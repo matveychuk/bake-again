@@ -558,12 +558,9 @@ footer p {
   font-size: 0.62rem;
 }
 
-.design-review [data-slot='tabs'] {
+.design-review__tabs {
   min-width: 0;
   flex: 1;
-}
-
-.design-review__tabs {
   width: 100%;
   height: auto;
   padding: 3px;
@@ -574,7 +571,7 @@ footer p {
   background: #efe7df;
 }
 
-.design-review [data-slot='tabs-trigger'] {
+.design-review__option {
   min-width: 0;
   height: 42px;
   padding: 5px 7px;
@@ -591,7 +588,7 @@ footer p {
   box-shadow: none;
 }
 
-.design-review [data-slot='tabs-trigger'][data-active] {
+.design-review__option[aria-pressed='true'] {
   background: #fffdf9;
   color: #2b1d18;
   box-shadow: 0 1px 5px rgba(43, 29, 24, 0.1);

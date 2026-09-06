@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { Palette } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const options = [
   { value: 'original', label: 'Original', swatches: ['#FAF6EF', '#E9D9BD', '#2B1D18'] },
@@ -29,23 +28,24 @@ export function DesignReviewSwitcher() {
         </div>
       </div>
 
-      <Tabs
-        value={value}
-        onValueChange={(nextValue) => setValue(nextValue as PaletteValue)}
-      >
-        <TabsList aria-label="Colour direction" className="design-review__tabs">
-          {options.map((option) => (
-            <TabsTrigger key={option.value} value={option.value}>
+      <div className="design-review__tabs" role="group" aria-label="Colour direction">
+        {options.map((option) => (
+          <button
+            className="design-review__option"
+            key={option.value}
+            type="button"
+            aria-pressed={value === option.value}
+            onClick={() => setValue(option.value)}
+          >
               <span className="palette-swatches" aria-hidden="true">
                 {option.swatches.map((colour) => (
                   <i key={colour} style={{ background: colour }} />
                 ))}
               </span>
               {option.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
+          </button>
+        ))}
+      </div>
     </aside>
   );
 }
