@@ -8,6 +8,7 @@ import {
   Search,
   ShoppingBag,
 } from 'lucide-react';
+import { DesignReviewSwitcher } from './design-review-switcher';
 
 const discoveryLinks = [
   'For breakfast',
@@ -203,6 +204,8 @@ export default function Home() {
         </a>
         <p>An exploratory Warm Precision homepage.</p>
       </footer>
+
+      <DesignReviewSwitcher />
     </main>
   );
 }
