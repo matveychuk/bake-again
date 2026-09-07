@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   ArrowRight,
   Bookmark,
@@ -250,7 +251,7 @@ export default function Home() {
         <a className="wordmark" href="#top">
           Bake Again<span aria-hidden="true">.</span>
         </a>
-        <p>An exploratory Warm Precision homepage.</p>
+        <p><Link href="/design-system">Design System v1</Link> · Warm Precision</p>
       </footer>
 
       <DesignReviewSwitcher />

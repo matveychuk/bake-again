@@ -1,56 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-
-:root {
-  --cream: #faf6ef;
-  --warm-white: #fffdf9;
-  --ink: #392721;
-  --terracotta: #a64f36;
-  --terracotta-dark: #853c29;
-  --sand: #eee7dd;
-  --sand-light: #f3ede5;
-  --cocoa: #735d54;
-  --line: rgba(57, 39, 33, 0.17);
-  --discovery-bg: var(--sand);
-  --discovery-line: transparent;
-  --trust-bg: var(--warm-white);
-  --trust-fg: var(--ink);
-  --trust-muted: var(--cocoa);
-  --trust-accent: var(--terracotta);
-  --trust-padding-y: 38px;
-  --status-tested-ink: #853c29;
-  --status-tested-bg: #f4e6df;
-  --status-calculated-ink: #52616b;
-  --status-calculated-bg: #edf0f2;
-  --status-suggested-ink: #805c26;
-  --status-suggested-bg: #f6eedd;
-}
-
-html[data-palette='selected-mix'] {
-  --cream: #faf6ef;
-  --warm-white: #fffdf9;
-  --ink: #392721;
-  --terracotta: #a64f36;
-  --terracotta-dark: #853c29;
-  --sand: #eee7dd;
-  --sand-light: #f3ede5;
-  --cocoa: #735d54;
-  --line: rgba(57, 39, 33, 0.17);
-  --discovery-bg: var(--sand);
-  --discovery-line: transparent;
-  --trust-bg: var(--warm-white);
-  --trust-fg: var(--ink);
-  --trust-muted: var(--cocoa);
-  --trust-accent: var(--terracotta);
-  --trust-padding-y: 38px;
-  --status-tested-ink: #853c29;
-  --status-tested-bg: #f4e6df;
-  --status-calculated-ink: #52616b;
-  --status-calculated-bg: #edf0f2;
-  --status-suggested-ink: #805c26;
-  --status-suggested-bg: #f6eedd;
-}
+@import '../design-system/tokens.css';
 
 html[data-palette='original'] {
   --cream: #faf6ef;
