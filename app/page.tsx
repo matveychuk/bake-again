@@ -11,7 +11,6 @@ import {
   Search,
   ShoppingBag,
 } from 'lucide-react';
-import { DesignReviewSwitcher } from './design-review-switcher';
 
 const discoveryLinks = [
   'For breakfast',
@@ -254,7 +253,6 @@ export default function Home() {
         <p><a href="/design-system">Design System v1</a> · Warm Precision</p>
       </footer>
 
-      <DesignReviewSwitcher />
     </main>
   );
 }

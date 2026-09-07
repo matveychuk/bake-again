@@ -67,6 +67,7 @@ export default function DesignSystemPage() {
             <a href="#space">04 · Space & shape</a>
             <a href="#components">05 · Components</a>
             <a href="#evidence">06 · Evidence</a>
+            <a href="#dark-mode">07 · Dark mode</a>
           </nav>
           <div className={styles.sidebarNote}>
             <span>Direction</span>
@@ -224,6 +225,33 @@ export default function DesignSystemPage() {
               <Check aria-hidden="true" size={20} />
               <div><strong>Tested configuration</strong><p>Schär Mix B · 28 cm round form · 12 layers</p></div>
             </div>
+          </section>
+
+          <section className={styles.section} id="dark-mode">
+            <div className={styles.sectionHeading}>
+              <span>07</span>
+              <div><p>Theme foundation</p><h2>Dark, without losing the appetite.</h2></div>
+            </div>
+            <div className={styles.darkPreview} data-theme="dark">
+              <div className={styles.darkPreviewCopy}>
+                <p className={styles.eyebrow}>Evening baking · optional mode</p>
+                <h3>Bake what you love.<br /><em>Know what works.</em></h3>
+                <p>
+                  Espresso surfaces, warm light text and a brighter terracotta accent.
+                  Recipe photography keeps its natural colour.
+                </p>
+                <button type="button">View recipe</button>
+              </div>
+              <div className={styles.darkPreviewEvidence}>
+                <StatusBadge status="tested" />
+                <StatusBadge status="calculated" />
+                <StatusBadge status="suggested" />
+              </div>
+            </div>
+            <p className={styles.guidance}>
+              Light remains the default. Dark mode is opt-in and will be exposed only
+              after its controls, photography and complete recipe flow are validated.
+            </p>
           </section>
         </div>
       </div>

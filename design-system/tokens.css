@@ -7,6 +7,7 @@ html[data-palette='selected-mix'] {
   --color-background-panel-subtle: #f3ede5;
   --color-text-primary: #392721;
   --color-text-secondary: #735d54;
+  --color-text-on-accent: #fffdf9;
   --color-action-primary: #a64f36;
   --color-action-primary-strong: #853c29;
   --color-border-subtle: rgba(57, 39, 33, 0.17);
@@ -80,4 +81,30 @@ html[data-palette='selected-mix'] {
   --status-calculated-bg: var(--color-status-calculated-background);
   --status-suggested-ink: var(--color-status-suggested-text);
   --status-suggested-bg: var(--color-status-suggested-background);
+}
+
+/*
+ * Dark is defined as an explicit semantic mode, not enabled automatically.
+ * Product controls can later set data-theme="dark" after both themes have
+ * been tested with real recipe photography and browser persistence.
+ */
+html[data-theme='dark'],
+[data-theme='dark'] {
+  --color-background-page: #211a17;
+  --color-background-surface: #2b211d;
+  --color-background-panel: #342822;
+  --color-background-panel-subtle: #302520;
+  --color-text-primary: #f7efe6;
+  --color-text-secondary: #c8b7ac;
+  --color-text-on-accent: #fffdf9;
+  --color-action-primary: #b85c3f;
+  --color-action-primary-strong: #cf7355;
+  --color-border-subtle: rgba(247, 239, 230, 0.16);
+
+  --color-status-tested-text: #f1b29d;
+  --color-status-tested-background: #412a23;
+  --color-status-calculated-text: #b7cdd8;
+  --color-status-calculated-background: #263239;
+  --color-status-suggested-text: #e1c18b;
+  --color-status-suggested-background: #392f20;
 }

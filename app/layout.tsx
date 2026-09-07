@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Manrope, Newsreader } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const manrope = Manrope({
@@ -26,7 +27,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${newsreader.variable}`}>{children}</body>
+      <body className={`${manrope.variable} ${newsreader.variable}`}>
+        {children}
+        {process.env.NODE_ENV === 'development' && (
+          <Script
+            src="https://mcp.figma.com/mcp/html-to-design/capture.js"
+            strategy="afterInteractive"
+          />
+        )}
+      </body>
     </html>
   );
 }

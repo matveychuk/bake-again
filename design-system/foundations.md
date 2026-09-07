@@ -18,6 +18,26 @@ The core palette is light and restrained. Terracotta is an accent, not a page-si
 Avoid adding green to signal gluten-free. Gluten-free is communicated through words and
 recipe evidence, not wellness colour conventions.
 
+### Dark mode foundation
+
+Dark mode is defined from v1 as an explicit semantic mode, but it is not enabled by
+`prefers-color-scheme` yet. Product controls should activate it with
+`data-theme="dark"` only after the complete recipe-reading and cook-mode flows have been
+tested in both themes.
+
+| Semantic role | Dark value |
+|---|---:|
+| Background / page | `#211A17` |
+| Background / surface | `#2B211D` |
+| Background / panel | `#342822` |
+| Text / primary | `#F7EFE6` |
+| Text / secondary | `#C8B7AC` |
+| Action / primary | `#B85C3F` |
+| Action / strong | `#CF7355` |
+
+Dark mode should feel like espresso, toasted crust and warm evening light, not black UI.
+Keep food photography natural; do not darken images or add a brown overlay globally.
+
 ## Typography
 
 - **Display:** Newsreader. Use for page titles, section titles and recipe titles.
@@ -48,6 +68,8 @@ Prefer whitespace over decorative dividers. Use 24–32px between related blocks
 - Desktop gutter: 40px.
 - Mobile gutter: 20px.
 - Reference widths: 390px mobile, 900px tablet and 1440px desktop.
+- At 390px, the first viewport should reveal the start of the food image. The hero title
+  must not consume the entire screen; target `52–56px` with a compact `0.93` line height.
 
 ## Photography
 
@@ -62,4 +84,3 @@ Prefer whitespace over decorative dividers. Use 24–32px between related blocks
 
 Use motion only to clarify hover, focus or a state change. Standard transitions are
 180–240ms. Respect reduced-motion preferences.
-
