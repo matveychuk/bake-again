@@ -2,8 +2,10 @@ import Image from 'next/image';
 import {
   ArrowRight,
   Bookmark,
+  Calculator,
   Check,
   ChevronDown,
+  CircleDashed,
   Clock3,
   Search,
   ShoppingBag,
@@ -23,7 +25,8 @@ const recipes = [
     title: 'Napoleon cake',
     eyebrow: 'Celebration · prepare ahead',
     detail: '12 layers · 28 cm',
-    trust: 'Tested with Schär Mix B',
+    status: 'Tested',
+    statusDetail: 'Schär Mix B',
     image: '/images/napoleon.png',
     alt: 'Gluten-free Napoleon cake with many thin layers and a cut slice',
     className: 'recipe-card recipe-card--wide',
@@ -32,7 +35,8 @@ const recipes = [
     title: 'Chocolate crinkle cookies',
     eyebrow: 'Everyday baking',
     detail: 'Chill for 3–4 hours',
-    trust: 'Made many times',
+    status: 'Made many times',
+    statusDetail: null,
     image: '/images/crinkle-cookies.png',
     alt: 'Chocolate crinkle cookies dusted with powdered sugar',
     className: 'recipe-card',
@@ -41,7 +45,8 @@ const recipes = [
     title: 'Thin breakfast crepes',
     eyebrow: 'Breakfast · everyday',
     detail: 'Rest batter 15–30 min',
-    trust: 'Tested recipe',
+    status: 'Tested',
+    statusDetail: 'As written',
     image: '/images/crepes.png',
     alt: 'A stack of thin golden gluten-free crepes',
     className: 'recipe-card',
@@ -83,7 +88,7 @@ export default function Home() {
             and written so you can get the same result at home.
           </p>
 
-          <form className="search-form" role="search" action="#recipes">
+          <form className="search-form" action="#recipes">
             <Search aria-hidden="true" size={21} strokeWidth={1.7} />
             <label className="sr-only" htmlFor="recipe-search">
               Search recipes
@@ -171,9 +176,19 @@ export default function Home() {
                   <Clock3 aria-hidden="true" size={15} strokeWidth={1.7} />
                   {recipe.detail}
                 </span>
-                <span className="tested-status">
-                  <Check aria-hidden="true" size={14} strokeWidth={2.2} />
-                  {recipe.trust}
+                <span
+                  className="recipe-status recipe-status--tested"
+                  aria-label={`Testing status: ${recipe.status}${
+                    recipe.statusDetail ? `, ${recipe.statusDetail}` : ''
+                  }`}
+                >
+                  <span className="recipe-status__mark" aria-hidden="true">
+                    <Check size={12} strokeWidth={2.4} />
+                  </span>
+                  <span className="recipe-status__copy">
+                    <strong>{recipe.status}</strong>
+                    {recipe.statusDetail && <small>{recipe.statusDetail}</small>}
+                  </span>
                 </span>
               </div>
             </article>
@@ -182,20 +197,43 @@ export default function Home() {
       </section>
 
       <section className="trust-section" aria-labelledby="trust-title">
-        <div className="trust-mark" aria-hidden="true">
-          <Check size={24} strokeWidth={1.8} />
+        <div className="trust-intro">
+          <div className="trust-mark" aria-hidden="true">
+            <Check size={22} strokeWidth={2} />
+          </div>
+          <div className="trust-copy">
+            <p className="eyebrow">Clear recipe status</p>
+            <h2 id="trust-title">Know what was baked — and what was only worked out.</h2>
+          </div>
         </div>
-        <div className="trust-copy">
-          <p className="eyebrow">What “tested” means here</p>
-          <h2 id="trust-title">Clear about what works — and what we haven’t tried.</h2>
+
+        <div className="trust-statuses" aria-label="Recipe status guide">
+          <div className="trust-status-row trust-status-row--tested">
+            <span className="trust-status-icon" aria-hidden="true">
+              <Check size={14} strokeWidth={2.3} />
+            </span>
+            <span><strong>Tested</strong><small>Baked exactly as written</small></span>
+          </div>
+          <div className="trust-status-row trust-status-row--calculated">
+            <span className="trust-status-icon" aria-hidden="true">
+              <Calculator size={14} strokeWidth={1.9} />
+            </span>
+            <span><strong>Calculated</strong><small>Adjusted, not baked in this form</small></span>
+          </div>
+          <div className="trust-status-row trust-status-row--suggested">
+            <span className="trust-status-icon" aria-hidden="true">
+              <CircleDashed size={14} strokeWidth={1.9} />
+            </span>
+            <span><strong>Suggested</strong><small>A helpful option, not tested</small></span>
+          </div>
         </div>
-        <p>
-          Each recipe tells you the exact flour mix, form and quantity used. If an
-          adaptation is calculated or only suggested, you’ll see that before you start.
-        </p>
-        <a href="#how-we-test">
-          How we test recipes <ArrowRight aria-hidden="true" size={18} />
-        </a>
+
+        <div className="trust-note">
+          <p>Every recipe names the flour mix, form and quantity actually used.</p>
+          <a href="#how-we-test">
+            How we test recipes <ArrowRight aria-hidden="true" size={18} />
+          </a>
+        </div>
       </section>
 
       <footer>
