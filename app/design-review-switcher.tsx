@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Palette } from 'lucide-react';
 
 const options = [
+  { value: 'selected-mix', label: 'Selected mix', swatches: ['#F6EFE6', '#E9D9BD', '#9A4B34'] },
   { value: 'original', label: 'Original', swatches: ['#FAF6EF', '#E9D9BD', '#2B1D18'] },
   { value: 'soft-balance', label: 'Soft balance', swatches: ['#F3ECE3', '#F8F3EC', '#5A4137'] },
   { value: 'terracotta-led', label: 'Terracotta', swatches: ['#F6EFE6', '#E8D7C2', '#9A4B34'] },
@@ -12,7 +13,7 @@ const options = [
 type PaletteValue = (typeof options)[number]['value'];
 
 export function DesignReviewSwitcher() {
-  const [value, setValue] = useState<PaletteValue>('original');
+  const [value, setValue] = useState<PaletteValue>('selected-mix');
 
   useEffect(() => {
     document.documentElement.dataset.palette = value;

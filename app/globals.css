@@ -3,6 +3,42 @@
 @import 'shadcn/tailwind.css';
 
 :root {
+  --cream: #f6efe6;
+  --warm-white: #fffaf5;
+  --ink: #392721;
+  --terracotta: #a64f36;
+  --terracotta-dark: #853c29;
+  --sand: #e9d9bd;
+  --sand-light: #eee1d1;
+  --cocoa: #735d54;
+  --line: rgba(57, 39, 33, 0.17);
+  --discovery-bg: var(--sand);
+  --discovery-line: transparent;
+  --trust-bg: #9a4b34;
+  --trust-fg: #fffaf5;
+  --trust-muted: #f0d9d0;
+  --trust-accent: #ffe0d2;
+}
+
+html[data-palette='selected-mix'] {
+  --cream: #f6efe6;
+  --warm-white: #fffaf5;
+  --ink: #392721;
+  --terracotta: #a64f36;
+  --terracotta-dark: #853c29;
+  --sand: #e9d9bd;
+  --sand-light: #eee1d1;
+  --cocoa: #735d54;
+  --line: rgba(57, 39, 33, 0.17);
+  --discovery-bg: var(--sand);
+  --discovery-line: transparent;
+  --trust-bg: #9a4b34;
+  --trust-fg: #fffaf5;
+  --trust-muted: #f0d9d0;
+  --trust-accent: #ffe0d2;
+}
+
+html[data-palette='original'] {
   --cream: #faf6ef;
   --warm-white: #fffdf9;
   --ink: #2b1d18;
@@ -66,6 +102,7 @@ body {
   font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.55;
+  transition: background 240ms ease, color 240ms ease;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -524,7 +561,7 @@ footer p {
   right: 18px;
   bottom: 18px;
   z-index: 50;
-  width: min(470px, calc(100vw - 36px));
+  width: min(550px, calc(100vw - 36px));
   padding: 12px;
   display: flex;
   align-items: center;
@@ -565,7 +602,7 @@ footer p {
   height: auto;
   padding: 3px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 3px;
   border-radius: 0;
   background: #efe7df;
