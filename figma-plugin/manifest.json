@@ -1,0 +1,8 @@
+{
+  "name": "Bake Again Design System Builder",
+  "id": "bake-again-design-system-builder-local",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page"
+}
