@@ -5,8 +5,8 @@ import {
   Calculator,
   Check,
   ChevronDown,
-  CircleDashed,
   Clock3,
+  Lightbulb,
   Search,
   ShoppingBag,
 } from 'lucide-react';
@@ -35,8 +35,8 @@ const recipes = [
     title: 'Chocolate crinkle cookies',
     eyebrow: 'Everyday baking',
     detail: 'Chill for 3–4 hours',
-    status: 'Made many times',
-    statusDetail: null,
+    status: 'Tested',
+    statusDetail: 'Made many times',
     image: '/images/crinkle-cookies.png',
     alt: 'Chocolate crinkle cookies dusted with powdered sugar',
     className: 'recipe-card',
@@ -46,7 +46,7 @@ const recipes = [
     eyebrow: 'Breakfast · everyday',
     detail: 'Rest batter 15–30 min',
     status: 'Tested',
-    statusDetail: 'As written',
+    statusDetail: null,
     image: '/images/crepes.png',
     alt: 'A stack of thin golden gluten-free crepes',
     className: 'recipe-card',
@@ -182,13 +182,17 @@ export default function Home() {
                     recipe.statusDetail ? `, ${recipe.statusDetail}` : ''
                   }`}
                 >
-                  <span className="recipe-status__mark" aria-hidden="true">
-                    <Check size={12} strokeWidth={2.4} />
-                  </span>
-                  <span className="recipe-status__copy">
+                  <span className="recipe-status__badge">
+                    <span aria-hidden="true">
+                      <Check size={12} strokeWidth={2.4} />
+                    </span>
                     <strong>{recipe.status}</strong>
-                    {recipe.statusDetail && <small>{recipe.statusDetail}</small>}
                   </span>
+                  {recipe.statusDetail && (
+                    <small className="recipe-status__detail">
+                      <span aria-hidden="true">·</span> {recipe.statusDetail}
+                    </small>
+                  )}
                 </span>
               </div>
             </article>
@@ -209,27 +213,33 @@ export default function Home() {
 
         <div className="trust-statuses" aria-label="Recipe status guide">
           <div className="trust-status-row trust-status-row--tested">
-            <span className="trust-status-icon" aria-hidden="true">
-              <Check size={14} strokeWidth={2.3} />
+            <span className="trust-status-badge">
+              <Check aria-hidden="true" size={14} strokeWidth={2.3} />
+              <strong>Tested</strong>
             </span>
-            <span><strong>Tested</strong><small>Baked exactly as written</small></span>
+            <small>Baked as written.</small>
           </div>
           <div className="trust-status-row trust-status-row--calculated">
-            <span className="trust-status-icon" aria-hidden="true">
-              <Calculator size={14} strokeWidth={1.9} />
+            <span className="trust-status-badge">
+              <Calculator aria-hidden="true" size={14} strokeWidth={1.9} />
+              <strong>Calculated</strong>
             </span>
-            <span><strong>Calculated</strong><small>Adjusted, not baked in this form</small></span>
+            <small>Quantities scaled. This version has not been bake-tested.</small>
           </div>
           <div className="trust-status-row trust-status-row--suggested">
-            <span className="trust-status-icon" aria-hidden="true">
-              <CircleDashed size={14} strokeWidth={1.9} />
+            <span className="trust-status-badge">
+              <Lightbulb aria-hidden="true" size={14} strokeWidth={1.9} />
+              <strong>Suggested</strong>
             </span>
-            <span><strong>Suggested</strong><small>A helpful option, not tested</small></span>
+            <small>An idea to try. This change has not been bake-tested.</small>
           </div>
         </div>
 
         <div className="trust-note">
-          <p>Every recipe names the flour mix, form and quantity actually used.</p>
+          <p>
+            Every recipe names the flour mix, form and quantity actually used. A tested
+            original may still have a calculated variation.
+          </p>
           <a href="#how-we-test">
             How we test recipes <ArrowRight aria-hidden="true" size={18} />
           </a>
