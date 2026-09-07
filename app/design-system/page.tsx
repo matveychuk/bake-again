@@ -1,6 +1,6 @@
+/* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   ArrowLeft,
   ArrowRight,
@@ -48,13 +48,13 @@ export default function DesignSystemPage() {
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <Link className={styles.wordmark} href="/">
+        <a className={styles.wordmark} href="/">
           Bake Again<span>.</span>
-        </Link>
+        </a>
         <span className={styles.version}>Design System · v1.0</span>
-        <Link className={styles.backLink} href="/">
+        <a className={styles.backLink} href="/">
           <ArrowLeft aria-hidden="true" size={17} /> Homepage
-        </Link>
+        </a>
       </header>
 
       <div className={styles.shell}>

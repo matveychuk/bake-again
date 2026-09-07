@@ -1,5 +1,5 @@
+/* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   ArrowRight,
   Bookmark,
@@ -251,7 +251,7 @@ export default function Home() {
         <a className="wordmark" href="#top">
           Bake Again<span aria-hidden="true">.</span>
         </a>
-        <p><Link href="/design-system">Design System v1</Link> · Warm Precision</p>
+        <p><a href="/design-system">Design System v1</a> · Warm Precision</p>
       </footer>
 
       <DesignReviewSwitcher />
