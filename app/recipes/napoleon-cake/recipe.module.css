@@ -74,50 +74,36 @@
 .steps aside p { margin: 0; font-size: .74rem; }
 .steps aside strong { display: block; color: var(--color-text-primary); }
 
-/* Desktop review variants. Original deliberately preserves the first proposal. */
+/* Approved practical density for laptop and desktop screens. */
 @media (min-width: 901px) {
-  :global(html[data-recipe-layout='balanced']) .breadcrumb { margin-block: 20px; }
-  :global(html[data-recipe-layout='balanced']) .hero { min-height: 570px; grid-template-columns: 1.04fr .96fr; }
-  :global(html[data-recipe-layout='balanced']) .heroImage { min-height: 570px; }
-  :global(html[data-recipe-layout='balanced']) .heroCopy { padding: 42px clamp(42px, 4vw, 58px); }
-  :global(html[data-recipe-layout='balanced']) .hero h1 { margin-top: 18px; font-size: clamp(3.4rem, 4.2vw, 4.6rem); line-height: .94; }
-  :global(html[data-recipe-layout='balanced']) .summary { margin-top: 20px; }
-  :global(html[data-recipe-layout='balanced']) .tested { margin-top: 19px; }
-  :global(html[data-recipe-layout='balanced']) .facts { margin-top: 20px; }
-  :global(html[data-recipe-layout='balanced']) .actions { margin-top: 20px; }
+  .breadcrumb { margin-block: 14px; }
+  .hero { min-height: 500px; grid-template-columns: .94fr 1.06fr; }
+  .heroImage { min-height: 500px; }
+  .heroCopy { padding: 30px clamp(36px, 3.7vw, 56px); }
+  .hero h1 { margin-top: 12px; font-size: clamp(3rem, 3.55vw, 3.85rem); line-height: .94; }
+  .summary { max-width: 590px; margin-top: 14px; font-size: .94rem; line-height: 1.5; }
+  .tested { margin-top: 14px; padding: 11px 14px; }
+  .tested p { margin-top: 3px; }
+  .facts { margin-top: 14px; grid-template-columns: repeat(4, 1fr); }
+  .facts div { min-width: 0; padding: 11px 12px; border-right: 1px solid var(--color-border-subtle); }
+  .facts div:first-child { padding-left: 0; }
+  .facts div:last-child { padding-right: 0; border-right: 0; }
+  .facts dd { font-size: .96rem; line-height: 1.25; }
+  .actions { margin-top: 15px; }
+  .primaryAction, .actions button { min-height: 44px; }
 
-  :global(html[data-recipe-layout='compact']) .breadcrumb { margin-block: 16px; }
-  :global(html[data-recipe-layout='compact']) .hero { min-height: 520px; grid-template-columns: 1.1fr .9fr; }
-  :global(html[data-recipe-layout='compact']) .heroImage { min-height: 520px; }
-  :global(html[data-recipe-layout='compact']) .heroCopy { padding: 32px clamp(34px, 3.4vw, 50px); }
-  :global(html[data-recipe-layout='compact']) .hero h1 { margin-top: 14px; font-size: clamp(3.1rem, 3.7vw, 4rem); line-height: .95; }
-  :global(html[data-recipe-layout='compact']) .summary { margin-top: 15px; font-size: .96rem; line-height: 1.55; }
-  :global(html[data-recipe-layout='compact']) .tested { margin-top: 15px; padding-block: 12px; }
-  :global(html[data-recipe-layout='compact']) .facts { margin-top: 15px; }
-  :global(html[data-recipe-layout='compact']) .facts div { padding-block: 11px; }
-  :global(html[data-recipe-layout='compact']) .actions { margin-top: 16px; }
-  :global(html[data-recipe-layout='compact']) .primaryAction,
-  :global(html[data-recipe-layout='compact']) .actions button { min-height: 46px; }
-
-  :global(html[data-recipe-layout='practical']) .breadcrumb { margin-block: 14px; }
-  :global(html[data-recipe-layout='practical']) .hero { min-height: 500px; grid-template-columns: .94fr 1.06fr; }
-  :global(html[data-recipe-layout='practical']) .heroImage { min-height: 500px; }
-  :global(html[data-recipe-layout='practical']) .heroCopy { padding: 30px clamp(36px, 3.7vw, 56px); }
-  :global(html[data-recipe-layout='practical']) .hero h1 { margin-top: 12px; font-size: clamp(3rem, 3.55vw, 3.85rem); line-height: .94; }
-  :global(html[data-recipe-layout='practical']) .summary { max-width: 590px; margin-top: 14px; font-size: .94rem; line-height: 1.5; }
-  :global(html[data-recipe-layout='practical']) .tested { margin-top: 14px; padding: 11px 14px; }
-  :global(html[data-recipe-layout='practical']) .tested p { margin-top: 3px; }
-  :global(html[data-recipe-layout='practical']) .facts { margin-top: 14px; grid-template-columns: repeat(4, 1fr); }
-  :global(html[data-recipe-layout='practical']) .facts div { min-width: 0; padding: 11px 12px; border-right: 1px solid var(--color-border-subtle); }
-  :global(html[data-recipe-layout='practical']) .facts div:first-child { padding-left: 0; }
-  :global(html[data-recipe-layout='practical']) .facts div:last-child { padding-right: 0; border-right: 0; }
-  :global(html[data-recipe-layout='practical']) .facts dd { font-size: .96rem; line-height: 1.25; }
-  :global(html[data-recipe-layout='practical']) .actions { margin-top: 15px; }
-  :global(html[data-recipe-layout='practical']) .primaryAction,
-  :global(html[data-recipe-layout='practical']) .actions button { min-height: 44px; }
-  :global(html[data-recipe-layout='balanced']) .beforeStart { margin-top: 54px; }
-  :global(html[data-recipe-layout='compact']) .beforeStart,
-  :global(html[data-recipe-layout='practical']) .beforeStart { margin-top: 42px; }
+  .beforeStart {
+    margin-top: 28px;
+    padding-top: 34px;
+    padding-bottom: 34px;
+    grid-template-columns: .64fr 2fr;
+    gap: 42px;
+  }
+  .beforeStart h2 { font-size: clamp(2rem, 2.55vw, 2.6rem); }
+  .planGrid article { min-height: 112px; padding-inline: 24px; }
+  .planGrid strong { margin-top: 10px; }
+  .planGrid p { margin-top: 5px; line-height: 1.5; }
+  .planning { margin-top: 60px; margin-bottom: 76px; }
 }
 
 @media (max-width: 900px) {
