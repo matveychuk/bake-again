@@ -76,20 +76,12 @@
 .stepCallout strong { display: block; color: var(--color-text-primary); }
 .stepCheckpoint { background: var(--color-background-panel-subtle); }
 .stepCheckpoint svg { color: var(--color-action-primary); }
-.stepTips { background: var(--color-status-suggested-background); }
-.stepTips svg, .stepTips strong { color: var(--color-status-suggested-text); }
 .stepTitleRow { display: flex; align-items: center; justify-content: space-between; gap: 34px; }
 .stepTitleRow h3 { flex: 0 0 auto; }
-.stepTipTitleNote { min-width: 0; display: flex; align-items: center; gap: 12px; color: var(--color-text-secondary); font-size: .7rem; }
-.stepTipTitleNote > span { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 5px; color: var(--color-status-suggested-text); }
+.stepTipTitleNote { min-width: 0; padding-left: 14px; display: flex; align-items: center; gap: 12px; border-left: 2px solid var(--color-status-suggested-text); color: var(--color-text-primary); font-size: .875rem; font-weight: 600; line-height: 1.4; }
+.stepTipTitleNote > span { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; color: var(--color-status-suggested-text); }
+.stepTipTitleNote strong { font-size: .72rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
 .stepTipTitleNote p { margin: 0; white-space: nowrap; }
-.tipLayoutReview { position: fixed; left: 50%; bottom: 16px; z-index: 90; padding: 6px; display: flex; align-items: stretch; gap: 4px; transform: translateX(-50%); border: 1px solid var(--color-border-subtle); background: var(--color-background-surface); box-shadow: 0 10px 34px rgba(43,29,24,.16); }
-.tipLayoutReview > div { min-width: 150px; padding: 8px 12px; display: flex; align-items: center; gap: 9px; }
-.tipLayoutReview span, .tipLayoutReview strong, .tipLayoutReview small { display: block; }
-.tipLayoutReview strong { font-size: .68rem; }
-.tipLayoutReview small { color: var(--color-text-secondary); font-size: .56rem; }
-.tipLayoutReview button { min-width: 112px; padding: 7px 13px; border: 1px solid transparent; background: transparent; color: var(--color-text-primary); cursor: pointer; }
-.tipLayoutReview button[aria-pressed='true'] { border-color: var(--color-border-subtle); background: var(--color-status-suggested-background); color: var(--color-status-suggested-text); }
 .steps > .stepWithMedia { grid-template-columns: 65px minmax(0, 1fr); }
 .stepWithMedia .mediaSequence { grid-column: 2; }
 .mediaSequence { margin-top: 25px; }
@@ -203,8 +195,5 @@
   .heroTopline { align-items: flex-start; }
   .tested p { margin-left: 0; }
   .facts dd { font-size: 1rem; }
-  .tipLayoutReview { width: calc(100% - 24px); bottom: 12px; }
-  .tipLayoutReview > div { min-width: 0; flex: 1; }
-  .tipLayoutReview button { min-width: 94px; }
   .sectionTitle { align-items: flex-start; }
 }
