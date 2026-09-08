@@ -154,7 +154,7 @@ export default function Home() {
         <div className="recipe-grid">
           {recipes.map((recipe) => (
             <article className={recipe.className} key={recipe.title}>
-              <a className="recipe-image" href={`#${recipe.title.toLowerCase().replaceAll(' ', '-')}`}>
+              <a className="recipe-image" href={recipe.title === 'Napoleon cake' ? '/recipes/napoleon-cake' : `#${recipe.title.toLowerCase().replaceAll(' ', '-')}`}>
                 <Image
                   src={recipe.image}
                   alt={recipe.alt}
