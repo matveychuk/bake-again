@@ -13,6 +13,7 @@ import {
   ShoppingBag,
 } from 'lucide-react';
 import styles from './recipe.module.css';
+import { LayoutReviewSwitcher } from './layout-review-switcher';
 
 const layerIngredients = [
   ['450 g', 'Schär Mix B Bread flour mix'],
@@ -189,6 +190,7 @@ export default function NapoleonRecipePage() {
           ))}
         </div>
       </section>
+      <LayoutReviewSwitcher />
     </main>
   );
 }

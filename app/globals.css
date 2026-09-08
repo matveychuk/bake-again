@@ -710,6 +710,35 @@ footer p {
   border-radius: 50%;
 }
 
+.layout-review {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 60;
+  width: min(660px, calc(100vw - 36px));
+  padding: 11px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 1px solid rgba(43, 29, 24, 0.2);
+  background: rgba(255, 253, 249, 0.97);
+  color: #2b1d18;
+  box-shadow: 0 16px 44px rgba(43, 29, 24, 0.14);
+  backdrop-filter: blur(12px);
+}
+
+.layout-review__heading { min-width: 150px; display: flex; align-items: center; gap: 9px; }
+.layout-review__heading strong, .layout-review__heading span { display: block; }
+.layout-review__heading strong { font-size: .72rem; letter-spacing: .035em; }
+.layout-review__heading span { color: #826b60; font-size: .6rem; }
+.layout-review__tabs { min-width: 0; flex: 1; margin: 0; padding: 3px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; border: 0; background: #efe7df; }
+.layout-review__option { min-width: 0; height: 43px; padding: 5px 6px; border: 0; background: transparent; color: #725a50; line-height: 1.05; cursor: pointer; }
+.layout-review__option strong, .layout-review__option span { display: block; }
+.layout-review__option strong { font-size: .61rem; }
+.layout-review__option span { margin-top: 3px; font-size: .52rem; font-weight: 550; }
+.layout-review__option[aria-pressed='true'] { background: #fffdf9; color: #2b1d18; box-shadow: 0 1px 5px rgba(43, 29, 24, .1); }
+.layout-review__option:last-child[aria-pressed='true'] strong { color: #853c29; }
+
 @media (max-width: 1120px) {
   .site-header { grid-template-columns: auto 1fr auto; gap: 32px; }
   .site-header nav { justify-self: end; }
@@ -781,6 +810,10 @@ footer p {
   footer { align-items: flex-start; flex-direction: column; gap: 10px; }
   .design-review { align-items: stretch; flex-direction: column; }
   .design-review__heading { min-width: 0; }
+  .layout-review { right: 10px; bottom: 10px; width: calc(100vw - 20px); padding: 8px; display: block; }
+  .layout-review__heading { display: none; }
+  .layout-review__option { height: 40px; }
+  .layout-review__option span { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
