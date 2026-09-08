@@ -98,6 +98,8 @@ function formatTime(seconds: number) {
 export function CookMode() {
   const [stepIndex, setStepIndex] = useState(0);
   const [completed, setCompleted] = useState<number[]>([]);
+  const [completedBackground, setCompletedBackground] = useState<'pale' | 'none'>('none');
+  const [completedIcon, setCompletedIcon] = useState<'filled' | 'outline'>('filled');
   const [assistantOpen, setAssistantOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(false);
   const [remaining, setRemaining] = useState(steps[0].timerSeconds ?? 0);
@@ -142,18 +144,21 @@ export function CookMode() {
           <p>Method</p>
           <strong>{stepIndex + 1} <span>/ 17</span></strong>
           <ol>
-            {steps.map((item, index) => (
-              <li key={item.number}>
-                <button
-                  className={`${index === stepIndex ? styles.activeStep : ''} ${completed.includes(index) && index !== stepIndex ? styles.completedStep : ''}`}
-                  type="button"
-                  onClick={() => goToStep(index)}
-                  aria-current={index === stepIndex ? 'step' : undefined}
-                >
-                  <span>{completed.includes(index) && index !== stepIndex ? <Check size={13} /> : item.number}</span>{item.title}
-                </button>
-              </li>
-            ))}
+            {steps.map((item, index) => {
+              const isDone = completed.includes(index);
+              return (
+                <li key={item.number}>
+                  <button
+                    className={`${index === stepIndex ? styles.activeStep : ''} ${isDone ? styles.completedStep : ''} ${isDone && completedBackground === 'none' ? styles.completedNoBackground : ''} ${isDone && completedIcon === 'filled' ? styles.completedFilledIcon : ''}`}
+                    type="button"
+                    onClick={() => goToStep(index)}
+                    aria-current={index === stepIndex ? 'step' : undefined}
+                  >
+                    <span>{isDone ? <Check size={13} /> : item.number}</span>{item.title}
+                  </button>
+                </li>
+              );
+            })}
           </ol>
           <p className={styles.prototypeNote}>Previewing the first 5 of 17 steps</p>
         </aside>
@@ -238,6 +243,20 @@ export function CookMode() {
           </dialog>
         </div>
       )}
+
+      <aside className={styles.reviewBar} aria-label="Completed step style comparison">
+        <div><CheckCircle2 size={17} /><span><strong>Completed style</strong>Compare the rail state</span></div>
+        <fieldset>
+          <legend>Background</legend>
+          <button type="button" aria-pressed={completedBackground === 'pale'} onClick={() => setCompletedBackground('pale')}>Pale</button>
+          <button type="button" aria-pressed={completedBackground === 'none'} onClick={() => setCompletedBackground('none')}>None</button>
+        </fieldset>
+        <fieldset>
+          <legend>Check</legend>
+          <button type="button" aria-pressed={completedIcon === 'filled'} onClick={() => setCompletedIcon('filled')}>Filled</button>
+          <button type="button" aria-pressed={completedIcon === 'outline'} onClick={() => setCompletedIcon('outline')}>Outline</button>
+        </fieldset>
+      </aside>
 
     </main>
   );
