@@ -76,7 +76,7 @@
 .stepCallout strong { display: block; color: var(--color-text-primary); }
 .stepCheckpoint { background: var(--color-background-panel-subtle); }
 .stepCheckpoint svg { color: var(--color-action-primary); }
-.stepTitleRow { display: flex; align-items: center; justify-content: space-between; gap: 34px; }
+.stepTitleRow { display: flex; align-items: center; justify-content: flex-start; gap: 18px; }
 .stepTitleRow h3 { flex: 0 0 auto; }
 .stepTipTitleNote { min-width: 0; padding-left: 14px; display: flex; align-items: center; gap: 12px; border-left: 2px solid var(--color-status-suggested-text); color: var(--color-text-primary); font-size: .875rem; font-weight: 600; line-height: 1.4; }
 .stepTipTitleNote > span { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; color: var(--color-status-suggested-text); }
