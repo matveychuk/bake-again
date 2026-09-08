@@ -3,35 +3,17 @@ import Image from 'next/image';
 import {
   ArrowLeft,
   Bookmark,
-  Calculator,
   Check,
   ChevronDown,
   Clock3,
-  Info,
   Play,
-  Plus,
   ShoppingBag,
 } from 'lucide-react';
 import styles from './recipe.module.css';
 import { StepMediaSequence, type StepMediaItem } from './step-media-sequence';
 import { AssistantTrigger, RecipeAssistantProvider } from './recipe-assistant';
+import { RecipeAdjuster } from './recipe-adjuster';
 import { StepTip } from './step-tip';
-
-const layerIngredients = [
-  ['450 g', 'Schär Mix B Bread flour mix'],
-  ['80 g', 'Tapioca starch'],
-  ['40 g', 'Corn starch'],
-  ['3 g', 'Xanthan gum', 'Only if the flour mix does not contain it'],
-  ['8 g', 'Baking powder'],
-  ['¼ tsp', 'Salt'],
-  ['1 tbsp', 'Sugar'],
-  ['120 g', 'Butter', 'Cold, cut into cubes'],
-  ['50 g', 'Sunflower oil'],
-  ['250 g', 'Sour cream or thick natural yogurt', 'Choose one · final default pending'],
-  ['2', 'Eggs'],
-  ['1 tbsp', 'Lemon juice'],
-  ['30–70 ml', 'Cold water', 'As needed'],
-];
 
 const prototypeMedia: StepMediaItem[] = [
   { id: 'butter-ready', src: '/media/recipes/gluten-free-napoleon/selected/cold-butter-ready-example-v1.png', alt: 'Cold butter cubes beside the dry flour mixture in a food processor', title: 'Start cold', caption: 'Cube the butter and chill it for 10–15 minutes.' },
@@ -169,50 +151,7 @@ export default function NapoleonRecipePage() {
         </div>
       </section>
 
-      <section className={styles.planning}>
-        <aside className={styles.controls} aria-label="Recipe configuration">
-          <p className={styles.eyebrow}>Your bake</p>
-          <h2>Choose the form</h2>
-          <label className={styles.choice} aria-label="Use the repeatedly verified 28 centimetre form">
-            <input type="radio" name="form" defaultChecked />
-            <span><strong>28 cm · 2 cakes</strong><small><Check size={13} /> Repeatedly verified</small></span>
-          </label>
-          <label className={`${styles.choice} ${styles.choiceCalculated}`} aria-label="Preview the calculated 24 centimetre form">
-            <input type="radio" name="form" />
-            <span><strong>24 cm · preview</strong><small><Calculator size={13} /> Calculated</small></span>
-          </label>
-          <div className={styles.calculatedNote}>
-            <Info size={16} />
-            <p>Quantities can be previewed, but this version is not bake-tested and cannot open in Cook Mode yet.</p>
-          </div>
-          <button className={styles.addBatch} type="button"><Plus size={16} /> Add another batch</button>
-        </aside>
-
-        <section className={styles.ingredients} aria-labelledby="ingredients-title">
-          <div className={styles.sectionTitle}>
-            <div><p className={styles.eyebrow}>Exact tested base</p><h2 id="ingredients-title">Ingredients</h2></div>
-            <button type="button"><ShoppingBag size={16} /> Add all</button>
-          </div>
-          <div className={styles.ingredientGroup}>
-            <h3>Layers</h3>
-            {layerIngredients.map(([amount, ingredient, note], index) => (
-              <div className={styles.ingredient} key={ingredient}>
-                <input id={`ingredient-${index}`} type="checkbox" />
-                <span className={styles.amount}>{amount}</span>
-                <span><label htmlFor={`ingredient-${index}`}>{ingredient}</label>{ingredient === 'Schär Mix B Bread flour mix' && <AssistantTrigger scope="flour" label="Can I use another mix?" compact />}{note && <small>{note}</small>}</span>
-              </div>
-            ))}
-          </div>
-          <div className={styles.provisional}>
-            <Info size={17} />
-            <p><strong>One choice still needs confirmation.</strong> The source allows sour cream or thick natural yogurt, but does not yet identify the default or test scope of each.</p>
-          </div>
-          <div className={styles.collapsedGroups}>
-            <button type="button"><span><small>9 ingredients</small>Custard</span><ChevronDown size={18} /></button>
-            <button type="button"><span><small>2 ingredients</small>Nuts &amp; finish</span><ChevronDown size={18} /></button>
-          </div>
-        </section>
-      </section>
+      <RecipeAdjuster />
 
       <section className={styles.method} id="method" aria-labelledby="method-title">
         <div className={styles.methodHeading}>
