@@ -79,7 +79,9 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">A small collection of tested gluten-free recipes</p>
           <h1 id="hero-title">
-            Bake what you love.
+            Bake what
+            <br />
+            you love.
             <br />
             <em>Know what works.</em>
           </h1>
