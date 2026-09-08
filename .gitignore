@@ -28,6 +28,7 @@ yarn-error.log*
 
 # local environment
 .env*
+!.env.example
 
 # deployment and generated files
 .vercel
@@ -36,3 +37,7 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Keep large original photo and video files local until the media workflow is finalized.
+media/recipes/*/original/*
+!media/recipes/*/original/.gitkeep
