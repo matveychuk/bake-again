@@ -8,7 +8,6 @@ import {
   ChevronDown,
   Clock3,
   Info,
-  Lightbulb,
   Play,
   Plus,
   ShoppingBag,
@@ -16,6 +15,7 @@ import {
 import styles from './recipe.module.css';
 import { StepMediaSequence, type StepMediaItem } from './step-media-sequence';
 import { AssistantTrigger, RecipeAssistantProvider } from './recipe-assistant';
+import { StepTipReview } from './step-tip-review';
 
 const layerIngredients = [
   ['450 g', 'Schär Mix B Bread flour mix'],
@@ -223,11 +223,10 @@ export default function NapoleonRecipePage() {
           {firstSteps.map((step) => (
             <article className={step.mediaIds ? styles.stepWithMedia : undefined} id={`step-${Number(step.number)}`} key={step.number}>
               <span>{step.number}</span>
-              <div><p className={styles.stepMeta}>{step.meta}</p><h3>{step.title}</h3><p>{step.body}</p>
-                {step.tips && <aside className={`${styles.stepCallout} ${styles.stepTips}`}><Lightbulb size={15} /><div><strong>{step.tips.length === 1 ? 'Tip' : 'Tips'}</strong>{step.tips.length === 1 ? <p>{step.tips[0]}</p> : <ul>{step.tips.map((tip) => <li key={tip}>{tip}</li>)}</ul>}</div></aside>}
+              {step.tips ? <StepTipReview meta={step.meta} title={step.title} body={step.body} tips={step.tips} guidance={step.guidance} /> : <div><p className={styles.stepMeta}>{step.meta}</p><h3>{step.title}</h3><p>{step.body}</p>
                 {step.guidance && <aside className={`${styles.stepCallout} ${styles.stepCheckpoint}`}><Check size={15} /><p><strong>Checkpoint</strong>{step.guidance}</p></aside>}
                 <AssistantTrigger scope="step" stepTitle={step.title} label="Ask about this step" compact />
-              </div>
+              </div>}
               {step.mediaIds && <StepMediaSequence items={prototypeMedia.filter((item) => step.mediaIds?.includes(item.id))} />}
             </article>
           ))}
