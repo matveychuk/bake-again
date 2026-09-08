@@ -150,7 +150,7 @@ export default function NapoleonRecipePage() {
           </dl>
 
           <div className={styles.actions}>
-            <a className={styles.primaryAction} href="#method"><Play size={17} fill="currentColor" /> Start Cook Mode</a>
+            <a className={styles.primaryAction} href="/recipes/napoleon-cake/cook"><Play size={17} fill="currentColor" /> Start Cook Mode</a>
             <button type="button"><ShoppingBag size={17} /> Add ingredients</button>
             <AssistantTrigger scope="recipe" label="Ask about this recipe" />
           </div>
@@ -217,7 +217,7 @@ export default function NapoleonRecipePage() {
       <section className={styles.method} id="method" aria-labelledby="method-title">
         <div className={styles.methodHeading}>
           <div><p className={styles.eyebrow}>Method · 17 steps</p><h2 id="method-title">Begin with the dough.</h2></div>
-          <a className={styles.primaryAction} href="#step-1"><Play size={17} fill="currentColor" /> Open Cook Mode</a>
+          <a className={styles.primaryAction} href="/recipes/napoleon-cake/cook"><Play size={17} fill="currentColor" /> Open Cook Mode</a>
         </div>
         <div className={styles.steps}>
           {firstSteps.map((step) => (
