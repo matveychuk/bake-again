@@ -8,6 +8,7 @@ import {
   ChevronDown,
   Clock3,
   Info,
+  Lightbulb,
   Play,
   Plus,
   ShoppingBag,
@@ -41,7 +42,17 @@ const prototypeMedia: StepMediaItem[] = [
   { id: 'dough-clumps', src: '/media/recipes/gluten-free-napoleon/selected/pliable-dough-clumps-example-v1.png', alt: 'Pliable Napoleon dough gathered into irregular clumps in a food processor', title: 'Stop at pliable clumps', caption: 'The dough should hold together without becoming a sticky paste.' },
 ];
 
-const firstSteps = [
+type PrototypeStep = {
+  number: string;
+  title: string;
+  body: string;
+  meta: string;
+  guidance?: string;
+  tips?: string[];
+  mediaIds?: string[];
+};
+
+const firstSteps: PrototypeStep[] = [
   {
     number: '01',
     title: 'Mix the dry ingredients',
@@ -70,6 +81,14 @@ const firstSteps = [
     meta: 'Food processor · short pulses',
     guidance: 'The dough should gather into pliable clumps, not become a sticky paste.',
     mediaIds: ['pour-wet-mixture', 'dough-clumps'],
+  },
+  {
+    number: '05',
+    title: 'Roll directly on parchment',
+    body: 'Place each chilled disc on its own sheet of parchment and roll it into an even 28 cm circle. Bake it on the same sheet—do not transfer the rolled dough.',
+    meta: 'One sheet per layer',
+    tips: ['Use the base of a 28 cm cake tin as a guide, leaving a small margin for trimming.'],
+    guidance: 'The layer should be evenly thin, with no thicker centre or dry, cracked edges.',
   },
 ];
 
@@ -145,7 +164,7 @@ export default function NapoleonRecipePage() {
         </div>
         <div className={styles.planGrid}>
           <article><Clock3 size={19} /><strong>Chill the dough</strong><p>At least 2 hours, or leave the twelve wrapped discs overnight.</p></article>
-          <article><span className={styles.planNumber}>12</span><strong>Roll on parchment</strong><p>Roll each thin layer on the sheet you will bake it on.</p></article>
+          <article><span className={styles.planNumber}>12</span><strong>Prepare the parchment</strong><p>Have at least twelve sheets ready—one for rolling and baking each layer.</p></article>
           <article><span className={styles.planNumber}>24h</span><strong>Best the next day</strong><p>Rest 1 hour at room temperature, then refrigerate for 12–24 hours.</p></article>
         </div>
       </section>
@@ -205,7 +224,8 @@ export default function NapoleonRecipePage() {
             <article className={step.mediaIds ? styles.stepWithMedia : undefined} id={`step-${Number(step.number)}`} key={step.number}>
               <span>{step.number}</span>
               <div><p className={styles.stepMeta}>{step.meta}</p><h3>{step.title}</h3><p>{step.body}</p>
-                {step.guidance && <aside><Check size={15} /><p><strong>Checkpoint</strong>{step.guidance}</p></aside>}
+                {step.tips && <aside className={`${styles.stepCallout} ${styles.stepTips}`}><Lightbulb size={15} /><div><strong>{step.tips.length === 1 ? 'Tip' : 'Tips'}</strong>{step.tips.length === 1 ? <p>{step.tips[0]}</p> : <ul>{step.tips.map((tip) => <li key={tip}>{tip}</li>)}</ul>}</div></aside>}
+                {step.guidance && <aside className={`${styles.stepCallout} ${styles.stepCheckpoint}`}><Check size={15} /><p><strong>Checkpoint</strong>{step.guidance}</p></aside>}
                 <AssistantTrigger scope="step" stepTitle={step.title} label="Ask about this step" compact />
               </div>
               {step.mediaIds && <StepMediaSequence items={prototypeMedia.filter((item) => step.mediaIds?.includes(item.id))} />}

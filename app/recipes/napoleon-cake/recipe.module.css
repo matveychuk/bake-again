@@ -69,10 +69,15 @@
 .steps h3 { margin: 7px 0 10px; font-family: var(--font-family-display); font-size: 1.55rem; font-weight: 550; }
 .steps article > div > p:not(.stepMeta) { max-width: 750px; margin: 0; color: var(--color-text-secondary); }
 .stepMeta { margin: 0; color: var(--color-action-primary-strong); font-size: .66rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
-.steps aside { max-width: 650px; margin-top: 18px; padding: 14px 16px; display: flex; gap: 10px; background: var(--color-background-panel-subtle); }
-.steps aside svg { flex: 0 0 auto; margin-top: 3px; color: var(--color-action-primary); }
-.steps aside p { margin: 0; font-size: .74rem; }
-.steps aside strong { display: block; color: var(--color-text-primary); }
+.stepCallout { max-width: 650px; margin-top: 18px; padding: 14px 16px; display: flex; gap: 10px; }
+.stepCallout svg { flex: 0 0 auto; margin-top: 3px; }
+.stepCallout p, .stepCallout ul { margin: 0; font-size: .74rem; }
+.stepCallout ul { padding-left: 18px; }
+.stepCallout strong { display: block; color: var(--color-text-primary); }
+.stepCheckpoint { background: var(--color-background-panel-subtle); }
+.stepCheckpoint svg { color: var(--color-action-primary); }
+.stepTips { background: var(--color-status-suggested-background); }
+.stepTips svg, .stepTips strong { color: var(--color-status-suggested-text); }
 .steps > .stepWithMedia { grid-template-columns: 65px minmax(0, 1fr); }
 .stepWithMedia .mediaSequence { grid-column: 2; }
 .mediaSequence { margin-top: 25px; }

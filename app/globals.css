@@ -370,7 +370,7 @@ input:focus-visible {
 .recipes-section {
   width: min(100% - 80px, 1360px);
   margin: 0 auto;
-  padding: 96px 0 110px;
+  padding: 64px 0 110px;
 }
 
 .section-heading {
@@ -416,6 +416,13 @@ input:focus-visible {
   aspect-ratio: 4 / 3;
   overflow: hidden;
   background: var(--sand-light);
+}
+
+@media (min-width: 901px) {
+  .recipe-image {
+    height: clamp(300px, 24vw, 360px);
+    aspect-ratio: auto;
+  }
 }
 
 .recipe-card--wide .recipe-image img { object-position: 55% 52%; }
