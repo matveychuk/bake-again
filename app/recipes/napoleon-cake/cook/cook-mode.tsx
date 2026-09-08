@@ -150,7 +150,7 @@ export function CookMode() {
                   onClick={() => goToStep(index)}
                   aria-current={index === stepIndex ? 'step' : undefined}
                 >
-                  <span>{completed.includes(index) ? <Check size={13} /> : item.number}</span>{item.title}
+                  <span>{completed.includes(index) && index !== stepIndex ? <Check size={13} /> : item.number}</span>{item.title}
                 </button>
               </li>
             ))}
