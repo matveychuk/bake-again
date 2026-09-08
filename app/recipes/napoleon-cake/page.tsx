@@ -13,7 +13,8 @@ import {
   ShoppingBag,
 } from 'lucide-react';
 import styles from './recipe.module.css';
-import { StepMediaReview } from './step-media-review';
+import { StepMediaSequence, type StepMediaItem } from './step-media-sequence';
+import { AssistantTrigger, RecipeAssistantProvider } from './recipe-assistant';
 
 const layerIngredients = [
   ['450 g', 'Schär Mix B Bread flour mix'],
@@ -31,6 +32,15 @@ const layerIngredients = [
   ['30–70 ml', 'Cold water', 'As needed'],
 ];
 
+const prototypeMedia: StepMediaItem[] = [
+  { id: 'butter-ready', src: '/media/recipes/gluten-free-napoleon/selected/cold-butter-ready-example-v1.png', alt: 'Cold butter cubes beside the dry flour mixture in a food processor', title: 'Start cold', caption: 'Cube the butter and chill it for 10–15 minutes.' },
+  { id: 'butter-early-pulse', src: '/media/recipes/gluten-free-napoleon/selected/cold-butter-early-pulse-example-v1.png', alt: 'Large pieces of butter partly coated in gluten-free flour after a few pulses', title: 'Pulse briefly', caption: 'Stop before every piece of butter disappears into the flour.' },
+  { id: 'butter-final-crumb', src: '/media/recipes/gluten-free-napoleon/selected/cold-butter-crumb-example-v1.png', alt: 'Gluten-free flour mixture with a sandy crumb and visible pea-sized pieces of cold butter', title: 'Look for this texture', caption: 'Some should look sandy while pea-sized pieces remain visible.' },
+  { id: 'wet-mixture-smooth', src: '/media/recipes/gluten-free-napoleon/selected/wet-mixture-smooth-example-v1.png', alt: 'Eggs, cultured dairy, sunflower oil and lemon juice mixed until smooth', title: 'Mix only until smooth', caption: 'The wet ingredients should be even, without prolonged whisking.' },
+  { id: 'pour-wet-mixture', src: '/media/recipes/gluten-free-napoleon/selected/pour-wet-into-crumb-example-v1.png', alt: 'Smooth wet mixture being poured into the flour and butter crumb', title: 'Add the wet mixture', caption: 'Pour it over the crumb before using short pulses.' },
+  { id: 'dough-clumps', src: '/media/recipes/gluten-free-napoleon/selected/pliable-dough-clumps-example-v1.png', alt: 'Pliable Napoleon dough gathered into irregular clumps in a food processor', title: 'Stop at pliable clumps', caption: 'The dough should hold together without becoming a sticky paste.' },
+];
+
 const firstSteps = [
   {
     number: '01',
@@ -44,19 +54,28 @@ const firstSteps = [
     body: 'Cube the cold butter, freeze it for 10–15 minutes, add it to the dry mixture and pulse about ten times.',
     meta: '10–15 min · food processor',
     guidance: 'Look for an uneven crumb: some sandy, with some pea-sized pieces of butter.',
-    gallery: true,
+    mediaIds: ['butter-ready', 'butter-early-pulse', 'butter-final-crumb'],
   },
   {
     number: '03',
     title: 'Add the wet ingredients',
-    body: 'Mix the eggs, chosen cultured dairy, sunflower oil and lemon juice only until smooth, then combine with short pulses.',
-    meta: 'Add cold water only as needed',
+    body: 'Mix the eggs, chosen cultured dairy, sunflower oil and lemon juice only until smooth.',
+    meta: 'Wet mixture',
+    mediaIds: ['wet-mixture-smooth'],
+  },
+  {
+    number: '04',
+    title: 'Combine the dough',
+    body: 'Pour the liquid into the dry mixture and combine with short pulses. Add cold water only as needed.',
+    meta: 'Food processor · short pulses',
     guidance: 'The dough should gather into pliable clumps, not become a sticky paste.',
+    mediaIds: ['pour-wet-mixture', 'dough-clumps'],
   },
 ];
 
 export default function NapoleonRecipePage() {
   return (
+    <RecipeAssistantProvider>
     <main className={styles.page}>
       <header className="site-header">
         <a className="wordmark" href="/" aria-label="Bake Again home">
@@ -108,12 +127,13 @@ export default function NapoleonRecipePage() {
             <div><dt>Active time</dt><dd>1 hour</dd></div>
             <div><dt>Yield</dt><dd>2 cakes · 6 layers each</dd></div>
             <div><dt>Form</dt><dd>28 cm round</dd></div>
-            <div><dt>Flour</dt><dd>Schär Mix B</dd></div>
+            <div><dt>Flour</dt><dd>Schär Mix B <AssistantTrigger scope="flour" label="Another mix?" compact /></dd></div>
           </dl>
 
           <div className={styles.actions}>
             <a className={styles.primaryAction} href="#method"><Play size={17} fill="currentColor" /> Start Cook Mode</a>
             <button type="button"><ShoppingBag size={17} /> Add ingredients</button>
+            <AssistantTrigger scope="recipe" label="Ask about this recipe" />
           </div>
         </div>
       </section>
@@ -156,12 +176,12 @@ export default function NapoleonRecipePage() {
           </div>
           <div className={styles.ingredientGroup}>
             <h3>Layers</h3>
-            {layerIngredients.map(([amount, ingredient, note]) => (
-              <label className={styles.ingredient} key={ingredient}>
-                <input type="checkbox" />
+            {layerIngredients.map(([amount, ingredient, note], index) => (
+              <div className={styles.ingredient} key={ingredient}>
+                <input id={`ingredient-${index}`} type="checkbox" />
                 <span className={styles.amount}>{amount}</span>
-                <span>{ingredient}{note && <small>{note}</small>}</span>
-              </label>
+                <span><label htmlFor={`ingredient-${index}`}>{ingredient}</label>{ingredient === 'Schär Mix B Bread flour mix' && <AssistantTrigger scope="flour" label="Can I use another mix?" compact />}{note && <small>{note}</small>}</span>
+              </div>
             ))}
           </div>
           <div className={styles.provisional}>
@@ -182,16 +202,18 @@ export default function NapoleonRecipePage() {
         </div>
         <div className={styles.steps}>
           {firstSteps.map((step) => (
-            <article className={step.gallery ? styles.stepWithGallery : undefined} id={step.number === '01' ? 'step-1' : undefined} key={step.number}>
+            <article className={step.mediaIds ? styles.stepWithMedia : undefined} id={`step-${Number(step.number)}`} key={step.number}>
               <span>{step.number}</span>
               <div><p className={styles.stepMeta}>{step.meta}</p><h3>{step.title}</h3><p>{step.body}</p>
                 {step.guidance && <aside><Check size={15} /><p><strong>Checkpoint</strong>{step.guidance}</p></aside>}
+                <AssistantTrigger scope="step" stepTitle={step.title} label="Ask about this step" compact />
               </div>
-              {step.gallery && <StepMediaReview />}
+              {step.mediaIds && <StepMediaSequence items={prototypeMedia.filter((item) => step.mediaIds?.includes(item.id))} />}
             </article>
           ))}
         </div>
       </section>
     </main>
+    </RecipeAssistantProvider>
   );
 }
