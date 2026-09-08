@@ -97,6 +97,7 @@ function formatTime(seconds: number) {
 
 export function CookMode() {
   const [stepIndex, setStepIndex] = useState(0);
+  const [tipLayout, setTipLayout] = useState<'stacked' | 'inline'>('inline');
   const [completed, setCompleted] = useState<number[]>([]);
   const [assistantOpen, setAssistantOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(false);
@@ -165,7 +166,7 @@ export function CookMode() {
           </section>
 
           {step.tip && (
-            <aside className={styles.tip}>
+            <aside className={`${styles.tip} ${tipLayout === 'inline' ? styles.tipInline : ''}`}>
               <Lightbulb size={19} />
               <p><strong>Tip</strong>{step.tip}</p>
             </aside>
@@ -230,6 +231,14 @@ export function CookMode() {
             <footer>AI can make mistakes. Recipe status comes from the verified collection.</footer>
           </dialog>
         </div>
+      )}
+
+      {step.tip && (
+        <aside className={styles.reviewBar} aria-label="Tip layout comparison">
+          <div><Lightbulb size={17} /><span><strong>Tip layout</strong>Compare information density</span></div>
+          <button type="button" aria-pressed={tipLayout === 'stacked'} onClick={() => setTipLayout('stacked')}>Stacked</button>
+          <button type="button" aria-pressed={tipLayout === 'inline'} onClick={() => setTipLayout('inline')}>Inline tip</button>
+        </aside>
       )}
     </main>
   );
