@@ -43,6 +43,11 @@ const firstSteps = [
     body: 'Cube the cold butter, freeze it for 10–15 minutes, add it to the dry mixture and pulse about ten times.',
     meta: '10–15 min · food processor',
     guidance: 'Look for an uneven crumb: some sandy, with some pea-sized pieces of butter.',
+    media: {
+      src: '/media/recipes/gluten-free-napoleon/selected/cold-butter-crumb-example-v1.png',
+      alt: 'Gluten-free flour mixture with a sandy crumb and visible pea-sized pieces of cold butter in a food processor',
+      caption: 'Some of the mixture should look sandy while visible pieces of cold butter remain.',
+    },
   },
   {
     number: '03',
@@ -180,11 +185,20 @@ export default function NapoleonRecipePage() {
         </div>
         <div className={styles.steps}>
           {firstSteps.map((step) => (
-            <article id={step.number === '01' ? 'step-1' : undefined} key={step.number}>
+            <article className={step.media ? styles.stepWithMedia : undefined} id={step.number === '01' ? 'step-1' : undefined} key={step.number}>
               <span>{step.number}</span>
               <div><p className={styles.stepMeta}>{step.meta}</p><h3>{step.title}</h3><p>{step.body}</p>
                 {step.guidance && <aside><Check size={15} /><p><strong>Checkpoint</strong>{step.guidance}</p></aside>}
               </div>
+              {step.media && (
+                <figure className={styles.stepMedia}>
+                  <div>
+                    <Image src={step.media.src} alt={step.media.alt} fill sizes="(min-width: 900px) 360px, 100vw" />
+                    <span>Visual example · pending author approval</span>
+                  </div>
+                  <figcaption>{step.media.caption}</figcaption>
+                </figure>
+              )}
             </article>
           ))}
         </div>

@@ -73,6 +73,12 @@
 .steps aside svg { flex: 0 0 auto; margin-top: 3px; color: var(--color-action-primary); }
 .steps aside p { margin: 0; font-size: .74rem; }
 .steps aside strong { display: block; color: var(--color-text-primary); }
+.steps > .stepWithMedia { grid-template-columns: 65px minmax(0, 1fr) 360px; gap: 34px; }
+.stepMedia { margin: 0; }
+.stepMedia > div { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-background-panel); }
+.stepMedia img { object-fit: cover; }
+.stepMedia > div > span { position: absolute; left: 10px; bottom: 10px; padding: 6px 9px; background: rgba(255, 253, 249, .94); color: var(--color-status-suggested-text); font-size: .58rem; font-weight: 800; letter-spacing: .045em; text-transform: uppercase; }
+.stepMedia figcaption { margin-top: 9px; color: var(--color-text-secondary); font-size: .68rem; line-height: 1.5; }
 
 /* Approved practical density for laptop and desktop screens. */
 @media (min-width: 901px) {
@@ -129,6 +135,8 @@
   .methodHeading { display: block; }
   .methodHeading .primaryAction { width: 100%; margin-top: 25px; }
   .steps > article { grid-template-columns: 45px 1fr; }
+  .steps > .stepWithMedia { grid-template-columns: 45px 1fr; gap: 0; }
+  .stepMedia { grid-column: 2; margin-top: 22px; }
 }
 
 @media (max-width: 560px) {
