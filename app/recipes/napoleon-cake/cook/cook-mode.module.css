@@ -17,10 +17,8 @@
 .rail li button > span { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid var(--color-border-subtle); border-radius: 50%; font-family: var(--font-family-display); font-size: .65rem; }
 .rail li .activeStep { color: var(--color-text-primary); }
 .rail li .activeStep > span { border-color: var(--color-action-primary); background: var(--color-action-primary); color: var(--color-text-on-accent); }
-.rail li .completedStep { min-height: 56px; background: var(--color-status-tested-background); box-shadow: inset 3px 0 0 var(--color-status-tested-text); color: var(--color-text-primary); font-weight: 750; }
+.rail li .completedStep { min-height: 56px; background: transparent; box-shadow: inset 3px 0 0 var(--color-status-tested-text); color: var(--color-text-primary); font-weight: 750; }
 .rail li .completedStep > span { border-color: var(--color-status-tested-text); background: var(--color-background-surface); color: var(--color-status-tested-text); }
-.rail li .completedNoBackground { background: transparent; }
-.rail li .completedFilledIcon > span { border-color: var(--color-status-tested-text); background: var(--color-status-tested-text); color: var(--color-text-on-accent); }
 .prototypeNote { margin-top: 20px !important; color: var(--color-text-secondary) !important; font-size: .62rem !important; line-height: 1.5; letter-spacing: 0 !important; text-transform: none !important; }
 .step { width: min(100%, 1040px); padding: clamp(36px, 4vw, 58px) clamp(34px, 5vw, 76px) 72px; }
 .mobileProgress { display: none; }
@@ -74,14 +72,6 @@
 .assistant form input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--color-text-primary); }
 .assistant form button { width: 42px; height: 42px; display: grid; place-items: center; border: 0; background: var(--color-action-primary); color: var(--color-text-on-accent); }
 .assistant footer { padding: 12px 20px 20px; color: var(--color-text-secondary); font-size: .6rem; }
-.reviewBar { position: fixed; right: 22px; bottom: 20px; z-index: 30; padding: 8px; display: flex; align-items: stretch; gap: 8px; border: 1px solid var(--color-border-subtle); background: color-mix(in srgb, var(--color-background-surface) 96%, transparent); box-shadow: 0 12px 32px rgba(43,29,24,.12); backdrop-filter: blur(12px); }
-.reviewBar > div { min-width: 172px; padding: 3px 10px 3px 4px; display: flex; align-items: center; gap: 9px; color: var(--color-action-primary); }
-.reviewBar span { display: flex; flex-direction: column; color: var(--color-text-secondary); font-size: .56rem; line-height: 1.35; }
-.reviewBar strong { color: var(--color-text-primary); font-size: .67rem; }
-.reviewBar fieldset { margin: 0; padding: 14px 4px 4px; position: relative; display: flex; border: 1px solid var(--color-border-subtle); }
-.reviewBar legend { position: absolute; top: 3px; left: 8px; color: var(--color-text-secondary); font-size: .5rem; text-transform: uppercase; }
-.reviewBar button { min-width: 66px; padding: 0 9px; border: 0; background: transparent; color: var(--color-text-secondary); cursor: pointer; font-size: .64rem; font-weight: 750; }
-.reviewBar button[aria-pressed='true'] { background: var(--color-background-panel-subtle); color: var(--color-action-primary-strong); }
 
 @media (max-width: 900px) {
   .header { height: 64px; padding: 0 20px; grid-template-columns: 1fr auto; }
@@ -100,7 +90,6 @@
   .mobileBar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; min-height: 72px; padding: 10px 14px max(10px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: 48px 1fr 48px; gap: 9px; border-top: 1px solid var(--color-border-subtle); background: color-mix(in srgb, var(--color-background-surface) 94%, transparent); backdrop-filter: blur(12px); }
   .mobileBar button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--color-border-subtle); background: var(--color-background-surface); color: var(--color-text-primary); font-size: .74rem; font-weight: 800; }
   .mobileBar button:nth-child(2) { background: var(--color-action-primary); border-color: var(--color-action-primary); color: var(--color-text-on-accent); }
-  .reviewBar { display: none; }
   .assistantLayer { align-items: flex-end; }
   .assistant { width: 100%; height: min(82vh, 690px); border-radius: 18px 18px 0 0; }
 }
