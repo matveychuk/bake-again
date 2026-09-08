@@ -75,14 +75,8 @@
 .steps aside strong { display: block; color: var(--color-text-primary); }
 .steps > .stepWithMedia { grid-template-columns: 65px minmax(0, 1fr); }
 .stepWithMedia .mediaSequence { grid-column: 2; }
-.mediaSequence { margin-top: 25px; padding: 18px; border: 1px solid var(--color-border-subtle); background: var(--color-background-page); }
-.mediaSequenceHeader { margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-.mediaSequenceHeader strong, .mediaSequenceHeader span { display: block; }
-.mediaSequenceHeader strong { font-size: .73rem; }
-.mediaSequenceHeader span { color: var(--color-status-suggested-text); font-size: .58rem; letter-spacing: .04em; text-transform: uppercase; }
+.mediaSequence { margin-top: 25px; }
 .sequenceView { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.sequenceView[data-count='1'] { grid-template-columns: minmax(0, 500px); }
-.sequenceView[data-count='2'] { grid-template-columns: repeat(2, minmax(0, 360px)); }
 .sequenceView figure { margin: 0; }
 .sequenceView figure > div { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-background-panel); }
 .sequenceView img { object-fit: cover; }
@@ -107,11 +101,12 @@
 .assistantContext svg { flex: 0 0 auto; margin-top: 2px; color: var(--color-action-primary); }
 .assistantContext p { margin: 0; color: var(--color-text-secondary); font-size: .7rem; line-height: 1.55; }
 .assistantContext strong { display: block; color: var(--color-text-primary); }
-.assistantQuestion { margin: 28px 0 14px; font-family: var(--font-family-display); font-size: 1.35rem; line-height: 1.25; }
-.assistantAnswer { padding: 16px; background: var(--color-status-calculated-background); }
+.assistantLead { margin: 24px 0 0; font-size: .88rem; line-height: 1.5; }
+.assistantAnswer { margin-top: 16px; padding: 16px; background: var(--color-status-calculated-background); }
 .assistantAnswer span { color: var(--color-status-calculated-text); font-size: .58rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .assistantAnswer p { margin: 6px 0 0; color: var(--color-text-primary); font-size: .76rem; line-height: 1.6; }
-.assistantPrompts { margin-top: 24px; display: grid; gap: 8px; }
+.assistantPromptLabel { margin: 24px 0 9px; color: var(--color-text-secondary); font-size: .64rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.assistantPrompts { display: grid; gap: 8px; }
 .assistantPrompts button { min-height: 46px; padding: 0 13px; display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--color-border-subtle); background: transparent; color: var(--color-text-primary); font-size: .73rem; font-weight: 700; cursor: pointer; }
 .assistantComposer { margin: 0 20px; padding: 6px 6px 6px 14px; display: flex; border: 1px solid var(--color-border-subtle); background: var(--color-background-page); }
 .assistantComposer input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--color-text-primary); font-size: .78rem; }
@@ -175,7 +170,6 @@
   .steps > article { grid-template-columns: 45px 1fr; }
   .steps > .stepWithMedia { grid-template-columns: 45px 1fr; }
   .stepWithMedia .mediaSequence { grid-column: 1 / -1; margin-top: 24px; }
-  .mediaSequenceHeader { align-items: flex-start; flex-direction: column; gap: 3px; }
   .sequenceView { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
   .sequenceView figure { flex: 0 0 82%; scroll-snap-align: start; }
   .assistantLayer { align-items: flex-end; }
