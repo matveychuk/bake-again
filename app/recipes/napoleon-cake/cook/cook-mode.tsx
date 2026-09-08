@@ -144,7 +144,12 @@ export function CookMode() {
           <ol>
             {steps.map((item, index) => (
               <li key={item.number}>
-                <button className={index === stepIndex ? styles.activeStep : undefined} type="button" onClick={() => goToStep(index)} aria-current={index === stepIndex ? 'step' : undefined}>
+                <button
+                  className={`${index === stepIndex ? styles.activeStep : ''} ${completed.includes(index) && index !== stepIndex ? styles.completedStep : ''}`}
+                  type="button"
+                  onClick={() => goToStep(index)}
+                  aria-current={index === stepIndex ? 'step' : undefined}
+                >
                   <span>{completed.includes(index) ? <Check size={13} /> : item.number}</span>{item.title}
                 </button>
               </li>

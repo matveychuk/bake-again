@@ -17,6 +17,8 @@
 .rail li button > span { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid var(--color-border-subtle); border-radius: 50%; font-family: var(--font-family-display); font-size: .65rem; }
 .rail li .activeStep { color: var(--color-text-primary); }
 .rail li .activeStep > span { border-color: var(--color-action-primary); background: var(--color-action-primary); color: var(--color-text-on-accent); }
+.rail li .completedStep { margin: 5px 0; min-height: 46px; padding: 8px 10px; border-left: 3px solid var(--color-status-tested-text); background: var(--color-status-tested-background); color: var(--color-text-primary); font-weight: 750; }
+.rail li .completedStep > span { border-color: var(--color-status-tested-text); background: var(--color-background-surface); color: var(--color-status-tested-text); }
 .prototypeNote { margin-top: 20px !important; color: var(--color-text-secondary) !important; font-size: .62rem !important; line-height: 1.5; letter-spacing: 0 !important; text-transform: none !important; }
 .step { width: min(100%, 1040px); padding: clamp(36px, 4vw, 58px) clamp(34px, 5vw, 76px) 72px; }
 .mobileProgress { display: none; }
