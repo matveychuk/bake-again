@@ -97,7 +97,6 @@ function formatTime(seconds: number) {
 
 export function CookMode() {
   const [stepIndex, setStepIndex] = useState(0);
-  const [tipLayout, setTipLayout] = useState<'stacked' | 'inline'>('inline');
   const [completed, setCompleted] = useState<number[]>([]);
   const [assistantOpen, setAssistantOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(false);
@@ -158,19 +157,21 @@ export function CookMode() {
           <div className={styles.mobileProgress}><span>Step {stepIndex + 1} of 17</span><span>{progress}%</span></div>
           <p className={styles.meta}>{step.meta}</p>
           <h1>{step.title}</h1>
+
+          {step.tip && (
+            <aside className={styles.leadTip}>
+              <Lightbulb size={19} />
+              <strong>Tip</strong>
+              <span>{step.tip}</span>
+            </aside>
+          )}
+
           <p className={styles.instruction}>{step.body}</p>
 
           <section className={styles.ingredientStrip} aria-label="Ingredients used in this step">
             <p>For this step</p>
             <strong>{ingredientLabel}</strong>
           </section>
-
-          {step.tip && (
-            <aside className={`${styles.tip} ${tipLayout === 'inline' ? styles.tipInline : ''}`}>
-              <Lightbulb size={19} />
-              <p><strong>Tip</strong>{step.tip}</p>
-            </aside>
-          )}
 
           {step.checkpoint && (
             <aside className={styles.checkpoint}>
@@ -233,13 +234,6 @@ export function CookMode() {
         </div>
       )}
 
-      {step.tip && (
-        <aside className={styles.reviewBar} aria-label="Tip layout comparison">
-          <div><Lightbulb size={17} /><span><strong>Tip layout</strong>Compare information density</span></div>
-          <button type="button" aria-pressed={tipLayout === 'stacked'} onClick={() => setTipLayout('stacked')}>Stacked</button>
-          <button type="button" aria-pressed={tipLayout === 'inline'} onClick={() => setTipLayout('inline')}>Inline tip</button>
-        </aside>
-      )}
     </main>
   );
 }
