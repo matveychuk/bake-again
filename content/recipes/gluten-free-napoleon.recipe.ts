@@ -1,7 +1,7 @@
 import type { RecipeDraft } from "./recipe.types";
 
 export const glutenFreeNapoleonRecipe = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   id: "gluten-free-napoleon",
   versionId: "gluten-free-napoleon-v1-draft",
   publicationStatus: "draft",
@@ -130,7 +130,7 @@ export const glutenFreeNapoleonRecipe = {
     },
     alternatives: [],
   },
-  forms: {
+  geometry: {
     default: {
       id: "round-28cm-6-layers-each",
       label: {
@@ -138,6 +138,8 @@ export const glutenFreeNapoleonRecipe = {
         en: "Six 28 cm round layers for each cake",
         es: "Seis capas redondas de 28 cm para cada tarta",
       },
+      kind: "roundTemplate",
+      application: "roll-and-trim",
       shape: "round",
       diameterCm: 28,
       layerCount: 6,
@@ -152,10 +154,12 @@ export const glutenFreeNapoleonRecipe = {
       {
         id: "round-24cm-preview",
         label: {
-          uk: "Кругла форма 24 см — лише розрахунковий перегляд",
-          en: "24 cm round form — calculation preview only",
+          uk: "Круглий шаблон 24 см — лише розрахунковий перегляд",
+          en: "24 cm round template — calculation preview only",
           es: "Formato redondo de 24 cm — solo vista previa calculada",
         },
+        kind: "roundTemplate",
+        application: "roll-and-trim",
         shape: "round",
         diameterCm: 24,
         layerCount: null,
@@ -169,6 +173,34 @@ export const glutenFreeNapoleonRecipe = {
         blockingGapIds: ["validate-24cm-form"],
       },
     ],
+  },
+  configuration: {
+    base: {
+      status: "Tested",
+      geometryId: "round-28cm-6-layers-each",
+      yieldId: "two-six-layer-cakes",
+      batchScale: 1,
+    },
+    geometryAdjustment: {
+      optionIds: ["round-24cm-preview"],
+      quantityBasis: "area",
+      timingPolicy: "unverifiedWhenChanged",
+    },
+    quantityAdjustment: {
+      batchScale: { allowed: [0.5, 1, 1.5, 2] },
+      useWhatIHave: {
+        scalingAnchors: [
+          {
+            ingredientLineId: "schar-mix-b",
+            allowedUnit: "g",
+            minimum: 100,
+          },
+        ],
+      },
+    },
+    ingredientScaling: {
+      default: { kind: "linear", precision: 0.1, rounding: "nearest" },
+    },
   },
   equipment: [
     {
@@ -312,6 +344,7 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "exact", value: 3, unit: "g" },
+          scaling: { kind: "linear", precision: 0.1, rounding: "nearest" },
           condition: {
             uk: "лише якщо її немає у складі суміші",
             en: "only if the flour mix does not contain it",
@@ -341,6 +374,7 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "exact", value: 0.25, unit: "tsp" },
+          scaling: { kind: "fixed" },
         },
         {
           id: "sugar-dough",
@@ -427,6 +461,7 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "exact", value: 2, unit: "piece" },
+          scaling: { kind: "discrete", increment: 1, rounding: "manual" },
         },
         {
           id: "lemon-juice",
@@ -451,6 +486,7 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "range", min: 30, max: 70, unit: "ml" },
+          scaling: { kind: "range", precision: 5, rounding: "nearest" },
           qualifier: {
             uk: "за потреби",
             en: "as needed",
@@ -491,6 +527,7 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "exact", value: 2, unit: "piece" },
+          scaling: { kind: "discrete", increment: 1, rounding: "manual" },
         },
         {
           id: "egg-whites-custard",
@@ -505,6 +542,7 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "exact", value: 3, unit: "piece" },
+          scaling: { kind: "discrete", increment: 1, rounding: "manual" },
         },
         {
           id: "sugar-custard",
@@ -571,6 +609,7 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "range", min: 16, max: 24, unit: "g" },
+          scaling: { kind: "discrete", increment: 8, rounding: "manual" },
           qualifier: {
             uk: "2–3 пакетики по 8 г",
             en: "2–3 packets of 8 g",
@@ -591,6 +630,7 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "exact", value: 1, unit: "pinch" },
+          scaling: { kind: "fixed" },
         },
       ],
     },
@@ -611,6 +651,14 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "range", min: 120, max: 150, unit: "g" },
+          scaling: {
+            kind: "manual",
+            reason: {
+              uk: "Кількість декору коригують після складання.",
+              en: "Adjust the decoration amount after assembly.",
+              es: "Ajusta la cantidad de decoración después del montaje.",
+            },
+          },
         },
         {
           id: "flaked-almonds",
@@ -625,6 +673,14 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           amount: { kind: "range", min: 30, max: 50, unit: "g" },
+          scaling: {
+            kind: "manual",
+            reason: {
+              uk: "Кількість декору коригують після складання.",
+              en: "Adjust the decoration amount after assembly.",
+              es: "Ajusta la cantidad de decoración después del montaje.",
+            },
+          },
         },
       ],
     },
@@ -997,8 +1053,20 @@ export const glutenFreeNapoleonRecipe = {
       availability: "hiddenUntilConfirmed",
     },
   ],
-  heroMediaId: null,
-  media: [],
+  heroMediaId: "napoleon-generated-card-v1",
+  media: [
+    {
+      id: "napoleon-generated-card-v1",
+      type: "image",
+      path: "/images/recipes/gluten-free-napoleon-card-v1.png",
+      usage: ["hero", "gallery"],
+      alt: {
+        uk: "Безглютеновий торт Наполеон із тонкими золотистими коржами та відрізаним шматком",
+        en: "Gluten-free Napoleon cake with thin golden layers and a cut slice",
+        es: "Tarta Napoleón sin gluten con capas finas doradas y una porción cortada",
+      },
+    },
+  ],
   relatedRecipeIds: [],
   sources: [
     {
@@ -1065,7 +1133,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: "validate-24cm-form",
       area: "form",
-      field: "forms.alternatives.round-24cm-preview",
+      field: "geometry.alternatives.round-24cm-preview",
       question: "Resolve eggs, layer count, cream volume and timing, then test the 24 cm configuration before enabling Cook Mode.",
       publicationBlocking: false,
       sourceIds: ["ux-form-example"],
@@ -1073,8 +1141,8 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: "add-hero-image",
       area: "image",
-      field: "heroMediaId",
-      question: "Make and select the final publication photos.",
+      field: "media.napoleon-generated-card-v1",
+      question: "Approve or replace the generated preview image before final publication.",
       publicationBlocking: true,
       sourceIds: ["inventory-row"],
     },

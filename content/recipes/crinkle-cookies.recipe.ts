@@ -1,7 +1,7 @@
 import type { RecipeDraft } from "./recipe.types";
 
 export const crinkleCookiesRecipe = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   id: "crinkle-cookies",
   versionId: "crinkle-cookies-v1-draft",
   publicationStatus: "draft",
@@ -76,7 +76,7 @@ export const crinkleCookiesRecipe = {
     },
     alternatives: [],
   },
-  forms: {
+  geometry: {
     default: {
       id: "parchment-lined-baking-sheet",
       label: {
@@ -84,7 +84,9 @@ export const crinkleCookiesRecipe = {
         en: "Parchment-lined baking sheet",
         es: "Bandeja de horno forrada con papel",
       },
-      shape: "bakingSheet",
+      kind: "tray",
+      application: "portion-on",
+      shape: "rectangular",
       diameterCm: null,
       layerCount: null,
       material: null,
@@ -95,6 +97,22 @@ export const crinkleCookiesRecipe = {
       availability: "default",
     },
     alternatives: [],
+  },
+  configuration: {
+    base: {
+      status: "Tested",
+      geometryId: "parchment-lined-baking-sheet",
+      yieldId: "default-batch",
+      batchScale: 1,
+    },
+    geometryAdjustment: null,
+    quantityAdjustment: {
+      batchScale: { allowed: [0.5, 1, 1.5, 2] },
+      useWhatIHave: null,
+    },
+    ingredientScaling: {
+      default: { kind: "linear", precision: 0.1, rounding: "nearest" },
+    },
   },
   equipment: [
     {
@@ -164,6 +182,7 @@ export const crinkleCookiesRecipe = {
             },
           ],
           amount: { kind: "exact", value: 2, unit: "piece" },
+          scaling: { kind: "discrete", increment: 1, rounding: "manual" },
         },
         {
           id: "sugar",
@@ -222,6 +241,7 @@ export const crinkleCookiesRecipe = {
             },
           ],
           amount: { kind: "exact", value: 1, unit: "piece" },
+          scaling: { kind: "discrete", increment: 1, rounding: "manual" },
           preparation: {
             uk: "використати цедру",
             en: "zest only",
@@ -241,6 +261,14 @@ export const crinkleCookiesRecipe = {
             },
           ],
           amount: null,
+          scaling: {
+            kind: "manual",
+            reason: {
+              uk: "Кількість для обкачування залежить від покриття.",
+              en: "The coating amount depends on coverage.",
+              es: "La cantidad para rebozar depende de la cobertura.",
+            },
+          },
           qualifier: {
             uk: "для обкачування",
             en: "for coating",
@@ -421,8 +449,20 @@ export const crinkleCookiesRecipe = {
       ],
     },
   ],
-  heroMediaId: null,
-  media: [],
+  heroMediaId: "crinkle-generated-card-v1",
+  media: [
+    {
+      id: "crinkle-generated-card-v1",
+      type: "image",
+      path: "/images/recipes/chocolate-crinkle-cookies-card-v1.png",
+      usage: ["hero", "gallery"],
+      alt: {
+        uk: "Шоколадне печиво тріщинки в цукровій пудрі на керамічній тарілці",
+        en: "Chocolate crinkle cookies dusted with powdered sugar on a ceramic plate",
+        es: "Galletas craqueladas de chocolate con azúcar glas sobre un plato de cerámica",
+      },
+    },
+  ],
   relatedRecipeIds: [],
   sources: [
     {
@@ -466,8 +506,8 @@ export const crinkleCookiesRecipe = {
     {
       id: "add-hero-image",
       area: "image",
-      field: "heroMediaId",
-      question: "Select or make the final publication photo.",
+      field: "media.crinkle-generated-card-v1",
+      question: "Approve or replace the generated preview image before final publication.",
       publicationBlocking: true,
       sourceIds: ["inventory-row"],
     },

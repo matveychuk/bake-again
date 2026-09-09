@@ -76,6 +76,8 @@ export interface IngredientLine {
   qualifier?: LocalizedText;
   condition?: LocalizedText;
   provenance?: Provenance;
+  /** Overrides the recipe-level ingredient scaling default. */
+  scaling?: IngredientScalingRule;
 }
 
 export interface IngredientSection {
@@ -112,16 +114,128 @@ export interface YieldOption {
   availability: Availability;
 }
 
-export interface FormOption {
+export type GeometryKind =
+  | "bakingPan"
+  | "tray"
+  | "mould"
+  | "roundTemplate"
+  | "other";
+
+export type GeometryApplication =
+  | "bake-in"
+  | "portion-on"
+  | "shape-in"
+  | "roll-and-trim"
+  | "other";
+
+export interface GeometryOption {
   id: string;
   label: LocalizedText;
-  shape: "round" | "bakingSheet";
+  kind: GeometryKind;
+  application: GeometryApplication;
+  shape: "round" | "rectangular" | "freeform" | "other";
   diameterCm: number | null;
+  widthCm?: number | null;
+  lengthCm?: number | null;
   layerCount: number | null;
   material: string | null;
   provenance: Provenance;
   availability: Availability;
   blockingGapIds?: string[];
+}
+
+export type IngredientScalingRule =
+  | {
+      kind: "linear";
+      precision?: number;
+      rounding?: "nearest" | "up" | "down";
+    }
+  | {
+      kind: "discrete";
+      increment: number;
+      rounding: "nearest" | "up" | "down" | "manual";
+    }
+  | {
+      kind: "range";
+      precision?: number;
+      rounding?: "nearest" | "up" | "down";
+    }
+  | { kind: "fixed" }
+  | { kind: "manual"; reason: LocalizedText };
+
+export type BatchScaleFactor = 0.5 | 1 | 1.5 | 2;
+
+export interface ScalingAnchor {
+  ingredientLineId: string;
+  allowedUnit: Unit;
+  minimum?: number;
+  maximum?: number;
+}
+
+export interface RecipeConfigurationModel {
+  /** References the recipe's verified values; it never contains copied quantities. */
+  base: {
+    status: "Tested";
+    geometryId: string;
+    yieldId: string;
+    batchScale: 1;
+  };
+  geometryAdjustment:
+    | {
+        optionIds: [string, ...string[]];
+        quantityBasis: "area";
+        timingPolicy: "unverifiedWhenChanged" | "unchanged";
+      }
+    | null;
+  quantityAdjustment: {
+    batchScale: { allowed: [BatchScaleFactor, ...BatchScaleFactor[]] } | null;
+    useWhatIHave: { scalingAnchors: [ScalingAnchor, ...ScalingAnchor[]] } | null;
+  };
+  ingredientScaling: {
+    default: IngredientScalingRule;
+  };
+}
+
+export type QuantityAdjustmentSelection =
+  | { mode: "batchScale"; factor: BatchScaleFactor }
+  | {
+      mode: "useWhatIHave";
+      anchorIngredientLineId: string;
+      availableAmount: { value: number; unit: Unit };
+    };
+
+export interface ConfigurationWarning {
+  code:
+    | "fractional-discrete-ingredient"
+    | "manual-scaling-required"
+    | "unverified-timing"
+    | "unsupported-selection";
+  severity: "warning" | "blocking";
+  ingredientLineId?: string;
+  message: string;
+}
+
+export interface CalculatedIngredientAmount {
+  ingredientLineId: string;
+  amount: Quantity | null;
+  rule: IngredientScalingRule["kind"];
+  requiresResolution: boolean;
+}
+
+/** User/runtime data. It must not be written into a RecipeDraft. */
+export interface CalculatedRecipeConfiguration {
+  recipeId: string;
+  recipeVersionId: string;
+  status: "Calculated";
+  provenance: "Calculated";
+  geometryId: string;
+  quantityAdjustment: QuantityAdjustmentSelection;
+  geometryScaleFactor: number;
+  batchScaleFactor: number;
+  totalScaleFactor: number;
+  ingredientAmounts: CalculatedIngredientAmount[];
+  warnings: ConfigurationWarning[];
+  cookMode: { eligible: boolean };
 }
 
 export interface Temperature {
@@ -215,7 +329,7 @@ export interface ContentGap {
 }
 
 export interface RecipeDraft {
-  schemaVersion: 1;
+  schemaVersion: 2;
   id: string;
   versionId: string;
   publicationStatus: PublicationStatus;
@@ -236,10 +350,11 @@ export interface RecipeDraft {
     default: YieldOption;
     alternatives: YieldOption[];
   };
-  forms: {
-    default: FormOption;
-    alternatives: FormOption[];
+  geometry: {
+    default: GeometryOption;
+    alternatives: GeometryOption[];
   };
+  configuration: RecipeConfigurationModel;
   equipment: Array<{ id: string; name: LocalizedText }>;
   flourConfiguration: FlourConfiguration;
   beforeStart: BeforeStartItem[];

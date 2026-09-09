@@ -26,7 +26,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${newsreader.variable}`}>{children}</body>
+      <body className={`${manrope.variable} ${newsreader.variable}`}>
+        {children}
+        {process.env.NODE_ENV === 'development' && (
+          <script
+            src="https://mcp.figma.com/mcp/html-to-design/capture.js"
+            async
+          />
+        )}
+      </body>
     </html>
   );
 }

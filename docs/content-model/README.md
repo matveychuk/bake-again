@@ -16,6 +16,54 @@ media/recipes/
 
 Each recipe is one entity with localized `en`, `es`, and `uk` content. Shared facts—quantities, oven settings, yields, times, flour configurations, evidence and provenance—are stored once. Translations contain only reader-facing text.
 
+## Base and calculated configurations
+
+The checked-in recipe is the immutable source of truth. `configuration.base` only points to its tested default geometry and yield; it never copies ingredient amounts. The exact base has status `Tested`. Any change to geometry or quantity has status and provenance `Calculated`, lives in `CalculatedRecipeConfiguration`, and references both `recipeId` and `recipeVersionId`. Calculated amounts must never be written back into `RecipeDraft`.
+
+Configuration has two independent axes:
+
+- geometry selects a baking pan, tray, mould, round template, or another recipe-appropriate format;
+- quantity selects exactly one discriminated-union mode: `batchScale` or `useWhatIHave`.
+
+Geometry may be combined with either quantity mode. With direct batch scaling, the area ratio and batch factor are multiplied. With `useWhatIHave`, the anchor amount fixes the final total factor; the geometry ratio is used to derive the effective batch factor, so the requested available amount remains exact.
+
+Recipe-level capabilities are explicit. `geometryAdjustment: null` means the recipe only supports its base geometry. `useWhatIHave: null` means it has no safe anchor workflow. Crinkle Cookies is the deliberately simple example: it supports batch scaling but neither geometry adjustment nor `Use what I have`.
+
+Schema version 2 uses `geometry` as the single canonical field; there is no parallel `forms` schema. Napoleon uses a `roundTemplate` with `application: "roll-and-trim"`: its 28 cm layers are rolled on parchment and trimmed against a lid or template, not baked in a pan.
+
+## Ingredient scaling
+
+`configuration.ingredientScaling.default` supplies the recipe default, while `IngredientLine.scaling` handles exceptions:
+
+- `linear`: multiply and optionally round to a precision increment;
+- `discrete`: enforce units such as whole eggs or 8 g packets; `rounding: "manual"` creates a blocking warning when the result is fractional;
+- `range`: scale both bounds, preserving an as-needed range such as water;
+- `fixed`: retain an amount such as a pinch of salt;
+- `manual`: do not invent a scaled amount, for example decoration adjusted after assembly.
+
+`scalingAnchors` belongs to the recipe and references ingredient-line IDs. It means “safe to derive the recipe scale from this measured amount”, not “most important ingredient”. Napoleon currently permits only `schar-mix-b` in grams.
+
+The calculator emits structured warnings for fractional discrete ingredients, manual adjustments and unverified geometry timing. Any blocking warning makes `cookMode.eligible` false. This prevents a calculated preview from inheriting the tested status or silently entering Cook Mode.
+
+### Runtime examples
+
+`configuration.examples.ts` contains executable fixtures:
+
+```ts
+calculateRecipeConfiguration(recipe, 'round-24cm-preview', {
+  mode: 'batchScale',
+  factor: 0.5,
+});
+
+calculateRecipeConfiguration(recipe, 'round-28cm-6-layers-each', {
+  mode: 'useWhatIHave',
+  anchorIngredientLineId: 'schar-mix-b',
+  availableAmount: { value: 200, unit: 'g' },
+});
+```
+
+The first combines the 24/28 area ratio with 0.5×. The second derives a total factor of 200/450 while preserving exactly 200 g of the anchor flour mix. Both are `Calculated`; both currently remain outside Cook Mode because they create fractional egg units and manual decoration work, and the 24 cm geometry also has unverified timing.
+
 ## Evidence states
 
 - `repeatedlyVerified`: repeatedly tested by the author and treated as the trusted recipe baseline.
@@ -106,3 +154,5 @@ Keep validation lightweight and repository-based:
 - A pull-request checklist for author confirmation, translation review, allergen review, media rights and final visual review.
 
 The initial model deliberately avoids separate tables for ingredients, units, appliances, evidence records or translations. Those abstractions would add maintenance work without helping a collection of roughly 20 recipes. Introduce them later only when repeated real content shows a clear need.
+
+Run `npm run typecheck` and `npm run validate:recipes`. The latter checks recipe references, anchor line IDs and units, optional capabilities, Napoleon geometry semantics, and the two calculated fixtures.
