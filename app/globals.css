@@ -139,6 +139,8 @@ input:focus-visible {
 
 .language-button {
   justify-self: end;
+  min-height: 44px;
+  padding: var(--space-2);
   border: 0;
   background: transparent;
   color: var(--ink);
@@ -146,6 +148,34 @@ input:focus-visible {
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.06em;
+}
+
+.language-button[aria-expanded='true'] { color: var(--color-action-primary-strong); }
+
+.language-menu {
+  min-width: 11.5rem;
+  padding: var(--space-1);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-raised);
+}
+
+.language-menu__item {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-control);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-small);
+  font-weight: 650;
+}
+
+.language-menu__item:focus-visible,
+.language-menu__item[data-highlighted] {
+  background: var(--color-background-panel);
+  color: var(--color-text-primary);
 }
 
 .hero {
@@ -725,7 +755,7 @@ footer p {
 
 @media (max-width: 1120px) {
   .site-header { grid-template-columns: auto 1fr auto; gap: 32px; }
-  .site-header nav { justify-self: end; }
+  .site-header nav { justify-self: end; gap: 22px; }
   .hero { grid-template-columns: 0.92fr 1.08fr; gap: 42px; }
   .hero h1 { font-size: clamp(3.85rem, 6vw, 4.8rem); }
   .trust-section { grid-template-columns: 1.1fr 1fr; }
@@ -737,7 +767,6 @@ footer p {
   .site-header, .hero, .recipes-section, .trust-section, footer {
     width: min(100% - 40px, 720px);
   }
-  .site-header nav a:not(:first-child) { display: none; }
   .hero { grid-template-columns: 1fr; padding-top: 58px; }
   .hero-copy { padding-left: 0; }
   .hero-visual { min-height: 620px; }
@@ -750,8 +779,9 @@ footer p {
 }
 
 @media (max-width: 620px) {
-  .site-header { height: 74px; }
-  .site-header nav { display: none; }
+  .site-header { height: auto; min-height: 74px; padding: var(--space-3) 0; grid-template-columns: 1fr auto; gap: var(--space-2) var(--space-4); }
+  .site-header nav { grid-row: 2; grid-column: 1 / -1; justify-self: start; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-size: var(--font-size-body-small); }
+  .language-button { grid-column: 2; }
   .hero {
     min-height: 0;
     padding-top: 36px;

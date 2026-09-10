@@ -6,7 +6,6 @@ type CookRouteProps = { params: Promise<{ slug: string }> };
 
 export default async function RecipeCookModeRoute({ params }: CookRouteProps) {
   const { slug } = await params;
-  const definition = getCookModeDefinition(slug);
-  if (!definition) notFound();
-  return <CookModePage definition={definition} />;
+  if (!getCookModeDefinition(slug)) notFound();
+  return <CookModePage recipeSlug={slug} />;
 }

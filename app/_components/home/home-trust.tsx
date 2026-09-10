@@ -1,35 +1,39 @@
 import { ArrowRight, Calculator, Check, Lightbulb } from 'lucide-react';
 import { Eyebrow } from '@/components/foundations/eyebrow';
+import type { AppLocale } from '@/lib/i18n/config';
+import { getUiMessages } from '@/lib/i18n/messages';
 
-export function HomeTrust() {
+export function HomeTrust({ locale }: { locale: AppLocale }) {
+  const messages = getUiMessages(locale);
+  const home = messages.home;
   return (
     <section className="trust-section" aria-labelledby="trust-title">
       <div className="trust-intro">
         <div className="trust-mark" aria-hidden="true"><Check size={22} strokeWidth={2} /></div>
         <div className="trust-copy">
-          <Eyebrow>Clear recipe status</Eyebrow>
-          <h2 id="trust-title">Know what was baked — and what was only worked out.</h2>
+          <Eyebrow>{home.trustEyebrow}</Eyebrow>
+          <h2 id="trust-title">{home.trustTitle}</h2>
         </div>
       </div>
 
-      <div className="trust-statuses" aria-label="Recipe status guide">
+      <div className="trust-statuses" aria-label={home.trustGuide}>
         <div className="trust-status-row trust-status-row--tested">
-          <span className="trust-status-badge"><Check aria-hidden="true" size={14} strokeWidth={2.3} /><strong>Tested</strong></span>
-          <small>Baked as written.</small>
+          <span className="trust-status-badge"><Check aria-hidden="true" size={14} strokeWidth={2.3} /><strong>{messages.status.tested.label}</strong></span>
+          <small>{home.testedExplanation}</small>
         </div>
         <div className="trust-status-row trust-status-row--calculated">
-          <span className="trust-status-badge"><Calculator aria-hidden="true" size={14} strokeWidth={1.9} /><strong>Calculated</strong></span>
-          <small>Quantities scaled. This version has not been bake-tested.</small>
+          <span className="trust-status-badge"><Calculator aria-hidden="true" size={14} strokeWidth={1.9} /><strong>{messages.status.calculated.label}</strong></span>
+          <small>{messages.status.calculated.explanation}</small>
         </div>
         <div className="trust-status-row trust-status-row--suggested">
-          <span className="trust-status-badge"><Lightbulb aria-hidden="true" size={14} strokeWidth={1.9} /><strong>Suggested</strong></span>
-          <small>An idea to try. This change has not been bake-tested.</small>
+          <span className="trust-status-badge"><Lightbulb aria-hidden="true" size={14} strokeWidth={1.9} /><strong>{messages.status.suggested.label}</strong></span>
+          <small>{messages.status.suggested.explanation}</small>
         </div>
       </div>
 
       <div className="trust-note">
-        <p>Every recipe names the flour mix, form and quantity actually used. A tested original may still have a calculated variation.</p>
-        <a href="#how-we-test">How we test recipes <ArrowRight aria-hidden="true" size={18} /></a>
+        <p>{home.trustNote}</p>
+        <a href="#how-we-test">{home.howWeTest} <ArrowRight aria-hidden="true" size={18} /></a>
       </div>
     </section>
   );

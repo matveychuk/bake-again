@@ -39,7 +39,13 @@ type RecipeConfigurationContextValue = {
 
 const RecipeConfigurationContext = createContext<RecipeConfigurationContextValue | null>(null);
 
-export function RecipeConfigurationProvider({ children }: { children: ReactNode }) {
+export function RecipeConfigurationProvider({
+  children,
+  cookPath = '/recipes/napoleon-cake/cook',
+}: {
+  children: ReactNode;
+  cookPath?: string;
+}) {
   const [form, setForm] = useState<FormSize>('28');
   const [quantityMode, setQuantityMode] = useState<QuantityMode>('scale');
   const [scale, setScale] = useState<BatchScaleFactor>(1);
@@ -62,8 +68,8 @@ export function RecipeConfigurationProvider({ children }: { children: ReactNode 
     && selection.quantityAdjustment.factor === 1;
   const cookModeHref = result.cookMode.eligible
     ? isExactBase
-      ? '/recipes/napoleon-cake/cook'
-      : `/recipes/napoleon-cake/cook?${encodeNapoleonConfiguration(selection)}`
+      ? cookPath
+      : `${cookPath}?${encodeNapoleonConfiguration(selection)}`
     : null;
 
   const reset = () => {

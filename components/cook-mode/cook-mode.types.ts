@@ -24,5 +24,6 @@ export type CookModeDefinition = {
   getState: (locationSearch: string) => {
     isAdjusted: boolean;
     steps: CookStep[];
+    unavailableReason?: string;
   };
 };

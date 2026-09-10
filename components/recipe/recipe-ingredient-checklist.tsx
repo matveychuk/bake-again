@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Checkbox } from '@/components/ui/checkbox';
-import type { StructuredIngredient, StructuredIngredientSection } from '@/content/recipes/structured-inventory';
+import { BakeCheckbox } from '@/components/ui/bake-checkbox';
+import type { StructuredIngredient, StructuredIngredientSection } from '@/content/recipes/source-recipe.types';
 import styles from './inventory-recipe-detail.module.css';
 
 export function RecipeIngredientChecklist({
@@ -33,7 +33,7 @@ export function RecipeIngredientChecklist({
               const checked = checkedIds.has(ingredient.id);
               return (
                 <li className={checked ? styles.ingredientChecked : undefined} key={ingredient.id}>
-                  <Checkbox
+                  <BakeCheckbox
                     aria-label={`Mark ${ingredient.name} as prepared`}
                     checked={checked}
                     onCheckedChange={(value) => toggle(ingredient.id, value === true)}

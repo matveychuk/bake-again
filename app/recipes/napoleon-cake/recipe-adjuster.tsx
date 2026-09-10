@@ -1,10 +1,15 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Calculator, Check, ChevronDown, Info, RotateCcw, ShoppingBag } from 'lucide-react';
+import { Calculator, Check, ChevronDown, Info, RotateCcw } from 'lucide-react';
+import { NapoleonIngredientsControl } from '@/components/recipe/add-recipe-ingredients-control';
+import { RecipeIngredientHeading } from '@/components/recipe/recipe-ingredient-heading';
+import { BakeCheckbox } from '@/components/ui/bake-checkbox';
 import { glutenFreeNapoleonRecipe } from '@/content/recipes/gluten-free-napoleon.recipe';
 import { formatQuantity } from '@/content/recipes/napoleon-configuration';
 import type { BatchScaleFactor, IngredientSection, RecipeDraft } from '@/content/recipes/recipe.types';
+import type { AppLocale } from '@/lib/i18n/config';
+import { getUiMessages } from '@/lib/i18n/messages';
 import { AssistantTrigger } from './recipe-assistant';
 import { useRecipeConfiguration } from './recipe-configuration';
 import styles from './recipe.module.css';
@@ -29,7 +34,7 @@ function sentenceCase(value: string) {
   return value ? value[0].toUpperCase() + value.slice(1) : value;
 }
 
-export function RecipeAdjuster() {
+export function RecipeAdjuster({ locale }: { locale: AppLocale }) {
   const {
     quantityMode,
     setQuantityMode,
@@ -49,8 +54,6 @@ export function RecipeAdjuster() {
     () => new Map(result.ingredientAmounts.map((item) => [item.ingredientLineId, item])),
     [result],
   );
-  const allLayerIds = layers.lines.map((line) => line.id);
-  const allSelected = allLayerIds.every((id) => checkedIngredients.includes(id));
   const status = useMemo(() => {
     if (isExactBase) return 'Exact tested base';
     const size = form === '24' ? '24 cm' : '28 cm';
@@ -66,10 +69,6 @@ export function RecipeAdjuster() {
         ? selected.filter((item) => item !== id)
         : [...selected, id],
     );
-  }
-
-  function toggleAllIngredients() {
-    setCheckedIngredients(allSelected ? [] : allLayerIds);
   }
 
   return (
@@ -138,13 +137,14 @@ export function RecipeAdjuster() {
       </aside>
 
       <section className={styles.ingredients} aria-labelledby="ingredients-title">
-        <div className={styles.sectionTitle}>
-          <div><p className={styles.eyebrow}>{status}</p><h2 id="ingredients-title">Ingredients</h2></div>
-          <button type="button" aria-pressed={allSelected} onClick={toggleAllIngredients}><ShoppingBag size={16} /> Add all</button>
-        </div>
+        <RecipeIngredientHeading
+          action={<NapoleonIngredientsControl locale={locale} recipe={recipe} triggerLabel={getUiMessages(locale).personal.addAll} />}
+          eyebrow={status}
+          title="Ingredients"
+        />
         <div className={styles.ingredientGroup}>
           <h3>{layers.title.en}</h3>
-          {layers.lines.map((line, index) => {
+          {layers.lines.map((line) => {
             const calculated = amounts.get(line.id);
             const name = sentenceCase(line.options.map((option) => option.name.en).join(' or '));
             const notes = [
@@ -155,15 +155,14 @@ export function RecipeAdjuster() {
             ].filter(Boolean).map((note) => sentenceCase(note!));
             return (
               <div className={styles.ingredient} key={line.id}>
-                <input
-                  id={`ingredient-${index}`}
-                  type="checkbox"
+                <BakeCheckbox
+                  aria-label={`Mark ${name} as prepared`}
                   checked={checkedIngredients.includes(line.id)}
-                  onChange={() => toggleIngredient(line.id)}
+                  onCheckedChange={() => toggleIngredient(line.id)}
                 />
                 <span className={styles.amount}>{formatQuantity(calculated?.amount ?? line.amount)}</span>
                 <span>
-                  <label htmlFor={`ingredient-${index}`}>{name}</label>
+                  <span>{name}</span>
                   {calculated?.requiresResolution && <small>Resolve this quantity before Cook Mode</small>}
                   {line.id === 'schar-mix-b' && <AssistantTrigger scope="flour" label="Can I use another mix?" compact />}
                   {notes.map((note) => <small key={note}>{note}</small>)}

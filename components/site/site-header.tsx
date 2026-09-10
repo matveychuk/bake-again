@@ -1,31 +1,41 @@
-import { ChevronDown, ShoppingBag } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
+import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
+import { getUiMessages } from '@/lib/i18n/messages';
+import { localeHomePath, localeRecipesPath, localeSavedPath, localeShoppingListPath } from '@/lib/i18n/routes';
+import { LanguageSwitcher } from './language-switcher';
 import { Wordmark } from './wordmark';
 
 type SiteHeaderProps = {
   homeHref?: string;
   recipesHref?: string;
+  locale?: AppLocale;
+  pathname?: string;
 };
 
 export function SiteHeader({
-  homeHref = '#top',
-  recipesHref = '/recipes',
+  homeHref,
+  recipesHref,
+  locale = defaultLocale,
+  pathname,
 }: SiteHeaderProps) {
+  const messages = getUiMessages(locale);
+  const resolvedHomeHref = homeHref ?? localeHomePath(locale);
+  const resolvedRecipesHref = recipesHref ?? localeRecipesPath(locale);
+
   return (
     <header className="site-header">
-      <Wordmark href={homeHref} />
+      <Wordmark href={resolvedHomeHref} locale={locale} />
 
-      <nav aria-label="Primary navigation">
-        <a href={recipesHref}>Recipes</a>
-        <a href="#saved">Saved</a>
-        <a className="nav-bag" href="#shopping-list">
+      <nav aria-label={messages.a11y.primaryNavigation}>
+        <a href={resolvedRecipesHref}>{messages.navigation.recipes}</a>
+        <a href={localeSavedPath(locale)}>{messages.navigation.saved}</a>
+        <a className="nav-bag" href={localeShoppingListPath(locale)}>
           <ShoppingBag aria-hidden="true" size={17} strokeWidth={1.7} />
-          Shopping list
+          {messages.navigation.shoppingList}
         </a>
       </nav>
 
-      <button className="language-button" type="button" aria-label="Change language">
-        EN <ChevronDown aria-hidden="true" size={15} />
-      </button>
+      <LanguageSwitcher locale={locale} pathname={pathname ?? resolvedHomeHref} />
     </header>
   );
 }

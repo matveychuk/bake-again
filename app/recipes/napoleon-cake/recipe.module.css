@@ -25,6 +25,7 @@
 .primaryAction, .actions button { min-height: 50px; padding: 0 20px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid var(--color-action-primary); cursor: pointer; font-size: .82rem; font-weight: 800; }
 .primaryAction { background: var(--color-action-primary); color: var(--color-text-on-accent); }
 .actions button { background: transparent; color: var(--color-text-primary); border-color: var(--color-border-subtle); }
+.addIngredientsAction { min-height: 50px; }
 .eyebrow { margin: 0; color: var(--color-action-primary-strong); font-size: .7rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
 .beforeStart { margin-top: 70px; padding: 55px max(40px, calc((100vw - 1360px) / 2)); display: grid; grid-template-columns: .72fr 2fr; gap: 60px; background: var(--color-background-panel); }
 .beforeStart h2, .planning h2, .method h2 { margin: 10px 0 0; font-family: var(--font-family-display); font-size: clamp(2rem, 3vw, 3rem); font-weight: 450; letter-spacing: -.04em; line-height: 1; }
@@ -68,11 +69,8 @@
 .testedNote { background: var(--color-status-tested-background); color: var(--color-status-tested-text); }
 .cookModeNote { margin: 11px 0 0; color: var(--color-text-secondary); font-size: .66rem; line-height: 1.5; }
 .addBatch { margin-top: 18px; padding: 0; display: flex; align-items: center; gap: 8px; border: 0; background: transparent; color: var(--color-action-primary-strong); font-size: .75rem; font-weight: 800; cursor: pointer; }
-.sectionTitle { padding-bottom: 25px; display: flex; align-items: end; justify-content: space-between; border-bottom: 1px solid var(--color-border-subtle); }
-.sectionTitle button { padding: 10px 14px; display: flex; gap: 7px; align-items: center; border: 1px solid var(--color-border-subtle); background: transparent; color: var(--color-text-primary); font-size: .74rem; font-weight: 750; }
 .ingredientGroup h3 { margin: 30px 0 12px; font-family: var(--font-family-display); font-size: 1.4rem; }
 .ingredient { min-height: 53px; display: grid; grid-template-columns: 22px 90px 1fr; align-items: center; border-bottom: 1px solid var(--color-border-subtle); font-size: .86rem; cursor: pointer; }
-.ingredient input { accent-color: var(--color-action-primary); }
 .ingredient small { display: block; margin-top: 2px; color: var(--color-text-secondary); font-size: .67rem; }
 .amount { font-weight: 750; }
 .provisional { margin-top: 20px; padding: 17px; display: flex; gap: 12px; background: var(--color-status-suggested-background); color: var(--color-status-suggested-text); }
@@ -160,6 +158,7 @@
   .facts dd { font-size: .96rem; line-height: 1.25; }
   .actions { margin-top: 15px; }
   .primaryAction, .actions button { min-height: 44px; }
+  .addIngredientsAction { min-height: 44px; }
 
   .beforeStart {
     margin-top: 28px;
@@ -216,5 +215,4 @@
   .heroTopline { align-items: flex-start; }
   .tested p { margin-left: 0; }
   .facts dd { font-size: 1rem; }
-  .sectionTitle { align-items: flex-start; }
 }

@@ -7,14 +7,58 @@ This is the working content contract for the first approximately 20 Bake Again r
 ```text
 content/recipes/
   recipe.types.ts
+  source-recipe.types.ts
+  registry.ts
   crinkle-cookies.recipe.ts
   gluten-free-napoleon.recipe.ts
+  apple-charlotte.recipe.ts
+  cottage-cheese-waffles.recipe.ts
+  carrot-cake.recipe.ts
+  sponge-cake.recipe.ts
+  crepes.recipe.ts
+  fruit-sponge-roll.recipe.ts
+  <other-recipe>.recipe.ts
 media/recipes/
   <recipe-id>/original/
   <recipe-id>/selected/
 ```
 
 Each recipe is one entity with localized `en`, `es`, and `uk` content. Shared facts—quantities, oven settings, yields, times, flour configurations, evidence and provenance—are stored once. Translations contain only reader-facing text.
+
+## Catalogue localisation
+
+Every recipe in the inventory has its own source file. While a source-backed draft is
+being migrated to `RecipeDraft`, `catalog-locales.ts` supplies discovery copy (title,
+category, concise summary and image alternative text) for EN, ES and UK. It must not
+supply ingredient quantities, timing, method or provenance that the source has not
+confirmed. Full recipe pages become locale-publishable only after their own `RecipeDraft`
+translation state is reviewed.
+
+## Source-recipe migration
+
+Every recipe in the current inventory now has its own `*.recipe.ts` file. Recipes with
+complete workbook transcriptions preserve the ingredient list and method. Recipes whose
+original text is missing carry only a clearly labelled `draft` placeholder or an external
+reference; those details must never be presented as the author's tested recipe.
+
+`registry.ts` is the one content entry point for recipe pages and Cook Mode. It imports
+every individual recipe file and provides a common reader-facing shape while recipes
+are progressively migrated from `RecipeSourceDraft` to the complete multilingual
+`RecipeDraft` model. There is no parallel structured-inventory file or fallback copy
+of recipe steps and ingredients.
+
+## Publication gate
+
+A locale-specific recipe route is public only when both `publicationStatus` is
+`ready` and `translationState[locale]` is `reviewed`. A draft route can remain
+available for editorial preview, but it must be `noindex` and must not emit a
+canonical URL or an `hreflang` alternate. A reviewed translation is not enough
+to publish a recipe whose facts, provenance, or media approval remain draft.
+
+The interface uses the same principle through `lib/i18n/publication.ts`.
+Currently English is the reviewed UI locale; Spanish and Ukrainian UI routes are
+preview-only until their complete dictionaries are reviewed. Changing either
+gate is an editorial release decision, not a routing shortcut.
 
 ## Base and calculated configurations
 

@@ -1,20 +1,24 @@
 import { Calculator, Check, Lightbulb } from 'lucide-react';
+import type { AppLocale } from '@/lib/i18n/config';
+import { getUiMessages } from '@/lib/i18n/messages';
 
 export type EvidenceStatus = 'tested' | 'calculated' | 'suggested';
 
 const evidence = {
-  tested: { label: 'Tested', Icon: Check },
-  calculated: { label: 'Calculated', Icon: Calculator },
-  suggested: { label: 'Suggested', Icon: Lightbulb },
-} satisfies Record<EvidenceStatus, { label: string; Icon: typeof Check }>;
+  tested: Check,
+  calculated: Calculator,
+  suggested: Lightbulb,
+} satisfies Record<EvidenceStatus, typeof Check>;
 
 type EvidenceBadgeProps = {
   status: EvidenceStatus;
   className?: string;
+  locale?: AppLocale;
 };
 
-export function EvidenceBadge({ status, className }: EvidenceBadgeProps) {
-  const { label, Icon } = evidence[status];
+export function EvidenceBadge({ status, className, locale = 'en' }: EvidenceBadgeProps) {
+  const Icon = evidence[status];
+  const label = getUiMessages(locale).status[status].label;
   return (
     <span className={className} data-status={status}>
       <Icon aria-hidden="true" size={16} strokeWidth={2} />

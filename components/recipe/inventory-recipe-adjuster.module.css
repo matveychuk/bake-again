@@ -1,4 +1,7 @@
 .planning { width: min(calc(100% - 80px), 1240px); margin: 60px auto 76px; display: grid; grid-template-columns: 350px minmax(0, 1fr); gap: 90px; align-items: start; }
+.content { min-width: 0; }
+.content > :nth-child(2) { margin-top: var(--space-8); }
+.unavailableAddAll { min-height: 44px; padding: var(--space-2) var(--space-4); display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-control); background: var(--color-background-panel-subtle); color: var(--color-text-secondary); cursor: not-allowed; font-family: var(--font-family-body); font-size: var(--font-size-body-small); font-weight: 750; }
 .controls { position: sticky; top: 24px; padding: 30px; border: 1px solid var(--color-border-subtle); background: var(--color-background-surface); }
 .controls h2 { margin: 10px 0 0; font-family: var(--font-family-display); font-size: 2.15rem; font-weight: 450; letter-spacing: -.04em; line-height: 1; }
 .eyebrow { margin: 0; color: var(--color-action-primary-strong); font-size: .7rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
@@ -18,8 +21,23 @@
 .locked { padding: 16px; background: var(--color-status-suggested-background); color: var(--color-status-suggested-text); font-size: .74rem; line-height: 1.55; }
 .locked strong { display: block; margin-bottom: 4px; color: var(--color-text-primary); }
 .content { min-width: 0; }
+.gapNote { margin-top: 22px; padding: 17px; display: flex; gap: 10px; background: var(--color-status-suggested-background); color: var(--color-status-suggested-text); }
+.gapNote strong { flex: 0 0 auto; font-size: var(--font-size-label); letter-spacing: .09em; text-transform: uppercase; }
+.gapNote p { margin: 0; color: var(--color-text-primary); font-size: var(--font-size-body-small); line-height: 1.6; }
+.sections { display: grid; gap: var(--space-6); }
+.section { padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-border-subtle); }
+.section h3 { margin: 0 0 var(--space-3); font-family: var(--font-family-display); font-size: var(--font-size-body-large); font-weight: 550; }
+.section pre { margin: 0; color: var(--color-text-primary); font-family: var(--font-family-body); font-size: var(--font-size-body-small); line-height: 1.7; white-space: pre-wrap; }
+.pending { padding: var(--space-5); background: var(--color-background-panel-subtle); }
+.pending h3 { margin: 0 0 var(--space-2); font-family: var(--font-family-display); font-size: var(--font-size-body-large); font-weight: 550; }
+.pending p { margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-body-small); line-height: 1.6; }
 
 @media (max-width: 900px) {
   .planning { width: calc(100% - 40px); margin: 55px auto; display: flex; flex-direction: column; gap: 38px; }
   .controls { width: 100%; position: static; }
+  .content { width: 100%; }
+}
+
+@media (max-width: 560px) {
+  .unavailableAddAll { width: 100%; }
 }

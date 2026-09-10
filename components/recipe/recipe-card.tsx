@@ -1,22 +1,31 @@
 import Image from 'next/image';
-import { Bookmark, Check, Clock3 } from 'lucide-react';
+import { Check, Clock3 } from 'lucide-react';
+import type { AppLocale } from '@/lib/i18n/config';
+import { isSaveableRecipeId } from '@/content/recipes/registry';
+import { SaveRecipeControl } from './save-recipe-control';
+import { getUiMessages } from '@/lib/i18n/messages';
 
 export type RecipeCardData = {
+  id: string;
   title: string;
   eyebrow: string;
   detail: string;
   status: string;
+  statusKind?: 'tested' | 'draft';
   statusDetail?: string | null;
   image: string;
   alt: string;
   href: string;
   featured?: boolean;
+  locale?: AppLocale;
 };
 
 export function RecipeCard({ recipe }: { recipe: RecipeCardData }) {
   const className = recipe.featured
     ? 'recipe-card recipe-card--wide'
     : 'recipe-card';
+  const messages = getUiMessages(recipe.locale ?? 'en');
+  const isTested = recipe.statusKind === 'tested';
 
   return (
     <article className={className}>
@@ -33,9 +42,7 @@ export function RecipeCard({ recipe }: { recipe: RecipeCardData }) {
           <p className="recipe-eyebrow">{recipe.eyebrow}</p>
           <h3>{recipe.title}</h3>
         </div>
-        <button type="button" aria-label={`Save ${recipe.title}`}>
-          <Bookmark aria-hidden="true" size={20} strokeWidth={1.6} />
-        </button>
+        {isSaveableRecipeId(recipe.id) && <SaveRecipeControl locale={recipe.locale ?? 'en'} recipeId={recipe.id} title={recipe.title} />}
       </div>
       <div className="recipe-meta">
         <span>
@@ -43,15 +50,13 @@ export function RecipeCard({ recipe }: { recipe: RecipeCardData }) {
           {recipe.detail}
         </span>
         <span
-          className="recipe-status recipe-status--tested"
-          aria-label={`Testing status: ${recipe.status}${
-            recipe.statusDetail ? `, ${recipe.statusDetail}` : ''
-          }`}
+          className={`recipe-status${isTested ? ' recipe-status--tested' : ''}`}
+          aria-label={(isTested ? messages.a11y.recipeStatus : messages.a11y.recipeRecordStatus)(recipe.status, recipe.statusDetail)}
         >
-          <span className="recipe-status__badge">
-            <span aria-hidden="true">
-              <Check size={12} strokeWidth={2.4} />
-            </span>
+            <span className="recipe-status__badge">
+              {isTested && <span aria-hidden="true">
+                <Check size={12} strokeWidth={2.4} />
+              </span>}
             <strong>{recipe.status}</strong>
           </span>
           {recipe.statusDetail && (

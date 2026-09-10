@@ -85,7 +85,7 @@ function makeButton() {
 function buildComponentsPage() {
   let page = figma.root.children.find(p => p.name === '02 Local Components');
   if (!page) page = figma.createPage();
-  page.name = '02 Local Components'; for (const child of [...page.children]) child.remove();
+  page.name = '02 Local Components'; for (const child of page.children) child.remove();
   const board = makeFrame('Local mirrors · Design System v1', 720, 920, C.page); page.appendChild(board);
   add(board, eyebrow('Screen-local building blocks'), 48, 48);
   add(board, paragraph('Reusable pieces for the first responsive homepage pair.', 620, 34, C.text, 'Newsreader', 'Regular', 38), 48, 82);

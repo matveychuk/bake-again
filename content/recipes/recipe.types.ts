@@ -1,4 +1,4 @@
-export const recipeLocales = ["uk", "en", "es"] as const;
+export const recipeLocales = ["en", "es", "uk"] as const;
 
 export type RecipeLocale = (typeof recipeLocales)[number];
 export type LocalizedText = Record<RecipeLocale, string>;

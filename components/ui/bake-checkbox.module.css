@@ -1,0 +1,16 @@
+.checkbox {
+  border-color: var(--color-text-secondary);
+  border-radius: var(--radius-control);
+  background: transparent;
+}
+
+.checkbox[data-checked] {
+  border-color: var(--color-action-primary-strong);
+  background: var(--color-action-primary-strong);
+  color: var(--color-text-on-accent);
+}
+
+.checkbox:focus-visible {
+  outline: 2px solid var(--color-action-primary);
+  outline-offset: 3px;
+}

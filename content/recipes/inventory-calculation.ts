@@ -1,4 +1,4 @@
-import type { StructuredIngredient } from './structured-inventory';
+import type { StructuredIngredient } from './source-recipe.types';
 
 export type ParsedInventoryAmount = {
   minimum: number;

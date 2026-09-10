@@ -60,7 +60,10 @@ function PaginationLink({
           data-slot="pagination-link"
           data-active={isActive}
           {...props}
-        />
+        >
+          <span className="sr-only">{typeof props['aria-label'] === 'string' ? props['aria-label'] : 'Page'}</span>
+          {props.children}
+        </a>
       }
     />
   );

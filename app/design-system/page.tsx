@@ -8,9 +8,13 @@ import {
   Check,
   Clock3,
   Search,
+  ShoppingBag,
+  Trash2,
 } from 'lucide-react';
 import { NumberedSectionTitle } from '@/components/foundations/numbered-section-title';
 import { EvidenceBadge, type EvidenceStatus } from '@/components/recipe/evidence-badge';
+import { LanguageSwitcher } from '@/components/site/language-switcher';
+import { BakeCheckbox } from '@/components/ui/bake-checkbox';
 import { Wordmark } from '@/components/site/wordmark';
 import styles from './design-system.module.css';
 
@@ -180,6 +184,22 @@ export default function DesignSystemPage() {
                   <span><StatusBadge status="tested" /> · Schär Mix B</span>
                 </div>
               </article>
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}><strong>Personal state</strong><span>Explicit save state and practical shopping row</span></div>
+              <div className={styles.personalExample}>
+                <button className={styles.savedControl} type="button" aria-pressed="true" aria-label="Remove Napoleon cake from Saved"><Bookmark size={19} fill="currentColor" /></button>
+                <div className={styles.shoppingExample}><BakeCheckbox aria-label="Mark butter as bought" defaultChecked /><strong>Butter</strong><span>180 g</span><small>From Napoleon cake, Crinkle Cookies</small><button aria-label="Remove butter"><Trash2 size={16} /></button></div>
+                <button className={styles.secondaryButton} type="button"><ShoppingBag size={16} /> Review ingredients</button>
+              </div>
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}><strong>Language menu</strong><span>Native language names, explicit selection, keyboard menu</span></div>
+              <div className={styles.actionRow}>
+                <LanguageSwitcher locale="en" pathname="/en" />
+              </div>
             </div>
           </section>
 

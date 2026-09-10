@@ -4,7 +4,7 @@ import { Eyebrow } from '@/components/foundations/eyebrow';
 import { RecipeCard } from '@/components/recipe/recipe-card';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
-import { recipeCatalog } from '@/content/recipes/catalog';
+import { getRecipeCatalog } from '@/content/recipes/catalog';
 import styles from './recipes.module.css';
 
 export const metadata: Metadata = {
@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function RecipesPage() {
+  const recipeCatalog = getRecipeCatalog('en');
+
   return (
     <main className={styles.page}>
       <SiteHeader homeHref="/" recipesHref="/recipes" />

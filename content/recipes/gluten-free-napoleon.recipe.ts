@@ -1,4 +1,4 @@
-import type { RecipeDraft } from "./recipe.types";
+import type { RecipeDraft } from "./recipe.types.ts";
 
 export const glutenFreeNapoleonRecipe = {
   schemaVersion: 2,

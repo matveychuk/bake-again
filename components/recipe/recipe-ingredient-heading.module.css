@@ -1,0 +1,33 @@
+.heading {
+  padding-bottom: var(--space-6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.heading h2 {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-title-small);
+  font-weight: 450;
+  letter-spacing: -0.04em;
+  line-height: var(--line-height-tight);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-action-primary-strong);
+  font-size: var(--font-size-label);
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 560px) {
+  .heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

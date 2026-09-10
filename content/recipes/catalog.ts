@@ -1,4 +1,7 @@
-import { recipeInventory } from './inventory';
+import { recipeInventory } from './inventory.ts';
+import { catalogLocaleCopy } from './catalog-locales.ts';
+import type { AppLocale } from '../../lib/i18n/config.ts';
+import { getUiMessages } from '../../lib/i18n/messages.ts';
 
 export type RecipeCatalogEntry = {
   id: string;
@@ -6,6 +9,7 @@ export type RecipeCatalogEntry = {
   eyebrow: string;
   detail: string;
   status: string;
+  statusKind: 'draft';
   statusDetail: string;
   image: string;
   alt: string;
@@ -14,16 +18,26 @@ export type RecipeCatalogEntry = {
   imageKind: 'generated-preview' | 'author-photo';
 };
 
-export const recipeCatalog: RecipeCatalogEntry[] = recipeInventory.map((recipe) => ({
+export function getRecipeCatalog(locale: AppLocale): RecipeCatalogEntry[] {
+  return recipeInventory.map((recipe) => {
+    const copy = catalogLocaleCopy[recipe.id];
+    const localized = copy?.title[locale];
+    return {
   id: recipe.id,
-  title: recipe.title,
-  eyebrow: recipe.category,
-  detail: recipe.totalTime ?? recipe.activeTime ?? 'Details to confirm',
-  status: recipe.testingStatus,
+  title: localized ?? recipe.title,
+  eyebrow: copy?.category[locale] ?? recipe.category,
+  detail: locale === 'en' ? (recipe.totalTime ?? recipe.activeTime ?? getUiMessages(locale).catalog.detailsToConfirm) : getUiMessages(locale).catalog.detailsToConfirm,
+  status: getUiMessages(locale).catalog.workingRecord,
+  statusKind: 'draft',
   statusDetail: recipe.flour.replace(' Bread', ''),
   image: recipe.image,
   imageKind: recipe.imageKind,
-  alt: recipe.imageAlt,
+  alt: copy?.alt[locale] ?? recipe.imageAlt,
   href: `/recipes/${recipe.slug}`,
   publicationStatus: 'draft',
-}));
+    };
+  });
+}
+
+/** @deprecated Use getRecipeCatalog(locale) in locale-aware surfaces. */
+export const recipeCatalog = getRecipeCatalog('en');

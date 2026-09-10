@@ -77,6 +77,11 @@
 .componentLabel strong { font-family: var(--font-family-display); font-size: 1.35rem; font-weight: 500; }
 .componentLabel span { color: var(--color-text-secondary); font-size: 0.7rem; line-height: 1.5; }
 .actionRow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.personalExample { display: grid; gap: var(--space-3); max-width: 620px; }
+.savedControl { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-action-primary); border-radius: var(--radius-round); background: var(--color-status-tested-background); color: var(--color-status-tested-text); }
+.shoppingExample { min-height: 56px; padding: var(--space-2) 0; display: grid; grid-template-columns: 24px 1fr auto 36px; align-items: center; gap: var(--space-2); border-top: 1px solid var(--color-border-subtle); border-bottom: 1px solid var(--color-border-subtle); font-size: var(--font-size-body-small); }
+.shoppingExample small { grid-column: 2 / 4; color: var(--color-text-secondary); font-size: var(--font-size-label); }
+.shoppingExample button { width: 36px; height: 36px; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-round); background: var(--color-background-surface); color: var(--color-text-primary); }
 .primaryButton, .secondaryButton, .textButton { min-height: 46px; padding: 0 18px; border-radius: var(--radius-control); cursor: pointer; font-size: 0.82rem; font-weight: 750; }
 .primaryButton { border: 1px solid var(--color-action-primary); background: var(--color-action-primary); color: var(--color-text-on-accent); }
 .primaryButton:hover { background: var(--color-action-primary-strong); }

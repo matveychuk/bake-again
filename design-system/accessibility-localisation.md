@@ -27,4 +27,6 @@ Approved status label/background contrast:
 - Keep unit, decimal and plural formatting locale-aware.
 - Status meaning must remain equivalent across translations; do not translate it into a
   stronger claim.
-
+- Catalogue and card images require locale-specific alternative text. Draft recipe copy
+  may be translated for discovery, but incomplete source material remains visibly draft
+  and is not released as a publishable recipe translation.
