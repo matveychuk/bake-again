@@ -6,6 +6,7 @@ export const ASSISTANT_MAX_RETRIES = 0;
 export interface AssistantRuntimeConfig {
   enabled: boolean;
   apiKey: string | null;
+  sessionSecret: string | null;
   model: string;
   maxOutputTokens: number;
 }
@@ -47,6 +48,7 @@ export function parseAssistantRuntimeEnv(
   }
   const enabled = enabledValue === 'true';
   const apiKey = optionalString(bindings, 'OPENAI_API_KEY');
+  const sessionSecret = optionalString(bindings, 'ASSISTANT_SESSION_SECRET');
   const model =
     optionalString(bindings, 'OPENAI_MODEL') ?? ASSISTANT_DEFAULT_MODEL;
   const maxOutputTokensValue =
@@ -73,8 +75,13 @@ export function parseAssistantRuntimeEnv(
       'OPENAI_API_KEY is required when the assistant is enabled.',
     );
   }
+  if (enabled && (!sessionSecret || sessionSecret.length < 32)) {
+    throw new AssistantEnvironmentError(
+      'ASSISTANT_SESSION_SECRET must contain at least 32 characters when the assistant is enabled.',
+    );
+  }
 
-  return { enabled, apiKey, model, maxOutputTokens };
+  return { enabled, apiKey, sessionSecret, model, maxOutputTokens };
 }
 
 /** Reads Cloudflare bindings at request time; Node env is only the local/test fallback. */

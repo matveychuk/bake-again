@@ -6,6 +6,12 @@ import type {
   AssistantResponseV1,
   AssistantScope,
 } from './contracts.ts';
+import {
+  ASSISTANT_MAX_HISTORY_MESSAGE_CHARACTERS,
+  ASSISTANT_MAX_HISTORY_MESSAGES,
+  ASSISTANT_MAX_QUESTION_CHARACTERS,
+  ASSISTANT_MAX_SCOPE_STEP_IDS,
+} from './limits.ts';
 
 const idPattern = '^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$';
 const idRegex = new RegExp(idPattern);
@@ -81,7 +87,7 @@ export const assistantRequestJsonSchema = {
             stepIds: {
               type: 'array',
               minItems: 1,
-              maxItems: 2,
+              maxItems: ASSISTANT_MAX_SCOPE_STEP_IDS,
               uniqueItems: true,
               items: idSchema,
             },
@@ -147,17 +153,25 @@ export const assistantRequestJsonSchema = {
         },
       ],
     },
-    question: { type: 'string', minLength: 1, maxLength: 2000 },
+    question: {
+      type: 'string',
+      minLength: 1,
+      maxLength: ASSISTANT_MAX_QUESTION_CHARACTERS,
+    },
     history: {
       type: 'array',
-      maxItems: 4,
+      maxItems: ASSISTANT_MAX_HISTORY_MESSAGES,
       items: {
         type: 'object',
         additionalProperties: false,
         required: ['role', 'text'],
         properties: {
           role: { enum: ['user', 'assistant'] },
-          text: { type: 'string', minLength: 1, maxLength: 1500 },
+          text: {
+            type: 'string',
+            minLength: 1,
+            maxLength: ASSISTANT_MAX_HISTORY_MESSAGE_CHARACTERS,
+          },
         },
       },
     },
@@ -371,7 +385,7 @@ function parseScope(value: unknown): AssistantScope | null {
     !hasExactKeys(value, ['kind', 'stepIds']) ||
     !Array.isArray(value.stepIds) ||
     value.stepIds.length < 1 ||
-    value.stepIds.length > 2 ||
+    value.stepIds.length > ASSISTANT_MAX_SCOPE_STEP_IDS ||
     !value.stepIds.every(isId) ||
     new Set(value.stepIds).size !== value.stepIds.length
   ) {
@@ -479,9 +493,9 @@ export function parseAssistantRequest(
     !scope ||
     !configuration ||
     question.length < 1 ||
-    question.length > 2000 ||
+    question.length > ASSISTANT_MAX_QUESTION_CHARACTERS ||
     !Array.isArray(value.history) ||
-    value.history.length > 4
+    value.history.length > ASSISTANT_MAX_HISTORY_MESSAGES
   ) {
     return { success: false, issue: 'One or more request fields are invalid.' };
   }
@@ -497,7 +511,10 @@ export function parseAssistantRequest(
       return { success: false, issue: 'History contains an invalid message.' };
     }
     const text = item.text.trim();
-    if (text.length < 1 || text.length > 1500) {
+    if (
+      text.length < 1 ||
+      text.length > ASSISTANT_MAX_HISTORY_MESSAGE_CHARACTERS
+    ) {
       return { success: false, issue: 'History message length is invalid.' };
     }
     history.push({ role: item.role, text });

@@ -12,6 +12,7 @@ import { resolveActionReview } from '../actions.ts';
 const config: AssistantRuntimeConfig = {
   enabled: true,
   apiKey: 'test-key',
+  sessionSecret: 's'.repeat(32),
   model: 'gpt-5.4-mini',
   maxOutputTokens: 2000,
 };
@@ -201,4 +202,77 @@ void test('rejects a calculation preview that is ineligible for Cook Mode withou
       error.code === 'CONFIGURATION_UNAVAILABLE',
   );
   assert.equal(calls, 0);
+});
+
+void test('records allowlisted content-free telemetry with model, latency, usage, recipe and scope', async () => {
+  const events: unknown[] = [];
+  const clock = [1_000, 1_037];
+  const hardened = createAssistantService({
+    config,
+    provider: {
+      async answer(_input, projection, context) {
+        context.onTelemetry({
+          providerRequestId: 'provider-123',
+          usage: {
+            inputTokens: 500,
+            outputTokens: 75,
+            totalTokens: 575,
+            cachedInputTokens: 100,
+          },
+        });
+        const evidenceId = projection.evidence.keys().next().value;
+        assert.ok(evidenceId);
+        return {
+          locale: 'en',
+          actionId: null,
+          outcome: 'answered',
+          blocks: [{ kind: 'evidence', evidenceId }],
+        };
+      },
+    },
+    resolveRecipe: () => ({ kind: 'detailed', recipe: readyRecipe }),
+    isRecipeEnabled: () => true,
+    isRecipeLocaleAllowed: () => true,
+    isUiLocaleAllowed: () => true,
+    telemetry: { record: (event) => events.push(event) },
+    now: () => clock.shift() ?? 1_037,
+  });
+
+  await hardened.respond(request, {
+    requestId: 'request-telemetry',
+    signal: new AbortController().signal,
+    safetyIdentifier: 'ba_private_identifier',
+  });
+
+  assert.equal(events.length, 1);
+  const event = events[0] as Record<string, unknown>;
+  assert.deepEqual(Object.keys(event).sort(), [
+    'cachedInputTokens',
+    'contextVersion',
+    'errorCode',
+    'event',
+    'inputTokens',
+    'latencyMs',
+    'locale',
+    'model',
+    'outputTokens',
+    'promptVersion',
+    'providerRequestId',
+    'recipeId',
+    'recipeVersionId',
+    'requestId',
+    'scope',
+    'status',
+    'totalTokens',
+  ]);
+  assert.equal(event.model, config.model);
+  assert.equal(event.latencyMs, 37);
+  assert.equal(event.recipeId, request.recipeId);
+  assert.equal(event.scope, 'flour');
+  assert.equal(event.totalTokens, 575);
+  const serialized = JSON.stringify(event);
+  assert.doesNotMatch(
+    serialized,
+    /test-key|Which flour|ba_private_identifier/u,
+  );
 });

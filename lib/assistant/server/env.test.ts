@@ -11,16 +11,19 @@ void test('defaults the feature off without requiring a credential', () => {
   assert.deepEqual(parseAssistantRuntimeEnv({}), {
     enabled: false,
     apiKey: null,
+    sessionSecret: null,
     model: ASSISTANT_DEFAULT_MODEL,
     maxOutputTokens: ASSISTANT_DEFAULT_MAX_OUTPUT_TOKENS,
   });
 });
 
-void test('reads only OPENAI_API_KEY when enabled', () => {
+void test('requires server-only API and session secrets when enabled', () => {
+  const sessionSecret = 's'.repeat(32);
   assert.equal(
     parseAssistantRuntimeEnv({
       ASSISTANT_ENABLED: 'true',
       OPENAI_API_KEY: 'server-key',
+      ASSISTANT_SESSION_SECRET: sessionSecret,
     }).apiKey,
     'server-key',
   );
@@ -29,6 +32,7 @@ void test('reads only OPENAI_API_KEY when enabled', () => {
       parseAssistantRuntimeEnv({
         ASSISTANT_ENABLED: 'true',
         NEXT_PUBLIC_OPENAI_API_KEY: 'public-key',
+        ASSISTANT_SESSION_SECRET: sessionSecret,
       }),
     AssistantEnvironmentError,
   );
@@ -37,6 +41,16 @@ void test('reads only OPENAI_API_KEY when enabled', () => {
       parseAssistantRuntimeEnv({
         ASSISTANT_ENABLED: 'true',
         VITE_OPENAI_API_KEY: 'public-key',
+        ASSISTANT_SESSION_SECRET: sessionSecret,
+      }),
+    AssistantEnvironmentError,
+  );
+  assert.throws(
+    () =>
+      parseAssistantRuntimeEnv({
+        ASSISTANT_ENABLED: 'true',
+        OPENAI_API_KEY: 'server-key',
+        ASSISTANT_SESSION_SECRET: 'too-short',
       }),
     AssistantEnvironmentError,
   );

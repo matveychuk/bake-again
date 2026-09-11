@@ -37,6 +37,7 @@ import type {
   PublicEvidenceStatus,
 } from '@/lib/assistant/contracts';
 import { isAssistantResponseV1 } from '@/lib/assistant/schemas';
+import { ASSISTANT_MAX_QUESTION_CHARACTERS } from '@/lib/assistant/limits';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getLocalizedRecipePath } from '@/lib/i18n/routes';
 import type { ActionProposal } from '@/lib/assistant/action-contract';
@@ -348,7 +349,7 @@ export function AssistantProvider({
               <input
                 id={inputId}
                 value={question}
-                maxLength={2000}
+                maxLength={ASSISTANT_MAX_QUESTION_CHARACTERS}
                 disabled={isBusy || isDisabled}
                 placeholder={messages.placeholder}
                 onChange={(event) => setQuestion(event.target.value)}

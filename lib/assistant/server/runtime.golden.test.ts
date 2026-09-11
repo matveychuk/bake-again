@@ -18,6 +18,7 @@ import { validateAssistantProse } from './validation.ts';
 const config = {
   enabled: true,
   apiKey: 'mock-only',
+  sessionSecret: 's'.repeat(32),
   model: 'gpt-5.4-mini',
   maxOutputTokens: 777,
 };

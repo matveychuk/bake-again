@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Hardened the contextual assistant with shared question/history limits, a localized
+  missing-runtime disabled state, signed anonymous safety sessions, server throttling,
+  total deadlines, stable error mapping and content-free operational telemetry. Added
+  a 45-case en/es/uk offline eval gate with 100% required critical-safety pass rate.
+
 - Added the `displayCyrillic` typography token and locale-aware Literata display font for
   Ukrainian, avoiding browser fallback in headings. Updated the home promise, supporting
   copy and search text in Spanish and Ukrainian; added Spanish headline spacing for the

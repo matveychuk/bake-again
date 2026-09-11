@@ -18,6 +18,7 @@ import {
   buildAssistantDeveloperInstructions,
   serializeAssistantInput,
 } from './prompt.ts';
+import type { AssistantTokenUsage } from './telemetry.ts';
 
 export type ProviderOutcome =
   | 'answered'
@@ -44,7 +45,15 @@ export interface AssistantProvider {
   answer(
     request: AssistantRequestV1,
     projection: AssistantContextProjection,
-    signal: AbortSignal,
+    context: {
+      signal: AbortSignal;
+      requestId: string;
+      safetyIdentifier: string;
+      onTelemetry(telemetry: {
+        providerRequestId: string | null;
+        usage: AssistantTokenUsage;
+      }): void;
+    },
   ): Promise<ProviderAnswer>;
 }
 
@@ -239,7 +248,8 @@ function hasRefusal(response: OpenAIResponse) {
 function mapProviderError(error: unknown): AssistantProviderError {
   if (
     error instanceof APIConnectionTimeoutError ||
-    (error instanceof Error && error.name === 'AbortError')
+    (error instanceof Error &&
+      (error.name === 'AbortError' || error.name === 'TimeoutError'))
   ) {
     return new AssistantProviderError('timeout', true, { cause: error });
   }
@@ -263,7 +273,7 @@ export function createOpenAIAssistantProvider(
   client: ResponsesClient = createServerOpenAIClient(config),
 ): AssistantProvider {
   return {
-    async answer(request, projection, signal) {
+    async answer(request, projection, context) {
       let response: OpenAIResponse;
       try {
         response = await client.responses.create(
@@ -289,13 +299,30 @@ export function createOpenAIAssistantProvider(
             tools: [],
             tool_choice: 'none',
             store: false,
+            safety_identifier: context.safetyIdentifier,
             max_output_tokens: config.maxOutputTokens,
           },
-          { signal },
+          {
+            signal: context.signal,
+            headers: { 'X-Client-Request-Id': context.requestId },
+          },
         );
       } catch (error) {
         throw mapProviderError(error);
       }
+
+      const usage = response.usage;
+      context.onTelemetry({
+        providerRequestId:
+          (response as OpenAIResponse & { _request_id?: string })._request_id ??
+          null,
+        usage: {
+          inputTokens: usage?.input_tokens ?? null,
+          outputTokens: usage?.output_tokens ?? null,
+          totalTokens: usage?.total_tokens ?? null,
+          cachedInputTokens: usage?.input_tokens_details?.cached_tokens ?? null,
+        },
+      });
 
       if (
         response.status !== 'completed' ||

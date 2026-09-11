@@ -92,7 +92,10 @@ variation.
 - Required states are idle, loading, success, empty, error with retry when allowed, and
   disabled. Loading disables all submit paths and closing aborts the current request.
 - Suggested-question buttons and the typed composer use the same submit path. Conversation
-  context is limited to four short messages and is not persisted after the drawer closes.
+  context is limited to four messages of 1,500 characters, questions are limited to
+  2,000 characters, and history is not persisted after the drawer closes.
+- Missing or invalid server runtime configuration returns the localized disabled state;
+  composer and submit actions remain disabled while the recipe stays usable.
 - Structured answer blocks keep generated explanation separate from server-owned evidence.
   Tested, Calculated and Suggested always use their written localized label and icon.
 - The modal drawer traps focus, closes with Escape, returns focus to its trigger and

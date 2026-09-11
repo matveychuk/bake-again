@@ -15,6 +15,7 @@ import type {
   EvidenceRef,
 } from '../contracts.ts';
 import {
+  ASSISTANT_CONTEXT_POLICY_VERSION,
   buildAssistantContext,
   type AssistantContextProjection,
 } from './context.ts';
@@ -26,10 +27,18 @@ import {
   type AssistantProvider,
   type ProviderAnswer,
 } from './openai.ts';
-import { buildAssistantDeveloperInstructions } from './prompt.ts';
+import {
+  ASSISTANT_PROMPT_VERSION,
+  buildAssistantDeveloperInstructions,
+} from './prompt.ts';
 import { validateAssistantProse } from './validation.ts';
 import { isAssistantResponseV1 } from '../schemas.ts';
 import { createActionCatalog, resolveActionReview } from '../actions.ts';
+import {
+  noOpAssistantTelemetry,
+  type AssistantTelemetry,
+  type AssistantTokenUsage,
+} from './telemetry.ts';
 
 const enabledRecipeIds = new Set(['gluten-free-napoleon']);
 
@@ -54,7 +63,11 @@ const messages = {
 export interface AssistantService {
   respond(
     request: AssistantRequestV1,
-    context: { requestId: string; signal: AbortSignal },
+    context: {
+      requestId: string;
+      signal: AbortSignal;
+      safetyIdentifier?: string;
+    },
   ): Promise<AssistantResponseV1>;
 }
 
@@ -68,6 +81,8 @@ interface AssistantServiceDependencies {
     locale: AppLocale,
   ) => boolean;
   isUiLocaleAllowed?: (locale: AppLocale) => boolean;
+  telemetry?: AssistantTelemetry;
+  now?: () => number;
 }
 
 function limitationResponse(
@@ -176,128 +191,180 @@ export function createAssistantService({
   isRecipeEnabled = (recipeId) => enabledRecipeIds.has(recipeId),
   isRecipeLocaleAllowed = isRecipeLocalePublishable,
   isUiLocaleAllowed = isUiLocalePublishable,
+  telemetry = noOpAssistantTelemetry,
+  now = Date.now,
 }: AssistantServiceDependencies): AssistantService {
   return {
-    async respond(request, { requestId, signal }) {
-      if (!config.enabled)
-        throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
-      const document = resolveRecipe(request.recipeId);
-      if (
-        !document ||
-        document.kind !== 'detailed' ||
-        !isRecipeEnabled(request.recipeId)
-      ) {
-        throw new AssistantServiceError('RECIPE_UNAVAILABLE', 404);
-      }
-      const recipe = document.recipe;
-      if (
-        !isUiLocaleAllowed(request.locale) ||
-        !isRecipeLocaleAllowed(recipe, request.locale)
-      ) {
-        throw new AssistantServiceError('LOCALE_UNAVAILABLE', 403);
-      }
-      if (request.recipeVersionId !== recipe.versionId) {
-        throw new AssistantServiceError('RECIPE_VERSION_MISMATCH', 409);
-      }
-      if (
-        request.scope.kind === 'step' &&
-        request.scope.stepIds.some(
-          (stepId) => !recipe.steps.some(({ id }) => id === stepId),
-        )
-      ) {
-        throw new AssistantServiceError('INVALID_REQUEST', 400);
-      }
+    async respond(request, { requestId, signal, safetyIdentifier }) {
+      const startedAt = now();
+      let providerRequestId: string | null = null;
+      let usage: AssistantTokenUsage = {
+        inputTokens: null,
+        outputTokens: null,
+        totalTokens: null,
+        cachedInputTokens: null,
+      };
+      let errorCode: AssistantServiceError['code'] | null = null;
+      try {
+        if (!config.enabled)
+          throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
+        const document = resolveRecipe(request.recipeId);
+        if (
+          !document ||
+          document.kind !== 'detailed' ||
+          !isRecipeEnabled(request.recipeId)
+        ) {
+          throw new AssistantServiceError('RECIPE_UNAVAILABLE', 404);
+        }
+        const recipe = document.recipe;
+        if (
+          !isUiLocaleAllowed(request.locale) ||
+          !isRecipeLocaleAllowed(recipe, request.locale)
+        ) {
+          throw new AssistantServiceError('LOCALE_UNAVAILABLE', 403);
+        }
+        if (request.recipeVersionId !== recipe.versionId) {
+          throw new AssistantServiceError('RECIPE_VERSION_MISMATCH', 409);
+        }
+        if (
+          request.scope.kind === 'step' &&
+          request.scope.stepIds.some(
+            (stepId) => !recipe.steps.some(({ id }) => id === stepId),
+          )
+        ) {
+          throw new AssistantServiceError('INVALID_REQUEST', 400);
+        }
 
-      let calculated = null;
-      if (request.configuration.kind === 'adjusted') {
-        try {
-          calculated = calculateRecipeConfiguration(
-            recipe,
-            request.configuration.geometryId,
-            request.configuration.quantityAdjustment,
+        let calculated = null;
+        if (request.configuration.kind === 'adjusted') {
+          try {
+            calculated = calculateRecipeConfiguration(
+              recipe,
+              request.configuration.geometryId,
+              request.configuration.quantityAdjustment,
+            );
+          } catch (error) {
+            throw new AssistantServiceError(
+              'CONFIGURATION_UNAVAILABLE',
+              409,
+              false,
+              null,
+              {
+                cause: error,
+              },
+            );
+          }
+          if (
+            request.surface === 'cook-mode' &&
+            !calculated.cookMode.eligible
+          ) {
+            throw new AssistantServiceError('CONFIGURATION_UNAVAILABLE', 409);
+          }
+        }
+
+        const projection = buildAssistantContext(
+          recipe,
+          request,
+          calculated,
+          buildAssistantDeveloperInstructions(request.locale),
+        );
+        if (!projection) {
+          return limitationResponse(
+            request,
+            requestId,
+            'insufficient-context',
+            messages.insufficient[request.locale],
           );
+        }
+
+        let answer: ProviderAnswer;
+        try {
+          const parsed = parseProviderAnswer(
+            await provider.answer(request, projection, {
+              signal,
+              requestId,
+              safetyIdentifier: safetyIdentifier ?? 'ba_anonymous_unavailable',
+              onTelemetry(value) {
+                providerRequestId = value.providerRequestId;
+                usage = value.usage;
+              },
+            }),
+          );
+          if (!parsed || parsed.locale !== request.locale) {
+            throw new AssistantProviderError('invalid-response', false);
+          }
+          answer = parsed;
         } catch (error) {
+          if (error instanceof AssistantProviderError)
+            throw mapProviderFailure(error);
           throw new AssistantServiceError(
-            'CONFIGURATION_UNAVAILABLE',
-            409,
+            'SERVICE_UNAVAILABLE',
+            503,
             false,
             null,
-            {
-              cause: error,
-            },
+            { cause: error },
           );
         }
-        if (request.surface === 'cook-mode' && !calculated.cookMode.eligible) {
-          throw new AssistantServiceError('CONFIGURATION_UNAVAILABLE', 409);
+        if (answer.outcome === 'refused') {
+          return limitationResponse(
+            request,
+            requestId,
+            'refused',
+            messages.refused[request.locale],
+          );
         }
-      }
-
-      const projection = buildAssistantContext(
-        recipe,
-        request,
-        calculated,
-        buildAssistantDeveloperInstructions(request.locale),
-      );
-      if (!projection) {
-        return limitationResponse(
-          request,
+        const response: AssistantResponseV1 = {
+          schemaVersion: 1,
+          ok: true,
           requestId,
-          'insufficient-context',
-          messages.insufficient[request.locale],
-        );
-      }
-
-      let answer: ProviderAnswer;
-      try {
-        const parsed = parseProviderAnswer(
-          await provider.answer(request, projection, signal),
-        );
-        if (!parsed || parsed.locale !== request.locale) {
-          throw new AssistantProviderError('invalid-response', false);
+          recipeId: recipe.id,
+          recipeVersionId: recipe.versionId,
+          locale: request.locale,
+          configuration: request.configuration,
+          outcome: answer.outcome,
+          blocks: assembleBlocks(answer, projection, request.locale),
+          proposedAction:
+            answer.actionId === null
+              ? null
+              : (createActionCatalog(request, requestId).get(answer.actionId) ??
+                null),
+        };
+        if (answer.actionId !== null && !response.proposedAction)
+          throw new AssistantServiceError('INVALID_UPSTREAM_RESPONSE', 502);
+        if (response.proposedAction)
+          resolveActionReview(response.proposedAction);
+        if (!isAssistantResponseV1(response)) {
+          throw new AssistantServiceError('INVALID_UPSTREAM_RESPONSE', 502);
         }
-        answer = parsed;
+        return response;
       } catch (error) {
-        if (error instanceof AssistantProviderError)
-          throw mapProviderFailure(error);
-        throw new AssistantServiceError(
-          'SERVICE_UNAVAILABLE',
-          503,
-          false,
-          null,
-          { cause: error },
-        );
+        errorCode =
+          error instanceof AssistantServiceError
+            ? error.code
+            : 'INTERNAL_ERROR';
+        throw error;
+      } finally {
+        try {
+          telemetry.record({
+            event: 'assistant.request',
+            requestId,
+            providerRequestId,
+            model: config.model,
+            latencyMs: Math.max(0, now() - startedAt),
+            ...usage,
+            recipeId: request.recipeId,
+            recipeVersionId: request.recipeVersionId,
+            locale: request.locale,
+            scope: request.scope.kind,
+            status: errorCode === null ? 'ok' : 'error',
+            errorCode,
+            promptVersion: ASSISTANT_PROMPT_VERSION,
+            contextVersion: ASSISTANT_CONTEXT_POLICY_VERSION,
+          });
+        } catch {
+          // Telemetry must never change the user-visible assistant response.
+        }
       }
-      if (answer.outcome === 'refused') {
-        return limitationResponse(
-          request,
-          requestId,
-          'refused',
-          messages.refused[request.locale],
-        );
-      }
-      const response: AssistantResponseV1 = {
-        schemaVersion: 1,
-        ok: true,
-        requestId,
-        recipeId: recipe.id,
-        recipeVersionId: recipe.versionId,
-        locale: request.locale,
-        configuration: request.configuration,
-        outcome: answer.outcome,
-        blocks: assembleBlocks(answer, projection, request.locale),
-        proposedAction:
-          answer.actionId === null
-            ? null
-            : (createActionCatalog(request, requestId).get(answer.actionId) ??
-              null),
-      };
-      if (answer.actionId !== null && !response.proposedAction)
-        throw new AssistantServiceError('INVALID_UPSTREAM_RESPONSE', 502);
-      if (response.proposedAction) resolveActionReview(response.proposedAction);
-      if (!isAssistantResponseV1(response)) {
-        throw new AssistantServiceError('INVALID_UPSTREAM_RESPONSE', 502);
-      }
-      return response;
     },
   };
 }

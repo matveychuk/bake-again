@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit --incremental false",
     "test:foundation": "node --experimental-strip-types --experimental-specifier-resolution=node --test lib/i18n/*.test.ts lib/persistence/*.test.ts content/recipes/*.test.ts",
     "test:assistant": "node --experimental-strip-types --experimental-specifier-resolution=node --test lib/assistant/*.test.ts lib/assistant/server/*.test.ts app/api/assistant/*.test.ts app/api/assistant/actions/review/*.test.ts components/assistant/*.test.ts",
+    "eval:assistant": "node --experimental-strip-types --experimental-specifier-resolution=node --test evals/*.test.ts",
     "validate:recipes": "node --experimental-strip-types --experimental-specifier-resolution=node scripts/validate-recipes.ts"
   },
   "dependencies": {

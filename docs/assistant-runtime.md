@@ -22,7 +22,29 @@ The Responses request uses `gpt-5.4-mini`, `reasoning: { effort: 'low' }`,
 and strict `text.format` JSON Schema. The model is fixed for this release; an
 alternative `OPENAI_MODEL` value fails environment validation.
 `ASSISTANT_MAX_OUTPUT_TOKENS` controls the output cap (default 2000, range 256–4000).
-Timeout remains 15 seconds and automatic retries remain disabled.
+The route and SDK share a 15-second total deadline and automatic retries remain
+disabled. Provider failures map to stable localized error codes.
+
+## Request and abuse bounds
+
+`lib/assistant/limits.ts` is the shared browser/server source for a 16 KiB body,
+2,000-character question, four history messages, 1,500 characters per history
+message and two canonical step IDs. The route enforces the byte limit while streaming;
+the schema rechecks all field limits before resolving recipe context or calling OpenAI.
+
+When enabled, the runtime requires both `OPENAI_API_KEY` and a minimum 32-character
+`ASSISTANT_SESSION_SECRET`. Missing or invalid bindings return the stable
+`ASSISTANT_DISABLED` response; the drawer moves to its localized disabled state while
+recipe and Cook Mode content remain usable.
+
+The server issues a signed, random, HttpOnly, SameSite=Strict 48-hour cookie. A keyed,
+non-identifying derivative becomes the Responses API `safety_identifier`; neither the
+cookie value nor an ingress address is sent as that identifier or logged. A process
+isolate throttle enforces one concurrent request, five requests/minute and 30/day per
+session, plus 20/minute for the keyed Cloudflare ingress-network bucket. It returns
+`RATE_LIMITED` with `Retry-After`. This is immediate abuse hardening, not a shared
+global budget: public enablement still requires the ADR's shared atomic quota/cost
+store and fail-closed deployment verification.
 
 The provider schema in `server/openai.ts` requires:
 
@@ -80,22 +102,34 @@ secrets. A GitHub Secret must be explicitly delivered by CI to that runtime; it 
 not a public build variable. Never use `NEXT_PUBLIC_` or `VITE_` for the key.
 `.env.example` contains names and non-secret defaults only.
 
-This slice does not log prompts, responses, questions, history or credentials.
+Content-free structured telemetry allowlists request ID, provider request ID, model,
+latency, token usage (input, cached input, output and total), recipe/version, locale,
+scope, prompt/context versions, status and stable error code. It cannot include the
+API key, session/safety identifier, cookies, ingress addresses, request body, question,
+history, full answer or raw provider errors. Logging failures never change the user
+response.
+
 `store: false` disables response storage, not every possible provider retention
 mechanism. Follow the ADR privacy disclosure and provider data-policy review before
-release. Shared rate limits and cost reservations are still required before enabling
-public traffic; per-request caps are not an account-wide budget implementation.
+release. Shared atomic rate limits and cost reservations are still required before
+enabling public traffic; per-isolate limits and per-request caps are not an
+account-wide budget implementation.
 
 ## Tests
 
-Run `npm run test:assistant`. `server/runtime.golden.test.ts` exercises a mocked SDK
-through the real provider, service and HTTP error mapping for en/es/uk: canonical
+Run `npm run test:assistant` and `npm run eval:assistant`. Every unit/eval provider is
+mocked and a dedicated test fails if an injected client falls through to global fetch;
+no API key or paid call is required. `server/runtime.golden.test.ts` exercises a mocked
+SDK through the real provider, service and HTTP error mapping for en/es/uk: canonical
 Tested facts, unbadged explanations, Suggested substitutions, unknown limitations,
 Calculated facts, refusals, invalid JSON, truncation, forged evidence, false badges,
 wrong locale, injection-shaped requests and unsafe prose. It also checks that
-canonical recipe data remains unchanged. No API key or paid API call is needed.
+canonical recipe data remains unchanged.
 Publication checks are explicitly bypassed only in test dependencies; canonical
 Napoleon content is not silently made publishable.
+
+The offline eval dataset and token/cost baseline live in [`evals/README.md`](../evals/README.md).
+Critical safety cases require a 100% pass rate.
 
 Implementation was checked against official OpenAI documentation:
 [GPT-5.4 mini](https://developers.openai.com/api/docs/models/gpt-5.4-mini) and

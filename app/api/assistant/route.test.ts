@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import type { AssistantRequestV1, AssistantResponseV1 } from '../../../lib/assistant/contracts.ts';
+import type {
+  AssistantRequestV1,
+  AssistantResponseV1,
+} from '../../../lib/assistant/contracts.ts';
 import { AssistantServiceError } from '../../../lib/assistant/server/errors.ts';
 import type { AssistantService } from '../../../lib/assistant/server/service.ts';
 import { createAssistantRouteHandler } from './route.ts';
@@ -86,7 +89,9 @@ void test('rejects method, origin and media type before resolving the service', 
   assert.equal(methodResponse.status, 405);
   assert.equal(methodResponse.headers.get('allow'), 'POST');
   const originResponse = await route(
-    request(JSON.stringify(requestBody), { origin: 'https://attacker.example' }),
+    request(JSON.stringify(requestBody), {
+      origin: 'https://attacker.example',
+    }),
   );
   assert.equal(originResponse.status, 403);
   const mediaResponse = await route(
@@ -102,8 +107,13 @@ void test('enforces the streaming 16 KiB limit without trusting Content-Length',
       throw new Error('must not run');
     },
   };
-  const response = await handler(service)(request(`{"question":"${'x'.repeat(17 * 1024)}"}`));
-  const body = (await response.json()) as Extract<AssistantResponseV1, { ok: false }>;
+  const response = await handler(service)(
+    request(`{"question":"${'x'.repeat(17 * 1024)}"}`),
+  );
+  const body = (await response.json()) as Extract<
+    AssistantResponseV1,
+    { ok: false }
+  >;
   assert.equal(response.status, 413);
   assert.equal(body.error.code, 'PAYLOAD_TOO_LARGE');
 });
@@ -114,10 +124,67 @@ void test('maps service errors to stable localized response codes', async () => 
       throw new AssistantServiceError('UPSTREAM_TIMEOUT', 504, true);
     },
   };
-  const response = await handler(service)(request(JSON.stringify({ ...requestBody, locale: 'uk' })));
-  const body = (await response.json()) as Extract<AssistantResponseV1, { ok: false }>;
+  const response = await handler(service)(
+    request(JSON.stringify({ ...requestBody, locale: 'uk' })),
+  );
+  const body = (await response.json()) as Extract<
+    AssistantResponseV1,
+    { ok: false }
+  >;
   assert.equal(response.status, 504);
   assert.equal(body.error.code, 'UPSTREAM_TIMEOUT');
   assert.equal(body.error.retryable, true);
   assert.match(body.error.message, /[А-Яа-яІіЇїЄє]/);
+});
+
+void test('sets the signed anonymous session and throttles before the service call', async () => {
+  let serviceCalls = 0;
+  const route = createAssistantRouteHandler({
+    getService: async () => ({
+      async respond() {
+        serviceCalls += 1;
+        throw new Error('must not run');
+      },
+    }),
+    getSecurity: async () => ({
+      sessionSecret: 'server-only-session-secret-value-123456789',
+      throttle: {
+        acquire() {
+          return { allowed: false, retryAfterSeconds: 17 };
+        },
+      },
+    }),
+    createRequestId: () => 'request-rate-limited',
+  });
+  const response = await route(request(JSON.stringify(requestBody)));
+  const body = (await response.json()) as Extract<
+    AssistantResponseV1,
+    { ok: false }
+  >;
+  assert.equal(response.status, 429);
+  assert.equal(response.headers.get('retry-after'), '17');
+  assert.match(response.headers.get('set-cookie') ?? '', /HttpOnly/u);
+  assert.equal(body.error.code, 'RATE_LIMITED');
+  assert.equal(serviceCalls, 0);
+});
+
+void test('missing or invalid runtime env maps to the explicit disabled state', async () => {
+  const route = createAssistantRouteHandler({
+    getService: async () => {
+      throw new Error('must not run');
+    },
+    getSecurity: async () => {
+      const { AssistantEnvironmentError } =
+        await import('../../../lib/assistant/server/env.ts');
+      throw new AssistantEnvironmentError('missing secret');
+    },
+    createRequestId: () => 'request-disabled',
+  });
+  const response = await route(request(JSON.stringify(requestBody)));
+  const body = (await response.json()) as Extract<
+    AssistantResponseV1,
+    { ok: false }
+  >;
+  assert.equal(response.status, 503);
+  assert.equal(body.error.code, 'ASSISTANT_DISABLED');
 });

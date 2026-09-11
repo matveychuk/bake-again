@@ -1,11 +1,17 @@
-import { defaultLocale, isAppLocale, type AppLocale } from '../../../lib/i18n/config.ts';
+import {
+  defaultLocale,
+  isAppLocale,
+  type AppLocale,
+} from '../../../lib/i18n/config.ts';
 import type {
   AssistantErrorCode,
   AssistantResponseV1,
 } from '../../../lib/assistant/contracts.ts';
 import { parseAssistantRequest } from '../../../lib/assistant/schemas.ts';
+import { ASSISTANT_MAX_BODY_BYTES } from '../../../lib/assistant/limits.ts';
 import {
   AssistantEnvironmentError,
+  ASSISTANT_TIMEOUT_MS,
   getAssistantRuntimeBindings,
   parseAssistantRuntimeEnv,
 } from '../../../lib/assistant/server/env.ts';
@@ -15,11 +21,18 @@ import {
   createAssistantService,
   type AssistantService,
 } from '../../../lib/assistant/server/service.ts';
+import {
+  resolveAnonymousAssistantIdentity,
+  type AssistantAnonymousIdentity,
+} from '../../../lib/assistant/server/security.ts';
+import {
+  assistantRequestThrottle,
+  type AssistantRequestThrottle,
+} from '../../../lib/assistant/server/throttle.ts';
+import { consoleAssistantTelemetry } from '../../../lib/assistant/server/telemetry.ts';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 20;
-
-const maxBodyBytes = 16 * 1024;
 
 const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
   en: {
@@ -30,7 +43,8 @@ const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
     ORIGIN_NOT_ALLOWED: 'This request origin is not allowed.',
     RECIPE_UNAVAILABLE: 'This recipe is not available to the assistant.',
     LOCALE_UNAVAILABLE: 'The assistant is not available in this language.',
-    RECIPE_VERSION_MISMATCH: 'The recipe changed. Refresh it before asking again.',
+    RECIPE_VERSION_MISMATCH:
+      'The recipe changed. Refresh it before asking again.',
     CONFIGURATION_UNAVAILABLE: 'This recipe configuration is not available.',
     ASSISTANT_DISABLED: 'The assistant is currently unavailable.',
     RATE_LIMITED: 'Too many assistant requests. Try again later.',
@@ -48,14 +62,18 @@ const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
     ORIGIN_NOT_ALLOWED: 'El origen de esta solicitud no está permitido.',
     RECIPE_UNAVAILABLE: 'Esta receta no está disponible para el asistente.',
     LOCALE_UNAVAILABLE: 'El asistente no está disponible en este idioma.',
-    RECIPE_VERSION_MISMATCH: 'La receta ha cambiado. Actualízala antes de volver a preguntar.',
-    CONFIGURATION_UNAVAILABLE: 'Esta configuración de receta no está disponible.',
+    RECIPE_VERSION_MISMATCH:
+      'La receta ha cambiado. Actualízala antes de volver a preguntar.',
+    CONFIGURATION_UNAVAILABLE:
+      'Esta configuración de receta no está disponible.',
     ASSISTANT_DISABLED: 'El asistente no está disponible en este momento.',
     RATE_LIMITED: 'Demasiadas solicitudes al asistente. Inténtalo más tarde.',
     BUDGET_EXHAUSTED: 'El asistente no está disponible en este momento.',
-    SERVICE_UNAVAILABLE: 'El servicio del asistente no está disponible temporalmente.',
+    SERVICE_UNAVAILABLE:
+      'El servicio del asistente no está disponible temporalmente.',
     UPSTREAM_TIMEOUT: 'El asistente tardó demasiado en responder.',
-    INVALID_UPSTREAM_RESPONSE: 'El asistente no pudo producir una respuesta segura.',
+    INVALID_UPSTREAM_RESPONSE:
+      'El asistente no pudo producir una respuesta segura.',
     INTERNAL_ERROR: 'El asistente encontró un error inesperado.',
   },
   uk: {
@@ -66,7 +84,8 @@ const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
     ORIGIN_NOT_ALLOWED: 'Походження цього запиту не дозволено.',
     RECIPE_UNAVAILABLE: 'Цей рецепт недоступний для помічника.',
     LOCALE_UNAVAILABLE: 'Помічник недоступний цією мовою.',
-    RECIPE_VERSION_MISMATCH: 'Рецепт змінився. Оновіть сторінку перед новим запитом.',
+    RECIPE_VERSION_MISMATCH:
+      'Рецепт змінився. Оновіть сторінку перед новим запитом.',
     CONFIGURATION_UNAVAILABLE: 'Ця конфігурація рецепта недоступна.',
     ASSISTANT_DISABLED: 'Помічник зараз недоступний.',
     RATE_LIMITED: 'Забагато запитів до помічника. Спробуйте пізніше.',
@@ -80,10 +99,18 @@ const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
 
 interface AssistantRouteDependencies {
   getService(): Promise<AssistantService>;
+  getSecurity?(): Promise<{
+    sessionSecret: string;
+    throttle: AssistantRequestThrottle;
+  }>;
   createRequestId?: () => string;
 }
 
-function jsonResponse(body: AssistantResponseV1, status: number, retryAfterSeconds?: number | null) {
+function jsonResponse(
+  body: AssistantResponseV1,
+  status: number,
+  retryAfterSeconds?: number | null,
+) {
   const headers = new Headers({
     'cache-control': 'no-store',
     'content-type': 'application/json; charset=utf-8',
@@ -122,7 +149,8 @@ function errorResponse(
 
 async function readBoundedBody(request: Request): Promise<string | null> {
   const contentLength = request.headers.get('content-length');
-  if (contentLength && Number(contentLength) > maxBodyBytes) return null;
+  if (contentLength && Number(contentLength) > ASSISTANT_MAX_BODY_BYTES)
+    return null;
   if (!request.body) return '';
 
   const reader = request.body.getReader();
@@ -134,7 +162,7 @@ async function readBoundedBody(request: Request): Promise<string | null> {
       const { done, value } = await reader.read();
       if (done) break;
       bytesRead += value.byteLength;
-      if (bytesRead > maxBodyBytes) {
+      if (bytesRead > ASSISTANT_MAX_BODY_BYTES) {
         await reader.cancel();
         return null;
       }
@@ -162,20 +190,36 @@ function requestLocale(value: unknown): AppLocale {
   return defaultLocale;
 }
 
-export function createAssistantRouteHandler(dependencies: AssistantRouteDependencies) {
+export function createAssistantRouteHandler(
+  dependencies: AssistantRouteDependencies,
+) {
   return async function assistantRoute(request: Request) {
     const requestId = dependencies.createRequestId?.() ?? crypto.randomUUID();
     if (request.method !== 'POST') {
-      const response = errorResponse(requestId, defaultLocale, 'METHOD_NOT_ALLOWED', 405);
+      const response = errorResponse(
+        requestId,
+        defaultLocale,
+        'METHOD_NOT_ALLOWED',
+        405,
+      );
       response.headers.set('allow', 'POST');
       return response;
     }
     if (request.headers.get('origin') !== new URL(request.url).origin) {
       return errorResponse(requestId, defaultLocale, 'ORIGIN_NOT_ALLOWED', 403);
     }
-    const mediaType = request.headers.get('content-type')?.split(';', 1)[0]?.trim().toLowerCase();
+    const mediaType = request.headers
+      .get('content-type')
+      ?.split(';', 1)[0]
+      ?.trim()
+      .toLowerCase();
     if (mediaType !== 'application/json') {
-      return errorResponse(requestId, defaultLocale, 'UNSUPPORTED_MEDIA_TYPE', 415);
+      return errorResponse(
+        requestId,
+        defaultLocale,
+        'UNSUPPORTED_MEDIA_TYPE',
+        415,
+      );
     }
     const bodyText = await readBoundedBody(request);
     if (bodyText === null) {
@@ -190,30 +234,75 @@ export function createAssistantRouteHandler(dependencies: AssistantRouteDependen
     }
     const locale = requestLocale(rawBody);
     const parsed = parseAssistantRequest(rawBody);
-    if (!parsed.success) return errorResponse(requestId, locale, 'INVALID_REQUEST', 400);
+    if (!parsed.success)
+      return errorResponse(requestId, locale, 'INVALID_REQUEST', 400);
 
+    let identity: AssistantAnonymousIdentity | null = null;
+    let releaseThrottle: (() => void) | null = null;
+    const withSession = (response: Response) => {
+      if (identity?.setCookie)
+        response.headers.append('set-cookie', identity.setCookie);
+      return response;
+    };
     try {
+      if (dependencies.getSecurity) {
+        const security = await dependencies.getSecurity();
+        identity = await resolveAnonymousAssistantIdentity(
+          request,
+          security.sessionSecret,
+        );
+        const lease = security.throttle.acquire(
+          identity.safetyIdentifier,
+          identity.networkIdentifier,
+        );
+        if (!lease.allowed) {
+          return withSession(
+            errorResponse(
+              requestId,
+              locale,
+              'RATE_LIMITED',
+              429,
+              true,
+              lease.retryAfterSeconds,
+            ),
+          );
+        }
+        releaseThrottle = () => lease.release();
+      }
       const service = await dependencies.getService();
+      const deadlineSignal = AbortSignal.any([
+        request.signal,
+        AbortSignal.timeout(ASSISTANT_TIMEOUT_MS),
+      ]);
       const response = await service.respond(parsed.data, {
         requestId,
-        signal: request.signal,
+        signal: deadlineSignal,
+        safetyIdentifier: identity?.safetyIdentifier,
       });
-      return jsonResponse(response, 200);
+      return withSession(jsonResponse(response, 200));
     } catch (error) {
       if (error instanceof AssistantServiceError) {
-        return errorResponse(
-          requestId,
-          locale,
-          error.code,
-          error.httpStatus,
-          error.retryable,
-          error.retryAfterSeconds,
+        return withSession(
+          errorResponse(
+            requestId,
+            locale,
+            error.code,
+            error.httpStatus,
+            error.retryable,
+            error.retryAfterSeconds,
+          ),
         );
       }
       if (error instanceof AssistantEnvironmentError) {
-        return errorResponse(requestId, locale, 'ASSISTANT_DISABLED', 503);
+        return withSession(
+          errorResponse(requestId, locale, 'ASSISTANT_DISABLED', 503),
+        );
       }
-      return errorResponse(requestId, locale, 'INTERNAL_ERROR', 500);
+      return withSession(
+        errorResponse(requestId, locale, 'INTERNAL_ERROR', 500),
+      );
+    } finally {
+      releaseThrottle?.();
     }
   };
 }
@@ -221,12 +310,31 @@ export function createAssistantRouteHandler(dependencies: AssistantRouteDependen
 async function getDefaultService() {
   const bindings = await getAssistantRuntimeBindings();
   const config = parseAssistantRuntimeEnv(bindings);
-  if (!config.enabled) throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
+  if (!config.enabled)
+    throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
   const provider = createOpenAIAssistantProvider(config);
-  return createAssistantService({ config, provider });
+  return createAssistantService({
+    config,
+    provider,
+    telemetry: consoleAssistantTelemetry,
+  });
 }
 
-const handleRequest = createAssistantRouteHandler({ getService: getDefaultService });
+async function getDefaultSecurity() {
+  const config = parseAssistantRuntimeEnv(await getAssistantRuntimeBindings());
+  if (!config.enabled || !config.sessionSecret) {
+    throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
+  }
+  return {
+    sessionSecret: config.sessionSecret,
+    throttle: assistantRequestThrottle,
+  };
+}
+
+const handleRequest = createAssistantRouteHandler({
+  getService: getDefaultService,
+  getSecurity: getDefaultSecurity,
+});
 
 export const POST = handleRequest;
 export const GET = handleRequest;

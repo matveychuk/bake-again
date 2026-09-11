@@ -42,6 +42,7 @@ void test('action selector accepts only catalog IDs and never model-authored pay
 const config: AssistantRuntimeConfig = {
   enabled: true,
   apiKey: 'test-key',
+  sessionSecret: 's'.repeat(32),
   model: 'gpt-5.4-mini',
   maxOutputTokens: 777,
 };
@@ -75,12 +76,16 @@ void test('constructs the server client with the ADR deadline and zero automatic
 void test('uses Responses Structured Outputs, store false and the configured output cap', async () => {
   let body: Parameters<OpenAI['responses']['create']>[0] | undefined;
   let signal: AbortSignal | null | undefined;
+  let headers: Record<string, string> | undefined;
+  let telemetry: unknown;
   const client: ResponsesClient = {
     responses: {
       async create(input, options) {
         body = input;
         signal = options?.signal;
+        headers = options?.headers as Record<string, string> | undefined;
         return {
+          _request_id: 'provider-request-test',
           status: 'completed',
           output_text: JSON.stringify({
             locale: 'en',
@@ -89,6 +94,12 @@ void test('uses Responses Structured Outputs, store false and the configured out
             blocks: [{ kind: 'evidence', evidenceId: 'e1' }],
           }),
           output: [],
+          usage: {
+            input_tokens: 321,
+            output_tokens: 45,
+            total_tokens: 366,
+            input_tokens_details: { cached_tokens: 120 },
+          },
         } as unknown as OpenAIResponse;
       },
     },
@@ -102,10 +113,18 @@ void test('uses Responses Structured Outputs, store false and the configured out
       evidence: new Map(),
       estimatedInputTokens: 10,
     },
-    controller.signal,
+    {
+      signal: controller.signal,
+      requestId: 'request-test',
+      safetyIdentifier: 'ba_test_identifier',
+      onTelemetry(value) {
+        telemetry = value;
+      },
+    },
   );
 
   assert.equal(body?.store, false);
+  assert.equal(body?.safety_identifier, 'ba_test_identifier');
   assert.equal(body?.max_output_tokens, 777);
   assert.equal(body?.model, 'gpt-5.4-mini');
   assert.deepEqual(body?.reasoning, { effort: 'low' });
@@ -114,6 +133,16 @@ void test('uses Responses Structured Outputs, store false and the configured out
   assert.equal(format?.type, 'json_schema');
   assert.equal(format && 'strict' in format ? format.strict : undefined, true);
   assert.equal(signal, controller.signal);
+  assert.equal(headers?.['X-Client-Request-Id'], 'request-test');
+  assert.deepEqual(telemetry, {
+    providerRequestId: 'provider-request-test',
+    usage: {
+      inputTokens: 321,
+      outputTokens: 45,
+      totalTokens: 366,
+      cachedInputTokens: 120,
+    },
+  });
   assert.deepEqual(answer, {
     locale: 'en',
     actionId: null,
@@ -145,7 +174,12 @@ void test('does not retry or repair malformed structured output', async () => {
         evidence: new Map(),
         estimatedInputTokens: 10,
       },
-      new AbortController().signal,
+      {
+        signal: new AbortController().signal,
+        requestId: 'request-test',
+        safetyIdentifier: 'ba_test_identifier',
+        onTelemetry() {},
+      },
     ),
     { kind: 'invalid-response' },
   );
