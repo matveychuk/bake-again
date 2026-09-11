@@ -1,0 +1,43 @@
+name: OpenAI Sites post-deploy smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      access_mode:
+        description: Expected Sites audience after deployment
+        required: true
+        default: owner-private
+        type: choice
+        options:
+          - owner-private
+          - public
+
+permissions:
+  contents: read
+
+concurrency:
+  group: openai-sites-production
+  cancel-in-progress: false
+
+jobs:
+  smoke:
+    name: Verify deployed Site
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: production
+      url: ${{ vars.PRODUCTION_URL }}
+    env:
+      PRODUCTION_URL: ${{ vars.PRODUCTION_URL }}
+      SITE_ACCESS_MODE: ${{ inputs.access_mode }}
+    steps:
+      - name: Check out smoke test
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Use Node.js 22.13.0
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22.13.0
+
+      - name: Run content-free smoke test
+        run: npm run smoke:site

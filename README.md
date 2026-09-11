@@ -15,6 +15,9 @@ media/recipes/         Original and selected recipe media
 
 The repository also contains the current Next.js website prototype and its existing Git history.
 
+Production is hosted through OpenAI Sites. See [the CI/CD and deployment runbook](docs/deployment.md)
+before changing runtime configuration or preparing a release.
+
 ## Current state
 
 - Recipe content model drafted.
