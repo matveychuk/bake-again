@@ -1,0 +1,314 @@
+.drawer {
+  width: min(var(--layout-assistant-drawer), 100%);
+  height: 100dvh;
+  max-height: 100dvh;
+  border: 0;
+  border-left: 1px solid var(--color-border-subtle);
+  border-radius: 0;
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-raised);
+}
+
+.header {
+  padding: var(--space-6);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  align-items: center;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.mark {
+  width: var(--space-12);
+  height: var(--space-12);
+  display: grid;
+  place-items: center;
+  background: var(--color-status-tested-background);
+  color: var(--color-status-tested-text);
+}
+
+.heading {
+  min-width: 0;
+}
+
+.kicker,
+.promptLabel,
+.questionLabel,
+.statusLabel {
+  margin: 0;
+  color: var(--color-action-primary-strong);
+  font-size: var(--font-size-label);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: var(--space-1) 0 0;
+  overflow-wrap: anywhere;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-title-small);
+  font-weight: 550;
+  line-height: 1.05;
+}
+
+.close,
+.send {
+  width: calc(var(--space-12));
+  height: calc(var(--space-12));
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+
+.close {
+  background: transparent;
+  color: var(--color-text-primary);
+}
+
+.body {
+  min-height: 0;
+  flex: 1;
+  padding: var(--space-6);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.context {
+  padding: var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+  background: var(--color-background-panel-subtle);
+}
+
+.context svg {
+  flex: 0 0 auto;
+  margin-top: var(--space-1);
+  color: var(--color-action-primary);
+}
+
+.context p,
+.state p,
+.block p,
+.question p {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body);
+}
+
+.context p {
+  color: var(--color-text-secondary);
+}
+
+.context strong {
+  display: block;
+  color: var(--color-text-primary);
+}
+
+.promptLabel {
+  margin-top: var(--space-6);
+  color: var(--color-text-secondary);
+}
+
+.prompts {
+  margin-top: var(--space-3);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.prompt,
+.retry {
+  min-height: calc(var(--space-12));
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--font-size-body-small);
+  font-weight: 700;
+  text-align: left;
+}
+
+.prompt svg {
+  flex: 0 0 auto;
+}
+
+.prompt:disabled,
+.send:disabled,
+.retry:disabled,
+.composer input:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.question,
+.state,
+.blocks {
+  margin-top: var(--space-6);
+}
+
+.question {
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border-subtle);
+}
+
+.questionLabel {
+  margin-bottom: var(--space-1);
+  color: var(--color-text-secondary);
+}
+
+.state {
+  padding: var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  background: var(--color-background-panel-subtle);
+}
+
+.state svg {
+  flex: 0 0 auto;
+  color: var(--color-action-primary-strong);
+}
+
+.state strong {
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.retry {
+  width: fit-content;
+  margin-top: var(--space-3);
+  color: var(--color-action-primary-strong);
+}
+
+.blocks {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.block {
+  padding: var(--space-4);
+  border-left: 2px solid var(--color-border-subtle);
+  background: var(--color-background-panel-subtle);
+}
+
+.block[data-status='tested'] {
+  border-color: var(--color-status-tested-text);
+  background: var(--color-status-tested-background);
+}
+
+.block[data-status='calculated'] {
+  border-color: var(--color-status-calculated-text);
+  background: var(--color-status-calculated-background);
+}
+
+.block[data-status='suggested'] {
+  border-color: var(--color-status-suggested-text);
+  background: var(--color-status-suggested-background);
+}
+
+.badge {
+  margin-bottom: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-primary);
+}
+
+.badge[data-status='tested'] {
+  color: var(--color-status-tested-text);
+}
+
+.badge[data-status='calculated'] {
+  color: var(--color-status-calculated-text);
+}
+
+.badge[data-status='suggested'] {
+  color: var(--color-status-suggested-text);
+}
+
+.qualification {
+  margin-top: var(--space-2) !important;
+  color: var(--color-text-secondary);
+}
+
+.composer {
+  margin: 0 var(--space-6);
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-background-page);
+}
+
+.composer input {
+  min-width: 0;
+  min-height: calc(var(--space-12));
+  flex: 1;
+  padding: 0 var(--space-2);
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  font: inherit;
+  font-size: var(--font-size-body);
+}
+
+.send {
+  background: var(--color-action-primary);
+  color: var(--color-text-on-accent);
+}
+
+.footer {
+  padding: var(--space-3) var(--space-6) var(--space-6);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-body);
+}
+
+.close:focus-visible,
+.prompt:focus-visible,
+.retry:focus-visible,
+.send:focus-visible,
+.composer:focus-within {
+  outline: 2px solid var(--color-action-primary-strong);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .drawer {
+    width: 100%;
+  }
+
+  .header,
+  .body {
+    padding: var(--space-4);
+  }
+
+  .composer {
+    margin-inline: var(--space-4);
+  }
+
+  .footer {
+    padding: var(--space-3) var(--space-4) var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer {
+    transition-duration: 0ms;
+  }
+}

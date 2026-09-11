@@ -39,4 +39,6 @@ record; the new configuration does not inherit it.
 - Recipe cards show only a concise test statement.
 - Recipe setup and adaptation controls show the full scope and explanation.
 - Never describe AI-generated guidance as Tested.
-
+- Assistant explanation and limitation blocks are unbadged. Only server-owned evidence may
+  carry Tested or Calculated; model-proposed changes always carry Suggested with the
+  localized not-bake-tested qualification.

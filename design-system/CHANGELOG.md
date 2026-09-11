@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- Added the `displayCyrillic` typography token and locale-aware Literata display font for
+  Ukrainian, avoiding browser fallback in headings. Updated the home promise, supporting
+  copy and search text in Spanish and Ukrainian; added Spanish headline spacing for the
+  italic accent line. Checked the responsive hero copy at 390px, 900px and 1440px.
+
+- Added controlled assistant action review for `open-scaling` and `add-shopping-items`,
+  with explicit confirmation, canonical quantities/evidence, ingredient-choice radios,
+  cancellation and a no-write multilingual Design Lab example. Checked at 390/900/1440px.
+
+- Added the shared contextual assistant drawer for Recipe Detail and Cook Mode, including
+  real API submission, bounded history, request cancellation, localized lifecycle states,
+  structured evidence rendering and modal keyboard behavior.
+- Added the `layout.assistantDrawer` token and a live Design Lab assistant example.
 - Localised the evidence badge contract: icon, written status and explanation are now
   locale-aware while the evidence-state semantics remain unchanged.
 - Clarified that ingredient prep checkboxes are distinct from the `Add all` shopping

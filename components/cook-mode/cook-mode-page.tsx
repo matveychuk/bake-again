@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import { ArrowLeft, CircleAlert } from 'lucide-react';
-import { CookAssistant } from '@/app/recipes/napoleon-cake/cook/cook-assistant';
+import { AssistantProvider } from '@/components/assistant';
 import { CookNavigation } from '@/app/recipes/napoleon-cake/cook/cook-navigation';
 import { CookProgress } from '@/app/recipes/napoleon-cake/cook/cook-progress';
 import { CookStep } from '@/app/recipes/napoleon-cake/cook/cook-step';
@@ -40,7 +40,6 @@ export function CookModePage({
   const cookSteps = state.steps;
   const [stepIndex, setStepIndex] = useState(0);
   const [completed, setCompleted] = useState<number[]>([]);
-  const [assistantOpen, setAssistantOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(false);
   const [remaining, setRemaining] = useState(cookSteps[0]?.timerSeconds ?? 0);
   const step = cookSteps[stepIndex];
@@ -86,7 +85,7 @@ export function CookModePage({
     setCompleted((items) => isComplete ? items.filter((item) => item !== stepIndex) : [...items, stepIndex]);
   }
 
-  return (
+  const page = (
     <main className={styles.page}>
       <header className={styles.header}>
         <Link href={resolvedDetailHref} className={styles.exit}><ArrowLeft size={17} /> {messages.exit}</Link>
@@ -96,10 +95,21 @@ export function CookModePage({
       <div className={styles.progressTrack} aria-label={messages.progress(stepIndex + 1, definition.totalSteps)}><span style={{ width: `${progress}%` }} /></div>
       <div className={styles.shell}>
         <CookProgress steps={cookSteps} activeIndex={stepIndex} completed={completed} totalSteps={definition.totalSteps} onSelect={goToStep} />
-        <CookStep step={step} stepIndex={stepIndex} totalSteps={definition.totalSteps} progress={progress} remaining={remaining} timerRunning={timerRunning} onToggleTimer={() => setTimerRunning((value) => !value)} onResetTimer={() => { setRemaining(step.timerSeconds ?? 0); setTimerRunning(false); }} onAsk={() => setAssistantOpen(true)} />
+        <CookStep step={step} stepIndex={stepIndex} totalSteps={definition.totalSteps} progress={progress} remaining={remaining} timerRunning={timerRunning} onToggleTimer={() => setTimerRunning((value) => !value)} onResetTimer={() => { setRemaining(step.timerSeconds ?? 0); setTimerRunning(false); }} assistant={definition.assistant && state.assistantConfiguration ? { configuration: state.assistantConfiguration, locale } : undefined} />
       </div>
       <CookNavigation isFirst={stepIndex === 0} isLast={stepIndex === cookSteps.length - 1} isComplete={isComplete} onPrevious={() => goToStep(stepIndex - 1)} onNext={() => goToStep(stepIndex + 1)} onToggleComplete={toggleComplete} />
-      {assistantOpen && <CookAssistant stepTitle={step.title} onClose={() => setAssistantOpen(false)} />}
     </main>
   );
+
+  return definition.assistant ? (
+    <AssistantProvider
+      recipeId={definition.assistant.recipeId}
+      recipeVersionId={definition.assistant.recipeVersionId}
+      recipeTitle={definition.recipeTitle}
+      locale={locale}
+      surface="cook-mode"
+    >
+      {page}
+    </AssistantProvider>
+  ) : page;
 }

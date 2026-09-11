@@ -159,6 +159,7 @@ export function createCookSteps(
     );
 
     return {
+      stepIds: [...ids] as [string, ...string[]],
       number: String(index + 1).padStart(2, '0'),
       meta: buildMeta(steps, prototype),
       title: titles[key],

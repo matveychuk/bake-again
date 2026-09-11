@@ -1,3 +1,5 @@
+import type { AssistantConfiguration } from '@/lib/assistant/contracts';
+
 export type CookMediaItem = {
   src: string;
   alt: string;
@@ -6,6 +8,7 @@ export type CookMediaItem = {
 };
 
 export type CookStep = {
+  stepIds: [string, ...string[]];
   number: string;
   meta: string;
   title: string;
@@ -21,9 +24,14 @@ export type CookModeDefinition = {
   recipeTitle: string;
   detailHref: string;
   totalSteps: number;
+  assistant?: {
+    recipeId: string;
+    recipeVersionId: string;
+  };
   getState: (locationSearch: string) => {
     isAdjusted: boolean;
     steps: CookStep[];
+    assistantConfiguration?: AssistantConfiguration;
     unavailableReason?: string;
   };
 };

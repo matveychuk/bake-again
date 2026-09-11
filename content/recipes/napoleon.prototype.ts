@@ -9,6 +9,7 @@ export type PrototypeMediaItem = {
 };
 
 export type PrototypeStep = {
+  canonicalStepIds: [string, ...string[]];
   number: string;
   title: string;
   recipeTitle?: string;
@@ -37,6 +38,7 @@ export const napoleonPrototypeMedia: PrototypeMediaItem[] = [
 
 export const napoleonPrototypeSteps: PrototypeStep[] = [
   {
+    canonicalStepIds: ['mix-dry-dough'],
     number: '01',
     title: 'Mix the dry ingredients',
     recipeBody: 'In a food processor, mix the Schär Mix B, both starches, xanthan, baking powder, salt and sugar for 5–10 seconds.',
@@ -46,6 +48,7 @@ export const napoleonPrototypeSteps: PrototypeStep[] = [
     ingredientLineIds: ['schar-mix-b', 'tapioca-dough', 'corn-starch-dough', 'xanthan', 'baking-powder', 'salt-dough', 'sugar-dough'],
   },
   {
+    canonicalStepIds: ['cut-in-butter'],
     number: '02',
     title: 'Cut in the cold butter',
     recipeBody: 'Cube the cold butter, freeze it for 10–15 minutes, add it to the dry mixture and pulse about ten times.',
@@ -59,6 +62,7 @@ export const napoleonPrototypeSteps: PrototypeStep[] = [
     timerSeconds: 600,
   },
   {
+    canonicalStepIds: ['mix-wet-dough'],
     number: '03',
     title: 'Mix the wet ingredients',
     recipeTitle: 'Add the wet ingredients',
@@ -70,6 +74,7 @@ export const napoleonPrototypeSteps: PrototypeStep[] = [
     mediaIds: ['wet-mixture-smooth'],
   },
   {
+    canonicalStepIds: ['combine-dough'],
     number: '04',
     title: 'Combine the dough',
     recipeBody: 'Pour the liquid into the dry mixture and combine with short pulses. Add cold water only as needed.',
@@ -82,6 +87,7 @@ export const napoleonPrototypeSteps: PrototypeStep[] = [
     mediaIds: ['pour-wet-mixture', 'dough-clumps'],
   },
   {
+    canonicalStepIds: ['roll-layer'],
     number: '05',
     title: 'Roll directly on parchment',
     recipeBody: 'Place each chilled disc on its own sheet of parchment and roll it into an even 28 cm circle. Bake it on the same sheet—do not transfer the rolled dough.',

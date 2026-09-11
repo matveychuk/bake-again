@@ -22,6 +22,7 @@ html[data-palette='selected-mix'] {
 
   /* Typography */
   --font-family-display: var(--font-newsreader), Georgia, serif;
+  --font-family-display-cyrillic: var(--font-literata), Georgia, serif;
   --font-family-body: var(--font-manrope), Arial, Helvetica, sans-serif;
   --font-size-label: 0.75rem;
   --font-size-body-small: 0.875rem;
@@ -57,6 +58,7 @@ html[data-palette='selected-mix'] {
   --layout-max-content: 85rem;
   --layout-gutter-desktop: 2.5rem;
   --layout-gutter-mobile: 1.25rem;
+  --layout-assistant-drawer: 30rem;
 
   /* Backwards-compatible aliases for the exploratory homepage. */
   --cream: var(--color-background-page);
@@ -81,6 +83,10 @@ html[data-palette='selected-mix'] {
   --status-calculated-bg: var(--color-status-calculated-background);
   --status-suggested-ink: var(--color-status-suggested-text);
   --status-suggested-bg: var(--color-status-suggested-background);
+}
+
+html:lang(uk) {
+  --font-family-display: var(--font-family-display-cyrillic);
 }
 
 /*

@@ -164,7 +164,7 @@ export function RecipeAdjuster({ locale }: { locale: AppLocale }) {
                 <span>
                   <span>{name}</span>
                   {calculated?.requiresResolution && <small>Resolve this quantity before Cook Mode</small>}
-                  {line.id === 'schar-mix-b' && <AssistantTrigger scope="flour" label="Can I use another mix?" compact />}
+                  {line.id === 'schar-mix-b' && <AssistantTrigger scope="flour" locale={locale} compact />}
                   {notes.map((note) => <small key={note}>{note}</small>)}
                 </span>
               </div>

@@ -1,4 +1,8 @@
-import { CheckCircle2, Lightbulb, MessageCircleQuestion } from 'lucide-react';
+import { CheckCircle2, Lightbulb } from 'lucide-react';
+import { AssistantTrigger } from '@/components/assistant';
+import { assistantMessages } from '@/components/assistant/assistant.messages';
+import type { AssistantConfiguration } from '@/lib/assistant/contracts';
+import type { AppLocale } from '@/lib/i18n/config';
 import type { CookStep as CookStepData } from './cook-mode.data';
 import { CookMediaSequence } from './cook-media-sequence';
 import { CookTimer } from './cook-timer';
@@ -13,7 +17,10 @@ type CookStepProps = {
   timerRunning: boolean;
   onToggleTimer: () => void;
   onResetTimer: () => void;
-  onAsk: () => void;
+  assistant?: {
+    configuration: AssistantConfiguration;
+    locale: AppLocale;
+  };
 };
 
 export function CookStep({
@@ -25,7 +32,7 @@ export function CookStep({
   timerRunning,
   onToggleTimer,
   onResetTimer,
-  onAsk,
+  assistant,
 }: CookStepProps) {
   return (
     <article className={styles.step} aria-live="polite">
@@ -68,7 +75,15 @@ export function CookStep({
 
       {step.media && <CookMediaSequence items={step.media} />}
 
-      <button className={styles.ask} type="button" onClick={onAsk}><MessageCircleQuestion size={17} /> Ask about this step</button>
+      {assistant && (
+        <AssistantTrigger
+          className={styles.ask}
+          configuration={assistant.configuration}
+          label={assistantMessages[assistant.locale].trigger.step}
+          scope={{ kind: 'step', stepIds: step.stepIds }}
+          stepTitle={step.title}
+        />
+      )}
     </article>
   );
 }

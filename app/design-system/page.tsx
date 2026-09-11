@@ -12,10 +12,14 @@ import {
   Trash2,
 } from 'lucide-react';
 import { NumberedSectionTitle } from '@/components/foundations/numbered-section-title';
+import { AssistantBlocks, AssistantProvider, AssistantTrigger } from '@/components/assistant';
+import type { AssistantBlock } from '@/lib/assistant/contracts';
 import { EvidenceBadge, type EvidenceStatus } from '@/components/recipe/evidence-badge';
 import { LanguageSwitcher } from '@/components/site/language-switcher';
 import { BakeCheckbox } from '@/components/ui/bake-checkbox';
+import { ActionReviewExample } from '@/components/assistant/action-review-example';
 import { Wordmark } from '@/components/site/wordmark';
+import { glutenFreeNapoleonRecipe } from '@/content/recipes/gluten-free-napoleon.recipe';
 import styles from './design-system.module.css';
 
 export const metadata: Metadata = {
@@ -33,6 +37,29 @@ const colours = [
 ];
 
 const space = [4, 8, 12, 16, 24, 32, 48, 64, 96];
+
+const assistantBlocks: AssistantBlock[] = [
+  {
+    kind: 'evidence',
+    text: 'The recorded base uses Schär Mix B for the layer dough.',
+    status: 'Tested',
+    qualification: 'This exact base has been baked successfully.',
+    references: [{ id: 'e1', recipeId: 'gluten-free-napoleon', recipeVersionId: 'gluten-free-napoleon-v1-draft', field: 'ingredients.schar-mix-b' }],
+  },
+  {
+    kind: 'explanation',
+    text: 'Different flour blends can absorb liquid and hold fat differently, so the same quantities may not produce the recorded dough texture.',
+    status: null,
+    references: [{ id: 'e1', recipeId: 'gluten-free-napoleon', recipeVersionId: 'gluten-free-napoleon-v1-draft', field: 'ingredients.schar-mix-b' }],
+  },
+  {
+    kind: 'suggestion',
+    text: 'If you try another blend, begin with a small batch and judge it by the documented pliable-clump checkpoint.',
+    status: 'Suggested',
+    qualification: 'An idea to try. This change has not been bake-tested.',
+    references: [],
+  },
+];
 
 function StatusBadge({ status }: { status: EvidenceStatus }) {
   return <EvidenceBadge status={status} className={`${styles.statusBadge} ${styles[status]}`} />;
@@ -109,9 +136,9 @@ export default function DesignSystemPage() {
             </NumberedSectionTitle>
             <div className={styles.typeGrid}>
               <article className={styles.typeDisplay}>
-                <p>Display · Newsreader</p>
+                <p>Display · Newsreader / Literata for Ukrainian</p>
                 <strong>Bake what you love.<br /><em>Know what works.</em></strong>
-                <small>Page titles, recipe names and editorial emphasis</small>
+                <small>Newsreader for Latin scripts; Literata for Ukrainian headings and editorial emphasis</small>
               </article>
               <article className={styles.typeBody}>
                 <p>Body · Manrope</p>
@@ -186,6 +213,11 @@ export default function DesignSystemPage() {
               </article>
             </div>
 
+            <div className={styles.componentBlock} id="assistant-actions">
+              <div className={styles.componentLabel}><strong>Assistant action review</strong><span>Suggested action · deterministic quantities · explicit confirmation</span></div>
+              <ActionReviewExample />
+            </div>
+
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}><strong>Personal state</strong><span>Explicit save state and practical shopping row</span></div>
               <div className={styles.personalExample}>
@@ -199,6 +231,29 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}><strong>Language menu</strong><span>Native language names, explicit selection, keyboard menu</span></div>
               <div className={styles.actionRow}>
                 <LanguageSwitcher locale="en" pathname="/en" />
+              </div>
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}><strong>Contextual assistant</strong><span>Shared Recipe and Cook drawer · trusted context · explicit evidence states</span></div>
+              <div className={styles.assistantExample}>
+                <AssistantProvider
+                  recipeId={glutenFreeNapoleonRecipe.id}
+                  recipeVersionId={glutenFreeNapoleonRecipe.versionId}
+                  recipeTitle={glutenFreeNapoleonRecipe.title.en}
+                  locale="en"
+                  surface="recipe-detail"
+                >
+                  <div className={styles.actionRow}>
+                    <AssistantTrigger
+                      className={styles.assistantExampleTrigger}
+                      configuration={{ kind: 'base' }}
+                      label="Ask about this recipe"
+                      scope={{ kind: 'recipe' }}
+                    />
+                  </div>
+                </AssistantProvider>
+                <AssistantBlocks blocks={assistantBlocks} locale="en" />
               </div>
             </div>
           </section>

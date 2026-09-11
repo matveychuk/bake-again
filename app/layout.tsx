@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Manrope, Newsreader } from 'next/font/google';
+import { Literata, Manrope, Newsreader } from 'next/font/google';
 import { headers } from 'next/headers';
 import { defaultLocale, isAppLocale, localeMetadata } from '@/lib/i18n/config';
 import './globals.css';
@@ -12,6 +12,12 @@ const manrope = Manrope({
 const newsreader = Newsreader({
   variable: '--font-newsreader',
   subsets: ['latin'],
+  style: ['normal', 'italic'],
+});
+
+const literata = Literata({
+  variable: '--font-literata',
+  subsets: ['cyrillic', 'latin'],
   style: ['normal', 'italic'],
 });
 
@@ -31,8 +37,11 @@ export default async function RootLayout({
   const locale = isAppLocale(requestLocale) ? requestLocale : defaultLocale;
 
   return (
-    <html lang={localeMetadata[locale].bcp47}>
-      <body className={`${manrope.variable} ${newsreader.variable}`}>
+    <html
+      lang={localeMetadata[locale].bcp47}
+      className={`${manrope.variable} ${newsreader.variable} ${literata.variable}`}
+    >
+      <body>
         {children}
         {process.env.NODE_ENV === 'development' && (
           <script

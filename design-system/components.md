@@ -1,5 +1,20 @@
 # Base components
 
+## Assistant action review
+
+- A proposed action opens a review dialog, never executes from the AI answer itself.
+- Reuse the installed `Dialog` and `EvidenceBadge` through `AssistantActionReview`.
+- The action is Suggested; per-line evidence describes the quantity, not the action.
+- Show app-calculated quantities, pending evidence, ingredient choices and eligibility
+  before confirmation. Do not preselect ambiguous ingredient alternatives.
+- Keep Cancel available during validation. Disable Confirm until review/choices are
+  complete and while confirming; Escape/close cancels outstanding work.
+- `open-scaling` only opens existing controls; it never applies a scale.
+- Use semantic tokens and wrap long translations. Let the dialog scroll vertically
+  on narrow screens; keep controls at least 44px high and keyboard focus visible.
+- The matching interactive example is `/design-system#assistant-actions`, with en/es/uk
+  copy and no persistence effects.
+
 ## Button
 
 - Primary: terracotta fill, warm-white text. One primary action per local task area.
@@ -66,6 +81,22 @@ variation.
 - When the source has no usable method, the action still opens a labelled unavailable
   state. It explains the missing source data and links back to the recipe record; it must
   not simulate cooking instructions or imply that the recipe can be cooked from the data.
+
+## Contextual assistant drawer
+
+- Recipe Assistant and Cook Assistant use the shared `components/assistant` drawer; do
+  not create route-specific drawer implementations.
+- The trigger passes the canonical recipe/version, active locale, exact displayed
+  configuration and canonical step IDs. Displayed step numbers or translated titles are
+  never used as API identities.
+- Required states are idle, loading, success, empty, error with retry when allowed, and
+  disabled. Loading disables all submit paths and closing aborts the current request.
+- Suggested-question buttons and the typed composer use the same submit path. Conversation
+  context is limited to four short messages and is not persisted after the drawer closes.
+- Structured answer blocks keep generated explanation separate from server-owned evidence.
+  Tested, Calculated and Suggested always use their written localized label and icon.
+- The modal drawer traps focus, closes with Escape, returns focus to its trigger and
+  announces each new answer through a polite live region.
 
 ## Navigation
 

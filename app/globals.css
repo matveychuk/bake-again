@@ -67,7 +67,7 @@ body {
   margin: 0;
   background: var(--cream);
   color: var(--ink);
-  font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
+  font-family: var(--font-family-body);
   font-size: 16px;
   line-height: 1.55;
   transition: background 240ms ease, color 240ms ease;
@@ -108,7 +108,7 @@ input:focus-visible {
 
 .wordmark {
   width: max-content;
-  font-family: var(--font-newsreader), Georgia, serif;
+  font-family: var(--font-family-display);
   font-size: 1.55rem;
   font-weight: 650;
   letter-spacing: -0.04em;
@@ -208,7 +208,7 @@ input:focus-visible {
 .hero h1,
 .section-heading h2,
 .trust-section h2,
-.recipe-card h3 { font-family: var(--font-newsreader), Georgia, serif; }
+.recipe-card h3 { font-family: var(--font-family-display); }
 
 .hero h1 {
   max-width: 700px;
@@ -223,6 +223,11 @@ input:focus-visible {
   color: var(--terracotta);
   font-weight: 360;
   white-space: nowrap;
+}
+
+html:lang(es) .hero h1 em {
+  display: inline-block;
+  margin-top: 0.1em;
 }
 
 .hero-intro {

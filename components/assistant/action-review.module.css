@@ -1,0 +1,105 @@
+.proposal {
+  margin-top: var(--space-4);
+}
+.dialog {
+  width: min(calc(100% - var(--space-8)), var(--layout-assistant-drawer));
+  max-width: calc(100% - var(--space-8));
+  max-height: calc(100dvh - var(--space-8));
+  overflow-y: auto;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-raised);
+}
+.dialog h2 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-body);
+}
+.dialog p,
+.content p,
+.proposal p {
+  margin-block: var(--space-2);
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body);
+  overflow-wrap: anywhere;
+}
+.content {
+  min-width: 0;
+  color: var(--color-text-primary);
+}
+.content span[data-status] {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+.line {
+  min-width: 0;
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+}
+.line legend {
+  max-width: 100%;
+  padding-inline: var(--space-1);
+  font-weight: 700;
+  font-size: var(--font-size-body-small);
+  overflow-wrap: anywhere;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--space-12);
+  font-size: var(--font-size-body);
+}
+.option input {
+  accent-color: var(--color-action-primary);
+  flex: 0 0 auto;
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.button {
+  min-height: var(--space-12);
+  max-width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+  font: inherit;
+  font-size: var(--font-size-body-small);
+  font-weight: 700;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.button:hover {
+  border-color: var(--color-action-primary);
+}
+.primary {
+  background: var(--color-action-primary);
+  color: var(--color-text-on-accent);
+}
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.button:focus-visible,
+.option input:focus-visible {
+  outline: 2px solid var(--color-action-primary-strong);
+  outline-offset: var(--space-1);
+}
+@media (max-width: 900px) {
+  .dialog {
+    padding: var(--space-4);
+  }
+  .footer .button {
+    flex: 1 1 100%;
+  }
+}

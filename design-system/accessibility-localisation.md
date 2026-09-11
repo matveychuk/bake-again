@@ -23,10 +23,17 @@ Approved status label/background contrast:
 - Use one stable recipe identity across languages.
 - Persist an explicit language choice.
 - Components must accommodate longer translations without truncating essential text.
+- Use the locale-aware display token for headings. Ukrainian must use Literata rather than
+  relying on a browser fallback for Newsreader's unavailable Cyrillic glyphs.
 - Avoid text baked into images.
 - Keep unit, decimal and plural formatting locale-aware.
 - Status meaning must remain equivalent across translations; do not translate it into a
   stronger claim.
+- Assistant titles, prompts, composer labels, lifecycle states, retry text and disclaimers
+  are available in English, Spanish and Ukrainian. Long questions and answers wrap rather
+  than truncate at 390px, 900px and 1440px.
+- A newly completed assistant response is announced with `aria-live="polite"`. The drawer
+  uses modal focus containment, Escape dismissal and focus return to the exact trigger.
 - Catalogue and card images require locale-specific alternative text. Draft recipe copy
   may be translated for discovery, but incomplete source material remains visibly draft
   and is not released as a publishable recipe translation.

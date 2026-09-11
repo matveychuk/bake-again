@@ -1,6 +1,7 @@
 import { createCookSteps, TOTAL_RECIPE_STEPS } from '@/app/recipes/napoleon-cake/cook/cook-mode.data';
 import { calculateNapoleonConfiguration, napoleonBaseSelection, parseNapoleonConfiguration } from './napoleon-configuration';
 import type { CookModeDefinition } from '@/components/cook-mode/cook-mode.types';
+import { glutenFreeNapoleonRecipe } from './gluten-free-napoleon.recipe';
 import { recipeInventory } from './inventory';
 import { getRecipeContent } from './registry';
 
@@ -8,6 +9,10 @@ const napoleonCookMode: CookModeDefinition = {
   recipeTitle: 'Napoleon cake',
   detailHref: '/recipes/napoleon-cake',
   totalSteps: TOTAL_RECIPE_STEPS,
+  assistant: {
+    recipeId: glutenFreeNapoleonRecipe.id,
+    recipeVersionId: glutenFreeNapoleonRecipe.versionId,
+  },
   getState: (locationSearch) => {
     const requested = parseNapoleonConfiguration(new URLSearchParams(locationSearch));
     const requestedResult = calculateNapoleonConfiguration(requested);
@@ -16,7 +21,17 @@ const napoleonCookMode: CookModeDefinition = {
     const isAdjusted = selection.geometryId !== napoleonBaseSelection.geometryId
       || selection.quantityAdjustment.mode !== 'batchScale'
       || selection.quantityAdjustment.factor !== 1;
-    return { isAdjusted, steps: createCookSteps(configuration) };
+    return {
+      isAdjusted,
+      steps: createCookSteps(configuration),
+      assistantConfiguration: isAdjusted
+        ? {
+            kind: 'adjusted',
+            geometryId: selection.geometryId,
+            quantityAdjustment: selection.quantityAdjustment,
+          }
+        : { kind: 'base' },
+    };
   },
 };
 
@@ -36,6 +51,7 @@ function createInventoryCookMode(recipe: (typeof recipeInventory)[number]): Cook
       isAdjusted: false,
       unavailableReason,
       steps: (structured?.steps ?? []).map((step, index) => ({
+        stepIds: [step.id],
         number: String(index + 1).padStart(2, '0'),
         meta: step.meta ?? `Step ${index + 1}`,
         title: step.title,

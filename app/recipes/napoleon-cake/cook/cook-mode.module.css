@@ -63,22 +63,6 @@
 .stepActions button:nth-child(2) { border-color: var(--color-action-primary); background: var(--color-action-primary); color: var(--color-text-on-accent); }
 .stepActions .completed { background: var(--color-status-tested-background); border-color: var(--color-status-tested-text); color: var(--color-status-tested-text); }
 .mobileBar { display: none; }
-.assistantLayer { position: fixed; inset: 0; z-index: 100; display: flex; justify-content: flex-end; background: rgba(33, 26, 23, .32); backdrop-filter: blur(2px); }
-.assistant { width: min(460px, 100vw); height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; display: flex; flex-direction: column; border: 0; background: var(--color-background-surface); color: var(--color-text-primary); box-shadow: -18px 0 50px rgba(43,29,24,.18); }
-.assistant header { padding: 24px; display: grid; grid-template-columns: 28px 1fr 34px; gap: 12px; align-items: center; border-bottom: 1px solid var(--color-border-subtle); color: var(--color-action-primary); }
-.assistant header p { margin: 0; color: var(--color-action-primary-strong); font-size: .59rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-.assistant h2 { margin: 3px 0 0; color: var(--color-text-primary); font-family: var(--font-family-display); font-size: 1.75rem; font-weight: 520; }
-.assistant header button { width: 34px; height: 34px; display: grid; place-items: center; border: 0; background: transparent; color: var(--color-text-primary); cursor: pointer; }
-.assistantBody { flex: 1; padding: 24px; }
-.context { margin: 0; padding: 16px; background: var(--color-background-panel-subtle); color: var(--color-text-secondary); font-size: .73rem; line-height: 1.55; }
-.context strong { display: block; margin-bottom: 3px; color: var(--color-text-primary); }
-.assistantBody h3 { margin: 30px 0 12px; font-family: var(--font-family-display); font-size: 1.4rem; font-weight: 520; }
-.assistantBody > button { width: 100%; min-height: 50px; padding: 0 14px; display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--color-border-subtle); border-bottom: 0; background: transparent; color: var(--color-text-primary); cursor: pointer; font-size: .75rem; font-weight: 700; }
-.assistantBody > button:last-child { border-bottom: 1px solid var(--color-border-subtle); }
-.assistant form { margin: 0 20px; padding: 6px 6px 6px 14px; display: flex; border: 1px solid var(--color-border-subtle); background: var(--color-background-page); }
-.assistant form input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--color-text-primary); }
-.assistant form button { width: 42px; height: 42px; display: grid; place-items: center; border: 0; background: var(--color-action-primary); color: var(--color-text-on-accent); }
-.assistant footer { padding: 12px 20px 20px; color: var(--color-text-secondary); font-size: .6rem; }
 
 @media (max-width: 900px) {
   .header { height: 64px; padding: 0 20px; grid-template-columns: 1fr auto; }
@@ -97,8 +81,6 @@
   .mobileBar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; min-height: 72px; padding: 10px 14px max(10px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: 48px 1fr 48px; gap: 9px; border-top: 1px solid var(--color-border-subtle); background: color-mix(in srgb, var(--color-background-surface) 94%, transparent); backdrop-filter: blur(12px); }
   .mobileBar button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--color-border-subtle); background: var(--color-background-surface); color: var(--color-text-primary); font-size: .74rem; font-weight: 800; }
   .mobileBar button:nth-child(2) { background: var(--color-action-primary); border-color: var(--color-action-primary); color: var(--color-text-on-accent); }
-  .assistantLayer { align-items: flex-end; }
-  .assistant { width: 100%; height: min(82vh, 690px); border-radius: 18px 18px 0 0; }
 }
 
 @media (max-width: 520px) {

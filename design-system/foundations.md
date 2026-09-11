@@ -40,9 +40,12 @@ Keep food photography natural; do not darken images or add a brown overlay globa
 
 ## Typography
 
-- **Display:** Newsreader. Use for page titles, section titles and recipe titles.
+- **Display:** Newsreader. Use for English and Spanish page titles, section titles and
+  recipe titles. Ukrainian uses Literata through the `displayCyrillic` semantic token:
+  it has Ukrainian glyph coverage and retains the editorial character of the display role.
 - **Body:** Manrope. Use for navigation, controls, ingredients, instructions and metadata.
-- Display text may use italic Newsreader for a single phrase of editorial emphasis.
+- Display text may use italic Newsreader or Literata, according to locale, for a single
+  phrase of editorial emphasis.
 - Body copy starts at 16px. Regularly used controls and labels should be at least 14px;
   12px is reserved for compact supporting metadata.
 - Use sentence case. Uppercase is limited to short eyebrows and evidence labels.
