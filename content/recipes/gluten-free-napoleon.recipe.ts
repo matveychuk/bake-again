@@ -301,7 +301,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 450, unit: "g" },
+          quantity: { base: { kind: "exact", value: 450, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "tapioca-dough",
@@ -315,7 +315,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 80, unit: "g" },
+          quantity: { base: { kind: "exact", value: 80, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "corn-starch-dough",
@@ -329,7 +329,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 40, unit: "g" },
+          quantity: { base: { kind: "exact", value: 40, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "xanthan",
@@ -343,7 +343,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 3, unit: "g" },
+          quantity: { base: { kind: "exact", value: 3, unit: "g" }, shopping: { mode: "base" } },
           scaling: { kind: "linear", precision: 0.1, rounding: "nearest" },
           condition: {
             uk: "лише якщо її немає у складі суміші",
@@ -363,7 +363,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 8, unit: "g" },
+          quantity: { base: { kind: "exact", value: 8, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "salt-dough",
@@ -373,7 +373,7 @@ export const glutenFreeNapoleonRecipe = {
               name: { uk: "сіль", en: "salt", es: "sal" },
             },
           ],
-          amount: { kind: "exact", value: 0.25, unit: "tsp" },
+          quantity: { base: { kind: "exact", value: 0.25, unit: "tsp" }, shopping: { mode: "base" } },
           scaling: { kind: "fixed" },
         },
         {
@@ -384,7 +384,7 @@ export const glutenFreeNapoleonRecipe = {
               name: { uk: "цукор", en: "sugar", es: "azúcar" },
             },
           ],
-          amount: { kind: "exact", value: 1, unit: "tbsp" },
+          quantity: { base: { kind: "exact", value: 1, unit: "tbsp" }, shopping: { mode: "base" } },
         },
         {
           id: "butter-dough",
@@ -398,7 +398,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 120, unit: "g" },
+          quantity: { base: { kind: "exact", value: 120, unit: "g" }, shopping: { mode: "base" } },
           preparation: {
             uk: "холодне, нарізати кубиками",
             en: "cold, cut into cubes",
@@ -417,7 +417,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 50, unit: "g" },
+          quantity: { base: { kind: "exact", value: 50, unit: "g" }, shopping: { mode: "base" } },
           provenance: {
             state: "repeatedlyVerified",
             sourceIds: ["author-update"],
@@ -445,7 +445,7 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           choose: 1,
-          amount: { kind: "exact", value: 250, unit: "g" },
+          quantity: { base: { kind: "exact", value: 250, unit: "g" }, shopping: { mode: "base" } },
           provenance: {
             state: "authorGuidance",
             sourceIds: ["archive-recipe"],
@@ -460,7 +460,7 @@ export const glutenFreeNapoleonRecipe = {
               name: { uk: "яйця", en: "eggs", es: "huevos" },
             },
           ],
-          amount: { kind: "exact", value: 2, unit: "piece" },
+          quantity: { base: { kind: "exact", value: 2, unit: "piece" }, shopping: { mode: "base" } },
           scaling: { kind: "discrete", increment: 1, rounding: "manual" },
         },
         {
@@ -475,7 +475,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 1, unit: "tbsp" },
+          quantity: { base: { kind: "exact", value: 1, unit: "tbsp" }, shopping: { mode: "base" } },
         },
         {
           id: "cold-water",
@@ -485,7 +485,7 @@ export const glutenFreeNapoleonRecipe = {
               name: { uk: "холодна вода", en: "cold water", es: "agua fría" },
             },
           ],
-          amount: { kind: "range", min: 30, max: 70, unit: "ml" },
+          quantity: { base: { kind: "range", min: 30, max: 70, unit: "ml" }, shopping: { mode: "base" } },
           scaling: { kind: "range", precision: 5, rounding: "nearest" },
           qualifier: {
             uk: "за потреби",
@@ -516,7 +516,7 @@ export const glutenFreeNapoleonRecipe = {
               name: { uk: "молоко", en: "milk", es: "leche" },
             },
           ],
-          amount: { kind: "exact", value: 2500, unit: "ml" },
+          quantity: { base: { kind: "exact", value: 2500, unit: "ml" }, shopping: { mode: "base" } },
         },
         {
           id: "eggs-custard",
@@ -526,7 +526,7 @@ export const glutenFreeNapoleonRecipe = {
               name: { uk: "яйця", en: "eggs", es: "huevos" },
             },
           ],
-          amount: { kind: "exact", value: 2, unit: "piece" },
+          quantity: { base: { kind: "exact", value: 2, unit: "piece" }, shopping: { mode: "base" } },
           scaling: { kind: "discrete", increment: 1, rounding: "manual" },
         },
         {
@@ -541,7 +541,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 3, unit: "piece" },
+          quantity: { base: { kind: "exact", value: 3, unit: "piece" }, shopping: { mode: "base" } },
           scaling: { kind: "discrete", increment: 1, rounding: "manual" },
         },
         {
@@ -552,7 +552,7 @@ export const glutenFreeNapoleonRecipe = {
               name: { uk: "цукор", en: "sugar", es: "azúcar" },
             },
           ],
-          amount: { kind: "exact", value: 410, unit: "g" },
+          quantity: { base: { kind: "exact", value: 410, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "corn-starch-custard",
@@ -566,7 +566,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 170, unit: "g" },
+          quantity: { base: { kind: "exact", value: 170, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "tapioca-custard",
@@ -580,7 +580,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 20, unit: "g" },
+          quantity: { base: { kind: "exact", value: 20, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "butter-custard",
@@ -594,7 +594,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "range", min: 90, max: 100, unit: "g" },
+          quantity: { base: { kind: "range", min: 90, max: 100, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "vanilla-sugar-custard",
@@ -608,7 +608,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "range", min: 16, max: 24, unit: "g" },
+          quantity: { base: { kind: "range", min: 16, max: 24, unit: "g" }, shopping: { mode: "base" } },
           scaling: { kind: "discrete", increment: 8, rounding: "manual" },
           qualifier: {
             uk: "2–3 пакетики по 8 г",
@@ -629,7 +629,7 @@ export const glutenFreeNapoleonRecipe = {
               name: { uk: "сіль", en: "salt", es: "sal" },
             },
           ],
-          amount: { kind: "exact", value: 1, unit: "pinch" },
+          quantity: { base: { kind: "exact", value: 1, unit: "pinch" }, shopping: { mode: "base" } },
           scaling: { kind: "fixed" },
         },
       ],
@@ -650,7 +650,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "range", min: 120, max: 150, unit: "g" },
+          quantity: { base: { kind: "range", min: 120, max: 150, unit: "g" }, shopping: { mode: "base" } },
           scaling: {
             kind: "manual",
             reason: {
@@ -672,7 +672,7 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          amount: { kind: "range", min: 30, max: 50, unit: "g" },
+          quantity: { base: { kind: "range", min: 30, max: 50, unit: "g" }, shopping: { mode: "base" } },
           scaling: {
             kind: "manual",
             reason: {

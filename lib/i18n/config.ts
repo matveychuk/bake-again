@@ -4,7 +4,7 @@ export const supportedLocales = recipeLocales;
 
 export type AppLocale = RecipeLocale;
 
-export const defaultLocale: AppLocale = 'en';
+export const defaultLocale: AppLocale = 'uk';
 
 export const localeMetadata: Record<
   AppLocale,

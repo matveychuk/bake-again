@@ -5,9 +5,9 @@ export const lazyDumplingsRecipe = {
   source: { file: 'docs/reference/recipe-inventory.xlsx', locator: 'Recipe Archive · Ліниві вареники' },
   completeness: 'incompleteSource', beforeStart: ['Let the mixed dough rest for 15–30 minutes.'],
   ingredientSections: [{ id: 'dumplings', title: 'Dumplings', ingredients: [
-    { id: 'cottage-cheese', name: 'Cottage cheese', amount: '2 packs' }, { id: 'eggs', name: 'Eggs', amount: '2' },
-    { id: 'sugar', name: 'Sugar', amount: '3 tbsp' }, { id: 'flour', name: 'Schär Mix B Bread flour', amount: '90 g' },
-    { id: 'starch', name: 'Tapioca or corn starch', amount: '7 g', note: 'Choose one.' },
+    { id: 'cottage-cheese', name: 'Cottage cheese', quantity: { base: { kind: 'exact', value: 2, unit: 'packet' }, shopping: { mode: 'base' } } }, { id: 'eggs', name: 'Eggs', quantity: { base: { kind: 'exact', value: 2, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } },
+    { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 3, unit: 'tbsp' }, shopping: { mode: 'base' } } }, { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 90, unit: 'g' }, shopping: { mode: 'base' } } },
+    { id: 'starch', name: 'Tapioca or corn starch', quantity: { base: { kind: 'exact', value: 7, unit: 'g' }, shopping: { mode: 'base' } }, note: 'Choose one.' },
   ] }],
   steps: [
     { id: 'mix-wet', title: 'Mix cottage cheese, eggs and sugar', body: 'Combine until the mixture is even.' },

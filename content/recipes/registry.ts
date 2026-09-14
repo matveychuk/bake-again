@@ -16,7 +16,7 @@ import { recipeInventory } from './inventory.ts';
 import { lazyDumplingsRecipe } from './lazy-dumplings.recipe.ts';
 import { pruneCakeRecipe } from './prune-cake.recipe.ts';
 import type { RecipeDraft } from './recipe.types.ts';
-import type { Duration, Quantity } from './recipe.types.ts';
+import type { Duration } from './recipe.types.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
 import { getUiMessages } from '../../lib/i18n/messages.ts';
 import type {
@@ -75,12 +75,6 @@ export function getRecipeDocument(recipeId: string): RecipeDocument | null {
   return recipeDocuments.find((document) => document.recipe.id === recipeId) ?? null;
 }
 
-function formatQuantity(locale: AppLocale, quantity: Quantity | null): string {
-  if (!quantity) return getUiMessages(locale).personal.asNeeded;
-  if (quantity.kind === 'exact') return `${quantity.value} ${quantity.unit}`;
-  return `${quantity.min}–${quantity.max} ${quantity.unit}`;
-}
-
 function formatDuration(locale: AppLocale, duration: Duration): string {
   const unit = duration.unit === 'minute' ? 'min' : duration.unit === 'hour' ? 'hr' : 'sec';
   if (duration.kind === 'exact') return `${duration.value} ${unit}`;
@@ -100,7 +94,7 @@ function detailedRecipeContent(recipe: RecipeDraft, locale: AppLocale): Structur
       ingredients: section.lines.map((line) => ({
         id: line.id,
         name: line.options[0].name[locale],
-        amount: formatQuantity(locale, line.amount),
+        quantity: line.quantity,
         optional: line.optional,
         note: [line.preparation?.[locale], line.qualifier?.[locale], line.condition?.[locale]]
           .filter(Boolean)
@@ -131,7 +125,20 @@ export function getRecipeContent(recipeId: string, locale: AppLocale = 'en'): St
   if (document.kind === 'detailed') return detailedRecipeContent(document.recipe, locale);
   if (locale === 'en') return document.recipe;
   const translation = document.recipe.translations?.[locale];
-  if (translation) return translation;
+  if (translation) {
+    // Text is localized, but quantities remain the one source-of-truth record.
+    // This prevents a translated display string from becoming a second numeric model.
+    return {
+      ...translation,
+      ingredientSections: translation.ingredientSections.map((section, sectionIndex) => ({
+        ...section,
+        ingredients: section.ingredients.map((ingredient, ingredientIndex) => ({
+          ...ingredient,
+          quantity: document.recipe.ingredientSections[sectionIndex]?.ingredients[ingredientIndex]?.quantity ?? ingredient.quantity,
+        })),
+      })),
+    };
+  }
   return {
     completeness: 'incompleteSource',
     ingredientSections: [],

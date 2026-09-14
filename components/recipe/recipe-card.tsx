@@ -38,34 +38,38 @@ export function RecipeCard({ recipe }: { recipe: RecipeCardData }) {
         />
       </a>
       <div className="recipe-card-header">
-        <div>
-          <p className="recipe-eyebrow">{recipe.eyebrow}</p>
-          <h3>{recipe.title}</h3>
-        </div>
+        <a aria-labelledby={`recipe-card-title-${recipe.id}`} className="recipe-card-link" href={recipe.href}>
+          <div>
+            <p className="recipe-eyebrow">{recipe.eyebrow}</p>
+            <h3 id={`recipe-card-title-${recipe.id}`}>{recipe.title}</h3>
+          </div>
+        </a>
         {isSaveableRecipeId(recipe.id) && <SaveRecipeControl locale={recipe.locale ?? 'en'} recipeId={recipe.id} title={recipe.title} />}
       </div>
-      <div className="recipe-meta">
-        <span>
-          <Clock3 aria-hidden="true" size={15} strokeWidth={1.7} />
-          {recipe.detail}
-        </span>
-        <span
-          className={`recipe-status${isTested ? ' recipe-status--tested' : ''}`}
-          aria-label={(isTested ? messages.a11y.recipeStatus : messages.a11y.recipeRecordStatus)(recipe.status, recipe.statusDetail)}
-        >
+      <a className="recipe-card-meta-link" href={recipe.href}>
+        <div className="recipe-meta">
+          <span>
+            <Clock3 aria-hidden="true" size={15} strokeWidth={1.7} />
+            {recipe.detail}
+          </span>
+          <span
+            className={`recipe-status${isTested ? ' recipe-status--tested' : ''}`}
+            aria-label={(isTested ? messages.a11y.recipeStatus : messages.a11y.recipeRecordStatus)(recipe.status, recipe.statusDetail)}
+          >
             <span className="recipe-status__badge">
               {isTested && <span aria-hidden="true">
                 <Check size={12} strokeWidth={2.4} />
               </span>}
-            <strong>{recipe.status}</strong>
+              <strong>{recipe.status}</strong>
+            </span>
+            {recipe.statusDetail && (
+              <small className="recipe-status__detail">
+                <span aria-hidden="true">·</span> {recipe.statusDetail}
+              </small>
+            )}
           </span>
-          {recipe.statusDetail && (
-            <small className="recipe-status__detail">
-              <span aria-hidden="true">·</span> {recipe.statusDetail}
-            </small>
-          )}
-        </span>
-      </div>
+        </div>
+      </a>
     </article>
   );
 }

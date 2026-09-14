@@ -9,7 +9,6 @@ import { glutenFreeNapoleonRecipe } from '@/content/recipes/gluten-free-napoleon
 import { formatQuantity } from '@/content/recipes/napoleon-configuration';
 import type { BatchScaleFactor, IngredientSection, RecipeDraft } from '@/content/recipes/recipe.types';
 import type { AppLocale } from '@/lib/i18n/config';
-import { getUiMessages } from '@/lib/i18n/messages';
 import { AssistantTrigger } from './recipe-assistant';
 import { useRecipeConfiguration } from './recipe-configuration';
 import styles from './recipe.module.css';
@@ -138,7 +137,7 @@ export function RecipeAdjuster({ locale }: { locale: AppLocale }) {
 
       <section className={styles.ingredients} aria-labelledby="ingredients-title">
         <RecipeIngredientHeading
-          action={<NapoleonIngredientsControl locale={locale} recipe={recipe} triggerLabel={getUiMessages(locale).personal.addAll} />}
+          action={<NapoleonIngredientsControl locale={locale} recipe={recipe} />}
           eyebrow={status}
           title="Ingredients"
         />
@@ -160,7 +159,7 @@ export function RecipeAdjuster({ locale }: { locale: AppLocale }) {
                   checked={checkedIngredients.includes(line.id)}
                   onCheckedChange={() => toggleIngredient(line.id)}
                 />
-                <span className={styles.amount}>{formatQuantity(calculated?.amount ?? line.amount)}</span>
+                <span className={styles.amount}>{formatQuantity(calculated?.amount ?? line.quantity.base)}</span>
                 <span>
                   <span>{name}</span>
                   {calculated?.requiresResolution && <small>Resolve this quantity before Cook Mode</small>}

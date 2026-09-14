@@ -7,17 +7,17 @@ export const fruitSpongeRollRecipe = {
   beforeStart: ['Line a baking tray with parchment.', 'Roll the sponge while warm, then cool before filling.'],
   ingredientSections: [
     { id: 'sponge', title: 'Sponge', ingredients: [
-      { id: 'eggs', name: 'Eggs', amount: '5' }, { id: 'sugar', name: 'Sugar', amount: '100 g' },
-      { id: 'salt', name: 'Salt', amount: 'A little' }, { id: 'oil', name: 'Oil', amount: '35 ml' },
-      { id: 'water', name: 'Water', amount: '35 ml' }, { id: 'flour', name: 'Schär Mix B Bread flour', amount: '120 g' },
+      { id: 'eggs', name: 'Eggs', quantity: { base: { kind: 'exact', value: 5, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } }, { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 100, unit: 'g' }, shopping: { mode: 'base' } } },
+      { id: 'salt', name: 'Salt', quantity: { base: null, equivalent: { kind: 'exact', value: 1, unit: 'pinch' }, shopping: { mode: 'nameOnly' } } }, { id: 'oil', name: 'Oil', quantity: { base: { kind: 'exact', value: 35, unit: 'ml' }, shopping: { mode: 'base' } } },
+      { id: 'water', name: 'Water', quantity: { base: { kind: 'exact', value: 35, unit: 'ml' }, shopping: { mode: 'base' } } }, { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 120, unit: 'g' }, shopping: { mode: 'base' } } },
     ] },
     { id: 'cream', title: 'Cream', ingredients: [
-      { id: 'cream', name: 'Whipping cream', amount: '250 ml' }, { id: 'sugar', name: 'Sugar', amount: '80 g' },
-      { id: 'mascarpone', name: 'Mascarpone', amount: '250 g' },
+      { id: 'cream', name: 'Whipping cream', quantity: { base: { kind: 'exact', value: 250, unit: 'ml' }, shopping: { mode: 'base' } } }, { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 80, unit: 'g' }, shopping: { mode: 'base' } } },
+      { id: 'mascarpone', name: 'Mascarpone', quantity: { base: { kind: 'exact', value: 250, unit: 'g' }, shopping: { mode: 'base' } } },
     ] },
     { id: 'filling', title: 'Filling and decoration', ingredients: [
-      { id: 'jam', name: 'Blueberry jam', amount: 'To spread' }, { id: 'strawberries', name: 'Strawberries', amount: 'To decorate' },
-      { id: 'mint', name: 'Mint', amount: 'To decorate', optional: true }, { id: 'almonds', name: 'Almonds', amount: 'To decorate', optional: true },
+      { id: 'jam', name: 'Blueberry jam', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'strawberries', name: 'Strawberries', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
+      { id: 'mint', name: 'Mint', quantity: { base: null, shopping: { mode: 'nameOnly' } }, optional: true }, { id: 'almonds', name: 'Almonds', quantity: { base: null, shopping: { mode: 'nameOnly' } }, optional: true },
     ] },
   ],
   steps: [

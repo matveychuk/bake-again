@@ -1,4 +1,5 @@
 .drawer {
+  container-type: inline-size;
   width: min(var(--layout-assistant-drawer), 100%);
   height: 100dvh;
   max-height: 100dvh;
@@ -30,6 +31,10 @@
 
 .heading {
   min-width: 0;
+}
+
+.kicker {
+  overflow-wrap: anywhere;
 }
 
 .kicker,
@@ -310,5 +315,33 @@
 @media (prefers-reduced-motion: reduce) {
   .drawer {
     transition-duration: 0ms;
+  }
+}
+
+/* Text enlargement can leave too little space for a fixed header/composer.
+   Scroll the complete drawer in that case so every control remains reachable. */
+@container (max-width: 24em) {
+  .header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .mark {
+    display: none;
+  }
+
+  .drawer [data-slot='drawer-content'] {
+    overflow-y: auto;
+  }
+
+  .header,
+  .composer,
+  .footer {
+    flex-shrink: 0;
+  }
+
+  .body {
+    flex: none;
+    overflow-y: visible;
   }
 }

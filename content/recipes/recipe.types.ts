@@ -44,12 +44,28 @@ export type Unit =
   | "piece"
   | "tsp"
   | "tbsp"
+  | "cup"
   | "packet"
   | "pinch";
 
 export type Quantity =
   | { kind: "exact"; value: number; unit: Unit }
   | { kind: "range"; min: number; max: number; unit: Unit };
+
+/**
+ * The one canonical ingredient quantity model. `base` is the only amount that
+ * can be bought or aggregated. `equivalent` is an explicitly recorded kitchen
+ * measure and is deliberately excluded from shopping.
+ */
+export interface IngredientQuantity {
+  base: Quantity | null;
+  equivalent?: Quantity | null;
+  shopping: {
+    mode: "base" | "nameOnly";
+    increment?: number;
+    rounding?: "up";
+  };
+}
 
 export type Duration =
   | { kind: "exact"; value: number; unit: "second" | "minute" | "hour" }
@@ -70,7 +86,7 @@ export interface IngredientLine {
   id: string;
   options: [IngredientOption, ...IngredientOption[]];
   choose?: 1;
-  amount: Quantity | null;
+  quantity: IngredientQuantity;
   optional?: boolean;
   preparation?: LocalizedText;
   qualifier?: LocalizedText;
@@ -217,6 +233,8 @@ export interface ConfigurationWarning {
 
 export interface CalculatedIngredientAmount {
   ingredientLineId: string;
+  /** Scaled kitchen-only equivalence; never a shopping quantity. */
+  equivalent?: Quantity | null;
   amount: Quantity | null;
   rule: IngredientScalingRule["kind"];
   requiresResolution: boolean;

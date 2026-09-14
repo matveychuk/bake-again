@@ -3,11 +3,12 @@ import Image from 'next/image';
 import { ArrowRight, Search } from 'lucide-react';
 import { Eyebrow } from '@/components/foundations/eyebrow';
 import type { AppLocale } from '@/lib/i18n/config';
-import { getLocalizedRecipePath, localeRecipesPath } from '@/lib/i18n/routes';
+import { getLocalizedRecipePath, localeHomePath, localeRecipesPath } from '@/lib/i18n/routes';
 import { getUiMessages } from '@/lib/i18n/messages';
 
 export function HomeHero({ locale }: { locale: AppLocale }) {
   const recipesPath = localeRecipesPath(locale);
+  const homePath = localeHomePath(locale);
   const napoleonPath = getLocalizedRecipePath('gluten-free-napoleon', locale) ?? recipesPath;
   const messages = getUiMessages(locale).home;
 
@@ -26,7 +27,7 @@ export function HomeHero({ locale }: { locale: AppLocale }) {
           {messages.intro}
         </p>
 
-        <form className="search-form" action={recipesPath}>
+        <form className="search-form" action={homePath}>
           <Search aria-hidden="true" size={21} strokeWidth={1.7} />
           <label className="sr-only" htmlFor="recipe-search">{messages.searchLabel}</label>
           <input id="recipe-search" name="q" type="search" placeholder={messages.searchPlaceholder} />

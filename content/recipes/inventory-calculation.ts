@@ -1,4 +1,5 @@
 import type { StructuredIngredient } from './source-recipe.types';
+import type { Quantity } from './recipe.types';
 
 export type ParsedInventoryAmount = {
   minimum: number;
@@ -50,7 +51,14 @@ export function scaleInventoryAmount(amount: string, factor: number) {
 export function findScalingAnchor(ingredients: StructuredIngredient[]) {
   const flour = ingredients.find((ingredient) => ingredient.id === 'flour');
   if (!flour) return null;
-  const amount = parseInventoryAmount(flour.amount);
-  if (!amount || amount.maximum !== null || !amount.unit) return null;
-  return { ingredient: flour, amount };
+  const amount = flour.quantity.base;
+  if (!amount || amount.kind !== 'exact') return null;
+  return { ingredient: flour, amount: { minimum: amount.value, maximum: null, unit: amount.unit } };
+}
+
+export function scaleStructuredQuantity(amount: Quantity | null, factor: number): Quantity | null {
+  if (!amount) return null;
+  return amount.kind === 'exact'
+    ? { ...amount, value: amount.value * factor }
+    : { ...amount, min: amount.min * factor, max: amount.max * factor };
 }

@@ -15,11 +15,14 @@ import { NumberedSectionTitle } from '@/components/foundations/numbered-section-
 import { AssistantBlocks, AssistantProvider, AssistantTrigger } from '@/components/assistant';
 import type { AssistantBlock } from '@/lib/assistant/contracts';
 import { EvidenceBadge, type EvidenceStatus } from '@/components/recipe/evidence-badge';
+import { RecipeIngredientChecklist } from '@/components/recipe/recipe-ingredient-checklist';
+import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { LanguageSwitcher } from '@/components/site/language-switcher';
 import { BakeCheckbox } from '@/components/ui/bake-checkbox';
 import { ActionReviewExample } from '@/components/assistant/action-review-example';
 import { Wordmark } from '@/components/site/wordmark';
 import { glutenFreeNapoleonRecipe } from '@/content/recipes/gluten-free-napoleon.recipe';
+import { recipeDetailTitles } from '@/content/recipes/catalog-locales';
 import styles from './design-system.module.css';
 
 export const metadata: Metadata = {
@@ -197,20 +200,29 @@ export default function DesignSystemPage() {
             </div>
 
             <div className={styles.componentBlock}>
-              <div className={styles.componentLabel}><strong>Recipe card</strong><span>Food, decision facts, concise evidence</span></div>
+              <div className={styles.componentLabel}><strong>Recipe card</strong><span>Food and lower content open the recipe; save stays separate</span></div>
               <article className={styles.recipeExample}>
-                <div className={styles.recipeImage}>
+                <a className={styles.recipeImage} href="/recipes/napoleon">
                   <Image src="/images/napoleon.png" alt="Napoleon cake with many thin layers" fill sizes="420px" />
-                </div>
+                </a>
                 <div className={styles.recipeCopy}>
-                  <div><p>Celebration · prepare ahead</p><h3>Napoleon cake</h3></div>
-                  <button type="button" aria-label="Save Napoleon cake"><Bookmark size={19} /></button>
+                  <a aria-labelledby="ds-recipe-card-title" className={styles.recipeLink} href="/recipes/napoleon"><div><p>Celebration · prepare ahead</p><h3 id="ds-recipe-card-title">Napoleon cake</h3></div></a>
+                  <button type="button" aria-label="Save Napoleon cake" onClick={(event) => event.stopPropagation()}><Bookmark size={19} /></button>
                 </div>
-                <div className={styles.recipeFacts}>
+                <a aria-label="Open Napoleon cake" className={styles.recipeFactsLink} href="/recipes/napoleon"><div className={styles.recipeFacts}>
                   <span><Clock3 size={15} />12 layers · 28 cm</span>
                   <span><StatusBadge status="tested" /> · Schär Mix B</span>
-                </div>
+                </div></a>
               </article>
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}><strong>Recipe detail title</strong><span>Explicit gluten-free message with editorial dish-name emphasis</span></div>
+              <RecipeDetailTitle
+                className={styles.recipeDetailTitleExample}
+                locale="uk"
+                title={recipeDetailTitles.crepes.uk}
+              />
             </div>
 
             <div className={styles.componentBlock} id="assistant-actions">
@@ -219,11 +231,37 @@ export default function DesignSystemPage() {
             </div>
 
             <div className={styles.componentBlock}>
-              <div className={styles.componentLabel}><strong>Personal state</strong><span>Explicit save state and practical shopping row</span></div>
+              <div className={styles.componentLabel}><strong>Personal state</strong><span>Explicit save state, shopping review and practical shopping row</span></div>
               <div className={styles.personalExample}>
                 <button className={styles.savedControl} type="button" aria-pressed="true" aria-label="Remove Napoleon cake from Saved"><Bookmark size={19} fill="currentColor" /></button>
                 <div className={styles.shoppingExample}><BakeCheckbox aria-label="Mark butter as bought" defaultChecked /><strong>Butter</strong><span>180 g</span><small>From Napoleon cake, Crinkle Cookies</small><button aria-label="Remove butter"><Trash2 size={16} /></button></div>
-                <button className={styles.secondaryButton} type="button"><ShoppingBag size={16} /> Review ingredients</button>
+                <div className={styles.shoppingFlowExample}>
+                  <button className={styles.primaryButton} type="button"><ShoppingBag size={16} /> Add ingredients to shopping list</button>
+                  <div className={styles.shoppingReviewExample}>
+                    <strong>Choose ingredients</strong>
+                    <p>Ingredients not yet in your list are selected. Uncheck anything you already have at home.</p>
+                    <div className={styles.shoppingReviewLine}><BakeCheckbox aria-label="Add Schär Mix B Bread flour mix to the shopping list" defaultChecked /> <span>450 g · Schär Mix B Bread flour mix</span></div>
+                    <div className={styles.shoppingReviewLine}><BakeCheckbox aria-label="Add tapioca starch to the shopping list" defaultChecked /> <span>80 g · Tapioca starch</span></div>
+                    <footer><span>Selected to add: 2</span><button className={styles.primaryButton} type="button">Add to shopping list · 2</button></footer>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}><strong>Ingredient amounts</strong><span>Primary kitchen measure with an optional secondary equivalent</span></div>
+              <div className={styles.ingredientExample}>
+                <RecipeIngredientChecklist
+                  sections={[{
+                    id: 'dual-measure-example',
+                    title: 'Crepe batter',
+                    ingredients: [{
+                      id: 'flour-example',
+                      name: 'Schär Mix B Bread flour',
+                      quantity: { base: { kind: 'exact', value: 140, unit: 'g' }, equivalent: { kind: 'exact', value: 6, unit: 'tbsp' }, shopping: { mode: 'base' } },
+                    }],
+                  }]}
+                />
               </div>
             </div>
 
@@ -235,7 +273,7 @@ export default function DesignSystemPage() {
             </div>
 
             <div className={styles.componentBlock}>
-              <div className={styles.componentLabel}><strong>Contextual assistant</strong><span>Shared Recipe and Cook drawer · trusted context · explicit evidence states</span></div>
+              <div className={styles.componentLabel}><strong>Contextual assistant</strong><span>Shared Recipe and Cook drawer · loading announcement · Close focus after submit/review · localized offline retry · scrollable at 200% text</span></div>
               <div className={styles.assistantExample}>
                 <AssistantProvider
                   recipeId={glutenFreeNapoleonRecipe.id}

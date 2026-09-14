@@ -1,0 +1,9 @@
+.title span,
+.title em {
+  display: block;
+}
+
+.title em {
+  color: var(--color-action-primary);
+  font-weight: 360;
+}

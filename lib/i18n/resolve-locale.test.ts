@@ -19,8 +19,8 @@ void test('ignores unsupported and zero-quality language entries', () => {
   );
 });
 
-void test('falls back to English when no supported language is available', () => {
-  assert.equal(resolveLocaleFromAcceptLanguage('pl-PL, de-DE;q=0.8'), 'en');
+void test('falls back to Ukrainian when no supported language is available', () => {
+  assert.equal(resolveLocaleFromAcceptLanguage('pl-PL, de-DE;q=0.8'), 'uk');
 });
 
 void test('matches browser languages by their supported base language', () => {

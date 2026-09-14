@@ -110,10 +110,12 @@ export function AssistantActionReview({
   proposal,
   context,
   onOpenScaling,
+  returnFocus,
 }: {
   proposal: ActionProposal;
   context: ActionContext;
   onOpenScaling: () => void;
+  returnFocus: () => HTMLElement | null;
 }) {
   const current = useRef({ context, onOpenScaling });
   useEffect(() => {
@@ -201,7 +203,7 @@ export function AssistantActionReview({
           if (!next) cancel();
         }}
       >
-        <DialogContent className={styles.dialog} showCloseButton={false}>
+        <DialogContent className={styles.dialog} showCloseButton={false} finalFocus={returnFocus}>
           <DialogHeader>
             <DialogTitle>{messages.title}</DialogTitle>
             <DialogDescription>{messages.suggestion}</DialogDescription>

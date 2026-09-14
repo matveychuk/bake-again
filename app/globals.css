@@ -466,6 +466,23 @@ html:lang(es) .hero h1 em {
 
 .recipe-card--wide .recipe-image img { object-position: 55% 52%; }
 
+.recipe-card-link {
+  min-width: 0;
+  display: block;
+  color: inherit;
+}
+
+.recipe-card-meta-link {
+  display: block;
+  color: inherit;
+}
+
+.recipe-card-link:focus-visible,
+.recipe-card-meta-link:focus-visible {
+  outline: 2px solid var(--color-action-primary);
+  outline-offset: 4px;
+}
+
 .recipe-card-header {
   margin-top: 19px;
   display: grid;
@@ -482,7 +499,7 @@ html:lang(es) .hero h1 em {
   line-height: 1.08;
 }
 
-.recipe-card-header button {
+.recipe-card-header > button {
   width: 42px;
   height: 42px;
   border: 1px solid var(--line);
@@ -495,7 +512,7 @@ html:lang(es) .hero h1 em {
   transition: border 180ms ease, background 180ms ease;
 }
 
-.recipe-card-header button:hover {
+.recipe-card-header > button:hover {
   border-color: var(--terracotta);
   background: var(--warm-white);
 }

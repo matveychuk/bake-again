@@ -6,7 +6,7 @@ import { personalStateRecipes } from '@/content/recipes/registry';
 import { getRecipeCatalog } from '@/content/recipes/catalog';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
-import { getLocalizedRecipePath, localeRecipesPath } from '@/lib/i18n/routes';
+import { getLocalizedRecipePath, localeHomePath, localeRecipesPath } from '@/lib/i18n/routes';
 import { readRecipeMemory, subscribeToRecipeMemory } from '@/lib/persistence/recipe-memory';
 import { SaveRecipeControl } from '@/components/recipe/save-recipe-control';
 import styles from './personal-state.module.css';
@@ -24,7 +24,7 @@ export function SavedRecipesPage({ locale }: { locale: AppLocale }) {
 
   return <section className={styles.page} aria-labelledby="saved-title">
     <div className={styles.heading}><p>Want to bake</p><h1 id="saved-title">{messages.savedTitle}</h1></div>
-    {recipes.length === 0 ? <div className={styles.empty}><p>{messages.savedEmpty}</p><a href={localeRecipesPath(locale)}>{messages.browseRecipes}</a></div> : <div className={styles.cards}>
+    {recipes.length === 0 ? <div className={styles.empty}><p>{messages.savedEmpty}</p><a href={`${localeHomePath(locale)}#recipes`}>{messages.browseRecipes}</a></div> : <div className={styles.cards}>
       {recipes.map((recipe) => {
         const localizedRecipe = personalStateRecipes.find((candidate) => candidate.id === recipe.id);
         const image = localizedRecipe?.media.find((media) => media.id === localizedRecipe.heroMediaId);

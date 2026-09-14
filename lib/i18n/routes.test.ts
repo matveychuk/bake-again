@@ -16,8 +16,12 @@ void test('preserves the same known recipe when a language changes', () => {
   );
 });
 
-void test('sends an unknown legacy recipe detail to the localized catalogue', () => {
-  assert.equal(getLocaleSwitchPath('/uk/recipes/banana-bread', 'en'), '/en/recipes');
+void test('sends an unknown legacy recipe detail to the localized home page', () => {
+  assert.equal(getLocaleSwitchPath('/uk/recipes/banana-bread', 'en'), '/en');
+});
+
+void test('sends the former localized catalogue to the localized home page', () => {
+  assert.equal(getLocaleSwitchPath('/uk/recipes', 'en'), '/en');
 });
 
 void test('preserves a Cook Mode suffix for a known recipe', () => {

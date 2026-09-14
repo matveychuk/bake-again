@@ -65,7 +65,7 @@ export function stripLocalePrefix(pathname: string): string {
 
 /**
  * Returns the equivalent localized path when it is known. Unknown recipe details
- * fall back to the localized catalogue rather than carrying an English-only slug
+ * fall back to the localized home page rather than carrying an English-only slug
  * into a different locale.
  */
 export function getLocaleSwitchPath(
@@ -84,11 +84,11 @@ export function getLocaleSwitchPath(
     const localizedPath = recipeId
       ? getLocalizedRecipePath(recipeId, targetLocale, cookSuffix)
       : null;
-    return localizedPath ?? localeRecipesPath(targetLocale);
+    return localizedPath ?? localeHomePath(targetLocale);
   }
 
   if (unlocalizedPath === '/' || unlocalizedPath === '') return localeHomePath(targetLocale);
-  if (unlocalizedPath === '/recipes') return localeRecipesPath(targetLocale);
+  if (unlocalizedPath === '/recipes') return localeHomePath(targetLocale);
 
   return `${localeHomePath(targetLocale)}${unlocalizedPath}`;
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { RecipePage } from '@/components/recipe/recipe-page';
 import { getInventoryRecipe } from '@/content/recipes/inventory';
-import { catalogLocaleCopy } from '@/content/recipes/catalog-locales';
+import { catalogLocaleCopy, recipeDetailTitles } from '@/content/recipes/catalog-locales';
 import { isAppLocale, localeMetadata, supportedLocales } from '@/lib/i18n/config';
 import { getPreviewRobots, getPublishableRecipeLocales, isRecipeLocalePublishable } from '@/lib/i18n/publication';
 import {
@@ -33,16 +33,20 @@ export async function generateMetadata({ params }: LocalizedRecipePageProps): Pr
   if (!recipe) {
     const legacyRecipe = getInventoryRecipe(slug);
     const copy = legacyRecipe ? catalogLocaleCopy[legacyRecipe.id] : null;
+    const detailTitle = legacyRecipe
+      ? recipeDetailTitles[legacyRecipe.id]?.[localeParam] ?? copy?.title[localeParam] ?? legacyRecipe.title
+      : null;
     return legacyRecipe
-      ? { title: `${copy?.title[localeParam] ?? legacyRecipe.title} — Bake Again`, description: copy?.summary[localeParam] ?? legacyRecipe.summary, robots: { index: false, follow: false }, openGraph: { title: `${copy?.title[localeParam] ?? legacyRecipe.title} — Bake Again`, description: copy?.summary[localeParam] ?? legacyRecipe.summary, locale: localeMetadata[localeParam].bcp47 } }
+      ? { title: `${detailTitle} — Bake Again`, description: copy?.summary[localeParam] ?? legacyRecipe.summary, robots: { index: false, follow: false }, openGraph: { title: `${detailTitle} — Bake Again`, description: copy?.summary[localeParam] ?? legacyRecipe.summary, locale: localeMetadata[localeParam].bcp47 } }
       : {};
   }
 
   const currentPath = getLocalizedRecipePath(recipe.id, localeParam)!;
   const isPublishable = isRecipeLocalePublishable(recipe, localeParam);
   const publishedLocales = getPublishableRecipeLocales(recipe);
+  const detailTitle = recipeDetailTitles[recipe.id]?.[localeParam] ?? recipe.title[localeParam];
   return {
-    title: `${recipe.title[localeParam]} — Bake Again`,
+    title: `${detailTitle} — Bake Again`,
     description: recipe.summary[localeParam],
     robots: getPreviewRobots(isPublishable),
     ...(isPublishable && {
@@ -57,7 +61,7 @@ export async function generateMetadata({ params }: LocalizedRecipePageProps): Pr
       },
     }),
     openGraph: {
-      title: `${recipe.title[localeParam]} — Bake Again`,
+      title: `${detailTitle} — Bake Again`,
       description: recipe.summary[localeParam],
       locale: localeMetadata[localeParam].bcp47,
     },

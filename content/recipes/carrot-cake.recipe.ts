@@ -7,11 +7,11 @@ export const carrotCakeRecipe = {
   beforeStart: ['This handwritten batch is noted as enough for three cakes.', 'Preheat the oven to 200°C.'],
   ingredientSections: [{
     id: 'cake', title: 'Carrot cake', ingredients: [
-      { id: 'carrots', name: 'Carrots', amount: '500–600 g' }, { id: 'oil', name: 'Oil', amount: '300 ml' },
-      { id: 'eggs', name: 'Eggs', amount: '8' }, { id: 'sugar', name: 'Sugar', amount: '300 g' },
-      { id: 'flour', name: 'Schär Mix B Bread flour', amount: '500 g' }, { id: 'baking-powder', name: 'Baking powder', amount: '16 g' },
-      { id: 'salt', name: 'Salt', amount: '4 g' }, { id: 'walnuts', name: 'Walnuts', amount: '300 g' },
-      { id: 'raisins', name: 'Raisins', amount: '250 g', note: 'Soak before using.' },
+      { id: 'carrots', name: 'Carrots', quantity: { base: { kind: 'range', min: 500, max: 600, unit: 'g' }, shopping: { mode: 'base' } } }, { id: 'oil', name: 'Oil', quantity: { base: { kind: 'exact', value: 300, unit: 'ml' }, shopping: { mode: 'base' } } },
+      { id: 'eggs', name: 'Eggs', quantity: { base: { kind: 'exact', value: 8, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } }, { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 300, unit: 'g' }, shopping: { mode: 'base' } } },
+      { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 500, unit: 'g' }, shopping: { mode: 'base' } } }, { id: 'baking-powder', name: 'Baking powder', quantity: { base: { kind: 'exact', value: 16, unit: 'g' }, shopping: { mode: 'base' } } },
+      { id: 'salt', name: 'Salt', quantity: { base: { kind: 'exact', value: 4, unit: 'g' }, shopping: { mode: 'base' } } }, { id: 'walnuts', name: 'Walnuts', quantity: { base: { kind: 'exact', value: 300, unit: 'g' }, shopping: { mode: 'base' } } },
+      { id: 'raisins', name: 'Raisins', quantity: { base: { kind: 'exact', value: 250, unit: 'g' }, shopping: { mode: 'base' } }, note: 'Soak before using.' },
     ],
   }],
   steps: [

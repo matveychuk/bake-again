@@ -1,7 +1,10 @@
+import type { IngredientQuantity } from './recipe.types.ts';
+
 export type StructuredIngredient = {
   id: string;
   name: string;
-  amount: string;
+  /** Canonical data, never a localized numeric string. */
+  quantity: IngredientQuantity;
   note?: string;
   optional?: boolean;
 };
@@ -19,6 +22,13 @@ export type StructuredRecipeStep = {
   meta?: string;
   checkpoint?: string;
   tip?: string;
+  media?: Array<{
+    id: string;
+    src: string;
+    alt: string;
+    title: string;
+    caption: string;
+  }>;
 };
 
 /**

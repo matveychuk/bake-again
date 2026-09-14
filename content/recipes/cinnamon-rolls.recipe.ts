@@ -5,11 +5,11 @@ export const cinnamonRollsRecipe = {
   source: { file: 'https://marikebol.com/2021/09/08/glutenvrije-cinnamon-rolls/', locator: 'External Schär Mix B reference · author recipe text not yet captured' },
   completeness: 'incompleteSource',
   ingredientSections: [{ id: 'draft-dough', title: 'Draft dough', ingredients: [
-    { id: 'flour', name: 'Schär Mix B Bread flour', amount: '500 g' }, { id: 'yeast', name: 'Dry yeast', amount: '9 g' },
-    { id: 'milk', name: 'Milk', amount: '400 ml', note: 'Lukewarm.' }, { id: 'sugar', name: 'Sugar', amount: '70 g' },
-    { id: 'butter', name: 'Butter', amount: '35 g', note: 'Melted.' }, { id: 'salt', name: 'Salt', amount: 'A pinch' },
+    { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 500, unit: 'g' }, shopping: { mode: 'base' } } }, { id: 'yeast', name: 'Dry yeast', quantity: { base: { kind: 'exact', value: 9, unit: 'g' }, shopping: { mode: 'base' } } },
+    { id: 'milk', name: 'Milk', quantity: { base: { kind: 'exact', value: 400, unit: 'ml' }, shopping: { mode: 'base' } }, note: 'Lukewarm.' }, { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 70, unit: 'g' }, shopping: { mode: 'base' } } },
+    { id: 'butter', name: 'Butter', quantity: { base: { kind: 'exact', value: 35, unit: 'g' }, shopping: { mode: 'base' } }, note: 'Melted.' }, { id: 'salt', name: 'Salt', quantity: { base: null, equivalent: { kind: 'exact', value: 1, unit: 'pinch' }, shopping: { mode: 'nameOnly' } } },
   ] }, { id: 'draft-filling', title: 'Draft filling', ingredients: [
-    { id: 'butter', name: 'Butter', amount: 'To confirm' }, { id: 'cinnamon', name: 'Ground cinnamon', amount: 'To confirm' }, { id: 'sugar', name: 'Sugar', amount: 'To confirm' },
+    { id: 'butter', name: 'Butter', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'cinnamon', name: 'Ground cinnamon', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'sugar', name: 'Sugar', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
   ] }],
   steps: [
     { id: 'draft-mix', title: 'Draft: mix and proof the dough', body: 'Mix the dough, then allow it to rise. Confirm the author’s liquid ratio and proofing cue before baking.' },

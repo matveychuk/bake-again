@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { RecipePage as RecipePageShell } from '@/components/recipe/recipe-page';
+import { recipeDetailTitles } from '@/content/recipes/catalog-locales';
 import { getInventoryRecipe, recipeInventory } from '@/content/recipes/inventory';
 
 type RecipePageProps = { params: Promise<{ slug: string }> };
@@ -14,7 +15,7 @@ export async function generateMetadata({ params }: RecipePageProps): Promise<Met
   const { slug } = await params;
   const recipe = getInventoryRecipe(slug);
   if (!recipe) return {};
-  return { title: `${recipe.title} — Bake Again`, description: recipe.summary };
+  return { title: `${recipeDetailTitles[recipe.id]?.en ?? recipe.title} — Bake Again`, description: recipe.summary };
 }
 
 export default async function RecipePage({ params }: RecipePageProps) {

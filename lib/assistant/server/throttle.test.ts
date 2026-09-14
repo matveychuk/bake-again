@@ -43,3 +43,21 @@ void test('enforces the daily session limit across minute windows', () => {
   assert.equal(limited.allowed, false);
   if (!limited.allowed) assert.ok(limited.retryAfterSeconds > 0);
 });
+
+void test('Retry-After covers every exhausted window, including concurrent requests', () => {
+  let now = 2_000_000;
+  const start = now;
+  const throttle = createMemoryAssistantThrottle(() => now);
+  for (let batch = 0; batch < 6; batch++) {
+    for (let index = 0; index < 5; index++) {
+      const lease = throttle.acquire('combined', null);
+      assert.equal(lease.allowed, true);
+      if (lease.allowed && !(batch === 5 && index === 4)) lease.release();
+    }
+    if (batch < 5) now += 60_001;
+  }
+  assert.deepEqual(throttle.acquire('combined', null), {
+    allowed: false,
+    retryAfterSeconds: Math.ceil((start + 86_400_000 - now) / 1_000),
+  });
+});

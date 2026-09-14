@@ -8,18 +8,21 @@ const unitLabels: Record<AppLocale, Record<Unit, { one: string; other: string }>
     g: { one: 'g', other: 'g' }, ml: { one: 'ml', other: 'ml' },
     piece: { one: 'pc', other: 'pcs' }, tsp: { one: 'tsp', other: 'tsp' },
     tbsp: { one: 'tbsp', other: 'tbsp' }, packet: { one: 'packet', other: 'packets' },
+    cup: { one: 'cup', other: 'cups' },
     pinch: { one: 'pinch', other: 'pinches' },
   },
   es: {
     g: { one: 'g', other: 'g' }, ml: { one: 'ml', other: 'ml' },
     piece: { one: 'ud.', other: 'uds.' }, tsp: { one: 'cdta.', other: 'cdtas.' },
     tbsp: { one: 'cda.', other: 'cdas.' }, packet: { one: 'sobre', other: 'sobres' },
+    cup: { one: 'taza', other: 'tazas' },
     pinch: { one: 'pizca', other: 'pizcas' },
   },
   uk: {
     g: { one: 'г', other: 'г' }, ml: { one: 'мл', other: 'мл' },
     piece: { one: 'шт.', other: 'шт.' }, tsp: { one: 'ч. л.', other: 'ч. л.' },
     tbsp: { one: 'ст. л.', other: 'ст. л.' }, packet: { one: 'пакет', other: 'пакетів' },
+    cup: { one: 'склянка', other: 'склянок' },
     pinch: { one: 'дрібка', other: 'дрібок' },
   },
 };

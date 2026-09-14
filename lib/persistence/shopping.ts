@@ -1,7 +1,9 @@
 import type { Quantity, Unit } from '../../content/recipes/recipe.types.ts';
 import { readStorageValue, subscribeToStorageKey, writeStorageValue, type StorageLike } from './storage.ts';
 
-export const shoppingStorageKey = 'bake-again:shopping:v1';
+/** v2 separates the persisted shopping representation from recipe display equivalents. */
+export const shoppingStorageKey = 'bake-again:shopping:v2';
+const legacyShoppingStorageKey = 'bake-again:shopping:v1';
 
 export type ShoppingSourceV1 = {
   recipeId: string;
@@ -22,7 +24,7 @@ export type ShoppingItemV1 = {
 };
 
 export type ShoppingV1 = {
-  schemaVersion: 1;
+  schemaVersion: 1 | 2;
   updatedAt: string;
   items: ShoppingItemV1[];
 };
@@ -30,11 +32,12 @@ export type ShoppingV1 = {
 export type ShoppingIngredientInput = {
   ingredientId: string;
   quantity: Quantity | null;
+  shopping?: { mode: 'base' | 'nameOnly'; increment?: number; rounding?: 'up' };
   source: ShoppingSourceV1;
 };
 
 const units: readonly Unit[] = ['g', 'ml', 'piece', 'tsp', 'tbsp', 'packet', 'pinch'];
-const emptyShopping = (): ShoppingV1 => ({ schemaVersion: 1, updatedAt: new Date(0).toISOString(), items: [] });
+const emptyShopping = (): ShoppingV1 => ({ schemaVersion: 2, updatedAt: new Date(0).toISOString(), items: [] });
 const isIsoDate = (value: unknown): value is string => typeof value === 'string' && !Number.isNaN(Date.parse(value));
 const isId = (value: unknown): value is string => typeof value === 'string' && /^[a-z0-9][a-z0-9-]{0,127}$/.test(value);
 const isUnit = (value: unknown): value is Unit => typeof value === 'string' && units.includes(value as Unit);
@@ -74,16 +77,22 @@ export function parseShopping(rawValue: string | null): ShoppingV1 | null {
     const value: unknown = JSON.parse(rawValue);
     if (!value || typeof value !== 'object') return null;
     const candidate = value as Record<string, unknown>;
-    if (candidate.schemaVersion !== 1 || !isIsoDate(candidate.updatedAt) || !Array.isArray(candidate.items)) return null;
+    if ((candidate.schemaVersion !== 1 && candidate.schemaVersion !== 2) || !isIsoDate(candidate.updatedAt) || !Array.isArray(candidate.items)) return null;
     const items = candidate.items.filter(isItem).slice(0, 1000);
-    return { schemaVersion: 1, updatedAt: candidate.updatedAt, items };
+    return { schemaVersion: 2, updatedAt: candidate.updatedAt, items };
   } catch {
     return null;
   }
 }
 
 export function readShopping(storage?: StorageLike | null): ShoppingV1 {
-  return parseShopping(readStorageValue(shoppingStorageKey, storage)) ?? emptyShopping();
+  const current = parseShopping(readStorageValue(shoppingStorageKey, storage));
+  if (current) return current;
+  const legacy = parseShopping(readStorageValue(legacyShoppingStorageKey, storage));
+  if (!legacy) return emptyShopping();
+  // v1 contains only base-like quantities, so retaining it is lossless.
+  persistShopping(legacy, storage);
+  return legacy;
 }
 
 export function persistShopping(state: ShoppingV1, storage?: StorageLike | null): ShoppingV1 {
@@ -109,19 +118,25 @@ export function addShoppingIngredients(
   const items = current.items.map((item) => ({ ...item, sources: [...item.sources] }));
   for (const input of ingredients) {
     if (!isId(input.ingredientId) || !isQuantity(input.quantity) || !isSource(input.source)) continue;
-    const id = mergeKey(input.ingredientId, input.quantity);
+    const quantity = input.shopping?.mode === 'nameOnly' ? null : input.quantity;
+    const rounded = quantity && input.shopping?.rounding === 'up' && input.shopping.increment
+      ? quantity.kind === 'exact'
+        ? { ...quantity, value: Math.ceil(quantity.value / input.shopping.increment) * input.shopping.increment }
+        : { ...quantity, min: Math.ceil(quantity.min / input.shopping.increment) * input.shopping.increment, max: Math.ceil(quantity.max / input.shopping.increment) * input.shopping.increment }
+      : quantity;
+    const id = mergeKey(input.ingredientId, rounded);
     const existing = items.find((item) => item.id === id);
     if (!existing) {
-      items.push({ id, ingredientId: input.ingredientId, quantity: input.quantity, checked: false, createdAt: now.toISOString(), updatedAt: now.toISOString(), sources: [input.source] });
+      items.push({ id, ingredientId: input.ingredientId, quantity: rounded, checked: false, createdAt: now.toISOString(), updatedAt: now.toISOString(), sources: [input.source] });
       continue;
     }
     if (existing.sources.some((source) => sourceKey(source) === sourceKey(input.source))) continue;
     existing.sources.push(input.source);
-    if (existing.quantity && input.quantity) existing.quantity = combinedQuantity(existing.quantity, input.quantity);
+    if (existing.quantity && rounded) existing.quantity = combinedQuantity(existing.quantity, rounded);
     existing.checked = false;
     existing.updatedAt = now.toISOString();
   }
-  return persistShopping({ schemaVersion: 1, updatedAt: now.toISOString(), items }, storage);
+  return persistShopping({ schemaVersion: 2, updatedAt: now.toISOString(), items }, storage);
 }
 
 export function setShoppingItemChecked(id: string, checked: boolean, now = new Date(), storage?: StorageLike | null): ShoppingV1 {

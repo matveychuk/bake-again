@@ -3,7 +3,7 @@
 import { Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { BakeCheckbox } from '@/components/ui/bake-checkbox';
-import { personalStateRecipes } from '@/content/recipes/registry';
+import { getRecipeContent, personalStateRecipes } from '@/content/recipes/registry';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { formatQuantity as formatLocalizedQuantity } from '@/lib/i18n/format';
@@ -12,6 +12,11 @@ import styles from './personal-state.module.css';
 
 function ingredientName(item: ShoppingItemV1, locale: AppLocale) {
   for (const recipe of personalStateRecipes) for (const section of recipe.ingredientSections) for (const line of section.lines) for (const option of line.options) if (option.ingredientId === item.ingredientId) return option.name[locale];
+  for (const source of item.sources) {
+    const content = getRecipeContent(source.recipeId, locale);
+    const ingredient = content?.ingredientSections.flatMap((section) => section.ingredients).find((candidate) => candidate.id === item.ingredientId);
+    if (ingredient) return ingredient.name;
+  }
   return item.ingredientId;
 }
 

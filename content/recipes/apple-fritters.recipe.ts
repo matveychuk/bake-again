@@ -5,9 +5,9 @@ export const appleFrittersRecipe = {
   source: { file: 'Author inventory', locator: 'Яблучні оладки · recipe text not captured' },
   completeness: 'incompleteSource',
   ingredientSections: [{ id: 'draft-batter', title: 'Draft batter', ingredients: [
-    { id: 'apple', name: 'Apple', amount: 'To confirm' }, { id: 'eggs', name: 'Eggs', amount: 'To confirm' },
-    { id: 'flour', name: 'Schär Mix B Bread flour', amount: 'To confirm' }, { id: 'sugar', name: 'Sugar', amount: 'To confirm' },
-    { id: 'leavener', name: 'Leavener', amount: 'To confirm' }, { id: 'oil', name: 'Oil for frying', amount: 'As needed' },
+    { id: 'apple', name: 'Apple', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'eggs', name: 'Eggs', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
+    { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'sugar', name: 'Sugar', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
+    { id: 'leavener', name: 'Leavener', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'oil', name: 'Oil for frying', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
   ] }],
   steps: [{ id: 'draft-method', title: 'Await the author method', body: 'Confirm the apple preparation, batter consistency, pan heat and turning cue before cooking.' }],
   gapNote: 'The author confirms this recipe is made many times, but no ingredients or method were captured. This placeholder must not be treated as tested.',

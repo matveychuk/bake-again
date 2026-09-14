@@ -115,13 +115,13 @@ export const recipeInventory: InventoryRecipe[] = [
     activeTime: null, totalTime: null, launchPriority: 'High', heroCandidate: 'Yes',
     image: '/images/crepes.png', imageKind: 'generated-preview',
     imageAlt: 'A stack of thin golden gluten-free breakfast crepes',
-    summary: 'Thin everyday crepes with a flexible batter adjusted with hot water.',
+    summary: 'Thin everyday crepes for three, finished with hot water after resting.',
     source: 'Handwritten notebook page, IMG_1275.jpeg',
     archiveSections: [
       { title: 'Ingredients · original notes', content: '5 яєць\n5 ст. л. борошна\n0,5 л молока\n1 ст. л. цукру\nДрібка солі\n5 ст. л. олії\n0,5 склянки води, краще гарячої' },
       { title: 'Method · original notes', content: '1. Змішати яйця, борошно, цукор, сіль і трохи молока без грудочок.\n2. Поступово додати молоко.\n3. Додати 0,5 склянки води, краще гарячої, та олію.\n4. Дати постояти 15–30 хв. За потреби додавати молоко або воду до рідкої консистенції.' },
     ],
-    needsBeforePublishing: 'Record difficulty and timing; approve or replace the preview photo.',
+    needsBeforePublishing: 'Record difficulty and full cooking time; approve or replace the preview photo.',
   },
   {
     id: 'gluten-free-napoleon', slug: 'napoleon-cake', title: 'Napoleon cake', sourceTitle: 'Безглютеновий Наполеон',

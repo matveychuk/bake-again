@@ -12,6 +12,7 @@ import {
   parseNapoleonConfiguration,
 } from '../content/recipes/napoleon-configuration.ts';
 import type { RecipeDraft } from '../content/recipes/recipe.types.ts';
+import { recipeDocuments } from '../content/recipes/registry.ts';
 
 function validateRecipe(recipe: RecipeDraft) {
   assert.equal(recipe.schemaVersion, 2);
@@ -46,12 +47,12 @@ function validateRecipe(recipe: RecipeDraft) {
     );
     const line = lines.find(({ id }) => id === anchor.ingredientLineId);
     assert.equal(
-      line?.amount?.kind,
+      line?.quantity.base?.kind,
       'exact',
       `${recipe.id}: anchor must be exact`,
     );
     assert.equal(
-      line?.amount?.unit,
+      line?.quantity.base?.unit,
       anchor.allowedUnit,
       `${recipe.id}: anchor unit`,
     );
@@ -60,6 +61,32 @@ function validateRecipe(recipe: RecipeDraft) {
 
 validateRecipe(glutenFreeNapoleonRecipe);
 validateRecipe(crinkleCookiesRecipe);
+
+let validatedRecipeCount = 0;
+for (const document of recipeDocuments) {
+  const sections = document.kind === 'detailed'
+    ? document.recipe.ingredientSections.map((section) => ({
+        id: section.id,
+        lines: section.lines.map((line) => ({ id: line.id, quantity: line.quantity })),
+      }))
+    : document.recipe.ingredientSections.map((section) => ({
+        id: section.id,
+        lines: section.ingredients.map((line) => ({ id: line.id, quantity: line.quantity })),
+      }));
+  for (const section of sections) for (const line of section.lines) {
+    assert(line.quantity, `${document.recipe.id}/${section.id}/${line.id}: missing canonical quantity`);
+    assert(['base', 'nameOnly'].includes(line.quantity.shopping.mode), `${document.recipe.id}/${line.id}: invalid shopping mode`);
+    assert(
+      line.quantity.shopping.mode === 'nameOnly' || line.quantity.base !== null,
+      `${document.recipe.id}/${line.id}: base shopping requires a base quantity`,
+    );
+    assert(
+      !(line.quantity.shopping.mode === 'nameOnly' && line.quantity.base !== null),
+      `${document.recipe.id}/${line.id}: name-only quantity must not carry a base`,
+    );
+  }
+  validatedRecipeCount += 1;
+}
 
 assert.equal(glutenFreeNapoleonRecipe.geometry.default.kind, 'roundTemplate');
 assert.equal(
@@ -100,7 +127,7 @@ assert.deepEqual(
   napoleonBaseSelection,
 );
 
-console.log('Validated 2 recipes and 2 calculated configuration fixtures.');
+console.log(`Validated ${validatedRecipeCount} canonical recipes and 2 calculated configuration fixtures.`);
 console.log({
   napoleon24cmHalfBatch: {
     totalScaleFactor: napoleon24cmHalfBatch.totalScaleFactor,

@@ -276,7 +276,7 @@ function lineEvidence(
     sourceIds,
     gapIds: gapsForLine(gaps, section.id, line.id),
     calculated,
-    missing: line.amount === null,
+    missing: line.quantity.base === null,
   });
 }
 
@@ -292,7 +292,7 @@ function projectIngredient(
   const calculatedLine = calculated?.ingredientAmounts.find(
     ({ ingredientLineId }) => ingredientLineId === line.id,
   );
-  const amount = calculatedLine ? calculatedLine.amount : line.amount;
+  const amount = calculatedLine ? calculatedLine.amount : line.quantity.base;
   const evidence = lineEvidence(
     recipe,
     section,

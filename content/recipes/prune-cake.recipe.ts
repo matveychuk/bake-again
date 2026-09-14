@@ -5,11 +5,11 @@ export const pruneCakeRecipe = {
   source: { file: 'docs/reference/recipe-inventory.xlsx', locator: 'Recipe Archive · Торт з чорносливом' },
   completeness: 'incompleteSource',
   ingredientSections: [{ id: 'cake', title: 'Cake · partial transcription', ingredients: [
-    { id: 'eggs', name: 'Eggs', amount: '4' }, { id: 'unknown-jars', name: 'Unclear ingredient', amount: '2 jars', note: 'Unreadable in the source.' },
-    { id: 'sugar', name: 'Sugar', amount: '1 scant cup' }, { id: 'unknown-spoons-one', name: 'Unclear ingredient', amount: '2 tbsp', note: 'Unreadable in the source.' },
-    { id: 'unknown-spoons-two', name: 'Unclear ingredient', amount: '5–6 tbsp', note: 'Unreadable in the source.' },
-    { id: 'leavener', name: 'Baking powder or lemon-quenched baking soda', amount: '2 tsp' }, { id: 'cocoa', name: 'Cocoa', amount: '5 tbsp' },
-    { id: 'flour', name: 'Schär Mix B Bread flour', amount: '5 tbsp' },
+    { id: 'eggs', name: 'Eggs', quantity: { base: { kind: 'exact', value: 4, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } }, { id: 'unknown-jars', name: 'Unclear ingredient', quantity: { base: null, shopping: { mode: 'nameOnly' } }, note: 'Unreadable in the source.' },
+    { id: 'sugar', name: 'Sugar', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'unknown-spoons-one', name: 'Unclear ingredient', quantity: { base: { kind: 'exact', value: 2, unit: 'tbsp' }, shopping: { mode: 'base' } }, note: 'Unreadable in the source.' },
+    { id: 'unknown-spoons-two', name: 'Unclear ingredient', quantity: { base: { kind: 'range', min: 5, max: 6, unit: 'tbsp' }, shopping: { mode: 'base' } }, note: 'Unreadable in the source.' },
+    { id: 'leavener', name: 'Baking powder or lemon-quenched baking soda', quantity: { base: { kind: 'exact', value: 2, unit: 'tsp' }, shopping: { mode: 'base' } } }, { id: 'cocoa', name: 'Cocoa', quantity: { base: { kind: 'exact', value: 5, unit: 'tbsp' }, shopping: { mode: 'base' } } },
+    { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 5, unit: 'tbsp' }, shopping: { mode: 'base' } } },
   ] }],
   steps: [
     { id: 'cream', title: 'Make the cream', body: 'Mix sour cream or cream with powdered sugar to taste.' },

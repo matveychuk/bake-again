@@ -168,8 +168,8 @@ export function calculateRecipeConfiguration(
     if (
       !anchor ||
       !line ||
-      line.amount?.kind !== 'exact' ||
-      line.amount.unit !== anchor.allowedUnit ||
+      line.quantity.base?.kind !== 'exact' ||
+      line.quantity.base.unit !== anchor.allowedUnit ||
       quantityAdjustment.availableAmount.unit !== anchor.allowedUnit
     ) {
       throw new Error('Invalid Use what I have anchor or unit');
@@ -181,13 +181,14 @@ export function calculateRecipeConfiguration(
     ) {
       throw new Error('Use what I have amount is outside the supported range');
     }
-    totalScaleFactor = availableValue / line.amount.value;
+    totalScaleFactor = availableValue / line.quantity.base.value;
     batchScaleFactor = totalScaleFactor / geometryScaleFactor;
   }
 
   const ingredientAmounts: CalculatedIngredientAmount[] = lines.map((line) => {
     const rule = line.scaling ?? recipe.configuration.ingredientScaling.default;
-    const scaled = scaleQuantity(line.amount, rule, totalScaleFactor);
+    const scaled = scaleQuantity(line.quantity.base, rule, totalScaleFactor);
+    const scaledEquivalent = scaleQuantity(line.quantity.equivalent ?? null, rule, totalScaleFactor);
     if (scaled.requiresResolution) {
       warnings.push({
         code:
@@ -205,6 +206,7 @@ export function calculateRecipeConfiguration(
     return {
       ingredientLineId: line.id,
       amount: scaled.amount,
+      equivalent: scaledEquivalent.amount,
       rule: rule.kind,
       requiresResolution: scaled.requiresResolution,
     };

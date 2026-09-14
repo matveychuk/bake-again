@@ -23,7 +23,8 @@ export function SaveRecipeControl({ recipeId, title, locale }: { recipeId: strin
       aria-pressed={saved}
       className={styles.control}
       data-saved={saved}
-      onClick={() => {
+      onClick={(event) => {
+        event.stopPropagation();
         const next = toggleSavedRecipe(recipeId);
         setSaved(next.savedRecipeIds.includes(recipeId));
       }}

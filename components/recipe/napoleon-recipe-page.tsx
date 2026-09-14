@@ -8,11 +8,13 @@ import {
 } from 'lucide-react';
 import { SectionTitle } from '@/components/foundations/section-title';
 import { RecipeFacts } from '@/components/recipe/recipe-facts';
+import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { SiteHeader } from '@/components/site/site-header';
 import { NAPOLEON_METHOD_STEP_COUNT, napoleonPrototypeMedia, napoleonPrototypeSteps } from '@/content/recipes/napoleon.prototype';
 import type { RecipeDraft } from '@/content/recipes/recipe.types';
+import { recipeDetailTitles } from '@/content/recipes/catalog-locales';
 import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
-import { getLocalizedRecipePath, localeRecipesPath } from '@/lib/i18n/routes';
+import { getLocalizedRecipePath, localeHomePath, localeRecipesPath } from '@/lib/i18n/routes';
 import styles from '@/app/recipes/napoleon-cake/recipe.module.css';
 import { StepMediaSequence } from '@/app/recipes/napoleon-cake/step-media-sequence';
 import { AssistantTrigger, RecipeAssistantProvider } from '@/app/recipes/napoleon-cake/recipe-assistant';
@@ -33,11 +35,7 @@ export function NapoleonRecipePage({
   methodStepLimit?: number;
   pathname?: string;
 }) {
-  const emphasizedTitle = locale === 'uk' ? 'Наполеон' : locale === 'es' ? 'Napoleón' : 'Napoleon Cake';
-  const localizedTitle = recipe.title[locale];
-  const titlePrefix = localizedTitle.endsWith(emphasizedTitle)
-    ? localizedTitle.slice(0, -emphasizedTitle.length).trim()
-    : '';
+  const detailTitle = recipeDetailTitles[recipe.id]?.[locale] ?? recipe.title[locale];
   const flourLine = recipe.ingredientSections
     .flatMap((section) => section.lines)
     .find((line) => line.id === recipe.flourConfiguration.commercialMixLineId);
@@ -55,7 +53,7 @@ export function NapoleonRecipePage({
       <SiteHeader locale={locale} pathname={pathname} />
 
       <div className={styles.breadcrumb}>
-        <a href={localeRecipesPath(locale)}><ArrowLeft size={15} /> Recipes</a>
+        <a href={`${localeHomePath(locale)}#recipes`}><ArrowLeft size={15} /> Recipes</a>
         <span>Celebration</span>
       </div>
 
@@ -65,7 +63,7 @@ export function NapoleonRecipePage({
         </div>
         <div className={styles.heroCopy}>
           <div className={styles.heroTopline}><p>Celebration · prepare ahead</p><SaveRecipeControl locale={locale} recipeId={recipe.id} title={recipe.title[locale]} /></div>
-          <h1>{titlePrefix && <>{titlePrefix}<br /></>}<em>{emphasizedTitle}</em></h1>
+          <RecipeDetailTitle locale={locale} title={detailTitle} />
           <p className={styles.summary}>{recipe.summary[locale]}</p>
           <div className={styles.tested}><span><Check size={15} strokeWidth={2.5} /> Repeatedly verified</span><p>This exact base has been baked successfully many times.</p></div>
           <RecipeFacts className={styles.facts} items={[
@@ -95,8 +93,9 @@ export function NapoleonRecipePage({
         <div className={styles.steps}>
           {visibleSteps.map((step) => (
             <article className={step.mediaIds ? styles.stepWithMedia : undefined} id={`step-${Number(step.number)}`} key={step.number}>
-              <span>{step.number}</span>
-              {step.tips ? <StepTip meta={step.meta} title={step.recipeTitle ?? step.title} body={step.recipeBody} tips={step.tips} guidance={step.recipeGuidance ?? step.guidance} stepIds={step.canonicalStepIds} locale={locale} /> : <div><p className={styles.stepMeta}>{step.meta}</p><h3>{step.recipeTitle ?? step.title}</h3><p>{step.recipeBody}</p>{(step.recipeGuidance ?? step.guidance) && <aside className={`${styles.stepCallout} ${styles.stepCheckpoint}`}><Check size={15} /><p><strong>Checkpoint</strong>{step.recipeGuidance ?? step.guidance}</p></aside>}<AssistantTrigger scope="step" stepIds={step.canonicalStepIds} stepTitle={step.recipeTitle ?? step.title} locale={locale} compact /></div>}
+              <p className={styles.stepMeta}>{step.meta}</p>
+              <span className={styles.stepNumber}>{step.number}</span>
+              {step.tips ? <StepTip title={step.recipeTitle ?? step.title} body={step.recipeBody} tips={step.tips} guidance={step.recipeGuidance ?? step.guidance} stepIds={step.canonicalStepIds} locale={locale} /> : <div className={styles.stepContent}><h3>{step.recipeTitle ?? step.title}</h3><p>{step.recipeBody}</p>{(step.recipeGuidance ?? step.guidance) && <aside className={`${styles.stepCallout} ${styles.stepCheckpoint}`}><Check size={15} /><p><strong>Checkpoint</strong>{step.recipeGuidance ?? step.guidance}</p></aside>}<AssistantTrigger scope="step" stepIds={step.canonicalStepIds} stepTitle={step.recipeTitle ?? step.title} locale={locale} compact /></div>}
               {step.mediaIds && <StepMediaSequence items={napoleonPrototypeMedia.filter((item) => step.mediaIds?.includes(item.id))} />}
             </article>
           ))}

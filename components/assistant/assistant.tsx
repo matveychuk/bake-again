@@ -119,6 +119,7 @@ export function AssistantProvider({
   const [history, setHistory] = useState<AssistantRequestV1['history']>([]);
   const [announcement, setAnnouncement] = useState('');
   const requestRef = useRef<AbortController | null>(null);
+  const closeRef = useRef<HTMLButtonElement | null>(null);
   const submittingRef = useRef(false);
   const inputId = useId();
   const messages = assistantMessages[locale];
@@ -156,12 +157,15 @@ export function AssistantProvider({
     requestRef.current?.abort();
     const controller = new AbortController();
     requestRef.current = controller;
+    // Submit controls are disabled or removed during loading. Keep focus on a
+    // persistent, visible control instead of letting it fall back to the page.
+    closeRef.current?.focus({ preventScroll: true });
     setPhase('loading');
     setProposedAction(null);
     setLastQuestion(nextQuestion);
     setErrorMessage('');
     setCanRetry(false);
-    setAnnouncement('');
+    setAnnouncement(messages.loading);
 
     const payload: AssistantRequestV1 = {
       schemaVersion: 1,
@@ -195,7 +199,7 @@ export function AssistantProvider({
         setErrorMessage(data.error.message);
         setCanRetry(data.error.retryable);
         setPhase(data.error.code === 'ASSISTANT_DISABLED' ? 'disabled' : 'error');
-        setAnnouncement(data.error.message);
+        setAnnouncement(data.error.code === 'ASSISTANT_DISABLED' ? data.error.message : '');
         return;
       }
       if (!response.ok || data.recipeId !== recipeId || data.recipeVersionId !== recipeVersionId || data.locale !== locale || JSON.stringify(data.configuration) !== JSON.stringify(active.configuration)) throw new Error(messages.genericError);
@@ -207,14 +211,14 @@ export function AssistantProvider({
       setAnnouncement(messages.answerReady);
     } catch (error) {
       if (controller.signal.aborted || requestRef.current !== controller || (error instanceof DOMException && error.name === 'AbortError')) return;
-      setErrorMessage(error instanceof Error ? error.message : messages.genericError);
+      setErrorMessage(messages.genericError);
       setCanRetry(true);
       setPhase('error');
-      setAnnouncement(messages.genericError);
+      setAnnouncement('');
     } finally {
       if (requestRef.current === controller) { requestRef.current = null; submittingRef.current = false; }
     }
-  }, [active, history, locale, messages.answerReady, messages.emptyTitle, messages.genericError, phase, recipeId, recipeVersionId, surface]);
+  }, [active, history, locale, messages.answerReady, messages.emptyTitle, messages.genericError, messages.loading, phase, recipeId, recipeVersionId, surface]);
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -237,7 +241,7 @@ export function AssistantProvider({
         swipeDirection="right"
       >
         {active && (
-          <DrawerContent className={styles.drawer} aria-describedby={`${inputId}-description`}>
+          <DrawerContent className={styles.drawer} initialFocus={closeRef} aria-describedby={`${inputId}-description`}>
             <header className={styles.header}>
               <div className={styles.mark}><Sparkles size={18} aria-hidden="true" /></div>
               <div className={styles.heading}>
@@ -247,7 +251,7 @@ export function AssistantProvider({
                 </p>
                 <DrawerTitle className={styles.title}>{messages.title[surface][scopeKind]}</DrawerTitle>
               </div>
-              <DrawerClose className={styles.close} aria-label={messages.close}>
+              <DrawerClose ref={closeRef} className={styles.close} aria-label={messages.close}>
                 <X size={20} aria-hidden="true" />
               </DrawerClose>
             </header>
@@ -286,6 +290,7 @@ export function AssistantProvider({
                   key={proposedAction.id}
                   proposal={proposedAction}
                   context={{ schemaVersion: 1, recipeId, recipeVersionId, locale, surface, scope: active.scope, configuration: active.configuration }}
+                  returnFocus={() => closeRef.current}
                   onOpenScaling={() => {
                     const target = document.getElementById('adjust-recipe');
                     const path = getLocalizedRecipePath(recipeId, locale);

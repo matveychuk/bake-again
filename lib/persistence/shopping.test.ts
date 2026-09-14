@@ -35,3 +35,12 @@ void test('a merged checked item becomes unchecked and can be removed', () => {
   removeShoppingItem('butter:g', now, storage);
   assert.equal(readShopping(storage).items.length, 0);
 });
+
+void test('keeps name-only items unquantified and rounds discrete shopping bases up', () => {
+  const storage = new MemoryStorage();
+  const source = { recipeId: 'crepes', recipeVersionId: 'crepes-source-v1', ingredientLineId: 'eggs', sectionId: 'batter', selectedIngredientId: 'eggs' };
+  addShoppingIngredients([{ ingredientId: 'eggs', quantity: { kind: 'exact', value: 2.5, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' }, source }], new Date('2026-09-09T10:00:00.000Z'), storage);
+  addShoppingIngredients([{ ingredientId: 'salt', quantity: null, shopping: { mode: 'nameOnly' }, source: { ...source, ingredientLineId: 'salt', selectedIngredientId: 'salt' } }], new Date('2026-09-09T10:00:00.000Z'), storage);
+  assert.deepEqual(readShopping(storage).items.find((item) => item.ingredientId === 'eggs')?.quantity, { kind: 'exact', value: 3, unit: 'piece' });
+  assert.equal(readShopping(storage).items.find((item) => item.ingredientId === 'salt')?.quantity, null);
+});

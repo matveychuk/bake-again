@@ -7,11 +7,11 @@ export const spongeCakeRecipe = {
   beforeStart: ['Preheat the oven. Grease only the bottom of the form.'],
   ingredientSections: [{
     id: 'sponge', title: 'Sponge', ingredients: [
-      { id: 'eggs', name: 'Large eggs', amount: '5', note: 'Or 6 small eggs.' },
-      { id: 'sugar', name: 'Sugar', amount: '120 g + 2 tbsp', note: 'The 2 tbsp are for the yolks.' },
-      { id: 'corn-starch', name: 'Corn starch', amount: '15 g' },
-      { id: 'tapioca', name: 'Tapioca starch', amount: '70 g' },
-      { id: 'flour', name: 'Schär Mix B Bread flour', amount: '140 g' },
+      { id: 'eggs', name: 'Large eggs', quantity: { base: { kind: 'exact', value: 5, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } }, note: 'Or 6 small eggs.' },
+      { id: 'sugar', name: 'Sugar', quantity: { base: null, shopping: { mode: 'nameOnly' } }, note: 'The 2 tbsp are for the yolks.' },
+      { id: 'corn-starch', name: 'Corn starch', quantity: { base: { kind: 'exact', value: 15, unit: 'g' }, shopping: { mode: 'base' } } },
+      { id: 'tapioca', name: 'Tapioca starch', quantity: { base: { kind: 'exact', value: 70, unit: 'g' }, shopping: { mode: 'base' } } },
+      { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 140, unit: 'g' }, shopping: { mode: 'base' } } },
     ],
   }],
   steps: [

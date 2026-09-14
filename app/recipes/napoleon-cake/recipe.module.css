@@ -10,7 +10,6 @@
 .heroTopline p { margin: 0; }
 .heroTopline button { border: 0; background: transparent; color: var(--color-text-primary); cursor: pointer; }
 .hero h1 { margin: 26px 0 0; font-family: var(--font-family-display); font-size: clamp(3.5rem, 5vw, 5.5rem); font-weight: 430; letter-spacing: -.055em; line-height: .92; }
-.hero h1 em { color: var(--color-action-primary); font-weight: 360; }
 .summary { margin: 28px 0 0; color: var(--color-text-secondary); font-size: 1.05rem; line-height: 1.7; }
 .tested { margin-top: 26px; padding: 15px 17px; background: var(--color-status-tested-background); }
 .tested span { display: flex; align-items: center; gap: 8px; color: var(--color-status-tested-text); font-size: .78rem; font-weight: 800; }
@@ -83,11 +82,12 @@
 .method { padding: 80px max(40px, calc((100vw - 1240px) / 2)) 110px; background: var(--color-background-surface); }
 .methodHeading { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
 .steps { margin-top: 45px; }
-.steps > article { padding: 30px 0; display: grid; grid-template-columns: 65px 1fr; border-top: 1px solid var(--color-border-subtle); }
-.steps > article > span { color: var(--color-action-primary); font-family: var(--font-family-display); font-size: 1.2rem; }
+.steps > article { padding: 30px 0; display: grid; grid-template-columns: 65px minmax(0, 1fr); border-top: 1px solid var(--color-border-subtle); }
+.stepNumber { grid-column: 1; grid-row: 2; align-self: baseline; color: var(--color-action-primary); font-family: var(--font-family-display); font-size: 1.2rem; }
+.stepContent { min-width: 0; grid-column: 2; grid-row: 2; align-self: baseline; }
 .steps h3 { margin: 7px 0 10px; font-family: var(--font-family-display); font-size: 1.55rem; font-weight: 550; }
 .steps article > div > p:not(.stepMeta) { max-width: 750px; margin: 0; color: var(--color-text-secondary); }
-.stepMeta { margin: 0; color: var(--color-action-primary-strong); font-size: .66rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.stepMeta { grid-column: 2; grid-row: 1; margin: 0 0 var(--space-2); color: var(--color-action-primary-strong); font-size: .66rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .stepCallout { max-width: 650px; margin-top: 18px; padding: 14px 16px; display: flex; gap: 10px; }
 .stepCallout svg { flex: 0 0 auto; margin-top: 3px; }
 .stepCallout p, .stepCallout ul { margin: 0; font-size: .74rem; }
@@ -102,7 +102,7 @@
 .stepTipTitleNote strong { font-size: .72rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
 .stepTipTitleNote p { margin: 0; white-space: normal; }
 .steps > .stepWithMedia { grid-template-columns: 65px minmax(0, 1fr); }
-.stepWithMedia .mediaSequence { grid-column: 2; }
+.stepWithMedia .mediaSequence { grid-column: 2; grid-row: 3; }
 .mediaSequence { margin-top: 25px; }
 .sequenceView { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .sequenceView figure { margin: 0; }
@@ -181,13 +181,15 @@
   .stepTipTitleNote { margin-top: 0; align-items: flex-start; }
   .stepTipTitleNote p { white-space: normal; }
   .sequenceView { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
-  .sequenceView figure { flex: 0 0 82%; scroll-snap-align: start; }
+  .sequenceView figure { flex: 0 0 52%; scroll-snap-align: start; }
 }
 
 @media (max-width: 560px) {
+  .hero h1 { font-size: clamp(2.5rem, 12vw, 3.5rem); }
   .breadcrumb span { display: none; }
   .heroImage { min-height: 300px; }
   .heroTopline { align-items: flex-start; }
+  .sequenceView figure { flex-basis: 82%; }
   .tested p { margin-left: 0; }
   .facts dd { font-size: 1rem; }
 }

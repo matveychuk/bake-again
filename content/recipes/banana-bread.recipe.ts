@@ -5,11 +5,11 @@ export const bananaBreadRecipe = {
   source: { file: 'docs/reference/recipe-inventory.xlsx', locator: 'Recipe Archive · Банановий хліб' },
   completeness: 'incompleteSource',
   ingredientSections: [{ id: 'loaf', title: 'Banana bread', ingredients: [
-    { id: 'bananas', name: 'Very ripe bananas', amount: '3' }, { id: 'butter', name: 'Butter, room temperature', amount: '½ cup' },
-    { id: 'sugar', name: 'Sugar', amount: '¾ cup' }, { id: 'eggs', name: 'Large eggs', amount: '2' },
-    { id: 'flour', name: 'Schär Mix B Bread flour', amount: '1½ cups' }, { id: 'baking-powder', name: 'Baking powder', amount: '1 tsp' },
-    { id: 'salt', name: 'Salt', amount: '½ tsp' }, { id: 'vanilla', name: 'Vanilla', amount: '½ tsp' },
-    { id: 'walnuts', name: 'Walnuts', amount: '1 cup' }, { id: 'raisins', name: 'Raisins', amount: '1 cup' },
+    { id: 'bananas', name: 'Very ripe bananas', quantity: { base: { kind: 'exact', value: 3, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } }, { id: 'butter', name: 'Butter, room temperature', quantity: { base: { kind: 'exact', value: 0.5, unit: 'cup' }, shopping: { mode: 'base' } } },
+    { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 0.75, unit: 'cup' }, shopping: { mode: 'base' } } }, { id: 'eggs', name: 'Large eggs', quantity: { base: { kind: 'exact', value: 2, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } },
+    { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 1.5, unit: 'cup' }, shopping: { mode: 'base' } } }, { id: 'baking-powder', name: 'Baking powder', quantity: { base: { kind: 'exact', value: 1, unit: 'tsp' }, shopping: { mode: 'base' } } },
+    { id: 'salt', name: 'Salt', quantity: { base: { kind: 'exact', value: 0.5, unit: 'tsp' }, shopping: { mode: 'base' } } }, { id: 'vanilla', name: 'Vanilla', quantity: { base: { kind: 'exact', value: 0.5, unit: 'tsp' }, shopping: { mode: 'base' } } },
+    { id: 'walnuts', name: 'Walnuts', quantity: { base: { kind: 'exact', value: 1, unit: 'cup' }, shopping: { mode: 'base' } } }, { id: 'raisins', name: 'Raisins', quantity: { base: { kind: 'exact', value: 1, unit: 'cup' }, shopping: { mode: 'base' } } },
   ] }],
   steps: [
     { id: 'proposed-prepare', title: 'Draft: prepare the loaf tin', body: 'Grease or line a loaf tin and preheat the oven. This setup is an editorial placeholder, not preserved in the author source.' },

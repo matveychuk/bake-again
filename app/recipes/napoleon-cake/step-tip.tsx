@@ -4,7 +4,6 @@ import type { AppLocale } from '@/lib/i18n/config';
 import styles from './recipe.module.css';
 
 type StepTipProps = {
-  meta: string;
   title: string;
   body: string;
   tips: string[];
@@ -13,12 +12,11 @@ type StepTipProps = {
   locale: AppLocale;
 };
 
-export function StepTip({ meta, title, body, tips, guidance, stepIds, locale }: StepTipProps) {
+export function StepTip({ title, body, tips, guidance, stepIds, locale }: StepTipProps) {
   const label = tips.length === 1 ? 'Tip' : `${tips.length} tips`;
 
   return (
-    <div>
-      <p className={styles.stepMeta}>{meta}</p>
+    <div className={styles.stepContent}>
       <div className={styles.stepTitleRow}>
         <h3>{title}</h3>
         <div className={styles.stepTipTitleNote}>

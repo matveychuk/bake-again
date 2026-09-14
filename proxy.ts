@@ -5,7 +5,6 @@ import {
   getLocaleFromPathname,
   getRecipeIdFromLegacySlug,
 } from '@/lib/i18n/routes';
-import { resolveLocaleFromAcceptLanguage } from '@/lib/i18n/resolve-locale';
 import { localeCookieName } from '@/lib/persistence/preferences';
 
 const requestLocaleHeader = 'x-bake-again-locale';
@@ -25,13 +24,16 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const explicitLocale = getLocaleFromPathname(pathname);
 
+  if (explicitLocale && pathname === `/${explicitLocale}/recipes`) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = `/${explicitLocale}`;
+    return NextResponse.redirect(redirectUrl);
+  }
   if (explicitLocale) return continueWithLocale(request, explicitLocale);
   if (isUnlocalizedRoute(pathname)) return continueWithLocale(request);
 
   const cookieLocale = request.cookies.get(localeCookieName)?.value;
-  const locale = isAppLocale(cookieLocale)
-    ? cookieLocale
-    : resolveLocaleFromAcceptLanguage(request.headers.get('accept-language'));
+  const locale = isAppLocale(cookieLocale) ? cookieLocale : defaultLocale;
 
   const redirectUrl = request.nextUrl.clone();
   const legacyRecipeMatch = pathname.match(/^\/recipes\/([^/]+)(\/cook)?$/);
@@ -39,7 +41,7 @@ export function proxy(request: NextRequest) {
   const localizedRecipePath = recipeId
     ? getLocalizedRecipePath(recipeId, locale, legacyRecipeMatch?.[2] ?? '')
     : null;
-  redirectUrl.pathname = localizedRecipePath ?? (pathname === '/' ? `/${locale}` : `/${locale}${pathname}`);
+  redirectUrl.pathname = localizedRecipePath ?? (pathname === '/recipes' || pathname === '/' ? `/${locale}` : `/${locale}${pathname}`);
   return NextResponse.redirect(redirectUrl);
 }
 

@@ -171,7 +171,7 @@ export const crinkleCookiesRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 60, unit: "g" },
+          quantity: { base: { kind: "exact", value: 60, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "eggs",
@@ -181,7 +181,7 @@ export const crinkleCookiesRecipe = {
               name: { uk: "яйця", en: "eggs", es: "huevos" },
             },
           ],
-          amount: { kind: "exact", value: 2, unit: "piece" },
+          quantity: { base: { kind: "exact", value: 2, unit: "piece" }, shopping: { mode: "base" } },
           scaling: { kind: "discrete", increment: 1, rounding: "manual" },
         },
         {
@@ -192,7 +192,7 @@ export const crinkleCookiesRecipe = {
               name: { uk: "цукор", en: "sugar", es: "azúcar" },
             },
           ],
-          amount: { kind: "exact", value: 200, unit: "g" },
+          quantity: { base: { kind: "exact", value: 200, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "cocoa",
@@ -202,7 +202,7 @@ export const crinkleCookiesRecipe = {
               name: { uk: "какао", en: "cocoa powder", es: "cacao en polvo" },
             },
           ],
-          amount: { kind: "exact", value: 60, unit: "g" },
+          quantity: { base: { kind: "exact", value: 60, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "flour",
@@ -216,7 +216,7 @@ export const crinkleCookiesRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 120, unit: "g" },
+          quantity: { base: { kind: "exact", value: 120, unit: "g" }, shopping: { mode: "base" } },
         },
         {
           id: "baking-powder",
@@ -230,7 +230,7 @@ export const crinkleCookiesRecipe = {
               },
             },
           ],
-          amount: { kind: "exact", value: 1, unit: "tsp" },
+          quantity: { base: { kind: "exact", value: 1, unit: "tsp" }, shopping: { mode: "base" } },
         },
         {
           id: "orange-zest",
@@ -240,7 +240,7 @@ export const crinkleCookiesRecipe = {
               name: { uk: "апельсин", en: "orange", es: "naranja" },
             },
           ],
-          amount: { kind: "exact", value: 1, unit: "piece" },
+          quantity: { base: { kind: "exact", value: 1, unit: "piece" }, shopping: { mode: "base" } },
           scaling: { kind: "discrete", increment: 1, rounding: "manual" },
           preparation: {
             uk: "використати цедру",
@@ -260,7 +260,7 @@ export const crinkleCookiesRecipe = {
               },
             },
           ],
-          amount: null,
+          quantity: { base: null, shopping: { mode: "nameOnly" } },
           scaling: {
             kind: "manual",
             reason: {
@@ -423,7 +423,7 @@ export const crinkleCookiesRecipe = {
               },
             ],
             choose: 1,
-            amount: { kind: "exact", value: 20, unit: "piece" },
+            quantity: { base: { kind: "exact", value: 20, unit: "piece" }, shopping: { mode: "base" } },
             qualifier: {
               uk: "по одному шматочку в кожну з 20 кульок",
               en: "one piece in each of the 20 dough balls",

@@ -68,17 +68,15 @@ export function createMemoryAssistantThrottle(
         bucket.minute.length >= ASSISTANT_SESSION_REQUESTS_PER_MINUTE ||
         bucket.day.length >= ASSISTANT_SESSION_REQUESTS_PER_DAY
       ) {
-        const retryAt =
-          bucket.inFlight >= 1
-            ? current + 1_000
-            : Math.min(
-                bucket.minute.length >= ASSISTANT_SESSION_REQUESTS_PER_MINUTE
-                  ? nextMinute + 60_000
-                  : Number.POSITIVE_INFINITY,
-                bucket.day.length >= ASSISTANT_SESSION_REQUESTS_PER_DAY
-                  ? nextDay + 86_400_000
-                  : Number.POSITIVE_INFINITY,
-              );
+        const retryAt = Math.max(
+          bucket.inFlight >= 1 ? current + 1_000 : current,
+          bucket.minute.length >= ASSISTANT_SESSION_REQUESTS_PER_MINUTE
+            ? nextMinute + 60_000
+            : current,
+          bucket.day.length >= ASSISTANT_SESSION_REQUESTS_PER_DAY
+            ? nextDay + 86_400_000
+            : current,
+        );
         return {
           allowed: false,
           retryAfterSeconds: Math.max(

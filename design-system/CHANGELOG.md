@@ -2,6 +2,45 @@
 
 ## Unreleased
 
+- Consolidated recipe discovery into the home page: the Recipes navigation item now
+  matches the Bake Again wordmark destination, and former catalogue URLs redirect home.
+
+- Simplified Shopping-row removal to a standalone terracotta trash icon with a 44px
+  accessible hit area, no white circular surface and clearer separation from quantity.
+
+- Replaced the ambiguous ingredient amount pair with canonical `base` and optional
+  `equivalent` quantities. Shopping uses only `base`; name-only items remain explicit.
+
+- Reduced step-photo cards at tablet widths to a compact, nearly two-up horizontal
+  sequence, while preserving the three-up desktop grid and the larger mobile scroll card.
+- Replaced the ambiguous ingredient `Add all` interaction with an explicit, two-step
+  shopping-list review. Not-yet-added ingredients start selected, at-home items can be
+  unchecked, the confirm action shows the count, and successful persistence produces a
+  durable `In shopping list · n` link. Ingredient preparation checkboxes remain local to
+  the recipe and no longer imply a shopping-list write. Added verified-write error
+  handling, localized copy and the matching Design Lab state.
+- Standardized recipe-detail headings on the Napoleon two-line treatment: a dark,
+  explicit gluten-free descriptor followed by the terracotta italic dish name in all
+  three locales. Added the shared heading to the Design Lab.
+- Made the gluten-free adaptation explicit in every localized recipe-detail heading while
+  keeping catalogue-card titles concise, and removed the duplicate source title beneath
+  working-record headings.
+- Aligned recipe step numbers with their titles while keeping optional timing metadata
+  in a separate row above the heading across source-backed and detailed recipe layouts.
+- Split ingredient quantity display into a required primary measure and an optional,
+  visually quieter secondary equivalent. Migrated source-backed recipes and added the
+  paired-measure state to the Design Lab.
+- Added a localized ingredients-only variant for translated source-backed recipes, so
+  reviewed quantities remain visible without exposing untranslated adjustment controls.
+- Extended the step media sequence to source-backed recipe pages with localized labels,
+  alternative text and captions. Verified the three-image layout at 390/900/1440px.
+- Assistant release audit: preserve Close focus on open, during loading and after
+  nested action review; announce loading once; localize offline/network/JSON errors
+  and avoid duplicate error announcements. Updated the shared Design Lab example and
+  component contract.
+- Prevent the assistant header from clipping the composer at 200% text size: use a
+  compact header and complete-drawer scrolling when text-relative width is limited.
+
 - Hardened the contextual assistant with shared question/history limits, a localized
   missing-runtime disabled state, signed anonymous safety sessions, server throttling,
   total deadlines, stable error mapping and content-free operational telemetry. Added
