@@ -27,7 +27,9 @@ application. Never alter a Tested base recipe silently.
 ## Personal state
 
 `Save` initially means Want to bake. `Baked` is separate and may carry a private local
-note. Shopping-list items retain their recipe source.
+note. Shopping-list items retain their recipe source and persist until explicit removal.
+Recipe ingredients are read-only; the drawer is the only selection surface and the
+shopping-list checkbox means bought.
 
 ## Responsive composition
 

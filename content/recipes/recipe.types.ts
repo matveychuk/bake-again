@@ -64,6 +64,8 @@ export interface IngredientQuantity {
     mode: "base" | "nameOnly";
     increment?: number;
     rounding?: "up";
+    /** Household staples such as water remain available but start unchecked. */
+    defaultSelected?: boolean;
   };
 }
 

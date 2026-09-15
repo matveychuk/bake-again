@@ -92,9 +92,13 @@
 .shoppingFlowExample { display: grid; justify-items: start; gap: var(--space-3); }
 .shoppingReviewExample { width: min(100%, var(--layout-assistant-drawer)); padding: var(--space-4); display: grid; gap: var(--space-3); border: 1px solid var(--color-border-subtle); background: var(--color-background-surface); box-shadow: var(--shadow-raised); }
 .shoppingReviewExample > strong { font-family: var(--font-family-display); font-size: var(--font-size-body-large); font-weight: 550; }
+.shoppingReviewExample > small { color: var(--color-text-primary); font-size: var(--font-size-label); font-weight: 750; }
 .shoppingReviewExample > p { margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-body-small); line-height: var(--line-height-body); }
+.shoppingReviewExample nav { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); border-top: 1px solid var(--color-border-subtle); border-bottom: 1px solid var(--color-border-subtle); }
+.shoppingReviewExample nav button { min-height: 44px; padding: 0; border: 0; background: transparent; color: var(--color-action-primary-strong); font-size: var(--font-size-label); font-weight: 750; }
 .shoppingReviewLine { min-height: 44px; padding-top: var(--space-2); display: flex; align-items: center; gap: var(--space-2); border-top: 1px solid var(--color-border-subtle); font-size: var(--font-size-body-small); }
-.shoppingReviewExample footer { padding-top: var(--space-3); display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); border-top: 1px solid var(--color-border-subtle); color: var(--color-text-secondary); font-size: var(--font-size-body-small); }
+.shoppingReviewExample footer { padding-top: var(--space-3); border-top: 1px solid var(--color-border-subtle); }
+.shoppingReviewExample footer button { width: 100%; }
 .primaryButton, .secondaryButton, .textButton { min-height: 46px; padding: 0 18px; border-radius: var(--radius-control); cursor: pointer; font-size: 0.82rem; font-weight: 750; }
 .primaryButton { border: 1px solid var(--color-action-primary); background: var(--color-action-primary); color: var(--color-text-on-accent); }
 .primaryButton:hover { background: var(--color-action-primary-strong); }

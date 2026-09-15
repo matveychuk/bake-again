@@ -59,6 +59,7 @@ html[data-palette='selected-mix'] {
   --layout-gutter-desktop: 2.5rem;
   --layout-gutter-mobile: 1.25rem;
   --layout-assistant-drawer: 30rem;
+  --layout-shopping-content: 58rem;
 
   /* Backwards-compatible aliases for the exploratory homepage. */
   --cream: var(--color-background-page);

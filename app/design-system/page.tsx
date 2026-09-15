@@ -231,18 +231,20 @@ export default function DesignSystemPage() {
             </div>
 
             <div className={styles.componentBlock}>
-              <div className={styles.componentLabel}><strong>Personal state</strong><span>Explicit save state, shopping review and practical shopping row</span></div>
+              <div className={styles.componentLabel}><strong>Personal state</strong><span>One shopping entry point, drawer review and compact persistent list</span></div>
               <div className={styles.personalExample}>
                 <button className={styles.savedControl} type="button" aria-pressed="true" aria-label="Remove Napoleon cake from Saved"><Bookmark size={19} fill="currentColor" /></button>
-                <div className={styles.shoppingExample}><BakeCheckbox aria-label="Mark butter as bought" defaultChecked /><strong>Butter</strong><span>180 g</span><small>From Napoleon cake, Crinkle Cookies</small><button aria-label="Remove butter"><Trash2 size={16} /></button></div>
+                <div className={styles.shoppingExample}><BakeCheckbox aria-label="Mark butter as bought" defaultChecked /><strong>Butter</strong><span>180 g</span><small>For 2 recipes</small><button aria-label="Remove butter"><Trash2 size={16} /></button></div>
                 <div className={styles.shoppingFlowExample}>
-                  <button className={styles.primaryButton} type="button"><ShoppingBag size={16} /> Add ingredients to shopping list</button>
+                  <button className={styles.primaryButton} type="button"><ShoppingBag size={16} /> To shopping list…</button>
                   <div className={styles.shoppingReviewExample}>
-                    <strong>Choose ingredients</strong>
-                    <p>Ingredients not yet in your list are selected. Uncheck anything you already have at home.</p>
+                    <strong>What do you need to buy?</strong>
+                    <small>Napoleon cake · 28 cm · 1×</small>
+                    <p>Leave selected the products you need to buy.</p>
+                    <nav aria-label="Shopping selection"><button type="button">Select all</button><button type="button">Clear all selections</button></nav>
                     <div className={styles.shoppingReviewLine}><BakeCheckbox aria-label="Add Schär Mix B Bread flour mix to the shopping list" defaultChecked /> <span>450 g · Schär Mix B Bread flour mix</span></div>
                     <div className={styles.shoppingReviewLine}><BakeCheckbox aria-label="Add tapioca starch to the shopping list" defaultChecked /> <span>80 g · Tapioca starch</span></div>
-                    <footer><span>Selected to add: 2</span><button className={styles.primaryButton} type="button">Add to shopping list · 2</button></footer>
+                    <footer><button className={styles.primaryButton} type="button">Add to list (2)</button></footer>
                   </div>
                 </div>
               </div>

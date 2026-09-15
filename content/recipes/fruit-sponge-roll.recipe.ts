@@ -9,7 +9,7 @@ export const fruitSpongeRollRecipe = {
     { id: 'sponge', title: 'Sponge', ingredients: [
       { id: 'eggs', name: 'Eggs', quantity: { base: { kind: 'exact', value: 5, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } }, { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 100, unit: 'g' }, shopping: { mode: 'base' } } },
       { id: 'salt', name: 'Salt', quantity: { base: null, equivalent: { kind: 'exact', value: 1, unit: 'pinch' }, shopping: { mode: 'nameOnly' } } }, { id: 'oil', name: 'Oil', quantity: { base: { kind: 'exact', value: 35, unit: 'ml' }, shopping: { mode: 'base' } } },
-      { id: 'water', name: 'Water', quantity: { base: { kind: 'exact', value: 35, unit: 'ml' }, shopping: { mode: 'base' } } }, { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 120, unit: 'g' }, shopping: { mode: 'base' } } },
+      { id: 'water', name: 'Water', quantity: { base: { kind: 'exact', value: 35, unit: 'ml' }, shopping: { mode: 'base', defaultSelected: false } } }, { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 120, unit: 'g' }, shopping: { mode: 'base' } } },
     ] },
     { id: 'cream', title: 'Cream', ingredients: [
       { id: 'cream', name: 'Whipping cream', quantity: { base: { kind: 'exact', value: 250, unit: 'ml' }, shopping: { mode: 'base' } } }, { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 80, unit: 'g' }, shopping: { mode: 'base' } } },

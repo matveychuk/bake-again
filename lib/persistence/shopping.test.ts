@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { addShoppingIngredients, readShopping, removeShoppingItem, setShoppingItemChecked } from './shopping.ts';
+import { addShoppingIngredients, clearShopping, readShopping, removeCheckedShoppingItems, removeShoppingItem, restoreShoppingItem, setShoppingItemChecked } from './shopping.ts';
 
 class MemoryStorage {
   readonly values = new Map<string, string>();
@@ -43,4 +43,25 @@ void test('keeps name-only items unquantified and rounds discrete shopping bases
   addShoppingIngredients([{ ingredientId: 'salt', quantity: null, shopping: { mode: 'nameOnly' }, source: { ...source, ingredientLineId: 'salt', selectedIngredientId: 'salt' } }], new Date('2026-09-09T10:00:00.000Z'), storage);
   assert.deepEqual(readShopping(storage).items.find((item) => item.ingredientId === 'eggs')?.quantity, { kind: 'exact', value: 3, unit: 'piece' });
   assert.equal(readShopping(storage).items.find((item) => item.ingredientId === 'salt')?.quantity, null);
+});
+
+void test('adds another recipe batch only when its source has an explicit batch id', () => {
+  const storage = new MemoryStorage();
+  const now = new Date('2026-09-09T10:00:00.000Z');
+  addShoppingIngredients([butter('crinkle-cookies', 'butter', 60)], now, storage);
+  addShoppingIngredients([butter('crinkle-cookies', 'butter', 60)], now, storage);
+  addShoppingIngredients([{ ...butter('crinkle-cookies', 'butter', 60), source: { ...butter('crinkle-cookies', 'butter', 60).source, batchId: 'batch-2' } }], now, storage);
+  assert.deepEqual(readShopping(storage).items[0].quantity, { kind: 'exact', value: 120, unit: 'g' });
+  assert.equal(readShopping(storage).items[0].sources.length, 2);
+});
+
+void test('removes bought items, restores one item, and clears only on request', () => {
+  const storage = new MemoryStorage();
+  const now = new Date('2026-09-09T10:00:00.000Z');
+  addShoppingIngredients([butter('crinkle-cookies', 'butter', 60), butter('gluten-free-napoleon', 'butter-dough', 120)], now, storage);
+  const item = readShopping(storage).items[0];
+  setShoppingItemChecked(item.id, true, now, storage);
+  assert.equal(removeCheckedShoppingItems(now, storage).items.length, 0);
+  assert.equal(restoreShoppingItem(item, now, storage).items.length, 1);
+  assert.equal(clearShopping(now, storage).items.length, 0);
 });

@@ -105,16 +105,24 @@ type UiMessages = {
     savedEmpty: string;
     browseRecipes: string;
     shoppingTitle: string;
+    shoppingEyebrow: string;
     shoppingEmpty: string;
+    shoppingEmptyBody: string;
+    storedInBrowser: string;
     addIngredients: string;
     addAll: string;
     reviewIngredients: string;
     reviewIngredientsDescription: string;
+    selectAll: string;
+    clearSelection: string;
+    close: string;
     addToList: string;
     addSelected: (count: number) => string;
     addedToList: string;
+    addedCount: (count: number) => string;
     inShoppingList: (count: number) => string;
     openShoppingList: string;
+    undo: string;
     selectedIngredients: (count: number) => string;
     selectIngredient: (name: string) => string;
     alreadyInShoppingList: string;
@@ -122,6 +130,19 @@ type UiMessages = {
     shoppingSaveFailed: string;
     chooseOptionBeforeAdding: string;
     removeItem: string;
+    markBought: (name: string) => string;
+    markNeeded: (name: string) => string;
+    removeChecked: (count: number) => string;
+    clearAll: string;
+    clearAllTitle: string;
+    clearAllDescription: string;
+    confirmClearAll: string;
+    cancel: string;
+    allBought: string;
+    removedItem: (name: string) => string;
+    sourceRecipe: (title: string) => string;
+    sourceRecipes: (count: number) => string;
+    addAnotherBatch: string;
     source: string;
     asNeeded: string;
     chooseOne: string;
@@ -172,7 +193,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       saved: { title: 'Saved recipes — Bake Again', description: 'Recipes you want to bake again.' },
       shoppingList: { title: 'Shopping list — Bake Again', description: 'Ingredients for your saved baking plans.' },
     },
-    personal: { save: 'Save recipe', removeSaved: 'Remove from Saved', savedTitle: 'Saved recipes', savedEmpty: 'No recipes saved yet.', browseRecipes: 'Browse recipes', shoppingTitle: 'Shopping list', shoppingEmpty: 'Your shopping list is empty.', addIngredients: 'Add ingredients to shopping list', addAll: 'Add ingredients to shopping list', reviewIngredients: 'Choose ingredients', reviewIngredientsDescription: 'Ingredients not yet in your list are selected. Uncheck anything you already have at home.', addToList: 'Add to shopping list', addSelected: (count) => `Add to shopping list · ${count}`, addedToList: 'Ingredients added to your shopping list.', inShoppingList: (count) => `In shopping list · ${count}`, openShoppingList: 'Open shopping list', selectedIngredients: (count) => `Selected to add: ${count}`, selectIngredient: (name) => `Add ${name} to the shopping list`, alreadyInShoppingList: 'Already in the shopping list', selectAtLeastOne: 'Select at least one ingredient.', shoppingSaveFailed: 'The shopping list could not be saved in this browser. Please try again.', chooseOptionBeforeAdding: 'Choose an option for every selected “Choose one” ingredient.', removeItem: 'Remove item', source: 'From', asNeeded: 'As needed', chooseOne: 'Choose one', testedBaseOnly: 'Available for the Tested base only' },
+    personal: { save: 'Save recipe', removeSaved: 'Remove from Saved', savedTitle: 'Saved recipes', savedEmpty: 'No recipes saved yet.', browseRecipes: 'Browse recipes', shoppingTitle: 'Shopping list', shoppingEyebrow: 'Your baking plan', shoppingEmpty: 'Your shopping list is empty.', shoppingEmptyBody: 'Add products from a recipe when you are ready to plan a bake.', storedInBrowser: 'Saved in this browser. The list stays here until you clear it.', addIngredients: 'To shopping list…', addAll: 'To shopping list…', reviewIngredients: 'What do you need to buy?', reviewIngredientsDescription: 'Leave selected the products you need to buy.', selectAll: 'Select all', clearSelection: 'Clear all selections', close: 'Close', addToList: 'Add to shopping list', addSelected: (count) => `Add to list (${count})`, addedToList: 'Ingredients added to your shopping list.', addedCount: (count) => `Added ${count} ${count === 1 ? 'product' : 'products'}.`, inShoppingList: (count) => `In shopping list · ${count}`, openShoppingList: 'View list', undo: 'Undo', selectedIngredients: (count) => `Selected to add: ${count}`, selectIngredient: (name) => `Add ${name} to the shopping list`, alreadyInShoppingList: 'Already in the shopping list', selectAtLeastOne: 'Select at least one ingredient.', shoppingSaveFailed: 'The shopping list could not be saved in this browser. Please try again.', chooseOptionBeforeAdding: 'Choose an option for every selected “Choose one” ingredient.', removeItem: 'Remove item', markBought: (name) => `Mark ${name} as bought`, markNeeded: (name) => `Mark ${name} as still needed`, removeChecked: (count) => `Remove bought (${count})`, clearAll: 'Clear all', clearAllTitle: 'Clear the shopping list?', clearAllDescription: 'Every product will be removed. This cannot be undone.', confirmClearAll: 'Clear list', cancel: 'Cancel', allBought: 'Everything is bought.', removedItem: (name) => `${name} removed.`, sourceRecipe: (title) => `For ${title}`, sourceRecipes: (count) => `For ${count} recipes`, addAnotherBatch: 'Add another batch…', source: 'From', asNeeded: 'As needed', chooseOne: 'Choose one', testedBaseOnly: 'Available for the Tested base only' },
   },
   es: {
     navigation: {
@@ -216,7 +237,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       saved: { title: 'Recetas guardadas — Bake Again', description: 'Recetas que quieres volver a preparar.' },
       shoppingList: { title: 'Lista de compra — Bake Again', description: 'Ingredientes para tus próximos horneados.' },
     },
-    personal: { save: 'Guardar receta', removeSaved: 'Quitar de Guardadas', savedTitle: 'Recetas guardadas', savedEmpty: 'Todavía no has guardado recetas.', browseRecipes: 'Ver recetas', shoppingTitle: 'Lista de compra', shoppingEmpty: 'Tu lista de compra está vacía.', addIngredients: 'Añadir ingredientes a la lista de compra', addAll: 'Añadir ingredientes a la lista de compra', reviewIngredients: 'Elegir ingredientes', reviewIngredientsDescription: 'Los ingredientes que aún no están en tu lista aparecen seleccionados. Desmarca lo que ya tengas en casa.', addToList: 'Añadir a la lista', addSelected: (count) => `Añadir a la lista · ${count}`, addedToList: 'Los ingredientes se han añadido a tu lista de compra.', inShoppingList: (count) => `En la lista de compra · ${count}`, openShoppingList: 'Abrir lista de compra', selectedIngredients: (count) => `Seleccionados para añadir: ${count}`, selectIngredient: (name) => `Añadir ${name} a la lista de compra`, alreadyInShoppingList: 'Ya está en la lista de compra', selectAtLeastOne: 'Selecciona al menos un ingrediente.', shoppingSaveFailed: 'No se ha podido guardar la lista de compra en este navegador. Inténtalo de nuevo.', chooseOptionBeforeAdding: 'Elige una opción para cada ingrediente seleccionado de “Elige una opción”.', removeItem: 'Eliminar artículo', source: 'De', asNeeded: 'Según se necesite', chooseOne: 'Elige una opción', testedBaseOnly: 'Disponible solo para la base probada' },
+    personal: { save: 'Guardar receta', removeSaved: 'Quitar de Guardadas', savedTitle: 'Recetas guardadas', savedEmpty: 'Todavía no has guardado recetas.', browseRecipes: 'Ver recetas', shoppingTitle: 'Lista de compra', shoppingEyebrow: 'Tu plan de repostería', shoppingEmpty: 'Tu lista de compra está vacía.', shoppingEmptyBody: 'Añade productos desde una receta cuando quieras planificar lo que vas a hornear.', storedInBrowser: 'Guardada en este navegador. La lista permanece hasta que la vacíes.', addIngredients: 'A la lista de compra…', addAll: 'A la lista de compra…', reviewIngredients: '¿Qué necesitas comprar?', reviewIngredientsDescription: 'Deja marcados los productos que necesitas comprar.', selectAll: 'Seleccionar todo', clearSelection: 'Quitar todas las marcas', close: 'Cerrar', addToList: 'Añadir a la lista', addSelected: (count) => `Añadir a la lista (${count})`, addedToList: 'Los ingredientes se han añadido a tu lista de compra.', addedCount: (count) => `Se ${count === 1 ? 'ha añadido' : 'han añadido'} ${count} ${count === 1 ? 'producto' : 'productos'}.`, inShoppingList: (count) => `En la lista de compra · ${count}`, openShoppingList: 'Ver la lista', undo: 'Deshacer', selectedIngredients: (count) => `Seleccionados para añadir: ${count}`, selectIngredient: (name) => `Añadir ${name} a la lista de compra`, alreadyInShoppingList: 'Ya está en la lista de compra', selectAtLeastOne: 'Selecciona al menos un ingrediente.', shoppingSaveFailed: 'No se ha podido guardar la lista de compra en este navegador. Inténtalo de nuevo.', chooseOptionBeforeAdding: 'Elige una opción para cada ingrediente seleccionado de “Elige una opción”.', removeItem: 'Eliminar artículo', markBought: (name) => `Marcar ${name} como comprado`, markNeeded: (name) => `Marcar ${name} como pendiente`, removeChecked: (count) => `Quitar comprados (${count})`, clearAll: 'Vaciar todo', clearAllTitle: '¿Vaciar la lista de compra?', clearAllDescription: 'Se eliminarán todos los productos. Esta acción no se puede deshacer.', confirmClearAll: 'Vaciar la lista', cancel: 'Cancelar', allBought: 'Ya está todo comprado.', removedItem: (name) => `${name} eliminado.`, sourceRecipe: (title) => `Para ${title}`, sourceRecipes: (count) => `Para ${count} recetas`, addAnotherBatch: 'Añadir otra tanda…', source: 'De', asNeeded: 'Según se necesite', chooseOne: 'Elige una opción', testedBaseOnly: 'Disponible solo para la base probada' },
   },
   uk: {
     navigation: {
@@ -260,7 +281,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       saved: { title: 'Збережені рецепти — Bake Again', description: 'Рецепти, які ви хочете спекти знову.' },
       shoppingList: { title: 'Список покупок — Bake Again', description: 'Інгредієнти для запланованої випічки.' },
     },
-    personal: { save: 'Зберегти рецепт', removeSaved: 'Прибрати зі збережених', savedTitle: 'Збережені рецепти', savedEmpty: 'Ще немає збережених рецептів.', browseRecipes: 'Переглянути рецепти', shoppingTitle: 'Список покупок', shoppingEmpty: 'Список покупок порожній.', addIngredients: 'Додати інгредієнти до списку покупок', addAll: 'Додати інгредієнти до списку покупок', reviewIngredients: 'Обрати інгредієнти', reviewIngredientsDescription: 'Інгредієнти, яких ще немає у списку, вже обрано. Зніміть позначку з того, що є вдома.', addToList: 'Додати до списку', addSelected: (count) => `Додати до списку · ${count}`, addedToList: 'Інгредієнти додано до списку покупок.', inShoppingList: (count) => `У списку покупок · ${count}`, openShoppingList: 'Відкрити список покупок', selectedIngredients: (count) => `Обрано для додавання: ${count}`, selectIngredient: (name) => `Додати «${name}» до списку покупок`, alreadyInShoppingList: 'Уже є у списку покупок', selectAtLeastOne: 'Оберіть хоча б один інгредієнт.', shoppingSaveFailed: 'Не вдалося зберегти список покупок у цьому браузері. Спробуйте ще раз.', chooseOptionBeforeAdding: 'Оберіть варіант для кожного обраного інгредієнта «Оберіть один варіант».', removeItem: 'Видалити позицію', source: 'З рецепта', asNeeded: 'За потреби', chooseOne: 'Оберіть один варіант', testedBaseOnly: 'Доступно лише для перевіреної бази' },
+    personal: { save: 'Зберегти рецепт', removeSaved: 'Прибрати зі збережених', savedTitle: 'Збережені рецепти', savedEmpty: 'Ще немає збережених рецептів.', browseRecipes: 'Переглянути рецепти', shoppingTitle: 'Список покупок', shoppingEyebrow: 'Ваш план випічки', shoppingEmpty: 'Ваш список порожній.', shoppingEmptyBody: 'Додайте продукти з рецепта, коли будете планувати випічку.', storedInBrowser: 'Збережено в цьому браузері. Список залишається, доки ви його не очистите.', addIngredients: 'До списку покупок…', addAll: 'До списку покупок…', reviewIngredients: 'Що потрібно купити?', reviewIngredientsDescription: 'Залиште позначеними продукти, які потрібно купити.', selectAll: 'Обрати всі', clearSelection: 'Зняти всі позначки', close: 'Закрити', addToList: 'Додати до списку', addSelected: (count) => `Додати до списку (${count})`, addedToList: 'Інгредієнти додано до списку покупок.', addedCount: (count) => { const mod10 = count % 10; const mod100 = count % 100; const noun = mod10 === 1 && mod100 !== 11 ? 'продукт' : mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14) ? 'продукти' : 'продуктів'; return `Додано ${count} ${noun}.`; }, inShoppingList: (count) => `У списку покупок · ${count}`, openShoppingList: 'Переглянути список', undo: 'Скасувати', selectedIngredients: (count) => `Обрано для додавання: ${count}`, selectIngredient: (name) => `Додати «${name}» до списку покупок`, alreadyInShoppingList: 'Уже є у списку покупок', selectAtLeastOne: 'Оберіть хоча б один інгредієнт.', shoppingSaveFailed: 'Не вдалося зберегти список покупок у цьому браузері. Спробуйте ще раз.', chooseOptionBeforeAdding: 'Оберіть варіант для кожного обраного інгредієнта «Оберіть один варіант».', removeItem: 'Видалити позицію', markBought: (name) => `Позначити «${name}» як куплений продукт`, markNeeded: (name) => `Позначити «${name}» як продукт, який ще потрібно купити`, removeChecked: (count) => `Прибрати куплене (${count})`, clearAll: 'Очистити все', clearAllTitle: 'Очистити список покупок?', clearAllDescription: 'Усі продукти буде видалено. Цю дію не можна скасувати.', confirmClearAll: 'Очистити список', cancel: 'Скасувати', allBought: 'Усе куплено.', removedItem: (name) => `«${name}» видалено.`, sourceRecipe: (title) => `З рецепта «${title}»`, sourceRecipes: (count) => `Для ${count} рецептів`, addAnotherBatch: 'Додати ще одну порцію…', source: 'З рецепта', asNeeded: 'За потреби', chooseOne: 'Оберіть один варіант', testedBaseOnly: 'Доступно лише для перевіреної бази' },
   },
 };
 

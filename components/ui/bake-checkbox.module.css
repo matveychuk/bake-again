@@ -4,6 +4,9 @@
   background: transparent;
 }
 
+/* Keep the visible square compact while the pseudo-element supplies a 44px hit area. */
+.checkbox::after { inset: -14px; }
+
 .checkbox[data-checked] {
   border-color: var(--color-action-primary-strong);
   background: var(--color-action-primary-strong);

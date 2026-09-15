@@ -15,7 +15,7 @@ export const crepesRecipe = {
       { id: 'milk', name: 'Milk', quantity: { base: { kind: 'exact', value: 500, unit: 'ml' }, shopping: { mode: 'base' } } },
       { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 20, unit: 'g' }, equivalent: { kind: 'exact', value: 1, unit: 'tbsp' }, shopping: { mode: 'base' } } },
       { id: 'salt', name: 'Salt', quantity: { base: null, equivalent: { kind: 'exact', value: 1, unit: 'pinch' }, shopping: { mode: 'nameOnly' } } },
-      { id: 'water', name: 'Hot water', quantity: { base: { kind: 'exact', value: 50, unit: 'ml' }, shopping: { mode: 'base' } } },
+      { id: 'water', name: 'Hot water', quantity: { base: { kind: 'exact', value: 50, unit: 'ml' }, shopping: { mode: 'base', defaultSelected: false } } },
       { id: 'oil', name: 'Neutral oil', quantity: { base: { kind: 'exact', value: 5, unit: 'tbsp' }, equivalent: { kind: 'exact', value: 25, unit: 'g' }, shopping: { mode: 'base' } }, note: 'The source records both 5 tbsp and 25 g; this inconsistent-looking pair is retained without conversion. Sunflower oil works well.' },
       { id: 'pan-oil', name: 'Oil for the pan', quantity: { base: null, shopping: { mode: 'nameOnly' } }, note: 'For a very thin coating before the first crepe only.' },
     ],

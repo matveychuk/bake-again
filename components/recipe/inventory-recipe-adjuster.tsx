@@ -92,7 +92,6 @@ export function InventoryRecipeAdjuster({
                   ? formatQuantity(locale, scaleStructuredQuantity(ingredient.quantity.equivalent, scaleFactor))
                   : undefined,
               })}
-              labelFor={(ingredient) => messages.recipe.markIngredientPrepared(ingredient.name)}
             />
             {recipe.gapNote && <aside className={styles.gapNote}><strong>Source gap</strong><p>{recipe.gapNote}</p></aside>}
           </>

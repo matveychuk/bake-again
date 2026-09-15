@@ -11,6 +11,8 @@ export type ShoppingSourceV1 = {
   ingredientLineId: string;
   sectionId: string;
   selectedIngredientId: string;
+  /** Present only when the user explicitly adds another batch of the same recipe. */
+  batchId?: string;
 };
 
 export type ShoppingItemV1 = {
@@ -32,11 +34,11 @@ export type ShoppingV1 = {
 export type ShoppingIngredientInput = {
   ingredientId: string;
   quantity: Quantity | null;
-  shopping?: { mode: 'base' | 'nameOnly'; increment?: number; rounding?: 'up' };
+  shopping?: { mode: 'base' | 'nameOnly'; increment?: number; rounding?: 'up'; defaultSelected?: boolean };
   source: ShoppingSourceV1;
 };
 
-const units: readonly Unit[] = ['g', 'ml', 'piece', 'tsp', 'tbsp', 'packet', 'pinch'];
+const units: readonly Unit[] = ['g', 'ml', 'piece', 'tsp', 'tbsp', 'cup', 'packet', 'pinch'];
 const emptyShopping = (): ShoppingV1 => ({ schemaVersion: 2, updatedAt: new Date(0).toISOString(), items: [] });
 const isIsoDate = (value: unknown): value is string => typeof value === 'string' && !Number.isNaN(Date.parse(value));
 const isId = (value: unknown): value is string => typeof value === 'string' && /^[a-z0-9][a-z0-9-]{0,127}$/.test(value);
@@ -54,7 +56,7 @@ function isQuantity(value: unknown): value is Quantity | null {
 function isSource(value: unknown): value is ShoppingSourceV1 {
   if (!value || typeof value !== 'object') return false;
   const source = value as Record<string, unknown>;
-  return isId(source.recipeId) && isId(source.recipeVersionId) && isId(source.ingredientLineId) && isId(source.sectionId) && isId(source.selectedIngredientId);
+  return isId(source.recipeId) && isId(source.recipeVersionId) && isId(source.ingredientLineId) && isId(source.sectionId) && isId(source.selectedIngredientId) && (source.batchId === undefined || isId(source.batchId));
 }
 
 function mergeKey(ingredientId: string, quantity: Quantity | null): string {
@@ -62,7 +64,7 @@ function mergeKey(ingredientId: string, quantity: Quantity | null): string {
 }
 
 function sourceKey(source: ShoppingSourceV1): string {
-  return [source.recipeId, source.recipeVersionId, source.ingredientLineId].join(':');
+  return [source.recipeId, source.recipeVersionId, source.ingredientLineId, source.batchId ?? 'base'].join(':');
 }
 
 function isItem(value: unknown): value is ShoppingItemV1 {
@@ -147,6 +149,29 @@ export function setShoppingItemChecked(id: string, checked: boolean, now = new D
 export function removeShoppingItem(id: string, now = new Date(), storage?: StorageLike | null): ShoppingV1 {
   const current = readShopping(storage);
   return persistShopping({ ...current, updatedAt: now.toISOString(), items: current.items.filter((item) => item.id !== id) }, storage);
+}
+
+export function removeCheckedShoppingItems(now = new Date(), storage?: StorageLike | null): ShoppingV1 {
+  const current = readShopping(storage);
+  return persistShopping({
+    ...current,
+    updatedAt: now.toISOString(),
+    items: current.items.filter((item) => !item.checked),
+  }, storage);
+}
+
+export function clearShopping(now = new Date(), storage?: StorageLike | null): ShoppingV1 {
+  return persistShopping({ schemaVersion: 2, updatedAt: now.toISOString(), items: [] }, storage);
+}
+
+export function restoreShoppingItem(item: ShoppingItemV1, now = new Date(), storage?: StorageLike | null): ShoppingV1 {
+  const current = readShopping(storage);
+  if (current.items.some((candidate) => candidate.id === item.id)) return current;
+  return persistShopping({
+    ...current,
+    updatedAt: now.toISOString(),
+    items: [...current.items, { ...item, updatedAt: now.toISOString() }],
+  }, storage);
 }
 
 export function subscribeToShopping(onChange: () => void): () => void {

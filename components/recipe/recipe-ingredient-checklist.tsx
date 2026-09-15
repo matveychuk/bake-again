@@ -1,7 +1,3 @@
-'use client';
-
-import { useState } from 'react';
-import { BakeCheckbox } from '@/components/ui/bake-checkbox';
 import type { StructuredIngredient, StructuredIngredientSection } from '@/content/recipes/source-recipe.types';
 import { formatQuantity } from '@/lib/i18n/format';
 import styles from './inventory-recipe-detail.module.css';
@@ -14,26 +10,13 @@ export function RecipeIngredientChecklist({
       ? formatQuantity('en', ingredient.quantity.equivalent)
       : undefined,
   }),
-  labelFor = (ingredient) => `Mark ${ingredient.name} as prepared`,
 }: {
   sections: StructuredIngredientSection[];
   amountFor?: (ingredient: StructuredIngredient) => {
     primary: string;
     secondary?: string;
   };
-  labelFor?: (ingredient: StructuredIngredient) => string;
 }) {
-  const [checkedIds, setCheckedIds] = useState<Set<string>>(new Set());
-
-  const toggle = (id: string, checked: boolean) => {
-    setCheckedIds((current) => {
-      const next = new Set(current);
-      if (checked) next.add(id);
-      else next.delete(id);
-      return next;
-    });
-  };
-
   return (
     <div className={styles.ingredientSections}>
       {sections.map((section) => (
@@ -41,15 +24,9 @@ export function RecipeIngredientChecklist({
           <h3>{section.title}</h3>
           <ul className={styles.ingredients}>
             {section.ingredients.map((ingredient) => {
-              const checked = checkedIds.has(ingredient.id);
               const amounts = amountFor(ingredient);
               return (
-                <li className={checked ? styles.ingredientChecked : undefined} key={ingredient.id}>
-                  <BakeCheckbox
-                    aria-label={labelFor(ingredient)}
-                    checked={checked}
-                    onCheckedChange={(value) => toggle(ingredient.id, value === true)}
-                  />
+                <li key={ingredient.id}>
                   <div className={styles.ingredientCopy}>
                     <span>{ingredient.name}{ingredient.optional ? ' · optional' : ''}</span>
                     {ingredient.note && <small>{ingredient.note}</small>}

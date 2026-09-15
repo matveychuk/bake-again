@@ -485,7 +485,7 @@ export const glutenFreeNapoleonRecipe = {
               name: { uk: "холодна вода", en: "cold water", es: "agua fría" },
             },
           ],
-          quantity: { base: { kind: "range", min: 30, max: 70, unit: "ml" }, shopping: { mode: "base" } },
+          quantity: { base: { kind: "range", min: 30, max: 70, unit: "ml" }, shopping: { mode: "base", defaultSelected: false } },
           scaling: { kind: "range", precision: 5, rounding: "nearest" },
           qualifier: {
             uk: "за потреби",

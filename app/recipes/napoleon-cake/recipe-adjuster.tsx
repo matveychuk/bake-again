@@ -1,10 +1,9 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Calculator, Check, ChevronDown, Info, RotateCcw } from 'lucide-react';
 import { NapoleonIngredientsControl } from '@/components/recipe/add-recipe-ingredients-control';
 import { RecipeIngredientHeading } from '@/components/recipe/recipe-ingredient-heading';
-import { BakeCheckbox } from '@/components/ui/bake-checkbox';
 import { glutenFreeNapoleonRecipe } from '@/content/recipes/gluten-free-napoleon.recipe';
 import { formatQuantity } from '@/content/recipes/napoleon-configuration';
 import type { BatchScaleFactor, IngredientSection, RecipeDraft } from '@/content/recipes/recipe.types';
@@ -47,7 +46,6 @@ export function RecipeAdjuster({ locale }: { locale: AppLocale }) {
     isExactBase,
     reset,
   } = useRecipeConfiguration();
-  const [checkedIngredients, setCheckedIngredients] = useState<string[]>([]);
 
   const amounts = useMemo(
     () => new Map(result.ingredientAmounts.map((item) => [item.ingredientLineId, item])),
@@ -61,14 +59,6 @@ export function RecipeAdjuster({ locale }: { locale: AppLocale }) {
     }
     return `Calculated · ${size} · ${pretty(scale)}× batch`;
   }, [available, form, isExactBase, quantityMode, scale]);
-
-  function toggleIngredient(id: string) {
-    setCheckedIngredients((selected) =>
-      selected.includes(id)
-        ? selected.filter((item) => item !== id)
-        : [...selected, id],
-    );
-  }
 
   return (
     <section className={styles.planning} id="adjust-recipe">
@@ -154,11 +144,6 @@ export function RecipeAdjuster({ locale }: { locale: AppLocale }) {
             ].filter(Boolean).map((note) => sentenceCase(note!));
             return (
               <div className={styles.ingredient} key={line.id}>
-                <BakeCheckbox
-                  aria-label={`Mark ${name} as prepared`}
-                  checked={checkedIngredients.includes(line.id)}
-                  onCheckedChange={() => toggleIngredient(line.id)}
-                />
                 <span className={styles.amount}>{formatQuantity(calculated?.amount ?? line.quantity.base)}</span>
                 <span>
                   <span>{name}</span>

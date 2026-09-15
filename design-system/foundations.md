@@ -68,6 +68,8 @@ Prefer whitespace over decorative dividers. Use 24–32px between related blocks
 
 - Page maximum: 1440px.
 - Content maximum: 1360px.
+- Shopping work-column maximum: 928px.
+- Contextual drawer width: 480px on desktop; full viewport width at 900px and below.
 - Desktop gutter: 40px.
 - Mobile gutter: 20px.
 - Reference widths: 390px mobile, 900px tablet and 1440px desktop.

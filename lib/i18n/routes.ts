@@ -1,4 +1,5 @@
 import { personalStateRecipes } from '../../content/recipes/registry.ts';
+import { recipeInventory } from '../../content/recipes/inventory.ts';
 import { isAppLocale, type AppLocale } from './config.ts';
 
 const localizedRecipes = personalStateRecipes;
@@ -34,7 +35,9 @@ export function getLocalizedRecipePath(
   suffix = '',
 ): string | null {
   const recipe = localizedRecipes.find((candidate) => candidate.id === recipeId);
-  return recipe ? `${localeRecipesPath(locale)}/${recipe.slug[locale]}${suffix}` : null;
+  if (recipe) return `${localeRecipesPath(locale)}/${recipe.slug[locale]}${suffix}`;
+  const inventoryRecipe = recipeInventory.find((candidate) => candidate.id === recipeId);
+  return inventoryRecipe ? `${localeRecipesPath(locale)}/${inventoryRecipe.slug}${suffix}` : null;
 }
 
 export function getRecipeIdFromLocalizedSlug(
@@ -80,7 +83,9 @@ export function getLocaleSwitchPath(
     const currentLocale = getLocaleFromPathname(pathname);
     const recipeId =
       (currentLocale ? getRecipeIdFromLocalizedSlug(currentLocale, slug) : null) ??
-      getRecipeIdFromLegacySlug(slug);
+      getRecipeIdFromLegacySlug(slug) ??
+      recipeInventory.find((recipe) => recipe.slug === slug)?.id ??
+      null;
     const localizedPath = recipeId
       ? getLocalizedRecipePath(recipeId, targetLocale, cookSuffix)
       : null;

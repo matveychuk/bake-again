@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Reworked shopping into one unambiguous path: read-only recipe ingredients open a shared
+  modal drawer for selection, with compact headings, select/clear actions, explicit
+  alternative choices, water deselected by default and a sticky counted confirmation.
+  Added explicit duplicate-batch handling, View list/Undo confirmation, persistent browser
+  guidance, localized recipe links and conditions, bought-item cleanup, single-item Undo,
+  confirmed Clear all and a denser responsive shopping page.
+  Added the `layout.shoppingContent` token for the focused shopping work column.
+
 - Consolidated recipe discovery into the home page: the Recipes navigation item now
   matches the Bake Again wordmark destination, and former catalogue URLs redirect home.
 
@@ -14,11 +22,8 @@
 - Reduced step-photo cards at tablet widths to a compact, nearly two-up horizontal
   sequence, while preserving the three-up desktop grid and the larger mobile scroll card.
 - Replaced the ambiguous ingredient `Add all` interaction with an explicit, two-step
-  shopping-list review. Not-yet-added ingredients start selected, at-home items can be
-  unchecked, the confirm action shows the count, and successful persistence produces a
-  durable `In shopping list · n` link. Ingredient preparation checkboxes remain local to
-  the recipe and no longer imply a shopping-list write. Added verified-write error
-  handling, localized copy and the matching Design Lab state.
+  shopping-list review. This earlier dialog treatment was superseded by the shared drawer
+  and read-only ingredient-list pattern above.
 - Standardized recipe-detail headings on the Napoleon two-line treatment: a dark,
   explicit gluten-free descriptor followed by the terracotta italic dish name in all
   three locales. Added the shared heading to the Design Lab.
@@ -61,10 +66,11 @@
 - Added the `layout.assistantDrawer` token and a live Design Lab assistant example.
 - Localised the evidence badge contract: icon, written status and explanation are now
   locale-aware while the evidence-state semantics remain unchanged.
-- Clarified that ingredient prep checkboxes are distinct from the `Add all` shopping
-  action, which belongs in the Ingredients heading.
-- Unified the Ingredients heading and preparation-checkbox primitives across detailed
-  recipes and source-backed working records.
+- Clarified the earlier distinction between preparation and shopping selection. The
+  preparation-checkbox pattern was later removed from recipe pages in favour of one
+  shopping-selection surface.
+- Unified the Ingredients heading and ingredient-row primitives across detailed recipes
+  and source-backed working records.
 - Standardised product and Design Lab checkbox states on `BakeCheckbox`.
 
 ## 1.0.4 — 2026-09-09

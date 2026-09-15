@@ -16,7 +16,7 @@ Use two independently versioned browser-local slices:
 
 ```text
 bake-again:recipe-memory:v1
-bake-again:shopping:v1
+bake-again:shopping:v2
 ```
 
 Recipe memory stores an ordered set of stable canonical `recipeId` values. Shopping
@@ -31,15 +31,24 @@ persisting localized display strings while still letting a reader save any known
 
 Compatible duplicate items merge by canonical ingredient ID and unit. Their quantities
 are summed, sources are retained, and a newly merged item becomes unchecked. Different
-units and unspecified quantities stay separate. A source line may be added only once.
+units and unspecified quantities stay separate. A source line may be added only once
+unless the user explicitly chooses Add another batch; that action records a batch identity
+and aggregates the additional compatible quantity.
 
 All parsing validates schema version, IDs, ISO dates, units, finite positive quantities,
 range ordering and bounded collections. Malformed storage falls back safely to an empty
 snapshot. Future schema versions read and transform a valid previous slice before writing
 their new key. Neither slice is mirrored into cookies.
 
-The first slice imports only the recipe's Tested base ingredients. Calculated and Suggested
-configurations remain out of scope so their provenance cannot be mistaken for Tested.
+The first slice imports only the recipe's recorded base ingredients. Calculated and
+Suggested configurations remain out of scope so their provenance cannot be mistaken for
+Tested. The shopping-selection drawer is the sole ingredient-selection surface; closing it
+does not write. Household staples may declare `shopping.defaultSelected: false`.
+
+The list has no age-based expiry. A checked item means bought and stays in place until the
+user removes bought items, removes the row, or confirms Clear all. Single-row removal is
+recoverable with Undo. Conditions, localized recipe links and all contributing sources are
+derived from canonical recipe data at render time.
 
 ## Consequences
 

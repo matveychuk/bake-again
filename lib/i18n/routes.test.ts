@@ -16,8 +16,8 @@ void test('preserves the same known recipe when a language changes', () => {
   );
 });
 
-void test('sends an unknown legacy recipe detail to the localized home page', () => {
-  assert.equal(getLocaleSwitchPath('/uk/recipes/banana-bread', 'en'), '/en');
+void test('preserves a source-backed recipe when the language changes', () => {
+  assert.equal(getLocaleSwitchPath('/uk/recipes/banana-bread', 'en'), '/en/recipes/banana-bread');
 });
 
 void test('sends the former localized catalogue to the localized home page', () => {

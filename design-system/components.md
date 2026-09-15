@@ -64,22 +64,24 @@
   standalone terracotta trash icon without a filled or white circular surface. Leave a
   clear gap after the quantity. A checked item remains readable; colour is not its only
   cue.
-- Use `BakeCheckbox` for every product and Design Lab checkbox. Its checked state is a
+- Use `BakeCheckbox` for shopping selection, bought state and Design Lab checkbox examples. Its checked state is a
   warm-brown fill with a warm-white checkmark.
-- Ingredient-list checkboxes mean prepared; they never add shopping data. Keep them
-  separate from the explicit `Add ingredients to shopping list` action in the Ingredients
-  heading.
-- The shopping action opens a review dialog with every not-yet-added ingredient selected.
-  Let people uncheck what they already have, resolve ingredient alternatives, and confirm
-  with a button that includes the selected count. Only confirmation writes to Shopping.
+- Recipe ingredient lists are read-only. They contain no checkboxes; selection happens
+  only after the explicit `To shopping list…` action in the Ingredients heading.
+- The shopping action opens the shared modal drawer on the right at desktop widths and
+  full-screen at 900px and below. Every not-yet-added ingredient starts selected except
+  an explicitly configured household staple such as water. Let people select all, clear
+  the selection, resolve ingredient alternatives and confirm with a button that includes
+  the selected count. Closing writes nothing and preserves the unfinished draft.
 - After a successful write, replace the primary action with a persistent `In shopping
-  list · n` link and show an announced confirmation with a direct link to Shopping. If
-  some recipe lines remain, keep the add action available beside that status.
+  list · n` link and show an announced confirmation with View list and Undo. If some
+  recipe lines remain, keep the add action available beside that status. If all lines are
+  present, offer the explicit `Add another batch…` action; never double quantities silently.
 - Verify the write before announcing success. A storage failure stays in the review and
   presents a localized error rather than implying the ingredients were saved.
-- Recipe detail variants share the same Ingredients heading and prep-checkbox primitives;
+- Recipe detail variants share the same Ingredients heading and read-only row primitives;
   recipe maturity may change the status copy or disable shopping, but not the layout.
-- Source-backed translations may show the ingredient checklist without English-only
+- Source-backed translations may show the ingredient list without English-only
   adjustment controls. Keep ingredient names, quantities, notes and checkbox labels in
   the active locale.
 - Store ingredient quantities in `quantity.base`, with an optional explicit
@@ -90,6 +92,11 @@
   parentheses. When quantities are scaled, scale both values from the same factor.
 - Ingredient choice is an explicit radio group in a review step. Never silently choose
   among alternatives offered by a recipe.
+- Shopping persists in browser storage until an explicit removal. Checking means bought
+  and does not reorder the row. Keep `Remove bought (n)` visible, keep `Clear all`
+  secondary and confirm it, and provide Undo after removing one row.
+- Preserve conditions and recipe provenance in shopping. Use a localized `For {recipe}`
+  link, or `For n recipes` with source details after compatible quantities merge.
 - Empty Saved and Shopping states explain the next practical action without decorative
   illustrations.
 
