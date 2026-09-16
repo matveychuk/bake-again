@@ -74,16 +74,17 @@
   the selection, resolve ingredient alternatives and confirm with a button that includes
   the selected count. Closing writes nothing and preserves the unfinished draft.
 - After a successful write, replace the primary action with a persistent `In shopping
-  list · n` link and show an announced confirmation with View list and Undo. If some
+list · n` link and show an announced confirmation with View list and Undo. If some
   recipe lines remain, keep the add action available beside that status. If all lines are
   present, offer the explicit `Add another batch…` action; never double quantities silently.
 - Verify the write before announcing success. A storage failure stays in the review and
   presents a localized error rather than implying the ingredients were saved.
 - Recipe detail variants share the same Ingredients heading and read-only row primitives;
   recipe maturity may change the status copy or disable shopping, but not the layout.
-- Source-backed translations may show the ingredient list without English-only
-  adjustment controls. Keep ingredient names, quantities, notes and checkbox labels in
-  the active locale.
+- Source-backed recipe pages show the shared adjustment controls in English, Spanish and
+  Ukrainian. Keep control labels, ingredient names, quantities, notes and shopping labels
+  in the active locale. The supported numeric anchor is recipe-specific; recipes without
+  one show the localized locked state instead of hiding the control.
 - Store ingredient quantities in `quantity.base`, with an optional explicit
   `quantity.equivalent`. Only `base` is used for shopping and aggregation; the
   equivalent is a scaled cooking aid and never enters the shopping list. Use
@@ -121,6 +122,9 @@ variation.
 - The recipe page includes an explicit `Open Cook Mode` action before the ingredient list
   and beside the method when a method exists.
 - A recipe with source-supported steps opens the shared step-by-step Cook Mode.
+- The shared Cook Mode adapter preserves the active locale, ordered step media and
+  localized image descriptions from the canonical recipe source. Route components must
+  not rebuild or truncate that recipe data.
 - When the source has no usable method, the action still opens a labelled unavailable
   state. It explains the missing source data and links back to the recipe record; it must
   not simulate cooking instructions or imply that the recipe can be cooked from the data.
@@ -138,8 +142,32 @@ variation.
   viewport and leave part of the next frame visible as a scrolling cue.
 - Localize captions, alternative text and the sequence label; image files remain shared
   across locales.
+- Recipe detail and Cook Mode consume the same canonical step-media array, so an image
+  approved for a recipe step appears on both surfaces in the same order.
 - The matching responsive reference is `/design-system/napoleon-five-steps`; it shares the
   live `StepMediaSequence` component and its production styles.
+- `components/recipe/step-media-sequence.tsx` is the only product renderer for ordered
+  step photography. Recipe detail uses the `recipe` variant and Cook Mode uses the `cook`
+  variant; route-specific copies are not allowed. Multi-image sequences expose a labelled,
+  keyboard-focusable scroll region.
+
+## Recipe ingredient rows
+
+- `RecipeIngredientList` owns the read-only name, amount, equivalent and note layout used
+  by recipe detail, per-step Cook quantities and the Cook ingredients drawer.
+- Use `full` for recipe/drawer lists and `compact` inside a Cook step. Interactive shopping
+  selection remains in the shared drawer and composes its own controls around canonical
+  ingredient data.
+- Route-specific ingredient needs use the shared item props: `notes` for multiple source
+  qualifications and `after` for a related control such as the flour assistant. Do not
+  recreate the amount/name grid around those differences.
+
+## Recipe step guidance
+
+- `RecipeStepGuidance` renders both `checkpoint` and `tip` semantics on recipe detail and
+  Cook Mode. Preserve the icon and written label; colour only reinforces the meaning.
+- Use the `prominent` variant for a critical warning before the action and the default
+  block variant for the observable completion cue after the action.
 
 ## Contextual assistant drawer
 

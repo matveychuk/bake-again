@@ -7,7 +7,11 @@ export type ParsedInventoryAmount = {
   unit: string;
 };
 
-const fractionValues: Record<string, number> = { '¼': 0.25, '½': 0.5, '¾': 0.75 };
+const fractionValues: Record<string, number> = {
+  '¼': 0.25,
+  '½': 0.5,
+  '¾': 0.75,
+};
 
 function parseNumber(value: string) {
   const mixed = value.match(/^(\d+)([¼½¾])$/);
@@ -17,12 +21,18 @@ function parseNumber(value: string) {
   return Number.isFinite(numeric) ? numeric : null;
 }
 
-export function parseInventoryAmount(amount: string): ParsedInventoryAmount | null {
-  const match = amount.trim().match(/^(\d+(?:[.,]\d+)?[¼½¾]?|[¼½¾])(?:\s*[–-]\s*(\d+(?:[.,]\d+)?[¼½¾]?|[¼½¾]))?\s*(.*)$/);
+export function parseInventoryAmount(
+  amount: string,
+): ParsedInventoryAmount | null {
+  const match = amount
+    .trim()
+    .match(
+      /^(\d+(?:[.,]\d+)?[¼½¾]?|[¼½¾])(?:\s*[–-]\s*(\d+(?:[.,]\d+)?[¼½¾]?|[¼½¾]))?\s*(.*)$/,
+    );
   if (!match) return null;
   const minimum = parseNumber(match[1]);
   const maximum = match[2] ? parseNumber(match[2]) : null;
-  if (minimum === null || maximum === null && Boolean(match[2])) return null;
+  if (minimum === null || (maximum === null && Boolean(match[2]))) return null;
   return { minimum, maximum, unit: match[3].trim() };
 }
 
@@ -42,21 +52,31 @@ function formatValue(value: number) {
 export function scaleInventoryAmount(amount: string, factor: number) {
   const parsed = parseInventoryAmount(amount);
   if (!parsed) return amount;
-  const values = parsed.maximum === null
-    ? formatValue(parsed.minimum * factor)
-    : `${formatValue(parsed.minimum * factor)}–${formatValue(parsed.maximum * factor)}`;
+  const values =
+    parsed.maximum === null
+      ? formatValue(parsed.minimum * factor)
+      : `${formatValue(parsed.minimum * factor)}–${formatValue(parsed.maximum * factor)}`;
   return `${values}${parsed.unit ? ` ${parsed.unit}` : ''}`;
 }
 
-export function findScalingAnchor(ingredients: StructuredIngredient[]) {
-  const flour = ingredients.find((ingredient) => ingredient.id === 'flour');
-  if (!flour) return null;
-  const amount = flour.quantity.base;
+export function findScalingAnchor(
+  ingredients: StructuredIngredient[],
+  ingredientId = 'flour',
+) {
+  const ingredient = ingredients.find((item) => item.id === ingredientId);
+  if (!ingredient) return null;
+  const amount = ingredient.quantity.base;
   if (!amount || amount.kind !== 'exact') return null;
-  return { ingredient: flour, amount: { minimum: amount.value, maximum: null, unit: amount.unit } };
+  return {
+    ingredient,
+    amount: { minimum: amount.value, maximum: null, unit: amount.unit },
+  };
 }
 
-export function scaleStructuredQuantity(amount: Quantity | null, factor: number): Quantity | null {
+export function scaleStructuredQuantity(
+  amount: Quantity | null,
+  factor: number,
+): Quantity | null {
   if (!amount) return null;
   return amount.kind === 'exact'
     ? { ...amount, value: amount.value * factor }

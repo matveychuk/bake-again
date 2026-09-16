@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { Calculator, Check, ChevronDown, Info, RotateCcw } from 'lucide-react';
 import { NapoleonIngredientsControl } from '@/components/recipe/add-recipe-ingredients-control';
 import { RecipeIngredientHeading } from '@/components/recipe/recipe-ingredient-heading';
+import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
 import { glutenFreeNapoleonRecipe } from '@/content/recipes/gluten-free-napoleon.recipe';
 import { formatQuantity } from '@/content/recipes/napoleon-configuration';
 import type { BatchScaleFactor, IngredientSection, RecipeDraft } from '@/content/recipes/recipe.types';
@@ -133,27 +134,35 @@ export function RecipeAdjuster({ locale }: { locale: AppLocale }) {
         />
         <div className={styles.ingredientGroup}>
           <h3>{layers.title.en}</h3>
-          {layers.lines.map((line) => {
-            const calculated = amounts.get(line.id);
-            const name = sentenceCase(line.options.map((option) => option.name.en).join(' or '));
-            const notes = [
-              line.choose ? 'Choose one · final default pending' : null,
-              line.condition?.en,
-              line.preparation?.en,
-              line.qualifier?.en,
-            ].filter(Boolean).map((note) => sentenceCase(note!));
-            return (
-              <div className={styles.ingredient} key={line.id}>
-                <span className={styles.amount}>{formatQuantity(calculated?.amount ?? line.quantity.base)}</span>
-                <span>
-                  <span>{name}</span>
-                  {calculated?.requiresResolution && <small>Resolve this quantity before Cook Mode</small>}
-                  {line.id === 'schar-mix-b' && <AssistantTrigger scope="flour" locale={locale} compact />}
-                  {notes.map((note) => <small key={note}>{note}</small>)}
-                </span>
-              </div>
-            );
-          })}
+          <RecipeIngredientList
+            items={layers.lines.map((line) => {
+              const calculated = amounts.get(line.id);
+              return {
+                id: line.id,
+                name: sentenceCase(
+                  line.options.map((option) => option.name.en).join(' or '),
+                ),
+                primary: formatQuantity(
+                  calculated?.amount ?? line.quantity.base,
+                ),
+                notes: [
+                  calculated?.requiresResolution
+                    ? 'Resolve this quantity before Cook Mode'
+                    : null,
+                  line.choose ? 'Choose one · final default pending' : null,
+                  line.condition?.en,
+                  line.preparation?.en,
+                  line.qualifier?.en,
+                ]
+                  .filter((note): note is string => Boolean(note))
+                  .map(sentenceCase),
+                after:
+                  line.id === 'schar-mix-b' ? (
+                    <AssistantTrigger scope="flour" locale={locale} compact />
+                  ) : undefined,
+              };
+            })}
+          />
         </div>
         <div className={styles.provisional}>
           <Info size={17} />

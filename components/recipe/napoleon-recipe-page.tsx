@@ -9,6 +9,7 @@ import {
 import { SectionTitle } from '@/components/foundations/section-title';
 import { RecipeFacts } from '@/components/recipe/recipe-facts';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
+import { RecipeStepGuidance } from '@/components/recipe/recipe-step-guidance';
 import { SiteHeader } from '@/components/site/site-header';
 import { NAPOLEON_METHOD_STEP_COUNT, napoleonPrototypeMedia, napoleonPrototypeSteps } from '@/content/recipes/napoleon.prototype';
 import type { RecipeDraft } from '@/content/recipes/recipe.types';
@@ -16,7 +17,7 @@ import { recipeDetailTitles } from '@/content/recipes/catalog-locales';
 import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
 import { getLocalizedRecipePath, localeHomePath, localeRecipesPath } from '@/lib/i18n/routes';
 import styles from '@/app/recipes/napoleon-cake/recipe.module.css';
-import { StepMediaSequence } from '@/app/recipes/napoleon-cake/step-media-sequence';
+import { StepMediaSequence } from '@/components/recipe/step-media-sequence';
 import { AssistantTrigger, RecipeAssistantProvider } from '@/app/recipes/napoleon-cake/recipe-assistant';
 import { RecipeAdjuster } from '@/app/recipes/napoleon-cake/recipe-adjuster';
 import { StepTip } from '@/app/recipes/napoleon-cake/step-tip';
@@ -95,8 +96,16 @@ export function NapoleonRecipePage({
             <article className={step.mediaIds ? styles.stepWithMedia : undefined} id={`step-${Number(step.number)}`} key={step.number}>
               <p className={styles.stepMeta}>{step.meta}</p>
               <span className={styles.stepNumber}>{step.number}</span>
-              {step.tips ? <StepTip title={step.recipeTitle ?? step.title} body={step.recipeBody} tips={step.tips} guidance={step.recipeGuidance ?? step.guidance} stepIds={step.canonicalStepIds} locale={locale} /> : <div className={styles.stepContent}><h3>{step.recipeTitle ?? step.title}</h3><p>{step.recipeBody}</p>{(step.recipeGuidance ?? step.guidance) && <aside className={`${styles.stepCallout} ${styles.stepCheckpoint}`}><Check size={15} /><p><strong>Checkpoint</strong>{step.recipeGuidance ?? step.guidance}</p></aside>}<AssistantTrigger scope="step" stepIds={step.canonicalStepIds} stepTitle={step.recipeTitle ?? step.title} locale={locale} compact /></div>}
-              {step.mediaIds && <StepMediaSequence items={napoleonPrototypeMedia.filter((item) => step.mediaIds?.includes(item.id))} />}
+              {step.tips ? <StepTip title={step.recipeTitle ?? step.title} body={step.recipeBody} tips={step.tips} guidance={step.recipeGuidance ?? step.guidance} stepIds={step.canonicalStepIds} locale={locale} /> : <div className={styles.stepContent}><h3>{step.recipeTitle ?? step.title}</h3><p>{step.recipeBody}</p>{(step.recipeGuidance ?? step.guidance) && <RecipeStepGuidance kind="checkpoint" label="Checkpoint">{step.recipeGuidance ?? step.guidance}</RecipeStepGuidance>}<AssistantTrigger scope="step" stepIds={step.canonicalStepIds} stepTitle={step.recipeTitle ?? step.title} locale={locale} compact /></div>}
+              {step.mediaIds && (
+                <StepMediaSequence
+                  ariaLabel="Step visual sequence"
+                  className={styles.stepMedia}
+                  items={napoleonPrototypeMedia.filter((item) =>
+                    step.mediaIds?.includes(item.id),
+                  )}
+                />
+              )}
             </article>
           ))}
         </div>

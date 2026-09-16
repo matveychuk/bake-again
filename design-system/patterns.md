@@ -16,8 +16,27 @@ be combined; the two quantity methods may not.
 
 ## Cook Mode
 
-Show one large step, quantities used at that moment and an observable completion cue.
-Critical guidance appears before cooking and again at the relevant step.
+Show one focused step, the quantities used at that moment and an observable completion
+cue. Keep the work column stable and left-aligned; use a 36–40px desktop step heading and
+a 28–32px mobile heading rather than display-page scale. Critical guidance appears before
+cooking and again at the relevant step.
+
+The primary action is `Done, next`: it completes the current canonical step IDs and moves
+forward in one action. `Previous` is secondary. Previewing through `All steps` never marks
+a step complete, and finishing the last step opens a completion state with a private local
+note. On mobile the two actions stay in a safe-area-aware bottom bar; on larger screens
+they remain inside the work column, 32px after the content.
+
+Cook Mode progress represents completed screens, not the current position. Persist the
+current canonical step ID, completed canonical IDs, a timer end time and the completion
+note per recipe version. A running timer continues across step navigation and reloads.
+Offer a 44px `Keep screen awake` control where the browser supports Screen Wake Lock.
+
+Consecutive canonical steps may share a documented Cook composition group. The crepes
+flow presents `add-milk` and `rest` as one two-action screen, so five canonical recipe
+steps become four Cook screens without changing recipe provenance. A short action does
+not need a decorative image: use quantities, a timer or a checkpoint only when they help
+the cook decide what to do next.
 
 ## Adaptation
 

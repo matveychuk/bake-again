@@ -1,11 +1,26 @@
-import { createCookSteps, TOTAL_RECIPE_STEPS } from '@/app/recipes/napoleon-cake/cook/cook-mode.data';
-import { calculateNapoleonConfiguration, napoleonBaseSelection, parseNapoleonConfiguration } from './napoleon-configuration';
+import {
+  createCookSteps,
+  TOTAL_RECIPE_STEPS,
+} from '@/app/recipes/napoleon-cake/cook/cook-mode.data';
+import {
+  calculateNapoleonConfiguration,
+  napoleonBaseSelection,
+  parseNapoleonConfiguration,
+} from './napoleon-configuration';
 import type { CookModeDefinition } from '@/components/cook-mode/cook-mode.types';
+import type { AppLocale } from '@/lib/i18n/config';
+import { recipeDetailTitles } from './catalog-locales';
+import {
+  createSourceCookIngredients,
+  createSourceCookSteps,
+} from './cook-mode-adapter';
 import { glutenFreeNapoleonRecipe } from './gluten-free-napoleon.recipe';
 import { recipeInventory } from './inventory';
 import { getRecipeContent } from './registry';
 
 const napoleonCookMode: CookModeDefinition = {
+  recipeId: glutenFreeNapoleonRecipe.id,
+  recipeVersionId: glutenFreeNapoleonRecipe.versionId,
   recipeTitle: 'Napoleon cake',
   detailHref: '/recipes/napoleon-cake',
   totalSteps: TOTAL_RECIPE_STEPS,
@@ -14,16 +29,29 @@ const napoleonCookMode: CookModeDefinition = {
     recipeVersionId: glutenFreeNapoleonRecipe.versionId,
   },
   getState: (locationSearch) => {
-    const requested = parseNapoleonConfiguration(new URLSearchParams(locationSearch));
+    const requested = parseNapoleonConfiguration(
+      new URLSearchParams(locationSearch),
+    );
     const requestedResult = calculateNapoleonConfiguration(requested);
-    const selection = requestedResult.cookMode.eligible ? requested : napoleonBaseSelection;
+    const selection = requestedResult.cookMode.eligible
+      ? requested
+      : napoleonBaseSelection;
     const configuration = calculateNapoleonConfiguration(selection);
-    const isAdjusted = selection.geometryId !== napoleonBaseSelection.geometryId
-      || selection.quantityAdjustment.mode !== 'batchScale'
-      || selection.quantityAdjustment.factor !== 1;
+    const isAdjusted =
+      selection.geometryId !== napoleonBaseSelection.geometryId ||
+      selection.quantityAdjustment.mode !== 'batchScale' ||
+      selection.quantityAdjustment.factor !== 1;
+    const steps = createCookSteps(configuration);
     return {
       isAdjusted,
-      steps: createCookSteps(configuration),
+      steps,
+      allIngredients: [
+        ...new Map(
+          steps
+            .flatMap((step) => step.ingredients)
+            .map((ingredient) => [ingredient.id, ingredient]),
+        ).values(),
+      ],
       assistantConfiguration: isAdjusted
         ? {
             kind: 'adjusted',
@@ -35,41 +63,46 @@ const napoleonCookMode: CookModeDefinition = {
   },
 };
 
-function createInventoryCookMode(recipe: (typeof recipeInventory)[number]): CookModeDefinition {
-  const structured = getRecipeContent(recipe.id);
-  const unavailableReason = structured?.steps.length === 0
-    ? structured.gapNote ?? 'The source preserves ingredients but not the preparation method.'
-    : !structured
-      ? 'The source currently preserves only the recipe name. Add the original ingredients and method before cooking.'
-      : undefined;
+function createInventoryCookMode(
+  recipe: (typeof recipeInventory)[number],
+  locale: AppLocale,
+): CookModeDefinition {
+  const structured = getRecipeContent(recipe.id, locale);
+  const unavailableReason =
+    structured?.steps.length === 0
+      ? (structured.gapNote ??
+        'The source preserves ingredients but not the preparation method.')
+      : !structured
+        ? 'The source currently preserves only the recipe name. Add the original ingredients and method before cooking.'
+        : undefined;
 
   return {
-    recipeTitle: recipe.title,
+    recipeId: recipe.id,
+    recipeVersionId: `${recipe.id}-source-v1`,
+    recipeTitle: recipeDetailTitles[recipe.id]?.[locale] ?? recipe.title,
     detailHref: `/recipes/${recipe.slug}`,
-    totalSteps: structured?.steps.length ?? 0,
+    totalSteps: structured ? createSourceCookSteps(structured, locale).length : 0,
     getState: () => ({
       isAdjusted: false,
       unavailableReason,
-      steps: (structured?.steps ?? []).map((step, index) => ({
-        stepIds: [step.id],
-        number: String(index + 1).padStart(2, '0'),
-        meta: step.meta ?? `Step ${index + 1}`,
-        title: step.title,
-        body: step.body,
-        ingredients: [],
-        checkpoint: step.checkpoint,
-        tip: step.tip,
-      })),
+      steps: structured ? createSourceCookSteps(structured, locale) : [],
+      allIngredients: structured
+        ? createSourceCookIngredients(structured, locale)
+        : [],
     }),
   };
 }
 
-const cookModesBySlug: Record<string, CookModeDefinition> = Object.fromEntries(
-  recipeInventory.map((recipe) => [recipe.slug, createInventoryCookMode(recipe)]),
-);
+export function getCookModeDefinition(slug: string, locale: AppLocale = 'en') {
+  if (slug === 'napoleon-cake') {
+    return {
+      ...napoleonCookMode,
+      recipeTitle:
+        recipeDetailTitles[glutenFreeNapoleonRecipe.id]?.[locale] ??
+        napoleonCookMode.recipeTitle,
+    };
+  }
 
-cookModesBySlug['napoleon-cake'] = napoleonCookMode;
-
-export function getCookModeDefinition(slug: string) {
-  return cookModesBySlug[slug];
+  const recipe = recipeInventory.find((candidate) => candidate.slug === slug);
+  return recipe ? createInventoryCookMode(recipe, locale) : undefined;
 }

@@ -23,18 +23,22 @@ export function getRecipeCatalog(locale: AppLocale): RecipeCatalogEntry[] {
     const copy = catalogLocaleCopy[recipe.id];
     const localized = copy?.title[locale];
     return {
-  id: recipe.id,
-  title: localized ?? recipe.title,
-  eyebrow: copy?.category[locale] ?? recipe.category,
-  detail: locale === 'en' ? (recipe.totalTime ?? recipe.activeTime ?? getUiMessages(locale).catalog.detailsToConfirm) : getUiMessages(locale).catalog.detailsToConfirm,
-  status: getUiMessages(locale).catalog.workingRecord,
-  statusKind: 'draft',
-  statusDetail: recipe.flour.replace(' Bread', ''),
-  image: recipe.image,
-  imageKind: recipe.imageKind,
-  alt: copy?.alt[locale] ?? recipe.imageAlt,
-  href: `/recipes/${recipe.slug}`,
-  publicationStatus: 'draft',
+      id: recipe.id,
+      title: localized ?? recipe.title,
+      eyebrow: copy?.category[locale] ?? recipe.category,
+      detail:
+        recipe.localizedFacts?.totalTime[locale] ??
+        recipe.localizedFacts?.activeTime[locale] ??
+        (locale === 'en' ? (recipe.totalTime ?? recipe.activeTime) : null) ??
+        getUiMessages(locale).catalog.detailsToConfirm,
+      status: getUiMessages(locale).catalog.workingRecord,
+      statusKind: 'draft',
+      statusDetail: recipe.flour.replace(' Bread', ''),
+      image: recipe.image,
+      imageKind: recipe.imageKind,
+      alt: copy?.alt[locale] ?? recipe.imageAlt,
+      href: `/recipes/${recipe.slug}`,
+      publicationStatus: 'draft',
     };
   });
 }

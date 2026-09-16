@@ -1,4 +1,6 @@
 import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
+import type { AppLocale } from '@/lib/i18n/config';
+import { getUiMessages } from '@/lib/i18n/messages';
 import styles from './cook-mode.module.css';
 
 type CookNavigationProps = {
@@ -6,8 +8,8 @@ type CookNavigationProps = {
   isLast: boolean;
   isComplete: boolean;
   onPrevious: () => void;
-  onNext: () => void;
-  onToggleComplete: () => void;
+  onCompleteAndNext: () => void;
+  locale: AppLocale;
 };
 
 export function CookNavigation({
@@ -15,22 +17,37 @@ export function CookNavigation({
   isLast,
   isComplete,
   onPrevious,
-  onNext,
-  onToggleComplete,
+  onCompleteAndNext,
+  locale,
 }: CookNavigationProps) {
-  return (
-    <>
-      <div className={styles.stepActions}>
-        <button type="button" onClick={onPrevious} disabled={isFirst}><ChevronLeft size={18} /> Previous</button>
-        <button className={isComplete ? styles.completed : undefined} type="button" onClick={onToggleComplete}><Check size={18} />{isComplete ? 'Completed' : 'Mark step complete'}</button>
-        <button type="button" onClick={onNext} disabled={isLast}>Next <ChevronRight size={18} /></button>
-      </div>
+  const messages = getUiMessages(locale).cook;
+  const primaryLabel = isLast
+    ? messages.finishCooking
+    : isComplete
+      ? messages.next
+      : messages.completeAndNext;
 
-      <nav className={styles.mobileBar} aria-label="Step navigation">
-        <button type="button" onClick={onPrevious} disabled={isFirst} aria-label="Previous step"><ChevronLeft /></button>
-        <button type="button" onClick={onToggleComplete}><Check size={18} />{isComplete ? 'Completed' : 'Complete step'}</button>
-        <button type="button" onClick={onNext} disabled={isLast} aria-label="Next step"><ChevronRight /></button>
-      </nav>
-    </>
+  return (
+    <nav className={styles.stepActions} aria-label={messages.navigationLabel}>
+      <button
+        className={styles.previousAction}
+        type="button"
+        onClick={onPrevious}
+        disabled={isFirst}
+      >
+        <ChevronLeft aria-hidden="true" size={18} /> {messages.previous}
+      </button>
+      <button
+        className={styles.primaryAction}
+        type="button"
+        onClick={onCompleteAndNext}
+      >
+        {isLast || !isComplete ? (
+          <Check aria-hidden="true" size={18} />
+        ) : null}
+        {primaryLabel}
+        {!isLast && <ChevronRight aria-hidden="true" size={18} />}
+      </button>
+    </nav>
   );
 }

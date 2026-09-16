@@ -2,6 +2,11 @@
 
 This is the working content contract for the first approximately 20 Bake Again recipes. Recipes stay as typed files in the repository; a CMS or database is not needed at this stage.
 
+For the end-to-end authoring workflow, including source transcription, quantity
+equivalents, scaling anchors, canonical steps, `cookIngredients`, `cookInstructions`,
+`cookGroup`, translations and acceptance checks, use the Ukrainian
+[recipe adaptation guide](./recipe-adaptation-guide.uk.md).
+
 ## Files
 
 ```text
@@ -46,6 +51,14 @@ every individual recipe file and provides a common reader-facing shape while rec
 are progressively migrated from `RecipeSourceDraft` to the complete multilingual
 `RecipeDraft` model. There is no parallel structured-inventory file or fallback copy
 of recipe steps and ingredients.
+
+Source-backed pages may also provide structured `yield`, `geometry` and `timing` facts in
+`RecipeSourceDraftContent`. These facts carry canonical quantities and durations in the
+source record, while each reviewed locale supplies reader-facing labels. The registry
+merges localized labels with canonical numeric values before rendering; `beforeStart` is
+reserved for practical planning guidance such as allowing time for a batter to rest.
+Crepes currently use a 28 cm round pan, yield 10 crepes, take 40 minutes of active time
+and 60 minutes elapsed, with a 15–20 minute batter-rest phase linked to the `rest` step.
 
 ## Publication gate
 

@@ -55,7 +55,10 @@ export const recipeDocuments: readonly RecipeDocument[] = [
 
 /** Recipes whose stable IDs and localized ingredient data support personal state. */
 export const personalStateRecipes: readonly RecipeDraft[] = recipeDocuments
-  .filter((document): document is Extract<RecipeDocument, { kind: 'detailed' }> => document.kind === 'detailed')
+  .filter(
+    (document): document is Extract<RecipeDocument, { kind: 'detailed' }> =>
+      document.kind === 'detailed',
+  )
   .map((document) => document.recipe);
 
 export function getPersonalStateRecipe(recipeId: string): RecipeDraft | null {
@@ -72,21 +75,67 @@ export function isSaveableRecipeId(recipeId: string): boolean {
 }
 
 export function getRecipeDocument(recipeId: string): RecipeDocument | null {
-  return recipeDocuments.find((document) => document.recipe.id === recipeId) ?? null;
+  return (
+    recipeDocuments.find((document) => document.recipe.id === recipeId) ?? null
+  );
 }
 
 function formatDuration(locale: AppLocale, duration: Duration): string {
-  const unit = duration.unit === 'minute' ? 'min' : duration.unit === 'hour' ? 'hr' : 'sec';
+  const unit =
+    duration.unit === 'minute'
+      ? 'min'
+      : duration.unit === 'hour'
+        ? 'hr'
+        : 'sec';
   if (duration.kind === 'exact') return `${duration.value} ${unit}`;
-  if (duration.kind === 'minimum') return locale === 'uk' ? `Щонайменше ${duration.min} ${unit}` : locale === 'es' ? `Como mínimo ${duration.min} ${unit}` : `at least ${duration.min} ${unit}`;
+  if (duration.kind === 'minimum')
+    return locale === 'uk'
+      ? `Щонайменше ${duration.min} ${unit}`
+      : locale === 'es'
+        ? `Como mínimo ${duration.min} ${unit}`
+        : `at least ${duration.min} ${unit}`;
   return `${duration.min}–${duration.max} ${unit}`;
 }
 
-function detailedRecipeContent(recipe: RecipeDraft, locale: AppLocale): StructuredRecipeContent {
+function detailedRecipeContent(
+  recipe: RecipeDraft,
+  locale: AppLocale,
+): StructuredRecipeContent {
   return {
     completeness: recipe.contentGaps.some((gap) => gap.area === 'method')
       ? 'incompleteSource'
       : 'readyToReview',
+    yield:
+      recipe.yield.default.amount === null
+        ? undefined
+        : {
+            id: recipe.yield.default.id,
+            label: recipe.yield.default.label[locale],
+            count: {
+              kind: 'exact',
+              value: recipe.yield.default.amount,
+            },
+            unit: recipe.yield.default.unit,
+          },
+    geometry: {
+      id: recipe.geometry.default.id,
+      label: recipe.geometry.default.label[locale],
+      kind: recipe.geometry.default.kind,
+      application: recipe.geometry.default.application,
+      shape: recipe.geometry.default.shape,
+      diameterCm: recipe.geometry.default.diameterCm,
+      widthCm: recipe.geometry.default.widthCm,
+      lengthCm: recipe.geometry.default.lengthCm,
+    },
+    timing: {
+      activeMinutes: recipe.timing.activeMinutes,
+      totalElapsedMinutes: recipe.timing.totalElapsedMinutes,
+      phases: recipe.timing.phases.map((phase) => ({
+        id: phase.id,
+        label: phase.label[locale],
+        duration: phase.duration,
+      })),
+    },
     beforeStart: recipe.beforeStart.map((item) => item.text[locale]),
     ingredientSections: recipe.ingredientSections.map((section) => ({
       id: section.id,
@@ -96,47 +145,108 @@ function detailedRecipeContent(recipe: RecipeDraft, locale: AppLocale): Structur
         name: line.options[0].name[locale],
         quantity: line.quantity,
         optional: line.optional,
-        note: [line.preparation?.[locale], line.qualifier?.[locale], line.condition?.[locale]]
-          .filter(Boolean)
-          .join(' · ') || undefined,
+        note:
+          [
+            line.preparation?.[locale],
+            line.qualifier?.[locale],
+            line.condition?.[locale],
+          ]
+            .filter(Boolean)
+            .join(' · ') || undefined,
       })),
     })),
     steps: recipe.steps.map((step) => ({
       id: step.id,
       title: step.instruction[locale],
       body: step.instruction[locale],
-      meta: [step.duration && formatDuration(locale, step.duration), step.temperature && `${step.temperature.value}°${step.temperature.unit}`]
-        .filter(Boolean)
-        .join(' · ') || undefined,
-      checkpoint: step.guidance?.find((guidance) => guidance.kind === 'checkpoint')?.text[locale],
-      tip: step.guidance?.find((guidance) => guidance.kind === 'practicalTip')?.text[locale],
+      meta:
+        [
+          step.duration && formatDuration(locale, step.duration),
+          step.temperature &&
+            `${step.temperature.value}°${step.temperature.unit}`,
+        ]
+          .filter(Boolean)
+          .join(' · ') || undefined,
+      checkpoint: step.guidance?.find(
+        (guidance) => guidance.kind === 'checkpoint',
+      )?.text[locale],
+      tip: step.guidance?.find((guidance) => guidance.kind === 'practicalTip')
+        ?.text[locale],
     })),
-    gapNote: recipe.contentGaps
-      .filter((gap) => gap.publicationBlocking)
-      .map((gap) => gap.question)
-      .join(' ') || undefined,
+    gapNote:
+      recipe.contentGaps
+        .filter((gap) => gap.publicationBlocking)
+        .map((gap) => gap.question)
+        .join(' ') || undefined,
   };
 }
 
 /** Content for recipe pages and Cook Mode, regardless of recipe-file maturity. */
-export function getRecipeContent(recipeId: string, locale: AppLocale = 'en'): StructuredRecipeContent | null {
+export function getRecipeContent(
+  recipeId: string,
+  locale: AppLocale = 'en',
+): StructuredRecipeContent | null {
   const document = getRecipeDocument(recipeId);
   if (!document) return null;
-  if (document.kind === 'detailed') return detailedRecipeContent(document.recipe, locale);
-  if (locale === 'en') return document.recipe;
-  const translation = document.recipe.translations?.[locale];
-  if (translation) {
+  if (document.kind === 'detailed')
+    return detailedRecipeContent(document.recipe, locale);
+  const localized =
+    locale === 'en' ? document.recipe : document.recipe.translations?.[locale];
+  if (localized) {
     // Text is localized, but quantities remain the one source-of-truth record.
     // This prevents a translated display string from becoming a second numeric model.
     return {
-      ...translation,
-      ingredientSections: translation.ingredientSections.map((section, sectionIndex) => ({
-        ...section,
-        ingredients: section.ingredients.map((ingredient, ingredientIndex) => ({
-          ...ingredient,
-          quantity: document.recipe.ingredientSections[sectionIndex]?.ingredients[ingredientIndex]?.quantity ?? ingredient.quantity,
-        })),
-      })),
+      ...localized,
+      yield:
+        localized.yield && document.recipe.yield
+          ? {
+              ...localized.yield,
+              count: document.recipe.yield.count,
+              unit: document.recipe.yield.unit,
+            }
+          : undefined,
+      geometry:
+        localized.geometry && document.recipe.geometry
+          ? {
+              ...localized.geometry,
+              kind: document.recipe.geometry.kind,
+              application: document.recipe.geometry.application,
+              shape: document.recipe.geometry.shape,
+              diameterCm: document.recipe.geometry.diameterCm,
+              widthCm: document.recipe.geometry.widthCm,
+              lengthCm: document.recipe.geometry.lengthCm,
+            }
+          : undefined,
+      timing:
+        localized.timing && document.recipe.timing
+          ? {
+              activeMinutes: document.recipe.timing.activeMinutes,
+              totalElapsedMinutes: document.recipe.timing.totalElapsedMinutes,
+              phases: localized.timing.phases.map((phase, phaseIndex) => ({
+                ...phase,
+                duration:
+                  document.recipe.timing?.phases[phaseIndex]?.duration ??
+                  phase.duration,
+                relatedStepId:
+                  document.recipe.timing?.phases[phaseIndex]?.relatedStepId ??
+                  phase.relatedStepId,
+              })),
+            }
+          : undefined,
+      ingredientSections: localized.ingredientSections.map(
+        (section, sectionIndex) => ({
+          ...section,
+          ingredients: section.ingredients.map(
+            (ingredient, ingredientIndex) => ({
+              ...ingredient,
+              quantity:
+                document.recipe.ingredientSections[sectionIndex]?.ingredients[
+                  ingredientIndex
+                ]?.quantity ?? ingredient.quantity,
+            }),
+          ),
+        }),
+      ),
     };
   }
   return {

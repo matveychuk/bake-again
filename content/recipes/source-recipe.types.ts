@@ -1,4 +1,41 @@
-import type { IngredientQuantity } from './recipe.types.ts';
+import type {
+  Duration,
+  GeometryApplication,
+  GeometryKind,
+  IngredientQuantity,
+  YieldOption,
+} from './recipe.types.ts';
+
+export type StructuredRecipeYield = {
+  id: string;
+  label: string;
+  count:
+    | { kind: 'exact'; value: number }
+    | { kind: 'range'; min: number; max: number };
+  unit: YieldOption['unit'] | 'crepe';
+};
+
+export type StructuredRecipeGeometry = {
+  id: string;
+  label: string;
+  kind: GeometryKind;
+  application: GeometryApplication;
+  shape: 'round' | 'rectangular' | 'freeform' | 'other';
+  diameterCm: number | null;
+  widthCm?: number | null;
+  lengthCm?: number | null;
+};
+
+export type StructuredRecipeTiming = {
+  activeMinutes: number | null;
+  totalElapsedMinutes: number | null;
+  phases: Array<{
+    id: string;
+    label: string;
+    duration: Duration;
+    relatedStepId?: string;
+  }>;
+};
 
 export type StructuredIngredient = {
   id: string;
@@ -22,6 +59,16 @@ export type StructuredRecipeStep = {
   meta?: string;
   checkpoint?: string;
   tip?: string;
+  /** Optional Cook Mode composition; canonical recipe steps remain separate. */
+  cookGroup?: string;
+  cookTitle?: string;
+  /** Short action sequence for Cook Mode without changing canonical recipe copy. */
+  cookInstructions?: string[];
+  cookIngredients?: Array<{
+    ingredientId: string;
+    quantity?: 'full' | 'omit';
+    note?: string;
+  }>;
   media?: Array<{
     id: string;
     src: string;
@@ -38,6 +85,9 @@ export type StructuredRecipeStep = {
  */
 export type RecipeSourceDraftContent = {
   completeness: 'readyToReview' | 'incompleteSource';
+  yield?: StructuredRecipeYield;
+  geometry?: StructuredRecipeGeometry;
+  timing?: StructuredRecipeTiming;
   beforeStart?: string[];
   ingredientSections: StructuredIngredientSection[];
   steps: StructuredRecipeStep[];

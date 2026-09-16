@@ -82,6 +82,7 @@
 .assistantExample { max-width: var(--layout-assistant-drawer); display: grid; gap: var(--space-4); }
 .personalExample { display: grid; gap: var(--space-3); max-width: 620px; }
 .ingredientExample { max-width: 620px; padding: var(--space-4); border: 1px solid var(--color-border-subtle); background: var(--color-background-surface); }
+.stepGuidanceExample { max-width: 620px; }
 .recipeDetailTitleExample { margin: 0; font-family: var(--font-family-display-cyrillic); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 430; letter-spacing: -.055em; line-height: .92; }
 .savedControl { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-action-primary); border-radius: var(--radius-round); background: var(--color-status-tested-background); color: var(--color-status-tested-text); }
 .shoppingExample { min-height: 56px; padding: var(--space-2) 0; display: grid; grid-template-columns: 24px 1fr auto 44px; align-items: center; gap: var(--space-2); border-top: 1px solid var(--color-border-subtle); border-bottom: 1px solid var(--color-border-subtle); font-size: var(--font-size-body-small); }

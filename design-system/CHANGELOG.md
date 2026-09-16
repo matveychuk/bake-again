@@ -2,6 +2,35 @@
 
 ## Unreleased
 
+- Rebuilt Cook Mode as a four-screen working flow for crepes while preserving all five
+  canonical recipe steps. Added one-action `Done, next` navigation, completion and private
+  notes, versioned session restoration, 15/20-minute timers that survive navigation, an
+  all-steps drawer, an ingredients drawer and an optional Screen Wake Lock control.
+- Consolidated recipe and Cook rendering on shared `StepMediaSequence`,
+  `RecipeIngredientList` and `RecipeStepGuidance` components with documented variants.
+  Removed route-specific photo renderers, made multi-image rails keyboard-focusable and
+  retained the approved 3-up / 52% tablet / 82% mobile responsive sequence.
+- Reduced Cook step headings and tightened its work-column rhythm at laptop and mobile
+  widths. Crepes now expose concise localized action lists, step-specific ingredients and
+  observable checkpoints without adding decorative photos to simple actions.
+- Added semantic Cook title and content-width tokens plus the shared keyboard focus-ring
+  colour to the machine-readable and CSS token sources.
+
+- Fixed the shared Cook Mode adapter so source-backed recipes retain localized step copy
+  and ordered step photography. Also localized the shared Cook Mode navigation, progress,
+  callout, timer and media accessibility labels in English, Spanish and Ukrainian.
+
+- Made the source-backed `Use what I have` anchor recipe-specific; crepes now calculate
+  from the available egg count rather than flour, with a localized whole-item unit.
+
+- Added shared structured recipe facts for source-backed yield, geometry and timing, and
+  aligned the pre-start guidance row so its clock and label sit together across locales.
+
+- Localized the source-backed recipe scaling control in English, Spanish and Ukrainian,
+  made it available on every inventory recipe page and formatted scale factors for the
+  active locale. Recipes without a supported numeric anchor retain an explicit localized
+  locked state.
+
 - Reworked shopping into one unambiguous path: read-only recipe ingredients open a shared
   modal drawer for selection, with compact headings, select/clear actions, explicit
   alternative choices, water deselected by default and a sticky counted confirmation.

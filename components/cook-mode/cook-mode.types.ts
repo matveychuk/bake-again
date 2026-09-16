@@ -1,10 +1,14 @@
 import type { AssistantConfiguration } from '@/lib/assistant/contracts';
+import type { StepMediaItem } from '@/components/recipe/step-media-sequence';
 
-export type CookMediaItem = {
-  src: string;
-  alt: string;
-  title: string;
-  caption: string;
+export type CookMediaItem = StepMediaItem;
+
+export type CookIngredient = {
+  id: string;
+  name: string;
+  primary?: string;
+  secondary?: string;
+  note?: string;
 };
 
 export type CookStep = {
@@ -12,15 +16,18 @@ export type CookStep = {
   number: string;
   meta: string;
   title: string;
-  body: string;
-  ingredients: string[];
+  instructions: string[];
+  ingredients: CookIngredient[];
   checkpoint?: string;
   tip?: string;
   timerSeconds?: number;
+  timerOptionsSeconds?: number[];
   media?: CookMediaItem[];
 };
 
 export type CookModeDefinition = {
+  recipeId: string;
+  recipeVersionId: string;
   recipeTitle: string;
   detailHref: string;
   totalSteps: number;
@@ -31,6 +38,7 @@ export type CookModeDefinition = {
   getState: (locationSearch: string) => {
     isAdjusted: boolean;
     steps: CookStep[];
+    allIngredients?: CookIngredient[];
     assistantConfiguration?: AssistantConfiguration;
     unavailableReason?: string;
   };

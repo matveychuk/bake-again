@@ -14,6 +14,7 @@ The core palette is light and restrained. Terracotta is an accent, not a page-si
 | Text / secondary | `#735D54` | Supporting copy and metadata |
 | Action / primary | `#A64F36` | Main CTA, brand punctuation and selected emphasis |
 | Action / strong | `#853C29` | Hover, focus and Tested status text |
+| Focus ring | `Action / strong` | Shared visible keyboard focus outline |
 
 Avoid adding green to signal gluten-free. Gluten-free is communicated through words and
 recipe evidence, not wellness colour conventions.
@@ -48,6 +49,7 @@ Keep food photography natural; do not darken images or add a brown overlay globa
   phrase of editorial emphasis.
 - Body copy starts at 16px. Regularly used controls and labels should be at least 14px;
   12px is reserved for compact supporting metadata.
+- Cook step titles scale from 32px on mobile to a maximum of 40px on desktop.
 - Use sentence case. Uppercase is limited to short eyebrows and evidence labels.
 
 ## Space
@@ -69,6 +71,7 @@ Prefer whitespace over decorative dividers. Use 24–32px between related blocks
 - Page maximum: 1440px.
 - Content maximum: 1360px.
 - Shopping work-column maximum: 928px.
+- Cook work column maximum: 936px; instruction width: 720px; step media width: 860px.
 - Contextual drawer width: 480px on desktop; full viewport width at 900px and below.
 - Desktop gutter: 40px.
 - Mobile gutter: 20px.

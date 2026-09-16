@@ -10,6 +10,7 @@ html[data-palette='selected-mix'] {
   --color-text-on-accent: #fffdf9;
   --color-action-primary: #a64f36;
   --color-action-primary-strong: #853c29;
+  --color-focus-ring: var(--color-action-primary-strong);
   --color-border-subtle: rgba(57, 39, 33, 0.17);
 
   /* Evidence status */
@@ -28,6 +29,8 @@ html[data-palette='selected-mix'] {
   --font-size-body-small: 0.875rem;
   --font-size-body: 1rem;
   --font-size-body-large: 1.125rem;
+  --font-size-cook-step-title-min: 2rem;
+  --font-size-cook-step-title-max: 2.5rem;
   --font-size-title-small: clamp(2rem, 3vw, 3rem);
   --font-size-title-large: clamp(4.6rem, 6.2vw, 6.7rem);
   --line-height-tight: 1;
@@ -60,6 +63,9 @@ html[data-palette='selected-mix'] {
   --layout-gutter-mobile: 1.25rem;
   --layout-assistant-drawer: 30rem;
   --layout-shopping-content: 58rem;
+  --layout-cook-work: 58.5rem;
+  --layout-cook-reading: 45rem;
+  --layout-step-media: 53.75rem;
 
   /* Backwards-compatible aliases for the exploratory homepage. */
   --cream: var(--color-background-page);

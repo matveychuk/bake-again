@@ -16,6 +16,7 @@ import { AssistantBlocks, AssistantProvider, AssistantTrigger } from '@/componen
 import type { AssistantBlock } from '@/lib/assistant/contracts';
 import { EvidenceBadge, type EvidenceStatus } from '@/components/recipe/evidence-badge';
 import { RecipeIngredientChecklist } from '@/components/recipe/recipe-ingredient-checklist';
+import { RecipeStepGuidance } from '@/components/recipe/recipe-step-guidance';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { LanguageSwitcher } from '@/components/site/language-switcher';
 import { BakeCheckbox } from '@/components/ui/bake-checkbox';
@@ -264,6 +265,18 @@ export default function DesignSystemPage() {
                     }],
                   }]}
                 />
+              </div>
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}><strong>Step guidance</strong><span>Shared recipe and Cook variants with written semantics</span></div>
+              <div className={styles.stepGuidanceExample}>
+                <RecipeStepGuidance kind="tip" label="Tip" variant="prominent">
+                  Add only a little milk while the base is still thick.
+                </RecipeStepGuidance>
+                <RecipeStepGuidance kind="checkpoint" label="Checkpoint">
+                  The batter is smooth and spreads easily across the pan.
+                </RecipeStepGuidance>
               </div>
             </div>
 

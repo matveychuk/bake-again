@@ -13,7 +13,11 @@ import type {
   RecipeDraft,
   RecipeStep,
 } from '@/content/recipes/recipe.types';
-import type { CookMediaItem, CookStep } from '@/components/cook-mode/cook-mode.types';
+import type {
+  CookIngredient,
+  CookMediaItem,
+  CookStep,
+} from '@/components/cook-mode/cook-mode.types';
 
 export type { CookMediaItem, CookStep } from '@/components/cook-mode/cook-mode.types';
 
@@ -110,7 +114,7 @@ function buildMeta(steps: RecipeStep[], prototype?: PrototypeStep) {
 function ingredientLabel(
   id: string,
   configuration: CalculatedRecipeConfiguration,
-) {
+): CookIngredient {
   const line = ingredientLines.find((item) => item.id === id);
   const calculated = configuration.ingredientAmounts.find(
     (item) => item.ingredientLineId === id,
@@ -121,7 +125,7 @@ function ingredientLabel(
     : line.options.map((option) => option.name.en).join(' or ');
   const qualifier = line.qualifier?.en ? `, ${line.qualifier.en}` : '';
   const amount = formatQuantity(calculated.amount).replace('0.25 tsp', '¼ tsp');
-  return `${amount} ${name}${qualifier}`;
+  return { id, name: `${name}${qualifier}`, primary: amount };
 }
 
 function mediaFor(prototype?: PrototypeStep): CookMediaItem[] | undefined {
@@ -129,6 +133,7 @@ function mediaFor(prototype?: PrototypeStep): CookMediaItem[] | undefined {
     const item = napoleonPrototypeMedia.find((media) => media.id === id);
     if (!item) throw new Error(`Missing prototype media: ${id}`);
     return {
+      id: item.id,
       src: item.src,
       alt: item.cookAlt ?? item.alt,
       title: item.id === 'butter-final-crumb' ? 'Ready texture' : item.title,
@@ -145,9 +150,11 @@ export function createCookSteps(
     const key = ids.join('+');
     const prototype = ids.length === 1 ? prototypeByStepId[ids[0]] : undefined;
     const lineIds = [...new Set(steps.flatMap((step) => step.ingredientLineIds))];
-    const ingredients = prototype?.ingredientLineIds
+    const ingredients: CookIngredient[] = prototype?.ingredientLineIds
       ? [
-          ...(ids[0] === 'combine-dough' ? ['Wet mixture'] : []),
+          ...(ids[0] === 'combine-dough'
+            ? [{ id: 'wet-mixture', name: 'Wet mixture' }]
+            : []),
           ...prototype.ingredientLineIds.map((id) => ingredientLabel(id, configuration)),
         ]
       : lineIds.map((id) => ingredientLabel(id, configuration));
@@ -163,9 +170,14 @@ export function createCookSteps(
       number: String(index + 1).padStart(2, '0'),
       meta: buildMeta(steps, prototype),
       title: titles[key],
-      body: prototype?.cookBody ?? steps.map((step) => step.instruction.en).join(' '),
+      instructions: [
+        prototype?.cookBody ?? steps.map((step) => step.instruction.en).join(' '),
+      ],
       ingredients: prototype && !prototype.ingredientLineIds
-        ? prototype.ingredients
+        ? prototype.ingredients.map((name, ingredientIndex) => ({
+            id: `prototype-${index}-${ingredientIndex}`,
+            name,
+          }))
         : ingredients,
       checkpoint: prototype?.guidance ?? (checkpoints.join(' ') || undefined),
       tip: prototype?.tips?.join(' · ') ?? (tips.join(' · ') || undefined),

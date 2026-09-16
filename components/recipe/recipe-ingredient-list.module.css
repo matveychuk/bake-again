@@ -1,0 +1,62 @@
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.list li {
+  min-height: 53px;
+  display: grid;
+  grid-template-columns: minmax(112px, 150px) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--font-size-body-small);
+}
+
+.copy {
+  min-width: 0;
+  grid-column: 2;
+}
+
+.copy > span,
+.copy small,
+.amounts > * {
+  display: block;
+}
+
+.copy small,
+.amounts span {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-body);
+}
+
+.amounts {
+  min-width: 0;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.after {
+  margin-top: var(--space-1);
+}
+
+.amounts strong {
+  font-size: var(--font-size-body-small);
+  line-height: 1.3;
+}
+
+.compact li {
+  grid-template-columns: minmax(96px, 130px) minmax(0, 1fr);
+  min-height: 48px;
+}
+
+@media (max-width: 560px) {
+  .list li,
+  .compact li {
+    grid-template-columns: minmax(88px, 112px) minmax(0, 1fr);
+  }
+}
