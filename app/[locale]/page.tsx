@@ -5,8 +5,12 @@ import { isAppLocale, localeMetadata, supportedLocales } from '@/lib/i18n/config
 import { getUiMessages } from '@/lib/i18n/messages';
 import { getPreviewRobots, isUiLocalePublishable } from '@/lib/i18n/publication';
 import { localeHomePath } from '@/lib/i18n/routes';
+import { isRecipeCollectionId } from '@/content/recipes/collections';
 
-type LocalePageProps = { params: Promise<{ locale: string }> };
+type LocalePageProps = {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ collection?: string | string[] }>;
+};
 
 export function generateStaticParams() {
   return supportedLocales.map((locale) => ({ locale }));
@@ -35,8 +39,12 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
   };
 }
 
-export default async function LocalizedHomePage({ params }: LocalePageProps) {
+export default async function LocalizedHomePage({ params, searchParams }: LocalePageProps) {
   const { locale } = await params;
   if (!isAppLocale(locale)) notFound();
-  return <HomePage locale={locale} />;
+  const { collection } = await searchParams;
+  const collectionId = typeof collection === 'string' && isRecipeCollectionId(collection)
+    ? collection
+    : null;
+  return <HomePage locale={locale} selectedCollectionId={collectionId} />;
 }

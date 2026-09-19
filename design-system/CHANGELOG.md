@@ -2,6 +2,73 @@
 
 ## Unreleased
 
+- Kept the shared Save control circular beside long recipe titles by preventing flex
+  shrink, and aligned its saved state with the Design Lab's filled bookmark silhouette.
+
+- Added localized recipe collections to the inventory and homepage: Breakfast, Every day,
+  Celebration, With cottage cheese and Batter on hand. Collection links now filter the
+  catalogue and every recipe card names its applicable collections.
+
+- Refined the shared recipe overview: active time first, total time and optional planning
+  guidance below, a compact status badge with aligned evidence text, and horizontal
+  rules only. Product and Design Lab now render the same component in three languages.
+- Added phase-linked planning notes to the recipe timing model and shortened Napoleon's
+  yield to two cakes; layer counts remain in its description and yield details.
+
+- Added one normalized recipe-overview model for all 17 recipes: time, yield, difficulty
+  and flour, with explicit nulls for unknown facts.
+- Replaced the large evidence panel with a compact evidence row and removed equipment and
+  geometry from the recipe hero overview.
+- Grouped total and active time into one fact, kept flour in a full-width row and added
+  the responsive Recipe overview reference to the Design Lab.
+
+- Replaced the Easter-bread placeholder with the complete Paska 2.0 working recipe:
+  four ingredient groups, twelve Ukrainian and English method steps, practical tips and
+  observable checkpoints. Marked the exact softer adaptation as Suggested until it is
+  bake-tested, preserving adaptation-specific provenance.
+- Added seven localized Paska 2.0 process photographs to recipe detail and Cook Mode,
+  covering the decision-critical yeast, dough, proofing, baking and cooled-crumb states.
+
+- Replaced the banana-fritter placeholder with a tested banana-pancake adaptation using
+  Schär Mix B Bread. Added six concise Ukrainian steps, practical tips, observable
+  checkpoints, localized facts, a new cover and five step photographs while retaining
+  explicit publication gaps for the flour weight and any liquid adjustment.
+- Added five localized process photographs to the sponge-cake recipe and Cook Mode,
+  covering the two whipped mixtures, both folding stages and transfer to the long form.
+
+- Prepared the sponge cake for the shared Ukrainian recipe flow with all six original
+  steps, separate sugar quantities for whites and yolks, source-backed tips and
+  checkpoints, localized practical facts and photo-verified corrected quantities. Kept
+  explicit gaps for the long form dimensions, doneness cue and total timing.
+
+- Added localized step photography to the fruit sponge roll and the incomplete prune-cake
+  working record. The prune recipe now uses the shared Ukrainian recipe composition,
+  separates the partially transcribed cake, cream and glaze ingredients, and keeps Cook
+  Mode unavailable until the unreadable core method is confirmed.
+
+- Prepared the fruit sponge roll for the shared Ukrainian recipe flow with six
+  source-backed steps, localized ingredients, one observable checkpoint, three practical
+  tips and explicit gaps for the oven temperature, rolling method, fruit quantities and
+  total time.
+
+- Moved the Napoleon product route onto the shared recipe-detail composition. Detailed
+  recipes now carry their Tested evidence into that shared surface, while the canonical
+  source retains all 19 Ukrainian method steps. Added concise Ukrainian action titles,
+  locale-aware duration labels and localized review notes to the shared presentation.
+  Removed the former Napoleon-only recipe renderer, adjustment/assistant wrappers and
+  styles; the Design Lab reference now exercises the shared recipe page as well.
+
+- Reworked the Crinkle Cookies method into concise titled actions with quantities,
+  practical tips and observable checkpoints. Added six localized instructional photos,
+  exposed detailed-recipe `mediaIds` through the shared Recipe Detail and Cook Mode
+  adapter, and resolved the powdered-sugar quantity as 100 g.
+
+- Added the shared `RecipeStepContent` structure for recipe detail and Cook Mode: the
+  contextual assistant action now sits with the heading, practical tips always precede
+  instructions, and checkpoints remain after the action they verify. Added the compact
+  warm-background tip treatment, aligned checkpoint labels and messages in one row and
+  updated the Design Lab example.
+
 - Rebuilt Cook Mode as a four-screen working flow for crepes while preserving all five
   canonical recipe steps. Added one-action `Done, next` navigation, completion and private
   notes, versioned session restoration, 15/20-minute timers that survive navigation, an

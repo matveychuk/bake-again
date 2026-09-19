@@ -13,6 +13,7 @@ import { recipeDetailTitles } from './catalog-locales';
 import {
   createSourceCookIngredients,
   createSourceCookSteps,
+  isSourceCookModeAvailable,
 } from './cook-mode-adapter';
 import { glutenFreeNapoleonRecipe } from './gluten-free-napoleon.recipe';
 import { recipeInventory } from './inventory';
@@ -68,8 +69,9 @@ function createInventoryCookMode(
   locale: AppLocale,
 ): CookModeDefinition {
   const structured = getRecipeContent(recipe.id, locale);
+  const isAvailable = isSourceCookModeAvailable(structured);
   const unavailableReason =
-    structured?.steps.length === 0
+    !isAvailable && structured
       ? (structured.gapNote ??
         'The source preserves ingredients but not the preparation method.')
       : !structured
@@ -81,11 +83,17 @@ function createInventoryCookMode(
     recipeVersionId: `${recipe.id}-source-v1`,
     recipeTitle: recipeDetailTitles[recipe.id]?.[locale] ?? recipe.title,
     detailHref: `/recipes/${recipe.slug}`,
-    totalSteps: structured ? createSourceCookSteps(structured, locale).length : 0,
+    totalSteps:
+      structured && isAvailable
+        ? createSourceCookSteps(structured, locale).length
+        : 0,
     getState: () => ({
       isAdjusted: false,
       unavailableReason,
-      steps: structured ? createSourceCookSteps(structured, locale) : [],
+      steps:
+        structured && isAvailable
+          ? createSourceCookSteps(structured, locale)
+          : [],
       allIngredients: structured
         ? createSourceCookIngredients(structured, locale)
         : [],

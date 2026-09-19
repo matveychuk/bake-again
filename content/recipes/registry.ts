@@ -15,15 +15,102 @@ import { glutenFreeNapoleonRecipe } from './gluten-free-napoleon.recipe.ts';
 import { recipeInventory } from './inventory.ts';
 import { lazyDumplingsRecipe } from './lazy-dumplings.recipe.ts';
 import { pruneCakeRecipe } from './prune-cake.recipe.ts';
-import type { RecipeDraft } from './recipe.types.ts';
-import type { Duration } from './recipe.types.ts';
+import type { RecipeDifficulty, RecipeDraft } from './recipe.types.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
+import { formatDuration } from '../../lib/i18n/format.ts';
 import { getUiMessages } from '../../lib/i18n/messages.ts';
 import type {
   RecipeSourceDraft,
   StructuredRecipeContent,
+  StructuredRecipeTiming,
 } from './source-recipe.types.ts';
 import { spongeCakeRecipe } from './sponge-cake.recipe.ts';
+
+function inventoryDifficulty(value: string | null): RecipeDifficulty | null {
+  switch (value?.toLowerCase()) {
+    case 'easy':
+      return 'easy';
+    case 'medium':
+    case 'intermediate':
+      return 'medium';
+    case 'advanced':
+      return 'advanced';
+    default:
+      return null;
+  }
+}
+
+function localizedFlourSummary(
+  recipeId: string,
+  locale: AppLocale,
+): string {
+  const inventory = recipeInventory.find((recipe) => recipe.id === recipeId);
+  const localized = inventory?.localizedFacts?.flour?.[locale];
+  if (localized) return localized;
+
+  const flour = inventory?.flour ?? '';
+  const translations: Record<string, Record<AppLocale, string>> = {
+    'Schär Mix B Bread': {
+      en: 'Schär Mix B Bread',
+      es: 'Schär Mix B Bread',
+      uk: 'Schär Mix B Bread',
+    },
+    'Schär Mix B Bread + tapioca starch': {
+      en: 'Schär Mix B Bread + tapioca starch',
+      es: 'Schär Mix B Bread + almidón de tapioca',
+      uk: 'Schär Mix B Bread + тапіоковий крохмаль',
+    },
+    'Schär Mix B Bread + corn starch': {
+      en: 'Schär Mix B Bread + corn starch',
+      es: 'Schär Mix B Bread + almidón de maíz',
+      uk: 'Schär Mix B Bread + кукурудзяний крохмаль',
+    },
+    'Schär Mix B Bread + tapioca and corn starch': {
+      en: 'Schär Mix B Bread + tapioca and corn starch',
+      es: 'Schär Mix B Bread + almidones de tapioca y maíz',
+      uk: 'Schär Mix B Bread + тапіоковий і кукурудзяний крохмалі',
+    },
+    'Rice flour + corn and tapioca starch': {
+      en: 'Rice flour + corn and tapioca starch',
+      es: 'Harina de arroz + almidones de maíz y tapioca',
+      uk: 'Рисове борошно + кукурудзяний і тапіоковий крохмалі',
+    },
+  };
+
+  return translations[flour]?.[locale] ?? flour;
+}
+
+function planningNote(
+  timing: StructuredRecipeTiming | undefined,
+  locale: AppLocale,
+): string | null {
+  const note = timing?.planningNote;
+  if (!note) return null;
+  if (!note.phaseId) return note.text;
+  const phase = timing.phases.find((item) => item.id === note.phaseId);
+  return phase
+    ? note.text.replaceAll('{duration}', formatDuration(locale, phase.duration))
+    : null;
+}
+
+function sourceRecipeOverview(
+  recipeId: string,
+  locale: AppLocale,
+  content: Partial<Pick<StructuredRecipeContent, 'timing' | 'yield'>>,
+) {
+  const inventory = recipeInventory.find((recipe) => recipe.id === recipeId);
+
+  return {
+    difficulty: inventoryDifficulty(inventory?.difficulty ?? null),
+    timing: {
+      activeMinutes: content.timing?.activeMinutes ?? null,
+      totalElapsedMinutes: content.timing?.totalElapsedMinutes ?? null,
+      planningNote: planningNote(content.timing, locale),
+    },
+    yieldLabel: content.yield?.label ?? null,
+    flour: localizedFlourSummary(recipeId, locale),
+  };
+}
 
 export type RecipeDocument =
   | { kind: 'detailed'; recipe: RecipeDraft }
@@ -80,40 +167,56 @@ export function getRecipeDocument(recipeId: string): RecipeDocument | null {
   );
 }
 
-function formatDuration(locale: AppLocale, duration: Duration): string {
-  const unit =
-    duration.unit === 'minute'
-      ? 'min'
-      : duration.unit === 'hour'
-        ? 'hr'
-        : 'sec';
-  if (duration.kind === 'exact') return `${duration.value} ${unit}`;
-  if (duration.kind === 'minimum')
-    return locale === 'uk'
-      ? `Щонайменше ${duration.min} ${unit}`
-      : locale === 'es'
-        ? `Como mínimo ${duration.min} ${unit}`
-        : `at least ${duration.min} ${unit}`;
-  return `${duration.min}–${duration.max} ${unit}`;
-}
-
 function detailedRecipeContent(
   recipe: RecipeDraft,
   locale: AppLocale,
 ): StructuredRecipeContent {
+  const messages = getUiMessages(locale);
+  const yieldAmount = recipe.yield.default.amount;
+  const yieldLabel =
+    yieldAmount === null ? null : recipe.yield.default.label[locale];
+  const timing: StructuredRecipeTiming = {
+    activeMinutes: recipe.timing.activeMinutes,
+    totalElapsedMinutes: recipe.timing.totalElapsedMinutes,
+    planningNote: recipe.timing.planningNote
+      ? { ...recipe.timing.planningNote, text: recipe.timing.planningNote.text[locale] }
+      : null,
+    phases: recipe.timing.phases.map((phase) => ({
+      id: phase.id,
+      label: phase.label[locale],
+      duration: phase.duration,
+    })),
+  };
+
   return {
+    overview: {
+      difficulty: recipe.difficulty,
+      timing: {
+        activeMinutes: recipe.timing.activeMinutes,
+        totalElapsedMinutes: recipe.timing.totalElapsedMinutes,
+        planningNote: planningNote(timing, locale),
+      },
+      yieldLabel,
+      flour: localizedFlourSummary(recipe.id, locale),
+    },
     completeness: recipe.contentGaps.some((gap) => gap.area === 'method')
       ? 'incompleteSource'
       : 'readyToReview',
+    evidence: {
+      status: 'tested',
+      explanation: recipe.baseProvenance.state === 'repeatedlyVerified'
+        ? messages.status.tested.repeatedExplanation
+        : messages.status.tested.explanation,
+    },
     yield:
-      recipe.yield.default.amount === null
+      yieldAmount === null
         ? undefined
         : {
             id: recipe.yield.default.id,
             label: recipe.yield.default.label[locale],
             count: {
               kind: 'exact',
-              value: recipe.yield.default.amount,
+              value: yieldAmount,
             },
             unit: recipe.yield.default.unit,
           },
@@ -127,15 +230,7 @@ function detailedRecipeContent(
       widthCm: recipe.geometry.default.widthCm,
       lengthCm: recipe.geometry.default.lengthCm,
     },
-    timing: {
-      activeMinutes: recipe.timing.activeMinutes,
-      totalElapsedMinutes: recipe.timing.totalElapsedMinutes,
-      phases: recipe.timing.phases.map((phase) => ({
-        id: phase.id,
-        label: phase.label[locale],
-        duration: phase.duration,
-      })),
-    },
+    timing,
     beforeStart: recipe.beforeStart.map((item) => item.text[locale]),
     ingredientSections: recipe.ingredientSections.map((section) => ({
       id: section.id,
@@ -157,7 +252,7 @@ function detailedRecipeContent(
     })),
     steps: recipe.steps.map((step) => ({
       id: step.id,
-      title: step.instruction[locale],
+      title: step.title?.[locale] ?? step.instruction[locale],
       body: step.instruction[locale],
       meta:
         [
@@ -172,6 +267,22 @@ function detailedRecipeContent(
       )?.text[locale],
       tip: step.guidance?.find((guidance) => guidance.kind === 'practicalTip')
         ?.text[locale],
+      media: step.mediaIds?.flatMap((mediaId) => {
+        const item = recipe.media.find((candidate) => candidate.id === mediaId);
+        if (!item || item.type !== 'image') return [];
+        return [
+          {
+            id: item.id,
+            src: item.path,
+            alt: item.alt[locale],
+            title:
+              item.caption?.[locale] ??
+              step.title?.[locale] ??
+              step.instruction[locale],
+            caption: item.caption?.[locale] ?? '',
+          },
+        ];
+      }),
     })),
     gapNote:
       recipe.contentGaps
@@ -195,7 +306,7 @@ export function getRecipeContent(
   if (localized) {
     // Text is localized, but quantities remain the one source-of-truth record.
     // This prevents a translated display string from becoming a second numeric model.
-    return {
+    const content = {
       ...localized,
       yield:
         localized.yield && document.recipe.yield
@@ -222,13 +333,19 @@ export function getRecipeContent(
           ? {
               activeMinutes: document.recipe.timing.activeMinutes,
               totalElapsedMinutes: document.recipe.timing.totalElapsedMinutes,
-              phases: localized.timing.phases.map((phase, phaseIndex) => ({
+              planningNote: localized.timing.planningNote
+                ? {
+                    ...localized.timing.planningNote,
+                    phaseId: document.recipe.timing.planningNote?.phaseId,
+                  }
+                : null,
+              phases: localized.timing.phases.map((phase) => ({
                 ...phase,
                 duration:
-                  document.recipe.timing?.phases[phaseIndex]?.duration ??
+                  document.recipe.timing?.phases.find((item) => item.id === phase.id)?.duration ??
                   phase.duration,
                 relatedStepId:
-                  document.recipe.timing?.phases[phaseIndex]?.relatedStepId ??
+                  document.recipe.timing?.phases.find((item) => item.id === phase.id)?.relatedStepId ??
                   phase.relatedStepId,
               })),
             }
@@ -248,8 +365,13 @@ export function getRecipeContent(
         }),
       ),
     };
+    return {
+      ...content,
+      overview: sourceRecipeOverview(recipeId, locale, content),
+    };
   }
   return {
+    overview: sourceRecipeOverview(recipeId, locale, {}),
     completeness: 'incompleteSource',
     ingredientSections: [],
     steps: [],

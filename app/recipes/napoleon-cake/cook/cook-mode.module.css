@@ -437,7 +437,7 @@
 
 .ask {
   min-height: 44px;
-  margin-top: var(--space-4);
+  margin: 0;
   padding: 0;
   display: inline-flex;
   align-items: center;
@@ -448,6 +448,7 @@
   cursor: pointer;
   font-size: var(--font-size-body-small);
   font-weight: 800;
+  white-space: nowrap;
 }
 
 .stepActions {

@@ -169,6 +169,7 @@ export function InventoryRecipeAdjuster({
         {recipe ? (
           <>
             <RecipeIngredientChecklist
+              locale={locale}
               sections={recipe.ingredientSections}
               amountFor={(ingredient) => ({
                 primary: formatQuantity(

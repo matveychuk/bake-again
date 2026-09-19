@@ -5,6 +5,42 @@ const translatedQuantity = {
   shopping: { mode: 'nameOnly' as const },
 };
 
+const lazyDumplingsStepMedia = {
+  'mix-wet': {
+    id: 'mix-cottage-cheese',
+    src: '/media/recipes/lazy-dumplings/selected/step-01-mix-cottage-cheese-v1.png',
+  },
+  'add-dry': {
+    id: 'add-flour-tapioca',
+    src: '/media/recipes/lazy-dumplings/selected/step-02-add-flour-tapioca-v1.png',
+  },
+  rest: {
+    id: 'rest-dough',
+    src: '/media/recipes/lazy-dumplings/selected/step-03-rest-dough-v1.png',
+  },
+  'shape-log': {
+    id: 'shape-dough-log',
+    src: '/media/recipes/lazy-dumplings/selected/step-04-shape-log-v1.png',
+  },
+  'shape-dumplings': {
+    id: 'shape-round-dumplings',
+    src: '/media/recipes/lazy-dumplings/selected/step-05-shape-dumplings-v1.png',
+  },
+  'cook-dumplings': {
+    id: 'boil-round-dumplings',
+    src: '/media/recipes/lazy-dumplings/selected/step-06-boil-dumplings-v1.png',
+  },
+} as const;
+
+function stepMedia(
+  stepId: keyof typeof lazyDumplingsStepMedia,
+  alt: string,
+  title: string,
+  caption: string,
+) {
+  return [{ ...lazyDumplingsStepMedia[stepId], alt, title, caption }];
+}
+
 export const lazyDumplingsRecipe = {
   id: 'lazy-dumplings',
   publicationStatus: 'draft',
@@ -103,6 +139,12 @@ export const lazyDumplingsRecipe = {
         { ingredientId: 'eggs' },
         { ingredientId: 'sugar' },
       ],
+      media: stepMedia(
+        'mix-wet',
+        'Cottage cheese, eggs and sugar mixing in a bowl with a dough hook',
+        'Mix to an even base',
+        'The cottage-cheese mixture can stay softly textured.',
+      ),
     },
     {
       id: 'add-dry',
@@ -111,12 +153,24 @@ export const lazyDumplingsRecipe = {
       checkpoint:
         'The dough should remain very sticky. Do not add extra flour to firm it up.',
       cookIngredients: [{ ingredientId: 'flour' }, { ingredientId: 'tapioca' }],
+      media: stepMedia(
+        'add-dry',
+        'Gluten-free flour and tapioca being added to sticky cottage-cheese dough',
+        'Keep the dough sticky',
+        'Add the dry ingredients, but do not firm the dough with extra flour.',
+      ),
     },
     {
       id: 'rest',
       title: 'Rest the dough',
       body: 'Leave the dough to rest for 15–30 minutes.',
       meta: '15–30 min',
+      media: stepMedia(
+        'rest',
+        'Soft cottage-cheese dough resting in a covered ceramic bowl',
+        'Let the dough rest',
+        'Cover it loosely and leave it for 15–30 minutes.',
+      ),
     },
     {
       id: 'shape-log',
@@ -130,6 +184,12 @@ export const lazyDumplingsRecipe = {
           note: 'Use extra flour only for dusting the surface and dough.',
         },
       ],
+      media: stepMedia(
+        'shape-log',
+        'Hands gently rolling soft cottage-cheese dough into a flour-dusted log',
+        'Use flour only on the surface',
+        'The dough stays soft; flour makes it easier to handle.',
+      ),
     },
     {
       id: 'shape-dumplings',
@@ -144,6 +204,12 @@ export const lazyDumplingsRecipe = {
           note: 'Use extra flour to coat the cut sides.',
         },
       ],
+      media: stepMedia(
+        'shape-dumplings',
+        'Round uncooked cottage-cheese dumplings and cut dough pieces on a floured surface',
+        'Coat the cut sides, then roll',
+        'Form each piece into a small round dumpling.',
+      ),
     },
     {
       id: 'cook-dumplings',
@@ -158,6 +224,12 @@ export const lazyDumplingsRecipe = {
       meta: '1–2 min after floating',
       checkpoint:
         'Keep the water at a calm boil so the dumplings do not become damaged or fall apart.',
+      media: stepMedia(
+        'cook-dumplings',
+        'Round cottage-cheese dumplings floating in gently simmering water with a skimmer',
+        'Cook at a gentle boil',
+        'Lift the round dumplings out carefully after 1–2 minutes.',
+      ),
     },
   ],
   translations: {
@@ -232,6 +304,12 @@ export const lazyDumplingsRecipe = {
             { ingredientId: 'eggs' },
             { ingredientId: 'sugar' },
           ],
+          media: stepMedia(
+            'mix-wet',
+            'Кисломолочний сир, яйця й цукор змішуються в мисці насадкою-тістомісом',
+            'Змішайте до однорідної основи',
+            'Сирна маса може залишатися м’якою та трохи фактурною.',
+          ),
         },
         {
           id: 'add-dry',
@@ -243,12 +321,24 @@ export const lazyDumplingsRecipe = {
             { ingredientId: 'flour' },
             { ingredientId: 'tapioca' },
           ],
+          media: stepMedia(
+            'add-dry',
+            'Безглютенове борошно й тапіока додаються до липкого сирного тіста',
+            'Залиште тісто липким',
+            'Додайте сухі інгредієнти, але не ущільнюйте тісто зайвим борошном.',
+          ),
         },
         {
           id: 'rest',
           title: 'Залиште тісто відпочити',
           body: 'Залиште тісто відпочити на 15–30 хвилин.',
           meta: '15–30 хв',
+          media: stepMedia(
+            'rest',
+            'М’яке сирне тісто відпочиває в накритій керамічній мисці',
+            'Дайте тісту відпочити',
+            'Нещільно накрийте й залиште на 15–30 хвилин.',
+          ),
         },
         {
           id: 'shape-log',
@@ -262,6 +352,12 @@ export const lazyDumplingsRecipe = {
               note: 'Додаткове борошно лише для присипання поверхні й тіста.',
             },
           ],
+          media: stepMedia(
+            'shape-log',
+            'Руки обережно формують ковбаску з м’якого сирного тіста на присипаній борошном поверхні',
+            'Борошно лише на поверхні',
+            'Тісто лишається м’яким, а борошно допомагає з ним працювати.',
+          ),
         },
         {
           id: 'shape-dumplings',
@@ -276,6 +372,12 @@ export const lazyDumplingsRecipe = {
               note: 'Додаткове борошно для покриття зрізів.',
             },
           ],
+          media: stepMedia(
+            'shape-dumplings',
+            'Круглі сирі сирні вареники та нарізане тісто на присипаній борошном поверхні',
+            'Покрийте зрізи борошном і скатайте',
+            'Сформуйте з кожного шматочка невеликий круглий вареник.',
+          ),
         },
         {
           id: 'cook-dumplings',
@@ -290,6 +392,12 @@ export const lazyDumplingsRecipe = {
           meta: '1–2 хв після спливання',
           checkpoint:
             'Вода має кипіти спокійно, щоб вареники не пошкодилися й не розвалилися.',
+          media: stepMedia(
+            'cook-dumplings',
+            'Круглі сирні вареники сплили у воді з тихим кипінням, один вареник на шумівці',
+            'Варіть при спокійному кипінні',
+            'Через 1–2 хвилини обережно дістаньте круглі вареники шумівкою.',
+          ),
         },
       ],
     },
@@ -364,6 +472,12 @@ export const lazyDumplingsRecipe = {
             { ingredientId: 'eggs' },
             { ingredientId: 'sugar' },
           ],
+          media: stepMedia(
+            'mix-wet',
+            'Requesón, huevos y azúcar mezclándose en un bol con gancho de amasar',
+            'Mezcla hasta obtener una base uniforme',
+            'La mezcla de requesón puede conservar una textura suave.',
+          ),
         },
         {
           id: 'add-dry',
@@ -375,12 +489,24 @@ export const lazyDumplingsRecipe = {
             { ingredientId: 'flour' },
             { ingredientId: 'tapioca' },
           ],
+          media: stepMedia(
+            'add-dry',
+            'Harina sin gluten y tapioca añadiéndose a una masa pegajosa de requesón',
+            'Mantén la masa pegajosa',
+            'Añade los ingredientes secos sin endurecer la masa con harina extra.',
+          ),
         },
         {
           id: 'rest',
           title: 'Deja reposar la masa',
           body: 'Deja reposar la masa durante 15–30 minutos.',
           meta: '15–30 min',
+          media: stepMedia(
+            'rest',
+            'Masa suave de requesón reposando en un bol de cerámica cubierto',
+            'Deja reposar la masa',
+            'Cúbrela sin apretar y déjala durante 15–30 minutos.',
+          ),
         },
         {
           id: 'shape-log',
@@ -394,6 +520,12 @@ export const lazyDumplingsRecipe = {
               note: 'Usa harina adicional solo para espolvorear la superficie y la masa.',
             },
           ],
+          media: stepMedia(
+            'shape-log',
+            'Manos formando con suavidad un cilindro de masa de requesón sobre una superficie enharinada',
+            'Usa harina solo en la superficie',
+            'La masa sigue blanda y la harina facilita el manejo.',
+          ),
         },
         {
           id: 'shape-dumplings',
@@ -409,6 +541,12 @@ export const lazyDumplingsRecipe = {
               note: 'Usa harina adicional para cubrir los cortes.',
             },
           ],
+          media: stepMedia(
+            'shape-dumplings',
+            'Bolitas crudas de requesón y masa cortada sobre una superficie enharinada',
+            'Cubre los cortes y forma las bolitas',
+            'Forma una bolita pequeña con cada trozo.',
+          ),
         },
         {
           id: 'cook-dumplings',
@@ -423,6 +561,12 @@ export const lazyDumplingsRecipe = {
           meta: '1–2 min después de que suban',
           checkpoint:
             'Mantén un hervor tranquilo para que las piezas no se dañen ni se deshagan.',
+          media: stepMedia(
+            'cook-dumplings',
+            'Bolitas de requesón flotando en agua con hervor suave, con una bolita en una espumadera',
+            'Cuece a hervor suave',
+            'Al cabo de 1–2 minutos, retira con cuidado las bolitas con una espumadera.',
+          ),
         },
       ],
     },

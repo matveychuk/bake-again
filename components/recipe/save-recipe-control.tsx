@@ -1,6 +1,6 @@
 'use client';
 
-import { Bookmark, BookmarkCheck } from 'lucide-react';
+import { Bookmark } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { readRecipeMemory, subscribeToRecipeMemory, toggleSavedRecipe } from '@/lib/persistence/recipe-memory';
@@ -30,7 +30,7 @@ export function SaveRecipeControl({ recipeId, title, locale }: { recipeId: strin
       }}
       type="button"
     >
-      {saved ? <BookmarkCheck aria-hidden="true" size={19} /> : <Bookmark aria-hidden="true" size={19} />}
+      <Bookmark aria-hidden="true" fill={saved ? 'currentColor' : 'none'} size={19} />
     </button>
   );
 }

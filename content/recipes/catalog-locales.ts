@@ -80,9 +80,9 @@ export const recipeDetailTitles: Record<string, LocalizedText> = {
     uk: 'Безглютенові яблучні оладки',
   },
   'banana-fritters': {
-    en: 'Gluten-free banana fritters',
+    en: 'Gluten-free banana pancakes',
     es: 'Tortitas de plátano sin gluten',
-    uk: 'Безглютенові бананові оладки',
+    uk: 'Безглютенові бананові панкейки',
   },
   'apple-banana-fritters': {
     en: 'Gluten-free apple-banana fritters',
@@ -267,6 +267,11 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       'Bizcocho sin gluten alto y sencillo con una porción cortada',
       'Високий простий безглютеновий бісквіт із відрізаним шматком',
     ),
+    publicationNote: {
+      en: 'Confirm the long form dimensions, doneness cue, active time and total time.',
+      es: 'Confirma las dimensiones del molde alargado, la señal de cocción y los tiempos activo y total.',
+      uk: 'Уточніть розміри довгої форми, ознаку готовності, активний і загальний час.',
+    },
   },
   crepes: {
     title: {
@@ -312,6 +317,11 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       'Tarta Napoleón sin gluten con capas finas doradas y una porción cortada',
       'Безглютеновий Наполеон із тонкими золотистими коржами та відрізаним шматком',
     ),
+    publicationNote: {
+      en: 'Confirm the final custard volume and total time; approve or replace the generated cover image.',
+      es: 'Confirma el volumen final de crema y el tiempo total; aprueba o sustituye la imagen de portada generada.',
+      uk: 'Уточніть остаточний об’єм крему й загальний час; схваліть або замініть згенеровану обкладинку.',
+    },
   },
   'cinnamon-rolls': {
     title: {
@@ -361,9 +371,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
     },
     category: { en: 'Breakfast', es: 'Desayuno', uk: 'Сніданок' },
     summary: {
-      en: 'Apple fritters from the working recipe.',
-      es: 'Tortitas de manzana de la receta de trabajo.',
-      uk: 'Яблучні оладки з робочого рецепта.',
+      en: 'Tender gluten-free apple fritters with Schär Mix B Bread.',
+      es: 'Tortitas tiernas de manzana sin gluten con Schär Mix B Bread.',
+      uk: 'Ніжні безглютенові яблучні оладки з борошном Schär Mix B Bread.',
     },
     alt: previewAlt(
       'Gluten-free apple fritters',
@@ -373,21 +383,26 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
   },
   'banana-fritters': {
     title: {
-      en: 'Banana fritters',
+      en: 'Banana pancakes',
       es: 'Tortitas de plátano',
-      uk: 'Бананові оладки',
+      uk: 'Бананові панкейки',
     },
     category: { en: 'Breakfast', es: 'Desayuno', uk: 'Сніданок' },
     summary: {
-      en: 'Banana fritters from the working recipe.',
-      es: 'Tortitas de plátano de la receta de trabajo.',
-      uk: 'Бананові оладки з робочого рецепта.',
+      en: 'Tested banana pancakes adapted with Schär Mix B Bread.',
+      es: 'Tortitas de plátano probadas y adaptadas con Schär Mix B Bread.',
+      uk: 'Перевірені бананові панкейки, адаптовані з борошном Schär Mix B Bread.',
     },
     alt: previewAlt(
-      'Gluten-free banana fritters',
+      'Fluffy gluten-free banana pancakes',
       'Tortitas de plátano sin gluten',
-      'Безглютенові бананові оладки',
+      'Пухкі безглютенові бананові панкейки',
     ),
+    publicationNote: {
+      en: 'Record the flour weight in grams and confirm whether the liquid is adjusted before publication.',
+      es: 'Antes de publicar, anota el peso de la harina en gramos y confirma si se ajusta el líquido.',
+      uk: 'Перед публікацією запишіть вагу борошна в грамах і уточніть, чи коригується кількість рідини.',
+    },
   },
   'apple-banana-fritters': {
     title: {
@@ -397,15 +412,20 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
     },
     category: { en: 'Breakfast', es: 'Desayuno', uk: 'Сніданок' },
     summary: {
-      en: 'Apple and banana fritters from the working recipe.',
-      es: 'Tortitas de manzana y plátano de la receta de trabajo.',
-      uk: 'Яблучно-бананові оладки з робочого рецепта.',
+      en: 'A suggested apple-fritter adaptation sweetened with ripe banana.',
+      es: 'Una adaptación sugerida de las tortitas de manzana, endulzada con plátano maduro.',
+      uk: 'Запропонована версія яблучних оладок, підсолоджена стиглим бананом.',
     },
     alt: previewAlt(
       'Gluten-free apple and banana fritters',
       'Tortitas sin gluten de manzana y plátano',
       'Безглютенові оладки з яблуком і бананом',
     ),
+    publicationNote: {
+      en: 'Bake-test the banana substitution and confirm the kefir or yogurt amount before publication.',
+      es: 'Antes de publicar, prueba la sustitución por plátano y confirma la cantidad de kéfir o yogur.',
+      uk: 'Перед публікацією перевірте заміну цукру бананом і уточніть кількість кефіру або йогурту.',
+    },
   },
   'easter-bread': {
     title: {
@@ -419,15 +439,20 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Сезонна випічка',
     },
     summary: {
-      en: 'A seasonal recipe awaiting transfer of its exact method.',
-      es: 'Una receta de temporada que espera la transcripción de su método exacto.',
-      uk: 'Сезонний рецепт, що очікує перенесення точного способу приготування.',
+      en: 'A softer, moister paska with abundant fruit and a panettone-like crumb.',
+      es: 'Una paska más tierna y húmeda, con abundante fruta y una miga parecida al panettone.',
+      uk: 'М’якша й вологіша паска з великою кількістю родзинок і цукатів, ближча до panettone.',
     },
     alt: previewAlt(
       'Tall gluten-free Ukrainian Easter bread with glaze and raisins',
       'Pan ucraniano de Pascua sin gluten con glaseado y pasas',
       'Висока безглютенова паска з глазур’ю та родзинками',
     ),
+    publicationNote: {
+      en: 'Bake-test this exact 2.0 adaptation, confirm the mould dimensions and total elapsed time, and review the generated cover image.',
+      es: 'Prueba horneando esta adaptación 2.0 exacta, confirma las dimensiones de los moldes y el tiempo total, y revisa la imagen de portada generada.',
+      uk: 'Випробуйте саме цю адаптацію 2.0, уточніть розміри форм і загальний час та перевірте згенеровану обкладинку.',
+    },
   },
   'prune-cake': {
     title: {
@@ -450,6 +475,11 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       'Tarta de chocolate en capas con crema y trozos de ciruela pasa',
       'Шоколадний торт із кремом і шматочками чорносливу',
     ),
+    publicationNote: {
+      en: 'Confirm the unreadable ingredients, cake method, prune preparation, assembly, glaze formula, temperature and timing before publication.',
+      es: 'Confirma los ingredientes ilegibles, el método del bizcocho, la preparación de las ciruelas, el montaje, la fórmula del glaseado, la temperatura y los tiempos antes de publicar.',
+      uk: 'Перед публікацією уточніть нерозбірливі інгредієнти, спосіб приготування коржів і чорносливу, складання, формулу поливки, температуру та час.',
+    },
   },
   'fruit-sponge-roll': {
     title: {
@@ -472,6 +502,11 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       'Foto de la autora de un brazo de gitano de frutas con crema, frutos rojos, menta y almendras',
       'Фото авторки бісквітного рулету з кремом, ягодами, м’ятою та мигдалем',
     ),
+    publicationNote: {
+      en: 'Confirm the exact oven temperature, rolling method, fruit quantities and total time; review the author photo for publication.',
+      es: 'Confirma la temperatura exacta del horno, el método de enrollado, las cantidades de fruta y el tiempo total; revisa la foto de la autora antes de publicar.',
+      uk: 'Уточніть точну температуру духовки, спосіб згортання, кількість фруктів і загальний час; перевірте фото авторки перед публікацією.',
+    },
   },
   eclairs: {
     title: { en: 'Eclairs', es: 'Éclairs', uk: 'Еклери' },
@@ -481,14 +516,19 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Заварне тісто / десерт',
     },
     summary: {
-      en: 'The working éclair recipe still needs its complete recipe card.',
-      es: 'La receta de éclairs aún necesita su ficha completa.',
-      uk: 'Робочий рецепт еклерів ще потребує повної картки.',
+      en: 'Tested gluten-free choux made with Schär Mix B Bread and four small eggs, filled with whipped cream.',
+      es: 'Masa choux sin gluten probada con Schär Mix B Bread y cuatro huevos pequeños, rellena de nata montada.',
+      uk: 'Перевірене безглютенове заварне тісто на Schär Mix B Bread із чотирма маленькими яйцями та начинкою зі збитих вершків.',
     },
     alt: previewAlt(
       'Golden gluten-free eclairs with vanilla cream and chocolate glaze',
       'Éclairs sin gluten dorados con crema de vainilla y glaseado de chocolate',
       'Золотисті безглютенові еклери з ванільним кремом і шоколадною глазур’ю',
     ),
+    publicationNote: {
+      en: 'The tested bake yielded about 20 profiteroles. Test the éclair shape and timing separately, capture the missing sauce methods, and approve or replace the generated photo.',
+      es: 'La prueba rindió unos 20 profiteroles. Prueba por separado la forma y el tiempo de los éclairs, registra los métodos de las salsas que faltan y aprueba o sustituye la imagen generada.',
+      uk: 'Перевірена випічка дала близько 20 профітролів. Окремо перевірте форму й час випікання еклерів, додайте відсутні способи приготування соусів і погодьте або замініть згенероване фото.',
+    },
   },
 };

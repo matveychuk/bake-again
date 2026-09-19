@@ -499,6 +499,31 @@ html:lang(es) .hero h1 em {
   line-height: 1.08;
 }
 
+.recipe-collections {
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  list-style: none;
+}
+
+.recipe-collections li {
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.recipes-collection-summary {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-small);
+}
+
 .recipe-card-header > button {
   width: 42px;
   height: 42px;

@@ -2,7 +2,7 @@ import { List, ListChecks } from 'lucide-react';
 import { AssistantTrigger } from '@/components/assistant';
 import { assistantMessages } from '@/components/assistant/assistant.messages';
 import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
-import { RecipeStepGuidance } from '@/components/recipe/recipe-step-guidance';
+import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
 import { StepMediaSequence } from '@/components/recipe/step-media-sequence';
 import type { AssistantConfiguration } from '@/lib/assistant/contracts';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -60,51 +60,55 @@ export function CookStep({
         </button>
       </div>
       {step.meta && <p className={styles.meta}>{step.meta}</p>}
-      <h1 id="cook-step-title" tabIndex={-1}>
-        {step.title}
-      </h1>
+      <RecipeStepContent
+        action={
+          assistant ? (
+            <AssistantTrigger
+              className={styles.ask}
+              compact
+              configuration={assistant.configuration}
+              label={assistantMessages[assistant.locale].trigger.step}
+              scope={{ kind: 'step', stepIds: step.stepIds }}
+              stepTitle={step.title}
+            />
+          ) : undefined
+        }
+        checkpoint={step.checkpoint}
+        checkpointLabel={messages.recipe.checkpoint}
+        headingId="cook-step-title"
+        headingLevel="h1"
+        headingTabIndex={-1}
+        tip={step.tip}
+        tipLabel={messages.recipe.tip}
+        title={step.title}
+      >
+        {step.instructions.length === 1 ? (
+          <p className={styles.instruction}>{step.instructions[0]}</p>
+        ) : (
+          <ol className={styles.instructions}>
+            {step.instructions.map((instruction, index) => (
+              <li key={`${step.stepIds[index] ?? index}-${instruction}`}>
+                <span>{index + 1}</span>
+                <p>{instruction}</p>
+              </li>
+            ))}
+          </ol>
+        )}
 
-      {step.tip && (
-        <RecipeStepGuidance
-          kind="tip"
-          label={messages.recipe.tip}
-          variant="prominent"
-        >
-          {step.tip}
-        </RecipeStepGuidance>
-      )}
-
-      {step.instructions.length === 1 ? (
-        <p className={styles.instruction}>{step.instructions[0]}</p>
-      ) : (
-        <ol className={styles.instructions}>
-          {step.instructions.map((instruction, index) => (
-            <li key={`${step.stepIds[index] ?? index}-${instruction}`}>
-              <span>{index + 1}</span>
-              <p>{instruction}</p>
-            </li>
-          ))}
-        </ol>
-      )}
-
-      {step.ingredients.length > 0 && (
-        <section
-          className={styles.ingredientStrip}
-          aria-label={messages.cook.ingredientsUsed}
-        >
-          <p>{messages.cook.forThisStep}</p>
-          <RecipeIngredientList items={step.ingredients} variant="compact" />
-        </section>
-      )}
-
-      {step.checkpoint && (
-        <RecipeStepGuidance
-          kind="checkpoint"
-          label={messages.recipe.checkpoint}
-        >
-          {step.checkpoint}
-        </RecipeStepGuidance>
-      )}
+        {step.ingredients.length > 0 && (
+          <section
+            className={styles.ingredientStrip}
+            aria-label={messages.cook.ingredientsUsed}
+          >
+            <p>{messages.cook.forThisStep}</p>
+            <RecipeIngredientList
+              items={step.ingredients}
+              locale={locale}
+              variant="compact"
+            />
+          </section>
+        )}
+      </RecipeStepContent>
 
       {step.timerSeconds && (
         <CookTimer
@@ -127,15 +131,6 @@ export function CookStep({
         />
       )}
 
-      {assistant && (
-        <AssistantTrigger
-          className={styles.ask}
-          configuration={assistant.configuration}
-          label={assistantMessages[assistant.locale].trigger.step}
-          scope={{ kind: 'step', stepIds: step.stepIds }}
-          stepTitle={step.title}
-        />
-      )}
     </article>
   );
 }

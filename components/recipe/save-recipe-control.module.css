@@ -1,4 +1,4 @@
-.control { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-round); background: var(--color-background-surface); color: var(--color-text-primary); cursor: pointer; }
+.control { width: 44px; min-width: 44px; height: 44px; min-height: 44px; flex: 0 0 44px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-round); background: var(--color-background-surface); color: var(--color-text-primary); cursor: pointer; }
 .control[data-saved='true'] { border-color: var(--color-action-primary); background: var(--color-status-tested-background); color: var(--color-status-tested-text); }
 .control:hover { border-color: var(--color-action-primary); }
 .control:focus-visible { outline: 2px solid var(--color-action-primary); outline-offset: 3px; }

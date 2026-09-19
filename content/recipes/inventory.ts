@@ -1,4 +1,5 @@
 import type { LocalizedText } from './recipe.types.ts';
+import type { RecipeCollectionId } from './collections.ts';
 
 export type InventoryArchiveSection = {
   title: string;
@@ -11,7 +12,9 @@ export type InventoryRecipe = {
   title: string;
   sourceTitle: string;
   category: string;
-  testingStatus: 'Core verified';
+  /** Reader-facing collections; category remains the dish type shown as the card eyebrow. */
+  collectionIds: RecipeCollectionId[];
+  testingStatus: 'Core verified' | 'Suggested adaptation';
   flour: string;
   difficulty: string | null;
   activeTime: string | null;
@@ -20,6 +23,7 @@ export type InventoryRecipe = {
     difficulty: LocalizedText;
     activeTime: LocalizedText;
     totalTime: LocalizedText;
+    flour?: LocalizedText;
   };
   scalingAnchorIngredientId?: string;
   launchPriority: string;
@@ -42,11 +46,34 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Banana bread',
     sourceTitle: 'Банановий хліб',
     category: 'Everyday cake',
+    collectionIds: ['everyday'],
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: null,
     activeTime: null,
     totalTime: null,
+    localizedFacts: {
+      difficulty: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      activeTime: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      totalTime: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      flour: {
+        en: 'Schär Mix B Bread',
+        es: 'Schär Mix B Bread',
+        uk: 'Schär Mix B Bread',
+      },
+    },
     launchPriority: 'Medium',
     heroCandidate: 'Possible',
     image: '/images/recipes/banana-bread-card-v1.png',
@@ -72,6 +99,7 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Lazy cottage-cheese dumplings',
     sourceTitle: 'Ліниві вареники',
     category: 'Breakfast / everyday',
+    collectionIds: ['breakfast', 'everyday', 'cottage-cheese'],
     testingStatus: 'Core verified',
     flour: `${schar} + tapioca starch`,
     difficulty: null,
@@ -109,6 +137,7 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Apple charlotte',
     sourceTitle: 'Яблучна шарлотка',
     category: 'Cake / everyday',
+    collectionIds: ['everyday'],
     testingStatus: 'Core verified',
     flour: `${schar} + tapioca starch`,
     difficulty: null,
@@ -142,6 +171,12 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Cottage-cheese waffles',
     sourceTitle: 'Творожні вафлі',
     category: 'Breakfast / snack',
+    collectionIds: [
+      'breakfast',
+      'everyday',
+      'cottage-cheese',
+      'batter-on-hand',
+    ],
     testingStatus: 'Core verified',
     flour: `${schar} + corn starch`,
     difficulty: null,
@@ -176,6 +211,7 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Carrot cake',
     sourceTitle: 'Морквяний кекс',
     category: 'Cake',
+    collectionIds: ['everyday', 'batter-on-hand'],
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: null,
@@ -211,11 +247,34 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Sponge cake',
     sourceTitle: 'Бісквіт',
     category: 'Cake base',
+    collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: `${schar} + tapioca and corn starch`,
     difficulty: null,
     activeTime: null,
     totalTime: '40–50 min baking + preparation',
+    localizedFacts: {
+      difficulty: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      activeTime: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      totalTime: {
+        en: '40–50 min baking + preparation',
+        es: '40–50 min de horneado + preparación',
+        uk: '40–50 хв випікання + підготовка',
+      },
+      flour: {
+        en: 'Schär Mix B Bread + tapioca and corn starch',
+        es: 'Schär Mix B Bread + almidones de tapioca y maíz',
+        uk: 'Schär Mix B Bread + тапіоковий і кукурудзяний крохмалі',
+      },
+    },
     launchPriority: 'Medium',
     heroCandidate: 'No',
     image: '/images/recipes/sponge-cake-card-v1.png',
@@ -237,7 +296,7 @@ export const recipeInventory: InventoryRecipe[] = [
       },
     ],
     needsBeforePublishing:
-      'Confirm corrected quantities against the notebook image; record form size and timing; approve or replace the generated photo.',
+      'Record the long form dimensions, doneness cue and full timing; approve or replace the generated photo.',
   },
   {
     id: 'crepes',
@@ -245,6 +304,7 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Thin breakfast crepes',
     sourceTitle: 'Млинці',
     category: 'Breakfast / everyday',
+    collectionIds: ['breakfast', 'everyday'],
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: 'Medium',
@@ -285,11 +345,26 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Napoleon cake',
     sourceTitle: 'Безглютеновий Наполеон',
     category: 'Celebration / layer cake',
+    collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: `${schar} + tapioca and corn starch`,
     difficulty: 'Advanced',
     activeTime: null,
-    totalTime: '14–26 h including chilling and maturation',
+    totalTime: '6 h',
+    localizedFacts: {
+      difficulty: { en: 'Advanced', es: 'Avanzada', uk: 'Складна' },
+      activeTime: { en: '1 hr', es: '1 h', uk: '1 год' },
+      totalTime: {
+        en: '6 hr',
+        es: '6 h',
+        uk: '6 год',
+      },
+      flour: {
+        en: 'Schär Mix B + tapioca and corn starch',
+        es: 'Schär Mix B + almidones de tapioca y maíz',
+        uk: 'Schär Mix B + тапіоковий і кукурудзяний крохмалі',
+      },
+    },
     launchPriority: 'High',
     heroCandidate: 'Yes',
     image: '/images/recipes/gluten-free-napoleon-card-v1.png',
@@ -309,22 +384,52 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Cinnamon rolls',
     sourceTitle: 'Cinnabons / cinnamon rolls',
     category: 'Sweet yeast baking',
+    collectionIds: ['everyday'],
     testingStatus: 'Core verified',
-    flour: schar,
+    flour: 'Rice flour + corn and tapioca starch',
     difficulty: null,
     activeTime: null,
     totalTime: null,
+    localizedFacts: {
+      difficulty: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      activeTime: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      totalTime: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      flour: {
+        en: 'Rice flour + corn and tapioca starch',
+        es: 'Harina de arroz + almidones de maíz y tapioca',
+        uk: 'Рисове борошно + кукурудзяний і тапіоковий крохмалі',
+      },
+    },
     launchPriority: 'High',
     heroCandidate: 'Yes',
     image: '/images/recipes/cinnamon-rolls-card-v1.png',
     imageKind: 'generated-preview',
     imageAlt: 'Gluten-free cinnamon rolls with a light cream glaze',
     summary:
-      'The working cinnamon-roll recipe is confirmed, but its proportions and method still need to be transferred.',
-    source: 'Named by the author in the inventory conversation',
-    archiveSections: [],
+      'Soft gluten-free cinnamon rolls made with rice flour, corn and tapioca starch, with a choice of cinnamon or cocoa-peanut filling.',
+    source:
+      'Megasilvita, “Cinnamon Rolls Sin Gluten la receta perfecta”, confirmed by the author as the recipe used',
+    archiveSections: [
+      {
+        title: 'Source recipe',
+        content:
+          'https://www.megasilvita.com/blog/cinnamon-rolls-sin-gluten-la-receta-perfecta/',
+      },
+    ],
     needsBeforePublishing:
-      'Add the full recipe text; record proofing, timing and difficulty; approve or replace the generated photo.',
+      'Confirm the filling and finish used, yield, baking-dish dimensions, difficulty and full timing; approve or replace the generated photo.',
   },
   {
     id: 'crinkle-cookies',
@@ -332,6 +437,7 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Chocolate crinkle cookies',
     sourceTitle: 'Мармурове печиво «Тріщинки»',
     category: 'Cookies / sweet baking',
+    collectionIds: ['everyday', 'batter-on-hand'],
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: 'Easy',
@@ -365,6 +471,7 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Apple fritters',
     sourceTitle: 'Яблучні оладки',
     category: 'Breakfast / everyday',
+    collectionIds: ['breakfast', 'everyday'],
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: null,
@@ -377,34 +484,59 @@ export const recipeInventory: InventoryRecipe[] = [
     imageAlt:
       'Golden gluten-free apple fritter pancakes with visible apple pieces',
     summary:
-      'A verified fruit-fritter recipe whose exact base still needs to be transferred.',
-    source: 'Named by the author in the inventory conversation',
-    archiveSections: [],
+      'A verified apple-fritter recipe with grated apple and Schär Mix B Bread.',
+    source:
+      'Full recipe supplied by the author with a reference to trueua.info',
+    archiveSections: [
+      {
+        title: 'Ingredients · original notes',
+        content:
+          'Яблука — 2 шт.\nЯйце — 1 шт.\nКефір або натуральний йогурт — 160 г\nБезглютенове борошно Schär Mix B Bread — 140 г\nЦукор або мед — 1 ст. л. (за смаком)\nСода — 0,5 ч. л.\nОлія — для смаження',
+      },
+      {
+        title: 'Method · original notes',
+        content:
+          'Помити й очистити яблука, натерти на середній тертці. Збити яйце з йогуртом та цукром чи медом. Додати яблука. Всипати борошно та соду й перемішати до консистенції густої сметани. Розігріти пательню з невеликою кількістю олії на середньому вогні. Викладати невеликі оладки ложкою. Смажити під кришкою по 2–3 хвилини з кожного боку до золотистої скоринки.',
+      },
+    ],
     needsBeforePublishing:
-      'Add the full recipe text and timing; decide whether to publish separately or as a fruit-fritter variation.',
+      'Record yield, total cooking time and approximate frying-oil quantity; approve or replace the generated photo.',
   },
   {
     id: 'banana-fritters',
     slug: 'banana-fritters',
-    title: 'Banana fritters',
-    sourceTitle: 'Бананові оладки',
+    title: 'Banana pancakes',
+    sourceTitle: 'Бананові панкейки',
     category: 'Breakfast / everyday',
+    collectionIds: ['breakfast', 'everyday'],
     testingStatus: 'Core verified',
     flour: schar,
-    difficulty: null,
-    activeTime: null,
-    totalTime: null,
+    difficulty: 'Easy',
+    activeTime: '30 min',
+    totalTime: '30 min',
+    localizedFacts: {
+      difficulty: { en: 'Easy', es: 'Fácil', uk: 'Легко' },
+      activeTime: { en: '30 min', es: '30 min', uk: '30 хв' },
+      totalTime: { en: '30 min', es: '30 min', uk: '30 хв' },
+      flour: {
+        en: 'Schär Mix B Bread',
+        es: 'Schär Mix B Bread',
+        uk: 'Schär Mix B Bread',
+      },
+    },
+    scalingAnchorIngredientId: 'flour',
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/banana-fritters-card-v1.png',
+    image: '/images/recipes/banana-pancakes-card-v2.png',
     imageKind: 'generated-preview',
-    imageAlt: 'Golden gluten-free banana fritter pancakes',
+    imageAlt: 'Fluffy round gluten-free banana pancakes with a tender crumb',
     summary:
-      'A verified banana-fritter recipe whose exact base still needs to be transferred.',
-    source: 'Named by the author in the inventory conversation',
+      'A tested banana-pancake adaptation made with Schär Mix B Bread, with a thick, lightly lumpy batter.',
+    source:
+      'Natasha’s Kitchen Banana Pancakes, adapted and tested by the author with Schär Mix B Bread',
     archiveSections: [],
     needsBeforePublishing:
-      'Add the full recipe text and timing; decide whether to publish separately or as a fruit-fritter variation.',
+      'Record the Schär Mix B Bread amount in grams, confirm whether the liquid is adjusted and approve or replace the generated photos.',
   },
   {
     id: 'apple-banana-fritters',
@@ -412,7 +544,8 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Apple-banana fritters',
     sourceTitle: 'Яблучно-бананові оладки',
     category: 'Breakfast / everyday',
-    testingStatus: 'Core verified',
+    collectionIds: ['breakfast', 'everyday'],
+    testingStatus: 'Suggested adaptation',
     flour: schar,
     difficulty: null,
     activeTime: null,
@@ -423,11 +556,17 @@ export const recipeInventory: InventoryRecipe[] = [
     imageKind: 'generated-preview',
     imageAlt: 'Golden gluten-free apple and banana fritter pancakes',
     summary:
-      'A verified apple-and-banana fritter recipe whose exact base still needs to be transferred.',
-    source: 'Named by the author in the inventory conversation',
-    archiveSections: [],
+      'A suggested adaptation of the tested apple fritters, replacing sugar or honey with one ripe banana.',
+    source: 'Adapted from the author-supplied apple-fritter recipe',
+    archiveSections: [
+      {
+        title: 'Adaptation note',
+        content:
+          'Замінити 1 ст. л. цукру або меду одним невеликим дуже стиглим бананом. Решту інгредієнтів і базовий спосіб приготування залишити без змін.',
+      },
+    ],
     needsBeforePublishing:
-      'Add the full recipe text and timing; decide whether to publish separately or as a fruit-fritter variation.',
+      'Bake-test the banana substitution; confirm whether 160 g kefir or yogurt still gives the right consistency; record yield, total time and frying-oil quantity; approve or replace the generated photo.',
   },
   {
     id: 'easter-bread',
@@ -435,22 +574,47 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Ukrainian Easter bread',
     sourceTitle: 'Безглютенова паска',
     category: 'Celebration / Easter baking',
+    collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: null,
     activeTime: null,
     totalTime: null,
+    localizedFacts: {
+      difficulty: { en: 'Medium', es: 'Media', uk: 'Середня' },
+      activeTime: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      totalTime: {
+        en: 'To confirm after bake test',
+        es: 'Por confirmar tras la prueba de horneado',
+        uk: 'Уточнити після випікання',
+      },
+      flour: {
+        en: 'Schär Bread Mix + tapioca starch',
+        es: 'Schär Bread Mix + almidón de tapioca',
+        uk: 'Schär Bread Mix + тапіоковий крохмаль',
+      },
+    },
     launchPriority: 'High · seasonal',
     heroCandidate: 'No',
     image: '/images/recipes/easter-bread-card-v1.png',
     imageKind: 'generated-preview',
     imageAlt: 'Tall gluten-free Ukrainian Easter bread with glaze and raisins',
     summary:
-      'A repeatedly baked seasonal recipe awaiting transfer of its exact proportions and method.',
-    source: 'Named by the author in the inventory conversation',
-    archiveSections: [],
+      'A softer, moister paska with abundant raisins and candied fruit, developed toward a panettone-like crumb.',
+    source: 'Author-provided Paska 2.0 recipe and method',
+    archiveSections: [
+      {
+        title: 'Recipe version',
+        content:
+          'Паска 2.0 — м’якша, вологіша, ближча до panettone. На 2 невеликі паски або 1 середню.',
+      },
+    ],
     needsBeforePublishing:
-      'Add the full recipe text, timings and difficulty; approve or replace the generated photo.',
+      'Bake-test this exact 2.0 adaptation; confirm the mould dimensions and total elapsed time; approve or replace the generated photo.',
   },
   {
     id: 'prune-cake',
@@ -458,11 +622,34 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Chocolate prune cake',
     sourceTitle: 'Торт з чорносливом',
     category: 'Cake / celebration',
+    collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: null,
     activeTime: null,
     totalTime: null,
+    localizedFacts: {
+      difficulty: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      activeTime: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      totalTime: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      flour: {
+        en: 'Schär Mix B Bread',
+        es: 'Schär Mix B Bread',
+        uk: 'Schär Mix B Bread',
+      },
+    },
     launchPriority: 'Medium',
     heroCandidate: 'No',
     image: '/images/recipes/prune-cake-card-v1.png',
@@ -492,11 +679,30 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Fruit sponge roll',
     sourceTitle: 'Бісквітний рулет з фруктами',
     category: 'Rolled sponge / dessert',
+    collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: 'Medium',
     activeTime: null,
     totalTime: '15–20 min baking + cooling and assembly',
+    localizedFacts: {
+      difficulty: { en: 'Medium', es: 'Media', uk: 'Середня' },
+      activeTime: {
+        en: 'To confirm',
+        es: 'Por confirmar',
+        uk: 'Потребує уточнення',
+      },
+      totalTime: {
+        en: '15–20 min baking + cooling and assembly',
+        es: '15–20 min de horneado + enfriado y montaje',
+        uk: '15–20 хв випікання + охолодження й складання',
+      },
+      flour: {
+        en: 'Schär Mix B Bread',
+        es: 'Schär Mix B Bread',
+        uk: 'Schär Mix B Bread',
+      },
+    },
     launchPriority: 'Medium–High',
     heroCandidate: 'No',
     image: '/images/recipes/fruit-sponge-roll-author-v1.png',
@@ -528,11 +734,22 @@ export const recipeInventory: InventoryRecipe[] = [
     title: 'Eclairs',
     sourceTitle: 'Еклери',
     category: 'Choux pastry / dessert',
+    collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: schar,
-    difficulty: null,
-    activeTime: null,
-    totalTime: null,
+    difficulty: 'Intermediate',
+    activeTime: '15 min',
+    totalTime: '50 min',
+    localizedFacts: {
+      difficulty: { en: 'Intermediate', es: 'Intermedio', uk: 'Середня' },
+      activeTime: { en: '15 min', es: '15 min', uk: '15 хв' },
+      totalTime: { en: '50 min', es: '50 min', uk: '50 хв' },
+      flour: {
+        en: 'Schär Mix B Bread',
+        es: 'Schär Mix B Bread',
+        uk: 'Schär Mix B Bread',
+      },
+    },
     launchPriority: 'To confirm',
     heroCandidate: 'Possible',
     image: '/images/recipes/eclairs-card-v1.png',
@@ -540,11 +757,17 @@ export const recipeInventory: InventoryRecipe[] = [
     imageAlt:
       'Golden gluten-free eclairs with vanilla cream and chocolate glaze',
     summary:
-      'The working éclair recipe is confirmed, but its complete recipe card still needs to be transferred.',
-    source: 'Added by the author on 2026-09-06',
-    archiveSections: [],
+      'A tested gluten-free choux made with Schär Mix B Bread and four small eggs, filled with whipped cream.',
+    source: 'Recipe screenshot and author bake note, added 2026-09-19',
+    archiveSections: [
+      {
+        title: 'Author note · tested bake',
+        content:
+          'Ми поклали 4 маленьких яйця і було ідеально, десь 20 профітролей.',
+      },
+    ],
     needsBeforePublishing:
-      'Add the full recipe text, yield, timing and difficulty; approve or replace the generated photo.',
+      'Test the piped éclair shape and its final bake time; capture the missing sauce methods; approve or replace the generated photo.',
   },
 ];
 

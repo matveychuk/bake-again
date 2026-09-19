@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { ArrowLeft, Clock3, Play } from 'lucide-react';
 import { SectionTitle } from '@/components/foundations/section-title';
 import { StepMediaSequence } from '@/components/recipe/step-media-sequence';
-import { RecipeFacts } from '@/components/recipe/recipe-facts';
+import { RecipeOverview } from '@/components/recipe/recipe-overview';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
-import { RecipeStepGuidance } from '@/components/recipe/recipe-step-guidance';
+import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
 import type { InventoryRecipe } from '@/content/recipes/inventory';
@@ -17,20 +17,10 @@ import {
 } from '@/content/recipes/catalog-locales';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
-import { formatDuration } from '@/lib/i18n/format';
 import { localeHomePath } from '@/lib/i18n/routes';
 import { InventoryRecipeAdjuster } from './inventory-recipe-adjuster';
 import { SaveRecipeControl } from './save-recipe-control';
 import styles from './inventory-recipe-detail.module.css';
-
-function formatMinutes(locale: AppLocale, minutes: number | null | undefined) {
-  if (minutes === null || minutes === undefined) return null;
-  return formatDuration(locale, {
-    kind: 'exact',
-    value: minutes % 60 === 0 ? minutes / 60 : minutes,
-    unit: minutes % 60 === 0 ? 'hour' : 'minute',
-  });
-}
 
 export function InventoryRecipeDetail({
   recipe,
@@ -50,39 +40,6 @@ export function InventoryRecipeDetail({
     recipeDetailTitles[recipe.id]?.[locale] ??
     copy?.title[locale] ??
     recipe.title;
-  const localizedFacts = recipe.localizedFacts;
-  const facts = [
-    {
-      label: messages.difficulty,
-      value:
-        localizedFacts?.difficulty[locale] ??
-        (locale === 'en' ? recipe.difficulty : null) ??
-        messages.toConfirm,
-    },
-    {
-      label: messages.activeTime,
-      value:
-        formatMinutes(locale, structured?.timing?.activeMinutes) ??
-        localizedFacts?.activeTime[locale] ??
-        (locale === 'en' ? recipe.activeTime : null) ??
-        messages.toConfirm,
-    },
-    {
-      label: messages.totalTime,
-      value:
-        formatMinutes(locale, structured?.timing?.totalElapsedMinutes) ??
-        localizedFacts?.totalTime[locale] ??
-        (locale === 'en' ? recipe.totalTime : null) ??
-        messages.toConfirm,
-    },
-    ...(structured?.yield
-      ? [{ label: messages.yield, value: structured.yield.label }]
-      : []),
-    ...(structured?.geometry
-      ? [{ label: messages.geometry, value: structured.geometry.label }]
-      : []),
-    { label: messages.flour, value: recipe.flour },
-  ];
   const cookModePath = `${pathname ?? `/recipes/${recipe.slug}`}/cook`;
 
   return (
@@ -129,11 +86,7 @@ export function InventoryRecipeDetail({
           <p className={styles.summary}>
             {copy?.summary[locale] ?? recipe.summary}
           </p>
-          <div className={styles.tested}>
-            <span>{messages.workingRecord}</span>
-            <p>{messages.workingRecordExplanation}</p>
-          </div>
-          <RecipeFacts items={facts} className={styles.facts} />
+          <RecipeOverview content={structured} locale={locale} />
           <a href={cookModePath} className={styles.cookModeLink}>
             <Play size={16} fill="currentColor" /> {messages.openCookMode}
           </a>
@@ -185,7 +138,15 @@ export function InventoryRecipeDetail({
                 }
               : null
           }
-          recipe={structured ?? undefined}
+          recipe={
+            structured
+              ? {
+                  ...structured,
+                  gapNote:
+                    copy?.publicationNote?.[locale] ?? structured.gapNote,
+                }
+              : undefined
+          }
         />
       </section>
 
@@ -214,23 +175,17 @@ export function InventoryRecipeDetail({
                   <span className={styles.stepNumber}>
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <div className={styles.stepContent}>
-                    <h4>{step.title}</h4>
+                  <RecipeStepContent
+                    checkpoint={step.checkpoint}
+                    checkpointLabel={messages.checkpoint}
+                    className={styles.stepContent}
+                    headingLevel="h4"
+                    tip={step.tip}
+                    tipLabel={messages.tip}
+                    title={step.title}
+                  >
                     <p>{step.body}</p>
-                    {step.checkpoint && (
-                      <RecipeStepGuidance
-                        kind="checkpoint"
-                        label={messages.checkpoint}
-                      >
-                        {step.checkpoint}
-                      </RecipeStepGuidance>
-                    )}
-                    {step.tip && (
-                      <RecipeStepGuidance kind="tip" label={messages.tip}>
-                        {step.tip}
-                      </RecipeStepGuidance>
-                    )}
-                  </div>
+                  </RecipeStepContent>
                   {step.media && (
                     <StepMediaSequence
                       items={step.media}

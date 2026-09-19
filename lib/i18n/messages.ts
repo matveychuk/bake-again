@@ -27,9 +27,10 @@ type UiMessages = {
     featuredKicker: string;
     featuredTitle: string;
     discoveryTitle: string;
-    discoveryLinks: string[];
+    discoveryLinks: Array<{ id: string; label: string }>;
     recipesEyebrow: string;
     recipesTitle: string;
+    collectionCount: (count: number) => string;
     viewAll: string;
     trustEyebrow: string;
     trustTitle: string;
@@ -46,6 +47,7 @@ type UiMessages = {
     allRecipes: string;
     detailsToConfirm: string;
     workingRecord: string;
+    collectionsLabel: string;
   };
   cook: {
     backToRecipe: string;
@@ -97,7 +99,11 @@ type UiMessages = {
     inventoryDraft: string;
     workingRecord: string;
     workingRecordExplanation: string;
+    time: string;
     difficulty: string;
+    difficultyEasy: string;
+    difficultyMedium: string;
+    difficultyAdvanced: string;
     activeTime: string;
     totalTime: string;
     yield: string;
@@ -111,6 +117,7 @@ type UiMessages = {
     keepInMind: string;
     ingredients: string;
     ingredientsIntro: string;
+    optional: string;
     markIngredientPrepared: (name: string) => string;
     method: (count: number) => string;
     stepByStep: string;
@@ -138,7 +145,7 @@ type UiMessages = {
     sourceGap: string;
   };
   status: {
-    tested: { label: string; explanation: string };
+    tested: { label: string; explanation: string; repeatedExplanation: string };
     calculated: { label: string; explanation: string };
     suggested: { label: string; explanation: string };
   };
@@ -232,16 +239,17 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         `Browse all ${count} working recipes in the current inventory.`,
       featuredKicker: 'Start with a classic',
       featuredTitle: 'Napoleon cake',
-      discoveryTitle: 'Choose by the moment',
+      discoveryTitle: 'Choose a collection',
       discoveryLinks: [
-        'For breakfast',
-        'Something for every day',
-        'For a celebration',
-        'Prepare ahead',
-        'I just want to bake',
+        { id: 'breakfast', label: 'For breakfast' },
+        { id: 'everyday', label: 'For every day' },
+        { id: 'celebration', label: 'For a celebration' },
+        { id: 'cottage-cheese', label: 'With cottage cheese' },
+        { id: 'batter-on-hand', label: 'Batter on hand' },
       ],
       recipesEyebrow: 'Current inventory',
       recipesTitle: 'Every recipe so far.',
+      collectionCount: (count) => `${count} recipes`,
       viewAll: 'View all recipes',
       trustEyebrow: 'Clear recipe status',
       trustTitle: 'Know what was baked — and what was only worked out.',
@@ -260,6 +268,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       allRecipes: 'All recipes',
       detailsToConfirm: 'Details to confirm',
       workingRecord: 'Working record',
+      collectionsLabel: 'Collections',
     },
     cook: {
       backToRecipe: 'Back to recipe',
@@ -315,7 +324,11 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       workingRecord: 'Working record',
       workingRecordExplanation:
         'This source-backed record is not yet a publishable Tested recipe.',
+      time: 'Time',
       difficulty: 'Difficulty',
+      difficultyEasy: 'Easy',
+      difficultyMedium: 'Medium',
+      difficultyAdvanced: 'Advanced',
       activeTime: 'Active time',
       totalTime: 'Total time',
       yield: 'Yield',
@@ -329,6 +342,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       keepInMind: 'Keep this in mind',
       ingredients: 'Ingredients',
       ingredientsIntro: 'Conditions and unresolved details stay visible.',
+      optional: 'optional',
       markIngredientPrepared: (name) => `Mark ${name} as prepared`,
       method: (count) => `Method · ${count} steps`,
       stepByStep: 'Make it step by step.',
@@ -364,6 +378,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       tested: {
         label: 'Tested',
         explanation: 'This exact version was baked successfully.',
+        repeatedExplanation: 'Made many times.',
       },
       calculated: {
         label: 'Calculated',
@@ -486,16 +501,17 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         `Explora las ${count} recetas disponibles ahora.`,
       featuredKicker: 'Empieza con un clásico',
       featuredTitle: 'Tarta Napoleón',
-      discoveryTitle: 'Elige según el momento',
+      discoveryTitle: 'Elige una colección',
       discoveryLinks: [
-        'Para desayunar',
-        'Para cada día',
-        'Para una celebración',
-        'Para preparar con antelación',
-        'Solo quiero hornear',
+        { id: 'breakfast', label: 'Para desayunar' },
+        { id: 'everyday', label: 'Para cada día' },
+        { id: 'celebration', label: 'Para una celebración' },
+        { id: 'cottage-cheese', label: 'Con requesón' },
+        { id: 'batter-on-hand', label: 'Masa lista' },
       ],
       recipesEyebrow: 'Inventario actual',
       recipesTitle: 'Todas las recetas hasta ahora.',
+      collectionCount: (count) => `${count} recetas`,
       viewAll: 'Ver todas las recetas',
       trustEyebrow: 'Estado claro de la receta',
       trustTitle: 'Distingue lo horneado de lo calculado.',
@@ -514,6 +530,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       allRecipes: 'Todas las recetas',
       detailsToConfirm: 'Detalles por confirmar',
       workingRecord: 'Ficha de trabajo',
+      collectionsLabel: 'Colecciones',
     },
     cook: {
       backToRecipe: 'Volver a la receta',
@@ -569,7 +586,11 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       workingRecord: 'Ficha de trabajo',
       workingRecordExplanation:
         'Este registro basado en la fuente todavía no es una receta Probada publicable.',
+      time: 'Tiempo',
       difficulty: 'Dificultad',
+      difficultyEasy: 'Fácil',
+      difficultyMedium: 'Media',
+      difficultyAdvanced: 'Avanzada',
       activeTime: 'Tiempo activo',
       totalTime: 'Tiempo total',
       yield: 'Rendimiento',
@@ -584,6 +605,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       ingredients: 'Ingredientes',
       ingredientsIntro:
         'Las condiciones y los detalles sin resolver permanecen visibles.',
+      optional: 'opcional',
       markIngredientPrepared: (name) => `Marcar ${name} como preparado`,
       method: (count) => `Método · ${count} pasos`,
       stepByStep: 'Hazlo paso a paso.',
@@ -619,6 +641,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       tested: {
         label: 'Probada',
         explanation: 'Esta versión exacta se ha horneado correctamente.',
+        repeatedExplanation: 'Preparada muchas veces.',
       },
       calculated: {
         label: 'Calculada',
@@ -742,16 +765,28 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         `Перегляньте всі ${count} рецептів, доступних зараз.`,
       featuredKicker: 'Почніть із класики',
       featuredTitle: 'Наполеон',
-      discoveryTitle: 'Оберіть за нагодою',
+      discoveryTitle: 'Оберіть добірку',
       discoveryLinks: [
-        'На сніданок',
-        'На щодень',
-        'Для свята',
-        'Приготуйте заздалегідь',
-        'Хочу просто пекти',
+        { id: 'breakfast', label: 'На сніданок' },
+        { id: 'everyday', label: 'На щодень' },
+        { id: 'celebration', label: 'Для свята' },
+        { id: 'cottage-cheese', label: 'З творогом' },
+        { id: 'batter-on-hand', label: 'Тісто про запас' },
       ],
       recipesEyebrow: 'Поточний каталог',
       recipesTitle: 'Усі рецепти на сьогодні.',
+      collectionCount: (count) => {
+        const lastTwoDigits = count % 100;
+        const lastDigit = count % 10;
+        const label = lastTwoDigits >= 11 && lastTwoDigits <= 14
+          ? 'рецептів'
+          : lastDigit === 1
+            ? 'рецепт'
+            : lastDigit >= 2 && lastDigit <= 4
+              ? 'рецепти'
+              : 'рецептів';
+        return `${count} ${label}`;
+      },
       viewAll: 'Переглянути всі рецепти',
       trustEyebrow: 'Зрозумілий статус рецепта',
       trustTitle: 'Знайте, що випікали, а що лише розрахували.',
@@ -770,6 +805,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       allRecipes: 'Усі рецепти',
       detailsToConfirm: 'Деталі потребують уточнення',
       workingRecord: 'Робочий запис',
+      collectionsLabel: 'Добірки',
     },
     cook: {
       backToRecipe: 'Повернутися до рецепта',
@@ -825,7 +861,11 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       workingRecord: 'Робочий запис',
       workingRecordExplanation:
         'Цей запис на основі джерела ще не є готовим до публікації перевіреним рецептом.',
+      time: 'Час',
       difficulty: 'Складність',
+      difficultyEasy: 'Легка',
+      difficultyMedium: 'Середня',
+      difficultyAdvanced: 'Складна',
       activeTime: 'Активний час',
       totalTime: 'Загальний час',
       yield: 'Вихід',
@@ -839,6 +879,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       keepInMind: 'Зверніть увагу',
       ingredients: 'Інгредієнти',
       ingredientsIntro: 'Умови й неуточнені деталі залишаються видимими.',
+      optional: 'необов’язково',
       markIngredientPrepared: (name) =>
         `Позначити «${name}» як підготовлений інгредієнт`,
       method: (count) => `Спосіб · ${count} кроків`,
@@ -875,6 +916,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       tested: {
         label: 'Перевірено',
         explanation: 'Цю точну версію успішно випікали.',
+        repeatedExplanation: 'Готували багато разів.',
       },
       calculated: {
         label: 'Розраховано',

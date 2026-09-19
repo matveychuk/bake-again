@@ -18,6 +18,7 @@ export type RecipeCardData = {
   href: string;
   featured?: boolean;
   locale?: AppLocale;
+  collections: Array<{ id: string; label: string }>;
 };
 
 export function RecipeCard({ recipe }: { recipe: RecipeCardData }) {
@@ -42,6 +43,11 @@ export function RecipeCard({ recipe }: { recipe: RecipeCardData }) {
           <div>
             <p className="recipe-eyebrow">{recipe.eyebrow}</p>
             <h3 id={`recipe-card-title-${recipe.id}`}>{recipe.title}</h3>
+            <ul className="recipe-collections" aria-label={messages.catalog.collectionsLabel}>
+              {recipe.collections.map((collection) => (
+                <li key={collection.id}>{collection.label}</li>
+              ))}
+            </ul>
           </div>
         </a>
         {isSaveableRecipeId(recipe.id) && <SaveRecipeControl locale={recipe.locale ?? 'en'} recipeId={recipe.id} title={recipe.title} />}

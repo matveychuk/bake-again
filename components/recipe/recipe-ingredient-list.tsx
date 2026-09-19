@@ -1,4 +1,6 @@
 import { cn } from '@/lib/utils';
+import type { AppLocale } from '@/lib/i18n/config';
+import { getUiMessages } from '@/lib/i18n/messages';
 import styles from './recipe-ingredient-list.module.css';
 
 export type RecipeIngredientListItem = {
@@ -15,12 +17,16 @@ export type RecipeIngredientListItem = {
 export function RecipeIngredientList({
   items,
   className,
+  locale = 'en',
   variant = 'full',
 }: {
   items: RecipeIngredientListItem[];
   className?: string;
+  locale?: AppLocale;
   variant?: 'full' | 'compact';
 }) {
+  const optionalLabel = getUiMessages(locale).recipe.optional;
+
   return (
     <ul
       className={cn(
@@ -34,7 +40,7 @@ export function RecipeIngredientList({
           <div className={styles.copy}>
             <span>
               {item.name}
-              {item.optional ? ' · optional' : ''}
+              {item.optional ? ` · ${optionalLabel}` : ''}
             </span>
             {[item.note, ...(item.notes ?? [])]
               .filter((note): note is string => Boolean(note))

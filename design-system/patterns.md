@@ -3,14 +3,16 @@
 ## Home discovery
 
 Order: promise and search, food image, practical entry points, three starting recipes,
-short Tested explanation. Practical links help decision-making and are not permanent
-taxonomy.
+short Tested explanation. Collection links filter the catalogue by stable reader-facing
+collection IDs; a recipe may appear in more than one collection. These links help
+decision-making and are not permanent taxonomy.
 
 ## Recipe planning
 
-Show outcome, time, yield, form or preparation geometry, exact flour mix and evidence
-before ingredients. Keep the verified base recipe selected by default. Display independent
-constraints such as baking size first. Below them, let the user choose one quantity method:
+Show evidence, time, yield, difficulty and the exact flour mix before ingredients. Keep
+equipment and geometry out of the overview; show consequential size constraints in recipe
+setup and adjustment controls. Keep the verified base recipe selected by default. Display
+independent constraints such as baking size first. Below them, let the user choose one quantity method:
 direct batch scaling or scaling from an available anchor ingredient. Size and quantity may
 be combined; the two quantity methods may not.
 

@@ -3,10 +3,309 @@ import test from 'node:test';
 import { recipeInventory } from './inventory.ts';
 import { getRecipeContent } from './registry.ts';
 
+void test('normalizes every recipe into the shared overview model', () => {
+  for (const locale of ['en', 'es', 'uk'] as const) {
+    for (const inventoryRecipe of recipeInventory) {
+      const recipe = getRecipeContent(inventoryRecipe.id, locale);
+      assert(recipe, `${inventoryRecipe.id}: missing ${locale} recipe content`);
+      assert.equal(typeof recipe.overview.flour, 'string');
+      assert(recipe.overview.flour.length > 0);
+      assert(
+        recipe.overview.difficulty === null ||
+          ['easy', 'medium', 'advanced'].includes(recipe.overview.difficulty),
+      );
+      assert.equal(recipe.overview.yieldLabel, recipe.yield?.label ?? null);
+      assert.equal(
+        recipe.overview.timing.activeMinutes,
+        recipe.timing?.activeMinutes ?? null,
+      );
+      assert.equal(
+        recipe.overview.timing.totalElapsedMinutes,
+        recipe.timing?.totalElapsedMinutes ?? null,
+      );
+      assert(!recipe.overview.timing.planningNote?.includes('{duration}'));
+    }
+  }
+});
+
+void test('shows localized planning guidance without inventing a total time', () => {
+  for (const locale of ['en', 'es', 'uk'] as const) {
+    const cookies = getRecipeContent('crinkle-cookies', locale);
+    assert.match(cookies?.overview.timing.planningNote ?? '', /3–4/);
+    assert.equal(cookies?.overview.timing.totalElapsedMinutes, null);
+    assert.equal(
+      getRecipeContent('crepes', locale)?.overview.timing.planningNote,
+      null,
+    );
+  }
+  assert.match(
+    getRecipeContent('crinkle-cookies', 'uk')?.overview.timing.planningNote ??
+      '',
+    /Перед випіканням/,
+  );
+  assert.equal(
+    getRecipeContent('gluten-free-napoleon', 'uk')?.overview.yieldLabel,
+    '2 торти',
+  );
+  for (const locale of ['en', 'es', 'uk'] as const) {
+    assert.equal(
+      getRecipeContent('gluten-free-napoleon', locale)?.overview.timing
+        .totalElapsedMinutes,
+      360,
+    );
+  }
+  assert.equal(
+    getRecipeContent('gluten-free-napoleon', 'uk')?.evidence?.explanation,
+    'Готували багато разів.',
+  );
+});
+
 void test('selects the requested locale for a detailed recipe', () => {
   const recipe = getRecipeContent('gluten-free-napoleon', 'uk');
   assert.equal(recipe?.ingredientSections[0]?.title, 'Коржі');
   assert.match(recipe?.beforeStart?.[0] ?? '', /[А-Яа-яІіЇїЄє]/);
+  assert.equal(recipe?.evidence?.status, 'tested');
+  assert.equal(recipe?.steps.length, 19);
+  assert.equal(recipe?.steps[0]?.title, 'Змішайте сухі інгредієнти');
+  assert.equal(recipe?.steps[0]?.meta, '5–10 с');
+  assert.equal(recipe?.steps.at(-1)?.title, 'Охолодіть до наступного дня');
+});
+
+void test('keeps the fruit sponge roll source-backed in Ukrainian', () => {
+  const recipe = getRecipeContent('fruit-sponge-roll', 'uk');
+  const ingredientIds =
+    recipe?.ingredientSections.flatMap((section) =>
+      section.ingredients.map((ingredient) => ingredient.id),
+    ) ?? [];
+
+  assert.equal(recipe?.evidence?.status, 'tested');
+  assert.equal(recipe?.steps.length, 6);
+  assert.equal(recipe?.steps[0]?.title, 'Збийте яйця, цукор і сіль');
+  assert.match(recipe?.steps[0]?.checkpoint ?? '', /густою світлою піною/i);
+  assert.match(recipe?.steps[3]?.tip ?? '', /дайте йому охолонути/i);
+  assert.equal(recipe?.steps[0]?.media?.[0]?.id, 'fruit-roll-egg-foam-v1');
+  assert.equal(recipe?.steps[3]?.media?.length, 2);
+  assert.equal(
+    recipe?.steps[4]?.media?.[0]?.id,
+    'fruit-roll-mascarpone-cream-v1',
+  );
+  assert.equal(new Set(ingredientIds).size, ingredientIds.length);
+});
+
+void test('keeps the sponge cake quantities and six Ukrainian steps together', () => {
+  const recipe = getRecipeContent('sponge-cake', 'uk');
+  const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
+  const whitesSugar = ingredients.find(
+    (ingredient) => ingredient.id === 'sugar-whites',
+  );
+  const yolksSugar = ingredients.find(
+    (ingredient) => ingredient.id === 'sugar-yolks',
+  );
+
+  assert.equal(recipe?.evidence?.status, 'tested');
+  assert.equal(recipe?.steps.length, 6);
+  assert.deepEqual(whitesSugar?.quantity.base, {
+    kind: 'exact',
+    value: 120,
+    unit: 'g',
+  });
+  assert.deepEqual(yolksSugar?.quantity.base, {
+    kind: 'exact',
+    value: 2,
+    unit: 'tbsp',
+  });
+  assert.match(recipe?.steps[1]?.tip ?? '', /густої білої піни/i);
+  assert.match(recipe?.steps[2]?.checkpoint ?? '', /посвітлішала й загусла/i);
+  assert.equal(recipe?.steps[5]?.meta, '200°C · 40–50 хв');
+  assert.equal(recipe?.steps[1]?.media?.[0]?.id, 'sponge-whipped-whites-v1');
+  assert.equal(recipe?.steps[2]?.media?.[0]?.id, 'sponge-whipped-yolks-v1');
+  assert.equal(recipe?.steps[3]?.media?.[0]?.id, 'sponge-fold-yolks-v1');
+  assert.equal(recipe?.steps[4]?.media?.[0]?.id, 'sponge-fold-dry-v1');
+  assert.equal(recipe?.steps[5]?.media?.[0]?.id, 'sponge-batter-form-v1');
+});
+
+void test('keeps the tested Mix B banana-pancake adaptation and step photos together', () => {
+  const recipe = getRecipeContent('banana-fritters', 'uk');
+  const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
+  const flour = ingredients.find((ingredient) => ingredient.id === 'flour');
+
+  assert.equal(recipe?.evidence?.status, 'tested');
+  assert.equal(recipe?.yield?.label, '12 панкейків');
+  assert.equal(recipe?.timing?.totalElapsedMinutes, 30);
+  assert.equal(recipe?.steps.length, 6);
+  assert.deepEqual(flour?.quantity.base, {
+    kind: 'exact',
+    value: 1.5,
+    unit: 'cup',
+  });
+  assert.match(recipe?.steps[3]?.checkpoint ?? '', /густе й неоднорідне/i);
+  assert.match(recipe?.steps[5]?.checkpoint ?? '', /великі бульбашки/i);
+  assert.deepEqual(
+    recipe?.steps.flatMap((step) => step.media?.map((item) => item.id) ?? []),
+    [
+      'banana-pancakes-dry-mix-v1',
+      'banana-pancakes-mashed-bananas-v1',
+      'banana-pancakes-wet-mixture-v1',
+      'banana-pancakes-lumpy-batter-v1',
+      'banana-pancakes-flip-cue-v1',
+    ],
+  );
+});
+
+void test('keeps the tested apple-fritter quantities and Ukrainian cooking cues together', () => {
+  const recipe = getRecipeContent('apple-fritters', 'uk');
+  const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
+  const flour = ingredients.find((ingredient) => ingredient.id === 'flour');
+  const batter = recipe?.steps.find((step) => step.id === 'finish-batter');
+  const frying = recipe?.steps.find((step) => step.id === 'fry');
+
+  assert.equal(recipe?.evidence?.status, 'tested');
+  assert.equal(recipe?.completeness, 'readyToReview');
+  assert.equal(recipe?.steps.length, 7);
+  assert.deepEqual(flour?.quantity.base, {
+    kind: 'exact',
+    value: 140,
+    unit: 'g',
+  });
+  assert.match(batter?.checkpoint ?? '', /повільно сповзає/i);
+  assert.match(frying?.checkpoint ?? '', /золотистий/i);
+  assert.match(frying?.tip ?? '', /зменште вогонь/i);
+  assert.equal(
+    frying?.meta,
+    'По 2–3 хв з кожного боку · середній вогонь · під кришкою',
+  );
+});
+
+void test('keeps the apple-banana substitution separate and explicitly suggested', () => {
+  const recipe = getRecipeContent('apple-banana-fritters', 'uk');
+  const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
+  const banana = ingredients.find((ingredient) => ingredient.id === 'banana');
+  const sweetener = ingredients.find(
+    (ingredient) => ingredient.id === 'sweetener',
+  );
+  const batter = recipe?.steps.find((step) => step.id === 'finish-batter');
+
+  assert.equal(recipe?.evidence?.status, 'suggested');
+  assert.match(recipe?.evidence?.explanation ?? '', /ще не перевіряли/i);
+  assert.equal(recipe?.steps.length, 7);
+  assert.deepEqual(banana?.quantity.base, {
+    kind: 'exact',
+    value: 1,
+    unit: 'piece',
+  });
+  assert.equal(sweetener, undefined);
+  assert.match(batter?.tip ?? '', /вологість банана/i);
+  assert.match(recipe?.gapNote ?? '', /перевірте заміну цукру бананом/i);
+});
+
+void test('keeps the tested eclair choux quantities, yield and Ukrainian guidance together', () => {
+  const recipe = getRecipeContent('eclairs', 'uk');
+  const ingredients =
+    recipe?.ingredientSections.flatMap((section) => section.ingredients) ?? [];
+  const flour = ingredients.find((ingredient) => ingredient.id === 'flour');
+  const eggs = ingredients.find((ingredient) => ingredient.id === 'eggs');
+
+  assert.equal(recipe?.evidence?.status, 'tested');
+  assert.match(recipe?.evidence?.explanation ?? '', /20 профітролів/i);
+  assert.equal(recipe?.yield?.label, 'Близько 20 профітролів');
+  assert.deepEqual(flour?.quantity.base, {
+    kind: 'exact',
+    value: 110,
+    unit: 'g',
+  });
+  assert.match(flour?.name ?? '', /Schär Mix B Bread/);
+  assert.deepEqual(eggs?.quantity.base, {
+    kind: 'exact',
+    value: 4,
+    unit: 'piece',
+  });
+  assert.equal(recipe?.steps.length, 8);
+  assert.match(recipe?.steps[3]?.checkpoint ?? '', /важкою стрічкою/i);
+  assert.equal(recipe?.steps[2]?.media?.[0]?.id, 'eclairs-cooked-panade-v1');
+  assert.equal(recipe?.steps[3]?.media?.[0]?.id, 'eclairs-heavy-ribbon-v2');
+  assert.equal(
+    recipe?.steps[4]?.media?.[0]?.id,
+    'eclairs-piped-profiteroles-v2',
+  );
+  assert.equal(
+    recipe?.steps[6]?.media?.[0]?.id,
+    'eclairs-dry-hollow-shells-v2',
+  );
+  assert.equal(recipe?.steps[5]?.meta, '200°C · 10 хв, потім 180°C · 15 хв');
+  assert.match(recipe?.gapNote ?? '', /соусів/i);
+});
+
+void test('keeps the source-backed cinnamon rolls cookable in Ukrainian', () => {
+  const recipe = getRecipeContent('cinnamon-rolls', 'uk');
+  const ingredients =
+    recipe?.ingredientSections.flatMap((section) => section.ingredients) ?? [];
+  const xanthan = ingredients.find((ingredient) => ingredient.id === 'xanthan');
+
+  assert.equal(recipe?.completeness, 'readyToReview');
+  assert.equal(recipe?.evidence?.status, 'tested');
+  assert.equal(recipe?.steps.length, 9);
+  assert.deepEqual(xanthan?.quantity.base, {
+    kind: 'exact',
+    value: 12,
+    unit: 'g',
+  });
+  assert.equal(recipe?.steps[0]?.title, 'Активуйте дріжджі');
+  assert.match(recipe?.steps[0]?.checkpoint ?? '', /бульбашки|піна/i);
+  assert.equal(recipe?.steps[6]?.meta, '40–60 хв · 180°C');
+  assert.match(recipe?.steps[7]?.tip ?? '', /перепечені/i);
+  assert.equal(recipe?.steps[8]?.title, 'Додайте обраний фініш');
+  assert.deepEqual(
+    recipe?.steps.flatMap((step) => step.media?.map((item) => item.id) ?? []),
+    [
+      'cinnamon-rolls-activated-yeast-v1',
+      'cinnamon-rolls-mixed-dough-v1',
+      'cinnamon-rolls-first-proof-v1',
+      'cinnamon-rolls-rolled-rectangle-v1',
+      'cinnamon-rolls-cinnamon-filling-v1',
+      'cinnamon-rolls-cut-rolls-v1',
+      'cinnamon-rolls-second-proof-v1',
+      'cinnamon-rolls-lightly-golden-v1',
+      'cinnamon-rolls-cream-cheese-glaze-v1',
+    ],
+  );
+  assert.match(recipe?.gapNote ?? '', /начинку й фініш/i);
+});
+
+void test('keeps the prune cake as an explicitly incomplete Ukrainian record', () => {
+  const recipe = getRecipeContent('prune-cake', 'uk');
+
+  assert.equal(recipe?.completeness, 'incompleteSource');
+  assert.equal(recipe?.ingredientSections.length, 3);
+  assert.equal(recipe?.steps.length, 2);
+  assert.equal(recipe?.steps[0]?.title, 'Змішайте записаний крем');
+  assert.equal(recipe?.steps[0]?.media?.[0]?.id, 'prune-cake-cream-v1');
+  assert.equal(recipe?.steps[1]?.media?.[0]?.id, 'prune-cake-glaze-v1');
+  assert.match(recipe?.gapNote ?? '', /Не готуйте за цією чернеткою/i);
+  assert(
+    !recipe?.steps.some((step) => /Confirm|Mix sour cream/.test(step.body)),
+  );
+});
+
+void test('keeps crinkle-cookie quantities, guidance and step media together', () => {
+  const recipe = getRecipeContent('crinkle-cookies', 'uk');
+  const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
+  const powderedSugar = ingredients.find(
+    (ingredient) => ingredient.id === 'powdered-sugar',
+  );
+  const shaping = recipe?.steps.find((step) => step.id === 'shape-and-coat');
+  const baking = recipe?.steps.find((step) => step.id === 'bake-cookies');
+
+  assert.deepEqual(powderedSugar?.quantity.base, {
+    kind: 'exact',
+    value: 100,
+    unit: 'g',
+  });
+  assert.equal(shaping?.title, 'Швидко сформуйте печиво');
+  assert.match(shaping?.body ?? '', /набирайте холодне тісто ложкою/i);
+  assert.match(shaping?.tip ?? '', /мінімальним/i);
+  assert.equal(shaping?.media?.length, 2);
+  assert.match(baking?.checkpoint ?? '', /вологими/i);
+  assert.equal(baking?.media?.[0]?.id, 'crinkle-moist-cracks-v1');
 });
 
 void test('uses reviewed source-draft translations without leaking English instructions', () => {

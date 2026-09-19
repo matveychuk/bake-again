@@ -6,6 +6,8 @@ import {
   recipeDetailTitles,
 } from './catalog-locales.ts';
 import { recipeInventory } from './inventory.ts';
+import { getRecipeContent } from './registry.ts';
+import { recipeCollectionIds } from './collections.ts';
 
 void test('renders catalogue discovery copy in the selected locale for every recipe', () => {
   for (const locale of ['en', 'es', 'uk'] as const) {
@@ -30,14 +32,44 @@ void test('uses localized recipe titles and preserves the stable recipe identity
   assert.equal(ukrainianNapoleon?.id, spanishNapoleon?.id);
 });
 
-void test('shows the recorded crepe duration in every catalogue locale', () => {
-  const crepes = recipeInventory.find((recipe) => recipe.id === 'crepes');
+void test('assigns every recipe to a localized reader-facing collection', () => {
+  for (const locale of ['en', 'es', 'uk'] as const) {
+    const catalogue = getRecipeCatalog(locale);
+    assert(catalogue.every((recipe) => recipe.collections.length > 0));
+    assert(catalogue.every((recipe) => recipe.collections.every((collection) =>
+      recipeCollectionIds.includes(collection.id),
+    )));
+    assert(catalogue.every((recipe) => recipe.collections.every((collection) =>
+      collection.label.length > 0,
+    )));
+  }
+});
 
-  assert.equal(crepes?.localizedFacts?.difficulty.uk, 'Середня');
-  assert.equal(crepes?.localizedFacts?.activeTime.uk, '40 хв');
+void test('keeps the reviewed cottage-cheese and batter-on-hand collections precise', () => {
+  const ukrainianCatalogue = getRecipeCatalog('uk');
+  const recipeIdsFor = (collectionId: string) => ukrainianCatalogue
+    .filter((recipe) => recipe.collections.some((collection) => collection.id === collectionId))
+    .map((recipe) => recipe.id);
+
+  assert.deepEqual(recipeIdsFor('cottage-cheese'), [
+    'lazy-dumplings',
+    'cottage-cheese-waffles',
+  ]);
+  assert.deepEqual(recipeIdsFor('batter-on-hand'), [
+    'cottage-cheese-waffles',
+    'carrot-cake',
+    'crinkle-cookies',
+  ]);
+});
+
+void test('shows the recorded crepe duration in every catalogue locale', () => {
+  const crepes = getRecipeContent('crepes', 'uk');
+
+  assert.equal(crepes?.overview.difficulty, 'medium');
+  assert.equal(crepes?.overview.timing.activeMinutes, 40);
   assert.equal(
     getRecipeCatalog('en').find((recipe) => recipe.id === 'crepes')?.detail,
-    '1 hr',
+    '1 hour',
   );
   assert.equal(
     getRecipeCatalog('es').find((recipe) => recipe.id === 'crepes')?.detail,

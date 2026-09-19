@@ -11,7 +11,6 @@ import { getUiMessages } from '@/lib/i18n/messages';
 import { formatQuantity } from '@/lib/i18n/format';
 import { localeShoppingListPath } from '@/lib/i18n/routes';
 import { addShoppingIngredients, persistShopping, readShopping, subscribeToShopping, type ShoppingV1 } from '@/lib/persistence/shopping';
-import { useRecipeConfiguration } from '@/app/recipes/napoleon-cake/recipe-configuration';
 import styles from './add-recipe-ingredients-control.module.css';
 
 export type SourceShoppingRecipe = {
@@ -257,11 +256,4 @@ export function AddRecipeIngredientsControl({ recipe, locale, className, context
       {confirmation ? <div aria-live="polite" className={styles.confirmation}><span>{messages.addedCount(confirmation.count)}</span><a href={localeShoppingListPath(locale)}>{messages.openShoppingList}</a><button onClick={undoAdd} type="button">{messages.undo}</button></div> : null}
     </div>
   );
-}
-
-/** Keeps the configuration-context hook inside a client component. */
-export function NapoleonIngredientsControl({ recipe, locale, className }: { recipe: RecipeDraft; locale: AppLocale; className?: string }) {
-  const { isExactBase } = useRecipeConfiguration();
-  const size = locale === 'uk' ? '28 см' : '28 cm';
-  return <AddRecipeIngredientsControl className={className} context={`${recipe.title[locale]} · ${size} · 1×`} disabled={!isExactBase} locale={locale} recipe={recipe} />;
 }

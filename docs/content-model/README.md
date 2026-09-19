@@ -132,9 +132,31 @@ The first combines the 24/28 area ratio with 0.5×. The second derives a total f
 
 Every important claim can carry its own evidence state and provenance. Missing values remain `null` and are also listed in `contentGaps`; they must not be guessed.
 
+## Recipe overview projection
+
+Every recipe returned by `registry.ts` includes the same reader-facing `overview` shape:
+difficulty, active and total time, optional planning note, yield label and flour summary. Detailed recipes derive
+it from their canonical recipe fields. Source-backed recipes combine their structured
+timing and yield with the inventory's recorded difficulty and localized flour summary.
+Unknown values remain `null` and render as an explicit value to confirm.
+
+This projection is the only input for overview UI and catalogue timing. Geometry and
+equipment remain available to setup, scaling and method surfaces but are deliberately
+excluded from the overview.
+
+Both recipe models accept an optional `timing.planningNote` with `text` and an optional
+`phaseId`. Detailed recipes store text in all three locales; source drafts keep it with
+their translated timing copy. A `{duration}` placeholder is resolved from the canonical
+phase by ID, so a chilling-time correction reaches every language without a second
+numeric field. Notes without a duration can express serving guidance such as “Best the
+next day”. Missing notes normalize to `null`; no waiting time or total is inferred.
+The hero prioritizes active work and shows total time plus planning guidance below it.
+
 ## Media attached to steps
 
 Photos and videos are defined once in the recipe-level `media` collection. A preparation step references one or more items using `mediaIds`. This allows the same asset to be reused without duplicating URLs or captions and keeps localized alternative text with the media record.
+
+Detailed recipe steps may also provide a short localized `title` separately from the full `instruction`. Recipe Detail and Cook Mode use the concise title as the heading and retain the complete instruction as the action copy. When `title` is omitted, the instruction remains the fallback heading for older records.
 
 Example:
 
@@ -165,7 +187,11 @@ Video-specific details such as poster image, duration and transcript can be adde
 - Active time: 40 minutes.
 - Oven: conventional top-and-bottom heat at 180 °C.
 - Orange zest is added at the end of mixing.
+- Butter is softened before mixing.
+- The powdered-sugar coating uses 100 g.
+- Chilled dough remains very sticky: scoop it with a spoon, shape it with minimal hand contact and coat it immediately so the butter does not warm and melt.
 - Walnut or pecan pressed into the shaped ball is a tested optional variation.
+- The cookies may cool on the baking sheet or be transferred immediately; either method works.
 - Reported total time is 3.5 hours, but remains unresolved because it conflicts with the currently recorded chilling, active and baking times.
 
 ### Gluten-Free Napoleon
@@ -211,5 +237,12 @@ Keep validation lightweight and repository-based:
 - A pull-request checklist for author confirmation, translation review, allergen review, media rights and final visual review.
 
 The initial model deliberately avoids separate tables for ingredients, units, appliances, evidence records or translations. Those abstractions would add maintenance work without helping a collection of roughly 20 recipes. Introduce them later only when repeated real content shows a clear need.
+
+## Reader-facing collections
+
+`content/recipes/collections.ts` defines stable, localized collection IDs. The inventory
+stores `collectionIds` for every recipe, while `category` continues to describe the dish
+type. A recipe may belong to several collections. Collections are navigation aids and do
+not express recipe evidence, testing status or an adaptation claim.
 
 Run `npm run typecheck` and `npm run validate:recipes`. The latter checks recipe references, anchor line IDs and units, optional capabilities, Napoleon geometry semantics, and the two calculated fixtures.

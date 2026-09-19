@@ -1,29 +1,27 @@
-export const recipeLocales = ["en", "es", "uk"] as const;
+export const recipeLocales = ['en', 'es', 'uk'] as const;
 
 export type RecipeLocale = (typeof recipeLocales)[number];
 export type LocalizedText = Record<RecipeLocale, string>;
 
-export type TranslationState =
-  | "sourceDraft"
-  | "draftTranslation"
-  | "reviewed";
+export type TranslationState = 'sourceDraft' | 'draftTranslation' | 'reviewed';
+export type RecipeDifficulty = 'easy' | 'medium' | 'advanced';
 
 export type EvidenceState =
-  | "repeatedlyVerified"
-  | "tested"
-  | "calculated"
-  | "authorGuidance"
-  | "suggested"
-  | "missing"
-  | "needsRetest"
-  | "draft";
+  | 'repeatedlyVerified'
+  | 'tested'
+  | 'calculated'
+  | 'authorGuidance'
+  | 'suggested'
+  | 'missing'
+  | 'needsRetest'
+  | 'draft';
 
-export type PublicationStatus = "draft" | "ready" | "archived";
+export type PublicationStatus = 'draft' | 'ready' | 'archived';
 export type Availability =
-  | "default"
-  | "selectable"
-  | "previewOnly"
-  | "hiddenUntilConfirmed";
+  | 'default'
+  | 'selectable'
+  | 'previewOnly'
+  | 'hiddenUntilConfirmed';
 
 export interface SourceRef {
   id: string;
@@ -39,18 +37,18 @@ export interface Provenance {
 }
 
 export type Unit =
-  | "g"
-  | "ml"
-  | "piece"
-  | "tsp"
-  | "tbsp"
-  | "cup"
-  | "packet"
-  | "pinch";
+  | 'g'
+  | 'ml'
+  | 'piece'
+  | 'tsp'
+  | 'tbsp'
+  | 'cup'
+  | 'packet'
+  | 'pinch';
 
 export type Quantity =
-  | { kind: "exact"; value: number; unit: Unit }
-  | { kind: "range"; min: number; max: number; unit: Unit };
+  | { kind: 'exact'; value: number; unit: Unit }
+  | { kind: 'range'; min: number; max: number; unit: Unit };
 
 /**
  * The one canonical ingredient quantity model. `base` is the only amount that
@@ -61,23 +59,23 @@ export interface IngredientQuantity {
   base: Quantity | null;
   equivalent?: Quantity | null;
   shopping: {
-    mode: "base" | "nameOnly";
+    mode: 'base' | 'nameOnly';
     increment?: number;
-    rounding?: "up";
+    rounding?: 'up';
     /** Household staples such as water remain available but start unchecked. */
     defaultSelected?: boolean;
   };
 }
 
 export type Duration =
-  | { kind: "exact"; value: number; unit: "second" | "minute" | "hour" }
+  | { kind: 'exact'; value: number; unit: 'second' | 'minute' | 'hour' }
   | {
-      kind: "range";
+      kind: 'range';
       min: number;
       max: number;
-      unit: "second" | "minute" | "hour";
+      unit: 'second' | 'minute' | 'hour';
     }
-  | { kind: "minimum"; min: number; unit: "minute" | "hour" };
+  | { kind: 'minimum'; min: number; unit: 'minute' | 'hour' };
 
 export interface IngredientOption {
   ingredientId: string;
@@ -126,32 +124,32 @@ export interface YieldOption {
   id: string;
   label: LocalizedText;
   amount: number | null;
-  unit: "cookie" | "cake" | "serving" | "batch";
+  unit: 'cookie' | 'cake' | 'serving' | 'batch';
   details?: LocalizedText;
   provenance: Provenance;
   availability: Availability;
 }
 
 export type GeometryKind =
-  | "bakingPan"
-  | "tray"
-  | "mould"
-  | "roundTemplate"
-  | "other";
+  | 'bakingPan'
+  | 'tray'
+  | 'mould'
+  | 'roundTemplate'
+  | 'other';
 
 export type GeometryApplication =
-  | "bake-in"
-  | "portion-on"
-  | "shape-in"
-  | "roll-and-trim"
-  | "other";
+  | 'bake-in'
+  | 'portion-on'
+  | 'shape-in'
+  | 'roll-and-trim'
+  | 'other';
 
 export interface GeometryOption {
   id: string;
   label: LocalizedText;
   kind: GeometryKind;
   application: GeometryApplication;
-  shape: "round" | "rectangular" | "freeform" | "other";
+  shape: 'round' | 'rectangular' | 'freeform' | 'other';
   diameterCm: number | null;
   widthCm?: number | null;
   lengthCm?: number | null;
@@ -164,22 +162,22 @@ export interface GeometryOption {
 
 export type IngredientScalingRule =
   | {
-      kind: "linear";
+      kind: 'linear';
       precision?: number;
-      rounding?: "nearest" | "up" | "down";
+      rounding?: 'nearest' | 'up' | 'down';
     }
   | {
-      kind: "discrete";
+      kind: 'discrete';
       increment: number;
-      rounding: "nearest" | "up" | "down" | "manual";
+      rounding: 'nearest' | 'up' | 'down' | 'manual';
     }
   | {
-      kind: "range";
+      kind: 'range';
       precision?: number;
-      rounding?: "nearest" | "up" | "down";
+      rounding?: 'nearest' | 'up' | 'down';
     }
-  | { kind: "fixed" }
-  | { kind: "manual"; reason: LocalizedText };
+  | { kind: 'fixed' }
+  | { kind: 'manual'; reason: LocalizedText };
 
 export type BatchScaleFactor = 0.5 | 1 | 1.5 | 2;
 
@@ -193,21 +191,21 @@ export interface ScalingAnchor {
 export interface RecipeConfigurationModel {
   /** References the recipe's verified values; it never contains copied quantities. */
   base: {
-    status: "Tested";
+    status: 'Tested';
     geometryId: string;
     yieldId: string;
     batchScale: 1;
   };
-  geometryAdjustment:
-    | {
-        optionIds: [string, ...string[]];
-        quantityBasis: "area";
-        timingPolicy: "unverifiedWhenChanged" | "unchanged";
-      }
-    | null;
+  geometryAdjustment: {
+    optionIds: [string, ...string[]];
+    quantityBasis: 'area';
+    timingPolicy: 'unverifiedWhenChanged' | 'unchanged';
+  } | null;
   quantityAdjustment: {
     batchScale: { allowed: [BatchScaleFactor, ...BatchScaleFactor[]] } | null;
-    useWhatIHave: { scalingAnchors: [ScalingAnchor, ...ScalingAnchor[]] } | null;
+    useWhatIHave: {
+      scalingAnchors: [ScalingAnchor, ...ScalingAnchor[]];
+    } | null;
   };
   ingredientScaling: {
     default: IngredientScalingRule;
@@ -215,20 +213,20 @@ export interface RecipeConfigurationModel {
 }
 
 export type QuantityAdjustmentSelection =
-  | { mode: "batchScale"; factor: BatchScaleFactor }
+  | { mode: 'batchScale'; factor: BatchScaleFactor }
   | {
-      mode: "useWhatIHave";
+      mode: 'useWhatIHave';
       anchorIngredientLineId: string;
       availableAmount: { value: number; unit: Unit };
     };
 
 export interface ConfigurationWarning {
   code:
-    | "fractional-discrete-ingredient"
-    | "manual-scaling-required"
-    | "unverified-timing"
-    | "unsupported-selection";
-  severity: "warning" | "blocking";
+    | 'fractional-discrete-ingredient'
+    | 'manual-scaling-required'
+    | 'unverified-timing'
+    | 'unsupported-selection';
+  severity: 'warning' | 'blocking';
   ingredientLineId?: string;
   message: string;
 }
@@ -238,7 +236,7 @@ export interface CalculatedIngredientAmount {
   /** Scaled kitchen-only equivalence; never a shopping quantity. */
   equivalent?: Quantity | null;
   amount: Quantity | null;
-  rule: IngredientScalingRule["kind"];
+  rule: IngredientScalingRule['kind'];
   requiresResolution: boolean;
 }
 
@@ -246,8 +244,8 @@ export interface CalculatedIngredientAmount {
 export interface CalculatedRecipeConfiguration {
   recipeId: string;
   recipeVersionId: string;
-  status: "Calculated";
-  provenance: "Calculated";
+  status: 'Calculated';
+  provenance: 'Calculated';
   geometryId: string;
   quantityAdjustment: QuantityAdjustmentSelection;
   geometryScaleFactor: number;
@@ -260,19 +258,21 @@ export interface CalculatedRecipeConfiguration {
 
 export interface Temperature {
   value: number;
-  unit: "C";
-  ovenMode: "conventional" | "fan" | null;
+  unit: 'C';
+  ovenMode: 'conventional' | 'fan' | null;
 }
 
 export interface StepGuidance {
   id: string;
-  kind: "checkpoint" | "practicalTip";
+  kind: 'checkpoint' | 'practicalTip';
   text: LocalizedText;
   provenance?: Provenance;
 }
 
 export interface RecipeStep {
   id: string;
+  /** A concise action title may be added one reviewed locale at a time. */
+  title?: Partial<LocalizedText>;
   instruction: LocalizedText;
   ingredientLineIds: string[];
   duration?: Duration;
@@ -289,7 +289,7 @@ export interface BeforeStartItem {
 }
 
 export interface VariationIngredientChange {
-  action: "add" | "replace" | "remove";
+  action: 'add' | 'replace' | 'remove';
   lineId: string;
   line?: IngredientLine;
 }
@@ -302,14 +302,14 @@ export interface VariationStepChange {
 export interface RecipeVariation {
   id: string;
   dimension:
-    | "fat"
-    | "sweetness"
-    | "dietary"
-    | "filling"
-    | "flavour"
-    | "method"
-    | "form"
-    | "yield";
+    | 'fat'
+    | 'sweetness'
+    | 'dietary'
+    | 'filling'
+    | 'flavour'
+    | 'method'
+    | 'form'
+    | 'yield';
   label: LocalizedText;
   description: LocalizedText;
   provenance: Provenance;
@@ -321,10 +321,10 @@ export interface RecipeVariation {
 
 export interface RecipeMedia {
   id: string;
-  type: "image" | "video";
+  type: 'image' | 'video';
   path: string;
   posterPath?: string;
-  usage: Array<"hero" | "step" | "gallery" | "social">;
+  usage: Array<'hero' | 'step' | 'gallery' | 'social'>;
   alt: LocalizedText;
   caption?: LocalizedText;
   transcript?: LocalizedText;
@@ -333,15 +333,15 @@ export interface RecipeMedia {
 export interface ContentGap {
   id: string;
   area:
-    | "timing"
-    | "yield"
-    | "form"
-    | "ingredient"
-    | "method"
-    | "variation"
-    | "image"
-    | "translation"
-    | "storage";
+    | 'timing'
+    | 'yield'
+    | 'form'
+    | 'ingredient'
+    | 'method'
+    | 'variation'
+    | 'image'
+    | 'translation'
+    | 'storage';
   field: string;
   question: string;
   publicationBlocking: boolean;
@@ -359,11 +359,13 @@ export interface RecipeDraft {
   summary: LocalizedText;
   categoryIds: string[];
   situationIds: string[];
-  difficulty: "easy" | "medium" | "advanced" | null;
+  difficulty: RecipeDifficulty | null;
   baseProvenance: Provenance;
   timing: {
     activeMinutes: number | null;
     totalElapsedMinutes: number | null;
+    /** Optional planning copy; {duration} is resolved from the referenced phase. */
+    planningNote?: { text: LocalizedText; phaseId?: string } | null;
     phases: Array<{ id: string; label: LocalizedText; duration: Duration }>;
   };
   yield: {

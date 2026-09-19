@@ -10,13 +10,22 @@ import type {
   StructuredRecipeStep,
 } from './source-recipe.types.ts';
 
+export function isSourceCookModeAvailable(
+  structured: StructuredRecipeContent | null | undefined,
+): boolean {
+  return Boolean(
+    structured &&
+    structured.completeness !== 'incompleteSource' &&
+    structured.steps.length > 0,
+  );
+}
+
 function durationOptionsSeconds(
   structured: StructuredRecipeContent,
   stepIds: string[],
 ): number[] | undefined {
   const duration = structured.timing?.phases.find(
-    (phase) =>
-      phase.relatedStepId && stepIds.includes(phase.relatedStepId),
+    (phase) => phase.relatedStepId && stepIds.includes(phase.relatedStepId),
   )?.duration;
   if (!duration) return undefined;
   const multiplier =
@@ -85,10 +94,7 @@ export function createSourceCookSteps(
 
   for (const step of structured.steps) {
     const previous = groups.at(-1);
-    if (
-      step.cookGroup &&
-      previous?.at(-1)?.cookGroup === step.cookGroup
-    ) {
+    if (step.cookGroup && previous?.at(-1)?.cookGroup === step.cookGroup) {
       previous.push(step);
     } else {
       groups.push([step]);
@@ -116,7 +122,9 @@ export function createSourceCookSteps(
       number: String(index + 1).padStart(2, '0'),
       meta: steps.find((step) => step.meta)?.meta ?? '',
       title: steps[0].cookTitle ?? steps[0].title,
-      instructions: steps.flatMap((step) => step.cookInstructions ?? [step.body]),
+      instructions: steps.flatMap(
+        (step) => step.cookInstructions ?? [step.body],
+      ),
       ingredients: ingredientUsages.flatMap((usage) => {
         const ingredient = ingredients.get(usage.ingredientId);
         return ingredient ? [cookIngredient(ingredient, locale, usage)] : [];

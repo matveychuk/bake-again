@@ -7,6 +7,7 @@ import {
   Bookmark,
   Check,
   Clock3,
+  MessageCircleQuestion,
   Search,
   ShoppingBag,
   Trash2,
@@ -16,8 +17,10 @@ import { AssistantBlocks, AssistantProvider, AssistantTrigger } from '@/componen
 import type { AssistantBlock } from '@/lib/assistant/contracts';
 import { EvidenceBadge, type EvidenceStatus } from '@/components/recipe/evidence-badge';
 import { RecipeIngredientChecklist } from '@/components/recipe/recipe-ingredient-checklist';
-import { RecipeStepGuidance } from '@/components/recipe/recipe-step-guidance';
+import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
+import { RecipeOverview } from '@/components/recipe/recipe-overview';
+import { getRecipeContent } from '@/content/recipes/registry';
 import { LanguageSwitcher } from '@/components/site/language-switcher';
 import { BakeCheckbox } from '@/components/ui/bake-checkbox';
 import { ActionReviewExample } from '@/components/assistant/action-review-example';
@@ -207,7 +210,7 @@ export default function DesignSystemPage() {
                   <Image src="/images/napoleon.png" alt="Napoleon cake with many thin layers" fill sizes="420px" />
                 </a>
                 <div className={styles.recipeCopy}>
-                  <a aria-labelledby="ds-recipe-card-title" className={styles.recipeLink} href="/recipes/napoleon"><div><p>Celebration · prepare ahead</p><h3 id="ds-recipe-card-title">Napoleon cake</h3></div></a>
+                  <a aria-labelledby="ds-recipe-card-title" className={styles.recipeLink} href="/recipes/napoleon"><div><p>Celebration cake</p><h3 id="ds-recipe-card-title">Napoleon cake</h3><ul className={styles.recipeCollections} aria-label="Collections"><li>For a celebration</li></ul></div></a>
                   <button type="button" aria-label="Save Napoleon cake" onClick={(event) => event.stopPropagation()}><Bookmark size={19} /></button>
                 </div>
                 <a aria-label="Open Napoleon cake" className={styles.recipeFactsLink} href="/recipes/napoleon"><div className={styles.recipeFacts}>
@@ -224,6 +227,15 @@ export default function DesignSystemPage() {
                 locale="uk"
                 title={recipeDetailTitles.crepes.uk}
               />
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}><strong>Recipe overview</strong><span>One comparable scheme for every recipe; equipment stays in setup and method</span></div>
+              <div className={styles.recipeOverviewExample}>
+                <RecipeOverview content={getRecipeContent('gluten-free-napoleon', 'uk')} locale="uk" />
+                <RecipeOverview content={getRecipeContent('crinkle-cookies', 'en')} locale="en" />
+                <RecipeOverview content={getRecipeContent('apple-charlotte', 'es')} locale="es" />
+              </div>
             </div>
 
             <div className={styles.componentBlock} id="assistant-actions">
@@ -271,12 +283,21 @@ export default function DesignSystemPage() {
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}><strong>Step guidance</strong><span>Shared recipe and Cook variants with written semantics</span></div>
               <div className={styles.stepGuidanceExample}>
-                <RecipeStepGuidance kind="tip" label="Tip" variant="prominent">
-                  Add only a little milk while the base is still thick.
-                </RecipeStepGuidance>
-                <RecipeStepGuidance kind="checkpoint" label="Checkpoint">
-                  The batter is smooth and spreads easily across the pan.
-                </RecipeStepGuidance>
+                <RecipeStepContent
+                  action={(
+                    <a className={styles.stepAskExample} href="#assistant-actions">
+                      <MessageCircleQuestion aria-hidden="true" size={14} />
+                      Ask about this step
+                    </a>
+                  )}
+                  checkpoint="The batter is smooth and spreads easily across the pan."
+                  checkpointLabel="Checkpoint"
+                  tip="Add only a little milk while the base is still thick."
+                  tipLabel="Tip"
+                  title="Blend the batter"
+                >
+                  <p>Add the remaining milk gradually and blend only until smooth.</p>
+                </RecipeStepContent>
               </div>
             </div>
 

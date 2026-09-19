@@ -1,18 +1,21 @@
 import type { StructuredIngredient, StructuredIngredientSection } from '@/content/recipes/source-recipe.types';
 import { formatQuantity } from '@/lib/i18n/format';
+import type { AppLocale } from '@/lib/i18n/config';
 import { RecipeIngredientList } from './recipe-ingredient-list';
 import styles from './recipe-ingredient-checklist.module.css';
 
 export function RecipeIngredientChecklist({
   sections,
+  locale = 'en',
   amountFor = (ingredient) => ({
-    primary: formatQuantity('en', ingredient.quantity.base ?? ingredient.quantity.equivalent ?? null),
+    primary: formatQuantity(locale, ingredient.quantity.base ?? ingredient.quantity.equivalent ?? null),
     secondary: ingredient.quantity.equivalent && ingredient.quantity.base
-      ? formatQuantity('en', ingredient.quantity.equivalent)
+      ? formatQuantity(locale, ingredient.quantity.equivalent)
       : undefined,
   }),
 }: {
   sections: StructuredIngredientSection[];
+  locale?: AppLocale;
   amountFor?: (ingredient: StructuredIngredient) => {
     primary: string;
     secondary?: string;
@@ -24,6 +27,7 @@ export function RecipeIngredientChecklist({
         <section className={styles.ingredientSection} key={section.id}>
           <h3>{section.title}</h3>
           <RecipeIngredientList
+            locale={locale}
             items={section.ingredients.map((ingredient) => ({
               id: ingredient.id,
               name: ingredient.name,

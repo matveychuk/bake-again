@@ -384,7 +384,10 @@ export function CookModePage({
             <DrawerTitle>{messages.ingredients}</DrawerTitle>
           </DrawerHeader>
           <div className={styles.ingredientsDrawerBody}>
-            <RecipeIngredientList items={state.allIngredients ?? []} />
+            <RecipeIngredientList
+              items={state.allIngredients ?? []}
+              locale={locale}
+            />
           </div>
         </DrawerContent>
       </Drawer>

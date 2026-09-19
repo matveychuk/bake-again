@@ -37,6 +37,8 @@
 - Food image first.
 - Situation/category eyebrow.
 - Recipe title in Newsreader.
+- One or more compact collection labels sit below the title. They are reader-facing
+  navigation labels, not evidence or adaptation status.
 - One or two practical facts only.
 - One concise Tested statement.
 - The image and complete lower content area open the recipe; the save control remains a
@@ -55,10 +57,36 @@
 - Do not repeat an alternate or source-language version of the same recipe name beneath
   the heading. Move useful provenance into the dedicated evidence treatment instead.
 
+## Recipe overview
+
+- Every recipe uses the same decision order: evidence, time, yield, difficulty and flour.
+- `RecipeOverview` composes the existing `EvidenceBadge` and `RecipeFacts` for both
+  product pages and the Design Lab. A soft background contains only the evidence icon
+  and label. Adjacent scope copy uses the same body-small size and line height; keep
+  the row separate from the summary. Repeatedly verified bases may say “Made many times”.
+- The primary row is Active time, Yield, Difficulty: one label and one value per fact.
+  Use horizontal rules without vertical dividers. Keep total elapsed time and an optional
+  planning note in a secondary full-width row. Omit this row when both are unknown;
+  never substitute baking or resting time for total time.
+- Planning notes describe consequential waiting or when to serve, not generic equipment.
+  They come from recipe timing data and can reference a canonical phase for its duration.
+- Yield describes the finished result in the recipe's natural unit, such as cookies,
+  crepes, cakes or servings. Recipe-specific structure such as layer count belongs as
+  supporting yield detail, not as a new universal field.
+- Difficulty uses the written levels Easy, Medium or Advanced in the active locale.
+  Decorative stars are not used because they can be mistaken for ratings.
+- Flour uses one full-width row with normal-weight body-small text so long names wrap.
+- Equipment and geometry do not appear in the overview. Keep consequential dimensions
+  with recipe setup and adjustment controls, and ordinary tools in the method.
+- Unknown values remain explicit. At 390px, stack the three comparable facts; at 900px
+  and 1440px, keep them in one row.
+
 ## Personal state
 
-- Save is a 44px circular secondary control with a bookmark icon and an explicit
-  programmatic pressed state. Its accessible name changes between Save and Remove.
+- Save is a non-shrinking 44px circular secondary control with a bookmark icon and an
+  explicit programmatic pressed state. Its accessible name changes between Save and
+  Remove. The saved state fills the same bookmark silhouette; it does not swap to a
+  different icon shape.
 - Shopping rows use a labelled checkbox, quantity, recipe source and a separately
   labelled remove control. The remove action has a 44px hit area, but is shown as a
   standalone terracotta trash icon without a filled or white circular surface. Leave a
@@ -144,8 +172,9 @@ variation.
   across locales.
 - Recipe detail and Cook Mode consume the same canonical step-media array, so an image
   approved for a recipe step appears on both surfaces in the same order.
-- The matching responsive reference is `/design-system/napoleon-five-steps`; it shares the
-  live `StepMediaSequence` component and its production styles.
+- The matching responsive reference is `/design-system/napoleon-five-steps`; the legacy
+  URL now renders the complete Ukrainian Napoleon through the shared recipe-detail
+  composition and production styles.
 - `components/recipe/step-media-sequence.tsx` is the only product renderer for ordered
   step photography. Recipe detail uses the `recipe` variant and Cook Mode uses the `cook`
   variant; route-specific copies are not allowed. Multi-image sequences expose a labelled,
@@ -164,10 +193,18 @@ variation.
 
 ## Recipe step guidance
 
-- `RecipeStepGuidance` renders both `checkpoint` and `tip` semantics on recipe detail and
-  Cook Mode. Preserve the icon and written label; colour only reinforces the meaning.
-- Use the `prominent` variant for a critical warning before the action and the default
-  block variant for the observable completion cue after the action.
+- `RecipeStepContent` owns the shared reading order on recipe detail and in Cook Mode:
+  heading and contextual assistant action, optional tip, instruction, then optional
+  checkpoint. A tip always appears before the instruction.
+- Keep `Ask about this step` in the heading row on wide screens. Let it wrap below the
+  heading on narrow screens and preserve a 44px target.
+- `RecipeStepGuidance` renders both `checkpoint` and `tip` semantics inside that structure.
+  Preserve the icon and written label; colour only reinforces the meaning.
+- Use the compact `inline` tip variant for practical advice. Its warm background,
+  terracotta rule, icon and written label separate advice from the recipe instruction.
+  Use the default checkpoint treatment for the observable completion cue: its icon, label
+  and message share one vertically aligned row, with long messages allowed to wrap. Reserve
+  `prominent` for critical guidance before an action.
 
 ## Contextual assistant drawer
 

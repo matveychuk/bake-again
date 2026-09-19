@@ -34,6 +34,45 @@
   background: var(--color-status-suggested-background);
 }
 
+.checkpoint,
+.inline {
+  align-items: center;
+}
+
+.checkpoint svg,
+.inline svg {
+  margin-top: 0;
+}
+
+.inline {
+  margin-top: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-action-primary);
+  color: var(--color-action-primary-strong);
+  background: var(--color-status-suggested-background);
+}
+
+.checkpoint p,
+.inline p {
+  display: block;
+}
+
+.checkpoint strong,
+.checkpoint span,
+.inline strong,
+.inline span {
+  display: inline;
+}
+
+.checkpoint strong,
+.inline strong {
+  margin: 0 var(--space-2) 0 0;
+}
+
+.inline strong {
+  color: var(--color-action-primary-strong);
+}
+
 .prominent {
   padding-inline: 0;
   border-bottom: 1px solid currentColor;

@@ -100,57 +100,6 @@
   font-size: 0.94rem;
   line-height: 1.5;
 }
-.tested {
-  margin-top: 14px;
-  padding: 11px 14px;
-  background: var(--color-status-tested-background);
-}
-.tested span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-status-tested-text);
-  font-size: 0.75rem;
-  font-weight: 800;
-}
-.tested p {
-  margin: 3px 0 0 23px;
-  color: var(--color-text-primary);
-  font-size: 0.72rem;
-}
-.facts {
-  margin: 14px 0 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--color-border-subtle);
-}
-.facts div {
-  min-width: 0;
-  padding: 11px 12px;
-  border-right: 1px solid var(--color-border-subtle);
-  border-bottom: 1px solid var(--color-border-subtle);
-}
-.facts div:first-child {
-  padding-left: 0;
-}
-.facts div:last-child {
-  padding-right: 0;
-  border-right: 0;
-}
-.facts dt {
-  color: var(--color-text-secondary);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.facts dd {
-  margin: 4px 0 0;
-  font-family: var(--font-family-display);
-  font-size: 0.96rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
 .cookModeLink {
   width: fit-content;
   min-height: 44px;
@@ -324,7 +273,7 @@
   font-size: 1.55rem;
   font-weight: 550;
 }
-.steps p {
+.steps [data-recipe-step-body] > p {
   max-width: 750px;
   margin: 0;
   color: var(--color-text-secondary);
@@ -406,17 +355,6 @@
   .summary {
     margin-top: 20px;
   }
-  .facts {
-    margin-top: 24px;
-    grid-template-columns: 1fr 1fr;
-  }
-  .facts div:nth-child(even) {
-    padding-right: 0;
-    border-right: 0;
-  }
-  .facts div:nth-child(3) {
-    padding-left: 0;
-  }
   .beforeStart {
     margin-top: 40px;
     padding: 38px 20px;
@@ -475,12 +413,6 @@
   }
   .hero h1 {
     font-size: clamp(2.5rem, 12vw, 3.5rem);
-  }
-  .tested p {
-    margin-left: 0;
-  }
-  .facts dd {
-    font-size: 0.9rem;
   }
   .stepMedia {
     grid-column: 1 / -1;

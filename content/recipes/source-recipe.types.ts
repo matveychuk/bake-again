@@ -3,8 +3,20 @@ import type {
   GeometryApplication,
   GeometryKind,
   IngredientQuantity,
+  RecipeDifficulty,
   YieldOption,
 } from './recipe.types.ts';
+
+export type StructuredRecipeOverview = {
+  difficulty: RecipeDifficulty | null;
+  timing: {
+    activeMinutes: number | null;
+    totalElapsedMinutes: number | null;
+    planningNote: string | null;
+  };
+  yieldLabel: string | null;
+  flour: string;
+};
 
 export type StructuredRecipeYield = {
   id: string;
@@ -29,6 +41,8 @@ export type StructuredRecipeGeometry = {
 export type StructuredRecipeTiming = {
   activeMinutes: number | null;
   totalElapsedMinutes: number | null;
+  /** Optional planning copy; durations come from the canonical phase by ID. */
+  planningNote?: { text: string; phaseId?: string } | null;
   phases: Array<{
     id: string;
     label: string;
@@ -85,6 +99,11 @@ export type StructuredRecipeStep = {
  */
 export type RecipeSourceDraftContent = {
   completeness: 'readyToReview' | 'incompleteSource';
+  /** Evidence for the exact source-backed configuration, independent of publication readiness. */
+  evidence?: {
+    status: 'tested' | 'calculated' | 'suggested';
+    explanation: string;
+  };
   yield?: StructuredRecipeYield;
   geometry?: StructuredRecipeGeometry;
   timing?: StructuredRecipeTiming;
@@ -102,4 +121,10 @@ export type RecipeSourceDraft = RecipeSourceDraftContent & {
   translations?: Partial<Record<'es' | 'uk', RecipeSourceDraftContent>>;
 };
 
-export type StructuredRecipeContent = RecipeSourceDraftContent;
+/**
+ * The reader-facing recipe shape. Every recipe, regardless of source maturity,
+ * receives the same compact overview before it reaches product UI.
+ */
+export type StructuredRecipeContent = RecipeSourceDraftContent & {
+  overview: StructuredRecipeOverview;
+};

@@ -13,7 +13,7 @@ export function RecipeStepGuidance({
   label: string;
   children: React.ReactNode;
   className?: string;
-  variant?: 'block' | 'prominent';
+  variant?: 'block' | 'inline' | 'prominent';
 }) {
   const Icon = kind === 'checkpoint' ? CheckCircle2 : Lightbulb;
   return (
@@ -21,6 +21,7 @@ export function RecipeStepGuidance({
       className={cn(
         styles.guidance,
         kind === 'tip' ? styles.tip : styles.checkpoint,
+        variant === 'inline' && styles.inline,
         variant === 'prominent' && styles.prominent,
         className,
       )}
