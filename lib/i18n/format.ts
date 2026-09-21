@@ -1,62 +1,110 @@
-import type { Duration, Quantity, Unit } from '../../content/recipes/recipe.types.ts';
+import type {
+  Duration,
+  Quantity,
+  Unit,
+} from '../../content/recipes/recipe.types.ts';
 import type { AppLocale } from './config.ts';
 
 const localeTags: Record<AppLocale, string> = { en: 'en', es: 'es', uk: 'uk' };
 
-const unitLabels: Record<AppLocale, Record<Unit, { one: string; other: string }>> = {
+const unitLabels: Record<
+  AppLocale,
+  Record<Unit, { one: string; other: string }>
+> = {
   en: {
-    g: { one: 'g', other: 'g' }, ml: { one: 'ml', other: 'ml' },
-    piece: { one: 'pc', other: 'pcs' }, tsp: { one: 'tsp', other: 'tsp' },
-    tbsp: { one: 'tbsp', other: 'tbsp' }, packet: { one: 'packet', other: 'packets' },
+    g: { one: 'g', other: 'g' },
+    ml: { one: 'ml', other: 'ml' },
+    piece: { one: 'pc', other: 'pcs' },
+    tsp: { one: 'tsp', other: 'tsp' },
+    tbsp: { one: 'tbsp', other: 'tbsp' },
+    packet: { one: 'packet', other: 'packets' },
     cup: { one: 'cup', other: 'cups' },
     pinch: { one: 'pinch', other: 'pinches' },
   },
   es: {
-    g: { one: 'g', other: 'g' }, ml: { one: 'ml', other: 'ml' },
-    piece: { one: 'ud.', other: 'uds.' }, tsp: { one: 'cdta.', other: 'cdtas.' },
-    tbsp: { one: 'cda.', other: 'cdas.' }, packet: { one: 'sobre', other: 'sobres' },
+    g: { one: 'g', other: 'g' },
+    ml: { one: 'ml', other: 'ml' },
+    piece: { one: 'ud.', other: 'uds.' },
+    tsp: { one: 'cdta.', other: 'cdtas.' },
+    tbsp: { one: 'cda.', other: 'cdas.' },
+    packet: { one: 'sobre', other: 'sobres' },
     cup: { one: 'taza', other: 'tazas' },
     pinch: { one: 'pizca', other: 'pizcas' },
   },
   uk: {
-    g: { one: 'г', other: 'г' }, ml: { one: 'мл', other: 'мл' },
-    piece: { one: 'шт.', other: 'шт.' }, tsp: { one: 'ч. л.', other: 'ч. л.' },
-    tbsp: { one: 'ст. л.', other: 'ст. л.' }, packet: { one: 'пакет', other: 'пакетів' },
+    g: { one: 'г', other: 'г' },
+    ml: { one: 'мл', other: 'мл' },
+    piece: { one: 'шт.', other: 'шт.' },
+    tsp: { one: 'ч. л.', other: 'ч. л.' },
+    tbsp: { one: 'ст. л.', other: 'ст. л.' },
+    packet: { one: 'пакет', other: 'пакетів' },
     cup: { one: 'склянка', other: 'склянок' },
     pinch: { one: 'дрібка', other: 'дрібок' },
   },
 };
 
-const durationLabels: Record<AppLocale, Record<Duration['unit'], { one: string; other: string }>> = {
-  en: { second: { one: 'sec', other: 'sec' }, minute: { one: 'min', other: 'min' }, hour: { one: 'hour', other: 'hours' } },
-  es: { second: { one: 's', other: 's' }, minute: { one: 'min', other: 'min' }, hour: { one: 'h', other: 'h' } },
-  uk: { second: { one: 'с', other: 'с' }, minute: { one: 'хв', other: 'хв' }, hour: { one: 'год', other: 'год' } },
+const durationLabels: Record<
+  AppLocale,
+  Record<Duration['unit'], { one: string; other: string }>
+> = {
+  en: {
+    second: { one: 'sec', other: 'sec' },
+    minute: { one: 'min', other: 'min' },
+    hour: { one: 'hour', other: 'hours' },
+  },
+  es: {
+    second: { one: 's', other: 's' },
+    minute: { one: 'min', other: 'min' },
+    hour: { one: 'h', other: 'h' },
+  },
+  uk: {
+    second: { one: 'с', other: 'с' },
+    minute: { one: 'хв', other: 'хв' },
+    hour: { one: 'год', other: 'год' },
+  },
 };
 
 const asNeeded: Record<AppLocale, string> = {
-  en: 'As needed', es: 'Según sea necesario', uk: 'За потреби',
+  en: 'As needed',
+  es: 'Según sea necesario',
+  uk: 'За потреби',
 };
 
 const minimumPrefix: Record<AppLocale, string> = {
-  en: 'At least', es: 'Como mínimo', uk: 'Щонайменше',
+  en: 'At least',
+  es: 'Como mínimo',
+  uk: 'Щонайменше',
 };
 
 function pluralForm(locale: AppLocale, value: number) {
-  return new Intl.PluralRules(localeTags[locale]).select(value) === 'one' ? 'one' : 'other';
+  return new Intl.PluralRules(localeTags[locale]).select(value) === 'one'
+    ? 'one'
+    : 'other';
 }
 
-export function formatNumber(locale: AppLocale, value: number, maximumFractionDigits = 2): string {
+export function formatNumber(
+  locale: AppLocale,
+  value: number,
+  maximumFractionDigits = 2,
+): string {
   return new Intl.NumberFormat(localeTags[locale], {
     maximumFractionDigits,
     minimumFractionDigits: 0,
   }).format(value);
 }
 
-export function formatUnit(locale: AppLocale, unit: Unit, value: number): string {
+export function formatUnit(
+  locale: AppLocale,
+  unit: Unit,
+  value: number,
+): string {
   return unitLabels[locale][unit][pluralForm(locale, value)];
 }
 
-export function formatQuantity(locale: AppLocale, quantity: Quantity | null): string {
+export function formatQuantity(
+  locale: AppLocale,
+  quantity: Quantity | null,
+): string {
   if (!quantity) return asNeeded[locale];
   if (quantity.kind === 'range') {
     return `${formatNumber(locale, quantity.min)}–${formatNumber(locale, quantity.max)} ${formatUnit(locale, quantity.unit, quantity.max)}`;
@@ -65,7 +113,8 @@ export function formatQuantity(locale: AppLocale, quantity: Quantity | null): st
 }
 
 export function formatDuration(locale: AppLocale, duration: Duration): string {
-  const label = (value: number) => durationLabels[locale][duration.unit][pluralForm(locale, value)];
+  const label = (value: number) =>
+    durationLabels[locale][duration.unit][pluralForm(locale, value)];
   if (duration.kind === 'range') {
     return `${formatNumber(locale, duration.min)}–${formatNumber(locale, duration.max)} ${label(duration.max)}`;
   }
@@ -73,6 +122,34 @@ export function formatDuration(locale: AppLocale, duration: Duration): string {
     return `${minimumPrefix[locale]} ${formatNumber(locale, duration.min)} ${label(duration.min)}`;
   }
   return `${formatNumber(locale, duration.value)} ${label(duration.value)}`;
+}
+
+/** Human-readable elapsed minutes without flattening long durations to minutes. */
+export function formatElapsedMinutes(
+  locale: AppLocale,
+  totalMinutes: number,
+): string {
+  if (totalMinutes < 60) {
+    return formatDuration(locale, {
+      kind: 'exact',
+      value: totalMinutes,
+      unit: 'minute',
+    });
+  }
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  const hourLabel = formatDuration(locale, {
+    kind: 'exact',
+    value: hours,
+    unit: 'hour',
+  });
+  return minutes === 0
+    ? hourLabel
+    : `${hourLabel} ${formatDuration(locale, {
+        kind: 'exact',
+        value: minutes,
+        unit: 'minute',
+      })}`;
 }
 
 export function formatRecipeCount(locale: AppLocale, count: number): string {

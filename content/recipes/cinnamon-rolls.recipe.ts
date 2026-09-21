@@ -2,6 +2,7 @@ import type {
   RecipeSourceDraft,
   RecipeSourceDraftContent,
 } from './source-recipe.types.ts';
+import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
 type Locale = 'en' | 'es' | 'uk';
 type Copy = Record<Locale, string>;
@@ -115,7 +116,7 @@ function ingredientSections(locale: Locale) {
             es: 'Almidón de maíz',
             uk: 'Кукурудзяний крохмаль',
           }),
-          quantity: exact(240, 'g'),
+          quantity: quantityFromGrams('corn-starch', 240),
         },
         {
           id: 'tapioca-starch',
@@ -124,7 +125,7 @@ function ingredientSections(locale: Locale) {
             es: 'Almidón de tapioca',
             uk: 'Тапіоковий крохмаль',
           }),
-          quantity: exact(120, 'g'),
+          quantity: quantityFromGrams('tapioca-starch', 120),
         },
         {
           id: 'rice-flour',
@@ -142,7 +143,7 @@ function ingredientSections(locale: Locale) {
             es: 'Levadura química',
             uk: 'Розпушувач',
           }),
-          quantity: exact(15, 'g'),
+          quantity: quantityFromGrams('baking-powder', 15),
         },
         {
           id: 'xanthan',
@@ -151,12 +152,12 @@ function ingredientSections(locale: Locale) {
             es: 'Goma xantana',
             uk: 'Ксантанова камедь',
           }),
-          quantity: exact(12, 'g'),
+          quantity: quantityFromGrams('xanthan-gum', 12),
         },
         {
           id: 'salt',
           name: tr(locale, { en: 'Salt', es: 'Sal', uk: 'Сіль' }),
-          quantity: exact(1, 'tsp'),
+          quantity: quantityFromSpoons('fine-salt', 1, 'tsp'),
         },
       ],
     },
@@ -260,7 +261,7 @@ function ingredientSections(locale: Locale) {
             es: 'Azúcar glas',
             uk: 'Цукрова пудра',
           }),
-          quantity: exact(100, 'g'),
+          quantity: quantityFromGrams('powdered-sugar', 100),
           optional: true,
         },
         {
@@ -826,7 +827,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
 
 export const cinnamonRollsRecipe = {
   id: 'cinnamon-rolls',
-  publicationStatus: 'draft',
+  publicationStatus: 'unpublished',
   source: {
     file: 'https://www.megasilvita.com/blog/cinnamon-rolls-sin-gluten-la-receta-perfecta/',
     locator:

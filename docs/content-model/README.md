@@ -62,16 +62,20 @@ and 60 minutes elapsed, with a 15–20 minute batter-rest phase linked to the `r
 
 ## Publication gate
 
-A locale-specific recipe route is public only when both `publicationStatus` is
-`ready` and `translationState[locale]` is `reviewed`. A draft route can remain
-available for editorial preview, but it must be `noindex` and must not emit a
-canonical URL or an `hreflang` alternate. A reviewed translation is not enough
-to publish a recipe whose facts, provenance, or media approval remain draft.
+Every canonical recipe source has an explicit `publicationStatus`: `published` or
+`unpublished`. The public catalogue, search, featured links and recipe routes use
+`published` records. Existing records were migrated to `unpublished`; publishing is
+an explicit owner decision after recipe review, independent of bake-test evidence.
 
-The interface uses the same principle through `lib/i18n/publication.ts`.
-Currently English is the reviewed UI locale; Spanish and Ukrainian UI routes are
-preview-only until their complete dictionaries are reviewed. Changing either
-gate is an editorial release decision, not a routing shortcut.
+The Drafts navigation and catalogue are available only when both the runtime is
+in development mode and the request host is localhost, 127.0.0.1 or ::1. Unpublished
+recipe and Cook Mode routes return 404 elsewhere, including production on localhost.
+Drafts remain noindex. Change the field in the recipe's `.recipe.ts` source to publish.
+
+Translation review remains a separate indexing and assistant-release gate through
+`lib/i18n/publication.ts`: only a published detailed recipe with a reviewed locale emits
+canonical and language-alternate metadata. Reviewed translations alone never publish
+an unpublished recipe. Publication never upgrades adaptation evidence to Tested.
 
 ## Base and calculated configurations
 
@@ -89,6 +93,27 @@ Recipe-level capabilities are explicit. `geometryAdjustment: null` means the rec
 Schema version 2 uses `geometry` as the single canonical field; there is no parallel `forms` schema. Napoleon uses a `roundTemplate` with `application: "roll-and-trim"`: its 28 cm layers are rolled on parchment and trimmed against a lid or template, not baked in a pan.
 
 ## Ingredient scaling
+
+### Gram-first spoon conversions
+
+`content/recipes/spoon-weights.ts` is the only conversion table for the recurring dry
+ingredients measured by spoon. A managed ingredient always stores grams in
+`quantity.base`; `quantity.equivalent` is the teaspoon or tablespoon cooking aid and is
+excluded from shopping and aggregation. Use `quantityFromSpoons` when the source was
+written in spoons and `quantityFromGrams` when the source was written in grams. Both
+factories produce the same gram-first model.
+
+Author measurements supersede generic density references for this recipe collection.
+The current author-measured entries are Schär Mix B Bread at 20 g/tbsp, tapioca starch
+at 15 g/tbsp, baking powder at 5 g/tsp and granulated sugar at 20 g/tbsp. Reference
+entries remain explicitly labelled in the table until they are measured by the author.
+Do not convert unresolved alternatives such as “sugar or honey” or “baking powder or
+baking soda”: their densities differ. Keep the source spoon amount as an equivalent,
+leave `base` null and use `shopping.mode: "nameOnly"` until the ingredient is resolved.
+
+Cup measures are not inferred from the tablespoon measurements. In particular, the
+unconfirmed 1.5-cup Schär Mix B amount in the banana-fritter source remains a secondary
+source measure with no canonical gram amount.
 
 `configuration.ingredientScaling.default` supplies the recipe default, while `IngredientLine.scaling` handles exceptions:
 
@@ -151,6 +176,19 @@ phase by ID, so a chilling-time correction reaches every language without a seco
 numeric field. Notes without a duration can express serving guidance such as “Best the
 next day”. Missing notes normalize to `null`; no waiting time or total is inferred.
 The hero prioritizes active work and shows total time plus planning guidance below it.
+
+## Reusable cream choices
+
+Creams are canonical recipe records with their own ingredients, method and evidence.
+Whether a cream is suitable for an éclair, cake or another finished dish is a property of
+that host recipe, not of the cream. A host may define `creamOptions.recipeIds` and exactly
+one `creamOptions.recommendedRecipeId`; the recommended ID must also appear in the option
+list. Cream records do not repeat backlinks or acquire a second compatibility status.
+
+The registry preserves these stable IDs across locales. Validation rejects duplicate or
+unknown cream IDs and a recommendation outside the host recipe's compatible list. The UI
+may therefore render one recommendation alongside the other confirmed choices without
+changing the cream's own Tested status.
 
 ## Media attached to steps
 

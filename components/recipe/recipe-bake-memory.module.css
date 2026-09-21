@@ -1,0 +1,111 @@
+.memory {
+  width: min(calc(100% - 80px), 1360px);
+  margin: var(--space-6) auto 0;
+  padding: var(--space-4) var(--space-6);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-background-panel-subtle);
+}
+
+.memory > svg {
+  color: var(--color-action-primary-strong);
+}
+
+.copy {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-action-primary-strong);
+  font-size: var(--font-size-label);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.memory h2 {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-body-large);
+  font-weight: 600;
+}
+
+.meta {
+  margin: var(--space-1) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-body);
+}
+
+.note {
+  max-width: var(--layout-cook-reading);
+  margin-top: var(--space-3);
+}
+
+.note strong {
+  font-size: var(--font-size-label);
+}
+
+.note p {
+  margin: var(--space-1) 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body);
+}
+
+.memory small {
+  margin-top: var(--space-3);
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label);
+}
+
+.memory > a {
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
+  background: var(--color-background-surface);
+  font-size: var(--font-size-body-small);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.memory > a:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .memory {
+    width: calc(100% - 40px);
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .memory > a {
+    grid-column: 2;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 560px) {
+  .memory {
+    padding: var(--space-4);
+  }
+
+  .memory > a {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}

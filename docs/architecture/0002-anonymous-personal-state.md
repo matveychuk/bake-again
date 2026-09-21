@@ -52,8 +52,9 @@ derived from canonical recipe data at render time.
 
 ## Consequences
 
-Personal state remains private to one browser and synchronizes only between tabs through
-the browser storage event. It does not provide accounts, device sync, sharing, notes,
-inventory, Baked history, or a general shopping-item editor.
+These Saved and Shopping slices remain private to one browser and synchronize only
+between tabs through the browser storage event. They do not provide accounts, device
+sync, sharing, inventory or a general shopping-item editor. Private Baked memory and notes
+are defined separately in ADR 0005 so Save can retain its Want to bake meaning.
 
 This ADR complements ADR 0001 and does not change its locale or cookie decisions.

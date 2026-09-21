@@ -1,6 +1,7 @@
 import { appleBananaFrittersRecipe } from './apple-banana-fritters.recipe.ts';
 import { appleCharlotteRecipe } from './apple-charlotte.recipe.ts';
 import { appleFrittersRecipe } from './apple-fritters.recipe.ts';
+import { appleMeringuePieRecipe } from './apple-meringue-pie.recipe.ts';
 import { bananaBreadRecipe } from './banana-bread.recipe.ts';
 import { bananaFrittersRecipe } from './banana-fritters.recipe.ts';
 import { carrotCakeRecipe } from './carrot-cake.recipe.ts';
@@ -8,12 +9,19 @@ import { cinnamonRollsRecipe } from './cinnamon-rolls.recipe.ts';
 import { cottageCheeseWafflesRecipe } from './cottage-cheese-waffles.recipe.ts';
 import { crepesRecipe } from './crepes.recipe.ts';
 import { crinkleCookiesRecipe } from './crinkle-cookies.recipe.ts';
+import {
+  egglessVanillaCustardRecipe,
+  mascarponeWhippedCreamRecipe,
+  vanillaButtercreamRecipe,
+  vanillaEggCustardRecipe,
+} from './cream-recipes.ts';
 import { eclairsRecipe } from './eclairs.recipe.ts';
 import { easterBreadRecipe } from './easter-bread.recipe.ts';
 import { fruitSpongeRollRecipe } from './fruit-sponge-roll.recipe.ts';
 import { glutenFreeNapoleonRecipe } from './gluten-free-napoleon.recipe.ts';
 import { recipeInventory } from './inventory.ts';
 import { lazyDumplingsRecipe } from './lazy-dumplings.recipe.ts';
+import { plumCakeRecipe } from './plum-cake.recipe.ts';
 import { pruneCakeRecipe } from './prune-cake.recipe.ts';
 import type { RecipeDifficulty, RecipeDraft } from './recipe.types.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
@@ -40,10 +48,7 @@ function inventoryDifficulty(value: string | null): RecipeDifficulty | null {
   }
 }
 
-function localizedFlourSummary(
-  recipeId: string,
-  locale: AppLocale,
-): string {
+function localizedFlourSummary(recipeId: string, locale: AppLocale): string {
   const inventory = recipeInventory.find((recipe) => recipe.id === recipeId);
   const localized = inventory?.localizedFacts?.flour?.[locale];
   if (localized) return localized;
@@ -96,12 +101,15 @@ function planningNote(
 function sourceRecipeOverview(
   recipeId: string,
   locale: AppLocale,
-  content: Partial<Pick<StructuredRecipeContent, 'timing' | 'yield'>>,
+  content: Partial<
+    Pick<StructuredRecipeContent, 'difficulty' | 'timing' | 'yield'>
+  >,
 ) {
   const inventory = recipeInventory.find((recipe) => recipe.id === recipeId);
 
   return {
-    difficulty: inventoryDifficulty(inventory?.difficulty ?? null),
+    difficulty:
+      content.difficulty ?? inventoryDifficulty(inventory?.difficulty ?? null),
     timing: {
       activeMinutes: content.timing?.activeMinutes ?? null,
       totalElapsedMinutes: content.timing?.totalElapsedMinutes ?? null,
@@ -124,6 +132,7 @@ export const recipeDocuments: readonly RecipeDocument[] = [
   { kind: 'detailed', recipe: glutenFreeNapoleonRecipe },
   { kind: 'detailed', recipe: crinkleCookiesRecipe },
   { kind: 'sourceDraft', recipe: appleCharlotteRecipe },
+  { kind: 'sourceDraft', recipe: plumCakeRecipe },
   { kind: 'sourceDraft', recipe: cottageCheeseWafflesRecipe },
   { kind: 'sourceDraft', recipe: carrotCakeRecipe },
   { kind: 'sourceDraft', recipe: spongeCakeRecipe },
@@ -138,6 +147,11 @@ export const recipeDocuments: readonly RecipeDocument[] = [
   { kind: 'sourceDraft', recipe: appleFrittersRecipe },
   { kind: 'sourceDraft', recipe: bananaFrittersRecipe },
   { kind: 'sourceDraft', recipe: appleBananaFrittersRecipe },
+  { kind: 'sourceDraft', recipe: appleMeringuePieRecipe },
+  { kind: 'sourceDraft', recipe: mascarponeWhippedCreamRecipe },
+  { kind: 'sourceDraft', recipe: vanillaEggCustardRecipe },
+  { kind: 'sourceDraft', recipe: egglessVanillaCustardRecipe },
+  { kind: 'sourceDraft', recipe: vanillaButtercreamRecipe },
 ] satisfies readonly RecipeDocument[];
 
 /** Recipes whose stable IDs and localized ingredient data support personal state. */
@@ -179,16 +193,21 @@ function detailedRecipeContent(
     activeMinutes: recipe.timing.activeMinutes,
     totalElapsedMinutes: recipe.timing.totalElapsedMinutes,
     planningNote: recipe.timing.planningNote
-      ? { ...recipe.timing.planningNote, text: recipe.timing.planningNote.text[locale] }
+      ? {
+          ...recipe.timing.planningNote,
+          text: recipe.timing.planningNote.text[locale],
+        }
       : null,
     phases: recipe.timing.phases.map((phase) => ({
       id: phase.id,
       label: phase.label[locale],
       duration: phase.duration,
+      relatedStepId: phase.relatedStepId,
     })),
   };
 
   return {
+    presentation: recipe.presentation,
     overview: {
       difficulty: recipe.difficulty,
       timing: {
@@ -204,9 +223,10 @@ function detailedRecipeContent(
       : 'readyToReview',
     evidence: {
       status: 'tested',
-      explanation: recipe.baseProvenance.state === 'repeatedlyVerified'
-        ? messages.status.tested.repeatedExplanation
-        : messages.status.tested.explanation,
+      explanation:
+        recipe.baseProvenance.state === 'repeatedlyVerified'
+          ? messages.status.tested.repeatedExplanation
+          : messages.status.tested.explanation,
     },
     yield:
       yieldAmount === null
@@ -231,7 +251,10 @@ function detailedRecipeContent(
       lengthCm: recipe.geometry.default.lengthCm,
     },
     timing,
-    beforeStart: recipe.beforeStart.map((item) => item.text[locale]),
+    beforeStart: recipe.beforeStart.length
+      ? recipe.beforeStart.map((item) => item.text[locale])
+      : undefined,
+    creamOptions: recipe.creamOptions,
     ingredientSections: recipe.ingredientSections.map((section) => ({
       id: section.id,
       title: section.title[locale],
@@ -254,14 +277,19 @@ function detailedRecipeContent(
       id: step.id,
       title: step.title?.[locale] ?? step.instruction[locale],
       body: step.instruction[locale],
+      cookIngredients: step.ingredientLineIds.map((ingredientId) => ({
+        ingredientId,
+      })),
       meta:
-        [
-          step.duration && formatDuration(locale, step.duration),
-          step.temperature &&
-            `${step.temperature.value}°${step.temperature.unit}`,
-        ]
-          .filter(Boolean)
-          .join(' · ') || undefined,
+        recipe.presentation === 'concise'
+          ? undefined
+          : [
+              step.duration && formatDuration(locale, step.duration),
+              step.temperature &&
+                `${step.temperature.value}°${step.temperature.unit}`,
+            ]
+              .filter(Boolean)
+              .join(' · ') || undefined,
       checkpoint: step.guidance?.find(
         (guidance) => guidance.kind === 'checkpoint',
       )?.text[locale],
@@ -275,11 +303,7 @@ function detailedRecipeContent(
             id: item.id,
             src: item.path,
             alt: item.alt[locale],
-            title:
-              item.caption?.[locale] ??
-              step.title?.[locale] ??
-              step.instruction[locale],
-            caption: item.caption?.[locale] ?? '',
+            caption: item.caption?.[locale],
           },
         ];
       }),
@@ -308,6 +332,7 @@ export function getRecipeContent(
     // This prevents a translated display string from becoming a second numeric model.
     const content = {
       ...localized,
+      creamOptions: document.recipe.creamOptions,
       yield:
         localized.yield && document.recipe.yield
           ? {
@@ -342,11 +367,13 @@ export function getRecipeContent(
               phases: localized.timing.phases.map((phase) => ({
                 ...phase,
                 duration:
-                  document.recipe.timing?.phases.find((item) => item.id === phase.id)?.duration ??
-                  phase.duration,
+                  document.recipe.timing?.phases.find(
+                    (item) => item.id === phase.id,
+                  )?.duration ?? phase.duration,
                 relatedStepId:
-                  document.recipe.timing?.phases.find((item) => item.id === phase.id)?.relatedStepId ??
-                  phase.relatedStepId,
+                  document.recipe.timing?.phases.find(
+                    (item) => item.id === phase.id,
+                  )?.relatedStepId ?? phase.relatedStepId,
               })),
             }
           : undefined,
@@ -356,6 +383,10 @@ export function getRecipeContent(
           ingredients: section.ingredients.map(
             (ingredient, ingredientIndex) => ({
               ...ingredient,
+              scaling:
+                document.recipe.ingredientSections[sectionIndex]?.ingredients[
+                  ingredientIndex
+                ]?.scaling,
               quantity:
                 document.recipe.ingredientSections[sectionIndex]?.ingredients[
                   ingredientIndex

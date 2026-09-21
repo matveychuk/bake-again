@@ -1,574 +1,306 @@
-import type { RecipeSourceDraft } from './source-recipe.types.ts';
+import type { RecipeLocale } from './recipe.types.ts';
+import type {
+  RecipeSourceDraft,
+  RecipeSourceDraftContent,
+  StructuredRecipeStep,
+} from './source-recipe.types.ts';
+import { quantityFromGrams } from './spoon-weights.ts';
 
-const translatedQuantity = {
-  base: null,
-  shopping: { mode: 'nameOnly' as const },
-};
-
-const lazyDumplingsStepMedia = {
-  'mix-wet': {
-    id: 'mix-cottage-cheese',
-    src: '/media/recipes/lazy-dumplings/selected/step-01-mix-cottage-cheese-v1.png',
+const copy = {
+  uk: {
+    evidence: 'Цю версію успішно готували.',
+    yield: '100 лінивих вареників',
+    section: 'Ліниві вареники',
+    ingredients: [
+      'Творог',
+      'Яйця',
+      'Цукор',
+      'Борошно Schär Mix B Bread',
+      'Тапіоковий крохмаль',
+    ],
+    flourNote: 'Плюс трохи для формування.',
+    dusting: 'Для присипання.',
+    rest: 'Відпочинок тіста',
+    boil: 'Варіння після спливання',
+    planning: 'Додатково {duration} на відпочинок тіста.',
+    titles: [
+      'Змішайте основу',
+      'Додайте борошно й крохмаль',
+      'Дайте тісту відпочити',
+      'Сформуйте ковбаску',
+      'Скачайте вареники',
+      'Зваріть вареники',
+    ],
+    instructions: [
+      'Перемішайте творог, яйця й цукор виделкою або в комбайні насадкою-тістомісом.',
+      'З’єднайте борошно з тапіоковим крохмалем і вмішайте в основу. Тісто має залишитися липким — не ущільнюйте його додатковим борошном.',
+      'Нещільно накрийте миску й залиште на 15–30 хвилин.',
+      'Присипте поверхню й тісто борошном. Обережно розкачайте в ковбаску, не вмішуючи борошно всередину.',
+      'Наріжте тісто на невеликі шматочки. Обваляйте зрізи в борошні й легко скачайте кожен шматочок між долонями в кульку.',
+    ],
+    cooking: [
+      'Опускайте вареники в киплячу воду невеликими порціями. Обережно проведіть шумівкою по дну, щоб вони не прилипли.',
+      'Коли вода знову закипить і вареники спливуть, зменште нагрів. Варіть при слабкому кипінні ще 1–2 хвилини й дістаньте шумівкою.',
+    ],
+    freezing: 'Для заморожування розкладіть сирі вареники в один шар на таці.',
+    alts: [
+      'Творог, яйця й цукор у мисці комбайна',
+      'Борошно й тапіоковий крохмаль у липкому тісті',
+      'Руки формують ковбаску з тіста на присипаній борошном поверхні',
+      'Кульки вареників і нарізане тісто на присипаній борошном поверхні',
+      'Вареники сплили у воді, один вареник на шумівці',
+    ],
   },
-  'add-dry': {
-    id: 'add-flour-tapioca',
-    src: '/media/recipes/lazy-dumplings/selected/step-02-add-flour-tapioca-v1.png',
+  en: {
+    evidence: 'This exact version has been cooked successfully.',
+    yield: '100 lazy dumplings',
+    section: 'Dumplings',
+    ingredients: [
+      'Cottage cheese',
+      'Eggs',
+      'Sugar',
+      'Schär Mix B Bread flour',
+      'Tapioca starch',
+    ],
+    flourNote: 'Plus a little for shaping.',
+    dusting: 'For dusting.',
+    rest: 'Dough rest',
+    boil: 'Cooking after floating',
+    planning: 'Allow an additional {duration} for the dough to rest.',
+    titles: [
+      'Mix the base',
+      'Add the flour and starch',
+      'Rest the dough',
+      'Shape a log',
+      'Roll the dumplings',
+      'Boil the dumplings',
+    ],
+    instructions: [
+      'Mix the cottage cheese, eggs and sugar with a fork or in a food processor fitted with a dough hook.',
+      'Combine the flour and tapioca starch and mix into the base. The dough should stay sticky — do not add extra flour to firm it up.',
+      'Cover the bowl loosely and leave for 15–30 minutes.',
+      'Dust the surface and dough with flour. Gently roll into a log without kneading the dusting flour into the dough.',
+      'Cut into small pieces. Coat the cut sides in flour and gently roll each piece between your palms into a ball.',
+    ],
+    cooking: [
+      'Add the dumplings to boiling water in small batches. Gently run a skimmer over the bottom so they do not stick.',
+      'When the water returns to a boil and the dumplings float, reduce the heat. Cook at a gentle boil for another 1–2 minutes, then lift out with a skimmer.',
+    ],
+    freezing:
+      'To freeze, arrange the uncooked dumplings in a single layer on a tray.',
+    alts: [
+      'Cottage cheese, eggs and sugar in a food processor bowl',
+      'Flour and tapioca starch in sticky cottage-cheese dough',
+      'Hands shaping a dough log on a floured surface',
+      'Round dumplings and cut dough on a floured surface',
+      'Dumplings floating in water with one on a skimmer',
+    ],
   },
-  rest: {
-    id: 'rest-dough',
-    src: '/media/recipes/lazy-dumplings/selected/step-03-rest-dough-v1.png',
-  },
-  'shape-log': {
-    id: 'shape-dough-log',
-    src: '/media/recipes/lazy-dumplings/selected/step-04-shape-log-v1.png',
-  },
-  'shape-dumplings': {
-    id: 'shape-round-dumplings',
-    src: '/media/recipes/lazy-dumplings/selected/step-05-shape-dumplings-v1.png',
-  },
-  'cook-dumplings': {
-    id: 'boil-round-dumplings',
-    src: '/media/recipes/lazy-dumplings/selected/step-06-boil-dumplings-v1.png',
+  es: {
+    evidence: 'Esta versión se ha preparado con éxito.',
+    yield: '100 ñoquis de requesón',
+    section: 'Ñoquis de requesón',
+    ingredients: [
+      'Requesón',
+      'Huevos',
+      'Azúcar',
+      'Harina Schär Mix B Bread',
+      'Almidón de tapioca',
+    ],
+    flourNote: 'Y un poco más para dar forma.',
+    dusting: 'Para espolvorear.',
+    rest: 'Reposo de la masa',
+    boil: 'Cocción después de que suban',
+    planning: 'Añade {duration} de reposo de la masa.',
+    titles: [
+      'Mezcla la base',
+      'Añade la harina y el almidón',
+      'Deja reposar la masa',
+      'Forma un cilindro',
+      'Forma las bolitas',
+      'Cuece los ñoquis',
+    ],
+    instructions: [
+      'Mezcla el requesón, los huevos y el azúcar con un tenedor o en un robot de cocina con gancho de amasar.',
+      'Combina la harina con el almidón de tapioca e incorpóralos a la base. La masa debe quedar pegajosa; no añadas más harina para endurecerla.',
+      'Cubre el bol sin apretar y deja reposar durante 15–30 minutos.',
+      'Enharina la superficie y la masa. Forma un cilindro con cuidado, sin amasar la harina de espolvorear dentro de la masa.',
+      'Corta en trozos pequeños. Cubre los cortes con harina y haz rodar suavemente cada trozo entre las palmas para formar una bolita.',
+    ],
+    cooking: [
+      'Añade los ñoquis al agua hirviendo en tandas pequeñas. Pasa suavemente una espumadera por el fondo para que no se peguen.',
+      'Cuando el agua vuelva a hervir y los ñoquis suban, baja el fuego. Cuécelos a hervor suave durante 1–2 minutos más y retíralos con una espumadera.',
+    ],
+    freezing:
+      'Para congelarlos, coloca los ñoquis crudos en una sola capa sobre una bandeja.',
+    alts: [
+      'Requesón, huevos y azúcar en el bol de un robot de cocina',
+      'Harina y almidón de tapioca en una masa pegajosa de requesón',
+      'Manos formando un cilindro de masa sobre una superficie enharinada',
+      'Bolitas y masa cortada sobre una superficie enharinada',
+      'Ñoquis flotando en agua, con uno sobre una espumadera',
+    ],
   },
 } as const;
 
-function stepMedia(
-  stepId: keyof typeof lazyDumplingsStepMedia,
-  alt: string,
-  title: string,
-  caption: string,
-) {
-  return [{ ...lazyDumplingsStepMedia[stepId], alt, title, caption }];
-}
-
-export const lazyDumplingsRecipe = {
-  id: 'lazy-dumplings',
-  publicationStatus: 'draft',
-  source: {
-    file: 'docs/reference/recipe-inventory.xlsx',
-    locator:
-      'Recipe Archive · Ліниві вареники; author-confirmed working method',
-  },
-  completeness: 'readyToReview',
-  timing: {
-    activeMinutes: null,
-    totalElapsedMinutes: null,
-    phases: [
-      {
-        id: 'dough-rest',
-        label: 'Dough rest',
-        duration: { kind: 'range', min: 15, max: 30, unit: 'minute' },
-        relatedStepId: 'rest',
-      },
-      {
-        id: 'gentle-boil',
-        label: 'Gentle boil after floating',
-        duration: { kind: 'range', min: 1, max: 2, unit: 'minute' },
-        relatedStepId: 'cook-dumplings',
-      },
-    ],
-  },
-  ingredientSections: [
+function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
+  const text = copy[locale];
+  const media = (id: string, file: string, alt: string) => [
     {
-      id: 'dumplings',
-      title: 'Dumplings',
-      ingredients: [
-        {
-          id: 'cottage-cheese',
-          name: 'Cottage cheese',
-          quantity: {
-            base: { kind: 'exact', value: 460, unit: 'g' },
-            equivalent: { kind: 'exact', value: 2, unit: 'packet' },
-            shopping: { mode: 'base' },
-          },
-          note: 'Two 230 g packets.',
-        },
-        {
-          id: 'eggs',
-          name: 'Eggs',
-          quantity: {
-            base: { kind: 'exact', value: 2, unit: 'piece' },
-            shopping: { mode: 'base', increment: 1, rounding: 'up' },
-          },
-        },
-        {
-          id: 'sugar',
-          name: 'Sugar',
-          quantity: {
-            base: { kind: 'exact', value: 67, unit: 'g' },
-            equivalent: { kind: 'exact', value: 3.33, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
-          note: 'The spoon equivalent uses the author’s measured 20 g per tablespoon.',
-        },
-        {
-          id: 'flour',
-          name: 'Schär Mix B Bread flour',
-          quantity: {
-            base: { kind: 'exact', value: 100, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-        },
-        {
-          id: 'tapioca',
-          name: 'Tapioca starch',
-          quantity: {
-            base: { kind: 'exact', value: 8, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-        },
-        {
-          id: 'water',
-          name: 'Water for cooking',
-          quantity: {
-            base: null,
-            shopping: { mode: 'nameOnly', defaultSelected: false },
-          },
-          note: 'Enough to cook the dumplings in small batches.',
-        },
-      ],
+      id,
+      src: `/media/recipes/lazy-dumplings/selected/${file}`,
+      alt,
     },
-  ],
-  steps: [
+  ];
+  const steps: StructuredRecipeStep[] = [
     {
       id: 'mix-wet',
-      title: 'Mix the cottage cheese, eggs and sugar',
-      body: 'Mix in a food processor with the dough hook until even. You can also mix thoroughly by hand with a fork.',
+      title: text.titles[0],
+      body: text.instructions[0],
       cookIngredients: [
         { ingredientId: 'cottage-cheese' },
         { ingredientId: 'eggs' },
         { ingredientId: 'sugar' },
       ],
-      media: stepMedia(
-        'mix-wet',
-        'Cottage cheese, eggs and sugar mixing in a bowl with a dough hook',
-        'Mix to an even base',
-        'The cottage-cheese mixture can stay softly textured.',
+      media: media(
+        'mix-cottage-cheese',
+        'step-01-mix-cottage-cheese-v1.png',
+        text.alts[0],
       ),
     },
     {
       id: 'add-dry',
-      title: 'Add the flour and tapioca',
-      body: 'Mix the flour with the tapioca starch, add them to the cottage-cheese mixture and mix until evenly combined.',
-      checkpoint:
-        'The dough should remain very sticky. Do not add extra flour to firm it up.',
+      title: text.titles[1],
+      body: text.instructions[1],
       cookIngredients: [{ ingredientId: 'flour' }, { ingredientId: 'tapioca' }],
-      media: stepMedia(
-        'add-dry',
-        'Gluten-free flour and tapioca being added to sticky cottage-cheese dough',
-        'Keep the dough sticky',
-        'Add the dry ingredients, but do not firm the dough with extra flour.',
+      media: media(
+        'add-flour-tapioca',
+        'step-02-add-flour-tapioca-v1.png',
+        text.alts[1],
       ),
     },
-    {
-      id: 'rest',
-      title: 'Rest the dough',
-      body: 'Leave the dough to rest for 15–30 minutes.',
-      meta: '15–30 min',
-      media: stepMedia(
-        'rest',
-        'Soft cottage-cheese dough resting in a covered ceramic bowl',
-        'Let the dough rest',
-        'Cover it loosely and leave it for 15–30 minutes.',
-      ),
-    },
+    { id: 'rest', title: text.titles[2], body: text.instructions[2] },
     {
       id: 'shape-log',
-      title: 'Shape the dough into a log',
-      body: 'Dust the work surface generously with flour. Place the dough on it, dust the top with flour and gently roll it into a log.',
-      tip: 'Use the flour only to handle and shape the sticky dough. Do not knead it into the dough.',
+      title: text.titles[3],
+      body: text.instructions[3],
       cookIngredients: [
-        {
-          ingredientId: 'flour',
-          quantity: 'omit',
-          note: 'Use extra flour only for dusting the surface and dough.',
-        },
+        { ingredientId: 'flour', quantity: 'omit', note: text.dusting },
       ],
-      media: stepMedia(
-        'shape-log',
-        'Hands gently rolling soft cottage-cheese dough into a flour-dusted log',
-        'Use flour only on the surface',
-        'The dough stays soft; flour makes it easier to handle.',
-      ),
+      media: media('shape-dough-log', 'step-04-shape-log-v1.png', text.alts[2]),
     },
     {
       id: 'shape-dumplings',
-      title: 'Cut and shape the dumplings',
-      body: 'Cut the log into small pieces. Coat each piece in flour, covering the cut sides, then roll it gently between your palms to make a ball.',
-      checkpoint: 'The cut sides should be completely coated with flour.',
-      tip: 'The shaped uncooked dumplings freeze very well. For a large batch—the author usually starts with about 1.5 kg of cottage cheese—arrange them in a single layer on plastic trays and freeze.',
+      title: text.titles[4],
+      body: text.instructions[4],
+      tip: text.freezing,
       cookIngredients: [
-        {
-          ingredientId: 'flour',
-          quantity: 'omit',
-          note: 'Use extra flour to coat the cut sides.',
-        },
+        { ingredientId: 'flour', quantity: 'omit', note: text.dusting },
       ],
-      media: stepMedia(
-        'shape-dumplings',
-        'Round uncooked cottage-cheese dumplings and cut dough pieces on a floured surface',
-        'Coat the cut sides, then roll',
-        'Form each piece into a small round dumpling.',
+      media: media(
+        'shape-round-dumplings',
+        'step-05-shape-dumplings-v1.png',
+        text.alts[3],
       ),
     },
     {
       id: 'cook-dumplings',
-      title: 'Boil the dumplings',
-      body: 'Bring water to a boil and add the dumplings in small batches. Gently run a spoon or skimmer over the bottom so they do not stick. When the water returns to a boil and the dumplings float, reduce the heat. Cook at a gentle boil for another 1–2 minutes, then lift them out carefully with a skimmer.',
-      cookInstructions: [
-        'Bring water to a boil and add the dumplings in small batches.',
-        'Gently run a spoon or skimmer over the bottom so they do not stick.',
-        'When the water returns to a boil and the dumplings float, reduce the heat. Cook at a gentle boil for another 1–2 minutes, then lift them out carefully with a skimmer.',
-      ],
-      cookIngredients: [{ ingredientId: 'water', quantity: 'omit' }],
-      meta: '1–2 min after floating',
-      checkpoint:
-        'Keep the water at a calm boil so the dumplings do not become damaged or fall apart.',
-      media: stepMedia(
-        'cook-dumplings',
-        'Round cottage-cheese dumplings floating in gently simmering water with a skimmer',
-        'Cook at a gentle boil',
-        'Lift the round dumplings out carefully after 1–2 minutes.',
+      title: text.titles[5],
+      body: text.cooking.join(' '),
+      cookInstructions: [...text.cooking],
+      media: media(
+        'boil-round-dumplings',
+        'step-06-boil-dumplings-v1.png',
+        text.alts[4],
       ),
     },
-  ],
-  translations: {
-    uk: {
-      completeness: 'readyToReview',
-      timing: {
-        activeMinutes: null,
-        totalElapsedMinutes: null,
-        phases: [
-          {
-            id: 'dough-rest',
-            label: 'Відпочинок тіста',
-            duration: { kind: 'range', min: 15, max: 30, unit: 'minute' },
-            relatedStepId: 'rest',
-          },
-          {
-            id: 'gentle-boil',
-            label: 'Спокійне кипіння після спливання',
-            duration: { kind: 'range', min: 1, max: 2, unit: 'minute' },
-            relatedStepId: 'cook-dumplings',
-          },
-        ],
-      },
-      ingredientSections: [
+  ];
+  return {
+    completeness: 'readyToReview',
+    presentation: 'concise',
+    evidence: { status: 'tested', explanation: text.evidence },
+    yield: {
+      id: 'hundred-dumplings',
+      label: text.yield,
+      count: { kind: 'exact', value: 100 },
+      unit: 'dumpling',
+    },
+    timing: {
+      activeMinutes: 45,
+      totalElapsedMinutes: null,
+      planningNote: { text: text.planning, phaseId: 'dough-rest' },
+      phases: [
         {
-          id: 'dumplings',
-          title: 'Ліниві вареники',
-          ingredients: [
-            {
-              id: 'cottage-cheese',
-              name: 'Кисломолочний сир',
-              quantity: translatedQuantity,
-              note: '2 пачки по 230 г.',
-            },
-            {
-              id: 'eggs',
-              name: 'Яйця',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'sugar',
-              name: 'Цукор',
-              quantity: translatedQuantity,
-              note: 'Еквівалент у ложках розрахований за зваженою авторкою мірою: 20 г у столовій ложці.',
-            },
-            {
-              id: 'flour',
-              name: 'Борошно Schär Mix B Bread',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'tapioca',
-              name: 'Тапіоковий крохмаль',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'water',
-              name: 'Вода для варіння',
-              quantity: translatedQuantity,
-              note: 'Стільки, щоб варити вареники невеликими порціями.',
-            },
-          ],
-        },
-      ],
-      steps: [
-        {
-          id: 'mix-wet',
-          title: 'Змішайте сир, яйця та цукор',
-          body: 'Перемішайте в комбайні насадкою-тістомісом до однорідності. Також можна ретельно перемішати все вручну виделкою.',
-          cookIngredients: [
-            { ingredientId: 'cottage-cheese' },
-            { ingredientId: 'eggs' },
-            { ingredientId: 'sugar' },
-          ],
-          media: stepMedia(
-            'mix-wet',
-            'Кисломолочний сир, яйця й цукор змішуються в мисці насадкою-тістомісом',
-            'Змішайте до однорідної основи',
-            'Сирна маса може залишатися м’якою та трохи фактурною.',
-          ),
+          id: 'dough-rest',
+          label: text.rest,
+          duration: { kind: 'range', min: 15, max: 30, unit: 'minute' },
+          relatedStepId: 'rest',
         },
         {
-          id: 'add-dry',
-          title: 'Додайте борошно й тапіоку',
-          body: 'Змішайте борошно з тапіокою, додайте до сирної маси та вимішайте до рівномірного тіста.',
-          checkpoint:
-            'Тісто має залишитися зовсім липким. Не додавайте більше борошна, щоб зробити його щільнішим.',
-          cookIngredients: [
-            { ingredientId: 'flour' },
-            { ingredientId: 'tapioca' },
-          ],
-          media: stepMedia(
-            'add-dry',
-            'Безглютенове борошно й тапіока додаються до липкого сирного тіста',
-            'Залиште тісто липким',
-            'Додайте сухі інгредієнти, але не ущільнюйте тісто зайвим борошном.',
-          ),
-        },
-        {
-          id: 'rest',
-          title: 'Залиште тісто відпочити',
-          body: 'Залиште тісто відпочити на 15–30 хвилин.',
-          meta: '15–30 хв',
-          media: stepMedia(
-            'rest',
-            'М’яке сирне тісто відпочиває в накритій керамічній мисці',
-            'Дайте тісту відпочити',
-            'Нещільно накрийте й залиште на 15–30 хвилин.',
-          ),
-        },
-        {
-          id: 'shape-log',
-          title: 'Сформуйте ковбаску',
-          body: 'Добре присипте робочу поверхню борошном. Викладіть тісто, присипте його борошном зверху й обережно розкачайте в ковбаску.',
-          tip: 'Борошно потрібне лише для роботи з липким тістом і формування. Не вмішуйте його додатково в тісто.',
-          cookIngredients: [
-            {
-              ingredientId: 'flour',
-              quantity: 'omit',
-              note: 'Додаткове борошно лише для присипання поверхні й тіста.',
-            },
-          ],
-          media: stepMedia(
-            'shape-log',
-            'Руки обережно формують ковбаску з м’якого сирного тіста на присипаній борошном поверхні',
-            'Борошно лише на поверхні',
-            'Тісто лишається м’яким, а борошно допомагає з ним працювати.',
-          ),
-        },
-        {
-          id: 'shape-dumplings',
-          title: 'Наріжте та сформуйте вареники',
-          body: 'Наріжте ковбаску на невеликі шматочки. Кожен шматочок обваляйте в борошні, добре покривши зрізи, а потім сформуйте кульку, легко прокочуючи її між долонями.',
-          checkpoint: 'Зрізи мають бути повністю вкриті борошном.',
-          tip: 'Сформовані сирі вареники чудово заморожуються. Для великої порції авторка зазвичай бере близько 1,5 кг сиру, розкладає вареники в один шар на пластикових формах і заморожує.',
-          cookIngredients: [
-            {
-              ingredientId: 'flour',
-              quantity: 'omit',
-              note: 'Додаткове борошно для покриття зрізів.',
-            },
-          ],
-          media: stepMedia(
-            'shape-dumplings',
-            'Круглі сирі сирні вареники та нарізане тісто на присипаній борошном поверхні',
-            'Покрийте зрізи борошном і скатайте',
-            'Сформуйте з кожного шматочка невеликий круглий вареник.',
-          ),
-        },
-        {
-          id: 'cook-dumplings',
-          title: 'Зваріть вареники',
-          body: 'Закип’ятіть воду й опустіть вареники в киплячу воду невеликими порціями. Обережно проведіть ложкою або шумівкою по дну, щоб вони не прилипли. Коли вода знову закипить і вареники спливуть, зменште нагрів. Варіть при спокійному кипінні ще 1–2 хвилини, потім обережно дістаньте шумівкою.',
-          cookInstructions: [
-            'Закип’ятіть воду й опустіть вареники в киплячу воду невеликими порціями.',
-            'Обережно проведіть ложкою або шумівкою по дну, щоб вони не прилипли.',
-            'Коли вода знову закипить і вареники спливуть, зменште нагрів. Варіть при спокійному кипінні ще 1–2 хвилини, потім обережно дістаньте шумівкою.',
-          ],
-          cookIngredients: [{ ingredientId: 'water', quantity: 'omit' }],
-          meta: '1–2 хв після спливання',
-          checkpoint:
-            'Вода має кипіти спокійно, щоб вареники не пошкодилися й не розвалилися.',
-          media: stepMedia(
-            'cook-dumplings',
-            'Круглі сирні вареники сплили у воді з тихим кипінням, один вареник на шумівці',
-            'Варіть при спокійному кипінні',
-            'Через 1–2 хвилини обережно дістаньте круглі вареники шумівкою.',
-          ),
+          id: 'gentle-boil',
+          label: text.boil,
+          duration: { kind: 'range', min: 1, max: 2, unit: 'minute' },
+          relatedStepId: 'cook-dumplings',
         },
       ],
     },
-    es: {
-      completeness: 'readyToReview',
-      timing: {
-        activeMinutes: null,
-        totalElapsedMinutes: null,
-        phases: [
+    ingredientSections: [
+      {
+        id: 'dumplings',
+        title: text.section,
+        ingredients: [
           {
-            id: 'dough-rest',
-            label: 'Reposo de la masa',
-            duration: { kind: 'range', min: 15, max: 30, unit: 'minute' },
-            relatedStepId: 'rest',
+            id: 'cottage-cheese',
+            name: text.ingredients[0],
+            quantity: {
+              base: { kind: 'exact', value: 450, unit: 'g' },
+              shopping: { mode: 'base' },
+            },
           },
           {
-            id: 'gentle-boil',
-            label: 'Cocción suave después de que suban',
-            duration: { kind: 'range', min: 1, max: 2, unit: 'minute' },
-            relatedStepId: 'cook-dumplings',
+            id: 'eggs',
+            name: text.ingredients[1],
+            quantity: {
+              base: { kind: 'exact', value: 2, unit: 'piece' },
+              shopping: { mode: 'base', increment: 1, rounding: 'up' },
+            },
+          },
+          {
+            id: 'sugar',
+            name: text.ingredients[2],
+            quantity: quantityFromGrams('granulated-sugar', 60),
+          },
+          {
+            id: 'flour',
+            name: text.ingredients[3],
+            quantity: quantityFromGrams('schar-mix-b', 100),
+            note: text.flourNote,
+          },
+          // Author's explicit recipe-specific measure; the shared tapioca table remains unchanged.
+          {
+            id: 'tapioca',
+            name: text.ingredients[4],
+            quantity: {
+              base: { kind: 'exact', value: 7, unit: 'g' },
+              equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
+              shopping: { mode: 'base' },
+            },
           },
         ],
       },
-      ingredientSections: [
-        {
-          id: 'dumplings',
-          title: 'Ñoquis perezosos de requesón',
-          ingredients: [
-            {
-              id: 'cottage-cheese',
-              name: 'Requesón',
-              quantity: translatedQuantity,
-              note: '2 paquetes de 230 g.',
-            },
-            {
-              id: 'eggs',
-              name: 'Huevos',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'sugar',
-              name: 'Azúcar',
-              quantity: translatedQuantity,
-              note: 'La equivalencia en cucharadas usa la medida pesada por la autora: 20 g por cucharada.',
-            },
-            {
-              id: 'flour',
-              name: 'Harina Schär Mix B Bread',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'tapioca',
-              name: 'Almidón de tapioca',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'water',
-              name: 'Agua para la cocción',
-              quantity: translatedQuantity,
-              note: 'La necesaria para cocer las piezas en tandas pequeñas.',
-            },
-          ],
-        },
-      ],
-      steps: [
-        {
-          id: 'mix-wet',
-          title: 'Mezcla el requesón, los huevos y el azúcar',
-          body: 'Mézclalos en un robot de cocina con el gancho de amasar hasta obtener una mezcla uniforme. También puedes mezclarlos bien a mano con un tenedor.',
-          cookIngredients: [
-            { ingredientId: 'cottage-cheese' },
-            { ingredientId: 'eggs' },
-            { ingredientId: 'sugar' },
-          ],
-          media: stepMedia(
-            'mix-wet',
-            'Requesón, huevos y azúcar mezclándose en un bol con gancho de amasar',
-            'Mezcla hasta obtener una base uniforme',
-            'La mezcla de requesón puede conservar una textura suave.',
-          ),
-        },
-        {
-          id: 'add-dry',
-          title: 'Añade la harina y la tapioca',
-          body: 'Mezcla la harina con el almidón de tapioca, añádelos al requesón y mezcla hasta que la masa quede uniforme.',
-          checkpoint:
-            'La masa debe quedar muy pegajosa. No añadas más harina para endurecerla.',
-          cookIngredients: [
-            { ingredientId: 'flour' },
-            { ingredientId: 'tapioca' },
-          ],
-          media: stepMedia(
-            'add-dry',
-            'Harina sin gluten y tapioca añadiéndose a una masa pegajosa de requesón',
-            'Mantén la masa pegajosa',
-            'Añade los ingredientes secos sin endurecer la masa con harina extra.',
-          ),
-        },
-        {
-          id: 'rest',
-          title: 'Deja reposar la masa',
-          body: 'Deja reposar la masa durante 15–30 minutos.',
-          meta: '15–30 min',
-          media: stepMedia(
-            'rest',
-            'Masa suave de requesón reposando en un bol de cerámica cubierto',
-            'Deja reposar la masa',
-            'Cúbrela sin apretar y déjala durante 15–30 minutos.',
-          ),
-        },
-        {
-          id: 'shape-log',
-          title: 'Forma un cilindro',
-          body: 'Enharina generosamente la superficie de trabajo. Coloca encima la masa, espolvorea harina por arriba y forma con cuidado un cilindro.',
-          tip: 'Usa la harina solo para manipular y formar la masa pegajosa. No la amases dentro de la masa.',
-          cookIngredients: [
-            {
-              ingredientId: 'flour',
-              quantity: 'omit',
-              note: 'Usa harina adicional solo para espolvorear la superficie y la masa.',
-            },
-          ],
-          media: stepMedia(
-            'shape-log',
-            'Manos formando con suavidad un cilindro de masa de requesón sobre una superficie enharinada',
-            'Usa harina solo en la superficie',
-            'La masa sigue blanda y la harina facilita el manejo.',
-          ),
-        },
-        {
-          id: 'shape-dumplings',
-          title: 'Corta y forma las piezas',
-          body: 'Corta el cilindro en trozos pequeños. Pasa cada trozo por harina, cubriendo bien los cortes, y forma una bola haciéndolo rodar suavemente entre las palmas.',
-          checkpoint:
-            'Los cortes deben quedar completamente cubiertos de harina.',
-          tip: 'Las piezas crudas ya formadas se congelan muy bien. Para una tanda grande, la autora suele partir de unos 1,5 kg de requesón, colocar las piezas en una sola capa sobre bandejas de plástico y congelarlas.',
-          cookIngredients: [
-            {
-              ingredientId: 'flour',
-              quantity: 'omit',
-              note: 'Usa harina adicional para cubrir los cortes.',
-            },
-          ],
-          media: stepMedia(
-            'shape-dumplings',
-            'Bolitas crudas de requesón y masa cortada sobre una superficie enharinada',
-            'Cubre los cortes y forma las bolitas',
-            'Forma una bolita pequeña con cada trozo.',
-          ),
-        },
-        {
-          id: 'cook-dumplings',
-          title: 'Cuece las piezas',
-          body: 'Lleva el agua a ebullición y añade las piezas en tandas pequeñas. Pasa con cuidado una cuchara o espumadera por el fondo para que no se peguen. Cuando el agua vuelva a hervir y las piezas suban a la superficie, baja el fuego. Cuécelas con un hervor suave durante 1–2 minutos más y retíralas con cuidado con una espumadera.',
-          cookInstructions: [
-            'Lleva el agua a ebullición y añade las piezas en tandas pequeñas.',
-            'Pasa con cuidado una cuchara o espumadera por el fondo para que no se peguen.',
-            'Cuando el agua vuelva a hervir y las piezas suban a la superficie, baja el fuego. Cuécelas con un hervor suave durante 1–2 minutos más y retíralas con cuidado con una espumadera.',
-          ],
-          cookIngredients: [{ ingredientId: 'water', quantity: 'omit' }],
-          meta: '1–2 min después de que suban',
-          checkpoint:
-            'Mantén un hervor tranquilo para que las piezas no se dañen ni se deshagan.',
-          media: stepMedia(
-            'cook-dumplings',
-            'Bolitas de requesón flotando en agua con hervor suave, con una bolita en una espumadera',
-            'Cuece a hervor suave',
-            'Al cabo de 1–2 minutos, retira con cuidado las bolitas con una espumadera.',
-          ),
-        },
-      ],
-    },
+    ],
+    steps,
+  };
+}
+
+export const lazyDumplingsRecipe = {
+  id: 'lazy-dumplings',
+  publicationStatus: 'published',
+  source: {
+    file: 'docs/reference/recipe-inventory.xlsx',
+    locator:
+      'Recipe Archive · Ліниві вареники; author-reviewed quantities and method',
   },
+  ...contentForLocale('en'),
+  translations: { uk: contentForLocale('uk'), es: contentForLocale('es') },
 } satisfies RecipeSourceDraft;

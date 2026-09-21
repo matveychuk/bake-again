@@ -1,12 +1,178 @@
-import type { RecipeSourceDraft } from './source-recipe.types.ts';
+import type {
+  RecipeSourceDraft,
+  StructuredRecipeStep,
+} from './source-recipe.types.ts';
+import type { RecipeLocale } from './recipe.types.ts';
+import { quantityFromGrams } from './spoon-weights.ts';
+
+const stepCopy = {
+  uk: {
+    titles: [
+      'Збийте густу основу',
+      'Додайте молоко й залиште тісто',
+      'Додайте воду й олію',
+      'Посмажте млинці',
+    ],
+    instructions: [
+      'З’єднайте яйця, борошно, цукор і сіль. Влийте трохи молока — лише стільки, щоб блендер або міксер міг працювати. Збийте до гладкої густої маси без грудочок.',
+      'Поступово вмішайте решту молока. Залиште на 15–20 хвилин.',
+      'Вмішайте гарячу воду, потім олію. Тісто має легко розтікатися по пательні.',
+      'Перед першим млинцем змастіть пательню тонким шаром олії. Налийте тісто й розподіліть його, нахиляючи пательню. Коли поверхня стане матовою з дрібними отворами, а краї легко відділятимуться, піддіть їх лопаткою, переверніть млинець і досмажте інший бік.',
+    ],
+    tip: 'У густій основі легше розбити грудочки.',
+    milkStart: 'Трохи молока для густої основи.',
+    milkRest: 'Решта молока.',
+    mediaTitles: [
+      'Перед перевертанням',
+      'Відділення краю',
+      'Після перевертання',
+    ],
+    alts: [
+      'Гладка густа основа для млинців на металевій ложці',
+      'Млинець на пательні: поверхня схоплюється й з’являються дрібні отвори',
+      'Лопатка піддіває край млинця на пательні',
+      'Золотиста сторона перевернутого млинця на пательні',
+    ],
+  },
+  en: {
+    titles: [
+      'Blend a thick base',
+      'Add the milk and rest',
+      'Add the water and oil',
+      'Cook the crepes',
+    ],
+    instructions: [
+      'Combine the eggs, flour, sugar and salt. Pour in a little milk — just enough for the blender or mixer to work. Blend to a smooth, thick base with no lumps.',
+      'Gradually mix in the remaining milk. Leave to rest for 15–20 minutes.',
+      'Mix in the hot water, then the oil. The batter should spread easily across the pan.',
+      'Before the first crepe, coat the pan with a thin layer of oil. Pour in the batter and tilt the pan to spread it. When the surface is matte with small holes and the edges release easily, loosen them with a spatula, flip the crepe and finish cooking the other side.',
+    ],
+    tip: 'Lumps break up more easily in a thick base.',
+    milkStart: 'A little milk for the thick base.',
+    milkRest: 'Remaining milk.',
+    mediaTitles: ['Before flipping', 'Releasing the edge', 'After flipping'],
+    alts: [
+      'Smooth thick crepe base coating a metal spoon',
+      'Crepe setting in a pan with small holes appearing on the surface',
+      'A spatula lifting the edge of a crepe in a pan',
+      'Golden cooked side of a flipped crepe in a pan',
+    ],
+  },
+  es: {
+    titles: [
+      'Bate una base espesa',
+      'Añade la leche y deja reposar',
+      'Añade el agua y el aceite',
+      'Cocina los crepes',
+    ],
+    instructions: [
+      'Mezcla los huevos, la harina, el azúcar y la sal. Añade un poco de leche, solo la necesaria para que funcione la batidora. Bate hasta obtener una base espesa, lisa y sin grumos.',
+      'Incorpora poco a poco el resto de la leche. Deja reposar durante 15–20 minutos.',
+      'Incorpora el agua caliente y después el aceite. La masa debe extenderse fácilmente por la sartén.',
+      'Antes del primer crepe, unta la sartén con una capa fina de aceite. Vierte la masa e inclina la sartén para extenderla. Cuando la superficie esté mate, con pequeños agujeros, y los bordes se despeguen fácilmente, levántalos con una espátula, dale la vuelta al crepe y termina de cocinar el otro lado.',
+    ],
+    tip: 'Los grumos se deshacen más fácilmente en una base espesa.',
+    milkStart: 'Un poco de leche para la base espesa.',
+    milkRest: 'El resto de la leche.',
+    mediaTitles: [
+      'Antes de darle la vuelta',
+      'Despegar el borde',
+      'Después de darle la vuelta',
+    ],
+    alts: [
+      'Base espesa y lisa para crepes sobre una cuchara de metal',
+      'Crepe cuajándose en una sartén con pequeños agujeros en la superficie',
+      'Una espátula levantando el borde de un crepe en una sartén',
+      'Lado dorado de un crepe volteado en una sartén',
+    ],
+  },
+} as const;
+
+function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
+  const copy = stepCopy[locale];
+  const media = (id: string, file: string, alt: string, title?: string) => ({
+    id,
+    src: `/media/recipes/crepes/selected/${file}`,
+    alt,
+    ...(title ? { title } : {}),
+  });
+  return [
+    {
+      id: 'start-batter',
+      title: copy.titles[0],
+      body: copy.instructions[0],
+      tip: copy.tip,
+      cookIngredients: [
+        { ingredientId: 'eggs' },
+        { ingredientId: 'flour' },
+        { ingredientId: 'sugar' },
+        { ingredientId: 'salt' },
+        { ingredientId: 'milk', quantity: 'omit', note: copy.milkStart },
+      ],
+      media: [
+        media(
+          'batter-smooth-base',
+          'step-01-batter-smooth-base-c2-v1.png',
+          copy.alts[0],
+        ),
+      ],
+    },
+    {
+      id: 'add-milk',
+      title: copy.titles[1],
+      body: copy.instructions[1],
+      cookIngredients: [
+        { ingredientId: 'milk', quantity: 'omit', note: copy.milkRest },
+      ],
+    },
+    {
+      id: 'finish-batter',
+      title: copy.titles[2],
+      body: copy.instructions[2],
+      cookIngredients: [{ ingredientId: 'water' }, { ingredientId: 'oil' }],
+    },
+    {
+      id: 'cook',
+      title: copy.titles[3],
+      body: copy.instructions[3],
+      cookIngredients: [{ ingredientId: 'pan-oil' }],
+      media: [
+        media(
+          'crepe-batter-setting',
+          'step-05-crepe-batter-setting-s2b-v1.png',
+          copy.alts[1],
+          copy.mediaTitles[0],
+        ),
+        media(
+          'crepe-edge-lift',
+          'step-05-crepe-edge-lift-s2b-v1.png',
+          copy.alts[2],
+          copy.mediaTitles[1],
+        ),
+        media(
+          'crepe-golden-side',
+          'step-05-crepe-golden-side-s2b-v1.png',
+          copy.alts[3],
+          copy.mediaTitles[2],
+        ),
+      ],
+    },
+  ];
+}
 
 export const crepesRecipe = {
+  publicationStatus: 'published',
   id: 'crepes',
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',
     locator: 'Recipe Archive · Млинці',
   },
   completeness: 'readyToReview',
+  presentation: 'concise',
+  evidence: {
+    status: 'tested',
+    explanation: 'This exact version has been cooked successfully.',
+  },
   yield: {
     id: 'ten-crepes',
     label: '10 crepes',
@@ -24,16 +190,20 @@ export const crepesRecipe = {
   timing: {
     activeMinutes: 40,
     totalElapsedMinutes: 60,
+    planningNote: {
+      text: 'Includes {duration} of batter rest.',
+      phaseId: 'batter-rest',
+    },
     phases: [
       {
         id: 'batter-rest',
         label: 'Batter rest',
         duration: { kind: 'range', min: 15, max: 20, unit: 'minute' },
-        relatedStepId: 'rest',
+        relatedStepId: 'add-milk',
       },
     ],
   },
-  beforeStart: ['Allow an extra 15–20 minutes for the batter to rest.'],
+
   ingredientSections: [
     {
       id: 'batter',
@@ -51,11 +221,7 @@ export const crepesRecipe = {
         {
           id: 'flour',
           name: 'Schär Mix B Bread flour',
-          quantity: {
-            base: { kind: 'exact', value: 140, unit: 'g' },
-            equivalent: { kind: 'exact', value: 6, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromGrams('schar-mix-b', 140),
         },
         {
           id: 'milk',
@@ -68,15 +234,12 @@ export const crepesRecipe = {
         {
           id: 'sugar',
           name: 'Sugar',
-          quantity: {
-            base: { kind: 'exact', value: 20, unit: 'g' },
-            equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromGrams('granulated-sugar', 20),
         },
         {
           id: 'salt',
           name: 'Salt',
+          scaling: 'fixed',
           quantity: {
             base: null,
             equivalent: { kind: 'exact', value: 1, unit: 'pinch' },
@@ -95,146 +258,28 @@ export const crepesRecipe = {
           id: 'oil',
           name: 'Neutral oil',
           quantity: {
-            base: { kind: 'exact', value: 5, unit: 'tbsp' },
-            equivalent: { kind: 'exact', value: 25, unit: 'g' },
+            base: { kind: 'exact', value: 25, unit: 'g' },
             shopping: { mode: 'base' },
           },
-          note: 'The source records both 5 tbsp and 25 g; this inconsistent-looking pair is retained without conversion. Sunflower oil works well.',
         },
         {
           id: 'pan-oil',
           name: 'Oil for the pan',
           quantity: { base: null, shopping: { mode: 'nameOnly' } },
-          note: 'For a very thin coating before the first crepe only.',
+          note: 'For greasing.',
         },
       ],
     },
   ],
-  steps: [
-    {
-      id: 'start-batter',
-      title: 'Blend a thick base',
-      body: 'Crack the eggs into a bowl. Add the flour, sugar and salt. Pour in a little milk—only enough for the blender or mixer to work—and blend to a smooth, thick base with no lumps.',
-      cookInstructions: [
-        'Crack the eggs into a bowl, then add the flour, sugar and salt.',
-        'Pour in only enough milk for the blender or mixer to work.',
-        'Blend to a smooth, thick base with no lumps.',
-      ],
-      tip: 'Do not add all the milk at once. Lumps of gluten-free flour break up more easily while the base is still thick.',
-      checkpoint: 'The base is smooth and thick, with no dry flour or lumps.',
-      cookIngredients: [
-        { ingredientId: 'eggs' },
-        { ingredientId: 'flour' },
-        { ingredientId: 'sugar' },
-        { ingredientId: 'salt' },
-        {
-          ingredientId: 'milk',
-          quantity: 'omit',
-          note: 'Add only a little now; keep the rest for the next action.',
-        },
-      ],
-      media: [
-        {
-          id: 'ingredients-before-blending',
-          src: '/media/recipes/crepes/selected/step-01-ingredients-before-blending-c2-v1.png',
-          alt: 'Eggs, gluten-free flour, sugar and salt in a white bowl with an immersion blender',
-          title: 'Add the dry ingredients',
-          caption: 'Combine the eggs with the flour, sugar and salt.',
-        },
-        {
-          id: 'batter-partly-blended',
-          src: '/media/recipes/crepes/selected/step-01-batter-partly-blended-c2-v1.png',
-          alt: 'A thick, partly blended crepe base with a small pocket of dry flour',
-          title: 'Blend the thick base',
-          caption: 'Add only a little milk so the mixture stays thick.',
-        },
-        {
-          id: 'batter-smooth-base',
-          src: '/media/recipes/crepes/selected/step-01-batter-smooth-base-c2-v1.png',
-          alt: 'Smooth thick yellow crepe base coating a metal spoon',
-          title: 'Check for lumps',
-          caption:
-            'The base should be smooth before you add the remaining milk.',
-        },
-      ],
-    },
-    {
-      id: 'add-milk',
-      title: 'Add the milk',
-      body: 'Gradually add the remaining milk while mixing.',
-      cookGroup: 'milk-rest',
-      cookTitle: 'Add the milk and rest the batter',
-      cookIngredients: [
-        {
-          ingredientId: 'milk',
-          quantity: 'omit',
-          note: 'Use the milk left after blending the thick base.',
-        },
-      ],
-    },
-    {
-      id: 'rest',
-      title: 'Rest the batter',
-      body: 'Let the batter rest for 15–20 minutes.',
-      meta: '15–20 min',
-      cookGroup: 'milk-rest',
-    },
-    {
-      id: 'finish-batter',
-      title: 'Finish the batter',
-      body: 'Pour in 50 ml of hot water and mix well. Add the neutral oil and mix again.',
-      cookTitle: 'Add the water and oil',
-      cookInstructions: [
-        'Pour in 50 ml of hot water and mix well.',
-        'Add the neutral oil and mix again.',
-      ],
-      checkpoint: 'The finished batter should spread easily across the pan.',
-      cookIngredients: [
-        { ingredientId: 'water' },
-        { ingredientId: 'oil' },
-      ],
-    },
-    {
-      id: 'cook',
-      title: 'Cook the crepes',
-      body: 'Before the first crepe, coat the pan with a very thin layer of oil. Pour in the batter and tilt the pan so it spreads easily. To turn, first loosen the edges, then flip the crepe with a spatula.',
-      cookInstructions: [
-        'Before the first crepe, coat the pan with a very thin layer of oil.',
-        'Pour in the batter and tilt the pan so it spreads easily.',
-        'Loosen the edges, then flip the crepe with a spatula.',
-      ],
-      checkpoint: 'Turn the crepe when the surface is matte with small holes and the edges release from the pan.',
-      cookIngredients: [{ ingredientId: 'pan-oil' }],
-      media: [
-        {
-          id: 'crepe-batter-setting',
-          src: '/media/recipes/crepes/selected/step-05-crepe-batter-setting-s2b-v1.png',
-          alt: 'Pale crepe batter setting in a black pan on a black induction hob, with tiny bubbles across the surface',
-          title: 'Wait for the surface to set',
-          caption:
-            'The surface turns matte and develops small holes as the crepe sets.',
-        },
-        {
-          id: 'crepe-edge-lift',
-          src: '/media/recipes/crepes/selected/step-05-crepe-edge-lift-s2b-v1.png',
-          alt: 'A hand using a black-and-red spatula to lift the edge of a crepe in a black pan',
-          title: 'Loosen the edges',
-          caption:
-            'Free the edge first, then slide the spatula farther under the crepe.',
-        },
-        {
-          id: 'crepe-golden-side',
-          src: '/media/recipes/crepes/selected/step-05-crepe-golden-side-s2b-v1.png',
-          alt: 'An evenly golden crepe cooking in a black pan on a black induction hob',
-          title: 'Flip and finish cooking',
-          caption: 'The cooked side should be evenly golden.',
-        },
-      ],
-    },
-  ],
+  steps: stepsForLocale('en'),
   translations: {
     uk: {
       completeness: 'readyToReview',
+      presentation: 'concise',
+      evidence: {
+        status: 'tested',
+        explanation: 'Цю версію успішно готували.',
+      },
       yield: {
         id: 'ten-crepes',
         label: '10 млинців',
@@ -252,16 +297,20 @@ export const crepesRecipe = {
       timing: {
         activeMinutes: 40,
         totalElapsedMinutes: 60,
+        planningNote: {
+          text: 'Включає {duration} відпочинку тіста.',
+          phaseId: 'batter-rest',
+        },
         phases: [
           {
             id: 'batter-rest',
             label: 'Відпочинок тіста',
             duration: { kind: 'range', min: 15, max: 20, unit: 'minute' },
-            relatedStepId: 'rest',
+            relatedStepId: 'add-milk',
           },
         ],
       },
-      beforeStart: ['Закладіть додаткові 15–20 хвилин, щоб тісто відпочило.'],
+
       ingredientSections: [
         {
           id: 'batter',
@@ -321,142 +370,25 @@ export const crepesRecipe = {
                 equivalent: null,
                 shopping: { mode: 'nameOnly' },
               },
-              note: 'Підійде соняшникова.',
             },
             {
               id: 'pan-oil',
               name: 'Олія для пательні',
               quantity: { base: null, shopping: { mode: 'nameOnly' } },
-              note: 'Лише дуже тонкий шар перед першим млинцем.',
+              note: 'Для змащування.',
             },
           ],
         },
       ],
-      steps: [
-        {
-          id: 'start-batter',
-          title: 'Збийте густу основу',
-          body: 'Розбийте яйця в миску. Додайте борошно, цукор і сіль. Влийте трохи молока — лише стільки, щоб блендер або міксер міг працювати. Збийте до гладкої густої основи без грудочок.',
-          cookInstructions: [
-            'Розбийте яйця в миску, додайте борошно, цукор і сіль.',
-            'Влийте лише стільки молока, щоб блендер або міксер міг працювати.',
-            'Збийте до гладкої густої основи без грудочок.',
-          ],
-          tip: 'Не додавайте все молоко одразу. У густій основі грудочки безглютенового борошна розбиваються легше.',
-          checkpoint: 'Основа гладка й густа, без сухого борошна та грудочок.',
-          cookIngredients: [
-            { ingredientId: 'eggs' },
-            { ingredientId: 'flour' },
-            { ingredientId: 'sugar' },
-            { ingredientId: 'salt' },
-            {
-              ingredientId: 'milk',
-              quantity: 'omit',
-              note: 'Зараз влийте лише трохи, решту залиште для наступної дії.',
-            },
-          ],
-          media: [
-            {
-              id: 'ingredients-before-blending',
-              src: '/media/recipes/crepes/selected/step-01-ingredients-before-blending-c2-v1.png',
-              alt: 'Яйця, безглютенове борошно, цукор і сіль у білій мисці з занурювальним блендером',
-              title: 'Додайте сухі інгредієнти',
-              caption: 'З’єднайте яйця з борошном, цукром і сіллю.',
-            },
-            {
-              id: 'batter-partly-blended',
-              src: '/media/recipes/crepes/selected/step-01-batter-partly-blended-c2-v1.png',
-              alt: 'Густа частково збита основа для млинців із невеликою ділянкою сухого борошна',
-              title: 'Збийте густу основу',
-              caption:
-                'Додайте лише трохи молока, щоб суміш залишалася густою.',
-            },
-            {
-              id: 'batter-smooth-base',
-              src: '/media/recipes/crepes/selected/step-01-batter-smooth-base-c2-v1.png',
-              alt: 'Гладка густа жовта основа для млинців на металевій ложці',
-              title: 'Перевірте, чи немає грудочок',
-              caption: 'Основа має бути гладкою до додавання решти молока.',
-            },
-          ],
-        },
-        {
-          id: 'add-milk',
-          title: 'Додайте молоко',
-          body: 'Поступово влийте решту молока, продовжуючи перемішувати.',
-          cookGroup: 'milk-rest',
-          cookTitle: 'Додайте молоко й дайте тісту відпочити',
-          cookIngredients: [
-            {
-              ingredientId: 'milk',
-              quantity: 'omit',
-              note: 'Використайте молоко, що залишилося після густої основи.',
-            },
-          ],
-        },
-        {
-          id: 'rest',
-          title: 'Дайте тісту відпочити',
-          body: 'Залиште тісто на 15–20 хвилин.',
-          meta: '15–20 хв',
-          cookGroup: 'milk-rest',
-        },
-        {
-          id: 'finish-batter',
-          title: 'Завершіть тісто',
-          body: 'Влийте 50 мл гарячої води й добре перемішайте. Додайте олію без запаху та перемішайте ще раз.',
-          cookTitle: 'Додайте воду й олію',
-          cookInstructions: [
-            'Влийте 50 мл гарячої води й добре перемішайте.',
-            'Додайте олію без запаху та перемішайте ще раз.',
-          ],
-          checkpoint: 'Готове тісто має легко розтікатися по пательні.',
-          cookIngredients: [
-            { ingredientId: 'water' },
-            { ingredientId: 'oil' },
-          ],
-        },
-        {
-          id: 'cook',
-          title: 'Посмажте млинці',
-          body: 'Перед першим млинцем змастіть пательню дуже тонким шаром олії. Налийте тісто й нахиляйте пательню, щоб воно легко розтеклося. Щоб перевернути млинець, спочатку піддіть його краї, а потім переверніть лопаткою.',
-          cookInstructions: [
-            'Перед першим млинцем змастіть пательню дуже тонким шаром олії.',
-            'Налийте тісто й нахиляйте пательню, щоб воно легко розтеклося.',
-            'Піддіть краї, а потім переверніть млинець лопаткою.',
-          ],
-          checkpoint: 'Перевертайте, коли поверхня стала матовою з дрібними отворами, а краї легко відділяються від пательні.',
-          cookIngredients: [{ ingredientId: 'pan-oil' }],
-          media: [
-            {
-              id: 'crepe-batter-setting',
-              src: '/media/recipes/crepes/selected/step-05-crepe-batter-setting-s2b-v1.png',
-              alt: 'Світле тісто для млинця схоплюється на чорній пательні на чорній індукційній плиті, по поверхні з’являються дрібні бульбашки',
-              title: 'Дочекайтеся, поки поверхня схопиться',
-              caption:
-                'Поверхня стане матовішою, а на ній з’являться дрібні отвори.',
-            },
-            {
-              id: 'crepe-edge-lift',
-              src: '/media/recipes/crepes/selected/step-05-crepe-edge-lift-s2b-v1.png',
-              alt: 'Рука піддіває край млинця чорно-червоною лопаткою на чорній пательні',
-              title: 'Піддіть краї',
-              caption:
-                'Спочатку відокремте край, потім підведіть лопатку далі під млинець.',
-            },
-            {
-              id: 'crepe-golden-side',
-              src: '/media/recipes/crepes/selected/step-05-crepe-golden-side-s2b-v1.png',
-              alt: 'Рівномірно золотистий млинець смажиться на чорній пательні на чорній індукційній плиті',
-              title: 'Переверніть і досмажте',
-              caption: 'Готова сторона має бути рівномірно золотистою.',
-            },
-          ],
-        },
-      ],
+      steps: stepsForLocale('uk'),
     },
     es: {
       completeness: 'readyToReview',
+      presentation: 'concise',
+      evidence: {
+        status: 'tested',
+        explanation: 'Esta versión se ha preparado con éxito.',
+      },
       yield: {
         id: 'ten-crepes',
         label: '10 crepes',
@@ -474,18 +406,19 @@ export const crepesRecipe = {
       timing: {
         activeMinutes: 40,
         totalElapsedMinutes: 60,
+        planningNote: {
+          text: 'Incluye {duration} de reposo de la masa.',
+          phaseId: 'batter-rest',
+        },
         phases: [
           {
             id: 'batter-rest',
             label: 'Reposo de la masa',
             duration: { kind: 'range', min: 15, max: 20, unit: 'minute' },
-            relatedStepId: 'rest',
+            relatedStepId: 'add-milk',
           },
         ],
       },
-      beforeStart: [
-        'Reserva 15–20 minutos adicionales para que repose la masa.',
-      ],
       ingredientSections: [
         {
           id: 'batter',
@@ -551,141 +484,17 @@ export const crepesRecipe = {
                 equivalent: { kind: 'exact', value: 25, unit: 'g' },
                 shopping: { mode: 'nameOnly' },
               },
-              note: 'El aceite de girasol va bien.',
             },
             {
               id: 'pan-oil',
               name: 'Aceite para la sartén',
               quantity: { base: null, shopping: { mode: 'nameOnly' } },
-              note: 'Solo una capa muy fina antes del primer crepe.',
+              note: 'Para engrasar.',
             },
           ],
         },
       ],
-      steps: [
-        {
-          id: 'start-batter',
-          title: 'Bate una base espesa',
-          body: 'Casca los huevos en un bol. Añade la harina, el azúcar y la sal. Vierte un poco de leche, solo la necesaria para que funcione la batidora, y bate hasta obtener una base espesa, lisa y sin grumos.',
-          cookInstructions: [
-            'Casca los huevos en un bol y añade la harina, el azúcar y la sal.',
-            'Vierte solo la leche necesaria para que funcione la batidora.',
-            'Bate hasta obtener una base espesa, lisa y sin grumos.',
-          ],
-          tip: 'No añadas toda la leche de una vez. Los grumos de harina sin gluten se deshacen mejor mientras la base todavía está espesa.',
-          checkpoint: 'La base está lisa y espesa, sin harina seca ni grumos.',
-          cookIngredients: [
-            { ingredientId: 'eggs' },
-            { ingredientId: 'flour' },
-            { ingredientId: 'sugar' },
-            { ingredientId: 'salt' },
-            {
-              ingredientId: 'milk',
-              quantity: 'omit',
-              note: 'Añade solo un poco ahora y reserva el resto para la siguiente acción.',
-            },
-          ],
-          media: [
-            {
-              id: 'ingredients-before-blending',
-              src: '/media/recipes/crepes/selected/step-01-ingredients-before-blending-c2-v1.png',
-              alt: 'Huevos, harina sin gluten, azúcar y sal en un bol blanco con una batidora de mano',
-              title: 'Añade los ingredientes secos',
-              caption: 'Combina los huevos con la harina, el azúcar y la sal.',
-            },
-            {
-              id: 'batter-partly-blended',
-              src: '/media/recipes/crepes/selected/step-01-batter-partly-blended-c2-v1.png',
-              alt: 'Base espesa para crepes parcialmente batida con una pequeña zona de harina seca',
-              title: 'Bate la base espesa',
-              caption:
-                'Añade solo un poco de leche para mantener la mezcla espesa.',
-            },
-            {
-              id: 'batter-smooth-base',
-              src: '/media/recipes/crepes/selected/step-01-batter-smooth-base-c2-v1.png',
-              alt: 'Base amarilla, espesa y lisa para crepes cubriendo una cuchara metálica',
-              title: 'Comprueba que no haya grumos',
-              caption:
-                'La base debe estar lisa antes de añadir el resto de la leche.',
-            },
-          ],
-        },
-        {
-          id: 'add-milk',
-          title: 'Añade la leche',
-          body: 'Incorpora poco a poco el resto de la leche mientras sigues mezclando.',
-          cookGroup: 'milk-rest',
-          cookTitle: 'Añade la leche y deja reposar la masa',
-          cookIngredients: [
-            {
-              ingredientId: 'milk',
-              quantity: 'omit',
-              note: 'Usa la leche que quedó después de batir la base espesa.',
-            },
-          ],
-        },
-        {
-          id: 'rest',
-          title: 'Deja reposar la masa',
-          body: 'Deja reposar la masa durante 15–20 minutos.',
-          meta: '15–20 min',
-          cookGroup: 'milk-rest',
-        },
-        {
-          id: 'finish-batter',
-          title: 'Termina la masa',
-          body: 'Vierte 50 ml de agua caliente y mezcla bien. Añade el aceite de sabor neutro y vuelve a mezclar.',
-          cookTitle: 'Añade el agua y el aceite',
-          cookInstructions: [
-            'Vierte 50 ml de agua caliente y mezcla bien.',
-            'Añade el aceite de sabor neutro y vuelve a mezclar.',
-          ],
-          checkpoint: 'La masa terminada debe extenderse fácilmente por la sartén.',
-          cookIngredients: [
-            { ingredientId: 'water' },
-            { ingredientId: 'oil' },
-          ],
-        },
-        {
-          id: 'cook',
-          title: 'Cocina los crepes',
-          body: 'Antes del primer crepe, unta la sartén con una capa muy fina de aceite. Vierte la masa e inclina la sartén para que se extienda con facilidad. Para darle la vuelta, despega primero los bordes y después gíralo con una espátula.',
-          cookInstructions: [
-            'Antes del primer crepe, unta la sartén con una capa muy fina de aceite.',
-            'Vierte la masa e inclina la sartén para que se extienda con facilidad.',
-            'Despega los bordes y después gíralo con una espátula.',
-          ],
-          checkpoint: 'Dale la vuelta cuando la superficie esté mate y tenga pequeños agujeros, y los bordes se desprendan de la sartén.',
-          cookIngredients: [{ ingredientId: 'pan-oil' }],
-          media: [
-            {
-              id: 'crepe-batter-setting',
-              src: '/media/recipes/crepes/selected/step-05-crepe-batter-setting-s2b-v1.png',
-              alt: 'Masa clara de crepe cuajando en una sartén negra sobre una placa de inducción negra, con pequeñas burbujas por la superficie',
-              title: 'Espera a que cuaje la superficie',
-              caption:
-                'La superficie se vuelve mate y aparecen pequeños agujeros al cuajarse.',
-            },
-            {
-              id: 'crepe-edge-lift',
-              src: '/media/recipes/crepes/selected/step-05-crepe-edge-lift-s2b-v1.png',
-              alt: 'Una mano levanta el borde de un crepe con una espátula negra y roja en una sartén negra',
-              title: 'Despega los bordes',
-              caption:
-                'Suelta primero el borde y después desliza la espátula más adentro.',
-            },
-            {
-              id: 'crepe-golden-side',
-              src: '/media/recipes/crepes/selected/step-05-crepe-golden-side-s2b-v1.png',
-              alt: 'Un crepe uniformemente dorado cocinándose en una sartén negra sobre una placa de inducción negra',
-              title: 'Dale la vuelta y termina la cocción',
-              caption:
-                'El lado cocinado debe quedar dorado de manera uniforme.',
-            },
-          ],
-        },
-      ],
+      steps: stepsForLocale('es'),
     },
   },
 } satisfies RecipeSourceDraft;

@@ -2,6 +2,7 @@ import { ArrowRight, Calculator, Check, Lightbulb } from 'lucide-react';
 import { Eyebrow } from '@/components/foundations/eyebrow';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
+import { localeAboutPath } from '@/lib/i18n/routes';
 
 export function HomeTrust({ locale }: { locale: AppLocale }) {
   const messages = getUiMessages(locale);
@@ -33,7 +34,7 @@ export function HomeTrust({ locale }: { locale: AppLocale }) {
 
       <div className="trust-note">
         <p>{home.trustNote}</p>
-        <a href="#how-we-test">{home.howWeTest} <ArrowRight aria-hidden="true" size={18} /></a>
+        <a href={`${localeAboutPath(locale)}#how-we-test`}>{home.howWeTest} <ArrowRight aria-hidden="true" size={18} /></a>
       </div>
     </section>
   );

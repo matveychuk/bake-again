@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { personalStateRecipes } from '@/content/recipes/registry';
-import { getRecipeCatalog } from '@/content/recipes/catalog';
+import { type RecipeCatalogEntry } from '@/content/recipes/catalog';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { getLocalizedRecipePath, localeHomePath, localeRecipesPath } from '@/lib/i18n/routes';
@@ -11,10 +11,9 @@ import { readRecipeMemory, subscribeToRecipeMemory } from '@/lib/persistence/rec
 import { SaveRecipeControl } from '@/components/recipe/save-recipe-control';
 import styles from './personal-state.module.css';
 
-export function SavedRecipesPage({ locale }: { locale: AppLocale }) {
+export function SavedRecipesPage({ locale, recipeCatalog }: { locale: AppLocale; recipeCatalog: RecipeCatalogEntry[] }) {
   const [savedIds, setSavedIds] = useState<string[]>([]);
   const messages = getUiMessages(locale).personal;
-  const recipeCatalog = getRecipeCatalog(locale);
   useEffect(() => {
     const update = () => setSavedIds(readRecipeMemory().savedRecipeIds);
     update();

@@ -4,7 +4,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
-import { ArrowLeft, CircleAlert } from 'lucide-react';
+import { ArrowLeft, CircleAlert, NotebookPen } from 'lucide-react';
 import { AssistantProvider } from '@/components/assistant';
 import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
 import {
@@ -23,6 +23,12 @@ import { getCookModeDefinition } from '@/content/recipes/cook-mode-registry';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import {
+  bakeConfigurationKey,
+  persistBakeRecord,
+  readBakeRecord,
+  type BakeRecordV1,
+} from '@/lib/persistence/bake-memory';
+import {
   persistCookModeSession,
   readCookModeSession,
   type CookTimerState,
@@ -35,10 +41,7 @@ const getServerLocationSearch = () => '';
 function timerRemaining(timer: CookTimerState | null) {
   if (!timer) return 0;
   if (!timer.endAt) return timer.remainingSeconds;
-  return Math.max(
-    0,
-    Math.ceil((Date.parse(timer.endAt) - Date.now()) / 1000),
-  );
+  return Math.max(0, Math.ceil((Date.parse(timer.endAt) - Date.now()) / 1000));
 }
 
 /** Shared interactive Cook Mode; recipe data and configuration rules arrive via its definition. */
@@ -58,12 +61,13 @@ export function CookModePage({
     () => getCookModeDefinition(recipeSlug, locale),
     [locale, recipeSlug],
   );
-  const resolvedDetailHref = detailHref ?? definition?.detailHref ?? '/recipes';
+  const baseDetailHref = detailHref ?? definition?.detailHref ?? '/recipes';
   const locationSearch = useSyncExternalStore(
     subscribeToLocation,
     getLocationSearch,
     getServerLocationSearch,
   );
+  const resolvedDetailHref = `${baseDetailHref}${locationSearch}`;
   const state = useMemo(
     () =>
       definition?.getState(locationSearch) ?? {
@@ -74,6 +78,11 @@ export function CookModePage({
       },
     [definition, locationSearch, messages.unavailableRecord],
   );
+  const configuration = useMemo(
+    () => state.assistantConfiguration ?? { kind: 'base' as const },
+    [state.assistantConfiguration],
+  );
+  const configurationKey = bakeConfigurationKey(configuration);
   const cookSteps = state.steps;
   const allStepIds = useMemo(
     () => cookSteps.flatMap((cookStep) => cookStep.stepIds),
@@ -84,7 +93,14 @@ export function CookModePage({
   const [timer, setTimer] = useState<CookTimerState | null>(null);
   const [completedAt, setCompletedAt] = useState<string | null>(null);
   const [note, setNote] = useState('');
+  const [noteSaveStatus, setNoteSaveStatus] = useState<
+    'saving' | 'saved' | 'error'
+  >('saved');
+  const [previousBake, setPreviousBake] = useState<BakeRecordV1 | null>(null);
   const [sessionReady, setSessionReady] = useState(false);
+  const [restoredConfigurationKey, setRestoredConfigurationKey] = useState<
+    string | null
+  >(null);
   const [stepsOpen, setStepsOpen] = useState(false);
   const [ingredientsOpen, setIngredientsOpen] = useState(false);
   const [, setClockTick] = useState(0);
@@ -110,10 +126,25 @@ export function CookModePage({
 
   useEffect(() => {
     if (!definition || cookSteps.length === 0) return;
+    setRestoredConfigurationKey(null);
+    setStepIndex(0);
+    setCompletedStepIds([]);
+    setTimer(null);
+    setCompletedAt(null);
+    setNote('');
+    setNoteSaveStatus('saved');
     const saved = readCookModeSession(
       definition.recipeId,
       definition.recipeVersionId,
+      undefined,
+      configurationKey,
     );
+    const baked = readBakeRecord(
+      definition.recipeId,
+      definition.recipeVersionId,
+      configuration,
+    );
+    setPreviousBake(baked);
     if (saved) {
       const savedIndex = cookSteps.findIndex((candidate) =>
         candidate.stepIds.includes(saved.currentStepId),
@@ -133,8 +164,9 @@ export function CookModePage({
       setCompletedAt(saved.completedAt);
       setNote(saved.note);
     }
+    setRestoredConfigurationKey(configurationKey);
     setSessionReady(true);
-  }, [allStepIds, cookSteps, definition]);
+  }, [allStepIds, configuration, configurationKey, cookSteps, definition]);
 
   useEffect(() => {
     if (!timer?.endAt) return;
@@ -153,19 +185,55 @@ export function CookModePage({
   }, [timer]);
 
   useEffect(() => {
-    if (!definition || !sessionReady || !step) return;
-    persistCookModeSession({
-      schemaVersion: 1,
+    if (
+      !definition ||
+      !sessionReady ||
+      restoredConfigurationKey !== configurationKey ||
+      !step
+    ) {
+      return;
+    }
+    const sessionSaved = persistCookModeSession(
+      {
+        schemaVersion: 1,
+        recipeId: definition.recipeId,
+        recipeVersionId: definition.recipeVersionId,
+        updatedAt: new Date().toISOString(),
+        currentStepId: step.stepIds[0],
+        completedStepIds,
+        timer,
+        completedAt,
+        note,
+      },
+      undefined,
+      configurationKey,
+    );
+    if (!completedAt) return;
+
+    const now = new Date().toISOString();
+    const record: BakeRecordV1 = {
       recipeId: definition.recipeId,
       recipeVersionId: definition.recipeVersionId,
-      updatedAt: new Date().toISOString(),
-      currentStepId: step.stepIds[0],
-      completedStepIds,
-      timer,
+      configuration,
       completedAt,
       note,
-    });
-  }, [completedAt, completedStepIds, definition, note, sessionReady, step, timer]);
+      noteUpdatedAt: now,
+    };
+    const memorySaved = persistBakeRecord(record);
+    setPreviousBake(record);
+    setNoteSaveStatus(sessionSaved && memorySaved ? 'saved' : 'error');
+  }, [
+    completedAt,
+    completedStepIds,
+    configuration,
+    configurationKey,
+    definition,
+    note,
+    restoredConfigurationKey,
+    sessionReady,
+    step,
+    timer,
+  ]);
 
   if (!definition) return null;
 
@@ -211,10 +279,9 @@ export function CookModePage({
   }
 
   function completeAndNext() {
-    setCompletedStepIds((items) => [
-      ...new Set([...items, ...step.stepIds]),
-    ]);
+    setCompletedStepIds((items) => [...new Set([...items, ...step.stepIds])]);
     if (stepIndex === cookSteps.length - 1) {
+      setNoteSaveStatus('saving');
       setCompletedAt(new Date().toISOString());
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -260,11 +327,26 @@ export function CookModePage({
   }
 
   function restart() {
+    if (!definition) return;
+    setPreviousBake(
+      readBakeRecord(
+        definition.recipeId,
+        definition.recipeVersionId,
+        configuration,
+      ),
+    );
     setStepIndex(0);
     setCompletedStepIds([]);
     setTimer(null);
     setCompletedAt(null);
+    setNote('');
+    setNoteSaveStatus('saved');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function changeNote(nextNote: string) {
+    setNoteSaveStatus('saving');
+    setNote(nextNote);
   }
 
   const completedIndexes = cookSteps.flatMap((candidate, index) =>
@@ -316,14 +398,29 @@ export function CookModePage({
               totalSteps={cookSteps.length}
               detailHref={resolvedDetailHref}
               note={note}
-              onNoteChange={setNote}
+              noteSaveStatus={noteSaveStatus}
+              onNoteChange={changeNote}
               onRestart={restart}
               locale={locale}
             />
           ) : (
             <>
+              {stepIndex === 0 && previousBake?.note && (
+                <aside className={styles.previousBakeNote}>
+                  <NotebookPen aria-hidden="true" size={19} />
+                  <div>
+                    <strong>{messages.previousNote}</strong>
+                    <p>{previousBake.note}</p>
+                    <small>{messages.previousNoteDescription}</small>
+                  </div>
+                </aside>
+              )}
               <p className="sr-only" aria-live="polite">
-                {messages.stepChanged(stepIndex + 1, cookSteps.length, step.title)}
+                {messages.stepChanged(
+                  stepIndex + 1,
+                  cookSteps.length,
+                  step.title,
+                )}
               </p>
               <CookStep
                 step={step}

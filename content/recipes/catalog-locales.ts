@@ -39,6 +39,16 @@ export const recipeDetailTitles: Record<string, LocalizedText> = {
     es: 'Carlota de manzana sin gluten',
     uk: 'Безглютенова яблучна шарлотка',
   },
+  'apple-meringue-pie': {
+    en: 'Gluten-free apple meringue pie',
+    es: 'Tarta de manzana y merengue sin gluten',
+    uk: 'Безглютеновий яблучний пиріг із меренгою',
+  },
+  'plum-cake': {
+    en: 'Gluten-free plum sponge cake',
+    es: 'Bizcocho de ciruelas sin gluten',
+    uk: 'Безглютеновий сливовий пиріг',
+  },
   'cottage-cheese-waffles': {
     en: 'Gluten-free cottage-cheese waffles',
     es: 'Gofres de requesón sin gluten',
@@ -104,10 +114,30 @@ export const recipeDetailTitles: Record<string, LocalizedText> = {
     es: 'Brazo de gitano de frutas sin gluten',
     uk: 'Безглютеновий бісквітний рулет із фруктами',
   },
+  'mascarpone-whipped-cream': {
+    en: 'Whipped cream with mascarpone',
+    es: 'Crema de nata y mascarpone',
+    uk: 'Крем із вершків та маскарпоне',
+  },
+  'vanilla-egg-custard': {
+    en: 'Vanilla custard with eggs',
+    es: 'Crema pastelera de vainilla con huevo',
+    uk: 'Ванільний заварний крем з яйцями',
+  },
+  'eggless-vanilla-custard': {
+    en: 'Eggless vanilla custard',
+    es: 'Crema de vainilla sin huevo',
+    uk: 'Ванільний заварний крем без яєць',
+  },
+  'vanilla-buttercream': {
+    en: 'Vanilla buttercream',
+    es: 'Crema de mantequilla de vainilla',
+    uk: 'Ванільний масляний крем',
+  },
   eclairs: {
-    en: 'Gluten-free eclairs',
-    es: 'Éclairs sin gluten',
-    uk: 'Безглютенові еклери',
+    en: 'Gluten-free profiteroles',
+    es: 'Profiteroles sin gluten',
+    uk: 'Безглютенові профітролі',
   },
 };
 
@@ -156,9 +186,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Кекс на щодень',
     },
     summary: {
-      en: 'A familiar banana loaf with walnuts and raisins, preserved from the working recipe.',
-      es: 'Un pan de plátano con nueces y pasas, conservado de la receta de trabajo.',
-      uk: 'Знайомий банановий кекс із горіхами й родзинками, збережений у робочому рецепті.',
+      en: 'Banana bread with walnuts and raisins.',
+      es: 'Pan de plátano con nueces y pasas.',
+      uk: 'Банановий хліб із горіхами й родзинками.',
     },
     alt: previewAlt(
       'Gluten-free banana bread with walnuts and raisins, sliced on a warm neutral surface',
@@ -178,14 +208,14 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Сніданок / на щодень',
     },
     summary: {
-      en: 'Soft cottage-cheese dumplings shaped into small balls and suitable for freezing.',
-      es: 'Ñoquis suaves de requesón, formados en bolitas y aptos para congelar.',
-      uk: 'Ніжні ліниві вареники, сформовані кульками; їх зручно заморожувати.',
+      en: 'Tender cottage-cheese dumplings.',
+      es: 'Ñoquis tiernos de requesón.',
+      uk: 'Ніжні вареники з творогу.',
     },
     alt: previewAlt(
       'Ukrainian lazy cottage-cheese dumplings with sour cream and butter',
       'Ñoquis perezosos ucranianos de requesón con nata agria y mantequilla',
-      'Українські ліниві вареники з кисломолочним сиром, сметаною та маслом',
+      'Ліниві вареники з творогу зі сметаною та маслом',
     ),
   },
   'apple-charlotte': {
@@ -195,19 +225,68 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Яблучна шарлотка',
     },
     category: {
-      en: 'Cake / everyday',
-      es: 'Pastel / diario',
-      uk: 'Торт / на щодень',
+      en: 'Everyday cake',
+      es: 'Bizcocho cotidiano',
+      uk: 'Пиріг на щодень',
     },
     summary: {
-      en: 'A large-tray apple sponge with a light crumb and cinnamon.',
-      es: 'Un bizcocho de manzana para bandeja grande, de miga ligera y canela.',
-      uk: 'Яблучний бісквіт для великого дека з легкою текстурою й корицею.',
+      en: 'A tender butter sponge with juicy pieces distributed through the crumb.',
+      es: 'Un bizcocho tierno con mantequilla y trozos jugosos repartidos por la miga.',
+      uk: 'Ніжний масляний бісквіт із соковитими шматочками, розподіленими в м’якуші.',
     },
     alt: previewAlt(
-      'Gluten-free apple charlotte sheet cake with a cut square',
-      'Bizcocho de manzana sin gluten en bandeja con un cuadrado cortado',
-      'Безглютенова яблучна шарлотка на деку з відрізаним шматком',
+      'Gluten-free apple charlotte with a cut square showing apple pieces throughout the crumb',
+      'Carlota de manzana sin gluten con un cuadrado cortado que muestra trozos repartidos por la miga',
+      'Безглютенова яблучна шарлотка з відрізаним шматком, у м’якуші якого видно яблука',
+    ),
+  },
+  'apple-meringue-pie': {
+    title: {
+      en: 'Apple meringue pie',
+      es: 'Tarta de manzana y merengue',
+      uk: 'Яблучний пиріг із меренгою',
+    },
+    category: {
+      en: 'Apple pie / dessert',
+      es: 'Tarta de manzana / postre',
+      uk: 'Яблучний пиріг / десерт',
+    },
+    summary: {
+      en: 'A chilled gluten-free pastry base topped with grated apples and soft meringue.',
+      es: 'Una base de masa sin gluten refrigerada con manzana rallada y merengue suave.',
+      uk: 'Охолоджена безглютенова основа з тертими яблуками та ніжною меренгою.',
+    },
+    alt: previewAlt(
+      'Generated preview of a gluten-free apple pie with a short pastry base and toasted meringue topping',
+      'Vista generada de una tarta de manzana sin gluten con base de masa corta y merengue tostado',
+      'Згенерований вигляд безглютенового яблучного пирога з пісочною основою та підрум’яненою меренгою',
+    ),
+    publicationNote: {
+      en: 'Bake-test the exact recipe and record the missing apple, baking-powder, pan and meringue details.',
+      es: 'Prueba la receta exacta y registra los datos que faltan sobre manzana, impulsor, molde y merengue.',
+      uk: 'Випробуйте точну версію та запишіть відсутні дані про яблука, розпушувач, форму й меренгу.',
+    },
+  },
+  'plum-cake': {
+    title: {
+      en: 'Plum sponge cake',
+      es: 'Bizcocho de ciruelas',
+      uk: 'Сливовий пиріг',
+    },
+    category: {
+      en: 'Everyday cake',
+      es: 'Bizcocho cotidiano',
+      uk: 'Пиріг на щодень',
+    },
+    summary: {
+      en: 'A soft sponge with a glossy fruit top and a gentle tartness.',
+      es: 'Un bizcocho tierno con una superficie de fruta brillante y una acidez suave.',
+      uk: 'М’який бісквіт із соковитим фруктовим верхом і легкою кислинкою.',
+    },
+    alt: previewAlt(
+      'Inverted gluten-free plum sponge cake with glossy baked plums on top and a cut square',
+      'Bizcocho invertido de ciruelas sin gluten con fruta horneada brillante en la parte superior',
+      'Перевернутий безглютеновий сливовий пиріг із блискучими запеченими сливами зверху',
     ),
   },
   'cottage-cheese-waffles': {
@@ -222,14 +301,14 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Сніданок / перекус',
     },
     summary: {
-      en: 'Tender breakfast waffles made with cottage cheese and natural yogurt.',
-      es: 'Gofres tiernos para el desayuno, hechos con requesón y yogur natural.',
-      uk: 'Ніжні сніданкові вафлі з кисломолочного сиру та натурального йогурту.',
+      en: 'Tender waffles with natural yogurt.',
+      es: 'Gofres tiernos con yogur natural.',
+      uk: 'Ніжні вафлі з натуральним йогуртом.',
     },
     alt: previewAlt(
-      'Golden gluten-free cottage-cheese waffles with natural yogurt',
-      'Gofres dorados sin gluten de requesón con yogur natural',
-      'Золотисті безглютенові творожні вафлі з натуральним йогуртом',
+      'Golden gluten-free cottage-cheese waffles with berries on a pale green plate',
+      'Gofres dorados sin gluten de requesón con frutos rojos en un plato verde claro',
+      'Золотисті безглютенові творожні вафлі з ягодами на світло-зеленій тарілці',
     ),
   },
   'carrot-cake': {
@@ -240,9 +319,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
     },
     category: { en: 'Cake', es: 'Bizcocho', uk: 'Кекс' },
     summary: {
-      en: 'A tender carrot cake with raisins and a choice of walnuts or pecans.',
-      es: 'Un bizcocho tierno de zanahoria con pasas y nueces o pacanas.',
-      uk: 'Ніжний морквяний кекс із родзинками, волоськими горіхами або пеканом.',
+      en: 'A tender carrot cake with raisins and nuts.',
+      es: 'Un bizcocho tierno de zanahoria con pasas y frutos secos.',
+      uk: 'Ніжний кекс із морквою, родзинками й горіхами.',
     },
     alt: previewAlt(
       'Gluten-free carrot loaf cake with walnuts and raisins',
@@ -258,20 +337,15 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Основа для торта',
     },
     summary: {
-      en: 'A tall, airy sponge base made with separated eggs and a starch blend.',
-      es: 'Una base de bizcocho alta y aireada con huevos separados y mezcla de almidones.',
-      uk: 'Високий, легкий бісквіт на розділених яйцях і суміші крохмалів.',
+      en: 'A light, airy sponge cake.',
+      es: 'Un bizcocho ligero y esponjoso.',
+      uk: 'Легкий повітряний бісквіт.',
     },
     alt: previewAlt(
       'Tall plain gluten-free sponge cake with one wedge cut',
       'Bizcocho sin gluten alto y sencillo con una porción cortada',
       'Високий простий безглютеновий бісквіт із відрізаним шматком',
     ),
-    publicationNote: {
-      en: 'Confirm the long form dimensions, doneness cue, active time and total time.',
-      es: 'Confirma las dimensiones del molde alargado, la señal de cocción y los tiempos activo y total.',
-      uk: 'Уточніть розміри довгої форми, ознаку готовності, активний і загальний час.',
-    },
   },
   crepes: {
     title: {
@@ -281,20 +355,15 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
     },
     category: { en: 'Breakfast', es: 'Desayuno', uk: 'Сніданок' },
     summary: {
-      en: 'Thin gluten-free crepes for a three-person breakfast.',
-      es: 'Crepes finos sin gluten para el desayuno de tres personas.',
-      uk: 'Тонкі безглютенові млинці для сніданку на трьох.',
+      en: 'Thin crepes made with milk.',
+      es: 'Crepes finos con leche.',
+      uk: 'Тонкі млинці на молоці.',
     },
     alt: previewAlt(
       'Thin gluten-free crepes folded on a plate',
       'Crepes finos sin gluten doblados en un plato',
       'Тонкі безглютенові млинці, складені на тарілці',
     ),
-    publicationNote: {
-      en: 'Review the generated step photos and approve or replace the preview photo.',
-      es: 'Revisa las fotos generadas de los pasos y aprueba o sustituye la imagen de portada.',
-      uk: 'Перевірте згенеровані фото кроків та схваліть або замініть обкладинку.',
-    },
   },
   'gluten-free-napoleon': {
     title: {
@@ -313,15 +382,10 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Два торти по шість тонких коржів 28 см із теплим заварним кремом і горіхами.',
     },
     alt: previewAlt(
-      'Gluten-free Napoleon cake with thin golden layers and a cut slice',
-      'Tarta Napoleón sin gluten con capas finas doradas y una porción cortada',
-      'Безглютеновий Наполеон із тонкими золотистими коржами та відрізаним шматком',
+      'Gluten-free Napoleon cake with six thin layers, custard and nuts',
+      'Tarta Napoleón sin gluten con seis capas finas, crema pastelera y frutos secos',
+      'Безглютеновий Наполеон із шістьма тонкими коржами, заварним кремом і горіхами',
     ),
-    publicationNote: {
-      en: 'Confirm the final custard volume and total time; approve or replace the generated cover image.',
-      es: 'Confirma el volumen final de crema y el tiempo total; aprueba o sustituye la imagen de portada generada.',
-      uk: 'Уточніть остаточний об’єм крему й загальний час; схваліть або замініть згенеровану обкладинку.',
-    },
   },
   'cinnamon-rolls': {
     title: {
@@ -353,9 +417,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
     },
     category: { en: 'Cookies', es: 'Galletas', uk: 'Печиво' },
     summary: {
-      en: 'Cocoa cookies with orange zest that rise and crack as they bake.',
-      es: 'Galletas de cacao con ralladura de naranja que suben y se craquelan al hornearse.',
-      uk: 'Какао-печиво з апельсиновою цедрою, яке піднімається й тріскається під час випікання.',
+      en: 'Chocolate cookies with a tender centre and a cracked sugar coating.',
+      es: 'Galletas de chocolate con un centro tierno y una cobertura de azúcar craquelada.',
+      uk: 'Шоколадне печиво з ніжною серединою й цукровими тріщинками.',
     },
     alt: previewAlt(
       'Chocolate crinkle cookies with a cracked surface',
@@ -439,20 +503,15 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Сезонна випічка',
     },
     summary: {
-      en: 'A softer, moister paska with abundant fruit and a panettone-like crumb.',
-      es: 'Una paska más tierna y húmeda, con abundante fruta y una miga parecida al panettone.',
-      uk: 'М’якша й вологіша паска з великою кількістю родзинок і цукатів, ближча до panettone.',
+      en: 'Soft Easter bread with raisins and candied fruit.',
+      es: 'Pan de Pascua tierno con pasas y fruta confitada.',
+      uk: 'М’яка паска з родзинками й цукатами.',
     },
     alt: previewAlt(
       'Tall gluten-free Ukrainian Easter bread with glaze and raisins',
       'Pan ucraniano de Pascua sin gluten con glaseado y pasas',
       'Висока безглютенова паска з глазур’ю та родзинками',
     ),
-    publicationNote: {
-      en: 'Bake-test this exact 2.0 adaptation, confirm the mould dimensions and total elapsed time, and review the generated cover image.',
-      es: 'Prueba horneando esta adaptación 2.0 exacta, confirma las dimensiones de los moldes y el tiempo total, y revisa la imagen de portada generada.',
-      uk: 'Випробуйте саме цю адаптацію 2.0, уточніть розміри форм і загальний час та перевірте згенеровану обкладинку.',
-    },
   },
   'prune-cake': {
     title: {
@@ -461,25 +520,20 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Торт із чорносливом',
     },
     category: {
-      en: 'Celebration cake',
-      es: 'Tarta de celebración',
-      uk: 'Святковий торт',
+      en: 'Cakes',
+      es: 'Tartas',
+      uk: 'Торти',
     },
     summary: {
-      en: 'A chocolate celebration cake with a cream filling and prunes.',
-      es: 'Una tarta de celebración de chocolate con crema y ciruelas pasas.',
-      uk: 'Шоколадний святковий торт із кремом і чорносливом.',
+      en: 'Chocolate layers with prune cream, a mound of tender cake pieces and chocolate glaze.',
+      es: 'Capas de chocolate con crema de ciruelas pasas, trozos tiernos de bizcocho y cobertura de chocolate.',
+      uk: 'Шоколадні коржі з чорносливовим кремом, гіркою ніжних шматочків і шоколадною поливкою.',
     },
     alt: previewAlt(
-      'Chocolate layer cake with cream and prune pieces',
-      'Tarta de chocolate en capas con crema y trozos de ciruela pasa',
-      'Шоколадний торт із кремом і шматочками чорносливу',
+      'Chocolate prune cake with a mound of cream-coated cake pieces, glaze and nuts',
+      'Tarta de chocolate y ciruelas pasas con trozos de bizcocho en crema, cobertura y frutos secos',
+      'Шоколадний торт із гіркою шматочків у кремі, поливкою, чорносливом і горіхами',
     ),
-    publicationNote: {
-      en: 'Confirm the unreadable ingredients, cake method, prune preparation, assembly, glaze formula, temperature and timing before publication.',
-      es: 'Confirma los ingredientes ilegibles, el método del bizcocho, la preparación de las ciruelas, el montaje, la fórmula del glaseado, la temperatura y los tiempos antes de publicar.',
-      uk: 'Перед публікацією уточніть нерозбірливі інгредієнти, спосіб приготування коржів і чорносливу, складання, формулу поливки, температуру та час.',
-    },
   },
   'fruit-sponge-roll': {
     title: {
@@ -493,42 +547,104 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Бісквітний рулет / десерт',
     },
     summary: {
-      en: 'A filled sponge roll with blueberry jam, mascarpone cream, strawberries, mint and almonds.',
-      es: 'Un bizcocho enrollado con mermelada de arándanos, crema de mascarpone, fresas, menta y almendras.',
-      uk: 'Бісквітний рулет із чорничним варенням, кремом із маскарпоне, полуницею, м’ятою та мигдалем.',
+      en: 'A light rolled sponge with a soft filling and a flexible crumb that slices into a clear spiral.',
+      es: 'Un bizcocho ligero y flexible, enrollado con un relleno suave y una espiral bien definida al cortarlo.',
+      uk: 'Легкий гнучкий бісквіт із ніжною начинкою та виразною спіраллю на зрізі.',
     },
     alt: previewAlt(
-      'Author photo of a fruit sponge roll with cream, berries, mint and almonds',
-      'Foto de la autora de un brazo de gitano de frutas con crema, frutos rojos, menta y almendras',
-      'Фото авторки бісквітного рулету з кремом, ягодами, м’ятою та мигдалем',
+      'Homemade fruit sponge roll with berry jam, mascarpone cream spread on top and fresh berries',
+      'Brazo de gitano casero con mermelada, crema de mascarpone extendida por encima y frutos rojos frescos',
+      'Домашній бісквітний рулет із ягідним варенням, кремом із маскарпоне зверху та свіжими ягодами',
     ),
-    publicationNote: {
-      en: 'Confirm the exact oven temperature, rolling method, fruit quantities and total time; review the author photo for publication.',
-      es: 'Confirma la temperatura exacta del horno, el método de enrollado, las cantidades de fruta y el tiempo total; revisa la foto de la autora antes de publicar.',
-      uk: 'Уточніть точну температуру духовки, спосіб згортання, кількість фруктів і загальний час; перевірте фото авторки перед публікацією.',
+  },
+  'mascarpone-whipped-cream': {
+    title: {
+      en: 'Whipped cream with mascarpone',
+      es: 'Crema de nata y mascarpone',
+      uk: 'Крем із вершків та маскарпоне',
     },
+    category: { en: 'Cream', es: 'Crema', uk: 'Крем' },
+    summary: {
+      en: 'A light, quick cream that spreads easily and holds its shape.',
+      es: 'Una crema ligera y rápida que se extiende bien y mantiene la forma.',
+      uk: 'Легкий швидкий крем, який легко намазується й добре тримає форму.',
+    },
+    alt: previewAlt(
+      'Smooth whipped mascarpone cream holding firm soft peaks in a ceramic bowl',
+      'Crema de mascarpone montada con picos suaves y firmes en un bol de cerámica',
+      'Гладкий збитий крем із маскарпоне тримає м’які стійкі піки в керамічній мисці',
+    ),
+  },
+  'vanilla-egg-custard': {
+    title: {
+      en: 'Vanilla custard with eggs',
+      es: 'Crema pastelera de vainilla con huevo',
+      uk: 'Ванільний заварний крем з яйцями',
+    },
+    category: { en: 'Cream', es: 'Crema', uk: 'Крем' },
+    summary: {
+      en: 'A smooth classic custard that cools into a stable pastry filling.',
+      es: 'Una crema pastelera clásica y lisa que al enfriarse queda estable para rellenar.',
+      uk: 'Гладкий класичний заварний крем, який після охолодження стає стійкою начинкою.',
+    },
+    alt: previewAlt(
+      'Thick glossy vanilla egg custard falling from a spoon into a ceramic bowl',
+      'Crema pastelera de vainilla espesa y brillante cayendo de una cuchara a un bol de cerámica',
+      'Густий блискучий ванільний крем з яйцями спадає з ложки в керамічну миску',
+    ),
+  },
+  'eggless-vanilla-custard': {
+    title: {
+      en: 'Eggless vanilla custard',
+      es: 'Crema de vainilla sin huevo',
+      uk: 'Ванільний заварний крем без яєць',
+    },
+    category: { en: 'Cream', es: 'Crema', uk: 'Крем' },
+    summary: {
+      en: 'A large-batch homemade custard that thickens further as it cools.',
+      es: 'Una crema casera abundante que se espesa aún más al enfriarse.',
+      uk: 'Домашній крем великого виходу, який додатково густішає під час охолодження.',
+    },
+    alt: previewAlt(
+      'Thick pale eggless vanilla custard with a clear spatula channel in a ceramic bowl',
+      'Crema de vainilla sin huevo espesa y pálida con un surco de espátula en un bol de cerámica',
+      'Густий світлий ванільний крем без яєць із чітким слідом від лопатки в керамічній мисці',
+    ),
+  },
+  'vanilla-buttercream': {
+    title: {
+      en: 'Vanilla buttercream',
+      es: 'Crema de mantequilla de vainilla',
+      uk: 'Ванільний масляний крем',
+    },
+    category: { en: 'Cream', es: 'Crema', uk: 'Крем' },
+    summary: {
+      en: 'A rich stable cream for filling and decorating cakes and pastries.',
+      es: 'Una crema rica y estable para rellenar y decorar tartas y pasteles.',
+      uk: 'Насичений стійкий крем для начинки й оздоблення тортів та тістечок.',
+    },
+    alt: previewAlt(
+      'Stable pale vanilla buttercream holding a firm spatula swoop in a ceramic bowl',
+      'Crema de mantequilla de vainilla pálida y estable con un pico firme de espátula en un bol de cerámica',
+      'Стійкий світлий ванільний масляний крем тримає виразний пік від лопатки в керамічній мисці',
+    ),
   },
   eclairs: {
-    title: { en: 'Eclairs', es: 'Éclairs', uk: 'Еклери' },
+    title: { en: 'Profiteroles', es: 'Profiteroles', uk: 'Профітролі' },
     category: {
       en: 'Choux pastry / dessert',
       es: 'Pasta choux / postre',
       uk: 'Заварне тісто / десерт',
     },
     summary: {
-      en: 'Tested gluten-free choux made with Schär Mix B Bread and four small eggs, filled with whipped cream.',
-      es: 'Masa choux sin gluten probada con Schär Mix B Bread y cuatro huevos pequeños, rellena de nata montada.',
-      uk: 'Перевірене безглютенове заварне тісто на Schär Mix B Bread із чотирма маленькими яйцями та начинкою зі збитих вершків.',
+      en: 'Crisp, hollow choux pastries with a soft cream filling.',
+      es: 'Bocaditos de pasta choux huecos y crujientes con un relleno cremoso.',
+      uk: 'Порожнисті заварні тістечка з тонкою золотистою оболонкою й ніжною начинкою.',
     },
     alt: previewAlt(
-      'Golden gluten-free eclairs with vanilla cream and chocolate glaze',
-      'Éclairs sin gluten dorados con crema de vainilla y glaseado de chocolate',
-      'Золотисті безглютенові еклери з ванільним кремом і шоколадною глазур’ю',
+      'Golden gluten-free profiteroles with one cut open to show vanilla cream',
+      'Profiteroles sin gluten dorados con uno abierto para mostrar la crema de vainilla',
+      'Золотисті безглютенові профітролі, один розрізаний і показує ванільний крем',
     ),
-    publicationNote: {
-      en: 'The tested bake yielded about 20 profiteroles. Test the éclair shape and timing separately, capture the missing sauce methods, and approve or replace the generated photo.',
-      es: 'La prueba rindió unos 20 profiteroles. Prueba por separado la forma y el tiempo de los éclairs, registra los métodos de las salsas que faltan y aprueba o sustituye la imagen generada.',
-      uk: 'Перевірена випічка дала близько 20 профітролів. Окремо перевірте форму й час випікання еклерів, додайте відсутні способи приготування соусів і погодьте або замініть згенероване фото.',
-    },
   },
 };

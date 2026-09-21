@@ -1,6 +1,6 @@
 import type { StructuredRecipeContent } from '@/content/recipes/source-recipe.types';
 import type { AppLocale } from '@/lib/i18n/config';
-import { formatDuration } from '@/lib/i18n/format';
+import { formatElapsedMinutes } from '@/lib/i18n/format';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { EvidenceBadge } from './evidence-badge';
 import { RecipeFacts } from './recipe-facts';
@@ -8,20 +8,20 @@ import styles from './recipe-overview.module.css';
 
 function minutesLabel(locale: AppLocale, minutes: number | null | undefined) {
   if (minutes == null) return null;
-  return formatDuration(locale, {
-    kind: 'exact',
-    value: minutes % 60 === 0 ? minutes / 60 : minutes,
-    unit: minutes % 60 === 0 ? 'hour' : 'minute',
-  });
+  return formatElapsedMinutes(locale, minutes);
 }
 
 /** Shared recipe-detail composition, also demonstrated by the Design Lab. */
 export function RecipeOverview({
   content,
   locale,
+  showFlour = true,
+  showWorkingRecord = true,
 }: {
   content: Pick<StructuredRecipeContent, 'overview' | 'evidence'> | null;
   locale: AppLocale;
+  showFlour?: boolean;
+  showWorkingRecord?: boolean;
 }) {
   const messages = getUiMessages(locale).recipe;
   const overview = content?.overview;
@@ -31,23 +31,25 @@ export function RecipeOverview({
 
   return (
     <div className={styles.overview}>
-      <div className={styles.evidence}>
-        {content?.evidence ? (
-          <>
-            <EvidenceBadge
-              className={styles.badge}
-              locale={locale}
-              status={content.evidence.status}
-            />
-            <p>{content.evidence.explanation}</p>
-          </>
-        ) : (
-          <>
-            <strong className={styles.draft}>{messages.workingRecord}</strong>
-            <p>{messages.workingRecordExplanation}</p>
-          </>
-        )}
-      </div>
+      {content?.evidence || showWorkingRecord ? (
+        <div className={styles.evidence}>
+          {content?.evidence ? (
+            <>
+              <EvidenceBadge
+                className={styles.badge}
+                locale={locale}
+                status={content.evidence.status}
+              />
+              <p>{content.evidence.explanation}</p>
+            </>
+          ) : (
+            <>
+              <strong className={styles.draft}>{messages.workingRecord}</strong>
+              <p>{messages.workingRecordExplanation}</p>
+            </>
+          )}
+        </div>
+      ) : null}
       <RecipeFacts
         className={styles.facts}
         items={[
@@ -84,12 +86,14 @@ export function RecipeOverview({
           {note ? <p>{note}</p> : null}
         </div>
       ) : null}
-      <dl className={styles.flour}>
-        <div>
-          <dt>{messages.flour}</dt>
-          <dd>{overview?.flour || messages.toConfirm}</dd>
-        </div>
-      </dl>
+      {showFlour ? (
+        <dl className={styles.flour}>
+          <div>
+            <dt>{messages.flour}</dt>
+            <dd>{overview?.flour || messages.toConfirm}</dd>
+          </div>
+        </dl>
+      ) : null}
     </div>
   );
 }

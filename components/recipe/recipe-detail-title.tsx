@@ -5,18 +5,29 @@ import styles from './recipe-detail-title.module.css';
 export function RecipeDetailTitle({
   className,
   locale,
+  plain = false,
   title,
 }: {
   className?: string;
   locale: keyof LocalizedText;
+  plain?: boolean;
   title: string;
 }) {
-  const { glutenFreeLabel, recipeName } = getRecipeDetailTitleParts(title, locale);
+  const { glutenFreeLabel, recipeName } = getRecipeDetailTitleParts(
+    title,
+    locale,
+  );
 
   return (
     <h1 aria-label={title} className={`${styles.title} ${className ?? ''}`}>
-      <span aria-hidden="true">{glutenFreeLabel}</span>{' '}
-      <em aria-hidden="true">{recipeName}</em>
+      {plain ? (
+        <em aria-hidden="true">{title}</em>
+      ) : (
+        <>
+          <span aria-hidden="true">{glutenFreeLabel}</span>{' '}
+          <em aria-hidden="true">{recipeName}</em>
+        </>
+      )}
     </h1>
   );
 }

@@ -19,7 +19,7 @@ export function isRecipeLocalePublishable(
   recipe: Pick<RecipeDraft, 'publicationStatus' | 'translationState'>,
   locale: AppLocale,
 ): boolean {
-  return recipe.publicationStatus === 'ready'
+  return recipe.publicationStatus === 'published'
     && recipe.translationState[locale] === 'reviewed';
 }
 

@@ -1,3 +1,5 @@
+import { canViewDrafts } from '@/lib/runtime/local-development.server';
+import { getRecipeCatalog } from '@/content/recipes/catalog';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SavedRecipesPage } from '@/components/personal-state/saved-recipes-page';
@@ -11,7 +13,7 @@ export default async function SavedRoute({ params }: { params: Promise<{ locale:
   const { locale } = await params;
   if (!isAppLocale(locale)) notFound();
   const pathname = localeSavedPath(locale);
-  return <main><SiteHeader locale={locale} pathname={pathname} /><SavedRecipesPage locale={locale} /><SiteFooter locale={locale} /></main>;
+  return <main><SiteHeader locale={locale} pathname={pathname} /><SavedRecipesPage locale={locale} recipeCatalog={getRecipeCatalog(locale, await canViewDrafts() ? 'all' : 'published')} /><SiteFooter locale={locale} /></main>;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {

@@ -5,7 +5,7 @@ import { isAssistantResponseV1, parseAssistantRequest } from './schemas.ts';
 const validRequest = {
   schemaVersion: 1,
   recipeId: 'gluten-free-napoleon',
-  recipeVersionId: 'gluten-free-napoleon-v1-draft',
+  recipeVersionId: 'gluten-free-napoleon-v2',
   locale: 'en',
   surface: 'recipe-detail',
   scope: { kind: 'step', stepIds: ['toast-walnuts', 'toast-almonds'] },

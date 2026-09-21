@@ -9,6 +9,22 @@
 .content {
   min-width: 0;
 }
+.concise .intro,
+.concise .result,
+.concise .modeTabs button {
+  font-size: var(--font-size-body-small);
+}
+.concise .label {
+  font-size: var(--font-size-label);
+}
+.concise .result p {
+  margin: var(--space-2) 0 0;
+}
+.concise button:focus-visible,
+.concise input:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
 .content > :nth-child(2) {
   margin-top: var(--space-8);
 }

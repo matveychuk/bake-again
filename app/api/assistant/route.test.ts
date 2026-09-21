@@ -11,7 +11,7 @@ import { createAssistantRouteHandler } from './route.ts';
 const requestBody: AssistantRequestV1 = {
   schemaVersion: 1,
   recipeId: 'gluten-free-napoleon',
-  recipeVersionId: 'gluten-free-napoleon-v1-draft',
+  recipeVersionId: 'gluten-free-napoleon-v2',
   locale: 'en',
   surface: 'recipe-detail',
   scope: { kind: 'flour' },

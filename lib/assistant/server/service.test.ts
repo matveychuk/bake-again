@@ -18,7 +18,7 @@ const config: AssistantRuntimeConfig = {
 };
 
 const readyRecipe = structuredClone(glutenFreeNapoleonRecipe) as RecipeDraft;
-readyRecipe.publicationStatus = 'ready';
+readyRecipe.publicationStatus = 'published';
 readyRecipe.translationState.en = 'reviewed';
 
 const request: AssistantRequestV1 = {

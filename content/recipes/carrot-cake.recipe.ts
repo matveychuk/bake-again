@@ -1,642 +1,321 @@
-import type { RecipeSourceDraft } from './source-recipe.types.ts';
+import type { IngredientQuantity, RecipeLocale } from './recipe.types.ts';
+import type {
+  RecipeSourceDraft,
+  RecipeSourceDraftContent,
+  StructuredRecipeStep,
+} from './source-recipe.types.ts';
+import { quantityFromGrams } from './spoon-weights.ts';
 
-const translatedQuantity = {
-  base: null,
-  shopping: { mode: 'nameOnly' as const },
-};
-
-const carrotCakeStepMedia = {
-  'prepare-add-ins': {
-    id: 'soaked-raisins-chopped-walnuts',
-    src: '/media/recipes/carrot-cake/selected/step-01-soaked-raisins-chopped-walnuts-v1.png',
+const copy = {
+  uk: {
+    evidence: 'Цю версію успішно випікали.',
+    yield: '1 кекс',
+    section: 'Морквяний кекс',
+    ingredients: [
+      'Морква',
+      'Олія без запаху',
+      'Яйця',
+      'Цукор',
+      'Борошно Schär Mix B Bread',
+      'Розпушувач',
+      'Сіль',
+      'Волоські горіхи або пекан',
+      'Родзинки',
+      'Вершкове масло для форми',
+      'Кориця для форми',
+    ],
+    planning: 'Заздалегідь замочіть родзинки.',
+    baking: 'Випікання',
+    titles: [
+      'Підготуйте духовку й форму',
+      'Підготуйте родзинки й горіхи',
+      'Перебийте моркву з олією',
+      'Збийте яйця з цукром',
+      'Змішайте тісто',
+      'Вмішайте родзинки й горіхи',
+      'Спечіть кекс',
+    ],
+    instructions: [
+      'Розігрійте духовку до 200°C, верхній і нижній нагрів. Дно високої форми застеліть пергаментом, боки змастіть маслом і присипте корицею.',
+      'Злийте воду із замочених родзинок, але не просушуйте їх. Подрібніть горіхи, залишаючи невеликі шматочки.',
+      'Натріть моркву й перебийте блендером з олією до гладкої маси без помітних волокон.',
+      'Збийте до густої світлої піни, що збільшилася в об’ємі у три-чотири рази.',
+      'Вмішайте борошно, розпушувач і сіль у морквяну масу. Додайте третину яєчної піни й перемішайте. Решту введіть лопаткою у два прийоми, рухами знизу догори, лише до зникнення світлих смуг.',
+      'Обережно розподіліть родзинки й горіхи в тісті.',
+      'Викладіть тісто у форму. Випікайте при 200°C, верхній і нижній нагрів, 35–40 хвилин. Перевірте центр зубочисткою — вона має вийти сухою.',
+    ],
+    storage: 'Тісто можна зберігати в холодильнику до трьох днів.',
+    alts: [
+      'Висока форма з пергаментом на дні й боками, змащеними маслом та присипаними корицею',
+      'Гладка помаранчева маса з моркви й олії біля занурювального блендера',
+      'Густа світла піна з яєць і цукру стікає стрічкою з вінчика',
+      'Морквяне тісто з родзинками й подрібненими горіхами',
+      'Сире морквяне тісто у високій формі для кексу',
+      'Спечений морквяний кекс і суха зубочистка, вийнята з центру',
+    ],
+    bakingImages: ['Перед випіканням', 'Готовий кекс'],
   },
-  'prepare-pan': {
-    id: 'prepared-pan',
-    src: '/media/recipes/carrot-cake/selected/step-02-prepared-pan-v1.png',
+  en: {
+    evidence: 'This exact version has been baked successfully.',
+    yield: '1 cake',
+    section: 'Carrot cake',
+    ingredients: [
+      'Carrots',
+      'Neutral oil',
+      'Eggs',
+      'Sugar',
+      'Schär Mix B Bread flour',
+      'Baking powder',
+      'Salt',
+      'Walnuts or pecans',
+      'Raisins',
+      'Butter for the pan',
+      'Cinnamon for the pan',
+    ],
+    planning: 'Soak the raisins in advance.',
+    baking: 'Baking',
+    titles: [
+      'Prepare the oven and pan',
+      'Prepare the raisins and nuts',
+      'Blend the carrots with oil',
+      'Whip the eggs and sugar',
+      'Mix the batter',
+      'Fold in the raisins and nuts',
+      'Bake the cake',
+    ],
+    instructions: [
+      'Preheat the oven to 200°C with top-and-bottom heat. Line the bottom of a tall pan with parchment, butter the sides and dust them with cinnamon.',
+      'Drain the soaked raisins without drying them. Chop the nuts, leaving small pieces.',
+      'Grate the carrots, then blend with the oil until smooth, with no visible carrot strands.',
+      'Beat to a thick, pale foam, three to four times its original volume.',
+      'Mix the flour, baking powder and salt into the carrot mixture. Stir in one third of the egg foam. Fold in the rest in two additions with a spatula, stopping as soon as no pale streaks remain.',
+      'Gently distribute the raisins and nuts through the batter.',
+      'Transfer the batter to the pan. Bake at 200°C with top-and-bottom heat for 35–40 minutes. A toothpick inserted into the centre should come out dry.',
+    ],
+    storage: 'The batter can be refrigerated for up to three days.',
+    alts: [
+      'Tall pan with parchment on the bottom and buttered, cinnamon-dusted sides',
+      'Smooth orange carrot and oil puree beside an immersion blender',
+      'Thick pale egg and sugar foam falling in a ribbon from a whisk',
+      'Carrot batter with raisins and chopped nuts',
+      'Raw carrot batter in a tall loaf pan',
+      'Baked carrot cake and a dry toothpick lifted from the centre',
+    ],
+    bakingImages: ['Before baking', 'Baked cake'],
   },
-  'grated-carrots': {
-    id: 'grated-carrots',
-    src: '/media/recipes/carrot-cake/selected/step-03-grated-carrots-v1.png',
-  },
-  'carrots-oil-blender': {
-    id: 'carrots-oil-blender',
-    src: '/media/recipes/carrot-cake/selected/step-03-carrots-oil-blender-v1.png',
-  },
-  'carrot-oil-smooth': {
-    id: 'carrot-oil-smooth',
-    src: '/media/recipes/carrot-cake/selected/step-03-carrot-oil-smooth-v1.png',
-  },
-  'eggs-sugar-foam': {
-    id: 'eggs-sugar-foam',
-    src: '/media/recipes/carrot-cake/selected/step-04-eggs-sugar-foam-v1.png',
-  },
-  'batter-add-ins': {
-    id: 'batter-add-ins',
-    src: '/media/recipes/carrot-cake/selected/step-06-batter-add-ins-v1.png',
-  },
-  'batter-in-pan': {
-    id: 'batter-in-pan',
-    src: '/media/recipes/carrot-cake/selected/step-07-batter-in-pan-v1.png',
-  },
-  'dry-toothpick': {
-    id: 'dry-toothpick',
-    src: '/media/recipes/carrot-cake/selected/step-07-dry-toothpick-v1.png',
+  es: {
+    evidence: 'Esta versión se ha horneado con éxito.',
+    yield: '1 bizcocho',
+    section: 'Bizcocho de zanahoria',
+    ingredients: [
+      'Zanahorias',
+      'Aceite neutro',
+      'Huevos',
+      'Azúcar',
+      'Harina Schär Mix B Bread',
+      'Levadura química',
+      'Sal',
+      'Nueces o pacanas',
+      'Pasas',
+      'Mantequilla para el molde',
+      'Canela para el molde',
+    ],
+    planning: 'Remoja las pasas con antelación.',
+    baking: 'Horneado',
+    titles: [
+      'Prepara el horno y el molde',
+      'Prepara las pasas y las nueces',
+      'Tritura las zanahorias con aceite',
+      'Bate los huevos con el azúcar',
+      'Mezcla la masa',
+      'Incorpora las pasas y las nueces',
+      'Hornea el bizcocho',
+    ],
+    instructions: [
+      'Precalienta el horno a 200 °C con calor arriba y abajo. Forra el fondo de un molde alto con papel de horno, unta los lados con mantequilla y espolvoréalos con canela.',
+      'Escurre las pasas remojadas sin secarlas. Pica las nueces dejando trozos pequeños.',
+      'Ralla las zanahorias y tritúralas con el aceite hasta obtener una mezcla lisa, sin hebras visibles.',
+      'Bate hasta obtener una espuma espesa y clara, entre tres y cuatro veces su volumen inicial.',
+      'Mezcla la harina, la levadura química y la sal con la zanahoria. Incorpora un tercio de la espuma de huevo. Añade el resto en dos tandas con una espátula y movimientos envolventes, solo hasta que desaparezcan las vetas claras.',
+      'Reparte suavemente las pasas y las nueces por la masa.',
+      'Pasa la masa al molde. Hornea a 200 °C con calor arriba y abajo durante 35–40 minutos. Un palillo insertado en el centro debe salir seco.',
+    ],
+    storage: 'Puedes guardar la masa en el frigorífico hasta tres días.',
+    alts: [
+      'Molde alto con papel en el fondo y lados untados con mantequilla y espolvoreados con canela',
+      'Puré liso de zanahoria y aceite junto a una batidora de mano',
+      'Espuma espesa y clara de huevo y azúcar cayendo en forma de cinta de unas varillas',
+      'Masa de zanahoria con pasas y nueces picadas',
+      'Masa cruda de zanahoria en un molde alto',
+      'Bizcocho de zanahoria horneado y un palillo seco retirado del centro',
+    ],
+    bakingImages: ['Antes de hornear', 'Bizcocho horneado'],
   },
 } as const;
 
-function stepMedia(
-  id: keyof typeof carrotCakeStepMedia,
-  alt: string,
-  title: string,
-  caption: string,
-) {
-  return [{ ...carrotCakeStepMedia[id], alt, title, caption }];
-}
+const exact = (value: number, unit: 'g' | 'ml'): IngredientQuantity => ({
+  base: { kind: 'exact', value, unit },
+  shopping: { mode: 'base' },
+});
+const ingredientData: Array<{ id: string; quantity: IngredientQuantity }> = [
+  { id: 'carrots', quantity: exact(200, 'g') },
+  { id: 'oil', quantity: exact(100, 'ml') },
+  {
+    id: 'eggs',
+    quantity: {
+      base: { kind: 'exact', value: 3, unit: 'piece' },
+      shopping: { mode: 'base', increment: 1, rounding: 'up' },
+    },
+  },
+  { id: 'sugar', quantity: quantityFromGrams('granulated-sugar', 100) },
+  { id: 'flour', quantity: quantityFromGrams('schar-mix-b', 170) },
+  { id: 'baking-powder', quantity: quantityFromGrams('baking-powder', 5) },
+  { id: 'salt', quantity: quantityFromGrams('fine-salt', 1.5) },
+  { id: 'nuts', quantity: exact(100, 'g') },
+  { id: 'raisins', quantity: exact(80, 'g') },
+  {
+    id: 'pan-butter',
+    quantity: { base: null, shopping: { mode: 'nameOnly' } },
+  },
+  {
+    id: 'pan-cinnamon',
+    quantity: { base: null, shopping: { mode: 'nameOnly' } },
+  },
+];
 
-export const carrotCakeRecipe = {
-  id: 'carrot-cake',
-  publicationStatus: 'draft',
-  source: {
-    file: 'docs/reference/recipe-inventory.xlsx',
-    locator:
-      'Recipe Archive · Морквяний кекс; author-confirmed one-cake quantities and working method',
-  },
-  completeness: 'readyToReview',
-  beforeStart: [
-    'Soak the raisins before starting.',
-    'Preheat the oven to 200°C with conventional top-and-bottom heat.',
-  ],
-  timing: {
-    activeMinutes: null,
-    totalElapsedMinutes: null,
-    phases: [
-      {
-        id: 'baking',
-        label: 'Baking',
-        duration: { kind: 'range', min: 35, max: 40, unit: 'minute' },
-        relatedStepId: 'bake',
-      },
-    ],
-  },
-  ingredientSections: [
+function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
+  const text = copy[locale];
+  const media = (id: string, file: string, alt: string, title?: string) => ({
+    id,
+    src: `/media/recipes/carrot-cake/selected/${file}`,
+    alt,
+    ...(title ? { title } : {}),
+  });
+  const usages = (...ids: string[]) =>
+    ids.map((ingredientId) => ({ ingredientId }));
+  const steps: StructuredRecipeStep[] = [
     {
-      id: 'cake',
-      title: 'Carrot cake',
-      ingredients: [
-        {
-          id: 'carrots',
-          name: 'Carrots',
-          quantity: {
-            base: { kind: 'exact', value: 200, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-        },
-        {
-          id: 'oil',
-          name: 'Sunflower or other neutral oil',
-          quantity: {
-            base: { kind: 'exact', value: 100, unit: 'ml' },
-            shopping: { mode: 'base' },
-          },
-          note: 'Use an oil without a noticeable aroma.',
-        },
-        {
-          id: 'eggs',
-          name: 'Eggs',
-          quantity: {
-            base: { kind: 'exact', value: 3, unit: 'piece' },
-            shopping: { mode: 'base', increment: 1, rounding: 'up' },
-          },
-        },
-        {
-          id: 'sugar',
-          name: 'Sugar',
-          quantity: {
-            base: { kind: 'exact', value: 100, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-        },
-        {
-          id: 'flour',
-          name: 'Schär Mix B Bread flour',
-          quantity: {
-            base: { kind: 'exact', value: 170, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-        },
-        {
-          id: 'baking-powder',
-          name: 'Baking powder',
-          quantity: {
-            base: { kind: 'exact', value: 5, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-        },
-        {
-          id: 'salt',
-          name: 'Salt',
-          quantity: {
-            base: { kind: 'exact', value: 1.5, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-        },
-        {
-          id: 'nuts',
-          name: 'Walnuts or pecans',
-          quantity: {
-            base: { kind: 'exact', value: 100, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-          note: 'Both variations are used by the author.',
-        },
-        {
-          id: 'raisins',
-          name: 'Raisins',
-          quantity: {
-            base: { kind: 'exact', value: 80, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-          note: 'Soak, then drain without drying.',
-        },
-        {
-          id: 'pan-butter',
-          name: 'Butter for the pan',
-          quantity: { base: null, shopping: { mode: 'nameOnly' } },
-        },
-        {
-          id: 'pan-cinnamon',
-          name: 'Cinnamon for the pan',
-          quantity: { base: null, shopping: { mode: 'nameOnly' } },
-        },
+      id: 'prepare-pan',
+      title: text.titles[0],
+      body: text.instructions[0],
+      cookIngredients: usages('pan-butter', 'pan-cinnamon'),
+      media: [
+        media('prepared-pan', 'step-02-prepared-pan-v1.png', text.alts[0]),
       ],
     },
-  ],
-  steps: [
     {
       id: 'prepare-add-ins',
-      title: 'Prepare the raisins and nuts',
-      body: 'Drain the soaked raisins without drying them. Pulse the nuts in a blender, leaving pieces large enough to be noticeable in the cake.',
-      checkpoint:
-        'The nuts should remain in visible pieces, not turn into flour.',
-      media: stepMedia(
-        'prepare-add-ins',
-        'Drained soaked raisins beside finely chopped walnut pieces in small bowls',
-        'Prepare the add-ins',
-        'Keep the raisins moist and chop the walnuts into small pieces.',
-      ),
+      title: text.titles[1],
+      body: text.instructions[1],
+      cookIngredients: usages('raisins', 'nuts'),
     },
     {
       id: 'blend-carrots',
-      title: 'Blend the carrots with oil',
-      body: 'Grate the carrots by hand or in a food processor, then blend them separately with the neutral oil until smooth.',
+      title: text.titles[2],
+      body: text.instructions[2],
+      cookIngredients: usages('carrots', 'oil'),
       media: [
-        {
-          ...carrotCakeStepMedia['grated-carrots'],
-          alt: 'Finely grated carrots in a ceramic bowl',
-          title: 'Grate the carrots',
-          caption: 'Start with finely grated carrot.',
-        },
-        {
-          ...carrotCakeStepMedia['carrots-oil-blender'],
-          alt: 'Grated carrots and neutral oil with an immersion blender in a ceramic bowl',
-          title: 'Add the oil',
-          caption: 'Blend the carrot and oil together in a separate bowl.',
-        },
-        {
-          ...carrotCakeStepMedia['carrot-oil-smooth'],
-          alt: 'Smooth orange carrot and oil puree with an immersion blender',
-          title: 'Blend until smooth',
-          caption: 'The mixture should be fully smooth, without visible carrot strands.',
-        },
+        media(
+          'carrot-oil-smooth',
+          'step-03-carrot-oil-smooth-v1.png',
+          text.alts[1],
+        ),
       ],
     },
     {
       id: 'whip-eggs',
-      title: 'Whip the eggs and sugar',
-      body: 'Beat the eggs and sugar in a mixer or food processor until the mixture is thick, pale and three to four times its original volume.',
-      checkpoint:
-        'The egg mixture should be pale, thick and three to four times its starting volume.',
-      media: stepMedia(
-        'eggs-sugar-foam',
-        'Pale thick egg and sugar foam forming a ribbon from a whisk',
-        'Whip to a thick foam',
-        'The foam should hold a ribbon and have three to four times its starting volume.',
-      ),
+      title: text.titles[3],
+      body: text.instructions[3],
+      cookIngredients: usages('eggs', 'sugar'),
+      media: [
+        media(
+          'eggs-sugar-foam',
+          'step-04-eggs-sugar-foam-v1.png',
+          text.alts[2],
+        ),
+      ],
     },
     {
       id: 'mix-batter',
-      title: 'Suggested: mix the batter gently',
-      body: 'Mix the flour, baking powder and salt into the carrot-and-oil mixture until even. Stir in about one third of the whipped egg foam to lighten the base, then fold in the remaining foam in two additions with a spatula, stopping as soon as no pale streaks remain.',
-      tip: 'Suggested method: this order is intended to protect the egg foam, but it has not been bake-tested as this exact version.',
+      title: text.titles[4],
+      body: text.instructions[4],
+      cookIngredients: usages('flour', 'baking-powder', 'salt'),
     },
     {
       id: 'fold-add-ins',
-      title: 'Add the raisins and nuts',
-      body: 'Add the drained raisins and chopped nuts to the finished batter and mix until evenly distributed.',
-      tip: 'Store the batter in the refrigerator and use it within three days.',
-      media: stepMedia(
-        'batter-add-ins',
-        'Smooth carrot cake batter with small soaked raisins and finely chopped walnuts',
-        'Fold in the add-ins',
-        'Distribute the small raisins and chopped walnuts evenly through the smooth batter.',
-      ),
-    },
-    {
-      id: 'prepare-pan',
-      title: 'Prepare the pan',
-      body: 'For a tall pan, place a piece of parchment on the bottom. Butter the side walls and dust them with cinnamon.',
-      tip: 'The cinnamon adds aroma and makes the crust crisper.',
-      media: stepMedia(
-        'prepare-pan',
-        'Tall loaf pan with parchment on the bottom and cinnamon-dusted buttered sides',
-        'Prepare the pan',
-        'Line only the bottom, then butter and dust the sides with cinnamon.',
-      ),
+      title: text.titles[5],
+      body: text.instructions[5],
+      tip: text.storage,
+      cookIngredients: usages('raisins', 'nuts'),
+      media: [
+        media('batter-add-ins', 'step-06-batter-add-ins-v1.png', text.alts[3]),
+      ],
     },
     {
       id: 'bake',
-      title: 'Bake the cake',
-      body: 'Transfer the batter to the prepared pan. Bake at 200°C with conventional top-and-bottom heat for 35–40 minutes. Pierce the center with a toothpick; it should come out completely dry.',
-      meta: '200°C · 35–40 min · top and bottom heat',
-      checkpoint: 'The toothpick should come out completely dry.',
+      title: text.titles[6],
+      body: text.instructions[6],
       media: [
+        media(
+          'batter-in-pan',
+          'step-07-batter-in-pan-v1.png',
+          text.alts[4],
+          text.bakingImages[0],
+        ),
+        media(
+          'dry-toothpick',
+          'step-07-dry-toothpick-v1.png',
+          text.alts[5],
+          text.bakingImages[1],
+        ),
+      ],
+    },
+  ];
+  return {
+    completeness: 'readyToReview',
+    presentation: 'concise',
+    evidence: { status: 'tested', explanation: text.evidence },
+    yield: {
+      id: 'one-cake',
+      label: text.yield,
+      count: { kind: 'exact', value: 1 },
+      unit: 'cake',
+    },
+    timing: {
+      activeMinutes: 30,
+      totalElapsedMinutes: null,
+      planningNote: { text: text.planning },
+      phases: [
         {
-          ...carrotCakeStepMedia['batter-in-pan'],
-          alt: 'Smooth raw carrot cake batter with small raisins and chopped walnuts in a tall loaf pan',
-          title: 'Fill the pan',
-          caption: 'Level the batter in the prepared pan before baking.',
-        },
-        {
-          ...carrotCakeStepMedia['dry-toothpick'],
-          alt: 'Baked carrot cake in a loaf pan with a clean toothpick lifted from the centre',
-          title: 'Check the centre',
-          caption: 'The toothpick should come out completely dry.',
+          id: 'baking',
+          label: text.baking,
+          duration: { kind: 'range', min: 35, max: 40, unit: 'minute' },
+          relatedStepId: 'bake',
         },
       ],
     },
-  ],
-  translations: {
-    uk: {
-      completeness: 'readyToReview',
-      beforeStart: [
-        'Заздалегідь замочіть родзинки.',
-        'Розігрійте духовку до 200°C у режимі верхнього й нижнього нагріву.',
-      ],
-      timing: {
-        activeMinutes: null,
-        totalElapsedMinutes: null,
-        phases: [
-          {
-            id: 'baking',
-            label: 'Випікання',
-            duration: { kind: 'range', min: 35, max: 40, unit: 'minute' },
-            relatedStepId: 'bake',
-          },
-        ],
+    ingredientSections: [
+      {
+        id: 'cake',
+        title: text.section,
+        ingredients: ingredientData.map((ingredient, index) => ({
+          ...ingredient,
+          name: text.ingredients[index],
+        })),
       },
-      ingredientSections: [
-        {
-          id: 'cake',
-          title: 'Морквяний кекс',
-          ingredients: [
-            {
-              id: 'carrots',
-              name: 'Морква',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'oil',
-              name: 'Соняшникова або інша нейтральна олія',
-              quantity: translatedQuantity,
-              note: 'Використовуйте олію без виразного запаху.',
-            },
-            {
-              id: 'eggs',
-              name: 'Яйця',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'sugar',
-              name: 'Цукор',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'flour',
-              name: 'Борошно Schär Mix B Bread',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'baking-powder',
-              name: 'Розпушувач',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'salt',
-              name: 'Сіль',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'nuts',
-              name: 'Волоські горіхи або пекан',
-              quantity: translatedQuantity,
-              note: 'Авторка використовує обидва варіанти.',
-            },
-            {
-              id: 'raisins',
-              name: 'Родзинки',
-              quantity: translatedQuantity,
-              note: 'Замочіть, потім злийте воду, не просушуючи.',
-            },
-            {
-              id: 'pan-butter',
-              name: 'Вершкове масло для форми',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'pan-cinnamon',
-              name: 'Кориця для форми',
-              quantity: translatedQuantity,
-            },
-          ],
-        },
-      ],
-      steps: [
-        {
-          id: 'prepare-add-ins',
-          title: 'Підготуйте родзинки та горіхи',
-          body: 'Злийте воду із замочених родзинок, але не просушуйте їх. Подрібніть горіхи в блендері так, щоб залишилися шматочки, які відчуватимуться в кексі.',
-          checkpoint:
-            'Горіхи мають залишитися помітними шматочками, а не перетворитися на борошно.',
-          media: stepMedia(
-            'prepare-add-ins',
-            'Злиті замочені родзинки поруч із дрібно подрібненими волоськими горіхами в маленьких мисках',
-            'Підготуйте добавки',
-            'Залиште родзинки вологими, а горіхи подрібніть невеликими шматочками.',
-          ),
-        },
-        {
-          id: 'blend-carrots',
-          title: 'Перебийте моркву з олією',
-          body: 'Натріть моркву вручну або в комбайні, а потім окремо перебийте її блендером з нейтральною олією до однорідності.',
-          media: [
-            {
-              ...carrotCakeStepMedia['grated-carrots'],
-              alt: 'Дрібно натерта морква в керамічній мисці',
-              title: 'Натріть моркву',
-              caption: 'Почніть із дрібно натертої моркви.',
-            },
-            {
-              ...carrotCakeStepMedia['carrots-oil-blender'],
-              alt: 'Натерта морква й нейтральна олія із занурювальним блендером у керамічній мисці',
-              title: 'Додайте олію',
-              caption: 'Окремо перебийте моркву з олією.',
-            },
-            {
-              ...carrotCakeStepMedia['carrot-oil-smooth'],
-              alt: 'Гладка помаранчева морквяно-олійна маса із занурювальним блендером',
-              title: 'Перебийте до однорідності',
-              caption: 'Маса має бути повністю гладкою, без помітних смужок моркви.',
-            },
-          ],
-        },
-        {
-          id: 'whip-eggs',
-          title: 'Збийте яйця з цукром',
-          body: 'Збийте яйця з цукром міксером або в комбайні до густої світлої піни. Маса має збільшитися в об’ємі у три-чотири рази.',
-          checkpoint:
-            'Яєчна маса має бути світлою, густою та у три-чотири рази більшою за початковий об’єм.',
-          media: stepMedia(
-            'eggs-sugar-foam',
-            'Світла густа піна з яєць і цукру, що стікає стрічкою з вінчика',
-            'Збийте до густої піни',
-            'Піна має тримати стрічку та збільшитися в об’ємі у три-чотири рази.',
-          ),
-        },
-        {
-          id: 'mix-batter',
-          title: 'Пропозиція: делікатно змішайте тісто',
-          body: 'Змішайте борошно, розпушувач і сіль із морквяно-олійною масою до однорідності. Додайте приблизно третину збитої яєчної піни й перемішайте, щоб зробити основу легшою. Решту піни введіть лопаткою у два прийоми рухами знизу догори та зупиніться, щойно зникнуть світлі смуги.',
-          tip: 'Пропозиція: ця послідовність допомагає зберегти яєчну піну, але не була перевірена випіканням саме в такому вигляді.',
-        },
-        {
-          id: 'fold-add-ins',
-          title: 'Додайте родзинки та горіхи',
-          body: 'Додайте до готового тіста родзинки без зайвої води та подрібнені горіхи. Перемішайте до рівномірного розподілення.',
-          tip: 'Зберігайте тісто в холодильнику та використайте протягом трьох днів.',
-          media: stepMedia(
-            'batter-add-ins',
-            'Однорідне тісто для морквяного кексу з невеликими замоченими родзинками й дрібно подрібненими волоськими горіхами',
-            'Вмішайте добавки',
-            'Рівномірно розподіліть невеликі родзинки й подрібнені горіхи в однорідному тісті.',
-          ),
-        },
-        {
-          id: 'prepare-pan',
-          title: 'Підготуйте форму',
-          body: 'Якщо форма висока, покладіть на дно шматок пергаменту. Бічні стінки змастіть вершковим маслом і присипте корицею.',
-          tip: 'Кориця додає скоринці аромату та хрусткості.',
-          media: stepMedia(
-            'prepare-pan',
-            'Висока форма для кексу з пергаментом на дні та змащеними й припорошеними корицею боками',
-            'Підготуйте форму',
-            'Застеліть лише дно, а боки змастіть маслом і присипте корицею.',
-          ),
-        },
-        {
-          id: 'bake',
-          title: 'Спечіть кекс',
-          body: 'Викладіть тісто в підготовлену форму. Випікайте при 200°C у режимі верхнього й нижнього нагріву протягом 35–40 хвилин. Проколіть кекс по центру зубочисткою — вона має вийти повністю сухою.',
-          meta: '200°C · 35–40 хв · верхній і нижній нагрів',
-          checkpoint: 'Зубочистка має вийти повністю сухою.',
-          media: [
-            {
-              ...carrotCakeStepMedia['batter-in-pan'],
-              alt: 'Однорідне сире тісто для морквяного кексу з невеликими родзинками й подрібненими горіхами у високій формі',
-              title: 'Викладіть тісто у форму',
-              caption: 'Розрівняйте тісто у підготовленій формі перед випіканням.',
-            },
-            {
-              ...carrotCakeStepMedia['dry-toothpick'],
-              alt: 'Спечений морквяний кекс у формі та чиста зубочистка, вийнята з центру',
-              title: 'Перевірте центр',
-              caption: 'Зубочистка має вийти повністю сухою.',
-            },
-          ],
-        },
-      ],
-    },
-    es: {
-      completeness: 'readyToReview',
-      beforeStart: [
-        'Remoja las pasas con antelación.',
-        'Precalienta el horno a 200 °C con calor arriba y abajo.',
-      ],
-      timing: {
-        activeMinutes: null,
-        totalElapsedMinutes: null,
-        phases: [
-          {
-            id: 'baking',
-            label: 'Horneado',
-            duration: { kind: 'range', min: 35, max: 40, unit: 'minute' },
-            relatedStepId: 'bake',
-          },
-        ],
-      },
-      ingredientSections: [
-        {
-          id: 'cake',
-          title: 'Bizcocho de zanahoria',
-          ingredients: [
-            { id: 'carrots', name: 'Zanahorias', quantity: translatedQuantity },
-            {
-              id: 'oil',
-              name: 'Aceite de girasol u otro aceite neutro',
-              quantity: translatedQuantity,
-              note: 'Usa un aceite sin aroma perceptible.',
-            },
-            { id: 'eggs', name: 'Huevos', quantity: translatedQuantity },
-            { id: 'sugar', name: 'Azúcar', quantity: translatedQuantity },
-            {
-              id: 'flour',
-              name: 'Harina Schär Mix B Bread',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'baking-powder',
-              name: 'Levadura química',
-              quantity: translatedQuantity,
-            },
-            { id: 'salt', name: 'Sal', quantity: translatedQuantity },
-            {
-              id: 'nuts',
-              name: 'Nueces o pacanas',
-              quantity: translatedQuantity,
-              note: 'La autora utiliza las dos variantes.',
-            },
-            {
-              id: 'raisins',
-              name: 'Pasas',
-              quantity: translatedQuantity,
-              note: 'Remójalas y escúrrelas sin secarlas.',
-            },
-            {
-              id: 'pan-butter',
-              name: 'Mantequilla para el molde',
-              quantity: translatedQuantity,
-            },
-            {
-              id: 'pan-cinnamon',
-              name: 'Canela para el molde',
-              quantity: translatedQuantity,
-            },
-          ],
-        },
-      ],
-      steps: [
-        {
-          id: 'prepare-add-ins',
-          title: 'Prepara las pasas y las nueces',
-          body: 'Escurre las pasas remojadas sin secarlas. Tritura las nueces en una batidora, dejando trozos que se noten en el bizcocho.',
-          checkpoint:
-            'Las nueces deben quedar en trozos visibles, no convertirse en harina.',
-          media: stepMedia(
-            'prepare-add-ins',
-            'Pasas remojadas escurridas junto a nueces finamente picadas en cuencos pequeños',
-            'Prepara los añadidos',
-            'Mantén las pasas húmedas y pica las nueces en trozos pequeños.',
-          ),
-        },
-        {
-          id: 'blend-carrots',
-          title: 'Tritura las zanahorias con aceite',
-          body: 'Ralla las zanahorias a mano o con un robot de cocina; después tritúralas aparte con el aceite neutro hasta obtener una mezcla homogénea.',
-          media: [
-            {
-              ...carrotCakeStepMedia['grated-carrots'],
-              alt: 'Zanahoria finamente rallada en un cuenco de cerámica',
-              title: 'Ralla las zanahorias',
-              caption: 'Empieza con zanahoria finamente rallada.',
-            },
-            {
-              ...carrotCakeStepMedia['carrots-oil-blender'],
-              alt: 'Zanahoria rallada y aceite neutro con una batidora de mano en un cuenco de cerámica',
-              title: 'Añade el aceite',
-              caption: 'Tritura aparte la zanahoria con el aceite.',
-            },
-            {
-              ...carrotCakeStepMedia['carrot-oil-smooth'],
-              alt: 'Mezcla lisa de zanahoria y aceite de color naranja con una batidora de mano',
-              title: 'Tritura hasta que quede lisa',
-              caption: 'La mezcla debe quedar completamente lisa, sin hebras visibles de zanahoria.',
-            },
-          ],
-        },
-        {
-          id: 'whip-eggs',
-          title: 'Bate los huevos con el azúcar',
-          body: 'Bate los huevos y el azúcar con una batidora o robot de cocina hasta obtener una espuma espesa y clara. La mezcla debe aumentar de volumen entre tres y cuatro veces.',
-          checkpoint:
-            'La mezcla de huevo debe ser clara, espesa y tener entre tres y cuatro veces su volumen inicial.',
-          media: stepMedia(
-            'eggs-sugar-foam',
-            'Espuma clara y espesa de huevo y azúcar que cae en forma de cinta de unas varillas',
-            'Bate hasta obtener una espuma espesa',
-            'La espuma debe dejar una cinta y aumentar entre tres y cuatro veces su volumen.',
-          ),
-        },
-        {
-          id: 'mix-batter',
-          title: 'Sugerencia: mezcla la masa con suavidad',
-          body: 'Mezcla la harina, la levadura química y la sal con la mezcla de zanahoria y aceite hasta integrar. Incorpora aproximadamente un tercio de la espuma de huevo batido para aligerar la base; después incorpora el resto en dos tandas con una espátula y movimientos envolventes, deteniéndote en cuanto no queden vetas claras.',
-          tip: 'Sugerencia: este orden busca proteger la espuma de huevo, pero no se ha probado al horno como esta versión exacta.',
-        },
-        {
-          id: 'fold-add-ins',
-          title: 'Añade las pasas y las nueces',
-          body: 'Añade a la masa terminada las pasas escurridas y las nueces picadas. Mezcla hasta que queden repartidas de forma uniforme.',
-          tip: 'Guarda la masa en el frigorífico y úsala en un plazo de tres días.',
-          media: stepMedia(
-            'batter-add-ins',
-            'Masa lisa de bizcocho de zanahoria con pasas remojadas pequeñas y nueces finamente picadas',
-            'Incorpora los añadidos',
-            'Reparte las pasas pequeñas y las nueces picadas de forma uniforme por la masa lisa.',
-          ),
-        },
-        {
-          id: 'prepare-pan',
-          title: 'Prepara el molde',
-          body: 'Para un molde alto, coloca un trozo de papel de horno en el fondo. Unta las paredes con mantequilla y espolvoréalas con canela.',
-          tip: 'La canela aporta aroma y hace la corteza más crujiente.',
-          media: stepMedia(
-            'prepare-pan',
-            'Molde alto para bizcocho con papel de horno en el fondo y paredes untadas con mantequilla y espolvoreadas con canela',
-            'Prepara el molde',
-            'Forra solo el fondo y unta y espolvorea los lados con canela.',
-          ),
-        },
-        {
-          id: 'bake',
-          title: 'Hornea el bizcocho',
-          body: 'Pasa la masa al molde preparado. Hornea a 200 °C con calor arriba y abajo durante 35–40 minutos. Pincha el centro con un palillo; debe salir completamente seco.',
-          meta: '200 °C · 35–40 min · calor arriba y abajo',
-          checkpoint: 'El palillo debe salir completamente seco.',
-          media: [
-            {
-              ...carrotCakeStepMedia['batter-in-pan'],
-              alt: 'Masa lisa cruda de bizcocho de zanahoria con pasas pequeñas y nueces picadas en un molde alto',
-              title: 'Pasa la masa al molde',
-              caption: 'Alisa la masa en el molde preparado antes de hornear.',
-            },
-            {
-              ...carrotCakeStepMedia['dry-toothpick'],
-              alt: 'Bizcocho de zanahoria horneado en un molde y un palillo limpio retirado del centro',
-              title: 'Comprueba el centro',
-              caption: 'El palillo debe salir completamente seco.',
-            },
-          ],
-        },
-      ],
-    },
+    ],
+    steps,
+  };
+}
+
+export const carrotCakeRecipe = {
+  id: 'carrot-cake',
+  publicationStatus: 'published',
+  source: {
+    file: 'docs/reference/recipe-inventory.xlsx',
+    locator:
+      'Recipe Archive · Морквяний кекс; author-reviewed one-cake quantities and method',
   },
+  ...contentForLocale('en'),
+  translations: { uk: contentForLocale('uk'), es: contentForLocale('es') },
 } satisfies RecipeSourceDraft;

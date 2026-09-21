@@ -36,7 +36,9 @@ record; the new configuration does not inherit it.
 - Always show icon and written label together.
 - Keep explanatory text dark chocolate for readability.
 - Do not use `Made many times` as a standalone status.
-- Recipe cards show only a concise test statement.
+- Published recipe cards omit the repeated Tested statement; exact evidence remains
+  on recipe detail and adaptation controls. Local draft cards use a separate Working
+  recipe label, never an evidence badge.
 - Recipe setup and adaptation controls show the full scope and explanation.
 - Never describe AI-generated guidance as Tested.
 - Assistant explanation and limitation blocks are unbadged. Only server-owned evidence may

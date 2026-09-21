@@ -17,14 +17,22 @@ void test('only reviewed UI locales are publishable', () => {
 
 void test('a draft recipe translation is not a public language equivalent', () => {
   assert.equal(isRecipeLocalePublishable(crinkleCookiesRecipe, 'en'), false);
-  assert.deepEqual(getPublishableRecipeLocales(crinkleCookiesRecipe), []);
+  assert.equal(isRecipeLocalePublishable(crinkleCookiesRecipe, 'uk'), true);
+  assert.deepEqual(getPublishableRecipeLocales(crinkleCookiesRecipe), ['uk']);
   assert.deepEqual(getPreviewRobots(false), { index: false, follow: false });
 });
 
-void test('a ready recipe requires a reviewed locale before publication', () => {
-  const readyRecipe: Pick<RecipeDraft, 'publicationStatus' | 'translationState'> = {
-    publicationStatus: 'ready',
-    translationState: { en: 'reviewed', es: 'draftTranslation', uk: 'reviewed' },
+void test('a published recipe requires a reviewed locale before publication', () => {
+  const readyRecipe: Pick<
+    RecipeDraft,
+    'publicationStatus' | 'translationState'
+  > = {
+    publicationStatus: 'published',
+    translationState: {
+      en: 'reviewed',
+      es: 'draftTranslation',
+      uk: 'reviewed',
+    },
   };
 
   assert.equal(isRecipeLocalePublishable(readyRecipe, 'en'), true);

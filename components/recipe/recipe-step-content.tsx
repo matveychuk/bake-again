@@ -41,7 +41,7 @@ export function RecipeStepContent({
 
   return (
     <div className={cn(styles.stepContent, className)}>
-      <div className={styles.header}>
+      <div className={styles.header} data-recipe-step-header>
         <Heading id={headingId} tabIndex={headingTabIndex}>
           {title}
         </Heading>

@@ -1,7 +1,8 @@
+import { canViewDrafts } from '@/lib/runtime/local-development.server';
 import { ShoppingBag } from 'lucide-react';
 import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
-import { localeHomePath, localeSavedPath, localeShoppingListPath } from '@/lib/i18n/routes';
+import { localeAboutPath, localeDraftsPath, localeHomePath, localeSavedPath, localeShoppingListPath } from '@/lib/i18n/routes';
 import { LanguageSwitcher } from './language-switcher';
 import { Wordmark } from './wordmark';
 
@@ -11,12 +12,13 @@ type SiteHeaderProps = {
   pathname?: string;
 };
 
-export function SiteHeader({
+export async function SiteHeader({
   homeHref,
   locale = defaultLocale,
   pathname,
 }: SiteHeaderProps) {
   const messages = getUiMessages(locale);
+  const showDrafts = await canViewDrafts();
   const resolvedHomeHref = homeHref ?? localeHomePath(locale);
 
   return (
@@ -25,6 +27,8 @@ export function SiteHeader({
 
       <nav aria-label={messages.a11y.primaryNavigation}>
         <a href={resolvedHomeHref}>{messages.navigation.recipes}</a>
+        <a href={localeAboutPath(locale)} aria-current={pathname === localeAboutPath(locale) ? 'page' : undefined}>{messages.navigation.about}</a>
+        {showDrafts && <a href={localeDraftsPath(locale)} aria-current={pathname === localeDraftsPath(locale) ? 'page' : undefined}>{messages.navigation.drafts}</a>}
         <a href={localeSavedPath(locale)}>{messages.navigation.saved}</a>
         <a className="nav-bag" href={localeShoppingListPath(locale)}>
           <ShoppingBag aria-hidden="true" size={17} strokeWidth={1.7} />

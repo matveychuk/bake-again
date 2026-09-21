@@ -23,8 +23,15 @@ export type CookModeSessionV1 = {
   note: string;
 };
 
-export function cookModeStorageKey(recipeId: string, recipeVersionId: string) {
-  return `bake-again:cook-mode:v1:${recipeId}:${recipeVersionId}`;
+export function cookModeStorageKey(
+  recipeId: string,
+  recipeVersionId: string,
+  configurationKey = 'base',
+) {
+  const baseKey = `bake-again:cook-mode:v1:${recipeId}:${recipeVersionId}`;
+  return configurationKey === 'base'
+    ? baseKey
+    : `${baseKey}:${encodeURIComponent(configurationKey)}`;
 }
 
 function isIsoDate(value: unknown): value is string {
@@ -92,9 +99,13 @@ export function readCookModeSession(
   recipeId: string,
   recipeVersionId: string,
   storage?: StorageLike | null,
+  configurationKey = 'base',
 ) {
   const session = parseCookModeSession(
-    readStorageValue(cookModeStorageKey(recipeId, recipeVersionId), storage),
+    readStorageValue(
+      cookModeStorageKey(recipeId, recipeVersionId, configurationKey),
+      storage,
+    ),
   );
   return session?.recipeId === recipeId &&
     session.recipeVersionId === recipeVersionId
@@ -105,9 +116,14 @@ export function readCookModeSession(
 export function persistCookModeSession(
   session: CookModeSessionV1,
   storage?: StorageLike | null,
+  configurationKey = 'base',
 ) {
-  writeStorageValue(
-    cookModeStorageKey(session.recipeId, session.recipeVersionId),
+  return writeStorageValue(
+    cookModeStorageKey(
+      session.recipeId,
+      session.recipeVersionId,
+      configurationKey,
+    ),
     JSON.stringify(session),
     storage,
   );

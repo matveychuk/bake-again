@@ -63,28 +63,67 @@ validateRecipe(glutenFreeNapoleonRecipe);
 validateRecipe(crinkleCookiesRecipe);
 
 let validatedRecipeCount = 0;
+const registeredRecipeIds = new Set(
+  recipeDocuments.map((document) => document.recipe.id),
+);
 for (const document of recipeDocuments) {
-  const sections = document.kind === 'detailed'
-    ? document.recipe.ingredientSections.map((section) => ({
-        id: section.id,
-        lines: section.lines.map((line) => ({ id: line.id, quantity: line.quantity })),
-      }))
-    : document.recipe.ingredientSections.map((section) => ({
-        id: section.id,
-        lines: section.ingredients.map((line) => ({ id: line.id, quantity: line.quantity })),
-      }));
-  for (const section of sections) for (const line of section.lines) {
-    assert(line.quantity, `${document.recipe.id}/${section.id}/${line.id}: missing canonical quantity`);
-    assert(['base', 'nameOnly'].includes(line.quantity.shopping.mode), `${document.recipe.id}/${line.id}: invalid shopping mode`);
-    assert(
-      line.quantity.shopping.mode === 'nameOnly' || line.quantity.base !== null,
-      `${document.recipe.id}/${line.id}: base shopping requires a base quantity`,
+  const creamOptions = document.recipe.creamOptions;
+  if (creamOptions) {
+    assert.equal(
+      new Set(creamOptions.recipeIds).size,
+      creamOptions.recipeIds.length,
+      `${document.recipe.id}: duplicate cream option`,
     );
     assert(
-      !(line.quantity.shopping.mode === 'nameOnly' && line.quantity.base !== null),
-      `${document.recipe.id}/${line.id}: name-only quantity must not carry a base`,
+      creamOptions.recipeIds.includes(creamOptions.recommendedRecipeId),
+      `${document.recipe.id}: recommended cream must be one of its options`,
     );
+    for (const creamRecipeId of creamOptions.recipeIds) {
+      assert(
+        registeredRecipeIds.has(creamRecipeId),
+        `${document.recipe.id}: unknown cream recipe ${creamRecipeId}`,
+      );
+    }
   }
+  const sections =
+    document.kind === 'detailed'
+      ? document.recipe.ingredientSections.map((section) => ({
+          id: section.id,
+          lines: section.lines.map((line) => ({
+            id: line.id,
+            quantity: line.quantity,
+          })),
+        }))
+      : document.recipe.ingredientSections.map((section) => ({
+          id: section.id,
+          lines: section.ingredients.map((line) => ({
+            id: line.id,
+            quantity: line.quantity,
+          })),
+        }));
+  for (const section of sections)
+    for (const line of section.lines) {
+      assert(
+        line.quantity,
+        `${document.recipe.id}/${section.id}/${line.id}: missing canonical quantity`,
+      );
+      assert(
+        ['base', 'nameOnly'].includes(line.quantity.shopping.mode),
+        `${document.recipe.id}/${line.id}: invalid shopping mode`,
+      );
+      assert(
+        line.quantity.shopping.mode === 'nameOnly' ||
+          line.quantity.base !== null,
+        `${document.recipe.id}/${line.id}: base shopping requires a base quantity`,
+      );
+      assert(
+        !(
+          line.quantity.shopping.mode === 'nameOnly' &&
+          line.quantity.base !== null
+        ),
+        `${document.recipe.id}/${line.id}: name-only quantity must not carry a base`,
+      );
+    }
   validatedRecipeCount += 1;
 }
 
@@ -127,7 +166,9 @@ assert.deepEqual(
   napoleonBaseSelection,
 );
 
-console.log(`Validated ${validatedRecipeCount} canonical recipes and 2 calculated configuration fixtures.`);
+console.log(
+  `Validated ${validatedRecipeCount} canonical recipes and 2 calculated configuration fixtures.`,
+);
 console.log({
   napoleon24cmHalfBatch: {
     totalScaleFactor: napoleon24cmHalfBatch.totalScaleFactor,

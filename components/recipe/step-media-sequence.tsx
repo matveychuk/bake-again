@@ -7,8 +7,8 @@ export type StepMediaItem = {
   id: string;
   src: string;
   alt: string;
-  title: string;
-  caption: string;
+  title?: string;
+  caption?: string;
 };
 
 export function StepMediaSequence({
@@ -50,10 +50,12 @@ export function StepMediaSequence({
                 </span>
               )}
             </div>
-            <figcaption>
-              <strong>{item.title}</strong>
-              {item.caption}
-            </figcaption>
+            {(item.title || item.caption) && (
+              <figcaption>
+                {item.title && <strong>{item.title}</strong>}
+                {item.caption}
+              </figcaption>
+            )}
           </figure>
         ))}
       </section>

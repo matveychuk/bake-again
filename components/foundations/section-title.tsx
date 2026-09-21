@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Eyebrow } from './eyebrow';
 
 type SectionTitleProps = {
-  eyebrow: ReactNode;
+  eyebrow?: ReactNode;
   children: ReactNode;
   id?: string;
   className?: string;
@@ -21,7 +21,7 @@ export function SectionTitle({
   const Heading = `h${level}` as const;
   return (
     <div className={className}>
-      <Eyebrow className={eyebrowClassName}>{eyebrow}</Eyebrow>
+      {eyebrow && <Eyebrow className={eyebrowClassName}>{eyebrow}</Eyebrow>}
       <Heading id={id}>{children}</Heading>
     </div>
   );

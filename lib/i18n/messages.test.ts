@@ -16,3 +16,9 @@ void test('provides localized recipe scaling controls for every supported locale
     '0,5× від записаної бази. Якщо виходить дробова кількість яєць або інших цілих одиниць, перевірте її вручну.',
   );
 });
+
+void test('provides a localized About navigation label for every supported locale', () => {
+  assert.equal(getUiMessages('en').navigation.about, 'About');
+  assert.equal(getUiMessages('es').navigation.about, 'Nosotros');
+  assert.equal(getUiMessages('uk').navigation.about, 'Про нас');
+});

@@ -1,63 +1,84 @@
 import { recipeInventory } from './inventory.ts';
 import { catalogLocaleCopy } from './catalog-locales.ts';
 import { getRecipeContent } from './registry.ts';
+import { getRecipePublicationStatus } from './publication.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
-import { formatDuration } from '../../lib/i18n/format.ts';
+import { formatElapsedMinutes } from '../../lib/i18n/format.ts';
 import { getUiMessages } from '../../lib/i18n/messages.ts';
-import { getLocalizedRecipeCollection } from './collections.ts';
-import type { RecipeCollectionId } from './collections.ts';
+import {
+  getLocalizedRecipeCollection,
+  type RecipeCollectionId,
+} from './collections.ts';
+import type { PublicationStatus } from './recipe.types.ts';
+import type { StructuredRecipeOverview } from './source-recipe.types.ts';
 
+export type CatalogScope = 'published' | 'unpublished' | 'all';
 export type RecipeCatalogEntry = {
   id: string;
   title: string;
-  eyebrow: string;
-  detail: string;
-  status: string;
-  statusKind: 'draft';
-  statusDetail: string;
+  /** Search-only classification; never rendered above the title. */
+  category: string;
+  detail: string | null;
+  difficulty: string | null;
+  flour: string;
   image: string;
   alt: string;
   href: string;
-  publicationStatus: 'draft';
+  publicationStatus: PublicationStatus;
   imageKind: 'generated-preview' | 'author-photo';
   collections: Array<{ id: RecipeCollectionId; label: string }>;
 };
 
-export function getRecipeCatalog(locale: AppLocale): RecipeCatalogEntry[] {
-  return recipeInventory.map((recipe) => {
+export function cardTime(
+  locale: AppLocale,
+  timing: StructuredRecipeOverview['timing'],
+): string | null {
+  const total = timing.totalElapsedMinutes;
+  const minutes = total ?? timing.activeMinutes;
+  if (minutes === null) return null;
+  const duration = formatElapsedMinutes(locale, minutes);
+  const messages = getUiMessages(locale).recipe;
+  return `${total === null ? messages.activeTime : messages.totalTime}: ${duration}`;
+}
+
+/** Public by default. Editorial callers must explicitly request unpublished records. */
+export function getRecipeCatalog(
+  locale: AppLocale,
+  scope: CatalogScope = 'published',
+): RecipeCatalogEntry[] {
+  return recipeInventory.flatMap((recipe) => {
+    const publicationStatus = getRecipePublicationStatus(recipe.id);
+    if (
+      !publicationStatus ||
+      publicationStatus === 'archived' ||
+      (scope !== 'all' && publicationStatus !== scope)
+    )
+      return [];
     const copy = catalogLocaleCopy[recipe.id];
-    const localized = copy?.title[locale];
     const overview = getRecipeContent(recipe.id, locale)?.overview;
-    const minutes =
-      overview?.timing.totalElapsedMinutes ??
-      overview?.timing.activeMinutes ??
-      null;
-    return {
-      id: recipe.id,
-      title: localized ?? recipe.title,
-      eyebrow: copy?.category[locale] ?? recipe.category,
-      detail:
-        (minutes === null
-          ? null
-          : formatDuration(locale, {
-              kind: 'exact',
-              value: minutes % 60 === 0 ? minutes / 60 : minutes,
-              unit: minutes % 60 === 0 ? 'hour' : 'minute',
-            })) ??
-        getUiMessages(locale).catalog.detailsToConfirm,
-      status: getUiMessages(locale).catalog.workingRecord,
-      statusKind: 'draft',
-      statusDetail: overview?.flour.replace(' Bread', '') ?? '',
-      image: recipe.image,
-      imageKind: recipe.imageKind,
-      alt: copy?.alt[locale] ?? recipe.imageAlt,
-      href: `/recipes/${recipe.slug}`,
-      publicationStatus: 'draft',
-      collections: recipe.collectionIds.map((id) => ({
-        id,
-        label: getLocalizedRecipeCollection(id, locale),
-      })),
-    };
+    const messages = getUiMessages(locale).recipe;
+    const difficulty = overview?.difficulty;
+    return [
+      {
+        id: recipe.id,
+        title: copy?.title[locale] ?? recipe.title,
+        category: copy?.category[locale] ?? recipe.category,
+        detail: overview ? cardTime(locale, overview.timing) : null,
+        difficulty: difficulty
+          ? `${messages.difficulty}: ${difficulty === 'easy' ? messages.difficultyEasy : difficulty === 'medium' ? messages.difficultyMedium : messages.difficultyAdvanced}`
+          : null,
+        flour: overview?.flour.replace(' Bread', '') ?? '',
+        image: recipe.image,
+        imageKind: recipe.imageKind,
+        alt: copy?.alt[locale] ?? recipe.imageAlt,
+        href: `/recipes/${recipe.slug}`,
+        publicationStatus,
+        collections: recipe.collectionIds.map((id) => ({
+          id,
+          label: getLocalizedRecipeCollection(id, locale),
+        })),
+      },
+    ];
   });
 }
 

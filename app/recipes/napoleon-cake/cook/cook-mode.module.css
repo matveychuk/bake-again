@@ -290,6 +290,41 @@
   padding: var(--space-8) var(--space-8) var(--space-16);
 }
 
+.previousBakeNote {
+  max-width: var(--layout-cook-reading);
+  margin-bottom: var(--space-6);
+  padding: var(--space-4);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  border-left: 3px solid var(--color-action-primary);
+  background: var(--color-background-panel-subtle);
+}
+
+.previousBakeNote > svg {
+  color: var(--color-action-primary-strong);
+}
+
+.previousBakeNote strong {
+  font-size: var(--font-size-body-small);
+}
+
+.previousBakeNote p {
+  margin: var(--space-2) 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body);
+}
+
+.previousBakeNote small {
+  margin-top: var(--space-2);
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-body);
+}
+
 .step {
   width: 100%;
 }
@@ -517,6 +552,26 @@
   color: var(--color-text-primary);
   font: inherit;
   resize: vertical;
+}
+
+.noteSaveStatus {
+  margin: var(--space-2) 0 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-body);
+}
+
+.noteSaveStatus[role='alert'] {
+  color: var(--color-action-primary-strong);
+}
+
+.completionNextSteps {
+  margin: var(--space-6) 0 0;
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body);
 }
 
 .completionActions {

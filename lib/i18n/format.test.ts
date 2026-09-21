@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { formatDuration, formatQuantity, formatRecipeCount } from './format.ts';
+import {
+  formatDuration,
+  formatElapsedMinutes,
+  formatQuantity,
+  formatRecipeCount,
+} from './format.ts';
 
 void test('formats decimal quantities and units for every supported locale', () => {
   const quantity = { kind: 'exact', value: 1.5, unit: 'tsp' } as const;
@@ -18,6 +23,12 @@ void test('formats ranges and minimum durations without English-only grammar', (
     formatDuration('uk', { kind: 'minimum', min: 2, unit: 'hour' }),
     'Щонайменше 2 год',
   );
+});
+
+void test('formats compound elapsed times in hours and minutes', () => {
+  assert.equal(formatElapsedMinutes('uk', 150), '2 год 30 хв');
+  assert.equal(formatElapsedMinutes('en', 75), '1 hour 15 min');
+  assert.equal(formatElapsedMinutes('es', 45), '45 min');
 });
 
 void test('formats recipe counts with locale-specific labels', () => {

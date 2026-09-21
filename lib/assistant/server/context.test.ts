@@ -125,13 +125,13 @@ void test('every sourceDraft is explicitly unavailable, even when its source met
   assert.ok(!result.available && result.message.includes('чернетку'));
 });
 
-void test('both detailed recipes project without treating draft publication as released', () => {
+void test('published detailed recipes preserve locale review state', () => {
   for (const document of recipeDocuments) {
     if (document.kind !== 'detailed') continue;
     const result = context({ recipeId: document.recipe.id });
     assert.equal(result.recipe.title, document.recipe.title.en);
     assert.equal(result.recipeVersionId, document.recipe.versionId);
-    assert.equal(result.publication.status, 'draft');
+    assert.equal(result.publication.status, 'published');
     assert.equal(result.publication.recipeLocalePublishable, false);
   }
 });
@@ -233,13 +233,13 @@ void test('checkpoints and practical tips preserve canonical types, IDs and lang
   }
 });
 
-void test('narrow section and line provenance override a repeatedly verified base', () => {
+void test('verified custard and narrower dairy guidance preserve their own provenance', () => {
   const result = context();
   assert.equal(result.recipe.evidence.status, 'Tested');
   const milk = result.ingredients.find((line) => line.id === 'milk-custard');
-  assert.equal(milk?.amount.evidence.sourceState, 'authorGuidance');
-  assert.equal(milk?.amount.evidence.status, null);
-  assert.ok(milk?.amount.evidence.gapIds.includes('confirm-cream-volume'));
+  assert.equal(milk?.amount.evidence.sourceState, 'repeatedlyVerified');
+  assert.equal(milk?.amount.evidence.status, 'Tested');
+  assert.deepEqual(milk?.amount.evidence.gapIds, []);
   const dairy = result.ingredients.find(
     (line) => line.id === 'cultured-dairy-dough',
   );
@@ -253,7 +253,17 @@ void test('narrow section and line provenance override a repeatedly verified bas
 });
 
 void test('unknowns stay null and gaps omit private editorial questions and source paths', () => {
-  const result = context();
+  const document = getRecipeDocument(base.recipeId)!;
+  assert.equal(document.kind, 'detailed');
+  if (document.kind !== 'detailed') throw new Error('Expected detailed recipe');
+  const recordedTime = document.recipe.timing.totalElapsedMinutes;
+  let result: TrustedRecipeContext;
+  try {
+    document.recipe.timing.totalElapsedMinutes = null;
+    result = context();
+  } finally {
+    document.recipe.timing.totalElapsedMinutes = recordedTime;
+  }
   assert.equal(result.timing?.totalElapsedMinutes.value, null);
   assert.equal(result.timing?.totalElapsedMinutes.evidence.status, null);
   assert.equal(result.storage?.value, null);
@@ -273,7 +283,7 @@ void test('unknowns stay null and gaps omit private editorial questions and sour
     assert.equal(serialized.includes(excluded), false, excluded);
   assert.ok(
     result.gaps.some(
-      (gap) => gap.id === 'confirm-cream-volume' && gap.publicationBlocking,
+      (gap) => gap.id === 'confirm-dairy-choice' && !gap.publicationBlocking,
     ),
   );
   assert.equal(
@@ -308,7 +318,7 @@ void test('geometry alternatives and variations have their own status, never bas
   }
 });
 
-void test('adjusted quantities are recomputed and retain provisional source limitations', () => {
+void test('adjusted quantities are recomputed without inheriting Tested', () => {
   const configuration = {
     kind: 'adjusted',
     geometryId: 'round-24cm-preview',
@@ -345,9 +355,9 @@ void test('adjusted quantities are recomputed and retain provisional source limi
   }
   const milk = result.ingredients.find((line) => line.id === 'milk-custard')!;
   assert.equal(milk.amount.evidence.status, 'Calculated');
-  assert.equal(milk.amount.evidence.sourceState, 'authorGuidance');
-  assert.ok(milk.amount.evidence.limitations.includes('authorGuidance'));
-  assert.ok(milk.amount.evidence.gapIds.includes('confirm-cream-volume'));
+  assert.equal(milk.amount.evidence.sourceState, 'repeatedlyVerified');
+  assert.deepEqual(milk.amount.evidence.limitations, []);
+  assert.deepEqual(milk.amount.evidence.gapIds, []);
   assert.equal(result.timing?.basis, 'canonical-base');
   assert.deepEqual(result.timing, context().timing);
   assert.deepEqual(result.yield, context().yield);

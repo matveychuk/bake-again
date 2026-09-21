@@ -16,7 +16,7 @@ export type EvidenceState =
   | 'needsRetest'
   | 'draft';
 
-export type PublicationStatus = 'draft' | 'ready' | 'archived';
+export type PublicationStatus = 'unpublished' | 'published' | 'archived';
 export type Availability =
   | 'default'
   | 'selectable'
@@ -52,8 +52,9 @@ export type Quantity =
 
 /**
  * The one canonical ingredient quantity model. `base` is the only amount that
- * can be bought or aggregated. `equivalent` is an explicitly recorded kitchen
- * measure and is deliberately excluded from shopping.
+ * can be bought or aggregated. Dry ingredients covered by `spoon-weights.ts`
+ * always use grams in `base`; their spoon measure is generated as `equivalent`.
+ * `equivalent` is deliberately excluded from shopping.
  */
 export interface IngredientQuantity {
   base: Quantity | null;
@@ -319,6 +320,15 @@ export interface RecipeVariation {
   blockingGapIds?: string[];
 }
 
+/**
+ * Reusable cream recipes that are confirmed for a finished dish. Compatibility and
+ * recommendation belong to the host recipe; the cream keeps only its own evidence.
+ */
+export interface RecipeCreamOptions {
+  recipeIds: [string, ...string[]];
+  recommendedRecipeId: string;
+}
+
 export interface RecipeMedia {
   id: string;
   type: 'image' | 'video';
@@ -350,6 +360,8 @@ export interface ContentGap {
 
 export interface RecipeDraft {
   schemaVersion: 2;
+  /** Opt-in concise reading layout after editorial review. */
+  presentation?: 'concise';
   id: string;
   versionId: string;
   publicationStatus: PublicationStatus;
@@ -366,7 +378,12 @@ export interface RecipeDraft {
     totalElapsedMinutes: number | null;
     /** Optional planning copy; {duration} is resolved from the referenced phase. */
     planningNote?: { text: LocalizedText; phaseId?: string } | null;
-    phases: Array<{ id: string; label: LocalizedText; duration: Duration }>;
+    phases: Array<{
+      id: string;
+      label: LocalizedText;
+      duration: Duration;
+      relatedStepId?: string;
+    }>;
   };
   yield: {
     default: YieldOption;
@@ -384,6 +401,7 @@ export interface RecipeDraft {
   steps: RecipeStep[];
   storage: LocalizedText | null;
   makeAhead: LocalizedText | null;
+  creamOptions?: RecipeCreamOptions;
   variations: RecipeVariation[];
   heroMediaId: string | null;
   media: RecipeMedia[];

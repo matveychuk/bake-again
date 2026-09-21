@@ -267,7 +267,7 @@
   grid-column: 2;
   grid-row: 3;
 }
-.steps h4 {
+.steps h3 {
   margin: 7px 0 10px;
   font-family: var(--font-family-display);
   font-size: 1.55rem;
@@ -416,5 +416,14 @@
   }
   .stepMedia {
     grid-column: 1 / -1;
+  }
+  .steps > li {
+    grid-template-columns: var(--space-12) minmax(0, 1fr);
+  }
+  .stepContent {
+    grid-column: 1 / -1;
+  }
+  .stepContent > [data-recipe-step-header] {
+    padding-inline-start: var(--space-12);
   }
 }

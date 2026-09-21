@@ -1,5 +1,252 @@
 # Design system changelog
 
+## 2026-09-21 · Shared cream pages and published profiteroles
+
+- Moved all four reusable cream routes onto the same `InventoryRecipeDetail` composition
+  as the main recipes, including hero photography, Tested status, quantity adjustment,
+  ingredients, Cook Mode and step photography. Removed the redundant cream-only page.
+- Kept creams as linked supporting recipes rather than discovery cards; they omit only
+  the irrelevant flour row and catalogue Save control.
+- Published the reviewed profiterole record to Recipes and kept éclair spellings as
+  search aliases. Updated the fruit-roll hero and method so a quarter of the selected
+  cream is reserved for the top, followed by fruit, berries or chopped nuts.
+
+## 2026-09-21 · Reviewed apple charlotte and plum upside-down cake
+
+- Published both author-confirmed recipes as Tested with a five-egg base batch, 20 minutes
+  of active work, 50 minutes total time and an explicit double-batch note for a full oven
+  tray. Eggs are the scaling anchor in both recipes.
+- Kept the apple charlotte butter-enriched and folded the floured apple pieces through the
+  batter. Kept the plum sponge butter-free, placed the plums cut side down and added the
+  immediate hot inversion that reveals the fruit layer on top.
+- Replaced both working covers with recipe-accurate natural-home heroes and added only the
+  decision-useful ribbon-stage, apple-distribution and plum-arrangement process images.
+
+## 2026-09-21 · Reviewed fruit sponge roll
+
+- Published the Tested fruit sponge roll with 30 minutes of active work, a yield of one
+  roll and easy difficulty. Total elapsed time remains open because cooling varies; the
+  dependency is stated once in planning instead of being invented.
+- Reduced the host recipe to four practical steps, preserved the ribbon-stage, doneness
+  and warm-rolling cues, and removed repeated photo captions and the duplicated cream
+  formula.
+- Linked whipped mascarpone cream as the recommended filling and vanilla buttercream as
+  the alternative. Thick blueberry or raspberry jam remains flexible, with optional fresh
+  fruit in the filling and on top.
+- Replaced the unreviewed author cover with a generated natural-home hero checked against
+  the actual baked roll and real examples; retained only three decision-useful process
+  images in the published flow.
+
+## 2026-09-21 · Profiteroles and reusable creams editorial pass
+
+- Renamed the working choux recipe to Profiteroles across reader-facing titles and
+  metadata while retaining éclair spellings as curated search aliases and the stable
+  internal recipe identity.
+- Added a visible Working recipe label to unpublished recipe heroes while keeping the
+  exact baked profiterole base separately marked Tested.
+- Replaced the mismatched éclair cover with a generated natural-home photograph of
+  round filled profiteroles and retained four step images only for useful dough states.
+- Added active and elapsed times, yield and difficulty to all four Tested cream recipes;
+  cooling is counted in elapsed time, not active work.
+- Added the flour-free Recipe overview variant for standalone creams and removed
+  preparation-only steps such as chilling an empty bowl or separately softening butter.
+
+## 2026-09-20 · Reusable cream recipe model
+
+- Added four Tested cream records with localized ingredients, steps, checkpoints and
+  practical tips: mascarpone whipped cream, vanilla egg custard, eggless vanilla custard
+  and vanilla buttercream.
+- Added host-owned cream options so a finished recipe lists compatible cream recipe IDs
+  and exactly one recommended cream without duplicating compatibility state on the cream.
+- Set vanilla egg custard as the recommended cream for éclairs and retained the other
+  three creams as confirmed alternatives.
+
+## 2026-09-20 · Reviewed gluten-free Napoleon
+
+- Published the repeatedly baked Napoleon recipe with Schär Mix B as the quantity-adjustment
+  anchor and removed draft-only publication notes from its detailed recipe layout.
+- Confirmed the custard formula at four whole eggs, 400 g sugar, 170 g corn starch,
+  100 g butter and 24 g vanilla sugar; fixed the nut finish at 150 g walnuts and 50 g
+  flaked almonds.
+- Consolidated planning into two practical notes: enough parchment for 12 layers and the
+  full chill/rest schedule. Total elapsed time stays intentionally open because the cake
+  matures for 12–24 hours and is best served the next day.
+- Restored six existing process photographs to the canonical recipe and added generated
+  images for the divided dough, rolled and baked layers, finished custard, assembly and
+  accurate six-layer hero.
+- Reworked the generated Napoleon set after reviewing real homemade examples: pastry and
+  crumbs are less uniform, the cream layers are thinner, the kitchen light is natural and
+  the assembly image now uses only round 28 cm layers.
+
+## 2026-09-20 · Personal bake memory
+
+- Separated personal `Baked` memory from Save / Want to bake. Completing Cook Mode now
+  records the date, exact recipe version and base or adjusted configuration locally.
+- Made the private completion note explicitly auto-saving with saving, saved and failure
+  states. Return to recipe and Cook again no longer imply that the note may be discarded.
+- Added the latest bake and note to recipe detail and surfaced the previous note before
+  step one of a repeat cook. Added the matching Personal state example to Design Lab.
+
+## 2026-09-20 · Author waffle photography
+
+- Replaced the cottage-cheese waffle generated hero and process imagery with seven
+  selected author photographs shared by recipe detail and Cook Mode.
+- Grouped the photos into three concise before/after sequences: blending the base,
+  mixing the batter and filling/baking/serving the waffles. Near-duplicate frames were
+  intentionally omitted.
+- Updated localized image descriptions to identify the visible berry variation without
+  changing the Tested base recipe or inventing an unrecorded berry quantity.
+
+## 2026-09-20 · Prune-cake editorial pass and step imagery
+
+- Published the completed prune-cake record in Recipes and removed its remaining
+  pre-publication note; bake-test evidence remains a separate status.
+- Published recipes without recorded bake-test evidence now omit the draft-only
+  working-record explanation instead of implying that they are still unpublished.
+- Simplified the prune-cake hero, ingredient notes and ten-step method, moving the two
+  bake durations into concise step metadata and recording the confirmed hot-glaze method.
+- Replaced generic cream and glaze images with a coherent five-image generated series:
+  sliced layers, prune cream, coated cake cubes, mound assembly and the finished cake.
+- Kept concise working-recipe publication guidance once beside ingredients instead of
+  repeating the same editorial note again at the end of the page.
+- Suppressed the generic “as needed” quantity when an unquantified ingredient already
+  provides a more specific note such as “to taste”.
+
+## 2026-09-20 · Prune-cake method clarified
+
+- Completed the working prune-cake method in the existing concise recipe layout:
+  60 active minutes, one 26 cm cake and medium difficulty.
+- Recorded the two-stage 200°C bake, three-layer assembly, 150 g prunes, sugar-based
+  cream and walnut-or-pecan finish. Total elapsed time remains open until the cooling
+  duration is confirmed; publication and evidence status remain unchanged.
+
+## 2026-09-20 · Cocoa spoon conversion
+
+- Added the shared unsweetened-cocoa reference of 5 g per tablespoon, rounded for
+  practical use from the cited 42 g per half cup reference. The new prune-cake
+  transcription therefore keeps 5 tbsp cocoa as a 25 g canonical quantity.
+
+## 2026-09-20 · Reviewed paska
+
+- Published the author-confirmed Tested paska in the existing concise layout with
+  30 active minutes and a yield of three medium paskas. Quantities are unchanged.
+- Set a conservative, explicitly approximate total of 290 minutes, including
+  proofing, baking and cooling. Overlapping fruit soaking and active mixing are not
+  added twice; mould dimensions remain unspecified.
+- Reduced twelve steps to nine, removed editorial notes and repeated photo captions,
+  and retained useful yeast, dough, proofing and doneness cues and linked timers.
+
+## 2026-09-20 · Reviewed sponge cake
+
+- Published the Tested sponge cake in the existing concise layout: 15 active minutes,
+  60 total minutes, one sponge cake and easy difficulty.
+- Replaced the planning banner with preparation in the first step; preserved greasing
+  only the tin bottom, gradual sugar addition and gentle folding in four concise steps.
+- Removed source-measure commentary and repeated captions/checkpoints. Kept separate
+  sugar quantities for whites/yolks and labelled the small-egg equivalent.
+- Added all three language versions and the existing 40–50 minute baking timer.
+
+## 2026-09-20 · Reviewed banana bread
+
+- Published banana bread using the existing concise layout and recorded Tested evidence.
+  Set 30 active minutes and 90 total minutes; the author confirmed 40 minutes at 200°C
+  in a rectangular tin. Dimensions remain unspecified rather than invented.
+- Reduced the method to five steps. Oven/tin preparation starts the first step;
+  dry ingredients, add-ins and filling share one step. Removed repeated checkpoints,
+  image captions and editorial gaps while preserving fill level and skewer cues.
+- Localized the complete method in all three languages and retained canonical quantities,
+  per-step ingredients and separate baking/in-tin cooling timers.
+
+## 2026-09-20 · Whole-card recipe navigation
+
+- Made every non-control area of a recipe card open the recipe. Save and collection
+  controls remain separate, keyboard-reachable targets above the card link.
+
+## 2026-09-20 · Reviewed crinkle cookies
+
+- Published the author-confirmed Tested version with 30 minutes of active work and no
+  citrus ingredient. Preserved the 3–4 hour chill and 8–10 minute per-tray baking range;
+  full elapsed time remains unknown because cooling and tray count are not recorded.
+- Reduced the method to seven concise steps without repeated checkpoints or photo
+  captions. Preserved fast shaping, full sugar coating and moist-crack doneness cues.
+- Extended the existing concise layout to detailed recipes. Their adapter now preserves
+  per-step ingredients and explicit phase-to-step timer links; Design Lab includes the
+  edited cookies alongside waffles and crepes.
+
+## 2026-09-20 · Recipe card visual hierarchy
+
+- Emphasized time and difficulty values, retaining localized labels and adding
+  terracotta clock/chef-hat icons. Increased flour-value contrast without adding weight.
+- Gave collection links subtle sand surfaces, more separation, and underlined
+  terracotta hover treatment; retained 44px targets and visible keyboard focus.
+- Updated the shared multilingual Design Lab example and card language attributes.
+  All colours, spacing and metadata sizes use existing semantic tokens.
+
+## 2026-09-20 · Reviewed carrot cake
+
+- Reused concise recipe reading for the author-confirmed Tested carrot cake and
+  published it in Recipes. Recorded 30 active minutes, one cake and medium difficulty.
+- Set carrots (200 g) as the quantity anchor without changing the ingredient formula.
+- Kept advance raisin soaking as one planning note; moved oven/pan preparation to the
+  first step. Removed editorial suggestions and duplicate cues/captions, preserving
+  seven canonical steps, per-step quantities and the 35–40 minute baking timer.
+
+## 2026-09-20 · Reviewed dumplings and recipe publication
+
+- Applied the existing concise layout to Tested lazy dumplings: six short steps,
+  caption-free photos and preserved rest/boiling timers. Recorded 45 active minutes,
+  100 dumplings and medium difficulty, with 450 g cottage cheese as the scaling anchor.
+- Removed packet counts and cooking water from the ingredient list. Recorded the
+  author's recipe-specific tapioca measure (7 g = 1 tbsp); the global table is unchanged.
+- Explicitly published waffles, crepes and lazy dumplings into Recipes, removing them
+  from local Drafts while keeping publication separate from adaptation evidence.
+
+## 2026-09-20 · Reviewed crepe copy
+
+- Applied the concise recipe layout to author-confirmed Tested crepes in all three
+  languages. Four canonical steps now match Cook Mode; the rest timer stays attached
+  to the combined milk-and-rest step.
+- Replaced the planning banner with a phase-linked note under total time and displayed
+  the recorded 28 cm pan beside the base quantity. Removed editorial notes and repeated
+  photo captions; retained the thick-base technique and visible flipping cues.
+- Removed the contradictory oil spoon equivalent; canonical oil remains 25 g.
+
+## 2026-09-20 · Concise waffle recipe
+
+- Recorded the author's confirmation of the exact waffle base as Tested, independently
+  of publication. Added an opt-in concise reading layout without editorial draft notes.
+- Combined the dry-mixing steps, removed repeated checkpoints and made image captions
+  optional while retaining descriptive alt text in recipe detail and Cook Mode.
+- Reduced quantity-control copy, added the canonical Calculated badge only for changed
+  quantities, and kept explicitly fixed pinch measures unchanged. Added multilingual
+  production-component examples to the Design Lab.
+- Added Ukrainian discovery aliases including «гофре» without duplicating the dish title.
+
+## 2026-09-20 · Gram-first spoon conversions
+
+- Added one gram-first spoon-weight table for recurring dry ingredients. Author-measured
+  Schär Mix B Bread, tapioca starch, baking powder and granulated sugar values now drive
+  recipe equivalents; referenced values remain labelled separately.
+- Migrated managed recipe quantities so grams are canonical and teaspoons or tablespoons
+  are secondary cooking aids. Ambiguous ingredient alternatives and unconfirmed cup
+  measures remain explicitly unresolved instead of receiving a false gram value.
+
+## 2026-09-20 · About and recipe testing
+
+- Added a localized editorial About page for the Bake Again family story and testing
+  method, with canonical Tested, Calculated and Suggested status treatments.
+- Linked the homepage trust card directly to the testing section and documented the
+  editorial story-page pattern.
+- Added the localized About destination to the primary site navigation.
+
+## 2026-09-20 · Publication and local drafts
+
+- Split public published recipes from local-only unpublished working records.
+- Guard draft, recipe and Cook Mode routes with development plus loopback-host checks.
+- Cards now show title, explicit time basis, difficulty, flour and collection links.
+- Remove duplicate category eyebrows and repeated Tested labels from public cards.
+- Reuse the production card for multilingual Design Lab examples.
+
 ## Unreleased
 
 - Kept the shared Save control circular beside long recipe titles by preventing flex
@@ -200,3 +447,11 @@
 - Added baseline layout, spacing, photography, accessibility and localisation rules.
 - Added an explicit, opt-in dark semantic mode for future product validation.
 - Tightened the 390px homepage hero so food and search enter the first viewport.
+
+## 2026-09-20 — Working catalogue search
+
+- Connected GET search queries to ranked catalogue results, combining collection filters.
+- Added canonical ingredient, multilingual title/category/collection matching, curated
+  dish aliases and word forms, prefix matching and limited typo tolerance.
+- Reused the shared search form in the homepage and Design Lab, with retained input,
+  result counts, empty-result guidance and wrapping for long search headings.

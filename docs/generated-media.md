@@ -19,12 +19,39 @@ not evidence that this exact adaptation has been bake-tested.
 
 ### Fruit sponge roll step photography
 
-Four generated 3:2 process images under
+Three generated 3:2 process images under
 `public/media/recipes/fruit-sponge-roll/selected/` show the source-backed visual
-checkpoints: thick pale egg foam, airy batter spread on parchment, the warm unfilled
-sponge being rolled with parchment, and smooth mascarpone cream holding its shape.
-The author photograph remains the recipe cover and was used only as a visual-mood
-reference.
+checkpoints retained by the published recipe: thick pale egg foam, airy batter spread on
+parchment and the warm unfilled sponge being rolled with parchment. The earlier cream
+image remains in the repository as a superseded working reference because cream now comes
+from a linked reusable recipe.
+
+`public/images/recipes/fruit-sponge-roll-card-v3.png` is the current recipe and catalogue
+cover. It preserves the naturally uneven golden roll, distinct mascarpone-cream and
+berry-jam spiral and cut slice, while adding a modest hand-spread layer of cream across the
+top with fresh berries seated in it. The author photograph and real homemade roll examples
+were used only to check the form and filling proportions. Generated with the built-in
+image tool in photorealistic-natural mode; no text, branding or packaging is present.
+
+### Reusable cream photography
+
+Four generated 3:2 heroes use the shared Warm Precision setting and show the finished
+consistency of each linked cream without decorative pastry props:
+
+- `public/images/recipes/mascarpone-whipped-cream-card-v1.png`: airy mascarpone cream
+  holding firm soft peaks.
+- `public/images/recipes/vanilla-egg-custard-card-v1.png`: glossy egg custard falling in
+  a thick ribbon from a spoon.
+- `public/images/recipes/eggless-vanilla-custard-card-v1.png`: pale eggless custard with
+  a clear spatula channel.
+- `public/images/recipes/vanilla-buttercream-card-v1.png`: pale buttercream holding a
+  stable spatula swoop.
+
+The method keeps one decision-useful final-state image per cream. Mascarpone reuses the
+existing exact-recipe image under `fruit-sponge-roll/selected/`; the egg custard uses the
+matching finished-custard image, and newly generated eggless-custard and buttercream
+frames show the slow-closing spatula channel and firm beater peak respectively. All new
+assets were generated with the built-in image tool in photorealistic-natural mode.
 
 ### Prune cake working-record photography
 
@@ -50,24 +77,23 @@ bananas, wet mixture, deliberately lumpy scoopable batter and the matte-edge/ope
 flip cue. The earlier fritter cover was used only for its warm-neutral visual direction;
 the generated assets contain no branding or product packaging.
 
-### Cottage-cheese waffles step photography
+### Cottage-cheese waffles author photography
 
-The following are generated process assets for recipe review. They use the shared
-Warm Precision kitchen direction and contain no text, branding or claimed author
-photography. Each image is a 4:3 landscape PNG under
-`public/media/recipes/cottage-cheese-waffles/selected/`.
+Recipe detail, Cook Mode and the catalogue now use the author's real 3:2 photographs.
+Seven distinct states were selected from the supplied set; near-duplicate starting and
+berry-batter frames were left out to keep the sequence practical and concise.
 
-The first step now begins with the real author photograph
-`step-01-ingredients-before-blending-author-v1.jpeg`, showing the cottage cheese, eggs
-and yogurt together before blending. It appears before the generated smooth-base image
-as a practical before-and-after sequence.
+- `step-01-ingredients-before-blending-author-v1.jpeg`: cottage cheese, eggs and yogurt before blending.
+- `step-01-blended-base-author-v1.jpeg`: the smooth blended base.
+- `step-03-add-dry-author-v1.jpeg`: flour added to the wet base.
+- `step-03-mixed-batter-author-v1.jpeg`: the final thick batter consistency.
+- `step-05-fill-waffle-maker-author-v1.jpeg`: batter being portioned into the waffle maker.
+- `step-05-baked-waffles-author-v1.jpeg`: golden waffles in the open waffle maker.
+- `public/images/recipes/cottage-cheese-waffles-author-v1.jpeg`: plated waffles used as
+  the final method frame and catalogue/recipe hero.
 
-- `step-01-blended-base-v1.png`: smooth cottage-cheese, egg and yogurt base beside an immersion blender.
-- `step-02-add-wet-ingredients-v1.png`: sunflower oil being added with sugar, salt and vanilla ready.
-- `step-03-dry-mix-v1.png`: flour, corn starch and baking powder mixed with a whisk.
-- `step-04-mixed-batter-v1.png`: fully combined thick waffle batter lifted with a silicone spatula.
-- `step-05-rested-batter-v1.png`: batter resting loosely covered for the source-specified rest.
-- `step-06-baked-waffle-v1.png`: golden waffle in an open waffle maker.
+The earlier generated waffle assets remain in the repository as superseded working
+references, but no published waffle surface references them.
 
 ### Eclairs and profiteroles step photography
 
@@ -75,8 +101,14 @@ Four generated 4:3 process images under
 `public/media/recipes/eclairs/selected/` show the source-backed checkpoints for the
 tested profiterole bake: a cooked panade gathered into one mass, the heavy ribbon after
 adding the eggs, evenly spaced walnut-size piped portions and a cooled shell with a dry
-hollow centre. The images support the tested profiterole form; the éclair shape remains
-explicitly untested in the recipe copy.
+hollow centre. The images support the tested profiterole form.
+
+`public/images/recipes/profiteroles-card-v2.png` is the current recipe and catalogue
+cover: seven naturally irregular round profiteroles on a warm-white plate, with one cut
+open to show the hollow shell and restrained vanilla filling. It replaces the earlier
+long éclair cover so the hero matches the tested shape and yield. Generated with the
+built-in image tool in the photorealistic-natural mode, using soft daylight and the Warm
+Precision kitchen palette; no text, branding or packaging is present.
 
 ### Cinnamon-roll step photography
 
@@ -89,10 +121,19 @@ reference and the existing generated recipe cover for visual continuity; they co
 no branding and are visual checkpoint references rather than author photography.
 
 - `gluten-free-napoleon-card-v1.png`: Many thin golden gluten-free pastry layers with pale vanilla custard; one generous slice beside the cake; cream, toasted gold, and subtle terracotta-brown palette.
+- `gluten-free-napoleon-card-v3.png`: Natural home-kitchen photograph of a round six-layer Napoleon with thin custard seams, alternating walnuts, crumbs and almond flakes; regenerated after comparison with real homemade examples.
+- `gluten-free-napoleon/selected/*-v3.png`: Natural process series for twelve wrapped dough portions, one thin round raw layer, one blistered baked layer, warm custard and assembly using only round 28 cm layers.
 - `chocolate-crinkle-cookies-card-v1.png`: Deep cocoa crinkle cookies with distinct cracks and powdered sugar; one cookie broken open; cream, cocoa, and warm-brown palette.
 - `banana-bread-card-v1.png`: Golden banana bread with a natural center split; sliced to show moist crumb, walnuts, and raisins; banana cream, toasted gold, and walnut-brown palette.
 - `lazy-dumplings-card-v1.png`: Ukrainian lazy cottage-cheese dumplings in a warm-white bowl with modest sour cream and butter; cream, warm-white, and pale-gold palette.
-- `apple-charlotte-card-v1.png`: Large-tray apple charlotte with an airy golden sponge, visible apples, one cut square, and light powdered sugar; baked-gold and apple-cream palette.
+- `apple-charlotte-card-v1.png`: Superseded working cover for the original large-tray draft.
+- `apple-charlotte-card-v2.png`: Current five-egg apple-charlotte cover; a cut square shows small apple pieces distributed through the tender crumb. Generated with the built-in image tool in photorealistic-natural mode; the image illustrates the tested recipe but is not itself test evidence.
+- `plum-cake-card-v1.png`: Superseded working cover that incorrectly showed the plums along the bottom when served.
+- `plum-cake-card-v2.png`: Current five-egg upside-down plum-cake cover; the finished cake is inverted and the glossy baked plums are visible on top. Generated with the built-in image tool in photorealistic-natural mode after reviewing real upside-down plum cakes; the image illustrates the tested recipe but is not itself test evidence.
+- `media/recipes/apple-charlotte/selected/whipped-egg-foam-v1.png`: Ribbon-stage reference reused from the same five-egg sponge family.
+- `media/recipes/apple-charlotte/selected/folded-apple-batter-v1.png`: Apple pieces suspended throughout thick airy batter before baking.
+- `media/recipes/plum-cake/selected/plums-cut-side-down-v1.png`: Plum halves arranged cut side down in one close layer before the batter is added.
+- `media/recipes/plum-cake/selected/whipped-egg-foam-v1.png`: Ribbon-stage reference reused from the same five-egg sponge family.
 - `cottage-cheese-waffles-card-v1.png`: Short stack of golden cottage-cheese waffles with a tender interior visible and a small serving of natural yogurt; warm-gold and cream palette.
 - `carrot-cake-card-v1.png`: Golden carrot loaf cake with orange-speckled crumb, walnuts, and raisins; one thick slice cut; carrot-orange, toasted-gold, and walnut-brown palette.
 - `sponge-cake-card-v1.png`: Tall plain gluten-free sponge cake with an even golden exterior and fine airy crumb; one wedge removed; pale-cream and warm-gold palette.

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
+  cookModeStorageKey,
   parseCookModeSession,
   persistCookModeSession,
   readCookModeSession,
@@ -58,4 +59,15 @@ void test('rejects malformed sessions and limits note length', () => {
     }),
   );
   assert.equal(parsed?.note.length, 2000);
+});
+
+void test('keeps adjusted configurations in separate session keys', () => {
+  assert.equal(
+    cookModeStorageKey('napoleon', 'v1'),
+    'bake-again:cook-mode:v1:napoleon:v1',
+  );
+  assert.notEqual(
+    cookModeStorageKey('napoleon', 'v1', 'adjusted:round-24:batch:0.5'),
+    cookModeStorageKey('napoleon', 'v1'),
+  );
 });

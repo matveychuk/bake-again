@@ -9,13 +9,15 @@ export function RecipeIngredientHeading({
   title,
 }: {
   action?: ReactNode;
-  eyebrow: string;
+  eyebrow?: string;
   id?: string;
   title: string;
 }) {
   return (
     <div className={styles.heading}>
-      <SectionTitle eyebrow={eyebrow} eyebrowClassName={styles.eyebrow} id={id}>{title}</SectionTitle>
+      <SectionTitle eyebrow={eyebrow} eyebrowClassName={styles.eyebrow} id={id}>
+        {title}
+      </SectionTitle>
       {action}
     </div>
   );

@@ -15,7 +15,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { getRecipeContent, personalStateRecipes } from '@/content/recipes/registry';
-import { getRecipeCatalog } from '@/content/recipes/catalog';
+import { type RecipeCatalogEntry } from '@/content/recipes/catalog';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { formatQuantity as formatLocalizedQuantity } from '@/lib/i18n/format';
@@ -42,8 +42,7 @@ function ingredientName(item: ShoppingItemV1, locale: AppLocale) {
   return item.ingredientId;
 }
 
-function sourceRecipes(item: ShoppingItemV1, locale: AppLocale) {
-  const catalog = getRecipeCatalog(locale);
+function sourceRecipes(item: ShoppingItemV1, locale: AppLocale, catalog: RecipeCatalogEntry[]) {
   return [...new Set(item.sources.map((source) => source.recipeId))].map((recipeId) => ({
     id: recipeId,
     title: personalStateRecipes.find((recipe) => recipe.id === recipeId)?.title[locale] ?? catalog.find((recipe) => recipe.id === recipeId)?.title ?? recipeId,
@@ -62,7 +61,7 @@ function itemNotes(item: ShoppingItemV1, locale: AppLocale) {
   return [...new Set(notes)];
 }
 
-export function ShoppingListPage({ locale }: { locale: AppLocale }) {
+export function ShoppingListPage({ locale, catalog }: { locale: AppLocale; catalog: RecipeCatalogEntry[] }) {
   const [items, setItems] = useState<ShoppingItemV1[]>([]);
   const [removed, setRemoved] = useState<ShoppingItemV1 | null>(null);
   const [clearOpen, setClearOpen] = useState(false);
@@ -125,7 +124,7 @@ export function ShoppingListPage({ locale }: { locale: AppLocale }) {
           <ul className={styles.list}>
             {items.map((item) => {
               const name = ingredientName(item, locale);
-              const recipes = sourceRecipes(item, locale);
+              const recipes = sourceRecipes(item, locale, catalog);
               const notes = itemNotes(item, locale);
               return (
                 <li className={styles.item} data-checked={item.checked} key={item.id}>

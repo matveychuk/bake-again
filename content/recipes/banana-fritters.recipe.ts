@@ -1,6 +1,8 @@
 import type { RecipeSourceDraft } from './source-recipe.types.ts';
+import { quantityFromSpoons } from './spoon-weights.ts';
 
 export const bananaFrittersRecipe = {
+  publicationStatus: 'unpublished',
   id: 'banana-fritters',
   source: {
     file: 'https://natashaskitchen.com/banana-pancakes/',
@@ -54,35 +56,27 @@ export const bananaFrittersRecipe = {
           id: 'flour',
           name: 'Schär Mix B Bread flour',
           quantity: {
-            base: { kind: 'exact', value: 1.5, unit: 'cup' },
-            shopping: { mode: 'base' },
+            base: null,
+            equivalent: { kind: 'exact', value: 1.5, unit: 'cup' },
+            shopping: { mode: 'nameOnly' },
           },
-          note: 'Author adaptation in place of the original all-purpose flour.',
+          note: 'Author adaptation in place of the original all-purpose flour. The source cup measure remains secondary until its gram weight is confirmed.',
         },
         {
           id: 'sugar',
           name: 'Sugar',
-          quantity: {
-            base: { kind: 'exact', value: 1, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromSpoons('granulated-sugar', 1, 'tbsp'),
           optional: true,
         },
         {
           id: 'baking-soda',
           name: 'Baking soda',
-          quantity: {
-            base: { kind: 'exact', value: 1, unit: 'tsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromSpoons('baking-soda', 1, 'tsp'),
         },
         {
           id: 'salt',
           name: 'Salt',
-          quantity: {
-            base: { kind: 'exact', value: 0.25, unit: 'tsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromSpoons('fine-salt', 0.25, 'tsp'),
         },
         {
           id: 'butter',

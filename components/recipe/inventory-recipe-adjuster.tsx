@@ -13,6 +13,8 @@ import type { RecipeDraft } from '@/content/recipes/recipe.types';
 import type { StructuredRecipeContent } from '@/content/recipes/source-recipe.types';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
+import { recipeReaderCopy } from '@/content/recipes/reader-copy';
+import { EvidenceBadge } from './evidence-badge';
 import {
   AddRecipeIngredientsControl,
   type SourceShoppingRecipe,
@@ -27,6 +29,7 @@ export function InventoryRecipeAdjuster({
   locale,
   personalRecipe,
   scalingAnchorIngredientId,
+  showWorkingRecord = true,
   sourceShoppingRecipe,
 }: {
   recipe: StructuredRecipeContent | undefined;
@@ -34,6 +37,7 @@ export function InventoryRecipeAdjuster({
   locale: AppLocale;
   personalRecipe?: RecipeDraft | null;
   scalingAnchorIngredientId?: string;
+  showWorkingRecord?: boolean;
   sourceShoppingRecipe?: SourceShoppingRecipe | null;
 }) {
   const [mode, setMode] = useState<'scale' | 'ingredient'>('scale');
@@ -55,6 +59,19 @@ export function InventoryRecipeAdjuster({
       : scale;
   const isAdjustable = Boolean(recipe && anchor);
   const messages = getUiMessages(locale);
+  const concise = recipe?.presentation === 'concise';
+  const readerCopy = recipeReaderCopy[locale];
+  const adjusted = Math.abs(scaleFactor - 1) > 0.000001;
+  const fractionalEggs = ingredients.some((ingredient) => {
+    const amount = ingredient.quantity.base;
+    return (
+      ingredient.id === 'eggs' &&
+      amount?.kind === 'exact' &&
+      Math.abs(
+        amount.value * scaleFactor - Math.round(amount.value * scaleFactor),
+      ) > 0.000001
+    );
+  });
   const scaling = messages.scaling;
   const formattedScaleFactor = formatNumber(
     locale,
@@ -62,15 +79,25 @@ export function InventoryRecipeAdjuster({
   );
 
   return (
-    <section className={styles.planning} id="adjust-recipe">
+    <section
+      className={`${styles.planning} ${concise ? styles.concise : ''}`}
+      id="adjust-recipe"
+    >
       <aside className={styles.controls}>
         <SectionTitle
-          eyebrow={scaling.eyebrow}
+          eyebrow={concise ? undefined : scaling.eyebrow}
           eyebrowClassName={styles.eyebrow}
         >
-          {scaling.title}
+          {concise ? readerCopy.quantity : scaling.title}
         </SectionTitle>
-        <p className={styles.intro}>{scaling.intro}</p>
+        <p className={styles.intro}>
+          {concise && anchor
+            ? `${readerCopy.base}: ${anchor.ingredient.name} — ${formatQuantity(locale, anchor.ingredient.quantity.base)}${recipe?.yield ? ` · ${recipe.yield.label}` : ''}`
+            : scaling.intro}
+        </p>
+        {concise && recipe?.geometry && (
+          <p className={styles.intro}>{recipe.geometry.label}</p>
+        )}
         {isAdjustable && anchor ? (
           <>
             <div className={styles.modeTabs}>
@@ -131,10 +158,23 @@ export function InventoryRecipeAdjuster({
                 </div>
               </div>
             )}
-            <p className={styles.result}>
-              <strong>{scaling.calculated}</strong>{' '}
-              {scaling.calculatedResult(formattedScaleFactor)}
-            </p>
+            {concise ? (
+              adjusted && (
+                <div className={styles.result} aria-live="polite">
+                  <EvidenceBadge locale={locale} status="calculated" />
+                  <p>
+                    {formattedScaleFactor}×.{' '}
+                    {messages.status.calculated.explanation}
+                  </p>
+                  {fractionalEggs && <p>{readerCopy.fractionalEggs}</p>}
+                </div>
+              )
+            ) : (
+              <p className={styles.result}>
+                <strong>{scaling.calculated}</strong>{' '}
+                {scaling.calculatedResult(formattedScaleFactor)}
+              </p>
+            )}
           </>
         ) : (
           <div className={styles.locked}>
@@ -163,31 +203,41 @@ export function InventoryRecipeAdjuster({
               </button>
             )
           }
-          eyebrow={messages.recipe.workingRecord}
+          eyebrow={
+            concise || !showWorkingRecord
+              ? undefined
+              : messages.recipe.workingRecord
+          }
           title={messages.recipe.ingredients}
         />
         {recipe ? (
           <>
             <RecipeIngredientChecklist
               locale={locale}
+              hideSingleSectionTitle={concise}
               sections={recipe.ingredientSections}
               amountFor={(ingredient) => ({
-                primary: formatQuantity(
-                  locale,
-                  scaleStructuredQuantity(
-                    ingredient.quantity.base ??
-                      ingredient.quantity.equivalent ??
-                      null,
-                    scaleFactor,
-                  ),
-                ),
+                primary:
+                  ingredient.quantity.base ||
+                  ingredient.quantity.equivalent ||
+                  !ingredient.note
+                    ? formatQuantity(
+                        locale,
+                        scaleStructuredQuantity(
+                          ingredient.quantity.base ??
+                            ingredient.quantity.equivalent ??
+                            null,
+                          ingredient.scaling === 'fixed' ? 1 : scaleFactor,
+                        ),
+                      )
+                    : undefined,
                 secondary:
                   ingredient.quantity.equivalent && ingredient.quantity.base
                     ? formatQuantity(
                         locale,
                         scaleStructuredQuantity(
                           ingredient.quantity.equivalent,
-                          scaleFactor,
+                          ingredient.scaling === 'fixed' ? 1 : scaleFactor,
                         ),
                       )
                     : undefined,

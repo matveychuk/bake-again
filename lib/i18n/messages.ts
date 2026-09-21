@@ -3,6 +3,8 @@ import type { AppLocale } from './config';
 type UiMessages = {
   navigation: {
     recipes: string;
+    about: string;
+    drafts: string;
     saved: string;
     shoppingList: string;
   };
@@ -23,6 +25,8 @@ type UiMessages = {
     searchLabel: string;
     searchPlaceholder: string;
     searchAction: string;
+    searchResultsTitle: (query: string) => string;
+    searchEmpty: string;
     inventoryHint: (count: number) => string;
     featuredKicker: string;
     featuredTitle: string;
@@ -40,6 +44,9 @@ type UiMessages = {
     howWeTest: string;
   };
   catalog: {
+    draftsIntro: string;
+    draftsEmpty: string;
+    publishedEmpty: string;
     eyebrow: string;
     title: [string, string];
     intro: string;
@@ -91,6 +98,12 @@ type UiMessages = {
     privateNote: string;
     privateNoteDescription: string;
     privateNotePlaceholder: string;
+    noteSaving: string;
+    noteSaved: string;
+    noteSaveFailed: string;
+    completionNextSteps: string;
+    previousNote: string;
+    previousNoteDescription: string;
     returnToRecipe: string;
     cookAgain: string;
   };
@@ -117,6 +130,17 @@ type UiMessages = {
     keepInMind: string;
     ingredients: string;
     ingredientsIntro: string;
+    creamOptionsEyebrow: string;
+    creamOptionsTitle: string;
+    creamOptionsIntro: (recommended: string) => string;
+    creamRecommended: string;
+    creamTested: string;
+    creamSelectedEyebrow: string;
+    creamRecipeEyebrow: string;
+    changeCream: string;
+    viewCreamRecipe: string;
+    chooseCreamBeforeCooking: string;
+    chooseCream: (name: string) => string;
     optional: string;
     markIngredientPrepared: (name: string) => string;
     method: (count: number) => string;
@@ -162,6 +186,12 @@ type UiMessages = {
     savedTitle: string;
     savedEmpty: string;
     browseRecipes: string;
+    bakedEyebrow: string;
+    bakedTitle: string;
+    bakedOn: (date: string) => string;
+    bakedAdjusted: string;
+    bakedStoredInBrowser: string;
+    privateNote: string;
     shoppingTitle: string;
     shoppingEyebrow: string;
     shoppingEmpty: string;
@@ -212,6 +242,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
   en: {
     navigation: {
       recipes: 'Recipes',
+      about: 'About',
+      drafts: 'Drafts',
       saved: 'Saved',
       shoppingList: 'Shopping list',
     },
@@ -233,8 +265,11 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       intro:
         'Familiar cakes, cookies and breakfasts — carefully adjusted, baked again, and written so you can get the same result at home.',
       searchLabel: 'Search recipes',
-      searchPlaceholder: 'What would you like to bake?',
+      searchPlaceholder: 'Name, ingredient or collection',
       searchAction: 'Search',
+      searchResultsTitle: (query) => `Results for “${query}”`,
+      searchEmpty:
+        'No recipes found. Try another name or ingredient, or view all recipes.',
       inventoryHint: (count) =>
         `Browse all ${count} working recipes in the current inventory.`,
       featuredKicker: 'Start with a classic',
@@ -260,6 +295,9 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       howWeTest: 'How we test recipes',
     },
     catalog: {
+      draftsIntro: 'Recipes in progress, before publication.',
+      draftsEmpty: 'No draft recipes.',
+      publishedEmpty: 'The first recipes are being prepared for publication.',
       eyebrow: 'Working recipe inventory',
       title: ['Recipes made to be', 'baked again.'],
       intro:
@@ -313,8 +351,16 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       completeTitle: 'The recipe is finished.',
       privateNote: 'Private note',
       privateNoteDescription:
-        'Saved only in this browser for the next time you make this recipe.',
+        'Optional. Changes are saved automatically in this browser.',
       privateNotePlaceholder: 'What would you remember or change next time?',
+      noteSaving: 'Saving…',
+      noteSaved: 'Saved automatically in this browser.',
+      noteSaveFailed:
+        'This note could not be saved in this browser. Please try again.',
+      completionNextSteps:
+        'You can return to the recipe or cook again — your note is already saved.',
+      previousNote: 'From your last bake',
+      previousNoteDescription: 'Keep this in mind as you cook.',
       returnToRecipe: 'Return to recipe',
       cookAgain: 'Cook again',
     },
@@ -342,6 +388,18 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       keepInMind: 'Keep this in mind',
       ingredients: 'Ingredients',
       ingredientsIntro: 'Conditions and unresolved details stay visible.',
+      creamOptionsEyebrow: 'Filling',
+      creamOptionsTitle: 'Choose a cream.',
+      creamOptionsIntro: (recommended) =>
+        `All of these creams are tested for this recipe. We recommend ${recommended}.`,
+      creamRecommended: 'Recommended',
+      creamTested: 'Tested',
+      creamSelectedEyebrow: 'Selected cream',
+      creamRecipeEyebrow: 'Cream recipe',
+      changeCream: 'Change cream',
+      viewCreamRecipe: 'View cream recipe',
+      chooseCreamBeforeCooking: 'Choose a cream first',
+      chooseCream: (name) => `Choose ${name}`,
       optional: 'optional',
       markIngredientPrepared: (name) => `Mark ${name} as prepared`,
       method: (count) => `Method · ${count} steps`,
@@ -419,6 +477,12 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       savedTitle: 'Saved recipes',
       savedEmpty: 'No recipes saved yet.',
       browseRecipes: 'Browse recipes',
+      bakedEyebrow: 'Your recipe memory',
+      bakedTitle: 'You made this recipe',
+      bakedOn: (date) => `Last made ${date}`,
+      bakedAdjusted: 'Made with an adjusted, untested configuration.',
+      bakedStoredInBrowser: 'Private to this browser.',
+      privateNote: 'Your private note',
       shoppingTitle: 'Shopping list',
       shoppingEyebrow: 'Your baking plan',
       shoppingEmpty: 'Your shopping list is empty.',
@@ -474,6 +538,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
   es: {
     navigation: {
       recipes: 'Recetas',
+      about: 'Nosotros',
+      drafts: 'Borradores',
       saved: 'Guardadas',
       shoppingList: 'Lista de compra',
     },
@@ -495,8 +561,11 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       intro:
         'Pasteles, galletas y desayunos de siempre, adaptados con cuidado y probados una y otra vez para que te salgan igual de bien en casa.',
       searchLabel: 'Buscar recetas',
-      searchPlaceholder: '¿Qué te apetece hornear?',
+      searchPlaceholder: 'Nombre, ingrediente o colección',
       searchAction: 'Buscar',
+      searchResultsTitle: (query) => `Resultados para «${query}»`,
+      searchEmpty:
+        'No encontramos recetas. Prueba otro nombre o ingrediente, o consulta todas las recetas.',
       inventoryHint: (count) =>
         `Explora las ${count} recetas disponibles ahora.`,
       featuredKicker: 'Empieza con un clásico',
@@ -522,6 +591,9 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       howWeTest: 'Cómo probamos las recetas',
     },
     catalog: {
+      draftsIntro: 'Recetas en preparación, antes de publicarlas.',
+      draftsEmpty: 'No hay borradores.',
+      publishedEmpty: 'Estamos preparando las primeras recetas para publicar.',
       eyebrow: 'Inventario de recetas de trabajo',
       title: ['Recetas para', 'volver a hornear.'],
       intro:
@@ -575,8 +647,16 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       completeTitle: 'La receta está lista.',
       privateNote: 'Nota privada',
       privateNoteDescription:
-        'Se guarda solo en este navegador para la próxima vez que prepares esta receta.',
+        'Opcional. Los cambios se guardan automáticamente en este navegador.',
       privateNotePlaceholder: '¿Qué quieres recordar o cambiar la próxima vez?',
+      noteSaving: 'Guardando…',
+      noteSaved: 'Guardada automáticamente en este navegador.',
+      noteSaveFailed:
+        'No se ha podido guardar esta nota en el navegador. Inténtalo de nuevo.',
+      completionNextSteps:
+        'Puedes volver a la receta o prepararla de nuevo: tu nota ya está guardada.',
+      previousNote: 'De la última vez',
+      previousNoteDescription: 'Tenlo en cuenta mientras preparas la receta.',
       returnToRecipe: 'Volver a la receta',
       cookAgain: 'Preparar de nuevo',
     },
@@ -605,6 +685,18 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       ingredients: 'Ingredientes',
       ingredientsIntro:
         'Las condiciones y los detalles sin resolver permanecen visibles.',
+      creamOptionsEyebrow: 'Relleno',
+      creamOptionsTitle: 'Elige una crema.',
+      creamOptionsIntro: (recommended) =>
+        `Todas estas cremas están probadas para esta receta. Recomendamos ${recommended}.`,
+      creamRecommended: 'Recomendada',
+      creamTested: 'Probada',
+      creamSelectedEyebrow: 'Crema elegida',
+      creamRecipeEyebrow: 'Receta de crema',
+      changeCream: 'Cambiar crema',
+      viewCreamRecipe: 'Ver receta de la crema',
+      chooseCreamBeforeCooking: 'Elige primero una crema',
+      chooseCream: (name) => `Elegir ${name}`,
       optional: 'opcional',
       markIngredientPrepared: (name) => `Marcar ${name} como preparado`,
       method: (count) => `Método · ${count} pasos`,
@@ -683,6 +775,12 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       savedTitle: 'Recetas guardadas',
       savedEmpty: 'Todavía no has guardado recetas.',
       browseRecipes: 'Ver recetas',
+      bakedEyebrow: 'Tu memoria de la receta',
+      bakedTitle: 'Ya preparaste esta receta',
+      bakedOn: (date) => `Última preparación: ${date}`,
+      bakedAdjusted: 'Preparada con una configuración ajustada sin probar.',
+      bakedStoredInBrowser: 'Privado en este navegador.',
+      privateNote: 'Tu nota privada',
       shoppingTitle: 'Lista de compra',
       shoppingEyebrow: 'Tu plan de repostería',
       shoppingEmpty: 'Tu lista de compra está vacía.',
@@ -738,6 +836,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
   uk: {
     navigation: {
       recipes: 'Рецепти',
+      about: 'Про нас',
+      drafts: 'Чернетки',
       saved: 'Збережені',
       shoppingList: 'Список покупок',
     },
@@ -759,8 +859,11 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       intro:
         'Улюблені торти, печиво й сніданки — ретельно адаптовані, не раз випробувані й докладно описані, щоб удома все вдалося.',
       searchLabel: 'Шукати рецепти',
-      searchPlaceholder: 'Що хочете спекти?',
+      searchPlaceholder: 'Назва, інгредієнт або добірка',
       searchAction: 'Шукати',
+      searchResultsTitle: (query) => `Результати для «${query}»`,
+      searchEmpty:
+        'Рецептів не знайдено. Спробуйте іншу назву чи інгредієнт або перегляньте всі рецепти.',
       inventoryHint: (count) =>
         `Перегляньте всі ${count} рецептів, доступних зараз.`,
       featuredKicker: 'Почніть із класики',
@@ -778,13 +881,14 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       collectionCount: (count) => {
         const lastTwoDigits = count % 100;
         const lastDigit = count % 10;
-        const label = lastTwoDigits >= 11 && lastTwoDigits <= 14
-          ? 'рецептів'
-          : lastDigit === 1
-            ? 'рецепт'
-            : lastDigit >= 2 && lastDigit <= 4
-              ? 'рецепти'
-              : 'рецептів';
+        const label =
+          lastTwoDigits >= 11 && lastTwoDigits <= 14
+            ? 'рецептів'
+            : lastDigit === 1
+              ? 'рецепт'
+              : lastDigit >= 2 && lastDigit <= 4
+                ? 'рецепти'
+                : 'рецептів';
         return `${count} ${label}`;
       },
       viewAll: 'Переглянути всі рецепти',
@@ -797,6 +901,9 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       howWeTest: 'Як ми перевіряємо рецепти',
     },
     catalog: {
+      draftsIntro: 'Рецепти в роботі, які ще не опубліковані.',
+      draftsEmpty: 'Чернеток поки немає.',
+      publishedEmpty: 'Готуємо перші рецепти до публікації.',
       eyebrow: 'Робочий каталог рецептів',
       title: ['Рецепти, які хочеться', 'пекти знову.'],
       intro:
@@ -804,7 +911,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       collectionEyebrow: 'Поточна колекція',
       allRecipes: 'Усі рецепти',
       detailsToConfirm: 'Деталі потребують уточнення',
-      workingRecord: 'Робочий запис',
+      workingRecord: 'Робочий рецепт',
       collectionsLabel: 'Добірки',
     },
     cook: {
@@ -850,15 +957,23 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       completeTitle: 'Рецепт готовий.',
       privateNote: 'Приватна нотатка',
       privateNoteDescription:
-        'Зберігається лише в цьому браузері для наступного приготування.',
+        'Необов’язково. Зміни автоматично зберігаються в цьому браузері.',
       privateNotePlaceholder: 'Що запам’ятати або змінити наступного разу?',
+      noteSaving: 'Зберігаємо…',
+      noteSaved: 'Автоматично збережено в цьому браузері.',
+      noteSaveFailed:
+        'Не вдалося зберегти нотатку в цьому браузері. Спробуйте ще раз.',
+      completionNextSteps:
+        'Можна повернутися до рецепта або почати знову — нотатку вже збережено.',
+      previousNote: 'З минулого приготування',
+      previousNoteDescription: 'Зверніть на це увагу під час приготування.',
       returnToRecipe: 'Повернутися до рецепта',
       cookAgain: 'Приготувати ще раз',
     },
     recipe: {
       backToRecipes: 'Рецепти',
       inventoryDraft: 'Чернетка каталогу',
-      workingRecord: 'Робочий запис',
+      workingRecord: 'Робочий рецепт',
       workingRecordExplanation:
         'Цей запис на основі джерела ще не є готовим до публікації перевіреним рецептом.',
       time: 'Час',
@@ -879,6 +994,18 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       keepInMind: 'Зверніть увагу',
       ingredients: 'Інгредієнти',
       ingredientsIntro: 'Умови й неуточнені деталі залишаються видимими.',
+      creamOptionsEyebrow: 'Начинка',
+      creamOptionsTitle: 'Оберіть крем.',
+      creamOptionsIntro: (recommended) =>
+        `Усі ці креми перевірені для цього рецепта. Рекомендуємо ${recommended}.`,
+      creamRecommended: 'Рекомендовано',
+      creamTested: 'Перевірено',
+      creamSelectedEyebrow: 'Вибраний крем',
+      creamRecipeEyebrow: 'Рецепт крему',
+      changeCream: 'Змінити крем',
+      viewCreamRecipe: 'Переглянути рецепт крему',
+      chooseCreamBeforeCooking: 'Спочатку оберіть крем',
+      chooseCream: (name) => `Обрати «${name}»`,
       optional: 'необов’язково',
       markIngredientPrepared: (name) =>
         `Позначити «${name}» як підготовлений інгредієнт`,
@@ -957,6 +1084,12 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       savedTitle: 'Збережені рецепти',
       savedEmpty: 'Ще немає збережених рецептів.',
       browseRecipes: 'Переглянути рецепти',
+      bakedEyebrow: 'Ваша пам’ять про рецепт',
+      bakedTitle: 'Ви вже готували цей рецепт',
+      bakedOn: (date) => `Востаннє готували ${date}`,
+      bakedAdjusted: 'Готували зі зміненою неперевіреною конфігурацією.',
+      bakedStoredInBrowser: 'Приватно й лише в цьому браузері.',
+      privateNote: 'Ваша приватна нотатка',
       shoppingTitle: 'Список покупок',
       shoppingEyebrow: 'Ваш план випічки',
       shoppingEmpty: 'Ваш список порожній.',

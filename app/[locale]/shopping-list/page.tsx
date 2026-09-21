@@ -1,3 +1,5 @@
+import { canViewDrafts } from '@/lib/runtime/local-development.server';
+import { getRecipeCatalog } from '@/content/recipes/catalog';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ShoppingListPage } from '@/components/personal-state/shopping-list-page';
@@ -11,7 +13,7 @@ export default async function ShoppingListRoute({ params }: { params: Promise<{ 
   const { locale } = await params;
   if (!isAppLocale(locale)) notFound();
   const pathname = localeShoppingListPath(locale);
-  return <main><SiteHeader locale={locale} pathname={pathname} /><ShoppingListPage locale={locale} /><SiteFooter locale={locale} /></main>;
+  return <main><SiteHeader locale={locale} pathname={pathname} /><ShoppingListPage locale={locale} catalog={getRecipeCatalog(locale, await canViewDrafts() ? 'all' : 'published')} /><SiteFooter locale={locale} /></main>;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {

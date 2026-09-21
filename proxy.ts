@@ -1,9 +1,14 @@
+import { isLocalDevelopment } from './lib/runtime/local-development';
+import { canReadRecipe } from './content/recipes/publication';
+import { getInventoryRecipe } from './content/recipes/inventory';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { defaultLocale, isAppLocale } from '@/lib/i18n/config';
 import {
   getLocalizedRecipePath,
   getLocaleFromPathname,
   getRecipeIdFromLegacySlug,
+  getRecipeIdFromLocalizedSlug,
 } from '@/lib/i18n/routes';
 import { localeCookieName } from '@/lib/persistence/preferences';
 
@@ -21,6 +26,18 @@ function continueWithLocale(request: NextRequest, locale = defaultLocale) {
 }
 
 export function proxy(request: NextRequest) {
+  const local = isLocalDevelopment(request.headers.get('host'), process.env.NODE_ENV);
+  const parts = request.nextUrl.pathname.split('/').filter(Boolean);
+  const pathLocale = isAppLocale(parts[0]) ? parts.shift()! : null;
+  if ((parts[0] === 'drafts' || parts[0] === 'design-system') && !local) {
+    return new NextResponse('Not found', { status: 404 });
+  }
+  if (parts[0] === 'recipes' && parts[1]) {
+    const id = (pathLocale && isAppLocale(pathLocale) ? getRecipeIdFromLocalizedSlug(pathLocale, parts[1]) : null)
+      ?? getInventoryRecipe(parts[1])?.id;
+    if (!id || !canReadRecipe(id, local)) return new NextResponse('Not found', { status: 404 });
+  }
+
   const { pathname } = request.nextUrl;
   const explicitLocale = getLocaleFromPathname(pathname);
 

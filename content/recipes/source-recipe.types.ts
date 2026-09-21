@@ -3,6 +3,7 @@ import type {
   GeometryApplication,
   GeometryKind,
   IngredientQuantity,
+  RecipeCreamOptions,
   RecipeDifficulty,
   YieldOption,
 } from './recipe.types.ts';
@@ -24,7 +25,7 @@ export type StructuredRecipeYield = {
   count:
     | { kind: 'exact'; value: number }
     | { kind: 'range'; min: number; max: number };
-  unit: YieldOption['unit'] | 'crepe';
+  unit: YieldOption['unit'] | 'crepe' | 'dumpling';
 };
 
 export type StructuredRecipeGeometry = {
@@ -58,6 +59,8 @@ export type StructuredIngredient = {
   quantity: IngredientQuantity;
   note?: string;
   optional?: boolean;
+  /** Keep unmeasured kitchen aids, such as a pinch, unchanged when scaling. */
+  scaling?: 'fixed';
 };
 
 export type StructuredIngredientSection = {
@@ -87,8 +90,8 @@ export type StructuredRecipeStep = {
     id: string;
     src: string;
     alt: string;
-    title: string;
-    caption: string;
+    title?: string;
+    caption?: string;
   }>;
 };
 
@@ -98,7 +101,11 @@ export type StructuredRecipeStep = {
  * archive; unresolved details remain explicit.
  */
 export type RecipeSourceDraftContent = {
+  /** Opt-in edited reading layout; independent of publication and evidence. */
+  presentation?: 'concise';
   completeness: 'readyToReview' | 'incompleteSource';
+  /** Reader-facing skill level for this exact recipe. */
+  difficulty?: RecipeDifficulty;
   /** Evidence for the exact source-backed configuration, independent of publication readiness. */
   evidence?: {
     status: 'tested' | 'calculated' | 'suggested';
@@ -108,6 +115,8 @@ export type RecipeSourceDraftContent = {
   geometry?: StructuredRecipeGeometry;
   timing?: StructuredRecipeTiming;
   beforeStart?: string[];
+  /** Host-recipe choice: compatible creams and the one recommended by the recipe. */
+  creamOptions?: RecipeCreamOptions;
   ingredientSections: StructuredIngredientSection[];
   steps: StructuredRecipeStep[];
   gapNote?: string;
@@ -115,7 +124,7 @@ export type RecipeSourceDraftContent = {
 
 export type RecipeSourceDraft = RecipeSourceDraftContent & {
   id: string;
-  publicationStatus?: 'draft';
+  publicationStatus: 'unpublished' | 'published';
   source?: { file: string; locator: string };
   /** Reviewed reader-facing translations; source facts are never inferred here. */
   translations?: Partial<Record<'es' | 'uk', RecipeSourceDraftContent>>;

@@ -1,73 +1,220 @@
-import type { RecipeSourceDraft } from './source-recipe.types.ts';
+import type {
+  RecipeSourceDraft,
+  StructuredRecipeStep,
+} from './source-recipe.types.ts';
+import type { RecipeLocale } from './recipe.types.ts';
+import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
 const translatedQuantity = {
   base: null,
   shopping: { mode: 'nameOnly' as const },
 };
 
-const cottageCheeseWafflesStepMedia = {
-  'ingredients-before-blending': {
-    id: 'ingredients-before-blending',
-    src: '/media/recipes/cottage-cheese-waffles/selected/step-01-ingredients-before-blending-author-v1.jpeg',
+const stepCopy = {
+  en: {
+    titles: [
+      'Blend the base',
+      'Add the remaining wet ingredients',
+      'Make the batter',
+      'Rest the batter',
+      'Bake the waffles',
+    ],
+    instructions: [
+      'Blend the cottage cheese, eggs and yogurt until smooth, with no noticeable lumps.',
+      'Mix in the neutral oil or softened butter, sugar, salt and vanilla.',
+      'In a separate bowl, mix the flour, corn starch and baking powder. Add to the base and stir until no dry flour remains.',
+      'Leave to rest for 7–10 minutes.',
+      'Heat the waffle maker well. Bake each waffle for 5–7 minutes until golden.',
+    ],
+    alts: {
+      ingredients:
+        'Cottage cheese, eggs and natural yogurt together in a white bowl before blending',
+      blended:
+        'Smooth cottage-cheese, egg and yogurt base with an immersion blender in the bowl',
+      flour: 'Gluten-free flour added to the wet waffle base before mixing',
+      batter: 'Thick, smooth waffle batter lifted on a spoon above the bowl',
+      filling:
+        'Berry-speckled waffle batter being spooned into a heated waffle maker',
+      baked: 'Two golden berry cottage-cheese waffles in an open waffle maker',
+      served:
+        'Golden berry cottage-cheese waffles stacked on a pale green plate',
+    },
   },
-  'blend-base': {
-    id: 'blended-base',
-    src: '/media/recipes/cottage-cheese-waffles/selected/step-01-blended-base-v1.png',
+  uk: {
+    titles: [
+      'Збийте основу',
+      'Додайте решту вологих інгредієнтів',
+      'Приготуйте тісто',
+      'Дайте тісту відпочити',
+      'Спечіть вафлі',
+    ],
+    instructions: [
+      'Збийте блендером творог, яйця та йогурт до гладкої маси без помітних грудочок.',
+      'Вмішайте олію без запаху або м’яке вершкове масло, цукор, сіль і ваніль.',
+      'В окремій мисці змішайте борошно, крохмаль і розпушувач. Додайте до основи й перемішайте, щоб не залишилося сухого борошна.',
+      'Залиште на 7–10 хвилин.',
+      'Добре розігрійте вафельницю. Випікайте кожну вафлю 5–7 хвилин до золотистого кольору.',
+    ],
+    alts: {
+      ingredients:
+        'Творог, яйця та натуральний йогурт у білій мисці перед збиванням',
+      blended:
+        'Гладка основа з творогу, яєць і йогурту із занурювальним блендером у мисці',
+      flour:
+        'Безглютенове борошно, додане до вологої основи для вафель перед перемішуванням',
+      batter: 'Густе гладке тісто для вафель на ложці над мискою',
+      filling:
+        'Тісто для вафель з ягодами викладають ложкою в розігріту вафельницю',
+      baked: 'Дві золотисті творожні вафлі з ягодами у відкритій вафельниці',
+      served: 'Золотисті творожні вафлі з ягодами на світло-зеленій тарілці',
+    },
   },
-  'add-wet': {
-    id: 'add-wet-ingredients',
-    src: '/media/recipes/cottage-cheese-waffles/selected/step-02-add-wet-ingredients-v1.png',
-  },
-  'mix-dry': {
-    id: 'dry-mix',
-    src: '/media/recipes/cottage-cheese-waffles/selected/step-03-dry-mix-v1.png',
-  },
-  'mix-batter': {
-    id: 'mixed-batter',
-    src: '/media/recipes/cottage-cheese-waffles/selected/step-04-mixed-batter-v1.png',
-  },
-  rest: {
-    id: 'rested-batter',
-    src: '/media/recipes/cottage-cheese-waffles/selected/step-05-rested-batter-v1.png',
-  },
-  bake: {
-    id: 'baked-waffle',
-    src: '/media/recipes/cottage-cheese-waffles/selected/step-06-baked-waffle-v1.png',
+  es: {
+    titles: [
+      'Tritura la base',
+      'Añade los demás ingredientes húmedos',
+      'Prepara la masa',
+      'Deja reposar la masa',
+      'Hornea los gofres',
+    ],
+    instructions: [
+      'Tritura el requesón, los huevos y el yogur hasta obtener una mezcla lisa, sin grumos perceptibles.',
+      'Incorpora el aceite neutro o la mantequilla blanda, el azúcar, la sal y la vainilla.',
+      'En otro bol, mezcla la harina, el almidón de maíz y la levadura química. Incorpóralos a la base y remueve hasta que no quede harina seca.',
+      'Deja reposar durante 7–10 minutos.',
+      'Calienta bien la gofrera. Hornea cada gofre durante 5–7 minutos, hasta que esté dorado.',
+    ],
+    alts: {
+      ingredients:
+        'Requesón, huevos y yogur natural juntos en un bol blanco antes de triturarlos',
+      blended:
+        'Base lisa de requesón, huevos y yogur con una batidora de mano dentro del bol',
+      flour:
+        'Harina sin gluten añadida a la base húmeda de los gofres antes de mezclar',
+      batter:
+        'Masa espesa y lisa para gofres levantada con una cuchara sobre el bol',
+      filling:
+        'Masa para gofres con frutos rojos colocada con una cuchara en la gofrera caliente',
+      baked:
+        'Dos gofres dorados de requesón con frutos rojos en una gofrera abierta',
+      served:
+        'Gofres dorados de requesón con frutos rojos en un plato verde claro',
+    },
   },
 } as const;
 
-function stepMedia(
-  stepId: keyof typeof cottageCheeseWafflesStepMedia,
-  alt: string,
-  title: string,
-  caption: string,
-) {
-  return [{ ...cottageCheeseWafflesStepMedia[stepId], alt, title, caption }];
-}
-
-function blendBaseMedia(
-  ingredients: { alt: string; title: string; caption: string },
-  blended: { alt: string; title: string; caption: string },
-) {
+function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
+  const copy = stepCopy[locale];
+  const media = (id: string, file: string, alt: string) => ({
+    id,
+    src: `/media/recipes/cottage-cheese-waffles/selected/${file}`,
+    alt,
+  });
   return [
     {
-      ...cottageCheeseWafflesStepMedia['ingredients-before-blending'],
-      ...ingredients,
+      id: 'blend-base',
+      title: copy.titles[0],
+      body: copy.instructions[0],
+      cookIngredients: [
+        { ingredientId: 'cottage-cheese' },
+        { ingredientId: 'eggs' },
+        { ingredientId: 'yogurt' },
+      ],
+      media: [
+        media(
+          'ingredients-before-blending',
+          'step-01-ingredients-before-blending-author-v1.jpeg',
+          copy.alts.ingredients,
+        ),
+        media(
+          'blended-base',
+          'step-01-blended-base-author-v1.jpeg',
+          copy.alts.blended,
+        ),
+      ],
     },
-    { ...cottageCheeseWafflesStepMedia['blend-base'], ...blended },
+    {
+      id: 'add-wet',
+      title: copy.titles[1],
+      body: copy.instructions[1],
+      cookIngredients: [
+        { ingredientId: 'oil' },
+        { ingredientId: 'sugar' },
+        { ingredientId: 'salt' },
+        { ingredientId: 'vanilla' },
+      ],
+    },
+    {
+      id: 'mix-dry',
+      title: copy.titles[2],
+      body: copy.instructions[2],
+      cookIngredients: [
+        { ingredientId: 'flour' },
+        { ingredientId: 'corn-starch' },
+        { ingredientId: 'baking-powder' },
+      ],
+      media: [
+        media(
+          'add-dry-ingredients',
+          'step-03-add-dry-author-v1.jpeg',
+          copy.alts.flour,
+        ),
+        media(
+          'mixed-batter',
+          'step-03-mixed-batter-author-v1.jpeg',
+          copy.alts.batter,
+        ),
+      ],
+    },
+    { id: 'rest', title: copy.titles[3], body: copy.instructions[3] },
+    {
+      id: 'bake',
+      title: copy.titles[4],
+      body: copy.instructions[4],
+      media: [
+        media(
+          'fill-waffle-maker',
+          'step-05-fill-waffle-maker-author-v1.jpeg',
+          copy.alts.filling,
+        ),
+        media(
+          'baked-waffles',
+          'step-05-baked-waffles-author-v1.jpeg',
+          copy.alts.baked,
+        ),
+        {
+          id: 'served-waffles',
+          src: '/images/recipes/cottage-cheese-waffles-author-v1.jpeg',
+          alt: copy.alts.served,
+        },
+      ],
+    },
   ];
 }
 
 export const cottageCheeseWafflesRecipe = {
+  publicationStatus: 'published',
   id: 'cottage-cheese-waffles',
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',
     locator: 'Recipe Archive · Творожні вафлі',
   },
   completeness: 'readyToReview',
+  presentation: 'concise',
+  evidence: {
+    status: 'tested',
+    explanation:
+      'The author confirms this exact recipe has been baked successfully.',
+  },
+  yield: {
+    id: 'eight-waffles',
+    label: '8 waffles',
+    count: { kind: 'exact', value: 8 },
+    unit: 'serving',
+  },
   timing: {
-    activeMinutes: null,
-    totalElapsedMinutes: null,
+    activeMinutes: 30,
+    totalElapsedMinutes: 40,
     phases: [
       {
         id: 'batter-rest',
@@ -92,7 +239,7 @@ export const cottageCheeseWafflesRecipe = {
           id: 'cottage-cheese',
           name: 'Cottage cheese',
           quantity: {
-            base: { kind: 'exact', value: 500, unit: 'g' },
+            base: { kind: 'exact', value: 200, unit: 'g' },
             shopping: { mode: 'base' },
           },
         },
@@ -100,7 +247,7 @@ export const cottageCheeseWafflesRecipe = {
           id: 'eggs',
           name: 'Eggs',
           quantity: {
-            base: { kind: 'exact', value: 4, unit: 'piece' },
+            base: { kind: 'exact', value: 2, unit: 'piece' },
             shopping: { mode: 'base', increment: 1, rounding: 'up' },
           },
         },
@@ -108,53 +255,42 @@ export const cottageCheeseWafflesRecipe = {
           id: 'yogurt',
           name: 'Natural yogurt',
           quantity: {
-            base: { kind: 'exact', value: 200, unit: 'ml' },
+            base: { kind: 'exact', value: 100, unit: 'ml' },
             shopping: { mode: 'base' },
           },
         },
         {
           id: 'oil',
-          name: 'Sunflower oil',
+          name: 'Neutral oil or softened butter',
           quantity: {
-            base: { kind: 'range', min: 60, max: 80, unit: 'ml' },
+            base: { kind: 'exact', value: 40, unit: 'g' },
             shopping: { mode: 'base' },
           },
         },
         {
           id: 'flour',
           name: 'Schär Mix B Bread flour',
-          quantity: {
-            base: { kind: 'exact', value: 250, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromGrams('schar-mix-b', 120),
         },
         {
           id: 'corn-starch',
           name: 'Corn starch',
-          quantity: {
-            base: { kind: 'exact', value: 1, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromSpoons('corn-starch', 1, 'tbsp'),
         },
         {
           id: 'baking-powder',
           name: 'Baking powder',
-          quantity: {
-            base: { kind: 'exact', value: 2, unit: 'tsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromSpoons('baking-powder', 1, 'tsp'),
         },
         {
           id: 'sugar',
           name: 'Sugar',
-          quantity: {
-            base: { kind: 'exact', value: 1, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromGrams('granulated-sugar', 20),
         },
         {
           id: 'salt',
           name: 'Salt',
+          scaling: 'fixed',
           quantity: {
             base: null,
             equivalent: { kind: 'exact', value: 1, unit: 'pinch' },
@@ -169,121 +305,24 @@ export const cottageCheeseWafflesRecipe = {
       ],
     },
   ],
-  steps: [
-    {
-      id: 'blend-base',
-      title: 'Blend the cottage-cheese base',
-      body: 'Blend the cottage cheese, eggs and yogurt until smooth.',
-      checkpoint:
-        'The base is even, with no noticeable pieces of cottage cheese.',
-      cookIngredients: [
-        { ingredientId: 'cottage-cheese' },
-        { ingredientId: 'eggs' },
-        { ingredientId: 'yogurt' },
-      ],
-      media: blendBaseMedia(
-        {
-          alt: 'Cottage cheese, four cracked eggs and natural yogurt together in a white bowl before blending',
-          title: 'Before blending',
-          caption:
-            'Put the cottage cheese, eggs and yogurt in the bowl together.',
-        },
-        {
-          alt: 'Smooth pale cottage-cheese, egg and yogurt base in a ceramic bowl beside an immersion blender',
-          title: 'Blend to an even base',
-          caption:
-            'Blend the cottage cheese, eggs and yogurt before adding the other ingredients.',
-        },
-      ),
-    },
-    {
-      id: 'add-wet',
-      title: 'Add the oil and flavourings',
-      body: 'Add the sunflower oil, sugar, salt and vanilla. Mix well.',
-      checkpoint: 'The oil and flavourings are fully mixed through the base.',
-      cookIngredients: [
-        { ingredientId: 'oil' },
-        { ingredientId: 'sugar' },
-        { ingredientId: 'salt' },
-        { ingredientId: 'vanilla' },
-      ],
-      media: stepMedia(
-        'add-wet',
-        'Sunflower oil being poured into a smooth cottage-cheese base with sugar, salt and vanilla nearby',
-        'Add the flavourings',
-        'Mix the oil, sugar, salt and vanilla into the smooth base.',
-      ),
-    },
-    {
-      id: 'mix-dry',
-      title: 'Mix the dry ingredients',
-      body: 'In a separate bowl, combine the flour, corn starch and baking powder.',
-      cookGroup: 'dry-and-combine',
-      cookTitle: 'Mix and add the dry ingredients',
-      cookInstructions: [
-        'In a separate bowl, combine the flour, corn starch and baking powder.',
-        'Add the dry mixture to the wet base and mix into a dough.',
-      ],
-      checkpoint:
-        'The dry mixture looks even before it goes into the wet base.',
-      cookIngredients: [
-        { ingredientId: 'flour' },
-        { ingredientId: 'corn-starch' },
-        { ingredientId: 'baking-powder' },
-      ],
-      media: stepMedia(
-        'mix-dry',
-        'Gluten-free flour, corn starch and baking powder mixed in a ceramic bowl with a whisk',
-        'Mix the dry ingredients',
-        'Whisk the flour, corn starch and baking powder together first.',
-      ),
-    },
-    {
-      id: 'mix-batter',
-      title: 'Mix in the dry ingredients',
-      body: 'Add the dry mixture to the wet base and mix into a dough.',
-      cookGroup: 'dry-and-combine',
-      checkpoint: 'There are no dry patches of flour left in the dough.',
-      media: stepMedia(
-        'mix-batter',
-        'Thick pale cottage-cheese waffle batter being lifted from a ceramic bowl with a silicone spatula',
-        'An even dough',
-        'Stop once the dry mixture is fully incorporated.',
-      ),
-    },
-    {
-      id: 'rest',
-      title: 'Rest the dough',
-      body: 'Leave the dough to rest for 7–10 minutes.',
-      meta: '7–10 min',
-      checkpoint: 'The dough has rested for at least 7 minutes.',
-      media: stepMedia(
-        'rest',
-        'A bowl of cottage-cheese waffle dough resting loosely covered with a plate',
-        'Let the dough rest',
-        'Leave the mixed dough for 7–10 minutes.',
-      ),
-    },
-    {
-      id: 'bake',
-      title: 'Bake the waffles',
-      body: 'Heat the waffle maker well. Bake each waffle for 5–7 minutes.',
-      meta: '5–7 min per waffle',
-      checkpoint: 'The waffle is golden.',
-      media: stepMedia(
-        'bake',
-        'Golden cottage-cheese waffle in an open black waffle maker with a light wisp of steam',
-        'Bake until golden',
-        'A well-heated waffle maker bakes each waffle in 5–7 minutes.',
-      ),
-    },
-  ],
+  steps: stepsForLocale('en'),
   translations: {
     uk: {
       completeness: 'readyToReview',
+      presentation: 'concise',
+      evidence: {
+        status: 'tested',
+        explanation: 'Авторка підтверджує: цю версію успішно випікали.',
+      },
+      yield: {
+        id: 'eight-waffles',
+        label: '8 вафель',
+        count: { kind: 'exact', value: 8 },
+        unit: 'serving',
+      },
       timing: {
-        activeMinutes: null,
-        totalElapsedMinutes: null,
+        activeMinutes: 30,
+        totalElapsedMinutes: 40,
         phases: [
           {
             id: 'batter-rest',
@@ -315,7 +354,7 @@ export const cottageCheeseWafflesRecipe = {
             },
             {
               id: 'oil',
-              name: 'Соняшникова олія',
+              name: 'Олія без запаху або м’яке вершкове масло',
               quantity: translatedQuantity,
             },
             {
@@ -334,124 +373,30 @@ export const cottageCheeseWafflesRecipe = {
               quantity: translatedQuantity,
             },
             { id: 'sugar', name: 'Цукор', quantity: translatedQuantity },
-            { id: 'salt', name: 'Дрібка солі', quantity: translatedQuantity },
+            { id: 'salt', name: 'Сіль', quantity: translatedQuantity },
             { id: 'vanilla', name: 'Ваніль', quantity: translatedQuantity },
           ],
         },
       ],
-      steps: [
-        {
-          id: 'blend-base',
-          title: 'Збийте основу блендером',
-          body: 'Проблендеріть творог, яйця та йогурт до однорідної маси.',
-          checkpoint: 'Основа однорідна, без помітних грудочок творогу.',
-          cookIngredients: [
-            { ingredientId: 'cottage-cheese' },
-            { ingredientId: 'eggs' },
-            { ingredientId: 'yogurt' },
-          ],
-          media: blendBaseMedia(
-            {
-              alt: 'Творог, чотири розбиті яйця та натуральний йогурт у білій мисці перед збиванням',
-              title: 'Перед збиванням',
-              caption: 'Складіть творог, яйця та йогурт разом у миску.',
-            },
-            {
-              alt: 'Однорідна світла основа з творогу, яєць і йогурту в керамічній мисці поруч із занурювальним блендером',
-              title: 'Збийте до однорідності',
-              caption:
-                'Проблендеріть творог, яйця та йогурт перед додаванням інших інгредієнтів.',
-            },
-          ),
-        },
-        {
-          id: 'add-wet',
-          title: 'Додайте олію та смакові добавки',
-          body: 'Додайте соняшникову олію, цукор, сіль і ваніль. Добре перемішайте.',
-          checkpoint: 'Олія та смакові добавки повністю вмішані в основу.',
-          cookIngredients: [
-            { ingredientId: 'oil' },
-            { ingredientId: 'sugar' },
-            { ingredientId: 'salt' },
-            { ingredientId: 'vanilla' },
-          ],
-          media: stepMedia(
-            'add-wet',
-            'Соняшникова олія наливається в однорідну творожну основу; поруч цукор, сіль і ваніль',
-            'Додайте смакові добавки',
-            'Вмішайте олію, цукор, сіль і ваніль в однорідну основу.',
-          ),
-        },
-        {
-          id: 'mix-dry',
-          title: 'Змішайте сухі інгредієнти',
-          body: 'В окремій мисці змішайте борошно, кукурудзяний крохмаль і розпушувач.',
-          cookGroup: 'dry-and-combine',
-          cookTitle: 'Змішайте та введіть сухі інгредієнти',
-          cookInstructions: [
-            'В окремій мисці змішайте борошно, кукурудзяний крохмаль і розпушувач.',
-            'Всипте суху суміш до вологої основи та замісіть тісто.',
-          ],
-          checkpoint:
-            'Суха суміш має однорідний вигляд перед додаванням до вологої основи.',
-          cookIngredients: [
-            { ingredientId: 'flour' },
-            { ingredientId: 'corn-starch' },
-            { ingredientId: 'baking-powder' },
-          ],
-          media: stepMedia(
-            'mix-dry',
-            'Борошняна суміш без глютену, кукурудзяний крохмаль і розпушувач змішані вінчиком у керамічній мисці',
-            'Змішайте сухі інгредієнти',
-            'Спочатку рівномірно змішайте борошно, крохмаль і розпушувач.',
-          ),
-        },
-        {
-          id: 'mix-batter',
-          title: 'Вмішайте сухі інгредієнти',
-          body: 'Всипте суху суміш до вологої основи та замісіть тісто.',
-          cookGroup: 'dry-and-combine',
-          checkpoint: 'У тісті не залишилося сухих ділянок борошна.',
-          media: stepMedia(
-            'mix-batter',
-            'Густе світле тісто для творожних вафель підняте силіконовою лопаткою з керамічної миски',
-            'Однорідне тісто',
-            'Зупиніться, щойно суха суміш повністю вмішається.',
-          ),
-        },
-        {
-          id: 'rest',
-          title: 'Дайте тісту відпочити',
-          body: 'Залиште тісто на 7–10 хвилин.',
-          meta: '7–10 хв',
-          checkpoint: 'Тісто відпочило щонайменше 7 хвилин.',
-          media: stepMedia(
-            'rest',
-            'Миска з тістом для творожних вафель, нещільно накрита тарілкою',
-            'Дайте тісту відпочити',
-            'Залиште замішане тісто на 7–10 хвилин.',
-          ),
-        },
-        {
-          id: 'bake',
-          title: 'Спечіть вафлі',
-          body: 'Добре розігрійте вафельницю. Випікайте кожну вафлю 5–7 хвилин.',
-          meta: '5–7 хв на вафлю',
-          checkpoint: 'Вафля золотиста.',
-          media: stepMedia(
-            'bake',
-            'Золотиста творожна вафля у відкритій чорній вафельниці з легкою парою',
-            'Випікайте до золотистого кольору',
-            'Добре розігріта вафельниця випікає кожну вафлю за 5–7 хвилин.',
-          ),
-        },
-      ],
+      steps: stepsForLocale('uk'),
     },
     es: {
       completeness: 'readyToReview',
+      presentation: 'concise',
+      evidence: {
+        status: 'tested',
+        explanation:
+          'La autora confirma que esta versión se ha horneado con éxito.',
+      },
+      yield: {
+        id: 'eight-waffles',
+        label: '8 gofres',
+        count: { kind: 'exact', value: 8 },
+        unit: 'serving',
+      },
       timing: {
-        activeMinutes: null,
-        totalElapsedMinutes: null,
+        activeMinutes: 30,
+        totalElapsedMinutes: 40,
         phases: [
           {
             id: 'batter-rest',
@@ -483,7 +428,7 @@ export const cottageCheeseWafflesRecipe = {
             },
             {
               id: 'oil',
-              name: 'Aceite de girasol',
+              name: 'Aceite neutro o mantequilla blanda',
               quantity: translatedQuantity,
             },
             {
@@ -504,123 +449,14 @@ export const cottageCheeseWafflesRecipe = {
             { id: 'sugar', name: 'Azúcar', quantity: translatedQuantity },
             {
               id: 'salt',
-              name: 'Una pizca de sal',
+              name: 'Sal',
               quantity: translatedQuantity,
             },
             { id: 'vanilla', name: 'Vainilla', quantity: translatedQuantity },
           ],
         },
       ],
-      steps: [
-        {
-          id: 'blend-base',
-          title: 'Tritura la base de requesón',
-          body: 'Tritura el requesón, los huevos y el yogur hasta obtener una mezcla homogénea.',
-          checkpoint:
-            'La base está uniforme, sin trozos perceptibles de requesón.',
-          cookIngredients: [
-            { ingredientId: 'cottage-cheese' },
-            { ingredientId: 'eggs' },
-            { ingredientId: 'yogurt' },
-          ],
-          media: blendBaseMedia(
-            {
-              alt: 'Requesón, cuatro huevos cascados y yogur natural juntos en un bol blanco antes de triturarlos',
-              title: 'Antes de triturar',
-              caption:
-                'Pon juntos el requesón, los huevos y el yogur en el bol.',
-            },
-            {
-              alt: 'Base clara y homogénea de requesón, huevos y yogur en un bol de cerámica junto a una batidora de mano',
-              title: 'Tritura hasta homogeneizar',
-              caption:
-                'Tritura el requesón, los huevos y el yogur antes de añadir los demás ingredientes.',
-            },
-          ),
-        },
-        {
-          id: 'add-wet',
-          title: 'Añade el aceite y los aromatizantes',
-          body: 'Añade el aceite de girasol, el azúcar, la sal y la vainilla. Mezcla bien.',
-          checkpoint:
-            'El aceite y los aromatizantes están totalmente integrados en la base.',
-          cookIngredients: [
-            { ingredientId: 'oil' },
-            { ingredientId: 'sugar' },
-            { ingredientId: 'salt' },
-            { ingredientId: 'vanilla' },
-          ],
-          media: stepMedia(
-            'add-wet',
-            'Aceite de girasol vertiéndose sobre una base homogénea de requesón, con azúcar, sal y vainilla cerca',
-            'Añade los aromatizantes',
-            'Mezcla el aceite, el azúcar, la sal y la vainilla con la base homogénea.',
-          ),
-        },
-        {
-          id: 'mix-dry',
-          title: 'Mezcla los ingredientes secos',
-          body: 'En otro bol, mezcla la harina, el almidón de maíz y la levadura química.',
-          cookGroup: 'dry-and-combine',
-          cookTitle: 'Mezcla e incorpora los ingredientes secos',
-          cookInstructions: [
-            'En otro bol, mezcla la harina, el almidón de maíz y la levadura química.',
-            'Añade la mezcla seca a la base húmeda y mezcla hasta formar una masa.',
-          ],
-          checkpoint:
-            'La mezcla seca se ve uniforme antes de incorporarla a la base húmeda.',
-          cookIngredients: [
-            { ingredientId: 'flour' },
-            { ingredientId: 'corn-starch' },
-            { ingredientId: 'baking-powder' },
-          ],
-          media: stepMedia(
-            'mix-dry',
-            'Harina sin gluten, almidón de maíz y levadura química mezclados con varillas en un bol de cerámica',
-            'Mezcla los ingredientes secos',
-            'Mezcla primero la harina, el almidón de maíz y la levadura química.',
-          ),
-        },
-        {
-          id: 'mix-batter',
-          title: 'Incorpora los ingredientes secos',
-          body: 'Añade la mezcla seca a la base húmeda y mezcla hasta formar una masa.',
-          cookGroup: 'dry-and-combine',
-          checkpoint: 'No quedan zonas de harina seca en la masa.',
-          media: stepMedia(
-            'mix-batter',
-            'Masa espesa y clara para gofres de requesón levantada con una espátula de silicona desde un bol de cerámica',
-            'Una masa uniforme',
-            'Detente en cuanto la mezcla seca esté totalmente incorporada.',
-          ),
-        },
-        {
-          id: 'rest',
-          title: 'Deja reposar la masa',
-          body: 'Deja reposar la masa durante 7–10 minutos.',
-          meta: '7–10 min',
-          checkpoint: 'La masa ha reposado al menos 7 minutos.',
-          media: stepMedia(
-            'rest',
-            'Un bol de masa para gofres de requesón cubierto sin apretar con un plato',
-            'Deja reposar la masa',
-            'Deja reposar la masa mezclada durante 7–10 minutos.',
-          ),
-        },
-        {
-          id: 'bake',
-          title: 'Hornea los gofres',
-          body: 'Calienta bien la gofrera. Hornea cada gofre durante 5–7 minutos.',
-          meta: '5–7 min por gofre',
-          checkpoint: 'El gofre está dorado.',
-          media: stepMedia(
-            'bake',
-            'Gofre dorado de requesón en una gofrera negra abierta con un ligero vapor',
-            'Hornea hasta dorar',
-            'Una gofrera bien caliente hornea cada gofre en 5–7 minutos.',
-          ),
-        },
-      ],
+      steps: stepsForLocale('es'),
     },
   },
 } satisfies RecipeSourceDraft;

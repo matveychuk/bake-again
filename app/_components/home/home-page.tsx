@@ -11,8 +11,10 @@ import { HomeTrust } from './home-trust';
 export function HomePage({
   locale,
   selectedCollectionId,
+  query = '',
 }: {
   locale: AppLocale;
+  query?: string;
   selectedCollectionId?: RecipeCollectionId | null;
 }) {
   const homePath = localeHomePath(locale);
@@ -20,9 +22,9 @@ export function HomePage({
   return (
     <main>
       <SiteHeader locale={locale} pathname={homePath} />
-      <HomeHero locale={locale} />
-      <HomeDiscovery locale={locale} />
-      <HomeRecipes locale={locale} selectedCollectionId={selectedCollectionId} />
+      <HomeHero locale={locale} query={query} selectedCollectionId={selectedCollectionId} />
+      <HomeDiscovery locale={locale} query={query} />
+      <HomeRecipes locale={locale} selectedCollectionId={selectedCollectionId} query={query} />
       <HomeTrust locale={locale} />
       <SiteFooter locale={locale} />
     </main>

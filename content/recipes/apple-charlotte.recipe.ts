@@ -1,50 +1,322 @@
-import type { RecipeSourceDraft } from './source-recipe.types.ts';
+import type {
+  RecipeSourceDraft,
+  RecipeSourceDraftContent,
+  StructuredIngredientSection,
+  StructuredRecipeStep,
+} from './source-recipe.types.ts';
+import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
+
+type Locale = 'en' | 'es' | 'uk';
+
+const text = (locale: Locale, en: string, es: string, uk: string) =>
+  locale === 'uk' ? uk : locale === 'es' ? es : en;
+
+const quantities = {
+  apples: {
+    base: { kind: 'exact' as const, value: 3, unit: 'piece' as const },
+    shopping: { mode: 'base' as const, increment: 1, rounding: 'up' as const },
+  },
+  eggs: {
+    base: { kind: 'exact' as const, value: 5, unit: 'piece' as const },
+    shopping: { mode: 'base' as const, increment: 1, rounding: 'up' as const },
+  },
+  sugar: quantityFromGrams('granulated-sugar', 100),
+  butter: {
+    base: { kind: 'exact' as const, value: 50, unit: 'g' as const },
+    shopping: { mode: 'base' as const },
+  },
+  flour: quantityFromGrams('schar-mix-b', 120),
+  tapioca: quantityFromGrams('tapioca-starch', 15),
+  xanthan: quantityFromSpoons('xanthan-gum', 0.5, 'tsp'),
+  pinch: {
+    base: null,
+    equivalent: { kind: 'exact' as const, value: 1, unit: 'pinch' as const },
+    shopping: { mode: 'nameOnly' as const },
+  },
+  nameOnly: { base: null, shopping: { mode: 'nameOnly' as const } },
+};
+
+function ingredientSections(locale: Locale): StructuredIngredientSection[] {
+  return [
+    {
+      id: 'cake',
+      title: text(
+        locale,
+        'Apple charlotte',
+        'Carlota de manzana',
+        'Яблучна шарлотка',
+      ),
+      ingredients: [
+        {
+          id: 'apples',
+          name: text(locale, 'Firm apples', 'Manzanas firmes', 'Щільні яблука'),
+          quantity: quantities.apples,
+          note: text(
+            locale,
+            'Cut into 1–1.5 cm pieces and pat dry.',
+            'Córtalas en trozos de 1–1,5 cm y sécalas.',
+            'Наріжте шматочками 1–1,5 см і промокніть.',
+          ),
+        },
+        {
+          id: 'eggs',
+          name: text(locale, 'Small eggs', 'Huevos pequeños', 'Невеликі яйця'),
+          quantity: quantities.eggs,
+        },
+        {
+          id: 'sugar',
+          name: text(locale, 'Sugar', 'Azúcar', 'Цукор'),
+          quantity: quantities.sugar,
+        },
+        {
+          id: 'butter',
+          name: text(
+            locale,
+            'Unsalted butter',
+            'Mantequilla sin sal',
+            'Вершкове масло',
+          ),
+          quantity: quantities.butter,
+        },
+        {
+          id: 'flour',
+          name: text(
+            locale,
+            'Schär Mix B Bread flour',
+            'Harina Schär Mix B Bread',
+            'Борошно Schär Mix B Bread',
+          ),
+          quantity: quantities.flour,
+          note: text(
+            locale,
+            'Reserve 10 g for coating the apples.',
+            'Reserva 10 g para cubrir las manzanas.',
+            'Відкладіть 10 г для яблук.',
+          ),
+        },
+        {
+          id: 'tapioca',
+          name: text(
+            locale,
+            'Tapioca starch',
+            'Almidón de tapioca',
+            'Тапіоковий крохмаль',
+          ),
+          quantity: quantities.tapioca,
+        },
+        {
+          id: 'xanthan',
+          name: text(
+            locale,
+            'Xanthan gum',
+            'Goma xantana',
+            'Ксантанова камедь',
+          ),
+          quantity: quantities.xanthan,
+        },
+        {
+          id: 'salt',
+          name: text(locale, 'Salt', 'Sal', 'Сіль'),
+          quantity: quantities.pinch,
+          scaling: 'fixed',
+        },
+        {
+          id: 'vanilla',
+          name: text(locale, 'Vanillin', 'Vainillina', 'Ванілін'),
+          quantity: quantities.nameOnly,
+        },
+        {
+          id: 'cinnamon',
+          name: text(locale, 'Cinnamon', 'Canela', 'Кориця'),
+          quantity: quantities.nameOnly,
+        },
+      ],
+    },
+  ];
+}
+
+function steps(locale: Locale): StructuredRecipeStep[] {
+  return [
+    {
+      id: 'prepare-apples',
+      title: text(
+        locale,
+        'Prepare the butter and apples',
+        'Prepara la mantequilla y las manzanas',
+        'Підготуйте масло та яблука',
+      ),
+      body: text(
+        locale,
+        'Melt the butter and let it cool until barely warm. Cut the apples into 1–1.5 cm pieces, pat them dry and toss with the reserved 10 g of flour.',
+        'Derrite la mantequilla y déjala enfriar hasta que esté apenas tibia. Corta las manzanas en trozos de 1–1,5 cm, sécalas y mézclalas con los 10 g de harina reservados.',
+        'Розтопіть масло й остудіть до ледь теплого стану. Наріжте яблука шматочками 1–1,5 см, промокніть і перемішайте з відкладеними 10 г борошна.',
+      ),
+      cookIngredients: [
+        { ingredientId: 'butter' },
+        { ingredientId: 'apples' },
+        { ingredientId: 'flour' },
+      ],
+    },
+    {
+      id: 'whip-eggs',
+      title: text(
+        locale,
+        'Whip to ribbon stage',
+        'Bate hasta el punto de cinta',
+        'Збийте до стрічки',
+      ),
+      body: text(
+        locale,
+        'Whip the eggs with the sugar until pale, thick and voluminous.',
+        'Bate los huevos con el azúcar hasta obtener una mezcla clara, espesa y voluminosa.',
+        'Збийте яйця з цукром до світлої, густої та пишної маси.',
+      ),
+      checkpoint: text(
+        locale,
+        'The mixture falls from the whisk in a broad ribbon that remains visible for a few seconds.',
+        'La mezcla cae de las varillas en una cinta ancha que permanece visible unos segundos.',
+        'Маса спадає з вінчика широкою стрічкою, яка кілька секунд тримається на поверхні.',
+      ),
+      cookIngredients: [{ ingredientId: 'eggs' }, { ingredientId: 'sugar' }],
+      media: [
+        {
+          id: 'apple-charlotte-egg-foam-v1',
+          src: '/media/recipes/apple-charlotte/selected/whipped-egg-foam-v1.png',
+          alt: text(
+            locale,
+            'Pale egg foam falling from a whisk in a broad ribbon',
+            'Espuma clara de huevo que cae de las varillas en una cinta ancha',
+            'Світла яєчна піна спадає з вінчика широкою стрічкою',
+          ),
+        },
+      ],
+    },
+    {
+      id: 'fold-batter',
+      title: text(
+        locale,
+        'Finish the batter',
+        'Termina la masa',
+        'Завершіть тісто',
+      ),
+      body: text(
+        locale,
+        'Mix the remaining flour, tapioca starch, xanthan gum, salt, vanillin and cinnamon. Fold into the egg foam. Stir a spoonful of batter into the cooled butter, fold it back into the bowl, then gently fold in the apples.',
+        'Mezcla la harina restante, el almidón de tapioca, la goma xantana, la sal, la vainillina y la canela. Incorpora esta mezcla a la espuma de huevo. Mezcla una cucharada de masa con la mantequilla fría, devuélvela al bol e incorpora con cuidado las manzanas.',
+        'Змішайте решту борошна, тапіоковий крохмаль, ксантанову камедь, сіль, ванілін і корицю та обережно вмішайте в яєчну піну. З’єднайте ложку тіста з охолодженим маслом, поверніть суміш у миску, а потім делікатно вмішайте яблука.',
+      ),
+      checkpoint: text(
+        locale,
+        'The batter remains airy, and the apple pieces are suspended throughout rather than collecting at the bottom.',
+        'La masa sigue aireada y los trozos de manzana quedan repartidos, sin acumularse en el fondo.',
+        'Тісто залишається повітряним, а шматочки яблук розподілені в ньому, а не збираються на дні.',
+      ),
+      cookIngredients: [
+        { ingredientId: 'flour', quantity: 'omit' },
+        { ingredientId: 'tapioca' },
+        { ingredientId: 'xanthan' },
+        { ingredientId: 'salt' },
+        { ingredientId: 'vanilla' },
+        { ingredientId: 'cinnamon' },
+        { ingredientId: 'butter', quantity: 'omit' },
+        { ingredientId: 'apples', quantity: 'omit' },
+      ],
+      media: [
+        {
+          id: 'folded-apple-batter-v1',
+          src: '/media/recipes/apple-charlotte/selected/folded-apple-batter-v1.png',
+          alt: text(
+            locale,
+            'Thick airy batter with small apple pieces distributed throughout',
+            'Masa espesa y aireada con pequeños trozos de manzana repartidos',
+            'Густе повітряне тісто з рівномірно розподіленими шматочками яблук',
+          ),
+        },
+      ],
+    },
+    {
+      id: 'bake',
+      title: text(
+        locale,
+        'Bake until golden',
+        'Hornea hasta dorar',
+        'Випікайте до золотистого кольору',
+      ),
+      body: text(
+        locale,
+        'Preheat the oven to 180°C. Spread the batter in a parchment-lined medium baking pan and bake.',
+        'Precalienta el horno a 180°C. Extiende la masa en un molde mediano forrado con papel de horno y hornea.',
+        'Розігрійте духовку до 180°C. Розподіліть тісто у середній формі, застеленій пергаментом, і випікайте.',
+      ),
+      meta: text(
+        locale,
+        '180°C · 25–30 min',
+        '180°C · 25–30 min',
+        '180°C · 25–30 хв',
+      ),
+      checkpoint: text(
+        locale,
+        'The top is golden, the centre springs back lightly, and a skewer has no wet batter.',
+        'La superficie está dorada, el centro recupera la forma al tocarlo y la brocheta no sale con masa cruda.',
+        'Верх золотистий, центр пружно відновлюється після легкого натискання, а на шпажці немає сирого тіста.',
+      ),
+    },
+  ];
+}
+
+function contentForLocale(locale: Locale): RecipeSourceDraftContent {
+  return {
+    completeness: 'readyToReview',
+    presentation: 'concise',
+    difficulty: 'easy',
+    evidence: {
+      status: 'tested',
+      explanation: text(
+        locale,
+        'This exact butter-enriched apple charlotte has been baked successfully.',
+        'Esta versión exacta de la carlota de manzana con mantequilla se ha horneado con éxito.',
+        'Саме цю версію яблучної шарлотки з маслом успішно випікали.',
+      ),
+    },
+    yield: {
+      id: 'one-charlotte',
+      label: text(locale, '1 charlotte', '1 carlota', '1 шарлотка'),
+      count: { kind: 'exact', value: 1 },
+      unit: 'cake',
+    },
+    timing: {
+      activeMinutes: 20,
+      totalElapsedMinutes: 50,
+      phases: [
+        {
+          id: 'baking',
+          label: text(locale, 'Baking', 'Horneado', 'Випікання'),
+          duration: { kind: 'range', min: 25, max: 30, unit: 'minute' },
+          relatedStepId: 'bake',
+        },
+      ],
+    },
+    beforeStart: [
+      text(
+        locale,
+        'For a full-size oven tray, use a double batch.',
+        'Para una bandeja de horno completa, prepara una cantidad doble.',
+        'Для повного дека духовки готуйте подвійну порцію.',
+      ),
+    ],
+    ingredientSections: ingredientSections(locale),
+    steps: steps(locale),
+  };
+}
 
 export const appleCharlotteRecipe = {
   id: 'apple-charlotte',
-  source: { file: 'docs/reference/recipe-inventory.xlsx', locator: 'Recipe Archive · Яблучна шарлотка' },
-  completeness: 'readyToReview',
-  beforeStart: ['This source quantity is for one full large baking tray.', 'Put the tray into a preheated oven.'],
-  ingredientSections: [{
-    id: 'cake', title: 'Apple charlotte', ingredients: [
-      { id: 'apples', name: 'Apples', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
-      { id: 'eggs', name: 'Small eggs', quantity: { base: { kind: 'exact', value: 10, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } },
-      { id: 'sugar', name: 'Sugar', quantity: { base: { kind: 'exact', value: 200, unit: 'g' }, shopping: { mode: 'base' } } },
-      { id: 'flour', name: 'Schär Mix B Bread flour', quantity: { base: { kind: 'exact', value: 240, unit: 'g' }, shopping: { mode: 'base' } } },
-      { id: 'tapioca', name: 'Tapioca starch', quantity: { base: { kind: 'exact', value: 30, unit: 'g' }, shopping: { mode: 'base' } } },
-      { id: 'xanthan', name: 'Xanthan gum', quantity: { base: { kind: 'exact', value: 1, unit: 'tsp' }, shopping: { mode: 'base' } } },
-      { id: 'salt', name: 'Salt', quantity: { base: null, equivalent: { kind: 'exact', value: 1, unit: 'pinch' }, shopping: { mode: 'nameOnly' } } },
-      { id: 'vanilla', name: 'Vanillin', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
-      { id: 'cinnamon', name: 'Cinnamon', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
-    ],
-  }],
-  steps: [
-    { id: 'prepare-apples', title: 'Prepare the apples', body: 'Finely chop the apples in a food processor. Line a baking tray with parchment and spread the apples over it.' },
-    { id: 'whip-eggs', title: 'Whip the eggs and sugar', body: 'Beat the eggs and sugar until very light and voluminous.' },
-    { id: 'mix-dry', title: 'Mix the dry ingredients', body: 'Combine the flour, tapioca starch, xanthan gum, salt, vanilla and cinnamon.' },
-    { id: 'fold-batter', title: 'Finish the batter', body: 'Slowly add the dry mixture to the whipped eggs, then pour the batter over the apples.' },
-    { id: 'bake', title: 'Bake', body: 'Bake in a hot oven until set and golden.', meta: '25–30 min', checkpoint: 'The source does not record the oven temperature; confirm it during the next bake.' },
-  ],
-  translations: {
-    uk: {
-      completeness: 'readyToReview',
-      beforeStart: ['Ця кількість розрахована на одне велике деко.', 'Ставте деко в розігріту духовку.'],
-      ingredientSections: [{ id: 'cake', title: 'Яблучна шарлотка', ingredients: [
-        { id: 'apples', name: 'Яблука', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'eggs', name: 'Невеликі яйця', quantity: { base: { kind: 'exact', value: 10, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } }, { id: 'sugar', name: 'Цукор', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'flour', name: 'Борошно Schär Mix B Bread', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'tapioca', name: 'Тапіоковий крохмаль', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'xanthan', name: 'Ксантанова камедь', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'salt', name: 'Сіль', quantity: { base: null, equivalent: { kind: 'exact', value: 1, unit: 'pinch' }, shopping: { mode: 'nameOnly' } } }, { id: 'vanilla', name: 'Ванілін', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'cinnamon', name: 'Кориця', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
-      ] }],
-      steps: [
-        { id: 'prepare-apples', title: 'Підготуйте яблука', body: 'Дрібно наріжте яблука в комбайні. Застеліть деко пергаментом і розподіліть яблука.' }, { id: 'whip-eggs', title: 'Збийте яйця з цукром', body: 'Збийте до дуже світлої, пишної маси.' }, { id: 'mix-dry', title: 'Змішайте сухі інгредієнти', body: 'З’єднайте борошно, тапіоковий крохмаль, ксантанову камедь, сіль, ванілін і корицю.' }, { id: 'fold-batter', title: 'Завершіть тісто', body: 'Повільно додайте суху суміш до збитих яєць, потім вилийте тісто на яблука.' }, { id: 'bake', title: 'Випікайте', body: 'Випікайте в гарячій духовці до готовності й золотистого кольору.', meta: '25–30 хв', checkpoint: 'Джерело не містить температури духовки; уточніть її під час наступнього випікання.' },
-      ],
-    },
-    es: {
-      completeness: 'readyToReview',
-      beforeStart: ['Esta cantidad corresponde a una bandeja grande completa.', 'Introduce la bandeja en el horno precalentado.'],
-      ingredientSections: [{ id: 'cake', title: 'Carlota de manzana', ingredients: [
-        { id: 'apples', name: 'Manzanas', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'eggs', name: 'Huevos pequeños', quantity: { base: { kind: 'exact', value: 10, unit: 'piece' }, shopping: { mode: 'base', increment: 1, rounding: 'up' } } }, { id: 'sugar', name: 'Azúcar', quantity: { base: { kind: 'exact', value: 200, unit: 'g' }, shopping: { mode: 'base' } } }, { id: 'flour', name: 'Harina Schär Mix B Bread', quantity: { base: { kind: 'exact', value: 240, unit: 'g' }, shopping: { mode: 'base' } } }, { id: 'tapioca', name: 'Almidón de tapioca', quantity: { base: { kind: 'exact', value: 30, unit: 'g' }, shopping: { mode: 'base' } } }, { id: 'xanthan', name: 'Goma xantana', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'salt', name: 'Sal', quantity: { base: null, equivalent: { kind: 'exact', value: 1, unit: 'pinch' }, shopping: { mode: 'nameOnly' } } }, { id: 'vanilla', name: 'Vainillina', quantity: { base: null, shopping: { mode: 'nameOnly' } } }, { id: 'cinnamon', name: 'Canela', quantity: { base: null, shopping: { mode: 'nameOnly' } } },
-      ] }],
-      steps: [
-        { id: 'prepare-apples', title: 'Prepara las manzanas', body: 'Pica finamente las manzanas en un robot de cocina. Forra una bandeja con papel y reparte las manzanas.' }, { id: 'whip-eggs', title: 'Bate los huevos y el azúcar', body: 'Bate hasta obtener una mezcla muy clara y voluminosa.' }, { id: 'mix-dry', title: 'Mezcla los ingredientes secos', body: 'Combina la harina, el almidón de tapioca, la goma xantana, la sal, la vainillina y la canela.' }, { id: 'fold-batter', title: 'Termina la masa', body: 'Añade lentamente la mezcla seca a los huevos batidos y vierte la masa sobre las manzanas.' }, { id: 'bake', title: 'Hornea', body: 'Hornea en un horno caliente hasta que esté cuajada y dorada.', meta: '25–30 min', checkpoint: 'La fuente no indica la temperatura del horno; confírmala en el próximo horneado.' },
-      ],
-    },
+  publicationStatus: 'published',
+  source: {
+    file: 'docs/reference/recipe-inventory.xlsx',
+    locator:
+      'Recipe Archive · Яблучна шарлотка; author-confirmed butter version and half batch, 2026-09-21',
   },
+  ...contentForLocale('en'),
+  translations: { uk: contentForLocale('uk'), es: contentForLocale('es') },
 } satisfies RecipeSourceDraft;

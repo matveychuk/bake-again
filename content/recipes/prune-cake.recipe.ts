@@ -1,346 +1,423 @@
-import type { RecipeSourceDraft } from './source-recipe.types.ts';
+import type {
+  RecipeSourceDraft,
+  RecipeSourceDraftContent,
+  StructuredIngredientSection,
+  StructuredRecipeStep,
+} from './source-recipe.types.ts';
+import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
-export const pruneCakeRecipe = {
-  id: 'prune-cake',
-  publicationStatus: 'draft',
-  source: {
-    file: 'docs/reference/recipe-inventory.xlsx',
-    locator: 'Recipe Archive · Торт з чорносливом',
-  },
-  completeness: 'incompleteSource',
-  beforeStart: [
-    'Do not bake from this working record yet: several cake ingredients and the main method are unreadable.',
-  ],
-  ingredientSections: [
+type Locale = 'en' | 'uk';
+
+const text = (locale: Locale, en: string, uk: string) =>
+  locale === 'uk' ? uk : en;
+
+const exact = (value: number, unit: 'g' | 'piece' | 'tbsp') => ({
+  base: { kind: 'exact' as const, value, unit },
+  shopping: { mode: 'base' as const },
+});
+
+const range = (min: number, max: number, unit: 'tbsp') => ({
+  base: { kind: 'range' as const, min, max, unit },
+  shopping: { mode: 'base' as const },
+});
+
+function ingredientSections(locale: Locale): StructuredIngredientSection[] {
+  return [
     {
       id: 'cake',
-      title: 'Cake · partial transcription',
+      title: text(locale, 'Cake', 'Корж'),
       ingredients: [
         {
           id: 'eggs',
-          name: 'Eggs',
+          name: text(locale, 'Eggs', 'Яйця'),
           quantity: {
-            base: { kind: 'exact', value: 4, unit: 'piece' },
+            ...exact(4, 'piece'),
             shopping: { mode: 'base', increment: 1, rounding: 'up' },
           },
         },
         {
-          id: 'unknown-jars',
-          name: 'Unclear ingredient',
-          quantity: { base: null, shopping: { mode: 'nameOnly' } },
-          note: 'The source records 2 jars, but the ingredient name is unreadable.',
+          id: 'greek-yogurt',
+          name: text(locale, 'Greek yogurt', 'Грецький йогурт'),
+          quantity: exact(250, 'g'),
         },
         {
           id: 'sugar',
-          name: 'Sugar',
-          quantity: { base: null, shopping: { mode: 'nameOnly' } },
-          note: 'The source records one incomplete glass; convert only after confirming the original measure.',
+          name: text(locale, 'Sugar', 'Цукор'),
+          quantity: quantityFromGrams('granulated-sugar', 200),
         },
         {
-          id: 'unknown-spoons-one',
-          name: 'Unclear ingredient',
-          quantity: {
-            base: { kind: 'exact', value: 2, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
-          note: 'Unreadable in the source.',
+          id: 'sunflower-oil',
+          name: text(locale, 'Sunflower oil', 'Соняшникова олія'),
+          quantity: exact(2, 'tbsp'),
         },
         {
-          id: 'unknown-spoons-two',
-          name: 'Unclear ingredient',
-          quantity: {
-            base: { kind: 'range', min: 5, max: 6, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
-          note: 'Unreadable in the source.',
+          id: 'sweetened-condensed-milk',
+          name: text(locale, 'Sweetened condensed milk', 'Згущене молоко'),
+          quantity: range(5, 6, 'tbsp'),
         },
         {
           id: 'leavener',
-          name: 'Baking powder or lemon-quenched baking soda',
-          quantity: {
-            base: { kind: 'exact', value: 2, unit: 'tsp' },
-            shopping: { mode: 'base' },
-          },
+          name: text(locale, 'Baking powder', 'Розпушувач'),
+          quantity: quantityFromSpoons('baking-powder', 2, 'tsp'),
         },
         {
           id: 'cocoa',
-          name: 'Cocoa',
-          quantity: {
-            base: { kind: 'exact', value: 5, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
+          name: text(locale, 'Cocoa', 'Какао'),
+          quantity: quantityFromSpoons('cocoa-powder', 5, 'tbsp'),
         },
         {
           id: 'flour',
-          name: 'Schär Mix B Bread flour',
-          quantity: {
-            base: { kind: 'exact', value: 5, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
+          name: text(
+            locale,
+            'Schär Mix B Bread flour',
+            'Борошно Schär Mix B Bread',
+          ),
+          quantity: quantityFromSpoons('schar-mix-b', 5, 'tbsp'),
         },
       ],
     },
     {
       id: 'cream',
-      title: 'Cream · partial transcription',
+      title: text(locale, 'Cream and decoration', 'Крем і декор'),
       ingredients: [
         {
           id: 'cream-base',
-          name: 'Sour cream or cream',
-          quantity: { base: null, shopping: { mode: 'nameOnly' } },
+          name: text(
+            locale,
+            'Sour cream or Greek yogurt',
+            'Сметана або грецький йогурт',
+          ),
+          quantity: exact(400, 'g'),
         },
         {
-          id: 'powdered-sugar',
-          name: 'Powdered sugar',
+          id: 'cream-sugar',
+          name: text(locale, 'Sugar', 'Цукор'),
           quantity: { base: null, shopping: { mode: 'nameOnly' } },
-          note: 'To taste, according to the source.',
+          note: text(locale, 'To taste', 'До смаку'),
         },
         {
           id: 'prunes',
-          name: 'Prunes',
+          name: text(locale, 'Prunes', 'Чорнослив'),
+          quantity: exact(150, 'g'),
+        },
+        {
+          id: 'nuts',
+          name: text(locale, 'Walnuts or pecans', 'Волоські горіхи або пекан'),
           quantity: { base: null, shopping: { mode: 'nameOnly' } },
-          note: 'The quantity and preparation are not legible in the surviving note.',
         },
       ],
     },
     {
       id: 'glaze',
-      title: 'Chocolate glaze · incomplete formula',
+      title: text(locale, 'Chocolate glaze', 'Шоколадна поливка'),
       ingredients: [
         {
           id: 'glaze-sour-cream',
-          name: 'Sour cream',
-          quantity: {
-            base: { kind: 'exact', value: 2, unit: 'tbsp' },
-            shopping: { mode: 'base' },
-          },
+          name: text(locale, 'Sour cream or cream', 'Сметана або вершки'),
+          quantity: exact(2, 'tbsp'),
         },
         {
-          id: 'glaze-unknown',
-          name: 'Unclear glaze ingredient',
-          quantity: { base: null, shopping: { mode: 'nameOnly' } },
-          note: 'Part of the formula is unreadable.',
+          id: 'glaze-sugar',
+          name: text(locale, 'Sugar', 'Цукор'),
+          quantity: quantityFromSpoons('granulated-sugar', 2, 'tbsp'),
+        },
+        {
+          id: 'glaze-cocoa',
+          name: text(locale, 'Cocoa', 'Какао'),
+          quantity: quantityFromSpoons('cocoa-powder', 2, 'tbsp'),
         },
         {
           id: 'butter',
-          name: 'Butter',
-          quantity: { base: null, shopping: { mode: 'nameOnly' } },
-          note: 'The amount is unreadable.',
+          name: text(locale, 'Butter', 'Вершкове масло'),
+          quantity: exact(50, 'g'),
         },
       ],
     },
-  ],
-  steps: [
+  ];
+}
+
+function steps(locale: Locale): StructuredRecipeStep[] {
+  if (locale === 'uk') {
+    return [
+      {
+        id: 'whip-eggs',
+        title: 'Збийте яйця з цукром',
+        body: 'Працюйте міксером до світлої піни.',
+        cookIngredients: [{ ingredientId: 'eggs' }, { ingredientId: 'sugar' }],
+      },
+      {
+        id: 'add-wet',
+        title: 'Додайте рідкі інгредієнти',
+        body: 'Йогурт, олію та згущене молоко перемішайте з яєчною сумішшю.',
+        cookIngredients: [
+          { ingredientId: 'greek-yogurt' },
+          { ingredientId: 'sunflower-oil' },
+          { ingredientId: 'sweetened-condensed-milk' },
+        ],
+      },
+      {
+        id: 'finish-batter',
+        title: 'Замісіть тісто',
+        body: 'Окремо змішайте борошно, какао й розпушувач. Частинами введіть у рідку суміш, обережно перемішуючи міксером.',
+        cookIngredients: [
+          { ingredientId: 'leavener' },
+          { ingredientId: 'cocoa' },
+          { ingredientId: 'flour' },
+        ],
+      },
+      {
+        id: 'bake-covered',
+        meta: '200°C · 30 хв',
+        title: 'Випікайте під фольгою',
+        body: 'Застеліть круглу форму діаметром 26 см фольгою, вилийте тісто й накрийте зверху фольгою. Поставте в розігріту духовку.',
+      },
+      {
+        id: 'bake-uncovered',
+        meta: '200°C · 30 хв',
+        title: 'Допечіть без фольги',
+        body: 'Зніміть верхню фольгу й поверніть форму в духовку.',
+      },
+      {
+        id: 'cool-and-slice',
+        title: 'Остудіть і розріжте',
+        body: 'Повністю охолоджений корж розріжте горизонтально на три частини.',
+        media: [
+          {
+            id: 'prune-cake-three-layers-v2',
+            src: '/media/recipes/prune-cake/selected/three-layers-v2.png',
+            alt: 'Три рівні круглі шоколадні коржі після розрізання',
+          },
+        ],
+      },
+      {
+        id: 'make-cream',
+        title: 'Приготуйте крем',
+        body: 'Сметану або йогурт змішайте із цукром до смаку. Трохи дрібно нарізаного чорносливу відкладіть для декору, решту подрібніть і вмішайте в крем.',
+        cookIngredients: [
+          { ingredientId: 'cream-base' },
+          { ingredientId: 'cream-sugar' },
+          { ingredientId: 'prunes' },
+        ],
+        media: [
+          {
+            id: 'prune-cake-prune-cream-v2',
+            src: '/media/recipes/prune-cake/selected/prune-cream-v2.png',
+            alt: 'Густий світлий крем із дрібними шматочками чорносливу',
+          },
+        ],
+      },
+      {
+        id: 'stack-layers',
+        title: 'З’єднайте два коржі',
+        body: 'Перший корж змастіть кремом, накрийте другим і також змастіть.',
+      },
+      {
+        id: 'assemble-mound',
+        title: 'Викладіть гірку',
+        body: 'Третій корж наріжте квадратними шматочками, перемішайте із залишком крему й викладіть зверху.',
+        media: [
+          {
+            id: 'prune-cake-cubes-in-cream-v2',
+            src: '/media/recipes/prune-cake/selected/cake-cubes-in-cream-v2.png',
+            alt: 'Шматочки шоколадного коржа, перемішані з кремом і чорносливом',
+          },
+          {
+            id: 'prune-cake-mound-assembly-v2',
+            src: '/media/recipes/prune-cake/selected/mound-assembly-v2.png',
+            alt: 'Гірка шматочків коржа в кремі на двох промащених коржах',
+          },
+        ],
+      },
+      {
+        id: 'glaze-and-decorate',
+        title: 'Полийте й прикрасьте',
+        body: 'У каструльці прогрійте сметану або вершки, цукор, какао й масло до однорідності, не доводячи до кипіння. Гарячою поливкою полийте торт. Додайте відкладений чорнослив і підсушені дрібно порізані горіхи.',
+        cookIngredients: [
+          { ingredientId: 'glaze-sour-cream' },
+          { ingredientId: 'glaze-sugar' },
+          { ingredientId: 'glaze-cocoa' },
+          { ingredientId: 'butter' },
+          { ingredientId: 'nuts' },
+        ],
+        media: [
+          {
+            id: 'prune-cake-finished-v2',
+            src: '/images/recipes/prune-cake-card-v2.png',
+            alt: 'Готовий шоколадний торт із гіркою шматочків у кремі, поливкою, чорносливом і горіхами',
+          },
+        ],
+      },
+    ];
+  }
+
+  return [
     {
-      id: 'cream',
-      title: 'Mix the recorded cream',
-      body: 'Mix sour cream or cream with powdered sugar to taste. The source does not preserve the amount or the later assembly method.',
+      id: 'whip-eggs',
+      title: 'Whip the eggs and sugar',
+      body: 'Use a mixer until the mixture is pale and foamy.',
+      cookIngredients: [{ ingredientId: 'eggs' }, { ingredientId: 'sugar' }],
+    },
+    {
+      id: 'add-wet',
+      title: 'Add the wet ingredients',
+      body: 'Mix the yogurt, oil and condensed milk into the egg mixture.',
+      cookIngredients: [
+        { ingredientId: 'greek-yogurt' },
+        { ingredientId: 'sunflower-oil' },
+        { ingredientId: 'sweetened-condensed-milk' },
+      ],
+    },
+    {
+      id: 'finish-batter',
+      title: 'Finish the batter',
+      body: 'Mix the flour, cocoa and baking powder separately. Add them to the wet mixture in batches, mixing gently with the mixer.',
+      cookIngredients: [
+        { ingredientId: 'leavener' },
+        { ingredientId: 'cocoa' },
+        { ingredientId: 'flour' },
+      ],
+    },
+    {
+      id: 'bake-covered',
+      meta: '200°C · 30 min',
+      title: 'Bake under foil',
+      body: 'Line a 26 cm round tin with foil, add the batter and cover the top with foil. Place it in the preheated oven.',
+    },
+    {
+      id: 'bake-uncovered',
+      meta: '200°C · 30 min',
+      title: 'Finish baking uncovered',
+      body: 'Remove the top foil and return the tin to the oven.',
+    },
+    {
+      id: 'cool-and-slice',
+      title: 'Cool and slice',
+      body: 'Slice the completely cooled cake horizontally into three layers.',
+      media: [
+        {
+          id: 'prune-cake-three-layers-v2',
+          src: '/media/recipes/prune-cake/selected/three-layers-v2.png',
+          alt: 'Three even round chocolate cake layers after slicing',
+        },
+      ],
+    },
+    {
+      id: 'make-cream',
+      title: 'Make the cream',
+      body: 'Mix the sour cream or yogurt with sugar to taste. Reserve a little finely chopped prune for decoration; chop or blend the rest and fold it into the cream.',
       cookIngredients: [
         { ingredientId: 'cream-base' },
-        { ingredientId: 'powdered-sugar' },
+        { ingredientId: 'cream-sugar' },
+        { ingredientId: 'prunes' },
       ],
       media: [
         {
-          id: 'prune-cake-cream-v1',
-          src: '/media/recipes/prune-cake/selected/cream-consistency-v1.png',
-          alt: 'Smooth pale cream falling in a thick ribbon from a whisk',
-          title: 'Recorded cream step',
-          caption:
-            'A visual consistency reference only; the source allows sour cream or cream and gives no exact amount.',
+          id: 'prune-cake-prune-cream-v2',
+          src: '/media/recipes/prune-cake/selected/prune-cream-v2.png',
+          alt: 'Thick pale cream with small pieces of prune',
         },
       ],
     },
     {
-      id: 'glaze',
-      title: 'Review the glaze record',
-      body: 'The source records 2 tablespoons sour cream, butter and an unreadable part of the formula. Confirm the complete formula before preparing it.',
+      id: 'stack-layers',
+      title: 'Stack two layers',
+      body: 'Spread cream over the first layer, add the second and spread it with cream too.',
+    },
+    {
+      id: 'assemble-mound',
+      title: 'Build the mound',
+      body: 'Cut the third layer into squares, mix them with the remaining cream and mound them on top.',
+      media: [
+        {
+          id: 'prune-cake-cubes-in-cream-v2',
+          src: '/media/recipes/prune-cake/selected/cake-cubes-in-cream-v2.png',
+          alt: 'Chocolate cake cubes mixed with prune cream',
+        },
+        {
+          id: 'prune-cake-mound-assembly-v2',
+          src: '/media/recipes/prune-cake/selected/mound-assembly-v2.png',
+          alt: 'A mound of cream-coated cake cubes on two filled cake layers',
+        },
+      ],
+    },
+    {
+      id: 'glaze-and-decorate',
+      title: 'Glaze and decorate',
+      body: 'Warm the sour cream or cream, sugar, cocoa and butter together in a small saucepan until smooth, without letting the mixture boil. Pour the glaze over the cake while hot. Finish with the reserved prune pieces and toasted, finely chopped nuts.',
       cookIngredients: [
         { ingredientId: 'glaze-sour-cream' },
-        { ingredientId: 'glaze-unknown' },
+        { ingredientId: 'glaze-sugar' },
+        { ingredientId: 'glaze-cocoa' },
         { ingredientId: 'butter' },
+        { ingredientId: 'nuts' },
       ],
       media: [
         {
-          id: 'prune-cake-glaze-v1',
-          src: '/media/recipes/prune-cake/selected/chocolate-glaze-v1.png',
-          alt: 'Glossy chocolate glaze falling from a spatula into a small saucepan',
-          title: 'Glaze consistency reference',
-          caption:
-            'This image illustrates texture only; it does not supply the missing formula.',
+          id: 'prune-cake-finished-v2',
+          src: '/images/recipes/prune-cake-card-v2.png',
+          alt: 'Finished chocolate cake with a mound of cream-coated cubes, glaze, prunes and nuts',
         },
       ],
     },
-  ],
-  gapNote:
-    'Several cake ingredients, the complete cake method, prune preparation, assembly, glaze formula, temperatures and timings are unreadable. Do not bake from this draft until the handwritten source is confirmed.',
-  translations: {
-    uk: {
-      completeness: 'incompleteSource',
-      beforeStart: [
-        'Поки що не готуйте за цим робочим записом: кілька інгредієнтів коржів і основний спосіб приготування нерозбірливі.',
-      ],
-      ingredientSections: [
-        {
-          id: 'cake',
-          title: 'Коржі · часткова розшифровка',
-          ingredients: [
-            {
-              id: 'eggs',
-              name: 'Яйця',
-              quantity: {
-                base: { kind: 'exact', value: 4, unit: 'piece' },
-                shopping: { mode: 'base', increment: 1, rounding: 'up' },
-              },
-            },
-            {
-              id: 'unknown-jars',
-              name: 'Нерозбірливий інгредієнт',
-              quantity: { base: null, shopping: { mode: 'nameOnly' } },
-              note: 'У джерелі записано 2 баночки, але назву інгредієнта не вдається прочитати.',
-            },
-            {
-              id: 'sugar',
-              name: 'Цукор',
-              quantity: { base: null, shopping: { mode: 'nameOnly' } },
-              note: 'У джерелі записано одну неповну склянку; переводити в грами можна лише після уточнення початкової міри.',
-            },
-            {
-              id: 'unknown-spoons-one',
-              name: 'Нерозбірливий інгредієнт',
-              quantity: {
-                base: { kind: 'exact', value: 2, unit: 'tbsp' },
-                shopping: { mode: 'base' },
-              },
-              note: 'Назва нерозбірлива у джерелі.',
-            },
-            {
-              id: 'unknown-spoons-two',
-              name: 'Нерозбірливий інгредієнт',
-              quantity: {
-                base: { kind: 'range', min: 5, max: 6, unit: 'tbsp' },
-                shopping: { mode: 'base' },
-              },
-              note: 'Назва нерозбірлива у джерелі.',
-            },
-            {
-              id: 'leavener',
-              name: 'Розпушувач або сода, погашена лимонним соком',
-              quantity: {
-                base: { kind: 'exact', value: 2, unit: 'tsp' },
-                shopping: { mode: 'base' },
-              },
-            },
-            {
-              id: 'cocoa',
-              name: 'Какао',
-              quantity: {
-                base: { kind: 'exact', value: 5, unit: 'tbsp' },
-                shopping: { mode: 'base' },
-              },
-            },
-            {
-              id: 'flour',
-              name: 'Борошно Schär Mix B Bread',
-              quantity: {
-                base: { kind: 'exact', value: 5, unit: 'tbsp' },
-                shopping: { mode: 'base' },
-              },
-            },
-          ],
-        },
-        {
-          id: 'cream',
-          title: 'Крем · часткова розшифровка',
-          ingredients: [
-            {
-              id: 'cream-base',
-              name: 'Сметана або вершки',
-              quantity: { base: null, shopping: { mode: 'nameOnly' } },
-            },
-            {
-              id: 'powdered-sugar',
-              name: 'Цукрова пудра',
-              quantity: { base: null, shopping: { mode: 'nameOnly' } },
-              note: 'До смаку, за записом у джерелі.',
-            },
-            {
-              id: 'prunes',
-              name: 'Чорнослив',
-              quantity: { base: null, shopping: { mode: 'nameOnly' } },
-              note: 'Кількість і спосіб підготовки не читаються у збереженому записі.',
-            },
-          ],
-        },
-        {
-          id: 'glaze',
-          title: 'Шоколадна поливка · неповна формула',
-          ingredients: [
-            {
-              id: 'glaze-sour-cream',
-              name: 'Сметана',
-              quantity: {
-                base: { kind: 'exact', value: 2, unit: 'tbsp' },
-                shopping: { mode: 'base' },
-              },
-            },
-            {
-              id: 'glaze-unknown',
-              name: 'Нерозбірливий інгредієнт поливки',
-              quantity: { base: null, shopping: { mode: 'nameOnly' } },
-              note: 'Частина формули нерозбірлива.',
-            },
-            {
-              id: 'butter',
-              name: 'Вершкове масло',
-              quantity: { base: null, shopping: { mode: 'nameOnly' } },
-              note: 'Кількість нерозбірлива.',
-            },
-          ],
-        },
-      ],
-      steps: [
-        {
-          id: 'cream',
-          title: 'Змішайте записаний крем',
-          body: 'Змішайте сметану або вершки з цукровою пудрою до смаку. Кількість і подальший спосіб складання торта у джерелі не збереглися.',
-          cookIngredients: [
-            { ingredientId: 'cream-base' },
-            { ingredientId: 'powdered-sugar' },
-          ],
-          media: [
-            {
-              id: 'prune-cake-cream-v1',
-              src: '/media/recipes/prune-cake/selected/cream-consistency-v1.png',
-              alt: 'Гладкий світлий крем стікає густою стрічкою з вінчика',
-              title: 'Записаний крок із кремом',
-              caption:
-                'Це лише орієнтир консистенції: джерело допускає сметану або вершки й не містить точної кількості.',
-            },
-          ],
-        },
-        {
-          id: 'glaze',
-          title: 'Перевірте запис поливки',
-          body: 'У джерелі записано 2 столові ложки сметани, вершкове масло й нерозбірливу частину формули. Перед приготуванням потрібно уточнити весь склад.',
-          cookIngredients: [
-            { ingredientId: 'glaze-sour-cream' },
-            { ingredientId: 'glaze-unknown' },
-            { ingredientId: 'butter' },
-          ],
-          media: [
-            {
-              id: 'prune-cake-glaze-v1',
-              src: '/media/recipes/prune-cake/selected/chocolate-glaze-v1.png',
-              alt: 'Блискуча шоколадна поливка стікає з лопатки в невелику каструлю',
-              title: 'Орієнтир консистенції поливки',
-              caption:
-                'Фото показує лише текстуру й не заповнює пропущену формулу.',
-            },
-          ],
-        },
-      ],
-      gapNote:
-        'Кілька інгредієнтів коржів, повний спосіб їх приготування, підготовка чорносливу, складання, формула поливки, температури й час нерозбірливі. Не готуйте за цією чернеткою, доки рукописне джерело не буде уточнено.',
+  ];
+}
+
+function recipeContent(locale: Locale): RecipeSourceDraftContent {
+  return {
+    presentation: 'concise',
+    completeness: 'readyToReview',
+    yield: {
+      id: 'one-cake',
+      label: text(locale, '1 cake', '1 торт'),
+      count: { kind: 'exact', value: 1 },
+      unit: 'cake',
     },
+    geometry: {
+      id: 'round-26cm',
+      label: text(locale, '26 cm round tin', 'Кругла форма 26 см'),
+      kind: 'bakingPan',
+      application: 'bake-in',
+      shape: 'round',
+      diameterCm: 26,
+    },
+    timing: {
+      activeMinutes: 60,
+      totalElapsedMinutes: null,
+      planningNote: {
+        text: text(
+          locale,
+          'Let the cake cool completely before slicing it into layers.',
+          'Перед розрізанням повністю остудіть корж.',
+        ),
+      },
+      phases: [
+        {
+          id: 'bake-covered',
+          label: text(locale, 'Bake covered', 'Випікання під фольгою'),
+          duration: { kind: 'exact', value: 30, unit: 'minute' },
+          relatedStepId: 'bake-covered',
+        },
+        {
+          id: 'bake-uncovered',
+          label: text(locale, 'Bake uncovered', 'Випікання без фольги'),
+          duration: { kind: 'exact', value: 30, unit: 'minute' },
+          relatedStepId: 'bake-uncovered',
+        },
+      ],
+    },
+    ingredientSections: ingredientSections(locale),
+    steps: steps(locale),
+  };
+}
+
+export const pruneCakeRecipe = {
+  id: 'prune-cake',
+  publicationStatus: 'published',
+  source: {
+    file: 'docs/reference/recipe-inventory.xlsx',
+    locator:
+      'Recipe Archive · Торт з чорносливом; author clarification on 2026-09-20',
   },
+  ...recipeContent('en'),
+  translations: { uk: recipeContent('uk') },
 } satisfies RecipeSourceDraft;

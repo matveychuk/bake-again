@@ -1,8 +1,9 @@
 import type { RecipeSourceDraft } from './source-recipe.types.ts';
+import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
 export const appleFrittersRecipe = {
   id: 'apple-fritters',
-  publicationStatus: 'draft',
+  publicationStatus: 'unpublished',
   source: {
     file: 'https://trueua.info/news/smachno-ta-korysno-retsept-yabluchnykh-oladkiv-bez-tsukru',
     locator:
@@ -51,28 +52,23 @@ export const appleFrittersRecipe = {
         {
           id: 'flour',
           name: 'Schär Mix B Bread flour',
-          quantity: {
-            base: { kind: 'exact', value: 140, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromGrams('schar-mix-b', 140),
         },
         {
           id: 'sweetener',
           name: 'Sugar or honey',
           quantity: {
-            base: { kind: 'exact', value: 1, unit: 'tbsp' },
-            shopping: { mode: 'base' },
+            base: null,
+            equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
+            shopping: { mode: 'nameOnly' },
           },
           optional: true,
-          note: 'Adjust to taste.',
+          note: 'Adjust to taste. Sugar and honey need different gram conversions, so the unresolved alternative keeps only its source spoon measure.',
         },
         {
           id: 'baking-soda',
           name: 'Baking soda',
-          quantity: {
-            base: { kind: 'exact', value: 0.5, unit: 'tsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromSpoons('baking-soda', 0.5, 'tsp'),
         },
         {
           id: 'oil',

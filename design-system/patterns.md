@@ -7,7 +7,34 @@ short Tested explanation. Collection links filter the catalogue by stable reader
 collection IDs; a recipe may appear in more than one collection. These links help
 decision-making and are not permanent taxonomy.
 
+The Tested explanation links directly to the testing section of the localized About page.
+
+## Editorial story page
+
+The About page keeps the family story concise and follows it with the practical testing
+method. Use one editorial headline, a short standfirst and a restrained pull quote; do not
+turn the page into a personal-feed or lifestyle-blog layout. The testing section reuses the
+canonical status icons, labels and semantic colours. It must state that calculated and
+suggested changes do not inherit the Tested status of the original recipe.
+
+## Publication and local drafts
+
+- Each recipe source owns `publicationStatus`: `published` or `unpublished` (`archived`
+  remains a non-visible lifecycle state for detailed records).
+- The public catalogue, search and featured link show published records only.
+- Unpublished records appear in the local Drafts catalogue and remain accessible by
+  recipe and Cook Mode links only in development on loopback hosts.
+- Publication is an explicit editorial decision. Tested evidence does not automatically
+  publish a record, and publication never changes evidence or translation review.
+- Moving an existing recipe to `published` is done in its `.recipe.ts` source after review.
+  All existing draft records were migrated to `unpublished` without being promoted.
+
 ## Recipe planning
+
+Active time counts hands-on work, not unattended baking, chilling or cooling. Total
+elapsed time runs until the recipe is ready, accounting for overlapping work and any
+sequential trays. When cooling or tray count is unknown, do not invent an exact total:
+show active time and the known waiting/baking phases in the planning note.
 
 Show evidence, time, yield, difficulty and the exact flour mix before ingredients. Keep
 equipment and geometry out of the overview; show consequential size constraints in recipe
@@ -31,12 +58,15 @@ they remain inside the work column, 32px after the content.
 
 Cook Mode progress represents completed screens, not the current position. Persist the
 current canonical step ID, completed canonical IDs, a timer end time and the completion
-note per recipe version. A running timer continues across step navigation and reloads.
+note per recipe version and exact configuration. Note changes save automatically with a
+visible saved or failed state. `Return to recipe` and `Cook again` never discard a saved
+note. Starting again opens a clean session and surfaces the previous note before step one.
+A running timer continues across step navigation and reloads.
 Offer a 44px `Keep screen awake` control where the browser supports Screen Wake Lock.
 
-Consecutive canonical steps may share a documented Cook composition group. The crepes
-flow presents `add-milk` and `rest` as one two-action screen, so five canonical recipe
-steps become four Cook screens without changing recipe provenance. A short action does
+Consecutive canonical steps may share a documented Cook composition group. The edited
+crepes recipe now combines adding milk and resting in the canonical `add-milk` step,
+so both recipe detail and Cook Mode show four steps with the rest timer preserved. A short action does
 not need a decorative image: use quantities, a timer or a checkpoint only when they help
 the cook decide what to do next.
 
@@ -48,7 +78,9 @@ application. Never alter a Tested base recipe silently.
 ## Personal state
 
 `Save` initially means Want to bake. `Baked` is separate and may carry a private local
-note. Shopping-list items retain their recipe source and persist until explicit removal.
+note. Completing Cook Mode records Baked without silently adding the recipe to Want to
+bake. Recipe detail shows the latest date and note while the exact version/configuration
+remain attached to the local record. Shopping-list items retain their recipe source and persist until explicit removal.
 Recipe ingredients are read-only; the drawer is the only selection surface and the
 shopping-list checkbox means bought.
 

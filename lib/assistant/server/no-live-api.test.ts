@@ -47,7 +47,7 @@ void test('assistant unit tests use an injected client and never call the live A
     const request: AssistantRequestV1 = {
       schemaVersion: 1,
       recipeId: 'gluten-free-napoleon',
-      recipeVersionId: 'gluten-free-napoleon-v1-draft',
+      recipeVersionId: 'gluten-free-napoleon-v2',
       locale: 'en',
       surface: 'recipe-detail',
       scope: { kind: 'recipe' },

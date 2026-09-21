@@ -35,14 +35,27 @@
 ## Recipe card
 
 - Food image first.
-- Situation/category eyebrow.
+- The whole card opens the recipe, including image, title and planning copy. Save and
+  collection links stay distinct controls above the card link, so their actions never
+  trigger recipe navigation.
+- No category/situation eyebrow above the title.
 - Recipe title in Newsreader.
-- One or more compact collection labels sit below the title. They are reader-facing
-  navigation labels, not evidence or adaptation status.
-- One or two practical facts only.
-- One concise Tested statement.
-- The image and complete lower content area open the recipe; the save control remains a
-  separate secondary action and must stop event propagation.
+- Under the title, show known time and written difficulty, then the flour mix. Time
+  explicitly says total or active; unknown facts are omitted on cards.
+- Keep fact labels secondary; emphasize values in primary text at body size and
+  semibold weight. Use small terracotta clock and chef-hat icons alongside the written
+  facts. Flour stays body-small, with a primary-colour value and secondary label.
+- Collection links sit last and open the matching catalogue filter. Keep them separate
+  from recipe links and the save control, with 44px touch targets.
+- Collection links use the subtle sand panel surface, primary text and a 4px radius.
+  Leave 16px above the group and 8px between links; let long labels wrap. Hover adds
+  a terracotta border and underlined text; keyboard focus keeps its visible outline.
+  Evidence status colours remain reserved for evidence, not collection categories.
+- Published cards do not repeat Tested. Unpublished cards show a document icon and
+  localized Working recipe label; publication is separate from adaptation evidence.
+- Save remains a separate secondary action.
+- The Design Lab renders this same component in Ukrainian, English and Spanish, with
+  published, unpublished and missing-fact examples.
 - Do not show a flour matrix or multiple adaptation badges on the card.
 
 ## Recipe detail title
@@ -76,6 +89,12 @@
 - Difficulty uses the written levels Easy, Medium or Advanced in the active locale.
   Decorative stars are not used because they can be mistaken for ratings.
 - Flour uses one full-width row with normal-weight body-small text so long names wrap.
+- Preparations where flour is not relevant, such as standalone creams, use the same
+  overview without the flour row; do not replace it with a “not applicable” value.
+- Linked standalone creams use the complete shared `InventoryRecipeDetail` composition:
+  hero, Tested evidence, recipe-specific scaling, ingredients, Cook Mode and illustrated
+  method. They remain outside the discovery catalogue and omit only catalogue Save and
+  the irrelevant flour fact; do not introduce a second cream-only page component.
 - Equipment and geometry do not appear in the overview. Keep consequential dimensions
   with recipe setup and adjustment controls, and ordinary tools in the method.
 - Unknown values remain explicit. At 390px, stack the three comparable facts; at 900px
@@ -87,6 +106,14 @@
   explicit programmatic pressed state. Its accessible name changes between Save and
   Remove. The saved state fills the same bookmark silhouette; it does not swap to a
   different icon shape.
+- Completing the final Cook Mode step records a private `Baked` memory independently of
+  `Save` / Want to bake. Store the date, exact recipe version, exact base or adjusted
+  configuration and one note locally; never present this personal state as Tested.
+- The completion note is optional and saves automatically as it changes. Show an explicit
+  saving, saved or failed message before the Return to recipe and Cook again actions.
+- Recipe detail shows the latest Baked date and note. Starting again clears the new note
+  field but shows the previous note before the first step, so advice remains useful while
+  cooking. Long notes wrap without clipping.
 - Shopping rows use a labelled checkbox, quantity, recipe source and a separately
   labelled remove control. The remove action has a 44px hit area, but is shown as a
   standalone terracotta trash icon without a filled or white circular surface. Leave a
@@ -96,6 +123,8 @@
   warm-brown fill with a warm-white checkmark.
 - Recipe ingredient lists are read-only. They contain no checkboxes; selection happens
   only after the explicit `To shopping list…` action in the Ingredients heading.
+- When an unquantified ingredient already has a specific note such as “to taste”, show
+  that note without adding the generic “as needed” amount beside it.
 - The shopping action opens the shared modal drawer on the right at desktop widths and
   full-screen at 900px and below. Every not-yet-added ingredient starts selected except
   an explicitly configured household staple such as water. Let people select all, clear
@@ -117,8 +146,12 @@ list · n` link and show an announced confirmation with View list and Undo. If s
   `quantity.equivalent`. Only `base` is used for shopping and aggregation; the
   equivalent is a scaled cooking aid and never enters the shopping list. Use
   `shopping.mode: "nameOnly"` where buying a numeric amount is not meaningful.
-  secondary equivalent beneath it in quieter text rather than joining both values with
-  parentheses. When quantities are scaled, scale both values from the same factor.
+  For dry ingredients covered by the shared spoon-weight table, `base` is always grams
+  and the spoon equivalent is generated from that table. Show the secondary equivalent
+  beneath it in quieter text rather than joining both values with parentheses. When
+  quantities are scaled, scale both values from the same factor.
+  An explicit author-confirmed recipe-specific measure may override the shared spoon
+  equivalent in that recipe only; document the exception without changing other recipes.
 - Ingredient choice is an explicit radio group in a review step. Never silently choose
   among alternatives offered by a recipe.
 - Shopping persists in browser storage until an explicit removal. Checking means bought
@@ -159,6 +192,10 @@ variation.
 
 ## Step media sequence
 
+- Image titles and captions are optional. Render a caption only when it adds information
+  beyond the step instruction; preserve descriptive alternative text in every case.
+  The caption-free example is `/design-system#concise-recipe`.
+
 - Keep the step number on the same baseline as the step title. Optional timing or other
   compact metadata sits in its own row above both; explanatory copy and callouts remain
   below the title.
@@ -192,6 +229,37 @@ variation.
   recreate the amount/name grid around those differences.
 
 ## Recipe step guidance
+
+- A checkpoint is optional: use it only for an additional observable decision cue.
+  Short cues can live in the instruction itself. Never repeat the instruction as a
+  checkpoint or image caption just to fill the component.
+
+## Concise recipe reading
+
+- Source and detailed recipes may opt into `presentation: 'concise'` after editorial review.
+  This affects presentation only; publication and exact-version evidence stay separate.
+- An author-confirmed Tested recipe in this layout omits working-record labels and
+  editorial publication notes. Keep its written evidence badge, scope and image origin.
+- A published recipe without recorded bake-test evidence does not inherit Tested and
+  does not retain the contradictory “not ready to publish” working-record message.
+- Published detailed recipes also omit draft-only editorial notes; their visible Tested,
+  Calculated or Suggested evidence remains tied to the exact recipe configuration.
+- A concise working recipe shows its editorial publication note once beside the
+  ingredients and does not repeat the same note at the end of the page.
+- Use one category, Ingredients heading and Method heading. Hide a single redundant
+  ingredient-section title; keep titles when multiple groups need differentiation.
+- Adjustment controls show the anchor's canonical base amount and yield, with recorded
+  geometry next to the base summary when present (for example a 28 cm crepe pan).
+  At 1×, retain base evidence; show Calculated with its icon and untested qualification when changed.
+  Show fractional-egg guidance only for an actual fractional quantity. Ingredients with
+  explicit `scaling: 'fixed'` retain their amount (for example one pinch of salt).
+- Shared section headings support omitting eyebrows without leaving an empty label.
+- Detailed recipes preserve canonical per-step ingredients and timer phase links.
+  Concise mode omits repeated duration/temperature metadata and automatic image titles;
+  concise step metadata may carry one useful time-and-temperature label when the body
+  does not repeat it. Explicit instructions, timers, image descriptions and useful
+  captions remain available.
+- The multilingual interactive reference is `/design-system#concise-recipe`.
 
 - `RecipeStepContent` owns the shared reading order on recipe detail and in Cook Mode:
   heading and contextual assistant action, optional tip, instruction, then optional
@@ -235,7 +303,9 @@ variation.
 
 The Recipes navigation item returns to the home recipe collection, using the same URL as
 the Bake Again wordmark. Saved and Shopping list remain separate primary destinations,
-followed by a clear language switcher. About and Privacy remain in the footer.
+followed by a clear language switcher. Drafts appears only in a development build on
+localhost, 127.0.0.1 or ::1. Its route and unpublished recipe/Cook Mode URLs are
+unavailable outside that local environment, including production on localhost. About and Privacy remain in the footer.
 
 ### Language switcher
 
@@ -246,3 +316,21 @@ followed by a clear language switcher. About and Privacy remain in the footer.
   focus.
 - Changing language navigates to the equivalent locale-specific URL; it does not replace
   page content in place.
+
+### Search behaviour
+
+- `RecipeSearchForm` is shared by the homepage and Design Lab; submit with Enter or
+  the button using a GET URL (`q`, optional `collection`, and `#recipes`). Retain the
+  query in the input. Collection navigation keeps the query; View all clears both.
+- Match localized recipe titles, dish categories, canonical ingredient names and
+  collection titles across English, Spanish and Ukrainian. Every meaningful query
+  word must match. Exact titles rank first, followed by title words/curated aliases,
+  ingredients and collections/categories. Ignore case, accents and punctuation.
+- `content/recipes/search.ts` owns curated alternative dish names and word forms.
+  Млинки/млинчики/налисники find млинці; оладки find the fritter recipes. These dish
+  families remain distinct. Allow word prefixes of at least three letters and one
+  small typo in words of at least five letters, at a lower rank.
+- Show the query, result count and any active collection above the existing cards.
+  Empty results explain how to retry and keep View all available. Long queries wrap.
+- This is catalogue discovery, not an allergy/exclusion filter or a recipe advisor.
+  Search metadata never changes ingredients, recipe evidence or publication status.

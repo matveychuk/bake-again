@@ -1,5 +1,6 @@
 import { personalStateRecipes } from '../../content/recipes/registry.ts';
 import { recipeInventory } from '../../content/recipes/inventory.ts';
+import { isReusableCreamRecipeId } from '../../content/recipes/cream-option-copy.ts';
 import { isAppLocale, type AppLocale } from './config.ts';
 
 const localizedRecipes = personalStateRecipes;
@@ -17,8 +18,16 @@ export function localeHomePath(locale: AppLocale): string {
   return `/${locale}`;
 }
 
+export function localeAboutPath(locale: AppLocale): string {
+  return `/${locale}/about`;
+}
+
 export function localeRecipesPath(locale: AppLocale): string {
   return `/${locale}/recipes`;
+}
+
+export function localeDraftsPath(locale: AppLocale): string {
+  return `/${locale}/drafts`;
 }
 
 export function localeSavedPath(locale: AppLocale): string {
@@ -34,17 +43,30 @@ export function getLocalizedRecipePath(
   locale: AppLocale,
   suffix = '',
 ): string | null {
-  const recipe = localizedRecipes.find((candidate) => candidate.id === recipeId);
-  if (recipe) return `${localeRecipesPath(locale)}/${recipe.slug[locale]}${suffix}`;
-  const inventoryRecipe = recipeInventory.find((candidate) => candidate.id === recipeId);
-  return inventoryRecipe ? `${localeRecipesPath(locale)}/${inventoryRecipe.slug}${suffix}` : null;
+  if (isReusableCreamRecipeId(recipeId)) {
+    return `${localeRecipesPath(locale)}/${recipeId}${suffix}`;
+  }
+  const recipe = localizedRecipes.find(
+    (candidate) => candidate.id === recipeId,
+  );
+  if (recipe)
+    return `${localeRecipesPath(locale)}/${recipe.slug[locale]}${suffix}`;
+  const inventoryRecipe = recipeInventory.find(
+    (candidate) => candidate.id === recipeId,
+  );
+  return inventoryRecipe
+    ? `${localeRecipesPath(locale)}/${inventoryRecipe.slug}${suffix}`
+    : null;
 }
 
 export function getRecipeIdFromLocalizedSlug(
   locale: AppLocale,
   slug: string,
 ): string | null {
-  return localizedRecipes.find((recipe) => recipe.slug[locale] === slug)?.id ?? null;
+  if (isReusableCreamRecipeId(slug)) return slug;
+  return (
+    localizedRecipes.find((recipe) => recipe.slug[locale] === slug)?.id ?? null
+  );
 }
 
 export function getRecipeIdFromLegacySlug(slug: string): string | null {
@@ -82,7 +104,9 @@ export function getLocaleSwitchPath(
     const [, slug, cookSuffix = ''] = recipeMatch;
     const currentLocale = getLocaleFromPathname(pathname);
     const recipeId =
-      (currentLocale ? getRecipeIdFromLocalizedSlug(currentLocale, slug) : null) ??
+      (currentLocale
+        ? getRecipeIdFromLocalizedSlug(currentLocale, slug)
+        : null) ??
       getRecipeIdFromLegacySlug(slug) ??
       recipeInventory.find((recipe) => recipe.slug === slug)?.id ??
       null;
@@ -92,7 +116,8 @@ export function getLocaleSwitchPath(
     return localizedPath ?? localeHomePath(targetLocale);
   }
 
-  if (unlocalizedPath === '/' || unlocalizedPath === '') return localeHomePath(targetLocale);
+  if (unlocalizedPath === '/' || unlocalizedPath === '')
+    return localeHomePath(targetLocale);
   if (unlocalizedPath === '/recipes') return localeHomePath(targetLocale);
 
   return `${localeHomePath(targetLocale)}${unlocalizedPath}`;

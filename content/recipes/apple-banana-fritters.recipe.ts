@@ -1,8 +1,9 @@
 import type { RecipeSourceDraft } from './source-recipe.types.ts';
+import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
 export const appleBananaFrittersRecipe = {
   id: 'apple-banana-fritters',
-  publicationStatus: 'draft',
+  publicationStatus: 'unpublished',
   source: {
     file: 'content/recipes/apple-fritters.recipe.ts',
     locator:
@@ -61,18 +62,12 @@ export const appleBananaFrittersRecipe = {
         {
           id: 'flour',
           name: 'Schär Mix B Bread flour',
-          quantity: {
-            base: { kind: 'exact', value: 140, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromGrams('schar-mix-b', 140),
         },
         {
           id: 'baking-soda',
           name: 'Baking soda',
-          quantity: {
-            base: { kind: 'exact', value: 0.5, unit: 'tsp' },
-            shopping: { mode: 'base' },
-          },
+          quantity: quantityFromSpoons('baking-soda', 0.5, 'tsp'),
         },
         {
           id: 'oil',

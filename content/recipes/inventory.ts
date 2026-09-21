@@ -12,7 +12,7 @@ export type InventoryRecipe = {
   title: string;
   sourceTitle: string;
   category: string;
-  /** Reader-facing collections; category remains the dish type shown as the card eyebrow. */
+  /** Reader-facing collections; category is search metadata, not a visible card eyebrow. */
   collectionIds: RecipeCollectionId[];
   testingStatus: 'Core verified' | 'Suggested adaptation';
   flour: string;
@@ -49,24 +49,24 @@ export const recipeInventory: InventoryRecipe[] = [
     collectionIds: ['everyday'],
     testingStatus: 'Core verified',
     flour: schar,
-    difficulty: null,
-    activeTime: null,
-    totalTime: null,
+    difficulty: 'Easy',
+    activeTime: '30 min',
+    totalTime: '1 h 30 min',
     localizedFacts: {
       difficulty: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: 'Easy',
+        es: 'Fácil',
+        uk: 'Легка',
       },
       activeTime: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: '30 min',
+        es: '30 min',
+        uk: '30 хв',
       },
       totalTime: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: '1 h 30 min',
+        es: '1 h 30 min',
+        uk: '1 год 30 хв',
       },
       flour: {
         en: 'Schär Mix B Bread',
@@ -80,8 +80,7 @@ export const recipeInventory: InventoryRecipe[] = [
     imageKind: 'generated-preview',
     imageAlt:
       'Gluten-free banana bread with walnuts and raisins, sliced on a warm neutral surface',
-    summary:
-      'A familiar banana loaf with walnuts and raisins, preserved from the handwritten working recipe.',
+    summary: 'Banana bread with walnuts and raisins.',
     source: 'Handwritten notebook page, IMG_1272.jpeg',
     archiveSections: [
       {
@@ -102,8 +101,8 @@ export const recipeInventory: InventoryRecipe[] = [
     collectionIds: ['breakfast', 'everyday', 'cottage-cheese'],
     testingStatus: 'Core verified',
     flour: `${schar} + tapioca starch`,
-    difficulty: null,
-    activeTime: null,
+    difficulty: 'Medium',
+    activeTime: '45 min',
     totalTime: null,
     scalingAnchorIngredientId: 'cottage-cheese',
     launchPriority: 'Medium',
@@ -112,8 +111,7 @@ export const recipeInventory: InventoryRecipe[] = [
     imageKind: 'generated-preview',
     imageAlt:
       'Ukrainian lazy cottage-cheese dumplings with sour cream and butter',
-    summary:
-      'Soft cottage-cheese dumplings shaped into small balls, with a working method confirmed by the author.',
+    summary: 'Tender cottage-cheese dumplings.',
     source:
       'Handwritten notebook page, IMG_1277.jpeg, with author-confirmed working quantities and method',
     archiveSections: [
@@ -136,34 +134,134 @@ export const recipeInventory: InventoryRecipe[] = [
     slug: 'apple-charlotte',
     title: 'Apple charlotte',
     sourceTitle: 'Яблучна шарлотка',
-    category: 'Cake / everyday',
+    category: 'Everyday cake',
     collectionIds: ['everyday'],
     testingStatus: 'Core verified',
     flour: `${schar} + tapioca starch`,
-    difficulty: null,
-    activeTime: null,
-    totalTime: '25–30 min baking + preparation',
+    difficulty: 'Easy',
+    activeTime: '20 min',
+    totalTime: '50 min',
+    localizedFacts: {
+      difficulty: { en: 'Easy', es: 'Fácil', uk: 'Легка' },
+      activeTime: { en: '20 min', es: '20 min', uk: '20 хв' },
+      totalTime: { en: '50 min', es: '50 min', uk: '50 хв' },
+    },
+    scalingAnchorIngredientId: 'eggs',
     launchPriority: 'High',
     heroCandidate: 'Possible',
-    image: '/images/recipes/apple-charlotte-card-v1.png',
+    image: '/images/recipes/apple-charlotte-card-v2.png',
     imageKind: 'generated-preview',
-    imageAlt: 'Gluten-free apple charlotte sheet cake with a cut square',
-    summary: 'A large-tray apple sponge with a light crumb and cinnamon.',
-    source: 'Handwritten notebook page, IMG_1278.jpeg',
+    imageAlt:
+      'Gluten-free apple charlotte with a cut square showing apple pieces throughout the crumb',
+    summary:
+      'A tender butter sponge with juicy pieces distributed through the crumb.',
+    source:
+      'Handwritten notebook page, IMG_1278.jpeg, with author-confirmed butter version and half batch recorded 2026-09-21',
     archiveSections: [
       {
-        title: 'Ingredients · original notes',
+        title: 'Ingredients · reviewed half batch',
         content:
-          'На повне велике деко:\n5–6 яблук\n10 невеликих яєць\n200 г цукру\n240 г безглютенового борошна\n30 г тапіокового крохмалю\n1 ч. л. ксантанової камеді\nДрібка солі\nВанілін\nКориця',
+          '3 яблука\n5 невеликих яєць\n100 г цукру\n50 г вершкового масла\n120 г безглютенового борошна\n15 г тапіокового крохмалю\n1/2 ч. л. ксантанової камеді\nДрібка солі\nВанілін\nКориця',
       },
       {
-        title: 'Method · original notes',
+        title: 'Method · reviewed version',
         content:
-          '1. 5–6 яблук порізати мілко на комбайні. Застелити пергаментом деко і висипати яблука.\n2. 10 невеликих яєць і 200 г цукру збити добре до пишної світлої маси.\n3. Окремо змішати сухі інгредієнти.\n4. Повільно додати суху суміш до збитих яєць і вилити на яблука.\n5. Випікати 25–30 хв; ставити в гарячу духовку.',
+          'Яблука нарізати шматочками, обсушити й злегка вкрити частиною борошна. Яйця з цукром збити до стрічки, обережно вмішати сухі інгредієнти, охолоджене розтоплене масло та яблука. Випікати при 180°C протягом 25–30 хв. Для повного дека взяти подвійну порцію.',
+      },
+    ],
+    needsBeforePublishing: '',
+  },
+  {
+    id: 'apple-meringue-pie',
+    slug: 'apple-meringue-pie',
+    title: 'Apple meringue pie',
+    sourceTitle: 'Безглютеновий яблучний пиріг',
+    category: 'Apple pie / dessert',
+    collectionIds: ['everyday'],
+    testingStatus: 'Suggested adaptation',
+    flour: 'GFM Universal gluten-free baking mix',
+    difficulty: null,
+    activeTime: null,
+    totalTime: '40 min baking + 1–2 h chilling',
+    localizedFacts: {
+      difficulty: { en: '', es: '', uk: '' },
+      activeTime: { en: '', es: '', uk: '' },
+      totalTime: {
+        en: '40 min baking + 1–2 h chilling',
+        es: '40 min de horneado + 1–2 h de frío',
+        uk: '40 хв випікання + 1–2 год охолодження',
+      },
+      flour: {
+        en: 'GFM Universal gluten-free baking mix',
+        es: 'Mezcla universal sin gluten GFM',
+        uk: 'Безглютенова суміш GFM «Універсальна»',
+      },
+    },
+    launchPriority: 'Medium',
+    heroCandidate: 'No',
+    image: '/images/recipes/apple-meringue-pie-card-v1.png',
+    imageKind: 'generated-preview',
+    imageAlt:
+      'Generated preview of a gluten-free apple pie with a short pastry base and toasted meringue topping',
+    summary:
+      'A chilled gluten-free pastry base topped with grated apples and soft meringue.',
+    source:
+      'Food GFM web recipe, “Безглютеновий яблучний пиріг: простий рецепт осінньої випічки”, 10.09.2025',
+    archiveSections: [
+      {
+        title: 'Ingredients · source transcription',
+        content:
+          'Для тіста: 1 яйце (жовток — у тісто, білок — для меренги); 30 мл холодної води; 60 г цукру; 60 г масла; 170 г безглютенової суміші «Універсальна»; розпушувач.\n\nНачинка: яблука, очищені та натерті; білок, збитий у ніжну меренгу.',
+      },
+      {
+        title: 'Method · source transcription',
+        content:
+          '1. Масло розтерти з жовтком і цукром.\n2. Додати воду, розпушувач і борошняну суміш.\n3. Замісити м’яке тісто, щоб не липло до рук.\n4. Поставити у холодильник на 1–2 години.\n5. Форму застелити тістом, викласти яблука, зверху прикрасити меренгою.\n6. Випікати 40 хв при 180°C.',
       },
     ],
     needsBeforePublishing:
-      'Record difficulty, tray dimensions and exact timing; approve or replace the generated photo.',
+      'Bake-test the exact recipe; record the apple quantity and variety, baking-powder amount, pan dimensions, meringue sugar amount, oven mode, active time and finished yield; replace or approve the generated preview.',
+  },
+  {
+    id: 'plum-cake',
+    slug: 'plum-cake',
+    title: 'Plum sponge cake',
+    sourceTitle: 'Сливовий пиріг',
+    category: 'Everyday cake',
+    collectionIds: ['everyday'],
+    testingStatus: 'Core verified',
+    flour: `${schar} + tapioca starch`,
+    difficulty: 'Medium',
+    activeTime: '20 min',
+    totalTime: '50 min',
+    localizedFacts: {
+      difficulty: { en: 'Medium', es: 'Media', uk: 'Середня' },
+      activeTime: { en: '20 min', es: '20 min', uk: '20 хв' },
+      totalTime: { en: '50 min', es: '50 min', uk: '50 хв' },
+    },
+    scalingAnchorIngredientId: 'eggs',
+    launchPriority: 'Medium',
+    heroCandidate: 'Possible',
+    image: '/images/recipes/plum-cake-card-v2.png',
+    imageKind: 'generated-preview',
+    imageAlt:
+      'Inverted gluten-free plum sponge cake with glossy baked plums on top and a cut square',
+    summary: 'A soft sponge with a glossy fruit top and a gentle tartness.',
+    source:
+      'Author-confirmed upside-down plum adaptation of the apple-charlotte sponge, recorded 2026-09-21',
+    archiveSections: [
+      {
+        title: 'Ingredients · reviewed half batch',
+        content:
+          '400 г стиглих щільних слив, 5 невеликих яєць, 100 г цукру, 120 г безглютенового борошна, 15 г тапіокового крохмалю, 1/2 ч. л. ксантанової камеді, дрібка солі, ванілін.',
+      },
+      {
+        title: 'Method · reviewed version',
+        content:
+          'Половинки слив викласти на застелене пергаментом дно зрізом донизу. Приготувати легке бісквітне тісто без масла, рівномірно вилити на сливи й випікати при 180°C протягом 25–30 хв. Після виймання одразу відділити краї та перевернути пиріг на пласку таріль. Для повного дека взяти подвійну порцію.',
+      },
+    ],
+    needsBeforePublishing: '',
   },
   {
     id: 'cottage-cheese-waffles',
@@ -179,14 +277,26 @@ export const recipeInventory: InventoryRecipe[] = [
     ],
     testingStatus: 'Core verified',
     flour: `${schar} + corn starch`,
-    difficulty: null,
-    activeTime: null,
-    totalTime: '5–7 min per batch + preparation',
+    difficulty: 'Easy',
+    activeTime: '30 min',
+    totalTime: '40 min',
+    scalingAnchorIngredientId: 'cottage-cheese',
+    localizedFacts: {
+      difficulty: { en: 'Easy', es: 'Fácil', uk: 'Легка' },
+      activeTime: { en: '30 min', es: '30 min', uk: '30 хв' },
+      totalTime: { en: '40 min', es: '40 min', uk: '40 хв' },
+      flour: {
+        en: 'Schär Mix B Bread + corn starch',
+        es: 'Schär Mix B Bread + almidón de maíz',
+        uk: 'Schär Mix B Bread + кукурудзяний крохмаль',
+      },
+    },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/cottage-cheese-waffles-card-v1.png',
-    imageKind: 'generated-preview',
-    imageAlt: 'Golden gluten-free cottage-cheese waffles with natural yogurt',
+    image: '/images/recipes/cottage-cheese-waffles-author-v1.jpeg',
+    imageKind: 'author-photo',
+    imageAlt:
+      'Golden gluten-free cottage-cheese waffles with berries on a pale green plate',
     summary:
       'Tender breakfast waffles made with cottage cheese and natural yogurt.',
     source: 'Handwritten notebook page, IMG_1276.jpeg',
@@ -202,8 +312,7 @@ export const recipeInventory: InventoryRecipe[] = [
           '1. Творог проблендерити з яйцями і йогуртом до однорідної маси.\n2. Додати олію, цукор, сіль і ваніль.\n3. Окремо змішати борошно, крохмаль і розпушувач.\n4. Всипати до вологої маси і замішати.\n5. Залишити тісто на 7–10 хв.\n6. Добре розігріти вафельницю. Випікати по 5–7 хв.',
       },
     ],
-    needsBeforePublishing:
-      'Confirm the starch quantity; record difficulty and total timing; approve or replace the generated photo.',
+    needsBeforePublishing: '',
   },
   {
     id: 'carrot-cake',
@@ -214,8 +323,9 @@ export const recipeInventory: InventoryRecipe[] = [
     collectionIds: ['everyday', 'batter-on-hand'],
     testingStatus: 'Core verified',
     flour: schar,
-    difficulty: null,
-    activeTime: null,
+    difficulty: 'Medium',
+    activeTime: '30 min',
+    scalingAnchorIngredientId: 'carrots',
     totalTime: '35–40 min baking + preparation',
     launchPriority: 'Medium',
     heroCandidate: 'No',
@@ -250,24 +360,24 @@ export const recipeInventory: InventoryRecipe[] = [
     collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: `${schar} + tapioca and corn starch`,
-    difficulty: null,
-    activeTime: null,
-    totalTime: '40–50 min baking + preparation',
+    difficulty: 'Easy',
+    activeTime: '15 min',
+    totalTime: '1 h',
     localizedFacts: {
       difficulty: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: 'Easy',
+        es: 'Fácil',
+        uk: 'Легка',
       },
       activeTime: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: '15 min',
+        es: '15 min',
+        uk: '15 хв',
       },
       totalTime: {
-        en: '40–50 min baking + preparation',
-        es: '40–50 min de horneado + preparación',
-        uk: '40–50 хв випікання + підготовка',
+        en: '1 h',
+        es: '1 h',
+        uk: '1 год',
       },
       flour: {
         en: 'Schär Mix B Bread + tapioca and corn starch',
@@ -349,15 +459,15 @@ export const recipeInventory: InventoryRecipe[] = [
     testingStatus: 'Core verified',
     flour: `${schar} + tapioca and corn starch`,
     difficulty: 'Advanced',
-    activeTime: null,
-    totalTime: '6 h',
+    activeTime: '1 h',
+    totalTime: null,
     localizedFacts: {
       difficulty: { en: 'Advanced', es: 'Avanzada', uk: 'Складна' },
       activeTime: { en: '1 hr', es: '1 h', uk: '1 год' },
       totalTime: {
-        en: '6 hr',
-        es: '6 h',
-        uk: '6 год',
+        en: 'Best the next day',
+        es: 'Mejor al día siguiente',
+        uk: 'Найкраще наступного дня',
       },
       flour: {
         en: 'Schär Mix B + tapioca and corn starch',
@@ -365,18 +475,19 @@ export const recipeInventory: InventoryRecipe[] = [
         uk: 'Schär Mix B + тапіоковий і кукурудзяний крохмалі',
       },
     },
+    scalingAnchorIngredientId: 'schar-mix-b',
     launchPriority: 'High',
     heroCandidate: 'Yes',
-    image: '/images/recipes/gluten-free-napoleon-card-v1.png',
+    image: '/images/recipes/gluten-free-napoleon-card-v3.png',
     imageKind: 'generated-preview',
-    imageAlt: 'Gluten-free Napoleon cake with many thin layers and a cut slice',
+    imageAlt:
+      'Gluten-free Napoleon cake with six thin layers, custard and nuts',
     summary:
       'A many-layered gluten-free celebration cake with warm custard and a long overnight rest.',
     source:
       'Detailed recipe card transferred from a separate ChatGPT conversation',
     archiveSections: [],
-    needsBeforePublishing:
-      'Confirm cream volume and exact active time; approve or replace the generated photo.',
+    needsBeforePublishing: '',
   },
   {
     id: 'cinnamon-rolls',
@@ -392,14 +503,14 @@ export const recipeInventory: InventoryRecipe[] = [
     totalTime: null,
     localizedFacts: {
       difficulty: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: 'Medium',
+        es: 'Media',
+        uk: 'Середня',
       },
       activeTime: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: '60 min',
+        es: '60 min',
+        uk: '1 год',
       },
       totalTime: {
         en: 'To confirm',
@@ -441,14 +552,15 @@ export const recipeInventory: InventoryRecipe[] = [
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: 'Easy',
-    activeTime: null,
-    totalTime: '3 h 10 min–24 h + cooling',
+    activeTime: '30 min',
+    totalTime: null,
     launchPriority: 'High',
     heroCandidate: 'Yes',
     image: '/images/recipes/chocolate-crinkle-cookies-card-v1.png',
     imageKind: 'generated-preview',
     imageAlt: 'Chocolate crinkle cookies dusted with powdered sugar',
-    summary: 'Cocoa cookies with orange zest that rise and crack as they bake.',
+    summary:
+      'Chocolate cookies with a tender centre and a cracked sugar coating.',
     source: 'Full recipe pasted in the inventory conversation',
     archiveSections: [
       {
@@ -572,25 +684,26 @@ export const recipeInventory: InventoryRecipe[] = [
     id: 'easter-bread',
     slug: 'easter-bread',
     title: 'Ukrainian Easter bread',
+    scalingAnchorIngredientId: 'schar-mix-b',
     sourceTitle: 'Безглютенова паска',
     category: 'Celebration / Easter baking',
     collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: schar,
-    difficulty: null,
-    activeTime: null,
-    totalTime: null,
+    difficulty: 'Medium',
+    activeTime: '30 min',
+    totalTime: 'About 4 h 50 min',
     localizedFacts: {
       difficulty: { en: 'Medium', es: 'Media', uk: 'Середня' },
       activeTime: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: '30 min',
+        es: '30 min',
+        uk: '30 хв',
       },
       totalTime: {
-        en: 'To confirm after bake test',
-        es: 'Por confirmar tras la prueba de horneado',
-        uk: 'Уточнити після випікання',
+        en: 'About 4 h 50 min',
+        es: 'Unas 4 h 50 min',
+        uk: 'Близько 4 год 50 хв',
       },
       flour: {
         en: 'Schär Bread Mix + tapioca starch',
@@ -603,8 +716,7 @@ export const recipeInventory: InventoryRecipe[] = [
     image: '/images/recipes/easter-bread-card-v1.png',
     imageKind: 'generated-preview',
     imageAlt: 'Tall gluten-free Ukrainian Easter bread with glaze and raisins',
-    summary:
-      'A softer, moister paska with abundant raisins and candied fruit, developed toward a panettone-like crumb.',
+    summary: 'Soft Easter bread with raisins and candied fruit.',
     source: 'Author-provided Paska 2.0 recipe and method',
     archiveSections: [
       {
@@ -613,8 +725,7 @@ export const recipeInventory: InventoryRecipe[] = [
           'Паска 2.0 — м’якша, вологіша, ближча до panettone. На 2 невеликі паски або 1 середню.',
       },
     ],
-    needsBeforePublishing:
-      'Bake-test this exact 2.0 adaptation; confirm the mould dimensions and total elapsed time; approve or replace the generated photo.',
+    needsBeforePublishing: '',
   },
   {
     id: 'prune-cake',
@@ -625,19 +736,19 @@ export const recipeInventory: InventoryRecipe[] = [
     collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: schar,
-    difficulty: null,
-    activeTime: null,
+    difficulty: 'Medium',
+    activeTime: '60 min',
     totalTime: null,
     localizedFacts: {
       difficulty: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: 'Medium',
+        es: 'Media',
+        uk: 'Середня',
       },
       activeTime: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: '60 min',
+        es: '60 min',
+        uk: '1 год',
       },
       totalTime: {
         en: 'To confirm',
@@ -652,26 +763,26 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/prune-cake-card-v1.png',
+    image: '/images/recipes/prune-cake-card-v2.png',
     imageKind: 'generated-preview',
-    imageAlt: 'Chocolate layer cake with cream and prune pieces',
+    imageAlt:
+      'Chocolate prune cake with a mound of cream-coated cake pieces, glaze and nuts',
     summary:
-      'A chocolate celebration cake with a sour-cream-style filling and prunes; parts of the old note remain unreadable.',
+      'Chocolate layers with prune cream, a mound of tender cake pieces and chocolate glaze.',
     source: 'Older handwritten photo, image.png',
     archiveSections: [
       {
-        title: 'Ingredients · partial transcription',
+        title: 'Ingredients · author clarification',
         content:
-          '4 яйця\n2 баночки [нерозбірливо]\n1 неповна склянка цукру\n2 ст. л. [нерозбірливо]\n5–6 ст. л. [нерозбірливо]\nРозпушувач — 2 ч. л. або 2 ч. л. соди, погашеної лимонним соком\n5 ст. л. какао\n5 ст. л. борошна',
+          '4 яйця\nГрецький йогурт — 250 г (2 баночки по 125 г)\nЦукор — 1 склянка, приблизно 200 г\nСоняшникова олія — 2 ст. л.\nЗгущене молоко — 5–6 ст. л.\nРозпушувач — 2 ч. л.\nКакао — 5 ст. л., 25 г\nБорошно Schär Mix B Bread — 5 ст. л., 100 г',
       },
       {
-        title: 'Method · partial transcription',
+        title: 'Method · author clarification',
         content:
-          'Крем: сметана або вершки; змішати з цукровою пудрою до смаку.\n\nПолити шоколадом: 2 ст. л. сметани, [частина запису нерозбірлива], вершкове масло; перемішати.',
+          'Збити яйця з цукром; додати грецький йогурт, олію і згущене молоко. Додати змішані розпушувач, какао й борошно. Випікати у формі 26 см за 200°C: 30 хв під фольгою і 30 хв без неї. Остудити й розрізати на три коржі.\n\nКрем: 400 г сметани або грецького йогурту, цукор до смаку та більша частина зі 150 г чорносливу. Третій корж порізати квадратами, змішати з рештою крему й викласти зверху. Для поливки прогріти сметану або вершки, цукор, какао й масло разом у каструльці, не доводячи до кипіння. Гарячою полити торт, прикрасити рештою чорносливу та підсушеними волоськими горіхами або пеканом.',
       },
     ],
-    needsBeforePublishing:
-      'Confirm unreadable words against the source image; record timing and difficulty; approve or replace the generated photo.',
+    needsBeforePublishing: '',
   },
   {
     id: 'fruit-sponge-roll',
@@ -682,20 +793,20 @@ export const recipeInventory: InventoryRecipe[] = [
     collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: schar,
-    difficulty: 'Medium',
-    activeTime: null,
-    totalTime: '15–20 min baking + cooling and assembly',
+    difficulty: 'Easy',
+    activeTime: '30 min',
+    totalTime: null,
     localizedFacts: {
-      difficulty: { en: 'Medium', es: 'Media', uk: 'Середня' },
+      difficulty: { en: 'Easy', es: 'Fácil', uk: 'Легка' },
       activeTime: {
-        en: 'To confirm',
-        es: 'Por confirmar',
-        uk: 'Потребує уточнення',
+        en: '30 min',
+        es: '30 min',
+        uk: '30 хв',
       },
       totalTime: {
-        en: '15–20 min baking + cooling and assembly',
-        es: '15–20 min de horneado + enfriado y montaje',
-        uk: '15–20 хв випікання + охолодження й складання',
+        en: 'Depends on cooling',
+        es: 'Depende del enfriado',
+        uk: 'Залежить від охолодження',
       },
       flour: {
         en: 'Schär Mix B Bread',
@@ -704,13 +815,13 @@ export const recipeInventory: InventoryRecipe[] = [
       },
     },
     launchPriority: 'Medium–High',
-    heroCandidate: 'No',
-    image: '/images/recipes/fruit-sponge-roll-author-v1.png',
-    imageKind: 'author-photo',
+    heroCandidate: 'Yes',
+    image: '/images/recipes/fruit-sponge-roll-card-v3.png',
+    imageKind: 'generated-preview',
     imageAlt:
-      'Author photo of a fruit sponge roll with cream, berries, mint and almonds',
+      'Homemade fruit sponge roll with berry jam, mascarpone cream spread on top and fresh berries',
     summary:
-      'A filled sponge roll with blueberry jam, mascarpone cream, strawberries, mint and almonds.',
+      'A light rolled sponge with a soft filling and a flexible crumb that slices into a clear spiral.',
     source:
       'Full recipe and author-supplied example photo archived in the workbook',
     archiveSections: [
@@ -725,25 +836,25 @@ export const recipeInventory: InventoryRecipe[] = [
           'Яйця, цукор і сіль збити до густої світлої піни — приблизно 10 хв. Додати олію, воду і поступово борошно, обережно перемішуючи.\n\nВилити на пергамент. Випікати 15–20 хв при 180–200°C. Згорнути й охолодити. Намастити чорничним варенням і кремом. Для крему збити вершки з цукром, додати маскарпоне. Прикрасити полуницею, м’ятою та мигдалем.',
       },
     ],
-    needsBeforePublishing:
-      'Record exact oven temperature, rolling method, fruit quantities and total time; review the author photo for publication.',
+    needsBeforePublishing: '',
   },
   {
     id: 'eclairs',
     slug: 'eclairs',
-    title: 'Eclairs',
-    sourceTitle: 'Еклери',
+    title: 'Profiteroles',
+    sourceTitle: 'Профітролі',
     category: 'Choux pastry / dessert',
     collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: schar,
     difficulty: 'Intermediate',
     activeTime: '15 min',
-    totalTime: '50 min',
+    totalTime: null,
+    scalingAnchorIngredientId: 'flour',
     localizedFacts: {
       difficulty: { en: 'Intermediate', es: 'Intermedio', uk: 'Середня' },
       activeTime: { en: '15 min', es: '15 min', uk: '15 хв' },
-      totalTime: { en: '50 min', es: '50 min', uk: '50 хв' },
+      totalTime: { en: '', es: '', uk: '' },
       flour: {
         en: 'Schär Mix B Bread',
         es: 'Schär Mix B Bread',
@@ -752,12 +863,11 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'To confirm',
     heroCandidate: 'Possible',
-    image: '/images/recipes/eclairs-card-v1.png',
+    image: '/images/recipes/profiteroles-card-v2.png',
     imageKind: 'generated-preview',
     imageAlt:
-      'Golden gluten-free eclairs with vanilla cream and chocolate glaze',
-    summary:
-      'A tested gluten-free choux made with Schär Mix B Bread and four small eggs, filled with whipped cream.',
+      'Golden gluten-free profiteroles with one cut open to show vanilla cream',
+    summary: 'Crisp, hollow choux pastries with a soft cream filling.',
     source: 'Recipe screenshot and author bake note, added 2026-09-19',
     archiveSections: [
       {
@@ -766,8 +876,7 @@ export const recipeInventory: InventoryRecipe[] = [
           'Ми поклали 4 маленьких яйця і було ідеально, десь 20 профітролей.',
       },
     ],
-    needsBeforePublishing:
-      'Test the piped éclair shape and its final bake time; capture the missing sauce methods; approve or replace the generated photo.',
+    needsBeforePublishing: '',
   },
 ];
 
