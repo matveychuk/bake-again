@@ -2,14 +2,16 @@
 
 /* oxlint-disable react-compiler/react-compiler -- Restore the versioned browser session once after hydration. */
 
+import { trackEvent } from '@/lib/analytics/umami';
 import Link from 'next/link';
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
-import { ArrowLeft, CircleAlert, NotebookPen } from 'lucide-react';
+import { ArrowLeft, CircleAlert, Clock3, NotebookPen, X } from 'lucide-react';
 import { AssistantProvider } from '@/components/assistant';
 import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
 import {
   Drawer,
   DrawerContent,
+  DrawerClose,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
@@ -82,6 +84,8 @@ export function CookModePage({
     () => state.assistantConfiguration ?? { kind: 'base' as const },
     [state.assistantConfiguration],
   );
+  const recipeVersionId =
+    state.recipeVersionId ?? definition?.recipeVersionId ?? '';
   const configurationKey = bakeConfigurationKey(configuration);
   const cookSteps = state.steps;
   const allStepIds = useMemo(
@@ -135,13 +139,13 @@ export function CookModePage({
     setNoteSaveStatus('saved');
     const saved = readCookModeSession(
       definition.recipeId,
-      definition.recipeVersionId,
+      recipeVersionId,
       undefined,
       configurationKey,
     );
     const baked = readBakeRecord(
       definition.recipeId,
-      definition.recipeVersionId,
+      recipeVersionId,
       configuration,
     );
     setPreviousBake(baked);
@@ -166,7 +170,14 @@ export function CookModePage({
     }
     setRestoredConfigurationKey(configurationKey);
     setSessionReady(true);
-  }, [allStepIds, configuration, configurationKey, cookSteps, definition]);
+  }, [
+    allStepIds,
+    configuration,
+    configurationKey,
+    cookSteps,
+    definition,
+    recipeVersionId,
+  ]);
 
   useEffect(() => {
     if (!timer?.endAt) return;
@@ -197,7 +208,7 @@ export function CookModePage({
       {
         schemaVersion: 1,
         recipeId: definition.recipeId,
-        recipeVersionId: definition.recipeVersionId,
+        recipeVersionId: recipeVersionId,
         updatedAt: new Date().toISOString(),
         currentStepId: step.stepIds[0],
         completedStepIds,
@@ -213,7 +224,7 @@ export function CookModePage({
     const now = new Date().toISOString();
     const record: BakeRecordV1 = {
       recipeId: definition.recipeId,
-      recipeVersionId: definition.recipeVersionId,
+      recipeVersionId,
       configuration,
       completedAt,
       note,
@@ -230,6 +241,7 @@ export function CookModePage({
     definition,
     note,
     restoredConfigurationKey,
+    recipeVersionId,
     sessionReady,
     step,
     timer,
@@ -279,8 +291,10 @@ export function CookModePage({
   }
 
   function completeAndNext() {
+    if (!isComplete) trackEvent('cook_step_complete', { recipe_id: definition?.recipeId, locale, count: stepIndex + 1 });
     setCompletedStepIds((items) => [...new Set([...items, ...step.stepIds])]);
     if (stepIndex === cookSteps.length - 1) {
+      if (!completedAt) trackEvent('cook_complete', { recipe_id: definition?.recipeId, locale });
       setNoteSaveStatus('saving');
       setCompletedAt(new Date().toISOString());
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -309,6 +323,7 @@ export function CookModePage({
     }
     const duration = currentTimer?.durationSeconds ?? step.timerSeconds ?? 0;
     const seconds = currentTimer?.remainingSeconds || duration;
+    if (seconds > 0) trackEvent('timer_start', { recipe_id: definition?.recipeId, locale });
     setTimer({
       stepId: timerStepId,
       durationSeconds: duration,
@@ -328,12 +343,9 @@ export function CookModePage({
 
   function restart() {
     if (!definition) return;
+    trackEvent('cook_restart', { recipe_id: definition.recipeId, locale });
     setPreviousBake(
-      readBakeRecord(
-        definition.recipeId,
-        definition.recipeVersionId,
-        configuration,
-      ),
+      readBakeRecord(definition.recipeId, recipeVersionId, configuration),
     );
     setStepIndex(0);
     setCompletedStepIds([]);
@@ -422,6 +434,34 @@ export function CookModePage({
                   step.title,
                 )}
               </p>
+              {timer && !currentTimer && (
+                <button
+                  className={styles.activeTimer}
+                  type="button"
+                  onClick={() => {
+                    const timerIndex = cookSteps.findIndex((candidate) =>
+                      candidate.stepIds.includes(timer.stepId),
+                    );
+                    if (timerIndex >= 0) goToStep(timerIndex);
+                  }}
+                >
+                  <Clock3 aria-hidden="true" size={20} />
+                  <span>
+                    {messages.timerLabel} ·{' '}
+                    <strong>
+                      {Math.floor(timerRemaining(timer) / 60)}:
+                      {String(timerRemaining(timer) % 60).padStart(2, '0')}
+                    </strong>
+                    <small>
+                      {
+                        cookSteps.find((candidate) =>
+                          candidate.stepIds.includes(timer.stepId),
+                        )?.title
+                      }
+                    </small>
+                  </span>
+                </button>
+              )}
               <CookStep
                 step={step}
                 stepIndex={stepIndex}
@@ -454,10 +494,20 @@ export function CookModePage({
         </div>
       </div>
 
-      <Drawer open={stepsOpen} onOpenChange={setStepsOpen} showSwipeHandle>
+      <Drawer
+        open={stepsOpen}
+        onOpenChange={setStepsOpen}
+        swipeDirection="right"
+      >
         <DrawerContent className={styles.stepsDrawer}>
-          <DrawerHeader>
+          <DrawerHeader className={styles.drawerHeader}>
             <DrawerTitle>{messages.allSteps}</DrawerTitle>
+            <DrawerClose
+              className={styles.drawerClose}
+              aria-label={getUiMessages(locale).personal.close}
+            >
+              <X aria-hidden="true" size={20} />
+            </DrawerClose>
           </DrawerHeader>
           <CookProgress
             steps={cookSteps}
@@ -474,11 +524,17 @@ export function CookModePage({
       <Drawer
         open={ingredientsOpen}
         onOpenChange={setIngredientsOpen}
-        showSwipeHandle
+        swipeDirection="right"
       >
         <DrawerContent className={styles.ingredientsDrawer}>
-          <DrawerHeader>
+          <DrawerHeader className={styles.drawerHeader}>
             <DrawerTitle>{messages.ingredients}</DrawerTitle>
+            <DrawerClose
+              className={styles.drawerClose}
+              aria-label={getUiMessages(locale).personal.close}
+            >
+              <X aria-hidden="true" size={20} />
+            </DrawerClose>
           </DrawerHeader>
           <div className={styles.ingredientsDrawerBody}>
             <RecipeIngredientList
@@ -494,7 +550,7 @@ export function CookModePage({
   return definition.assistant ? (
     <AssistantProvider
       recipeId={definition.assistant.recipeId}
-      recipeVersionId={definition.assistant.recipeVersionId}
+      recipeVersionId={recipeVersionId}
       recipeTitle={definition.recipeTitle}
       locale={locale}
       surface="cook-mode"

@@ -115,6 +115,18 @@ release. Shared atomic rate limits and cost reservations are still required befo
 enabling public traffic; per-isolate limits and per-request caps are not an
 account-wide budget implementation.
 
+## Local UI preview
+
+Put the server-only `OPENAI_API_KEY` and a random `ASSISTANT_SESSION_SECRET` of at
+least 32 characters in the ignored `.env` file, set `ASSISTANT_ENABLED=true`, and
+run `npm run dev`. Open the Napoleon recipe in Cook Mode on `localhost` and use the
+step-level assistant button to exercise the real `/api/assistant` route from the UI.
+
+Development requests on the exact loopback hosts `localhost`, `127.0.0.1` and
+`[::1]` may preview draft recipe/UI locales. This exception never applies to a
+production build or a non-loopback host; normal publication gates and the default
+disabled production flag remain unchanged.
+
 ## Tests
 
 Run `npm run test:assistant` and `npm run eval:assistant`. Every unit/eval provider is

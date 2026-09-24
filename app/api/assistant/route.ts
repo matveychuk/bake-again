@@ -30,6 +30,7 @@ import {
   type AssistantRequestThrottle,
 } from '../../../lib/assistant/server/throttle.ts';
 import { consoleAssistantTelemetry } from '../../../lib/assistant/server/telemetry.ts';
+import { isLocalDevelopment } from '../../../lib/runtime/local-development.ts';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 20;
@@ -98,7 +99,7 @@ const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
 };
 
 interface AssistantRouteDependencies {
-  getService(): Promise<AssistantService>;
+  getService(request: Request): Promise<AssistantService>;
   getSecurity?(): Promise<{
     sessionSecret: string;
     throttle: AssistantRequestThrottle;
@@ -269,7 +270,7 @@ export function createAssistantRouteHandler(
         }
         releaseThrottle = () => lease.release();
       }
-      const service = await dependencies.getService();
+      const service = await dependencies.getService(request);
       const deadlineSignal = AbortSignal.any([
         request.signal,
         AbortSignal.timeout(ASSISTANT_TIMEOUT_MS),
@@ -307,16 +308,31 @@ export function createAssistantRouteHandler(
   };
 }
 
-async function getDefaultService() {
+export function isAssistantLocalPreviewRequest(
+  request: Request,
+  environment = process.env.NODE_ENV,
+) {
+  const host = request.headers.get('host') ?? new URL(request.url).host;
+  return isLocalDevelopment(host, environment);
+}
+
+async function getDefaultService(request: Request) {
   const bindings = await getAssistantRuntimeBindings();
   const config = parseAssistantRuntimeEnv(bindings);
   if (!config.enabled)
     throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
   const provider = createOpenAIAssistantProvider(config);
+  const localPreview = isAssistantLocalPreviewRequest(request);
   return createAssistantService({
     config,
     provider,
     telemetry: consoleAssistantTelemetry,
+    ...(localPreview
+      ? {
+          isRecipeLocaleAllowed: () => true,
+          isUiLocaleAllowed: () => true,
+        }
+      : {}),
   });
 }
 

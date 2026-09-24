@@ -1,5 +1,6 @@
 'use client';
 
+import { trackEvent } from '@/lib/analytics/umami';
 import { Bookmark } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { getUiMessages } from '@/lib/i18n/messages';
@@ -27,6 +28,8 @@ export function SaveRecipeControl({ recipeId, title, locale }: { recipeId: strin
         event.stopPropagation();
         const next = toggleSavedRecipe(recipeId);
         setSaved(next.savedRecipeIds.includes(recipeId));
+        const persisted = readRecipeMemory().savedRecipeIds.includes(recipeId);
+        if (persisted !== saved) trackEvent(persisted ? 'recipe_save' : 'recipe_unsave', { recipe_id: recipeId, locale });
       }}
       type="button"
     >

@@ -1,6 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { trackEvent } from '@/lib/analytics/umami';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ShoppingBag } from 'lucide-react';
 import { SectionTitle } from '@/components/foundations/section-title';
 import {
@@ -14,6 +16,14 @@ import type { StructuredRecipeContent } from '@/content/recipes/source-recipe.ty
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { recipeReaderCopy } from '@/content/recipes/reader-copy';
+import {
+  parseSourceRecipeConfiguration,
+  sourceBatchScaleFactors,
+  sourceRecipeConfigurationKey,
+  sourceRecipeScalingBounds,
+  updateSourceRecipeConfigurationParams,
+  type SourceRecipeConfiguration,
+} from '@/content/recipes/source-recipe-configuration';
 import { EvidenceBadge } from './evidence-badge';
 import {
   AddRecipeIngredientsControl,
@@ -23,6 +33,12 @@ import { RecipeIngredientChecklist } from './recipe-ingredient-checklist';
 import { RecipeIngredientHeading } from './recipe-ingredient-heading';
 import styles from './inventory-recipe-adjuster.module.css';
 
+const baseConfiguration: SourceRecipeConfiguration = {
+  kind: 'base',
+  mode: 'scale',
+  scaleFactor: 1,
+};
+
 export function InventoryRecipeAdjuster({
   recipe,
   archiveSections,
@@ -31,6 +47,8 @@ export function InventoryRecipeAdjuster({
   scalingAnchorIngredientId,
   showWorkingRecord = true,
   sourceShoppingRecipe,
+  configuration = baseConfiguration,
+  syncConfigurationToUrl = true,
 }: {
   recipe: StructuredRecipeContent | undefined;
   archiveSections: InventoryArchiveSection[];
@@ -39,9 +57,18 @@ export function InventoryRecipeAdjuster({
   scalingAnchorIngredientId?: string;
   showWorkingRecord?: boolean;
   sourceShoppingRecipe?: SourceShoppingRecipe | null;
+  configuration?: SourceRecipeConfiguration;
+  syncConfigurationToUrl?: boolean;
 }) {
-  const [mode, setMode] = useState<'scale' | 'ingredient'>('scale');
-  const [scale, setScale] = useState(1);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const availableInputId = useId();
+  const availableErrorId = `${availableInputId}-error`;
+  const [mode, setMode] = useState<'scale' | 'ingredient'>(configuration.mode);
+  const [scale, setScale] = useState(
+    configuration.mode === 'scale' ? configuration.scaleFactor : 1,
+  );
   const ingredients = useMemo(
     () =>
       recipe?.ingredientSections.flatMap((section) => section.ingredients) ??
@@ -52,31 +79,134 @@ export function InventoryRecipeAdjuster({
     () => findScalingAnchor(ingredients, scalingAnchorIngredientId),
     [ingredients, scalingAnchorIngredientId],
   );
-  const [available, setAvailable] = useState(() => anchor?.amount.minimum ?? 0);
+  const availableChanged = useRef(false);
+  const [available, setAvailable] = useState(() =>
+    configuration.mode === 'ingredient'
+      ? String(configuration.availableAmount)
+      : String(anchor?.amount.minimum ?? ''),
+  );
+  const scalingBounds = sourceRecipeScalingBounds(
+    personalRecipe,
+    scalingAnchorIngredientId,
+  );
+  const draftConfiguration = useMemo(() => {
+    const params =
+      mode === 'scale'
+        ? updateSourceRecipeConfigurationParams(searchParams, {
+            mode: 'scale',
+            scaleFactor: scale,
+          })
+        : updateSourceRecipeConfigurationParams(searchParams, {
+            mode: 'ingredient',
+            ingredientId: anchor?.ingredient.id ?? '',
+            availableAmount: available,
+            unit: anchor?.amount.unit ?? 'g',
+          });
+    return parseSourceRecipeConfiguration(
+      params,
+      recipe,
+      scalingAnchorIngredientId,
+      scalingBounds,
+    );
+  }, [
+    anchor,
+    available,
+    mode,
+    recipe,
+    scale,
+    scalingAnchorIngredientId,
+    scalingBounds,
+    searchParams,
+  ]);
   const scaleFactor =
-    mode === 'ingredient' && anchor && available > 0
-      ? available / anchor.amount.minimum
-      : scale;
+    draftConfiguration.kind === 'invalid'
+      ? null
+      : draftConfiguration.scaleFactor;
   const isAdjustable = Boolean(recipe && anchor);
   const messages = getUiMessages(locale);
   const concise = recipe?.presentation === 'concise';
   const readerCopy = recipeReaderCopy[locale];
-  const adjusted = Math.abs(scaleFactor - 1) > 0.000001;
+  const invalidAmount = draftConfiguration.kind === 'invalid';
+  const adjusted = scaleFactor !== null && Math.abs(scaleFactor - 1) > 0.000001;
   const fractionalEggs = ingredients.some((ingredient) => {
     const amount = ingredient.quantity.base;
     return (
       ingredient.id === 'eggs' &&
       amount?.kind === 'exact' &&
       Math.abs(
-        amount.value * scaleFactor - Math.round(amount.value * scaleFactor),
+        amount.value * (scaleFactor ?? 1) -
+          Math.round(amount.value * (scaleFactor ?? 1)),
       ) > 0.000001
     );
   });
   const scaling = messages.scaling;
   const formattedScaleFactor = formatNumber(
     locale,
-    Math.round(scaleFactor * 100) / 100,
+    Math.round((scaleFactor ?? 1) * 100) / 100,
   );
+
+  function replaceConfiguration(params: URLSearchParams) {
+    if (!syncConfigurationToUrl) return;
+    const query = params.toString();
+    if (query === searchParams.toString()) return;
+    const hash = window.location.hash;
+    router.replace(`${query ? `${pathname}?${query}` : pathname}${hash}`, {
+      scroll: false,
+    });
+  }
+
+  useEffect(() => {
+    if (!syncConfigurationToUrl) return;
+    function restoreConfiguration() {
+      const restored = parseSourceRecipeConfiguration(
+        window.location.search,
+        recipe,
+        scalingAnchorIngredientId,
+        scalingBounds,
+      );
+      setMode(restored.mode);
+      if (restored.mode === 'scale') {
+        setScale(restored.scaleFactor);
+      } else {
+        setAvailable(String(restored.availableAmount));
+      }
+    }
+    window.addEventListener('popstate', restoreConfiguration);
+    return () => window.removeEventListener('popstate', restoreConfiguration);
+  }, [
+    recipe,
+    scalingAnchorIngredientId,
+    scalingBounds,
+    syncConfigurationToUrl,
+  ]);
+
+  function selectScale(factor: (typeof sourceBatchScaleFactors)[number]) {
+    if (mode !== 'scale' || scale !== factor) trackEvent('recipe_scale', { recipe_id: personalRecipe?.id ?? sourceShoppingRecipe?.id, locale, factor });
+    setMode('scale');
+    setScale(factor);
+    replaceConfiguration(
+      updateSourceRecipeConfigurationParams(searchParams, {
+        mode: 'scale',
+        scaleFactor: factor,
+      }),
+    );
+  }
+
+  function useAvailableIngredient() {
+    if (!anchor) return;
+    const nextAvailable =
+      mode === 'ingredient' ? available : String(anchor.amount.minimum);
+    setMode('ingredient');
+    setAvailable(nextAvailable);
+    replaceConfiguration(
+      updateSourceRecipeConfigurationParams(searchParams, {
+        mode: 'ingredient',
+        ingredientId: anchor.ingredient.id,
+        availableAmount: nextAvailable,
+        unit: anchor.amount.unit,
+      }),
+    );
+  }
 
   return (
     <section
@@ -104,14 +234,14 @@ export function InventoryRecipeAdjuster({
               <button
                 type="button"
                 aria-pressed={mode === 'scale'}
-                onClick={() => setMode('scale')}
+                onClick={() => selectScale(scale)}
               >
                 {scaling.scaleRecipe}
               </button>
               <button
                 type="button"
                 aria-pressed={mode === 'ingredient'}
-                onClick={() => setMode('ingredient')}
+                onClick={useAvailableIngredient}
               >
                 {scaling.useWhatIHave}
               </button>
@@ -120,12 +250,12 @@ export function InventoryRecipeAdjuster({
               <div>
                 <span className={styles.label}>{scaling.batchScale}</span>
                 <div className={styles.scales}>
-                  {[0.5, 1, 1.5, 2].map((factor) => (
+                  {sourceBatchScaleFactors.map((factor) => (
                     <button
                       type="button"
                       aria-pressed={scale === factor}
                       key={factor}
-                      onClick={() => setScale(factor)}
+                      onClick={() => selectScale(factor)}
                     >
                       {formatNumber(locale, factor)}×
                     </button>
@@ -134,28 +264,62 @@ export function InventoryRecipeAdjuster({
               </div>
             ) : (
               <div>
-                <label className={styles.label} htmlFor="available-anchor">
+                <label className={styles.label} htmlFor={availableInputId}>
                   {scaling.availableIngredient(anchor.ingredient.name)}
                 </label>
                 <div className={styles.amountInput}>
                   <input
-                    id="available-anchor"
-                    min="1"
+                    id={availableInputId}
+                    min={
+                      scalingBounds?.minimum ??
+                      (anchor.amount.unit === 'piece' ? 1 : 0.01)
+                    }
+                    max={scalingBounds?.maximum}
                     step={anchor.amount.unit === 'piece' ? 1 : undefined}
                     type="number"
-                    value={available || ''}
-                    onChange={(event) =>
-                      setAvailable(Number(event.target.value))
+                    aria-describedby={
+                      invalidAmount ? availableErrorId : undefined
                     }
+                    aria-invalid={invalidAmount || undefined}
+                    value={available}
+                    onBlur={() => {
+                      if (availableChanged.current && !invalidAmount) trackEvent('recipe_ingredient_scale', { recipe_id: personalRecipe?.id ?? sourceShoppingRecipe?.id, locale });
+                      availableChanged.current = false;
+                    }}
+                    onChange={(event) => {
+                      availableChanged.current = true;
+                      const nextAvailable = event.target.value;
+                      setAvailable(nextAvailable);
+                      replaceConfiguration(
+                        updateSourceRecipeConfigurationParams(searchParams, {
+                          mode: 'ingredient',
+                          ingredientId: anchor.ingredient.id,
+                          availableAmount: nextAvailable,
+                          unit: anchor.amount.unit,
+                        }),
+                      );
+                    }}
                   />
                   <span>
                     {formatUnit(
                       locale,
                       anchor.amount.unit,
-                      available || anchor.amount.minimum,
+                      Number(available) || anchor.amount.minimum,
                     )}
                   </span>
                 </div>
+                {invalidAmount && (
+                  <p
+                    className={styles.result}
+                    id={availableErrorId}
+                    role="alert"
+                  >
+                    {draftConfiguration.kind === 'invalid' &&
+                    draftConfiguration.reason === 'unsupported'
+                      ? scaling.supportedAmount
+                      : scaling.positiveAmount}
+                  </p>
+                )}
               </div>
             )}
             {concise ? (
@@ -169,12 +333,12 @@ export function InventoryRecipeAdjuster({
                   {fractionalEggs && <p>{readerCopy.fractionalEggs}</p>}
                 </div>
               )
-            ) : (
+            ) : adjusted ? (
               <p className={styles.result}>
                 <strong>{scaling.calculated}</strong>{' '}
                 {scaling.calculatedResult(formattedScaleFactor)}
               </p>
-            )}
+            ) : null}
           </>
         ) : (
           <div className={styles.locked}>
@@ -188,8 +352,15 @@ export function InventoryRecipeAdjuster({
           action={
             personalRecipe || sourceShoppingRecipe ? (
               <AddRecipeIngredientsControl
+                configurationKey={sourceRecipeConfigurationKey(
+                  draftConfiguration,
+                )}
+                context={`${sourceShoppingRecipe?.title ?? personalRecipe?.title[locale] ?? ''} · ${formattedScaleFactor}×`}
+                disabled={invalidAmount}
+                disabledReason={scaling.positiveAmount}
                 locale={locale}
                 recipe={personalRecipe ?? sourceShoppingRecipe!}
+                scaleFactor={scaleFactor ?? 1}
               />
             ) : (
               <button
@@ -217,27 +388,34 @@ export function InventoryRecipeAdjuster({
               hideSingleSectionTitle={concise}
               sections={recipe.ingredientSections}
               amountFor={(ingredient) => ({
-                primary:
-                  ingredient.quantity.base ||
-                  ingredient.quantity.equivalent ||
-                  !ingredient.note
+                primary: invalidAmount
+                  ? '—'
+                  : ingredient.quantity.base ||
+                      ingredient.quantity.equivalent ||
+                      !ingredient.note
                     ? formatQuantity(
                         locale,
                         scaleStructuredQuantity(
                           ingredient.quantity.base ??
                             ingredient.quantity.equivalent ??
                             null,
-                          ingredient.scaling === 'fixed' ? 1 : scaleFactor,
+                          ingredient.scaling === 'fixed'
+                            ? 1
+                            : (scaleFactor ?? 1),
                         ),
                       )
                     : undefined,
                 secondary:
-                  ingredient.quantity.equivalent && ingredient.quantity.base
+                  !invalidAmount &&
+                  ingredient.quantity.equivalent &&
+                  ingredient.quantity.base
                     ? formatQuantity(
                         locale,
                         scaleStructuredQuantity(
                           ingredient.quantity.equivalent,
-                          ingredient.scaling === 'fixed' ? 1 : scaleFactor,
+                          ingredient.scaling === 'fixed'
+                            ? 1
+                            : (scaleFactor ?? 1),
                         ),
                       )
                     : undefined,

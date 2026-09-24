@@ -135,6 +135,7 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
     },
     {
       id: 'add-wet',
+      technique: { id: 'soften-butter', condition: 'butter-option' },
       title: copy.titles[1],
       body: copy.instructions[1],
       cookIngredients: [

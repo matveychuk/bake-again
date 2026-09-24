@@ -61,6 +61,8 @@ export function CookStep({
       </div>
       {step.meta && <p className={styles.meta}>{step.meta}</p>}
       <RecipeStepContent
+        technique={step.technique}
+        locale={locale}
         action={
           assistant ? (
             <AssistantTrigger

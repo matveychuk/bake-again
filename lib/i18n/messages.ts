@@ -13,6 +13,7 @@ type UiMessages = {
     select: string;
   };
   a11y: {
+    skipNavigation: string;
     wordmarkHome: string;
     primaryNavigation: string;
     recipeStatus: (status: string, detail?: string | null) => string;
@@ -132,9 +133,8 @@ type UiMessages = {
     ingredientsIntro: string;
     creamOptionsEyebrow: string;
     creamOptionsTitle: string;
-    creamOptionsIntro: (recommended: string) => string;
+    creamOptionsIntro: () => string;
     creamRecommended: string;
-    creamTested: string;
     creamSelectedEyebrow: string;
     creamRecipeEyebrow: string;
     changeCream: string;
@@ -164,6 +164,8 @@ type UiMessages = {
     availableIngredient: (name: string) => string;
     calculated: string;
     calculatedResult: (factor: string) => string;
+    positiveAmount: string;
+    supportedAmount: string;
     quantitiesMissing: string;
     quantitiesMissingDescription: string;
     sourceGap: string;
@@ -183,6 +185,8 @@ type UiMessages = {
   personal: {
     save: string;
     removeSaved: string;
+    savedEyebrow: string;
+    savedHint: string;
     savedTitle: string;
     savedEmpty: string;
     browseRecipes: string;
@@ -254,6 +258,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
     a11y: {
       wordmarkHome: 'Bake Again home',
       primaryNavigation: 'Primary navigation',
+      skipNavigation: 'Skip to content',
       recipeStatus: (status, detail) =>
         `Testing status: ${status}${detail ? `, ${detail}` : ''}`,
       recipeRecordStatus: (status, detail) =>
@@ -265,7 +270,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       intro:
         'Familiar cakes, cookies and breakfasts — carefully adjusted, baked again, and written so you can get the same result at home.',
       searchLabel: 'Search recipes',
-      searchPlaceholder: 'Name, ingredient or collection',
+      searchPlaceholder: 'Name or ingredient',
       searchAction: 'Search',
       searchResultsTitle: (query) => `Results for “${query}”`,
       searchEmpty:
@@ -282,8 +287,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         { id: 'cottage-cheese', label: 'With cottage cheese' },
         { id: 'batter-on-hand', label: 'Batter on hand' },
       ],
-      recipesEyebrow: 'Current inventory',
-      recipesTitle: 'Every recipe so far.',
+      recipesEyebrow: 'Find your next bake',
+      recipesTitle: 'Recipes to make again.',
       collectionCount: (count) => `${count} recipes`,
       viewAll: 'View all recipes',
       trustEyebrow: 'Clear recipe status',
@@ -348,7 +353,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       completedSteps: (completed, total) =>
         `${completed} of ${total} steps completed`,
       cookingComplete: 'Cooking complete',
-      completeTitle: 'The recipe is finished.',
+      completeTitle: 'Cooking complete.',
       privateNote: 'Private note',
       privateNoteDescription:
         'Optional. Changes are saved automatically in this browser.',
@@ -390,10 +395,9 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       ingredientsIntro: 'Conditions and unresolved details stay visible.',
       creamOptionsEyebrow: 'Filling',
       creamOptionsTitle: 'Choose a cream.',
-      creamOptionsIntro: (recommended) =>
-        `All of these creams are tested for this recipe. We recommend ${recommended}.`,
+      creamOptionsIntro: () =>
+        'All of these creams are tested for this recipe.',
       creamRecommended: 'Recommended',
-      creamTested: 'Tested',
       creamSelectedEyebrow: 'Selected cream',
       creamRecipeEyebrow: 'Cream recipe',
       changeCream: 'Change cream',
@@ -427,6 +431,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculated: 'Calculated:',
       calculatedResult: (factor) =>
         `${factor}× the recorded base. Check eggs and other whole items manually when the result is fractional.`,
+      positiveAmount: 'Enter an amount greater than 0.',
+      supportedAmount: 'Enter an amount supported by this recipe.',
       quantitiesMissing: 'Quantities still needed',
       quantitiesMissingDescription:
         'This recipe does not yet have a supported numeric anchor ingredient. Add the source quantities to unlock Scale recipe and Use what I have.',
@@ -475,6 +481,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       save: 'Save recipe',
       removeSaved: 'Remove from Saved',
       savedTitle: 'Saved recipes',
+      savedEyebrow: 'Want to bake',
+      savedHint: 'Use the bookmark on a recipe to keep it here for later.',
       savedEmpty: 'No recipes saved yet.',
       browseRecipes: 'Browse recipes',
       bakedEyebrow: 'Your recipe memory',
@@ -550,6 +558,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
     a11y: {
       wordmarkHome: 'Inicio de Bake Again',
       primaryNavigation: 'Navegación principal',
+      skipNavigation: 'Saltar al contenido',
       recipeStatus: (status, detail) =>
         `Estado de prueba: ${status}${detail ? `, ${detail}` : ''}`,
       recipeRecordStatus: (status, detail) =>
@@ -561,7 +570,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       intro:
         'Pasteles, galletas y desayunos de siempre, adaptados con cuidado y probados una y otra vez para que te salgan igual de bien en casa.',
       searchLabel: 'Buscar recetas',
-      searchPlaceholder: 'Nombre, ingrediente o colección',
+      searchPlaceholder: 'Nombre o ingrediente',
       searchAction: 'Buscar',
       searchResultsTitle: (query) => `Resultados para «${query}»`,
       searchEmpty:
@@ -578,8 +587,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         { id: 'cottage-cheese', label: 'Con requesón' },
         { id: 'batter-on-hand', label: 'Masa lista' },
       ],
-      recipesEyebrow: 'Inventario actual',
-      recipesTitle: 'Todas las recetas hasta ahora.',
+      recipesEyebrow: 'Tu próxima receta',
+      recipesTitle: 'Recetas para repetir.',
       collectionCount: (count) => `${count} recetas`,
       viewAll: 'Ver todas las recetas',
       trustEyebrow: 'Estado claro de la receta',
@@ -687,10 +696,9 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         'Las condiciones y los detalles sin resolver permanecen visibles.',
       creamOptionsEyebrow: 'Relleno',
       creamOptionsTitle: 'Elige una crema.',
-      creamOptionsIntro: (recommended) =>
-        `Todas estas cremas están probadas para esta receta. Recomendamos ${recommended}.`,
+      creamOptionsIntro: () =>
+        'Todas estas cremas están probadas para esta receta.',
       creamRecommended: 'Recomendada',
-      creamTested: 'Probada',
       creamSelectedEyebrow: 'Crema elegida',
       creamRecipeEyebrow: 'Receta de crema',
       changeCream: 'Cambiar crema',
@@ -724,6 +732,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculated: 'Calculado:',
       calculatedResult: (factor) =>
         `${factor}× de la receta base registrada. Revisa manualmente los huevos y otras unidades enteras si el resultado contiene fracciones.`,
+      positiveAmount: 'Introduce una cantidad mayor que 0.',
+      supportedAmount: 'Introduce una cantidad compatible con esta receta.',
       quantitiesMissing: 'Faltan cantidades',
       quantitiesMissingDescription:
         'Esta receta todavía no tiene un ingrediente base compatible con una cantidad numérica. Añade las cantidades de la fuente para activar Cambiar cantidad y Usar lo que tengo.',
@@ -773,6 +783,9 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       save: 'Guardar receta',
       removeSaved: 'Quitar de Guardadas',
       savedTitle: 'Recetas guardadas',
+      savedEyebrow: 'Quiero preparar',
+      savedHint:
+        'Pulsa el marcador de una receta para guardarla aquí y volver a ella.',
       savedEmpty: 'Todavía no has guardado recetas.',
       browseRecipes: 'Ver recetas',
       bakedEyebrow: 'Tu memoria de la receta',
@@ -848,6 +861,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
     a11y: {
       wordmarkHome: 'Головна Bake Again',
       primaryNavigation: 'Основна навігація',
+      skipNavigation: 'Перейти до вмісту',
       recipeStatus: (status, detail) =>
         `Статус перевірки: ${status}${detail ? `, ${detail}` : ''}`,
       recipeRecordStatus: (status, detail) =>
@@ -859,7 +873,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       intro:
         'Улюблені торти, печиво й сніданки — ретельно адаптовані, не раз випробувані й докладно описані, щоб удома все вдалося.',
       searchLabel: 'Шукати рецепти',
-      searchPlaceholder: 'Назва, інгредієнт або добірка',
+      searchPlaceholder: 'Назва або інгредієнт',
       searchAction: 'Шукати',
       searchResultsTitle: (query) => `Результати для «${query}»`,
       searchEmpty:
@@ -876,8 +890,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         { id: 'cottage-cheese', label: 'З творогом' },
         { id: 'batter-on-hand', label: 'Тісто про запас' },
       ],
-      recipesEyebrow: 'Поточний каталог',
-      recipesTitle: 'Усі рецепти на сьогодні.',
+      recipesEyebrow: 'Що приготуємо?',
+      recipesTitle: 'Рецепти, до яких повертаються.',
       collectionCount: (count) => {
         const lastTwoDigits = count % 100;
         const lastDigit = count % 10;
@@ -954,7 +968,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       completedSteps: (completed, total) =>
         `Виконано ${completed} з ${total} кроків`,
       cookingComplete: 'Приготування завершено',
-      completeTitle: 'Рецепт готовий.',
+      completeTitle: 'Приготування завершено.',
       privateNote: 'Приватна нотатка',
       privateNoteDescription:
         'Необов’язково. Зміни автоматично зберігаються в цьому браузері.',
@@ -996,10 +1010,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       ingredientsIntro: 'Умови й неуточнені деталі залишаються видимими.',
       creamOptionsEyebrow: 'Начинка',
       creamOptionsTitle: 'Оберіть крем.',
-      creamOptionsIntro: (recommended) =>
-        `Усі ці креми перевірені для цього рецепта. Рекомендуємо ${recommended}.`,
+      creamOptionsIntro: () => 'Усі ці креми перевірені для цього рецепта.',
       creamRecommended: 'Рекомендовано',
-      creamTested: 'Перевірено',
       creamSelectedEyebrow: 'Вибраний крем',
       creamRecipeEyebrow: 'Рецепт крему',
       changeCream: 'Змінити крем',
@@ -1034,6 +1046,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculated: 'Розраховано:',
       calculatedResult: (factor) =>
         `${factor}× від записаної бази. Якщо виходить дробова кількість яєць або інших цілих одиниць, перевірте її вручну.`,
+      positiveAmount: 'Введіть кількість більшу за 0.',
+      supportedAmount: 'Введіть кількість, яку підтримує цей рецепт.',
       quantitiesMissing: 'Бракує кількостей',
       quantitiesMissingDescription:
         'У цьому рецепті ще немає підтримуваного базового інгредієнта з числовою кількістю. Додайте кількості з джерела, щоб увімкнути «Змінити кількість» і «Використати наявне».',
@@ -1082,6 +1096,9 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       save: 'Зберегти рецепт',
       removeSaved: 'Прибрати зі збережених',
       savedTitle: 'Збережені рецепти',
+      savedEyebrow: 'Хочу приготувати',
+      savedHint:
+        'Натисніть закладку на рецепті, щоб зберегти його тут і повернутися пізніше.',
       savedEmpty: 'Ще немає збережених рецептів.',
       browseRecipes: 'Переглянути рецепти',
       bakedEyebrow: 'Ваша пам’ять про рецепт',

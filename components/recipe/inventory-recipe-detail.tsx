@@ -7,6 +7,8 @@ import { RecipeOverview } from '@/components/recipe/recipe-overview';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { RecipeBakeMemory } from '@/components/recipe/recipe-bake-memory';
 import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
+import { RecipeStepGuidance } from '@/components/recipe/recipe-step-guidance';
+import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
 import type { InventoryRecipe } from '@/content/recipes/inventory';
@@ -25,6 +27,11 @@ import {
 import { getUiMessages } from '@/lib/i18n/messages';
 import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
 import { getRecipePublicationStatus } from '@/content/recipes/publication';
+import {
+  applySourceRecipeConfiguration,
+  parseSourceRecipeConfiguration,
+  sourceRecipeScalingBounds,
+} from '@/content/recipes/source-recipe-configuration';
 import { localeDraftsPath, localeHomePath } from '@/lib/i18n/routes';
 import { InventoryRecipeAdjuster } from './inventory-recipe-adjuster';
 import { SaveRecipeControl } from './save-recipe-control';
@@ -37,14 +44,16 @@ export function InventoryRecipeDetail({
   locale = defaultLocale,
   pathname,
   selectedCreamRecipeId: requestedCreamRecipeId,
-  isStandaloneCream = false,
+  isStandaloneComponent = false,
+  configurationSearch = '',
 }: {
   recipe: InventoryRecipe;
   personalRecipe?: RecipeDraft | null;
   locale?: AppLocale;
   pathname?: string;
   selectedCreamRecipeId?: string | null;
-  isStandaloneCream?: boolean;
+  isStandaloneComponent?: boolean;
+  configurationSearch?: string;
 }) {
   const isDraft = getRecipePublicationStatus(recipe.id) === 'unpublished';
   const baseStructured = getRecipeContent(recipe.id, locale);
@@ -62,7 +71,25 @@ export function InventoryRecipeDetail({
         selectedCreamRecipeId,
       )
     : null;
+  const configuration = parseSourceRecipeConfiguration(
+    configurationSearch,
+    structured,
+    recipe.scalingAnchorIngredientId,
+    sourceRecipeScalingBounds(personalRecipe, recipe.scalingAnchorIngredientId),
+  );
+  const configuredStructured = structured
+    ? applySourceRecipeConfiguration(structured, configuration, locale)
+    : null;
   const concise = structured?.presentation === 'concise';
+  const techniques = [
+    ...new Map(
+      (structured?.steps ?? []).flatMap((step) =>
+        step.technique
+          ? [[`${step.technique.id}:${step.technique.condition ?? ''}`, step.technique] as const]
+          : [],
+      ),
+    ).values(),
+  ];
   const readerCopy = recipeReaderCopy[locale];
   const showEditorialNotes = isDraft && !concise;
   const messages = getUiMessages(locale).recipe;
@@ -72,7 +99,11 @@ export function InventoryRecipeDetail({
     copy?.title[locale] ??
     recipe.title;
   const recipePath = pathname ?? `/recipes/${recipe.slug}`;
-  const cookModePath = `${recipePath}/cook${selectedCreamRecipeId ? `?cream=${selectedCreamRecipeId}` : ''}`;
+  const cookModeParams = new URLSearchParams(configurationSearch);
+  if (selectedCreamRecipeId) cookModeParams.set('cream', selectedCreamRecipeId);
+  const cookModeSearch = cookModeParams.toString();
+  const cookModePath = `${recipePath}/cook${cookModeSearch ? `?${cookModeSearch}` : ''}`;
+  const sourceVersionId = `${recipe.id}-source-v1${selectedCreamRecipeId ? `-cream-${selectedCreamRecipeId}` : ''}`;
   const creamRecipePath = (recipeId: string) =>
     pathname ? `/${locale}/recipes/${recipeId}` : `/recipes/${recipeId}`;
   const creamOptions = structured?.creamOptions?.recipeIds
@@ -103,7 +134,7 @@ export function InventoryRecipeDetail({
         </a>
         {!concise && <span>{copy?.category[locale] ?? recipe.category}</span>}
       </div>
-      <section className={styles.hero}>
+      <section className={styles.hero} id="recipe-content" tabIndex={-1}>
         <div className={styles.heroImage}>
           <Image
             src={recipe.image}
@@ -113,20 +144,22 @@ export function InventoryRecipeDetail({
             sizes="(min-width: 900px) 48vw, 100vw"
           />
           <span className={styles.imageNote}>
-            {recipe.imageKind === 'author-photo'
-              ? isDraft && !concise
-                ? messages.authorPhotoPending
-                : readerCopy.authorImage
-              : isDraft && !concise
-                ? messages.generatedPreviewPending
-                : readerCopy.generatedImage}
+            {recipe.imageKind === 'edited-author-photo'
+              ? readerCopy.editedAuthorImage
+              : recipe.imageKind === 'author-photo'
+                ? isDraft && !concise
+                  ? messages.authorPhotoPending
+                  : readerCopy.authorImage
+                : isDraft && !concise
+                  ? messages.generatedPreviewPending
+                  : readerCopy.generatedImage}
           </span>
         </div>
         <div className={styles.heroCopy}>
           <div className={styles.heroTopline}>
             <p>{copy?.category[locale] ?? recipe.category}</p>
             <div className={styles.heroActions}>
-              {!isStandaloneCream && (
+              {!isStandaloneComponent && (
                 <SaveRecipeControl
                   locale={locale}
                   recipeId={recipe.id}
@@ -143,17 +176,21 @@ export function InventoryRecipeDetail({
           <RecipeDetailTitle
             locale={locale}
             title={detailTitle}
-            plain={isStandaloneCream}
+            plain={isStandaloneComponent}
           />
           <p className={styles.summary}>
             {copy?.summary[locale] ?? recipe.summary}
           </p>
           <RecipeOverview
-            content={structured}
+            content={configuredStructured}
             locale={locale}
-            showFlour={!isStandaloneCream}
+            showFlour={!isStandaloneComponent}
             showWorkingRecord={isDraft}
           />
+          <nav className={styles.sectionNavigation} aria-label={detailTitle}>
+            <a href="#ingredients">{messages.ingredients}</a>
+            <a href="#recipe-method">{readerCopy.method}</a>
+          </nav>
           {structured?.creamOptions && !selectedCreamRecipeId ? (
             <a href="#cream-options" className={styles.cookModeLink}>
               {messages.chooseCreamBeforeCooking}
@@ -182,7 +219,22 @@ export function InventoryRecipeDetail({
         />
       ) : null}
 
-      {structured?.beforeStart && (
+      {structured?.relatedRecipes?.length ? (
+        <nav
+          className={styles.sectionNavigation}
+          aria-label={readerCopy.recipeParts}
+        >
+          {structured.relatedRecipes.map((id) => (
+            <a key={id} href={creamRecipePath(id)}>
+              {catalogLocaleCopy[id]?.title[locale] ??
+                recipeDetailTitles[id]?.[locale] ??
+                id}
+            </a>
+          ))}
+        </nav>
+      ) : null}
+
+      {(structured?.beforeStart?.length || techniques.length > 0) ? (
         <section
           className={styles.beforeStart}
           aria-labelledby="before-start-title"
@@ -195,25 +247,38 @@ export function InventoryRecipeDetail({
             {messages.planAhead}
           </SectionTitle>
           <div className={styles.planGrid}>
-            {structured.beforeStart.map((item) => (
+            {(structured?.beforeStart ?? []).map((item) => (
               <article key={item}>
-                <Clock3 size={19} />
-                <div>
+                <div className={styles.planItemHeading}>
+                  <Clock3 aria-hidden="true" size={19} />
                   <strong>{messages.keepInMind}</strong>
-                  <p>{item}</p>
                 </div>
+                <p>{item}</p>
               </article>
             ))}
           </div>
+          {techniques.map((reference) => (
+            <RecipeStepGuidance
+              key={`${reference.id}:${reference.condition ?? ''}`}
+              kind="tip"
+              label={messages.tip}
+            >
+              <TechniqueHelp locale={locale} reference={reference} />
+            </RecipeStepGuidance>
+          ))}
         </section>
-      )}
+      ) : null}
 
       <section
         className={styles.ingredientsArea}
+        id="ingredients"
+        tabIndex={-1}
         aria-labelledby="ingredients-title"
       >
         <InventoryRecipeAdjuster
           archiveSections={recipe.archiveSections}
+          configuration={configuration}
+          key={`${recipe.id}:${selectedCreamRecipeId ?? 'no-cream'}`}
           locale={locale}
           personalRecipe={personalRecipe}
           scalingAnchorIngredientId={recipe.scalingAnchorIngredientId}
@@ -221,7 +286,7 @@ export function InventoryRecipeDetail({
             structured
               ? {
                   id: recipe.id,
-                  versionId: `${recipe.id}-source-v1`,
+                  versionId: sourceVersionId,
                   title: detailTitle,
                   ingredientSections: structured.ingredientSections,
                 }
@@ -242,7 +307,12 @@ export function InventoryRecipeDetail({
       </section>
 
       {structured && (
-        <section className={styles.method} aria-labelledby="method-title">
+        <section
+          className={styles.method}
+          id="recipe-method"
+          tabIndex={-1}
+          aria-labelledby="method-title"
+        >
           <div className={styles.methodHeading}>
             <SectionTitle
               eyebrow={
@@ -254,11 +324,17 @@ export function InventoryRecipeDetail({
               {concise ? readerCopy.method : messages.stepByStep}
             </SectionTitle>
             {structured.creamOptions && !selectedCreamRecipeId ? (
-              <a href="#cream-options" className={styles.cookModeLink}>
+              <a
+                href="#cream-options"
+                className={`${styles.cookModeLink} ${styles.cookModeSecondary}`}
+              >
                 {messages.chooseCreamBeforeCooking}
               </a>
             ) : (
-              <a href={cookModePath} className={styles.cookModeLink}>
+              <a
+                href={cookModePath}
+                className={`${styles.cookModeLink} ${styles.cookModeSecondary}`}
+              >
                 <Play size={16} fill="currentColor" />{' '}
                 {concise ? readerCopy.cookMode : messages.openCookMode}
               </a>
@@ -276,6 +352,8 @@ export function InventoryRecipeDetail({
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <RecipeStepContent
+                    technique={step.technique}
+                    locale={locale}
                     checkpoint={step.checkpoint}
                     checkpointLabel={messages.checkpoint}
                     className={styles.stepContent}

@@ -14,7 +14,7 @@ export function RecipeSearchForm({ locale, query = '', collectionId, id = 'recip
   const messages = getUiMessages(locale).home;
   return (
     <search aria-label={messages.searchLabel}>
-    <form className="search-form" action={action ?? `${localeHomePath(locale)}#recipes`} method="get">
+    <form data-analytics-search="true" className="search-form" action={action ?? `${localeHomePath(locale)}#recipes`} method="get">
       <Search aria-hidden="true" size={21} strokeWidth={1.7} />
       <label className="sr-only" htmlFor={id}>{messages.searchLabel}</label>
       <input key={query} id={id} name="q" type="search" maxLength={200} defaultValue={query} placeholder={messages.searchPlaceholder} />

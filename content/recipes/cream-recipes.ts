@@ -709,6 +709,7 @@ function egglessCustardContent(locale: CreamLocale): RecipeSourceDraftContent {
     steps: [
       {
         id: 'make-paste',
+        technique: { id: 'soften-butter' },
         title: copy.pasteTitle,
         body: copy.pasteBody,
         tip: copy.pasteTip,
@@ -1000,6 +1001,7 @@ function buttercreamContent(locale: CreamLocale): RecipeSourceDraftContent {
       },
       {
         id: 'whip-butter',
+        technique: { id: 'soften-butter' },
         title: copy.whipTitle,
         body: copy.whipBody,
         tip: copy.whipTip,

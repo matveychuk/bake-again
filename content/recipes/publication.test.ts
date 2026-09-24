@@ -41,6 +41,7 @@ void test('reviewed recipes are published, searchable and absent from drafts', (
       'eclairs',
       'apple-charlotte',
       'plum-cake',
+      'banana-fritters',
     ]) {
       assert(getRecipeCatalog(locale).some((recipe) => recipe.id === id));
       assert(

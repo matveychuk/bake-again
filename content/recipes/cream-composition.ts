@@ -1,4 +1,7 @@
-import type { StructuredRecipeContent } from './source-recipe.types.ts';
+import type {
+  StructuredRecipeContent,
+  StructuredRecipeStep,
+} from './source-recipe.types.ts';
 
 export function resolveSelectedCreamRecipeId(
   content: Pick<StructuredRecipeContent, 'creamOptions'> | null | undefined,
@@ -14,10 +17,13 @@ function namespacedId(creamRecipeId: string, id: string) {
   return `cream-${creamRecipeId}-${id}`;
 }
 
+const needsCream = (step: StructuredRecipeStep) =>
+  step.requiresCream === true || step.id === 'fill';
+
 /**
- * Adds one explicitly selected reusable cream to a host recipe. Without a
- * selection, the host's final filling step stays hidden so the recipe never
- * implies that a cream was chosen on the reader's behalf.
+ * Adds one explicitly selected reusable cream before the host's assembly steps.
+ * Without a selection, preserve the complete host method for reading, without
+ * adding a cream's ingredients or preparation on the reader's behalf.
  */
 export function composeRecipeWithCream(
   host: StructuredRecipeContent,
@@ -26,10 +32,10 @@ export function composeRecipeWithCream(
 ): StructuredRecipeContent {
   if (!host.creamOptions) return host;
 
-  const hostStepsWithoutFill = host.steps.filter((step) => step.id !== 'fill');
   if (!cream || !creamRecipeId) {
-    return { ...host, steps: hostStepsWithoutFill };
+    return host;
   }
+  const hostStepsWithoutFill = host.steps.filter((step) => !needsCream(step));
 
   const creamSections = cream.ingredientSections.map((section) => ({
     ...section,
@@ -47,15 +53,11 @@ export function composeRecipeWithCream(
       ingredientId: namespacedId(creamRecipeId, ingredient.ingredientId),
     })),
   }));
-  const fillStep = host.steps.find((step) => step.id === 'fill');
+  const assemblySteps = host.steps.filter(needsCream);
 
   return {
     ...host,
     ingredientSections: [...host.ingredientSections, ...creamSections],
-    steps: [
-      ...hostStepsWithoutFill,
-      ...creamSteps,
-      ...(fillStep ? [fillStep] : []),
-    ],
+    steps: [...hostStepsWithoutFill, ...creamSteps, ...assemblySteps],
   };
 }

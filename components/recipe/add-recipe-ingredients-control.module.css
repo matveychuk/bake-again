@@ -71,7 +71,15 @@
 }
 
 .heading { min-width: 0; }
-.title { margin: 0; overflow-wrap: anywhere; font-family: var(--font-family-display); font-size: var(--font-size-title-small); font-weight: 550; letter-spacing: -.035em; line-height: 1.05; }
+.title {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-drawer-title);
+  font-weight: 550;
+  letter-spacing: -.035em;
+  line-height: 1.05;
+}
 .context { margin: var(--space-2) 0 0; color: var(--color-text-primary); font-size: var(--font-size-body-small); font-weight: 750; overflow-wrap: anywhere; }
 .description { margin: var(--space-4) 0 0; color: var(--color-text-secondary); font-size: var(--font-size-body-small); line-height: var(--line-height-body); text-wrap: pretty; }
 

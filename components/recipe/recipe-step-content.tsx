@@ -1,4 +1,7 @@
 import type { ReactNode } from 'react';
+import type { TechniqueReference } from '@/content/techniques/types';
+import type { AppLocale } from '@/lib/i18n/config';
+import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { cn } from '@/lib/utils';
 import { RecipeStepGuidance } from './recipe-step-guidance';
 import styles from './recipe-step-content.module.css';
@@ -6,6 +9,8 @@ import styles from './recipe-step-content.module.css';
 type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4';
 
 type RecipeStepContentProps = {
+  technique?: TechniqueReference;
+  locale?: AppLocale;
   title: string;
   children: ReactNode;
   tip?: ReactNode;
@@ -25,6 +30,8 @@ type RecipeStepContentProps = {
  * observable completion cue follows it.
  */
 export function RecipeStepContent({
+  technique,
+  locale = 'en',
   title,
   children,
   tip,
@@ -48,9 +55,11 @@ export function RecipeStepContent({
         {action && <div className={styles.action}>{action}</div>}
       </div>
 
-      {tip && (
+      {(tip || technique) && (
         <RecipeStepGuidance kind="tip" label={tipLabel} variant="inline">
           {tip}
+          {tip && technique && <br />}
+          {technique && <TechniqueHelp locale={locale} reference={technique} />}
         </RecipeStepGuidance>
       )}
 

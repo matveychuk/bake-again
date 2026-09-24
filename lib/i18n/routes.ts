@@ -1,6 +1,6 @@
 import { personalStateRecipes } from '../../content/recipes/registry.ts';
 import { recipeInventory } from '../../content/recipes/inventory.ts';
-import { isReusableCreamRecipeId } from '../../content/recipes/cream-option-copy.ts';
+import { isReusableComponentRecipeId } from '../../content/recipes/recipe-component-records.ts';
 import { isAppLocale, type AppLocale } from './config.ts';
 
 const localizedRecipes = personalStateRecipes;
@@ -43,7 +43,7 @@ export function getLocalizedRecipePath(
   locale: AppLocale,
   suffix = '',
 ): string | null {
-  if (isReusableCreamRecipeId(recipeId)) {
+  if (isReusableComponentRecipeId(recipeId)) {
     return `${localeRecipesPath(locale)}/${recipeId}${suffix}`;
   }
   const recipe = localizedRecipes.find(
@@ -63,7 +63,7 @@ export function getRecipeIdFromLocalizedSlug(
   locale: AppLocale,
   slug: string,
 ): string | null {
-  if (isReusableCreamRecipeId(slug)) return slug;
+  if (isReusableComponentRecipeId(slug)) return slug;
   return (
     localizedRecipes.find((recipe) => recipe.slug[locale] === slug)?.id ?? null
   );
@@ -94,6 +94,16 @@ export function stripLocalePrefix(pathname: string): string {
  * into a different locale.
  */
 export function getLocaleSwitchPath(
+  location: string,
+  targetLocale: AppLocale,
+): string {
+  const suffixIndex = location.search(/[?#]/);
+  const pathname = suffixIndex < 0 ? location : location.slice(0, suffixIndex);
+  const suffix = suffixIndex < 0 ? '' : location.slice(suffixIndex);
+  return `${getLocaleSwitchPathname(pathname, targetLocale)}${suffix}`;
+}
+
+function getLocaleSwitchPathname(
   pathname: string,
   targetLocale: AppLocale,
 ): string {

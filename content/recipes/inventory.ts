@@ -29,7 +29,7 @@ export type InventoryRecipe = {
   launchPriority: string;
   heroCandidate: 'Yes' | 'Possible' | 'No';
   image: string;
-  imageKind: 'generated-preview' | 'author-photo';
+  imageKind: 'generated-preview' | 'author-photo' | 'edited-author-photo';
   imageAlt: string;
   summary: string;
   source: string;
@@ -40,6 +40,32 @@ export type InventoryRecipe = {
 const schar = 'Schär Mix B Bread';
 
 export const recipeInventory: InventoryRecipe[] = [
+  {
+    id: 'celebration-sponge-cake',
+    slug: 'celebration-sponge-cake',
+    title: 'Celebration sponge cake with fruit',
+    sourceTitle: 'Святковий бісквітний торт із фруктами',
+    category: 'Layer cake',
+    collectionIds: ['celebration'],
+    testingStatus: 'Suggested adaptation',
+    flour: 'Schär Mix B Bread + tapioca and corn starch',
+    difficulty: 'Medium',
+    activeTime: null,
+    totalTime: null,
+    scalingAnchorIngredientId: 'sponge-eggs',
+    launchPriority: 'High',
+    heroCandidate: 'Yes',
+    image:
+      '/media/recipes/celebration-sponge-cake/selected/author-cake-warm-precision-v1.png',
+    imageKind: 'edited-author-photo',
+    imageAlt: 'Tall homemade fruit cake with chocolate glaze and cream flowers',
+    summary:
+      'Three sponge layers, sour cream filling, chocolate glaze and fresh fruit.',
+    source: 'Author-confirmed cake · 2026-09-25',
+    archiveSections: [],
+    needsBeforePublishing:
+      'Confirm oven temperature, total bake time and exact reduced frosting sugar.',
+  },
   {
     id: 'banana-bread',
     slug: 'banana-bread',
@@ -362,7 +388,7 @@ export const recipeInventory: InventoryRecipe[] = [
     flour: `${schar} + tapioca and corn starch`,
     difficulty: 'Easy',
     activeTime: '15 min',
-    totalTime: '1 h',
+    totalTime: null,
     localizedFacts: {
       difficulty: {
         en: 'Easy',
@@ -375,9 +401,9 @@ export const recipeInventory: InventoryRecipe[] = [
         uk: '15 хв',
       },
       totalTime: {
-        en: '1 h',
-        es: '1 h',
-        uk: '1 год',
+        en: '40–50 min baking + gradual cooling',
+        es: '40–50 min de horneado + enfriado gradual',
+        uk: '40–50 хв випікання + поступове охолодження',
       },
       flour: {
         en: 'Schär Mix B Bread + tapioca and corn starch',
@@ -636,19 +662,18 @@ export const recipeInventory: InventoryRecipe[] = [
         uk: 'Schär Mix B Bread',
       },
     },
-    scalingAnchorIngredientId: 'flour',
+    scalingAnchorIngredientId: 'bananas',
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/banana-pancakes-card-v2.png',
+    image: '/images/recipes/banana-pancakes-card-v3.png',
     imageKind: 'generated-preview',
-    imageAlt: 'Fluffy round gluten-free banana pancakes with a tender crumb',
-    summary:
-      'A tested banana-pancake adaptation made with Schär Mix B Bread, with a thick, lightly lumpy batter.',
+    imageAlt:
+      'Thick irregular gluten-free banana pancakes with golden-brown tops and a tender crumb',
+    summary: 'Tender and fluffy, with Greek yogurt and Schär Mix B Bread.',
     source:
       'Natasha’s Kitchen Banana Pancakes, adapted and tested by the author with Schär Mix B Bread',
     archiveSections: [],
-    needsBeforePublishing:
-      'Record the Schär Mix B Bread amount in grams, confirm whether the liquid is adjusted and approve or replace the generated photos.',
+    needsBeforePublishing: '',
   },
   {
     id: 'apple-banana-fritters',
@@ -821,7 +846,7 @@ export const recipeInventory: InventoryRecipe[] = [
     imageAlt:
       'Homemade fruit sponge roll with berry jam, mascarpone cream spread on top and fresh berries',
     summary:
-      'A light rolled sponge with a soft filling and a flexible crumb that slices into a clear spiral.',
+      'A tender sponge with berry jam and cream, finished with cream and optional fresh fruit.',
     source:
       'Full recipe and author-supplied example photo archived in the workbook',
     archiveSections: [

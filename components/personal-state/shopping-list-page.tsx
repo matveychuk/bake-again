@@ -90,7 +90,7 @@ export function ShoppingListPage({ locale, catalog }: { locale: AppLocale; catal
     <section className={styles.page} aria-labelledby="shopping-title">
       <div className={styles.heading}>
         <p>{messages.shoppingEyebrow}</p>
-        <h1 id="shopping-title">{messages.shoppingTitle}</h1>
+        <h1 id="shopping-title" tabIndex={-1}>{messages.shoppingTitle}</h1>
         <span>{messages.storedInBrowser}</span>
       </div>
 

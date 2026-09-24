@@ -16,7 +16,8 @@
     "test:assistant": "node --experimental-strip-types --experimental-specifier-resolution=node --test lib/assistant/*.test.ts lib/assistant/server/*.test.ts app/api/assistant/*.test.ts app/api/assistant/actions/review/*.test.ts components/assistant/*.test.ts",
     "eval:assistant": "node --experimental-strip-types --experimental-specifier-resolution=node --test evals/*.test.ts",
     "smoke:site": "node scripts/smoke-site.mjs",
-    "validate:recipes": "node --experimental-strip-types --experimental-specifier-resolution=node scripts/validate-recipes.ts"
+    "validate:recipes": "node --experimental-strip-types --experimental-specifier-resolution=node scripts/validate-recipes.ts",
+    "test:analytics": "node --experimental-strip-types --test lib/analytics/*.test.ts"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

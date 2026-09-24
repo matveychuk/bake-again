@@ -1,8 +1,9 @@
 'use client';
 
+import { trackEvent } from '@/lib/analytics/umami';
 import { useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Check, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import styles from './recipe-cream-selector.module.css';
@@ -38,6 +39,7 @@ export function RecipeCreamSelector({
   const selected = options.find((option) => option.id === selectedRecipeId);
 
   function selectCream(recipeId: string) {
+    if (recipeId !== selectedRecipeId) trackEvent('cream_select', { recipe_id: recipeId, locale });
     const next = new URLSearchParams(searchParams.toString());
     next.set('cream', recipeId);
     setExpanded(false);
@@ -52,10 +54,6 @@ export function RecipeCreamSelector({
         <div className={styles.summaryCopy}>
           <p className={styles.eyebrow}>{messages.creamSelectedEyebrow}</p>
           <h2>{selected.title}</h2>
-          <span className={styles.tested}>
-            <Check aria-hidden="true" size={15} strokeWidth={2.2} />
-            {messages.creamTested}
-          </span>
         </div>
         <div className={styles.summaryActions}>
           <a href={selected.href}>
@@ -75,9 +73,7 @@ export function RecipeCreamSelector({
       <div className={styles.heading}>
         <p className={styles.eyebrow}>{messages.creamOptionsEyebrow}</p>
         <h2>{messages.creamOptionsTitle}</h2>
-        <p className={styles.intro}>
-          {messages.creamOptionsIntro(recommended.title)}
-        </p>
+        <p className={styles.intro}>{messages.creamOptionsIntro()}</p>
       </div>
 
       <fieldset className={styles.fieldset}>
@@ -88,6 +84,9 @@ export function RecipeCreamSelector({
           {options.map((option) => {
             const selectedOption = option.id === selectedRecipeId;
             const recommendedOption = option.id === recommendedRecipeId;
+            const recommendationId = recommendedOption
+              ? `cream-recommendation-${option.id}`
+              : undefined;
 
             return (
               <article
@@ -95,9 +94,18 @@ export function RecipeCreamSelector({
                 data-selected={selectedOption || undefined}
                 key={option.id}
               >
+                {recommendedOption ? (
+                  <span
+                    className={styles.recommended}
+                    id={recommendationId}
+                  >
+                    {messages.creamRecommended}
+                  </span>
+                ) : null}
                 <label className={styles.selection}>
                   <span className={styles.optionTopline}>
                     <input
+                      aria-describedby={recommendationId}
                       aria-label={messages.chooseCream(option.title)}
                       checked={selectedOption}
                       name="recipe-cream"
@@ -111,17 +119,6 @@ export function RecipeCreamSelector({
                     {option.description}
                   </span>
                 </label>
-                <span className={styles.meta}>
-                  <span className={styles.tested}>
-                    <Check aria-hidden="true" size={15} strokeWidth={2.2} />
-                    {messages.creamTested}
-                  </span>
-                  {recommendedOption ? (
-                    <span className={styles.recommended}>
-                      {messages.creamRecommended}
-                    </span>
-                  ) : null}
-                </span>
                 <a className={styles.viewRecipe} href={option.href}>
                   {messages.viewCreamRecipe}
                   <ChevronRight aria-hidden="true" size={16} />

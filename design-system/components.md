@@ -1,5 +1,20 @@
 # Base components
 
+## Contextual technique guide
+
+- `RecipeStepContent` accepts a canonical `technique` reference and locale. The existing
+  tip treatment shows the help before the action; recipe planning surfaces each reference
+  once. Conditional butter alternatives keep their written qualification.
+- `TechniqueHelp` uses the shared Drawer, with the Cook tools' right-side treatment,
+  a fixed title/Close header and a scrolling body. At 900px and below it fills the viewport.
+- The trigger is a real link: ordinary click/Enter opens the drawer, modified clicks and
+  JavaScript-free navigation reach the standalone localized page. Closing returns focus
+  to the exact link. No recipe configuration, timer or cooking progress is changed.
+- `TechniqueGuide` shares the process, readiness cue and evidence between page and drawer.
+  Source-based untested techniques use Suggested with its icon and explicit scope.
+- `/design-system#technique-help` demonstrates Ukrainian, English and Spanish copy.
+  Use existing semantic tokens; no new palette or typography is introduced.
+
 ## Assistant action review
 
 - A proposed action opens a review dialog, never executes from the AI answer itself.
@@ -27,6 +42,9 @@
 
 ## Search field
 
+- Use 16px input text and a minimum 44px input and submit target. The containing form has a visible focus-within ring; preserve keyboard focus rather than removing it without replacement.
+- Filtered results repeat the same search component close to the result heading so the query can be refined in context.
+
 - Warm-white surface, subtle chocolate border and search icon.
 - Placeholder uses secondary text colour and must remain readable.
 - Submit action uses the primary button treatment.
@@ -34,21 +52,41 @@
 
 ## Recipe card
 
+- Catalogue layout uses equal cards: one column on mobile, two on tablet and three on desktop. A featured span is reserved for explicitly curated placement.
+- Full cards share five content tracks within each catalogue row: photo, title/Save,
+  planning facts, flour, and footer. Use CSS subgrid at tablet/desktop widths so actual
+  text sets the track heights. Never truncate titles or reserve a fixed two-line height.
+  Single-column cards size naturally to their own content.
+- Saved uses `RecipeCard` with `variant="compact"`: horizontal image, title, known facts and the same independent Save control. Omit flour/collection rows for this task. Design Lab includes uk/en/es examples.
+
 - Food image first.
+- Keep the image, recipe facts and collection links inside one square surface with a
+  subtle semantic border and compact internal padding. The boundary must make the final
+  collection links visibly belong to the recipe above without competing with the food.
 - The whole card opens the recipe, including image, title and planning copy. Save and
   collection links stay distinct controls above the card link, so their actions never
   trigger recipe navigation.
 - No category/situation eyebrow above the title.
 - Recipe title in Newsreader.
+- Use concise dish names on cards: Наполеон, Паска, Рулет із фруктами and
+  Мармурове печиво. Keep full adaptation names on recipe pages and in search metadata.
+- Vertically centre full-card titles beside the 44px Save control. Keep facts 8px
+  below the complete header, including the control; never overlap its touch target.
 - Under the title, show known time and written difficulty, then the flour mix. Time
   explicitly says total or active; unknown facts are omitted on cards.
 - Keep fact labels secondary; emphasize values in primary text at body size and
   semibold weight. Use small terracotta clock and chef-hat icons alongside the written
   facts. Flour stays body-small, with a primary-colour value and secondary label.
+- Full-card time and difficulty use two stable columns with the label above the value.
+  Keep total versus active time explicit; long labels and values wrap within each column.
 - Collection links sit last and open the matching catalogue filter. Keep them separate
   from recipe links and the save control, with 44px touch targets.
 - Collection links use the subtle sand panel surface, primary text and a 4px radius.
-  Leave 16px above the group and 8px between links; let long labels wrap. Hover adds
+  Show every collection as a compact chip, in catalogue order. Keep 14px text,
+  4px internal padding and 4px horizontal gaps; the visible sand chip sits inside a
+  44px-high link target. Leave 12px above the group. Never hide links behind a count
+  or truncate labels. Wrap onto another line only when the actual content needs it.
+  Hover adds
   a terracotta border and underlined text; keyboard focus keeps its visible outline.
   Evidence status colours remain reserved for evidence, not collection categories.
 - Published cards do not repeat Tested. Unpublished cards show a document icon and
@@ -99,6 +137,20 @@
   with recipe setup and adjustment controls, and ordinary tools in the method.
 - Unknown values remain explicit. At 390px, stack the three comparable facts; at 900px
   and 1440px, keep them in one row.
+
+## Cream choice cards
+
+- State once in the section introduction that every compatible cream has been tested for
+  the host recipe. Do not repeat Tested on every option or in the selected summary.
+- Place a compact chocolate Recommended label across the preferred card's top border.
+  Keep it out of normal flow so other cards do not reserve an empty label row. The label
+  is written as well as coloured, and is included in the preferred option's accessible
+  description.
+- Keep each radio at the top right while titles, descriptions and recipe links share one
+  left edge. Titles and descriptions must start on the same line across a card row.
+- Keep the recipe links aligned at the card bottoms on wide screens. Let each card size to
+  its content in the single-column mobile layout without clipping long translations.
+- The shared multilingual Design Lab example uses the production selector in Ukrainian.
 
 ## Personal state
 
@@ -205,6 +257,14 @@ variation.
   sequence with each frame near half the available width, so almost two states remain
   visible together. At 560px and below, enlarge each frame to roughly four-fifths of the
   viewport and leave part of the next frame visible as a scrolling cue.
+- A single photo uses the same frame width and 4:3 aspect ratio as a photo in a sequence
+  at every breakpoint; never expand it to fill the whole step. This applies to both
+  recipe detail and Cook Mode.
+- Multiple photos carry simple ordinal labels (`1`, `2`, `3`) rather than repeated
+  fractions (`1 / 3`). A single photo has no number. On small screens the next-photo peek
+  and horizontal scrolling communicate additional photos; the accessible region label
+  retains the total count. See `/design-system#step-photography` for single and multiple
+  photos in both variants.
 - Localize captions, alternative text and the sequence label; image files remain shared
   across locales.
 - Recipe detail and Cook Mode consume the same canonical step-media array, so an image
@@ -295,6 +355,8 @@ variation.
 - Initial focus and focus during loading stay on Close, which remains available.
   Loading is announced politely; errors use one alert and localized fallback copy,
   including when the browser is offline.
+- Use the compact drawer-title token for the localized Recipe and Cook Assistant title;
+  it is a contextual tool heading, not a page or recipe title.
 - When enlarged text leaves less than 24em of drawer width, use the compact header
   without its decorative mark and scroll the complete drawer. Keep the composer,
   answers and Close reachable at 200% text size.
@@ -302,10 +364,13 @@ variation.
 ## Navigation
 
 The Recipes navigation item returns to the home recipe collection, using the same URL as
-the Bake Again wordmark. Saved and Shopping list remain separate primary destinations,
-followed by a clear language switcher. Drafts appears only in a development build on
+the Bake Again wordmark. Saved and Shopping list remain separate primary destinations;
+About comes last so the practical destinations stay together. Without the local Drafts
+destination, all four links remain on one row at 390px in every supported language. A
+clear language switcher stays separate. Drafts appears only in a development build on
 localhost, 127.0.0.1 or ::1. Its route and unpublished recipe/Cook Mode URLs are
-unavailable outside that local environment, including production on localhost. About and Privacy remain in the footer.
+unavailable outside that local environment, including production on localhost. Privacy
+remains in the footer.
 
 ### Language switcher
 
@@ -334,3 +399,37 @@ unavailable outside that local environment, including production on localhost. A
   Empty results explain how to retry and keep View all available. Long queries wrap.
 - This is catalogue discovery, not an allergy/exclusion filter or a recipe advisor.
   Search metadata never changes ingredients, recipe evidence or publication status.
+
+## Cook tools and persistent timer
+
+- Ingredients and all-steps panels use the existing Drawer with a rightward dismiss direction, the assistant drawer width token, full viewport height and full width on mobile.
+- A fixed header contains a 24px display title and a labelled 48px Close button; the body scrolls independently. Escape, focus containment and focus return come from the shared primitive.
+- An active timer on another step is shown as a compact button with remaining time and step title. Pressing it returns to that step. Do not announce every tick to screen readers.
+- The Design Lab Cook tools example uses the production drawer classes and ingredient-list component.
+
+## Shared evidence badge
+
+- `EvidenceBadge` owns its default inline-flex layout, icon spacing and semantic status colours. Callers may extend layout, but cannot be required to provide styles for the icon and text to align.
+- Preserve icon plus written status in every context, including a calculated quantity result.
+
+## Reusable recipe components and author video
+
+- Fixed components (filling, frosting, glaze) retain separate source recipes, but their
+  ingredients and steps are composed inline in the host recipe. Optional component
+  links use the existing section-navigation pattern; cooking never requires opening
+  another page. Stage names use existing step metadata.
+- Standalone glazes use the same detail composition as creams. Keep flour and catalogue
+  Save hidden for linked-only components. Calculated components never inherit Tested.
+- `StepMediaSequence` accepts optional `type: 'video'`. Use native controls, playsInline,
+  muted initial playback, metadata preload, no autoplay and contain fitting in the same
+  4:3 frame. Include a descriptive accessible label and visible author-video caption.
+  `/design-system#step-photography` demonstrates the production video variant.
+- AI-edited author photographs retain an explicit background/plate editing label;
+  fully generated examples remain labelled as generated, including instructional cuts.
+
+## Analytics behavior
+
+Shared controls emit the events listed in `docs/analytics.md` after their relevant
+action, without changing focus, labels or visual states. Search records submission
+without its text; persistence actions record confirmed changes. Existing Design Lab
+examples retain these handlers, but analytics never loads on the Design Lab route.

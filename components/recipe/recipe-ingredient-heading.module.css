@@ -7,6 +7,10 @@
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
+.heading > * {
+  min-width: 0;
+}
+
 .heading h2 {
   margin: var(--space-2) 0 0;
   font-family: var(--font-family-display);
@@ -14,6 +18,7 @@
   font-weight: 450;
   letter-spacing: -0.04em;
   line-height: var(--line-height-tight);
+  overflow-wrap: anywhere;
 }
 
 .eyebrow {
@@ -23,11 +28,18 @@
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 560px) {
   .heading {
     align-items: stretch;
     flex-direction: column;
+    padding-bottom: var(--space-4);
+  }
+
+  .heading > :last-child {
+    width: 100%;
+    align-self: stretch;
   }
 }

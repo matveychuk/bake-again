@@ -35,28 +35,40 @@ export function RecipeIngredientList({
         className,
       )}
     >
-      {items.map((item) => (
-        <li key={item.id}>
-          <div className={styles.copy}>
-            <span>
-              {item.name}
-              {item.optional ? ` · ${optionalLabel}` : ''}
-            </span>
-            {[item.note, ...(item.notes ?? [])]
-              .filter((note): note is string => Boolean(note))
-              .map((note) => (
+      {items.map((item) => {
+        const notes = [
+          ...new Set(
+            [item.note, ...(item.notes ?? [])].filter((note): note is string =>
+              Boolean(note),
+            ),
+          ),
+        ];
+        const primary =
+          notes.length > 0 &&
+          item.primary === getUiMessages(locale).personal.asNeeded
+            ? undefined
+            : item.primary;
+        return (
+          <li key={item.id}>
+            <div className={styles.copy}>
+              <span>
+                {item.name}
+                {item.optional ? ` · ${optionalLabel}` : ''}
+              </span>
+              {notes.map((note) => (
                 <small key={note}>{note}</small>
               ))}
-            {item.after && <div className={styles.after}>{item.after}</div>}
-          </div>
-          {(item.primary || item.secondary) && (
-            <div className={styles.amounts}>
-              {item.primary && <strong>{item.primary}</strong>}
-              {item.secondary && <span>{item.secondary}</span>}
+              {item.after && <div className={styles.after}>{item.after}</div>}
             </div>
-          )}
-        </li>
-      ))}
+            {(primary || item.secondary) && (
+              <div className={styles.amounts}>
+                {primary && <strong>{primary}</strong>}
+                {item.secondary && <span>{item.secondary}</span>}
+              </div>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }

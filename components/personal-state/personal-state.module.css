@@ -73,9 +73,21 @@ a.source { display: inline-block; border-bottom: 1px solid var(--color-border-su
   .page { padding-top: var(--space-8); }
   .card { grid-template-columns: 7.5rem 1fr; }
   .image { min-height: 10rem; }
-  .listActions { justify-content: space-between; }
+  .listActions {
+    justify-content: flex-start;
+  }
+  .listActions button {
+    width: 100%;
+    padding-inline: var(--space-3);
+    justify-content: flex-start;
+    text-align: left;
+  }
   .item { grid-template-columns: 28px minmax(0, 1fr) 44px; gap: var(--space-2); }
   .amount { grid-column: 2; grid-row: 2; margin-left: 0; }
   .remove { grid-column: 3; grid-row: 1 / span 2; margin-left: 0; }
   .undoNotice { right: var(--space-4); bottom: var(--space-4); }
+}
+.page h1,
+.empty {
+  overflow-wrap: anywhere;
 }

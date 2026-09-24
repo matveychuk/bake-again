@@ -21,8 +21,9 @@ export function AboutPage({ locale }: { locale: AppLocale }) {
         <header className={styles.hero}>
           <div className={styles.heroCopy}>
             <Eyebrow>{content.eyebrow}</Eyebrow>
-            <h1>{content.title}</h1>
+            <h1 id="about-title" tabIndex={-1}>{content.title}</h1>
             <p className={styles.standfirst}>{content.standfirst}</p>
+            <a className={styles.recipeLink} href="#how-we-test">{content.testingTitle}<ArrowRight aria-hidden="true" size={18} /></a>
           </div>
           <blockquote className={styles.pullQuote}>{content.pullQuote}</blockquote>
         </header>

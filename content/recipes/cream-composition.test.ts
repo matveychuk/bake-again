@@ -15,8 +15,9 @@ void test('a host recipe starts without an implied cream selection', () => {
   assert.equal(unselected.ingredientSections.length, 1);
   assert.equal(
     unselected.steps.some((step) => step.id === 'fill'),
-    false,
+    true,
   );
+  assert.deepEqual(unselected.steps, eclairs.steps);
 });
 
 void test('a selected cream contributes namespaced ingredients and steps before filling', () => {
@@ -73,10 +74,50 @@ void test('fruit sponge roll recommends mascarpone cream and keeps buttercream a
   const composed = composeRecipeWithCream(roll, mascarpone, selectedId);
   assert.equal(composed.steps.at(-1)?.id, 'fill');
   assert(
-    composed.steps.at(-2)?.id.startsWith('cream-mascarpone-whipped-cream-'),
+    composed.steps.at(-4)?.id.startsWith('cream-mascarpone-whipped-cream-'),
   );
   assert.equal(
     composed.ingredientSections.some((section) => section.id === 'cream'),
     false,
   );
+});
+
+void test('the complete roll method is visible before selection and follows either selected cream', () => {
+  for (const locale of ['uk', 'en', 'es'] as const) {
+    const roll = getRecipeContent('fruit-sponge-roll', locale)!;
+    const baseIds = ['whip-eggs', 'fold-batter', 'bake-roll', 'roll-and-cool'];
+    assert.deepEqual(
+      composeRecipeWithCream(roll, null, null).steps.map((step) => step.id),
+      [...baseIds, 'spread-jam', 'spread-cream', 'fill'],
+    );
+    const unselected = composeRecipeWithCream(roll, null, null);
+    assert.deepEqual(unselected.ingredientSections, roll.ingredientSections);
+    assert(unselected.steps.at(-1)?.tip);
+    for (const id of ['roll-and-cool', 'spread-jam', 'spread-cream', 'fill']) {
+      assert(unselected.steps.find((step) => step.id === id)?.media?.length);
+    }
+    for (const creamId of roll.creamOptions!.recipeIds) {
+      const cream = getRecipeContent(creamId, locale)!;
+      const composed = composeRecipeWithCream(roll, cream, creamId);
+      assert.deepEqual(
+        composed.steps.map((step) => step.id),
+        [
+          ...baseIds,
+          ...cream.steps.map((step) => `cream-${creamId}-${step.id}`),
+          'spread-jam',
+          'spread-cream',
+          'fill',
+        ],
+      );
+      const ingredientIds = new Set(
+        composed.ingredientSections.flatMap((section) =>
+          section.ingredients.map((ingredient) => ingredient.id),
+        ),
+      );
+      for (const step of composed.steps) {
+        for (const ingredient of step.cookIngredients ?? [])
+          assert(ingredientIds.has(ingredient.ingredientId));
+      }
+    }
+  }
 });

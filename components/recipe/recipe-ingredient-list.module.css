@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--color-border-subtle);
 }
 
 .list li {
@@ -12,11 +11,12 @@
   align-items: center;
   gap: var(--space-3);
   border-bottom: 1px solid var(--color-border-subtle);
-  font-size: var(--font-size-body-small);
+  font-size: var(--font-size-body);
 }
 
 .copy {
   min-width: 0;
+  overflow-wrap: anywhere;
   grid-column: 2;
 }
 
@@ -36,6 +36,7 @@
 
 .amounts {
   min-width: 0;
+  overflow-wrap: anywhere;
   grid-column: 1;
   grid-row: 1;
 }
@@ -45,7 +46,7 @@
 }
 
 .amounts strong {
-  font-size: var(--font-size-body-small);
+  font-size: var(--font-size-body);
   line-height: 1.3;
 }
 

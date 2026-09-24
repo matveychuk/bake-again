@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Literata, Manrope, Newsreader } from 'next/font/google';
 import { headers } from 'next/headers';
+import { SiteAnalytics } from '@/components/site/site-analytics';
 import { defaultLocale, isAppLocale, localeMetadata } from '@/lib/i18n/config';
 import './globals.css';
 
@@ -42,6 +43,7 @@ export default async function RootLayout({
       className={`${manrope.variable} ${newsreader.variable} ${literata.variable}`}
     >
       <body>
+        <SiteAnalytics />
         {children}
         {process.env.NODE_ENV === 'development' && (
           <script

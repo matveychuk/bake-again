@@ -1,5 +1,6 @@
 'use client';
 
+import { trackEvent } from '@/lib/analytics/umami';
 import { ChevronDown } from 'lucide-react';
 import {
   DropdownMenu,
@@ -8,7 +9,11 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { localeMetadata, supportedLocales, type AppLocale } from '@/lib/i18n/config';
+import {
+  localeMetadata,
+  supportedLocales,
+  type AppLocale,
+} from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { getLocaleSwitchPath } from '@/lib/i18n/routes';
 import { persistLocalePreference } from '@/lib/persistence/preferences';
@@ -23,8 +28,14 @@ export function LanguageSwitcher({ locale, pathname }: LanguageSwitcherProps) {
 
   function selectLocale(nextLocale: AppLocale) {
     if (nextLocale === locale) return;
+    trackEvent('language_change', { locale, target_locale: nextLocale });
     persistLocalePreference(nextLocale);
-    window.location.assign(getLocaleSwitchPath(pathname, nextLocale));
+    window.location.assign(
+      getLocaleSwitchPath(
+        `${pathname}${window.location.search}${window.location.hash}`,
+        nextLocale,
+      ),
+    );
   }
 
   return (
@@ -41,9 +52,12 @@ export function LanguageSwitcher({ locale, pathname }: LanguageSwitcherProps) {
         className="language-menu"
         aria-label={messages.language.select}
       >
-        <DropdownMenuRadioGroup value={locale} onValueChange={(value) => {
-          if (isLocaleValue(value)) selectLocale(value);
-        }}>
+        <DropdownMenuRadioGroup
+          value={locale}
+          onValueChange={(value) => {
+            if (isLocaleValue(value)) selectLocale(value);
+          }}
+        >
           {supportedLocales.map((option) => (
             <DropdownMenuRadioItem
               className="language-menu__item"

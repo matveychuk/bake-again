@@ -43,7 +43,20 @@ independent constraints such as baking size first. Below them, let the user choo
 direct batch scaling or scaling from an available anchor ingredient. Size and quantity may
 be combined; the two quantity methods may not.
 
+When a recipe needs advance planning, each pre-start note uses one aligned heading row:
+clock icon and written “Keep in mind” label together, with the explanation indented below
+the label. Preserve that relationship when the copy wraps on narrow screens.
+
 ## Cook Mode
+
+For staged assembly, give each distinct action its own step and matching photo.
+Keep required actions (such as leaving a 2 cm cream-free edge) in the body; use the
+existing tip treatment to explain why. The sponge-roll example in Design Lab shows
+this in Ukrainian, English and Spanish. Cream-dependent assembly steps follow the
+selected cream's preparation together, in order, in both recipe detail and Cook Mode.
+Before a cream is selected, recipe detail still shows the entire host method, including
+filling and decoration. Selection adds the chosen cream's preparation and quantities;
+it never gates reading the host's assembly instructions.
 
 Show one focused step, the quantities used at that moment and an observable completion
 cue. Keep the work column stable and left-aligned; use a 36–40px desktop step heading and
@@ -89,3 +102,12 @@ shopping-list checkbox means bought.
 Responsive does not mean shrinking desktop. Preserve the information order, move secondary
 actions below the primary task and keep touch targets at least 44px. At 390px, recipe cards
 use one column and long translated strings wrap naturally.
+
+## Recipe configuration across screens
+
+- Selected batch/available ingredient and selected cream travel in the URL and survive reload, language switches and entry to Cook Mode. Shopping and Cook read the same deterministic configuration as the visible ingredient list.
+- Keep base evidence distinct from an adjusted configuration; changed quantities and yield are Calculated. Do not automatically multiply known preparation or resting times. Fixed ingredient quantities remain fixed.
+- Invalid non-positive input shows a local error and disables quantity-dependent purchasing rather than silently presenting base quantities as a valid adjustment.
+- Jump links near the hero take readers directly to ingredients and method. On small screens, favour concise controls, short cream cards and natural title wrapping over decorative whitespace.
+- The main Cook action uses the primary treatment. Its repeat beside the method is secondary.
+- Language changes preserve query/filter, cream and recipe configuration, plus the existing section anchor.

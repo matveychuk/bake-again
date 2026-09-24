@@ -5,6 +5,7 @@ import type {
   StructuredRecipeStep,
 } from './source-recipe.types.ts';
 import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
+import { chocolateGlazeContent } from './chocolate-glaze.recipe.ts';
 
 type Locale = 'en' | 'uk';
 
@@ -107,32 +108,7 @@ function ingredientSections(locale: Locale): StructuredIngredientSection[] {
         },
       ],
     },
-    {
-      id: 'glaze',
-      title: text(locale, 'Chocolate glaze', 'Шоколадна поливка'),
-      ingredients: [
-        {
-          id: 'glaze-sour-cream',
-          name: text(locale, 'Sour cream or cream', 'Сметана або вершки'),
-          quantity: exact(2, 'tbsp'),
-        },
-        {
-          id: 'glaze-sugar',
-          name: text(locale, 'Sugar', 'Цукор'),
-          quantity: quantityFromSpoons('granulated-sugar', 2, 'tbsp'),
-        },
-        {
-          id: 'glaze-cocoa',
-          name: text(locale, 'Cocoa', 'Какао'),
-          quantity: quantityFromSpoons('cocoa-powder', 2, 'tbsp'),
-        },
-        {
-          id: 'butter',
-          name: text(locale, 'Butter', 'Вершкове масло'),
-          quantity: exact(50, 'g'),
-        },
-      ],
-    },
+    chocolateGlazeContent(locale).ingredientSections[0],
   ];
 }
 
@@ -231,7 +207,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       {
         id: 'glaze-and-decorate',
         title: 'Полийте й прикрасьте',
-        body: 'У каструльці прогрійте сметану або вершки, цукор, какао й масло до однорідності, не доводячи до кипіння. Гарячою поливкою полийте торт. Додайте відкладений чорнослив і підсушені дрібно порізані горіхи.',
+        body: `${chocolateGlazeContent(locale).steps[0].body} Гарячою поливкою полийте торт. Додайте відкладений чорнослив і підсушені дрібно порізані горіхи.`,
         cookIngredients: [
           { ingredientId: 'glaze-sour-cream' },
           { ingredientId: 'glaze-sugar' },
@@ -343,7 +319,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
     {
       id: 'glaze-and-decorate',
       title: 'Glaze and decorate',
-      body: 'Warm the sour cream or cream, sugar, cocoa and butter together in a small saucepan until smooth, without letting the mixture boil. Pour the glaze over the cake while hot. Finish with the reserved prune pieces and toasted, finely chopped nuts.',
+      body: `${chocolateGlazeContent(locale).steps[0].body} Pour the glaze over the cake while hot. Finish with the reserved prune pieces and toasted, finely chopped nuts.`,
       cookIngredients: [
         { ingredientId: 'glaze-sour-cream' },
         { ingredientId: 'glaze-sugar' },

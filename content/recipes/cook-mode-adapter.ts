@@ -108,7 +108,8 @@ export function createSourceCookSteps(
     );
     const timers = durationOptionsSeconds(structured, stepIds);
     const media = steps.flatMap((step) =>
-      (step.media ?? []).map(({ id, src, alt, title, caption }) => ({
+      (step.media ?? []).map(({ id, src, alt, title, caption, type }) => ({
+        type,
         id,
         src,
         alt,
@@ -119,6 +120,7 @@ export function createSourceCookSteps(
 
     return {
       stepIds: stepIds as [string, ...string[]],
+      technique: steps.find((step) => step.technique)?.technique,
       number: String(index + 1).padStart(2, '0'),
       meta: steps.find((step) => step.meta)?.meta ?? '',
       title: steps[0].cookTitle ?? steps[0].title,

@@ -1,0 +1,112 @@
+.full {
+  display: grid;
+  grid-template-rows: auto auto auto auto auto;
+  align-content: start;
+  row-gap: 0;
+}
+
+.full :global(.recipe-image) {
+  grid-row: 1;
+}
+.full :global(.recipe-card-header) {
+  grid-row: 2;
+  align-items: center;
+}
+.full :global(.recipe-card-facts) {
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-content: start;
+  margin-top: var(--space-2);
+  column-gap: var(--space-3);
+}
+
+.full :global(.recipe-card-facts li) {
+  align-items: start;
+}
+.full :global(.recipe-card-facts svg) {
+  align-self: start;
+  margin-top: var(--space-1);
+}
+.full :global(.recipe-card-fact-label) {
+  display: block;
+}
+.full :global(.recipe-card-flour) {
+  grid-row: 4;
+}
+.footer {
+  grid-row: 5;
+  min-width: 0;
+}
+
+/* Share actual content heights within each row; never clamp translated titles. */
+@media (min-width: 621px) {
+  :global(.recipe-grid) > .full {
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+  }
+}
+
+/* Compact visual chips retain a full-height, independent touch target. */
+.full :global(.recipe-collections) {
+  gap: 0 var(--space-1);
+  margin-top: var(--space-3);
+}
+.full :global(.recipe-collections a) {
+  min-height: calc(var(--space-8) + var(--space-3));
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.full :global(.recipe-collections a span) {
+  display: block;
+  padding: var(--space-1);
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  background: var(--color-background-panel-subtle);
+}
+.full :global(.recipe-collections a:hover span) {
+  border-color: var(--color-action-primary);
+  background: var(--color-background-panel);
+}
+
+.compact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-content: start;
+  gap: var(--space-3) var(--space-4);
+}
+
+.compact :global(.recipe-image) {
+  height: 100%;
+  min-height: calc(var(--space-16) * 2);
+  aspect-ratio: auto;
+  grid-row: 1 / span 3;
+}
+
+.compact :global(.recipe-card-header) {
+  grid-column: 2;
+  margin-top: 0;
+  gap: var(--space-2);
+}
+
+.compact h2 {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-drawer-title);
+  font-weight: 500;
+  line-height: var(--line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.compact :global(.recipe-card-facts),
+.compact :global(.recipe-card-draft) {
+  grid-column: 2;
+  margin: 0;
+}
+
+@media (max-width: 560px) {
+  .compact :global(.recipe-card-header) {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}

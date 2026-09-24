@@ -12,7 +12,7 @@ export const localeMetadata: Record<
 > = {
   en: { bcp47: 'en', label: 'English', shortLabel: 'EN' },
   es: { bcp47: 'es', label: 'Español', shortLabel: 'ES' },
-  uk: { bcp47: 'uk', label: 'Українська', shortLabel: 'UK' },
+  uk: { bcp47: 'uk', label: 'Українська', shortLabel: 'Укр' },
 };
 
 export function isAppLocale(value: string | null | undefined): value is AppLocale {

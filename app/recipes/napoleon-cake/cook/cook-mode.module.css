@@ -73,8 +73,9 @@
 }
 
 .header {
-  height: 74px;
-  padding: 0 max(var(--space-8), calc((100vw - var(--layout-max-page)) / 2));
+  min-height: calc(var(--space-16) + var(--space-3));
+  padding: var(--space-2)
+    max(var(--space-8), calc((100vw - var(--layout-max-page)) / 2));
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -503,6 +504,10 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
+  min-width: 0;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+  line-height: var(--line-height-body);
   border: 1px solid var(--color-border-subtle);
   background: transparent;
   color: var(--color-text-primary);
@@ -597,8 +602,84 @@
 
 .stepsDrawer,
 .ingredientsDrawer {
+  width: min(100%, var(--layout-assistant-drawer));
+  height: 100dvh;
+  max-height: 100dvh;
+  border: 0;
+  border-left: 1px solid var(--color-border-subtle);
+  border-radius: 0;
   background: var(--color-background-surface);
   color: var(--color-text-primary);
+}
+
+.drawerHeader {
+  flex-shrink: 0;
+  padding: var(--space-4) var(--space-6);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+  text-align: left;
+}
+
+.drawerHeader h2 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-drawer-title);
+  line-height: var(--line-height-tight);
+}
+
+.drawerClose {
+  width: var(--space-12);
+  height: var(--space-12);
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.activeTimer {
+  width: min(100%, var(--layout-cook-reading));
+  min-height: var(--space-12);
+  margin-bottom: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-left: var(--space-1) solid var(--color-action-primary);
+  background: var(--color-background-panel-subtle);
+  color: var(--color-text-primary);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.activeTimer svg {
+  flex-shrink: 0;
+}
+.activeTimer strong {
+  font-variant-numeric: tabular-nums;
+}
+.activeTimer small {
+  display: block;
+  font-size: var(--font-size-body-small);
+  color: var(--color-text-secondary);
+}
+.page :is(button, a, textarea, select):focus-visible,
+.drawerClose:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+.step h1,
+.completion h1,
+.unavailable h1 {
+  overflow-wrap: anywhere;
 }
 
 .drawerProgress {
@@ -613,8 +694,8 @@
 
 @media (max-width: 900px) {
   .header {
-    height: 64px;
-    padding: 0 var(--layout-gutter-mobile);
+    min-height: var(--space-16);
+    padding: var(--space-2) var(--layout-gutter-mobile);
     grid-template-columns: auto minmax(0, 1fr);
     gap: var(--space-3);
   }
@@ -734,6 +815,7 @@
 
   .stepActions button {
     min-height: 50px;
+    padding: var(--space-2);
     font-size: var(--font-size-body-small);
   }
 
@@ -748,7 +830,8 @@
 
   .stepsDrawer,
   .ingredientsDrawer {
-    --drawer-height: min(82dvh, 700px);
+    width: 100%;
+    height: 100dvh;
   }
 }
 

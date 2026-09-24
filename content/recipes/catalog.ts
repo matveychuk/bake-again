@@ -25,7 +25,7 @@ export type RecipeCatalogEntry = {
   alt: string;
   href: string;
   publicationStatus: PublicationStatus;
-  imageKind: 'generated-preview' | 'author-photo';
+  imageKind: 'generated-preview' | 'author-photo' | 'edited-author-photo';
   collections: Array<{ id: RecipeCollectionId; label: string }>;
 };
 

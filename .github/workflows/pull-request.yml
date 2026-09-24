@@ -37,6 +37,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Analytics privacy tests
+        run: npm run test:analytics
+
       - name: Foundation tests
         run: npm run test:foundation
 

@@ -70,6 +70,7 @@ export type StructuredIngredientSection = {
 };
 
 export type StructuredRecipeStep = {
+  technique?: import('../techniques/types.ts').TechniqueReference;
   id: string;
   title: string;
   body: string;
@@ -78,6 +79,8 @@ export type StructuredRecipeStep = {
   tip?: string;
   /** Optional Cook Mode composition; canonical recipe steps remain separate. */
   cookGroup?: string;
+  /** Assembly steps shown after preparing the explicitly selected cream. */
+  requiresCream?: boolean;
   cookTitle?: string;
   /** Short action sequence for Cook Mode without changing canonical recipe copy. */
   cookInstructions?: string[];
@@ -87,6 +90,7 @@ export type StructuredRecipeStep = {
     note?: string;
   }>;
   media?: Array<{
+    type?: 'image' | 'video';
     id: string;
     src: string;
     alt: string;
@@ -115,6 +119,8 @@ export type RecipeSourceDraftContent = {
   geometry?: StructuredRecipeGeometry;
   timing?: StructuredRecipeTiming;
   beforeStart?: string[];
+  /** Optional standalone components; full preparation stays inline. */
+  relatedRecipes?: string[];
   /** Host-recipe choice: compatible creams and the one recommended by the recipe. */
   creamOptions?: RecipeCreamOptions;
   ingredientSections: StructuredIngredientSection[];

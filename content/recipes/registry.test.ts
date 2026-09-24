@@ -204,14 +204,15 @@ void test('keeps the reviewed fruit sponge roll concise in every locale', () => 
     assert.equal(recipe.overview.timing.activeMinutes, 30);
     assert.equal(recipe.overview.timing.totalElapsedMinutes, null);
     assert.deepEqual(recipe.yield?.count, { kind: 'exact', value: 1 });
-    assert.equal(recipe.steps.length, 4);
+    assert.equal(recipe.steps.length, 7);
     assert.deepEqual(recipe.creamOptions, {
       recipeIds: ['mascarpone-whipped-cream', 'vanilla-buttercream'],
       recommendedRecipeId: 'mascarpone-whipped-cream',
     });
     assert.equal(recipe.steps[0]?.media?.[0]?.id, 'fruit-roll-egg-foam-v1');
-    assert.equal(recipe.steps[2]?.media?.length, 2);
-    assert(recipe.steps.every((step) => !step.tip));
+    assert.equal(recipe.steps[2]?.media?.length, 1);
+    assert(recipe.steps.find((step) => step.id === 'spread-jam')?.tip);
+    assert(recipe.steps.find((step) => step.id === 'spread-cream')?.tip);
     assert(
       recipe.steps
         .flatMap((step) => step.media ?? [])
@@ -222,7 +223,7 @@ void test('keeps the reviewed fruit sponge roll concise in every locale', () => 
   }
 });
 
-void test('keeps the sponge cake quantities and four concise Ukrainian steps together', () => {
+void test('keeps the sponge cake quantities and author-reviewed method together', () => {
   const recipe = getRecipeContent('sponge-cake', 'uk');
   const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
   const whitesSugar = ingredients.find(
@@ -233,7 +234,7 @@ void test('keeps the sponge cake quantities and four concise Ukrainian steps tog
   );
 
   assert.equal(recipe?.evidence?.status, 'tested');
-  assert.equal(recipe?.steps.length, 4);
+  assert.equal(recipe?.steps.length, 5);
   assert.deepEqual(whitesSugar?.quantity.base, {
     kind: 'exact',
     value: 120,
@@ -250,27 +251,47 @@ void test('keeps the sponge cake quantities and four concise Ukrainian steps tog
     unit: 'tbsp',
   });
   assert.match(recipe?.steps[0]?.body ?? '', /густої білої піни/i);
-  assert.match(recipe?.steps[0]?.body ?? '', /лише дно/);
+  assert.doesNotMatch(recipe?.steps[0]?.body ?? '', /форм|змаст/);
+  assert.match(
+    recipe?.steps[0]?.body ?? '',
+    /комбайні.*міксером.*ручним вінчиком/,
+  );
   assert.match(recipe?.steps[1]?.body ?? '', /світлої густої маси/i);
   assert.equal(recipe?.steps[0]?.media?.[0]?.id, 'sponge-whipped-whites-v1');
   assert.equal(recipe?.steps[1]?.media?.[0]?.id, 'sponge-whipped-yolks-v1');
   assert.equal(recipe?.steps[2]?.media?.[0]?.id, 'sponge-fold-yolks-v1');
   assert.equal(recipe?.steps[2]?.media?.[1]?.id, 'sponge-fold-dry-v1');
-  assert.equal(recipe?.steps[3]?.media?.[0]?.id, 'sponge-batter-form-v1');
+  assert.equal(recipe?.steps[3]?.media?.[0]?.id, 'sponge-batter-round-foil-v2');
+  assert.match(
+    recipe?.steps[2]?.body ?? '',
+    /Окремо змішайте борошно й обидва крохмалі/,
+  );
+  assert.match(
+    recipe?.steps[3]?.body ?? '',
+    /круглої форми.*двома листами фольги.*навхрест/,
+  );
+  assert.match(
+    recipe?.steps[4]?.body ?? '',
+    /вимкніть духовку.*прочиніть.*10–15/,
+  );
+  assert.match(
+    recipe?.steps[4]?.body ?? '',
+    /повністю охолонути.*два або три коржі/,
+  );
   for (const locale of ['uk', 'en', 'es'] as const) {
     const localized = getRecipeContent('sponge-cake', locale)!;
     assert.equal(localized.presentation, 'concise');
     assert.equal(localized.overview.timing.activeMinutes, 15);
-    assert.equal(localized.overview.timing.totalElapsedMinutes, 60);
+    assert.equal(localized.overview.timing.totalElapsedMinutes, null);
+    assert.ok(localized.overview.timing.planningNote);
     assert.equal(localized.overview.difficulty, 'easy');
     assert.deepEqual(localized.yield?.count, { kind: 'exact', value: 1 });
     assert.equal(localized.beforeStart, undefined);
     assert.equal(localized.gapNote, undefined);
-    assert(
-      localized.steps.every(
-        (step) => !step.meta && !step.tip && !step.checkpoint,
-      ),
-    );
+    assert(localized.steps.every((step) => !step.meta));
+    assert.equal(localized.steps.filter((step) => step.checkpoint).length, 3);
+    assert.equal(localized.steps.filter((step) => step.tip).length, 1);
+    assert.equal(localized.steps[4]?.id, 'cool-and-slice');
     assert(
       localized.steps
         .flatMap((step) => step.media ?? [])
@@ -283,27 +304,94 @@ void test('keeps the tested Mix B banana-pancake adaptation and step photos toge
   const recipe = getRecipeContent('banana-fritters', 'uk');
   const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
   const flour = ingredients.find((ingredient) => ingredient.id === 'flour');
+  const yogurt = ingredients.find(
+    (ingredient) => ingredient.id === 'greek-yogurt',
+  );
+  const bananas = ingredients.find((ingredient) => ingredient.id === 'bananas');
+  const sugar = ingredients.find((ingredient) => ingredient.id === 'sugar');
+  const butter = ingredients.find((ingredient) => ingredient.id === 'butter');
+  const bakingPowder = ingredients.find(
+    (ingredient) => ingredient.id === 'baking-powder',
+  );
 
   assert.equal(recipe?.evidence?.status, 'tested');
-  assert.equal(recipe?.yield?.label, '12 панкейків');
+  assert.equal(recipe?.yield?.label, '28 панкейків');
   assert.equal(recipe?.timing?.totalElapsedMinutes, 30);
-  assert.equal(recipe?.steps.length, 6);
-  assert.equal(flour?.quantity.base, null);
-  assert.deepEqual(flour?.quantity.equivalent, {
+  assert.equal(recipe?.beforeStart, undefined);
+  assert.deepEqual(
+    recipe?.steps.map((step) => step.id),
+    ['mix-wet', 'mix-batter', 'portion', 'cook'],
+  );
+  assert.deepEqual(
+    ingredients.map((ingredient) => ingredient.id),
+    [
+      'bananas',
+      'flour',
+      'sugar',
+      'baking-powder',
+      'salt',
+      'greek-yogurt',
+      'eggs',
+      'butter',
+      'vanilla',
+      'oil',
+    ],
+  );
+  assert.deepEqual(flour?.quantity.base, {
     kind: 'exact',
-    value: 1.5,
-    unit: 'cup',
+    value: 200,
+    unit: 'g',
   });
-  assert.match(recipe?.steps[3]?.checkpoint ?? '', /густе й неоднорідне/i);
-  assert.match(recipe?.steps[5]?.checkpoint ?? '', /великі бульбашки/i);
+  assert.deepEqual(yogurt?.quantity.base, {
+    kind: 'exact',
+    value: 250,
+    unit: 'g',
+  });
+  assert.deepEqual(bananas?.quantity.base, {
+    kind: 'exact',
+    value: 500,
+    unit: 'g',
+  });
+  assert.deepEqual(bananas?.quantity.equivalent, {
+    kind: 'range',
+    min: 4,
+    max: 5,
+    unit: 'piece',
+  });
+  assert.equal(bananas?.note, 'Зважуйте без шкірки.');
+  assert.equal(sugar?.optional, true);
+  assert.match(sugar?.note ?? '', /банани дуже стиглі/i);
+  assert.deepEqual(butter?.quantity.base, {
+    kind: 'exact',
+    value: 30,
+    unit: 'g',
+  });
+  assert.deepEqual(butter?.quantity.equivalent, {
+    kind: 'exact',
+    value: 2,
+    unit: 'tbsp',
+  });
+  assert.equal(butter?.optional, true);
+  assert.deepEqual(bakingPowder?.quantity.base, {
+    kind: 'exact',
+    value: 5,
+    unit: 'g',
+  });
+  assert.match(recipe?.steps[0]?.body ?? '', /яйця, грецький йогурт/i);
+  assert.match(recipe?.steps[0]?.body ?? '', /за бажанням.*масло/i);
+  assert.match(recipe?.steps[1]?.body ?? '', /ложкою або вінчиком/i);
+  assert.match(recipe?.steps[1]?.checkpoint ?? '', /густе, легко набирається/i);
+  assert.match(recipe?.steps[2]?.body ?? '', /1 столовій ложці/i);
+  assert.doesNotMatch(recipe?.steps[2]?.body ?? '', /175|чавун|антипригар/i);
+  assert.match(recipe?.steps[3]?.body ?? '', /медом/i);
   assert.deepEqual(
     recipe?.steps.flatMap((step) => step.media?.map((item) => item.id) ?? []),
     [
-      'banana-pancakes-dry-mix-v1',
       'banana-pancakes-mashed-bananas-v1',
       'banana-pancakes-wet-mixture-v1',
       'banana-pancakes-lumpy-batter-v1',
-      'banana-pancakes-flip-cue-v1',
+      'banana-pancakes-flip-cue-author-v1',
+      'banana-pancakes-finished-pan-author-v1',
     ],
   );
 });
@@ -871,8 +959,11 @@ void test('keeps the tested one-cake carrot recipe concise without losing practi
     value: 80,
     unit: 'g',
   });
-  assert.match(whippedEggs?.body ?? '', /три-чотири рази/);
-  assert.match(baking?.body ?? '', /зубочисткою/);
+  assert.match(whippedEggs?.body ?? '', /яйця з цукром/);
+  assert.match(whippedEggs?.checkpoint ?? '', /три-чотири рази/);
+  assert.match(baking?.checkpoint ?? '', /зубочистку/);
+  assert.match(baking?.body ?? '', /розігріту до 200°C/);
+  assert.match(baking?.body ?? '', /пергаментом/);
   assert.match(addIns?.tip ?? '', /трьох днів/);
   assert.equal(recipe?.evidence?.status, 'tested');
   assert.equal(recipe?.presentation, 'concise');
@@ -880,17 +971,16 @@ void test('keeps the tested one-cake carrot recipe concise without losing practi
   assert.equal(recipe?.overview.difficulty, 'medium');
   assert.equal(recipe?.overview.yieldLabel, '1 кекс');
   assert.equal(recipe?.beforeStart, undefined);
-  assert.equal(
-    recipe?.overview.timing.planningNote,
-    'Заздалегідь замочіть родзинки.',
+  assert.match(recipe?.steps[0].body ?? '', /5 хвилин/);
+  assert.match(recipe?.overview.timing.planningNote ?? '', /200°C/);
+  assert.equal(recipe?.steps.length, 6);
+  assert.equal(recipe?.steps[0].id, 'prepare-add-ins');
+  assert.match(recipe?.steps[0].tip ?? '', /200°C/);
+  assert.match(
+    recipe?.steps.find((step) => step.id === 'mix-batter')?.tip ?? '',
+    /пишність/,
   );
-  assert.equal(recipe?.steps[0].id, 'prepare-pan');
-  assert.match(recipe?.steps[0].body ?? '', /200°C/);
-  assert.equal(
-    recipe?.steps.find((step) => step.id === 'mix-batter')?.tip,
-    undefined,
-  );
-  assert(recipe?.steps.every((step) => !step.checkpoint && !step.meta));
+  assert(recipe?.steps.every((step) => !step.meta));
   assert(
     recipe?.steps
       .flatMap((step) => step.media ?? [])
@@ -945,8 +1035,7 @@ void test('keeps the apple-meringue pie honest about source gaps', () => {
     (section) => section.ingredients,
   );
   assert.equal(
-    ingredients.find((ingredient) => ingredient.id === 'apples')?.quantity
-      .base,
+    ingredients.find((ingredient) => ingredient.id === 'apples')?.quantity.base,
     null,
   );
   assert.equal(

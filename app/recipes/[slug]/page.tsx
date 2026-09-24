@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { RecipePage as RecipePageShell } from '@/components/recipe/recipe-page';
 import {
-  getCreamOptionCopy,
-  isReusableCreamRecipeId,
-  reusableCreamRecipeIds,
-} from '@/content/recipes/cream-option-copy';
+  getComponentCopy,
+  isReusableComponentRecipeId,
+  reusableComponentRecipeIds,
+} from '@/content/recipes/recipe-component-records';
 import { recipeDetailTitles } from '@/content/recipes/catalog-locales';
 import {
   getInventoryRecipe,
@@ -14,13 +14,13 @@ import {
 
 type RecipePageProps = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ cream?: string | string[] }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export function generateStaticParams() {
   return [
     ...recipeInventory.map((recipe) => ({ slug: recipe.slug })),
-    ...reusableCreamRecipeIds.map((slug) => ({ slug })),
+    ...reusableComponentRecipeIds.map((slug) => ({ slug })),
   ];
 }
 
@@ -28,8 +28,8 @@ export async function generateMetadata({
   params,
 }: RecipePageProps): Promise<Metadata> {
   const { slug } = await params;
-  if (isReusableCreamRecipeId(slug)) {
-    const copy = getCreamOptionCopy(slug, 'en');
+  if (isReusableComponentRecipeId(slug)) {
+    const copy = getComponentCopy(slug, 'en');
     return {
       title: `${copy.title} — Bake Again`,
       description: copy.description,
@@ -50,14 +50,24 @@ export default async function RecipePage({
 }: RecipePageProps) {
   const { slug } = await params;
   const recipe = getInventoryRecipe(slug);
-  if (!recipe && !isReusableCreamRecipeId(slug)) notFound();
-  const requestedCream = (await searchParams).cream;
+  if (!recipe && !isReusableComponentRecipeId(slug)) notFound();
+  const requestedSearchParams = await searchParams;
+  const requestedCream = requestedSearchParams.cream;
   return (
     <RecipePageShell
       slug={slug}
       selectedCreamRecipeId={
         Array.isArray(requestedCream) ? requestedCream[0] : requestedCream
       }
+      configurationSearch={new URLSearchParams(
+        Object.entries(requestedSearchParams).flatMap(([key, value]) =>
+          value === undefined
+            ? []
+            : (Array.isArray(value) ? value : [value]).map(
+                (item) => [key, item] as [string, string],
+              ),
+        ),
+      ).toString()}
     />
   );
 }
