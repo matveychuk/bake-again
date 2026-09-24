@@ -29,17 +29,20 @@ if (
   fail('The production URL must be an HTTPS URL without credentials.');
 }
 
-if (process.env.OPENAI_API_KEY_CONFIGURED !== 'true') {
+// Match the runtime contract: a disabled assistant needs no credentials.
+// Enabling it still requires both protected secrets.
+const assistantEnabled = process.env.ASSISTANT_ENABLED === 'true';
+if (assistantEnabled && process.env.OPENAI_API_KEY_CONFIGURED !== 'true') {
   fail(
     'The protected production OPENAI_API_KEY GitHub secret is not configured.',
   );
 }
-if (process.env.ASSISTANT_SESSION_SECRET_CONFIGURED !== 'true') {
+if (assistantEnabled && process.env.ASSISTANT_SESSION_SECRET_CONFIGURED !== 'true') {
   fail(
     'The protected production ASSISTANT_SESSION_SECRET GitHub secret is not configured.',
   );
 }
 
 console.log(
-  `Production configuration is complete for ${productionUrl.hostname}; model, feature flag, token limit and secret presence were validated without reading secret values.`,
+  `Production configuration is complete for ${productionUrl.hostname}; model, feature flag, token limit and required secret presence were validated without reading secret values.`,
 );
