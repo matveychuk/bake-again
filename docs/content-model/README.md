@@ -284,3 +284,13 @@ type. A recipe may belong to several collections. Collections are navigation aid
 not express recipe evidence, testing status or an adaptation claim.
 
 Run `npm run typecheck` and `npm run validate:recipes`. The latter checks recipe references, anchor line IDs and units, optional capabilities, Napoleon geometry semantics, and the two calculated fixtures.
+
+## Cream-dependent assembly
+
+A source step can set `requiresCream: true` when it belongs to the assembly sequence
+that follows preparation of the selected cream. `composeRecipeWithCream` preserves
+these steps in source order after the namespaced cream steps. Without a selection,
+the complete host method stays visible; no cream ingredients or preparation are added.
+Cook Mode still requires an explicit cream selection. The existing `fill` ID is still supported. The sponge roll uses this
+for jam, cream and final rolling/decoration; parchment rolling and cooling remain base
+steps. This metadata does not change recipe evidence.

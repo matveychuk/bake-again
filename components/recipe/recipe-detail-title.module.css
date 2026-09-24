@@ -1,6 +1,13 @@
+.title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .title span,
 .title em {
   display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .title em {

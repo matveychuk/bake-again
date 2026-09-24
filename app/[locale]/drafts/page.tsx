@@ -27,7 +27,7 @@ export default async function DraftsPage({ params, searchParams }: {
   return <main>
     <SiteHeader locale={locale} pathname={pathname} />
     <section className="drafts-intro" aria-labelledby="drafts-title">
-      <h1 id="drafts-title">{messages.navigation.drafts}</h1>
+      <h1 id="drafts-title" tabIndex={-1}>{messages.navigation.drafts}</h1>
       <p>{messages.catalog.draftsIntro}</p>
       <RecipeSearchForm locale={locale} query={query} collectionId={collectionId} action={`${pathname}#recipes`} />
     </section>

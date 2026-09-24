@@ -1,7 +1,7 @@
 import { getPersonalStateRecipe } from '@/content/recipes/registry';
 import { getInventoryRecipe } from '@/content/recipes/inventory';
-import { getCreamPageRecipe } from '@/content/recipes/cream-page-records';
-import { isReusableCreamRecipeId } from '@/content/recipes/cream-option-copy';
+import { getComponentPageRecipe } from '@/content/recipes/recipe-component-records';
+import { isReusableComponentRecipeId } from '@/content/recipes/recipe-component-records';
 import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
 import { InventoryRecipeDetail } from './inventory-recipe-detail';
 
@@ -10,6 +10,7 @@ type RecipePageProps = {
   locale?: AppLocale;
   pathname?: string;
   selectedCreamRecipeId?: string | null;
+  configurationSearch?: string;
 };
 
 /**
@@ -21,8 +22,9 @@ export function RecipePage({
   locale = defaultLocale,
   pathname,
   selectedCreamRecipeId,
+  configurationSearch = '',
 }: RecipePageProps) {
-  const recipe = getInventoryRecipe(slug) ?? getCreamPageRecipe(slug);
+  const recipe = getInventoryRecipe(slug) ?? getComponentPageRecipe(slug);
   return recipe ? (
     <InventoryRecipeDetail
       personalRecipe={getPersonalStateRecipe(recipe.id)}
@@ -30,7 +32,8 @@ export function RecipePage({
       locale={locale}
       pathname={pathname}
       selectedCreamRecipeId={selectedCreamRecipeId}
-      isStandaloneCream={isReusableCreamRecipeId(slug)}
+      configurationSearch={configurationSearch}
+      isStandaloneComponent={isReusableComponentRecipeId(slug)}
     />
   ) : null;
 }

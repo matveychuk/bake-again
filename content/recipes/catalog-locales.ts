@@ -24,6 +24,26 @@ const previewAlt = (en: string, es: string, uk: string): LocalizedText => ({
  * their shorter discovery titles so the grid remains easy to scan.
  */
 export const recipeDetailTitles: Record<string, LocalizedText> = {
+  'sour-cream': {
+    en: 'Sour cream filling',
+    es: 'Crema de nata agria',
+    uk: 'Сметанний крем',
+  },
+  'lemon-cream-cheese': {
+    en: 'Lemon butter and cream cheese frosting',
+    es: 'Crema de mantequilla y queso al limón',
+    uk: 'Лимонний крем із маслом і вершковим сиром',
+  },
+  'chocolate-glaze': {
+    en: 'Chocolate glaze',
+    es: 'Glaseado de chocolate',
+    uk: 'Шоколадна глазур',
+  },
+  'celebration-sponge-cake': {
+    en: 'Gluten-free celebration sponge cake with fruit',
+    es: 'Tarta de celebración con fruta sin gluten',
+    uk: 'Безглютеновий святковий бісквітний торт із фруктами',
+  },
   'banana-bread': {
     en: 'Gluten-free banana bread',
     es: 'Pan de plátano sin gluten',
@@ -60,9 +80,9 @@ export const recipeDetailTitles: Record<string, LocalizedText> = {
     uk: 'Безглютеновий морквяний кекс',
   },
   'sponge-cake': {
-    en: 'Gluten-free sponge cake',
-    es: 'Bizcocho sin gluten',
-    uk: 'Безглютеновий бісквіт',
+    en: 'Gluten-free sponge cake for layer cakes',
+    es: 'Bizcocho sin gluten para tartas',
+    uk: 'Безглютеновий бісквіт для торта',
   },
   crepes: {
     en: 'Gluten-free crepes',
@@ -178,6 +198,94 @@ export function getRecipeDetailTitleParts(
 }
 
 export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
+  'sour-cream': {
+    title: {
+      en: 'Sour cream filling',
+      es: 'Crema de nata agria',
+      uk: 'Сметанний крем',
+    },
+    category: {
+      en: 'Cream',
+      es: 'Crema',
+      uk: 'Крем',
+    },
+    summary: {
+      en: 'A simple filling for two layers in a 24 cm cake.',
+      es: 'Una crema sencilla para dos capas de relleno en una tarta de 24 cm.',
+      uk: 'Простий крем для двох прошарків торта діаметром 24 см.',
+    },
+    alt: {
+      en: 'Sour cream filling',
+      es: 'Crema de nata agria',
+      uk: 'Сметанний крем',
+    },
+  },
+  'lemon-cream-cheese': {
+    title: {
+      en: 'Lemon butter and cream cheese frosting',
+      es: 'Crema de mantequilla y queso al limón',
+      uk: 'Лимонний крем із маслом і вершковим сиром',
+    },
+    category: {
+      en: 'Cream',
+      es: 'Crema',
+      uk: 'Крем',
+    },
+    summary: {
+      en: 'A calculated batch for coating and piping, with 200 g butter.',
+      es: 'Una tanda calculada para cubrir y decorar, con 200 g de mantequilla.',
+      uk: 'Перерахована порція на 200 г масла для покриття й оздоблення.',
+    },
+    alt: {
+      en: 'Lemon butter and cream cheese frosting',
+      es: 'Crema de mantequilla y queso al limón',
+      uk: 'Лимонний крем із маслом і вершковим сиром',
+    },
+  },
+  'chocolate-glaze': {
+    title: {
+      en: 'Chocolate glaze',
+      es: 'Glaseado de chocolate',
+      uk: 'Шоколадна глазур',
+    },
+    category: {
+      en: 'Glaze',
+      es: 'Glaseado',
+      uk: 'Глазур',
+    },
+    summary: {
+      en: 'A shared cocoa glaze for homemade cakes.',
+      es: 'Un glaseado de cacao para tartas caseras.',
+      uk: 'Спільний рецепт поливки з какао для домашніх тортів.',
+    },
+    alt: {
+      en: 'Chocolate glaze',
+      es: 'Glaseado de chocolate',
+      uk: 'Шоколадна глазур',
+    },
+  },
+  'celebration-sponge-cake': {
+    title: {
+      en: 'Celebration sponge cake with fruit',
+      es: 'Tarta de celebración con fruta',
+      uk: 'Святковий бісквітний торт із фруктами',
+    },
+    category: {
+      en: 'Layer cake',
+      es: 'Tarta de capas',
+      uk: 'Торт',
+    },
+    summary: {
+      en: 'Three sponge layers, sour cream filling, chocolate glaze and fresh fruit.',
+      es: 'Tres capas de bizcocho, crema de nata agria, glaseado de chocolate y fruta.',
+      uk: 'Три бісквітні коржі, ніжний сметанний крем, шоколадна глазур і фрукти.',
+    },
+    alt: {
+      en: 'Tall homemade fruit cake with chocolate glaze and cream flowers',
+      es: 'Tarta alta con fruta, glaseado de chocolate y flores de crema',
+      uk: 'Високий торт із фруктами, шоколадною глазур’ю та кремовими квіточками',
+    },
+  },
   'banana-bread': {
     title: { en: 'Banana bread', es: 'Pan de plátano', uk: 'Банановий хліб' },
     category: {
@@ -337,9 +445,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Основа для торта',
     },
     summary: {
-      en: 'A light, airy sponge cake.',
-      es: 'Un bizcocho ligero y esponjoso.',
-      uk: 'Легкий повітряний бісквіт.',
+      en: 'An airy gluten-free sponge with Schär Mix B Bread, ready to slice into two or three layers for a homemade cake.',
+      es: 'Un bizcocho esponjoso sin gluten con Schär Mix B Bread, para cortar en dos o tres capas y preparar una tarta casera.',
+      uk: 'Повітряний безглютеновий бісквіт на Schär Mix B Bread — основа для домашнього торта на два або три коржі.',
     },
     alt: previewAlt(
       'Tall plain gluten-free sponge cake with one wedge cut',
@@ -367,9 +475,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
   },
   'gluten-free-napoleon': {
     title: {
-      en: 'Gluten-Free Napoleon Cake',
-      es: 'Tarta Napoleón sin gluten',
-      uk: 'Безглютеновий Наполеон',
+      en: 'Napoleon Cake',
+      es: 'Tarta Napoleón',
+      uk: 'Наполеон',
     },
     category: {
       en: 'Celebration cake',
@@ -411,9 +519,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
   },
   'crinkle-cookies': {
     title: {
-      en: 'Marbled Crinkle Cookies',
-      es: 'Galletas marmoladas craqueladas',
-      uk: 'Мармурове печиво «Тріщинки»',
+      en: 'Marbled Cookies',
+      es: 'Galletas marmoladas',
+      uk: 'Мармурове печиво',
     },
     category: { en: 'Cookies', es: 'Galletas', uk: 'Печиво' },
     summary: {
@@ -453,20 +561,15 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
     },
     category: { en: 'Breakfast', es: 'Desayuno', uk: 'Сніданок' },
     summary: {
-      en: 'Tested banana pancakes adapted with Schär Mix B Bread.',
-      es: 'Tortitas de plátano probadas y adaptadas con Schär Mix B Bread.',
-      uk: 'Перевірені бананові панкейки, адаптовані з борошном Schär Mix B Bread.',
+      en: 'Tender and fluffy, with Greek yogurt and Schär Mix B Bread.',
+      es: 'Tiernas y esponjosas, con yogur griego y Schär Mix B Bread.',
+      uk: 'Ніжні й пухкі, з грецьким йогуртом та Schär Mix B Bread.',
     },
     alt: previewAlt(
-      'Fluffy gluten-free banana pancakes',
-      'Tortitas de plátano sin gluten',
-      'Пухкі безглютенові бананові панкейки',
+      'Thick irregular gluten-free banana pancakes with golden-brown tops and a tender crumb',
+      'Tortitas de plátano sin gluten, gruesas e irregulares, doradas y con una miga tierna',
+      'Товсті нерівні безглютенові бананові панкейки із золотистою скоринкою та ніжною серединкою',
     ),
-    publicationNote: {
-      en: 'Record the flour weight in grams and confirm whether the liquid is adjusted before publication.',
-      es: 'Antes de publicar, anota el peso de la harina en gramos y confirma si se ajusta el líquido.',
-      uk: 'Перед публікацією запишіть вагу борошна в грамах і уточніть, чи коригується кількість рідини.',
-    },
   },
   'apple-banana-fritters': {
     title: {
@@ -495,7 +598,7 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
     title: {
       en: 'Ukrainian Easter bread',
       es: 'Pan ucraniano de Pascua',
-      uk: 'Безглютенова паска',
+      uk: 'Паска',
     },
     category: {
       en: 'Seasonal baking',
@@ -537,9 +640,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
   },
   'fruit-sponge-roll': {
     title: {
-      en: 'Fruit sponge roll',
-      es: 'Brazo de gitano de frutas',
-      uk: 'Бісквітний рулет із фруктами',
+      en: 'Fruit roll',
+      es: 'Rollo de frutas',
+      uk: 'Рулет із фруктами',
     },
     category: {
       en: 'Rolled sponge / dessert',
@@ -547,9 +650,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Бісквітний рулет / десерт',
     },
     summary: {
-      en: 'A light rolled sponge with a soft filling and a flexible crumb that slices into a clear spiral.',
-      es: 'Un bizcocho ligero y flexible, enrollado con un relleno suave y una espiral bien definida al cortarlo.',
-      uk: 'Легкий гнучкий бісквіт із ніжною начинкою та виразною спіраллю на зрізі.',
+      en: 'A tender sponge with berry jam and cream, finished with cream and optional fresh fruit.',
+      es: 'Bizcocho tierno con mermelada de frutos rojos y crema, cubierto de crema y fruta fresca al gusto.',
+      uk: 'Ніжний бісквіт із ягідним варенням і кремом; зверху — крем і фрукти за бажанням.',
     },
     alt: previewAlt(
       'Homemade fruit sponge roll with berry jam, mascarpone cream spread on top and fresh berries',

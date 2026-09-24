@@ -271,6 +271,7 @@ export interface StepGuidance {
 }
 
 export interface RecipeStep {
+  technique?: import('../techniques/types.ts').TechniqueReference;
   id: string;
   /** A concise action title may be added one reviewed locale at a time. */
   title?: Partial<LocalizedText>;

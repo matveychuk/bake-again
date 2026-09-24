@@ -231,6 +231,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
     [],
   ];
   const steps: StructuredRecipeStep[] = ids.map((id, index) => ({
+    technique: index === 0 ? { id: 'soften-butter' } : undefined,
     id,
     title: text.titles[index],
     body: text.instructions[index],

@@ -1,0 +1,31 @@
+# Author correction — inward curl and full parchment wrap
+
+Built-in image_gen edits, 2026-09-25. Final assets: warm-sponge-roll-v3.png, blueberry-jam-v3.png, cream-over-jam-v3.png. Earlier candidates are superseded. warmV3 edits warm-sponge-roll-v2; jamV2 edits blueberry-jam-v1; jamV3 removes the trapped-paper artifact from jamV2; creamV2 was rejected for retaining that artifact; creamV3 uses corrected jamV3.
+
+## warmV3
+
+Use case: precise-object-edit. Edit this instructional photograph. Correct the physically inconsistent rolling geometry. The current image wrongly shows a long bare rounded golden roll beside a white paper-covered roll. There must be ONLY ONE rolled cylinder, fully covered all the way around by the baking parchment. REMOVE the long exposed golden curved bulge in front of the white cylinder. Replace this entire curved bulge with the same continuous ivory parchment surface wrapped tightly against the cake. All curved/rolled sponge on the cylindrical length is hidden under paper, only the small RIGHT CUT END shows sponge spirals interleaved with paper. The remaining unrolled golden sheet in the foreground is COMPLETELY FLAT right up to where it disappears underneath the ONE parchment-covered cylinder. No second bulge, no exposed curved golden strip, no uncovered roll, no flap being peeled off. The paper beneath the flat cake is the same paper wrapping the roll. Preserve the same warm sponge, two hands, framing, kitchen counter, left natural light, 3:2 landscape. No text, arrows or collage.
+
+## jamV2
+
+Use case: precise-object-edit. Edit the blueberry jam instructional photo. Critical geometric correction: the FAR EDGE of the sponge currently bends BACKWARDS AWAY from the jam, like a tunnel roof outside the sheet. REVERSE the direction of its curl. The free far edge must curve INWARD TOWARD THE CAMERA OVER the jam-covered surface. In side profile at the RIGHT edge show a large OPEN C hook whose lower limb is the flat jam-covered sponge, whose back wall rises at the farthest boundary, and whose upper free tip extends forward OVER THE JAM, hovering about 4 cm above the jam. The tip stops in midair directly above the cake, NOT touching the counter behind the cake. Clearly show the underside of that inward-curled free lip hanging above the filling, with blueberry jam on that inward-facing underside. The upper curl is continuous with the flat sponge at the BACK, not as a separate piece. Like a partly unrolled scroll ready to roll back inward, only half a turn remains curled. The rest of the sponge in front is flat and spread with thin dark blueberry jam and small cooked berry pieces, no white cream. Preserve hand spreading jam with offset spatula, same paper, camera, counter, golden cake texture, kitchen, 3:2 landscape. No extra cake, no backward arch, no inverted U touching countertop, no text or arrows.
+
+## jamV3
+
+Use case: precise-object-edit. Make ONE tiny correction to this photo. There is an erroneous little pale grey-white oval of parchment poking out from UNDER the inward-curled sponge lip, near the right open end, just above the blueberry jam. REMOVE that small trapped piece of paper completely and replace it with the natural shadowed AIR GAP and jam-coated sponge underside. Parchment must exist ONLY flat underneath the entire cake, absolutely NONE inside the curve or touching the jam. Preserve EXACTLY the correctly inward-curled C shape: free lip hovers over jam, back wall joins flat sheet. Preserve all other pixels/composition, golden sponge, blueberry pieces, hand, spatula, kitchen, 3:2. No text.
+
+## creamV2
+
+Use case: precise-object-edit. This image is the corrected blueberry jam stage. Advance to cream stage while preserving EXACTLY its inward-curled C-shaped sponge geometry. The far free edge curls forward toward camera and hovers OVER the jam, not away from it. Spread a soft stable moderate layer of white whipped cream with mascarpone on top of the blueberry jam on the flat exposed sponge, using the same hand and offset spatula. Continue some cream gently along the inward-facing underside of the curved lip. Show a small dark jam patch near spatula to establish layer order. At the straight FRONT finishing edge closest to camera leave a clear approximately 2 cm strip completely FREE OF WHITE CREAM across the full width; thin jam may remain visible there. The upper curled lip remains visibly suspended over the filling with an open air gap. Crucial cleanup: REMOVE the erroneous small grey-white oval of trapped parchment under the right curled lip. NO PAPER inside the curl or touching jam/cream. Paper only underneath the whole sponge on the counter. Keep exact kitchen, lighting, frame, cake and hand. No fruits on cream, no text, arrows, labels or collage. Landscape 3:2.
+
+## creamV3
+
+Use case: precise-object-edit. Input is the geometry-correct blueberry jam stage. Keep EXACT sponge geometry, inward C curl, open air gap under free lip, kitchen, lighting, hand, paper beneath cake, framing. Change ONLY filling and spatula surface: spread white whipped mascarpone cream smoothly OVER the blueberry jam on most of the flat cake. Leave a clear strip about 2 cm WIDE with jam but NO WHITE CREAM across the straight FRONT closing edge closest to camera. Show a small dark jam patch near the spatula so layers remain legible. A little cream coats the inward-facing underside of the suspended upper lip. Keep the area inside the C curl as cake with jam and some cream, with a clear DARK AIR GAP under its tip. Do not introduce any objects or paper there. The upper tip continues to curl INWARD OVER the cream; it must not point backward. Retain food textures, moderate cream thickness, clean white cream not marbled purple. No fruit on top. Landscape 3:2, no text.
+
+
+## Final workspace assets
+
+- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/warm-sponge-roll-v3.png`
+- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/blueberry-jam-v3.png`
+- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/cream-over-jam-v3.png`
+- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/decorate-roll-v1.png` — original final-decoration prompt remains in `assembly-prompts.md`.

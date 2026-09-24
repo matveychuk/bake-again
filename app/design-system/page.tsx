@@ -26,18 +26,23 @@ import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { RecipeSearchForm } from '@/components/recipe/recipe-search-form';
 import { RecipeCard } from '@/components/recipe/recipe-card';
+import { CookToolsExample } from '@/components/cook-mode/cook-tools-example';
+import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { getRecipeCatalog } from '@/content/recipes/catalog';
 import { getLocalizedRecipePath } from '@/lib/i18n/routes';
 import { RecipeOverview } from '@/components/recipe/recipe-overview';
+import { RecipeCreamSelector } from '@/components/recipe/recipe-cream-selector';
 import { InventoryRecipeAdjuster } from '@/components/recipe/inventory-recipe-adjuster';
 import { StepMediaSequence } from '@/components/recipe/step-media-sequence';
 import { getRecipeContent } from '@/content/recipes/registry';
+import { composeRecipeWithCream } from '@/content/recipes/cream-composition';
 import { LanguageSwitcher } from '@/components/site/language-switcher';
 import { BakeCheckbox } from '@/components/ui/bake-checkbox';
 import { ActionReviewExample } from '@/components/assistant/action-review-example';
 import { Wordmark } from '@/components/site/wordmark';
 import { glutenFreeNapoleonRecipe } from '@/content/recipes/gluten-free-napoleon.recipe';
 import { recipeDetailTitles } from '@/content/recipes/catalog-locales';
+import { getCreamOptionCopy } from '@/content/recipes/cream-option-copy';
 import styles from './design-system.module.css';
 
 export const metadata: Metadata = {
@@ -84,6 +89,14 @@ const colours = [
     className: styles.terracotta,
   },
 ];
+
+const creamSelectorOptions = (
+  ['mascarpone-whipped-cream', 'vanilla-buttercream'] as const
+).map((id) => ({
+  id,
+  ...getCreamOptionCopy(id, 'uk'),
+  href: getLocalizedRecipePath(id, 'uk')!,
+}));
 
 const space = [4, 8, 12, 16, 24, 32, 48, 64, 96];
 
@@ -336,13 +349,27 @@ export default function DesignSystemPage() {
                 Published preview and local working records. Publication changes
                 visibility, never evidence. Unknown card facts are omitted.
                 Every non-control area opens the recipe. Planning values use
-                stronger type and terracotta icons; flour stays quiet, and
-                collection links use a soft sand surface. Check wrapping and
-                keyboard focus at 390, 900 and 1440px.
+                stronger type and terracotta icons in two label/value columns.
+                Short catalogue names keep headings compact, centred beside Save;
+                facts follow 8px below the complete title/control row.
+                Photos, titles, facts, flour and footers align within each grid row
+                without truncating names. All collection links stay visible as
+                compact sand chips with full-height touch targets; long labels
+                wrap naturally. A subtle card border
+                keeps those final links visibly attached to their recipe. Check
+                wrapping and keyboard focus at 390, 900 and 1440px.
               </p>
               <div className="recipe-grid recipe-grid--catalog-preview">
                 {(
                   [
+                    { locale: 'uk', id: 'gluten-free-napoleon' },
+                    { locale: 'uk', id: 'fruit-sponge-roll' },
+                    { locale: 'uk', id: 'crinkle-cookies' },
+                    { locale: 'uk', id: 'banana-fritters' },
+                    { locale: 'uk', id: 'easter-bread' },
+                    { locale: 'uk', id: 'plum-cake' },
+                    { locale: 'uk', id: 'cottage-cheese-waffles' },
+                    { locale: 'uk', id: 'carrot-cake' },
                     { locale: 'uk', id: 'lazy-dumplings' },
                     { locale: 'en', id: 'cottage-cheese-waffles' },
                     { locale: 'es', id: 'cottage-cheese-waffles' },
@@ -366,6 +393,32 @@ export default function DesignSystemPage() {
                   );
                 })}
               </div>
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}>
+                <strong>Saved recipe · compact card</strong>
+                <span>
+                  Shared catalogue component · smaller image · localized title
+                  and facts · independent Save control
+                </span>
+              </div>
+              {(['uk', 'en', 'es'] as const).map((locale) => {
+                const recipe = getRecipeCatalog(locale, 'all').find(
+                  (entry) => entry.id === 'crepes',
+                )!;
+                return (
+                  <RecipeCard
+                    key={locale}
+                    variant="compact"
+                    recipe={{
+                      ...recipe,
+                      locale,
+                      href: getLocalizedRecipePath(recipe.id, locale)!,
+                    }}
+                  />
+                );
+              })}
             </div>
 
             <div className={styles.componentBlock}>
@@ -406,6 +459,23 @@ export default function DesignSystemPage() {
               </div>
             </div>
 
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}>
+                <strong>Cream choice cards</strong>
+                <span>
+                  Chocolate recommendation label on the card edge · aligned
+                  titles, descriptions and recipe links · shared Tested
+                  statement
+                </span>
+              </div>
+              <RecipeCreamSelector
+                locale="uk"
+                options={creamSelectorOptions}
+                recommendedRecipeId="mascarpone-whipped-cream"
+                selectedRecipeId={null}
+              />
+            </div>
+
             <div className={styles.componentBlock} id="concise-recipe">
               <div className={styles.componentLabel}>
                 <strong>Concise recipe</strong>
@@ -431,6 +501,7 @@ export default function DesignSystemPage() {
                       showWorkingRecord={recipe.evidence != null}
                     />
                     <InventoryRecipeAdjuster
+                      syncConfigurationToUrl={false}
                       recipe={recipe}
                       archiveSections={[]}
                       locale={locale}
@@ -454,6 +525,68 @@ export default function DesignSystemPage() {
                   </div>
                 );
               })}
+            </div>
+
+            <div className={styles.componentBlock} id="roll-assembly">
+              <div className={styles.componentLabel}>
+                <strong>Recipe assembly guidance</strong>
+                <span>Complete method before cream selection · final serving tip</span>
+              </div>
+              {(['uk', 'en', 'es'] as const).map((locale) => {
+                const recipe = composeRecipeWithCream(
+                  getRecipeContent('fruit-sponge-roll', locale)!,
+                  null,
+                  null,
+                );
+                const step = recipe.steps.find(
+                  (item) => item.id === 'fill',
+                )!;
+                return (
+                  <div key={locale} lang={locale}>
+                    <RecipeStepContent
+                      title={step.title}
+                      tip={step.tip}
+                      tipLabel={locale === 'uk' ? 'Порада' : locale === 'es' ? 'Consejo' : 'Tip'}
+                      checkpointLabel=""
+                    >
+                      <p>{step.body}</p>
+                    </RecipeStepContent>
+                    <StepMediaSequence items={step.media!} ariaLabel={step.title} />
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className={styles.componentBlock} id="step-photography">
+              <div className={styles.componentLabel}>
+                <strong>Step photography</strong>
+                <span>
+                  Equal frame sizes · simple photo numbers · next-photo peek on mobile
+                </span>
+              </div>
+              <div className={styles.stepPhotographyExamples}>
+                {(['recipe', 'cook'] as const).map((variant) => (
+                  <div key={variant}>
+                    <h3>{variant === 'recipe' ? 'Recipe detail' : 'Cook Mode'}</h3>
+                    <p>One photo keeps the same size as each photo in a sequence.</p>
+                    <StepMediaSequence
+                      items={getRecipeContent('sponge-cake', 'en')!.steps[0].media!}
+                      ariaLabel={`${variant}: single photo`}
+                      variant={variant}
+                    />
+                    <StepMediaSequence
+                      items={getRecipeContent('sponge-cake', 'en')!.steps[2].media!}
+                      ariaLabel={`${variant}: ordered photos`}
+                      variant={variant}
+                    />
+                    <StepMediaSequence
+                      items={[{ id: 'author-video-example', type: 'video', src: '/media/recipes/celebration-sponge-cake/selected/author-cake-overview-v1.mp4', alt: 'Author video of a fruit cake', caption: 'Author video · play on demand' }]}
+                      ariaLabel={`${variant}: author video`}
+                      variant={variant}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className={styles.componentBlock} id="assistant-actions">
@@ -583,6 +716,36 @@ export default function DesignSystemPage() {
 
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}>
+                <strong>Cook tools drawer</strong>
+                <span>
+                  Shared right panel · full width on mobile · visible Close ·
+                  Escape and focus return · fixed header and scrollable content
+                </span>
+              </div>
+              <CookToolsExample className={styles.secondaryButton} />
+            </div>
+
+            <div className={styles.componentBlock} id="technique-help">
+              <div className={styles.componentLabel}>
+                <strong>Contextual technique guide</strong>
+                <span>Recipe link → drawer · native link fallback · shared standalone guide</span>
+              </div>
+              {(['uk', 'en', 'es'] as const).map((locale) => (
+                <div key={locale} lang={locale}>
+                  <RecipeStepContent
+                    title={locale}
+                    tipLabel={locale === 'uk' ? 'Порада' : locale === 'es' ? 'Consejo' : 'Tip'}
+                    checkpointLabel=""
+                    tip={<TechniqueHelp locale={locale} reference={{ id: 'soften-butter', condition: 'butter-option' }} />}
+                  >
+                    {null}
+                  </RecipeStepContent>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}>
                 <strong>Step guidance</strong>
                 <span>
                   Shared recipe and Cook variants with written semantics
@@ -629,9 +792,9 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Contextual assistant</strong>
                 <span>
-                  Shared Recipe and Cook drawer · loading announcement · Close
-                  focus after submit/review · localized offline retry ·
-                  scrollable at 200% text
+                  Shared Recipe and Cook drawer · compact contextual title ·
+                  loading announcement · Close focus after submit/review ·
+                  localized offline retry · scrollable at 200% text
                 </span>
               </div>
               <div className={styles.assistantExample}>

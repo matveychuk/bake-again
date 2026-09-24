@@ -6,7 +6,10 @@ import type {
 } from '../../../lib/assistant/contracts.ts';
 import { AssistantServiceError } from '../../../lib/assistant/server/errors.ts';
 import type { AssistantService } from '../../../lib/assistant/server/service.ts';
-import { createAssistantRouteHandler } from './route.ts';
+import {
+  createAssistantRouteHandler,
+  isAssistantLocalPreviewRequest,
+} from './route.ts';
 
 const requestBody: AssistantRequestV1 = {
   schemaVersion: 1,
@@ -38,6 +41,30 @@ function handler(service: AssistantService) {
     createRequestId: () => 'request-test',
   });
 }
+
+void test('enables unpublished-locale preview only for a development loopback request', () => {
+  for (const url of [
+    'http://localhost:3000/api/assistant',
+    'http://127.0.0.1:5173/api/assistant',
+    'http://[::1]:3000/api/assistant',
+  ]) {
+    assert.equal(
+      isAssistantLocalPreviewRequest(new Request(url), 'development'),
+      true,
+    );
+    assert.equal(
+      isAssistantLocalPreviewRequest(new Request(url), 'production'),
+      false,
+    );
+  }
+  assert.equal(
+    isAssistantLocalPreviewRequest(
+      new Request('https://bakeagain.example/api/assistant'),
+      'development',
+    ),
+    false,
+  );
+});
 
 void test('returns the successful service envelope with no-store headers', async () => {
   let receivedQuestion = '';

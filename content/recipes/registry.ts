@@ -32,6 +32,10 @@ import type {
   StructuredRecipeContent,
   StructuredRecipeTiming,
 } from './source-recipe.types.ts';
+import { celebrationSpongeCakeRecipe } from './celebration-sponge-cake.recipe.ts';
+import { sourCreamRecipe } from './sour-cream.recipe.ts';
+import { lemonCreamCheeseRecipe } from './lemon-cream-cheese.recipe.ts';
+import { chocolateGlazeRecipe } from './chocolate-glaze.recipe.ts';
 import { spongeCakeRecipe } from './sponge-cake.recipe.ts';
 
 function inventoryDifficulty(value: string | null): RecipeDifficulty | null {
@@ -129,6 +133,12 @@ export type RecipeDocument =
  * file; this registry is the only place that connects a stable recipe ID to it.
  */
 export const recipeDocuments: readonly RecipeDocument[] = [
+  ...[
+    celebrationSpongeCakeRecipe,
+    sourCreamRecipe,
+    lemonCreamCheeseRecipe,
+    chocolateGlazeRecipe,
+  ].map((recipe) => ({ kind: 'sourceDraft' as const, recipe })),
   { kind: 'detailed', recipe: glutenFreeNapoleonRecipe },
   { kind: 'detailed', recipe: crinkleCookiesRecipe },
   { kind: 'sourceDraft', recipe: appleCharlotteRecipe },
@@ -263,6 +273,7 @@ function detailedRecipeContent(
         name: line.options[0].name[locale],
         quantity: line.quantity,
         optional: line.optional,
+        scaling: line.scaling?.kind === 'fixed' ? 'fixed' : undefined,
         note:
           [
             line.preparation?.[locale],
@@ -274,6 +285,7 @@ function detailedRecipeContent(
       })),
     })),
     steps: recipe.steps.map((step) => ({
+      technique: step.technique,
       id: step.id,
       title: step.title?.[locale] ?? step.instruction[locale],
       body: step.instruction[locale],

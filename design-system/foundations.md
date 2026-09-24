@@ -49,6 +49,8 @@ Keep food photography natural; do not darken images or add a brown overlay globa
   phrase of editorial emphasis.
 - Body copy starts at 16px. Regularly used controls and labels should be at least 14px;
   12px is reserved for compact supporting metadata.
+- Drawer titles use the compact 24px display size so contextual tools do not compete with
+  the recipe or step heading behind them.
 - Cook step titles scale from 32px on mobile to a maximum of 40px on desktop.
 - Use sentence case. Uppercase is limited to short eyebrows and evidence labels.
 

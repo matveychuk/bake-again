@@ -8,6 +8,7 @@ import type { RecipeCollectionId } from '@/content/recipes/collections';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getLocalizedRecipePath, localeDraftsPath, localeHomePath, localeRecipesPath } from '@/lib/i18n/routes';
 import { getUiMessages } from '@/lib/i18n/messages';
+import { RecipeSearchForm } from '@/components/recipe/recipe-search-form';
 
 export function HomeRecipes({
   locale,
@@ -45,14 +46,14 @@ export function HomeRecipes({
           <a href={collectionHref}>{messages.viewAll} <ArrowRight aria-hidden="true" size={18} /></a>
         )}
       </div>
+      {(query || selectedCollectionId) && <div className="results-search"><RecipeSearchForm locale={locale} query={query} collectionId={selectedCollectionId} id="results-search" action={`${drafts ? localeDraftsPath(locale) : localeHomePath(locale)}#recipes`} /></div>}
       {visibleRecipes.length === 0 && <p className="recipes-search-empty">{query || selectedCollection ? messages.searchEmpty : drafts ? getUiMessages(locale).catalog.draftsEmpty : getUiMessages(locale).catalog.publishedEmpty}</p>}
       <div className="recipe-grid recipe-grid--catalog-preview">
-        {visibleRecipes.map((recipe, index) => (
+        {visibleRecipes.map((recipe) => (
           <RecipeCard
             recipe={{
               ...recipe,
               locale,
-              featured: !drafts && !query && selectedCollectionId === null && index === 0,
               href: getLocalizedRecipePath(recipe.id, locale) ?? `${recipesPath}/${recipe.href.split('/').at(-1)}`,
             }}
             key={recipe.id}

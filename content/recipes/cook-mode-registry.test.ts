@@ -1,10 +1,16 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
+  createSourceCookIngredients,
   createSourceCookSteps,
   isSourceCookModeAvailable,
 } from './cook-mode-adapter.ts';
 import { getRecipeContent } from './registry.ts';
+import {
+  applySourceRecipeConfiguration,
+  parseSourceRecipeConfiguration,
+  sourceAssistantConfiguration,
+} from './source-recipe-configuration.ts';
 
 void test('banana bread is cookable with five steps and the confirmed baking timer', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
@@ -48,24 +54,40 @@ void test('concise detailed cookies preserve chilling/baking timers and omit rem
   }
 });
 
-void test('reviewed carrot cake keeps seven concise steps, ingredients and the baking timer', () => {
+void test('carrot cake preserves locale-specific steps, ingredients and the baking timer', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
     const content = getRecipeContent('carrot-cake', locale)!;
     const steps = createSourceCookSteps(content, locale);
     assert.equal(content.evidence?.status, 'tested');
-    assert.equal(steps.length, 7);
-    assert.deepEqual(steps[0].stepIds, ['prepare-pan']);
+    assert.equal(steps.length, locale === 'uk' ? 6 : 7);
+    assert.deepEqual(steps[0].stepIds, [
+      locale === 'uk' ? 'prepare-add-ins' : 'prepare-pan',
+    ]);
     assert.deepEqual(
-      steps[2].ingredients.map((ingredient) => ingredient.id),
+      steps
+        .find((step) => step.stepIds.includes('blend-carrots'))
+        ?.ingredients.map((ingredient) => ingredient.id),
       ['carrots', 'oil'],
     );
     assert.deepEqual(
-      steps[3].ingredients.map((ingredient) => ingredient.id),
+      steps
+        .find((step) => step.stepIds.includes('whip-eggs'))
+        ?.ingredients.map((ingredient) => ingredient.id),
       ['eggs', 'sugar'],
     );
-    assert.deepEqual(steps[6].timerOptionsSeconds, [2100, 2400]);
-    assert.equal(steps[6].media?.length, 2);
-    assert(steps.every((step) => !step.checkpoint));
+    const baking = steps.at(-1)!;
+    assert.deepEqual(baking.timerOptionsSeconds, [2100, 2400]);
+    assert.equal(baking.media?.length, 2);
+    if (locale === 'uk') {
+      assert.match(steps[0].tip ?? '', /200°C/);
+      assert.deepEqual(
+        baking.ingredients.map((ingredient) => ingredient.id),
+        ['pan-butter', 'pan-cinnamon'],
+      );
+      assert.equal(steps.filter((step) => step.checkpoint).length, 3);
+    } else {
+      assert(steps.every((step) => !step.checkpoint));
+    }
   }
 });
 
@@ -94,6 +116,39 @@ void test('crepes Cook Mode resolves Spanish content through the same adapter', 
   assert.equal(steps[0].title, 'Bate una base espesa');
   assert.equal(steps[0].media?.[0].id, 'batter-smooth-base');
   assert.equal(steps[3].media?.[2].title, 'Después de darle la vuelta');
+});
+
+void test('crepes Cook Mode uses the same 2x quantities and calculated configuration', () => {
+  const base = getRecipeContent('crepes', 'en')!;
+  const configuration = parseSourceRecipeConfiguration(
+    '?mode=scale&scale=2',
+    base,
+    'flour',
+  );
+  const configured = applySourceRecipeConfiguration(base, configuration, 'en');
+  const allIngredients = createSourceCookIngredients(configured, 'en');
+  const steps = createSourceCookSteps(configured, 'en');
+  assert.deepEqual(
+    sourceAssistantConfiguration('crepes', configured, configuration),
+    {
+      kind: 'adjusted',
+      geometryId: 'round-pan-28-cm',
+      quantityAdjustment: { mode: 'batchScale', factor: 2 },
+    },
+  );
+  assert.equal(
+    allIngredients.find((ingredient) => ingredient.id === 'eggs')?.primary,
+    '10 pcs',
+  );
+  assert.equal(
+    allIngredients.find((ingredient) => ingredient.id === 'flour')?.primary,
+    '280 g',
+  );
+  assert.equal(
+    steps[0].ingredients.find((ingredient) => ingredient.id === 'eggs')
+      ?.primary,
+    '10 pcs',
+  );
 });
 
 void test('lazy dumplings Cook Mode uses one cooking step and step ingredients', () => {
@@ -172,7 +227,7 @@ void test('fruit sponge roll Cook Mode keeps Ukrainian guidance and step ingredi
   assert.ok(content);
 
   const steps = createSourceCookSteps(content, 'uk');
-  assert.equal(steps.length, 4);
+  assert.equal(steps.length, 7);
   assert.deepEqual(
     steps[0].ingredients.map((ingredient) => ingredient.id),
     ['eggs', 'sugar-sponge', 'salt'],
@@ -183,12 +238,15 @@ void test('fruit sponge roll Cook Mode keeps Ukrainian guidance and step ingredi
     ['oil', 'water', 'flour'],
   );
   assert.deepEqual(
-    steps[3].ingredients.map((ingredient) => ingredient.id),
-    ['jam', 'fresh-fruit', 'nuts'],
+    steps[4].ingredients.map((ingredient) => ingredient.id),
+    ['jam'],
   );
+  assert.deepEqual(steps[3].ingredients, []);
+  assert.equal(steps[3].media?.[0]?.id, 'fruit-roll-warm-roll-v3');
+  assert.deepEqual(steps[6].ingredients.map((ingredient) => ingredient.id), ['fresh-fruit', 'nuts']);
   assert.deepEqual(steps[2].timerOptionsSeconds, [900, 1200]);
   assert.equal(steps[0].media?.[0]?.id, 'fruit-roll-egg-foam-v1');
-  assert.equal(steps[2].media?.length, 2);
+  assert.equal(steps[2].media?.length, 1);
 });
 
 void test('sponge cake Cook Mode separates sugar for whites and yolks', () => {
@@ -196,7 +254,7 @@ void test('sponge cake Cook Mode separates sugar for whites and yolks', () => {
   assert.ok(content);
 
   const steps = createSourceCookSteps(content, 'uk');
-  assert.equal(steps.length, 4);
+  assert.equal(steps.length, 5);
   assert.deepEqual(
     steps[0].ingredients.map((ingredient) => ingredient.id),
     ['eggs', 'sugar-whites'],
@@ -210,8 +268,11 @@ void test('sponge cake Cook Mode separates sugar for whites and yolks', () => {
     ['corn-starch', 'tapioca', 'flour'],
   );
   assert.equal(steps[0].media?.[0]?.id, 'sponge-whipped-whites-v1');
-  assert.equal(steps[3].media?.[0]?.id, 'sponge-batter-form-v1');
+  assert.equal(steps[3].media?.[0]?.id, 'sponge-batter-round-foil-v2');
   assert.deepEqual(steps[3].timerOptionsSeconds, [2400, 3000]);
+  assert.deepEqual(steps[4].timerOptionsSeconds, [600, 900]);
+  assert.deepEqual(steps[4].stepIds, ['cool-and-slice']);
+  assert.deepEqual(steps[4].ingredients, []);
 });
 
 void test('banana pancakes Cook Mode keeps Mix B ingredients, cues and photography', () => {
@@ -219,16 +280,26 @@ void test('banana pancakes Cook Mode keeps Mix B ingredients, cues and photograp
   assert.ok(content);
 
   const steps = createSourceCookSteps(content, 'uk');
-  assert.equal(steps.length, 6);
+  assert.equal(steps.length, 4);
   assert.deepEqual(
     steps[0].ingredients.map((ingredient) => ingredient.id),
-    ['flour', 'sugar', 'baking-soda', 'salt'],
+    ['bananas', 'eggs', 'greek-yogurt', 'butter', 'vanilla'],
   );
-  assert.equal(steps[0].media?.[0]?.id, 'banana-pancakes-dry-mix-v1');
-  assert.equal(steps[3].media?.[0]?.id, 'banana-pancakes-lumpy-batter-v1');
-  assert.equal(steps[5].media?.[0]?.id, 'banana-pancakes-flip-cue-v1');
-  assert.match(steps[5].checkpoint ?? '', /бульбашки/i);
-  assert.equal(steps[5].timerOptionsSeconds, undefined);
+  assert.deepEqual(
+    steps[1].ingredients.map((ingredient) => ingredient.id),
+    ['flour', 'baking-powder', 'salt', 'sugar'],
+  );
+  assert.equal(steps[0].media?.[0]?.id, 'banana-pancakes-mashed-bananas-v1');
+  assert.equal(steps[0].media?.[1]?.id, 'banana-pancakes-wet-mixture-v1');
+  assert.equal(steps[1].media?.[0]?.id, 'banana-pancakes-lumpy-batter-v1');
+  assert.deepEqual(
+    steps[3].media?.map((item) => item.id),
+    [
+      'banana-pancakes-flip-cue-author-v1',
+      'banana-pancakes-finished-pan-author-v1',
+    ],
+  );
+  assert.equal(steps[3].timerOptionsSeconds, undefined);
 });
 
 void test('apple-banana Cook Mode uses banana instead of added sweetener', () => {

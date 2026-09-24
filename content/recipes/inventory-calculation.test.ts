@@ -58,6 +58,33 @@ void test('uses the recipe-specific egg anchor for crepes', () => {
   });
 });
 
+void test('scales banana pancakes from the peeled-banana weight', () => {
+  const anchorId = recipeInventory.find(
+    (recipe) => recipe.id === 'banana-fritters',
+  )?.scalingAnchorIngredientId;
+  assert.equal(anchorId, 'bananas');
+
+  const recipe = getRecipeContent('banana-fritters', 'uk')!;
+  const ingredients = recipe.ingredientSections.flatMap(
+    (section) => section.ingredients,
+  );
+  const anchor = findScalingAnchor(ingredients, anchorId)!;
+
+  assert.deepEqual(anchor.amount, {
+    minimum: 500,
+    maximum: null,
+    unit: 'g',
+  });
+  assert.deepEqual(
+    scaleStructuredQuantity(anchor.ingredient.quantity.base, 0.5),
+    {
+      kind: 'exact',
+      value: 250,
+      unit: 'g',
+    },
+  );
+});
+
 void test('scales both reviewed fruit cakes from their five-egg base', () => {
   for (const recipeId of ['apple-charlotte', 'plum-cake']) {
     const anchorId = recipeInventory.find(

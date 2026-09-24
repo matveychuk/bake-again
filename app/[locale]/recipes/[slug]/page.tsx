@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { RecipePage } from '@/components/recipe/recipe-page';
 import {
-  getCreamOptionCopy,
-  isReusableCreamRecipeId,
-  reusableCreamRecipeIds,
-} from '@/content/recipes/cream-option-copy';
+  getComponentCopy,
+  isReusableComponentRecipeId,
+  reusableComponentRecipeIds,
+} from '@/content/recipes/recipe-component-records';
 import { getInventoryRecipe } from '@/content/recipes/inventory';
 import {
   catalogLocaleCopy,
@@ -30,7 +30,7 @@ import { personalStateRecipes } from '@/content/recipes/registry';
 
 type LocalizedRecipePageProps = {
   params: Promise<{ locale: string; slug: string }>;
-  searchParams: Promise<{ cream?: string | string[] }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 const localizedRecipes = personalStateRecipes;
@@ -41,7 +41,7 @@ export function generateStaticParams() {
       locale,
       slug: recipe.slug[locale],
     })),
-    ...reusableCreamRecipeIds.map((slug) => ({ locale, slug })),
+    ...reusableComponentRecipeIds.map((slug) => ({ locale, slug })),
   ]);
 }
 
@@ -51,8 +51,8 @@ export async function generateMetadata({
   const { locale: localeParam, slug } = await params;
   if (!isAppLocale(localeParam)) return {};
 
-  if (isReusableCreamRecipeId(slug)) {
-    const copy = getCreamOptionCopy(slug, localeParam);
+  if (isReusableComponentRecipeId(slug)) {
+    const copy = getComponentCopy(slug, localeParam);
     return {
       title: `${copy.title} — Bake Again`,
       description: copy.description,
@@ -127,11 +127,12 @@ export default async function LocalizedRecipePage({
     : slug;
   if (
     !legacySlug ||
-    (!getInventoryRecipe(legacySlug) && !isReusableCreamRecipeId(legacySlug))
+    (!getInventoryRecipe(legacySlug) && !isReusableComponentRecipeId(legacySlug))
   )
     notFound();
 
-  const requestedCream = (await searchParams).cream;
+  const requestedSearchParams = await searchParams;
+  const requestedCream = requestedSearchParams.cream;
   const selectedCreamRecipeId = Array.isArray(requestedCream)
     ? requestedCream[0]
     : requestedCream;
@@ -142,6 +143,15 @@ export default async function LocalizedRecipePage({
       locale={locale}
       pathname={`/${locale}/recipes/${slug}`}
       selectedCreamRecipeId={selectedCreamRecipeId}
+      configurationSearch={new URLSearchParams(
+        Object.entries(requestedSearchParams).flatMap(([key, value]) =>
+          value === undefined
+            ? []
+            : (Array.isArray(value) ? value : [value]).map(
+                (item) => [key, item] as [string, string],
+              ),
+        ),
+      ).toString()}
     />
   );
 }

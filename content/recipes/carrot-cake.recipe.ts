@@ -24,27 +24,9 @@ const copy = {
       'Вершкове масло для форми',
       'Кориця для форми',
     ],
-    planning: 'Заздалегідь замочіть родзинки.',
+    planning:
+      'Перед початком розігрійте духовку до 200°C у режимі верхнього й нижнього нагріву.',
     baking: 'Випікання',
-    titles: [
-      'Підготуйте духовку й форму',
-      'Підготуйте родзинки й горіхи',
-      'Перебийте моркву з олією',
-      'Збийте яйця з цукром',
-      'Змішайте тісто',
-      'Вмішайте родзинки й горіхи',
-      'Спечіть кекс',
-    ],
-    instructions: [
-      'Розігрійте духовку до 200°C, верхній і нижній нагрів. Дно високої форми застеліть пергаментом, боки змастіть маслом і присипте корицею.',
-      'Злийте воду із замочених родзинок, але не просушуйте їх. Подрібніть горіхи, залишаючи невеликі шматочки.',
-      'Натріть моркву й перебийте блендером з олією до гладкої маси без помітних волокон.',
-      'Збийте до густої світлої піни, що збільшилася в об’ємі у три-чотири рази.',
-      'Вмішайте борошно, розпушувач і сіль у морквяну масу. Додайте третину яєчної піни й перемішайте. Решту введіть лопаткою у два прийоми, рухами знизу догори, лише до зникнення світлих смуг.',
-      'Обережно розподіліть родзинки й горіхи в тісті.',
-      'Викладіть тісто у форму. Випікайте при 200°C, верхній і нижній нагрів, 35–40 хвилин. Перевірте центр зубочисткою — вона має вийти сухою.',
-    ],
-    storage: 'Тісто можна зберігати в холодильнику до трьох днів.',
     alts: [
       'Висока форма з пергаментом на дні й боками, змащеними маслом та присипаними корицею',
       'Гладка помаранчева маса з моркви й олії біля занурювального блендера',
@@ -193,84 +175,180 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
   });
   const usages = (...ids: string[]) =>
     ids.map((ingredientId) => ({ ingredientId }));
-  const steps: StructuredRecipeStep[] = [
-    {
-      id: 'prepare-pan',
-      title: text.titles[0],
-      body: text.instructions[0],
-      cookIngredients: usages('pan-butter', 'pan-cinnamon'),
-      media: [
-        media('prepared-pan', 'step-02-prepared-pan-v1.png', text.alts[0]),
-      ],
-    },
-    {
-      id: 'prepare-add-ins',
-      title: text.titles[1],
-      body: text.instructions[1],
-      cookIngredients: usages('raisins', 'nuts'),
-    },
-    {
-      id: 'blend-carrots',
-      title: text.titles[2],
-      body: text.instructions[2],
-      cookIngredients: usages('carrots', 'oil'),
-      media: [
-        media(
-          'carrot-oil-smooth',
-          'step-03-carrot-oil-smooth-v1.png',
-          text.alts[1],
-        ),
-      ],
-    },
-    {
-      id: 'whip-eggs',
-      title: text.titles[3],
-      body: text.instructions[3],
-      cookIngredients: usages('eggs', 'sugar'),
-      media: [
-        media(
-          'eggs-sugar-foam',
-          'step-04-eggs-sugar-foam-v1.png',
-          text.alts[2],
-        ),
-      ],
-    },
-    {
-      id: 'mix-batter',
-      title: text.titles[4],
-      body: text.instructions[4],
-      cookIngredients: usages('flour', 'baking-powder', 'salt'),
-    },
-    {
-      id: 'fold-add-ins',
-      title: text.titles[5],
-      body: text.instructions[5],
-      tip: text.storage,
-      cookIngredients: usages('raisins', 'nuts'),
-      media: [
-        media('batter-add-ins', 'step-06-batter-add-ins-v1.png', text.alts[3]),
-      ],
-    },
-    {
-      id: 'bake',
-      title: text.titles[6],
-      body: text.instructions[6],
-      media: [
-        media(
-          'batter-in-pan',
-          'step-07-batter-in-pan-v1.png',
-          text.alts[4],
-          text.bakingImages[0],
-        ),
-        media(
-          'dry-toothpick',
-          'step-07-dry-toothpick-v1.png',
-          text.alts[5],
-          text.bakingImages[1],
-        ),
-      ],
-    },
-  ];
+  const stepsForLocale = (): StructuredRecipeStep[] => {
+    // Ukrainian editorial review comes first; translations keep their current copy
+    // and step structure until the catalogue-wide translation pass.
+    if (locale === 'uk') {
+      return [
+        {
+          id: 'prepare-add-ins',
+          title: 'Підготуйте родзинки й горіхи',
+          tip: 'Увімкніть духовку на 200°C, верхній і нижній нагрів, щоб вона встигла розігрітися.',
+          body: 'Залийте родзинки водою й залиште на 5 хвилин. Тим часом наріжте горіхи невеликими шматочками й переходьте до моркви.',
+          cookIngredients: usages('raisins', 'nuts'),
+        },
+        {
+          id: 'blend-carrots',
+          title: 'Подрібніть моркву з олією',
+          body: 'Натріть моркву, додайте олію й подрібніть усе блендером.',
+          checkpoint: 'Маса гладка й однорідна, без помітних волокон моркви.',
+          cookIngredients: usages('carrots', 'oil'),
+          media: [
+            media(
+              'carrot-oil-smooth',
+              'step-03-carrot-oil-smooth-v1.png',
+              text.alts[1],
+            ),
+          ],
+        },
+        {
+          id: 'whip-eggs',
+          title: 'Збийте яйця з цукром',
+          body: 'З’єднайте яйця з цукром і збийте міксером.',
+          checkpoint:
+            'Маса світла й пишна, збільшилася в об’ємі у три-чотири рази. З вінчика стікає густою стрічкою.',
+          cookIngredients: usages('eggs', 'sugar'),
+          media: [
+            media(
+              'eggs-sugar-foam',
+              'step-04-eggs-sugar-foam-v1.png',
+              text.alts[2],
+            ),
+          ],
+        },
+        {
+          id: 'mix-batter',
+          title: 'Замісіть тісто',
+          body: 'Додайте до морквяної маси борошно, розпушувач і сіль. Перемішайте. Вмішайте третину збитих яєць, потім додайте решту у два прийоми. Перемішуйте лопаткою знизу догори, доки не зникнуть світлі смуги.',
+          tip: 'Щоб зберегти пишність тіста, не перемішуйте його довше, ніж потрібно для однорідності.',
+          cookIngredients: usages('flour', 'baking-powder', 'salt'),
+        },
+        {
+          id: 'fold-add-ins',
+          title: 'Додайте родзинки й горіхи',
+          body: 'Злийте воду з родзинок, але не обсушуйте їх. Додайте родзинки й горіхи до тіста. Обережно перемішайте лопаткою, щоб рівномірно розподілити їх.',
+          tip: 'Якщо готуєте заздалегідь, тісто можна зберігати в холодильнику до трьох днів.',
+          cookIngredients: usages('raisins', 'nuts'),
+          media: [
+            media(
+              'batter-add-ins',
+              'step-06-batter-add-ins-v1.png',
+              text.alts[3],
+            ),
+          ],
+        },
+        {
+          id: 'bake',
+          title: 'Спечіть кекс',
+          body: 'Дно високої форми застеліть пергаментом, боки змастіть маслом і присипте корицею. Викладіть тісто у форму. Поставте в розігріту до 200°C духовку, верхній і нижній нагрів. Випікайте 35–40 хвилин.',
+          checkpoint:
+            'Встроміть зубочистку в центр кексу: якщо вона виходить повністю сухою, кекс готовий. Дістаньте його з духовки й вийміть із форми.',
+          cookIngredients: usages('pan-butter', 'pan-cinnamon'),
+          media: [
+            media(
+              'batter-in-pan',
+              'step-07-batter-in-pan-v1.png',
+              text.alts[4],
+              text.bakingImages[0],
+            ),
+            media(
+              'dry-toothpick',
+              'step-07-dry-toothpick-v1.png',
+              text.alts[5],
+              text.bakingImages[1],
+            ),
+          ],
+        },
+      ];
+    }
+    const translatedText = copy[locale];
+    return [
+      {
+        id: 'prepare-pan',
+        title: translatedText.titles[0],
+        body: translatedText.instructions[0],
+        cookIngredients: usages('pan-butter', 'pan-cinnamon'),
+        media: [
+          media(
+            'prepared-pan',
+            'step-02-prepared-pan-v1.png',
+            translatedText.alts[0],
+          ),
+        ],
+      },
+      {
+        id: 'prepare-add-ins',
+        title: translatedText.titles[1],
+        body: translatedText.instructions[1],
+        cookIngredients: usages('raisins', 'nuts'),
+      },
+      {
+        id: 'blend-carrots',
+        title: translatedText.titles[2],
+        body: translatedText.instructions[2],
+        cookIngredients: usages('carrots', 'oil'),
+        media: [
+          media(
+            'carrot-oil-smooth',
+            'step-03-carrot-oil-smooth-v1.png',
+            translatedText.alts[1],
+          ),
+        ],
+      },
+      {
+        id: 'whip-eggs',
+        title: translatedText.titles[3],
+        body: translatedText.instructions[3],
+        cookIngredients: usages('eggs', 'sugar'),
+        media: [
+          media(
+            'eggs-sugar-foam',
+            'step-04-eggs-sugar-foam-v1.png',
+            translatedText.alts[2],
+          ),
+        ],
+      },
+      {
+        id: 'mix-batter',
+        title: translatedText.titles[4],
+        body: translatedText.instructions[4],
+        cookIngredients: usages('flour', 'baking-powder', 'salt'),
+      },
+      {
+        id: 'fold-add-ins',
+        title: translatedText.titles[5],
+        body: translatedText.instructions[5],
+        tip: translatedText.storage,
+        cookIngredients: usages('raisins', 'nuts'),
+        media: [
+          media(
+            'batter-add-ins',
+            'step-06-batter-add-ins-v1.png',
+            translatedText.alts[3],
+          ),
+        ],
+      },
+      {
+        id: 'bake',
+        title: translatedText.titles[6],
+        body: translatedText.instructions[6],
+        media: [
+          media(
+            'batter-in-pan',
+            'step-07-batter-in-pan-v1.png',
+            translatedText.alts[4],
+            translatedText.bakingImages[0],
+          ),
+          media(
+            'dry-toothpick',
+            'step-07-dry-toothpick-v1.png',
+            translatedText.alts[5],
+            translatedText.bakingImages[1],
+          ),
+        ],
+      },
+    ];
+  };
   return {
     completeness: 'readyToReview',
     presentation: 'concise',
@@ -304,7 +382,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
         })),
       },
     ],
-    steps,
+    steps: stepsForLocale(),
   };
 }
 

@@ -18,13 +18,19 @@ import {
 import { glutenFreeNapoleonRecipe } from './gluten-free-napoleon.recipe';
 import { recipeInventory } from './inventory';
 import type { InventoryRecipe } from './inventory';
-import { getCreamPageRecipe } from './cream-page-records';
+import { getComponentPageRecipe } from './recipe-component-records';
 import { getRecipeContent, getRecipeDocument } from './registry';
 import {
   composeRecipeWithCream,
   resolveSelectedCreamRecipeId,
 } from './cream-composition';
 import { getUiMessages } from '../../lib/i18n/messages';
+import {
+  applySourceRecipeConfiguration,
+  parseSourceRecipeConfiguration,
+  sourceAssistantConfiguration,
+  sourceRecipeScalingBounds,
+} from './source-recipe-configuration';
 
 const napoleonCookMode: CookModeDefinition = {
   recipeId: glutenFreeNapoleonRecipe.id,
@@ -77,16 +83,17 @@ function createInventoryCookMode(
 ): CookModeDefinition {
   const structured = getRecipeContent(recipe.id, locale);
   const document = getRecipeDocument(recipe.id);
+  const baseVersionId =
+    document?.kind === 'detailed'
+      ? document.recipe.versionId
+      : `${recipe.id}-source-v1`;
   const baseForCookMode = structured
     ? composeRecipeWithCream(structured, null, null)
     : null;
 
   return {
     recipeId: recipe.id,
-    recipeVersionId:
-      document?.kind === 'detailed'
-        ? document.recipe.versionId
-        : `${recipe.id}-source-v1`,
+    recipeVersionId: baseVersionId,
     recipeTitle: recipeDetailTitles[recipe.id]?.[locale] ?? recipe.title,
     detailHref: `/recipes/${recipe.slug}`,
     totalSteps:
@@ -111,30 +118,54 @@ function createInventoryCookMode(
             selectedCreamRecipeId,
           )
         : null;
+      const configuration = parseSourceRecipeConfiguration(
+        locationSearch,
+        composed,
+        recipe.scalingAnchorIngredientId,
+        sourceRecipeScalingBounds(
+          document?.kind === 'detailed' ? document.recipe : null,
+          recipe.scalingAnchorIngredientId,
+        ),
+      );
+      const configured = composed
+        ? applySourceRecipeConfiguration(composed, configuration, locale)
+        : null;
       const needsCreamSelection = Boolean(
         structured?.creamOptions && !selectedCreamRecipeId,
       );
       const isAvailable =
-        !needsCreamSelection && isSourceCookModeAvailable(composed);
-      const unavailableReason = needsCreamSelection
-        ? getUiMessages(locale).recipe.chooseCreamBeforeCooking
-        : !isAvailable && composed
-          ? (composed.gapNote ??
-            'The source preserves ingredients but not the preparation method.')
-          : !composed
-            ? 'The source currently preserves only the recipe name. Add the original ingredients and method before cooking.'
-            : undefined;
+        configuration.kind !== 'invalid' &&
+        !needsCreamSelection &&
+        isSourceCookModeAvailable(configured);
+      const unavailableReason =
+        configuration.kind === 'invalid'
+          ? configuration.reason === 'unsupported'
+            ? getUiMessages(locale).scaling.supportedAmount
+            : getUiMessages(locale).scaling.positiveAmount
+          : needsCreamSelection
+            ? getUiMessages(locale).recipe.chooseCreamBeforeCooking
+            : !isAvailable && configured
+              ? (configured.gapNote ??
+                'The source preserves ingredients but not the preparation method.')
+              : !configured
+                ? 'The source currently preserves only the recipe name. Add the original ingredients and method before cooking.'
+                : undefined;
 
       return {
-        isAdjusted: false,
+        recipeVersionId: `${baseVersionId}${selectedCreamRecipeId ? `-cream-${selectedCreamRecipeId}` : ''}`,
+        isAdjusted: configuration.kind === 'adjusted',
         unavailableReason,
         steps:
-          composed && isAvailable
-            ? createSourceCookSteps(composed, locale)
+          configured && isAvailable
+            ? createSourceCookSteps(configured, locale)
             : [],
-        allIngredients: composed
-          ? createSourceCookIngredients(composed, locale)
-          : [],
+        allIngredients:
+          configured && configuration.kind !== 'invalid'
+            ? createSourceCookIngredients(configured, locale)
+            : [],
+        assistantConfiguration: configured
+          ? sourceAssistantConfiguration(recipe.id, configured, configuration)
+          : undefined,
       };
     },
   };
@@ -147,11 +178,32 @@ export function getCookModeDefinition(slug: string, locale: AppLocale = 'en') {
       recipeTitle:
         recipeDetailTitles[glutenFreeNapoleonRecipe.id]?.[locale] ??
         napoleonCookMode.recipeTitle,
+      getState: (locationSearch: string) => {
+        const params = new URLSearchParams(locationSearch);
+        const availableAmount = params.get('amount');
+        if (
+          params.get('mode') === 'ingredient' &&
+          (!availableAmount ||
+            !Number.isFinite(Number(availableAmount)) ||
+            Number(availableAmount) < 100)
+        ) {
+          return {
+            isAdjusted: false,
+            steps: [],
+            allIngredients: [],
+            unavailableReason:
+              Number(availableAmount) > 0
+                ? getUiMessages(locale).scaling.supportedAmount
+                : getUiMessages(locale).scaling.positiveAmount,
+          };
+        }
+        return napoleonCookMode.getState(locationSearch);
+      },
     };
   }
 
   const recipe =
     recipeInventory.find((candidate) => candidate.slug === slug) ??
-    getCreamPageRecipe(slug);
+    getComponentPageRecipe(slug);
   return recipe ? createInventoryCookMode(recipe, locale) : undefined;
 }

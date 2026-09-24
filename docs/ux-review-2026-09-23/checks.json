@@ -1,0 +1,1501 @@
+[
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "uk",
+    "route": "",
+    "overflow": false,
+    "height": 10271,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Печіть те,\nщо любите.\nІ все вийде.",
+        "y": 257
+      },
+      {
+        "text": "Усі рецепти на сьогодні.",
+        "y": 1416
+      },
+      {
+        "text": "Знайте, що випікали, а що лише розрахували.",
+        "y": 9493
+      }
+    ],
+    "clipped": [
+      "Шукати рецепти"
+    ]
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "uk",
+    "route": "/recipes/banana-fritters",
+    "overflow": false,
+    "height": 4674,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютенові\nбананові панкейки",
+        "y": 318
+      },
+      {
+        "text": "Кількість",
+        "y": 1307
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 1641
+      },
+      {
+        "text": "Приготування",
+        "y": 2452
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "uk",
+    "route": "/recipes/napoleon-cake",
+    "overflow": false,
+    "height": 10631,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютеновий\nНаполеон",
+        "y": 318
+      },
+      {
+        "text": "Сплануйте заздалегідь.",
+        "y": 1274
+      },
+      {
+        "text": "Змінити кількість",
+        "y": 1791
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 2267
+      },
+      {
+        "text": "Готуйте крок за кроком.",
+        "y": 3979
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "uk",
+    "route": "/recipes/crepes/cook",
+    "overflow": false,
+    "height": 1064,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Збийте густу основу",
+        "y": 159
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "uk",
+    "route": "/saved",
+    "overflow": false,
+    "height": 844,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Збережені рецепти",
+        "y": 232
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "uk",
+    "route": "/shopping-list",
+    "overflow": false,
+    "height": 850,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Список покупок",
+        "y": 232
+      },
+      {
+        "text": "Ваш список порожній.",
+        "y": 376
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "en",
+    "route": "",
+    "overflow": false,
+    "height": 9816,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Bake what\nyou love.\nKnow what works.",
+        "y": 257
+      },
+      {
+        "text": "Every recipe so far.",
+        "y": 1468
+      },
+      {
+        "text": "Know what was baked — and what was only worked out.",
+        "y": 9086
+      }
+    ],
+    "clipped": [
+      "Search recipes"
+    ]
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "en",
+    "route": "/recipes/banana-fritters",
+    "overflow": false,
+    "height": 4446,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Gluten-free\nbanana pancakes",
+        "y": 318
+      },
+      {
+        "text": "Quantity",
+        "y": 1263
+      },
+      {
+        "text": "Ingredients",
+        "y": 1596
+      },
+      {
+        "text": "Method",
+        "y": 2407
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "en",
+    "route": "/recipes/napoleon-cake",
+    "overflow": false,
+    "height": 12300,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Gluten-Free\nNapoleon Cake",
+        "y": 318
+      },
+      {
+        "text": "Plan for the rest.",
+        "y": 1274
+      },
+      {
+        "text": "Adjust recipe",
+        "y": 1759
+      },
+      {
+        "text": "Ingredients",
+        "y": 2164
+      },
+      {
+        "text": "Make it step by step.",
+        "y": 3876
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "en",
+    "route": "/recipes/crepes/cook",
+    "overflow": false,
+    "height": 1064,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Blend a thick base",
+        "y": 159
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "en",
+    "route": "/saved",
+    "overflow": false,
+    "height": 844,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Saved recipes",
+        "y": 232
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "en",
+    "route": "/shopping-list",
+    "overflow": false,
+    "height": 850,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Shopping list",
+        "y": 232
+      },
+      {
+        "text": "Your shopping list is empty.",
+        "y": 376
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "es",
+    "route": "",
+    "overflow": false,
+    "height": 9915,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Hornea lo que\nte gusta.\nTe saldrá bien.",
+        "y": 257
+      },
+      {
+        "text": "Todas las recetas hasta ahora.",
+        "y": 1422
+      },
+      {
+        "text": "Distingue lo horneado de lo calculado.",
+        "y": 9180
+      }
+    ],
+    "clipped": [
+      "Buscar recetas"
+    ]
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "es",
+    "route": "/recipes/banana-fritters",
+    "overflow": false,
+    "height": 2266,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Sin gluten\nTortitas de plátano",
+        "y": 318
+      },
+      {
+        "text": "Ajustar receta",
+        "y": 1168
+      },
+      {
+        "text": "Ingredientes",
+        "y": 1535
+      },
+      {
+        "text": "Hazlo paso a paso.",
+        "y": 1821
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "es",
+    "route": "/recipes/napoleon-cake",
+    "overflow": false,
+    "height": 12864,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Sin gluten\nTarta Napoleón",
+        "y": 318
+      },
+      {
+        "text": "Planifica con antelación.",
+        "y": 1274
+      },
+      {
+        "text": "Ajustar receta",
+        "y": 1759
+      },
+      {
+        "text": "Ingredientes",
+        "y": 2200
+      },
+      {
+        "text": "Hazlo paso a paso.",
+        "y": 3913
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "es",
+    "route": "/recipes/crepes/cook",
+    "overflow": false,
+    "height": 1080,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Bate una base espesa",
+        "y": 159
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "es",
+    "route": "/saved",
+    "overflow": false,
+    "height": 844,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Recetas guardadas",
+        "y": 232
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 390,
+    "locale": "es",
+    "route": "/shopping-list",
+    "overflow": false,
+    "height": 875,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Lista de compra",
+        "y": 232
+      },
+      {
+        "text": "Tu lista de compra está vacía.",
+        "y": 376
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "drawer",
+    "width": 390,
+    "overflow": false,
+    "height": 4042,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютенові\nмлинці",
+        "y": 318
+      },
+      {
+        "text": "Кількість",
+        "y": 1246
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 1601
+      },
+      {
+        "text": "Приготування",
+        "y": 2295
+      },
+      {
+        "text": "Що потрібно купити?",
+        "y": 1265
+      }
+    ],
+    "clipped": [],
+    "text": "Що потрібно купити?\n\nБезглютенові млинці · 1×\n\nЗалиште позначеними продукти, які потрібно купити.\n\nОбрати всі\nЗняти всі позначки\nТісто для млинців\nЯйця\n5 шт.\nБорошно Schär Mix B Bread\n140 г\nМолоко\n500 мл\nЦукор\n20 г\nСіль\nЗа потреби\nГаряча вода\n50 мл\nОлія без запаху\n25 г\nОлія для пательні\nДля змащування.\nЗа потреби\nДодати до списку (7)"
+  },
+  {
+    "name": "focus-return",
+    "width": 390,
+    "focus": "<button class=\"_trigger_54kw2_16 \" type=\"button\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-shopping-bag\" aria-hidden=\"true\"><path d=\"M16 10a4 4 0 0 1-8 0\"></path><path d=\"M3.103 6.034h17.794\"></path><path d=\"M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z\"></path></svg>До списку покупок…</button>"
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "uk",
+    "route": "",
+    "overflow": false,
+    "height": 6724,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Печіть те,\nщо любите.\nІ все вийде.",
+        "y": 213
+      },
+      {
+        "text": "Усі рецепти на сьогодні.",
+        "y": 1501
+      },
+      {
+        "text": "Знайте, що випікали, а що лише розрахували.",
+        "y": 6083
+      }
+    ],
+    "clipped": [
+      "Шукати рецепти"
+    ]
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "uk",
+    "route": "/recipes/banana-fritters",
+    "overflow": false,
+    "height": 4403,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютенові\nбананові панкейки",
+        "y": 266
+      },
+      {
+        "text": "Кількість",
+        "y": 1227
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 1541
+      },
+      {
+        "text": "Приготування",
+        "y": 2281
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "uk",
+    "route": "/recipes/napoleon-cake",
+    "overflow": false,
+    "height": 9904,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютеновий\nНаполеон",
+        "y": 266
+      },
+      {
+        "text": "Сплануйте заздалегідь.",
+        "y": 1236
+      },
+      {
+        "text": "Змінити кількість",
+        "y": 1643
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 1998
+      },
+      {
+        "text": "Готуйте крок за кроком.",
+        "y": 3651
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "uk",
+    "route": "/recipes/crepes/cook",
+    "overflow": false,
+    "height": 1110,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Збийте густу основу",
+        "y": 159
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "uk",
+    "route": "/saved",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Збережені рецепти",
+        "y": 196
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "uk",
+    "route": "/shopping-list",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Список покупок",
+        "y": 196
+      },
+      {
+        "text": "Ваш список порожній.",
+        "y": 318
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "en",
+    "route": "",
+    "overflow": false,
+    "height": 6423,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Bake what\nyou love.\nKnow what works.",
+        "y": 161
+      },
+      {
+        "text": "Every recipe so far.",
+        "y": 1449
+      },
+      {
+        "text": "Know what was baked — and what was only worked out.",
+        "y": 5807
+      }
+    ],
+    "clipped": [
+      "Search recipes"
+    ]
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "en",
+    "route": "/recipes/banana-fritters",
+    "overflow": false,
+    "height": 4328,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Gluten-free\nbanana pancakes",
+        "y": 214
+      },
+      {
+        "text": "Quantity",
+        "y": 1175
+      },
+      {
+        "text": "Ingredients",
+        "y": 1489
+      },
+      {
+        "text": "Method",
+        "y": 2229
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "en",
+    "route": "/recipes/napoleon-cake",
+    "overflow": false,
+    "height": 10349,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Gluten-Free\nNapoleon Cake",
+        "y": 214
+      },
+      {
+        "text": "Plan for the rest.",
+        "y": 1184
+      },
+      {
+        "text": "Adjust recipe",
+        "y": 1591
+      },
+      {
+        "text": "Ingredients",
+        "y": 1928
+      },
+      {
+        "text": "Make it step by step.",
+        "y": 3581
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "en",
+    "route": "/recipes/crepes/cook",
+    "overflow": false,
+    "height": 1110,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Blend a thick base",
+        "y": 159
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "en",
+    "route": "/saved",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Saved recipes",
+        "y": 144
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "en",
+    "route": "/shopping-list",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Shopping list",
+        "y": 144
+      },
+      {
+        "text": "Your shopping list is empty.",
+        "y": 266
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "es",
+    "route": "",
+    "overflow": false,
+    "height": 6506,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Hornea lo que\nte gusta.\nTe saldrá bien.",
+        "y": 161
+      },
+      {
+        "text": "Todas las recetas hasta ahora.",
+        "y": 1455
+      },
+      {
+        "text": "Distingue lo horneado de lo calculado.",
+        "y": 5895
+      }
+    ],
+    "clipped": [
+      "Buscar recetas"
+    ]
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "es",
+    "route": "/recipes/banana-fritters",
+    "overflow": false,
+    "height": 2001,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Sin gluten\nTortitas de plátano",
+        "y": 214
+      },
+      {
+        "text": "Ajustar receta",
+        "y": 1100
+      },
+      {
+        "text": "Ingredientes",
+        "y": 1379
+      },
+      {
+        "text": "Hazlo paso a paso.",
+        "y": 1605
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "es",
+    "route": "/recipes/napoleon-cake",
+    "overflow": false,
+    "height": 10642,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Sin gluten\nTarta Napoleón",
+        "y": 214
+      },
+      {
+        "text": "Planifica con antelación.",
+        "y": 1184
+      },
+      {
+        "text": "Ajustar receta",
+        "y": 1591
+      },
+      {
+        "text": "Ingredientes",
+        "y": 1946
+      },
+      {
+        "text": "Hazlo paso a paso.",
+        "y": 3599
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "es",
+    "route": "/recipes/crepes/cook",
+    "overflow": false,
+    "height": 1110,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Bate una base espesa",
+        "y": 159
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "es",
+    "route": "/saved",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Recetas guardadas",
+        "y": 144
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 900,
+    "locale": "es",
+    "route": "/shopping-list",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Lista de compra",
+        "y": 144
+      },
+      {
+        "text": "Tu lista de compra está vacía.",
+        "y": 266
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "drawer",
+    "width": 900,
+    "overflow": false,
+    "height": 3921,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютенові\nмлинці",
+        "y": 266
+      },
+      {
+        "text": "Кількість",
+        "y": 1227
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 1585
+      },
+      {
+        "text": "Приготування",
+        "y": 2219
+      },
+      {
+        "text": "Що потрібно купити?",
+        "y": 1111
+      }
+    ],
+    "clipped": [],
+    "text": "Що потрібно купити?\n\nБезглютенові млинці · 1×\n\nЗалиште позначеними продукти, які потрібно купити.\n\nОбрати всі\nЗняти всі позначки\nТісто для млинців\nЯйця\n5 шт.\nБорошно Schär Mix B Bread\n140 г\nМолоко\n500 мл\nЦукор\n20 г\nСіль\nЗа потреби\nГаряча вода\n50 мл\nОлія без запаху\n25 г\nОлія для пательні\nДля змащування.\nЗа потреби\nДодати до списку (7)"
+  },
+  {
+    "name": "focus-return",
+    "width": 900,
+    "focus": "<button class=\"_trigger_54kw2_16 \" type=\"button\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-shopping-bag\" aria-hidden=\"true\"><path d=\"M16 10a4 4 0 0 1-8 0\"></path><path d=\"M3.103 6.034h17.794\"></path><path d=\"M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z\"></path></svg>До списку покупок…</button>"
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "uk",
+    "route": "",
+    "overflow": false,
+    "height": 6133,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Печіть те,\nщо любите.\nІ все вийде.",
+        "y": 189
+      },
+      {
+        "text": "Усі рецепти на сьогодні.",
+        "y": 850
+      },
+      {
+        "text": "Знайте, що випікали, а що лише розрахували.",
+        "y": 5756
+      }
+    ],
+    "clipped": [
+      "Шукати рецепти"
+    ]
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "uk",
+    "route": "/recipes/banana-fritters",
+    "overflow": false,
+    "height": 3536,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютенові\nбананові панкейки",
+        "y": 221
+      },
+      {
+        "text": "Кількість",
+        "y": 787
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 754
+      },
+      {
+        "text": "Приготування",
+        "y": 1551
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "uk",
+    "route": "/recipes/napoleon-cake",
+    "overflow": false,
+    "height": 8637,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютеновий\nНаполеон",
+        "y": 221
+      },
+      {
+        "text": "Сплануйте заздалегідь.",
+        "y": 775
+      },
+      {
+        "text": "Змінити кількість",
+        "y": 1012
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 962
+      },
+      {
+        "text": "Готуйте крок за кроком.",
+        "y": 2671
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "uk",
+    "route": "/recipes/crepes/cook",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Збийте густу основу",
+        "y": 109
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "uk",
+    "route": "/saved",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Збережені рецепти",
+        "y": 163
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "uk",
+    "route": "/shopping-list",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Список покупок",
+        "y": 163
+      },
+      {
+        "text": "Ваш список порожній.",
+        "y": 296
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "en",
+    "route": "",
+    "overflow": false,
+    "height": 6133,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Bake what\nyou love.\nKnow what works.",
+        "y": 189
+      },
+      {
+        "text": "Every recipe so far.",
+        "y": 850
+      },
+      {
+        "text": "Know what was baked — and what was only worked out.",
+        "y": 5756
+      }
+    ],
+    "clipped": [
+      "Search recipes"
+    ]
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "en",
+    "route": "/recipes/banana-fritters",
+    "overflow": false,
+    "height": 3513,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Gluten-free\nbanana pancakes",
+        "y": 221
+      },
+      {
+        "text": "Quantity",
+        "y": 787
+      },
+      {
+        "text": "Ingredients",
+        "y": 754
+      },
+      {
+        "text": "Method",
+        "y": 1551
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "en",
+    "route": "/recipes/napoleon-cake",
+    "overflow": false,
+    "height": 9152,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Gluten-Free\nNapoleon Cake",
+        "y": 221
+      },
+      {
+        "text": "Plan for the rest.",
+        "y": 775
+      },
+      {
+        "text": "Adjust recipe",
+        "y": 1012
+      },
+      {
+        "text": "Ingredients",
+        "y": 962
+      },
+      {
+        "text": "Make it step by step.",
+        "y": 2671
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "en",
+    "route": "/recipes/crepes/cook",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Blend a thick base",
+        "y": 109
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "en",
+    "route": "/saved",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Saved recipes",
+        "y": 163
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "en",
+    "route": "/shopping-list",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Shopping list",
+        "y": 163
+      },
+      {
+        "text": "Your shopping list is empty.",
+        "y": 296
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "es",
+    "route": "",
+    "overflow": false,
+    "height": 6133,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Hornea lo que\nte gusta.\nTe saldrá bien.",
+        "y": 185
+      },
+      {
+        "text": "Todas las recetas hasta ahora.",
+        "y": 850
+      },
+      {
+        "text": "Distingue lo horneado de lo calculado.",
+        "y": 5775
+      }
+    ],
+    "clipped": [
+      "Buscar recetas"
+    ]
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "es",
+    "route": "/recipes/banana-fritters",
+    "overflow": false,
+    "height": 1607,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Sin gluten\nTortitas de plátano",
+        "y": 242
+      },
+      {
+        "text": "Ajustar receta",
+        "y": 754
+      },
+      {
+        "text": "Ingredientes",
+        "y": 703
+      },
+      {
+        "text": "Hazlo paso a paso.",
+        "y": 1258
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "es",
+    "route": "/recipes/napoleon-cake",
+    "overflow": false,
+    "height": 9389,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Sin gluten\nTarta Napoleón",
+        "y": 221
+      },
+      {
+        "text": "Planifica con antelación.",
+        "y": 775
+      },
+      {
+        "text": "Ajustar receta",
+        "y": 1012
+      },
+      {
+        "text": "Ingredientes",
+        "y": 962
+      },
+      {
+        "text": "Hazlo paso a paso.",
+        "y": 2671
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "es",
+    "route": "/recipes/crepes/cook",
+    "overflow": false,
+    "height": 1027,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Bate una base espesa",
+        "y": 109
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "es",
+    "route": "/saved",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Recetas guardadas",
+        "y": 163
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "layout",
+    "width": 1440,
+    "locale": "es",
+    "route": "/shopping-list",
+    "overflow": false,
+    "height": 1000,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Lista de compra",
+        "y": 163
+      },
+      {
+        "text": "Tu lista de compra está vacía.",
+        "y": 296
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "name": "drawer",
+    "width": 1440,
+    "overflow": false,
+    "height": 3040,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютенові\nмлинці",
+        "y": 221
+      },
+      {
+        "text": "Кількість",
+        "y": 787
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 754
+      },
+      {
+        "text": "Приготування",
+        "y": 1445
+      },
+      {
+        "text": "Що потрібно купити?",
+        "y": 24
+      }
+    ],
+    "clipped": [],
+    "text": "Що потрібно купити?\n\nБезглютенові млинці · 1×\n\nЗалиште позначеними продукти, які потрібно купити.\n\nОбрати всі\nЗняти всі позначки\nТісто для млинців\nЯйця\n5 шт.\nБорошно Schär Mix B Bread\n140 г\nМолоко\n500 мл\nЦукор\n20 г\nСіль\nЗа потреби\nГаряча вода\n50 мл\nОлія без запаху\n25 г\nОлія для пательні\nДля змащування.\nЗа потреби\nДодати до списку (7)"
+  },
+  {
+    "name": "focus-return",
+    "width": 1440,
+    "focus": "<button class=\"_trigger_54kw2_16 \" type=\"button\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-shopping-bag\" aria-hidden=\"true\"><path d=\"M16 10a4 4 0 0 1-8 0\"></path><path d=\"M3.103 6.034h17.794\"></path><path d=\"M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z\"></path></svg>До списку покупок…</button>"
+  },
+  {
+    "name": "search-focus",
+    "style": {
+      "outline": "rgb(57, 39, 33) none 0px",
+      "shadow": "none",
+      "height": 22.328125,
+      "fontSize": "14.4px",
+      "formOutline": "rgb(57, 39, 33) none 3px"
+    }
+  },
+  {
+    "name": "search-results",
+    "url": "http://localhost:3000/uk?q=%D0%BC%D0%BB%D0%B8%D0%BD%D0%BA%D0%B8#recipes",
+    "text": "Bake Again.\nРецепти\nЧернетки\nЗбережені\nСписок покупок\nПро нас\nUK\n\nНЕВЕЛИКА КОЛЕКЦІЯ ПЕРЕВІРЕНИХ БЕЗГЛЮТЕНОВИХ РЕЦЕПТІВ\n\nПечіть те,\nщо любите.\nІ все вийде.\n\nУлюблені торти, печиво й сніданки — ретельно адаптовані, не раз випробувані й докладно описані, щоб удома все вдалося.\n\nШукати рецепти\nШукати\nПОЧНІТЬ ІЗ КЛАСИКИ\nБезглютеновий Наполеон\n\nОБЕРІТЬ ДОБІРКУ\n\nНа сніданок\nНа щодень\nДля свята\nЗ творогом\nТісто про запас\n\nПОТОЧНИЙ КАТАЛОГ\n\nРезультати для «млинки»\n\n1 рецепт\n\nПереглянути всі рецепти\nМлинці\nЗагальний час: 1 год\nСкладність: Середня\n\nБорошно: Schär Mix B\n\nНа сніданок\nНа щодень\n\nЗРОЗУМІЛИЙ СТАТУС РЕЦЕПТА\n\nЗнайте, що випікали, а що лише розрахували.\nПеревірено\nВипечено саме за цим записом.\nРозраховано\nКількості перераховано. Цю версію не перевірено випіканням.\nЗапропоновано\nІдея для спроби. Цю зміну не перевірено випіканням.\n\nУ кожному рецепті вказано використані борошняну суміш, форму й кількість. У перевіреного оригіналу може бути розрахований варіант.\n\nЯк ми перевіряємо рецепти\nBake Again.\n\nDesign System v1 · Warm Precision"
+  },
+  {
+    "name": "search-empty",
+    "text": "Bake Again.\nРецепти\nЧернетки\nЗбережені\nСписок покупок\nПро нас\nUK\n\nНЕВЕЛИКА КОЛЕКЦІЯ ПЕРЕВІРЕНИХ БЕЗГЛЮТЕНОВИХ РЕЦЕПТІВ\n\nПечіть те,\nщо любите.\nІ все вийде.\n\nУлюблені торти, печиво й сніданки — ретельно адаптовані, не раз випробувані й докладно описані, щоб удома все вдалося.\n\nШукати рецепти\nШукати\nПОЧНІТЬ ІЗ КЛАСИКИ\nБезглютеновий Наполеон\n\nОБЕРІТЬ ДОБІРКУ\n\nНа сніданок\nНа щодень\nДля свята\nЗ творогом\nТісто про запас\n\nПОТОЧНИЙ КАТАЛОГ\n\nРезультати для «абракадабра»\n\n0 рецептів\n\nПереглянути всі рецепти\n\nРецептів не знайдено. Спробуйте іншу назву чи інгредієнт або перегляньте всі рецепти.\n\nЗРОЗУМІЛИЙ СТАТУС РЕЦЕПТА\n\nЗнайте, що випікали, а що лише розрахували.\nПеревірено\nВипечено саме за цим записом.\nРозраховано\nКількості перераховано. Цю версію не перевірено випіканням.\nЗапропоновано\nІдея для спроби. Цю зміну не перевірено випіканням.\n\nУ кожному рецепті вказано використані борошняну суміш, форму й кількість. У перевіреного оригіналу може бути розрахований варіант.\n\nЯк ми перевіряємо рецепти\nBake Again.\n\nDesign System v1 · Warm Precision"
+  },
+  {
+    "name": "zoom200",
+    "route": "uk",
+    "overflow": true,
+    "width": 390,
+    "height": 20309,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Печіть те,\nщо любите.\nІ все вийде.",
+        "y": 768
+      },
+      {
+        "text": "Усі рецепти на сьогодні.",
+        "y": 2802
+      },
+      {
+        "text": "Знайте, що випікали, а що лише розрахували.",
+        "y": 18906
+      }
+    ],
+    "clipped": [
+      "Шукати рецепти"
+    ]
+  },
+  {
+    "name": "zoom200",
+    "route": "uk/recipes/napoleon-cake",
+    "overflow": true,
+    "width": 390,
+    "height": 22447,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Безглютеновий\nНаполеон",
+        "y": 783
+      },
+      {
+        "text": "Сплануйте заздалегідь.",
+        "y": 2550
+      },
+      {
+        "text": "Змінити кількість",
+        "y": 3688
+      },
+      {
+        "text": "Інгредієнти",
+        "y": 4706
+      },
+      {
+        "text": "Готуйте крок за кроком.",
+        "y": 7715
+      }
+    ],
+    "clipped": [
+      "Безглютеновий\nНаполеон",
+      "Сплануйте заздалегідь.",
+      "Змінити кількість",
+      "Інгредієнти"
+    ]
+  },
+  {
+    "name": "zoom200",
+    "route": "uk/recipes/crepes/cook",
+    "overflow": false,
+    "width": 390,
+    "height": 2450,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Збийте густу основу",
+        "y": 267
+      }
+    ],
+    "clipped": [
+      "Назад"
+    ]
+  },
+  {
+    "name": "zoom200",
+    "route": "es",
+    "overflow": true,
+    "width": 390,
+    "height": 18807,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Hornea lo que\nte gusta.\nTe saldrá bien.",
+        "y": 768
+      },
+      {
+        "text": "Todas las recetas hasta ahora.",
+        "y": 2716
+      },
+      {
+        "text": "Distingue lo horneado de lo calculado.",
+        "y": 17414
+      }
+    ],
+    "clipped": [
+      "Buscar recetas"
+    ]
+  },
+  {
+    "name": "zoom200",
+    "route": "es/recipes/banana-fritters",
+    "overflow": false,
+    "width": 390,
+    "height": 4636,
+    "brokenImages": [],
+    "headings": [
+      {
+        "text": "Sin gluten\nTortitas de plátano",
+        "y": 783
+      },
+      {
+        "text": "Ajustar receta",
+        "y": 2271
+      },
+      {
+        "text": "Ingredientes",
+        "y": 3263
+      },
+      {
+        "text": "Hazlo paso a paso.",
+        "y": 3736
+      }
+    ],
+    "clipped": []
+  }
+]

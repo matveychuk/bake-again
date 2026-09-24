@@ -37,3 +37,10 @@ Approved status label/background contrast:
 - Catalogue and card images require locale-specific alternative text. Draft recipe copy
   may be translated for discovery, but incomplete source material remains visibly draft
   and is not released as a publishable recipe translation.
+
+## Review verification
+
+- Verify 390, 900 and 1440px widths in Ukrainian, English and Spanish. Include long recipe names, quantity errors, shopping review and Cook drawers.
+- At 200% root text, headings and actions wrap; prevent horizontal scrolling without clipping text.
+- Every standard page starts with a keyboard-visible skip link to its own main heading or recipe content target. The recipe navigation item remains active on recipe pages.
+- Native language labels remain explicit (`Укр`, `English`, `Español`); changing language must not reset the selected recipe configuration.

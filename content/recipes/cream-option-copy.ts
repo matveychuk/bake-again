@@ -1,3 +1,4 @@
+import { catalogLocaleCopy } from './catalog-locales.ts';
 import type { AppLocale } from '@/lib/i18n/config';
 
 export type CreamOptionCopy = {
@@ -10,6 +11,8 @@ export const reusableCreamRecipeIds = [
   'vanilla-egg-custard',
   'eggless-vanilla-custard',
   'vanilla-buttercream',
+  'sour-cream',
+  'lemon-cream-cheese',
 ] as const;
 
 export function isReusableCreamRecipeId(
@@ -95,8 +98,8 @@ export function getCreamOptionCopy(
 ): CreamOptionCopy {
   return (
     creamOptionCopy[recipeId]?.[locale] ?? {
-      title: recipeId,
-      description: '',
+      title: catalogLocaleCopy[recipeId]?.title[locale] ?? recipeId,
+      description: catalogLocaleCopy[recipeId]?.summary[locale] ?? '',
     }
   );
 }

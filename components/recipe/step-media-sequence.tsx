@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import styles from './step-media-sequence.module.css';
 
 export type StepMediaItem = {
+  type?: 'image' | 'video';
   id: string;
   src: string;
   alt: string;
@@ -32,23 +33,32 @@ export function StepMediaSequence({
     >
       <section
         className={styles.viewport}
-        aria-label={ariaLabel}
+        aria-label={`${ariaLabel} · ${items.length}`}
         tabIndex={items.length > 1 ? 0 : undefined}
       >
         {items.map((item, index) => (
           <figure key={item.id}>
             <div className={styles.image}>
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(min-width: 901px) 340px, (min-width: 561px) 52vw, 82vw"
-              />
-              {items.length > 1 && (
-                <span aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
+              {item.type === 'video' ? (
+                <video
+                  controls
+                  playsInline
+                  muted
+                  preload="metadata"
+                  aria-label={item.alt}
+                >
+                  <source src={item.src} type="video/mp4" />
+                  <a href={item.src}>{item.alt}</a>
+                </video>
+              ) : (
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(min-width: 901px) 400px, (min-width: 561px) 52vw, 82vw"
+                />
               )}
+              {items.length > 1 && <span aria-hidden="true">{index + 1}</span>}
             </div>
             {(item.title || item.caption) && (
               <figcaption>

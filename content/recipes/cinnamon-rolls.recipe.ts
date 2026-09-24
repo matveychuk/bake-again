@@ -576,6 +576,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
       },
       {
         id: 'add-filling',
+        technique: { id: 'soften-butter', condition: 'cinnamon-filling' },
         title: tr(locale, {
           en: 'Add one filling',
           es: 'Añade un relleno',

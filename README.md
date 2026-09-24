@@ -160,7 +160,15 @@ npm run build
 
 Reference strategy and specifications:
 
+- [Future newsletter, recipe-digest and baking-techniques strategy (Ukrainian)](docs/strategy/newsletter-after-backend.uk.md)
+
 - [Brand strategy v2](docs/reference/Gluten-Free_Baking_Brand_Strategy_v2.docx)
 - [Product and Engineering Brief v1](<docs/reference/Gluten-Free Baking — Product & Engineering Brief v1.md>)
 - [UX and Information Architecture Specification v1](docs/reference/UX-IA-Specification-v1.md)
 - [Recipe content model](docs/content-model/README.md)
+
+## Basic analytics
+
+Umami Cloud tracks production pageviews and key recipe actions. See
+[the analytics event reference](docs/analytics.md) for coverage, privacy and verification.
+Run `npm run test:analytics` to check the payload boundary.

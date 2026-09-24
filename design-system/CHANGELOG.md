@@ -1,5 +1,74 @@
 # Design system changelog
 
+## 2026-09-25 · Butter-softening guide
+
+- Added localized technique pages and contextual help using the existing tip and Drawer
+  primitives; native links retain standalone navigation and keyboard focus return.
+- Added explicit technique references to the relevant steps of seven recipes, including
+  conditional butter choices. References survive cream composition and Cook Mode.
+- Added a multilingual Design Lab example and shared Suggested provenance for the
+  externally sourced technique; recipe evidence remains adaptation-specific.
+- Verified page/drawer layout in uk/en/es at 390/900/1440px, keyboard containment and
+  focus return, Cook Mode, JavaScript-free link navigation and 200% mobile text.
+
+## 2026-09-25 · Complete method before cream selection
+
+- Keep all host-recipe assembly steps and photos visible before a cream is selected.
+  Selection adds cream preparation and ingredients without revealing previously hidden steps.
+- Added the author's two-hour refrigerator tip to the final sponge-roll step and
+  updated the Design Lab example to exercise unselected cream composition.
+
+## 2026-09-25 · Concise card headings
+
+- Shortened the Napoleon, Easter bread, fruit roll and marbled-cookie catalogue names;
+  recipe-page headings retain their explicit gluten-free adaptation names.
+- Centre titles beside Save and place facts 8px below the complete header, avoiding
+  excess title spacing while retaining the bookmark's independent 44px target.
+- Added the shortened headings to the shared Design Lab card examples.
+
+## 2026-09-25 · Sponge-roll assembly guidance
+
+- Split cooling, jam, cream and final decoration into focused recipe actions with
+  matching photos. Reused existing tip and single-photo components; no new tokens.
+- Added a multilingual Design Lab assembly example: essential action stays in the
+  body while the tip explains the curved sponge and cream-free closing edge.
+- Recipe overview now includes baking and cooling in its planning note; cream
+  composition keeps all dependent assembly steps after preparation of the chosen cream.
+
+## 2026-09-25 · Aligned catalogue cards
+
+- Share photo, title, facts, flour and footer tracks within each tablet/desktop row;
+  mobile cards retain natural height, and translated titles remain fully visible.
+- Place time and difficulty in stable label/value columns for easier comparison.
+- Keep every collection visible as a compact sand chip with 4px padding and gaps,
+  preserving 14px text and independent 44px-high touch targets.
+- Extend Design Lab with the reported Ukrainian card rows and multilingual/draft cases.
+
+## 2026-09-24 · Consistent step photography
+
+- Removed the full-width single-photo treatment: one photo now matches an individual
+  sequence frame on desktop, tablet and mobile in recipe detail and Cook Mode.
+- Restored simple ordinal photo labels (`1`, `2`, `3`), without numbering single photos.
+  Mobile retains the next-photo peek and keyboard-scrollable sequence; accessible labels
+  keep the total count.
+- Added single/two-photo comparisons in both variants to Design Lab.
+
+## 2026-09-23 · Responsive UX review applied
+
+- Unified selected quantities across recipe overview, ingredients, shopping and Cook Mode; preserve configuration and cream when switching language. Adapted quantities use Calculated, while an unchanged base retains its own evidence. Invalid amounts require correction.
+- Tightened mobile recipe heroes, cream choices and quantity controls; added ingredient/method jump links and a quieter secondary Cook link. Catalogue cards use equal 3/2/1-column desktop/tablet/mobile grids.
+- Standardized Saved on the compact RecipeCard variant and gave EvidenceBadge a shared default visual treatment. Removed duplicated ingredient dividers and expanded single step photographs.
+- Added visible search focus, 44px controls, skip navigation, wrapping at 200% text and localized Saved copy.
+- Cook tools now use a bounded side panel with a visible Close action. An active timer remains reachable from other steps.
+- Added compact cards and a working Cook drawer to Design Lab; added localized information about browser storage and assistant context.
+
+## 2026-09-22 · Published banana pancakes
+
+- Published the Tested banana-pancake recipe with a concise hero: the summary now
+  describes texture and key ingredients without repeating the title or Tested status.
+- Replaced the generated final-step cue with two horizontal crops of the author's real
+  cooking photographs and retained the previous hero alongside a more accurate v3.
+
 ## 2026-09-21 · Shared cream pages and published profiteroles
 
 - Moved all four reusable cream routes onto the same `InventoryRecipeDetail` composition
@@ -249,6 +318,19 @@
 
 ## Unreleased
 
+- Simplified reusable-cream choice cards: Tested is now stated once in the introduction,
+  a chocolate Recommended label crosses the preferred card's top edge without reserving
+  an empty row on its peers, radios sit at the top right, and left-aligned recipe links
+  align across the card row. Added the production selector to Design Lab.
+- Reduced the shared Recipe and Cook Assistant drawer title to the dedicated 24px
+  contextual-title token, keeping long localized headings subordinate to recipe content.
+- Moved About to the end of primary navigation and kept the four public destinations on
+  one mobile row at 390px in English, Spanish and Ukrainian when local Drafts is absent.
+- Added a subtle semantic boundary to recipe cards so collection links remain visibly
+  attached to the recipe above in one-column catalogues.
+- Aligned each pre-start clock with its “Keep in mind” heading and indented the supporting
+  copy consistently across responsive layouts.
+
 - Kept the shared Save control circular beside long recipe titles by preventing flex
   shrink, and aligned its saved state with the Design Lab's filled bookmark silhouette.
 
@@ -455,3 +537,20 @@
   dish aliases and word forms, prefix matching and limited typo tolerance.
 - Reused the shared search form in the homepage and Design Lab, with retained input,
   result counts, empty-result guidance and wrapping for long search headings.
+
+### 2026-09-25 — Recipe components and author cake media
+
+- Added fixed recipe-part composition and linked standalone glaze/cream pages using
+  the shared recipe detail; full method remains inline in the host cake.
+- Extended the existing step media sequence with optional author video (native
+  controls, muted initially, inline, no autoplay), documented in Design Lab.
+- Added a distinct label for author photographs with AI-edited backgrounds/plates.
+
+## 2026-09-25 — Basic analytics
+
+- Shared recipe, search, language, shopping, Cook Mode and assistant controls now emit
+  named Umami events. Visual treatment, keyboard behavior and provenance are unchanged.
+- Existing Design Lab examples exercise the same controls; Design Lab and local visits
+  are excluded from collection. No new tokens or visual variants.
+- Privacy content explains basic analytics in Ukrainian, English and Spanish.
+- Event semantics and the data allowlist are documented in `docs/analytics.md`.

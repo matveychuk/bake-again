@@ -9,6 +9,8 @@ export const recipeReaderCopy = {
     cookMode: 'Режим приготування',
     generatedImage: 'Згенероване зображення',
     authorImage: 'Фото авторки',
+    editedAuthorImage: 'Фото авторки · фон і тарілка змінені ШІ',
+    recipeParts: 'Складові рецепта',
     fractionalEggs:
       'Кількість яєць дробова — відміряйте потрібну частину збитого яйця.',
   },
@@ -19,6 +21,8 @@ export const recipeReaderCopy = {
     cookMode: 'Cook Mode',
     generatedImage: 'Generated image',
     authorImage: 'Author photo',
+    editedAuthorImage: 'Author photo · AI-edited background and plate',
+    recipeParts: 'Recipe components',
     fractionalEggs:
       'The egg quantity is fractional — measure the required portion of a beaten egg.',
   },
@@ -29,6 +33,8 @@ export const recipeReaderCopy = {
     cookMode: 'Modo de cocina',
     generatedImage: 'Imagen generada',
     authorImage: 'Foto de la autora',
+    editedAuthorImage: 'Foto de la autora · fondo y plato editados con IA',
+    recipeParts: 'Componentes de la receta',
     fractionalEggs:
       'La cantidad de huevos es fraccionaria: mide la porción necesaria de un huevo batido.',
   },

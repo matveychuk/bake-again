@@ -274,6 +274,7 @@ export const crinkleCookiesRecipe = {
   steps: [
     {
       id: 'beat-wet',
+      technique: { id: 'soften-butter' },
       title: { uk: 'Збийте основу', en: 'Beat the base', es: 'Bate la base' },
       instruction: {
         uk: 'Збийте яйця, цукор і м’яке масло міксером до світлої маси без шматочків масла.',

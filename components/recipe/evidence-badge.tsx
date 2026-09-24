@@ -1,6 +1,7 @@
 import { Calculator, Check, Lightbulb } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
+import styles from './evidence-badge.module.css';
 
 export type EvidenceStatus = 'tested' | 'calculated' | 'suggested';
 
@@ -16,11 +17,15 @@ type EvidenceBadgeProps = {
   locale?: AppLocale;
 };
 
-export function EvidenceBadge({ status, className, locale = 'en' }: EvidenceBadgeProps) {
+export function EvidenceBadge({
+  status,
+  className,
+  locale = 'en',
+}: EvidenceBadgeProps) {
   const Icon = evidence[status];
   const label = getUiMessages(locale).status[status].label;
   return (
-    <span className={className} data-status={status}>
+    <span className={`${styles.badge} ${className ?? ''}`} data-status={status}>
       <Icon aria-hidden="true" size={16} strokeWidth={2} />
       <strong>{label}</strong>
     </span>

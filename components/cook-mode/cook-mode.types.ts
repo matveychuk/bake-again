@@ -12,6 +12,7 @@ export type CookIngredient = {
 };
 
 export type CookStep = {
+  technique?: import('../../content/techniques/types.ts').TechniqueReference;
   stepIds: [string, ...string[]];
   number: string;
   meta: string;
@@ -36,6 +37,8 @@ export type CookModeDefinition = {
     recipeVersionId: string;
   };
   getState: (locationSearch: string) => {
+    /** Exact composed version, including a selected cream when applicable. */
+    recipeVersionId?: string;
     isAdjusted: boolean;
     steps: CookStep[];
     allIngredients?: CookIngredient[];

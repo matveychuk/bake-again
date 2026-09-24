@@ -25,7 +25,9 @@ no cache.
 commit without runtime secrets. Only after that job succeeds does the
 `authorize-sites-deploy` job enter the protected `production` environment. It checks
 allowlisted variable values and secret **presence booleans**; secret values are never
-passed to the runner. Approval authorizes only that exact commit for an owner-operated
+passed to the runner. Secret presence is required only when `ASSISTANT_ENABLED=true`,
+matching the runtime contract; a disabled-assistant release still validates the flag,
+model, token limit and production URL. Approval authorizes only that exact commit for an owner-operated
 Sites deployment.
 
 `post-deploy-smoke.yml` is manually run after Sites reports that deployment complete.

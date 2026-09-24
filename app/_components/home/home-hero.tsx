@@ -20,7 +20,7 @@ export function HomeHero({ locale, query = '', selectedCollectionId }: { locale:
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero-copy">
         <Eyebrow>{messages.eyebrow}</Eyebrow>
-        <h1 id="hero-title">
+        <h1 id="hero-title" tabIndex={-1}>
           {messages.title[0]}
           <br />
           {messages.title[1]}

@@ -27,8 +27,8 @@ void test('uses localized recipe titles and preserves the stable recipe identity
     (recipe) => recipe.id === 'gluten-free-napoleon',
   );
 
-  assert.equal(ukrainianNapoleon?.title, 'Безглютеновий Наполеон');
-  assert.equal(spanishNapoleon?.title, 'Tarta Napoleón sin gluten');
+  assert.equal(ukrainianNapoleon?.title, 'Наполеон');
+  assert.equal(spanishNapoleon?.title, 'Tarta Napoleón');
   assert.equal(ukrainianNapoleon?.id, spanishNapoleon?.id);
 });
 

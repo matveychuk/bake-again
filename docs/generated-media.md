@@ -65,17 +65,30 @@ references, not evidence for the missing quantities or formula.
 Five generated 3:2 process images under
 `public/media/recipes/sponge-cake/selected/` show the source-backed working states:
 thick whipped whites, pale ribbon-stage yolks, gentle yolk folding, dry ingredients added
-in portions and airy batter transferred to the long form. The existing generated cover
-was used only as a warm-neutral visual reference.
+in portions and airy batter transferred to a round cake tin lined with two crossed sheets
+of aluminium foil. The original long-tin image is retained as a superseded reference.
+
+The current `batter-in-round-foil-v2.png` was generated with the built-in image tool on
+2026-09-24 after the author's correction. It uses the earlier pouring image as the edit
+target and `media/style-references/warm-precision-kitchen-v1/kitchen-prep-closeup-4x3.png`
+as the supporting kitchen reference. The foil covers the inside base and sides; it is
+not a lid. The generated image illustrates the method and is not baking evidence.
+The exact generation prompt is saved in
+`media/recipes/sponge-cake/working/round-foil-v2-prompt.md`.
+
+The cover remains the plain round sponge with a visible cut crumb. The recipe is an
+unfilled cake base; the author's sour-cream filling and chocolate glaze are a serving
+idea, not an additional ingredient formula.
 
 ### Banana pancake photography
 
-`banana-pancakes-card-v2.png` replaces the fritter-shaped preview with fluffy round
-banana pancakes and a visible tender crumb. Five generated 3:2 process images under
-`public/media/recipes/banana-fritters/selected/` show the dry-mix well, chunky mashed
-bananas, wet mixture, deliberately lumpy scoopable batter and the matte-edge/open-bubble
-flip cue. The earlier fritter cover was used only for its warm-neutral visual direction;
-the generated assets contain no branding or product packaging.
+`banana-pancakes-card-v3.png` keeps the warm-neutral plate styling of v2 while matching
+the author's real pancakes more closely: thick, irregular shapes with uneven golden tops.
+The v2 cover remains in the repository for visual comparison. Three generated 3:2 process
+images show chunky mashed bananas, the wet mixture and deliberately lumpy scoopable batter.
+The final step now uses two real author photographs, losslessly cropped to a horizontal
+3:2 frame: the open-bubble flip cue and the finished pancakes on the pan. The original
+portrait exports remain under `media/recipes/banana-fritters/working/author-photos/`.
 
 ### Cottage-cheese waffles author photography
 
@@ -141,6 +154,7 @@ no branding and are visual checkpoint references rather than author photography.
 - `apple-fritters-card-v1.png`: Small rustic apple fritter pancakes with golden edges and visible apple pieces; one fritter torn open; warm-gold and subtle-cinnamon palette.
 - `banana-fritters-card-v1.png`: Naturally irregular banana fritter pancakes with caramelized edges and a soft banana interior; banana-cream, honey-gold, and warm-brown palette.
 - `banana-pancakes-card-v2.png`: Fluffy round banana pancakes with a tender crumb, created for the tested Schär Mix B Bread adaptation.
+- `banana-pancakes-card-v3.png`: Warm-neutral hero with thicker, irregular pancakes modelled on the author's cooked batch; v2 is retained for comparison.
 - `apple-banana-fritters-card-v1.png`: Rustic apple-and-banana fritters with visible fruit and one torn-open piece; warm-gold and pale-fruit palette.
 - `easter-bread-card-v1.png`: Tall Ukrainian Easter bread with a domed golden top, white glaze, restrained colorful sprinkles, and a raisin crumb visible in one slice.
 - `prune-cake-card-v1.png`: Chocolate prune layer cake with dark cocoa sponge, light sour-cream-style filling, visible prune pieces, and restrained chocolate glaze.
@@ -150,3 +164,35 @@ no branding and are visual checkpoint references rather than author photography.
 
 - `fruit-sponge-roll-author-v1.png`: Extracted unchanged from `docs/reference/recipe-inventory.xlsx`, worksheet `Recipe Photos`, cell anchor `A3`. Publication-quality review is still pending.
 - `crepes.png`: Existing prototype cover retained for the crepes inventory card. Approval or replacement is still pending.
+
+### Sponge-roll assembly correction · 2026-09-25
+
+Four built-in image_gen outputs illustrate the author's clarified technique under
+`public/media/recipes/fruit-sponge-roll/selected/`:
+
+- `warm-sponge-roll-v2.png`: baking parchment stays between the sponge turns during cooling.
+- `blueberry-jam-v1.png`: thick blueberry jam with small berry pieces; the cooled sponge retains a raised curved edge.
+- `cream-over-jam-v1.png`: cream over jam with about 2 cm free of cream at the closing edge.
+- `decorate-roll-v1.png`: the reserved cream spread over the re-rolled cake, with optional berries.
+
+The existing `fruit-sponge-roll-card-v3.png` remains the hero: its filling and finish
+already match the method. Earlier media is retained. Generated images illustrate
+technique and do not establish Tested evidence. Exact prompts and reference roles:
+`media/recipes/fruit-sponge-roll/working/assembly-prompts.md`.
+
+Author correction later in the same review: the active assets are now
+`warm-sponge-roll-v3.png`, `blueberry-jam-v3.png` and `cream-over-jam-v3.png`.
+The first shows the entire rolled cylinder covered in parchment with a flat exposed
+sheet in front. In both filling frames, the free edge curls inward over the filling,
+not backward toward the counter. Removed the generated trapped-paper artifact inside
+the open curl. The decoration frame remains v1. Exact revision prompts:
+`media/recipes/fruit-sponge-roll/working/assembly-correction-prompts.md`.
+
+### Sponge-roll rounded bend · v4
+
+The current filling frames are `blueberry-jam-v4.png` and `cream-over-jam-v4.png`.
+Both replace the sharp lower corner with a continuous rounded transition from the flat
+sponge to its inward-curled lip. Parchment lies underneath only. The author's updated
+method detaches the parchment after unrolling, before filling, and keeps the sponge on
+that same sheet for final rolling. No peeling occurs during the final roll.
+Prompts and final paths: `media/recipes/fruit-sponge-roll/working/rounded-bend-v4-prompts.md`.

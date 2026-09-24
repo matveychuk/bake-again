@@ -419,6 +419,14 @@
 .recipeOverviewExample {
   max-width: 720px;
 }
+.stepPhotographyExamples {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-8);
+}
+.stepPhotographyExamples > div {
+  min-width: 0;
+}
 .savedControl {
   width: 44px;
   min-width: 44px;
@@ -481,7 +489,7 @@
   min-height: 56px;
   padding: var(--space-2) 0;
   display: grid;
-  grid-template-columns: 24px 1fr auto 44px;
+  grid-template-columns: auto minmax(0, 1fr) auto 44px;
   align-items: center;
   gap: var(--space-2);
   border-top: 1px solid var(--color-border-subtle);
@@ -496,7 +504,7 @@
 .shoppingExample button {
   width: 44px;
   height: 44px;
-  margin-left: var(--space-3);
+  margin-left: 0;
   padding: 0;
   display: grid;
   place-items: center;
@@ -993,5 +1001,34 @@
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
+  }
+}
+.page :is(h1, h2, h3, p),
+.componentBlock {
+  overflow-wrap: anywhere;
+}
+
+.sectionHeading > div {
+  min-width: 0;
+}
+
+.componentBlock :global(#adjust-recipe) {
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.componentBlock :global(#adjust-recipe) > aside {
+  position: static;
+}
+
+@media (max-width: 560px) {
+  .header {
+    height: auto;
+    min-height: var(--space-16);
+    padding-block: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    justify-content: space-between;
   }
 }

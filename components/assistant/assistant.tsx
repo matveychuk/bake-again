@@ -1,5 +1,6 @@
 'use client';
 
+import { trackEvent } from '@/lib/analytics/umami';
 import {
   createContext,
   useCallback,
@@ -147,12 +148,14 @@ export function AssistantProvider({
     setHistory([]);
     setAnnouncement('');
     setActive({ ...options, trigger });
-  }, []);
+    trackEvent('assistant_open', { recipe_id: recipeId, locale });
+  }, [recipeId, locale]);
 
   const submitQuestion = useCallback(async (rawQuestion: string) => {
     const nextQuestion = rawQuestion.trim();
     if (!active || !nextQuestion || submittingRef.current || phase === 'disabled') return;
 
+    trackEvent('assistant_submit', { recipe_id: recipeId, locale });
     submittingRef.current = true;
     requestRef.current?.abort();
     const controller = new AbortController();

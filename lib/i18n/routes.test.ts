@@ -64,3 +64,27 @@ void test('builds and preserves the localized About path', () => {
   assert.equal(localeAboutPath('uk'), '/uk/about');
   assert.equal(getLocaleSwitchPath('/uk/about', 'es'), '/es/about');
 });
+
+void test('preserves a selected cream, scale and section when changing language', () => {
+  assert.equal(
+    getLocaleSwitchPath(
+      '/uk/recipes/eclairs?cream=vanilla-egg-custard&scale=2#cream-options',
+      'es',
+    ),
+    '/es/recipes/eclairs?cream=vanilla-egg-custard&scale=2#cream-options',
+  );
+  assert.equal(
+    getLocaleSwitchPath(
+      '/en/recipes/gluten-free-napoleon-cake/cook?scale=0.5',
+      'uk',
+    ),
+    '/uk/recipes/bezghliutenovyi-napoleon/cook?scale=0.5',
+  );
+});
+
+void test('keeps discovery query and collection on the equivalent home page', () => {
+  assert.equal(
+    getLocaleSwitchPath('/uk?q=млинки&collection=breakfast#recipes', 'en'),
+    '/en?q=млинки&collection=breakfast#recipes',
+  );
+});
