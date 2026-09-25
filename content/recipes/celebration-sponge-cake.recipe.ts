@@ -324,7 +324,7 @@ export function celebrationSpongeCakeContent(
         media: [
           {
             id: 'three-layer-example',
-            src: `${path}three-layer-cutaway-v1.png`,
+            src: `${path}three-layer-cutaway-v1.webp`,
             alt: t.cutAlt,
             caption: t.generated,
           },
@@ -345,7 +345,7 @@ export function celebrationSpongeCakeContent(
         media: [
           {
             id: 'author-overhead',
-            src: `${path}author-cake-overhead-v1.png`,
+            src: `${path}author-cake-overhead-v1.webp`,
             alt: t.authorAlt,
             caption: t.edited,
           },

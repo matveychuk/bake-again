@@ -80,7 +80,7 @@ void test('uses the author waffle photo across catalogue locales', () => {
     assert.equal(waffles?.imageKind, 'author-photo');
     assert.equal(
       waffles?.image,
-      '/images/recipes/cottage-cheese-waffles-author-v1.jpeg',
+      '/images/recipes/cottage-cheese-waffles-author-v1.webp',
     );
     assert.match(waffles?.alt ?? '', /berries|frutos rojos|ягодами/);
   }
@@ -115,7 +115,7 @@ void test('publishes the reviewed fruit sponge roll with its final hero and prac
 
   assert.equal(roll?.detail, 'Активний час: 30 хв');
   assert.equal(roll?.difficulty, 'Складність: Легка');
-  assert.equal(roll?.image, '/images/recipes/fruit-sponge-roll-card-v3.png');
+  assert.equal(roll?.image, '/images/recipes/fruit-sponge-roll-card-v3.webp');
   assert.equal(roll?.imageKind, 'generated-preview');
 });
 
@@ -129,10 +129,10 @@ void test('publishes the reviewed fruit cakes with their final heroes and timing
 
   assert.equal(apple?.detail, 'Загальний час: 50 хв');
   assert.equal(apple?.difficulty, 'Складність: Легка');
-  assert.equal(apple?.image, '/images/recipes/apple-charlotte-card-v2.png');
+  assert.equal(apple?.image, '/images/recipes/apple-charlotte-card-v2.webp');
   assert.equal(plum?.detail, 'Загальний час: 50 хв');
   assert.equal(plum?.difficulty, 'Складність: Середня');
-  assert.equal(plum?.image, '/images/recipes/plum-cake-card-v2.png');
+  assert.equal(plum?.image, '/images/recipes/plum-cake-card-v2.webp');
 });
 
 void test('keeps catalogue names concise and makes gluten-free explicit on recipe pages', () => {

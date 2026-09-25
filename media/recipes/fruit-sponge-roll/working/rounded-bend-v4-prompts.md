@@ -10,8 +10,8 @@ sponge. The sponge stays on that same paper during filling and final rolling; th
 paper is no longer attached and is not peeled away while rolling.
 
 Final workspace assets:
-- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/blueberry-jam-v4.png`
-- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/cream-over-jam-v4.png`
+- `/Users/sasha/Bake Again/media/web-source/media/recipes/fruit-sponge-roll/selected/blueberry-jam-v4.png`
+- `/Users/sasha/Bake Again/media/web-source/media/recipes/fruit-sponge-roll/selected/cream-over-jam-v4.png`
 
 ## jam
 

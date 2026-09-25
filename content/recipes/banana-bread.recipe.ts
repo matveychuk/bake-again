@@ -217,11 +217,11 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
     'cool-loaf',
   ];
   const media = [
-    ['butter-and-sugar', 'step-02-butter-sugar-v1.png'],
-    ['mashed-bananas', 'step-03-mashed-bananas-v1.png'],
-    ['batter-in-tin', 'step-05-batter-in-tin-v1.png'],
-    ['doneness-skewer', 'step-06-doneness-skewer-v1.png'],
-    ['cooled-sliced-loaf', 'step-07-cooled-sliced-loaf-v1.png'],
+    ['butter-and-sugar', 'step-02-butter-sugar-v1.webp'],
+    ['mashed-bananas', 'step-03-mashed-bananas-v1.webp'],
+    ['batter-in-tin', 'step-05-batter-in-tin-v1.webp'],
+    ['doneness-skewer', 'step-06-doneness-skewer-v1.webp'],
+    ['cooled-sliced-loaf', 'step-07-cooled-sliced-loaf-v1.webp'],
   ];
   const ingredients = [
     ['butter', 'sugar'],

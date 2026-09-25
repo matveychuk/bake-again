@@ -181,7 +181,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'apple-charlotte-egg-foam-v1',
-          src: '/media/recipes/apple-charlotte/selected/whipped-egg-foam-v1.png',
+          src: '/media/recipes/apple-charlotte/selected/whipped-egg-foam-v1.webp',
           alt: text(
             locale,
             'Pale egg foam falling from a whisk in a broad ribbon',
@@ -224,7 +224,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'folded-apple-batter-v1',
-          src: '/media/recipes/apple-charlotte/selected/folded-apple-batter-v1.png',
+          src: '/media/recipes/apple-charlotte/selected/folded-apple-batter-v1.webp',
           alt: text(
             locale,
             'Thick airy batter with small apple pieces distributed throughout',

@@ -134,12 +134,12 @@ export const bananaFrittersRecipe = {
       media: [
         {
           id: 'banana-pancakes-mashed-bananas-v1',
-          src: '/media/recipes/banana-fritters/selected/mashed-bananas-v1.png',
+          src: '/media/recipes/banana-fritters/selected/mashed-bananas-v1.webp',
           alt: 'Very ripe bananas mashed with a fork while small soft pieces remain',
         },
         {
           id: 'banana-pancakes-wet-mixture-v1',
-          src: '/media/recipes/banana-fritters/selected/wet-mixture-v1.png',
+          src: '/media/recipes/banana-fritters/selected/wet-mixture-v1.webp',
           alt: 'Pale golden banana and Greek yogurt mixture with small banana flecks',
         },
       ],
@@ -159,7 +159,7 @@ export const bananaFrittersRecipe = {
       media: [
         {
           id: 'banana-pancakes-lumpy-batter-v1',
-          src: '/media/recipes/banana-fritters/selected/lumpy-batter-v1.png',
+          src: '/media/recipes/banana-fritters/selected/lumpy-batter-v1.webp',
           alt: 'Thick banana pancake batter falling from a spatula with small lumps visible',
         },
       ],
@@ -185,12 +185,12 @@ export const bananaFrittersRecipe = {
       media: [
         {
           id: 'banana-pancakes-flip-cue-author-v1',
-          src: '/media/recipes/banana-fritters/selected/flip-cue-author-v1.jpg',
+          src: '/media/recipes/banana-fritters/selected/flip-cue-author-v1.webp',
           alt: 'Homemade banana pancakes cooking on a pan as bubbles open on the surface',
         },
         {
           id: 'banana-pancakes-finished-pan-author-v1',
-          src: '/media/recipes/banana-fritters/selected/finished-pan-author-v1.jpg',
+          src: '/media/recipes/banana-fritters/selected/finished-pan-author-v1.webp',
           alt: 'Thick irregular banana pancakes cooked until golden brown on a pan',
         },
       ],
@@ -328,12 +328,12 @@ export const bananaFrittersRecipe = {
           media: [
             {
               id: 'banana-pancakes-mashed-bananas-v1',
-              src: '/media/recipes/banana-fritters/selected/mashed-bananas-v1.png',
+              src: '/media/recipes/banana-fritters/selected/mashed-bananas-v1.webp',
               alt: 'Дуже стиглі банани, розім’яті виделкою з невеликими м’якими шматочками',
             },
             {
               id: 'banana-pancakes-wet-mixture-v1',
-              src: '/media/recipes/banana-fritters/selected/wet-mixture-v1.png',
+              src: '/media/recipes/banana-fritters/selected/wet-mixture-v1.webp',
               alt: 'Світло-золотиста бананова суміш із грецьким йогуртом і дрібними часточками банана',
             },
           ],
@@ -353,7 +353,7 @@ export const bananaFrittersRecipe = {
           media: [
             {
               id: 'banana-pancakes-lumpy-batter-v1',
-              src: '/media/recipes/banana-fritters/selected/lumpy-batter-v1.png',
+              src: '/media/recipes/banana-fritters/selected/lumpy-batter-v1.webp',
               alt: 'Густе тісто для бананових панкейків із невеликими грудочками на лопатці',
             },
           ],
@@ -379,12 +379,12 @@ export const bananaFrittersRecipe = {
           media: [
             {
               id: 'banana-pancakes-flip-cue-author-v1',
-              src: '/media/recipes/banana-fritters/selected/flip-cue-author-v1.jpg',
+              src: '/media/recipes/banana-fritters/selected/flip-cue-author-v1.webp',
               alt: 'Домашні бананові панкейки на пательні, на поверхні яких відкриваються бульбашки',
             },
             {
               id: 'banana-pancakes-finished-pan-author-v1',
-              src: '/media/recipes/banana-fritters/selected/finished-pan-author-v1.jpg',
+              src: '/media/recipes/banana-fritters/selected/finished-pan-author-v1.webp',
               alt: 'Товсті нерівні бананові панкейки, підсмажені на пательні до золотистої скоринки',
             },
           ],

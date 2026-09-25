@@ -112,7 +112,7 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
       media: [
         media(
           'batter-smooth-base',
-          'step-01-batter-smooth-base-c2-v1.png',
+          'step-01-batter-smooth-base-c2-v1.webp',
           copy.alts[0],
         ),
       ],
@@ -139,19 +139,19 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
       media: [
         media(
           'crepe-batter-setting',
-          'step-05-crepe-batter-setting-s2b-v1.png',
+          'step-05-crepe-batter-setting-s2b-v1.webp',
           copy.alts[1],
           copy.mediaTitles[0],
         ),
         media(
           'crepe-edge-lift',
-          'step-05-crepe-edge-lift-s2b-v1.png',
+          'step-05-crepe-edge-lift-s2b-v1.webp',
           copy.alts[2],
           copy.mediaTitles[1],
         ),
         media(
           'crepe-golden-side',
-          'step-05-crepe-golden-side-s2b-v1.png',
+          'step-05-crepe-golden-side-s2b-v1.webp',
           copy.alts[3],
           copy.mediaTitles[2],
         ),

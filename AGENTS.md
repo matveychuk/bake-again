@@ -22,6 +22,22 @@ Before changing product UI, read `design-system/README.md` and the relevant file
   AA contrast for normal text.
 - Do not make medical or universal health claims about gluten-free eating.
 
+## Media publishing
+
+- Keep the source-quality version of every website image under `media/web-source/`,
+  mirroring its intended public path. Do not put source PNG/JPEG files in `public/`.
+- Product code must reference the generated `.webp` URL. Use concise descriptive alt
+  text and keep food visually dominant.
+- Run `npm run media:prepare` after adding or renaming media. It generates only files
+  referenced by product code, caps images at 1800 px wide, strips metadata, uses WebP
+  quality 82 and enforces a 64 MiB media budget. It runs automatically before `dev`
+  and `build`.
+- Preserve camera originals and working files under `media/recipes/*/original/` or
+  `working/`; they are not publishable assets. Promote a reviewed copy to
+  `media/web-source/` when it is ready for the site.
+- Never bypass the media preparation step or copy an entire source/original directory
+  into a deployment bundle.
+
 ## Status language
 
 - **Tested**: this exact version was baked successfully. Check icon.
@@ -38,4 +54,3 @@ they are not separate statuses.
 2. Update the matching Design Lab example and documentation.
 3. Verify responsive behaviour and accessibility.
 4. Record meaningful system changes in `design-system/CHANGELOG.md`.
-

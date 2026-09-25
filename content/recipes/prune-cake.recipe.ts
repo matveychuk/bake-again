@@ -160,7 +160,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
         media: [
           {
             id: 'prune-cake-three-layers-v2',
-            src: '/media/recipes/prune-cake/selected/three-layers-v2.png',
+            src: '/media/recipes/prune-cake/selected/three-layers-v2.webp',
             alt: 'Три рівні круглі шоколадні коржі після розрізання',
           },
         ],
@@ -177,7 +177,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
         media: [
           {
             id: 'prune-cake-prune-cream-v2',
-            src: '/media/recipes/prune-cake/selected/prune-cream-v2.png',
+            src: '/media/recipes/prune-cake/selected/prune-cream-v2.webp',
             alt: 'Густий світлий крем із дрібними шматочками чорносливу',
           },
         ],
@@ -194,12 +194,12 @@ function steps(locale: Locale): StructuredRecipeStep[] {
         media: [
           {
             id: 'prune-cake-cubes-in-cream-v2',
-            src: '/media/recipes/prune-cake/selected/cake-cubes-in-cream-v2.png',
+            src: '/media/recipes/prune-cake/selected/cake-cubes-in-cream-v2.webp',
             alt: 'Шматочки шоколадного коржа, перемішані з кремом і чорносливом',
           },
           {
             id: 'prune-cake-mound-assembly-v2',
-            src: '/media/recipes/prune-cake/selected/mound-assembly-v2.png',
+            src: '/media/recipes/prune-cake/selected/mound-assembly-v2.webp',
             alt: 'Гірка шматочків коржа в кремі на двох промащених коржах',
           },
         ],
@@ -218,7 +218,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
         media: [
           {
             id: 'prune-cake-finished-v2',
-            src: '/images/recipes/prune-cake-card-v2.png',
+            src: '/images/recipes/prune-cake-card-v2.webp',
             alt: 'Готовий шоколадний торт із гіркою шматочків у кремі, поливкою, чорносливом і горіхами',
           },
         ],
@@ -272,7 +272,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'prune-cake-three-layers-v2',
-          src: '/media/recipes/prune-cake/selected/three-layers-v2.png',
+          src: '/media/recipes/prune-cake/selected/three-layers-v2.webp',
           alt: 'Three even round chocolate cake layers after slicing',
         },
       ],
@@ -289,7 +289,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'prune-cake-prune-cream-v2',
-          src: '/media/recipes/prune-cake/selected/prune-cream-v2.png',
+          src: '/media/recipes/prune-cake/selected/prune-cream-v2.webp',
           alt: 'Thick pale cream with small pieces of prune',
         },
       ],
@@ -306,12 +306,12 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'prune-cake-cubes-in-cream-v2',
-          src: '/media/recipes/prune-cake/selected/cake-cubes-in-cream-v2.png',
+          src: '/media/recipes/prune-cake/selected/cake-cubes-in-cream-v2.webp',
           alt: 'Chocolate cake cubes mixed with prune cream',
         },
         {
           id: 'prune-cake-mound-assembly-v2',
-          src: '/media/recipes/prune-cake/selected/mound-assembly-v2.png',
+          src: '/media/recipes/prune-cake/selected/mound-assembly-v2.webp',
           alt: 'A mound of cream-coated cake cubes on two filled cake layers',
         },
       ],
@@ -330,7 +330,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'prune-cake-finished-v2',
-          src: '/images/recipes/prune-cake-card-v2.png',
+          src: '/images/recipes/prune-cake-card-v2.webp',
           alt: 'Finished chocolate cake with a mound of cream-coated cubes, glaze, prunes and nuts',
         },
       ],

@@ -38,6 +38,12 @@ next-env.d.ts
 /outputs/
 /work/
 
+# Generated web media. Keep source-quality assets in media/web-source and run
+# `npm run media:prepare` (also runs automatically before dev and build).
+/public/images/
+/public/media/
+/public/social/
+
 # Keep large original photo and video files local until the media workflow is finalized.
 media/recipes/*/original/*
 !media/recipes/*/original/.gitkeep

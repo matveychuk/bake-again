@@ -554,3 +554,10 @@
   are excluded from collection. No new tokens or visual variants.
 - Privacy content explains basic analytics in Ukrainian, English and Spanish.
 - Event semantics and the data allowlist are documented in `docs/analytics.md`.
+
+## 2026-09-25 — Production media pipeline
+
+- Source-quality recipe imagery now lives outside `public` and remains versioned in
+  GitHub. Production builds generate referenced WebP delivery assets automatically.
+- The generated set caps width at 1800 px, removes metadata, omits unused source files
+  and enforces a 64 MiB media budget. Image content, crop and alt text are unchanged.

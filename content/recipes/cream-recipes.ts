@@ -181,7 +181,7 @@ function mascarponeCreamContent(locale: CreamLocale): RecipeSourceDraftContent {
         media: [
           {
             id: 'mascarpone-cream-final-v1',
-            src: '/media/recipes/fruit-sponge-roll/selected/mascarpone-cream-v1.png',
+            src: '/media/recipes/fruit-sponge-roll/selected/mascarpone-cream-v1.webp',
             alt: {
               en: 'Whipped mascarpone cream holding a smooth stable peak on a spatula',
               es: 'Crema de mascarpone montada que mantiene un pico liso y estable en una espátula',
@@ -475,7 +475,7 @@ function eggCustardContent(locale: CreamLocale): RecipeSourceDraftContent {
         media: [
           {
             id: 'vanilla-egg-custard-final-v1',
-            src: '/media/recipes/vanilla-egg-custard/selected/final-custard-v1.png',
+            src: '/media/recipes/vanilla-egg-custard/selected/final-custard-v1.webp',
             alt: {
               en: 'Smooth glossy vanilla custard holding its shape on a spoon',
               es: 'Crema pastelera de vainilla lisa y brillante que mantiene la forma en una cuchara',
@@ -740,7 +740,7 @@ function egglessCustardContent(locale: CreamLocale): RecipeSourceDraftContent {
         media: [
           {
             id: 'eggless-vanilla-custard-final-v1',
-            src: '/media/recipes/eggless-vanilla-custard/selected/final-custard-v1.png',
+            src: '/media/recipes/eggless-vanilla-custard/selected/final-custard-v1.webp',
             alt: {
               en: 'Thick eggless vanilla custard with a spatula channel that closes slowly',
               es: 'Crema de vainilla sin huevo espesa con un surco de espátula que se cierra lentamente',
@@ -1015,7 +1015,7 @@ function buttercreamContent(locale: CreamLocale): RecipeSourceDraftContent {
         media: [
           {
             id: 'vanilla-buttercream-final-v1',
-            src: '/media/recipes/vanilla-buttercream/selected/final-buttercream-v1.png',
+            src: '/media/recipes/vanilla-buttercream/selected/final-buttercream-v1.webp',
             alt: {
               en: 'Pale vanilla buttercream holding a firm smooth peak on raised beaters',
               es: 'Crema de mantequilla de vainilla pálida que mantiene un pico firme y liso en las varillas',

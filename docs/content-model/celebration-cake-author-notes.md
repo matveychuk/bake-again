@@ -18,7 +18,7 @@ The author says she made this frosting with a reduced quantity, but did not conf
 
 `recipePart` composes source ingredient sections and steps with namespaced IDs and ingredient references. It does not transfer evidence. The cake keeps all instructions inline, plus optional links to the base sponge and three component pages. Shared chocolate glaze is extracted from the prune cake with its original ingredient IDs preserved there.
 
-Author originals: IMG_0975.jpeg (overhead), IMG_0976.jpeg (front), IMG_0978.MOV (8-second overview), exported from Photos. JPEG originals and MOV are preserved in the ignored media archive. Generated/edited assets and MP4 live under public/media/recipes. Both edited author photos are labelled AI-edited background/plate. The cutaway is explicitly labelled a generated example. Component bowl images are generated previews. See `celebration-cake-image-prompts.md` for exact prompts.
+Author originals: IMG_0975.jpeg (overhead), IMG_0976.jpeg (front), IMG_0978.MOV (8-second overview), exported from Photos. JPEG originals and MOV are preserved in the ignored media archive. Reviewed source-quality generated/edited assets and the MP4 live under `media/web-source/media/recipes`; builds publish referenced WebP derivatives and the MP4. Both edited author photos are labelled AI-edited background/plate. The cutaway is explicitly labelled a generated example. Component bowl images are generated previews. See `celebration-cake-image-prompts.md` for exact prompts.
 
 ## Verification
 

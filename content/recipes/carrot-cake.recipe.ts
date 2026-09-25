@@ -196,7 +196,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
           media: [
             media(
               'carrot-oil-smooth',
-              'step-03-carrot-oil-smooth-v1.png',
+              'step-03-carrot-oil-smooth-v1.webp',
               text.alts[1],
             ),
           ],
@@ -211,7 +211,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
           media: [
             media(
               'eggs-sugar-foam',
-              'step-04-eggs-sugar-foam-v1.png',
+              'step-04-eggs-sugar-foam-v1.webp',
               text.alts[2],
             ),
           ],
@@ -232,7 +232,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
           media: [
             media(
               'batter-add-ins',
-              'step-06-batter-add-ins-v1.png',
+              'step-06-batter-add-ins-v1.webp',
               text.alts[3],
             ),
           ],
@@ -247,13 +247,13 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
           media: [
             media(
               'batter-in-pan',
-              'step-07-batter-in-pan-v1.png',
+              'step-07-batter-in-pan-v1.webp',
               text.alts[4],
               text.bakingImages[0],
             ),
             media(
               'dry-toothpick',
-              'step-07-dry-toothpick-v1.png',
+              'step-07-dry-toothpick-v1.webp',
               text.alts[5],
               text.bakingImages[1],
             ),
@@ -271,7 +271,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
         media: [
           media(
             'prepared-pan',
-            'step-02-prepared-pan-v1.png',
+            'step-02-prepared-pan-v1.webp',
             translatedText.alts[0],
           ),
         ],
@@ -290,7 +290,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
         media: [
           media(
             'carrot-oil-smooth',
-            'step-03-carrot-oil-smooth-v1.png',
+            'step-03-carrot-oil-smooth-v1.webp',
             translatedText.alts[1],
           ),
         ],
@@ -303,7 +303,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
         media: [
           media(
             'eggs-sugar-foam',
-            'step-04-eggs-sugar-foam-v1.png',
+            'step-04-eggs-sugar-foam-v1.webp',
             translatedText.alts[2],
           ),
         ],
@@ -323,7 +323,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
         media: [
           media(
             'batter-add-ins',
-            'step-06-batter-add-ins-v1.png',
+            'step-06-batter-add-ins-v1.webp',
             translatedText.alts[3],
           ),
         ],
@@ -335,13 +335,13 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
         media: [
           media(
             'batter-in-pan',
-            'step-07-batter-in-pan-v1.png',
+            'step-07-batter-in-pan-v1.webp',
             translatedText.alts[4],
             translatedText.bakingImages[0],
           ),
           media(
             'dry-toothpick',
-            'step-07-dry-toothpick-v1.png',
+            'step-07-dry-toothpick-v1.webp',
             translatedText.alts[5],
             translatedText.bakingImages[1],
           ),

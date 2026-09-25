@@ -1098,7 +1098,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-generated-card-v3',
       type: 'image',
-      path: '/images/recipes/gluten-free-napoleon-card-v3.png',
+      path: '/images/recipes/gluten-free-napoleon-card-v3.webp',
       usage: ['hero', 'gallery'],
       alt: {
         uk: 'Безглютеновий торт Наполеон із шістьма тонкими коржами, заварним кремом і горіхами',
@@ -1109,7 +1109,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-butter-ready-v1',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/cold-butter-ready-example-v1.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/cold-butter-ready-example-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Холодні кубики масла поруч із сухою сумішшю в чаші комбайна',
@@ -1120,7 +1120,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-butter-early-pulse-v1',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/cold-butter-early-pulse-example-v1.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/cold-butter-early-pulse-example-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Шматочки масла, частково вкриті борошном після кількох імпульсів',
@@ -1131,7 +1131,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-butter-crumb-v1',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/cold-butter-crumb-example-v1.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/cold-butter-crumb-example-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Неоднорідна борошняна крихта з піщаними частинками й шматочками масла',
@@ -1142,7 +1142,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-wet-mixture-v1',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/wet-mixture-smooth-example-v1.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/wet-mixture-smooth-example-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Однорідна суміш яєць, кисломолочного продукту, олії та лимонного соку',
@@ -1153,7 +1153,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-pour-wet-v1',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/pour-wet-into-crumb-example-v1.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/pour-wet-into-crumb-example-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Рідку суміш вливають у борошняно-масляну крихту',
@@ -1164,7 +1164,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-dough-clumps-v1',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/pliable-dough-clumps-example-v1.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/pliable-dough-clumps-example-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Пластичне тісто зібралося м’якими грудками в чаші комбайна',
@@ -1175,7 +1175,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-dough-discs-v3',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.webp',
       usage: ['step'],
       alt: {
         uk: 'Дванадцять однакових дисків тіста, окремо загорнутих для охолодження',
@@ -1186,7 +1186,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-rolled-layer-v3',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/rolled-layer-parchment-v3.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/rolled-layer-parchment-v3.webp',
       usage: ['step'],
       alt: {
         uk: 'Тонкий круглий корж діаметром 28 см, проколотий виделкою на пергаменті, поруч обрізки',
@@ -1197,7 +1197,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-baked-layer-v3',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/baked-layer-light-golden-v3.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/baked-layer-light-golden-v3.webp',
       usage: ['step'],
       alt: {
         uk: 'Світло-золотистий спечений корж Наполеона з обрізками на пергаменті',
@@ -1208,7 +1208,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-finished-custard-v3',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/finished-custard-v3.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/finished-custard-v3.webp',
       usage: ['step'],
       alt: {
         uk: 'Густий гладкий ванільний заварний крем після додавання масла',
@@ -1219,7 +1219,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-round-six-layer-assembly-v3',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/round-six-layer-assembly-v3.png',
+      path: '/media/recipes/gluten-free-napoleon/selected/round-six-layer-assembly-v3.webp',
       usage: ['step'],
       alt: {
         uk: 'Теплий крем розподіляють по круглому коржу під час складання шестишарового Наполеона',

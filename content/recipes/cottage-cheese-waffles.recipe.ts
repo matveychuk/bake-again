@@ -123,12 +123,12 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
       media: [
         media(
           'ingredients-before-blending',
-          'step-01-ingredients-before-blending-author-v1.jpeg',
+          'step-01-ingredients-before-blending-author-v1.webp',
           copy.alts.ingredients,
         ),
         media(
           'blended-base',
-          'step-01-blended-base-author-v1.jpeg',
+          'step-01-blended-base-author-v1.webp',
           copy.alts.blended,
         ),
       ],
@@ -157,12 +157,12 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
       media: [
         media(
           'add-dry-ingredients',
-          'step-03-add-dry-author-v1.jpeg',
+          'step-03-add-dry-author-v1.webp',
           copy.alts.flour,
         ),
         media(
           'mixed-batter',
-          'step-03-mixed-batter-author-v1.jpeg',
+          'step-03-mixed-batter-author-v1.webp',
           copy.alts.batter,
         ),
       ],
@@ -175,17 +175,17 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
       media: [
         media(
           'fill-waffle-maker',
-          'step-05-fill-waffle-maker-author-v1.jpeg',
+          'step-05-fill-waffle-maker-author-v1.webp',
           copy.alts.filling,
         ),
         media(
           'baked-waffles',
-          'step-05-baked-waffles-author-v1.jpeg',
+          'step-05-baked-waffles-author-v1.webp',
           copy.alts.baked,
         ),
         {
           id: 'served-waffles',
-          src: '/images/recipes/cottage-cheese-waffles-author-v1.jpeg',
+          src: '/images/recipes/cottage-cheese-waffles-author-v1.webp',
           alt: copy.alts.served,
         },
       ],

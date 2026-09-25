@@ -140,7 +140,7 @@ export const eclairsRecipe = {
       media: [
         {
           id: 'eclairs-cooked-panade-v1',
-          src: '/media/recipes/eclairs/selected/step-03-cooked-panade-v1.png',
+          src: '/media/recipes/eclairs/selected/step-03-cooked-panade-v1.webp',
           alt: 'A smooth pale choux paste gathered into one mass in a stainless-steel saucepan',
         },
       ],
@@ -156,7 +156,7 @@ export const eclairsRecipe = {
       media: [
         {
           id: 'eclairs-heavy-ribbon-v2',
-          src: '/media/recipes/eclairs/selected/step-04-heavy-ribbon-v2.png',
+          src: '/media/recipes/eclairs/selected/step-04-heavy-ribbon-v2.webp',
           alt: 'Glossy choux dough falling slowly from a spatula in a thick ribbon above a bowl',
         },
       ],
@@ -170,7 +170,7 @@ export const eclairsRecipe = {
       media: [
         {
           id: 'eclairs-piped-profiteroles-v2',
-          src: '/media/recipes/eclairs/selected/step-05-piped-profiteroles-v2.png',
+          src: '/media/recipes/eclairs/selected/step-05-piped-profiteroles-v2.webp',
           alt: 'Even walnut-size rounds of uncooked choux dough spaced apart on a parchment-lined tray',
         },
       ],
@@ -192,7 +192,7 @@ export const eclairsRecipe = {
       media: [
         {
           id: 'eclairs-dry-hollow-shells-v2',
-          src: '/media/recipes/eclairs/selected/step-07-dry-hollow-shells-v2.png',
+          src: '/media/recipes/eclairs/selected/step-07-dry-hollow-shells-v2.webp',
           alt: 'Golden profiterole shells on a rack with one split open to show a dry hollow centre',
         },
       ],
@@ -309,7 +309,7 @@ export const eclairsRecipe = {
           media: [
             {
               id: 'eclairs-cooked-panade-v1',
-              src: '/media/recipes/eclairs/selected/step-03-cooked-panade-v1.png',
+              src: '/media/recipes/eclairs/selected/step-03-cooked-panade-v1.webp',
               alt: 'Гладке світле заварне тісто, зібране в одну масу в сталевій каструлі',
             },
           ],
@@ -325,7 +325,7 @@ export const eclairsRecipe = {
           media: [
             {
               id: 'eclairs-heavy-ribbon-v2',
-              src: '/media/recipes/eclairs/selected/step-04-heavy-ribbon-v2.png',
+              src: '/media/recipes/eclairs/selected/step-04-heavy-ribbon-v2.webp',
               alt: 'Блискуче заварне тісто повільно спадає з лопатки густою стрічкою над мискою',
             },
           ],
@@ -339,7 +339,7 @@ export const eclairsRecipe = {
           media: [
             {
               id: 'eclairs-piped-profiteroles-v2',
-              src: '/media/recipes/eclairs/selected/step-05-piped-profiteroles-v2.png',
+              src: '/media/recipes/eclairs/selected/step-05-piped-profiteroles-v2.webp',
               alt: 'Однакові сирі кульки заварного тіста розміром із волоський горіх на застеленому пергаментом деку',
             },
           ],
@@ -361,7 +361,7 @@ export const eclairsRecipe = {
           media: [
             {
               id: 'eclairs-dry-hollow-shells-v2',
-              src: '/media/recipes/eclairs/selected/step-07-dry-hollow-shells-v2.png',
+              src: '/media/recipes/eclairs/selected/step-07-dry-hollow-shells-v2.webp',
               alt: 'Золотисті оболонки профітролів на решітці, одна розкрита й показує суху порожнисту середину',
             },
           ],
@@ -478,7 +478,7 @@ export const eclairsRecipe = {
           media: [
             {
               id: 'eclairs-cooked-panade-v1',
-              src: '/media/recipes/eclairs/selected/step-03-cooked-panade-v1.png',
+              src: '/media/recipes/eclairs/selected/step-03-cooked-panade-v1.webp',
               alt: 'Masa choux clara y lisa reunida en una sola pieza dentro de un cazo de acero inoxidable',
             },
           ],
@@ -494,7 +494,7 @@ export const eclairsRecipe = {
           media: [
             {
               id: 'eclairs-heavy-ribbon-v2',
-              src: '/media/recipes/eclairs/selected/step-04-heavy-ribbon-v2.png',
+              src: '/media/recipes/eclairs/selected/step-04-heavy-ribbon-v2.webp',
               alt: 'Masa choux brillante que cae lentamente de una espátula formando una cinta gruesa sobre un bol',
             },
           ],
@@ -508,7 +508,7 @@ export const eclairsRecipe = {
           media: [
             {
               id: 'eclairs-piped-profiteroles-v2',
-              src: '/media/recipes/eclairs/selected/step-05-piped-profiteroles-v2.png',
+              src: '/media/recipes/eclairs/selected/step-05-piped-profiteroles-v2.webp',
               alt: 'Porciones iguales de masa choux cruda del tamaño de una nuez separadas sobre una bandeja con papel de horno',
             },
           ],
@@ -530,7 +530,7 @@ export const eclairsRecipe = {
           media: [
             {
               id: 'eclairs-dry-hollow-shells-v2',
-              src: '/media/recipes/eclairs/selected/step-07-dry-hollow-shells-v2.png',
+              src: '/media/recipes/eclairs/selected/step-07-dry-hollow-shells-v2.webp',
               alt: 'Profiteroles dorados sobre una rejilla con uno abierto para mostrar el interior seco y hueco',
             },
           ],

@@ -248,14 +248,14 @@ export function spongeCakeContent(locale: RecipeLocale): RecipeSourceDraftConten
           { ingredientId: 'eggs' },
           { ingredientId: 'sugar-whites' },
         ],
-        media: [media('sponge-whipped-whites-v1', 'whipped-whites-v1.png', 0)],
+        media: [media('sponge-whipped-whites-v1', 'whipped-whites-v1.webp', 0)],
       },
       {
         id: 'whip-yolks',
         title: text.titles[1],
         body: text.bodies[1],
         cookIngredients: [{ ingredientId: 'sugar-yolks' }],
-        media: [media('sponge-whipped-yolks-v1', 'whipped-yolks-v1.png', 1)],
+        media: [media('sponge-whipped-yolks-v1', 'whipped-yolks-v1.webp', 1)],
       },
       {
         id: 'fold-dry',
@@ -268,8 +268,8 @@ export function spongeCakeContent(locale: RecipeLocale): RecipeSourceDraftConten
           { ingredientId: 'flour' },
         ],
         media: [
-          media('sponge-fold-yolks-v1', 'fold-yolks-v1.png', 2),
-          media('sponge-fold-dry-v1', 'fold-dry-v1.png', 3),
+          media('sponge-fold-yolks-v1', 'fold-yolks-v1.webp', 2),
+          media('sponge-fold-dry-v1', 'fold-dry-v1.webp', 3),
         ],
       },
       {
@@ -280,7 +280,7 @@ export function spongeCakeContent(locale: RecipeLocale): RecipeSourceDraftConten
         media: [
           media(
             'sponge-batter-round-foil-v2',
-            'batter-in-round-foil-v2.png',
+            'batter-in-round-foil-v2.webp',
             4,
           ),
         ],

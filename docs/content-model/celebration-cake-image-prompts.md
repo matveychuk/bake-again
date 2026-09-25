@@ -2,8 +2,8 @@
 
 Tool: built-in image_gen. Original author files are preserved under media/recipes/celebration-sponge-cake/original/. Two cake photos have AI-edited backgrounds/plates; the cutaway and component bowl photos are generated illustrations, not evidence of a bake. The original video is transcoded for playback, with no autoplay.
 
-Selected cake assets: public/media/recipes/celebration-sponge-cake/selected/.
-Component assets: public/media/recipes/recipe-components/.
+Selected cake assets: media/web-source/media/recipes/celebration-sponge-cake/selected/.
+Component assets: media/web-source/media/recipes/recipe-components/.
 
 ## Author cake hero
 

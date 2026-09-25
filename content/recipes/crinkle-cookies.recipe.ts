@@ -476,7 +476,7 @@ export const crinkleCookiesRecipe = {
     {
       id: 'crinkle-generated-card-v1',
       type: 'image',
-      path: '/images/recipes/chocolate-crinkle-cookies-card-v1.png',
+      path: '/images/recipes/chocolate-crinkle-cookies-card-v1.webp',
       usage: ['hero', 'gallery'],
       alt: {
         uk: 'Шоколадне печиво тріщинки в цукровій пудрі на керамічній тарілці',
@@ -487,7 +487,7 @@ export const crinkleCookiesRecipe = {
     {
       id: 'crinkle-pale-wet-base-v1',
       type: 'image',
-      path: '/media/recipes/crinkle-cookies/selected/step-01-pale-wet-base-v1.png',
+      path: '/media/recipes/crinkle-cookies/selected/step-01-pale-wet-base-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Світла однорідна суміш яєць, цукру й м’якого масла стікає з вінчиків у керамічну миску',
@@ -498,7 +498,7 @@ export const crinkleCookiesRecipe = {
     {
       id: 'crinkle-finished-sticky-dough-v1',
       type: 'image',
-      path: '/media/recipes/crinkle-cookies/selected/step-03-finished-sticky-dough-v1.png',
+      path: '/media/recipes/crinkle-cookies/selected/step-03-finished-sticky-dough-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Дуже липке шоколадне тісто тягнеться за лопаткою над керамічною мискою',
@@ -509,7 +509,7 @@ export const crinkleCookiesRecipe = {
     {
       id: 'crinkle-chilled-dough-scoop-v1',
       type: 'image',
-      path: '/media/recipes/crinkle-cookies/selected/step-04-chilled-dough-scoop-v1.png',
+      path: '/media/recipes/crinkle-cookies/selected/step-04-chilled-dough-scoop-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Ложка набирає порцію холодного липкого шоколадного тіста з керамічної миски',
@@ -520,7 +520,7 @@ export const crinkleCookiesRecipe = {
     {
       id: 'crinkle-fast-shape-coat-v1',
       type: 'image',
-      path: '/media/recipes/crinkle-cookies/selected/step-06-fast-shape-coat-v1.png',
+      path: '/media/recipes/crinkle-cookies/selected/step-06-fast-shape-coat-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Руки швидко округлюють шоколадне тісто над мискою з цукровою пудрою; поруч лежить обкачана кулька',
@@ -531,7 +531,7 @@ export const crinkleCookiesRecipe = {
     {
       id: 'crinkle-tray-spacing-options-v1',
       type: 'image',
-      path: '/media/recipes/crinkle-cookies/selected/step-06-tray-spacing-options-v1.png',
+      path: '/media/recipes/crinkle-cookies/selected/step-06-tray-spacing-options-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Обкачані в цукровій пудрі кульки тіста далеко одна від одної на деку; частина з волоським горіхом або пеканом',
@@ -542,7 +542,7 @@ export const crinkleCookiesRecipe = {
     {
       id: 'crinkle-moist-cracks-v1',
       type: 'image',
-      path: '/media/recipes/crinkle-cookies/selected/step-07-moist-cracks-v1.png',
+      path: '/media/recipes/crinkle-cookies/selected/step-07-moist-cracks-v1.webp',
       usage: ['step'],
       alt: {
         uk: 'Щойно спечене шоколадне печиво з виразними тріщинами, всередині яких тісто ще виглядає вологим',

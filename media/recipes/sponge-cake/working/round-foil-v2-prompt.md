@@ -2,7 +2,7 @@
 
 Generated with the built-in image tool on 2026-09-24.
 
-Output: `public/media/recipes/sponge-cake/selected/batter-in-round-foil-v2.png`.
+Output: `media/web-source/media/recipes/sponge-cake/selected/batter-in-round-foil-v2.png`.
 
 ## Exact prompt
 

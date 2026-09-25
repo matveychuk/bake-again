@@ -298,7 +298,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'active-yeast',
-                  src: '/media/recipes/easter-bread/selected/step-02-active-yeast-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-02-active-yeast-v1.webp',
                   alt: 'Свіжі дріжджі, активовані в теплому молоці, з кремовим шаром дрібних бульбашок',
                 },
               ],
@@ -310,7 +310,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'soft-dough',
-                  src: '/media/recipes/easter-bread/selected/step-05-soft-dough-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-05-soft-dough-v1.webp',
                   alt: 'Дуже м’яке липке світло-золотисте тісто для паски, підняте силіконовою лопаткою над чашею',
                 },
               ],
@@ -324,7 +324,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'ribbon-consistency',
-                  src: '/media/recipes/easter-bread/selected/step-06-ribbon-consistency-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-06-ribbon-consistency-v1.webp',
                   alt: 'Тісто для паски після відпочинку спадає з лопатки широкою важкою стрічкою над чашею',
                 },
               ],
@@ -336,7 +336,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'fruit-folded',
-                  src: '/media/recipes/easter-bread/selected/step-07-fruit-folded-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-07-fruit-folded-v1.webp',
                   alt: 'М’яке тісто для паски з рівномірно вмішаними родзинками й невеликими бурштиновими шматочками цукатів',
                 },
               ],
@@ -355,7 +355,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'proofed-paskas',
-                  src: '/media/recipes/easter-bread/selected/step-09-proofed-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-09-proofed-v1.webp',
                   alt: 'Дві невеликі паперові форми для паски зі світлим пухким тістом, що піднялося майже до країв',
                 },
               ],
@@ -369,7 +369,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'baked-paskas',
-                  src: '/media/recipes/easter-bread/selected/step-11-baked-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-11-baked-v1.webp',
                   alt: 'Дві невеликі спечені паски з рівномірно золотистими верхівками в паперових формах і чистою дерев’яною шпажкою поруч',
                 },
               ],
@@ -381,7 +381,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'cooled-crumb',
-                  src: '/media/recipes/easter-bread/selected/step-12-cooled-crumb-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-12-cooled-crumb-v1.webp',
                   alt: 'Повністю остигла паска зі скибкою, на якій видно м’який пухкий м’якуш, родзинки й трохи цукатів',
                 },
               ],
@@ -402,7 +402,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'active-yeast',
-                  src: '/media/recipes/easter-bread/selected/step-02-active-yeast-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-02-active-yeast-v1.webp',
                   alt: 'Fresh yeast activated in warm milk with a creamy cap of small bubbles',
                 },
               ],
@@ -414,7 +414,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'soft-dough',
-                  src: '/media/recipes/easter-bread/selected/step-05-soft-dough-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-05-soft-dough-v1.webp',
                   alt: 'Very soft sticky pale-golden paska dough lifted from a mixing bowl with a silicone spatula',
                 },
               ],
@@ -428,7 +428,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'ribbon-consistency',
-                  src: '/media/recipes/easter-bread/selected/step-06-ribbon-consistency-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-06-ribbon-consistency-v1.webp',
                   alt: 'Hydrated paska dough falling from a spatula in a broad heavy ribbon above the bowl',
                 },
               ],
@@ -440,7 +440,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'fruit-folded',
-                  src: '/media/recipes/easter-bread/selected/step-07-fruit-folded-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-07-fruit-folded-v1.webp',
                   alt: 'Soft paska dough with raisins and small amber candied-fruit pieces evenly folded through it',
                 },
               ],
@@ -459,7 +459,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'proofed-paskas',
-                  src: '/media/recipes/easter-bread/selected/step-09-proofed-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-09-proofed-v1.webp',
                   alt: 'Two small paper paska moulds with pale airy dough risen close to their rims',
                 },
               ],
@@ -473,7 +473,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'baked-paskas',
-                  src: '/media/recipes/easter-bread/selected/step-11-baked-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-11-baked-v1.webp',
                   alt: 'Two small baked paskas with evenly golden domed tops in paper moulds and a clean wooden skewer beside them',
                 },
               ],
@@ -485,7 +485,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
               media: [
                 {
                   id: 'cooled-crumb',
-                  src: '/media/recipes/easter-bread/selected/step-12-cooled-crumb-v1.png',
+                  src: '/media/recipes/easter-bread/selected/step-12-cooled-crumb-v1.webp',
                   alt: 'Fully cooled paska with one slice showing a soft airy crumb, raisins and restrained candied fruit',
                 },
               ],

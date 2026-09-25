@@ -16,7 +16,7 @@ void test('standalone cream pages provide shared-detail metadata and scaling anc
     assert.equal(recipe.scalingAnchorIngredientId, scalingAnchor);
     assert.match(
       recipe.image,
-      new RegExp(`/images/recipes/${id}-card-v1\\.png$`),
+      new RegExp(`/images/recipes/${id}-card-v1\\.webp$`),
     );
     assert.equal(recipe.needsBeforePublishing, '');
   }

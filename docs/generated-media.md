@@ -2,6 +2,9 @@
 
 These images are preview assets for the local recipe inventory. They are not final publication photography. Each generated cover requires explicit approval or replacement before its recipe is marked ready.
 
+The paths below identify source-quality files in `media/web-source/`. Product code
+uses matching `.webp` URLs generated into `public/` by `npm run media:prepare`.
+
 ## Shared prompt direction
 
 Use case: photorealistic-natural. Asset type: landscape 3:2 recipe-card cover for the Bake Again website. Scene: warm cream linen surface and a minimal neutral setting. Style: refined natural editorial food photography with believable handmade texture. Composition: close three-quarter view, centered slightly off-axis, with crop-safe margins. Lighting: soft diffused window light, warm but color-accurate. Constraints: food only, no people, no text, no logo, no watermark, no excessive props, and no artificial gloss.
@@ -11,7 +14,7 @@ Use case: photorealistic-natural. Asset type: landscape 3:2 recipe-card cover fo
 ### Paska 2.0 step photography
 
 Seven generated 3:2 process images under
-`public/media/recipes/easter-bread/selected/` show the decision-critical states in the
+`media/web-source/media/recipes/easter-bread/selected/` show the decision-critical states in the
 Suggested Paska 2.0 workflow: foamy activated yeast, soft dough after mixing, the final
 heavy-ribbon consistency after hydration, evenly folded fruit, fully proofed dough, baked
 golden domes and the cooled stabilised crumb. The images are visual texture references,
@@ -20,13 +23,13 @@ not evidence that this exact adaptation has been bake-tested.
 ### Fruit sponge roll step photography
 
 Three generated 3:2 process images under
-`public/media/recipes/fruit-sponge-roll/selected/` show the source-backed visual
+`media/web-source/media/recipes/fruit-sponge-roll/selected/` show the source-backed visual
 checkpoints retained by the published recipe: thick pale egg foam, airy batter spread on
 parchment and the warm unfilled sponge being rolled with parchment. The earlier cream
 image remains in the repository as a superseded working reference because cream now comes
 from a linked reusable recipe.
 
-`public/images/recipes/fruit-sponge-roll-card-v3.png` is the current recipe and catalogue
+`media/web-source/images/recipes/fruit-sponge-roll-card-v3.png` is the current recipe and catalogue
 cover. It preserves the naturally uneven golden roll, distinct mascarpone-cream and
 berry-jam spiral and cut slice, while adding a modest hand-spread layer of cream across the
 top with fresh berries seated in it. The author photograph and real homemade roll examples
@@ -38,13 +41,13 @@ image tool in photorealistic-natural mode; no text, branding or packaging is pre
 Four generated 3:2 heroes use the shared Warm Precision setting and show the finished
 consistency of each linked cream without decorative pastry props:
 
-- `public/images/recipes/mascarpone-whipped-cream-card-v1.png`: airy mascarpone cream
+- `media/web-source/images/recipes/mascarpone-whipped-cream-card-v1.png`: airy mascarpone cream
   holding firm soft peaks.
-- `public/images/recipes/vanilla-egg-custard-card-v1.png`: glossy egg custard falling in
+- `media/web-source/images/recipes/vanilla-egg-custard-card-v1.png`: glossy egg custard falling in
   a thick ribbon from a spoon.
-- `public/images/recipes/eggless-vanilla-custard-card-v1.png`: pale eggless custard with
+- `media/web-source/images/recipes/eggless-vanilla-custard-card-v1.png`: pale eggless custard with
   a clear spatula channel.
-- `public/images/recipes/vanilla-buttercream-card-v1.png`: pale buttercream holding a
+- `media/web-source/images/recipes/vanilla-buttercream-card-v1.png`: pale buttercream holding a
   stable spatula swoop.
 
 The method keeps one decision-useful final-state image per cream. Mascarpone reuses the
@@ -55,7 +58,7 @@ assets were generated with the built-in image tool in photorealistic-natural mod
 
 ### Prune cake working-record photography
 
-Two generated 3:2 process images under `public/media/recipes/prune-cake/selected/`
+Two generated 3:2 process images under `media/web-source/media/recipes/prune-cake/selected/`
 illustrate the only legible partial method states: pale cream mixed with powdered sugar
 and glossy chocolate glaze. Their recipe captions explicitly identify them as texture
 references, not evidence for the missing quantities or formula.
@@ -63,7 +66,7 @@ references, not evidence for the missing quantities or formula.
 ### Sponge cake step photography
 
 Five generated 3:2 process images under
-`public/media/recipes/sponge-cake/selected/` show the source-backed working states:
+`media/web-source/media/recipes/sponge-cake/selected/` show the source-backed working states:
 thick whipped whites, pale ribbon-stage yolks, gentle yolk folding, dry ingredients added
 in portions and airy batter transferred to a round cake tin lined with two crossed sheets
 of aluminium foil. The original long-tin image is retained as a superseded reference.
@@ -102,7 +105,7 @@ berry-batter frames were left out to keep the sequence practical and concise.
 - `step-03-mixed-batter-author-v1.jpeg`: the final thick batter consistency.
 - `step-05-fill-waffle-maker-author-v1.jpeg`: batter being portioned into the waffle maker.
 - `step-05-baked-waffles-author-v1.jpeg`: golden waffles in the open waffle maker.
-- `public/images/recipes/cottage-cheese-waffles-author-v1.jpeg`: plated waffles used as
+- `media/web-source/images/recipes/cottage-cheese-waffles-author-v1.jpeg`: plated waffles used as
   the final method frame and catalogue/recipe hero.
 
 The earlier generated waffle assets remain in the repository as superseded working
@@ -111,12 +114,12 @@ references, but no published waffle surface references them.
 ### Eclairs and profiteroles step photography
 
 Four generated 4:3 process images under
-`public/media/recipes/eclairs/selected/` show the source-backed checkpoints for the
+`media/web-source/media/recipes/eclairs/selected/` show the source-backed checkpoints for the
 tested profiterole bake: a cooked panade gathered into one mass, the heavy ribbon after
 adding the eggs, evenly spaced walnut-size piped portions and a cooled shell with a dry
 hollow centre. The images support the tested profiterole form.
 
-`public/images/recipes/profiteroles-card-v2.png` is the current recipe and catalogue
+`media/web-source/images/recipes/profiteroles-card-v2.png` is the current recipe and catalogue
 cover: seven naturally irregular round profiteroles on a warm-white plate, with one cut
 open to show the hollow shell and restrained vanilla filling. It replaces the earlier
 long éclair cover so the hero matches the tested shape and yield. Generated with the
@@ -126,7 +129,7 @@ Precision kitchen palette; no text, branding or packaging is present.
 ### Cinnamon-roll step photography
 
 Nine generated 4:3 process images under
-`public/media/recipes/cinnamon-rolls/selected/` show the complete source-backed
+`media/web-source/media/recipes/cinnamon-rolls/selected/` show the complete source-backed
 sequence: foamy activated yeast, cohesive mixed dough, the first proof, an even rolled
 rectangle, cinnamon filling, 2 cm cut spirals, the second proof, lightly golden baked
 rolls and the final cream-cheese glaze. The images use the Warm Precision kitchen
@@ -168,7 +171,7 @@ no branding and are visual checkpoint references rather than author photography.
 ### Sponge-roll assembly correction · 2026-09-25
 
 Four built-in image_gen outputs illustrate the author's clarified technique under
-`public/media/recipes/fruit-sponge-roll/selected/`:
+`media/web-source/media/recipes/fruit-sponge-roll/selected/`:
 
 - `warm-sponge-roll-v2.png`: baking parchment stays between the sponge turns during cooling.
 - `blueberry-jam-v1.png`: thick blueberry jam with small berry pieces; the cooled sponge retains a raised curved edge.

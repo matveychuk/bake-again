@@ -17,7 +17,7 @@ Status: S2-B background and three derived recipe photographs selected for the re
 3. `crepe-golden-side-s2b-v1.png`
 
 Each image is a 1448 × 1086 px, 4:3 landscape asset. Public copies use the `step-05-`
-prefix under `public/media/recipes/crepes/selected/`.
+prefix under `media/web-source/media/recipes/crepes/selected/`.
 
 ## Edit direction
 

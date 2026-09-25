@@ -177,7 +177,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'fruit-roll-egg-foam-v1',
-          src: '/media/recipes/fruit-sponge-roll/selected/whipped-egg-foam-v1.png',
+          src: '/media/recipes/fruit-sponge-roll/selected/whipped-egg-foam-v1.webp',
           alt: text(
             locale,
             'Thick pale egg foam falling from a whisk in a broad ribbon',
@@ -236,7 +236,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'fruit-roll-batter-tray-v1',
-          src: '/media/recipes/fruit-sponge-roll/selected/batter-on-tray-v1.png',
+          src: '/media/recipes/fruit-sponge-roll/selected/batter-on-tray-v1.webp',
           alt: text(
             locale,
             'Airy sponge batter spread in a thin, even rectangle on parchment',
@@ -263,7 +263,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'fruit-roll-warm-roll-v3',
-          src: '/media/recipes/fruit-sponge-roll/selected/warm-sponge-roll-v3.png',
+          src: '/media/recipes/fruit-sponge-roll/selected/warm-sponge-roll-v3.webp',
           alt: text(
             locale,
             'Warm sponge rolled together with its baking parchment, with paper visible between the turns',
@@ -298,7 +298,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'fruit-roll-blueberry-jam-v4',
-          src: '/media/recipes/fruit-sponge-roll/selected/blueberry-jam-v4.png',
+          src: '/media/recipes/fruit-sponge-roll/selected/blueberry-jam-v4.webp',
           alt: text(
             locale,
             'Blueberry jam with small berry pieces spread on the sponge while one edge curves smoothly upward and inward over the jam',
@@ -333,7 +333,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'fruit-roll-cream-over-jam-v4',
-          src: '/media/recipes/fruit-sponge-roll/selected/cream-over-jam-v4.png',
+          src: '/media/recipes/fruit-sponge-roll/selected/cream-over-jam-v4.webp',
           alt: text(
             locale,
             'Whipped cream with mascarpone spread over blueberry jam, leaving a 2 cm border without cream at the closing edge',
@@ -371,7 +371,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'fruit-roll-decorate-v1',
-          src: '/media/recipes/fruit-sponge-roll/selected/decorate-roll-v1.png',
+          src: '/media/recipes/fruit-sponge-roll/selected/decorate-roll-v1.webp',
           alt: text(
             locale,
             'Reserved cream being spread on top of the finished roll, with a few berries added for decoration',

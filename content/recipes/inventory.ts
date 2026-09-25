@@ -56,7 +56,7 @@ export const recipeInventory: InventoryRecipe[] = [
     launchPriority: 'High',
     heroCandidate: 'Yes',
     image:
-      '/media/recipes/celebration-sponge-cake/selected/author-cake-warm-precision-v1.png',
+      '/media/recipes/celebration-sponge-cake/selected/author-cake-warm-precision-v1.webp',
     imageKind: 'edited-author-photo',
     imageAlt: 'Tall homemade fruit cake with chocolate glaze and cream flowers',
     summary:
@@ -102,7 +102,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'Possible',
-    image: '/images/recipes/banana-bread-card-v1.png',
+    image: '/images/recipes/banana-bread-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Gluten-free banana bread with walnuts and raisins, sliced on a warm neutral surface',
@@ -133,7 +133,7 @@ export const recipeInventory: InventoryRecipe[] = [
     scalingAnchorIngredientId: 'cottage-cheese',
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/lazy-dumplings-card-v1.png',
+    image: '/images/recipes/lazy-dumplings-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Ukrainian lazy cottage-cheese dumplings with sour cream and butter',
@@ -175,7 +175,7 @@ export const recipeInventory: InventoryRecipe[] = [
     scalingAnchorIngredientId: 'eggs',
     launchPriority: 'High',
     heroCandidate: 'Possible',
-    image: '/images/recipes/apple-charlotte-card-v2.png',
+    image: '/images/recipes/apple-charlotte-card-v2.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Gluten-free apple charlotte with a cut square showing apple pieces throughout the crumb',
@@ -225,7 +225,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/apple-meringue-pie-card-v1.png',
+    image: '/images/recipes/apple-meringue-pie-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Generated preview of a gluten-free apple pie with a short pastry base and toasted meringue topping',
@@ -268,7 +268,7 @@ export const recipeInventory: InventoryRecipe[] = [
     scalingAnchorIngredientId: 'eggs',
     launchPriority: 'Medium',
     heroCandidate: 'Possible',
-    image: '/images/recipes/plum-cake-card-v2.png',
+    image: '/images/recipes/plum-cake-card-v2.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Inverted gluten-free plum sponge cake with glossy baked plums on top and a cut square',
@@ -319,7 +319,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/cottage-cheese-waffles-author-v1.jpeg',
+    image: '/images/recipes/cottage-cheese-waffles-author-v1.webp',
     imageKind: 'author-photo',
     imageAlt:
       'Golden gluten-free cottage-cheese waffles with berries on a pale green plate',
@@ -355,7 +355,7 @@ export const recipeInventory: InventoryRecipe[] = [
     totalTime: '35–40 min baking + preparation',
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/carrot-cake-card-v1.png',
+    image: '/images/recipes/carrot-cake-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt: 'Gluten-free carrot loaf cake with walnuts and raisins',
     summary:
@@ -413,7 +413,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/sponge-cake-card-v1.png',
+    image: '/images/recipes/sponge-cake-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt: 'Tall plain gluten-free sponge cake with one wedge cut',
     summary:
@@ -454,7 +454,7 @@ export const recipeInventory: InventoryRecipe[] = [
     scalingAnchorIngredientId: 'eggs',
     launchPriority: 'High',
     heroCandidate: 'Yes',
-    image: '/images/crepes.png',
+    image: '/images/crepes.webp',
     imageKind: 'generated-preview',
     imageAlt: 'A stack of thin golden gluten-free breakfast crepes',
     summary:
@@ -504,7 +504,7 @@ export const recipeInventory: InventoryRecipe[] = [
     scalingAnchorIngredientId: 'schar-mix-b',
     launchPriority: 'High',
     heroCandidate: 'Yes',
-    image: '/images/recipes/gluten-free-napoleon-card-v3.png',
+    image: '/images/recipes/gluten-free-napoleon-card-v3.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Gluten-free Napoleon cake with six thin layers, custard and nuts',
@@ -551,7 +551,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'High',
     heroCandidate: 'Yes',
-    image: '/images/recipes/cinnamon-rolls-card-v1.png',
+    image: '/images/recipes/cinnamon-rolls-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt: 'Gluten-free cinnamon rolls with a light cream glaze',
     summary:
@@ -582,7 +582,7 @@ export const recipeInventory: InventoryRecipe[] = [
     totalTime: null,
     launchPriority: 'High',
     heroCandidate: 'Yes',
-    image: '/images/recipes/chocolate-crinkle-cookies-card-v1.png',
+    image: '/images/recipes/chocolate-crinkle-cookies-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt: 'Chocolate crinkle cookies dusted with powdered sugar',
     summary:
@@ -617,7 +617,7 @@ export const recipeInventory: InventoryRecipe[] = [
     totalTime: null,
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/apple-fritters-card-v1.png',
+    image: '/images/recipes/apple-fritters-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Golden gluten-free apple fritter pancakes with visible apple pieces',
@@ -665,7 +665,7 @@ export const recipeInventory: InventoryRecipe[] = [
     scalingAnchorIngredientId: 'bananas',
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/banana-pancakes-card-v3.png',
+    image: '/images/recipes/banana-pancakes-card-v3.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Thick irregular gluten-free banana pancakes with golden-brown tops and a tender crumb',
@@ -689,7 +689,7 @@ export const recipeInventory: InventoryRecipe[] = [
     totalTime: null,
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/apple-banana-fritters-card-v1.png',
+    image: '/images/recipes/apple-banana-fritters-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt: 'Golden gluten-free apple and banana fritter pancakes',
     summary:
@@ -738,7 +738,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'High · seasonal',
     heroCandidate: 'No',
-    image: '/images/recipes/easter-bread-card-v1.png',
+    image: '/images/recipes/easter-bread-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt: 'Tall gluten-free Ukrainian Easter bread with glaze and raisins',
     summary: 'Soft Easter bread with raisins and candied fruit.',
@@ -788,7 +788,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/prune-cake-card-v2.png',
+    image: '/images/recipes/prune-cake-card-v2.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Chocolate prune cake with a mound of cream-coated cake pieces, glaze and nuts',
@@ -841,7 +841,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium–High',
     heroCandidate: 'Yes',
-    image: '/images/recipes/fruit-sponge-roll-card-v3.png',
+    image: '/images/recipes/fruit-sponge-roll-card-v3.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Homemade fruit sponge roll with berry jam, mascarpone cream spread on top and fresh berries',
@@ -888,7 +888,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'To confirm',
     heroCandidate: 'Possible',
-    image: '/images/recipes/profiteroles-card-v2.png',
+    image: '/images/recipes/profiteroles-card-v2.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Golden gluten-free profiteroles with one cut open to show vanilla cream',

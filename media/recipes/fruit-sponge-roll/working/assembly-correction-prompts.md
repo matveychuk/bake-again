@@ -25,7 +25,7 @@ Use case: precise-object-edit. Input is the geometry-correct blueberry jam stage
 
 ## Final workspace assets
 
-- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/warm-sponge-roll-v3.png`
-- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/blueberry-jam-v3.png`
-- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/cream-over-jam-v3.png`
-- `/Users/sasha/Bake Again/public/media/recipes/fruit-sponge-roll/selected/decorate-roll-v1.png` — original final-decoration prompt remains in `assembly-prompts.md`.
+- `/Users/sasha/Bake Again/media/web-source/media/recipes/fruit-sponge-roll/selected/warm-sponge-roll-v3.png`
+- `/Users/sasha/Bake Again/media/web-source/media/recipes/fruit-sponge-roll/selected/blueberry-jam-v3.png`
+- `/Users/sasha/Bake Again/media/web-source/media/recipes/fruit-sponge-roll/selected/cream-over-jam-v3.png`
+- `/Users/sasha/Bake Again/media/web-source/media/recipes/fruit-sponge-roll/selected/decorate-roll-v1.png` — original final-decoration prompt remains in `assembly-prompts.md`.

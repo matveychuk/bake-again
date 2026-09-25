@@ -141,7 +141,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'plums-cut-side-down-v1',
-          src: '/media/recipes/plum-cake/selected/plums-cut-side-down-v1.png',
+          src: '/media/recipes/plum-cake/selected/plums-cut-side-down-v1.webp',
           alt: text(
             locale,
             'Plum halves arranged cut side down in one layer in a parchment-lined pan',
@@ -175,7 +175,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'plum-cake-egg-foam-v1',
-          src: '/media/recipes/plum-cake/selected/whipped-egg-foam-v1.png',
+          src: '/media/recipes/plum-cake/selected/whipped-egg-foam-v1.webp',
           alt: text(
             locale,
             'Pale egg foam falling from a whisk in a broad ribbon',

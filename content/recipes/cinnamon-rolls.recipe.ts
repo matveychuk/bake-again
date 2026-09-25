@@ -398,7 +398,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         media: stepMedia(
           locale,
           'cinnamon-rolls-activated-yeast-v1',
-          'step-01-activated-yeast-v1.png',
+          'step-01-activated-yeast-v1.webp',
           {
             en: 'Foamy activated yeast in lukewarm almond milk in a cream bowl',
             es: 'Levadura activada y espumosa en leche de almendra templada dentro de un bol crema',
@@ -454,7 +454,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         media: stepMedia(
           locale,
           'cinnamon-rolls-mixed-dough-v1',
-          'step-02-mixed-dough-v1.png',
+          'step-02-mixed-dough-v1.webp',
           {
             en: 'Soft cohesive gluten-free cinnamon-roll dough in a cream mixing bowl',
             es: 'Masa blanda y cohesionada de rollos de canela sin gluten en un bol crema',
@@ -513,7 +513,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         media: stepMedia(
           locale,
           'cinnamon-rolls-first-proof-v1',
-          'step-03-first-proof-v1.png',
+          'step-03-first-proof-v1.webp',
           {
             en: 'Risen gluten-free dough with a softly domed aerated surface',
             es: 'Masa sin gluten levada con una superficie aireada y suavemente abombada',
@@ -556,7 +556,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         media: stepMedia(
           locale,
           'cinnamon-rolls-rolled-rectangle-v1',
-          'step-04-rolled-rectangle-v1.png',
+          'step-04-rolled-rectangle-v1.webp',
           {
             en: 'Even rectangle of pale gluten-free dough beside a wooden rolling pin',
             es: 'Rectángulo uniforme de masa sin gluten clara junto a un rodillo de madera',
@@ -600,7 +600,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         media: stepMedia(
           locale,
           'cinnamon-rolls-cinnamon-filling-v1',
-          'step-05-cinnamon-filling-v1.png',
+          'step-05-cinnamon-filling-v1.webp',
           {
             en: 'Rolled dough rectangle evenly covered with brown sugar and cinnamon filling',
             es: 'Rectángulo de masa cubierto uniformemente con azúcar moreno y canela',
@@ -655,7 +655,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         media: stepMedia(
           locale,
           'cinnamon-rolls-cut-rolls-v1',
-          'step-06-cut-rolls-v1.png',
+          'step-06-cut-rolls-v1.webp',
           {
             en: 'Cinnamon-filled dough log with evenly cut spiral portions beside a serrated knife',
             es: 'Cilindro de masa con canela y porciones en espiral cortadas junto a un cuchillo de sierra',
@@ -703,7 +703,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         media: stepMedia(
           locale,
           'cinnamon-rolls-second-proof-v1',
-          'step-07-second-proof-v1.png',
+          'step-07-second-proof-v1.webp',
           {
             en: 'Pale unbaked cinnamon rolls modestly puffed in a cream ceramic baking dish',
             es: 'Rollos de canela pálidos y sin hornear, ligeramente levados en una fuente de cerámica crema',
@@ -751,7 +751,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         media: stepMedia(
           locale,
           'cinnamon-rolls-lightly-golden-v1',
-          'step-08-lightly-golden-v1.png',
+          'step-08-lightly-golden-v1.webp',
           {
             en: 'Lightly golden baked cinnamon rolls without glaze in a cream ceramic dish',
             es: 'Rollos de canela horneados y ligeramente dorados, sin glaseado, en una fuente crema',
@@ -794,7 +794,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         media: stepMedia(
           locale,
           'cinnamon-rolls-cream-cheese-glaze-v1',
-          'step-09-cream-cheese-glaze-v1.png',
+          'step-09-cream-cheese-glaze-v1.webp',
           {
             en: 'Warm cinnamon rolls with restrained cream-cheese glaze in a cream ceramic dish',
             es: 'Rollos de canela templados con un glaseado moderado de queso crema en una fuente crema',

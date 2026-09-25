@@ -25,7 +25,7 @@ export const creamPageRecipes: readonly InventoryRecipe[] = [
     scalingAnchorIngredientId: 'whipping-cream',
     launchPriority: 'Linked recipe',
     heroCandidate: 'Yes',
-    image: '/images/recipes/mascarpone-whipped-cream-card-v1.png',
+    image: '/images/recipes/mascarpone-whipped-cream-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Smooth whipped mascarpone cream holding firm soft peaks in a ceramic bowl',
@@ -58,7 +58,7 @@ export const creamPageRecipes: readonly InventoryRecipe[] = [
     scalingAnchorIngredientId: 'milk',
     launchPriority: 'Linked recipe',
     heroCandidate: 'Yes',
-    image: '/images/recipes/vanilla-egg-custard-card-v1.png',
+    image: '/images/recipes/vanilla-egg-custard-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Thick glossy vanilla egg custard falling from a spoon into a ceramic bowl',
@@ -92,7 +92,7 @@ export const creamPageRecipes: readonly InventoryRecipe[] = [
     scalingAnchorIngredientId: 'milk',
     launchPriority: 'Linked recipe',
     heroCandidate: 'Yes',
-    image: '/images/recipes/eggless-vanilla-custard-card-v1.png',
+    image: '/images/recipes/eggless-vanilla-custard-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Thick pale eggless vanilla custard with a clear spatula channel in a ceramic bowl',
@@ -126,7 +126,7 @@ export const creamPageRecipes: readonly InventoryRecipe[] = [
     scalingAnchorIngredientId: 'butter',
     launchPriority: 'Linked recipe',
     heroCandidate: 'Yes',
-    image: '/images/recipes/vanilla-buttercream-card-v1.png',
+    image: '/images/recipes/vanilla-buttercream-card-v1.webp',
     imageKind: 'generated-preview',
     imageAlt:
       'Stable pale vanilla buttercream holding a firm spatula swoop in a ceramic bowl',

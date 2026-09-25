@@ -21,6 +21,11 @@ foundation tests, no-live-API assistant tests, the critical eval gate, recipe
 validation and the production build. The workflow uploads no artifacts and configures
 no cache.
 
+`npm run build` first runs `media:prepare`. Source-quality PNG/JPEG files remain under
+`media/web-source/`; the generated `public/` tree contains referenced WebP assets and
+required video only. The preparation step enforces a 64 MiB media budget. Never package
+`media/web-source/` or `media/recipes/*/original/` as static deployment assets.
+
 `production-release.yml` is manual. It rebuilds and revalidates the selected `main`
 commit without runtime secrets. Only after that job succeeds does the
 `authorize-sites-deploy` job enter the protected `production` environment. It checks

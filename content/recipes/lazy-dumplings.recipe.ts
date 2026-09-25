@@ -164,7 +164,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
       ],
       media: media(
         'mix-cottage-cheese',
-        'step-01-mix-cottage-cheese-v1.png',
+        'step-01-mix-cottage-cheese-v1.webp',
         text.alts[0],
       ),
     },
@@ -175,7 +175,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
       cookIngredients: [{ ingredientId: 'flour' }, { ingredientId: 'tapioca' }],
       media: media(
         'add-flour-tapioca',
-        'step-02-add-flour-tapioca-v1.png',
+        'step-02-add-flour-tapioca-v1.webp',
         text.alts[1],
       ),
     },
@@ -187,7 +187,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
       cookIngredients: [
         { ingredientId: 'flour', quantity: 'omit', note: text.dusting },
       ],
-      media: media('shape-dough-log', 'step-04-shape-log-v1.png', text.alts[2]),
+      media: media('shape-dough-log', 'step-04-shape-log-v1.webp', text.alts[2]),
     },
     {
       id: 'shape-dumplings',
@@ -199,7 +199,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
       ],
       media: media(
         'shape-round-dumplings',
-        'step-05-shape-dumplings-v1.png',
+        'step-05-shape-dumplings-v1.webp',
         text.alts[3],
       ),
     },
@@ -210,7 +210,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
       cookInstructions: [...text.cooking],
       media: media(
         'boil-round-dumplings',
-        'step-06-boil-dumplings-v1.png',
+        'step-06-boil-dumplings-v1.webp',
         text.alts[4],
       ),
     },

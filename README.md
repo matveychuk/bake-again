@@ -139,7 +139,9 @@ content/recipes/       Structured multilingual recipe content
 design-system/         Approved tokens, components, patterns and change history
 docs/content-model/    Recipe schema decisions and authoring workflow
 docs/reference/        Historical briefs, research and recipe inventory
-media/recipes/         Original and selected recipe media
+media/web-source/      Source-quality media retained in GitHub; build input only
+media/recipes/         Camera originals and working recipe media; never deployed
+public/                Generated WebP/video delivery assets plus static files
 ```
 
 The initial collection remains repository-authored; no CMS or database is required.
