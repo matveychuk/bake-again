@@ -132,6 +132,8 @@ Do not add these before launch evidence justifies them:
 
 ## Repository structure
 
+Owner reference: [Довідник сервісів і доступів — домен, хостинг, аналітика та продовження](docs/services-register.uk.md).
+
 ```text
 content/recipes/       Structured multilingual recipe content
 design-system/         Approved tokens, components, patterns and change history
