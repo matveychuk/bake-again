@@ -4,11 +4,12 @@ import { analyticsAllowed, analyticsConfig, sanitizeAnalyticsPayload, trackEvent
 
 void test('only production product routes collect analytics; DNT and internal routes are excluded', () => {
   for (const locale of ['uk', 'en', 'es']) {
-    assert.equal(analyticsAllowed(analyticsConfig.hostname, `/${locale}/recipes/banana-bread/cook`), true);
+    assert.equal(analyticsAllowed('bakeagain.com', `/${locale}/recipes/banana-bread/cook`), true);
     assert.equal(analyticsAllowed(analyticsConfig.hostname, `/${locale}/drafts`), false);
   }
   assert.equal(analyticsAllowed('localhost', '/uk'), false);
   assert.equal(analyticsAllowed('preview.example.com', '/uk'), false);
+  assert.equal(analyticsAllowed('bake-again-warm-precision.matveychuk-a.chatgpt.site', '/uk'), false);
   assert.equal(analyticsAllowed(analyticsConfig.hostname, '/design-system'), false);
   assert.equal(analyticsAllowed(analyticsConfig.hostname, '/uk', '1'), false);
 });

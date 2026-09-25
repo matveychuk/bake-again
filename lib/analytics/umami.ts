@@ -1,7 +1,7 @@
 // Public installation identifiers, not credentials. Keep localhost/preview traffic out.
 export const analyticsConfig = {
   websiteId: '1b499007-bdab-4322-9b5e-b5173f5649f6',
-  hostname: 'bake-again-warm-precision.matveychuk-a.chatgpt.site',
+  hostname: 'bakeagain.com',
   scriptUrl: 'https://cloud.umami.is/script.js',
 };
 

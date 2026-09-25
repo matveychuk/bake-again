@@ -4,6 +4,11 @@ Umami website **Bake Again**, EU dashboard. The public website ID and exact prod
 hostname live in `lib/analytics/umami.ts`; neither is a secret. No runtime key or paid
 plan is needed. If the public hostname changes, update both this config and Umami.
 
+The production hostname is `bakeagain.com`. Code and the Umami website settings were
+aligned on 25 September 2026, keeping the existing website ID. The former
+`chatgpt.site` hostname is excluded. Deployment and a real pageview/event check on
+the custom domain are still pending; the previous Sites publication failed.
+
 `SiteAnalytics` loads one asynchronous tracker on production product routes. Umami
 owns pageviews, including client-side navigation. Query strings and fragments are
 excluded, so recipe quantity changes do not create separate page URLs. Localhost,
