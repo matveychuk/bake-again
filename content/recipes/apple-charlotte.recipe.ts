@@ -311,7 +311,7 @@ function contentForLocale(locale: Locale): RecipeSourceDraftContent {
 
 export const appleCharlotteRecipe = {
   id: 'apple-charlotte',
-  publicationStatus: 'published',
+  publicationStatus: 'unpublished',
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',
     locator:

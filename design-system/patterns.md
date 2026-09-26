@@ -9,6 +9,16 @@ decision-making and are not permanent taxonomy.
 
 The Tested explanation links directly to the testing section of the localized About page.
 
+Published catalogue order is curated per language in `content/recipes/catalog-order.ts`.
+Mix breakfast, everyday baking and celebration recipes among the first six cards.
+This is editorial placement, not a popularity claim. Keep the same DOM/keyboard order
+at every viewport width; do not group or reorder cards with CSS to force desktop rows.
+Collection filters preserve the locale's relative order. Search relevance takes
+precedence, with editorial order breaking ties. Draft/all editorial inventories retain
+source order. Newly published recipes without a curated position appear at the end
+in source order; ordering never publishes a draft. Seasonal changes are explicit edits
+to the same lists. Design Lab shows the first six published cards in uk/es/en.
+
 ## Editorial story page
 
 The About page keeps the family story concise and follows it with the practical testing
@@ -43,9 +53,21 @@ independent constraints such as baking size first. Below them, let the user choo
 direct batch scaling or scaling from an available anchor ingredient. Size and quantity may
 be combined; the two quantity methods may not.
 
+When a concise yield already includes the exact geometry label (for example, a 24 cm cake),
+do not repeat that same label on a second line in the quantity controls.
+
+Links between recipes stay canonical and do not encode a parent recipe. A short-lived,
+same-tab marker records an ordinary transition between recipes without changing the URL;
+a same-site recipe referrer provides a secondary signal. The visible back link then uses
+native browser history to return to that exact recipe. Direct visits, shared links and
+external referrers fall back to the localized catalogue. Keep ordinary links so the
+browser's own Back action retains the same history naturally.
+
 When a recipe needs advance planning, each pre-start note uses one aligned heading row:
 clock icon and written “Keep in mind” label together, with the explanation indented below
-the label. Preserve that relationship when the copy wraps on narrow screens.
+the label. Preserve that relationship when the copy wraps on narrow screens. Technique
+help needed before starting follows this same treatment, without a nested tip card or
+lightbulb; keep its guide link inline in the explanatory sentence.
 
 ## Cook Mode
 
@@ -108,6 +130,16 @@ use one column and long translated strings wrap naturally.
 - Selected batch/available ingredient and selected cream travel in the URL and survive reload, language switches and entry to Cook Mode. Shopping and Cook read the same deterministic configuration as the visible ingredient list.
 - Keep base evidence distinct from an adjusted configuration; changed quantities and yield are Calculated. Do not automatically multiply known preparation or resting times. Fixed ingredient quantities remain fixed.
 - Invalid non-positive input shows a local error and disables quantity-dependent purchasing rather than silently presenting base quantities as a valid adjustment.
-- Jump links near the hero take readers directly to ingredients and method. On small screens, favour concise controls, short cream cards and natural title wrapping over decorative whitespace.
-- The main Cook action uses the primary treatment. Its repeat beside the method is secondary.
+- Quiet, left-aligned links in the hero explicitly say “Jump to ingredients” and “Jump
+  to steps”, with down arrows. They navigate within the page, never switch tab panels.
+  Keep the reading order: overview, consequential preparation, quantity/ingredients,
+  then method. On small screens, favour concise controls and natural wrapping.
+- The primary “Cook step by step” action appears beside the method, with one sentence
+  explaining the focused cooking view. Omit its former hero duplicate. The hero's
+  “Jump to steps” link gives returning readers a direct route to it.
+- Use the shared Button's default terracotta variant for Cook entry, next/finish
+  and restart actions, consistent with primary actions elsewhere in the product.
+  The method section starts with 48px desktop / 32px compact-screen padding, followed
+  by 32px from the heading/action group to the first rule and 24px before the first
+  step content. Use spacing tokens, not accumulated one-off gaps.
 - Language changes preserve query/filter, cream and recipe configuration, plus the existing section anchor.

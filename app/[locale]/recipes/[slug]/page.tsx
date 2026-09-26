@@ -145,7 +145,7 @@ export default async function LocalizedRecipePage({
       selectedCreamRecipeId={selectedCreamRecipeId}
       configurationSearch={new URLSearchParams(
         Object.entries(requestedSearchParams).flatMap(([key, value]) =>
-          value === undefined
+          key === 'from' || value === undefined
             ? []
             : (Array.isArray(value) ? value : [value]).map(
                 (item) => [key, item] as [string, string],

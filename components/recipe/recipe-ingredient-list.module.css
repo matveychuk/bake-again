@@ -10,8 +10,11 @@
   grid-template-columns: minmax(112px, 150px) minmax(0, 1fr);
   align-items: center;
   gap: var(--space-3);
-  border-bottom: 1px solid var(--color-border-subtle);
   font-size: var(--font-size-body);
+}
+
+.list > li:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .copy {

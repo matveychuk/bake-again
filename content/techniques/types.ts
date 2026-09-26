@@ -1,4 +1,7 @@
 export type TechniqueReference = {
   id: 'soften-butter';
-  condition?: 'butter-option' | 'cinnamon-filling';
+  condition?:
+    | 'butter-option'
+    | 'cinnamon-filling'
+    | 'room-temperature-butter';
 };

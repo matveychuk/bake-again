@@ -1,13 +1,18 @@
 /* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
 import Image from 'next/image';
-import { ArrowLeft, Clock3, Play } from 'lucide-react';
 import { SectionTitle } from '@/components/foundations/section-title';
 import { StepMediaSequence } from '@/components/recipe/step-media-sequence';
 import { RecipeOverview } from '@/components/recipe/recipe-overview';
+import {
+  RecipeCookEntry,
+  RecipeSectionNavigation,
+} from '@/components/recipe/recipe-reading-actions';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { RecipeBakeMemory } from '@/components/recipe/recipe-bake-memory';
+import { RecipeBackLink } from '@/components/recipe/recipe-back-link';
 import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
-import { RecipeStepGuidance } from '@/components/recipe/recipe-step-guidance';
+import { RecipePlanItem } from '@/components/recipe/recipe-plan-item';
+import { RecipeRelatedLink } from '@/components/recipe/recipe-related-link';
 import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
@@ -32,7 +37,11 @@ import {
   parseSourceRecipeConfiguration,
   sourceRecipeScalingBounds,
 } from '@/content/recipes/source-recipe-configuration';
-import { localeDraftsPath, localeHomePath } from '@/lib/i18n/routes';
+import {
+  getLocalizedRecipePath,
+  localeDraftsPath,
+  localeHomePath,
+} from '@/lib/i18n/routes';
 import { InventoryRecipeAdjuster } from './inventory-recipe-adjuster';
 import { SaveRecipeControl } from './save-recipe-control';
 import { RecipeCreamSelector } from './recipe-cream-selector';
@@ -85,7 +94,12 @@ export function InventoryRecipeDetail({
     ...new Map(
       (structured?.steps ?? []).flatMap((step) =>
         step.technique
-          ? [[`${step.technique.id}:${step.technique.condition ?? ''}`, step.technique] as const]
+          ? [
+              [
+                `${step.technique.id}:${step.technique.condition ?? ''}`,
+                step.technique,
+              ] as const,
+            ]
           : [],
       ),
     ).values(),
@@ -100,16 +114,25 @@ export function InventoryRecipeDetail({
     recipe.title;
   const recipePath = pathname ?? `/recipes/${recipe.slug}`;
   const cookModeParams = new URLSearchParams(configurationSearch);
+  cookModeParams.delete('from');
   if (selectedCreamRecipeId) cookModeParams.set('cream', selectedCreamRecipeId);
   const cookModeSearch = cookModeParams.toString();
   const cookModePath = `${recipePath}/cook${cookModeSearch ? `?${cookModeSearch}` : ''}`;
-  const sourceVersionId = `${recipe.id}-source-v1${selectedCreamRecipeId ? `-cream-${selectedCreamRecipeId}` : ''}`;
-  const creamRecipePath = (recipeId: string) =>
-    pathname ? `/${locale}/recipes/${recipeId}` : `/recipes/${recipeId}`;
+  const sourceVersionId = `${structured?.versionId ?? `${recipe.id}-source-v1`}${selectedCreamRecipeId ? `-cream-${selectedCreamRecipeId}` : ''}`;
+  const backHref = `${isDraft ? localeDraftsPath(locale) : localeHomePath(locale)}#recipes`;
+  const backLabel = isDraft
+    ? getUiMessages(locale).navigation.drafts
+    : messages.backToRecipes;
+  const linkedRecipePath = (recipeId: string) => {
+    return pathname
+      ? (getLocalizedRecipePath(recipeId, locale) ??
+          `/${locale}/recipes/${recipeId}`)
+      : `/recipes/${recipeId}`;
+  };
   const creamOptions = structured?.creamOptions?.recipeIds
     .map((recipeId) => ({
       id: recipeId,
-      href: creamRecipePath(recipeId),
+      href: linkedRecipePath(recipeId),
       ...getCreamOptionCopy(recipeId, locale),
     }))
     .sort((left, right) =>
@@ -124,14 +147,11 @@ export function InventoryRecipeDetail({
     <main className={styles.page}>
       <SiteHeader locale={locale} pathname={pathname} />
       <div className={styles.breadcrumb}>
-        <a
-          href={`${isDraft ? localeDraftsPath(locale) : localeHomePath(locale)}#recipes`}
-        >
-          <ArrowLeft size={15} />{' '}
-          {isDraft
-            ? getUiMessages(locale).navigation.drafts
-            : messages.backToRecipes}
-        </a>
+        <RecipeBackLink
+          fallbackHref={backHref}
+          fallbackLabel={backLabel}
+          returnLabel={getUiMessages(locale).cook.returnToRecipe}
+        />
         {!concise && <span>{copy?.category[locale] ?? recipe.category}</span>}
       </div>
       <section className={styles.hero} id="recipe-content" tabIndex={-1}>
@@ -143,17 +163,19 @@ export function InventoryRecipeDetail({
             priority
             sizes="(min-width: 900px) 48vw, 100vw"
           />
-          <span className={styles.imageNote}>
-            {recipe.imageKind === 'edited-author-photo'
-              ? readerCopy.editedAuthorImage
-              : recipe.imageKind === 'author-photo'
-                ? isDraft && !concise
-                  ? messages.authorPhotoPending
-                  : readerCopy.authorImage
-                : isDraft && !concise
-                  ? messages.generatedPreviewPending
-                  : readerCopy.generatedImage}
-          </span>
+          {structured?.showImageNote !== false && (
+            <span className={styles.imageNote}>
+              {recipe.imageKind === 'edited-author-photo'
+                ? readerCopy.editedAuthorImage
+                : recipe.imageKind === 'author-photo'
+                  ? isDraft && !concise
+                    ? messages.authorPhotoPending
+                    : readerCopy.authorImage
+                  : isDraft && !concise
+                    ? messages.generatedPreviewPending
+                    : readerCopy.generatedImage}
+            </span>
+          )}
         </div>
         <div className={styles.heroCopy}>
           <div className={styles.heroTopline}>
@@ -187,20 +209,7 @@ export function InventoryRecipeDetail({
             showFlour={!isStandaloneComponent}
             showWorkingRecord={isDraft}
           />
-          <nav className={styles.sectionNavigation} aria-label={detailTitle}>
-            <a href="#ingredients">{messages.ingredients}</a>
-            <a href="#recipe-method">{readerCopy.method}</a>
-          </nav>
-          {structured?.creamOptions && !selectedCreamRecipeId ? (
-            <a href="#cream-options" className={styles.cookModeLink}>
-              {messages.chooseCreamBeforeCooking}
-            </a>
-          ) : (
-            <a href={cookModePath} className={styles.cookModeLink}>
-              <Play size={16} fill="currentColor" />{' '}
-              {concise ? readerCopy.cookMode : messages.openCookMode}
-            </a>
-          )}
+          <RecipeSectionNavigation locale={locale} />
         </div>
       </section>
 
@@ -225,16 +234,16 @@ export function InventoryRecipeDetail({
           aria-label={readerCopy.recipeParts}
         >
           {structured.relatedRecipes.map((id) => (
-            <a key={id} href={creamRecipePath(id)}>
+            <RecipeRelatedLink key={id} href={linkedRecipePath(id)}>
               {catalogLocaleCopy[id]?.title[locale] ??
                 recipeDetailTitles[id]?.[locale] ??
                 id}
-            </a>
+            </RecipeRelatedLink>
           ))}
         </nav>
       ) : null}
 
-      {(structured?.beforeStart?.length || techniques.length > 0) ? (
+      {structured?.beforeStart?.length || techniques.length > 0 ? (
         <section
           className={styles.beforeStart}
           aria-labelledby="before-start-title"
@@ -248,24 +257,19 @@ export function InventoryRecipeDetail({
           </SectionTitle>
           <div className={styles.planGrid}>
             {(structured?.beforeStart ?? []).map((item) => (
-              <article key={item}>
-                <div className={styles.planItemHeading}>
-                  <Clock3 aria-hidden="true" size={19} />
-                  <strong>{messages.keepInMind}</strong>
-                </div>
-                <p>{item}</p>
-              </article>
+              <RecipePlanItem key={item} label={messages.keepInMind}>
+                {item}
+              </RecipePlanItem>
+            ))}
+            {techniques.map((reference) => (
+              <RecipePlanItem
+                key={`${reference.id}:${reference.condition ?? ''}`}
+                label={messages.keepInMind}
+              >
+                <TechniqueHelp locale={locale} reference={reference} />
+              </RecipePlanItem>
             ))}
           </div>
-          {techniques.map((reference) => (
-            <RecipeStepGuidance
-              key={`${reference.id}:${reference.condition ?? ''}`}
-              kind="tip"
-              label={messages.tip}
-            >
-              <TechniqueHelp locale={locale} reference={reference} />
-            </RecipeStepGuidance>
-          ))}
         </section>
       ) : null}
 
@@ -306,82 +310,78 @@ export function InventoryRecipeDetail({
         />
       </section>
 
-      {structured && (
-        <section
-          className={styles.method}
-          id="recipe-method"
-          tabIndex={-1}
-          aria-labelledby="method-title"
-        >
-          <div className={styles.methodHeading}>
-            <SectionTitle
-              eyebrow={
-                concise ? undefined : messages.method(structured.steps.length)
-              }
-              eyebrowClassName={styles.eyebrow}
-              id="method-title"
-            >
-              {concise ? readerCopy.method : messages.stepByStep}
-            </SectionTitle>
-            {structured.creamOptions && !selectedCreamRecipeId ? (
-              <a
-                href="#cream-options"
-                className={`${styles.cookModeLink} ${styles.cookModeSecondary}`}
-              >
-                {messages.chooseCreamBeforeCooking}
-              </a>
-            ) : (
-              <a
-                href={cookModePath}
-                className={`${styles.cookModeLink} ${styles.cookModeSecondary}`}
-              >
-                <Play size={16} fill="currentColor" />{' '}
-                {concise ? readerCopy.cookMode : messages.openCookMode}
-              </a>
+      <section
+        className={styles.method}
+        id="recipe-method"
+        tabIndex={-1}
+        aria-labelledby="method-title"
+      >
+        <div className={styles.methodHeading}>
+          <SectionTitle
+            eyebrow={
+              concise || !structured
+                ? undefined
+                : messages.method(structured.steps.length)
+            }
+            eyebrowClassName={styles.eyebrow}
+            id="method-title"
+          >
+            {concise ? readerCopy.method : messages.stepByStep}
+          </SectionTitle>
+          <RecipeCookEntry
+            locale={locale}
+            href={
+              structured?.creamOptions && !selectedCreamRecipeId
+                ? '#cream-options'
+                : cookModePath
+            }
+            needsCream={Boolean(
+              structured?.creamOptions && !selectedCreamRecipeId,
             )}
-          </div>
-          {structured.steps.length > 0 ? (
-            <ol className={styles.steps}>
-              {structured.steps.map((step, index) => (
-                <li
-                  className={step.media ? styles.stepWithMedia : undefined}
-                  key={step.id}
+            hasMethod={Boolean(structured?.steps.length)}
+          />
+        </div>
+        {structured && structured.steps.length > 0 ? (
+          <ol className={styles.steps}>
+            {structured.steps.map((step, index) => (
+              <li
+                className={step.media ? styles.stepWithMedia : undefined}
+                key={step.id}
+              >
+                {step.meta && <p className={styles.stepMeta}>{step.meta}</p>}
+                <span className={styles.stepNumber}>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <RecipeStepContent
+                  technique={step.technique}
+                  locale={locale}
+                  checkpoint={step.checkpoint}
+                  checkpointLabel={messages.checkpoint}
+                  className={styles.stepContent}
+                  headingLevel="h3"
+                  tip={step.tip}
+                  tipLabel={messages.tip}
+                  title={step.title}
                 >
-                  {step.meta && <p className={styles.stepMeta}>{step.meta}</p>}
-                  <span className={styles.stepNumber}>
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <RecipeStepContent
-                    technique={step.technique}
-                    locale={locale}
-                    checkpoint={step.checkpoint}
-                    checkpointLabel={messages.checkpoint}
-                    className={styles.stepContent}
-                    headingLevel="h3"
-                    tip={step.tip}
-                    tipLabel={messages.tip}
-                    title={step.title}
-                  >
-                    <p>{step.body}</p>
-                  </RecipeStepContent>
-                  {step.media && (
-                    <StepMediaSequence
-                      items={step.media}
-                      ariaLabel={messages.stepVisualSequence}
-                      className={styles.stepMedia}
-                    />
-                  )}
-                </li>
-              ))}
-            </ol>
-          ) : (
-            <div className={styles.pending}>
-              <h3>{messages.methodPending}</h3>
-              <p>{structured.gapNote ?? messages.methodPendingDescription}</p>
-            </div>
-          )}
-        </section>
-      )}
+                  <p>{step.body}</p>
+                </RecipeStepContent>
+                {step.media && (
+                  <StepMediaSequence
+                    items={step.media}
+                    ariaLabel={messages.stepVisualSequence}
+                    className={styles.stepMedia}
+                  />
+                )}
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div className={styles.pending}>
+            <h3>{messages.methodPending}</h3>
+            <p>{structured?.gapNote ?? messages.methodPendingDescription}</p>
+          </div>
+        )}
+      </section>
       {showEditorialNotes && !concise && (
         <aside className={styles.publication}>
           <strong>{messages.beforePublishing}</strong>

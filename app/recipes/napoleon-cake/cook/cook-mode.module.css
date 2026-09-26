@@ -440,7 +440,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-.timer button,
 .timer select {
   min-height: 44px;
   padding: 0 var(--space-3);
@@ -450,25 +449,6 @@
   color: var(--color-text-primary);
   font-size: var(--font-size-body-small);
   font-weight: 750;
-}
-
-.timer button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  border-color: var(--color-action-primary);
-  background: var(--color-action-primary);
-  color: var(--color-text-on-accent);
-  cursor: pointer;
-}
-
-.timerActions > button:last-child {
-  width: 44px;
-  padding: 0;
-  border-color: var(--color-border-subtle);
-  background: transparent;
-  color: var(--color-text-primary);
 }
 
 .ask {
@@ -495,36 +475,6 @@
   grid-template-columns: minmax(140px, 0.42fr) minmax(220px, 1fr);
   gap: var(--space-3);
   border-top: 1px solid var(--color-border-subtle);
-}
-
-.stepActions button {
-  min-height: 50px;
-  padding: 0 var(--space-4);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  min-width: 0;
-  flex-wrap: wrap;
-  overflow-wrap: anywhere;
-  line-height: var(--line-height-body);
-  border: 1px solid var(--color-border-subtle);
-  background: transparent;
-  color: var(--color-text-primary);
-  cursor: pointer;
-  font-size: var(--font-size-body);
-  font-weight: 750;
-}
-
-.stepActions button:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.stepActions .primaryAction {
-  border-color: var(--color-action-primary);
-  background: var(--color-action-primary);
-  color: var(--color-text-on-accent);
 }
 
 .completion {
@@ -585,20 +535,7 @@
   align-items: center;
 }
 
-.completionActions button {
-  min-height: 44px;
-  margin-top: var(--space-6);
-  padding: 0 var(--space-4);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  border: 1px solid var(--color-border-subtle);
-  background: transparent;
-  color: var(--color-text-primary);
-  cursor: pointer;
-  font-size: var(--font-size-body-small);
-  font-weight: 750;
-}
+.completionActions button { margin-top: var(--space-6); }
 
 .stepsDrawer,
 .ingredientsDrawer {
@@ -813,12 +750,6 @@
     backdrop-filter: blur(12px);
   }
 
-  .stepActions button {
-    min-height: 50px;
-    padding: var(--space-2);
-    font-size: var(--font-size-body-small);
-  }
-
   .timer {
     align-items: stretch;
     flex-direction: column;
@@ -851,3 +782,11 @@
     transition: none;
   }
 }
+
+/* Specialized controls share the control radius; content panels remain square. */
+.ingredientsAction,
+.timer select,
+.timer button,
+.completionActions button,
+.completion textarea,
+.drawerClose { border-radius: var(--radius-control); }

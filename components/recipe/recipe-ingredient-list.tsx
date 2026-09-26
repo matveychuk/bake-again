@@ -53,7 +53,7 @@ export function RecipeIngredientList({
             <div className={styles.copy}>
               <span>
                 {item.name}
-                {item.optional ? ` · ${optionalLabel}` : ''}
+                {item.optional ? ` (${optionalLabel})` : ''}
               </span>
               {notes.map((note) => (
                 <small key={note}>{note}</small>

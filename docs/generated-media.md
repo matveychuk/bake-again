@@ -11,6 +11,26 @@ Use case: photorealistic-natural. Asset type: landscape 3:2 recipe-card cover fo
 
 ## Asset prompts
 
+### Chocolate-glaze step photography
+
+Two generated 4:3 process images under
+`media/web-source/media/recipes/chocolate-glaze/selected/` show the universal two-step
+method. `step-01-ingredients-v1.png` uses a photorealistic-natural prompt for the four
+unmixed ingredients—sour cream or cream, sugar, cocoa and butter—in a small stainless
+saucepan on a warm neutral worktop. `step-02-warm-until-smooth-v1.png` uses the same
+editorial kitchen direction for a hand stirring smooth, stable glaze over low heat,
+explicitly excluding bubbles, steam, scorching and separated butter. Both were generated
+with the built-in image tool; no text, labels, logos or watermarks were requested.
+
+### Apple-fritter step photography
+
+Three generated 4:3 process images under
+`media/web-source/media/recipes/apple-fritters/selected/` show the reviewed method: peeled
+apples grated into coarse shreds, the thick batter mixed directly in the same bowl and
+small fritters cooking in a lightly oiled uncovered pan. The built-in image tool used
+photorealistic-natural prompts with a quiet contemporary kitchen, soft window light and
+warm neutral surfaces; no text, logos or decorative props were requested.
+
 ### Paska 2.0 step photography
 
 Seven generated 3:2 process images under
@@ -93,10 +113,15 @@ The final step now uses two real author photographs, losslessly cropped to a hor
 3:2 frame: the open-bubble flip cue and the finished pancakes on the pan. The original
 portrait exports remain under `media/recipes/banana-fritters/working/author-photos/`.
 
-### Cottage-cheese waffles author photography
+### Cottage-cheese waffles edited real photography
 
-Recipe detail, Cook Mode and the catalogue now use the author's real 3:2 photographs.
-Seven distinct states were selected from the supplied set; near-duplicate starting and
+Recipe detail, Cook Mode and the catalogue use seven photographs based on the real waffle
+bake. The v2 edit keeps the actual food and process: the hero places the original waffles
+and pale green plate on warm ivory linen, while the six working frames replace their
+surroundings with the pale stone counter from the agreed Warm Precision kitchen. The
+edits were made with the built-in image tool; the exact prompts and source mapping are
+recorded in `media/recipes/cottage-cheese-waffles/working/photo-edits-v2.md`.
+The v1 photographs remain as unedited references. Near-duplicate starting and
 berry-batter frames were left out to keep the sequence practical and concise.
 
 - `step-01-ingredients-before-blending-author-v1.jpeg`: cottage cheese, eggs and yogurt before blending.
@@ -199,3 +224,24 @@ sponge to its inward-curled lip. Parchment lies underneath only. The author's up
 method detaches the parchment after unrolling, before filling, and keeps the sponge on
 that same sheet for final rolling. No peeling occurs during the final roll.
 Prompts and final paths: `media/recipes/fruit-sponge-roll/working/rounded-bend-v4-prompts.md`.
+
+# 2026-09-25 · Author plum cake revision
+
+`plum-cake-author-hero-v1.png` is an AI-edited hero based on the author's real finished
+cake photographs. The cake retains its round form, plum wedges and pink fruit layer;
+the styling uses an ivory plate, pale stone and natural light. Product metadata uses
+`edited-author-photo`. Seven unedited author process/result images accompany the steps.
+The 13 camera originals, source mapping and complete built-in image-generation prompt
+are recorded in `media/recipes/plum-cake/REVISION-2026-09-25.md`.
+
+## 2026-09-26 · Author prune cake photographs
+
+Seven edited author photographs replace the prune cake's generated illustrations.
+The selected hero is `images/recipes/prune-cake-author-hero-v2.png`: the author's real
+cake on an ivory platter and cream linen, with a restrained serving-table backdrop.
+Six process images in `media/recipes/prune-cake/selected/*-author-v1.png` retain the
+actual food, bowls and utensils against the Warm Precision preparation-counter setting.
+Originals remain under `media/recipes/prune-cake/original/2026-09-26/`.
+Built-in imagegen prompts and the full source-to-output mapping are recorded in
+`docs/content-model/prune-cake-photo-edits.md`. The initial worktop hero was rejected;
+only the linen hero is referenced by product code. Website assets are generated WebP.

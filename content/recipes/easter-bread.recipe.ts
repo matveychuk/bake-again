@@ -496,7 +496,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
 
 export const easterBreadRecipe = {
   id: 'easter-bread',
-  publicationStatus: 'published',
+  publicationStatus: 'unpublished',
   source: {
     file: 'Author-provided recipe text',
     locator: 'Паска 2.0 — авторська перевірена версія',

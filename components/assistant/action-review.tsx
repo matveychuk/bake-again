@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+
 import { useEffect, useRef, useState } from 'react';
 import {
   Dialog,
@@ -186,7 +188,8 @@ export function AssistantActionReview({
   );
   return (
     <section className={styles.proposal} aria-label={messages.review}>
-      <button
+      <Button
+        variant="outline"
         className={styles.button}
         type="button"
         disabled={!controller || phase !== 'proposed'}
@@ -194,7 +197,7 @@ export function AssistantActionReview({
       >
         {messages.review}:{' '}
         {proposal.kind === 'open-scaling' ? messages.open : messages.shopping}
-      </button>
+      </Button>
       {phase === 'done' && <output>{messages.done}</output>}
       {phase === 'cancelled' && <output>{messages.cancelled}</output>}
       <Dialog
@@ -203,7 +206,11 @@ export function AssistantActionReview({
           if (!next) cancel();
         }}
       >
-        <DialogContent className={styles.dialog} showCloseButton={false} finalFocus={returnFocus}>
+        <DialogContent
+          className={styles.dialog}
+          showCloseButton={false}
+          finalFocus={returnFocus}
+        >
           <DialogHeader>
             <DialogTitle>{messages.title}</DialogTitle>
             <DialogDescription>{messages.suggestion}</DialogDescription>
@@ -223,17 +230,22 @@ export function AssistantActionReview({
           )}
           {error && <p role="alert">{error}</p>}
           <div className={styles.footer}>
-            <button className={styles.button} type="button" onClick={cancel}>
+            <Button
+              variant="outline"
+              className={styles.button}
+              type="button"
+              onClick={cancel}
+            >
               {messages.cancel}
-            </button>
-            <button
-              className={`${styles.button} ${styles.primary}`}
+            </Button>
+            <Button
+              className={styles.button}
               type="button"
               disabled={phase !== 'ready' || !complete}
               onClick={() => void confirm()}
             >
               {messages.confirm}
-            </button>
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

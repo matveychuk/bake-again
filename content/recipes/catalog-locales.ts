@@ -40,9 +40,9 @@ export const recipeDetailTitles: Record<string, LocalizedText> = {
     uk: 'Шоколадна глазур',
   },
   'celebration-sponge-cake': {
-    en: 'Gluten-free celebration sponge cake with fruit',
-    es: 'Tarta de celebración con fruta sin gluten',
-    uk: 'Безглютеновий святковий бісквітний торт із фруктами',
+    en: 'Gluten-free celebration cake',
+    es: 'Tarta de celebración sin gluten',
+    uk: 'Безглютеновий святковий торт',
   },
   'banana-bread': {
     en: 'Gluten-free banana bread',
@@ -254,9 +254,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Глазур',
     },
     summary: {
-      en: 'A shared cocoa glaze for homemade cakes.',
-      es: 'Un glaseado de cacao para tartas caseras.',
-      uk: 'Спільний рецепт поливки з какао для домашніх тортів.',
+      en: 'A versatile cocoa glaze for homemade cakes.',
+      es: 'Un glaseado de cacao versátil para tartas caseras.',
+      uk: 'Універсальна глазур із какао для домашніх тортів.',
     },
     alt: {
       en: 'Chocolate glaze',
@@ -266,9 +266,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
   },
   'celebration-sponge-cake': {
     title: {
-      en: 'Celebration sponge cake with fruit',
-      es: 'Tarta de celebración con fruta',
-      uk: 'Святковий бісквітний торт із фруктами',
+      en: 'Celebration cake',
+      es: 'Tarta de celebración',
+      uk: 'Святковий торт',
     },
     category: {
       en: 'Layer cake',
@@ -276,9 +276,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Торт',
     },
     summary: {
-      en: 'Three sponge layers, sour cream filling, chocolate glaze and fresh fruit.',
-      es: 'Tres capas de bizcocho, crema de nata agria, glaseado de chocolate y fruta.',
-      uk: 'Три бісквітні коржі, ніжний сметанний крем, шоколадна глазур і фрукти.',
+      en: 'Tall, tender and made for a celebration, with generous sour cream filling, chocolate drips and fresh fruit.',
+      es: 'Alta, tierna y festiva, con abundante crema de nata agria, chorritos de chocolate y fruta fresca.',
+      uk: 'Високий, ніжний і по-домашньому святковий — зі щедрим сметанним кремом, шоколадними потьоками та свіжими фруктами.',
     },
     alt: {
       en: 'Tall homemade fruit cake with chocolate glaze and cream flowers',
@@ -387,14 +387,14 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Пиріг на щодень',
     },
     summary: {
-      en: 'A soft sponge with a glossy fruit top and a gentle tartness.',
-      es: 'Un bizcocho tierno con una superficie de fruta brillante y una acidez suave.',
-      uk: 'М’який бісквіт із соковитим фруктовим верхом і легкою кислинкою.',
+      en: 'A tender butter sponge topped with juicy plum wedges and a gentle tartness.',
+      es: 'Un bizcocho tierno de mantequilla con gajos de ciruela jugosos y un toque ácido.',
+      uk: 'Ніжний бісквіт із вершковим маслом, соковитими скибочками слив і легкою кислинкою.',
     },
     alt: previewAlt(
-      'Inverted gluten-free plum sponge cake with glossy baked plums on top and a cut square',
-      'Bizcocho invertido de ciruelas sin gluten con fruta horneada brillante en la parte superior',
-      'Перевернутий безглютеновий сливовий пиріг із блискучими запеченими сливами зверху',
+      'Round upside-down plum cake with one slice showing the pale crumb',
+      'Bizcocho redondo invertido de ciruelas con una porción que muestra la miga clara',
+      'Круглий перевернутий сливовий пиріг і шматочок зі світлим м’якушем',
     ),
   },
   'cottage-cheese-waffles': {

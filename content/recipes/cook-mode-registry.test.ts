@@ -243,7 +243,10 @@ void test('fruit sponge roll Cook Mode keeps Ukrainian guidance and step ingredi
   );
   assert.deepEqual(steps[3].ingredients, []);
   assert.equal(steps[3].media?.[0]?.id, 'fruit-roll-warm-roll-v3');
-  assert.deepEqual(steps[6].ingredients.map((ingredient) => ingredient.id), ['fresh-fruit', 'nuts']);
+  assert.deepEqual(
+    steps[6].ingredients.map((ingredient) => ingredient.id),
+    ['fresh-fruit', 'nuts'],
+  );
   assert.deepEqual(steps[2].timerOptionsSeconds, [900, 1200]);
   assert.equal(steps[0].media?.[0]?.id, 'fruit-roll-egg-foam-v1');
   assert.equal(steps[2].media?.length, 1);
@@ -357,20 +360,54 @@ void test('cinnamon-roll Cook Mode keeps baking and finishing as separate steps'
   );
 });
 
-void test('presents the clarified prune-cake record with both baking timers', () => {
-  const content = getRecipeContent('prune-cake', 'uk');
-  assert.ok(content);
-  assert.equal(isSourceCookModeAvailable(content), true);
-  const steps = createSourceCookSteps(content, 'uk');
-  assert.equal(steps.length, 10);
-  assert.deepEqual(
-    steps.find((step) => step.stepIds.includes('bake-covered'))
-      ?.timerOptionsSeconds,
-    [1800],
-  );
-  assert.deepEqual(
-    steps.find((step) => step.stepIds.includes('bake-uncovered'))
-      ?.timerOptionsSeconds,
-    [1800],
-  );
+void test('keeps the author prune-cake revision, spoon weights and baking timers aligned in every locale', () => {
+  for (const locale of ['uk', 'en', 'es'] as const) {
+    const content = getRecipeContent('prune-cake', locale)!;
+    assert.equal(content.versionId, 'prune-cake-24cm-v2');
+    assert.equal(isSourceCookModeAvailable(content), true);
+    const steps = createSourceCookSteps(content, locale);
+    assert.equal(steps.length, 11);
+    assert.deepEqual(steps[0].stepIds, ['prepare-pan']);
+    assert.deepEqual(
+      steps.find((step) => step.stepIds.includes('bake-covered'))
+        ?.timerOptionsSeconds,
+      [1800],
+    );
+    assert.deepEqual(
+      steps.find((step) => step.stepIds.includes('bake-uncovered'))
+        ?.timerOptionsSeconds,
+      [1200],
+    );
+    assert(
+      steps
+        .find((step) => step.stepIds.includes('make-cream'))
+        ?.ingredients.some((item) => item.id === 'cream-lemon-juice'),
+    );
+    const doubled = applySourceRecipeConfiguration(
+      content,
+      parseSourceRecipeConfiguration('mode=scale&scale=2', content),
+      locale,
+    )!;
+    const ingredients = doubled.ingredientSections.flatMap(
+      (section) => section.ingredients,
+    );
+    for (const [id, grams] of [
+      ['greek-yogurt', 400],
+      ['sweetened-condensed-milk', 140],
+      ['cocoa', 130],
+    ] as const) {
+      const quantity = ingredients.find((item) => item.id === id)!.quantity;
+      assert.deepEqual(quantity.base, {
+        kind: 'exact',
+        value: grams,
+        unit: 'g',
+      });
+      assert.deepEqual(quantity.equivalent, {
+        kind: 'exact',
+        value: 10,
+        unit: 'tbsp',
+      });
+    }
+    assert.equal(doubled.evidence?.status, 'calculated');
+  }
 });

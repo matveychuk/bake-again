@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+
 import { useEffect, useState } from 'react';
 import { type RecipeCatalogEntry } from '@/content/recipes/catalog';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -42,9 +44,9 @@ export function SavedRecipesPage({
         <div className={styles.empty}>
           <h2>{messages.savedEmpty}</h2>
           <p>{messages.savedHint}</p>
-          <a href={`${localeHomePath(locale)}#recipes`}>
+          <Button href={`${localeHomePath(locale)}#recipes`}>
             {messages.browseRecipes}
-          </a>
+          </Button>
         </div>
       ) : (
         <div className={styles.cards}>

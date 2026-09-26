@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+
 import { NotebookPen } from 'lucide-react';
 import { useEffect, useId, useState } from 'react';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -59,7 +61,9 @@ export function RecipeBakeMemory({
         )}
         <small>{messages.personal.bakedStoredInBrowser}</small>
       </div>
-      <a href={cookModeHref}>{messages.cook.cookAgain}</a>
+      <Button variant="outline" href={cookModeHref}>
+        {messages.cook.cookAgain}
+      </Button>
     </aside>
   );
 }

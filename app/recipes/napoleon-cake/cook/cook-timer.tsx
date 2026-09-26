@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { Clock3, Pause, Play, RotateCcw } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
@@ -51,9 +52,7 @@ export function CookTimer({
               aria-label={messages.timerDuration}
               disabled={running}
               value={selectedSeconds}
-              onChange={(event) =>
-                onSelectDuration(Number(event.target.value))
-              }
+              onChange={(event) => onSelectDuration(Number(event.target.value))}
             >
               {options.map((seconds) => (
                 <option key={seconds} value={seconds}>
@@ -63,21 +62,23 @@ export function CookTimer({
             </select>
           </label>
         )}
-        <button type="button" onClick={onToggle}>
+        <Button type="button" onClick={onToggle}>
           {running ? (
             <Pause size={16} />
           ) : (
             <Play size={16} fill="currentColor" />
           )}
           {running ? messages.pause : messages.start}
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
           type="button"
           aria-label={messages.resetTimer}
           onClick={onReset}
         >
           <RotateCcw size={16} />
-        </button>
+        </Button>
       </div>
     </section>
   );

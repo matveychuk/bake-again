@@ -4,7 +4,7 @@ import type {
   StructuredIngredientSection,
   StructuredRecipeStep,
 } from './source-recipe.types.ts';
-import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
+import { quantityFromGrams } from './spoon-weights.ts';
 
 type Locale = 'en' | 'es' | 'uk';
 
@@ -23,7 +23,16 @@ const quantities = {
   sugar: quantityFromGrams('granulated-sugar', 100),
   flour: quantityFromGrams('schar-mix-b', 120),
   tapioca: quantityFromGrams('tapioca-starch', 15),
-  xanthan: quantityFromSpoons('xanthan-gum', 0.5, 'tsp'),
+  // Author-weighed spoon for this bake; do not change the shared conversion.
+  xanthan: {
+    base: { kind: 'exact' as const, value: 5, unit: 'g' as const },
+    equivalent: { kind: 'exact' as const, value: 1, unit: 'tsp' as const },
+    shopping: { mode: 'base' as const },
+  },
+  butter: {
+    base: { kind: 'exact' as const, value: 50, unit: 'g' as const },
+    shopping: { mode: 'base' as const },
+  },
   pinch: {
     base: null,
     equivalent: { kind: 'exact' as const, value: 1, unit: 'pinch' as const },
@@ -52,12 +61,6 @@ function ingredientSections(locale: Locale): StructuredIngredientSection[] {
             'Стиглі, але щільні сливи',
           ),
           quantity: quantities.plums,
-          note: text(
-            locale,
-            'Halve, stone and pat the cut surfaces dry.',
-            'Pártelas por la mitad, quita los huesos y seca las superficies cortadas.',
-            'Розріжте навпіл, вийміть кісточки та промокніть зрізи.',
-          ),
         },
         {
           id: 'eggs',
@@ -98,6 +101,28 @@ function ingredientSections(locale: Locale): StructuredIngredientSection[] {
             'Ксантанова камедь',
           ),
           quantity: quantities.xanthan,
+          optional: true,
+        },
+        {
+          id: 'butter',
+          name: text(
+            locale,
+            'Unsalted butter',
+            'Mantequilla sin sal',
+            'Вершкове масло',
+          ),
+          quantity: quantities.butter,
+        },
+        {
+          id: 'butter-for-pan',
+          name: text(
+            locale,
+            'Butter for greasing the parchment',
+            'Mantequilla para engrasar el papel',
+            'Масло для змащування пергаменту',
+          ),
+          quantity: quantities.nameOnly,
+          scaling: 'fixed',
         },
         {
           id: 'salt',
@@ -116,88 +141,92 @@ function ingredientSections(locale: Locale): StructuredIngredientSection[] {
 }
 
 function steps(locale: Locale): StructuredRecipeStep[] {
+  const media = (id: string, en: string, es: string, uk: string) => [
+    {
+      id: id.replace(/\.webp$/, ''),
+      src: `/media/recipes/plum-cake/selected/${id}`,
+      alt: text(locale, en, es, uk),
+    },
+  ];
   return [
     {
       id: 'prepare-plums',
       title: text(
         locale,
-        'Arrange the plums',
-        'Coloca las ciruelas',
-        'Викладіть сливи',
+        'Prepare the pan and plums',
+        'Prepara el molde y las ciruelas',
+        'Підготуйте форму та сливи',
       ),
       body: text(
         locale,
-        'Line a medium baking pan with parchment. Halve and stone the plums, pat the cut surfaces dry and arrange them closely in one layer, cut side down.',
-        'Forra un molde mediano con papel de horno. Parte las ciruelas por la mitad, quita los huesos, seca los cortes y colócalas juntas en una sola capa, con el corte hacia abajo.',
-        'Застеліть середню форму пергаментом. Розріжте сливи навпіл, вийміть кісточки, промокніть зрізи й щільно викладіть одним шаром зрізом донизу.',
+        'Preheat the oven to 200°C. Line the pan with parchment and lightly butter the paper. Stone the plums, cut into wedges and pat away excess juice. Arrange in one layer with a cut surface against the paper.',
+        'Precalienta el horno a 200°C. Forra el molde con papel de horno y engrásalo ligeramente con mantequilla. Deshuesa las ciruelas, córtalas en gajos y seca el exceso de jugo. Colócalas en una sola capa, con una cara cortada sobre el papel.',
+        'Розігрійте духовку до 200°C. Застеліть форму пергаментом і злегка змастіть папір маслом. Вийміть зі слив кісточки, наріжте м’якоть скибочками та промокніть зайвий сік. Викладіть одним шаром, однією зі зрізаних сторін до пергаменту.',
       ),
-      checkpoint: text(
-        locale,
-        'The bottom is covered in one close layer without stacked fruit.',
-        'El fondo está cubierto por una sola capa compacta, sin fruta apilada.',
-        'Дно вкрите одним щільним шаром, сливи не лежать одна на одній.',
-      ),
-      cookIngredients: [{ ingredientId: 'plums' }],
-      media: [
-        {
-          id: 'plums-cut-side-down-v1',
-          src: '/media/recipes/plum-cake/selected/plums-cut-side-down-v1.webp',
-          alt: text(
-            locale,
-            'Plum halves arranged cut side down in one layer in a parchment-lined pan',
-            'Mitades de ciruela colocadas con el corte hacia abajo en una sola capa en un molde forrado',
-            'Половинки слив викладені зрізом донизу одним шаром у формі з пергаментом',
-          ),
-        },
+      cookIngredients: [
+        { ingredientId: 'plums' },
+        { ingredientId: 'butter-for-pan' },
       ],
+      media: media(
+        'plum-wedges-author-v1.webp',
+        'Plum wedges on buttered parchment',
+        'Gajos de ciruela sobre papel engrasado',
+        'Скибочки слив на змащеному пергаменті',
+      ),
     },
     {
       id: 'whip-eggs',
       title: text(
         locale,
-        'Whip to ribbon stage',
-        'Bate hasta el punto de cinta',
-        'Збийте до стрічки',
+        'Whip the whites and yolks separately',
+        'Bate las claras y las yemas por separado',
+        'Окремо збийте білки та жовтки',
       ),
       body: text(
         locale,
-        'Whip the eggs with the sugar until pale, thick and voluminous.',
-        'Bate los huevos con el azúcar hasta obtener una mezcla clara, espesa y voluminosa.',
-        'Збийте яйця з цукром до світлої, густої та пишної маси.',
+        'Separate the eggs. Beat the yolks with 2 tablespoons of the sugar until pale. In a clean, dry bowl, whip the whites, gradually adding the remaining sugar. Gently fold the yolks into the whites.',
+        'Separa los huevos. Bate las yemas con 2 cucharadas del azúcar hasta que aclaren. En un bol limpio y seco, monta las claras añadiendo poco a poco el azúcar restante. Incorpora las yemas a las claras con movimientos envolventes.',
+        'Відокремте білки від жовтків. Жовтки збийте з 2 столовими ложками цукру до посвітління. У чистій сухій мисці збийте білки, поступово додаючи решту цукру. Обережно вмішайте жовтки у збиті білки.',
       ),
       checkpoint: text(
         locale,
-        'The mixture falls from the whisk in a broad ribbon that remains visible for a few seconds.',
-        'La mezcla cae de las varillas en una cinta ancha que permanece visible unos segundos.',
-        'Маса спадає з вінчика широкою стрічкою, яка кілька секунд тримається на поверхні.',
+        'The whites hold their shape; the combined mixture remains airy.',
+        'Las claras mantienen la forma y la mezcla conserva el aire al unirla.',
+        'Білки тримають форму, після з’єднання маса залишається повітряною.',
       ),
       cookIngredients: [{ ingredientId: 'eggs' }, { ingredientId: 'sugar' }],
-      media: [
-        {
-          id: 'plum-cake-egg-foam-v1',
-          src: '/media/recipes/plum-cake/selected/whipped-egg-foam-v1.webp',
-          alt: text(
-            locale,
-            'Pale egg foam falling from a whisk in a broad ribbon',
-            'Espuma clara de huevo que cae de las varillas en una cinta ancha',
-            'Світла яєчна піна спадає з вінчика широкою стрічкою',
-          ),
-        },
-      ],
+      media: media(
+        'whipped-whites-author-v1.webp',
+        'Whipped egg whites',
+        'Claras montadas',
+        'Збиті білки',
+      ),
     },
     {
-      id: 'finish-batter',
+      id: 'fold-flour',
       title: text(
         locale,
-        'Finish the batter',
-        'Termina la masa',
-        'Завершіть тісто',
+        'Fold in the dry ingredients',
+        'Incorpora los ingredientes secos',
+        'Вмішайте сухі інгредієнти',
       ),
       body: text(
         locale,
-        'Mix the flour, tapioca starch, xanthan gum, salt and vanillin, then fold into the egg foam. Pour the batter over the plums in several places and gently spread it without moving the fruit.',
-        'Mezcla la harina, el almidón de tapioca, la goma xantana, la sal y la vainillina e incorpora con cuidado a la espuma de huevo. Vierte la masa sobre las ciruelas en varios puntos y extiéndela suavemente sin mover la fruta.',
-        'Змішайте борошно, тапіоковий крохмаль, ксантанову камедь, сіль і ванілін та обережно вмішайте в яєчну піну. Вилийте тісто на сливи в кількох місцях і делікатно розрівняйте, не зсуваючи фруктів.',
+        'Fold the dry mixture into the egg mixture in several additions, lifting the batter from the bottom with a spatula.',
+        'Incorpora la mezcla seca a la de huevo en varias tandas con una espátula y movimientos envolventes.',
+        'У кілька прийомів додайте суху суміш до яєчної маси, обережно перемішуючи лопаткою знизу вгору.',
+      ),
+      checkpoint: text(
+        locale,
+        'No dry pockets remain; the batter is still airy.',
+        'No quedan bolsas de harina y la masa conserva el aire.',
+        'Сухого борошна не видно, тісто залишається повітряним.',
+      ),
+      tip: text(
+        locale,
+        'First, thoroughly mix the flour, tapioca starch, salt and vanillin, adding xanthan gum if using.',
+        'Primero mezcla bien la harina, el almidón de tapioca, la sal y la vainillina; añade la goma xantana si la usas.',
+        'Спочатку ретельно змішайте борошно, тапіоковий крохмаль, сіль і ванілін; за бажанням додайте ксантанову камедь.',
       ),
       cookIngredients: [
         { ingredientId: 'flour' },
@@ -206,50 +235,134 @@ function steps(locale: Locale): StructuredRecipeStep[] {
         { ingredientId: 'salt' },
         { ingredientId: 'vanilla' },
       ],
+      media: media(
+        'fold-flour-author-v1.webp',
+        'Dry ingredients being added to the egg mixture',
+        'Ingredientes secos incorporándose a la mezcla de huevo',
+        'Додавання сухих інгредієнтів до яєчної маси',
+      ),
     },
     {
-      id: 'bake-and-invert',
+      id: 'fold-butter',
       title: text(
         locale,
-        'Bake and invert',
-        'Hornea y dale la vuelta',
-        'Спечіть і переверніть',
+        'Fold in the butter',
+        'Incorpora la mantequilla',
+        'Додайте масло',
       ),
       body: text(
         locale,
-        'Preheat the oven to 180°C and bake the cake. As soon as it comes out, loosen the edges. Wearing oven mitts, place a flat serving board or platter over the pan and invert both together in one confident movement. Lift off the pan and carefully peel away the parchment.',
-        'Precalienta el horno a 180°C y hornea el bizcocho. En cuanto lo saques, despega los bordes. Con manoplas, coloca una tabla o fuente plana sobre el molde y gira ambos juntos con un movimiento decidido. Retira el molde y despega con cuidado el papel.',
-        'Розігрійте духовку до 180°C і випікайте пиріг. Щойно дістанете його, відділіть краї. У рукавицях накрийте форму пласкою дошкою або таріллю й одним упевненим рухом переверніть їх разом. Зніміть форму та обережно відокремте пергамент.',
-      ),
-      meta: text(
-        locale,
-        '180°C · 25–30 min',
-        '180°C · 25–30 min',
-        '180°C · 25–30 хв',
+        'Melt 50 g butter and let it cool until just warm. Mix 3–4 spoonfuls of batter into the butter until smooth. Return this mixture to the main bowl and gently fold together.',
+        'Derrite 50 g de mantequilla y deja templar. Mézclala con 3–4 cucharadas de masa hasta que quede homogénea. Devuelve la mezcla al bol principal e incorpora con movimientos envolventes.',
+        'Розтопіть 50 г масла й дайте охолонути до ледь теплого. Додайте до масла 3–4 ложки тіста та перемішайте до однорідності. Поверніть суміш у миску з рештою тіста й обережно вмішайте лопаткою.',
       ),
       checkpoint: text(
         locale,
-        'Before inverting, the sponge is golden, the centre springs back lightly, and a skewer has no wet batter.',
-        'Antes de darle la vuelta, el bizcocho está dorado, el centro recupera la forma al tocarlo y la brocheta no sale con masa cruda.',
-        'Перед перевертанням бісквіт золотистий, центр пружно відновлюється після легкого натискання, а на шпажці немає сирого тіста.',
+        'The butter is fully incorporated, with no oily streaks.',
+        'La mantequilla está integrada, sin vetas de grasa.',
+        'Масло повністю з’єдналося з тістом, жирних смуг немає.',
+      ),
+      tip: text(
+        locale,
+        'Melt the butter before whipping the eggs so it has time to cool.',
+        'Derrite la mantequilla antes de batir los huevos para que tenga tiempo de templarse.',
+        'Розтопіть масло ще до збивання яєць — воно встигне охолонути.',
+      ),
+      cookIngredients: [{ ingredientId: 'butter' }],
+      media: media(
+        'butter-batter-author-v1.webp',
+        'A small portion of batter mixed with melted butter',
+        'Una porción de masa con mantequilla derretida',
+        'Невелика порція тіста з розтопленим маслом',
+      ),
+    },
+    {
+      id: 'fill-pan',
+      title: text(
+        locale,
+        'Cover the plums with batter',
+        'Cubre las ciruelas con la masa',
+        'Викладіть тісто на сливи',
+      ),
+      body: text(
+        locale,
+        'Spoon the batter over the plums in several places, then gently level it without moving the fruit. Put the pan straight into the preheated oven.',
+        'Reparte la masa sobre las ciruelas en varios puntos y alisa con cuidado sin desplazar la fruta. Introduce el molde enseguida en el horno precalentado.',
+        'Викладіть тісто на сливи в кількох місцях і делікатно розрівняйте, не зсуваючи скибочок. Одразу поставте форму в розігріту духовку.',
+      ),
+      media: media(
+        'filled-pan-author-v1.webp',
+        'Batter spread over the plums in the lined pan',
+        'Masa extendida sobre las ciruelas en el molde forrado',
+        'Тісто рівномірно вкриває сливи у формі',
+      ),
+    },
+    {
+      id: 'bake',
+      title: text(
+        locale,
+        'Bake the cake',
+        'Hornea el bizcocho',
+        'Спечіть пиріг',
+      ),
+      body: text(
+        locale,
+        'Bake at 200°C for about 30 minutes. To check, insert a skewer into the sponge, avoiding the fruit.',
+        'Hornea a 200°C durante unos 30 minutos. Para comprobarlo, introduce una brocheta en el bizcocho, evitando la fruta.',
+        'Випікайте при 200°C приблизно 30 хвилин. Для перевірки готовності вставте шпажку в бісквіт, не потрапляючи у сливи.',
+      ),
+      meta: text(locale, '200°C · 30 min', '200°C · 30 min', '200°C · 30 хв'),
+      checkpoint: text(
+        locale,
+        'The top is golden, the centre springs back gently and the skewer has no raw batter.',
+        'La superficie está dorada, el centro recupera la forma al tocarlo y la brocheta sale sin masa cruda.',
+        'Поверхня золотиста, середина пружинить після легкого натискання, на шпажці немає сирого тіста.',
+      ),
+      tip: text(
+        locale,
+        'If the top browns before the centre is baked, cover loosely with foil and continue until done.',
+        'Si la superficie se dora antes de que el centro esté hecho, cubre sin apretar con aluminio y sigue horneando.',
+        'Якщо верх уже підрум’янився, а середина ще сира, нещільно накрийте фольгою та допечіть.',
+      ),
+      media: media(
+        'baked-sponge-author-v1.webp',
+        'Golden cake in its pan before inverting',
+        'Bizcocho dorado en el molde antes de darle la vuelta',
+        'Золотистий пиріг у формі перед перевертанням',
+      ),
+    },
+    {
+      id: 'invert',
+      title: text(
+        locale,
+        'Invert and cool',
+        'Dale la vuelta y deja enfriar',
+        'Переверніть і дайте охолонути',
+      ),
+      body: text(
+        locale,
+        'Remove the cake from the oven and loosen the edges. Wearing oven mitts, cover the pan with a larger flat platter and turn both over together. Lift off the pan and carefully peel away the parchment. Let the cake cool before slicing.',
+        'Saca el bizcocho del horno y despega los bordes. Con manoplas, cubre el molde con una fuente plana más grande y gira ambos juntos. Retira el molde y despega el papel con cuidado. Deja enfriar antes de cortar.',
+        'Дістаньте пиріг із духовки та відділіть краї від форми. Надягніть рукавиці, накрийте форму більшою пласкою таріллю й переверніть їх разом. Зніміть форму та обережно відокремте пергамент. Перед нарізанням дайте пирогу охолонути.',
+      ),
+      media: media(
+        'inverted-cake-author-v1.webp',
+        'Finished upside-down plum cake',
+        'Bizcocho invertido de ciruelas',
+        'Готовий перевернутий сливовий пиріг',
       ),
     },
   ];
 }
-
 function contentForLocale(locale: Locale): RecipeSourceDraftContent {
   return {
     completeness: 'readyToReview',
     presentation: 'concise',
+    showImageNote: false,
     difficulty: 'medium',
     evidence: {
       status: 'tested',
-      explanation: text(
-        locale,
-        'This exact upside-down plum version has been baked successfully.',
-        'Esta versión exacta del bizcocho invertido de ciruelas se ha horneado con éxito.',
-        'Саме цю версію перевернутого сливового пирога успішно випікали.',
-      ),
+      explanation: '',
     },
     yield: {
       id: 'one-plum-cake',
@@ -258,25 +371,17 @@ function contentForLocale(locale: Locale): RecipeSourceDraftContent {
       unit: 'cake',
     },
     timing: {
-      activeMinutes: 20,
-      totalElapsedMinutes: 50,
+      activeMinutes: 30,
+      totalElapsedMinutes: 60,
       phases: [
         {
           id: 'baking',
           label: text(locale, 'Baking', 'Horneado', 'Випікання'),
-          duration: { kind: 'range', min: 25, max: 30, unit: 'minute' },
-          relatedStepId: 'bake-and-invert',
+          duration: { kind: 'exact', value: 30, unit: 'minute' },
+          relatedStepId: 'bake',
         },
       ],
     },
-    beforeStart: [
-      text(
-        locale,
-        'Have a flat board or platter slightly larger than the pan ready for inverting. For a full-size oven tray, use a double batch.',
-        'Prepara una tabla o fuente plana algo mayor que el molde para darle la vuelta. Para una bandeja de horno completa, prepara una cantidad doble.',
-        'Підготуйте пласку дошку або таріль трохи більшу за форму для перевертання. Для повного дека духовки готуйте подвійну порцію.',
-      ),
-    ],
     ingredientSections: ingredientSections(locale),
     steps: steps(locale),
   };
@@ -286,9 +391,9 @@ export const plumCakeRecipe = {
   id: 'plum-cake',
   publicationStatus: 'published',
   source: {
-    file: 'docs/reference/recipe-inventory.xlsx',
+    file: 'media/recipes/plum-cake/REVISION-2026-09-25.md',
     locator:
-      'Plum adaptation of Recipe Archive · Яблучна шарлотка; author-confirmed upside-down half batch, 2026-09-21',
+      'Author butter-cake revision 2026-09-25; final sugar allocation and editorial revision confirmed 2026-09-26',
   },
   ...contentForLocale('en'),
   translations: { uk: contentForLocale('uk'), es: contentForLocale('es') },

@@ -21,7 +21,7 @@ const stepCopy = {
     ],
     instructions: [
       'Blend the cottage cheese, eggs and yogurt until smooth, with no noticeable lumps.',
-      'Mix in the neutral oil or softened butter, sugar, salt and vanilla.',
+      'Mix in the neutral oil or melted butter, sugar, salt and vanilla.',
       'In a separate bowl, mix the flour, corn starch and baking powder. Add to the base and stir until no dry flour remains.',
       'Leave to rest for 7–10 minutes.',
       'Heat the waffle maker well. Bake each waffle for 5–7 minutes until golden.',
@@ -50,7 +50,7 @@ const stepCopy = {
     ],
     instructions: [
       'Збийте блендером творог, яйця та йогурт до гладкої маси без помітних грудочок.',
-      'Вмішайте олію без запаху або м’яке вершкове масло, цукор, сіль і ваніль.',
+      'Вмішайте олію без запаху або розтоплене вершкове масло, цукор, сіль і ваніль.',
       'В окремій мисці змішайте борошно, крохмаль і розпушувач. Додайте до основи й перемішайте, щоб не залишилося сухого борошна.',
       'Залиште на 7–10 хвилин.',
       'Добре розігрійте вафельницю. Випікайте кожну вафлю 5–7 хвилин до золотистого кольору.',
@@ -79,7 +79,7 @@ const stepCopy = {
     ],
     instructions: [
       'Tritura el requesón, los huevos y el yogur hasta obtener una mezcla lisa, sin grumos perceptibles.',
-      'Incorpora el aceite neutro o la mantequilla blanda, el azúcar, la sal y la vainilla.',
+      'Incorpora el aceite neutro o la mantequilla derretida, el azúcar, la sal y la vainilla.',
       'En otro bol, mezcla la harina, el almidón de maíz y la levadura química. Incorpóralos a la base y remueve hasta que no quede harina seca.',
       'Deja reposar durante 7–10 minutos.',
       'Calienta bien la gofrera. Hornea cada gofre durante 5–7 minutos, hasta que esté dorado.',
@@ -105,6 +105,11 @@ const stepCopy = {
 
 function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
   const copy = stepCopy[locale];
+  const fruitSuggestion = {
+    en: 'Suggested, not bake-tested: if you like, fold in a few small pieces of cherries or other chopped fruit. Keep the amount modest so the batter does not become too wet.',
+    uk: 'Запропонована, ще не перевірена зміна: за бажанням додайте трохи вишень або дрібно нарізаних інших фруктів. Не кладіть багато, щоб тісто не стало надто вологим.',
+    es: 'Cambio sugerido, aún sin probar: si quieres, añade unos pocos trocitos de cerezas u otra fruta picada. Usa poca cantidad para no aportar demasiada humedad a la masa.',
+  }[locale];
   const media = (id: string, file: string, alt: string) => ({
     id,
     src: `/media/recipes/cottage-cheese-waffles/selected/${file}`,
@@ -123,19 +128,18 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
       media: [
         media(
           'ingredients-before-blending',
-          'step-01-ingredients-before-blending-author-v1.webp',
+          'step-01-ingredients-before-blending-kitchen-v2.webp',
           copy.alts.ingredients,
         ),
         media(
           'blended-base',
-          'step-01-blended-base-author-v1.webp',
+          'step-01-blended-base-kitchen-v2.webp',
           copy.alts.blended,
         ),
       ],
     },
     {
       id: 'add-wet',
-      technique: { id: 'soften-butter', condition: 'butter-option' },
       title: copy.titles[1],
       body: copy.instructions[1],
       cookIngredients: [
@@ -149,6 +153,7 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
       id: 'mix-dry',
       title: copy.titles[2],
       body: copy.instructions[2],
+      tip: fruitSuggestion,
       cookIngredients: [
         { ingredientId: 'flour' },
         { ingredientId: 'corn-starch' },
@@ -157,12 +162,12 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
       media: [
         media(
           'add-dry-ingredients',
-          'step-03-add-dry-author-v1.webp',
+          'step-03-add-dry-kitchen-v2.webp',
           copy.alts.flour,
         ),
         media(
           'mixed-batter',
-          'step-03-mixed-batter-author-v1.webp',
+          'step-03-mixed-batter-kitchen-v2.webp',
           copy.alts.batter,
         ),
       ],
@@ -175,17 +180,17 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
       media: [
         media(
           'fill-waffle-maker',
-          'step-05-fill-waffle-maker-author-v1.webp',
+          'step-05-fill-waffle-maker-kitchen-v2.webp',
           copy.alts.filling,
         ),
         media(
           'baked-waffles',
-          'step-05-baked-waffles-author-v1.webp',
+          'step-05-baked-waffles-kitchen-v2.webp',
           copy.alts.baked,
         ),
         {
           id: 'served-waffles',
-          src: '/images/recipes/cottage-cheese-waffles-author-v1.webp',
+          src: '/images/recipes/cottage-cheese-waffles-linen-v2.webp',
           alt: copy.alts.served,
         },
       ],
@@ -205,7 +210,7 @@ export const cottageCheeseWafflesRecipe = {
   evidence: {
     status: 'tested',
     explanation:
-      'The author confirms this exact recipe has been baked successfully.',
+      'This exact recipe has been baked successfully.',
   },
   yield: {
     id: 'eight-waffles',
@@ -262,7 +267,7 @@ export const cottageCheeseWafflesRecipe = {
         },
         {
           id: 'oil',
-          name: 'Neutral oil or softened butter',
+          name: 'Neutral oil or melted butter',
           quantity: {
             base: { kind: 'exact', value: 40, unit: 'g' },
             shopping: { mode: 'base' },
@@ -313,7 +318,7 @@ export const cottageCheeseWafflesRecipe = {
       presentation: 'concise',
       evidence: {
         status: 'tested',
-        explanation: 'Авторка підтверджує: цю версію успішно випікали.',
+        explanation: 'Цю версію успішно випікали.',
       },
       yield: {
         id: 'eight-waffles',
@@ -355,7 +360,7 @@ export const cottageCheeseWafflesRecipe = {
             },
             {
               id: 'oil',
-              name: 'Олія без запаху або м’яке вершкове масло',
+              name: 'Олія без запаху або розтоплене вершкове масло',
               quantity: translatedQuantity,
             },
             {
@@ -386,8 +391,7 @@ export const cottageCheeseWafflesRecipe = {
       presentation: 'concise',
       evidence: {
         status: 'tested',
-        explanation:
-          'La autora confirma que esta versión se ha horneado con éxito.',
+        explanation: 'Esta versión se ha horneado con éxito.',
       },
       yield: {
         id: 'eight-waffles',
@@ -429,7 +433,7 @@ export const cottageCheeseWafflesRecipe = {
             },
             {
               id: 'oil',
-              name: 'Aceite neutro o mantequilla blanda',
+              name: 'Aceite neutro o mantequilla derretida',
               quantity: translatedQuantity,
             },
             {

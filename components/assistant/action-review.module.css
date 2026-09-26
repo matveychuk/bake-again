@@ -65,32 +65,6 @@
   gap: var(--space-3);
   margin-top: var(--space-4);
 }
-.button {
-  min-height: var(--space-12);
-  max-width: 100%;
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-control);
-  background: var(--color-background-surface);
-  color: var(--color-text-primary);
-  font: inherit;
-  font-size: var(--font-size-body-small);
-  font-weight: 700;
-  cursor: pointer;
-  overflow-wrap: anywhere;
-}
-.button:hover {
-  border-color: var(--color-action-primary);
-}
-.primary {
-  background: var(--color-action-primary);
-  color: var(--color-text-on-accent);
-}
-.button:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-.button:focus-visible,
 .option input:focus-visible {
   outline: 2px solid var(--color-action-primary-strong);
   outline-offset: var(--space-1);

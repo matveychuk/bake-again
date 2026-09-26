@@ -3,7 +3,9 @@ import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
 export const appleFrittersRecipe = {
   id: 'apple-fritters',
-  publicationStatus: 'unpublished',
+  publicationStatus: 'published',
+  presentation: 'concise',
+  showImageNote: false,
   source: {
     file: 'https://trueua.info/news/smachno-ta-korysno-retsept-yabluchnykh-oladkiv-bez-tsukru',
     locator:
@@ -12,13 +14,23 @@ export const appleFrittersRecipe = {
   completeness: 'readyToReview',
   evidence: {
     status: 'tested',
-    explanation:
-      'The author supplied this exact apple-fritter version and uses Schär Mix B Bread.',
+    explanation: 'This exact version was cooked successfully.',
   },
-  beforeStart: [
-    'Use a medium grater so the apple softens as the small fritters cook.',
-    'Keep the pan at medium heat and have a lid ready.',
-  ],
+  difficulty: 'easy',
+  yield: {
+    id: 'twenty-fritters',
+    label: '20 fritters',
+    count: { kind: 'exact', value: 20 },
+    unit: 'serving',
+  },
+  timing: {
+    activeMinutes: 30,
+    totalElapsedMinutes: null,
+    planningNote: {
+      text: 'A handy rule of thumb: one large apple per person.',
+    },
+    phases: [],
+  },
   ingredientSections: [
     {
       id: 'batter',
@@ -28,16 +40,16 @@ export const appleFrittersRecipe = {
           id: 'apples',
           name: 'Apples',
           quantity: {
-            base: { kind: 'exact', value: 2, unit: 'piece' },
+            base: { kind: 'exact', value: 3, unit: 'piece' },
             shopping: { mode: 'base', increment: 1, rounding: 'up' },
           },
-          note: 'Peel and grate on a medium grater.',
+          note: 'Peel and grate coarsely.',
         },
         {
-          id: 'egg',
-          name: 'Egg',
+          id: 'eggs',
+          name: 'Eggs',
           quantity: {
-            base: { kind: 'exact', value: 1, unit: 'piece' },
+            base: { kind: 'exact', value: 2, unit: 'piece' },
             shopping: { mode: 'base', increment: 1, rounding: 'up' },
           },
         },
@@ -45,25 +57,24 @@ export const appleFrittersRecipe = {
           id: 'kefir-or-yogurt',
           name: 'Kefir or natural yogurt',
           quantity: {
-            base: { kind: 'exact', value: 160, unit: 'g' },
+            base: { kind: 'exact', value: 150, unit: 'g' },
             shopping: { mode: 'base' },
           },
         },
         {
           id: 'flour',
           name: 'Schär Mix B Bread flour',
-          quantity: quantityFromGrams('schar-mix-b', 140),
+          quantity: quantityFromGrams('schar-mix-b', 100),
         },
         {
           id: 'sweetener',
-          name: 'Sugar or honey',
+          name: 'Sugar or a ripe soft banana',
           quantity: {
             base: null,
             equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
             shopping: { mode: 'nameOnly' },
           },
-          optional: true,
-          note: 'Adjust to taste. Sugar and honey need different gram conversions, so the unresolved alternative keeps only its source spoon measure.',
+          note: 'Use 1 tbsp sugar, or mash 1 ripe soft banana and add it instead of the sugar.',
         },
         {
           id: 'baking-soda',
@@ -85,58 +96,42 @@ export const appleFrittersRecipe = {
     {
       id: 'prepare-apples',
       title: 'Prepare the apples',
-      body: 'Wash and peel the apples, then grate them on a medium grater.',
+      body: 'Wash and peel the apples, then grate them on the coarse side of a grater. Do not grate them finely, or they will release too much juice.',
       checkpoint:
-        'The apple is in short, fine shreds with no large pieces that could keep the centre from cooking evenly.',
+        'The apples are in distinct coarse shreds rather than a fine, wet pulp.',
       cookIngredients: [{ ingredientId: 'apples' }],
-    },
-    {
-      id: 'mix-wet',
-      title: 'Whisk the wet base',
-      body: 'In a separate bowl, whisk the egg with the kefir or yogurt and the sugar or honey.',
-      tip: 'Whisk the egg and kefir first, then add the sweetener so it disperses evenly.',
-      cookIngredients: [
-        { ingredientId: 'egg' },
-        { ingredientId: 'kefir-or-yogurt' },
-        { ingredientId: 'sweetener' },
+      media: [
+        {
+          id: 'apple-fritters-coarse-grated-apples-v1',
+          src: '/media/recipes/apple-fritters/selected/step-01-coarse-grated-apples-v1.webp',
+          alt: 'Peeled apples grated into coarse shreds in a ceramic bowl',
+        },
       ],
     },
     {
-      id: 'add-apples',
-      title: 'Add the grated apples',
-      body: 'Fold the grated apples into the wet mixture until evenly distributed.',
-      cookIngredients: [{ ingredientId: 'apples', quantity: 'omit' }],
-    },
-    {
-      id: 'finish-batter',
-      title: 'Finish the batter',
-      body: 'Add the Schär Mix B Bread flour and baking soda. Whisk thoroughly until the batter is uniform and as thick as sour cream.',
-      checkpoint:
-        'The batter is thick enough to hold a small mound on the spoon, then falls slowly rather than running.',
-      tip: 'Stop mixing as soon as no dry flour remains and the apples are evenly suspended.',
+      id: 'mix-batter',
+      title: 'Mix the batter',
+      body: 'Crack the eggs directly into the grated apples. Add the kefir or yogurt and the sugar, or the mashed banana instead of sugar, then mix. Add the Schär Mix B Bread flour and baking soda and stir until combined.',
       cookIngredients: [
+        { ingredientId: 'eggs' },
+        { ingredientId: 'kefir-or-yogurt' },
+        { ingredientId: 'sweetener' },
         { ingredientId: 'flour' },
         { ingredientId: 'baking-soda' },
       ],
-    },
-    {
-      id: 'heat-pan',
-      title: 'Heat the pan',
-      body: 'Heat a small amount of oil in a frying pan over medium heat.',
-      tip: 'Keep the oil layer thin; add a little more between batches only when the pan looks dry.',
-      cookIngredients: [{ ingredientId: 'oil' }],
-    },
-    {
-      id: 'portion',
-      title: 'Portion small fritters',
-      body: 'Spoon the batter into the pan, shaping small fritters.',
-      tip: 'Keep the fritters small and similar in size so their centres cook in the same time.',
+      media: [
+        {
+          id: 'apple-fritters-mix-batter-v1',
+          src: '/media/recipes/apple-fritters/selected/step-02-mix-batter-v1.webp',
+          alt: 'Thick apple-fritter batter with coarse apple shreds mixed in a ceramic bowl',
+        },
+      ],
     },
     {
       id: 'fry',
-      title: 'Fry under a lid and turn',
-      body: 'Cover and fry for 2–3 minutes per side, turning once, until both sides are golden.',
-      meta: '2–3 min per side · medium heat · covered',
+      title: 'Fry the fritters',
+      body: 'Heat a little oil in a frying pan. Spoon 1 tablespoon of batter per fritter into the hot pan and fry over medium heat for 2–3 minutes per side, so the apples have time to cook through.',
+      meta: '2–3 min per side · medium heat',
       checkpoint:
         'Turn when the underside is golden and the top has begun to set around the edges; the centre should no longer look wet after the second side cooks.',
       tip: 'Lower the heat if the outside browns before the top begins to set.',
@@ -147,22 +142,39 @@ export const appleFrittersRecipe = {
           note: 'Add a little more between batches if needed.',
         },
       ],
+      media: [
+        {
+          id: 'apple-fritters-fry-fritters-v1',
+          src: '/media/recipes/apple-fritters/selected/step-03-fry-fritters-v1.webp',
+          alt: 'Small apple fritters frying in a lightly oiled uncovered pan',
+        },
+      ],
     },
   ],
-  gapNote:
-    'Before publication, record the yield, total cooking time and approximate amount of oil used for frying.',
   translations: {
     uk: {
+      presentation: 'concise',
+      showImageNote: false,
       completeness: 'readyToReview',
       evidence: {
         status: 'tested',
-        explanation:
-          'Авторка надала саме цю версію яблучних оладок і готує її з борошном Schär Mix B Bread.',
+        explanation: 'Цю версію успішно приготовано.',
       },
-      beforeStart: [
-        'Натирайте яблука на середній тертці, щоб вони встигли стати м’якими, поки невеликі оладки смажаться.',
-        'Тримайте пательню на середньому вогні та підготуйте кришку.',
-      ],
+      difficulty: 'easy',
+      yield: {
+        id: 'twenty-fritters',
+        label: '20 оладок',
+        count: { kind: 'exact', value: 20 },
+        unit: 'serving',
+      },
+      timing: {
+        activeMinutes: 30,
+        totalElapsedMinutes: null,
+        planningNote: {
+          text: 'Зручний розрахунок: одне велике яблуко на людину.',
+        },
+        phases: [],
+      },
       ingredientSections: [
         {
           id: 'batter',
@@ -172,16 +184,16 @@ export const appleFrittersRecipe = {
               id: 'apples',
               name: 'Яблука',
               quantity: {
-                base: { kind: 'exact', value: 2, unit: 'piece' },
+                base: { kind: 'exact', value: 3, unit: 'piece' },
                 shopping: { mode: 'base', increment: 1, rounding: 'up' },
               },
-              note: 'Очистьте та натріть на середній тертці.',
+              note: 'Очистьте та натріть на великій тертці.',
             },
             {
-              id: 'egg',
-              name: 'Яйце',
+              id: 'eggs',
+              name: 'Яйця',
               quantity: {
-                base: { kind: 'exact', value: 1, unit: 'piece' },
+                base: { kind: 'exact', value: 2, unit: 'piece' },
                 shopping: { mode: 'base', increment: 1, rounding: 'up' },
               },
             },
@@ -189,7 +201,7 @@ export const appleFrittersRecipe = {
               id: 'kefir-or-yogurt',
               name: 'Кефір або натуральний йогурт',
               quantity: {
-                base: { kind: 'exact', value: 160, unit: 'g' },
+                base: { kind: 'exact', value: 150, unit: 'g' },
                 shopping: { mode: 'base' },
               },
             },
@@ -197,19 +209,20 @@ export const appleFrittersRecipe = {
               id: 'flour',
               name: 'Борошно Schär Mix B Bread',
               quantity: {
-                base: { kind: 'exact', value: 140, unit: 'g' },
+                base: { kind: 'exact', value: 100, unit: 'g' },
+                equivalent: { kind: 'exact', value: 5, unit: 'tbsp' },
                 shopping: { mode: 'base' },
               },
             },
             {
               id: 'sweetener',
-              name: 'Цукор або мед',
+              name: 'Цукор або стиглий м’який банан',
               quantity: {
-                base: { kind: 'exact', value: 1, unit: 'tbsp' },
-                shopping: { mode: 'base' },
+                base: null,
+                equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
+                shopping: { mode: 'nameOnly' },
               },
-              optional: true,
-              note: 'Додайте за смаком.',
+              note: 'Візьміть 1 ст. л. цукру або розімніть 1 стиглий м’який банан і додайте замість цукру.',
             },
             {
               id: 'baking-soda',
@@ -234,58 +247,42 @@ export const appleFrittersRecipe = {
         {
           id: 'prepare-apples',
           title: 'Підготуйте яблука',
-          body: 'Помийте й очистьте яблука, потім натріть їх на середній тертці.',
+          body: 'Помийте й очистьте яблука, потім натріть їх на великій тертці. Не натирайте дрібно, інакше яблука пустять забагато соку.',
           checkpoint:
-            'Яблука натерті короткою дрібною стружкою, без великих шматків, які могли б завадити середині рівномірно просмажитися.',
+            'Яблука натерті виразною великою стружкою, а не перетворені на дрібну вологу масу.',
           cookIngredients: [{ ingredientId: 'apples' }],
-        },
-        {
-          id: 'mix-wet',
-          title: 'Змішайте рідку основу',
-          body: 'В окремій мисці збийте вінчиком яйце з кефіром або йогуртом і цукром чи медом.',
-          tip: 'Спочатку змішайте яйце з кефіром, а тоді додайте підсолоджувач — так він розподілиться рівномірніше.',
-          cookIngredients: [
-            { ingredientId: 'egg' },
-            { ingredientId: 'kefir-or-yogurt' },
-            { ingredientId: 'sweetener' },
+          media: [
+            {
+              id: 'apple-fritters-coarse-grated-apples-v1',
+              src: '/media/recipes/apple-fritters/selected/step-01-coarse-grated-apples-v1.webp',
+              alt: 'Очищені яблука натирають великою стружкою в керамічну миску',
+            },
           ],
         },
         {
-          id: 'add-apples',
-          title: 'Додайте натерті яблука',
-          body: 'Вмішайте натерті яблука в рідку суміш, щоб вони розподілилися рівномірно.',
-          cookIngredients: [{ ingredientId: 'apples', quantity: 'omit' }],
-        },
-        {
-          id: 'finish-batter',
+          id: 'mix-batter',
           title: 'Замішайте тісто',
-          body: 'Додайте борошно Schär Mix B Bread і соду. Ретельно перемішайте вінчиком до однорідної консистенції густої сметани.',
-          checkpoint:
-            'Тісто тримається на ложці невеликою гіркою, а потім повільно сповзає, а не стікає.',
-          tip: 'Припиніть перемішувати, щойно сухого борошна не залишилося, а яблука розподілилися рівномірно.',
+          body: 'Прямо в натерті яблука вбийте яйця. Додайте кефір або йогурт і цукор чи розім’ятий банан замість цукру, перемішайте. Потім додайте борошно Schär Mix B Bread і соду та перемішайте до поєднання.',
           cookIngredients: [
+            { ingredientId: 'eggs' },
+            { ingredientId: 'kefir-or-yogurt' },
+            { ingredientId: 'sweetener' },
             { ingredientId: 'flour' },
             { ingredientId: 'baking-soda' },
           ],
-        },
-        {
-          id: 'heat-pan',
-          title: 'Розігрійте пательню',
-          body: 'Розігрійте на середньому вогні пательню з невеликою кількістю олії.',
-          tip: 'Олія має лише тонко вкривати дно; додавайте ще трохи між партіями, лише коли пательня стає сухою.',
-          cookIngredients: [{ ingredientId: 'oil' }],
-        },
-        {
-          id: 'portion',
-          title: 'Сформуйте невеликі оладки',
-          body: 'Викладайте тісто ложкою на пательню, формуючи невеликі оладки.',
-          tip: 'Робіть оладки невеликими й однакового розміру, щоб серединки просмажилися одночасно.',
+          media: [
+            {
+              id: 'apple-fritters-mix-batter-v1',
+              src: '/media/recipes/apple-fritters/selected/step-02-mix-batter-v1.webp',
+              alt: 'Густе тісто для оладок із великою яблучною стружкою перемішують у керамічній мисці',
+            },
+          ],
         },
         {
           id: 'fry',
-          title: 'Смажте під кришкою та переверніть',
-          body: 'Накрийте кришкою й смажте по 2–3 хвилини з кожного боку, перевернувши один раз, до золотистої скоринки.',
-          meta: 'По 2–3 хв з кожного боку · середній вогонь · під кришкою',
+          title: 'Посмажте оладки',
+          body: 'Розігрійте пательню з невеликою кількістю олії. Викладайте на гарячу пательню по 1 столовій ложці тіста на оладок і смажте на середньому вогні по 2–3 хвилини з кожного боку, щоб яблука встигли пропектися.',
+          meta: 'По 2–3 хв з кожного боку · середній вогонь',
           checkpoint:
             'Перевертайте, коли низ уже золотистий, а поверхня почала схоплюватися по краях; після другого боку серединка не має виглядати вологою.',
           tip: 'Зменште вогонь, якщо скоринка темнішає раніше, ніж поверхня починає схоплюватися.',
@@ -296,10 +293,15 @@ export const appleFrittersRecipe = {
               note: 'За потреби додайте ще трохи олії між партіями.',
             },
           ],
+          media: [
+            {
+              id: 'apple-fritters-fry-fritters-v1',
+              src: '/media/recipes/apple-fritters/selected/step-03-fry-fritters-v1.webp',
+              alt: 'Невеликі яблучні оладки смажаться на відкритій пательні з тонким шаром олії',
+            },
+          ],
         },
       ],
-      gapNote:
-        'Перед публікацією запишіть вихід, загальний час приготування та приблизну кількість олії для смаження.',
     },
   },
 } satisfies RecipeSourceDraft;

@@ -1,5 +1,107 @@
 # Design system changelog
 
+## 2026-09-26 · Localized recipe discovery order
+
+- Applied the approved 15-recipe editorial order separately for Ukrainian, Spanish
+  and English, with a varied opening selection and stable responsive reading order.
+- Collections preserve localized order; search relevance remains primary. Local
+  drafts and editorial inventories retain source order and publication stays explicit.
+- Added live first-six catalogue examples for all three languages to Design Lab.
+
+## 2026-09-26 · Universal chocolate glaze
+
+- Reframed the shared chocolate glaze as a universal component with 10 minutes of
+  active work and a canonical finished yield of 120 g.
+- Split the method into combining and low-heat warming steps, removed the standalone
+  tip and added one generated instructional photograph to each step.
+- Extended source-backed yields to support a finished mass in grams while preserving
+  localized reader-facing labels and calculated scaling.
+
+## 2026-09-26 · Concise butter-softening technique
+
+- Removed the Suggested badge and external-source footer from the practical technique
+  guide without replacing them with a recipe-evidence claim.
+- Clarified that butter softens faster when cut into small cubes on a plate and specified
+  a heatproof glass or ceramic bowl in Ukrainian, English and Spanish.
+
+## 2026-09-26 · Apple-fritter editorial review
+
+- Published the reviewed apple-fritter recipe with its recorded active time, yield and
+  difficulty; returned the Easter bread and apple charlotte to local drafts.
+- Reduced the method to three practical actions, removed advance-planning and editorial
+  notes, and kept the one-large-apple-per-person rule beside the recipe facts.
+- Replaced the author-specific evidence sentence with concise tested copy and added a
+  practical generated photograph to each of the three method steps.
+
+## 2026-09-26 · Plan-ahead technique guidance
+
+- Moved pre-start technique help into the standard plan-ahead item: clock icon, written
+  `Keep in mind` label and inline guide link, without a nested tip background.
+- Added the shared `RecipePlanItem` to the production recipe and Design Lab examples.
+
+## 2026-09-26 · History-aware recipe return
+
+- Related recipe and reusable component links remain canonical instead of encoding one
+  parent recipe in a shareable URL.
+- A consumed, short-lived same-tab marker makes the visible back link return through
+  native history when another recipe opened the page. Same-site referrer is a secondary
+  signal; direct, shared and external visits fall back to the localized catalogue.
+
+## 2026-09-26 · Consistent primary action colour
+
+- Returned Cook entry and restart to the shared terracotta default, matching next,
+  finish, search and shopping actions. Removed the unused chocolate Button variant.
+- Retained chocolate for text and the editorial Napoleon feature. Updated the
+  production Design Lab example and documented a single primary-button colour.
+
+## 2026-09-26 · Lighter Cook navigation
+
+- Returned the wide Done, next / Finish action to the shared terracotta button variant.
+  Retained its size, radius, keyboard focus and behaviour; the compact Cook entry stays
+  chocolate. Updated the production Button example and colour-role documentation.
+
+## 2026-09-26 · Concise recipe geometry
+
+- Prevented concise recipe quantity controls from repeating a geometry label already
+  included in the yield.
+
+## 2026-09-26 · Ingredient list dividers
+
+- Draw separators only between ingredient rows in the shared full and compact lists.
+  Removing the final separator avoids a double rule inside bordered Cook panels.
+- Extended the Cook tools Design Lab example with the production per-step ingredient
+  panel alongside its existing full-list drawer.
+- Verified uk/en/es at 390/900/1440px, single-row and full lists, the Cook drawer and
+  Design Lab. Typecheck and lint passed.
+
+## 2026-09-26 · Shared actions and recipe spacing
+
+- Consolidated standard action styling in the existing Button component: shared 4px
+  radius, 44px minimum target, wrapping 14px labels, focus and disabled states.
+- Added semantic chocolate emphasis tokens for focused cooking; search and shopping
+  retain terracotta. The homepage feature keeps its editorial-card shape.
+- Migrated search, shopping controls, Cook entry/progress/timer/restart, cream change,
+  bake-memory repeat, empty-collection and assistant review actions; Design Lab uses
+  production buttons.
+- Aligned quantity controls and fields with the control-radius token. Kept recipe
+  panels and photography square and Save circular.
+- Reduced the method's desktop top padding from 80px to 48px, heading-to-rule gap
+  from 45px to 32px and step padding from 30px to 24px; compact screens start at 32px.
+- Verified shared geometry in uk/en/es at 390/900/1440px, 200% text, no-JavaScript
+  styling/navigation, shopping confirmation/focus return, search, Cook progress and
+  timer controls. Typecheck, lint, production build and 136 assistant tests passed.
+
+## 2026-09-26 · Recipe navigation and cooking entry
+
+- Replaced tab-like hero links with left-aligned “Jump to ingredients” / “Jump to
+  steps” anchors and down arrows. Both recipe sections remain visible in reading order.
+- Moved the main Cook entry to the written method and renamed it “Cook step by step”,
+  with a short explanation. Preserved cream selection and configured Cook URLs.
+- Extracted the existing navigation and entry into shared production components and
+  added Ukrainian, English and Spanish examples to the Design Lab.
+- Verified all three locales at 390/900/1440px, 200% mobile text, native anchor focus,
+  visible keyboard focus, cream selection and navigation without JavaScript.
+
 ## 2026-09-25 · Butter-softening guide
 
 - Added localized technique pages and contextual help using the existing tip and Drawer
@@ -561,3 +663,31 @@
   GitHub. Production builds generate referenced WebP delivery assets automatically.
 - The generated set caps width at 1800 px, removes metadata, omits unused source files
   and enforces a 64 MiB media budget. Image content, crop and alt text are unchanged.
+
+# 2026-09-26 · Final plum recipe editorial treatment
+
+- Added optional suppression of the hero image-origin overlay while retaining source
+  metadata. Empty evidence explanations render only the existing status badge.
+- Optional ingredients use parentheses. The Ukrainian concise Design Lab example now
+  uses the final plum recipe, with its badge-only overview and optional xanthan.
+- Removed redundant preparation notes and checkpoints from the plum recipe; clarified
+  sugar allocation and kept only useful technique/readiness guidance.
+
+## 2026-09-26 · Prune cake author bake and photographs
+
+- Replaced the old transcription with the author's actual 65 g cocoa / 70 g condensed
+  milk bake, the 700 g combined cream base and the confirmed 200°C, 30 + 20 minute bake.
+- Reused the existing Before you start, tip and checkpoint components with concise
+  instructions in Ukrainian, English and Spanish. No new visual variant or token.
+- Replaced synthetic illustrations with six edited author process photos and a
+  linen-table hero; the preparation kitchen is used only for process imagery.
+- Kept author spoon weights local to the recipe and shared chocolate glaze unchanged.
+- Added an optional source revision ID, shared by reading/shopping and Cook Mode,
+  so previous bake sessions do not silently attach to changed quantities and timers.
+
+- Prune cake clarification: corrected tested tin to 24 cm and method to two layers with edge trimmings; shortened evidence and hid photo notes using the existing content setting. Added two process photos; no new UI variants.
+
+## 2026-09-26 · Recipe note wording
+
+- Renamed the bake-memory eyebrow to “Your recipe note” and updated its Ukrainian
+  and Spanish translations. The Design Lab example now uses the same wording.

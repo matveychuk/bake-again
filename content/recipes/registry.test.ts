@@ -399,25 +399,65 @@ void test('keeps the tested Mix B banana-pancake adaptation and step photos toge
 void test('keeps the tested apple-fritter quantities and Ukrainian cooking cues together', () => {
   const recipe = getRecipeContent('apple-fritters', 'uk');
   const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
+  const apples = ingredients.find((ingredient) => ingredient.id === 'apples');
+  const eggs = ingredients.find((ingredient) => ingredient.id === 'eggs');
+  const culturedMilk = ingredients.find(
+    (ingredient) => ingredient.id === 'kefir-or-yogurt',
+  );
   const flour = ingredients.find((ingredient) => ingredient.id === 'flour');
-  const batter = recipe?.steps.find((step) => step.id === 'finish-batter');
+  const batter = recipe?.steps.find((step) => step.id === 'mix-batter');
   const frying = recipe?.steps.find((step) => step.id === 'fry');
 
   assert.equal(recipe?.evidence?.status, 'tested');
   assert.equal(recipe?.completeness, 'readyToReview');
-  assert.equal(recipe?.steps.length, 7);
-  assert.deepEqual(flour?.quantity.base, {
+  assert.equal(recipe?.presentation, 'concise');
+  assert.equal(recipe?.overview.difficulty, 'easy');
+  assert.equal(recipe?.overview.timing.activeMinutes, 30);
+  assert.equal(recipe?.overview.timing.totalElapsedMinutes, null);
+  assert.match(
+    recipe?.overview.timing.planningNote ?? '',
+    /одне велике яблуко/i,
+  );
+  assert.equal(recipe?.overview.yieldLabel, '20 оладок');
+  assert.equal(recipe?.steps.length, 3);
+  assert.deepEqual(apples?.quantity.base, {
     kind: 'exact',
-    value: 140,
+    value: 3,
+    unit: 'piece',
+  });
+  assert.deepEqual(eggs?.quantity.base, {
+    kind: 'exact',
+    value: 2,
+    unit: 'piece',
+  });
+  assert.deepEqual(culturedMilk?.quantity.base, {
+    kind: 'exact',
+    value: 150,
     unit: 'g',
   });
-  assert.match(batter?.checkpoint ?? '', /повільно сповзає/i);
+  assert.deepEqual(flour?.quantity.base, {
+    kind: 'exact',
+    value: 100,
+    unit: 'g',
+  });
+  assert.deepEqual(flour?.quantity.equivalent, {
+    kind: 'exact',
+    value: 5,
+    unit: 'tbsp',
+  });
+  assert.match(batter?.body ?? '', /прямо в натерті яблука/i);
   assert.match(frying?.checkpoint ?? '', /золотистий/i);
   assert.match(frying?.tip ?? '', /зменште вогонь/i);
-  assert.equal(
-    frying?.meta,
-    'По 2–3 хв з кожного боку · середній вогонь · під кришкою',
+  assert.equal(frying?.meta, 'По 2–3 хв з кожного боку · середній вогонь');
+  assert.deepEqual(
+    recipe?.steps.flatMap((step) => step.media?.map((item) => item.id) ?? []),
+    [
+      'apple-fritters-coarse-grated-apples-v1',
+      'apple-fritters-mix-batter-v1',
+      'apple-fritters-fry-fritters-v1',
+    ],
   );
+  assert(!recipe?.evidence?.explanation.includes('Авторка'));
 });
 
 void test('keeps the apple-banana substitution separate and explicitly suggested', () => {
@@ -657,16 +697,16 @@ void test('keeps the published prune cake structured', () => {
   assert.equal(recipe?.completeness, 'readyToReview');
   assert.equal(recipe?.presentation, 'concise');
   assert.equal(recipe?.ingredientSections.length, 3);
-  assert.equal(recipe?.steps.length, 10);
-  assert.equal(recipe?.steps[0]?.title, 'Збийте яйця з цукром');
+  assert.equal(recipe?.steps.length, 11);
+  assert.equal(recipe?.steps[0]?.title, 'Підготуйте духовку й форму');
   assert.equal(
     recipe?.steps.find((step) => step.id === 'make-cream')?.media?.[0]?.id,
-    'prune-cake-prune-cream-v2',
+    'prune-cake-chopped-prunes-author-v1',
   );
   assert.equal(
     recipe?.steps.find((step) => step.id === 'glaze-and-decorate')?.media?.[0]
       ?.id,
-    'prune-cake-finished-v2',
+    'prune-cake-finished-author-v2',
   );
   assert.equal(
     recipe?.steps.find((step) => step.id === 'bake-covered')?.meta,
@@ -674,23 +714,23 @@ void test('keeps the published prune cake structured', () => {
   );
   assert.equal(
     recipe?.steps.find((step) => step.id === 'bake-uncovered')?.meta,
-    '200°C · 30 хв',
+    '200°C · 20 хв',
   );
   assert.match(
     recipe?.steps.find((step) => step.id === 'glaze-and-decorate')?.body ?? '',
-    /не доводячи до кипіння.*Гарячою поливкою/i,
+    /не доводьте до кипіння.*не допускайте, щоб масло розшарувалося.*Дайте глазурі охолонути/i,
   );
   assert.deepEqual(amount('greek-yogurt'), {
     kind: 'exact',
-    value: 250,
+    value: 200,
     unit: 'g',
   });
-  assert.deepEqual(amount('sugar'), { kind: 'exact', value: 200, unit: 'g' });
-  assert.deepEqual(amount('cocoa'), { kind: 'exact', value: 25, unit: 'g' });
-  assert.deepEqual(amount('flour'), { kind: 'exact', value: 100, unit: 'g' });
+  assert.deepEqual(amount('sugar'), { kind: 'exact', value: 150, unit: 'g' });
+  assert.deepEqual(amount('cocoa'), { kind: 'exact', value: 65, unit: 'g' });
+  assert.deepEqual(amount('flour'), { kind: 'exact', value: 160, unit: 'g' });
   assert.deepEqual(amount('cream-base'), {
     kind: 'exact',
-    value: 400,
+    value: 700,
     unit: 'g',
   });
   assert.deepEqual(amount('prunes'), {
@@ -699,13 +739,28 @@ void test('keeps the published prune cake structured', () => {
     unit: 'g',
   });
   assert.deepEqual(amount('butter'), { kind: 'exact', value: 50, unit: 'g' });
-  assert.equal(amount('cream-sugar'), null);
+  assert.deepEqual(amount('cream-sugar'), {
+    kind: 'exact',
+    value: 70,
+    unit: 'g',
+  });
+  assert.deepEqual(amount('sweetened-condensed-milk'), {
+    kind: 'exact',
+    value: 70,
+    unit: 'g',
+  });
+  assert.deepEqual(amount('nuts'), { kind: 'exact', value: 30, unit: 'g' });
+  assert.deepEqual(amount('cream-lemon-juice'), {
+    kind: 'exact',
+    value: 1,
+    unit: 'tbsp',
+  });
   assert.equal(recipe?.overview.timing.activeMinutes, 60);
   assert.equal(recipe?.overview.timing.totalElapsedMinutes, null);
   assert.equal(recipe?.overview.difficulty, 'medium');
   assert.equal(recipe?.overview.yieldLabel, '1 торт');
-  assert.equal(recipe?.geometry?.diameterCm, 26);
-  assert.equal(recipe?.beforeStart, undefined);
+  assert.equal(recipe?.geometry?.diameterCm, 24);
+  assert.equal(recipe?.beforeStart?.length, 2);
   assert.equal(recipe?.gapNote, undefined);
   assert.match(
     recipe?.steps.find((step) => step.id === 'bake-covered')?.meta ?? '',
@@ -713,9 +768,9 @@ void test('keeps the published prune cake structured', () => {
   );
   assert.match(
     recipe?.steps.find((step) => step.id === 'bake-uncovered')?.meta ?? '',
-    /200°C.*30 хв/,
+    /200°C.*20 хв/,
   );
-  assert.equal(recipe?.evidence, undefined);
+  assert.equal(recipe?.evidence?.status, 'tested');
   assert(
     !recipe?.steps.some((step) => /Confirm|Mix sour cream/.test(step.body)),
   );
@@ -804,18 +859,36 @@ void test('keeps the apple and plum sponge adaptations distinct and honest', () 
 
   assert.equal(plum?.evidence?.status, 'tested');
   assert.equal(plum?.presentation, 'concise');
-  assert.equal(plum?.overview.timing.activeMinutes, 20);
-  assert.equal(plum?.overview.timing.totalElapsedMinutes, 50);
+  assert.equal(plum?.overview.timing.activeMinutes, 30);
+  assert.equal(plum?.overview.timing.totalElapsedMinutes, 60);
   assert.equal(plum?.overview.difficulty, 'medium');
-  assert(!plumIngredients.some((ingredient) => ingredient.id === 'butter'));
+  assert.deepEqual(
+    plumIngredients.find((ingredient) => ingredient.id === 'butter')?.quantity
+      .base,
+    { kind: 'exact', value: 50, unit: 'g' },
+  );
+  assert.deepEqual(
+    plumIngredients.find((ingredient) => ingredient.id === 'xanthan')?.quantity
+      .base,
+    { kind: 'exact', value: 5, unit: 'g' },
+  );
+  assert.deepEqual(
+    plumIngredients.find((ingredient) => ingredient.id === 'xanthan')?.quantity
+      .equivalent,
+    { kind: 'exact', value: 1, unit: 'tsp' },
+  );
   assert.deepEqual(
     plumIngredients.find((ingredient) => ingredient.id === 'eggs')?.quantity
       .base,
     { kind: 'exact', value: 5, unit: 'piece' },
   );
-  assert.match(plum?.steps[0]?.body ?? '', /зрізом донизу/i);
+  assert.match(plum?.steps[0]?.body ?? '', /скибочками/i);
+  assert.match(
+    plum?.steps.find((step) => step.id === 'bake')?.meta ?? '',
+    /200°C · 30 хв/,
+  );
   assert.match(plum?.steps.at(-1)?.body ?? '', /переверніть/i);
-  assert.equal(plum?.steps[0]?.media?.[0]?.id, 'plums-cut-side-down-v1');
+  assert.equal(plum?.steps[0]?.media?.[0]?.id, 'plum-wedges-author-v1');
 });
 
 void test('keeps localized crepe step media and practical guidance together', () => {
@@ -1016,7 +1089,7 @@ void test('reviewed paska is concise, timed and yields three medium paskas', () 
       unit: 'g',
     });
   }
-  assert.equal(easterBreadRecipe.publicationStatus, 'published');
+  assert.equal(easterBreadRecipe.publicationStatus, 'unpublished');
 });
 
 void test('keeps the apple-meringue pie honest about source gaps', () => {

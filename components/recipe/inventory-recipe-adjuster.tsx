@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+
 import { trackEvent } from '@/lib/analytics/umami';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -181,7 +183,12 @@ export function InventoryRecipeAdjuster({
   ]);
 
   function selectScale(factor: (typeof sourceBatchScaleFactors)[number]) {
-    if (mode !== 'scale' || scale !== factor) trackEvent('recipe_scale', { recipe_id: personalRecipe?.id ?? sourceShoppingRecipe?.id, locale, factor });
+    if (mode !== 'scale' || scale !== factor)
+      trackEvent('recipe_scale', {
+        recipe_id: personalRecipe?.id ?? sourceShoppingRecipe?.id,
+        locale,
+        factor,
+      });
     setMode('scale');
     setScale(factor);
     replaceConfiguration(
@@ -225,9 +232,11 @@ export function InventoryRecipeAdjuster({
             ? `${readerCopy.base}: ${anchor.ingredient.name} — ${formatQuantity(locale, anchor.ingredient.quantity.base)}${recipe?.yield ? ` · ${recipe.yield.label}` : ''}`
             : scaling.intro}
         </p>
-        {concise && recipe?.geometry && (
-          <p className={styles.intro}>{recipe.geometry.label}</p>
-        )}
+        {concise &&
+          recipe?.geometry &&
+          !recipe.yield?.label.includes(recipe.geometry.label) && (
+            <p className={styles.intro}>{recipe.geometry.label}</p>
+          )}
         {isAdjustable && anchor ? (
           <>
             <div className={styles.modeTabs}>
@@ -283,7 +292,12 @@ export function InventoryRecipeAdjuster({
                     aria-invalid={invalidAmount || undefined}
                     value={available}
                     onBlur={() => {
-                      if (availableChanged.current && !invalidAmount) trackEvent('recipe_ingredient_scale', { recipe_id: personalRecipe?.id ?? sourceShoppingRecipe?.id, locale });
+                      if (availableChanged.current && !invalidAmount)
+                        trackEvent('recipe_ingredient_scale', {
+                          recipe_id:
+                            personalRecipe?.id ?? sourceShoppingRecipe?.id,
+                          locale,
+                        });
                       availableChanged.current = false;
                     }}
                     onChange={(event) => {
@@ -363,15 +377,14 @@ export function InventoryRecipeAdjuster({
                 scaleFactor={scaleFactor ?? 1}
               />
             ) : (
-              <button
-                className={styles.unavailableAddAll}
+              <Button
                 disabled
                 title={messages.personal.testedBaseOnly}
                 type="button"
               >
                 <ShoppingBag aria-hidden="true" size={17} />{' '}
                 {messages.personal.addAll}
-              </button>
+              </Button>
             )
           }
           eyebrow={

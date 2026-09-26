@@ -25,7 +25,7 @@ export type StructuredRecipeYield = {
   count:
     | { kind: 'exact'; value: number }
     | { kind: 'range'; min: number; max: number };
-  unit: YieldOption['unit'] | 'crepe' | 'dumpling';
+  unit: YieldOption['unit'] | 'crepe' | 'dumpling' | 'g';
 };
 
 export type StructuredRecipeGeometry = {
@@ -105,8 +105,12 @@ export type StructuredRecipeStep = {
  * archive; unresolved details remain explicit.
  */
 export type RecipeSourceDraftContent = {
+  /** Explicit revision for changed bake configurations; keeps saved sessions separate. */
+  versionId?: string;
   /** Opt-in edited reading layout; independent of publication and evidence. */
   presentation?: 'concise';
+  /** Optional editorial image overlay; image provenance remains in catalogue metadata. */
+  showImageNote?: boolean;
   completeness: 'readyToReview' | 'incompleteSource';
   /** Reader-facing skill level for this exact recipe. */
   difficulty?: RecipeDifficulty;

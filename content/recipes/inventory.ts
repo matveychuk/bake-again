@@ -43,14 +43,14 @@ export const recipeInventory: InventoryRecipe[] = [
   {
     id: 'celebration-sponge-cake',
     slug: 'celebration-sponge-cake',
-    title: 'Celebration sponge cake with fruit',
-    sourceTitle: 'Святковий бісквітний торт із фруктами',
+    title: 'Celebration cake',
+    sourceTitle: 'Святковий торт',
     category: 'Layer cake',
     collectionIds: ['celebration'],
-    testingStatus: 'Suggested adaptation',
+    testingStatus: 'Core verified',
     flour: 'Schär Mix B Bread + tapioca and corn starch',
     difficulty: 'Medium',
-    activeTime: null,
+    activeTime: '1 h 30 min',
     totalTime: null,
     scalingAnchorIngredientId: 'sponge-eggs',
     launchPriority: 'High',
@@ -60,11 +60,10 @@ export const recipeInventory: InventoryRecipe[] = [
     imageKind: 'edited-author-photo',
     imageAlt: 'Tall homemade fruit cake with chocolate glaze and cream flowers',
     summary:
-      'Three sponge layers, sour cream filling, chocolate glaze and fresh fruit.',
+      'A tall, tender celebration cake with generous sour cream filling, chocolate drips and fresh fruit.',
     source: 'Author-confirmed cake · 2026-09-25',
     archiveSections: [],
-    needsBeforePublishing:
-      'Confirm oven temperature, total bake time and exact reduced frosting sugar.',
+    needsBeforePublishing: '',
   },
   {
     id: 'banana-bread',
@@ -258,33 +257,34 @@ export const recipeInventory: InventoryRecipe[] = [
     testingStatus: 'Core verified',
     flour: `${schar} + tapioca starch`,
     difficulty: 'Medium',
-    activeTime: '20 min',
-    totalTime: '50 min',
+    activeTime: '30 min',
+    totalTime: '1 hr',
     localizedFacts: {
       difficulty: { en: 'Medium', es: 'Media', uk: 'Середня' },
-      activeTime: { en: '20 min', es: '20 min', uk: '20 хв' },
-      totalTime: { en: '50 min', es: '50 min', uk: '50 хв' },
+      activeTime: { en: '30 min', es: '30 min', uk: '30 хв' },
+      totalTime: { en: '1 hr', es: '1 h', uk: '1 год' },
     },
     scalingAnchorIngredientId: 'eggs',
     launchPriority: 'Medium',
     heroCandidate: 'Possible',
-    image: '/images/recipes/plum-cake-card-v2.webp',
-    imageKind: 'generated-preview',
+    image: '/images/recipes/plum-cake-author-hero-v1.webp',
+    imageKind: 'edited-author-photo',
     imageAlt:
-      'Inverted gluten-free plum sponge cake with glossy baked plums on top and a cut square',
-    summary: 'A soft sponge with a glossy fruit top and a gentle tartness.',
+      'Round upside-down plum cake with a cut slice showing the pale crumb',
+    summary:
+      'A tender butter sponge with juicy plum wedges and a gentle tartness.',
     source:
-      'Author-confirmed upside-down plum adaptation of the apple-charlotte sponge, recorded 2026-09-21',
+      'Author recipe revision and 13 original process/result photographs, 2026-09-25',
     archiveSections: [
       {
-        title: 'Ingredients · reviewed half batch',
+        title: 'Ingredients · author revision 2026-09-25',
         content:
-          '400 г стиглих щільних слив, 5 невеликих яєць, 100 г цукру, 120 г безглютенового борошна, 15 г тапіокового крохмалю, 1/2 ч. л. ксантанової камеді, дрібка солі, ванілін.',
+          '400 г слив, 5 невеликих яєць, 100 г цукру, 120 г Schär Mix B Bread, 15 г тапіокового крохмалю, 5 г ксантанової камеді (1 ч. л., опціонально), 50 г вершкового масла та трохи для пергаменту, дрібка солі, ванілін.',
       },
       {
         title: 'Method · reviewed version',
         content:
-          'Половинки слив викласти на застелене пергаментом дно зрізом донизу. Приготувати легке бісквітне тісто без масла, рівномірно вилити на сливи й випікати при 180°C протягом 25–30 хв. Після виймання одразу відділити краї та перевернути пиріг на пласку таріль. Для повного дека взяти подвійну порцію.',
+          'Сливи нарізати скибочками та викласти на змащений пергамент. Жовтки збити з 2 ст. л. цукру, білки — з рештою; обережно з’єднати. Після борошна змішати 3–4 ложки тіста з 50 г розтопленого ледь теплого масла, повернути в основне тісто та обережно вмішати. Викласти на сливи. Підготовка 30 хв; випікання 30 хв при 200°C. Перевернути готовий пиріг.',
       },
     ],
     needsBeforePublishing: '',
@@ -319,8 +319,8 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/cottage-cheese-waffles-author-v1.webp',
-    imageKind: 'author-photo',
+    image: '/images/recipes/cottage-cheese-waffles-linen-v2.webp',
+    imageKind: 'edited-author-photo',
     imageAlt:
       'Golden gluten-free cottage-cheese waffles with berries on a pale green plate',
     summary:
@@ -612,9 +612,19 @@ export const recipeInventory: InventoryRecipe[] = [
     collectionIds: ['breakfast', 'everyday'],
     testingStatus: 'Core verified',
     flour: schar,
-    difficulty: null,
-    activeTime: null,
+    difficulty: 'Easy',
+    activeTime: '30 min',
     totalTime: null,
+    localizedFacts: {
+      difficulty: { en: 'Easy', es: 'Fácil', uk: 'Легка' },
+      activeTime: { en: '30 min', es: '30 min', uk: '30 хв' },
+      totalTime: { en: '', es: '', uk: '' },
+      flour: {
+        en: 'Schär Mix B Bread',
+        es: 'Schär Mix B Bread',
+        uk: 'Schär Mix B Bread',
+      },
+    },
     launchPriority: 'Medium',
     heroCandidate: 'No',
     image: '/images/recipes/apple-fritters-card-v1.webp',
@@ -637,8 +647,7 @@ export const recipeInventory: InventoryRecipe[] = [
           'Помити й очистити яблука, натерти на середній тертці. Збити яйце з йогуртом та цукром чи медом. Додати яблука. Всипати борошно та соду й перемішати до консистенції густої сметани. Розігріти пательню з невеликою кількістю олії на середньому вогні. Викладати невеликі оладки ложкою. Смажити під кришкою по 2–3 хвилини з кожного боку до золотистої скоринки.',
       },
     ],
-    needsBeforePublishing:
-      'Record yield, total cooking time and approximate frying-oil quantity; approve or replace the generated photo.',
+    needsBeforePublishing: '',
   },
   {
     id: 'banana-fritters',
@@ -788,13 +797,13 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/prune-cake-card-v2.webp',
-    imageKind: 'generated-preview',
+    image: '/images/recipes/prune-cake-author-hero-v2.webp',
+    imageKind: 'edited-author-photo',
     imageAlt:
       'Chocolate prune cake with a mound of cream-coated cake pieces, glaze and nuts',
     summary:
       'Chocolate layers with prune cream, a mound of tender cake pieces and chocolate glaze.',
-    source: 'Older handwritten photo, image.png',
+    source: 'Author bake and original photographs · 2026-09-26',
     archiveSections: [
       {
         title: 'Ingredients · author clarification',

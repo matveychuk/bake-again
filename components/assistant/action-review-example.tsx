@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+
 import { useState } from 'react';
 import {
   Dialog,
@@ -64,7 +66,8 @@ export function ActionReviewExample() {
       <p>Design Lab preview only. No shopping data is changed.</p>
       <fieldset className={styles.footer} aria-label="Preview language">
         {(['en', 'es', 'uk'] as const).map((value) => (
-          <button
+          <Button
+            variant="outline"
             className={styles.button}
             type="button"
             aria-pressed={locale === value}
@@ -76,7 +79,7 @@ export function ActionReviewExample() {
               : value === 'es'
                 ? 'Español'
                 : 'Українська'}
-          </button>
+          </Button>
         ))}
       </fieldset>
       <Dialog
@@ -89,7 +92,10 @@ export function ActionReviewExample() {
           }
         }}
       >
-        <DialogTrigger className={styles.button}>
+        <DialogTrigger
+          render={<Button variant="outline" />}
+          className={styles.button}
+        >
           {messages.review}
         </DialogTrigger>
         <DialogContent className={styles.dialog} showCloseButton={false}>
@@ -107,8 +113,9 @@ export function ActionReviewExample() {
             }
           />
           <div className={styles.footer}>
-            <button
+            <Button
               type="button"
+              variant="outline"
               className={styles.button}
               onClick={() => {
                 setOpen(false);
@@ -116,10 +123,10 @@ export function ActionReviewExample() {
               }}
             >
               {messages.cancel}
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className={`${styles.button} ${styles.primary}`}
+              className={styles.button}
               disabled={!complete}
               onClick={() => {
                 setOpen(false);
@@ -127,7 +134,7 @@ export function ActionReviewExample() {
               }}
             >
               {messages.confirm}
-            </button>
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

@@ -40,7 +40,9 @@ export function RecipeOverview({
                 locale={locale}
                 status={content.evidence.status}
               />
-              <p>{content.evidence.explanation}</p>
+              {content.evidence.explanation && (
+                <p>{content.evidence.explanation}</p>
+              )}
             </>
           ) : (
             <>

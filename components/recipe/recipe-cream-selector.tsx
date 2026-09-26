@@ -1,5 +1,8 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import { RecipeRelatedLink } from '@/components/recipe/recipe-related-link';
+
 import { trackEvent } from '@/lib/analytics/umami';
 import { useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -39,7 +42,8 @@ export function RecipeCreamSelector({
   const selected = options.find((option) => option.id === selectedRecipeId);
 
   function selectCream(recipeId: string) {
-    if (recipeId !== selectedRecipeId) trackEvent('cream_select', { recipe_id: recipeId, locale });
+    if (recipeId !== selectedRecipeId)
+      trackEvent('cream_select', { recipe_id: recipeId, locale });
     const next = new URLSearchParams(searchParams.toString());
     next.set('cream', recipeId);
     setExpanded(false);
@@ -56,13 +60,17 @@ export function RecipeCreamSelector({
           <h2>{selected.title}</h2>
         </div>
         <div className={styles.summaryActions}>
-          <a href={selected.href}>
+          <RecipeRelatedLink href={selected.href}>
             {messages.viewCreamRecipe}
             <ChevronRight aria-hidden="true" size={16} />
-          </a>
-          <button onClick={() => setExpanded(true)} type="button">
+          </RecipeRelatedLink>
+          <Button
+            variant="outline"
+            onClick={() => setExpanded(true)}
+            type="button"
+          >
             {messages.changeCream}
-          </button>
+          </Button>
         </div>
       </section>
     );
@@ -95,10 +103,7 @@ export function RecipeCreamSelector({
                 key={option.id}
               >
                 {recommendedOption ? (
-                  <span
-                    className={styles.recommended}
-                    id={recommendationId}
-                  >
+                  <span className={styles.recommended} id={recommendationId}>
                     {messages.creamRecommended}
                   </span>
                 ) : null}
@@ -119,10 +124,13 @@ export function RecipeCreamSelector({
                     {option.description}
                   </span>
                 </label>
-                <a className={styles.viewRecipe} href={option.href}>
+                <RecipeRelatedLink
+                  className={styles.viewRecipe}
+                  href={option.href}
+                >
                   {messages.viewCreamRecipe}
                   <ChevronRight aria-hidden="true" size={16} />
-                </a>
+                </RecipeRelatedLink>
               </article>
             );
           })}

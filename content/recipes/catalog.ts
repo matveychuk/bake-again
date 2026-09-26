@@ -1,5 +1,6 @@
 import { recipeInventory } from './inventory.ts';
 import { catalogLocaleCopy } from './catalog-locales.ts';
+import { catalogOrder } from './catalog-order.ts';
 import { getRecipeContent } from './registry.ts';
 import { getRecipePublicationStatus } from './publication.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
@@ -46,7 +47,7 @@ export function getRecipeCatalog(
   locale: AppLocale,
   scope: CatalogScope = 'published',
 ): RecipeCatalogEntry[] {
-  return recipeInventory.flatMap((recipe) => {
+  const entries: RecipeCatalogEntry[] = recipeInventory.flatMap((recipe) => {
     const publicationStatus = getRecipePublicationStatus(recipe.id);
     if (
       !publicationStatus ||
@@ -80,6 +81,15 @@ export function getRecipeCatalog(
       },
     ];
   });
+
+  // Keep editorial inventories and local drafts in source order. Public filters
+  // inherit discovery order; search applies its relevance score afterwards.
+  if (scope !== 'published') return entries;
+  const ranks = new Map(catalogOrder[locale].map((id, index) => [id, index]));
+  // Newly published recipes remain visible after curated entries, in source order.
+  return entries.sort(
+    (a, b) => (ranks.get(a.id) ?? ranks.size) - (ranks.get(b.id) ?? ranks.size),
+  );
 }
 
 /** @deprecated Use getRecipeCatalog(locale) in locale-aware surfaces. */

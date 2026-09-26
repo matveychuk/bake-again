@@ -584,49 +584,6 @@
 .shoppingReviewExample footer button {
   width: 100%;
 }
-.primaryButton,
-.secondaryButton,
-.textButton {
-  min-height: 46px;
-  padding: 0 18px;
-  border-radius: var(--radius-control);
-  cursor: pointer;
-  font-size: 0.82rem;
-  font-weight: 750;
-}
-.primaryButton {
-  border: 1px solid var(--color-action-primary);
-  background: var(--color-action-primary);
-  color: var(--color-text-on-accent);
-}
-.primaryButton:hover {
-  background: var(--color-action-primary-strong);
-}
-.primaryButton:disabled {
-  border-color: var(--color-background-panel);
-  background: var(--color-background-panel);
-  color: var(--color-text-secondary);
-  cursor: not-allowed;
-}
-.secondaryButton {
-  border: 1px solid var(--color-text-primary);
-  background: var(--color-background-surface);
-  color: var(--color-text-primary);
-}
-.textButton {
-  padding-inline: 2px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border: 0;
-  border-bottom: 1px solid var(--color-text-primary);
-  background: transparent;
-  color: var(--color-text-primary);
-  border-radius: 0;
-}
-.primaryButton:focus-visible,
-.secondaryButton:focus-visible,
-.textButton:focus-visible,
 .searchExample button:focus-visible,
 .searchExample input:focus-visible {
   outline: 2px solid var(--color-action-primary);

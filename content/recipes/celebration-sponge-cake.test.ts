@@ -11,6 +11,7 @@ import {
 } from './recipe-component-records.ts';
 
 void test('author eight-egg formula is distinct from a scaled five-egg sponge in all locales', () => {
+  const eggNames = { uk: 'Яйця', en: 'Eggs', es: 'Huevos' } as const;
   for (const locale of ['uk', 'en', 'es'] as const) {
     const cake = getRecipeContent('celebration-sponge-cake', locale)!;
     const ingredients = cake.ingredientSections.flatMap(
@@ -23,21 +24,23 @@ void test('author eight-egg formula is distinct from a scaled five-egg sponge in
       value: 8,
       unit: 'piece',
     });
+    assert.equal(
+      ingredients.find((item) => item.id === 'sponge-eggs')?.name,
+      eggNames[locale],
+    );
     assert.deepEqual(amount('sponge-tapioca'), {
-      kind: 'range',
-      min: 10,
-      max: 12,
+      kind: 'exact',
+      value: 15,
       unit: 'g',
     });
     assert.deepEqual(amount('sponge-corn-starch'), {
-      kind: 'range',
-      min: 24,
-      max: 25,
+      kind: 'exact',
+      value: 21,
       unit: 'g',
     });
     assert.deepEqual(amount('sponge-flour'), {
       kind: 'exact',
-      value: 225,
+      value: 240,
       unit: 'g',
     });
     assert.deepEqual(amount('filling-sour-cream'), {
@@ -46,14 +49,39 @@ void test('author eight-egg formula is distinct from a scaled five-egg sponge in
       unit: 'g',
     });
     assert.equal(cake.geometry?.diameterCm, 24);
-    assert.equal(cake.completeness, 'incompleteSource');
-    assert.equal(cake.evidence?.status, 'calculated');
-    assert(!cake.steps.some((step) => step.body.includes('200°C')));
+    assert.equal(cake.completeness, 'readyToReview');
+    assert.equal(cake.evidence?.status, 'tested');
+    assert.equal(cake.timing?.activeMinutes, 90);
+    assert(cake.steps.some((step) => step.body.includes('200°C')));
     assert(
-      !cake.timing?.phases.some(
-        (phase) => phase.duration.kind === 'range' && phase.duration.min === 40,
+      cake.timing?.phases.some(
+        (phase) =>
+          phase.duration.kind === 'range' &&
+          phase.duration.min === 60 &&
+          phase.duration.max === 70,
       ),
     );
+    assert.deepEqual(
+      ingredients.find((item) => item.id === 'sponge-sugar-yolks')?.quantity
+        .equivalent,
+      { kind: 'exact', value: 3, unit: 'tbsp' },
+    );
+    assert.deepEqual(
+      ingredients.find((item) => item.id === 'sponge-sugar-whites')?.quantity
+        .equivalent,
+      { kind: 'exact', value: 7, unit: 'tbsp' },
+    );
+    assert.deepEqual(amount('buttercream-butter'), {
+      kind: 'exact',
+      value: 200,
+      unit: 'g',
+    });
+    assert.deepEqual(amount('buttercream-powdered-sugar'), {
+      kind: 'exact',
+      value: 100,
+      unit: 'g',
+    });
+    assert(!ingredients.some((item) => item.id.startsWith('frosting-')));
     const ids = new Set(ingredients.map((item) => item.id));
     assert.equal(ids.size, ingredients.length);
     assert.equal(
@@ -67,14 +95,33 @@ void test('author eight-egg formula is distinct from a scaled five-egg sponge in
       cake.steps.findIndex((step) => step.id === 'fill') >
         cake.steps.findIndex((step) => step.id === 'filling-mix'),
     );
-    const video = createSourceCookSteps(cake, locale)
-      .flatMap((step) => step.media ?? [])
-      .find((item) => item.type === 'video');
-    assert(video?.src.endsWith('.mp4'));
+    assert.equal(cake.beforeStart, undefined);
+    assert.equal(cake.gapNote, undefined);
+    assert.equal(cake.showImageNote, false);
+    assert.equal(
+      cake.steps.find((step) => step.id === 'decorate')?.media?.[0]?.caption,
+      undefined,
+    );
+    assert.equal(
+      cake.steps.find((step) => step.id === 'buttercream-beat-buttercream')
+        ?.technique?.condition,
+      'room-temperature-butter',
+    );
+    const cookSteps = createSourceCookSteps(cake, locale);
+    assert.deepEqual(
+      cookSteps.find((step) => step.stepIds.includes('sponge-bake'))
+        ?.timerOptionsSeconds,
+      [3600, 4200],
+    );
+    assert(
+      !cookSteps
+        .flatMap((step) => step.media ?? [])
+        .some((item) => item.type === 'video'),
+    );
   }
   assert.equal(
     getRecipeDocument('celebration-sponge-cake')!.recipe.publicationStatus,
-    'unpublished',
+    'published',
   );
   assert.deepEqual(
     getRecipeContent('sponge-cake', 'en')!.ingredientSections[0].ingredients[0]

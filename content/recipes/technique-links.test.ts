@@ -8,7 +8,6 @@ import { getLocaleSwitchPath } from '../../lib/i18n/routes.ts';
 const recipes = [
   'banana-bread',
   'crinkle-cookies',
-  'cottage-cheese-waffles',
   'cinnamon-rolls',
   'eggless-vanilla-custard',
   'vanilla-buttercream',
@@ -31,12 +30,6 @@ void test('butter technique references reach all locales and Cook Mode at the re
       );
     }
     assert.equal(
-      getRecipeContent('cottage-cheese-waffles', locale)!.steps.find(
-        (s) => s.technique,
-      )?.technique?.condition,
-      'butter-option',
-    );
-    assert.equal(
       getRecipeContent('cinnamon-rolls', locale)!.steps.find((s) => s.technique)
         ?.technique?.condition,
       'cinnamon-filling',
@@ -45,6 +38,7 @@ void test('butter technique references reach all locales and Cook Mode at the re
       'gluten-free-napoleon',
       'apple-meringue-pie',
       'banana-fritters',
+      'cottage-cheese-waffles',
       'easter-bread',
     ]) {
       assert.ok(

@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 /* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
 import type { Metadata } from 'next';
 import {
@@ -23,6 +24,7 @@ import {
 } from '@/components/recipe/evidence-badge';
 import { RecipeIngredientChecklist } from '@/components/recipe/recipe-ingredient-checklist';
 import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
+import { RecipePlanItem } from '@/components/recipe/recipe-plan-item';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { RecipeSearchForm } from '@/components/recipe/recipe-search-form';
 import { RecipeCard } from '@/components/recipe/recipe-card';
@@ -31,6 +33,14 @@ import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { getRecipeCatalog } from '@/content/recipes/catalog';
 import { getLocalizedRecipePath } from '@/lib/i18n/routes';
 import { RecipeOverview } from '@/components/recipe/recipe-overview';
+import { RecipeBackLink } from '@/components/recipe/recipe-back-link';
+import {
+  RecipeCookEntry,
+  RecipeSectionNavigation,
+} from '@/components/recipe/recipe-reading-actions';
+import { recipeReaderCopy } from '@/content/recipes/reader-copy';
+import { getUiMessages } from '@/lib/i18n/messages';
+import { localeMetadata } from '@/lib/i18n/config';
 import { RecipeCreamSelector } from '@/components/recipe/recipe-cream-selector';
 import { InventoryRecipeAdjuster } from '@/components/recipe/inventory-recipe-adjuster';
 import { StepMediaSequence } from '@/components/recipe/step-media-sequence';
@@ -280,10 +290,10 @@ export default function DesignSystemPage() {
             </div>
             <div className={styles.shapeNotes}>
               <p>
-                <strong>4px</strong> for compact functional labels.
+                <strong>4px</strong> for buttons, fields and compact labels.
               </p>
               <p>
-                <strong>Square surfaces</strong> for content and controls.
+                <strong>Square surfaces</strong> for content and photography.
               </p>
               <p>
                 <strong>Circles</strong> only for save actions and proof marks.
@@ -302,22 +312,30 @@ export default function DesignSystemPage() {
 
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}>
-                <strong>Actions</strong>
-                <span>Default · hover · focus · disabled</span>
+                <strong>Shared Button</strong>
+                <span>
+                  4px radius · 44px minimum · terracotta / outline / text
+                </span>
               </div>
               <div className={styles.actionRow}>
-                <button className={styles.primaryButton} type="button">
-                  View recipe
-                </button>
-                <button className={styles.secondaryButton} type="button">
+                <Button variant="default" type="button">
+                  Search
+                </Button>
+                <Button variant="default" type="button">
+                  Cook step by step
+                </Button>
+                <Button variant="default" size="lg" type="button">
+                  Done, next
+                </Button>
+                <Button variant="outline" type="button">
                   Save for later
-                </button>
-                <button className={styles.textButton} type="button">
+                </Button>
+                <Button variant="link" type="button">
                   See all recipes <ArrowRight size={17} />
-                </button>
-                <button className={styles.primaryButton} type="button" disabled>
+                </Button>
+                <Button variant="default" type="button" disabled>
                   Unavailable
-                </button>
+                </Button>
               </div>
             </div>
 
@@ -350,14 +368,14 @@ export default function DesignSystemPage() {
                 visibility, never evidence. Unknown card facts are omitted.
                 Every non-control area opens the recipe. Planning values use
                 stronger type and terracotta icons in two label/value columns.
-                Short catalogue names keep headings compact, centred beside Save;
-                facts follow 8px below the complete title/control row.
-                Photos, titles, facts, flour and footers align within each grid row
-                without truncating names. All collection links stay visible as
-                compact sand chips with full-height touch targets; long labels
-                wrap naturally. A subtle card border
-                keeps those final links visibly attached to their recipe. Check
-                wrapping and keyboard focus at 390, 900 and 1440px.
+                Short catalogue names keep headings compact, centred beside
+                Save; facts follow 8px below the complete title/control row.
+                Photos, titles, facts, flour and footers align within each grid
+                row without truncating names. All collection links stay visible
+                as compact sand chips with full-height touch targets; long
+                labels wrap naturally. A subtle card border keeps those final
+                links visibly attached to their recipe. Check wrapping and
+                keyboard focus at 390, 900 and 1440px.
               </p>
               <div className="recipe-grid recipe-grid--catalog-preview">
                 {(
@@ -393,6 +411,35 @@ export default function DesignSystemPage() {
                   );
                 })}
               </div>
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}>
+                <strong>Localized catalogue order</strong>
+                <span>First six published recipes · approved editorial selection</span>
+              </div>
+              <p>
+                Each language has its own discovery order. Collections keep that
+                order; search ranks relevance first. The same DOM order flows
+                through one, two and three columns without CSS reordering.
+              </p>
+              {(['uk', 'es', 'en'] as const).map((locale) => (
+                <div key={locale} lang={locale}>
+                  <h3>{localeMetadata[locale].label}</h3>
+                  <div className="recipe-grid recipe-grid--catalog-preview">
+                    {getRecipeCatalog(locale).slice(0, 6).map((recipe) => (
+                      <RecipeCard
+                        key={recipe.id}
+                        recipe={{
+                          ...recipe,
+                          locale,
+                          href: getLocalizedRecipePath(recipe.id, locale)!,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
 
             <div className={styles.componentBlock}>
@@ -476,11 +523,47 @@ export default function DesignSystemPage() {
               />
             </div>
 
+            <div className={styles.componentBlock} id="recipe-reading-actions">
+              <div className={styles.componentLabel}>
+                <strong>Recipe navigation and cooking entry</strong>
+                <span>
+                  Native section links in the hero · primary Cook action beside
+                  the written method · both sections remain visible
+                </span>
+              </div>
+              <div className={styles.recipeOverviewExample}>
+                {(['uk', 'en', 'es'] as const).map((locale) => (
+                  <div key={locale} lang={locale}>
+                    <RecipeBackLink
+                      fallbackHref={`/${locale}#recipes`}
+                      fallbackLabel={getUiMessages(locale).recipe.backToRecipes}
+                      returnLabel={getUiMessages(locale).cook.returnToRecipe}
+                    />
+                    <RecipeSectionNavigation
+                      locale={locale}
+                      ingredientsHref={`#reading-ingredients-${locale}`}
+                      methodHref={`#reading-method-${locale}`}
+                    />
+                    <h3 id={`reading-ingredients-${locale}`} tabIndex={-1}>
+                      {getUiMessages(locale).recipe.ingredients}
+                    </h3>
+                    <h3 id={`reading-method-${locale}`} tabIndex={-1}>
+                      {recipeReaderCopy[locale].method}
+                    </h3>
+                    <RecipeCookEntry
+                      locale={locale}
+                      href={`/${locale}/recipes/plum-cake/cook`}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className={styles.componentBlock} id="concise-recipe">
               <div className={styles.componentLabel}>
                 <strong>Concise recipe</strong>
                 <span>
-                  Edited copy · optional captions · single working note
+                  Edited copy · optional captions · badge-only evidence
                 </span>
               </div>
               {(['uk', 'en', 'es'] as const).map((locale) => {
@@ -489,7 +572,7 @@ export default function DesignSystemPage() {
                     ? 'crepes'
                     : locale === 'en'
                       ? 'crinkle-cookies'
-                      : 'prune-cake',
+                      : 'plum-cake',
                   locale,
                 )!;
                 const step = recipe.steps[locale === 'uk' ? 3 : 2];
@@ -506,7 +589,7 @@ export default function DesignSystemPage() {
                       archiveSections={[]}
                       locale={locale}
                       scalingAnchorIngredientId={
-                        locale === 'es' ? 'eggs' : 'flour'
+                        locale === 'en' ? 'flour' : 'eggs'
                       }
                     />
                     <RecipeStepContent
@@ -530,7 +613,9 @@ export default function DesignSystemPage() {
             <div className={styles.componentBlock} id="roll-assembly">
               <div className={styles.componentLabel}>
                 <strong>Recipe assembly guidance</strong>
-                <span>Complete method before cream selection · final serving tip</span>
+                <span>
+                  Complete method before cream selection · final serving tip
+                </span>
               </div>
               {(['uk', 'en', 'es'] as const).map((locale) => {
                 const recipe = composeRecipeWithCream(
@@ -538,20 +623,27 @@ export default function DesignSystemPage() {
                   null,
                   null,
                 );
-                const step = recipe.steps.find(
-                  (item) => item.id === 'fill',
-                )!;
+                const step = recipe.steps.find((item) => item.id === 'fill')!;
                 return (
                   <div key={locale} lang={locale}>
                     <RecipeStepContent
                       title={step.title}
                       tip={step.tip}
-                      tipLabel={locale === 'uk' ? 'Порада' : locale === 'es' ? 'Consejo' : 'Tip'}
+                      tipLabel={
+                        locale === 'uk'
+                          ? 'Порада'
+                          : locale === 'es'
+                            ? 'Consejo'
+                            : 'Tip'
+                      }
                       checkpointLabel=""
                     >
                       <p>{step.body}</p>
                     </RecipeStepContent>
-                    <StepMediaSequence items={step.media!} ariaLabel={step.title} />
+                    <StepMediaSequence
+                      items={step.media!}
+                      ariaLabel={step.title}
+                    />
                   </div>
                 );
               })}
@@ -561,26 +653,43 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Step photography</strong>
                 <span>
-                  Equal frame sizes · simple photo numbers · next-photo peek on mobile
+                  Equal frame sizes · simple photo numbers · next-photo peek on
+                  mobile
                 </span>
               </div>
               <div className={styles.stepPhotographyExamples}>
                 {(['recipe', 'cook'] as const).map((variant) => (
                   <div key={variant}>
-                    <h3>{variant === 'recipe' ? 'Recipe detail' : 'Cook Mode'}</h3>
-                    <p>One photo keeps the same size as each photo in a sequence.</p>
+                    <h3>
+                      {variant === 'recipe' ? 'Recipe detail' : 'Cook Mode'}
+                    </h3>
+                    <p>
+                      One photo keeps the same size as each photo in a sequence.
+                    </p>
                     <StepMediaSequence
-                      items={getRecipeContent('sponge-cake', 'en')!.steps[0].media!}
+                      items={
+                        getRecipeContent('sponge-cake', 'en')!.steps[0].media!
+                      }
                       ariaLabel={`${variant}: single photo`}
                       variant={variant}
                     />
                     <StepMediaSequence
-                      items={getRecipeContent('sponge-cake', 'en')!.steps[2].media!}
+                      items={
+                        getRecipeContent('sponge-cake', 'en')!.steps[2].media!
+                      }
                       ariaLabel={`${variant}: ordered photos`}
                       variant={variant}
                     />
                     <StepMediaSequence
-                      items={[{ id: 'author-video-example', type: 'video', src: '/media/recipes/celebration-sponge-cake/selected/author-cake-overview-v1.mp4', alt: 'Author video of a fruit cake', caption: 'Author video · play on demand' }]}
+                      items={[
+                        {
+                          id: 'author-video-example',
+                          type: 'video',
+                          src: '/media/recipes/celebration-sponge-cake/selected/author-cake-overview-v1.mp4',
+                          alt: 'Author video of a fruit cake',
+                          caption: 'Author video · play on demand',
+                        },
+                      ]}
                       ariaLabel={`${variant}: author video`}
                       variant={variant}
                     />
@@ -620,7 +729,7 @@ export default function DesignSystemPage() {
                 <aside className={styles.bakeMemoryExample}>
                   <NotebookPen aria-hidden="true" size={20} />
                   <div>
-                    <small>Your recipe memory</small>
+                    <small>Your recipe note</small>
                     <strong>You made this recipe</strong>
                     <span>Last made 20 Sep 2026 · Private to this browser</span>
                     <p>
@@ -628,9 +737,9 @@ export default function DesignSystemPage() {
                       hotter.
                     </p>
                   </div>
-                  <button className={styles.secondaryButton} type="button">
+                  <Button variant="outline" type="button">
                     Cook again
-                  </button>
+                  </Button>
                 </aside>
                 <div className={styles.shoppingExample}>
                   <BakeCheckbox
@@ -645,9 +754,9 @@ export default function DesignSystemPage() {
                   </button>
                 </div>
                 <div className={styles.shoppingFlowExample}>
-                  <button className={styles.primaryButton} type="button">
+                  <Button variant="default" type="button">
                     <ShoppingBag size={16} /> To shopping list…
-                  </button>
+                  </Button>
                   <div className={styles.shoppingReviewExample}>
                     <strong>What do you need to buy?</strong>
                     <small>Napoleon cake · 28 cm · 1×</small>
@@ -671,9 +780,9 @@ export default function DesignSystemPage() {
                       <span>80 g · Tapioca starch</span>
                     </div>
                     <footer>
-                      <button className={styles.primaryButton} type="button">
+                      <Button variant="default" type="button">
                         Add to list (2)
-                      </button>
+                      </Button>
                     </footer>
                   </div>
                 </div>
@@ -716,30 +825,37 @@ export default function DesignSystemPage() {
 
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}>
-                <strong>Cook tools drawer</strong>
+                <strong>Cook ingredients and tools drawer</strong>
                 <span>
-                  Shared right panel · full width on mobile · visible Close ·
-                  Escape and focus return · fixed header and scrollable content
+                  Dividers between rows only · full width on mobile · visible
+                  Close · Escape and focus return · fixed header and scrollable
+                  content
                 </span>
               </div>
-              <CookToolsExample className={styles.secondaryButton} />
+              <CookToolsExample />
             </div>
 
             <div className={styles.componentBlock} id="technique-help">
               <div className={styles.componentLabel}>
-                <strong>Contextual technique guide</strong>
-                <span>Recipe link → drawer · native link fallback · shared standalone guide</span>
+                <strong>Plan-ahead technique guide</strong>
+                <span>
+                  Clock and written label · inline link · no nested card ·
+                  shared drawer and standalone guide
+                </span>
               </div>
               {(['uk', 'en', 'es'] as const).map((locale) => (
                 <div key={locale} lang={locale}>
-                  <RecipeStepContent
-                    title={locale}
-                    tipLabel={locale === 'uk' ? 'Порада' : locale === 'es' ? 'Consejo' : 'Tip'}
-                    checkpointLabel=""
-                    tip={<TechniqueHelp locale={locale} reference={{ id: 'soften-butter', condition: 'butter-option' }} />}
+                  <RecipePlanItem
+                    label={getUiMessages(locale).recipe.keepInMind}
                   >
-                    {null}
-                  </RecipeStepContent>
+                    <TechniqueHelp
+                      locale={locale}
+                      reference={{
+                        id: 'soften-butter',
+                        condition: 'room-temperature-butter',
+                      }}
+                    />
+                  </RecipePlanItem>
                 </div>
               ))}
             </div>

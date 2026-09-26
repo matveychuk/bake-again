@@ -57,6 +57,8 @@ Source-backed pages may also provide structured `yield`, `geometry` and `timing`
 source record, while each reviewed locale supplies reader-facing labels. The registry
 merges localized labels with canonical numeric values before rendering; `beforeStart` is
 reserved for practical planning guidance such as allowing time for a batter to rest.
+Yield can describe either a countable result or a finished mass in grams, as with a
+small batch of glaze.
 Crepes currently use a 28 cm round pan, yield 10 crepes, take 40 minutes of active time
 and 60 minutes elapsed, with a 15–20 minute batter-rest phase linked to the `rest` step.
 
@@ -294,3 +296,13 @@ the complete host method stays visible; no cream ingredients or preparation are 
 Cook Mode still requires an explicit cream selection. The existing `fill` ID is still supported. The sponge roll uses this
 for jam, cream and final rolling/decoration; parchment rolling and cooling remain base
 steps. This metadata does not change recipe evidence.
+
+### Author bake revisions
+
+A source recipe may set `versionId` on every localized content record when its exact
+baked configuration changes. Recipe reading/shopping and Cook Mode use that same ID,
+with the existing cream suffix when applicable. Older recipes retain their `source-v1`
+fallback. The prune cake's `prune-cake-author-2026-09-26` keeps prior quantities,
+completed steps, timers and bake notes from being treated as this new bake.
+Recipe-specific author-weighed spoon equivalents stay on the ingredient quantity;
+they do not overwrite the shared spoon table.

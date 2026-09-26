@@ -86,7 +86,7 @@ function createInventoryCookMode(
   const baseVersionId =
     document?.kind === 'detailed'
       ? document.recipe.versionId
-      : `${recipe.id}-source-v1`;
+      : (structured?.versionId ?? `${recipe.id}-source-v1`);
   const baseForCookMode = structured
     ? composeRecipeWithCream(structured, null, null)
     : null;

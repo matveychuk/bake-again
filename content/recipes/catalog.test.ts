@@ -71,16 +71,16 @@ void test('keeps the reviewed cottage-cheese and batter-on-hand collections prec
   ]);
 });
 
-void test('uses the author waffle photo across catalogue locales', () => {
+void test('uses the edited real waffle photo across catalogue locales', () => {
   for (const locale of ['en', 'es', 'uk'] as const) {
     const waffles = getRecipeCatalog(locale, 'all').find(
       (recipe) => recipe.id === 'cottage-cheese-waffles',
     );
 
-    assert.equal(waffles?.imageKind, 'author-photo');
+    assert.equal(waffles?.imageKind, 'edited-author-photo');
     assert.equal(
       waffles?.image,
-      '/images/recipes/cottage-cheese-waffles-author-v1.webp',
+      '/images/recipes/cottage-cheese-waffles-linen-v2.webp',
     );
     assert.match(waffles?.alt ?? '', /berries|frutos rojos|ягодами/);
   }
@@ -119,8 +119,8 @@ void test('publishes the reviewed fruit sponge roll with its final hero and prac
   assert.equal(roll?.imageKind, 'generated-preview');
 });
 
-void test('publishes the reviewed fruit cakes with their final heroes and timing', () => {
-  const apple = getRecipeCatalog('uk').find(
+void test('keeps apple charlotte in drafts while publishing the reviewed plum cake', () => {
+  const apple = getRecipeCatalog('uk', 'unpublished').find(
     (recipe) => recipe.id === 'apple-charlotte',
   );
   const plum = getRecipeCatalog('uk').find(
@@ -130,9 +130,12 @@ void test('publishes the reviewed fruit cakes with their final heroes and timing
   assert.equal(apple?.detail, 'Загальний час: 50 хв');
   assert.equal(apple?.difficulty, 'Складність: Легка');
   assert.equal(apple?.image, '/images/recipes/apple-charlotte-card-v2.webp');
-  assert.equal(plum?.detail, 'Загальний час: 50 хв');
+  assert(
+    !getRecipeCatalog('uk').some((recipe) => recipe.id === 'apple-charlotte'),
+  );
+  assert.equal(plum?.detail, 'Загальний час: 1 год');
   assert.equal(plum?.difficulty, 'Складність: Середня');
-  assert.equal(plum?.image, '/images/recipes/plum-cake-card-v2.webp');
+  assert.equal(plum?.image, '/images/recipes/plum-cake-author-hero-v1.webp');
 });
 
 void test('keeps catalogue names concise and makes gluten-free explicit on recipe pages', () => {

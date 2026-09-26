@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { CheckCircle2, RotateCcw, Save } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -61,9 +62,9 @@ export function CookCompletion({
       </p>
       <div className={styles.completionActions}>
         <Link href={detailHref}>{messages.returnToRecipe}</Link>
-        <button type="button" onClick={onRestart}>
+        <Button variant="default" type="button" onClick={onRestart}>
           <RotateCcw aria-hidden="true" size={17} /> {messages.cookAgain}
-        </button>
+        </Button>
       </div>
     </section>
   );

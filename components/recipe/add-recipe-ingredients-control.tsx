@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+
 import { trackEvent } from '@/lib/analytics/umami';
 import { Check, ShoppingBag, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -349,7 +351,12 @@ export function AddRecipeIngredientsControl({
       setSaveFailed(true);
       return;
     }
-    if (inputs.length > 0) trackEvent('shopping_add', { recipe_id: shoppingRecipe.id, locale, count: inputs.length });
+    if (inputs.length > 0)
+      trackEvent('shopping_add', {
+        recipe_id: shoppingRecipe.id,
+        locale,
+        count: inputs.length,
+      });
     setConfirmation({ count: inputs.length, before });
     setDraftMode(null);
     setOpen(false);
@@ -366,13 +373,17 @@ export function AddRecipeIngredientsControl({
     <div className={styles.control}>
       <div className={styles.actions}>
         {shoppingLineIds.size > 0 && !disabled ? (
-          <a className={styles.inList} href={localeShoppingListPath(locale)}>
+          <Button
+            variant="outline"
+            className={styles.inList}
+            href={localeShoppingListPath(locale)}
+          >
             <Check aria-hidden="true" size={17} />
             {messages.inShoppingList(shoppingLineIds.size)}
-          </a>
+          </Button>
         ) : null}
         {!disabled ? (
-          <button
+          <Button
             className={`${styles.trigger} ${className ?? ''}`}
             onClick={(event) =>
               openDrawer(
@@ -386,9 +397,9 @@ export function AddRecipeIngredientsControl({
             {missingCount > 0
               ? messages.addIngredients
               : messages.addAnotherBatch}
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
             className={`${styles.trigger} ${className ?? ''}`}
             disabled
             title={disabledReason ?? messages.testedBaseOnly}
@@ -396,7 +407,7 @@ export function AddRecipeIngredientsControl({
           >
             <ShoppingBag aria-hidden="true" size={17} />
             {messages.addIngredients}
-          </button>
+          </Button>
         )}
       </div>
 
@@ -526,14 +537,14 @@ export function AddRecipeIngredientsControl({
             ) : null}
           </div>
           <footer className={styles.footer}>
-            <button
+            <Button
               className={styles.submit}
               disabled={!complete}
               onClick={addIngredients}
               type="button"
             >
               {messages.addSelected(selectedCount)}
-            </button>
+            </Button>
           </footer>
         </DrawerContent>
       </Drawer>

@@ -34,12 +34,11 @@ void test('reviewed recipes are published, searchable and absent from drafts', (
       'crinkle-cookies',
       'banana-bread',
       'sponge-cake',
-      'easter-bread',
       'prune-cake',
       'gluten-free-napoleon',
       'fruit-sponge-roll',
       'eclairs',
-      'apple-charlotte',
+      'apple-fritters',
       'plum-cake',
       'banana-fritters',
     ]) {
@@ -58,6 +57,17 @@ void test('reviewed recipes are published, searchable and absent from drafts', (
   assert.equal(searchRecipes('uk', 'ліниві вареники')[0]?.id, 'lazy-dumplings');
   assert.equal(searchRecipes('uk', 'морквяний кекс')[0]?.id, 'carrot-cake');
   assert.equal(searchRecipes('uk', 'тріщинки')[0]?.id, 'crinkle-cookies');
+});
+
+void test('keeps Easter bread and apple charlotte in local drafts', () => {
+  for (const id of ['easter-bread', 'apple-charlotte']) {
+    assert(!getRecipeCatalog('uk').some((recipe) => recipe.id === id));
+    assert(
+      getRecipeCatalog('uk', 'unpublished').some((recipe) => recipe.id === id),
+    );
+    assert.equal(canReadRecipe(id, false), false);
+    assert.equal(canReadRecipe(id, true), true);
+  }
 });
 
 void test('published reusable creams stay linked-only instead of becoming catalogue cards', () => {

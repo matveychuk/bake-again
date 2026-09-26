@@ -51,16 +51,14 @@
 }
 .helpLink,
 .pageLink,
-.page a,
-.provenance a {
+.page a {
   color: var(--color-action-primary-strong);
   text-decoration: underline;
   text-underline-offset: var(--space-1);
 }
 .helpLink,
 .pageLink,
-.page a,
-.provenance a {
+.page a {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -70,13 +68,6 @@
 }
 .pageLink {
   margin-top: var(--space-4);
-}
-.provenance {
-  margin-top: var(--space-8);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border-subtle);
-  font-size: var(--font-size-body-small);
-  color: var(--color-text-secondary);
 }
 .drawer {
   width: min(100%, var(--layout-assistant-drawer));

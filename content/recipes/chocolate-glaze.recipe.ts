@@ -9,32 +9,50 @@ const copy = {
   uk: {
     title: 'Шоколадна глазур',
     names: ['Сметана або вершки', 'Цукор', 'Какао', 'Вершкове масло'],
-    evidence: 'Авторська поливка з рецепта торта з чорносливом.',
-    yield: '1 порція глазурі',
-    step: 'Приготуйте шоколадну глазур',
-    body: 'З’єднайте в невеликій каструльці сметану або вершки, цукор, какао й масло. Прогрівайте, помішуючи, до однорідності, не доводячи до кипіння.',
+    evidence: 'Цей універсальний рецепт глазурі успішно перевірено.',
+    yield: '120 г глазурі',
+    combineStep: 'З’єднайте інгредієнти в каструльці',
+    combineBody:
+      'У невеликій каструльці з’єднайте сметану або вершки, цукор, какао й масло.',
+    combineAlt: 'Сметана, цукор, какао й шматочки масла в невеликій каструльці',
+    warmStep: 'Прогрійте глазур',
+    warmBody:
+      'Прогрівайте на маленькому вогні, постійно помішуючи, до повної однорідності. Не доводьте до кипіння й не допускайте, щоб масло розшарувалося.',
+    warmAlt:
+      'Гладку шоколадну глазур помішують у каструльці на маленькому вогні',
     cue: 'Глазур гладка, без грудочок какао й нерозтопленого масла.',
-    note: 'Температуру нанесення й потрібну кількість визначає рецепт торта: гарячу поливку не наносять безпосередньо на ніжний крем.',
   },
   en: {
     title: 'Chocolate glaze',
     names: ['Sour cream or cream', 'Sugar', 'Cocoa', 'Butter'],
-    evidence: 'The author’s glaze from the prune cake recipe.',
-    yield: '1 batch of glaze',
-    step: 'Make the chocolate glaze',
-    body: 'Combine the sour cream or cream, sugar, cocoa and butter in a small saucepan. Warm gently, stirring until smooth. Do not bring to the boil.',
+    evidence: 'This versatile glaze recipe has been tested successfully.',
+    yield: '120 g glaze',
+    combineStep: 'Combine the ingredients in a saucepan',
+    combineBody:
+      'Combine the sour cream or cream, sugar, cocoa and butter in a small saucepan.',
+    combineAlt:
+      'Sour cream, sugar, cocoa and pieces of butter in a small saucepan',
+    warmStep: 'Warm the glaze',
+    warmBody:
+      'Warm over low heat, stirring constantly, until completely smooth. Do not let it boil or allow the butter to separate.',
+    warmAlt: 'Smooth chocolate glaze being stirred in a saucepan over low heat',
     cue: 'The glaze is smooth, without cocoa lumps or unmelted butter.',
-    note: 'Follow the cake recipe for the amount and application temperature: do not pour hot glaze directly onto a delicate cream filling.',
   },
   es: {
     title: 'Glaseado de chocolate',
     names: ['Nata agria o nata', 'Azúcar', 'Cacao', 'Mantequilla'],
-    evidence: 'El glaseado de la autora de su tarta de ciruelas pasas.',
-    yield: '1 porción de glaseado',
-    step: 'Prepara el glaseado de chocolate',
-    body: 'Pon la nata agria o nata, el azúcar, el cacao y la mantequilla en un cazo. Calienta suavemente, removiendo hasta que quede homogéneo. No dejes que hierva.',
+    evidence: 'Esta receta versátil de glaseado se ha probado con éxito.',
+    yield: '120 g de glaseado',
+    combineStep: 'Pon los ingredientes en un cazo',
+    combineBody:
+      'Pon la nata agria o nata, el azúcar, el cacao y la mantequilla en un cazo pequeño.',
+    combineAlt:
+      'Nata agria, azúcar, cacao y trozos de mantequilla en un cazo pequeño',
+    warmStep: 'Calienta el glaseado',
+    warmBody:
+      'Calienta a fuego bajo, removiendo constantemente, hasta que quede completamente homogéneo. No dejes que hierva ni que la mantequilla se separe.',
+    warmAlt: 'Glaseado de chocolate liso removido en un cazo a fuego bajo',
     cue: 'El glaseado está liso, sin grumos de cacao ni mantequilla sin fundir.',
-    note: 'La receta de la tarta indica la cantidad y la temperatura de aplicación: no viertas el glaseado caliente directamente sobre una crema delicada.',
   },
 } as const;
 
@@ -48,11 +66,16 @@ export function chocolateGlazeContent(
     completeness: 'readyToReview',
     difficulty: 'easy',
     evidence: { status: 'tested', explanation: t.evidence },
+    timing: {
+      activeMinutes: 10,
+      totalElapsedMinutes: null,
+      phases: [],
+    },
     yield: {
-      id: 'one-glaze-batch',
+      id: '120g-glaze',
       label: t.yield,
-      count: { kind: 'exact', value: 1 },
-      unit: 'batch',
+      count: { kind: 'exact', value: 120 },
+      unit: 'g',
     },
     ingredientSections: [
       {
@@ -90,12 +113,30 @@ export function chocolateGlazeContent(
     ],
     steps: [
       {
-        id: 'make-glaze',
-        title: t.step,
-        body: t.body,
-        checkpoint: t.cue,
-        tip: t.note,
+        id: 'combine-ingredients',
+        title: t.combineStep,
+        body: t.combineBody,
         cookIngredients: ids.map((ingredientId) => ({ ingredientId })),
+        media: [
+          {
+            id: 'chocolate-glaze-ingredients-v1',
+            src: '/media/recipes/chocolate-glaze/selected/step-01-ingredients-v1.webp',
+            alt: t.combineAlt,
+          },
+        ],
+      },
+      {
+        id: 'warm-until-smooth',
+        title: t.warmStep,
+        body: t.warmBody,
+        checkpoint: t.cue,
+        media: [
+          {
+            id: 'chocolate-glaze-warm-until-smooth-v1',
+            src: '/media/recipes/chocolate-glaze/selected/step-02-warm-until-smooth-v1.webp',
+            alt: t.warmAlt,
+          },
+        ],
       },
     ],
   };

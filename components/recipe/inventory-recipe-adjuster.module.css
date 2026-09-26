@@ -28,22 +28,6 @@
 .content > :nth-child(2) {
   margin-top: var(--space-4);
 }
-.unavailableAddAll {
-  min-height: 44px;
-  padding: var(--space-2) var(--space-4);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-control);
-  background: var(--color-background-panel-subtle);
-  color: var(--color-text-secondary);
-  cursor: not-allowed;
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-body-small);
-  font-weight: 750;
-}
 .controls {
   position: sticky;
   top: var(--space-6);
@@ -279,4 +263,11 @@
   .unavailableAddAll {
     width: 100%;
   }
+}
+
+.modeTabs,
+.modeTabs button,
+.scales button,
+.amountInput {
+  border-radius: var(--radius-control);
 }

@@ -1,9 +1,5 @@
 import type { AppLocale } from '@/lib/i18n/config';
-import {
-  softenButter,
-  softenButterSource,
-} from '@/content/techniques/soften-butter';
-import { EvidenceBadge } from '@/components/recipe/evidence-badge';
+import { softenButter } from '@/content/techniques/soften-butter';
 import { RecipeStepGuidance } from '@/components/recipe/recipe-step-guidance';
 import styles from './technique.module.css';
 
@@ -41,11 +37,6 @@ export function TechniqueGuide({
         <h2>{t.mistakeTitle}</h2>
         <p>{t.mistake}</p>
       </section>
-      <div className={styles.provenance}>
-        <EvidenceBadge status="suggested" locale={locale} />
-        <p>{t.provenance}</p>
-        <a href={softenButterSource}>{t.source}</a>
-      </div>
     </div>
   );
 }

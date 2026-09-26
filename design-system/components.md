@@ -4,14 +4,18 @@
 
 - `RecipeStepContent` accepts a canonical `technique` reference and locale. The existing
   tip treatment shows the help before the action; recipe planning surfaces each reference
-  once. Conditional butter alternatives keep their written qualification.
+  once through `RecipePlanItem`. Plan-ahead technique help uses the same clock and written
+  `Keep in mind` label as ordinary planning notes, without a nested tip background; the
+  guide link remains inline in the explanation. Conditional butter alternatives keep
+  their written qualification.
 - `TechniqueHelp` uses the shared Drawer, with the Cook tools' right-side treatment,
   a fixed title/Close header and a scrolling body. At 900px and below it fills the viewport.
 - The trigger is a real link: ordinary click/Enter opens the drawer, modified clicks and
   JavaScript-free navigation reach the standalone localized page. Closing returns focus
   to the exact link. No recipe configuration, timer or cooking progress is changed.
-- `TechniqueGuide` shares the process, readiness cue and evidence between page and drawer.
-  Source-based untested techniques use Suggested with its icon and explicit scope.
+- `TechniqueGuide` shares the process and readiness cue between page and drawer.
+  Practical technique guidance is unbadged and makes no Tested, Calculated or Suggested
+  claim; recipe and adaptation evidence remains separate.
 - `/design-system#technique-help` demonstrates Ukrainian, English and Spanish copy.
   Use existing semantic tokens; no new palette or typography is introduced.
 
@@ -34,11 +38,28 @@
 
 ## Button
 
-- Primary: terracotta fill, warm-white text. One primary action per local task area.
-- Secondary: transparent or warm-white surface, chocolate border and text.
-- Text link: chocolate text with a restrained underline or arrow.
-- Minimum touch target: 44×44px.
-- Required states: default, hover, focus-visible, disabled and busy when applicable.
+- Use `components/ui/button.tsx` for standard action buttons and button-shaped links.
+  Its CSS module owns geometry, type, colours and states; local CSS adds layout only.
+  Pass `href` for a native link; omit it for a native button. Navigation must retain
+  link semantics, modified clicks and operation without JavaScript.
+- Default: terracotta fill and warm-white text for all primary actions, including
+  search, shopping, confirmations and Cook entry/next/finish/restart. Use the same
+  colour regardless of button width; chocolate is reserved for editorial surfaces
+  and text, rather than a separate primary-button category.
+- Outline: warm-white surface, subtle border and chocolate text for secondary actions.
+  Ghost and link variants serve quieter controls; a section jump remains a text link.
+- All variants share a 4px `radius-control`, 14px body type, 700 weight, 8px icon gap,
+  8px/16px padding and a minimum 44×44px target. Height grows with translated text;
+  never force nowrap. The large Cook navigation variant uses 48px minimum height.
+- Preserve visible focus, hover and disabled states. Use the same shape for icon-only
+  actions; Save remains its documented round toggle, not a standard action button.
+- Search, shopping entry/confirmation, Cook entry/navigation/timer/restart, cream change,
+  bake-memory repeat, empty-collection actions and assistant action review use the shared component. Specialized
+  quantity controls keep their pressed states and use the same radius token.
+- The dark homepage Napoleon feature is an editorial recipe link card: retain its
+  display title, emphasis colour tokens and square surface. It is not a standard
+  action button. Large recipe panels, photography and drawers also remain square.
+- The Design Lab Actions and recipe-reading examples render these production controls.
 
 ## Search field
 
@@ -232,8 +253,22 @@ variation.
 
 ## Cook Mode entry
 
-- The recipe page includes an explicit `Open Cook Mode` action before the ingredient list
-  and beside the method when a method exists.
+- `RecipeRelatedLink` keeps related-recipe and reusable-component URLs canonical while
+  recording a short-lived, same-tab return marker. `RecipeBackLink` consumes that marker,
+  or a same-site recipe referrer, and then uses native history to return to the exact
+  recipe. It otherwise remains an ordinary localized catalogue link, including without
+  JavaScript. Never encode a parent recipe in the shareable URL.
+- The recipe hero uses `RecipeSectionNavigation`: left-aligned native links labelled
+  “Jump to ingredients” and “Jump to steps”, with decorative down arrows. These scroll
+  to sections on the same page; do not style them as tabs or hide either section.
+  Keep 44px targets, visible focus, wrapping translations and focusable destinations.
+- `RecipeCookEntry` places one primary “Cook step by step” action beside the written
+  method, with a short explanation of the separate, one-step-at-a-time view. On narrow
+  screens it stacks below the method heading. Do not repeat the launch in the hero.
+- Preserve the exact configuration and selected cream in the Cook URL. When cream
+  selection is required, keep the existing “Choose cream first” entry instead.
+- `/design-system#recipe-reading-actions` demonstrates the production back control,
+  section navigation and cooking entry in Ukrainian, English and Spanish.
 - A recipe with source-supported steps opens the shared step-by-step Cook Mode.
 - The shared Cook Mode adapter preserves the active locale, ordered step media and
   localized image descriptions from the canonical recipe source. Route components must
@@ -284,6 +319,9 @@ variation.
 - Use `full` for recipe/drawer lists and `compact` inside a Cook step. Interactive shopping
   selection remains in the shared drawer and composes its own controls around canonical
   ingredient data.
+- Dividers separate rows only. Never draw a line below the last row, including a
+  single-item list; the surrounding Cook panel already provides its own bottom border.
+  The Design Lab Cook tools example includes the production compact panel and full drawer.
 - Route-specific ingredient needs use the shared item props: `notes` for multiple source
   qualifications and `after` for a related control such as the flour assistant. Do not
   recreate the amount/name grid around those differences.
@@ -299,7 +337,12 @@ variation.
 - Source and detailed recipes may opt into `presentation: 'concise'` after editorial review.
   This affects presentation only; publication and exact-version evidence stay separate.
 - An author-confirmed Tested recipe in this layout omits working-record labels and
-  editorial publication notes. Keep its written evidence badge, scope and image origin.
+  editorial publication notes. Keep its written evidence badge. A tested base may use
+  an empty evidence explanation for a badge-only overview; calculated/suggested
+  configurations retain their scope explanation. The plum example in the Design Lab
+  demonstrates this compact treatment and optional ingredients in parentheses.
+  `showImageNote: false` suppresses the hero overlay when explicitly requested by the
+  editor; image-origin metadata and the media record remain intact.
 - A published recipe without recorded bake-test evidence does not inherit Tested and
   does not retain the contradictory “not ready to publish” working-record message.
 - Published detailed recipes also omit draft-only editorial notes; their visible Tested,
@@ -424,7 +467,9 @@ remains in the footer.
   muted initial playback, metadata preload, no autoplay and contain fitting in the same
   4:3 frame. Include a descriptive accessible label and visible author-video caption.
   `/design-system#step-photography` demonstrates the production video variant.
-- AI-edited author photographs retain an explicit background/plate editing label;
+- AI-edited author photographs normally retain a background/plate editing label;
+  the explicit `showImageNote` editorial option may suppress the overlay without
+  reclassifying the image as an unedited photograph.
   fully generated examples remain labelled as generated, including instructional cuts.
 
 ## Analytics behavior

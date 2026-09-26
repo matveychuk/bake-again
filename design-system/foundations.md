@@ -14,6 +14,8 @@ The core palette is light and restrained. Terracotta is an accent, not a page-si
 | Text / secondary | `#735D54` | Supporting copy and metadata |
 | Action / primary | `#A64F36` | Main CTA, brand punctuation and selected emphasis |
 | Action / strong | `#853C29` | Hover, focus and Tested status text |
+| Action / emphasis | `#392721` | Editorial recipe feature surface; not standard buttons |
+| Action / emphasis hover | `#735D54` | Editorial feature interaction accent |
 | Focus ring | `Action / strong` | Shared visible keyboard focus outline |
 
 Avoid adding green to signal gluten-free. Gluten-free is communicated through words and
@@ -64,8 +66,10 @@ Prefer whitespace over decorative dividers. Use 24–32px between related blocks
 ## Shape
 
 - Product surfaces are mostly square.
-- Small functional labels use a 4px radius.
+- Buttons, fields, segmented controls and small functional labels use the same 4px
+  `radius-control`. Standard action buttons share one component and grow with text.
 - Save controls and proof marks may be circular.
+- Large content panels, recipe photography and full-height drawers stay square.
 - Avoid stacks of rounded cards and large pill-shaped controls.
 
 ## Layout
