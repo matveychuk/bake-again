@@ -248,6 +248,16 @@ export default function DesignSystemPage() {
               terracotta marks action and proof. Large areas of saturated colour
               are exceptional.
             </p>
+            <figure className={styles.sharingPreview}>
+              {/* oxlint-disable-next-line next/no-img-element -- Display the exact generated sharing asset. */}
+              <img
+                src="/social/bake-again-share-v1.webp"
+                width="600"
+                height="315"
+                alt="Bake Again link preview with a layered Napoleon cake"
+              />
+              <figcaption>Homepage link preview · food leads, brand stays quiet.</figcaption>
+            </figure>
           </section>
 
           <section className={styles.section} id="type">

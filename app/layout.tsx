@@ -28,6 +28,24 @@ export const metadata: Metadata = {
   title: 'Bake Again — Перевірена безглютенова випічка',
   description:
     'Безглютенові рецепти з точними кількостями, покроковими інструкціями та зрозумілим статусом перевірки.',
+  openGraph: {
+    type: 'website',
+    title: 'Bake Again — Перевірена безглютенова випічка',
+    description:
+      'Невелика колекція ретельно перевірених безглютенових рецептів.',
+    siteName: 'Bake Again',
+    images: [{
+      url: '/social/bake-again-share-v1.webp',
+      width: 1200,
+      height: 630,
+      type: 'image/webp',
+      alt: 'Наполеон із видимими тонкими коржами поруч із назвою Bake Again',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/social/bake-again-share-v1.webp'],
+  },
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' }],
     shortcut: '/favicon.svg',

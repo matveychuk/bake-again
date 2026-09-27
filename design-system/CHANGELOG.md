@@ -1,5 +1,13 @@
 # Design system changelog
 
+## 2026-09-27 · Shared link preview
+
+- Added a food-led 1200 × 630 sharing card based on the existing Napoleon photograph
+  and semantic brand colours.
+- Added localized Open Graph image descriptions and a large sharing image to public
+  page metadata while retaining recipe-specific photographs.
+- Added the production preview to the Design Lab colour section.
+
 ## 2026-09-27 · Repository cleanup
 
 - Removed unused starter UI components, the detached palette-review switcher and

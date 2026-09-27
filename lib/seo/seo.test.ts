@@ -12,7 +12,7 @@ import {
   recipeStructuredData,
   serializeJsonLd,
 } from './recipes.ts';
-import { recipeMetadata } from './metadata.ts';
+import { pageMetadata, recipeMetadata } from './metadata.ts';
 import { sitemapEntries, sitemapXml } from './sitemap.ts';
 
 void test('published translations have unique canonical URLs, reciprocal alternatives and complete SEO copy', () => {
@@ -42,6 +42,36 @@ void test('published translations have unique canonical URLs, reciprocal alterna
       assert.equal(Object.keys(metadata.alternates!.languages!).length, 3);
     }
   assert.equal(urls.size, 66);
+});
+
+void test('localized public pages expose a sharing image while recipes keep their own photo', () => {
+  for (const locale of supportedLocales) {
+    const metadata = pageMetadata({
+      title: 'Bake Again',
+      description: 'Baking recipes',
+      path: `/${locale}`,
+      locale,
+    });
+    const images = metadata.openGraph?.images;
+    assert.ok(Array.isArray(images));
+    const image = images[0];
+    assert.equal(typeof image, 'object');
+    if (typeof image === 'string' || image instanceof URL)
+      throw new Error('Expected image metadata');
+    assert.equal(image.url, 'https://bakeagain.com/social/bake-again-share-v1.webp');
+    assert.equal(image.width, 1200);
+    assert.equal(image.height, 630);
+    assert.equal((metadata.twitter as { card?: string })?.card, 'summary_large_image');
+  }
+
+  const recipe = recipeMetadata('gluten-free-napoleon', 'uk');
+  const recipeImages = recipe.openGraph?.images;
+  assert.ok(Array.isArray(recipeImages));
+  const recipeImage = recipeImages[0];
+  assert.equal(typeof recipeImage, 'object');
+  if (typeof recipeImage === 'string' || recipeImage instanceof URL)
+    throw new Error('Expected recipe image metadata');
+  assert.notEqual(recipeImage.url, 'https://bakeagain.com/social/bake-again-share-v1.webp');
 });
 
 void test('sitemap contains only published canonical pages and reciprocal language links', () => {
