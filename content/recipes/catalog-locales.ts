@@ -414,9 +414,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Ніжні вафлі з натуральним йогуртом.',
     },
     alt: previewAlt(
-      'Golden gluten-free curd cheese waffles with berries on a pale green plate',
-      'Gofres dorados sin gluten de tvorog con frutos rojos en un plato verde claro',
-      'Золотисті безглютенові сирні вафлі з ягодами на світло-зеленій тарілці',
+      'Golden gluten-free curd cheese waffles with berries on an ivory ceramic plate',
+      'Gofres dorados sin gluten de tvorog con frutos rojos en un plato de cerámica marfil',
+      'Золотисті безглютенові сирні вафлі з ягодами на світлій керамічній тарілці',
     ),
   },
   'carrot-cake': {

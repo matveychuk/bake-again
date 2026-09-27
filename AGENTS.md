@@ -54,3 +54,24 @@ they are not separate statuses.
 2. Update the matching Design Lab example and documentation.
 3. Verify responsive behaviour and accessibility.
 4. Record meaningful system changes in `design-system/CHANGELOG.md`.
+
+## Instagram continuity
+
+- Before any Instagram strategy, account setup, post, Reel, Story or advertising task,
+  read [the Instagram working document](docs/strategy/instagram.uk.md), its publication
+  register and the relevant linked post records. Use these files across chats.
+- Distinguish user-approved decisions, proposals and verified completed actions.
+  Do not turn an earlier assistant recommendation into an approved decision.
+- After meaningful Instagram work, update the working document's current state,
+  next action and dated activity log. Keep the publication register and affected post
+  records current; preserve published copy and append later corrections/results.
+- Use [the post record template](docs/instagram/post-template.uk.md) for concrete
+  content drafts. Record recipe identity/version, copy, media paths, language, CTA,
+  actual destination URL and any known previous related posts before creating more.
+- A draft is not a publication. Record publication only after a verified platform
+  result or the user's confirmation, with its permalink when available. Account
+  creation, publishing, scheduling and ad spending require authorization in the
+  current task or existing conversation; this documentation is not that authorization.
+- Keep passwords, recovery codes, access tokens and private audience data out of
+  these documents. Recipe facts and adaptation evidence come from canonical recipe
+  files; source media and social exports stay outside `public/`.

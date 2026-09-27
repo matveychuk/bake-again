@@ -11,6 +11,12 @@
 - Historical audits, creative working files and unused media are no longer repository
   inputs. Analytics event contracts remain in `lib/analytics/umami.ts` and its tests.
 
+## 2026-09-27 · Bake Again browser icon
+
+- Replaced the blue template favicon with a compact `B.` mark based on the wordmark
+  and existing semantic colours; linked it explicitly in site metadata.
+- Added the production icon to the Design Lab and documented its small-size use.
+
 ## 2026-09-27 · Pre-publication configuration recovery
 
 - Shared the existing unavailable Cook treatment with a recipe-detail variant and explicit base-recipe recovery for unsupported parameters and geometry.

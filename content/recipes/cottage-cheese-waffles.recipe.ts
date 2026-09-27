@@ -37,7 +37,7 @@ const stepCopy = {
         'Berry-speckled waffle batter being spooned into a heated waffle maker',
       baked: 'Two golden berry cottage-cheese waffles in an open waffle maker',
       served:
-        'Golden berry cottage-cheese waffles stacked on a pale green plate',
+        'Golden berry cottage-cheese waffles on an ivory ceramic plate',
     },
   },
   uk: {
@@ -66,7 +66,7 @@ const stepCopy = {
       filling:
         'Тісто для вафель з ягодами викладають ложкою в розігріту вафельницю',
       baked: 'Дві золотисті сирні вафлі з ягодами у відкритій вафельниці',
-      served: 'Золотисті сирні вафлі з ягодами на світло-зеленій тарілці',
+      served: 'Золотисті сирні вафлі з ягодами на світлій керамічній тарілці',
     },
   },
   es: {
@@ -98,7 +98,7 @@ const stepCopy = {
       baked:
         'Dos gofres dorados de tvorog con frutos rojos en una gofrera abierta',
       served:
-        'Gofres dorados de tvorog con frutos rojos en un plato verde claro',
+        'Gofres dorados de tvorog con frutos rojos en un plato de cerámica marfil',
     },
   },
 } as const;
@@ -190,7 +190,7 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
         ),
         {
           id: 'served-waffles',
-          src: '/images/recipes/cottage-cheese-waffles-linen-v2.webp',
+          src: '/images/recipes/cottage-cheese-waffles-linen-ivory-plate-v3.webp',
           alt: copy.alts.served,
         },
       ],

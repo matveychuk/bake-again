@@ -80,7 +80,7 @@ void test('uses the edited real waffle photo across catalogue locales', () => {
     assert.equal(waffles?.imageKind, 'edited-author-photo');
     assert.equal(
       waffles?.image,
-      '/images/recipes/cottage-cheese-waffles-linen-v2.webp',
+      '/images/recipes/cottage-cheese-waffles-linen-ivory-plate-v3.webp',
     );
     assert.match(waffles?.alt ?? '', /berries|frutos rojos|ягодами/);
   }

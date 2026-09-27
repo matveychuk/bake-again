@@ -319,10 +319,10 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/cottage-cheese-waffles-linen-v2.webp',
+    image: '/images/recipes/cottage-cheese-waffles-linen-ivory-plate-v3.webp',
     imageKind: 'edited-author-photo',
     imageAlt:
-      'Golden gluten-free cottage-cheese waffles with berries on a pale green plate',
+      'Golden gluten-free cottage-cheese waffles with berries on an ivory ceramic plate',
     summary:
       'Tender breakfast waffles made with cottage cheese and natural yogurt.',
     source: 'Handwritten notebook page, IMG_1276.jpeg',
