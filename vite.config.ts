@@ -15,6 +15,10 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === 'seatbelt';
 const localBindingConfig = {
   main: 'vinext/server/fetch-handler',
   compatibility_flags: ['nodejs_compat'],
+  assets: {
+    binding: 'ASSETS',
+    run_worker_first: ['/social/bake-again-share-v3.webp'],
+  },
   d1_databases: d1
     ? [
         {
