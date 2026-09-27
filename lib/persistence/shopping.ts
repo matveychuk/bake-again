@@ -1,4 +1,5 @@
 import type { Quantity, Unit } from '../../content/recipes/recipe.types.ts';
+import { recoverShoppingSweetener } from './shopping-migrations.ts';
 import {
   readStorageValue,
   subscribeToStorageKey,
@@ -158,7 +159,11 @@ export function parseShopping(rawValue: string | null): ShoppingV1 | null {
     )
       return null;
     const items = candidate.items.filter(isItem).slice(0, 1000);
-    return { schemaVersion: 2, updatedAt: candidate.updatedAt, items };
+    return {
+      schemaVersion: 2,
+      updatedAt: candidate.updatedAt,
+      items: recoverShoppingSweetener(items),
+    };
   } catch {
     return null;
   }

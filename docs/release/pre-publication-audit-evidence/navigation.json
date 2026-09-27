@@ -1,0 +1,966 @@
+[
+  {
+    "locale": "uk",
+    "width": 390,
+    "js": true,
+    "kind": "blocked-body",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 390,
+    "js": true,
+    "kind": "blocked-header",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 390,
+    "js": true,
+    "kind": "normal-exit",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon/cook?mode=scale&scale=2",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 390,
+    "js": false,
+    "kind": "blocked-body",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "uk",
+    "width": 390,
+    "js": false,
+    "kind": "blocked-header",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "uk",
+    "width": 390,
+    "js": false,
+    "kind": "normal-exit",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "uk",
+    "width": 900,
+    "js": true,
+    "kind": "blocked-body",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 900,
+    "js": true,
+    "kind": "blocked-header",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 900,
+    "js": true,
+    "kind": "normal-exit",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon/cook?mode=scale&scale=2",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 900,
+    "js": false,
+    "kind": "blocked-body",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "uk",
+    "width": 900,
+    "js": false,
+    "kind": "blocked-header",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "uk",
+    "width": 900,
+    "js": false,
+    "kind": "normal-exit",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "js": true,
+    "kind": "blocked-body",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "js": true,
+    "kind": "blocked-header",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "js": true,
+    "kind": "normal-exit",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon/cook?mode=scale&scale=2",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "js": false,
+    "kind": "blocked-body",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "js": false,
+    "kind": "blocked-header",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "js": false,
+    "kind": "normal-exit",
+    "href": "/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2",
+    "url": "http://localhost:3013/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "js": true,
+    "kind": "blocked-body",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "js": true,
+    "kind": "blocked-header",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "js": true,
+    "kind": "normal-exit",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=scale&scale=2",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake/cook?mode=scale&scale=2",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "js": false,
+    "kind": "blocked-body",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "js": false,
+    "kind": "blocked-header",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "js": false,
+    "kind": "normal-exit",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=scale&scale=2",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake?mode=scale&scale=2",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "en",
+    "width": 900,
+    "js": true,
+    "kind": "blocked-body",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 900,
+    "js": true,
+    "kind": "blocked-header",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 900,
+    "js": true,
+    "kind": "normal-exit",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=scale&scale=2",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake/cook?mode=scale&scale=2",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 900,
+    "js": false,
+    "kind": "blocked-body",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "en",
+    "width": 900,
+    "js": false,
+    "kind": "blocked-header",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "en",
+    "width": 900,
+    "js": false,
+    "kind": "normal-exit",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=scale&scale=2",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake?mode=scale&scale=2",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "js": true,
+    "kind": "blocked-body",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "js": true,
+    "kind": "blocked-header",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "js": true,
+    "kind": "normal-exit",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=scale&scale=2",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake/cook?mode=scale&scale=2",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "js": false,
+    "kind": "blocked-body",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "js": false,
+    "kind": "blocked-header",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "js": false,
+    "kind": "normal-exit",
+    "href": "/en/recipes/gluten-free-napoleon-cake?mode=scale&scale=2",
+    "url": "http://localhost:3013/en/recipes/gluten-free-napoleon-cake?mode=scale&scale=2",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "js": true,
+    "kind": "blocked-body",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "js": true,
+    "kind": "blocked-header",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "js": true,
+    "kind": "normal-exit",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=scale&scale=2",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten/cook?mode=scale&scale=2",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "js": false,
+    "kind": "blocked-body",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "js": false,
+    "kind": "blocked-header",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "js": false,
+    "kind": "normal-exit",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=scale&scale=2",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten?mode=scale&scale=2",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "es",
+    "width": 900,
+    "js": true,
+    "kind": "blocked-body",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 900,
+    "js": true,
+    "kind": "blocked-header",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 900,
+    "js": true,
+    "kind": "normal-exit",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=scale&scale=2",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten/cook?mode=scale&scale=2",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 900,
+    "js": false,
+    "kind": "blocked-body",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "es",
+    "width": 900,
+    "js": false,
+    "kind": "blocked-header",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "es",
+    "width": 900,
+    "js": false,
+    "kind": "normal-exit",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=scale&scale=2",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten?mode=scale&scale=2",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "js": true,
+    "kind": "blocked-body",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "js": true,
+    "kind": "blocked-header",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      },
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "js": true,
+    "kind": "normal-exit",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=scale&scale=2",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten/cook?mode=scale&scale=2",
+    "navigated": false,
+    "errors": [
+      {
+        "message": "e is not a function",
+        "stack": "TypeError: e is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14615\n    at e.startTransition (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:1:6185)\n    at U (http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:14594)\n    at yd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:125860)\n    at http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:130853\n    at _n (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:15080)\n    at wd (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:8:127087)\n    at up (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28432)\n    at cp (http://localhost:3013/_next/static/chunks/framework-D_rUT4EX.js:9:28254)"
+      }
+    ],
+    "consoleErrors": [
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131",
+      "[vinext] RSC prefetch setup error: TypeError: p is not a function\n    at http://localhost:3013/_next/static/chunks/cook-mode-page-8QOxESSp.js:2:7131"
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "js": false,
+    "kind": "blocked-body",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "js": false,
+    "kind": "blocked-header",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "js": false,
+    "kind": "normal-exit",
+    "href": "/es/recipes/tarta-napoleon-sin-gluten?mode=scale&scale=2",
+    "url": "http://localhost:3013/es/recipes/tarta-napoleon-sin-gluten?mode=scale&scale=2",
+    "navigated": true,
+    "errors": [],
+    "consoleErrors": []
+  }
+]

@@ -1,0 +1,31 @@
+[
+  {
+    locale: 'uk',
+    cookHref: '/uk/recipes/bezghliutenovyi-napoleon/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g',
+    note: 'Audit note, isolated profile',
+    languages: [
+      'http://localhost:3014/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=225&unit=g#ingredients',
+      'http://localhost:3014/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=225&unit=g#ingredients',
+      'http://localhost:3014/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=225&unit=g#ingredients'
+    ]
+  },
+  {
+    locale: 'en',
+    cookHref: '/en/recipes/gluten-free-napoleon-cake/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g',
+    note: 'Audit note, isolated profile',
+    languages: [
+      'http://localhost:3014/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=225&unit=g#ingredients',
+      'http://localhost:3014/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=225&unit=g#ingredients'
+    ]
+  },
+  {
+    locale: 'es',
+    cookHref: '/es/recipes/tarta-napoleon-sin-gluten/cook?mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g',
+    note: 'Audit note, isolated profile',
+    languages: [
+      'http://localhost:3014/en/recipes/gluten-free-napoleon-cake?mode=ingredient&ingredient=schar-mix-b&amount=225&unit=g#ingredients',
+      'http://localhost:3014/es/recipes/tarta-napoleon-sin-gluten?mode=ingredient&ingredient=schar-mix-b&amount=225&unit=g#ingredients',
+      'http://localhost:3014/uk/recipes/bezghliutenovyi-napoleon?mode=ingredient&ingredient=schar-mix-b&amount=225&unit=g#ingredients'
+    ]
+  }
+]

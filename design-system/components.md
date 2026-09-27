@@ -512,3 +512,19 @@ examples retain these handlers, but analytics never loads on the Design Lab rout
   must not introduce a transient base version or a different status.
 - `/design-system#scaling-consistency` demonstrates the 2× method, preparation note and
   blocked Cook explanation in UK/EN/ES with existing components and semantic tokens.
+
+## Pre-publication configuration recovery
+
+- `RecipeConfigurationUnavailable` reuses Cook Mode's unavailable styling. Its `detail`
+  variant displays a localized heading, reason and explicit base-recipe link. Unsupported
+  geometry or scale must not render base quantities, a Tested badge or Recipe JSON-LD.
+- Recovery and Cook navigation use native anchors, preserving query parameters and
+  working with or without JavaScript. A base reset removes configuration parameters
+  only after the reader chooses it.
+- Napoleon custard egg mentions use structured quantities; assembly specifies six layers
+  per cake, while the configured yield states the cake count. Time and temperature stay fixed.
+- Apple-fritter sugar has a shopping base in tablespoons. Known older unquantified saved
+  entries recover that amount from their exact version and configuration, preserving
+  sources, additional batches and checked state. Unknown sources remain intact.
+- `/design-system#scaling-consistency` includes these quantities and the detail recovery
+  variant in UK/EN/ES at 2×.

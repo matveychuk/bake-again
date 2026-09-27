@@ -1,0 +1,313 @@
+[
+  {
+    "kind": "saved-legacy-ids",
+    "locale": "uk",
+    "links": [
+      {
+        "text": "Перейти до вмісту",
+        "href": "#saved-title"
+      },
+      {
+        "text": "Bake Again.",
+        "href": "/uk"
+      },
+      {
+        "text": "Рецепти",
+        "href": "/uk"
+      },
+      {
+        "text": "Збережені",
+        "href": "/uk/saved"
+      },
+      {
+        "text": "Список покупок",
+        "href": "/uk/shopping-list"
+      },
+      {
+        "text": "Про нас",
+        "href": "/uk/about"
+      },
+      {
+        "text": "",
+        "href": "/uk/recipes/bezghliutenovi-mlyntsi"
+      },
+      {
+        "text": "Млинці",
+        "href": "/uk/recipes/bezghliutenovi-mlyntsi"
+      },
+      {
+        "text": "",
+        "href": "/uk/recipes/bezghliutenovyi-slyvovyi-pyrih"
+      },
+      {
+        "text": "Сливовий пиріг",
+        "href": "/uk/recipes/bezghliutenovyi-slyvovyi-pyrih"
+      },
+      {
+        "text": "",
+        "href": "/uk/recipes/bezghliutenovyi-napoleon"
+      },
+      {
+        "text": "Наполеон",
+        "href": "/uk/recipes/bezghliutenovyi-napoleon"
+      },
+      {
+        "text": "Bake Again.",
+        "href": "/uk"
+      },
+      {
+        "text": "Про нас",
+        "href": "/uk/about"
+      },
+      {
+        "text": "Приватність і ваші збереження",
+        "href": "/uk/privacy"
+      }
+    ],
+    "text": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nХОЧУ ПРИГОТУВАТИ\n\nЗбережені рецепти\nМлинці\nЗагальний час: 1 год\nСкладність: Середня\nСливовий пиріг\nЗагальний час: 1 год\nСкладність: Середня\nНаполеон\nАктивний час: 1 год\nСкладність: Складна\nBake Again\n.\nПро нас\nПриватність і ваші збереження"
+  },
+  {
+    "kind": "saved-legacy-ids",
+    "locale": "en",
+    "links": [
+      {
+        "text": "Skip to content",
+        "href": "#saved-title"
+      },
+      {
+        "text": "Bake Again.",
+        "href": "/en"
+      },
+      {
+        "text": "Recipes",
+        "href": "/en"
+      },
+      {
+        "text": "Saved",
+        "href": "/en/saved"
+      },
+      {
+        "text": "Shopping list",
+        "href": "/en/shopping-list"
+      },
+      {
+        "text": "About",
+        "href": "/en/about"
+      },
+      {
+        "text": "",
+        "href": "/en/recipes/gluten-free-crepes"
+      },
+      {
+        "text": "Thin breakfast crepes",
+        "href": "/en/recipes/gluten-free-crepes"
+      },
+      {
+        "text": "",
+        "href": "/en/recipes/gluten-free-plum-cake"
+      },
+      {
+        "text": "Plum sponge cake",
+        "href": "/en/recipes/gluten-free-plum-cake"
+      },
+      {
+        "text": "",
+        "href": "/en/recipes/gluten-free-napoleon-cake"
+      },
+      {
+        "text": "Napoleon Cake",
+        "href": "/en/recipes/gluten-free-napoleon-cake"
+      },
+      {
+        "text": "Bake Again.",
+        "href": "/en"
+      },
+      {
+        "text": "About",
+        "href": "/en/about"
+      },
+      {
+        "text": "Privacy and your saved items",
+        "href": "/en/privacy"
+      }
+    ],
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nWANT TO BAKE\n\nSaved recipes\nThin breakfast crepes\nTotal time: 1 hour\nDifficulty: Medium\nPlum sponge cake\nTotal time: 1 hour\nDifficulty: Medium\nNapoleon Cake\nActive time: 1 hour\nDifficulty: Advanced\nBake Again\n.\nAbout\nPrivacy and your saved items"
+  },
+  {
+    "kind": "saved-legacy-ids",
+    "locale": "es",
+    "links": [
+      {
+        "text": "Saltar al contenido",
+        "href": "#saved-title"
+      },
+      {
+        "text": "Bake Again.",
+        "href": "/es"
+      },
+      {
+        "text": "Recetas",
+        "href": "/es"
+      },
+      {
+        "text": "Guardadas",
+        "href": "/es/saved"
+      },
+      {
+        "text": "Lista de compra",
+        "href": "/es/shopping-list"
+      },
+      {
+        "text": "Nosotros",
+        "href": "/es/about"
+      },
+      {
+        "text": "",
+        "href": "/es/recipes/crepes-sin-gluten"
+      },
+      {
+        "text": "Crepes finos para el desayuno",
+        "href": "/es/recipes/crepes-sin-gluten"
+      },
+      {
+        "text": "",
+        "href": "/es/recipes/bizcocho-de-ciruelas-sin-gluten"
+      },
+      {
+        "text": "Bizcocho de ciruelas",
+        "href": "/es/recipes/bizcocho-de-ciruelas-sin-gluten"
+      },
+      {
+        "text": "",
+        "href": "/es/recipes/tarta-napoleon-sin-gluten"
+      },
+      {
+        "text": "Tarta Napoleón",
+        "href": "/es/recipes/tarta-napoleon-sin-gluten"
+      },
+      {
+        "text": "Bake Again.",
+        "href": "/es"
+      },
+      {
+        "text": "Nosotros",
+        "href": "/es/about"
+      },
+      {
+        "text": "Privacidad y tus datos guardados",
+        "href": "/es/privacy"
+      }
+    ],
+    "text": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nQUIERO PREPARAR\n\nRecetas guardadas\nCrepes finos para el desayuno\nTiempo total: 1 h\nDificultad: Media\nBizcocho de ciruelas\nTiempo total: 1 h\nDificultad: Media\nTarta Napoleón\nTiempo activo: 1 h\nDificultad: Avanzada\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados"
+  },
+  {
+    "kind": "namespaced-shopping",
+    "locale": "uk",
+    "text": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (0)\nОчистити все\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\nЗ рецепта «Профітролі»\n220 г\nцукрова пудра\nЗ рецепта «Профітролі»\n4,71 г\nсіль\nЗ рецепта «Профітролі»\nЗа потреби\nвершкове масло\nОхолоджене й нарізане кубиками.\nЗ рецепта «Профітролі»\n140 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\nЗ рецепта «Профітролі»\n8 шт.\nНезбиране молоко\nЗ рецепта «Профітролі»\n1 140 мл\nЦукор\nЗ рецепта «Профітролі»\n260 г\nКукурудзяний крохмаль\nЗ рецепта «Профітролі»\n56 г\nСіль\nЗ рецепта «Профітролі»\nЗа потреби\nЯєчні жовтки\nЗ рецепта «Профітролі»\n12 шт.\nВанільний екстракт\nЗ рецепта «Профітролі»\nЗа потреби\nНесолоне вершкове масло\nХолодне, нарізане невеликими кубиками.\nЗ рецепта «Профітролі»\n220 г\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "storage": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-milk:ml\",\"ingredientId\":\"cream-vanilla-egg-custard-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":1140,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-milk\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-milk\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-sugar:g\",\"ingredientId\":\"cream-vanilla-egg-custard-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":260,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-sugar\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-corn-starch:g\",\"ingredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"quantity\":{\"kind\":\"exact\",\"value\":56,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-corn-starch\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-salt:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-salt\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-egg-yolks:piece\",\"ingredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"quantity\":{\"kind\":\"exact\",\"value\":12,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-egg-yolks\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-vanilla:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-vanilla\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-vanilla\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-vanilla\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-butter:g\",\"ingredientId\":\"cream-vanilla-egg-custard-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-butter\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-butter\",\"configurationKey\":\"scale:2\"}]}]}"
+  },
+  {
+    "kind": "namespaced-shopping",
+    "locale": "en",
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\nFor Profiteroles\n220 g\nicing sugar\nFor Profiteroles\n4.71 g\nsalt\nFor Profiteroles\nAs needed\nbutter\nChilled and cut into cubes.\nFor Profiteroles\n140 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\nFor Profiteroles\n8 pcs\nWhole milk\nFor Profiteroles\n1,140 ml\nSugar\nFor Profiteroles\n260 g\nCorn starch\nFor Profiteroles\n56 g\nSalt\nFor Profiteroles\nAs needed\nEgg yolks\nFor Profiteroles\n12 pcs\nVanilla extract\nFor Profiteroles\nAs needed\nUnsalted butter\nCold, cut into small cubes.\nFor Profiteroles\n220 g\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "storage": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-milk:ml\",\"ingredientId\":\"cream-vanilla-egg-custard-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":1140,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-milk\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-milk\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-sugar:g\",\"ingredientId\":\"cream-vanilla-egg-custard-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":260,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-sugar\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-corn-starch:g\",\"ingredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"quantity\":{\"kind\":\"exact\",\"value\":56,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-corn-starch\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-salt:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-salt\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-egg-yolks:piece\",\"ingredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"quantity\":{\"kind\":\"exact\",\"value\":12,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-egg-yolks\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-vanilla:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-vanilla\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-vanilla\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-vanilla\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-butter:g\",\"ingredientId\":\"cream-vanilla-egg-custard-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-butter\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-butter\",\"configurationKey\":\"scale:2\"}]}]}"
+  },
+  {
+    "kind": "namespaced-shopping",
+    "locale": "es",
+    "text": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (0)\nVaciar todo\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\nPara Profiteroles\n220 g\nazúcar glas\nPara Profiteroles\n4,71 g\nsal\nPara Profiteroles\nSegún sea necesario\nmantequilla\nFría y cortada en dados.\nPara Profiteroles\n140 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\nPara Profiteroles\n8 uds.\nLeche entera\nPara Profiteroles\n1140 ml\nAzúcar\nPara Profiteroles\n260 g\nAlmidón de maíz\nPara Profiteroles\n56 g\nSal\nPara Profiteroles\nSegún sea necesario\nYemas de huevo\nPara Profiteroles\n12 uds.\nExtracto de vainilla\nPara Profiteroles\nSegún sea necesario\nMantequilla sin sal\nFría y cortada en cubos pequeños.\nPara Profiteroles\n220 g\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "storage": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-milk:ml\",\"ingredientId\":\"cream-vanilla-egg-custard-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":1140,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-milk\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-milk\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-sugar:g\",\"ingredientId\":\"cream-vanilla-egg-custard-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":260,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-sugar\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-corn-starch:g\",\"ingredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"quantity\":{\"kind\":\"exact\",\"value\":56,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-corn-starch\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-salt:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-salt\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-egg-yolks:piece\",\"ingredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"quantity\":{\"kind\":\"exact\",\"value\":12,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-egg-yolks\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-vanilla:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-vanilla\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-vanilla\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-vanilla\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-butter:g\",\"ingredientId\":\"cream-vanilla-egg-custard-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T13:52:13.300Z\",\"updatedAt\":\"2026-09-27T13:52:13.300Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-butter\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-butter\",\"configurationKey\":\"scale:2\"}]}]}"
+  },
+  {
+    "kind": "legacy-language-switch",
+    "switches": [
+      {
+        "url": "http://localhost:3014/en/recipes/gluten-free-crepes?mode=ingredient&ingredient=eggs&amount=10&unit=piece#ingredients",
+        "amount": "10"
+      },
+      {
+        "url": "http://localhost:3014/es/recipes/crepes-sin-gluten?mode=ingredient&ingredient=eggs&amount=10&unit=piece#ingredients",
+        "amount": "10"
+      },
+      {
+        "url": "http://localhost:3014/uk/recipes/bezghliutenovi-mlyntsi?mode=ingredient&ingredient=eggs&amount=10&unit=piece#ingredients",
+        "amount": "10"
+      }
+    ]
+  },
+  {
+    "kind": "zoom-bottom",
+    "locale": "uk",
+    "metrics": {
+      "scroll": 2100,
+      "height": 900,
+      "scrollHeight": 3000,
+      "overflow": false,
+      "buttons": [
+        {
+          "text": "Назад",
+          "rect": {
+            "x": 32,
+            "y": 635.21875,
+            "width": 326,
+            "height": 96,
+            "top": 635.21875,
+            "right": 358,
+            "bottom": 731.21875,
+            "left": 32
+          }
+        }
+      ]
+    }
+  },
+  {
+    "kind": "zoom-bottom",
+    "locale": "en",
+    "metrics": {
+      "scroll": 1675,
+      "height": 900,
+      "scrollHeight": 2575,
+      "overflow": false,
+      "buttons": [
+        {
+          "text": "Previous",
+          "rect": {
+            "x": 32,
+            "y": 676,
+            "width": 326,
+            "height": 96,
+            "top": 676,
+            "right": 358,
+            "bottom": 772,
+            "left": 32
+          }
+        }
+      ]
+    }
+  },
+  {
+    "kind": "zoom-bottom",
+    "locale": "es",
+    "metrics": {
+      "scroll": 2009,
+      "height": 900,
+      "scrollHeight": 2909,
+      "overflow": false,
+      "buttons": [
+        {
+          "text": "Anterior",
+          "rect": {
+            "x": 32,
+            "y": 635.21875,
+            "width": 326,
+            "height": 96,
+            "top": 635.21875,
+            "right": 358,
+            "bottom": 731.21875,
+            "left": 32
+          }
+        }
+      ]
+    }
+  }
+]

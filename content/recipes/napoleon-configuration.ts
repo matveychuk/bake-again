@@ -1,3 +1,4 @@
+import { recipeConfigurationQueryIssue } from './recipe-configuration-query.ts';
 import { calculateRecipeConfiguration } from './calculate-configuration.ts';
 import { glutenFreeNapoleonRecipe } from './gluten-free-napoleon.recipe.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
@@ -41,8 +42,14 @@ export function encodeNapoleonConfiguration(
     params.set('scale', String(selection.quantityAdjustment.factor));
   } else {
     params.set('mode', 'ingredient');
-    params.set('ingredient', selection.quantityAdjustment.anchorIngredientLineId);
-    params.set('amount', String(selection.quantityAdjustment.availableAmount.value));
+    params.set(
+      'ingredient',
+      selection.quantityAdjustment.anchorIngredientLineId,
+    );
+    params.set(
+      'amount',
+      String(selection.quantityAdjustment.availableAmount.value),
+    );
     params.set('unit', selection.quantityAdjustment.availableAmount.unit);
   }
   return params.toString();
@@ -52,8 +59,10 @@ export function parseNapoleonConfiguration(
   params: URLSearchParams,
 ): NapoleonConfigurationSelection {
   const geometryId = params.get('geometry');
-  const supportedGeometry = [NAPOLEON_BASE_GEOMETRY_ID, NAPOLEON_PREVIEW_GEOMETRY_ID]
-    .includes(geometryId ?? '')
+  const supportedGeometry = [
+    NAPOLEON_BASE_GEOMETRY_ID,
+    NAPOLEON_PREVIEW_GEOMETRY_ID,
+  ].includes(geometryId ?? '')
     ? geometryId!
     : NAPOLEON_BASE_GEOMETRY_ID;
 
@@ -74,7 +83,7 @@ export function parseNapoleonConfiguration(
   const requestedScale = Number(params.get('scale'));
   const allowedScales: BatchScaleFactor[] = [0.5, 1, 1.5, 2];
   const factor = allowedScales.includes(requestedScale as BatchScaleFactor)
-    ? requestedScale as BatchScaleFactor
+    ? (requestedScale as BatchScaleFactor)
     : 1;
   return {
     geometryId: supportedGeometry,
@@ -89,17 +98,36 @@ export function resolveNapoleonCookConfiguration(
 ) {
   const params = new URLSearchParams(search);
   const messages = getUiMessages(locale);
+  const issue = recipeConfigurationQueryIssue(
+    params,
+    NAPOLEON_BASE_GEOMETRY_ID,
+  );
+  if (issue)
+    return {
+      kind: 'blocked',
+      reason:
+        issue === 'geometry'
+          ? messages.scaling.unsupportedGeometry
+          : messages.cook.unsupportedConfiguration,
+    } as const;
   if (params.get('mode') === 'ingredient') {
     const amount = Number(params.get('amount'));
     if (!Number.isFinite(amount) || amount <= 0) {
-      return { kind: 'blocked', reason: messages.scaling.positiveAmount } as const;
+      return {
+        kind: 'blocked',
+        reason: messages.scaling.positiveAmount,
+      } as const;
     }
     if (
       amount < 100 ||
-      (params.has('ingredient') && params.get('ingredient') !== 'schar-mix-b') ||
+      (params.has('ingredient') &&
+        params.get('ingredient') !== 'schar-mix-b') ||
       (params.has('unit') && params.get('unit') !== 'g')
     ) {
-      return { kind: 'blocked', reason: messages.scaling.supportedAmount } as const;
+      return {
+        kind: 'blocked',
+        reason: messages.scaling.supportedAmount,
+      } as const;
     }
   }
   const selection = parseNapoleonConfiguration(params);
@@ -129,7 +157,10 @@ export function formatQuantity(amount: Quantity | null) {
   const format = (value: number) =>
     Number.isInteger(value)
       ? String(value)
-      : value.toFixed(value < 2 ? 2 : 1).replace(/0+$/, '').replace(/\.$/, '');
+      : value
+          .toFixed(value < 2 ? 2 : 1)
+          .replace(/0+$/, '')
+          .replace(/\.$/, '');
   if (amount.kind === 'range') {
     return `${format(amount.min)}–${format(amount.max)} ${amount.unit}`;
   }

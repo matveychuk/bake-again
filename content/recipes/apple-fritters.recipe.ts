@@ -1,5 +1,5 @@
-import { localizeRecipeContent } from "./localize-content.ts";
-import { apple_frittersEs } from "./translations/apple-fritters.es.ts";
+import { localizeRecipeContent } from './localize-content.ts';
+import { apple_frittersEs } from './translations/apple-fritters.es.ts';
 import type { RecipeSourceDraft } from './source-recipe.types.ts';
 import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
@@ -73,9 +73,8 @@ const appleFrittersRecipeBase = {
           id: 'sweetener',
           name: 'Sugar or a ripe soft banana',
           quantity: {
-            base: null,
-            equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
-            shopping: { mode: 'nameOnly' },
+            base: { kind: 'exact', value: 1, unit: 'tbsp' },
+            shopping: { mode: 'base' },
           },
           note: 'Use the sugar amount shown. To replace it, mash one ripe soft banana per tablespoon of sugar.',
         },
@@ -221,9 +220,8 @@ const appleFrittersRecipeBase = {
               id: 'sweetener',
               name: 'Цукор або стиглий м’який банан',
               quantity: {
-                base: null,
-                equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
-                shopping: { mode: 'nameOnly' },
+                base: { kind: 'exact', value: 1, unit: 'tbsp' },
+                shopping: { mode: 'base' },
               },
               note: 'Візьміть зазначену кількість цукру. Для заміни розімніть один стиглий м’який банан на кожну столову ложку цукру.',
             },
@@ -313,6 +311,9 @@ export const appleFrittersRecipe = {
   ...appleFrittersRecipeBase,
   translations: {
     ...appleFrittersRecipeBase.translations,
-    es: localizeRecipeContent(appleFrittersRecipeBase.translations.uk, apple_frittersEs),
+    es: localizeRecipeContent(
+      appleFrittersRecipeBase.translations.uk,
+      apple_frittersEs,
+    ),
   },
 } satisfies RecipeSourceDraft;

@@ -1,3 +1,8 @@
+import {
+  baseRecipeConfigurationSearch,
+  recipeConfigurationQueryIssue,
+} from '@/content/recipes/recipe-configuration-query';
+import { RecipeConfigurationUnavailable } from './recipe-configuration-unavailable';
 import { recipeStructuredData, serializeJsonLd } from '@/lib/seo/recipes';
 /* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
 import Image from 'next/image';
@@ -82,6 +87,30 @@ export function InventoryRecipeDetail({
         locale,
       )
     : null;
+  const queryIssue = recipeConfigurationQueryIssue(
+    configurationSearch,
+    structured?.geometry?.id,
+  );
+  if (queryIssue) {
+    const cleanSearch = baseRecipeConfigurationSearch(configurationSearch);
+    const baseHref = `${pathname ?? `/recipes/${recipe.slug}`}${cleanSearch ? `?${cleanSearch}` : ''}#ingredients`;
+    return (
+      <main className={styles.page}>
+        <SiteHeader locale={locale} pathname={pathname} />
+        <RecipeConfigurationUnavailable
+          locale={locale}
+          variant="detail"
+          reason={
+            queryIssue === 'geometry'
+              ? getUiMessages(locale).scaling.unsupportedGeometry
+              : getUiMessages(locale).cook.unsupportedConfiguration
+          }
+          href={baseHref}
+        />
+        <SiteFooter locale={locale} />
+      </main>
+    );
+  }
   const configuration = parseSourceRecipeConfiguration(
     configurationSearch,
     structured,
@@ -147,7 +176,9 @@ export function InventoryRecipeDetail({
     );
 
   const structuredData =
-    configuredStructured && configuration.kind === 'base' && !selectedCreamRecipeId
+    configuredStructured &&
+    configuration.kind === 'base' &&
+    !selectedCreamRecipeId
       ? recipeStructuredData(recipe.id, locale, configuredStructured)
       : null;
   return (

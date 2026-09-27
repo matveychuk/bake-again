@@ -1,0 +1,10 @@
+const {chromium}=require('/Users/sasha/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('node:fs');const path=require('node:path');
+const out=__dirname,base='http://localhost:3014';
+const manifest=JSON.parse(fs.readFileSync(path.join(out,'manifest.json')));
+const route=(id,locale)=>manifest.find(r=>r.id===id&&r.locale===locale).path;
+const save=(name,data)=>fs.writeFileSync(path.join(out,name),JSON.stringify(data,null,2));
+const settle=async p=>{await p.waitForLoadState('domcontentloaded');await p.waitForTimeout(200)};
+const go=async(p,url)=>{const r=await p.goto(base+url);await settle(p);return r.status()};
+const snapshot=async p=>({url:p.url(),text:await p.locator('body').innerText(),status:await p.locator('[data-status]').evaluateAll(a=>a.map(x=>({status:x.getAttribute('data-status'),text:x.innerText}))),overflow:await p.evaluate(()=>({client:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth})),buttons:await p.getByRole('button').evaluateAll(a=>a.map(x=>({text:x.innerText,label:x.getAttribute('aria-label')})))});
+module.exports={chromium,fs,path,out,base,manifest,route,save,settle,go,snapshot};

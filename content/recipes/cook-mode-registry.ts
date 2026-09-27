@@ -1,11 +1,10 @@
+import { recipeConfigurationQueryIssue } from './recipe-configuration-query';
 import type { IngredientLine } from './recipe.types';
 import {
   createCookSteps,
   TOTAL_RECIPE_STEPS,
 } from '@/app/recipes/napoleon-cake/cook/cook-mode.data';
-import {
-  resolveNapoleonCookConfiguration,
-} from './napoleon-configuration';
+import { resolveNapoleonCookConfiguration } from './napoleon-configuration';
 import type { CookModeDefinition } from '@/components/cook-mode/cook-mode.types';
 import type { AppLocale } from '@/lib/i18n/config';
 import { recipeDetailTitles } from './catalog-locales';
@@ -67,6 +66,20 @@ function createInventoryCookMode(
         ? createSourceCookSteps(baseForCookMode, locale).length
         : 0,
     getState: (locationSearch) => {
+      const queryIssue = recipeConfigurationQueryIssue(
+        locationSearch,
+        structured?.geometry?.id,
+      );
+      if (queryIssue)
+        return {
+          isAdjusted: false,
+          steps: [],
+          allIngredients: [],
+          unavailableReason:
+            queryIssue === 'geometry'
+              ? getUiMessages(locale).scaling.unsupportedGeometry
+              : getUiMessages(locale).cook.unsupportedConfiguration,
+        };
       const requestedCreamRecipeId = new URLSearchParams(locationSearch).get(
         'cream',
       );
@@ -150,7 +163,10 @@ export function getCookModeDefinition(
         recipeDetailTitles[glutenFreeNapoleonRecipe.id]?.[locale] ??
         napoleonCookMode.recipeTitle,
       getState: (locationSearch: string) => {
-        const resolved = resolveNapoleonCookConfiguration(locationSearch, locale);
+        const resolved = resolveNapoleonCookConfiguration(
+          locationSearch,
+          locale,
+        );
         if (resolved.kind === 'blocked') {
           return {
             isAdjusted: false,
@@ -175,9 +191,10 @@ export function getCookModeDefinition(
           glutenFreeNapoleonRecipe.id,
           locale,
         )!;
-        const lines = glutenFreeNapoleonRecipe.ingredientSections.flatMap<IngredientLine>(
-          (section) => section.lines,
-        );
+        const lines =
+          glutenFreeNapoleonRecipe.ingredientSections.flatMap<IngredientLine>(
+            (section) => section.lines,
+          );
         const source = {
           ...canonicalSource,
           ingredientSections: canonicalSource.ingredientSections.map(

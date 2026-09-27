@@ -1,0 +1,32 @@
+[
+  {
+    "locale": "uk",
+    "initial": 7,
+    "afterRemove": 6,
+    "afterUndo": 7,
+    "afterRemoveBought": 6,
+    "afterCancel": 6,
+    "empty": 0,
+    "text": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nВаш список порожній.\n\nДодайте продукти з рецепта, коли будете планувати випічку.\n\nПереглянути рецепти\nBake Again\n.\nПро нас\nПриватність і ваші збереження"
+  },
+  {
+    "locale": "en",
+    "initial": 7,
+    "afterRemove": 6,
+    "afterUndo": 7,
+    "afterRemoveBought": 6,
+    "afterCancel": 6,
+    "empty": 0,
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nYour shopping list is empty.\n\nAdd products from a recipe when you are ready to plan a bake.\n\nBrowse recipes\nBake Again\n.\nAbout\nPrivacy and your saved items"
+  },
+  {
+    "locale": "es",
+    "initial": 7,
+    "afterRemove": 6,
+    "afterUndo": 7,
+    "afterRemoveBought": 6,
+    "afterCancel": 6,
+    "empty": 0,
+    "text": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nTu lista de compra está vacía.\n\nAñade productos desde una receta cuando quieras planificar lo que vas a hornear.\n\nVer recetas\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados"
+  }
+]

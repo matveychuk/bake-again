@@ -166,6 +166,9 @@ type UiMessages = {
     calculatedResult: (factor: string) => string;
     positiveAmount: string;
     supportedAmount: string;
+    unsupportedTitle: string;
+    unsupportedGeometry: string;
+    openBaseRecipe: string;
     quantitiesMissing: string;
     quantitiesMissingDescription: string;
     sourceGap: string;
@@ -320,8 +323,10 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       unavailableTitle: 'Cooking cannot start yet.',
       unavailableLink: 'Read the recipe record',
       unavailableRecord: 'This recipe record is not available.',
-      fractionalIngredients: 'This amount gives fractional eggs or other whole ingredients that need manual adjustment. Return to the recipe and choose a different amount before starting Cook Mode.',
-      unsupportedConfiguration: 'This configuration needs manual adjustment. Return to the recipe and choose a supported configuration before starting Cook Mode.',
+      fractionalIngredients:
+        'This amount gives fractional eggs or other whole ingredients that need manual adjustment. Return to the recipe and choose a different amount before starting Cook Mode.',
+      unsupportedConfiguration:
+        'This configuration needs manual adjustment. Return to the recipe and choose a supported configuration before starting Cook Mode.',
       adjustedStatus: 'Calculated',
       progress: (current, total) => `Step ${current} of ${total}`,
       progressLabel: 'Cook Mode progress',
@@ -432,6 +437,10 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculatedResult: (factor) =>
         `${factor}× the recorded base. Check eggs and other whole items manually when the result is fractional.`,
       positiveAmount: 'Enter an amount greater than 0.',
+      unsupportedTitle: 'This recipe configuration is not supported.',
+      unsupportedGeometry:
+        'This pan size has not been resolved for this recipe. Open the base recipe to choose supported quantities.',
+      openBaseRecipe: 'Open the base recipe',
       supportedAmount: 'Enter an amount supported by this recipe.',
       quantitiesMissing: 'Quantities still needed',
       quantitiesMissingDescription:
@@ -620,8 +629,10 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       unavailableTitle: 'Aún no se puede empezar a cocinar.',
       unavailableLink: 'Leer la ficha de la receta',
       unavailableRecord: 'Esta ficha de receta no está disponible.',
-      fractionalIngredients: 'Esta cantidad da fracciones de huevos u otros ingredientes enteros que requieren un ajuste manual. Vuelve a la receta y elige otra cantidad antes de iniciar el modo Cocina.',
-      unsupportedConfiguration: 'Esta configuración requiere un ajuste manual. Vuelve a la receta y elige una configuración compatible antes de iniciar el modo Cocina.',
+      fractionalIngredients:
+        'Esta cantidad da fracciones de huevos u otros ingredientes enteros que requieren un ajuste manual. Vuelve a la receta y elige otra cantidad antes de iniciar el modo Cocina.',
+      unsupportedConfiguration:
+        'Esta configuración requiere un ajuste manual. Vuelve a la receta y elige una configuración compatible antes de iniciar el modo Cocina.',
       adjustedStatus: 'Calculada',
       progress: (current, total) => `Paso ${current} de ${total}`,
       progressLabel: 'Progreso del modo Cocina',
@@ -733,6 +744,10 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculatedResult: (factor) =>
         `${factor}× de la receta base registrada. Revisa manualmente los huevos y otras unidades enteras si el resultado contiene fracciones.`,
       positiveAmount: 'Introduce una cantidad mayor que 0.',
+      unsupportedTitle: 'Esta configuración de la receta no está disponible.',
+      unsupportedGeometry:
+        'Este tamaño de molde no está resuelto para esta receta. Abre la receta base para elegir cantidades admitidas.',
+      openBaseRecipe: 'Abrir la receta base',
       supportedAmount: 'Introduce una cantidad compatible con esta receta.',
       quantitiesMissing: 'Faltan cantidades',
       quantitiesMissingDescription:
@@ -935,8 +950,10 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       unavailableTitle: 'Поки що неможливо почати приготування.',
       unavailableLink: 'Переглянути запис рецепта',
       unavailableRecord: 'Цей запис рецепта недоступний.',
-      fractionalIngredients: 'Ця кількість дає дробові яйця або інші цілі інгредієнти, які потребують ручного коригування. Поверніться до рецепта й оберіть іншу кількість перед початком покрокового приготування.',
-      unsupportedConfiguration: 'Ця конфігурація потребує ручного коригування. Поверніться до рецепта й оберіть підтримувану конфігурацію перед початком покрокового приготування.',
+      fractionalIngredients:
+        'Ця кількість дає дробові яйця або інші цілі інгредієнти, які потребують ручного коригування. Поверніться до рецепта й оберіть іншу кількість перед початком покрокового приготування.',
+      unsupportedConfiguration:
+        'Ця конфігурація потребує ручного коригування. Поверніться до рецепта й оберіть підтримувану конфігурацію перед початком покрокового приготування.',
       adjustedStatus: 'Розраховано',
       progress: (current, total) => `Крок ${current} з ${total}`,
       progressLabel: 'Перебіг режиму приготування',
@@ -1010,7 +1027,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       ingredientsIntro: 'Умови й неуточнені деталі залишаються видимими.',
       creamOptionsEyebrow: 'Начинка',
       creamOptionsTitle: 'Оберіть крем.',
-      creamOptionsIntro: () => 'Оберіть начинку. Від вибору залежать інгредієнти та кроки приготування.',
+      creamOptionsIntro: () =>
+        'Оберіть начинку. Від вибору залежать інгредієнти та кроки приготування.',
       creamRecommended: 'Рекомендовано',
       creamSelectedEyebrow: 'Вибраний крем',
       creamRecipeEyebrow: 'Рецепт крему',
@@ -1047,6 +1065,10 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculatedResult: (factor) =>
         `${factor}× від записаної бази. Якщо виходить дробова кількість яєць або інших цілих одиниць, перевірте її вручну.`,
       positiveAmount: 'Введіть кількість більшу за 0.',
+      unsupportedTitle: 'Ця конфігурація рецепта не підтримується.',
+      unsupportedGeometry:
+        'Цей розмір форми ще не узгоджено для рецепта. Відкрийте базовий рецепт, щоб обрати підтримувані кількості.',
+      openBaseRecipe: 'Відкрити базовий рецепт',
       supportedAmount: 'Введіть кількість, яку підтримує цей рецепт.',
       quantitiesMissing: 'Бракує кількостей',
       quantitiesMissingDescription:

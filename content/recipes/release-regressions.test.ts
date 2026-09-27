@@ -21,53 +21,88 @@ import { getUiMessages } from '../../lib/i18n/messages.ts';
 for (const locale of ['uk', 'en', 'es'] as const) {
   void test(`R01: Cook Mode blocks unresolved quantities instead of choosing the base (${locale})`, () => {
     const blocked = resolveNapoleonCookConfiguration(
-      'mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g', locale,
+      'mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g',
+      locale,
     );
     assert.deepEqual(blocked, {
-      kind: 'blocked', reason: getUiMessages(locale).cook.fractionalIngredients,
+      kind: 'blocked',
+      reason: getUiMessages(locale).cook.fractionalIngredients,
     });
     for (const amount of ['0', '-1', 'NaN', 'Infinity', '99']) {
-      assert.equal(resolveNapoleonCookConfiguration(
-        `mode=ingredient&ingredient=schar-mix-b&amount=${amount}&unit=g`, locale,
-      ).kind, 'blocked');
+      assert.equal(
+        resolveNapoleonCookConfiguration(
+          `mode=ingredient&ingredient=schar-mix-b&amount=${amount}&unit=g`,
+          locale,
+        ).kind,
+        'blocked',
+      );
     }
     for (const query of [
       'mode=ingredient&ingredient=eggs&amount=450&unit=g',
       'mode=ingredient&ingredient=schar-mix-b&amount=450&unit=ml',
       'mode=ingredient&ingredient=schar-mix-b&amount=450&unit=invalid',
       'geometry=round-24cm-preview&mode=scale&scale=1',
-    ]) assert.equal(resolveNapoleonCookConfiguration(query, locale).kind, 'blocked');
-    for (const [amount, factor] of [[225, 0.5], [450, 1], [900, 2]]) {
+    ])
+      assert.equal(
+        resolveNapoleonCookConfiguration(query, locale).kind,
+        'blocked',
+      );
+    for (const [amount, factor] of [
+      [225, 0.5],
+      [450, 1],
+      [900, 2],
+    ]) {
       const state = resolveNapoleonCookConfiguration(
-        `mode=ingredient&ingredient=schar-mix-b&amount=${amount}&unit=g`, locale,
+        `mode=ingredient&ingredient=schar-mix-b&amount=${amount}&unit=g`,
+        locale,
       );
       assert.equal(state.kind, 'ready');
-      if (state.kind !== 'ready') throw new Error('Expected a cookable configuration');
+      if (state.kind !== 'ready')
+        throw new Error('Expected a cookable configuration');
       assert.equal(state.isAdjusted, factor !== 1);
       assert.equal(state.configuration.totalScaleFactor, factor);
-      assert.deepEqual(state.configuration.ingredientAmounts.find(
-        (item) => item.ingredientLineId === 'schar-mix-b',
-      )?.amount, { kind: 'exact', value: amount, unit: 'g' });
+      assert.deepEqual(
+        state.configuration.ingredientAmounts.find(
+          (item) => item.ingredientLineId === 'schar-mix-b',
+        )?.amount,
+        { kind: 'exact', value: amount, unit: 'g' },
+      );
     }
   });
   void test(`R02: preparation notes stay valid across scales and shopping (${locale})`, () => {
     const cake = getRecipeContent('prune-cake', locale)!;
     assert(!cake.beforeStart?.join(' ').includes('700'));
     const fritters = getRecipeContent('apple-fritters', locale)!;
-    const note = fritters.ingredientSections.flatMap((s) => s.ingredients)
+    const note = fritters.ingredientSections
+      .flatMap((s) => s.ingredients)
       .find((i) => i.id === 'sweetener')!.note!;
-    assert.match(note, {
-      uk: /на кожну столову ложку/, en: /per tablespoon/, es: /por cada cucharada/,
-    }[locale]);
+    assert.match(
+      note,
+      {
+        uk: /на кожну столову ложку/,
+        en: /per tablespoon/,
+        es: /por cada cucharada/,
+      }[locale],
+    );
     for (const factor of [0.5, 1.5, 2]) {
       const adjusted = applySourceRecipeConfiguration(
-        fritters, { kind: 'adjusted', scaleFactor: factor }, locale,
+        fritters,
+        { kind: 'adjusted', scaleFactor: factor },
+        locale,
       );
-      const sugar = adjusted.ingredientSections.flatMap((s) => s.ingredients)
+      const sugar = adjusted.ingredientSections
+        .flatMap((s) => s.ingredients)
         .find((i) => i.id === 'sweetener')!;
-      assert.deepEqual(sugar.quantity.equivalent, { kind: 'exact', value: factor, unit: 'tbsp' });
+      assert.deepEqual(sugar.quantity.base, {
+        kind: 'exact',
+        value: factor,
+        unit: 'tbsp',
+      });
       assert.equal(sugar.note, note);
-      assert.equal(findShoppingIngredient('apple-fritters', 'sweetener', locale)?.note, note);
+      assert.equal(
+        findShoppingIngredient('apple-fritters', 'sweetener', locale)?.note,
+        note,
+      );
     }
   });
   void test(`D01: prose and Cook Mode match scaled butter and allocated sugar (${locale})`, () => {
@@ -197,4 +232,67 @@ void test('Napoleon milk allocation and disc count scale, while base facts stay 
       base.steps.find((s) => s.id === 'bake-layer')!.body,
     );
   }
+});
+
+void test('Napoleon custard eggs agree with ingredients and Cook Mode at every supported scale', () => {
+  for (const locale of ['uk', 'en', 'es'] as const) {
+    const base = getRecipeContent('gluten-free-napoleon', locale)!;
+    for (const scaleFactor of [0.5, 1.5, 2] as const) {
+      const recipe = applySourceRecipeConfiguration(
+        base,
+        { kind: 'adjusted', mode: 'scale', scaleFactor },
+        locale,
+      );
+      const eggs = recipe.ingredientSections
+        .flatMap((section) => section.ingredients)
+        .find((line) => line.id === 'eggs-custard')!;
+      const expected = formatQuantity(locale, eggs.quantity.base);
+      assert(
+        recipe.steps
+          .find((step) => step.id === 'mix-custard-base')!
+          .body.includes(expected),
+      );
+      assert(
+        JSON.stringify(createSourceCookSteps(recipe, locale)).includes(
+          expected,
+        ),
+      );
+      for (const id of ['bake-layer', 'toast-almonds', 'refrigerate-cake']) {
+        assert.equal(
+          recipe.steps.find((step) => step.id === id)!.body,
+          base.steps.find((step) => step.id === id)!.body,
+        );
+      }
+      assert(
+        !JSON.stringify(recipe.beforeStart).match(/12 (layers|коржів|capas)/),
+      );
+      assert(
+        !recipe.steps
+          .find((step) => step.id === 'assemble-cake')!
+          .body.match(/two cakes|два торти|dos tartas/),
+      );
+    }
+  }
+});
+
+void test('Explicit unsupported Napoleon parameters never become a tested base', () => {
+  for (const query of [
+    'mode=scale&scale=0',
+    'mode=scale&scale=3',
+    'mode=scale&scale=NaN',
+    'mode=scale',
+    'geometry=unknown',
+    'geometry=round-24cm-preview',
+    'mode=unknown',
+    'scale=2',
+    'mode=scale&scale=2&scale=1',
+    'mode=scale&scale=1&amount=200',
+  ])
+    for (const locale of ['uk', 'en', 'es'] as const) {
+      assert.equal(
+        resolveNapoleonCookConfiguration(query, locale).kind,
+        'blocked',
+        query,
+      );
+    }
 });

@@ -1,0 +1,32 @@
+[
+  {
+    "locale": "uk",
+    "width": 390,
+    "before": "Вийти з режиму приготування\n\nБезглютеновий Наполеон\n\nПеревірено\n\nКрок 2 з 17: Порубайте холодне масло\n\nКРОК 2 З 17\nУсі кроки\nІнгредієнти\n\n10–15 ХВ\n\nПорубайте холодне масло\nЗапитати про цей крок\n\nНаріжте холодне масло кубиками, покладіть на 10–15 хвилин у морозилку, додайте до сухої суміші й зробіть приблизно 10 коротких імпульсів.\n\nДЛЯ ЦЬОГО КРОКУ\n\nвершкове масло\nхолодне, нарізати кубиками\n120 г\n\nОРІЄНТИРПотрібна неоднорідна крихта: частина як пісок, частина — шматочки масла розміром з горошину.\n\n1\n2\n3\nНазад\nГотово, далі",
+    "invalid": "Вийти з режиму приготування\n\nБезглютеновий Наполеон\n\nПеревірено\n\nКрок 2 з 17: Порубайте холодне масло\n\nКРОК 2 З 17\nУсі кроки\nІнгредієнти\n\n10–15 ХВ\n\nПорубайте холодне масло\nЗапитати про цей крок\n\nНаріжте холодне масло кубиками, покладіть на 10–15 хвилин у морозилку, додайте до сухої суміші й зробіть приблизно 10 коротких імпульсів.\n\nДЛЯ ЦЬОГО КРОКУ\n\nвершкове масло\nхолодне, нарізати кубиками\n120 г\n\nОРІЄНТИРПотрібна неоднорідна крихта: частина як пісок, частина — шматочки масла розміром з горошину.\n\n1\n2\n3\nНазад\nГотово, далі",
+    "after": "Вийти з режиму приготування\n\nБезглютеновий Наполеон\n\nПеревірено\n\nКрок 3 з 17: Змішайте рідкі інгредієнти\n\nКРОК 3 З 17\nУсі кроки\nІнгредієнти\nЗмішайте рідкі інгредієнти\nЗапитати про цей крок\n\nЗмішайте яйця, обраний кисломолочний продукт, соняшникову олію та лимонний сік лише до однорідності.\n\nДЛЯ ЦЬОГО КРОКУ\n\nяйця\n2 шт.\nсметана або густий натуральний йогурт\n250 г\nсоняшникова олія\n50 г\nлимонний сік\n1 ст. л.\nНазад\nГотово, далі",
+    "storage": {
+      "bake-again:cook-mode:v1:gluten-free-napoleon:gluten-free-napoleon-v2": "{\"schemaVersion\":1,\"recipeId\":\"gluten-free-napoleon\",\"recipeVersionId\":\"gluten-free-napoleon-v2\",\"updatedAt\":\"2026-09-27T13:17:36.157Z\",\"currentStepId\":\"mix-wet-dough\",\"completedStepIds\":[\"mix-dry-dough\",\"cut-in-butter\"],\"timer\":null,\"completedAt\":null,\"note\":\"\"}"
+    }
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "before": "Exit Cook Mode\n\nGluten-Free Napoleon Cake\n\nTested\n\nStep 2 of 17: Cut in the cold butter\n\nSTEP 2 OF 17\nAll steps\nIngredients\n\n10–15 MIN\n\nCut in the cold butter\nAsk about this step\n\nCube the cold butter, freeze it for 10–15 minutes, add it to the dry mixture and pulse about ten times.\n\nFOR THIS STEP\n\nbutter\ncold, cut into cubes\n120 g\n\nCHECKPOINTThe crumb should be uneven: some sandy, with some pea-sized pieces of butter.\n\n1\n2\n3\nPrevious\nDone, next",
+    "invalid": "Exit Cook Mode\n\nGluten-Free Napoleon Cake\n\nTested\n\nStep 2 of 17: Cut in the cold butter\n\nSTEP 2 OF 17\nAll steps\nIngredients\n\n10–15 MIN\n\nCut in the cold butter\nAsk about this step\n\nCube the cold butter, freeze it for 10–15 minutes, add it to the dry mixture and pulse about ten times.\n\nFOR THIS STEP\n\nbutter\ncold, cut into cubes\n120 g\n\nCHECKPOINTThe crumb should be uneven: some sandy, with some pea-sized pieces of butter.\n\n1\n2\n3\nPrevious\nDone, next",
+    "after": "Exit Cook Mode\n\nGluten-Free Napoleon Cake\n\nTested\n\nStep 3 of 17: Mix the wet ingredients\n\nSTEP 3 OF 17\nAll steps\nIngredients\nMix the wet ingredients\nAsk about this step\n\nMix the eggs, chosen cultured dairy, sunflower oil and lemon juice only until smooth.\n\nFOR THIS STEP\n\neggs\n2 pcs\nsour cream or thick natural yoghurt\n250 g\nsunflower oil\n50 g\nlemon juice\n1 tbsp\nPrevious\nDone, next",
+    "storage": {
+      "bake-again:cook-mode:v1:gluten-free-napoleon:gluten-free-napoleon-v2": "{\"schemaVersion\":1,\"recipeId\":\"gluten-free-napoleon\",\"recipeVersionId\":\"gluten-free-napoleon-v2\",\"updatedAt\":\"2026-09-27T13:17:37.454Z\",\"currentStepId\":\"mix-wet-dough\",\"completedStepIds\":[\"mix-dry-dough\",\"cut-in-butter\"],\"timer\":null,\"completedAt\":null,\"note\":\"\"}"
+    }
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "before": "Salir del modo Cocina\n\nTarta Napoleón sin gluten\n\nProbada\n\nPaso 2 de 17: Incorpora la mantequilla fría\n\nPASO 2 DE 17\nTodos los pasos\nIngredientes\n\n10–15 MIN\n\nIncorpora la mantequilla fría\nPreguntar sobre este paso\n\nCorta la mantequilla fría en dados, déjala 10–15 minutos en el congelador, añádela a la mezcla seca y da unos diez impulsos cortos.\n\nPARA ESTE PASO\n\nmantequilla\nfría, cortada en dados\n120 g\n\nPUNTO DE CONTROLLa miga debe quedar irregular: una parte arenosa y otra con trozos de mantequilla del tamaño de un guisante.\n\n1\n2\n3\nAnterior\nListo, siguiente",
+    "invalid": "Salir del modo Cocina\n\nTarta Napoleón sin gluten\n\nProbada\n\nPaso 2 de 17: Incorpora la mantequilla fría\n\nPASO 2 DE 17\nTodos los pasos\nIngredientes\n\n10–15 MIN\n\nIncorpora la mantequilla fría\nPreguntar sobre este paso\n\nCorta la mantequilla fría en dados, déjala 10–15 minutos en el congelador, añádela a la mezcla seca y da unos diez impulsos cortos.\n\nPARA ESTE PASO\n\nmantequilla\nfría, cortada en dados\n120 g\n\nPUNTO DE CONTROLLa miga debe quedar irregular: una parte arenosa y otra con trozos de mantequilla del tamaño de un guisante.\n\n1\n2\n3\nAnterior\nListo, siguiente",
+    "after": "Salir del modo Cocina\n\nTarta Napoleón sin gluten\n\nProbada\n\nPaso 3 de 17: Mezcla los ingredientes líquidos\n\nPASO 3 DE 17\nTodos los pasos\nIngredientes\nMezcla los ingredientes líquidos\nPreguntar sobre este paso\n\nMezcla los huevos, el lácteo fermentado elegido, el aceite de girasol y el zumo de limón solo hasta obtener una mezcla homogénea.\n\nPARA ESTE PASO\n\nhuevos\n2 uds.\ncrema agria o yogur natural espeso\n250 g\naceite de girasol\n50 g\nzumo de limón\n1 cda.\nAnterior\nListo, siguiente",
+    "storage": {
+      "bake-again:cook-mode:v1:gluten-free-napoleon:gluten-free-napoleon-v2": "{\"schemaVersion\":1,\"recipeId\":\"gluten-free-napoleon\",\"recipeVersionId\":\"gluten-free-napoleon-v2\",\"updatedAt\":\"2026-09-27T13:17:38.723Z\",\"currentStepId\":\"mix-wet-dough\",\"completedStepIds\":[\"mix-dry-dough\",\"cut-in-butter\"],\"timer\":null,\"completedAt\":null,\"note\":\"\"}"
+    }
+  }
+]

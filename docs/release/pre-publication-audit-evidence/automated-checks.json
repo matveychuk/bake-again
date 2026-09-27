@@ -1,0 +1,38 @@
+[
+  {
+    "command": "npm run typecheck",
+    "exit": 0
+  },
+  {
+    "command": "npm run lint",
+    "exit": 0
+  },
+  {
+    "command": "npm run validate:recipes",
+    "exit": 0
+  },
+  {
+    "command": "npm run test:foundation",
+    "exit": 0
+  },
+  {
+    "command": "npm run test:seo",
+    "exit": 0
+  },
+  {
+    "command": "npm run test:assistant",
+    "exit": 0
+  },
+  {
+    "command": "npm run eval:assistant",
+    "exit": 0
+  },
+  {
+    "command": "npm run test:analytics",
+    "exit": 0
+  },
+  {
+    "command": "node --test scripts/validate-production-config.test.mjs",
+    "exit": 0
+  }
+]

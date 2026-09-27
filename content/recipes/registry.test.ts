@@ -114,7 +114,7 @@ void test('selects the requested locale for a detailed recipe', () => {
   assert.equal(recipe?.ingredientSections[0]?.title, 'Коржі');
   assert.match(recipe?.beforeStart?.[0] ?? '', /[А-Яа-яІіЇїЄє]/);
   assert.equal(recipe?.beforeStart?.length, 2);
-  assert.match(recipe?.beforeStart?.[0] ?? '', /пергаменту.*12 коржів/i);
+  assert.match(recipe?.beforeStart?.[0] ?? '', /пергаменту.*всіх коржів/i);
   assert.equal(recipe?.evidence?.status, 'tested');
   assert.equal(recipe?.steps.length, 19);
   assert.equal(recipe?.steps[0]?.title, 'Змішайте сухі інгредієнти');
@@ -595,7 +595,9 @@ void test('stores four tested reusable creams with ingredients and practical gui
   )!;
   assert.equal(egglessFlour.name, 'Борошно Schär Mix B Bread');
   assert.deepEqual(egglessFlour.quantity.base, {
-    kind: 'exact', value: 120, unit: 'g',
+    kind: 'exact',
+    value: 120,
+    unit: 'g',
   });
   assert.deepEqual(egglessFlour.quantity.shopping, { mode: 'base' });
   assert.deepEqual(

@@ -1,0 +1,902 @@
+[
+  {
+    "locale": "uk",
+    "width": 390,
+    "blockedDetail": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\nЦя конфігурація рецепта не підтримується.\n\nЦей розмір форми ще не узгоджено для рецепта. Відкрийте базовий рецепт, щоб обрати підтримувані кількості.\n\nВідкрити базовий рецепт\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "focus": {
+      "outline": "rgb(133, 60, 41) solid 3px",
+      "boxShadow": "none"
+    },
+    "recoveryUrl": "http://localhost:3014/uk/recipes/bezghliutenovyi-napoleon#ingredients",
+    "migrated": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (1)\nОчистити все\nУсе куплено.\nПрибрати куплене (1)\nЦукор або стиглий м’який банан\nВізьміть зазначену кількість цукру. Для заміни розімніть один стиглий м’який банан на кожну столову ложку цукру.\nЗ рецепта «Яблучні оладки»\n4 ст. л.\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "persisted": {
+      "schemaVersion": 2,
+      "updatedAt": "2026-09-27T13:58:23.266Z",
+      "items": [
+        {
+          "id": "sweetener:tbsp",
+          "ingredientId": "sweetener",
+          "quantity": {
+            "kind": "exact",
+            "value": 4,
+            "unit": "tbsp"
+          },
+          "checked": false,
+          "createdAt": "2026-09-20T00:00:00.000Z",
+          "updatedAt": "2026-09-27T13:58:23.266Z",
+          "sources": [
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:0.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:1.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:2",
+              "batchId": "additional"
+            }
+          ]
+        }
+      ]
+    },
+    "dedup": {
+      "id": "sweetener:tbsp",
+      "ingredientId": "sweetener",
+      "quantity": {
+        "kind": "exact",
+        "value": 4,
+        "unit": "tbsp"
+      },
+      "checked": false,
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "updatedAt": "2026-09-27T13:58:23.266Z",
+      "sources": [
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:0.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:1.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:2",
+          "batchId": "additional"
+        }
+      ]
+    },
+    "completion": "Вийти з режиму приготування\n\nБезглютенові яблучні оладки\n\nРозраховано\n\nПРИГОТУВАННЯ ЗАВЕРШЕНО\n\nПриготування завершено.\n\nВиконано 3 з 3 кроків\n\nПриватна нотатка\nНеобов’язково. Зміни автоматично зберігаються в цьому браузері.\n\nАвтоматично збережено в цьому браузері.\n\nМожна повернутися до рецепта або почати знову — нотатку вже збережено.\n\nПовернутися до рецепта\nПриготувати ще раз",
+    "completionHref": "/uk/recipes/bezghliutenovi-yabluchni-oladky?mode=scale&scale=2",
+    "completionReturn": "http://localhost:3014/uk/recipes/bezghliutenovi-yabluchni-oladky?mode=scale&scale=2",
+    "overflow": false,
+    "pass": true
+  },
+  {
+    "locale": "uk",
+    "width": 900,
+    "blockedDetail": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\nЦя конфігурація рецепта не підтримується.\n\nЦей розмір форми ще не узгоджено для рецепта. Відкрийте базовий рецепт, щоб обрати підтримувані кількості.\n\nВідкрити базовий рецепт\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "focus": {
+      "outline": "rgb(133, 60, 41) solid 3px",
+      "boxShadow": "none"
+    },
+    "recoveryUrl": "http://localhost:3014/uk/recipes/bezghliutenovyi-napoleon#ingredients",
+    "migrated": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (1)\nОчистити все\nУсе куплено.\nПрибрати куплене (1)\nЦукор або стиглий м’який банан\nВізьміть зазначену кількість цукру. Для заміни розімніть один стиглий м’який банан на кожну столову ложку цукру.\nЗ рецепта «Яблучні оладки»\n4 ст. л.\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "persisted": {
+      "schemaVersion": 2,
+      "updatedAt": "2026-09-27T13:58:28.370Z",
+      "items": [
+        {
+          "id": "sweetener:tbsp",
+          "ingredientId": "sweetener",
+          "quantity": {
+            "kind": "exact",
+            "value": 4,
+            "unit": "tbsp"
+          },
+          "checked": false,
+          "createdAt": "2026-09-20T00:00:00.000Z",
+          "updatedAt": "2026-09-27T13:58:28.370Z",
+          "sources": [
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:0.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:1.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:2",
+              "batchId": "additional"
+            }
+          ]
+        }
+      ]
+    },
+    "dedup": {
+      "id": "sweetener:tbsp",
+      "ingredientId": "sweetener",
+      "quantity": {
+        "kind": "exact",
+        "value": 4,
+        "unit": "tbsp"
+      },
+      "checked": false,
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "updatedAt": "2026-09-27T13:58:28.370Z",
+      "sources": [
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:0.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:1.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:2",
+          "batchId": "additional"
+        }
+      ]
+    },
+    "completion": "Вийти з режиму приготування\n\nБезглютенові яблучні оладки\n\nРозраховано\n\nПРИГОТУВАННЯ ЗАВЕРШЕНО\n\nПриготування завершено.\n\nВиконано 3 з 3 кроків\n\nПриватна нотатка\nНеобов’язково. Зміни автоматично зберігаються в цьому браузері.\n\nАвтоматично збережено в цьому браузері.\n\nМожна повернутися до рецепта або почати знову — нотатку вже збережено.\n\nПовернутися до рецепта\nПриготувати ще раз",
+    "completionHref": "/uk/recipes/bezghliutenovi-yabluchni-oladky?mode=scale&scale=2",
+    "completionReturn": "http://localhost:3014/uk/recipes/bezghliutenovi-yabluchni-oladky?mode=scale&scale=2",
+    "overflow": false,
+    "pass": true
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "blockedDetail": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\nЦя конфігурація рецепта не підтримується.\n\nЦей розмір форми ще не узгоджено для рецепта. Відкрийте базовий рецепт, щоб обрати підтримувані кількості.\n\nВідкрити базовий рецепт\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "focus": {
+      "outline": "rgb(133, 60, 41) solid 3px",
+      "boxShadow": "none"
+    },
+    "recoveryUrl": "http://localhost:3014/uk/recipes/bezghliutenovyi-napoleon#ingredients",
+    "migrated": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (1)\nОчистити все\nУсе куплено.\nПрибрати куплене (1)\nЦукор або стиглий м’який банан\nВізьміть зазначену кількість цукру. Для заміни розімніть один стиглий м’який банан на кожну столову ложку цукру.\nЗ рецепта «Яблучні оладки»\n4 ст. л.\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "persisted": {
+      "schemaVersion": 2,
+      "updatedAt": "2026-09-27T13:58:33.339Z",
+      "items": [
+        {
+          "id": "sweetener:tbsp",
+          "ingredientId": "sweetener",
+          "quantity": {
+            "kind": "exact",
+            "value": 4,
+            "unit": "tbsp"
+          },
+          "checked": false,
+          "createdAt": "2026-09-20T00:00:00.000Z",
+          "updatedAt": "2026-09-27T13:58:33.339Z",
+          "sources": [
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:0.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:1.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:2",
+              "batchId": "additional"
+            }
+          ]
+        }
+      ]
+    },
+    "dedup": {
+      "id": "sweetener:tbsp",
+      "ingredientId": "sweetener",
+      "quantity": {
+        "kind": "exact",
+        "value": 4,
+        "unit": "tbsp"
+      },
+      "checked": false,
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "updatedAt": "2026-09-27T13:58:33.339Z",
+      "sources": [
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:0.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:1.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:2",
+          "batchId": "additional"
+        }
+      ]
+    },
+    "completion": "Вийти з режиму приготування\nBake Again.\nНе вимикати екран\n\nБезглютенові яблучні оладки\n\nРозраховано\n\nСПОСІБ ПРИГОТУВАННЯ\n\n3 / 3\nПідготуйте яблука\nЗамішайте тісто\nПосмажте оладки\nІнгредієнти\n\nПРИГОТУВАННЯ ЗАВЕРШЕНО\n\nПриготування завершено.\n\nВиконано 3 з 3 кроків\n\nПриватна нотатка\nНеобов’язково. Зміни автоматично зберігаються в цьому браузері.\n\nАвтоматично збережено в цьому браузері.\n\nМожна повернутися до рецепта або почати знову — нотатку вже збережено.\n\nПовернутися до рецепта\nПриготувати ще раз",
+    "completionHref": "/uk/recipes/bezghliutenovi-yabluchni-oladky?mode=scale&scale=2",
+    "completionReturn": "http://localhost:3014/uk/recipes/bezghliutenovi-yabluchni-oladky?mode=scale&scale=2",
+    "overflow": false,
+    "pass": true
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "blockedDetail": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\nThis recipe configuration is not supported.\n\nThis pan size has not been resolved for this recipe. Open the base recipe to choose supported quantities.\n\nOpen the base recipe\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "focus": {
+      "outline": "rgb(133, 60, 41) solid 3px",
+      "boxShadow": "none"
+    },
+    "recoveryUrl": "http://localhost:3014/en/recipes/gluten-free-napoleon-cake#ingredients",
+    "migrated": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (1)\nClear all\nEverything is bought.\nRemove bought (1)\nSugar or a ripe soft banana\nUse the sugar amount shown. To replace it, mash one ripe soft banana per tablespoon of sugar.\nFor Apple fritters\n4 tbsp\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "persisted": {
+      "schemaVersion": 2,
+      "updatedAt": "2026-09-27T13:58:38.296Z",
+      "items": [
+        {
+          "id": "sweetener:tbsp",
+          "ingredientId": "sweetener",
+          "quantity": {
+            "kind": "exact",
+            "value": 4,
+            "unit": "tbsp"
+          },
+          "checked": false,
+          "createdAt": "2026-09-20T00:00:00.000Z",
+          "updatedAt": "2026-09-27T13:58:38.296Z",
+          "sources": [
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:0.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:1.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:2",
+              "batchId": "additional"
+            }
+          ]
+        }
+      ]
+    },
+    "dedup": {
+      "id": "sweetener:tbsp",
+      "ingredientId": "sweetener",
+      "quantity": {
+        "kind": "exact",
+        "value": 4,
+        "unit": "tbsp"
+      },
+      "checked": false,
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "updatedAt": "2026-09-27T13:58:38.296Z",
+      "sources": [
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:0.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:1.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:2",
+          "batchId": "additional"
+        }
+      ]
+    },
+    "completion": "Exit Cook Mode\n\nGluten-free apple fritters\n\nCalculated\n\nCOOKING COMPLETE\n\nCooking complete.\n\n3 of 3 steps completed\n\nPrivate note\nOptional. Changes are saved automatically in this browser.\n\nSaved automatically in this browser.\n\nYou can return to the recipe or cook again — your note is already saved.\n\nReturn to recipe\nCook again",
+    "completionHref": "/en/recipes/gluten-free-apple-fritters?mode=scale&scale=2",
+    "completionReturn": "http://localhost:3014/en/recipes/gluten-free-apple-fritters?mode=scale&scale=2",
+    "overflow": false,
+    "pass": true
+  },
+  {
+    "locale": "en",
+    "width": 900,
+    "blockedDetail": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\nThis recipe configuration is not supported.\n\nThis pan size has not been resolved for this recipe. Open the base recipe to choose supported quantities.\n\nOpen the base recipe\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "focus": {
+      "outline": "rgb(133, 60, 41) solid 3px",
+      "boxShadow": "none"
+    },
+    "recoveryUrl": "http://localhost:3014/en/recipes/gluten-free-napoleon-cake#ingredients",
+    "migrated": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (1)\nClear all\nEverything is bought.\nRemove bought (1)\nSugar or a ripe soft banana\nUse the sugar amount shown. To replace it, mash one ripe soft banana per tablespoon of sugar.\nFor Apple fritters\n4 tbsp\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "persisted": {
+      "schemaVersion": 2,
+      "updatedAt": "2026-09-27T13:58:43.222Z",
+      "items": [
+        {
+          "id": "sweetener:tbsp",
+          "ingredientId": "sweetener",
+          "quantity": {
+            "kind": "exact",
+            "value": 4,
+            "unit": "tbsp"
+          },
+          "checked": false,
+          "createdAt": "2026-09-20T00:00:00.000Z",
+          "updatedAt": "2026-09-27T13:58:43.222Z",
+          "sources": [
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:0.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:1.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:2",
+              "batchId": "additional"
+            }
+          ]
+        }
+      ]
+    },
+    "dedup": {
+      "id": "sweetener:tbsp",
+      "ingredientId": "sweetener",
+      "quantity": {
+        "kind": "exact",
+        "value": 4,
+        "unit": "tbsp"
+      },
+      "checked": false,
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "updatedAt": "2026-09-27T13:58:43.222Z",
+      "sources": [
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:0.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:1.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:2",
+          "batchId": "additional"
+        }
+      ]
+    },
+    "completion": "Exit Cook Mode\n\nGluten-free apple fritters\n\nCalculated\n\nCOOKING COMPLETE\n\nCooking complete.\n\n3 of 3 steps completed\n\nPrivate note\nOptional. Changes are saved automatically in this browser.\n\nSaved automatically in this browser.\n\nYou can return to the recipe or cook again — your note is already saved.\n\nReturn to recipe\nCook again",
+    "completionHref": "/en/recipes/gluten-free-apple-fritters?mode=scale&scale=2",
+    "completionReturn": "http://localhost:3014/en/recipes/gluten-free-apple-fritters?mode=scale&scale=2",
+    "overflow": false,
+    "pass": true
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "blockedDetail": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\nThis recipe configuration is not supported.\n\nThis pan size has not been resolved for this recipe. Open the base recipe to choose supported quantities.\n\nOpen the base recipe\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "focus": {
+      "outline": "rgb(133, 60, 41) solid 3px",
+      "boxShadow": "none"
+    },
+    "recoveryUrl": "http://localhost:3014/en/recipes/gluten-free-napoleon-cake#ingredients",
+    "migrated": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (1)\nClear all\nEverything is bought.\nRemove bought (1)\nSugar or a ripe soft banana\nUse the sugar amount shown. To replace it, mash one ripe soft banana per tablespoon of sugar.\nFor Apple fritters\n4 tbsp\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "persisted": {
+      "schemaVersion": 2,
+      "updatedAt": "2026-09-27T13:58:48.164Z",
+      "items": [
+        {
+          "id": "sweetener:tbsp",
+          "ingredientId": "sweetener",
+          "quantity": {
+            "kind": "exact",
+            "value": 4,
+            "unit": "tbsp"
+          },
+          "checked": false,
+          "createdAt": "2026-09-20T00:00:00.000Z",
+          "updatedAt": "2026-09-27T13:58:48.164Z",
+          "sources": [
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:0.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:1.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:2",
+              "batchId": "additional"
+            }
+          ]
+        }
+      ]
+    },
+    "dedup": {
+      "id": "sweetener:tbsp",
+      "ingredientId": "sweetener",
+      "quantity": {
+        "kind": "exact",
+        "value": 4,
+        "unit": "tbsp"
+      },
+      "checked": false,
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "updatedAt": "2026-09-27T13:58:48.164Z",
+      "sources": [
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:0.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:1.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:2",
+          "batchId": "additional"
+        }
+      ]
+    },
+    "completion": "Exit Cook Mode\nBake Again.\nKeep screen awake\n\nGluten-free apple fritters\n\nCalculated\n\nMETHOD\n\n3 / 3\nPrepare the apples\nMix the batter\nFry the fritters\nIngredients\n\nCOOKING COMPLETE\n\nCooking complete.\n\n3 of 3 steps completed\n\nPrivate note\nOptional. Changes are saved automatically in this browser.\n\nSaved automatically in this browser.\n\nYou can return to the recipe or cook again — your note is already saved.\n\nReturn to recipe\nCook again",
+    "completionHref": "/en/recipes/gluten-free-apple-fritters?mode=scale&scale=2",
+    "completionReturn": "http://localhost:3014/en/recipes/gluten-free-apple-fritters?mode=scale&scale=2",
+    "overflow": false,
+    "pass": true
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "blockedDetail": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\nEsta configuración de la receta no está disponible.\n\nEste tamaño de molde no está resuelto para esta receta. Abre la receta base para elegir cantidades admitidas.\n\nAbrir la receta base\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "focus": {
+      "outline": "rgb(133, 60, 41) solid 3px",
+      "boxShadow": "none"
+    },
+    "recoveryUrl": "http://localhost:3014/es/recipes/tarta-napoleon-sin-gluten#ingredients",
+    "migrated": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (1)\nVaciar todo\nYa está todo comprado.\nQuitar comprados (1)\nAzúcar o un plátano maduro y blando\nUsa la cantidad de azúcar indicada. Para sustituirla, machaca un plátano maduro y blando por cada cucharada de azúcar.\nPara Tortitas de manzana\n4 cdas.\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "persisted": {
+      "schemaVersion": 2,
+      "updatedAt": "2026-09-27T13:58:53.067Z",
+      "items": [
+        {
+          "id": "sweetener:tbsp",
+          "ingredientId": "sweetener",
+          "quantity": {
+            "kind": "exact",
+            "value": 4,
+            "unit": "tbsp"
+          },
+          "checked": false,
+          "createdAt": "2026-09-20T00:00:00.000Z",
+          "updatedAt": "2026-09-27T13:58:53.067Z",
+          "sources": [
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:0.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:1.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:2",
+              "batchId": "additional"
+            }
+          ]
+        }
+      ]
+    },
+    "dedup": {
+      "id": "sweetener:tbsp",
+      "ingredientId": "sweetener",
+      "quantity": {
+        "kind": "exact",
+        "value": 4,
+        "unit": "tbsp"
+      },
+      "checked": false,
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "updatedAt": "2026-09-27T13:58:53.067Z",
+      "sources": [
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:0.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:1.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:2",
+          "batchId": "additional"
+        }
+      ]
+    },
+    "completion": "Salir del modo Cocina\n\nTortitas de manzana sin gluten\n\nCalculada\n\nPREPARACIÓN TERMINADA\n\nLa receta está lista.\n\n3 de 3 pasos completados\n\nNota privada\nOpcional. Los cambios se guardan automáticamente en este navegador.\n\nGuardada automáticamente en este navegador.\n\nPuedes volver a la receta o prepararla de nuevo: tu nota ya está guardada.\n\nVolver a la receta\nPreparar de nuevo",
+    "completionHref": "/es/recipes/tortitas-de-manzana-sin-gluten?mode=scale&scale=2",
+    "completionReturn": "http://localhost:3014/es/recipes/tortitas-de-manzana-sin-gluten?mode=scale&scale=2",
+    "overflow": false,
+    "pass": true
+  },
+  {
+    "locale": "es",
+    "width": 900,
+    "blockedDetail": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\nEsta configuración de la receta no está disponible.\n\nEste tamaño de molde no está resuelto para esta receta. Abre la receta base para elegir cantidades admitidas.\n\nAbrir la receta base\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "focus": {
+      "outline": "rgb(133, 60, 41) solid 3px",
+      "boxShadow": "none"
+    },
+    "recoveryUrl": "http://localhost:3014/es/recipes/tarta-napoleon-sin-gluten#ingredients",
+    "migrated": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (1)\nVaciar todo\nYa está todo comprado.\nQuitar comprados (1)\nAzúcar o un plátano maduro y blando\nUsa la cantidad de azúcar indicada. Para sustituirla, machaca un plátano maduro y blando por cada cucharada de azúcar.\nPara Tortitas de manzana\n4 cdas.\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "persisted": {
+      "schemaVersion": 2,
+      "updatedAt": "2026-09-27T13:58:57.959Z",
+      "items": [
+        {
+          "id": "sweetener:tbsp",
+          "ingredientId": "sweetener",
+          "quantity": {
+            "kind": "exact",
+            "value": 4,
+            "unit": "tbsp"
+          },
+          "checked": false,
+          "createdAt": "2026-09-20T00:00:00.000Z",
+          "updatedAt": "2026-09-27T13:58:57.959Z",
+          "sources": [
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:0.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:1.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:2",
+              "batchId": "additional"
+            }
+          ]
+        }
+      ]
+    },
+    "dedup": {
+      "id": "sweetener:tbsp",
+      "ingredientId": "sweetener",
+      "quantity": {
+        "kind": "exact",
+        "value": 4,
+        "unit": "tbsp"
+      },
+      "checked": false,
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "updatedAt": "2026-09-27T13:58:57.959Z",
+      "sources": [
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:0.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:1.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:2",
+          "batchId": "additional"
+        }
+      ]
+    },
+    "completion": "Salir del modo Cocina\n\nTortitas de manzana sin gluten\n\nCalculada\n\nPREPARACIÓN TERMINADA\n\nLa receta está lista.\n\n3 de 3 pasos completados\n\nNota privada\nOpcional. Los cambios se guardan automáticamente en este navegador.\n\nGuardada automáticamente en este navegador.\n\nPuedes volver a la receta o prepararla de nuevo: tu nota ya está guardada.\n\nVolver a la receta\nPreparar de nuevo",
+    "completionHref": "/es/recipes/tortitas-de-manzana-sin-gluten?mode=scale&scale=2",
+    "completionReturn": "http://localhost:3014/es/recipes/tortitas-de-manzana-sin-gluten?mode=scale&scale=2",
+    "overflow": false,
+    "pass": true
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "blockedDetail": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\nEsta configuración de la receta no está disponible.\n\nEste tamaño de molde no está resuelto para esta receta. Abre la receta base para elegir cantidades admitidas.\n\nAbrir la receta base\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "focus": {
+      "outline": "rgb(133, 60, 41) solid 3px",
+      "boxShadow": "none"
+    },
+    "recoveryUrl": "http://localhost:3014/es/recipes/tarta-napoleon-sin-gluten#ingredients",
+    "migrated": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (1)\nVaciar todo\nYa está todo comprado.\nQuitar comprados (1)\nAzúcar o un plátano maduro y blando\nUsa la cantidad de azúcar indicada. Para sustituirla, machaca un plátano maduro y blando por cada cucharada de azúcar.\nPara Tortitas de manzana\n4 cdas.\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "persisted": {
+      "schemaVersion": 2,
+      "updatedAt": "2026-09-27T13:59:02.851Z",
+      "items": [
+        {
+          "id": "sweetener:tbsp",
+          "ingredientId": "sweetener",
+          "quantity": {
+            "kind": "exact",
+            "value": 4,
+            "unit": "tbsp"
+          },
+          "checked": false,
+          "createdAt": "2026-09-20T00:00:00.000Z",
+          "updatedAt": "2026-09-27T13:59:02.851Z",
+          "sources": [
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:0.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:1.5"
+            },
+            {
+              "recipeId": "apple-fritters",
+              "recipeVersionId": "apple-fritters-source-v1",
+              "ingredientLineId": "sweetener",
+              "sectionId": "batter",
+              "selectedIngredientId": "sweetener",
+              "configurationKey": "scale:2",
+              "batchId": "additional"
+            }
+          ]
+        }
+      ]
+    },
+    "dedup": {
+      "id": "sweetener:tbsp",
+      "ingredientId": "sweetener",
+      "quantity": {
+        "kind": "exact",
+        "value": 4,
+        "unit": "tbsp"
+      },
+      "checked": false,
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "updatedAt": "2026-09-27T13:59:02.851Z",
+      "sources": [
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:0.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:1.5"
+        },
+        {
+          "recipeId": "apple-fritters",
+          "recipeVersionId": "apple-fritters-source-v1",
+          "ingredientLineId": "sweetener",
+          "sectionId": "batter",
+          "selectedIngredientId": "sweetener",
+          "configurationKey": "scale:2",
+          "batchId": "additional"
+        }
+      ]
+    },
+    "completion": "Salir del modo Cocina\nBake Again.\nMantener pantalla activa\n\nTortitas de manzana sin gluten\n\nCalculada\n\nPREPARACIÓN\n\n3 / 3\nPrepara las manzanas\nMezcla la masa\nCocina las tortitas\nIngredientes\n\nPREPARACIÓN TERMINADA\n\nLa receta está lista.\n\n3 de 3 pasos completados\n\nNota privada\nOpcional. Los cambios se guardan automáticamente en este navegador.\n\nGuardada automáticamente en este navegador.\n\nPuedes volver a la receta o prepararla de nuevo: tu nota ya está guardada.\n\nVolver a la receta\nPreparar de nuevo",
+    "completionHref": "/es/recipes/tortitas-de-manzana-sin-gluten?mode=scale&scale=2",
+    "completionReturn": "http://localhost:3014/es/recipes/tortitas-de-manzana-sin-gluten?mode=scale&scale=2",
+    "overflow": false,
+    "pass": true
+  }
+]

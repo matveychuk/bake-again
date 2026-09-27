@@ -1,0 +1,11 @@
+✔ disabled assistant releases need no OpenAI credentials (44.026292ms)
+✔ enabled assistant releases require both protected secrets (176.536583ms)
+✔ disabled assistant still requires valid release configuration (161.462792ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 446.65525

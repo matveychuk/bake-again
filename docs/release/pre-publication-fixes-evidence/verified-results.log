@@ -1,0 +1,9 @@
+{
+  quantities: { scenarios: 54, cookScreens: 648 },
+  navigation: 54,
+  configurations: { profiles: 9, cases: 153, renderStates: 306 },
+  notesCompositions: { scenarios: 72, cookScreens: 201 },
+  recoveryShopping: 9,
+  broadActions: 66,
+  migration: 162
+}

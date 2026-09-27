@@ -5,9 +5,10 @@ import { EvidenceBadge } from '@/components/recipe/evidence-badge';
 /* oxlint-disable react-compiler/react-compiler -- Restore the versioned browser session once after hydration. */
 
 import { trackEvent } from '@/lib/analytics/umami';
-import Link from 'next/link';
+/* oxlint-disable next/no-html-link-for-pages -- Match native recipe navigation; hydrated next/link fails in the production runtime. */
+import { RecipeConfigurationUnavailable } from '@/components/recipe/recipe-configuration-unavailable';
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
-import { ArrowLeft, CircleAlert, Clock3, NotebookPen, X } from 'lucide-react';
+import { ArrowLeft, Clock3, NotebookPen, X } from 'lucide-react';
 import { AssistantProvider } from '@/components/assistant';
 import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
 import {
@@ -70,7 +71,7 @@ export function CookModePage({
   const locationSearch = useSyncExternalStore(
     subscribeToLocation,
     getLocationSearch,
-    () => configurationSearch ? `?${configurationSearch}` : '',
+    () => (configurationSearch ? `?${configurationSearch}` : ''),
   );
   const resolvedDetailHref = `${baseDetailHref}${locationSearch}`;
   const state = useMemo(
@@ -256,24 +257,19 @@ export function CookModePage({
     return (
       <main className={styles.page}>
         <header className={styles.header}>
-          <Link href={resolvedDetailHref} className={styles.exit}>
+          <a href={resolvedDetailHref} className={styles.exit}>
             <ArrowLeft size={17} /> {messages.backToRecipe}
-          </Link>
-          <Link href={homeHref} className={styles.wordmark}>
+          </a>
+          <a href={homeHref} className={styles.wordmark}>
             Bake Again<span>.</span>
-          </Link>
+          </a>
           <p>{definition.recipeTitle}</p>
         </header>
-        <section
-          className={styles.unavailable}
-          aria-labelledby="cook-mode-unavailable-title"
-        >
-          <CircleAlert size={24} aria-hidden="true" />
-          <p>{messages.unavailableKicker}</p>
-          <h1 id="cook-mode-unavailable-title">{messages.unavailableTitle}</h1>
-          <p>{state.unavailableReason}</p>
-          <Link href={resolvedDetailHref}>{messages.unavailableLink}</Link>
-        </section>
+        <RecipeConfigurationUnavailable
+          locale={locale}
+          reason={state.unavailableReason}
+          href={resolvedDetailHref}
+        />
       </main>
     );
   }
@@ -294,10 +290,19 @@ export function CookModePage({
   }
 
   function completeAndNext() {
-    if (!isComplete) trackEvent('cook_step_complete', { recipe_id: definition?.recipeId, locale, count: stepIndex + 1 });
+    if (!isComplete)
+      trackEvent('cook_step_complete', {
+        recipe_id: definition?.recipeId,
+        locale,
+        count: stepIndex + 1,
+      });
     setCompletedStepIds((items) => [...new Set([...items, ...step.stepIds])]);
     if (stepIndex === cookSteps.length - 1) {
-      if (!completedAt) trackEvent('cook_complete', { recipe_id: definition?.recipeId, locale });
+      if (!completedAt)
+        trackEvent('cook_complete', {
+          recipe_id: definition?.recipeId,
+          locale,
+        });
       setNoteSaveStatus('saving');
       setCompletedAt(new Date().toISOString());
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -326,7 +331,8 @@ export function CookModePage({
     }
     const duration = currentTimer?.durationSeconds ?? step.timerSeconds ?? 0;
     const seconds = currentTimer?.remainingSeconds || duration;
-    if (seconds > 0) trackEvent('timer_start', { recipe_id: definition?.recipeId, locale });
+    if (seconds > 0)
+      trackEvent('timer_start', { recipe_id: definition?.recipeId, locale });
     setTimer({
       stepId: timerStepId,
       durationSeconds: duration,
@@ -373,19 +379,23 @@ export function CookModePage({
   const page = (
     <main className={styles.page}>
       <header className={styles.header}>
-        <Link href={resolvedDetailHref} className={styles.exit}>
+        <a href={resolvedDetailHref} className={styles.exit}>
           <ArrowLeft size={17} /> {messages.exit}
-        </Link>
-        <Link href={homeHref} className={styles.wordmark}>
+        </a>
+        <a href={homeHref} className={styles.wordmark}>
           Bake Again<span>.</span>
-        </Link>
+        </a>
         <div className={styles.headerTools}>
           <CookWakeLock locale={locale} />
           <p>
             {definition.recipeTitle}
-            {state.isAdjusted && !state.evidence ? ` · ${messages.adjustedStatus}` : ''}
+            {state.isAdjusted && !state.evidence
+              ? ` · ${messages.adjustedStatus}`
+              : ''}
           </p>
-          {state.evidence && <EvidenceBadge locale={locale} status={state.evidence.status} />}
+          {state.evidence && (
+            <EvidenceBadge locale={locale} status={state.evidence.status} />
+          )}
         </div>
       </header>
       <div

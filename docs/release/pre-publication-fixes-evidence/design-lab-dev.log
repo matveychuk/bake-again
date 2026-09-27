@@ -1,0 +1,23 @@
+
+> bake-again@0.1.0 predev
+> npm run media:prepare
+
+
+> bake-again@0.1.0 media:prepare
+> node scripts/prepare-media.mjs
+
+Prepared 138 referenced media files (29.60 MiB); left 60 source files out of the publish bundle.
+
+> bake-again@0.1.0 dev
+> vinext dev --port 3015
+
+
+  Another vinext dev server is already running.
+  
+  - Local:        http://localhost:3000
+  - PID:          34305
+  - Dir:          /Users/sasha/Bake Again
+  
+  You can access the existing server at http://localhost:3000,
+  or run `kill 34305` to stop it and start a new one.
+

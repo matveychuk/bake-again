@@ -1,3 +1,5 @@
+import { RecipeConfigurationUnavailable } from '@/components/recipe/recipe-configuration-unavailable';
+import { formatQuantity } from '@/lib/i18n/format';
 import { NotFoundContent } from '@/components/site/not-found-content';
 import { Button } from '@/components/ui/button';
 /* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
@@ -420,7 +422,9 @@ export default function DesignSystemPage() {
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}>
                 <strong>Localized catalogue order</strong>
-                <span>First six published recipes · approved editorial selection</span>
+                <span>
+                  First six published recipes · approved editorial selection
+                </span>
               </div>
               <p>
                 Each language has its own discovery order. Collections keep that
@@ -431,16 +435,18 @@ export default function DesignSystemPage() {
                 <div key={locale} lang={locale}>
                   <h3>{localeMetadata[locale].label}</h3>
                   <div className="recipe-grid recipe-grid--catalog-preview">
-                    {getRecipeCatalog(locale).slice(0, 6).map((recipe) => (
-                      <RecipeCard
-                        key={recipe.id}
-                        recipe={{
-                          ...recipe,
-                          locale,
-                          href: getLocalizedRecipePath(recipe.id, locale)!,
-                        }}
-                      />
-                    ))}
+                    {getRecipeCatalog(locale)
+                      .slice(0, 6)
+                      .map((recipe) => (
+                        <RecipeCard
+                          key={recipe.id}
+                          recipe={{
+                            ...recipe,
+                            locale,
+                            href: getLocalizedRecipePath(recipe.id, locale)!,
+                          }}
+                        />
+                      ))}
                   </div>
                 </div>
               ))}
@@ -513,17 +519,37 @@ export default function DesignSystemPage() {
             <div className={styles.componentBlock} id="scaling-consistency">
               <div className={styles.componentLabel}>
                 <strong>Calculated method and preparation notes</strong>
-                <span>2× quantities · proportional alternatives · blocked unresolved Cook version</span>
+                <span>
+                  2× quantities · proportional alternatives · blocked unresolved
+                  Cook version
+                </span>
               </div>
               <div className={styles.recipeOverviewExample}>
                 {(['uk', 'en', 'es'] as const).map((locale) => {
                   const plum = applySourceRecipeConfiguration(
                     getRecipeContent('plum-cake', locale)!,
-                    { kind: 'adjusted', scaleFactor: 2 }, locale,
+                    { kind: 'adjusted', scaleFactor: 2 },
+                    locale,
                   );
-                  const step = plum.steps.find((item) => item.id === 'fold-butter')!;
+                  const napoleon = applySourceRecipeConfiguration(
+                    getRecipeContent('gluten-free-napoleon', locale)!,
+                    { kind: 'adjusted', scaleFactor: 2 },
+                    locale,
+                  );
+                  const fritters = applySourceRecipeConfiguration(
+                    getRecipeContent('apple-fritters', locale)!,
+                    { kind: 'adjusted', scaleFactor: 2 },
+                    locale,
+                  );
+                  const sweetener = fritters.ingredientSections
+                    .flatMap((section) => section.ingredients)
+                    .find((line) => line.id === 'sweetener')!;
+                  const step = plum.steps.find(
+                    (item) => item.id === 'fold-butter',
+                  )!;
                   const blocked = resolveNapoleonCookConfiguration(
-                    'mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g', locale,
+                    'mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g',
+                    locale,
                   );
                   return (
                     <div key={locale} lang={locale}>
@@ -533,14 +559,54 @@ export default function DesignSystemPage() {
                         headingLevel="h3"
                         locale={locale}
                         tipLabel={getUiMessages(locale).recipe.tip}
-                        checkpointLabel={getUiMessages(locale).recipe.checkpoint}
+                        checkpointLabel={
+                          getUiMessages(locale).recipe.checkpoint
+                        }
                       >
                         <p>{step.body}</p>
                       </RecipeStepContent>
-                      <RecipePlanItem label={getUiMessages(locale).recipe.keepInMind}>
-                        <p>{getRecipeContent('prune-cake', locale)?.beforeStart?.[1]}</p>
+                      <RecipePlanItem
+                        label={getUiMessages(locale).recipe.keepInMind}
+                      >
+                        <p>
+                          {
+                            getRecipeContent('prune-cake', locale)
+                              ?.beforeStart?.[1]
+                          }
+                        </p>
                       </RecipePlanItem>
+                      <p>
+                        {
+                          napoleon.steps.find(
+                            (item) => item.id === 'mix-custard-base',
+                          )?.body
+                        }
+                      </p>
+                      <p>
+                        {
+                          napoleon.steps.find(
+                            (item) => item.id === 'assemble-cake',
+                          )?.body
+                        }
+                      </p>
+                      <p>
+                        {sweetener.name}:{' '}
+                        {formatQuantity(locale, sweetener.quantity.base)}.{' '}
+                        {sweetener.note}
+                      </p>
                       {blocked.kind === 'blocked' && <p>{blocked.reason}</p>}
+                      <RecipeConfigurationUnavailable
+                        locale={locale}
+                        variant="detail"
+                        titleId={`unsupported-${locale}`}
+                        reason={
+                          getUiMessages(locale).scaling.unsupportedGeometry
+                        }
+                        href={getLocalizedRecipePath(
+                          'gluten-free-napoleon',
+                          locale,
+                        )!}
+                      />
                     </div>
                   );
                 })}
@@ -550,14 +616,27 @@ export default function DesignSystemPage() {
             <div className={styles.componentBlock} id="release-states">
               <div className={styles.componentLabel}>
                 <strong>Composed recipe evidence and missing pages</strong>
-                <span>Suggested pair · independent component evidence · localized recovery</span>
+                <span>
+                  Suggested pair · independent component evidence · localized
+                  recovery
+                </span>
               </div>
               {(['uk', 'en', 'es'] as const).map((locale) => (
                 <div key={locale} lang={locale}>
-                  <RecipeOverview locale={locale} showWorkingRecord={false} content={composeRecipeWithCream(
-                    getRecipeContent('eclairs', locale)!, getRecipeContent('vanilla-egg-custard', locale), 'vanilla-egg-custard', locale,
-                  )} />
-                  <NotFoundContent locale={locale} headingId={`missing-example-${locale}`} />
+                  <RecipeOverview
+                    locale={locale}
+                    showWorkingRecord={false}
+                    content={composeRecipeWithCream(
+                      getRecipeContent('eclairs', locale)!,
+                      getRecipeContent('vanilla-egg-custard', locale),
+                      'vanilla-egg-custard',
+                      locale,
+                    )}
+                  />
+                  <NotFoundContent
+                    locale={locale}
+                    headingId={`missing-example-${locale}`}
+                  />
                 </div>
               ))}
             </div>
@@ -608,7 +687,11 @@ export default function DesignSystemPage() {
                     </h3>
                     <RecipeCookEntry
                       locale={locale}
-                      href={getLocalizedRecipePath('plum-cake', locale, '/cook')!}
+                      href={getLocalizedRecipePath(
+                        'plum-cake',
+                        locale,
+                        '/cook',
+                      )!}
                     />
                   </div>
                 ))}

@@ -1,5 +1,12 @@
 # Design system changelog
 
+## 2026-09-27 · Pre-publication configuration recovery
+
+- Shared the existing unavailable Cook treatment with a recipe-detail variant and explicit base-recipe recovery for unsupported parameters and geometry.
+- Kept return navigation usable before and after hydration with native anchors.
+- Updated multilingual Design Lab examples for scaled custard eggs, per-cake assembly and quantified sugar alternatives in shopping.
+- Preserved semantic tokens, status icons and session identities.
+
 ## 2026-09-26 · Impersonal multilingual recipe copy and metadata
 
 - Standardized reader-facing UK/EN/ES copy and food descriptions; removed public

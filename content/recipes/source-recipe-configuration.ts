@@ -95,7 +95,7 @@ export function parseSourceRecipeConfiguration(
       (bounds?.maximum === undefined || numericAmount <= bounds.maximum);
     if (
       ingredientId !== anchor.ingredient.id ||
-      unit !== anchor.amount.unit ||
+      unitParam !== anchor.amount.unit ||
       !supported
     ) {
       return {

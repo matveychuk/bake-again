@@ -1,0 +1,4 @@
+
+> bake-again@0.1.0 lint
+> oxlint --ignore-pattern docs/release/pre-publication-*-evidence/**
+

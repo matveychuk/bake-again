@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+/* oxlint-disable next/no-html-link-for-pages -- Keep recipe recovery independent of hydration. */
 import { CheckCircle2, RotateCcw, Save } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
@@ -61,7 +61,7 @@ export function CookCompletion({
         {messages.completionNextSteps}
       </p>
       <div className={styles.completionActions}>
-        <Link href={detailHref}>{messages.returnToRecipe}</Link>
+        <a href={detailHref}>{messages.returnToRecipe}</a>
         <Button variant="default" type="button" onClick={onRestart}>
           <RotateCcw aria-hidden="true" size={17} /> {messages.cookAgain}
         </Button>

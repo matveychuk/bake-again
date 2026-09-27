@@ -22,9 +22,9 @@ export const glutenFreeNapoleonRecipe = {
     es: 'Tarta Napoleón sin gluten',
   },
   summary: {
-    uk: 'Два торти по 6 тонких коржів діаметром 28 см із теплим заварним кремом і горіхами.',
-    en: 'Two cakes with six thin 28 cm layers each, warm custard and nuts.',
-    es: 'Dos tartas con seis capas finas de 28 cm cada una, crema pastelera templada y frutos secos.',
+    uk: 'Торти по 6 тонких коржів діаметром 28 см із теплим заварним кремом і горіхами.',
+    en: 'Cakes with six thin 28 cm layers each, warm custard and nuts.',
+    es: 'Tartas con seis capas finas de 28 cm cada una, crema pastelera templada y frutos secos.',
   },
   categoryIds: ['celebration', 'layer-cake'],
   situationIds: ['celebration'],
@@ -268,9 +268,9 @@ export const glutenFreeNapoleonRecipe = {
       id: 'plan-parchment',
       relatedStepId: 'roll-layer',
       text: {
-        uk: 'Підготуйте достатньо листів пергаменту для 12 коржів: кожен розкачується між двома листами й випікається на нижньому.',
-        en: 'Have enough sheets of baking parchment for 12 layers: each is rolled between two sheets and baked on the lower one.',
-        es: 'Prepara suficientes hojas de papel de horno para 12 capas: cada una se estira entre dos hojas y se hornea sobre la inferior.',
+        uk: 'Підготуйте достатньо листів пергаменту для всіх коржів: кожен розкачується між двома листами й випікається на нижньому.',
+        en: 'Have enough sheets of baking parchment for all the layers: each is rolled between two sheets and baked on the lower one.',
+        es: 'Prepara suficientes hojas de papel de horno para todas las capas: cada una se estira entre dos hojas y se hornea sobre la inferior.',
       },
     },
     {
@@ -806,11 +806,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'divide-and-chill',
-      quantityMentions: [{
-        text: { uk: '12', en: 'twelve', es: 'doce' },
-        quantity: { kind: 'exact', value: 12, unit: 'piece' },
-        numberOnly: true,
-      }],
+      quantityMentions: [
+        {
+          text: { uk: '12', en: 'twelve', es: 'doce' },
+          quantity: { kind: 'exact', value: 12, unit: 'piece' },
+          numberOnly: true,
+        },
+      ],
       title: {
         uk: 'Розділіть і охолодіть',
         en: 'Divide and chill',
@@ -894,10 +896,12 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'heat-milk',
-      quantityMentions: [{
-        text: { uk: '600–650 мл', en: '600–650 ml', es: '600–650 ml' },
-        quantity: { kind: 'range', min: 600, max: 650, unit: 'ml' },
-      }],
+      quantityMentions: [
+        {
+          text: { uk: '600–650 мл', en: '600–650 ml', es: '600–650 ml' },
+          quantity: { kind: 'range', min: 600, max: 650, unit: 'ml' },
+        },
+      ],
       title: {
         uk: 'Нагрійте молоко',
         en: 'Heat the milk',
@@ -913,15 +917,21 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'mix-custard-base',
+      quantityMentions: [
+        {
+          text: { uk: '4 шт.', en: '4 pcs', es: '4 uds.' },
+          quantity: { kind: 'exact', value: 4, unit: 'piece' },
+        },
+      ],
       title: {
         uk: 'Змішайте основу крему',
         en: 'Mix the custard base',
         es: 'Prepara la base de la crema',
       },
       instruction: {
-        uk: 'У великій мисці змішайте цукор, обидва крохмалі, ванільний цукор і сіль. Додайте відлите холодне молоко й розмішайте до гладкості, потім додайте 4 яйця.',
-        en: 'In a large bowl, combine the sugar, both starches, vanilla sugar and salt. Add the reserved cold milk and stir until smooth, then add the four eggs.',
-        es: 'En un bol grande, mezcla el azúcar, los dos almidones, el azúcar vainillado y la sal. Añade la leche fría reservada y remueve hasta que quede liso; incorpora después los cuatro huevos.',
+        uk: 'У великій мисці змішайте цукор, обидва крохмалі, ванільний цукор і сіль. Додайте відлите холодне молоко й розмішайте до гладкості, потім додайте яйця для крему — 4 шт.',
+        en: 'In a large bowl, combine the sugar, both starches, vanilla sugar and salt. Add the reserved cold milk and stir until smooth, then add the custard eggs — 4 pcs.',
+        es: 'En un bol grande, mezcla el azúcar, los dos almidones, el azúcar vainillado y la sal. Añade la leche fría reservada y remueve hasta que quede liso; incorpora después los huevos para la crema: 4 uds.',
       },
       ingredientLineIds: [
         'sugar-custard',
@@ -1027,14 +1037,14 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'assemble-cake',
       title: {
-        uk: 'Складіть два торти',
+        uk: 'Складіть торти',
         en: 'Assemble the cakes',
         es: 'Monta las tartas',
       },
       instruction: {
-        uk: 'Складіть два торти по 6 коржів. Використовуйте крем теплим. Нанесіть крем на кожен корж, додаючи волоські горіхи через один шар. Зверху посипте крихтою від коржів і мигдальними пластівцями.',
-        en: 'Assemble two cakes with six layers each. Use the custard while warm. Spread it on every layer, adding walnuts to every other layer. Finish with layer crumbs and flaked almonds.',
-        es: 'Monta dos tartas de seis capas cada una. Usa la crema templada. Extiéndela sobre cada capa y añade nueces en capas alternas. Termina con migas de los recortes y almendras laminadas.',
+        uk: 'На кожен торт використайте 6 коржів. Використовуйте крем теплим. Нанесіть крем на кожен корж, додаючи волоські горіхи через один шар. Зверху посипте крихтою від коржів і мигдальними пластівцями.',
+        en: 'Use six layers for each cake. Use the custard while warm. Spread it on every layer, adding walnuts to every other layer. Finish with layer crumbs and flaked almonds.',
+        es: 'Usa seis capas para cada tarta. Usa la crema templada. Extiéndela sobre cada capa y añade nueces en capas alternas. Termina con migas de los recortes y almendras laminadas.',
       },
       ingredientLineIds: ['walnuts', 'flaked-almonds'],
       mediaIds: ['napoleon-round-six-layer-assembly-v3'],
