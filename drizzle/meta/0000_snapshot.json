@@ -1,0 +1,146 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "fd5aec47-ecea-45db-a493-71e4cd97d685",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "assistant_quota_reservations": {
+      "name": "assistant_quota_reservations",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "session_key": {
+          "name": "session_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "network_key": {
+          "name": "network_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "lease_until": {
+          "name": "lease_until",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "reserved_microusd": {
+          "name": "reserved_microusd",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "assistant_quota_created": {
+          "name": "assistant_quota_created",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "assistant_quota_session": {
+          "name": "assistant_quota_session",
+          "columns": [
+            "session_key",
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "assistant_quota_network": {
+          "name": "assistant_quota_network",
+          "columns": [
+            "network_key",
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "assistant_reserved_nonnegative": {
+          "name": "assistant_reserved_nonnegative",
+          "value": "\"assistant_quota_reservations\".\"reserved_microusd\" >= 0"
+        }
+      }
+    },
+    "assistant_verification_attempts": {
+      "name": "assistant_verification_attempts",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "network_key": {
+          "name": "network_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "assistant_verification_network": {
+          "name": "assistant_verification_network",
+          "columns": [
+            "network_key",
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "assistant_verification_created": {
+          "name": "assistant_verification_created",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

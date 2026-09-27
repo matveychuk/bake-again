@@ -3,10 +3,18 @@
 ## Product integration
 
 Recipe Detail and Cook Mode render the same client component from
-`components/assistant`. Both typed questions and suggested prompts post the validated
-`AssistantRequestV1` payload to `/api/assistant`. The client sends the active locale,
-canonical recipe/version IDs, the exact displayed base or adjusted configuration, and
-canonical step IDs for step-scoped questions.
+`components/assistant`. Prepared step questions resolve locally from reviewed recipe
+content and never post to the API. Only manually submitted questions (and their explicit
+retries) post the validated `AssistantRequestV1` payload to `/api/assistant`, on recipes
+supported by the existing live rollout. The client sends the active locale, canonical
+recipe/version IDs, the exact displayed base or adjusted configuration, and canonical
+step IDs for step-scoped questions. The selected prepared question and answer enter the
+bounded history for a subsequent typed follow-up.
+
+Prepared help covers every canonical recipe, including source-backed records that are
+not supported by live AI. Simple steps have no local help trigger. The complete decision
+register, source-change checks, and configuration rules are documented in
+[the step audit](assistant-step-audit/implementation.md).
 
 The drawer keeps at most four whitespace-normalized history messages, disables every
 submit path while a request is active, and aborts that request when the drawer closes.
@@ -144,3 +152,9 @@ draft availability, immutable source data, source-field exclusion, ingredient ch
 calculation warnings, bad IDs/steps/locales and forged or non-finite configuration data.
 The suite makes no paid or network requests. Run `npm run typecheck`, focused lint,
 foundation tests, recipe validation and the production build for integration checks.
+
+## Shared abuse and budget controls
+
+Custom model requests now pass server-side Turnstile and atomic D1 quota/budget
+reservations. See [protection limits, activation and verification](assistant-protection.md).
+The production resources remain an activation gate; prepared step answers do not use them.

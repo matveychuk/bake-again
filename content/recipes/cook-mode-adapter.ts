@@ -1,3 +1,4 @@
+import { resolveStepHelp } from './step-help.ts';
 import type {
   CookIngredient,
   CookStep,
@@ -119,6 +120,7 @@ export function createSourceCookSteps(
     );
 
     return {
+      preparedAnswers: steps.flatMap(resolveStepHelp),
       stepIds: stepIds as [string, ...string[]],
       technique: steps.find((step) => step.technique)?.technique,
       number: String(index + 1).padStart(2, '0'),

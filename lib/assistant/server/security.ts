@@ -57,15 +57,18 @@ function constantTimeEqual(left: string, right: string): boolean {
 async function readSessionId(
   request: Request,
   secret: string,
+  now: number,
 ): Promise<string | null> {
   const value = cookieValue(request);
   if (!value) return null;
-  const match = /^v1\.([A-Za-z0-9_-]{16,64})\.([A-Za-z0-9_-]{40,64})$/u.exec(
+  const match = /^v2\.([A-Za-z0-9_-]{16,64})\.(\d{10})\.([A-Za-z0-9_-]{40,64})$/u.exec(
     value,
   );
   if (!match) return null;
-  const expected = await keyedDigest(secret, `cookie:v1:${match[1]}`);
-  return constantTimeEqual(match[2]!, expected) ? match[1]! : null;
+  const expires = Number(match[2]);
+  if (expires <= now || expires > now + ASSISTANT_SESSION_MAX_AGE_SECONDS) return null;
+  const expected = await keyedDigest(secret, `cookie:v2:${match[1]}:${expires}`);
+  return constantTimeEqual(match[3]!, expected) ? match[1]! : null;
 }
 
 function sessionCookie(request: Request, value: string): string {
@@ -81,16 +84,18 @@ export async function resolveAnonymousAssistantIdentity(
   request: Request,
   secret: string,
   createSessionId: () => string = () => crypto.randomUUID().replaceAll('-', ''),
+  now: number = Math.floor(Date.now() / 1000),
 ): Promise<AssistantAnonymousIdentity> {
-  let sessionId = await readSessionId(request, secret);
+  let sessionId = await readSessionId(request, secret, now);
   let setCookie: string | null = null;
   if (!sessionId) {
     sessionId = createSessionId();
     if (!/^[A-Za-z0-9_-]{16,64}$/u.test(sessionId)) {
       throw new Error('Invalid generated assistant session ID.');
     }
-    const signature = await keyedDigest(secret, `cookie:v1:${sessionId}`);
-    setCookie = sessionCookie(request, `v1.${sessionId}.${signature}`);
+    const expires = now + ASSISTANT_SESSION_MAX_AGE_SECONDS;
+    const signature = await keyedDigest(secret, `cookie:v2:${sessionId}:${expires}`);
+    setCookie = sessionCookie(request, `v2.${sessionId}.${expires}.${signature}`);
   }
 
   const safetyDigest = await keyedDigest(secret, `safety:v1:${sessionId}`);

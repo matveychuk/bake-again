@@ -1,5 +1,10 @@
 'use client';
 
+import type { PreparedStepAnswer } from '@/content/recipes/step-help';
+import { Button } from '@/components/ui/button';
+import { preparedAnswerExchange } from './prepared-answer';
+import { AssistantVerification, verificationMessages } from './verification';
+import { stepHelpMessages } from './step-help.messages';
 import { trackEvent } from '@/lib/analytics/umami';
 import {
   createContext,
@@ -14,6 +19,7 @@ import {
 import {
   ArrowRight,
   Bot,
+  BookOpen,
   CircleAlert,
   LoaderCircle,
   MessageCircleQuestion,
@@ -51,6 +57,7 @@ type OpenAssistantOptions = {
   scope: AssistantScope;
   configuration: AssistantConfiguration;
   stepTitle?: string;
+  preparedAnswers?: PreparedStepAnswer[];
 };
 
 type ActiveAssistant = OpenAssistantOptions & { trigger: HTMLElement | null };
@@ -101,6 +108,7 @@ export function AssistantProvider({
   recipeTitle,
   locale,
   surface,
+  liveEnabled = true,
 }: {
   children: ReactNode;
   recipeId: string;
@@ -108,10 +116,17 @@ export function AssistantProvider({
   recipeTitle: string;
   locale: AppLocale;
   surface: AssistantSurface;
+  liveEnabled?: boolean;
 }) {
   const [active, setActive] = useState<ActiveAssistant | null>(null);
   const [phase, setPhase] = useState<RequestPhase>('idle');
   const [question, setQuestion] = useState('');
+  const [answerSource, setAnswerSource] = useState<'recipe' | 'ai'>('ai');
+  const [liveUnavailable, setLiveUnavailable] = useState(false);
+  const [verificationNeeded, setVerificationNeeded] = useState(false);
+  const [verificationToken, setVerificationToken] = useState<string | null>(null);
+  const [verificationAttempt, setVerificationAttempt] = useState(0);
+  const answerRef = useRef<HTMLDivElement | null>(null);
   const [lastQuestion, setLastQuestion] = useState('');
   const [blocks, setBlocks] = useState<AssistantBlock[]>([]);
   const [proposedAction, setProposedAction] = useState<ActionProposal | null>(null);
@@ -124,12 +139,15 @@ export function AssistantProvider({
   const submittingRef = useRef(false);
   const inputId = useId();
   const messages = assistantMessages[locale];
+  const helpMessages = stepHelpMessages[locale];
 
   const closeAssistant = useCallback(() => {
     requestRef.current?.abort();
     requestRef.current = null;
     submittingRef.current = false;
     const trigger = active?.trigger;
+    setVerificationToken(null);
+    setVerificationNeeded(false);
     setActive(null);
     window.setTimeout(() => trigger?.focus(), 0);
   }, [active]);
@@ -138,6 +156,10 @@ export function AssistantProvider({
     requestRef.current?.abort();
     requestRef.current = null;
     submittingRef.current = false;
+    setVerificationNeeded(false);
+    setVerificationToken(null);
+    setAnswerSource('ai');
+    setLiveUnavailable(false);
     setPhase('idle');
     setQuestion('');
     setLastQuestion('');
@@ -153,8 +175,11 @@ export function AssistantProvider({
 
   const submitQuestion = useCallback(async (rawQuestion: string) => {
     const nextQuestion = rawQuestion.trim();
-    if (!active || !nextQuestion || submittingRef.current || phase === 'disabled') return;
+    if (!verificationToken || !liveEnabled || liveUnavailable || !active || !nextQuestion || submittingRef.current) return;
 
+    const token = verificationToken;
+    setVerificationToken(null);
+    setAnswerSource('ai');
     trackEvent('assistant_submit', { recipe_id: recipeId, locale });
     submittingRef.current = true;
     requestRef.current?.abort();
@@ -185,7 +210,7 @@ export function AssistantProvider({
     try {
       const response = await fetch('/api/assistant', {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: { 'content-type': 'application/json', 'x-assistant-verification': token },
         body: JSON.stringify(payload),
         signal: controller.signal,
       });
@@ -201,6 +226,7 @@ export function AssistantProvider({
       if (!data.ok) {
         setErrorMessage(data.error.message);
         setCanRetry(data.error.retryable);
+        setLiveUnavailable(data.error.code === 'ASSISTANT_DISABLED');
         setPhase(data.error.code === 'ASSISTANT_DISABLED' ? 'disabled' : 'error');
         setAnnouncement(data.error.code === 'ASSISTANT_DISABLED' ? data.error.message : '');
         return;
@@ -219,9 +245,24 @@ export function AssistantProvider({
       setPhase('error');
       setAnnouncement('');
     } finally {
-      if (requestRef.current === controller) { requestRef.current = null; submittingRef.current = false; }
+      if (requestRef.current === controller) { requestRef.current = null; submittingRef.current = false; setVerificationAttempt(value => value + 1); }
     }
-  }, [active, history, locale, messages.answerReady, messages.emptyTitle, messages.genericError, messages.loading, phase, recipeId, recipeVersionId, surface]);
+  }, [verificationToken, liveEnabled, liveUnavailable, active, history, locale, messages.answerReady, messages.emptyTitle, messages.genericError, messages.loading, recipeId, recipeVersionId, surface]);
+
+  const showPreparedAnswer = (answer: PreparedStepAnswer) => {
+    if (submittingRef.current) return;
+    const exchange = preparedAnswerExchange(answer, history);
+    setAnswerSource('recipe');
+    setLastQuestion(answer.question);
+    setBlocks(exchange.blocks);
+    setHistory(exchange.history);
+    setProposedAction(null);
+    setErrorMessage('');
+    setCanRetry(false);
+    setPhase('success');
+    setAnnouncement(`${helpMessages.source}. ${messages.answerReady}`);
+    window.requestAnimationFrame(() => answerRef.current?.focus());
+  };
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -229,9 +270,10 @@ export function AssistantProvider({
   };
 
   const scopeKind = active?.scope.kind ?? 'recipe';
-  const prompts = messages.prompts[surface][scopeKind];
+  const preparedAnswers = active?.preparedAnswers ?? [];
+  const hasPreparedAnswers = preparedAnswers.length > 0;
   const isBusy = phase === 'loading';
-  const isDisabled = phase === 'disabled';
+  const isDisabled = liveUnavailable;
 
   return (
     <AssistantContext.Provider value={{ openAssistant }}>
@@ -246,13 +288,13 @@ export function AssistantProvider({
         {active && (
           <DrawerContent className={styles.drawer} initialFocus={closeRef} aria-describedby={`${inputId}-description`}>
             <header className={styles.header}>
-              <div className={styles.mark}><Sparkles size={18} aria-hidden="true" /></div>
+              <div className={styles.mark}>{hasPreparedAnswers ? <BookOpen size={18} aria-hidden="true" /> : <Sparkles size={18} aria-hidden="true" />}</div>
               <div className={styles.heading}>
                 <p className={styles.kicker}>
                   {scopeKind === 'recipe' ? recipeTitle : messages.kicker[scopeKind]}
                   {active.stepTitle ? ` · ${active.stepTitle}` : ''}
                 </p>
-                <DrawerTitle className={styles.title}>{messages.title[surface][scopeKind]}</DrawerTitle>
+                <DrawerTitle className={styles.title}>{hasPreparedAnswers ? helpMessages.title : messages.title[surface][scopeKind]}</DrawerTitle>
               </div>
               <DrawerClose ref={closeRef} className={styles.close} aria-label={messages.close}>
                 <X size={20} aria-hidden="true" />
@@ -260,14 +302,14 @@ export function AssistantProvider({
             </header>
 
             <DrawerDescription id={`${inputId}-description`} className="sr-only">
-              {messages.contextBody[surface]}
+              {hasPreparedAnswers ? helpMessages.description : messages.contextBody[surface]}
             </DrawerDescription>
             <p className="sr-only" aria-live="polite" aria-atomic="true">{announcement}</p>
 
             <div className={styles.body}>
               <div className={styles.context}>
-                <Bot size={18} aria-hidden="true" />
-                <p><strong>{messages.contextTitle}</strong>{messages.contextBody[surface]}</p>
+                {hasPreparedAnswers ? <BookOpen size={18} aria-hidden="true" /> : <Bot size={18} aria-hidden="true" />}
+                <p><strong>{hasPreparedAnswers ? helpMessages.source : messages.contextTitle}</strong>{hasPreparedAnswers ? helpMessages.description : messages.contextBody[surface]}</p>
               </div>
 
               {lastQuestion && phase !== 'idle' && (
@@ -285,7 +327,10 @@ export function AssistantProvider({
               )}
 
               {phase === 'success' && (
-                <AssistantBlocks blocks={blocks} locale={locale} />
+                <div ref={answerRef} tabIndex={-1} className={styles.answerResult}>
+                  {answerSource === 'recipe' && <p className={styles.promptLabel}>{helpMessages.source}</p>}
+                  <AssistantBlocks blocks={blocks} locale={locale} />
+                </div>
               )}
 
               {phase === 'success' && proposedAction && (
@@ -317,7 +362,7 @@ export function AssistantProvider({
                   <div>
                     <p><strong>{messages.errorTitle}</strong>{errorMessage}</p>
                     {canRetry && (
-                      <button className={styles.retry} type="button" onClick={() => void submitQuestion(lastQuestion)}>
+                      <button className={styles.retry} type="button" disabled={!verificationToken} onClick={() => void submitQuestion(lastQuestion)}>
                         {messages.retry}
                       </button>
                     )}
@@ -332,46 +377,50 @@ export function AssistantProvider({
                 </div>
               )}
 
-              {(phase === 'idle' || phase === 'success' || phase === 'empty' || phase === 'error') && (
+              {hasPreparedAnswers && (
                 <>
-                  <p className={styles.promptLabel}>{messages.suggestedQuestions}</p>
+                  <p className={styles.promptLabel}>{helpMessages.questions}</p>
                   <div className={styles.prompts}>
-                    {prompts.map((prompt) => (
+                    {preparedAnswers.map((answer) => (
                       <button
                         className={styles.prompt}
                         type="button"
-                        key={prompt}
+                        key={answer.id}
                         disabled={isBusy}
-                        onClick={() => void submitQuestion(prompt)}
+                        aria-pressed={answerSource === 'recipe' && lastQuestion === answer.question}
+                        onClick={() => showPreparedAnswer(answer)}
                       >
-                        {prompt}<ArrowRight size={16} aria-hidden="true" />
+                        {answer.question}<ArrowRight size={16} aria-hidden="true" />
                       </button>
                     ))}
                   </div>
                 </>
               )}
+              {liveEnabled && <p className={styles.quotaNote}>{verificationMessages[locale].limits}</p>}
+              {liveEnabled && verificationNeeded && !isBusy && <AssistantVerification key={verificationAttempt} locale={locale} onToken={setVerificationToken} />}
             </div>
 
-            <form className={styles.composer} onSubmit={handleSubmit}>
-              <label className="sr-only" htmlFor={inputId}>{messages.questionLabel}</label>
+            {liveEnabled && <form className={styles.composer} onSubmit={handleSubmit}>
+              <label className={styles.composerLabel} htmlFor={inputId}>{helpMessages.chat}</label>
               <input
                 id={inputId}
                 value={question}
                 maxLength={ASSISTANT_MAX_QUESTION_CHARACTERS}
                 disabled={isBusy || isDisabled}
-                placeholder={messages.placeholder}
-                onChange={(event) => setQuestion(event.target.value)}
+                placeholder={helpMessages.placeholder}
+                onFocus={() => setVerificationNeeded(true)}
+                onChange={(event) => { setQuestion(event.target.value); setVerificationNeeded(true); }}
               />
               <button
                 className={styles.send}
                 type="submit"
                 aria-label={messages.send}
-                disabled={!question.trim() || isBusy || isDisabled}
+                disabled={!verificationToken || !question.trim() || isBusy || isDisabled}
               >
                 <Send size={18} aria-hidden="true" />
               </button>
-            </form>
-            <footer className={styles.footer}>{messages.disclaimer}</footer>
+            </form>}
+            <footer className={styles.footer}>{liveEnabled ? messages.disclaimer : helpMessages.description}</footer>
           </DrawerContent>
         )}
       </Drawer>
@@ -386,6 +435,7 @@ export function AssistantTrigger({
   stepTitle,
   className,
   compact = false,
+  preparedAnswers,
 }: {
   scope: AssistantScope;
   configuration: AssistantConfiguration;
@@ -393,17 +443,19 @@ export function AssistantTrigger({
   stepTitle?: string;
   className?: string;
   compact?: boolean;
+  preparedAnswers?: PreparedStepAnswer[];
 }) {
   const context = useContext(AssistantContext);
   if (!context) return null;
   return (
-    <button
+    <Button
+      variant="link"
       className={className}
       type="button"
-      onClick={(event) => context.openAssistant({ scope, configuration, stepTitle }, event.currentTarget)}
+      onClick={(event) => context.openAssistant({ scope, configuration, stepTitle, preparedAnswers }, event.currentTarget)}
     >
       <MessageCircleQuestion size={compact ? 14 : 17} aria-hidden="true" />
       {label}
-    </button>
+    </Button>
   );
 }

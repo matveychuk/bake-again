@@ -1,6 +1,6 @@
 import { List, ListChecks } from 'lucide-react';
 import { AssistantTrigger } from '@/components/assistant';
-import { assistantMessages } from '@/components/assistant/assistant.messages';
+import { stepHelpMessages } from '@/components/assistant/step-help.messages';
 import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
 import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
 import { StepMediaSequence } from '@/components/recipe/step-media-sequence';
@@ -64,12 +64,13 @@ export function CookStep({
         technique={step.technique}
         locale={locale}
         action={
-          assistant ? (
+          assistant && step.preparedAnswers?.length ? (
             <AssistantTrigger
               className={styles.ask}
               compact
               configuration={assistant.configuration}
-              label={assistantMessages[assistant.locale].trigger.step}
+              label={stepHelpMessages[assistant.locale].trigger}
+              preparedAnswers={step.preparedAnswers}
               scope={{ kind: 'step', stepIds: step.stepIds }}
               stepTitle={step.title}
             />

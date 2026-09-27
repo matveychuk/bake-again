@@ -12,6 +12,7 @@ export type CookIngredient = {
 };
 
 export type CookStep = {
+  preparedAnswers?: import('../../content/recipes/step-help.ts').PreparedStepAnswer[];
   technique?: import('../../content/techniques/types.ts').TechniqueReference;
   stepIds: [string, ...string[]];
   number: string;

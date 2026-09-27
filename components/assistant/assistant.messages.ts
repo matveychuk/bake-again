@@ -10,7 +10,6 @@ type AssistantMessages = {
   contextTitle: string;
   contextBody: Record<AssistantSurface, string>;
   suggestedQuestions: string;
-  prompts: Record<AssistantSurface, Record<AssistantScopeKind, string[]>>;
   questionLabel: string;
   placeholder: string;
   send: string;
@@ -58,18 +57,6 @@ export const assistantMessages: Record<AppLocale, AssistantMessages> = {
       'cook-mode': 'This step’s ingredients and checkpoints are included. Untested suggestions are labelled.',
     },
     suggestedQuestions: 'Suggested questions',
-    prompts: {
-      'recipe-detail': {
-        recipe: ['Explain the timing', 'What can I prepare tonight?', 'What should I check before starting?'],
-        flour: ['I have Schär Mix C', 'Why does the exact mix matter?', 'Which flour mix was used?'],
-        step: ['Is my texture right?', 'Explain this more simply', 'When should I stop mixing?'],
-      },
-      'cook-mode': {
-        recipe: ['What should I prepare next?', 'Explain the timing', 'What should I watch for?'],
-        flour: ['Which flour mix was used?', 'Why does the exact mix matter?', 'Is another mix recorded?'],
-        step: ['Does my texture sound right?', 'Explain this step more simply', 'What should I do if it looks too dry?'],
-      },
-    },
     questionLabel: 'Ask a question',
     placeholder: 'Ask in your own words…',
     send: 'Send question',
@@ -115,18 +102,6 @@ export const assistantMessages: Record<AppLocale, AssistantMessages> = {
       'cook-mode': 'Se incluyen los ingredientes y puntos de control de este paso. Las sugerencias no probadas llevan una etiqueta.',
     },
     suggestedQuestions: 'Preguntas sugeridas',
-    prompts: {
-      'recipe-detail': {
-        recipe: ['Explícame los tiempos', '¿Qué puedo preparar esta noche?', '¿Qué debo comprobar antes de empezar?'],
-        flour: ['Tengo Schär Mix C', '¿Por qué importa la mezcla exacta?', '¿Qué mezcla de harina se utilizó?'],
-        step: ['¿La textura es correcta?', 'Explica este paso de forma más sencilla', '¿Cuándo debo dejar de mezclar?'],
-      },
-      'cook-mode': {
-        recipe: ['¿Qué debo preparar después?', 'Explícame los tiempos', '¿En qué debo fijarme?'],
-        flour: ['¿Qué mezcla de harina se utilizó?', '¿Por qué importa la mezcla exacta?', '¿Hay otra mezcla registrada?'],
-        step: ['¿La textura que describo es correcta?', 'Explica este paso de forma más sencilla', '¿Qué hago si parece demasiado seco?'],
-      },
-    },
     questionLabel: 'Haz una pregunta',
     placeholder: 'Pregunta con tus propias palabras…',
     send: 'Enviar pregunta',
@@ -172,18 +147,6 @@ export const assistantMessages: Record<AppLocale, AssistantMessages> = {
       'cook-mode': 'Враховано інгредієнти й контрольні ознаки цього кроку. Неперевірені пропозиції мають позначку.',
     },
     suggestedQuestions: 'Запропоновані запитання',
-    prompts: {
-      'recipe-detail': {
-        recipe: ['Поясніть тривалість етапів', 'Що можна підготувати сьогодні ввечері?', 'Що перевірити перед початком?'],
-        flour: ['У мене є Schär Mix C', 'Чому важлива точна суміш?', 'Яку борошняну суміш використовували?'],
-        step: ['Чи правильна в мене текстура?', 'Поясніть цей крок простіше', 'Коли потрібно припинити змішування?'],
-      },
-      'cook-mode': {
-        recipe: ['Що підготувати далі?', 'Поясніть тривалість етапів', 'На що звернути увагу?'],
-        flour: ['Яку борошняну суміш використовували?', 'Чому важлива точна суміш?', 'Чи записано іншу суміш?'],
-        step: ['Чи схожа описана мною текстура на правильну?', 'Поясніть цей крок простіше', 'Що робити, якщо суміш здається надто сухою?'],
-      },
-    },
     questionLabel: 'Поставте запитання',
     placeholder: 'Запитайте своїми словами…',
     send: 'Надіслати запитання',

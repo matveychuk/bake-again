@@ -124,6 +124,7 @@ void test('uses Responses Structured Outputs, store false and the configured out
   );
 
   assert.equal(body?.store, false);
+  assert.equal(body?.service_tier, 'default');
   assert.equal(body?.safety_identifier, 'ba_test_identifier');
   assert.equal(body?.max_output_tokens, 777);
   assert.equal(body?.model, 'gpt-5.4-mini');

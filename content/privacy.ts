@@ -22,7 +22,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Якщо користуєтеся помічником',
-        body: 'Коли помічник доступний, ваше запитання й контекст рецепта надсилаються на сервер для формування відповіді за допомогою OpenAI. Це окрема дія від збереження приватної нотатки.',
+        body: 'Готові відповіді до кроків відкриваються без OpenAI. Коли ви надсилаєте власне запитання, сервер передає OpenAI запитання, коротку історію розмови та контекст рецепта. Для захисту від зловживань використовується підписана cookie на 48 годин. Перевірка Cloudflare Turnstile завантажується після переходу до поля власного запитання; під час перевірки Cloudflare отримує IP-адресу. У базі лімітів зберігаються лише захищені ідентифікатори, час і резерв витрат — без текстів запитань та відповідей. Під час наступних запитів ідентифікатори старші за 48 годин прибираються, а записи витрат старші за 35 днів видаляються. Приватні нотатки до помічника не передаються.',
       },
     ],
   },
@@ -44,7 +44,7 @@ export const privacyContent: Record<
       },
       {
         title: 'If you use the assistant',
-        body: 'When the assistant is available, your question and recipe context are sent to the server to produce a response using OpenAI. This is separate from saving a private cooking note.',
+        body: 'Prepared step answers open without OpenAI. When you send your own question, the server sends OpenAI the question, a short conversation history and recipe context. Abuse protection uses a signed cookie lasting 48 hours. Cloudflare Turnstile loads when you enter the custom-question field; Cloudflare receives your IP address during verification. The quota database stores only protected identifiers, timestamps and reserved spend, without question or answer text. Subsequent requests remove identifiers older than 48 hours and spend records older than 35 days. Private cooking notes are not sent to the assistant.',
       },
     ],
   },
@@ -66,7 +66,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Si utilizas el asistente',
-        body: 'Cuando el asistente está disponible, tu pregunta y el contexto de la receta se envían al servidor para generar una respuesta mediante OpenAI. Esta acción es independiente de guardar una nota privada.',
+        body: 'Las respuestas preparadas de los pasos se abren sin OpenAI. Al enviar tu propia pregunta, el servidor envía a OpenAI la pregunta, un historial breve de la conversación y el contexto de la receta. La protección contra abusos utiliza una cookie firmada de 48 horas. Cloudflare Turnstile se carga al entrar en el campo de preguntas propias; Cloudflare recibe tu dirección IP durante la verificación. La base de límites guarda solo identificadores protegidos, horas y gasto reservado, sin textos de preguntas ni respuestas. Las solicitudes posteriores eliminan los identificadores de más de 48 horas y los registros de gasto de más de 35 días. Las notas privadas no se envían al asistente.',
       },
     ],
   },

@@ -1,5 +1,6 @@
 'use client';
 
+import { stepHelpMessages } from '@/components/assistant/step-help.messages';
 import { EvidenceBadge } from '@/components/recipe/evidence-badge';
 
 /* oxlint-disable react-compiler/react-compiler -- Restore the versioned browser session once after hydration. */
@@ -9,7 +10,7 @@ import { trackEvent } from '@/lib/analytics/umami';
 import { RecipeConfigurationUnavailable } from '@/components/recipe/recipe-configuration-unavailable';
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import { ArrowLeft, Clock3, NotebookPen, X } from 'lucide-react';
-import { AssistantProvider } from '@/components/assistant';
+import { AssistantProvider, AssistantTrigger } from '@/components/assistant';
 import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
 import {
   Drawer,
@@ -387,6 +388,14 @@ export function CookModePage({
         </a>
         <div className={styles.headerTools}>
           <CookWakeLock locale={locale} />
+          {definition.assistant && state.assistantConfiguration && step && !isComplete && (
+            <AssistantTrigger
+              configuration={state.assistantConfiguration}
+              scope={{ kind: 'step', stepIds: step.stepIds }}
+              stepTitle={step.title}
+              label={stepHelpMessages[locale].chat}
+            />
+          )}
           <p>
             {definition.recipeTitle}
             {state.isAdjusted && !state.evidence
@@ -489,9 +498,7 @@ export function CookModePage({
                 onShowAllSteps={() => setStepsOpen(true)}
                 onShowIngredients={() => setIngredientsOpen(true)}
                 assistant={
-                  definition.assistant && state.assistantConfiguration
-                    ? { configuration: state.assistantConfiguration, locale }
-                    : undefined
+                  { configuration: state.assistantConfiguration ?? { kind: 'base' }, locale }
                 }
                 locale={locale}
               />
@@ -561,9 +568,11 @@ export function CookModePage({
     </main>
   );
 
-  return definition.assistant ? (
+  return (
     <AssistantProvider
-      recipeId={definition.assistant.recipeId}
+      key={`${recipeVersionId}:${JSON.stringify(state.assistantConfiguration)}`}
+      recipeId={definition.recipeId}
+      liveEnabled={Boolean(definition.assistant)}
       recipeVersionId={recipeVersionId}
       recipeTitle={definition.recipeTitle}
       locale={locale}
@@ -571,7 +580,5 @@ export function CookModePage({
     >
       {page}
     </AssistantProvider>
-  ) : (
-    page
   );
 }

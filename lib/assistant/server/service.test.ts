@@ -6,6 +6,7 @@ import type { AssistantRequestV1 } from '../contracts.ts';
 import type { AssistantRuntimeConfig } from './env.ts';
 import { AssistantServiceError } from './errors.ts';
 import type { AssistantProvider } from './openai.ts';
+import { protectAssistantProvider } from './quotas.ts';
 import { createAssistantService } from './service.ts';
 import { resolveActionReview } from '../actions.ts';
 
@@ -275,4 +276,21 @@ void test('records allowlisted content-free telemetry with model, latency, usage
     serialized,
     /test-key|Which flour|ba_private_identifier/u,
   );
+});
+
+void test('shared quota denial remains a quota error instead of a generic provider failure', async () => {
+  await assert.rejects(service({ answer: async () => { throw new AssistantServiceError('BUDGET_EXHAUSTED', 503); } }).respond(request, {
+    requestId: 'budget-denied', signal: new AbortController().signal,
+  }), { code: 'BUDGET_EXHAUSTED' });
+});
+
+void test('budget rejection prevents all model calls; provider failure still releases only concurrency', async () => {
+  let calls = 0; let releases = 0; let reserved = 0;
+  const upstream: AssistantProvider = { async answer() { calls++; throw new Error('timeout after possible billing'); } };
+  const denied = protectAssistantProvider(upstream, { async allowVerification() {}, async reserve() { throw new AssistantServiceError('BUDGET_EXHAUSTED', 503); } }, { sessionKey: 's', networkKey: 'n' }, 2000);
+  await assert.rejects(service(denied).respond(request, { requestId: 'denied', signal: new AbortController().signal }), { code: 'BUDGET_EXHAUSTED' });
+  assert.equal(calls, 0);
+  const protectedProvider = protectAssistantProvider(upstream, { async allowVerification() {}, async reserve(_actor, _id, cost) { reserved += cost; return { async release() { releases++; } }; } }, { sessionKey: 's', networkKey: 'n' }, 2000);
+  await assert.rejects(service(protectedProvider).respond(request, { requestId: 'timed-out', signal: new AbortController().signal }), { code: 'SERVICE_UNAVAILABLE' });
+  assert.equal(calls, 1); assert.equal(releases, 1); assert.equal(reserved, 33000);
 });

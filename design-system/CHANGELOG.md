@@ -733,3 +733,19 @@
   quantities, ratios, IDs or stored data. Clarify the cream-selector documentation.
 - Add the multilingual scaling-consistency Design Lab example and production-render
   regression checks to both the pull-request workflow and manual release gate.
+
+## 2026-09-27 — Recipe-backed step questions
+
+- Audited every canonical step: 27 recipes, 165 steps, 128 question/answer pairs in
+  UK/EN/ES; 45 simple steps intentionally omit local help.
+- Extended the shared assistant drawer with instant prepared answers, written source
+  labels, answer focus, and a distinct typed-AI composer where supported.
+- Removed generic suggested prompts; prepared help follows scaling, selected creams
+  and grouped Cook steps without inheriting Tested status.
+- Added multilingual Design Lab examples and source-change regression checks.
+
+## 2026-09-27 · Assistant abuse protection
+
+- Added localized custom-question allowance and deferred verification to the shared drawer.
+- Kept prepared answers unlimited and available during AI/verification outages.
+- Reused existing retry, composer and status styles; documented the Design Lab example.

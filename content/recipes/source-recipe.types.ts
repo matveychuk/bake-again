@@ -73,6 +73,7 @@ export type StructuredIngredientSection = {
 };
 
 export type StructuredRecipeStep = {
+  help?: import('./step-help.ts').StepHelpDefinition[];
   technique?: import('../techniques/types.ts').TechniqueReference;
   id: string;
   title: string;

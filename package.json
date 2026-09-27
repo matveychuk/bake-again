@@ -22,7 +22,8 @@
     "validate:recipes": "node --experimental-strip-types --experimental-specifier-resolution=node scripts/validate-recipes.ts",
     "test:analytics": "node --experimental-strip-types --test lib/analytics/*.test.ts",
     "media:prepare": "node scripts/prepare-media.mjs",
-    "test:release-render": "node scripts/check-release-render.mjs"
+    "test:release-render": "node scripts/check-release-render.mjs",
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
@@ -56,6 +57,8 @@
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.2",
     "@vitejs/plugin-rsc": "0.5.26",
+    "drizzle-kit": "0.31.10",
+    "drizzle-orm": "0.45.2",
     "oxfmt": "0.61.0",
     "oxlint": "1.76.0",
     "oxlint-tsgolint": "7.0.2001",

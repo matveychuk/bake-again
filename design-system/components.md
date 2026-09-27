@@ -528,3 +528,31 @@ examples retain these handlers, but analytics never loads on the Design Lab rout
   sources, additional batches and checked state. Unknown sources remain intact.
 - `/design-system#scaling-consistency` includes these quantities and the detail recovery
   variant in UK/EN/ES at 2×.
+
+## Prepared step questions (2026-09-27)
+
+- Extend the existing assistant drawer and shared link Button; do not create a separate
+  FAQ or chat shell. Recipe Detail and Cook Mode show `Step questions` only for steps
+  with an explicit editorial help decision. Basic steps have no local help trigger.
+- Prepared questions open recipe-backed answers locally without loading, API requests,
+  actions or evidence badges. A book icon and written `Answers from the recipe` label
+  distinguish these from generated replies. Selecting an answer moves keyboard focus
+  to the answer and announces its availability; Escape returns to the exact trigger.
+- Keep selected questions visible for switching answers. Source quantities are resolved
+  after scaling; composed creams retain their own questions. Grouped steps combine only
+  their own prepared answers. Do not add universal mixing/texture prompts.
+- The separately labelled typed-question composer is shown only where live assistance
+  is supported. Its next request includes the selected prepared question and answer.
+  A general typed-question entry remains available on simple steps in supported Cook Mode.
+- `/design-system#step-questions` demonstrates the production drawer in UK/EN/ES without
+  any live API dependency. All text wraps at 390/900/1440px and 200% text enlargement.
+
+### Custom assistant verification and limits
+
+The existing assistant drawer includes a localized browser allowance note: 5 custom
+questions per rolling two hours and 10 per day. Prepared answers are unlimited.
+The existing composer defers verification until field focus/input; submit waits for a
+fresh token. A localized status and retry control keep verification outages recoverable.
+Prepared questions remain usable through every verification or AI failure. The widget
+uses Cloudflare's flexible size; text uses semantic tokens. The contextual assistant
+example in the Design Lab demonstrates the composer and offline-verification state.

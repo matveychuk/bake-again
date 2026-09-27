@@ -1,3 +1,4 @@
+import { getStepHelpDefinitions } from './step-help.ts';
 import { appleBananaFrittersRecipe } from './apple-banana-fritters.recipe.ts';
 import { appleCharlotteRecipe } from './apple-charlotte.recipe.ts';
 import { appleFrittersRecipe } from './apple-fritters.recipe.ts';
@@ -330,7 +331,7 @@ function detailedRecipeContent(
 }
 
 /** Content for recipe pages and Cook Mode, regardless of recipe-file maturity. */
-export function getRecipeContent(
+function getRecipeContentWithoutHelp(
   recipeId: string,
   locale: AppLocale = 'en',
 ): StructuredRecipeContent | null {
@@ -421,4 +422,13 @@ export function getRecipeContent(
     steps: [],
     gapNote: getUiMessages(locale).recipe.translationPending,
   };
+}
+
+/** Keep prepared help attached to canonical identity before any composition. */
+export function getRecipeContent(recipeId: string, locale: AppLocale = 'en'): StructuredRecipeContent | null {
+  const content = getRecipeContentWithoutHelp(recipeId, locale);
+  if (!content) return null;
+  return { ...content, steps: content.steps.map(step => ({
+    ...step, help: getStepHelpDefinitions(recipeId, step.id, locale),
+  })) };
 }

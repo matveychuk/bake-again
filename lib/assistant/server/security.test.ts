@@ -19,7 +19,7 @@ void test('creates a signed HttpOnly anonymous session and a non-identifying saf
 
   assert.match(
     identity.setCookie ?? '',
-    new RegExp(`^${ASSISTANT_SESSION_COOKIE}=v1\\.`),
+    new RegExp(`^${ASSISTANT_SESSION_COOKIE}=v2\\.`),
   );
   assert.match(identity.setCookie ?? '', /HttpOnly; SameSite=Strict; Secure/u);
   assert.match(identity.safetyIdentifier, /^ba_[A-Za-z0-9_-]{40}$/u);
@@ -57,4 +57,12 @@ void test('reuses a valid signed cookie and replaces a tampered cookie', async (
   );
   assert.notEqual(tampered.safetyIdentifier, first.safetyIdentifier);
   assert.ok(tampered.setCookie);
+});
+
+void test('a copied cookie expires on the server after 48 hours', async () => {
+  const now = 1_800_000_000;
+  const first = await resolveAnonymousAssistantIdentity(new Request('https://bakeagain.example'), secret, () => sessionId, now);
+  const expired = await resolveAnonymousAssistantIdentity(new Request('https://bakeagain.example', { headers: { cookie: first.setCookie!.split(';')[0]! } }), secret, () => 'replacementsession00000000000001', now + 172800);
+  assert.notEqual(expired.safetyIdentifier, first.safetyIdentifier);
+  assert.ok(expired.setCookie);
 });

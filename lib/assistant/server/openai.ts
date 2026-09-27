@@ -279,6 +279,7 @@ export function createOpenAIAssistantProvider(
         response = await client.responses.create(
           {
             model: config.model,
+            service_tier: 'default',
             reasoning: { effort: 'low' },
             instructions: buildAssistantDeveloperInstructions(request.locale),
             input: serializeAssistantInput(request, projection),

@@ -1,3 +1,5 @@
+import { resolveStepHelp } from '@/content/recipes/step-help';
+import { stepHelpMessages } from '@/components/assistant/step-help.messages';
 import { RecipeConfigurationUnavailable } from '@/components/recipe/recipe-configuration-unavailable';
 import { formatQuantity } from '@/lib/i18n/format';
 import { NotFoundContent } from '@/components/site/not-found-content';
@@ -1043,13 +1045,36 @@ export default function DesignSystemPage() {
               </div>
             </div>
 
+            <div className={styles.componentBlock} id="step-questions">
+              <div className={styles.componentLabel}>
+                <strong>Prepared step questions · UK / EN / ES</strong>
+                <span>Recipe-backed answers · no AI request · no evidence badge · simple steps have no trigger</span>
+              </div>
+              {(['uk', 'en', 'es'] as const).map((locale) => {
+                const step = getRecipeContent('eclairs', locale)!.steps.find(step => step.id === 'add-eggs')!;
+                return <AssistantProvider key={locale} recipeId="eclairs" recipeVersionId="eclairs-source-v1"
+                  recipeTitle={step.title} locale={locale} surface="recipe-detail" liveEnabled={false}>
+                  <div lang={locale} className={styles.assistantExample}>
+                    <RecipeStepContent title={step.title} locale={locale}
+                      checkpointLabel={getUiMessages(locale).recipe.checkpoint}
+                      tipLabel={getUiMessages(locale).recipe.tip}
+                      action={<AssistantTrigger configuration={{ kind: 'base' }}
+                        scope={{ kind: 'step', stepIds: [step.id] }} stepTitle={step.title}
+                        label={stepHelpMessages[locale].trigger} preparedAnswers={resolveStepHelp(step)} />}>
+                      <p>{step.body}</p>
+                    </RecipeStepContent>
+                  </div>
+                </AssistantProvider>;
+              })}
+            </div>
+
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}>
                 <strong>Contextual assistant</strong>
                 <span>
                   Shared Recipe and Cook drawer · compact contextual title ·
                   loading announcement · Close focus after submit/review ·
-                  localized offline retry · scrollable at 200% text
+                  localized offline retry · scrollable at 200% text · custom-question limits · verification after input focus
                 </span>
               </div>
               <div className={styles.assistantExample}>

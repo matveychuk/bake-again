@@ -32,6 +32,9 @@ import {
 import { consoleAssistantTelemetry } from '../../../lib/assistant/server/telemetry.ts';
 import { isLocalDevelopment } from '../../../lib/runtime/local-development.ts';
 
+import { getAssistantProtection, trustedIngressAddress, verifyAssistantChallenge } from '../../../lib/assistant/server/protection.ts';
+import { protectAssistantProvider } from '../../../lib/assistant/server/quotas.ts';
+
 export const dynamic = 'force-dynamic';
 export const maxDuration = 20;
 
@@ -48,6 +51,7 @@ const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
       'The recipe changed. Refresh it before asking again.',
     CONFIGURATION_UNAVAILABLE: 'This recipe configuration is not available.',
     ASSISTANT_DISABLED: 'The assistant is currently unavailable.',
+    VERIFICATION_REQUIRED: 'Complete the verification before sending your question.',
     RATE_LIMITED: 'Too many assistant requests. Try again later.',
     BUDGET_EXHAUSTED: 'The assistant is currently unavailable.',
     SERVICE_UNAVAILABLE: 'The assistant service is temporarily unavailable.',
@@ -68,6 +72,7 @@ const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
     CONFIGURATION_UNAVAILABLE:
       'Esta configuración de receta no está disponible.',
     ASSISTANT_DISABLED: 'El asistente no está disponible en este momento.',
+    VERIFICATION_REQUIRED: 'Completa la verificación antes de enviar tu pregunta.',
     RATE_LIMITED: 'Demasiadas solicitudes al asistente. Inténtalo más tarde.',
     BUDGET_EXHAUSTED: 'El asistente no está disponible en este momento.',
     SERVICE_UNAVAILABLE:
@@ -89,6 +94,7 @@ const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
       'Рецепт змінився. Оновіть сторінку перед новим запитом.',
     CONFIGURATION_UNAVAILABLE: 'Ця конфігурація рецепта недоступна.',
     ASSISTANT_DISABLED: 'Помічник зараз недоступний.',
+    VERIFICATION_REQUIRED: 'Пройдіть перевірку перед надсиланням запитання.',
     RATE_LIMITED: 'Забагато запитів до помічника. Спробуйте пізніше.',
     BUDGET_EXHAUSTED: 'Помічник зараз недоступний.',
     SERVICE_UNAVAILABLE: 'Сервіс помічника тимчасово недоступний.',
@@ -99,10 +105,11 @@ const errorMessages: Record<AppLocale, Record<AssistantErrorCode, string>> = {
 };
 
 interface AssistantRouteDependencies {
-  getService(request: Request): Promise<AssistantService>;
+  getService(request: Request, identity: AssistantAnonymousIdentity | null): Promise<AssistantService>;
   getSecurity?(): Promise<{
     sessionSecret: string;
     throttle: AssistantRequestThrottle;
+    verify?(request: Request, identity: AssistantAnonymousIdentity, requestId: string): Promise<void>;
   }>;
   createRequestId?: () => string;
 }
@@ -269,8 +276,9 @@ export function createAssistantRouteHandler(
           );
         }
         releaseThrottle = () => lease.release();
+        await security.verify?.(request, identity, requestId);
       }
-      const service = await dependencies.getService(request);
+      const service = await dependencies.getService(request, identity);
       const deadlineSignal = AbortSignal.any([
         request.signal,
         AbortSignal.timeout(ASSISTANT_TIMEOUT_MS),
@@ -316,12 +324,15 @@ export function isAssistantLocalPreviewRequest(
   return isLocalDevelopment(host, environment);
 }
 
-async function getDefaultService(request: Request) {
+async function getDefaultService(request: Request, identity: AssistantAnonymousIdentity | null) {
   const bindings = await getAssistantRuntimeBindings();
   const config = parseAssistantRuntimeEnv(bindings);
   if (!config.enabled)
     throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
-  const provider = createOpenAIAssistantProvider(config);
+  if (!identity?.networkIdentifier) throw new AssistantServiceError('SERVICE_UNAVAILABLE', 503);
+  const protection = getAssistantProtection(bindings);
+  const provider = protectAssistantProvider(createOpenAIAssistantProvider(config), protection.store,
+    { sessionKey: identity.safetyIdentifier, networkKey: identity.networkIdentifier }, config.maxOutputTokens);
   const localPreview = isAssistantLocalPreviewRequest(request);
   return createAssistantService({
     config,
@@ -337,13 +348,21 @@ async function getDefaultService(request: Request) {
 }
 
 async function getDefaultSecurity() {
-  const config = parseAssistantRuntimeEnv(await getAssistantRuntimeBindings());
+  const bindings = await getAssistantRuntimeBindings();
+  const config = parseAssistantRuntimeEnv(bindings);
   if (!config.enabled || !config.sessionSecret) {
     throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
   }
   return {
     sessionSecret: config.sessionSecret,
     throttle: assistantRequestThrottle,
+    async verify(request: Request, identity: AssistantAnonymousIdentity, requestId: string) {
+      trustedIngressAddress(request);
+      const protection = getAssistantProtection(bindings);
+      if (!identity.networkIdentifier) throw new AssistantServiceError('SERVICE_UNAVAILABLE', 503);
+      await protection.store.allowVerification(identity.networkIdentifier, requestId);
+      await verifyAssistantChallenge(request, protection);
+    },
   };
 }
 

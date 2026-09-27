@@ -215,3 +215,21 @@ void test('missing or invalid runtime env maps to the explicit disabled state', 
   assert.equal(response.status, 503);
   assert.equal(body.error.code, 'ASSISTANT_DISABLED');
 });
+
+void test('verification failures stop before resolving the service and still issue a signed identity', async () => {
+  let serviceReads = 0;
+  const route = createAssistantRouteHandler({
+    getSecurity: async () => ({
+      sessionSecret: 'a'.repeat(32),
+      throttle: { acquire: () => ({ allowed: true, release() {} }) },
+      async verify() { throw new AssistantServiceError('VERIFICATION_REQUIRED', 403); },
+    }),
+    getService: async () => { serviceReads++; throw new Error('Must not run'); },
+  });
+  const response = await route(request(JSON.stringify(requestBody)));
+  assert.equal(response.status, 403);
+  assert.equal(serviceReads, 0);
+  assert.match(response.headers.get('set-cookie') ?? '', /HttpOnly/);
+  const body = await response.json() as { error: { code: string } };
+  assert.equal(body.error.code, 'VERIFICATION_REQUIRED');
+});

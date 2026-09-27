@@ -295,6 +295,7 @@ export function createAssistantService({
           }
           answer = parsed;
         } catch (error) {
+          if (error instanceof AssistantServiceError) throw error;
           if (error instanceof AssistantProviderError)
             throw mapProviderFailure(error);
           throw new AssistantServiceError(

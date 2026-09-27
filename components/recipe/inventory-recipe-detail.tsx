@@ -1,3 +1,6 @@
+import { AssistantProvider, AssistantTrigger } from '@/components/assistant';
+import { stepHelpMessages } from '@/components/assistant/step-help.messages';
+import { resolveStepHelp } from '@/content/recipes/step-help';
 import {
   baseRecipeConfigurationSearch,
   recipeConfigurationQueryIssue,
@@ -24,7 +27,7 @@ import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
 import type { InventoryRecipe } from '@/content/recipes/inventory';
 import type { RecipeDraft } from '@/content/recipes/recipe.types';
-import { getRecipeContent } from '@/content/recipes/registry';
+import { getRecipeContent, getRecipeDocument } from '@/content/recipes/registry';
 import { getCreamOptionCopy } from '@/content/recipes/cream-option-copy';
 import {
   composeRecipeWithCream,
@@ -39,6 +42,7 @@ import { getUiMessages } from '@/lib/i18n/messages';
 import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
 import { getRecipePublicationStatus } from '@/content/recipes/publication';
 import {
+  sourceAssistantConfiguration,
   applySourceRecipeConfiguration,
   parseSourceRecipeConfiguration,
   sourceRecipeScalingBounds,
@@ -181,7 +185,15 @@ export function InventoryRecipeDetail({
     !selectedCreamRecipeId
       ? recipeStructuredData(recipe.id, locale, configuredStructured)
       : null;
+  const document = getRecipeDocument(recipe.id);
+  const helpConfiguration = configuredStructured
+    ? sourceAssistantConfiguration(recipe.id, configuredStructured, configuration)
+    : undefined;
+  const helpVersion = document?.kind === 'detailed' ? document.recipe.versionId : sourceVersionId;
   return (
+    <AssistantProvider key={`${helpVersion}:${configurationSearch}`} recipeId={recipe.id} recipeVersionId={helpVersion}
+      recipeTitle={detailTitle} locale={locale} surface="recipe-detail"
+      liveEnabled={recipe.id === 'gluten-free-napoleon' && Boolean(helpConfiguration)}>
     <main className={styles.page}>
       {structuredData && (
         <script
@@ -359,6 +371,9 @@ export function InventoryRecipeDetail({
           >
             {concise ? readerCopy.method : messages.stepByStep}
           </SectionTitle>
+          {recipe.id === 'gluten-free-napoleon' && helpConfiguration && (
+            <AssistantTrigger configuration={helpConfiguration} scope={{ kind: 'recipe' }} label={stepHelpMessages[locale].chat} />
+          )}
           <RecipeCookEntry
             locale={locale}
             href={
@@ -384,6 +399,11 @@ export function InventoryRecipeDetail({
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <RecipeStepContent
+                  action={resolveStepHelp(step).length > 0 ? (
+                    <AssistantTrigger configuration={helpConfiguration ?? { kind: 'base' }}
+                      scope={{ kind: 'step', stepIds: [step.id] }} stepTitle={step.title}
+                      label={stepHelpMessages[locale].trigger} preparedAnswers={resolveStepHelp(step)} />
+                  ) : undefined}
                   technique={step.technique}
                   locale={locale}
                   checkpoint={step.checkpoint}
@@ -423,5 +443,6 @@ export function InventoryRecipeDetail({
         )}
       <SiteFooter locale={locale} />
     </main>
+    </AssistantProvider>
   );
 }
