@@ -1,5 +1,13 @@
 # Base components
 
+## Browser icon
+
+- `public/favicon.svg` is the compact `B.` mark derived from the Bake Again wordmark.
+  Its surface, letter and period use the existing `background.surface`, `text.primary`
+  and `action.primary` colours. Keep the letter and period legible at 16 × 16 px.
+- The root layout explicitly links this SVG as the browser icon. The Design Lab
+  principles section shows the production asset at 32 × 32 px.
+
 ## Contextual technique guide
 
 - `RecipeStepContent` accepts a canonical `technique` reference and locale. The existing

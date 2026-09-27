@@ -213,6 +213,15 @@ export default function DesignSystemPage() {
               <span>Quality before quantity</span>
               <span>Clear uncertainty</span>
             </div>
+            <div className={styles.faviconExample}>
+              <img
+                src="/favicon.svg"
+                width="32"
+                height="32"
+                alt="Bake Again browser icon: dark B with a terracotta period"
+              />
+              <span>Browser icon · B. from the Bake Again wordmark</span>
+            </div>
           </section>
 
           <section className={styles.section} id="colour">

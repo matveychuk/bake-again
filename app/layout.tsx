@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   title: 'Bake Again — Перевірена безглютенова випічка',
   description:
     'Безглютенові рецепти з точними кількостями, покроковими інструкціями та зрозумілим статусом перевірки.',
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' }],
+    shortcut: '/favicon.svg',
+  },
 };
 
 export default async function RootLayout({
