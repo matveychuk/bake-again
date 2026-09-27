@@ -6,6 +6,7 @@
   and semantic brand colours.
 - Added localized Open Graph image descriptions and a large sharing image to public
   page metadata while retaining recipe-specific photographs.
+- Set the sharing image's response type explicitly to `image/webp` for link previews.
 - Added the production preview to the Design Lab colour section.
 
 ## 2026-09-27 · Repository cleanup

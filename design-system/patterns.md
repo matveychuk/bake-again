@@ -9,6 +9,8 @@
 - Open Graph and Twitter metadata include an absolute image URL, dimensions and
   descriptive alt text. Titles and descriptions remain localized in HTML metadata.
   Recipe pages continue to use their own recipe photographs.
+- `public/_headers` serves the sharing image as `image/webp` so link-preview
+  crawlers receive the image's actual media type.
 - The Design Lab colour section displays the production sharing image.
 
 ## Home discovery
