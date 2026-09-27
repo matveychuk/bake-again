@@ -124,7 +124,23 @@ function assembleBlocks(
   projection: AssistantContextProjection,
   locale: AppLocale,
 ): AssistantBlock[] {
-  return answer.blocks.map((block): AssistantBlock => {
+  const selectedEvidence = new Set(answer.blocks.flatMap(block =>
+    block.kind === 'evidence' ? [block.evidenceId] : []));
+  const blocks = answer.blocks.filter(block => {
+    // A model may select the correct source and then repeat its quantity in prose.
+    // Keep the verbatim source block, never display that generated numeric prose.
+    // Recover only when all cited facts are already selected and every number
+    // exists in those exact facts; unrelated policy failures still reject below.
+    if (block.kind !== 'explanation' || answer.actionId !== null ||
+        block.evidenceIds.length === 0 ||
+        !block.evidenceIds.every(id => selectedEvidence.has(id) && projection.evidence.has(id))) return true;
+    const numbers = block.text.match(/\p{N}+(?:[.,]\p{N}+)?/gu) ?? [];
+    if (numbers.length === 0 || !validateAssistantProse(block.text.replace(/\p{N}+(?:[.,]\p{N}+)?/gu, ''), locale)) return true;
+    const sourceNumbers = new Set(block.evidenceIds.flatMap(id =>
+      projection.evidence.get(id)!.text.match(/\p{N}+(?:[.,]\p{N}+)?/gu) ?? []));
+    return !numbers.every(number => sourceNumbers.has(number));
+  });
+  return blocks.map((block): AssistantBlock => {
     if (block.kind === 'evidence') {
       const evidence = projection.evidence.get(block.evidenceId);
       if (!evidence)
