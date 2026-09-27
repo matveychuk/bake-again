@@ -132,7 +132,7 @@ void test('published detailed recipes preserve locale review state', () => {
     assert.equal(result.recipe.title, document.recipe.title.en);
     assert.equal(result.recipeVersionId, document.recipe.versionId);
     assert.equal(result.publication.status, 'published');
-    assert.equal(result.publication.recipeLocalePublishable, false);
+    assert.equal(result.publication.recipeLocalePublishable, true);
   }
 });
 

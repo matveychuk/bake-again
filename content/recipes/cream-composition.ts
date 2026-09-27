@@ -1,3 +1,5 @@
+import type { AppLocale } from '../../lib/i18n/config.ts';
+import { getUiMessages } from '../../lib/i18n/messages.ts';
 import type {
   StructuredRecipeContent,
   StructuredRecipeStep,
@@ -29,6 +31,7 @@ export function composeRecipeWithCream(
   host: StructuredRecipeContent,
   cream: StructuredRecipeContent | null,
   creamRecipeId: string | null,
+  locale: AppLocale = 'en',
 ): StructuredRecipeContent {
   if (!host.creamOptions) return host;
 
@@ -57,6 +60,23 @@ export function composeRecipeWithCream(
 
   return {
     ...host,
+    // Compatibility/recommendation is not evidence of a bake of this exact pair.
+    evidence: {
+      status: 'suggested',
+      explanation:
+        {
+          uk: 'Успішне приготування цього поєднання з кремом ще не підтверджено. Початкові рецепти:',
+          en: 'A successful bake of this combination has not been confirmed. Original recipes:',
+          es: 'No se ha confirmado la preparación con éxito de esta combinación. Recetas originales:',
+        }[locale] +
+        ' ' +
+        [host.evidence, cream.evidence]
+          .map(
+            (evidence, index) =>
+              `${{ uk: ['Основа', 'Крем'], en: ['Base', 'Cream'], es: ['Base', 'Crema'] }[locale][index]}: ${evidence ? getUiMessages(locale).status[evidence.status].label : '—'}.`,
+          )
+          .join(' '),
+    },
     ingredientSections: [...host.ingredientSections, ...creamSections],
     steps: [...hostStepsWithoutFill, ...creamSteps, ...assemblySteps],
   };

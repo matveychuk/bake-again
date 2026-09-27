@@ -3,6 +3,7 @@ import { Literata, Manrope, Newsreader } from 'next/font/google';
 import { headers } from 'next/headers';
 import { SiteAnalytics } from '@/components/site/site-analytics';
 import { defaultLocale, isAppLocale, localeMetadata } from '@/lib/i18n/config';
+import { siteOrigin } from '@/lib/seo/site';
 import './globals.css';
 
 const manrope = Manrope({
@@ -23,9 +24,10 @@ const literata = Literata({
 });
 
 export const metadata: Metadata = {
-  title: 'Bake Again — Tested gluten-free baking',
+  metadataBase: new URL(siteOrigin),
+  title: 'Bake Again — Перевірена безглютенова випічка',
   description:
-    'An exploratory homepage for a small collection of carefully tested gluten-free recipes.',
+    'Безглютенові рецепти з точними кількостями, покроковими інструкціями та зрозумілим статусом перевірки.',
 };
 
 export default async function RootLayout({

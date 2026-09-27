@@ -161,8 +161,8 @@
 
 ## Cream choice cards
 
-- State once in the section introduction that every compatible cream has been tested for
-  the host recipe. Do not repeat Tested on every option or in the selected summary.
+- Describe compatible creams without claiming the exact host + cream combination has
+  been tested. Show the composition evidence in the overview, not on every choice card.
 - Place a compact chocolate Recommended label across the preferred card's top border.
   Keep it out of normal flow so other cards do not reserve an empty label row. The label
   is written as well as coloured, and is included in the preferred option's accessible
@@ -341,8 +341,8 @@ variation.
   an empty evidence explanation for a badge-only overview; calculated/suggested
   configurations retain their scope explanation. The plum example in the Design Lab
   demonstrates this compact treatment and optional ingredients in parentheses.
-  `showImageNote: false` suppresses the hero overlay when explicitly requested by the
-  editor; image-origin metadata and the media record remain intact.
+  Hero image-origin overlays are omitted throughout the public product; image-origin
+  metadata and the media record remain intact.
 - A published recipe without recorded bake-test evidence does not inherit Tested and
   does not retain the contradictory “not ready to publish” working-record message.
 - Published detailed recipes also omit draft-only editorial notes; their visible Tested,
@@ -465,12 +465,11 @@ remains in the footer.
   Save hidden for linked-only components. Calculated components never inherit Tested.
 - `StepMediaSequence` accepts optional `type: 'video'`. Use native controls, playsInline,
   muted initial playback, metadata preload, no autoplay and contain fitting in the same
-  4:3 frame. Include a descriptive accessible label and visible author-video caption.
+  4:3 frame. Include a descriptive accessible label and a concise descriptive caption when useful.
   `/design-system#step-photography` demonstrates the production video variant.
-- AI-edited author photographs normally retain a background/plate editing label;
-  the explicit `showImageNote` editorial option may suppress the overlay without
-  reclassifying the image as an unedited photograph.
-  fully generated examples remain labelled as generated, including instructional cuts.
+- Public recipe images use descriptive alt text without image-origin overlays or
+  author/AI captions (editorial decision, 2026-09-26). Preserve internal media provenance;
+  removing a label must never reclassify an image or upgrade recipe evidence.
 
 ## Analytics behavior
 
@@ -478,3 +477,38 @@ Shared controls emit the events listed in `docs/analytics.md` after their releva
 action, without changing focus, labels or visual states. Search records submission
 without its text; persistence actions record confirmed changes. Existing Design Lab
 examples retain these handlers, but analytics never loads on the Design Lab route.
+
+## Release states (2026-09-27)
+
+- Optional host + cream compositions use Suggested unless that exact version has a
+  separate successful-bake record. The overview names the base and cream evidence
+  separately; mathematical scaling does not promote Suggested to Calculated or Tested.
+- The cream selector describes the choice without claiming all combinations are tested.
+  Adaptation query states do not emit the base Recipe JSON-LD identity.
+- Cook Mode uses the same localized evidence badge and canonical localized method as
+  recipe detail. Explicit ingredient amounts in prose follow scaling; time and
+  temperature remain source values. Existing canonical step groups preserve sessions.
+- Mobile Cook navigation uses wrapping flex buttons so Spanish “Anterior” stays intact.
+  Enlarged text moves actions onto separate rows. ResizeObserver measures the navigation
+  height so the method keeps enough bottom space above the fixed actions, plus semantic
+  spacing. Header tools wrap and evidence never shrinks into letter columns.
+- `NotFoundContent` reuses the personal-page spacing and shared Button. The localized
+  404 keeps a focusable heading, recovery link, header skip link, and HTTP 404 status.
+- `/design-system#release-states` demonstrates compositions and missing pages in all
+  three languages. The existing Cook tools/reading examples use canonical recipe URLs.
+
+
+## Scaling consistency (2026-09-27 re-audit follow-up)
+
+- The recipe method renders the configured steps, as Cook Mode does. Keep the unscaled
+  source for the quantity controls so the selected factor is applied exactly once.
+- Preparation notes refer to the displayed ingredient amounts. A substitution can state
+  its ratio (one banana per tablespoon of sugar), not a fixed batch amount that becomes
+  wrong when the recipe is scaled. This wording also works in saved shopping entries.
+- An unresolved Napoleon configuration cannot start Cook Mode. Show the localized reason
+  and a link back to the same query; never replace it with a Tested base or restore/write
+  a base session. Supported configurations preserve existing session identities.
+- The initial server-rendered Cook screen uses the requested configuration too; hydration
+  must not introduce a transient base version or a different status.
+- `/design-system#scaling-consistency` demonstrates the 2× method, preparation note and
+  blocked Cook explanation in UK/EN/ES with existing components and semantic tokens.

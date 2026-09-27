@@ -285,9 +285,9 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
     evidence: {
       status: 'tested',
       explanation: tr(locale, {
-        en: 'The author confirms using this source recipe. The exact filling and finish used still need to be recorded.',
-        es: 'La autora confirma que utilizó esta receta fuente. Aún falta registrar el relleno y el acabado exactos que usó.',
-        uk: 'Авторка підтвердила, що готувала за цим рецептом-джерелом. Ще потрібно записати, яку саме начинку та фініш вона використала.',
+        en: 'This source recipe has been baked successfully. The exact filling and finish used still need to be recorded.',
+        es: 'Esta receta se ha horneado con éxito. Aún falta registrar el relleno y el acabado utilizados.',
+        uk: 'За цим рецептом успішно випікали. Точну начинку й оздоблення ще потрібно уточнити.',
       }),
     },
     geometry: {
@@ -731,7 +731,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         body: tr(locale, {
           en: 'Bake at 180°C for about 20 minutes. Cool slightly before adding your chosen finish.',
           es: 'Hornea a 180°C durante unos 20 minutos. Deja templar antes de añadir el acabado elegido.',
-          uk: 'Випікайте при 180°C приблизно 20 хвилин. Трохи остудіть перед нанесенням обраного фінішу.',
+          uk: 'Випікайте при 180°C приблизно 20 хвилин. Трохи остудіть перед нанесенням обраного покриття.',
         }),
         meta: tr(locale, {
           en: '180°C · about 20 min',
@@ -774,7 +774,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
         title: tr(locale, {
           en: 'Add the chosen finish',
           es: 'Añade el acabado elegido',
-          uk: 'Додайте обраний фініш',
+          uk: 'Додайте обране покриття',
         }),
         body: tr(locale, {
           en: 'For the classic glaze, mix the cream cheese, icing sugar and hot water until smooth and spoon over the warm rolls. Alternatively, finish with a little cocoa-peanut spread.',
@@ -821,7 +821,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
     gapNote: tr(locale, {
       en: 'Before publication, record the filling and finish used, the yield, baking-dish dimensions, difficulty and full active and elapsed time.',
       es: 'Antes de publicar, registra el relleno y acabado usados, el rendimiento, las medidas de la fuente, la dificultad y los tiempos completos.',
-      uk: 'Перед публікацією запишіть використані начинку й фініш, кількість булочок, розмір форми, складність, активний і загальний час.',
+      uk: 'Перед публікацією запишіть використані начинку й покриття, кількість булочок, розмір форми, складність, активний і загальний час.',
     }),
   };
 }
@@ -829,6 +829,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
 export const cinnamonRollsRecipe = {
   id: 'cinnamon-rolls',
   publicationStatus: 'unpublished',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'https://www.megasilvita.com/blog/cinnamon-rolls-sin-gluten-la-receta-perfecta/',
     locator:

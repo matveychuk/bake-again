@@ -1,5 +1,7 @@
 'use client';
 
+import { EvidenceBadge } from '@/components/recipe/evidence-badge';
+
 /* oxlint-disable react-compiler/react-compiler -- Restore the versioned browser session once after hydration. */
 
 import { trackEvent } from '@/lib/analytics/umami';
@@ -38,7 +40,6 @@ import {
 
 const subscribeToLocation = () => () => undefined;
 const getLocationSearch = () => window.location.search;
-const getServerLocationSearch = () => '';
 
 function timerRemaining(timer: CookTimerState | null) {
   if (!timer) return 0;
@@ -52,11 +53,13 @@ export function CookModePage({
   homeHref = '/',
   detailHref,
   locale = 'en',
+  configurationSearch = '',
 }: {
   recipeSlug: string;
   homeHref?: string;
   detailHref?: string;
   locale?: AppLocale;
+  configurationSearch?: string;
 }) {
   const messages = getUiMessages(locale).cook;
   const definition = useMemo(
@@ -67,7 +70,7 @@ export function CookModePage({
   const locationSearch = useSyncExternalStore(
     subscribeToLocation,
     getLocationSearch,
-    getServerLocationSearch,
+    () => configurationSearch ? `?${configurationSearch}` : '',
   );
   const resolvedDetailHref = `${baseDetailHref}${locationSearch}`;
   const state = useMemo(
@@ -380,8 +383,9 @@ export function CookModePage({
           <CookWakeLock locale={locale} />
           <p>
             {definition.recipeTitle}
-            {state.isAdjusted ? ` · ${messages.adjustedStatus}` : ''}
+            {state.isAdjusted && !state.evidence ? ` · ${messages.adjustedStatus}` : ''}
           </p>
+          {state.evidence && <EvidenceBadge locale={locale} status={state.evidence.status} />}
         </div>
       </header>
       <div

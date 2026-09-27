@@ -162,6 +162,7 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
 
 export const crepesRecipe = {
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   id: 'crepes',
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',

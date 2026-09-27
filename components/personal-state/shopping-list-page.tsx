@@ -16,15 +16,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import {
-  getRecipeContent,
-  personalStateRecipes,
-} from '@/content/recipes/registry';
+import { ingredientName, itemNotes, sourceRecipes } from '@/content/recipes/shopping-copy';
 import { type RecipeCatalogEntry } from '@/content/recipes/catalog';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { formatQuantity as formatLocalizedQuantity } from '@/lib/i18n/format';
-import { getLocalizedRecipePath, localeHomePath } from '@/lib/i18n/routes';
+import { localeHomePath } from '@/lib/i18n/routes';
 import {
   clearShopping,
   readShopping,
@@ -36,62 +33,6 @@ import {
   type ShoppingItemV1,
 } from '@/lib/persistence/shopping';
 import styles from './personal-state.module.css';
-
-function ingredientName(item: ShoppingItemV1, locale: AppLocale) {
-  for (const recipe of personalStateRecipes)
-    for (const section of recipe.ingredientSections)
-      for (const line of section.lines)
-        for (const option of line.options)
-          if (option.ingredientId === item.ingredientId)
-            return option.name[locale];
-  for (const source of item.sources) {
-    const content = getRecipeContent(source.recipeId, locale);
-    const ingredient = content?.ingredientSections
-      .flatMap((section) => section.ingredients)
-      .find((candidate) => candidate.id === item.ingredientId);
-    if (ingredient) return ingredient.name;
-  }
-  return item.ingredientId;
-}
-
-function sourceRecipes(
-  item: ShoppingItemV1,
-  locale: AppLocale,
-  catalog: RecipeCatalogEntry[],
-) {
-  return [...new Set(item.sources.map((source) => source.recipeId))].map(
-    (recipeId) => ({
-      id: recipeId,
-      title:
-        personalStateRecipes.find((recipe) => recipe.id === recipeId)?.title[
-          locale
-        ] ??
-        catalog.find((recipe) => recipe.id === recipeId)?.title ??
-        recipeId,
-      href: getLocalizedRecipePath(recipeId, locale),
-    }),
-  );
-}
-
-function itemNotes(item: ShoppingItemV1, locale: AppLocale) {
-  const notes = item.sources.flatMap((source) => {
-    const recipe = personalStateRecipes.find(
-      (candidate) => candidate.id === source.recipeId,
-    );
-    const line = recipe?.ingredientSections
-      .flatMap((section) => section.lines)
-      .find((candidate) => candidate.id === source.ingredientLineId);
-    if (line)
-      return [line.condition?.[locale], line.qualifier?.[locale]].filter(
-        (note): note is string => Boolean(note),
-      );
-    const ingredient = getRecipeContent(source.recipeId, locale)
-      ?.ingredientSections.flatMap((section) => section.ingredients)
-      .find((candidate) => candidate.id === source.ingredientLineId);
-    return ingredient?.note ? [ingredient.note] : [];
-  });
-  return [...new Set(notes)];
-}
 
 export function ShoppingListPage({
   locale,

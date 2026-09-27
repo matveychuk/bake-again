@@ -304,6 +304,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
 export const bananaBreadRecipe = {
   id: 'banana-bread',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',
     locator:

@@ -1,8 +1,11 @@
+import { localizeRecipeContent } from "./localize-content.ts";
+import { banana_frittersEs } from "./translations/banana-fritters.es.ts";
 import type { RecipeSourceDraft } from './source-recipe.types.ts';
 import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
-export const bananaFrittersRecipe = {
+const bananaFrittersRecipeBase = {
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   presentation: 'concise',
   id: 'banana-fritters',
   source: {
@@ -76,7 +79,7 @@ export const bananaFrittersRecipe = {
         },
         {
           id: 'greek-yogurt',
-          name: 'Greek yogurt',
+          name: 'Greek yoghurt',
           quantity: {
             base: { kind: 'exact', value: 250, unit: 'g' },
             shopping: { mode: 'base' },
@@ -123,7 +126,7 @@ export const bananaFrittersRecipe = {
     {
       id: 'mix-wet',
       title: 'Mash and mix',
-      body: 'Mash the bananas with a fork, leaving small soft pieces. Add the eggs, Greek yogurt and vanilla. Add the melted butter, if using, and whisk until combined.',
+      body: 'Mash the bananas with a fork, leaving small soft pieces. Add the eggs, Greek yoghurt and vanilla. Add the melted butter, if using, and whisk until combined.',
       cookIngredients: [
         { ingredientId: 'bananas' },
         { ingredientId: 'eggs' },
@@ -140,7 +143,7 @@ export const bananaFrittersRecipe = {
         {
           id: 'banana-pancakes-wet-mixture-v1',
           src: '/media/recipes/banana-fritters/selected/wet-mixture-v1.webp',
-          alt: 'Pale golden banana and Greek yogurt mixture with small banana flecks',
+          alt: 'Pale golden banana and Greek yoghurt mixture with small banana flecks',
         },
       ],
     },
@@ -391,5 +394,13 @@ export const bananaFrittersRecipe = {
         },
       ],
     },
+  },
+} satisfies RecipeSourceDraft;
+
+export const bananaFrittersRecipe = {
+  ...bananaFrittersRecipeBase,
+  translations: {
+    ...bananaFrittersRecipeBase.translations,
+    es: localizeRecipeContent(bananaFrittersRecipeBase.translations.uk, banana_frittersEs),
   },
 } satisfies RecipeSourceDraft;

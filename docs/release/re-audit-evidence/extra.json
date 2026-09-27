@@ -1,0 +1,196 @@
+{
+  "static": [
+    {
+      "path": "/uk",
+      "status": 200,
+      "title": "Bake Again — Перевірена безглютенова випічка",
+      "canonical": "https://bakeagain.com/uk",
+      "alternates": 3,
+      "description": "Невелика колекція ретельно перевірених безглютенових рецептів."
+    },
+    {
+      "path": "/uk/about",
+      "status": 200,
+      "title": "Про Bake Again та перевірку рецептів — Bake Again",
+      "canonical": "https://bakeagain.com/uk/about",
+      "alternates": 3,
+      "description": "Сімейна колекція безглютенової випічки: як перевіряють рецепти й що означають статуси Перевірено, Розраховано та Запропоновано."
+    },
+    {
+      "path": "/uk/privacy",
+      "status": 200,
+      "title": "Приватність і ваші збереження — Bake Again",
+      "canonical": "https://bakeagain.com/uk/privacy",
+      "alternates": 3,
+      "description": "Як Bake Again зберігає ваші рецепти, покупки та нотатки."
+    },
+    {
+      "path": "/uk/techniques/soften-butter",
+      "status": 200,
+      "title": "Як швидко розм’якшити масло — Bake Again",
+      "canonical": "https://bakeagain.com/uk/techniques/soften-butter",
+      "alternates": 3,
+      "description": "Забули дістати масло заздалегідь? Тепла миска допоможе підготувати його до змішування."
+    },
+    {
+      "path": "/en",
+      "status": 200,
+      "title": "Bake Again — Tested gluten-free baking",
+      "canonical": "https://bakeagain.com/en",
+      "alternates": 3,
+      "description": "A small collection of carefully tested gluten-free recipes."
+    },
+    {
+      "path": "/en/about",
+      "status": 200,
+      "title": "About Bake Again and recipe testing — Bake Again",
+      "canonical": "https://bakeagain.com/en/about",
+      "alternates": 3,
+      "description": "A family collection of gluten-free recipes, with a clear explanation of Tested, Calculated and Suggested versions."
+    },
+    {
+      "path": "/en/privacy",
+      "status": 200,
+      "title": "Privacy and your saved items — Bake Again",
+      "canonical": "https://bakeagain.com/en/privacy",
+      "alternates": 3,
+      "description": "How Bake Again stores your recipes, shopping and notes."
+    },
+    {
+      "path": "/en/techniques/soften-butter",
+      "status": 200,
+      "title": "How to soften butter quickly — Bake Again",
+      "canonical": "https://bakeagain.com/en/techniques/soften-butter",
+      "alternates": 3,
+      "description": "Forgot to take the butter out? A warm bowl can help get it ready for mixing."
+    },
+    {
+      "path": "/es",
+      "status": 200,
+      "title": "Bake Again — Repostería sin gluten probada",
+      "canonical": "https://bakeagain.com/es",
+      "alternates": 3,
+      "description": "Una pequeña colección de recetas sin gluten cuidadosamente probadas."
+    },
+    {
+      "path": "/es/about",
+      "status": 200,
+      "title": "Sobre Bake Again y las pruebas de recetas — Bake Again",
+      "canonical": "https://bakeagain.com/es/about",
+      "alternates": 3,
+      "description": "Una colección familiar de recetas sin gluten y una explicación de las versiones Probada, Calculada y Sugerida."
+    },
+    {
+      "path": "/es/privacy",
+      "status": 200,
+      "title": "Privacidad y tus datos guardados — Bake Again",
+      "canonical": "https://bakeagain.com/es/privacy",
+      "alternates": 3,
+      "description": "Cómo guarda Bake Again tus recetas, compras y notas."
+    },
+    {
+      "path": "/es/techniques/soften-butter",
+      "status": 200,
+      "title": "Cómo ablandar la mantequilla rápidamente — Bake Again",
+      "canonical": "https://bakeagain.com/es/techniques/soften-butter",
+      "alternates": 3,
+      "description": "¿Olvidaste sacar la mantequilla? Un bol caliente puede ayudarte a prepararla para mezclar."
+    }
+  ],
+  "legacy": [
+    {
+      "path": "/recipes/napoleon-cake",
+      "status": 308,
+      "location": "/uk/recipes/bezghliutenovyi-napoleon?mode=scale&scale=2"
+    },
+    {
+      "path": "/recipes/crinkle-cookies",
+      "status": 308,
+      "location": "/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky?mode=scale&scale=2"
+    },
+    {
+      "path": "/recipes/crepes",
+      "status": 308,
+      "location": "/uk/recipes/bezghliutenovi-mlyntsi?mode=scale&scale=2"
+    },
+    {
+      "path": "/recipes/napoleon-cake/cook",
+      "status": 308,
+      "location": "/uk/recipes/bezghliutenovyi-napoleon/cook?mode=scale&scale=2"
+    },
+    {
+      "path": "/recipes/crinkle-cookies/cook",
+      "status": 308,
+      "location": "/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky/cook?mode=scale&scale=2"
+    },
+    {
+      "path": "/recipes/crepes/cook",
+      "status": 308,
+      "location": "/uk/recipes/bezghliutenovi-mlyntsi/cook?mode=scale&scale=2"
+    }
+  ],
+  "copy": [
+    {
+      "path": "/uk/recipes/bezghliutenovi-linyvi-varenyky",
+      "text": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\nРецепти\n\nСНІДАНОК / НА ЩОДЕНЬ\n\nБезглютенові\nліниві вареники\n\nНіжні вареники з кисломолочного сиру.\n\nПеревірено\n\nЦю версію успішно готували.\n\nАКТИВНИЙ ЧАС\n45 хв\nВИХІД\n100 лінивих вареників\nСКЛАДНІСТЬ\nСередня\n\nДодатково 15–30 хв на відпочинок тіста.\n\nБОРОШНО\nSchär Mix B Bread + тапіоковий крохмаль\nДо інгредієнтів\nДо кроків\nКількість\n\nБазовий рецепт: Кисломолочний сир — 450 г · 100 лінивих вареників\n\nЗмінити кількість\nВикористати наявне\nМАСШТАБ РЕЦЕПТА\n0,5×\n1×\n1,5×\n2×\nІнгредієнти\nДо списку покупок…\nКисломолочний сир\n450 г\nЯйця\n2 шт.\nЦукор\n60 г\n3 ст. л.\nБорошно Schär Mix B Bread\nПлюс трохи для формування.\n100 г\n5 ст. л.\nТапіоковий крохмаль\n7 г\n1 ст. л.\nПриготування\nГотувати покроково\n\nОдин крок на екрані, інгредієнти й таймери під рукою.\n\n01\nЗмішайте основу\n\nПеремішайте кисломолочний сир, яйця й цукор виделкою або в комбайні насадкою-тістомісом.\n\n02\nДодайте борошно й крохмаль\n\nЗ’єднайте борошно з тапіоковим крохмалем і вмішайте в основу. Тісто має залишитися липким — не ущільнюйте його додатковим борошном.\n\n03\nДайте тісту відпочити\n\nНещільно накрийте миску й залиште на 15–30 хвилин.\n\n04\nСформуйте ковбаску\n\nПрисипте поверхню й тісто борошном. Обережно розкачайте в ковбаску, не вмішуючи борошно всередину.\n\n05\nСкачайте вареники\n\nПОРАДАДля заморожування розкладіть сирі вареники в один шар на таці.\n\nНаріжте тісто на невеликі шматочки. Обваляйте зрізи в борошні й легко скачайте кожен шматочок між долонями в кульку.\n\n06\nЗваріть вареники\n\nОпускайте вареники в киплячу воду невеликими порціями. Обережно проведіть шумівкою по дну, щоб вони не прилипли. Коли вода знову закипить і вареники спливуть, зменште нагрів. Варіть при слабкому кипінні ще 1–2 хвилини й дістаньте шумівкою.\n\nBake Again\n.\nПро нас\nПриватність і ваші збереження"
+    },
+    {
+      "path": "/uk/recipes/bezghliutenovi-profitroli",
+      "text": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\nРецепти\n\nЗАВАРНЕ ТІСТО / ДЕСЕРТ\n\nБезглютенові\nпрофітролі\n\nПорожнисті заварні тістечка з тонкою золотистою оболонкою й ніжною начинкою.\n\nПеревірено\n\nСаме це заварне тісто на Schär Mix B Bread із 4 маленькими яйцями успішно випікалося й дало близько 20 профітролів.\n\nАКТИВНИЙ ЧАС\n15 хв\nВИХІД\nБлизько 20 профітролів розміром із волоський горіх\nСКЛАДНІСТЬ\nСередня\nБОРОШНО\nSchär Mix B Bread\nДо інгредієнтів\nДо кроків\n\nНАЧИНКА\n\nОберіть крем.\n\nОберіть начинку. Від вибору залежать інгредієнти та кроки приготування.\n\nОберіть крем.\nРекомендовано\nВанільний заварний крем з яйцями\nГладкий класичний крем для наповнення тістечок і прошарування десертів.\nПереглянути рецепт крему\nЗбиті вершки з маскарпоне\nЛегкий швидкий крем для наповнення тістечок і прошарування бісквітів, який добре тримає форму.\nПереглянути рецепт крему\nВанільний заварний крем без яєць\nМ’який домашній крем для великої партії тістечок; під час охолодження він стає густішим.\nПереглянути рецепт крему\nВанільний масляний крем\nНасичений стійкий крем для наповнення й оздоблення тортів та тістечок.\nПереглянути рецепт крему\n\nПЕРЕД ПОЧАТКОМ\n\nСплануйте заздалегідь.\nЗверніть увагу\n\nЗаздалегідь приготуйте вибраний крем і повністю охолодіть його. Наповнюйте лише повністю охололі оболонки.\n\nКількість\n\nБазовий рецепт: Борошняна суміш Schär Mix B Bread — 110 г · Близько 20 профітролів розміром із волоський горіх\n\nПрофітролі розміром із волоський горіх\n\nЗмінити кількість\nВикористати наявне\nМАСШТАБ РЕЦЕПТА\n0,5×\n1×\n1,5×\n2×\nІнгредієнти\nДо списку покупок…\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\n110 г\n5,5 ст. л.\nЦукрова пудра\n2,35 г\n1 ч. л.\nСіль\n1 дрібка\nВода\n130 мл\nНесолоне вершкове масло\nОхолоджене й нарізане кубиками.\n70 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\n4 шт.\nПриготування\nСпочатку оберіть крем\n\nОдин крок на екрані, інгредієнти й таймери під рукою.\n\n01\nПросійте сухі інгредієнти\n\nПросійте в невелику миску борошняну суміш Schär Mix B Bread, цукрову пудру й сіль.\n\n02\nРозтопіть масло у воді\n\nПОРАДАСпочатку нагрівайте повільно, щоб масло встигло розтанути до помітного випаровування води.\n\nПокладіть воду й масло в невелику каструлю. Нагрівайте на слабкому вогні, доки масло не розтане, а потім доведіть суміш до кипіння.\n\n03\nЗаваріть основу\n\nПОРАДАПеред додаванням яєць дайте основі трохи охолонути, щоб яйця не згорнулися.\n\nОдразу всипте всю суху суміш і зніміть каструлю з вогню. Енергійно вимішуйте лопаткою, доки тісто не збереться докупи й не відійде від стінок. Ненадовго поверніть на слабкий вогонь, а потім відставте на кілька хвилин, продовжуючи перемішувати й випускаючи гарячу пару.\n\n04\nПоступово введіть яйця\n\nПОРАДАУ перевіреній випічці ідеально підійшли 4 маленькі яйця. Перед останньою порцією обов’язково перевірте консистенцію.\n\nДодавайте злегка збиті яйця невеликими порціями, щоразу ретельно вимішуючи, доки тісто не стане м’яким, гладким і блискучим.\n\nОРІЄНТИРТісто блискуче, тримає форму й повільно спадає з лопатки важкою стрічкою.\n\n05\nВідсадіть заготовки\n\nПерекладіть тісто в кондитерський мішок із насадкою приблизно 1,5 см. Відсадіть на деко кульки розміром із волоський горіх, залишаючи між ними місце.\n\nОРІЄНТИРЗаготовки тримають форму й не розпливаються пласкими калюжами.\n\n200°C · 10 ХВ, ПОТІМ 180°C · 15 ХВ\n\n06\nВипечіть до золотистого кольору\n\nНе відкривайте духовку між етапами й випікайте, доки оболонки добре не піднімуться та не стануть золотистими.\n\nОРІЄНТИРОболонки добре піднялися, стали золотистими й міцними, а не блідими чи м’якими.\n\n07\nВипустіть пару й досушіть\n\nВийміть деко й зробіть невеликий отвір у дні кожної оболонки. Поверніть їх у духовку ще на кілька хвилин, щоб середина підсохла, а потім повністю остудіть.\n\nОРІЄНТИРОхололі оболонки легкі, сухі й порожнисті та не осідають.\n\n08\nНаповніть охололі оболонки\n\nПерекладіть приготований крем у кондитерський мішок і наповніть повністю охололі оболонки через отвори внизу.\n\nBake Again\n.\nПро нас\nПриватність і ваші збереження"
+    },
+    {
+      "path": "/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+      "text": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\nРецепти\n\nБІСКВІТНИЙ РУЛЕТ / ДЕСЕРТ\n\nБезглютеновий\nбісквітний рулет із фруктами\n\nНіжний бісквіт із ягідним варенням і кремом; зверху — крем і фрукти за бажанням.\n\nПеревірено\n\nЦю основу бісквітного рулету успішно випікали.\n\nАКТИВНИЙ ЧАС\n30 хв\nВИХІД\n1 рулет\nСКЛАДНІСТЬ\nЛегка\n\nДодатково: 15–20 хв випікання й повне охолодження перед начиненням.\n\nБОРОШНО\nSchär Mix B Bread\nДо інгредієнтів\nДо кроків\n\nНАЧИНКА\n\nОберіть крем.\n\nОберіть начинку. Від вибору залежать інгредієнти та кроки приготування.\n\nОберіть крем.\nРекомендовано\nЗбиті вершки з маскарпоне\nЛегкий швидкий крем для наповнення тістечок і прошарування бісквітів, який добре тримає форму.\nПереглянути рецепт крему\nВанільний масляний крем\nНасичений стійкий крем для наповнення й оздоблення тортів та тістечок.\nПереглянути рецепт крему\n\nПЕРЕД ПОЧАТКОМ\n\nСплануйте заздалегідь.\nЗверніть увагу\n\nОхолоджуйте бісквіт згорнутим разом із пергаментом. Начиняйте лише повністю холодним.\n\nЗверніть увагу\n\nОберіть густе чорничне або малинове варення й крем. Одразу після збивання відкладіть кілька ложок крему для оздоблення.\n\nКількість\n\nБазовий рецепт: Борошно Schär Mix B Bread — 120 г · 1 рулет\n\nЗмінити кількість\nВикористати наявне\nМАСШТАБ РЕЦЕПТА\n0,5×\n1×\n1,5×\n2×\nІнгредієнти\nДо списку покупок…\nБісквіт\nЯйця\n5 шт.\nЦукор\n100 г\n5 ст. л.\nСіль\n1 дрібка\nНейтральна олія\n35 мл\nВода\n35 мл\nБорошно Schär Mix B Bread\n120 г\n6 ст. л.\nНачинка й оздоблення\nГусте ягідне варення\nДобре підходить чорничне або малинове.\nСвіжі фрукти або ягоди (необов’язково)\nДля начинки й оздоблення; добре вимити та обсушити.\nПодрібнені горіхи (необов’язково)\nДля верху — замість свіжих фруктів або разом із ними.\nПриготування\nСпочатку оберіть крем\n\nОдин крок на екрані, інгредієнти й таймери під рукою.\n\nПРИБЛИЗНО 10 ХВ\n\n01\nЗбийте до стрічки\n\nЗбивайте яйця з цукром і сіллю приблизно 10 хвилин.\n\nОРІЄНТИРМаса світла й густа, а слід від вінчика спадає широкою стрічкою та кілька секунд тримається на поверхні.\n\n02\nЗмішайте тісто\n\nОбережно вмішайте олію, потім воду. Поступово додайте борошно й складайте лопаткою лише доки не зникнуть сухі ділянки.\n\n180–200°C · 15–20 ХВ\n\n03\nСпечіть бісквіт\n\nРозігрійте духовку до 180–200°C. Застеліть пергаментом деко з бортиками й розподіліть тісто тонким рівним прямокутником. Випікайте 15–20 хвилин.\n\nОРІЄНТИРБісквіт злегка золотистий, пружинить після дотику й залишається достатньо гнучким для згортання.\n\n04\nЗгорніть разом із пергаментом\n\nЩе теплий бісквіт нещільно згорніть разом із пергаментом, на якому він випікався. Не відділяйте папір: він має залишитися між витками. Залиште рулет згорнутим до повного охолодження.\n\n05\nРозгорніть і намастіть варенням\n\nПОРАДАНе намагайтеся розпрямити бісквіт повністю: збережіть природний загин краю всередину, щоб він не тріснув.\n\nВідкладіть кілька ложок щойно збитого крему для оздоблення. Обережно розгорніть повністю охолоджений бісквіт. Потім обережно відділіть від нього пергамент і залиште бісквіт лежати на тому ж папері. Намастіть тонким шаром густого ягідного варення.\n\n06\nНанесіть крем\n\nПОРАДАВільний край залишає місце для крему, щоб він не витискався через шов під час згортання.\n\nОбережно розподіліть решту крему поверх варення. Уздовж краю, який закриватиме рулет, залиште приблизно 2 см без крему. За бажанням додайте свіжі фрукти чи ягоди.\n\n07\nЗгорніть і оздобте\n\nПОРАДАПеред подачею дайте рулету постояти в холодильнику приблизно 2 години, щоб крем і начинка стабілізувалися.\n\nНа тому ж пергаменті згорніть рулет від загнутого краю. Папір залиште під рулетом, а рулет покладіть швом донизу. Намастіть зверху відкладеним кремом і за бажанням прикрасьте фруктами, ягодами чи подрібненими горіхами.\n\nBake Again\n.\nПро нас\nПриватність і ваші збереження"
+    },
+    {
+      "path": "/en/recipes/gluten-free-lazy-dumplings",
+      "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\nRecipes\n\nBREAKFAST / EVERYDAY\n\nGluten-free\nlazy curd cheese dumplings\n\nTender curd cheese dumplings.\n\nTested\n\nThis exact version has been cooked successfully.\n\nACTIVE TIME\n45 min\nYIELD\n100 lazy dumplings\nDIFFICULTY\nMedium\n\nAllow an additional 15–30 min for the dough to rest.\n\nFLOUR\nSchär Mix B Bread + tapioca starch\nJump to ingredients\nJump to steps\nQuantity\n\nBase recipe: Tvorog (curd cheese) — 450 g · 100 lazy dumplings\n\nScale recipe\nUse what I have\nBATCH SCALE\n0.5×\n1×\n1.5×\n2×\nIngredients\nTo shopping list…\nTvorog (curd cheese)\n450 g\nEggs\n2 pcs\nSugar\n60 g\n3 tbsp\nSchär Mix B Bread flour\nPlus a little for shaping.\n100 g\n5 tbsp\nTapioca starch\n7 g\n1 tbsp\nMethod\nCook step by step\n\nOne step at a time, with ingredients and timers close at hand.\n\n01\nMix the base\n\nMix the tvorog, eggs and sugar with a fork or in a food processor fitted with a dough attachment.\n\n02\nAdd the flour and starch\n\nCombine the flour and tapioca starch and mix into the base. The dough should stay sticky — do not add extra flour to firm it up.\n\n03\nRest the dough\n\nCover the bowl loosely and leave for 15–30 minutes.\n\n04\nShape a log\n\nDust the surface and dough with flour. Gently roll into a log without kneading the dusting flour into the dough.\n\n05\nRoll the dumplings\n\nTIPTo freeze, arrange the uncooked dumplings in a single layer on a tray.\n\nCut into small pieces. Coat the cut sides in flour and gently roll each piece between your palms into a ball.\n\n06\nBoil the dumplings\n\nAdd the dumplings to boiling water in small batches. Gently run a skimmer over the bottom so they do not stick. When the water returns to a boil and the dumplings float, reduce the heat. Cook at a gentle boil for another 1–2 minutes, then lift out with a skimmer.\n\nBake Again\n.\nAbout\nPrivacy and your saved items"
+    },
+    {
+      "path": "/en/recipes/gluten-free-profiteroles",
+      "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\nRecipes\n\nCHOUX PASTRY / DESSERT\n\nGluten-free\nprofiteroles\n\nCrisp, hollow choux pastries with a soft cream filling.\n\nTested\n\nThis exact choux made with Schär Mix B Bread and 4 small eggs baked successfully and yielded about 20 profiteroles.\n\nACTIVE TIME\n15 min\nYIELD\nAbout 20 walnut-size profiteroles\nDIFFICULTY\nMedium\nFLOUR\nSchär Mix B Bread\nJump to ingredients\nJump to steps\n\nFILLING\n\nChoose a cream.\n\nChoose a filling. Your choice changes the ingredients and preparation steps.\n\nChoose a cream.\nRecommended\nVanilla custard with eggs\nA smooth classic cream for filling pastries and layering desserts.\nView cream recipe\nWhipped cream with mascarpone\nA light, quick cream for filling pastries or layering sponge cakes that holds its shape well.\nView cream recipe\nEggless vanilla custard\nA soft homemade cream for filling a large batch of pastries; it thickens as it cools.\nView cream recipe\nVanilla buttercream\nA rich, stable cream for filling and decorating cakes and pastries.\nView cream recipe\n\nBEFORE YOU START\n\nPlan for the rest.\nKeep this in mind\n\nPrepare the selected cream in advance and chill it completely. Fill only completely cooled shells.\n\nQuantity\n\nBase recipe: Schär Mix B Bread flour mix — 110 g · About 20 walnut-size profiteroles\n\nWalnut-size profiteroles\n\nScale recipe\nUse what I have\nBATCH SCALE\n0.5×\n1×\n1.5×\n2×\nIngredients\nTo shopping list…\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\n110 g\n5.5 tbsp\nIcing sugar\n2.35 g\n1 tsp\nSalt\n1 pinch\nWater\n130 ml\nUnsalted butter\nChilled and cut into cubes.\n70 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\n4 pcs\nMethod\nChoose a cream first\n\nOne step at a time, with ingredients and timers close at hand.\n\n01\nSift the dry ingredients\n\nSift the Schär Mix B Bread flour, icing sugar and salt together into a small bowl.\n\n02\nMelt the butter in the water\n\nTIPUse gentle heat at first so the butter melts before too much water evaporates.\n\nPut the water and butter in a small saucepan. Heat gently until the butter has melted, then bring the mixture to a boil.\n\n03\nCook the choux base\n\nTIPLet the base cool slightly before adding egg so the egg does not set on contact.\n\nAdd all the dry mixture at once and remove the saucepan from the heat. Beat firmly with a spatula until the dough comes together and pulls away from the sides of the pan. Stir over low heat briefly, then set aside for a few minutes, beating out some of the hot steam.\n\n04\nBeat in the eggs gradually\n\nTIPFour small eggs were ideal in the tested bake. Hold back the last addition until you have checked the texture.\n\nAdd the lightly beaten eggs a little at a time, mixing thoroughly after every addition, until the dough is soft, smooth and glossy.\n\nCHECKPOINTThe dough is glossy, holds its shape and falls slowly from the spatula in a heavy ribbon.\n\n05\nPipe the shells\n\nTransfer the dough to a piping bag fitted with an approximately 1.5 cm nozzle. Pipe walnut-size rounds onto the lined tray, leaving room between them.\n\nCHECKPOINTThe piped dough keeps its shape and does not spread into flat puddles.\n\n200°C · 10 MIN, THEN 180°C · 15 MIN\n\n06\nBake until risen and golden\n\nWithout opening the oven between stages, bake until the shells have risen and turned golden.\n\nCHECKPOINTThe shells are well risen, golden and firm rather than pale or soft.\n\n07\nVent and dry the shells\n\nRemove the tray and make a small hole in the base of each shell. Return them to the oven for a few minutes so the inside can dry, then cool completely.\n\nCHECKPOINTThe cooled shells feel light, dry and hollow and do not collapse.\n\n08\nFill the cooled shells\n\nTransfer the prepared cream to a piping bag and fill the completely cooled shells through the holes in their bases.\n\nBake Again\n.\nAbout\nPrivacy and your saved items"
+    },
+    {
+      "path": "/en/recipes/gluten-free-fruit-sponge-roll",
+      "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\nRecipes\n\nROLLED SPONGE / DESSERT\n\nGluten-free\nfruit sponge roll\n\nA tender sponge with berry jam and cream, finished with cream and optional fresh fruit.\n\nTested\n\nThis sponge-roll base was baked successfully.\n\nACTIVE TIME\n30 min\nYIELD\n1 roll\nDIFFICULTY\nEasy\n\nPlus 15–20 min baking and complete cooling before filling.\n\nFLOUR\nSchär Mix B Bread\nJump to ingredients\nJump to steps\n\nFILLING\n\nChoose a cream.\n\nChoose a filling. Your choice changes the ingredients and preparation steps.\n\nChoose a cream.\nRecommended\nWhipped cream with mascarpone\nA light, quick cream for filling pastries or layering sponge cakes that holds its shape well.\nView cream recipe\nVanilla buttercream\nA rich, stable cream for filling and decorating cakes and pastries.\nView cream recipe\n\nBEFORE YOU START\n\nPlan for the rest.\nKeep this in mind\n\nCool the sponge rolled with its parchment. Fill only when completely cold.\n\nKeep this in mind\n\nChoose thick blueberry or raspberry jam and a cream. As soon as the cream is whipped, reserve a few spoonfuls for the top.\n\nQuantity\n\nBase recipe: Schär Mix B Bread flour — 120 g · 1 roll\n\nScale recipe\nUse what I have\nBATCH SCALE\n0.5×\n1×\n1.5×\n2×\nIngredients\nTo shopping list…\nSponge\nEggs\n5 pcs\nSugar\n100 g\n5 tbsp\nSalt\n1 pinch\nNeutral oil\n35 ml\nWater\n35 ml\nSchär Mix B Bread flour\n120 g\n6 tbsp\nFilling and decoration\nThick berry jam\nBlueberry or raspberry jam works well.\nFresh fruit or berries (optional)\nFor the filling and decoration; wash and dry thoroughly.\nChopped nuts (optional)\nFor the top, instead of or together with fresh fruit.\nMethod\nChoose a cream first\n\nOne step at a time, with ingredients and timers close at hand.\n\nABOUT 10 MIN\n\n01\nWhip to ribbon stage\n\nWhip the eggs with the sugar and salt for about 10 minutes.\n\nCHECKPOINTThe mixture is pale and thick, and falls from the whisk in a broad ribbon that remains visible briefly.\n\n02\nFold the batter\n\nFold in the oil, then the water. Add the flour gradually and fold gently just until no dry pockets remain.\n\n180–200°C · 15–20 MIN\n\n03\nBake the sponge\n\nPreheat the oven to 180–200°C. Line a rimmed baking tray with parchment and spread the batter into a thin, even rectangle. Bake for 15–20 minutes.\n\nCHECKPOINTThe sponge is lightly golden, springs back when touched and remains flexible enough to roll.\n\n04\nRoll with the parchment\n\nWhile still warm, loosely roll the sponge together with the parchment it was baked on. Do not peel the paper away: it stays between the turns. Leave the sponge rolled until completely cool.\n\n05\nUnroll and spread the jam\n\nTIPDo not press the sponge flat: let the edge keep its inward curve to avoid cracking.\n\nSet aside a few spoonfuls of the freshly whipped cream for the top. Gently unroll the completely cooled sponge. Then carefully peel the parchment away from the sponge, leaving the sponge resting on the same paper. Spread a thin layer of thick berry jam.\n\n06\nSpread the cream\n\nTIPThe clear border gives the cream room to spread as you roll, so it does not squeeze out at the seam.\n\nGently spread the remaining cream over the jam. Leave about 2 cm without cream along the edge that will close the roll. Add fresh fruit or berries if you like.\n\n07\nReroll and decorate\n\nTIPBefore serving, refrigerate the roll for about 2 hours so the cream and filling can set.\n\nOn the same parchment, reroll from the curled edge. Keep the paper underneath the roll and place the roll seam-side down. Spread the reserved cream over the top and decorate with fruit, berries or chopped nuts if you like.\n\nBake Again\n.\nAbout\nPrivacy and your saved items"
+    },
+    {
+      "path": "/es/recipes/vareniki-perezosos-sin-gluten",
+      "text": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\nRecetas\n\nDESAYUNO / DIARIO\n\nSin gluten\nVáreniki de tvorog\n\nTiernos váreniki sin relleno, hechos con tvorog.\n\nProbada\n\nEsta versión se ha preparado con éxito.\n\nTIEMPO ACTIVO\n45 min\nRENDIMIENTO\n100 váreniki de tvorog\nDIFICULTAD\nMedia\n\nAñade 15–30 min de reposo de la masa.\n\nHARINA\nSchär Mix B Bread + almidón de tapioca\nIr a los ingredientes\nIr a los pasos\nCantidad\n\nReceta base: Tvorog (queso fresco de leche fermentada) — 450 g · 100 váreniki de tvorog\n\nCambiar cantidad\nUsar lo que tengo\nTAMAÑO DE LA TANDA\n0,5×\n1×\n1,5×\n2×\nIngredientes\nA la lista de compra…\nTvorog (queso fresco de leche fermentada)\n450 g\nHuevos\n2 uds.\nAzúcar\n60 g\n3 cdas.\nHarina Schär Mix B Bread\nY un poco más para dar forma.\n100 g\n5 cdas.\nAlmidón de tapioca\n7 g\n1 cda.\nPreparación\nCocinar paso a paso\n\nUn paso en pantalla, con ingredientes y temporizadores a mano.\n\n01\nMezcla la base\n\nMezcla el tvorog, los huevos y el azúcar con un tenedor o en un robot de cocina con accesorio para amasar.\n\n02\nAñade la harina y el almidón\n\nCombina la harina con el almidón de tapioca e incorpóralos a la base. La masa debe quedar pegajosa; no añadas más harina para endurecerla.\n\n03\nDeja reposar la masa\n\nCubre el bol sin apretar y deja reposar durante 15–30 minutos.\n\n04\nForma un cilindro\n\nEnharina la superficie y la masa. Forma un cilindro con cuidado, sin amasar la harina de espolvorear dentro de la masa.\n\n05\nForma las bolitas\n\nCONSEJOPara congelarlos, coloca los váreniki crudos en una sola capa sobre una bandeja.\n\nCorta en trozos pequeños. Cubre los cortes con harina y haz rodar suavemente cada trozo entre las palmas para formar una bolita.\n\n06\nCuece los váreniki\n\nAñade los váreniki al agua hirviendo en tandas pequeñas. Pasa suavemente una espumadera por el fondo para que no se peguen. Cuando el agua vuelva a hervir y los váreniki suban, baja el fuego. Cuécelos a hervor suave durante 1–2 minutos más y retíralos con una espumadera.\n\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados"
+    },
+    {
+      "path": "/es/recipes/profiteroles-sin-gluten",
+      "text": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\nRecetas\n\nPASTA CHOUX / POSTRE\n\nSin gluten\nProfiteroles\n\nBocaditos de pasta choux huecos y crujientes con un relleno cremoso.\n\nProbada\n\nEsta masa choux con Schär Mix B Bread y 4 huevos pequeños se horneó con éxito y rindió unos 20 profiteroles.\n\nTIEMPO ACTIVO\n15 min\nRENDIMIENTO\nUnos 20 profiteroles del tamaño de una nuez\nDIFICULTAD\nMedia\nHARINA\nSchär Mix B Bread\nIr a los ingredientes\nIr a los pasos\n\nRELLENO\n\nElige una crema.\n\nElige el relleno. Tu elección cambia los ingredientes y los pasos de preparación.\n\nElige una crema.\nRecomendada\nCrema pastelera de vainilla con huevo\nUna crema clásica y lisa para rellenar pasteles y montar postres.\nVer receta de la crema\nNata montada con mascarpone\nUna crema ligera y rápida para rellenar pasteles o montar bizcochos que mantiene bien la forma.\nVer receta de la crema\nCrema de vainilla sin huevo\nUna crema casera suave para rellenar una tanda grande de pasteles; espesa al enfriarse.\nVer receta de la crema\nCrema de mantequilla y vainilla\nUna crema rica y estable para rellenar y decorar tartas y pasteles.\nVer receta de la crema\n\nANTES DE EMPEZAR\n\nPlanifica con antelación.\nTenlo en cuenta\n\nPrepara con antelación la crema elegida y enfríala por completo. Rellena solo las piezas completamente frías.\n\nCantidad\n\nReceta base: Mezcla de harina Schär Mix B Bread — 110 g · Unos 20 profiteroles del tamaño de una nuez\n\nProfiteroles del tamaño de una nuez\n\nCambiar cantidad\nUsar lo que tengo\nTAMAÑO DE LA TANDA\n0,5×\n1×\n1,5×\n2×\nIngredientes\nA la lista de compra…\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\n110 g\n5,5 cdas.\nAzúcar glas\n2,35 g\n1 cdta.\nSal\n1 pizca\nAgua\n130 ml\nMantequilla sin sal\nFría y cortada en dados.\n70 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\n4 uds.\nPreparación\nElige primero una crema\n\nUn paso en pantalla, con ingredientes y temporizadores a mano.\n\n01\nTamiza los ingredientes secos\n\nTamiza en un bol pequeño la mezcla Schär Mix B Bread, el azúcar glas y la sal.\n\n02\nDerrite la mantequilla en el agua\n\nCONSEJOEmpieza con fuego suave para que la mantequilla se derrita antes de que se evapore demasiada agua.\n\nPon el agua y la mantequilla en un cazo pequeño. Calienta suavemente hasta que la mantequilla se derrita y después lleva la mezcla a ebullición.\n\n03\nCuece la base de la masa\n\nCONSEJODeja que la base se enfríe un poco antes de añadir los huevos para que no se cuajen al contacto.\n\nAñade de golpe toda la mezcla seca y retira el cazo del fuego. Bate con firmeza con una espátula hasta que la masa se una y se separe de las paredes. Remueve brevemente a fuego bajo y deja reposar unos minutos mientras eliminas parte del vapor caliente.\n\n04\nIncorpora los huevos poco a poco\n\nCONSEJOCuatro huevos pequeños fueron ideales en la prueba. Reserva la última porción hasta comprobar la textura.\n\nAñade los huevos ligeramente batidos en pequeñas porciones y mezcla bien después de cada una hasta obtener una masa blanda, lisa y brillante.\n\nPUNTO DE CONTROLLa masa está brillante, conserva la forma y cae lentamente de la espátula formando una cinta pesada.\n\n05\nForma las piezas\n\nPasa la masa a una manga con boquilla de unos 1,5 cm. Forma montones del tamaño de una nuez sobre la bandeja, dejando espacio entre ellos.\n\nPUNTO DE CONTROLLas piezas mantienen la forma y no se extienden en discos planos.\n\n200°C · 10 MIN; DESPUÉS 180°C · 15 MIN\n\n06\nHornea hasta que estén dorados\n\nSin abrir el horno entre las dos etapas, hornea hasta que las piezas hayan subido y estén doradas.\n\nPUNTO DE CONTROLLas piezas están bien hinchadas, doradas y firmes, no pálidas ni blandas.\n\n07\nDeja salir el vapor y seca\n\nSaca la bandeja y haz un pequeño agujero en la base de cada pieza. Devuélvelas al horno unos minutos para secar el interior y deja que se enfríen por completo.\n\nPUNTO DE CONTROLLas piezas frías se sienten ligeras, secas y huecas y no se hunden.\n\n08\nRellena las piezas frías\n\nPasa la crema preparada a una manga y rellena las piezas completamente frías por los agujeros de la base.\n\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados"
+    },
+    {
+      "path": "/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+      "text": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\nRecetas\n\nBIZCOCHO ENROLLADO / POSTRE\n\nSin gluten\nBrazo de gitano de frutas\n\nBizcocho tierno con mermelada de frutos rojos y crema, cubierto de crema y fruta fresca al gusto.\n\nProbada\n\nEsta base de brazo de gitano se horneó con éxito.\n\nTIEMPO ACTIVO\n30 min\nRENDIMIENTO\n1 brazo de gitano\nDIFICULTAD\nFácil\n\nAdemás: 15–20 min de horno y enfriado completo antes de rellenar.\n\nHARINA\nSchär Mix B Bread\nIr a los ingredientes\nIr a los pasos\n\nRELLENO\n\nElige una crema.\n\nElige el relleno. Tu elección cambia los ingredientes y los pasos de preparación.\n\nElige una crema.\nRecomendada\nNata montada con mascarpone\nUna crema ligera y rápida para rellenar pasteles o montar bizcochos que mantiene bien la forma.\nVer receta de la crema\nCrema de mantequilla y vainilla\nUna crema rica y estable para rellenar y decorar tartas y pasteles.\nVer receta de la crema\n\nANTES DE EMPEZAR\n\nPlanifica con antelación.\nTenlo en cuenta\n\nDeja enfriar el bizcocho enrollado con su papel. Rellénalo solo cuando esté completamente frío.\n\nTenlo en cuenta\n\nElige mermelada espesa de arándano o frambuesa y una crema. En cuanto esté batida, reserva unas cucharadas para decorar.\n\nCantidad\n\nReceta base: Harina Schär Mix B Bread — 120 g · 1 brazo de gitano\n\nCambiar cantidad\nUsar lo que tengo\nTAMAÑO DE LA TANDA\n0,5×\n1×\n1,5×\n2×\nIngredientes\nA la lista de compra…\nBizcocho\nHuevos\n5 uds.\nAzúcar\n100 g\n5 cdas.\nSal\n1 pizca\nAceite neutro\n35 ml\nAgua\n35 ml\nHarina Schär Mix B Bread\n120 g\n6 cdas.\nRelleno y decoración\nMermelada espesa de frutos rojos\nQueda bien con mermelada de arándanos o frambuesa.\nFruta fresca o frutos rojos (opcional)\nPara el relleno y la decoración; lavar y secar bien.\nFrutos secos picados (opcional)\nPara la parte superior, en lugar de la fruta fresca o junto con ella.\nPreparación\nElige primero una crema\n\nUn paso en pantalla, con ingredientes y temporizadores a mano.\n\nUNOS 10 MIN\n\n01\nBate hasta el punto de cinta\n\nBate los huevos con el azúcar y la sal durante unos 10 minutos.\n\nPUNTO DE CONTROLLa mezcla está pálida y espesa y cae de las varillas en una cinta ancha que permanece visible unos instantes.\n\n02\nIntegra la masa\n\nIncorpora con movimientos envolventes el aceite y después el agua. Añade la harina poco a poco y mezcla con suavidad solo hasta que no queden zonas secas.\n\n180–200°C · 15–20 MIN\n\n03\nHornea el bizcocho\n\nPrecalienta el horno a 180–200°C. Forra una bandeja con borde con papel de horno y extiende la masa en un rectángulo fino y uniforme. Hornea durante 15–20 minutos.\n\nPUNTO DE CONTROLEl bizcocho está ligeramente dorado, recupera la forma al tocarlo y sigue flexible para enrollarlo.\n\n04\nEnrolla con el papel\n\nCon el bizcocho aún caliente, enróllalo sin apretar junto con el papel en el que se ha horneado. No retires el papel: debe quedar entre las vueltas. Déjalo enrollado hasta que se enfríe por completo.\n\n05\nAbre y unta la mermelada\n\nCONSEJONo fuerces el bizcocho para dejarlo plano: conserva la curva del extremo hacia dentro para evitar que se agriete.\n\nReserva unas cucharadas de la crema recién batida para decorar. Desenrolla con cuidado el bizcocho completamente frío. Después desprende suavemente el papel del bizcocho y deja el bizcocho apoyado sobre ese mismo papel. Unta una capa fina de mermelada espesa.\n\n06\nExtiende la crema\n\nCONSEJOEl borde libre deja espacio para que la crema se desplace al enrollar sin salir por la unión.\n\nExtiende con suavidad el resto de la crema sobre la mermelada. Deja unos 2 cm sin crema en el borde que cerrará el rollo. Si quieres, añade fruta fresca o frutos rojos.\n\n07\nEnrolla y decora\n\nCONSEJOAntes de servir, deja el rollo unas 2 horas en la nevera para que la crema y el relleno se asienten.\n\nSobre el mismo papel, vuelve a enrollar desde el extremo curvado. El papel queda debajo del rollo; coloca la unión hacia abajo. Unta por encima la crema reservada y decora con fruta, frutos rojos o frutos secos picados si quieres.\n\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados"
+    }
+  ],
+  "zoom": [
+    {
+      "locale": "uk",
+      "overflow": false,
+      "scrollY": 2100,
+      "scrollHeight": 3000,
+      "padding": "0px",
+      "navHeight": 281.78125
+    },
+    {
+      "locale": "en",
+      "overflow": false,
+      "scrollY": 1675,
+      "scrollHeight": 2575,
+      "padding": "0px",
+      "navHeight": 241
+    },
+    {
+      "locale": "es",
+      "overflow": false,
+      "scrollY": 2009,
+      "scrollHeight": 2909,
+      "padding": "0px",
+      "navHeight": 281.78125
+    }
+  ]
+}

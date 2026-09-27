@@ -17,7 +17,9 @@ const dishAliases: Record<string, string[]> = {
     'éclair',
     'éclairs',
   ],
+  'lazy-dumplings': ['tvorog', 'curd cheese', 'cottage cheese', 'requesón', 'vareniki', 'вареники'],
   'cottage-cheese-waffles': [
+    'tvorog', 'curd cheese', 'cottage cheese', 'requesón',
     'гофре',
     'сирні вафлі',
     'творожні вафлі',

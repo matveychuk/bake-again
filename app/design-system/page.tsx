@@ -1,3 +1,4 @@
+import { NotFoundContent } from '@/components/site/not-found-content';
 import { Button } from '@/components/ui/button';
 /* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
 import type { Metadata } from 'next';
@@ -45,6 +46,8 @@ import { RecipeCreamSelector } from '@/components/recipe/recipe-cream-selector';
 import { InventoryRecipeAdjuster } from '@/components/recipe/inventory-recipe-adjuster';
 import { StepMediaSequence } from '@/components/recipe/step-media-sequence';
 import { getRecipeContent } from '@/content/recipes/registry';
+import { applySourceRecipeConfiguration } from '@/content/recipes/source-recipe-configuration';
+import { resolveNapoleonCookConfiguration } from '@/content/recipes/napoleon-configuration';
 import { composeRecipeWithCream } from '@/content/recipes/cream-composition';
 import { LanguageSwitcher } from '@/components/site/language-switcher';
 import { BakeCheckbox } from '@/components/ui/bake-checkbox';
@@ -57,6 +60,7 @@ import styles from './design-system.module.css';
 
 export const metadata: Metadata = {
   title: 'Design System v1 — Bake Again',
+  robots: { index: false, follow: false },
   description:
     'Approved Warm Precision foundations, components and product rules.',
 };
@@ -506,13 +510,65 @@ export default function DesignSystemPage() {
               </div>
             </div>
 
+            <div className={styles.componentBlock} id="scaling-consistency">
+              <div className={styles.componentLabel}>
+                <strong>Calculated method and preparation notes</strong>
+                <span>2× quantities · proportional alternatives · blocked unresolved Cook version</span>
+              </div>
+              <div className={styles.recipeOverviewExample}>
+                {(['uk', 'en', 'es'] as const).map((locale) => {
+                  const plum = applySourceRecipeConfiguration(
+                    getRecipeContent('plum-cake', locale)!,
+                    { kind: 'adjusted', scaleFactor: 2 }, locale,
+                  );
+                  const step = plum.steps.find((item) => item.id === 'fold-butter')!;
+                  const blocked = resolveNapoleonCookConfiguration(
+                    'mode=ingredient&ingredient=schar-mix-b&amount=200&unit=g', locale,
+                  );
+                  return (
+                    <div key={locale} lang={locale}>
+                      <EvidenceBadge locale={locale} status="calculated" />
+                      <RecipeStepContent
+                        title={step.title}
+                        headingLevel="h3"
+                        locale={locale}
+                        tipLabel={getUiMessages(locale).recipe.tip}
+                        checkpointLabel={getUiMessages(locale).recipe.checkpoint}
+                      >
+                        <p>{step.body}</p>
+                      </RecipeStepContent>
+                      <RecipePlanItem label={getUiMessages(locale).recipe.keepInMind}>
+                        <p>{getRecipeContent('prune-cake', locale)?.beforeStart?.[1]}</p>
+                      </RecipePlanItem>
+                      {blocked.kind === 'blocked' && <p>{blocked.reason}</p>}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className={styles.componentBlock} id="release-states">
+              <div className={styles.componentLabel}>
+                <strong>Composed recipe evidence and missing pages</strong>
+                <span>Suggested pair · independent component evidence · localized recovery</span>
+              </div>
+              {(['uk', 'en', 'es'] as const).map((locale) => (
+                <div key={locale} lang={locale}>
+                  <RecipeOverview locale={locale} showWorkingRecord={false} content={composeRecipeWithCream(
+                    getRecipeContent('eclairs', locale)!, getRecipeContent('vanilla-egg-custard', locale), 'vanilla-egg-custard', locale,
+                  )} />
+                  <NotFoundContent locale={locale} headingId={`missing-example-${locale}`} />
+                </div>
+              ))}
+            </div>
+
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}>
                 <strong>Cream choice cards</strong>
                 <span>
                   Chocolate recommendation label on the card edge · aligned
-                  titles, descriptions and recipe links · shared Tested
-                  statement
+                  titles, descriptions and recipe links · neutral selection
+                  guidance
                 </span>
               </div>
               <RecipeCreamSelector
@@ -527,8 +583,8 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Recipe navigation and cooking entry</strong>
                 <span>
-                  Native section links in the hero · primary Cook action beside
-                  the written method · both sections remain visible
+                  Native section links · Cook entry in three languages · open
+                  each example to review wrapping navigation at 200% text
                 </span>
               </div>
               <div className={styles.recipeOverviewExample}>
@@ -552,7 +608,7 @@ export default function DesignSystemPage() {
                     </h3>
                     <RecipeCookEntry
                       locale={locale}
-                      href={`/${locale}/recipes/plum-cake/cook`}
+                      href={getLocalizedRecipePath('plum-cake', locale, '/cook')!}
                     />
                   </div>
                 ))}
@@ -686,11 +742,11 @@ export default function DesignSystemPage() {
                           id: 'author-video-example',
                           type: 'video',
                           src: '/media/recipes/celebration-sponge-cake/selected/author-cake-overview-v1.mp4',
-                          alt: 'Author video of a fruit cake',
-                          caption: 'Author video · play on demand',
+                          alt: 'Fruit cake with chocolate glaze',
+                          caption: 'Fruit cake · play on demand',
                         },
                       ]}
-                      ariaLabel={`${variant}: author video`}
+                      ariaLabel={`${variant}: fruit cake video`}
                       variant={variant}
                     />
                   </div>

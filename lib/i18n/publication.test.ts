@@ -11,14 +11,14 @@ import {
 
 void test('only reviewed UI locales are publishable', () => {
   assert.equal(isUiLocalePublishable('en'), true);
-  assert.equal(isUiLocalePublishable('es'), false);
-  assert.equal(isUiLocalePublishable('uk'), false);
+  assert.equal(isUiLocalePublishable('es'), true);
+  assert.equal(isUiLocalePublishable('uk'), true);
 });
 
-void test('a draft recipe translation is not a public language equivalent', () => {
-  assert.equal(isRecipeLocalePublishable(crinkleCookiesRecipe, 'en'), false);
+void test('reviewed recipe translations are public language equivalents', () => {
+  assert.equal(isRecipeLocalePublishable(crinkleCookiesRecipe, 'en'), true);
   assert.equal(isRecipeLocalePublishable(crinkleCookiesRecipe, 'uk'), true);
-  assert.deepEqual(getPublishableRecipeLocales(crinkleCookiesRecipe), ['uk']);
+  assert.deepEqual(new Set(getPublishableRecipeLocales(crinkleCookiesRecipe)), new Set(['uk', 'en', 'es']));
   assert.deepEqual(getPreviewRobots(false), { index: false, follow: false });
 });
 

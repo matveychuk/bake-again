@@ -1,3 +1,5 @@
+import { localizeRecipeContent } from "./localize-content.ts";
+import { easter_breadEs } from "./translations/easter-bread.es.ts";
 import type {
   RecipeSourceDraft,
   RecipeSourceDraftContent,
@@ -494,13 +496,22 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
   };
 }
 
-export const easterBreadRecipe = {
+const easterBreadRecipeBase = {
   id: 'easter-bread',
   publicationStatus: 'unpublished',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'Author-provided recipe text',
     locator: 'Паска 2.0 — авторська перевірена версія',
   },
   ...recipeContent('en'),
   translations: { uk: recipeContent('uk') },
+} satisfies RecipeSourceDraft;
+
+export const easterBreadRecipe = {
+  ...easterBreadRecipeBase,
+  translations: {
+    ...easterBreadRecipeBase.translations,
+    es: localizeRecipeContent(easterBreadRecipeBase.translations.uk, easter_breadEs),
+  },
 } satisfies RecipeSourceDraft;

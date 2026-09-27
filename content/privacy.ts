@@ -18,7 +18,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Базова статистика',
-        body: 'Ми використовуємо Umami, щоб рахувати перегляди сторінок і використання основних функцій: пошуку, збереження рецептів, списку покупок та режиму приготування. Аналітика працює без cookies. Ми не надсилаємо до Umami тексти пошуку, приватних нотаток чи запитань до помічника. Параметри адрес сторінок вилучаються; для джерела переходу передається лише домен. Якщо у браузері увімкнено Do Not Track, статистика не збирається.',
+        body: 'Bake Again використовує Umami, щоб рахувати перегляди сторінок і використання основних функцій: пошуку, збереження рецептів, списку покупок та режиму приготування. Аналітика працює без cookies. Тексти пошуку, приватних нотаток і запитань до помічника не надсилаються до Umami. Параметри адрес сторінок вилучаються; для джерела переходу передається лише домен. Якщо у браузері увімкнено Do Not Track, статистика не збирається.',
       },
       {
         title: 'Якщо користуєтеся помічником',
@@ -40,7 +40,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Basic analytics',
-        body: 'We use Umami to count page views and use of key features: search, saved recipes, shopping lists and Cook Mode. Analytics uses no cookies. We do not send search text, private notes or assistant questions to Umami. Page URL parameters are removed; only the referring origin is sent. Analytics is disabled when your browser enables Do Not Track.',
+        body: 'Bake Again uses Umami to count page views and use of key features: search, saved recipes, shopping lists and Cook Mode. Analytics uses no cookies. Search text, private notes and assistant questions are not sent to Umami. Page URL parameters are removed; only the referring origin is sent. Analytics is disabled when your browser enables Do Not Track.',
       },
       {
         title: 'If you use the assistant',
@@ -62,7 +62,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Estadísticas básicas',
-        body: 'Usamos Umami para contar las visitas a las páginas y el uso de las funciones principales: búsqueda, recetas guardadas, lista de la compra y modo de preparación. La analítica no utiliza cookies. No enviamos a Umami textos de búsqueda, notas privadas ni preguntas al asistente. Eliminamos los parámetros de las direcciones; del origen de la visita solo enviamos el dominio. Si activas Do Not Track en tu navegador, no recopilamos estadísticas.',
+        body: 'Bake Again utiliza Umami para contar las visitas a las páginas y el uso de las funciones principales: búsqueda, recetas guardadas, lista de la compra y modo de preparación. La analítica no utiliza cookies. Los textos de búsqueda, las notas privadas y las preguntas al asistente no se envían a Umami. Se eliminan los parámetros de las direcciones; del origen de la visita solo se envía el dominio. Si activas Do Not Track en tu navegador, no se recopilan estadísticas.',
       },
       {
         title: 'Si utilizas el asistente',

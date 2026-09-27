@@ -1,0 +1,146 @@
+[
+  {
+    "locale": "uk",
+    "width": 390,
+    "images": [
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Ffold-flour-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      },
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Fbutter-batter-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      }
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 900,
+    "images": [
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Ffold-flour-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      },
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Fbutter-batter-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      }
+    ]
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Ffold-flour-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      },
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Fbutter-batter-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "images": [
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Ffold-flour-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      },
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Fbutter-batter-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 900,
+    "images": [
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Ffold-flour-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      },
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Fbutter-batter-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Ffold-flour-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      },
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Fbutter-batter-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "images": [
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Ffold-flour-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      },
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Fbutter-batter-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 900,
+    "images": [
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Ffold-flour-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      },
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Fbutter-batter-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Ffold-flour-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      },
+      {
+        "src": "/_next/image?url=%2Fmedia%2Frecipes%2Fplum-cake%2Fselected%2Fbutter-batter-author-v1.webp&w=640&q=75",
+        "complete": true,
+        "width": 1800
+      }
+    ]
+  }
+]

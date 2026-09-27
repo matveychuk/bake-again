@@ -1,3 +1,4 @@
+import { recipeStructuredData, serializeJsonLd } from '@/lib/seo/recipes';
 /* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
 import Image from 'next/image';
 import { SectionTitle } from '@/components/foundations/section-title';
@@ -78,6 +79,7 @@ export function InventoryRecipeDetail({
         baseStructured,
         selectedCream,
         selectedCreamRecipeId,
+        locale,
       )
     : null;
   const configuration = parseSourceRecipeConfiguration(
@@ -89,6 +91,7 @@ export function InventoryRecipeDetail({
   const configuredStructured = structured
     ? applySourceRecipeConfiguration(structured, configuration, locale)
     : null;
+  const methodSteps = configuredStructured?.steps ?? [];
   const concise = structured?.presentation === 'concise';
   const techniques = [
     ...new Map(
@@ -143,8 +146,18 @@ export function InventoryRecipeDetail({
           : 0,
     );
 
+  const structuredData =
+    configuredStructured && configuration.kind === 'base' && !selectedCreamRecipeId
+      ? recipeStructuredData(recipe.id, locale, configuredStructured)
+      : null;
   return (
     <main className={styles.page}>
+      {structuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
+        />
+      )}
       <SiteHeader locale={locale} pathname={pathname} />
       <div className={styles.breadcrumb}>
         <RecipeBackLink
@@ -163,19 +176,6 @@ export function InventoryRecipeDetail({
             priority
             sizes="(min-width: 900px) 48vw, 100vw"
           />
-          {structured?.showImageNote !== false && (
-            <span className={styles.imageNote}>
-              {recipe.imageKind === 'edited-author-photo'
-                ? readerCopy.editedAuthorImage
-                : recipe.imageKind === 'author-photo'
-                  ? isDraft && !concise
-                    ? messages.authorPhotoPending
-                    : readerCopy.authorImage
-                  : isDraft && !concise
-                    ? messages.generatedPreviewPending
-                    : readerCopy.generatedImage}
-            </span>
-          )}
         </div>
         <div className={styles.heroCopy}>
           <div className={styles.heroTopline}>
@@ -321,7 +321,7 @@ export function InventoryRecipeDetail({
             eyebrow={
               concise || !structured
                 ? undefined
-                : messages.method(structured.steps.length)
+                : messages.method(methodSteps.length)
             }
             eyebrowClassName={styles.eyebrow}
             id="method-title"
@@ -338,12 +338,12 @@ export function InventoryRecipeDetail({
             needsCream={Boolean(
               structured?.creamOptions && !selectedCreamRecipeId,
             )}
-            hasMethod={Boolean(structured?.steps.length)}
+            hasMethod={methodSteps.length > 0}
           />
         </div>
-        {structured && structured.steps.length > 0 ? (
+        {methodSteps.length > 0 ? (
           <ol className={styles.steps}>
-            {structured.steps.map((step, index) => (
+            {methodSteps.map((step, index) => (
               <li
                 className={step.media ? styles.stepWithMedia : undefined}
                 key={step.id}
@@ -382,17 +382,14 @@ export function InventoryRecipeDetail({
           </div>
         )}
       </section>
-      {showEditorialNotes && !concise && (
-        <aside className={styles.publication}>
-          <strong>{messages.beforePublishing}</strong>
-          <p>
-            {copy?.publicationNote?.[locale] ??
-              (locale === 'en'
-                ? recipe.needsBeforePublishing
-                : messages.translationPending)}
-          </p>
-        </aside>
-      )}
+      {showEditorialNotes &&
+        !concise &&
+        (copy?.publicationNote?.[locale] || structured?.gapNote) && (
+          <aside className={styles.publication}>
+            <strong>{messages.beforePublishing}</strong>
+            <p>{copy?.publicationNote?.[locale] ?? structured?.gapNote}</p>
+          </aside>
+        )}
       <SiteFooter locale={locale} />
     </main>
   );

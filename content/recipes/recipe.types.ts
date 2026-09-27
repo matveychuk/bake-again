@@ -276,6 +276,7 @@ export interface RecipeStep {
   /** A concise action title may be added one reviewed locale at a time. */
   title?: Partial<LocalizedText>;
   instruction: LocalizedText;
+  quantityMentions?: Array<{ text: LocalizedText; quantity: Quantity; numberOnly?: boolean }>;
   ingredientLineIds: string[];
   duration?: Duration;
   temperature?: Temperature;

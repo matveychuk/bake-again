@@ -26,6 +26,7 @@ const quantity = {
 export const eclairsRecipe = {
   id: 'eclairs',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   presentation: 'concise',
   source: {
     file: 'User-provided recipe screenshot, 2026-09-19',
@@ -94,7 +95,7 @@ export const eclairsRecipe = {
         },
         {
           id: 'powdered-sugar',
-          name: 'Powdered sugar',
+          name: 'Icing sugar',
           quantity: quantity.powderedSugar,
         },
         { id: 'salt', name: 'Salt', quantity: quantity.salt },
@@ -103,13 +104,13 @@ export const eclairsRecipe = {
           id: 'butter',
           name: 'Unsalted butter',
           quantity: quantity.butter,
-          note: 'Chilled and cut into cubes in the source recipe.',
+          note: 'Chilled and cut into cubes.',
         },
         {
           id: 'eggs',
           name: 'Small eggs',
           quantity: quantity.eggs,
-          note: 'Lightly beaten; the author used 4 small eggs.',
+          note: 'Lightly beaten. The tested version uses 4 small eggs.',
         },
       ],
     },
@@ -118,7 +119,7 @@ export const eclairsRecipe = {
     {
       id: 'mix-dry',
       title: 'Sift the dry ingredients',
-      body: 'Sift the Schär Mix B Bread flour, powdered sugar and salt together into a small bowl.',
+      body: 'Sift the Schär Mix B Bread flour, icing sugar and salt together into a small bowl.',
       cookIngredients: [
         { ingredientId: 'flour' },
         { ingredientId: 'powdered-sugar' },
@@ -269,13 +270,13 @@ export const eclairsRecipe = {
               id: 'butter',
               name: 'Несолоне вершкове масло',
               quantity: quantity.butter,
-              note: 'У джерелі — охолоджене й нарізане кубиками.',
+              note: 'Охолоджене й нарізане кубиками.',
             },
             {
               id: 'eggs',
               name: 'Маленькі яйця',
               quantity: quantity.eggs,
-              note: 'Злегка збити; авторка використала 4 маленькі яйця.',
+              note: 'Злегка збийте. У перевіреній версії використано 4 маленькі яйця.',
             },
           ],
         },
@@ -438,13 +439,13 @@ export const eclairsRecipe = {
               id: 'butter',
               name: 'Mantequilla sin sal',
               quantity: quantity.butter,
-              note: 'Fría y cortada en dados en la receta original.',
+              note: 'Fría y cortada en dados.',
             },
             {
               id: 'eggs',
               name: 'Huevos pequeños',
               quantity: quantity.eggs,
-              note: 'Ligeramente batidos; la autora utilizó 4 huevos pequeños.',
+              note: 'Ligeramente batidos. En la versión probada se usaron 4 huevos pequeños.',
             },
           ],
         },

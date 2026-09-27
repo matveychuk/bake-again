@@ -50,8 +50,8 @@ export const recipeDetailTitles: Record<string, LocalizedText> = {
     uk: 'Безглютеновий банановий хліб',
   },
   'lazy-dumplings': {
-    en: 'Gluten-free lazy cottage-cheese dumplings',
-    es: 'Ñoquis perezosos de requesón sin gluten',
+    en: 'Gluten-free lazy curd cheese dumplings',
+    es: 'Váreniki de tvorog sin gluten',
     uk: 'Безглютенові ліниві вареники',
   },
   'apple-charlotte': {
@@ -70,9 +70,9 @@ export const recipeDetailTitles: Record<string, LocalizedText> = {
     uk: 'Безглютеновий сливовий пиріг',
   },
   'cottage-cheese-waffles': {
-    en: 'Gluten-free cottage-cheese waffles',
-    es: 'Gofres de requesón sin gluten',
-    uk: 'Безглютенові творожні вафлі',
+    en: 'Gluten-free curd cheese waffles',
+    es: 'Gofres de tvorog sin gluten',
+    uk: 'Безглютенові сирні вафлі',
   },
   'carrot-cake': {
     en: 'Gluten-free carrot cake',
@@ -306,8 +306,8 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
   },
   'lazy-dumplings': {
     title: {
-      en: 'Lazy cottage-cheese dumplings',
-      es: 'Ñoquis perezosos de requesón',
+      en: 'Lazy curd cheese dumplings',
+      es: 'Váreniki de tvorog sin relleno',
       uk: 'Ліниві вареники',
     },
     category: {
@@ -316,14 +316,14 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Сніданок / на щодень',
     },
     summary: {
-      en: 'Tender cottage-cheese dumplings.',
-      es: 'Ñoquis tiernos de requesón.',
-      uk: 'Ніжні вареники з творогу.',
+      en: 'Tender curd cheese dumplings.',
+      es: 'Tiernos váreniki sin relleno, hechos con tvorog.',
+      uk: 'Ніжні вареники з кисломолочного сиру.',
     },
     alt: previewAlt(
-      'Ukrainian lazy cottage-cheese dumplings with sour cream and butter',
-      'Ñoquis perezosos ucranianos de requesón con nata agria y mantequilla',
-      'Ліниві вареники з творогу зі сметаною та маслом',
+      'Ukrainian lazy curd cheese dumplings with sour cream and butter',
+      'Váreniki ucranianos de tvorog con nata agria y mantequilla',
+      'Ліниві вареники з кисломолочного сиру зі сметаною та маслом',
     ),
   },
   'apple-charlotte': {
@@ -365,9 +365,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Охолоджена безглютенова основа з тертими яблуками та ніжною меренгою.',
     },
     alt: previewAlt(
-      'Generated preview of a gluten-free apple pie with a short pastry base and toasted meringue topping',
-      'Vista generada de una tarta de manzana sin gluten con base de masa corta y merengue tostado',
-      'Згенерований вигляд безглютенового яблучного пирога з пісочною основою та підрум’яненою меренгою',
+      'A gluten-free apple pie with a short pastry base and toasted meringue topping',
+      'Una tarta de manzana sin gluten con base de masa corta y merengue tostado',
+      'Безглютеновий яблучний пиріг із пісочною основою та підрум’яненою меренгою',
     ),
     publicationNote: {
       en: 'Bake-test the exact recipe and record the missing apple, baking-powder, pan and meringue details.',
@@ -399,9 +399,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
   },
   'cottage-cheese-waffles': {
     title: {
-      en: 'Cottage-cheese waffles',
-      es: 'Gofres de requesón',
-      uk: 'Творожні вафлі',
+      en: 'Curd cheese waffles',
+      es: 'Gofres de tvorog',
+      uk: 'Сирні вафлі',
     },
     category: {
       en: 'Breakfast / snack',
@@ -409,14 +409,14 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Сніданок / перекус',
     },
     summary: {
-      en: 'Tender waffles with natural yogurt.',
+      en: 'Tender waffles with natural yoghurt.',
       es: 'Gofres tiernos con yogur natural.',
       uk: 'Ніжні вафлі з натуральним йогуртом.',
     },
     alt: previewAlt(
-      'Golden gluten-free cottage-cheese waffles with berries on a pale green plate',
-      'Gofres dorados sin gluten de requesón con frutos rojos en un plato verde claro',
-      'Золотисті безглютенові творожні вафлі з ягодами на світло-зеленій тарілці',
+      'Golden gluten-free curd cheese waffles with berries on a pale green plate',
+      'Gofres dorados sin gluten de tvorog con frutos rojos en un plato verde claro',
+      'Золотисті безглютенові сирні вафлі з ягодами на світло-зеленій тарілці',
     ),
   },
   'carrot-cake': {
@@ -561,7 +561,7 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
     },
     category: { en: 'Breakfast', es: 'Desayuno', uk: 'Сніданок' },
     summary: {
-      en: 'Tender and fluffy, with Greek yogurt and Schär Mix B Bread.',
+      en: 'Tender and fluffy, with Greek yoghurt and Schär Mix B Bread.',
       es: 'Tiernas y esponjosas, con yogur griego y Schär Mix B Bread.',
       uk: 'Ніжні й пухкі, з грецьким йогуртом та Schär Mix B Bread.',
     },
@@ -589,7 +589,7 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       'Безглютенові оладки з яблуком і бананом',
     ),
     publicationNote: {
-      en: 'Bake-test the banana substitution and confirm the kefir or yogurt amount before publication.',
+      en: 'Bake-test the banana substitution and confirm the kefir or yoghurt amount before publication.',
       es: 'Antes de publicar, prueba la sustitución por plátano y confirma la cantidad de kéfir o yogur.',
       uk: 'Перед публікацією перевірте заміну цукру бананом і уточніть кількість кефіру або йогурту.',
     },

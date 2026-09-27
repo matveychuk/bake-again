@@ -1,11 +1,10 @@
+import type { IngredientLine } from './recipe.types';
 import {
   createCookSteps,
   TOTAL_RECIPE_STEPS,
 } from '@/app/recipes/napoleon-cake/cook/cook-mode.data';
 import {
-  calculateNapoleonConfiguration,
-  napoleonBaseSelection,
-  parseNapoleonConfiguration,
+  resolveNapoleonCookConfiguration,
 } from './napoleon-configuration';
 import type { CookModeDefinition } from '@/components/cook-mode/cook-mode.types';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -32,7 +31,7 @@ import {
   sourceRecipeScalingBounds,
 } from './source-recipe-configuration';
 
-const napoleonCookMode: CookModeDefinition = {
+const napoleonCookMode: Omit<CookModeDefinition, 'getState'> = {
   recipeId: glutenFreeNapoleonRecipe.id,
   recipeVersionId: glutenFreeNapoleonRecipe.versionId,
   recipeTitle: 'Napoleon cake',
@@ -41,39 +40,6 @@ const napoleonCookMode: CookModeDefinition = {
   assistant: {
     recipeId: glutenFreeNapoleonRecipe.id,
     recipeVersionId: glutenFreeNapoleonRecipe.versionId,
-  },
-  getState: (locationSearch) => {
-    const requested = parseNapoleonConfiguration(
-      new URLSearchParams(locationSearch),
-    );
-    const requestedResult = calculateNapoleonConfiguration(requested);
-    const selection = requestedResult.cookMode.eligible
-      ? requested
-      : napoleonBaseSelection;
-    const configuration = calculateNapoleonConfiguration(selection);
-    const isAdjusted =
-      selection.geometryId !== napoleonBaseSelection.geometryId ||
-      selection.quantityAdjustment.mode !== 'batchScale' ||
-      selection.quantityAdjustment.factor !== 1;
-    const steps = createCookSteps(configuration);
-    return {
-      isAdjusted,
-      steps,
-      allIngredients: [
-        ...new Map(
-          steps
-            .flatMap((step) => step.ingredients)
-            .map((ingredient) => [ingredient.id, ingredient]),
-        ).values(),
-      ],
-      assistantConfiguration: isAdjusted
-        ? {
-            kind: 'adjusted',
-            geometryId: selection.geometryId,
-            quantityAdjustment: selection.quantityAdjustment,
-          }
-        : { kind: 'base' },
-    };
   },
 };
 
@@ -116,6 +82,7 @@ function createInventoryCookMode(
             structured,
             selectedCream,
             selectedCreamRecipeId,
+            locale,
           )
         : null;
       const configuration = parseSourceRecipeConfiguration(
@@ -146,14 +113,15 @@ function createInventoryCookMode(
             ? getUiMessages(locale).recipe.chooseCreamBeforeCooking
             : !isAvailable && configured
               ? (configured.gapNote ??
-                'The source preserves ingredients but not the preparation method.')
+                getUiMessages(locale).recipe.methodPendingDescription)
               : !configured
-                ? 'The source currently preserves only the recipe name. Add the original ingredients and method before cooking.'
+                ? getUiMessages(locale).recipe.methodPendingDescription
                 : undefined;
 
       return {
         recipeVersionId: `${baseVersionId}${selectedCreamRecipeId ? `-cream-${selectedCreamRecipeId}` : ''}`,
         isAdjusted: configuration.kind === 'adjusted',
+        evidence: configured?.evidence,
         unavailableReason,
         steps:
           configured && isAvailable
@@ -171,7 +139,10 @@ function createInventoryCookMode(
   };
 }
 
-export function getCookModeDefinition(slug: string, locale: AppLocale = 'en') {
+export function getCookModeDefinition(
+  slug: string,
+  locale: AppLocale = 'en',
+): CookModeDefinition | undefined {
   if (slug === 'napoleon-cake') {
     return {
       ...napoleonCookMode,
@@ -179,25 +150,78 @@ export function getCookModeDefinition(slug: string, locale: AppLocale = 'en') {
         recipeDetailTitles[glutenFreeNapoleonRecipe.id]?.[locale] ??
         napoleonCookMode.recipeTitle,
       getState: (locationSearch: string) => {
-        const params = new URLSearchParams(locationSearch);
-        const availableAmount = params.get('amount');
-        if (
-          params.get('mode') === 'ingredient' &&
-          (!availableAmount ||
-            !Number.isFinite(Number(availableAmount)) ||
-            Number(availableAmount) < 100)
-        ) {
+        const resolved = resolveNapoleonCookConfiguration(locationSearch, locale);
+        if (resolved.kind === 'blocked') {
           return {
             isAdjusted: false,
             steps: [],
             allIngredients: [],
-            unavailableReason:
-              Number(availableAmount) > 0
-                ? getUiMessages(locale).scaling.supportedAmount
-                : getUiMessages(locale).scaling.positiveAmount,
+            unavailableReason: resolved.reason,
           };
         }
-        return napoleonCookMode.getState(locationSearch);
+        const { selection, configuration: calculation, isAdjusted } = resolved;
+        const state = {
+          isAdjusted,
+          steps: createCookSteps(calculation),
+          assistantConfiguration: isAdjusted
+            ? {
+                kind: 'adjusted' as const,
+                geometryId: selection.geometryId,
+                quantityAdjustment: selection.quantityAdjustment,
+              }
+            : { kind: 'base' as const },
+        };
+        const canonicalSource = getRecipeContent(
+          glutenFreeNapoleonRecipe.id,
+          locale,
+        )!;
+        const lines = glutenFreeNapoleonRecipe.ingredientSections.flatMap<IngredientLine>(
+          (section) => section.lines,
+        );
+        const source = {
+          ...canonicalSource,
+          ingredientSections: canonicalSource.ingredientSections.map(
+            (section) => ({
+              ...section,
+              ingredients: section.ingredients.map((ingredient) => ({
+                ...ingredient,
+                // Keep the source's alternatives visible in both Cook ingredient views.
+                name:
+                  lines
+                    .find((line) => line.id === ingredient.id)
+                    ?.options.map((option) => option.name[locale])
+                    .join({ uk: ' або ', en: ' or ', es: ' o ' }[locale]) ??
+                  ingredient.name,
+              })),
+            }),
+          ),
+        };
+        const configured = applySourceRecipeConfiguration(
+          source,
+          state.isAdjusted
+            ? {
+                kind: 'adjusted',
+                scaleFactor: calculation.totalScaleFactor,
+              }
+            : { kind: 'base', mode: 'scale', scaleFactor: 1 },
+          locale,
+        );
+        // Preserve the existing 17 groups and canonical IDs used by stored sessions.
+        const grouped = {
+          ...configured,
+          steps: configured.steps.map((step) => ({
+            ...step,
+            cookGroup: String(
+              state.steps.findIndex((group) => group.stepIds.includes(step.id)),
+            ),
+          })),
+        };
+        return {
+          ...state,
+          evidence: configured.evidence,
+          steps: createSourceCookSteps(grouped, locale),
+          allIngredients: createSourceCookIngredients(configured, locale),
+        };
       },
     };
   }

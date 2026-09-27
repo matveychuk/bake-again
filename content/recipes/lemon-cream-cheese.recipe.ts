@@ -18,7 +18,7 @@ const copy = {
       'Ванільний екстракт',
     ],
     evidence:
-      'Пропорції Preppy Kitchen перераховано на 200 г масла. Авторка готувала цей крем, але точну зменшену порцію ще уточнюємо.',
+      'Пропорції Preppy Kitchen перераховано на 200 г масла. Цю перераховану порцію ще не перевіряли на практиці.',
     yield: '1 порція крему',
     before:
       'Виходить понад 1 кг крему. Це повний пропорційний перерахунок; для тонкого покриття й кількох квіточок може знадобитися лише частина.',
@@ -39,18 +39,18 @@ const copy = {
     names: [
       'Butter',
       'Cream cheese',
-      'Powdered sugar',
+      'Icing sugar',
       'Lemon zest',
       'Lemon juice',
       'Vanilla extract',
     ],
     evidence:
-      'Preppy Kitchen proportions calculated for 200 g butter. The author made this frosting, but her exact reduced batch is still being confirmed.',
+      'Preppy Kitchen proportions calculated for 200 g butter. This calculated batch has not been tested.',
     yield: '1 batch of frosting',
     before:
       'This makes over 1 kg of frosting. It is a proportional calculation; a thin coating and a few piped flowers may use only part of it.',
     titleStep: 'Beat the lemon frosting',
-    body: 'Beat soft butter with cream cheese until smooth. Add finely grated lemon zest and beat for about 3 minutes. Mix in powdered sugar in portions, alternating with lemon juice. Add vanilla and beat briefly until fluffy.',
+    body: 'Beat soft butter with cream cheese until smooth. Add finely grated lemon zest and beat for about 3 minutes. Mix in icing sugar in portions, alternating with lemon juice. Add vanilla and beat briefly until fluffy.',
     cue: 'The frosting is smooth and holds a piped ridge.',
     notes: [
       'Soft, at room temperature.',
@@ -72,7 +72,7 @@ const copy = {
       'Extracto de vainilla',
     ],
     evidence:
-      'Proporciones de Preppy Kitchen calculadas para 200 g de mantequilla. La autora preparó esta crema; su cantidad reducida exacta está pendiente de confirmar.',
+      'Proporciones de Preppy Kitchen calculadas para 200 g de mantequilla. Esta cantidad recalculada aún no se ha probado.',
     yield: '1 tanda de crema',
     before:
       'Sale más de 1 kg de crema. Es un cálculo proporcional; para una capa fina y unas flores puede bastar una parte.',
@@ -148,6 +148,7 @@ export function lemonCreamCheeseContent(
 export const lemonCreamCheeseRecipe = {
   id: 'lemon-cream-cheese',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'https://preppykitchen.com/lemon-cake/',
     locator:

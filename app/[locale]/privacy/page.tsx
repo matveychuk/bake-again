@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/seo/metadata';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/site/site-header';
@@ -9,12 +10,13 @@ import styles from './privacy.module.css';
 type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return isAppLocale(locale)
-    ? {
-        title: `${privacyContent[locale].title} — Bake Again`,
-        description: privacyContent[locale].intro,
-      }
-    : {};
+  if (!isAppLocale(locale)) return {};
+  return pageMetadata({
+    title: `${privacyContent[locale].title} — Bake Again`,
+    description: privacyContent[locale].intro,
+    locale,
+    path: `/${locale}/privacy`,
+  });
 }
 export default async function PrivacyPage({ params }: Props) {
   const { locale } = await params;

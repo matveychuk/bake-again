@@ -1,0 +1,6284 @@
+[
+  {
+    "path": "/es",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Hornea lo que\nte gusta.\nTe saldrá bien."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Bake what\nyou love.\nKnow what works."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Печіть те,\nщо любите.\nІ все вийде."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/about",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Рецепти, до яких хочеться повертатися."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/about",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/about",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Recipes worth coming back to."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/about",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/about",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Recetas que apetece repetir."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/about",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/privacy",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Приватність і ваші збереження"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/privacy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/privacy",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Privacy and your saved items"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/privacy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/privacy",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Privacidad y tus datos guardados"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/privacy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/saved",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збережені рецепти"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/en/saved",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Saved recipes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/es/saved",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Recetas guardadas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/uk/shopping-list",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Список покупок"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/en/shopping-list",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Shopping list"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/es/shopping-list",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Lista de compra"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/uk/techniques/soften-butter",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Як швидко розм’якшити масло"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/techniques/soften-butter",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/techniques/soften-butter",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Cómo ablandar la mantequilla rápidamente"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/techniques/soften-butter",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/techniques/soften-butter",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "How to soften butter quickly"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/techniques/soften-butter",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-sviatkovyi-tort",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nсвятковий торт"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-sviatkovyi-tort",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-celebracion-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTarta de celebración"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-celebracion-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-celebration-cake",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncelebration cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-celebration-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-sviatkovyi-tort/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте білки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-sviatkovyi-tort",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-celebracion-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Monta las claras"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-celebracion-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-celebration-cake/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whip the whites"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-celebration-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/smetannyi-krem",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Сметанний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/smetannyi-krem",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-nata-agria",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de nata agria"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-nata-agria",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/sour-cream-filling",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Sour cream filling"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/sour-cream-filling",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/smetannyi-krem/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Приготуйте сметанний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/smetannyi-krem",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-nata-agria/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara la crema de nata agria"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-nata-agria",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/sour-cream-filling/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Make the sour cream filling"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/sour-cream-filling",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Лимонний крем із маслом і вершковим сиром"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/lemon-butter-cream-cheese-frosting",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Lemon butter and cream cheese frosting"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/lemon-butter-cream-cheese-frosting",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-queso-al-limon",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de mantequilla y queso al limón"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-queso-al-limon",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте лимонний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-queso-al-limon/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate la crema de limón"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-queso-al-limon",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/lemon-butter-cream-cheese-frosting/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Beat the lemon frosting"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/lemon-butter-cream-cheese-frosting",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/shokoladna-hlazur",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Шоколадна глазур"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/shokoladna-hlazur",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/chocolate-glaze",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Chocolate glaze"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/chocolate-glaze",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/glaseado-de-chocolate",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Glaseado de chocolate"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/glaseado-de-chocolate",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/shokoladna-hlazur/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "З’єднайте інгредієнти в каструльці"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/shokoladna-hlazur",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/chocolate-glaze/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Combine the ingredients in a saucepan"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/chocolate-glaze",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/glaseado-de-chocolate/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Pon los ingredientes en un cazo"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/glaseado-de-chocolate",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-napoleon",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nНаполеон"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-napoleon",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-napoleon-cake",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-Free\nNapoleon Cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-napoleon-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-napoleon-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTarta Napoleón"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-napoleon-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-napoleon/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Змішайте сухі інгредієнти"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-napoleon",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-napoleon-cake/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Mix the dry ingredients"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-napoleon-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-napoleon-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Mezcla los ingredientes secos"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-napoleon-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенове\nмармурове печиво «Тріщинки»"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-marbled-crinkle-cookies",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nmarbled crinkle cookies"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-marbled-crinkle-cookies",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/galletas-marmoladas-craqueladas-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nGalletas marmoladas craqueladas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/galletas-marmoladas-craqueladas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/galletas-marmoladas-craqueladas-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate la base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/galletas-marmoladas-craqueladas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-marbled-crinkle-cookies/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Beat the base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-marbled-crinkle-cookies",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-slyvovyi-pyrih",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nсливовий пиріг"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-slyvovyi-pyrih",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-plum-cake",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nplum sponge cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-plum-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-ciruelas-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBizcocho de ciruelas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-ciruelas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-slyvovyi-pyrih/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте форму та сливи"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-slyvovyi-pyrih",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-plum-cake/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the pan and plums"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-plum-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-ciruelas-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara el molde y las ciruelas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-ciruelas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-syrni-vafli",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nсирні вафлі"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-syrni-vafli",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-tvorog-waffles",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncurd cheese waffles"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-tvorog-waffles",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/gofres-de-tvorog-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nGofres de tvorog"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/gofres-de-tvorog-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-syrni-vafli/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-syrni-vafli",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/gofres-de-tvorog-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Tritura la base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/gofres-de-tvorog-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-tvorog-waffles/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Blend the base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-tvorog-waffles",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-morkvianyi-keks",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nморквяний кекс"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-morkvianyi-keks",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-zanahoria-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBizcocho de zanahoria"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-zanahoria-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-carrot-cake",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncarrot cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-carrot-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-morkvianyi-keks/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте родзинки й горіхи"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-morkvianyi-keks",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-zanahoria-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara las pasas y las nueces"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-zanahoria-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-carrot-cake/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the raisins and nuts"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-carrot-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvit-dlia-torta",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nбісквіт для торта"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvit-dlia-torta",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-para-tartas-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBizcocho sin gluten para tartas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-para-tartas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-sponge-cake",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nsponge cake for layer cakes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-sponge-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvit-dlia-torta/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте білки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvit-dlia-torta",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-para-tartas-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Monta las claras"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-para-tartas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-sponge-cake/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whip the whites"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-sponge-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-mlyntsi",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nмлинці"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-mlyntsi",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crepes-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nCrepes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crepes-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-crepes",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncrepes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-crepes",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-mlyntsi/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте густу основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-mlyntsi",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nбісквітний рулет із фруктами"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crepes-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate una base espesa"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crepes-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-crepes/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Blend a thick base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-crepes",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Поки що неможливо почати приготування."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBrazo de gitano de frutas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-fruit-sponge-roll",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nfruit sponge roll"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-fruit-sponge-roll",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-bananovyi-khlib",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nбанановий хліб"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-bananovyi-khlib",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-fruit-sponge-roll/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cooking cannot start yet."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-fruit-sponge-roll",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/brazo-de-gitano-con-fruta-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Aún no se puede empezar a cocinar."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/pan-de-platano-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nPan de plátano"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/pan-de-platano-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-bread",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nbanana bread"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-bread",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-bananovyi-khlib/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте масло з цукром"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-bananovyi-khlib",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/pan-de-platano-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate la mantequilla con el azúcar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/pan-de-platano-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nліниві вареники"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-bread/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cream the butter and sugar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-bread",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/vareniki-perezosos-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nVáreniki de tvorog"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/vareniki-perezosos-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-lazy-dumplings",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nlazy curd cheese dumplings"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-lazy-dumplings",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-linyvi-varenyky/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Змішайте основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/vareniki-perezosos-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Mezcla la base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/vareniki-perezosos-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nторт із чорносливом"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-lazy-dumplings/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Mix the base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-lazy-dumplings",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-ciruelas-pasas-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTarta de chocolate y ciruelas pasas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-ciruelas-pasas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-prune-cake",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nchocolate prune cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-prune-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте духовку й форму"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-ciruelas-pasas-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara el horno y el molde"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-ciruelas-pasas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-prune-cake/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the oven and tin"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-prune-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-profitroli",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nпрофітролі"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-profitroli",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-profitroli/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Поки що неможливо почати приготування."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-profitroli",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/profiteroles-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nProfiteroles"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/profiteroles-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-profiteroles",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nprofiteroles"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-profiteroles",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-yabluchni-oladky",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nяблучні оладки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-yabluchni-oladky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-profiteroles/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cooking cannot start yet."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-profiteroles",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/profiteroles-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Aún no se puede empezar a cocinar."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/profiteroles-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-apple-fritters",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\napple fritters"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-apple-fritters",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-manzana-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTortitas de manzana"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-manzana-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-yabluchni-oladky/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте яблука"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-yabluchni-oladky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-bananovi-oladky",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nбананові панкейки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-bananovi-oladky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-apple-fritters/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the apples"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-apple-fritters",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-manzana-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara las manzanas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-manzana-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-platano-sin-gluten",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTortitas de plátano"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-platano-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-fritters",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nbanana pancakes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-fritters",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-bananovi-oladky/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Розімніть і змішайте"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-bananovi-oladky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/zbyti-vershky-z-maskarpone",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Крем із вершків та маскарпоне"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/zbyti-vershky-z-maskarpone",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-platano-sin-gluten/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Machaca y mezcla"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-platano-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-fritters/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Mash and mix"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-fritters",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/zbyti-vershky-z-maskarpone/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте вершки з цукром"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/zbyti-vershky-z-maskarpone",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/nata-montada-con-mascarpone",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de nata y mascarpone"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/nata-montada-con-mascarpone",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/whipped-cream-with-mascarpone",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whipped cream with mascarpone"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/whipped-cream-with-mascarpone",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Ванільний заварний крем з яйцями"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/nata-montada-con-mascarpone/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Monta la nata con el azúcar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/nata-montada-con-mascarpone",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/whipped-cream-with-mascarpone/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whip the cream with the sugar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/whipped-cream-with-mascarpone",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Нагрійте молоко"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-con-huevo",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema pastelera de vainilla con huevo"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-con-huevo",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-custard-with-eggs",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Vanilla custard with eggs"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-custard-with-eggs",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-con-huevo/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Calienta la leche"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-con-huevo",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Ванільний заварний крем без яєць"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-custard-with-eggs/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Heat the milk"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-custard-with-eggs",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-sin-huevo",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de vainilla sin huevo"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-sin-huevo",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Зробіть пасту з масла та борошна"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/eggless-vanilla-custard",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Eggless vanilla custard"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/eggless-vanilla-custard",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-sin-huevo/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara la pasta de mantequilla y harina"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-sin-huevo",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-maslianyi-krem",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Ванільний масляний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-maslianyi-krem",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/eggless-vanilla-custard/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Make the butter and flour paste"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/eggless-vanilla-custard",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-vainilla",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de mantequilla de vainilla"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-vainilla",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-maslianyi-krem/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Заваріть яєчно-молочну основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-maslianyi-krem",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-buttercream",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Vanilla buttercream"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-buttercream",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-vainilla/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Cuece la base de huevo y leche"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-vainilla",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-buttercream/cook",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cook the egg and milk base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-buttercream",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Печіть те,\nщо любите.\nІ все вийде."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Hornea lo que\nte gusta.\nTe saldrá bien."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Bake what\nyou love.\nKnow what works."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/about",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Рецепти, до яких хочеться повертатися."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/about",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/about",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Recipes worth coming back to."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/about",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/privacy",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Приватність і ваші збереження"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/privacy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/about",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Recetas que apetece repetir."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/about",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/saved",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збережені рецепти"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/en/privacy",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Privacy and your saved items"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/privacy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/privacy",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Privacidad y tus datos guardados"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/privacy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/saved",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Recetas guardadas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/uk/shopping-list",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Список покупок"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/en/saved",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Saved recipes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/es/shopping-list",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Lista de compra"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/en/shopping-list",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Shopping list"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/uk/techniques/soften-butter",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Як швидко розм’якшити масло"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/techniques/soften-butter",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/techniques/soften-butter",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "How to soften butter quickly"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/techniques/soften-butter",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/techniques/soften-butter",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Cómo ablandar la mantequilla rápidamente"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/techniques/soften-butter",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-sviatkovyi-tort",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nсвятковий торт"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-sviatkovyi-tort",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-celebration-cake",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncelebration cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-celebration-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-celebracion-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTarta de celebración"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-celebracion-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-sviatkovyi-tort/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте білки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-sviatkovyi-tort",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/smetannyi-krem",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Сметанний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/smetannyi-krem",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-celebration-cake/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whip the whites"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-celebration-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-celebracion-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Monta las claras"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-celebracion-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/smetannyi-krem/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Приготуйте сметанний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/smetannyi-krem",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-nata-agria",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de nata agria"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-nata-agria",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/sour-cream-filling",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Sour cream filling"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/sour-cream-filling",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Лимонний крем із маслом і вершковим сиром"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-nata-agria/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara la crema de nata agria"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-nata-agria",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/sour-cream-filling/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Make the sour cream filling"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/sour-cream-filling",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте лимонний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-queso-al-limon",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de mantequilla y queso al limón"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-queso-al-limon",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/lemon-butter-cream-cheese-frosting",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Lemon butter and cream cheese frosting"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/lemon-butter-cream-cheese-frosting",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/shokoladna-hlazur",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Шоколадна глазур"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/shokoladna-hlazur",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-queso-al-limon/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate la crema de limón"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-queso-al-limon",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/lemon-butter-cream-cheese-frosting/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Beat the lemon frosting"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/lemon-butter-cream-cheese-frosting",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/shokoladna-hlazur/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "З’єднайте інгредієнти в каструльці"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/shokoladna-hlazur",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/glaseado-de-chocolate",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Glaseado de chocolate"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/glaseado-de-chocolate",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/chocolate-glaze",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Chocolate glaze"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/chocolate-glaze",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-napoleon",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nНаполеон"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-napoleon",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/chocolate-glaze/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Combine the ingredients in a saucepan"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/chocolate-glaze",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/glaseado-de-chocolate/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Pon los ingredientes en un cazo"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/glaseado-de-chocolate",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-napoleon/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Змішайте сухі інгредієнти"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-napoleon",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-napoleon-cake",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-Free\nNapoleon Cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-napoleon-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-napoleon-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTarta Napoleón"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-napoleon-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенове\nмармурове печиво «Тріщинки»"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-napoleon-cake/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Mix the dry ingredients"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-napoleon-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-napoleon-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Mezcla los ingredientes secos"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-napoleon-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-marbled-crinkle-cookies",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nmarbled crinkle cookies"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-marbled-crinkle-cookies",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/galletas-marmoladas-craqueladas-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nGalletas marmoladas craqueladas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/galletas-marmoladas-craqueladas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-slyvovyi-pyrih",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nсливовий пиріг"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-slyvovyi-pyrih",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/galletas-marmoladas-craqueladas-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate la base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/galletas-marmoladas-craqueladas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-marbled-crinkle-cookies/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Beat the base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-marbled-crinkle-cookies",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-slyvovyi-pyrih/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте форму та сливи"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-slyvovyi-pyrih",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-ciruelas-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBizcocho de ciruelas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-ciruelas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-plum-cake",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nplum sponge cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-plum-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-syrni-vafli",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nсирні вафлі"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-syrni-vafli",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-ciruelas-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara el molde y las ciruelas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-ciruelas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-plum-cake/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the pan and plums"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-plum-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-syrni-vafli/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-syrni-vafli",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/gofres-de-tvorog-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nGofres de tvorog"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/gofres-de-tvorog-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-tvorog-waffles",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncurd cheese waffles"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-tvorog-waffles",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-morkvianyi-keks",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nморквяний кекс"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-morkvianyi-keks",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/gofres-de-tvorog-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Tritura la base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/gofres-de-tvorog-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-tvorog-waffles/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Blend the base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-tvorog-waffles",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-morkvianyi-keks/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте родзинки й горіхи"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-morkvianyi-keks",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-zanahoria-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBizcocho de zanahoria"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-zanahoria-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-carrot-cake",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncarrot cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-carrot-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvit-dlia-torta",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nбісквіт для торта"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvit-dlia-torta",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-zanahoria-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara las pasas y las nueces"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-zanahoria-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-carrot-cake/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the raisins and nuts"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-carrot-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvit-dlia-torta/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте білки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvit-dlia-torta",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-para-tartas-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBizcocho sin gluten para tartas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-para-tartas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-sponge-cake",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nsponge cake for layer cakes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-sponge-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-mlyntsi",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nмлинці"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-mlyntsi",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-para-tartas-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Monta las claras"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-para-tartas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-sponge-cake/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whip the whites"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-sponge-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-mlyntsi/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте густу основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-mlyntsi",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-crepes",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncrepes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-crepes",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crepes-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nCrepes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crepes-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nбісквітний рулет із фруктами"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-crepes/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Blend a thick base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-crepes",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crepes-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate una base espesa"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crepes-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Поки що неможливо почати приготування."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-fruit-sponge-roll",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nfruit sponge roll"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-fruit-sponge-roll",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBrazo de gitano de frutas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-bananovyi-khlib",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nбанановий хліб"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-bananovyi-khlib",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/brazo-de-gitano-con-fruta-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Aún no se puede empezar a cocinar."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-fruit-sponge-roll/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cooking cannot start yet."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-fruit-sponge-roll",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-bananovyi-khlib/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте масло з цукром"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-bananovyi-khlib",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/pan-de-platano-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nPan de plátano"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/pan-de-platano-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-bread",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nbanana bread"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-bread",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nліниві вареники"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-bread/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cream the butter and sugar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-bread",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/pan-de-platano-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate la mantequilla con el azúcar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/pan-de-platano-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-linyvi-varenyky/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Змішайте основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-lazy-dumplings",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nlazy curd cheese dumplings"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-lazy-dumplings",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/vareniki-perezosos-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nVáreniki de tvorog"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/vareniki-perezosos-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nторт із чорносливом"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-lazy-dumplings/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Mix the base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-lazy-dumplings",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/vareniki-perezosos-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Mezcla la base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/vareniki-perezosos-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте духовку й форму"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-ciruelas-pasas-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTarta de chocolate y ciruelas pasas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-ciruelas-pasas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-prune-cake",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nchocolate prune cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-prune-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-profitroli",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nпрофітролі"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-profitroli",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-prune-cake/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the oven and tin"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-prune-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-ciruelas-pasas-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara el horno y el molde"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-ciruelas-pasas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-profitroli/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Поки що неможливо почати приготування."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-profitroli",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-profiteroles",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nprofiteroles"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-profiteroles",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/profiteroles-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nProfiteroles"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/profiteroles-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-yabluchni-oladky",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nяблучні оладки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-yabluchni-oladky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/profiteroles-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Aún no se puede empezar a cocinar."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/profiteroles-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-profiteroles/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cooking cannot start yet."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-profiteroles",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-yabluchni-oladky/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте яблука"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-yabluchni-oladky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-manzana-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTortitas de manzana"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-manzana-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-apple-fritters",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\napple fritters"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-apple-fritters",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-bananovi-oladky",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nбананові панкейки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-bananovi-oladky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-apple-fritters/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the apples"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-apple-fritters",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-manzana-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara las manzanas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-manzana-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-bananovi-oladky/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Розімніть і змішайте"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-bananovi-oladky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-fritters",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nbanana pancakes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-fritters",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-platano-sin-gluten",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTortitas de plátano"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-platano-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/zbyti-vershky-z-maskarpone",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Крем із вершків та маскарпоне"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/zbyti-vershky-z-maskarpone",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-platano-sin-gluten/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Machaca y mezcla"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-platano-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-fritters/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Mash and mix"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-fritters",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/zbyti-vershky-z-maskarpone/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте вершки з цукром"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/zbyti-vershky-z-maskarpone",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/nata-montada-con-mascarpone",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de nata y mascarpone"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/nata-montada-con-mascarpone",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/whipped-cream-with-mascarpone",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whipped cream with mascarpone"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/whipped-cream-with-mascarpone",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Ванільний заварний крем з яйцями"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/nata-montada-con-mascarpone/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Monta la nata con el azúcar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/nata-montada-con-mascarpone",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Нагрійте молоко"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/whipped-cream-with-mascarpone/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whip the cream with the sugar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/whipped-cream-with-mascarpone",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-con-huevo",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema pastelera de vainilla con huevo"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-con-huevo",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-custard-with-eggs",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Vanilla custard with eggs"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-custard-with-eggs",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Ванільний заварний крем без яєць"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-con-huevo/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Calienta la leche"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-con-huevo",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-custard-with-eggs/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Heat the milk"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-custard-with-eggs",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Зробіть пасту з масла та борошна"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-sin-huevo",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de vainilla sin huevo"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-sin-huevo",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/eggless-vanilla-custard",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Eggless vanilla custard"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/eggless-vanilla-custard",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-maslianyi-krem",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Ванільний масляний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-maslianyi-krem",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/eggless-vanilla-custard/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Make the butter and flour paste"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/eggless-vanilla-custard",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-sin-huevo/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara la pasta de mantequilla y harina"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-sin-huevo",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-maslianyi-krem/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Заваріть яєчно-молочну основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-maslianyi-krem",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-vainilla",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de mantequilla de vainilla"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-vainilla",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-buttercream",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Vanilla buttercream"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-buttercream",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Печіть те,\nщо любите.\nІ все вийде."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-vainilla/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Cuece la base de huevo y leche"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-vainilla",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-buttercream/cook",
+    "width": 900,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cook the egg and milk base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-buttercream",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/about",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Рецепти, до яких хочеться повертатися."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/about",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Hornea lo que\nte gusta.\nTe saldrá bien."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Bake what\nyou love.\nKnow what works."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/privacy",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Приватність і ваші збереження"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/privacy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/saved",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збережені рецепти"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/en/about",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Recipes worth coming back to."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/about",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/about",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Recetas que apetece repetir."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/about",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/shopping-list",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Список покупок"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/en/privacy",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Privacy and your saved items"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/privacy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/privacy",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Privacidad y tus datos guardados"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/privacy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/techniques/soften-butter",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Як швидко розм’якшити масло"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/techniques/soften-butter",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/saved",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Saved recipes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/es/saved",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Recetas guardadas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/en/shopping-list",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Shopping list"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-sviatkovyi-tort",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nсвятковий торт"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-sviatkovyi-tort",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/shopping-list",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Lista de compra"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "robots": "noindex",
+    "errors": []
+  },
+  {
+    "path": "/en/techniques/soften-butter",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "How to soften butter quickly"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/techniques/soften-butter",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/techniques/soften-butter",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Cómo ablandar la mantequilla rápidamente"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/techniques/soften-butter",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-sviatkovyi-tort/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте білки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-sviatkovyi-tort",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-celebration-cake",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncelebration cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-celebration-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-celebracion-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTarta de celebración"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-celebracion-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/smetannyi-krem",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Сметанний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/smetannyi-krem",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/smetannyi-krem/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Приготуйте сметанний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/smetannyi-krem",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-celebration-cake/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whip the whites"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-celebration-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-celebracion-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Monta las claras"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-celebracion-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Лимонний крем із маслом і вершковим сиром"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-nata-agria",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de nata agria"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-nata-agria",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/sour-cream-filling",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Sour cream filling"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/sour-cream-filling",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте лимонний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/lymonnyi-krem-z-maslom-i-vershkovym-syrom",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-nata-agria/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara la crema de nata agria"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-nata-agria",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/sour-cream-filling/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Make the sour cream filling"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/sour-cream-filling",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/shokoladna-hlazur",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Шоколадна глазур"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/shokoladna-hlazur",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-queso-al-limon",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de mantequilla y queso al limón"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-queso-al-limon",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/lemon-butter-cream-cheese-frosting",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Lemon butter and cream cheese frosting"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/lemon-butter-cream-cheese-frosting",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/shokoladna-hlazur/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "З’єднайте інгредієнти в каструльці"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/shokoladna-hlazur",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-queso-al-limon/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate la crema de limón"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-queso-al-limon",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/lemon-butter-cream-cheese-frosting/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Beat the lemon frosting"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/lemon-butter-cream-cheese-frosting",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-napoleon",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nНаполеон"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-napoleon",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/glaseado-de-chocolate",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Glaseado de chocolate"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/glaseado-de-chocolate",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/chocolate-glaze",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Chocolate glaze"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/chocolate-glaze",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-napoleon/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Змішайте сухі інгредієнти"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-napoleon",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/chocolate-glaze/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Combine the ingredients in a saucepan"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/chocolate-glaze",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/glaseado-de-chocolate/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Pon los ingredientes en un cazo"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/glaseado-de-chocolate",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенове\nмармурове печиво «Тріщинки»"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-napoleon-cake",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-Free\nNapoleon Cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-napoleon-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-napoleon-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTarta Napoleón"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-napoleon-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenove-marmurove-pechyvo-trishchynky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-napoleon-cake/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Mix the dry ingredients"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-napoleon-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-napoleon-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Mezcla los ingredientes secos"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-napoleon-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-slyvovyi-pyrih",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nсливовий пиріг"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-slyvovyi-pyrih",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-marbled-crinkle-cookies",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nmarbled crinkle cookies"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-marbled-crinkle-cookies",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/galletas-marmoladas-craqueladas-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nGalletas marmoladas craqueladas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/galletas-marmoladas-craqueladas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-marbled-crinkle-cookies/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Beat the base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-marbled-crinkle-cookies",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/galletas-marmoladas-craqueladas-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate la base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/galletas-marmoladas-craqueladas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-slyvovyi-pyrih/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте форму та сливи"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-slyvovyi-pyrih",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-plum-cake",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nplum sponge cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-plum-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-syrni-vafli",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nсирні вафлі"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-syrni-vafli",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-ciruelas-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBizcocho de ciruelas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-ciruelas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-syrni-vafli/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-syrni-vafli",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-plum-cake/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the pan and plums"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-plum-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-ciruelas-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara el molde y las ciruelas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-ciruelas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-morkvianyi-keks",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nморквяний кекс"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-morkvianyi-keks",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-tvorog-waffles",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncurd cheese waffles"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-tvorog-waffles",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/gofres-de-tvorog-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nGofres de tvorog"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/gofres-de-tvorog-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-morkvianyi-keks/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте родзинки й горіхи"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-morkvianyi-keks",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-tvorog-waffles/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Blend the base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-tvorog-waffles",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/gofres-de-tvorog-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Tritura la base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/gofres-de-tvorog-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvit-dlia-torta",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nбісквіт для торта"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvit-dlia-torta",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-zanahoria-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBizcocho de zanahoria"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-zanahoria-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-carrot-cake",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncarrot cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-carrot-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvit-dlia-torta/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте білки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvit-dlia-torta",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-carrot-cake/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the raisins and nuts"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-carrot-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-de-zanahoria-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara las pasas y las nueces"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-de-zanahoria-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-mlyntsi",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nмлинці"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-mlyntsi",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-sponge-cake",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nsponge cake for layer cakes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-sponge-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-para-tartas-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBizcocho sin gluten para tartas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-para-tartas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-mlyntsi/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте густу основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-mlyntsi",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/bizcocho-para-tartas-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Monta las claras"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/bizcocho-para-tartas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-sponge-cake/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whip the whites"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-sponge-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nбісквітний рулет із фруктами"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-crepes",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\ncrepes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-crepes",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crepes-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nCrepes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crepes-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Поки що неможливо почати приготування."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crepes-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate una base espesa"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crepes-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-crepes/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Blend a thick base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-crepes",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-bananovyi-khlib",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nбанановий хліб"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-bananovyi-khlib",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nBrazo de gitano de frutas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-fruit-sponge-roll",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nfruit sponge roll"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-fruit-sponge-roll",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-bananovyi-khlib/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте масло з цукром"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-bananovyi-khlib",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/brazo-de-gitano-con-fruta-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Aún no se puede empezar a cocinar."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/brazo-de-gitano-con-fruta-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-fruit-sponge-roll/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cooking cannot start yet."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-fruit-sponge-roll",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nліниві вареники"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/pan-de-platano-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nPan de plátano"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/pan-de-platano-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-bread",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nbanana bread"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-bread",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-linyvi-varenyky/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Змішайте основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/pan-de-platano-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Bate la mantequilla con el azúcar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/pan-de-platano-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-bread/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cream the butter and sugar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-bread",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютеновий\nторт із чорносливом"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/vareniki-perezosos-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nVáreniki de tvorog"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/vareniki-perezosos-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-lazy-dumplings",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nlazy curd cheese dumplings"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-lazy-dumplings",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте духовку й форму"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovyi-tort-z-chornoslyvom",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/vareniki-perezosos-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Mezcla la base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/vareniki-perezosos-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-lazy-dumplings/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Mix the base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-lazy-dumplings",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-profitroli",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nпрофітролі"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-profitroli",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-prune-cake",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nchocolate prune cake"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-prune-cake",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-ciruelas-pasas-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTarta de chocolate y ciruelas pasas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-ciruelas-pasas-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-profitroli/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Поки що неможливо почати приготування."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-profitroli",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-prune-cake/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the oven and tin"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-prune-cake",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tarta-de-ciruelas-pasas-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara el horno y el molde"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tarta-de-ciruelas-pasas-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-yabluchni-oladky",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nяблучні оладки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-yabluchni-oladky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/profiteroles-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nProfiteroles"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/profiteroles-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-profiteroles",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nprofiteroles"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-profiteroles",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-yabluchni-oladky/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Підготуйте яблука"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-yabluchni-oladky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-profiteroles/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cooking cannot start yet."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-profiteroles",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/profiteroles-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Aún no se puede empezar a cocinar."
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/profiteroles-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-bananovi-oladky",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Безглютенові\nбананові панкейки"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-bananovi-oladky",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-apple-fritters",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\napple fritters"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-apple-fritters",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-manzana-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTortitas de manzana"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-manzana-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/bezghliutenovi-bananovi-oladky/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Розімніть і змішайте"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/bezghliutenovi-bananovi-oladky",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-apple-fritters/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Prepare the apples"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-apple-fritters",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-manzana-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara las manzanas"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-manzana-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/zbyti-vershky-z-maskarpone",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Крем із вершків та маскарпоне"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/zbyti-vershky-z-maskarpone",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-fritters",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Gluten-free\nbanana pancakes"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-fritters",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-platano-sin-gluten",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Sin gluten\nTortitas de plátano"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-platano-sin-gluten",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/zbyti-vershky-z-maskarpone/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Збийте вершки з цукром"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/zbyti-vershky-z-maskarpone",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/gluten-free-banana-fritters/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Mash and mix"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/gluten-free-banana-fritters",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/tortitas-de-platano-sin-gluten/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Machaca y mezcla"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/tortitas-de-platano-sin-gluten",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Ванільний заварний крем з яйцями"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/whipped-cream-with-mascarpone",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whipped cream with mascarpone"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/whipped-cream-with-mascarpone",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/nata-montada-con-mascarpone",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de nata y mascarpone"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/nata-montada-con-mascarpone",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Нагрійте молоко"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-z-yaitsiamy",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/whipped-cream-with-mascarpone/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Whip the cream with the sugar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/whipped-cream-with-mascarpone",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/nata-montada-con-mascarpone/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Monta la nata con el azúcar"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/nata-montada-con-mascarpone",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Ванільний заварний крем без яєць"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-custard-with-eggs",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Vanilla custard with eggs"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-custard-with-eggs",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Зробіть пасту з масла та борошна"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-zavarnyi-krem-bez-yaiets",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-con-huevo",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema pastelera de vainilla con huevo"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-con-huevo",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-custard-with-eggs/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Heat the milk"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-custard-with-eggs",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-con-huevo/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Calienta la leche"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-con-huevo",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-maslianyi-krem",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Ванільний масляний крем"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-maslianyi-krem",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/eggless-vanilla-custard",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Eggless vanilla custard"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/eggless-vanilla-custard",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-sin-huevo",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de vainilla sin huevo"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-sin-huevo",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/uk/recipes/vanilnyi-maslianyi-krem/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "uk",
+    "h1": [
+      "Заваріть яєчно-молочну основу"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/uk/recipes/vanilnyi-maslianyi-krem",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/eggless-vanilla-custard/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Make the butter and flour paste"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/eggless-vanilla-custard",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-pastelera-de-vainilla-sin-huevo/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Prepara la pasta de mantequilla y harina"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-pastelera-de-vainilla-sin-huevo",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-buttercream",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Vanilla buttercream"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-buttercream",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-vainilla",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Crema de mantequilla de vainilla"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-vainilla",
+    "robots": "index, follow",
+    "errors": []
+  },
+  {
+    "path": "/en/recipes/vanilla-buttercream/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "en",
+    "h1": [
+      "Cook the egg and milk base"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/en/recipes/vanilla-buttercream",
+    "robots": "noindex, follow",
+    "errors": []
+  },
+  {
+    "path": "/es/recipes/crema-de-mantequilla-y-vainilla/cook",
+    "width": 1440,
+    "status": 200,
+    "lang": "es",
+    "h1": [
+      "Cuece la base de huevo y leche"
+    ],
+    "overflow": false,
+    "missingAlt": 0,
+    "canonical": "https://bakeagain.com/es/recipes/crema-de-mantequilla-y-vainilla",
+    "robots": "noindex, follow",
+    "errors": []
+  }
+]

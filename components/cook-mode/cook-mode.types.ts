@@ -40,6 +40,7 @@ export type CookModeDefinition = {
     /** Exact composed version, including a selected cream when applicable. */
     recipeVersionId?: string;
     isAdjusted: boolean;
+    evidence?: { status: 'tested' | 'calculated' | 'suggested'; explanation: string };
     steps: CookStep[];
     allIngredients?: CookIngredient[];
     assistantConfiguration?: AssistantConfiguration;

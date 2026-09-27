@@ -1,3 +1,4 @@
+import { recipeSlugs } from './recipe-slugs.ts';
 import { personalStateRecipes } from '../../content/recipes/registry.ts';
 import { recipeInventory } from '../../content/recipes/inventory.ts';
 import { isReusableComponentRecipeId } from '../../content/recipes/recipe-component-records.ts';
@@ -43,34 +44,26 @@ export function getLocalizedRecipePath(
   locale: AppLocale,
   suffix = '',
 ): string | null {
-  if (isReusableComponentRecipeId(recipeId)) {
-    return `${localeRecipesPath(locale)}/${recipeId}${suffix}`;
-  }
-  const recipe = localizedRecipes.find(
-    (candidate) => candidate.id === recipeId,
-  );
-  if (recipe)
-    return `${localeRecipesPath(locale)}/${recipe.slug[locale]}${suffix}`;
-  const inventoryRecipe = recipeInventory.find(
-    (candidate) => candidate.id === recipeId,
-  );
-  return inventoryRecipe
-    ? `${localeRecipesPath(locale)}/${inventoryRecipe.slug}${suffix}`
-    : null;
+  const slug = recipeSlugs[recipeId]?.[locale];
+  return slug ? `${localeRecipesPath(locale)}/${slug}${suffix}` : null;
 }
 
 export function getRecipeIdFromLocalizedSlug(
   locale: AppLocale,
   slug: string,
 ): string | null {
+  const canonicalId = Object.keys(recipeSlugs).find(id => recipeSlugs[id][locale] === slug);
+  if (canonicalId) return canonicalId;
   if (isReusableComponentRecipeId(slug)) return slug;
   return (
-    localizedRecipes.find((recipe) => recipe.slug[locale] === slug)?.id ?? null
+    localizedRecipes.find((recipe) => recipe.slug[locale] === slug)?.id ??
+    recipeInventory.find((recipe) => recipe.slug === slug || recipe.id === slug)?.id ??
+    legacyRecipeIds[slug] ?? null
   );
 }
 
 export function getRecipeIdFromLegacySlug(slug: string): string | null {
-  return legacyRecipeIds[slug] ?? null;
+  return legacyRecipeIds[slug] ?? (recipeSlugs[slug] ? slug : null);
 }
 
 export function getLegacySlugForRecipeId(recipeId: string): string | null {

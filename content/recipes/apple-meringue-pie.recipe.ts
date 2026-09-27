@@ -1,9 +1,12 @@
+import { localizeRecipeContent } from "./localize-content.ts";
+import { apple_meringue_pieEs } from "./translations/apple-meringue-pie.es.ts";
 import type { RecipeSourceDraft } from './source-recipe.types.ts';
 import { quantityFromGrams } from './spoon-weights.ts';
 
-export const appleMeringuePieRecipe = {
+const appleMeringuePieRecipeBase = {
   id: 'apple-meringue-pie',
   publicationStatus: 'unpublished',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'https://foodgfm.com/%d0%b1%d0%b5%d0%b7%d0%b3%d0%bb%d1%8e%d1%82%d0%b5%d0%bd%d0%be%d0%b2%d0%b8%d0%b9-%d1%8f%d0%b1%d0%bb%d1%83%d1%87%d0%bd%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d1%96%d0%b3/',
     locator:
@@ -371,5 +374,13 @@ export const appleMeringuePieRecipe = {
       gapNote:
         'Перед публікацією випробуйте точну версію та запишіть кількість і сорт яблук, кількість розпушувача, розміри форми, кількість цукру для меренги, режим духовки, активний час і готовий вихід.',
     },
+  },
+} satisfies RecipeSourceDraft;
+
+export const appleMeringuePieRecipe = {
+  ...appleMeringuePieRecipeBase,
+  translations: {
+    ...appleMeringuePieRecipeBase.translations,
+    es: localizeRecipeContent(appleMeringuePieRecipeBase.translations.uk, apple_meringue_pieEs),
   },
 } satisfies RecipeSourceDraft;

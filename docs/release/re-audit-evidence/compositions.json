@@ -1,0 +1,1478 @@
+[
+  {
+    "locale": "uk",
+    "host": "fruit-sponge-roll",
+    "cream": "mascarpone-whipped-cream",
+    "path": "/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy?cream=mascarpone-whipped-cream&mode=scale&scale=2",
+    "review": "Що потрібно купити?\n\nБезглютеновий бісквітний рулет із фруктами · 2×\n\nЗалиште позначеними продукти, які потрібно купити.\n\nОбрати всі\nЗняти всі позначки\nБісквіт\nЯйця\n10 шт.\nЦукор\n200 г\nСіль\nЗа потреби\nНейтральна олія\n70 мл\nВода\n70 мл\nБорошно Schär Mix B Bread\n240 г\nНачинка й оздоблення\nГусте ягідне варення\nДобре підходить чорничне або малинове.\nЗа потреби\nСвіжі фрукти або ягоди\nДля начинки й оздоблення; добре вимити та обсушити.\nЗа потреби\nПодрібнені горіхи\nДля верху — замість свіжих фруктів або разом із ними.\nЗа потреби\nКрем\nВершки для збивання\nТримайте в холодильнику до збивання.\n500 мл\nЦукор\n160 г\nМаскарпоне\nТримайте в холодильнику до використання.\n500 г\nДодати до списку (11)",
+    "shopping": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (0)\nОчистити все\nЯйця\nЗ рецепта «Рулет із фруктами»\n10 шт.\nЦукор\nЗ рецепта «Рулет із фруктами»\n200 г\nсіль\nЗ рецепта «Рулет із фруктами»\nЗа потреби\nНейтральна олія\nЗ рецепта «Рулет із фруктами»\n70 мл\nБорошно Schär Mix B Bread\nЗ рецепта «Рулет із фруктами»\n240 г\nГусте ягідне варення\nДобре підходить чорничне або малинове.\nЗ рецепта «Рулет із фруктами»\nЗа потреби\nСвіжі фрукти або ягоди\nДля начинки й оздоблення; добре вимити та обсушити.\nЗ рецепта «Рулет із фруктами»\nЗа потреби\nПодрібнені горіхи\nДля верху — замість свіжих фруктів або разом із ними.\nЗ рецепта «Рулет із фруктами»\nЗа потреби\nВершки для збивання\nТримайте в холодильнику до збивання.\nЗ рецепта «Рулет із фруктами»\n500 мл\nЦукор\nЗ рецепта «Рулет із фруктами»\n160 г\nМаскарпоне\nТримайте в холодильнику до використання.\nЗ рецепта «Рулет із фруктами»\n500 г\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"items\":[{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":10,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"sugar-sponge:g\",\"ingredientId\":\"sugar-sponge\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"sugar-sponge\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"sugar-sponge\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"oil:ml\",\"ingredientId\":\"oil\",\"quantity\":{\"kind\":\"exact\",\"value\":70,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"oil\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"oil\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"jam:as-needed\",\"ingredientId\":\"jam\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"jam\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"jam\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"fresh-fruit:as-needed\",\"ingredientId\":\"fresh-fruit\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"fresh-fruit\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"fresh-fruit\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"nuts:as-needed\",\"ingredientId\":\"nuts\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"nuts\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"nuts\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-whipping-cream:ml\",\"ingredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-sugar:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":160,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-sugar\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-mascarpone:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:42.836Z\",\"updatedAt\":\"2026-09-27T11:39:42.836Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Збийте до стрічки"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Змішайте тісто"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Спечіть бісквіт"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Згорніть разом із пергаментом"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Збийте вершки з цукром"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Додайте маскарпоне"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Розгорніть і намастіть варенням"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Нанесіть крем"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Згорніть і оздобте"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "uk",
+    "host": "fruit-sponge-roll",
+    "cream": "vanilla-buttercream",
+    "path": "/uk/recipes/bezghliutenovyi-biskvitnyi-rulet-z-fruktamy?cream=vanilla-buttercream&mode=scale&scale=2",
+    "review": "Що потрібно купити?\n\nБезглютеновий бісквітний рулет із фруктами · 2×\n\nЗалиште позначеними продукти, які потрібно купити.\n\nОбрати всі\nЗняти всі позначки\nБісквіт\nЯйця\n10 шт.\nЦукор\n200 г\nСіль\nЗа потреби\nНейтральна олія\n70 мл\nВода\n70 мл\nБорошно Schär Mix B Bread\n240 г\nНачинка й оздоблення\nГусте ягідне варення\nДобре підходить чорничне або малинове.\nЗа потреби\nСвіжі фрукти або ягоди\nДля начинки й оздоблення; добре вимити та обсушити.\nЗа потреби\nПодрібнені горіхи\nДля верху — замість свіжих фруктів або разом із ними.\nЗа потреби\nМасляний крем\nВершкове масло\nЖирністю від 82%; м’яке, але не розтоплене.\n400 г\nЦукор\n140 г\nЯйця\n4 шт.\nВанільний цукор\n20 г\nМолоко\n200 мл\nДодати до списку (13)",
+    "shopping": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (0)\nОчистити все\nЯйця\nЗ рецепта «Рулет із фруктами»\n10 шт.\nЦукор\nЗ рецепта «Рулет із фруктами»\n200 г\nсіль\nЗ рецепта «Рулет із фруктами»\nЗа потреби\nНейтральна олія\nЗ рецепта «Рулет із фруктами»\n70 мл\nБорошно Schär Mix B Bread\nЗ рецепта «Рулет із фруктами»\n240 г\nГусте ягідне варення\nДобре підходить чорничне або малинове.\nЗ рецепта «Рулет із фруктами»\nЗа потреби\nСвіжі фрукти або ягоди\nДля начинки й оздоблення; добре вимити та обсушити.\nЗ рецепта «Рулет із фруктами»\nЗа потреби\nПодрібнені горіхи\nДля верху — замість свіжих фруктів або разом із ними.\nЗ рецепта «Рулет із фруктами»\nЗа потреби\nВершкове масло\nЖирністю від 82%; м’яке, але не розтоплене.\nЗ рецепта «Рулет із фруктами»\n400 г\nЦукор\nЗ рецепта «Рулет із фруктами»\n140 г\nЯйця\nЗ рецепта «Рулет із фруктами»\n4 шт.\nВанільний цукор\nЗ рецепта «Рулет із фруктами»\n20 г\nМолоко\nЗ рецепта «Рулет із фруктами»\n200 мл\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"items\":[{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":10,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"sugar-sponge:g\",\"ingredientId\":\"sugar-sponge\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"sugar-sponge\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"sugar-sponge\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"oil:ml\",\"ingredientId\":\"oil\",\"quantity\":{\"kind\":\"exact\",\"value\":70,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"oil\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"oil\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"jam:as-needed\",\"ingredientId\":\"jam\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"jam\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"jam\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"fresh-fruit:as-needed\",\"ingredientId\":\"fresh-fruit\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"fresh-fruit\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"fresh-fruit\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"nuts:as-needed\",\"ingredientId\":\"nuts\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"nuts\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"nuts\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-butter:g\",\"ingredientId\":\"cream-vanilla-buttercream-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":400,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-butter\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-eggs:piece\",\"ingredientId\":\"cream-vanilla-buttercream-eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":4,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-eggs\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-vanilla-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":20,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-milk:ml\",\"ingredientId\":\"cream-vanilla-buttercream-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:45.608Z\",\"updatedAt\":\"2026-09-27T11:39:45.608Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-milk\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-milk\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Збийте до стрічки"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Змішайте тісто"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Спечіть бісквіт"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Згорніть разом із пергаментом"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Заваріть яєчно-молочну основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Охолодіть основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Збийте масло"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Поступово додайте заварену основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Розгорніть і намастіть варенням"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Нанесіть крем"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Згорніть і оздобте"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "uk",
+    "host": "eclairs",
+    "cream": "mascarpone-whipped-cream",
+    "path": "/uk/recipes/bezghliutenovi-profitroli?cream=mascarpone-whipped-cream&mode=scale&scale=2",
+    "review": "Що потрібно купити?\n\nБезглютенові профітролі · 2×\n\nЗалиште позначеними продукти, які потрібно купити.\n\nОбрати всі\nЗняти всі позначки\nЗаварне тісто\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\n220 г\nЦукрова пудра\n4,71 г\nСіль\nЗа потреби\nВода\n260 мл\nНесолоне вершкове масло\nОхолоджене й нарізане кубиками.\n140 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\n8 шт.\nКрем\nВершки для збивання\nТримайте в холодильнику до збивання.\n500 мл\nЦукор\n160 г\nМаскарпоне\nТримайте в холодильнику до використання.\n500 г\nДодати до списку (8)",
+    "shopping": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (0)\nОчистити все\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\nЗ рецепта «Профітролі»\n220 г\nцукрова пудра\nЗ рецепта «Профітролі»\n4,71 г\nсіль\nЗ рецепта «Профітролі»\nЗа потреби\nвершкове масло\nОхолоджене й нарізане кубиками.\nЗ рецепта «Профітролі»\n140 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\nЗ рецепта «Профітролі»\n8 шт.\nВершки для збивання\nТримайте в холодильнику до збивання.\nЗ рецепта «Профітролі»\n500 мл\nЦукор\nЗ рецепта «Профітролі»\n160 г\nМаскарпоне\nТримайте в холодильнику до використання.\nЗ рецепта «Профітролі»\n500 г\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:39:48.509Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:48.509Z\",\"updatedAt\":\"2026-09-27T11:39:48.509Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:48.509Z\",\"updatedAt\":\"2026-09-27T11:39:48.509Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:48.509Z\",\"updatedAt\":\"2026-09-27T11:39:48.509Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:48.509Z\",\"updatedAt\":\"2026-09-27T11:39:48.509Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:48.509Z\",\"updatedAt\":\"2026-09-27T11:39:48.509Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-whipping-cream:ml\",\"ingredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:48.509Z\",\"updatedAt\":\"2026-09-27T11:39:48.509Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-sugar:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":160,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:48.509Z\",\"updatedAt\":\"2026-09-27T11:39:48.509Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-sugar\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-mascarpone:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:48.509Z\",\"updatedAt\":\"2026-09-27T11:39:48.509Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Просійте сухі інгредієнти"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Розтопіть масло у воді"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Заваріть основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Поступово введіть яйця"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Відсадіть заготовки"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Випечіть до золотистого кольору"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Випустіть пару й досушіть"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Збийте вершки з цукром"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Додайте маскарпоне"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Наповніть охололі оболонки"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "uk",
+    "host": "eclairs",
+    "cream": "vanilla-egg-custard",
+    "path": "/uk/recipes/bezghliutenovi-profitroli?cream=vanilla-egg-custard&mode=scale&scale=2",
+    "review": "Що потрібно купити?\n\nБезглютенові профітролі · 2×\n\nЗалиште позначеними продукти, які потрібно купити.\n\nОбрати всі\nЗняти всі позначки\nЗаварне тісто\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\n220 г\nЦукрова пудра\n4,71 г\nСіль\nЗа потреби\nВода\n260 мл\nНесолоне вершкове масло\nОхолоджене й нарізане кубиками.\n140 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\n8 шт.\nВанільний заварний крем\nНезбиране молоко\n1 140 мл\nЦукор\n260 г\nКукурудзяний крохмаль\n56 г\nСіль\nЗа потреби\nЯєчні жовтки\n12 шт.\nВанільний екстракт\nЗа потреби\nНесолоне вершкове масло\nХолодне, нарізане невеликими кубиками.\n220 г\nДодати до списку (12)",
+    "shopping": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (0)\nОчистити все\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\nЗ рецепта «Профітролі»\n220 г\nцукрова пудра\nЗ рецепта «Профітролі»\n4,71 г\nсіль\nЗ рецепта «Профітролі»\nЗа потреби\nвершкове масло\nОхолоджене й нарізане кубиками.\nЗ рецепта «Профітролі»\n140 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\nЗ рецепта «Профітролі»\n8 шт.\nНезбиране молоко\nЗ рецепта «Профітролі»\n1 140 мл\nЦукор\nЗ рецепта «Профітролі»\n260 г\nКукурудзяний крохмаль\nЗ рецепта «Профітролі»\n56 г\nСіль\nЗ рецепта «Профітролі»\nЗа потреби\nЯєчні жовтки\nЗ рецепта «Профітролі»\n12 шт.\nВанільний екстракт\nЗ рецепта «Профітролі»\nЗа потреби\nНесолоне вершкове масло\nХолодне, нарізане невеликими кубиками.\nЗ рецепта «Профітролі»\n220 г\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-milk:ml\",\"ingredientId\":\"cream-vanilla-egg-custard-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":1140,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-milk\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-milk\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-sugar:g\",\"ingredientId\":\"cream-vanilla-egg-custard-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":260,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-sugar\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-corn-starch:g\",\"ingredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"quantity\":{\"kind\":\"exact\",\"value\":56,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-corn-starch\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-salt:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-salt\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-egg-yolks:piece\",\"ingredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"quantity\":{\"kind\":\"exact\",\"value\":12,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-egg-yolks\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-vanilla:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-vanilla\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-vanilla\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-vanilla\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-butter:g\",\"ingredientId\":\"cream-vanilla-egg-custard-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:51.342Z\",\"updatedAt\":\"2026-09-27T11:39:51.342Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-butter\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-butter\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Просійте сухі інгредієнти"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Розтопіть масло у воді"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Заваріть основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Поступово введіть яйця"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Відсадіть заготовки"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Випечіть до золотистого кольору"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Випустіть пару й досушіть"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Нагрійте молоко"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Змішайте жовткову основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Темперуйте жовтки"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Заваріть до загустіння"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Завершіть і охолодіть крем"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Наповніть охололі оболонки"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "uk",
+    "host": "eclairs",
+    "cream": "eggless-vanilla-custard",
+    "path": "/uk/recipes/bezghliutenovi-profitroli?cream=eggless-vanilla-custard&mode=scale&scale=2",
+    "review": "Що потрібно купити?\n\nБезглютенові профітролі · 2×\n\nЗалиште позначеними продукти, які потрібно купити.\n\nОбрати всі\nЗняти всі позначки\nЗаварне тісто\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\n220 г\nЦукрова пудра\n4,71 г\nСіль\nЗа потреби\nВода\n260 мл\nНесолоне вершкове масло\nОхолоджене й нарізане кубиками.\n140 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\n8 шт.\nВанільний заварний крем без яєць\nМолоко\n3 000 мл\nЦукор\n240 г\nБорошно Schär Mix B Bread\n240 г\nВершкове масло\nМ’яке, щоб його можна було розім’яти виделкою або ложкою.\n400 г\nВаніль\nДодайте до смаку.\nЗа потреби\nДодати до списку (10)",
+    "shopping": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (0)\nОчистити все\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\nЗ рецепта «Профітролі»\n220 г\nцукрова пудра\nЗ рецепта «Профітролі»\n4,71 г\nсіль\nЗ рецепта «Профітролі»\nЗа потреби\nвершкове масло\nОхолоджене й нарізане кубиками.\nЗ рецепта «Профітролі»\n140 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\nЗ рецепта «Профітролі»\n8 шт.\nМолоко\nЗ рецепта «Профітролі»\n3 000 мл\nЦукор\nЗ рецепта «Профітролі»\n240 г\nБорошно Schär Mix B Bread\nЗ рецепта «Профітролі»\n240 г\nВершкове масло\nМ’яке, щоб його можна було розім’яти виделкою або ложкою.\nЗ рецепта «Профітролі»\n400 г\nВаніль\nДодайте до смаку.\nЗ рецепта «Профітролі»\nЗа потреби\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-milk:ml\",\"ingredientId\":\"cream-eggless-vanilla-custard-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":3000,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-milk\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-milk\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-sugar:g\",\"ingredientId\":\"cream-eggless-vanilla-custard-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-sugar\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-flour:g\",\"ingredientId\":\"cream-eggless-vanilla-custard-flour\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-flour\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-butter:g\",\"ingredientId\":\"cream-eggless-vanilla-custard-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":400,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-butter\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-vanilla:as-needed\",\"ingredientId\":\"cream-eggless-vanilla-custard-vanilla\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:54.375Z\",\"updatedAt\":\"2026-09-27T11:39:54.375Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-vanilla\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-vanilla\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Просійте сухі інгредієнти"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Розтопіть масло у воді"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Заваріть основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Поступово введіть яйця"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Відсадіть заготовки"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Випечіть до золотистого кольору"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Випустіть пару й досушіть"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Зробіть пасту з масла та борошна"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Додайте половину молока"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Додайте решту молока й заваріть"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Накрийте й охолодіть"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Наповніть охололі оболонки"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "uk",
+    "host": "eclairs",
+    "cream": "vanilla-buttercream",
+    "path": "/uk/recipes/bezghliutenovi-profitroli?cream=vanilla-buttercream&mode=scale&scale=2",
+    "review": "Що потрібно купити?\n\nБезглютенові профітролі · 2×\n\nЗалиште позначеними продукти, які потрібно купити.\n\nОбрати всі\nЗняти всі позначки\nЗаварне тісто\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\n220 г\nЦукрова пудра\n4,71 г\nСіль\nЗа потреби\nВода\n260 мл\nНесолоне вершкове масло\nОхолоджене й нарізане кубиками.\n140 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\n8 шт.\nМасляний крем\nВершкове масло\nЖирністю від 82%; м’яке, але не розтоплене.\n400 г\nЦукор\n140 г\nЯйця\n4 шт.\nВанільний цукор\n20 г\nМолоко\n200 мл\nДодати до списку (10)",
+    "shopping": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\n\nВАШ ПЛАН ВИПІЧКИ\n\nСписок покупок\nЗбережено в цьому браузері. Список залишається, доки ви його не очистите.\nПрибрати куплене (0)\nОчистити все\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\nЗ рецепта «Профітролі»\n220 г\nцукрова пудра\nЗ рецепта «Профітролі»\n4,71 г\nсіль\nЗ рецепта «Профітролі»\nЗа потреби\nвершкове масло\nОхолоджене й нарізане кубиками.\nЗ рецепта «Профітролі»\n140 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\nЗ рецепта «Профітролі»\n8 шт.\nВершкове масло\nЖирністю від 82%; м’яке, але не розтоплене.\nЗ рецепта «Профітролі»\n400 г\nЦукор\nЗ рецепта «Профітролі»\n140 г\nЯйця\nЗ рецепта «Профітролі»\n4 шт.\nВанільний цукор\nЗ рецепта «Профітролі»\n20 г\nМолоко\nЗ рецепта «Профітролі»\n200 мл\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-butter:g\",\"ingredientId\":\"cream-vanilla-buttercream-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":400,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-butter\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-eggs:piece\",\"ingredientId\":\"cream-vanilla-buttercream-eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":4,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-eggs\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-vanilla-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":20,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-milk:ml\",\"ingredientId\":\"cream-vanilla-buttercream-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:39:57.362Z\",\"updatedAt\":\"2026-09-27T11:39:57.362Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-milk\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-milk\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Просійте сухі інгредієнти"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Розтопіть масло у воді"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Заваріть основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Поступово введіть яйця"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Відсадіть заготовки"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Випечіть до золотистого кольору"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Випустіть пару й досушіть"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Заваріть яєчно-молочну основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Охолодіть основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Збийте масло"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Поступово додайте заварену основу"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Наповніть охололі оболонки"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "en",
+    "host": "fruit-sponge-roll",
+    "cream": "mascarpone-whipped-cream",
+    "path": "/en/recipes/gluten-free-fruit-sponge-roll?cream=mascarpone-whipped-cream&mode=scale&scale=2",
+    "review": "What do you need to buy?\n\nGluten-free fruit sponge roll · 2×\n\nLeave selected the products you need to buy.\n\nSelect all\nClear all selections\nSponge\nEggs\n10 pcs\nSugar\n200 g\nSalt\nAs needed\nNeutral oil\n70 ml\nWater\n70 ml\nSchär Mix B Bread flour\n240 g\nFilling and decoration\nThick berry jam\nBlueberry or raspberry jam works well.\nAs needed\nFresh fruit or berries\nFor the filling and decoration; wash and dry thoroughly.\nAs needed\nChopped nuts\nFor the top, instead of or together with fresh fruit.\nAs needed\nCream\nWhipping cream\nKeep refrigerated until whipping.\n500 ml\nSugar\n160 g\nMascarpone\nKeep refrigerated until needed.\n500 g\nAdd to list (11)",
+    "shopping": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nEggs\nFor Fruit roll\n10 pcs\nSugar\nFor Fruit roll\n200 g\nsalt\nFor Fruit roll\nAs needed\nNeutral oil\nFor Fruit roll\n70 ml\nSchär Mix B Bread flour\nFor Fruit roll\n240 g\nThick berry jam\nBlueberry or raspberry jam works well.\nFor Fruit roll\nAs needed\nFresh fruit or berries\nFor the filling and decoration; wash and dry thoroughly.\nFor Fruit roll\nAs needed\nChopped nuts\nFor the top, instead of or together with fresh fruit.\nFor Fruit roll\nAs needed\nWhipping cream\nKeep refrigerated until whipping.\nFor Fruit roll\n500 ml\nSugar\nFor Fruit roll\n160 g\nMascarpone\nKeep refrigerated until needed.\nFor Fruit roll\n500 g\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"items\":[{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":10,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"sugar-sponge:g\",\"ingredientId\":\"sugar-sponge\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"sugar-sponge\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"sugar-sponge\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"oil:ml\",\"ingredientId\":\"oil\",\"quantity\":{\"kind\":\"exact\",\"value\":70,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"oil\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"oil\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"jam:as-needed\",\"ingredientId\":\"jam\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"jam\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"jam\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"fresh-fruit:as-needed\",\"ingredientId\":\"fresh-fruit\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"fresh-fruit\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"fresh-fruit\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"nuts:as-needed\",\"ingredientId\":\"nuts\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"nuts\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"nuts\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-whipping-cream:ml\",\"ingredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-sugar:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":160,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-sugar\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-mascarpone:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:00.280Z\",\"updatedAt\":\"2026-09-27T11:40:00.280Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Whip to ribbon stage"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Fold the batter"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Bake the sponge"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Roll with the parchment"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Whip the cream with the sugar"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Add the mascarpone"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Unroll and spread the jam"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Spread the cream"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Reroll and decorate"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "en",
+    "host": "fruit-sponge-roll",
+    "cream": "vanilla-buttercream",
+    "path": "/en/recipes/gluten-free-fruit-sponge-roll?cream=vanilla-buttercream&mode=scale&scale=2",
+    "review": "What do you need to buy?\n\nGluten-free fruit sponge roll · 2×\n\nLeave selected the products you need to buy.\n\nSelect all\nClear all selections\nSponge\nEggs\n10 pcs\nSugar\n200 g\nSalt\nAs needed\nNeutral oil\n70 ml\nWater\n70 ml\nSchär Mix B Bread flour\n240 g\nFilling and decoration\nThick berry jam\nBlueberry or raspberry jam works well.\nAs needed\nFresh fruit or berries\nFor the filling and decoration; wash and dry thoroughly.\nAs needed\nChopped nuts\nFor the top, instead of or together with fresh fruit.\nAs needed\nButtercream\nButter\n82% fat or higher; softened but not melted.\n400 g\nSugar\n140 g\nEggs\n4 pcs\nVanilla sugar\n20 g\nMilk\n200 ml\nAdd to list (13)",
+    "shopping": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nEggs\nFor Fruit roll\n10 pcs\nSugar\nFor Fruit roll\n200 g\nsalt\nFor Fruit roll\nAs needed\nNeutral oil\nFor Fruit roll\n70 ml\nSchär Mix B Bread flour\nFor Fruit roll\n240 g\nThick berry jam\nBlueberry or raspberry jam works well.\nFor Fruit roll\nAs needed\nFresh fruit or berries\nFor the filling and decoration; wash and dry thoroughly.\nFor Fruit roll\nAs needed\nChopped nuts\nFor the top, instead of or together with fresh fruit.\nFor Fruit roll\nAs needed\nButter\n82% fat or higher; softened but not melted.\nFor Fruit roll\n400 g\nSugar\nFor Fruit roll\n140 g\nEggs\nFor Fruit roll\n4 pcs\nVanilla sugar\nFor Fruit roll\n20 g\nMilk\nFor Fruit roll\n200 ml\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"items\":[{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":10,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"sugar-sponge:g\",\"ingredientId\":\"sugar-sponge\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"sugar-sponge\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"sugar-sponge\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"oil:ml\",\"ingredientId\":\"oil\",\"quantity\":{\"kind\":\"exact\",\"value\":70,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"oil\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"oil\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"jam:as-needed\",\"ingredientId\":\"jam\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"jam\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"jam\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"fresh-fruit:as-needed\",\"ingredientId\":\"fresh-fruit\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"fresh-fruit\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"fresh-fruit\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"nuts:as-needed\",\"ingredientId\":\"nuts\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"nuts\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"nuts\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-butter:g\",\"ingredientId\":\"cream-vanilla-buttercream-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":400,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-butter\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-eggs:piece\",\"ingredientId\":\"cream-vanilla-buttercream-eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":4,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-eggs\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-vanilla-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":20,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-milk:ml\",\"ingredientId\":\"cream-vanilla-buttercream-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:02.995Z\",\"updatedAt\":\"2026-09-27T11:40:02.995Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-milk\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-milk\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Whip to ribbon stage"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Fold the batter"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Bake the sponge"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Roll with the parchment"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cook the egg and milk base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cool the base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Whip the butter"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Add the cooked base gradually"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Unroll and spread the jam"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Spread the cream"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Reroll and decorate"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "en",
+    "host": "eclairs",
+    "cream": "mascarpone-whipped-cream",
+    "path": "/en/recipes/gluten-free-profiteroles?cream=mascarpone-whipped-cream&mode=scale&scale=2",
+    "review": "What do you need to buy?\n\nGluten-free profiteroles · 2×\n\nLeave selected the products you need to buy.\n\nSelect all\nClear all selections\nChoux pastry\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\n220 g\nIcing sugar\n4.71 g\nSalt\nAs needed\nWater\n260 ml\nUnsalted butter\nChilled and cut into cubes.\n140 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\n8 pcs\nCream\nWhipping cream\nKeep refrigerated until whipping.\n500 ml\nSugar\n160 g\nMascarpone\nKeep refrigerated until needed.\n500 g\nAdd to list (8)",
+    "shopping": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\nFor Profiteroles\n220 g\nicing sugar\nFor Profiteroles\n4.71 g\nsalt\nFor Profiteroles\nAs needed\nbutter\nChilled and cut into cubes.\nFor Profiteroles\n140 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\nFor Profiteroles\n8 pcs\nWhipping cream\nKeep refrigerated until whipping.\nFor Profiteroles\n500 ml\nSugar\nFor Profiteroles\n160 g\nMascarpone\nKeep refrigerated until needed.\nFor Profiteroles\n500 g\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:05.988Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:05.988Z\",\"updatedAt\":\"2026-09-27T11:40:05.988Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:05.988Z\",\"updatedAt\":\"2026-09-27T11:40:05.988Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:05.988Z\",\"updatedAt\":\"2026-09-27T11:40:05.988Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:05.988Z\",\"updatedAt\":\"2026-09-27T11:40:05.988Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:05.988Z\",\"updatedAt\":\"2026-09-27T11:40:05.988Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-whipping-cream:ml\",\"ingredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:05.988Z\",\"updatedAt\":\"2026-09-27T11:40:05.988Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-sugar:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":160,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:05.988Z\",\"updatedAt\":\"2026-09-27T11:40:05.988Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-sugar\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-mascarpone:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:05.988Z\",\"updatedAt\":\"2026-09-27T11:40:05.988Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Sift the dry ingredients"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Melt the butter in the water"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cook the choux base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Beat in the eggs gradually"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Pipe the shells"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Bake until risen and golden"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Vent and dry the shells"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Whip the cream with the sugar"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Add the mascarpone"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Fill the cooled shells"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "en",
+    "host": "eclairs",
+    "cream": "vanilla-egg-custard",
+    "path": "/en/recipes/gluten-free-profiteroles?cream=vanilla-egg-custard&mode=scale&scale=2",
+    "review": "What do you need to buy?\n\nGluten-free profiteroles · 2×\n\nLeave selected the products you need to buy.\n\nSelect all\nClear all selections\nChoux pastry\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\n220 g\nIcing sugar\n4.71 g\nSalt\nAs needed\nWater\n260 ml\nUnsalted butter\nChilled and cut into cubes.\n140 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\n8 pcs\nVanilla custard\nWhole milk\n1,140 ml\nSugar\n260 g\nCorn starch\n56 g\nSalt\nAs needed\nEgg yolks\n12 pcs\nVanilla extract\nAs needed\nUnsalted butter\nCold, cut into small cubes.\n220 g\nAdd to list (12)",
+    "shopping": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\nFor Profiteroles\n220 g\nicing sugar\nFor Profiteroles\n4.71 g\nsalt\nFor Profiteroles\nAs needed\nbutter\nChilled and cut into cubes.\nFor Profiteroles\n140 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\nFor Profiteroles\n8 pcs\nWhole milk\nFor Profiteroles\n1,140 ml\nSugar\nFor Profiteroles\n260 g\nCorn starch\nFor Profiteroles\n56 g\nSalt\nFor Profiteroles\nAs needed\nEgg yolks\nFor Profiteroles\n12 pcs\nVanilla extract\nFor Profiteroles\nAs needed\nUnsalted butter\nCold, cut into small cubes.\nFor Profiteroles\n220 g\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-milk:ml\",\"ingredientId\":\"cream-vanilla-egg-custard-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":1140,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-milk\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-milk\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-sugar:g\",\"ingredientId\":\"cream-vanilla-egg-custard-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":260,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-sugar\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-corn-starch:g\",\"ingredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"quantity\":{\"kind\":\"exact\",\"value\":56,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-corn-starch\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-salt:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-salt\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-egg-yolks:piece\",\"ingredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"quantity\":{\"kind\":\"exact\",\"value\":12,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-egg-yolks\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-vanilla:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-vanilla\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-vanilla\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-vanilla\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-butter:g\",\"ingredientId\":\"cream-vanilla-egg-custard-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:08.769Z\",\"updatedAt\":\"2026-09-27T11:40:08.769Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-butter\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-butter\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Sift the dry ingredients"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Melt the butter in the water"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cook the choux base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Beat in the eggs gradually"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Pipe the shells"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Bake until risen and golden"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Vent and dry the shells"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Heat the milk"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Mix the yolk base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Temper the yolks"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cook until thick"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Finish and chill the custard"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Fill the cooled shells"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "en",
+    "host": "eclairs",
+    "cream": "eggless-vanilla-custard",
+    "path": "/en/recipes/gluten-free-profiteroles?cream=eggless-vanilla-custard&mode=scale&scale=2",
+    "review": "What do you need to buy?\n\nGluten-free profiteroles · 2×\n\nLeave selected the products you need to buy.\n\nSelect all\nClear all selections\nChoux pastry\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\n220 g\nIcing sugar\n4.71 g\nSalt\nAs needed\nWater\n260 ml\nUnsalted butter\nChilled and cut into cubes.\n140 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\n8 pcs\nEggless vanilla custard\nMilk\n3,000 ml\nSugar\n240 g\nSchär Mix B Bread flour blend\n240 g\nButter\nSoftened so it can be worked with a fork or spoon.\n400 g\nVanilla\nAdd to taste.\nAs needed\nAdd to list (10)",
+    "shopping": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\nFor Profiteroles\n220 g\nicing sugar\nFor Profiteroles\n4.71 g\nsalt\nFor Profiteroles\nAs needed\nbutter\nChilled and cut into cubes.\nFor Profiteroles\n140 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\nFor Profiteroles\n8 pcs\nMilk\nFor Profiteroles\n3,000 ml\nSugar\nFor Profiteroles\n240 g\nSchär Mix B Bread flour blend\nFor Profiteroles\n240 g\nButter\nSoftened so it can be worked with a fork or spoon.\nFor Profiteroles\n400 g\nVanilla\nAdd to taste.\nFor Profiteroles\nAs needed\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-milk:ml\",\"ingredientId\":\"cream-eggless-vanilla-custard-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":3000,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-milk\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-milk\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-sugar:g\",\"ingredientId\":\"cream-eggless-vanilla-custard-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-sugar\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-flour:g\",\"ingredientId\":\"cream-eggless-vanilla-custard-flour\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-flour\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-butter:g\",\"ingredientId\":\"cream-eggless-vanilla-custard-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":400,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-butter\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-vanilla:as-needed\",\"ingredientId\":\"cream-eggless-vanilla-custard-vanilla\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:11.746Z\",\"updatedAt\":\"2026-09-27T11:40:11.746Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-vanilla\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-vanilla\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Sift the dry ingredients"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Melt the butter in the water"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cook the choux base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Beat in the eggs gradually"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Pipe the shells"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Bake until risen and golden"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Vent and dry the shells"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Make the butter and flour paste"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Add half of the milk"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Add the remaining milk and cook"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cover and cool"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Fill the cooled shells"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "en",
+    "host": "eclairs",
+    "cream": "vanilla-buttercream",
+    "path": "/en/recipes/gluten-free-profiteroles?cream=vanilla-buttercream&mode=scale&scale=2",
+    "review": "What do you need to buy?\n\nGluten-free profiteroles · 2×\n\nLeave selected the products you need to buy.\n\nSelect all\nClear all selections\nChoux pastry\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\n220 g\nIcing sugar\n4.71 g\nSalt\nAs needed\nWater\n260 ml\nUnsalted butter\nChilled and cut into cubes.\n140 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\n8 pcs\nButtercream\nButter\n82% fat or higher; softened but not melted.\n400 g\nSugar\n140 g\nEggs\n4 pcs\nVanilla sugar\n20 g\nMilk\n200 ml\nAdd to list (10)",
+    "shopping": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nSchär Mix B Bread flour mix\nThe exact flour mix used in the successful bake.\nFor Profiteroles\n220 g\nicing sugar\nFor Profiteroles\n4.71 g\nsalt\nFor Profiteroles\nAs needed\nbutter\nChilled and cut into cubes.\nFor Profiteroles\n140 g\nSmall eggs\nLightly beaten. The tested version uses 4 small eggs.\nFor Profiteroles\n8 pcs\nButter\n82% fat or higher; softened but not melted.\nFor Profiteroles\n400 g\nSugar\nFor Profiteroles\n140 g\nEggs\nFor Profiteroles\n4 pcs\nVanilla sugar\nFor Profiteroles\n20 g\nMilk\nFor Profiteroles\n200 ml\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-butter:g\",\"ingredientId\":\"cream-vanilla-buttercream-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":400,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-butter\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-eggs:piece\",\"ingredientId\":\"cream-vanilla-buttercream-eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":4,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-eggs\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-vanilla-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":20,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-milk:ml\",\"ingredientId\":\"cream-vanilla-buttercream-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:14.663Z\",\"updatedAt\":\"2026-09-27T11:40:14.663Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-milk\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-milk\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Sift the dry ingredients"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Melt the butter in the water"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cook the choux base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Beat in the eggs gradually"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Pipe the shells"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Bake until risen and golden"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Vent and dry the shells"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cook the egg and milk base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cool the base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Whip the butter"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Add the cooked base gradually"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Fill the cooled shells"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "es",
+    "host": "fruit-sponge-roll",
+    "cream": "mascarpone-whipped-cream",
+    "path": "/es/recipes/brazo-de-gitano-con-fruta-sin-gluten?cream=mascarpone-whipped-cream&mode=scale&scale=2",
+    "review": "¿Qué necesitas comprar?\n\nBrazo de gitano de frutas sin gluten · 2×\n\nDeja marcados los productos que necesitas comprar.\n\nSeleccionar todo\nQuitar todas las marcas\nBizcocho\nHuevos\n10 uds.\nAzúcar\n200 g\nSal\nSegún sea necesario\nAceite neutro\n70 ml\nAgua\n70 ml\nHarina Schär Mix B Bread\n240 g\nRelleno y decoración\nMermelada espesa de frutos rojos\nQueda bien con mermelada de arándanos o frambuesa.\nSegún sea necesario\nFruta fresca o frutos rojos\nPara el relleno y la decoración; lavar y secar bien.\nSegún sea necesario\nFrutos secos picados\nPara la parte superior, en lugar de la fruta fresca o junto con ella.\nSegún sea necesario\nCrema\nNata para montar\nMantenla refrigerada hasta el momento de batir.\n500 ml\nAzúcar\n160 g\nMascarpone\nMantenlo refrigerado hasta que lo necesites.\n500 g\nAñadir a la lista (11)",
+    "shopping": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (0)\nVaciar todo\nHuevos\nPara Rollo de frutas\n10 uds.\nAzúcar\nPara Rollo de frutas\n200 g\nsal\nPara Rollo de frutas\nSegún sea necesario\nAceite neutro\nPara Rollo de frutas\n70 ml\nHarina Schär Mix B Bread\nPara Rollo de frutas\n240 g\nMermelada espesa de frutos rojos\nQueda bien con mermelada de arándanos o frambuesa.\nPara Rollo de frutas\nSegún sea necesario\nFruta fresca o frutos rojos\nPara el relleno y la decoración; lavar y secar bien.\nPara Rollo de frutas\nSegún sea necesario\nFrutos secos picados\nPara la parte superior, en lugar de la fruta fresca o junto con ella.\nPara Rollo de frutas\nSegún sea necesario\nNata para montar\nMantenla refrigerada hasta el momento de batir.\nPara Rollo de frutas\n500 ml\nAzúcar\nPara Rollo de frutas\n160 g\nMascarpone\nMantenlo refrigerado hasta que lo necesites.\nPara Rollo de frutas\n500 g\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"items\":[{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":10,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"sugar-sponge:g\",\"ingredientId\":\"sugar-sponge\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"sugar-sponge\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"sugar-sponge\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"oil:ml\",\"ingredientId\":\"oil\",\"quantity\":{\"kind\":\"exact\",\"value\":70,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"oil\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"oil\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"jam:as-needed\",\"ingredientId\":\"jam\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"jam\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"jam\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"fresh-fruit:as-needed\",\"ingredientId\":\"fresh-fruit\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"fresh-fruit\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"fresh-fruit\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"nuts:as-needed\",\"ingredientId\":\"nuts\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"nuts\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"nuts\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-whipping-cream:ml\",\"ingredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-sugar:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":160,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-sugar\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-mascarpone:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:17.597Z\",\"updatedAt\":\"2026-09-27T11:40:17.597Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Bate hasta el punto de cinta"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Integra la masa"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Hornea el bizcocho"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Enrolla con el papel"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Monta la nata con el azúcar"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Añade el mascarpone"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Abre y unta la mermelada"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Extiende la crema"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Enrolla y decora"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "es",
+    "host": "fruit-sponge-roll",
+    "cream": "vanilla-buttercream",
+    "path": "/es/recipes/brazo-de-gitano-con-fruta-sin-gluten?cream=vanilla-buttercream&mode=scale&scale=2",
+    "review": "¿Qué necesitas comprar?\n\nBrazo de gitano de frutas sin gluten · 2×\n\nDeja marcados los productos que necesitas comprar.\n\nSeleccionar todo\nQuitar todas las marcas\nBizcocho\nHuevos\n10 uds.\nAzúcar\n200 g\nSal\nSegún sea necesario\nAceite neutro\n70 ml\nAgua\n70 ml\nHarina Schär Mix B Bread\n240 g\nRelleno y decoración\nMermelada espesa de frutos rojos\nQueda bien con mermelada de arándanos o frambuesa.\nSegún sea necesario\nFruta fresca o frutos rojos\nPara el relleno y la decoración; lavar y secar bien.\nSegún sea necesario\nFrutos secos picados\nPara la parte superior, en lugar de la fruta fresca o junto con ella.\nSegún sea necesario\nCrema de mantequilla\nMantequilla\nCon un 82 % de grasa o más; blanda pero no derretida.\n400 g\nAzúcar\n140 g\nHuevos\n4 uds.\nAzúcar vainillado\n20 g\nLeche\n200 ml\nAñadir a la lista (13)",
+    "shopping": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (0)\nVaciar todo\nHuevos\nPara Rollo de frutas\n10 uds.\nAzúcar\nPara Rollo de frutas\n200 g\nsal\nPara Rollo de frutas\nSegún sea necesario\nAceite neutro\nPara Rollo de frutas\n70 ml\nHarina Schär Mix B Bread\nPara Rollo de frutas\n240 g\nMermelada espesa de frutos rojos\nQueda bien con mermelada de arándanos o frambuesa.\nPara Rollo de frutas\nSegún sea necesario\nFruta fresca o frutos rojos\nPara el relleno y la decoración; lavar y secar bien.\nPara Rollo de frutas\nSegún sea necesario\nFrutos secos picados\nPara la parte superior, en lugar de la fruta fresca o junto con ella.\nPara Rollo de frutas\nSegún sea necesario\nMantequilla\nCon un 82 % de grasa o más; blanda pero no derretida.\nPara Rollo de frutas\n400 g\nAzúcar\nPara Rollo de frutas\n140 g\nHuevos\nPara Rollo de frutas\n4 uds.\nAzúcar vainillado\nPara Rollo de frutas\n20 g\nLeche\nPara Rollo de frutas\n200 ml\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"items\":[{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":10,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"sugar-sponge:g\",\"ingredientId\":\"sugar-sponge\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"sugar-sponge\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"sugar-sponge\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"oil:ml\",\"ingredientId\":\"oil\",\"quantity\":{\"kind\":\"exact\",\"value\":70,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"oil\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"oil\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"sponge\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"jam:as-needed\",\"ingredientId\":\"jam\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"jam\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"jam\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"fresh-fruit:as-needed\",\"ingredientId\":\"fresh-fruit\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"fresh-fruit\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"fresh-fruit\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"nuts:as-needed\",\"ingredientId\":\"nuts\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"nuts\",\"sectionId\":\"filling\",\"selectedIngredientId\":\"nuts\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-butter:g\",\"ingredientId\":\"cream-vanilla-buttercream-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":400,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-butter\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-eggs:piece\",\"ingredientId\":\"cream-vanilla-buttercream-eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":4,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-eggs\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-vanilla-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":20,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-milk:ml\",\"ingredientId\":\"cream-vanilla-buttercream-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:20.259Z\",\"updatedAt\":\"2026-09-27T11:40:20.259Z\",\"sources\":[{\"recipeId\":\"fruit-sponge-roll\",\"recipeVersionId\":\"fruit-sponge-roll-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-milk\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-milk\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Bate hasta el punto de cinta"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Integra la masa"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Hornea el bizcocho"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Enrolla con el papel"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cuece la base de huevo y leche"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Enfría la base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Bate la mantequilla"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Añade gradualmente la base cocida"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Abre y unta la mermelada"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Extiende la crema"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Enrolla y decora"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "es",
+    "host": "eclairs",
+    "cream": "mascarpone-whipped-cream",
+    "path": "/es/recipes/profiteroles-sin-gluten?cream=mascarpone-whipped-cream&mode=scale&scale=2",
+    "review": "¿Qué necesitas comprar?\n\nProfiteroles sin gluten · 2×\n\nDeja marcados los productos que necesitas comprar.\n\nSeleccionar todo\nQuitar todas las marcas\nMasa choux\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\n220 g\nAzúcar glas\n4,71 g\nSal\nSegún sea necesario\nAgua\n260 ml\nMantequilla sin sal\nFría y cortada en dados.\n140 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\n8 uds.\nCrema\nNata para montar\nMantenla refrigerada hasta el momento de batir.\n500 ml\nAzúcar\n160 g\nMascarpone\nMantenlo refrigerado hasta que lo necesites.\n500 g\nAñadir a la lista (8)",
+    "shopping": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (0)\nVaciar todo\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\nPara Profiteroles\n220 g\nazúcar glas\nPara Profiteroles\n4,71 g\nsal\nPara Profiteroles\nSegún sea necesario\nmantequilla\nFría y cortada en dados.\nPara Profiteroles\n140 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\nPara Profiteroles\n8 uds.\nNata para montar\nMantenla refrigerada hasta el momento de batir.\nPara Profiteroles\n500 ml\nAzúcar\nPara Profiteroles\n160 g\nMascarpone\nMantenlo refrigerado hasta que lo necesites.\nPara Profiteroles\n500 g\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:23.125Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:23.125Z\",\"updatedAt\":\"2026-09-27T11:40:23.125Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:23.125Z\",\"updatedAt\":\"2026-09-27T11:40:23.125Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:23.125Z\",\"updatedAt\":\"2026-09-27T11:40:23.125Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:23.125Z\",\"updatedAt\":\"2026-09-27T11:40:23.125Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:23.125Z\",\"updatedAt\":\"2026-09-27T11:40:23.125Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-whipping-cream:ml\",\"ingredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:23.125Z\",\"updatedAt\":\"2026-09-27T11:40:23.125Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-whipping-cream\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-sugar:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":160,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:23.125Z\",\"updatedAt\":\"2026-09-27T11:40:23.125Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-sugar\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-mascarpone-whipped-cream-mascarpone:g\",\"ingredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"quantity\":{\"kind\":\"exact\",\"value\":500,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:23.125Z\",\"updatedAt\":\"2026-09-27T11:40:23.125Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-mascarpone-whipped-cream\",\"ingredientLineId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"sectionId\":\"cream-mascarpone-whipped-cream-cream\",\"selectedIngredientId\":\"cream-mascarpone-whipped-cream-mascarpone\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Tamiza los ingredientes secos"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Derrite la mantequilla en el agua"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cuece la base de la masa"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Incorpora los huevos poco a poco"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Forma las piezas"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Hornea hasta que estén dorados"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Deja salir el vapor y seca"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Monta la nata con el azúcar"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Añade el mascarpone"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Rellena las piezas frías"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "es",
+    "host": "eclairs",
+    "cream": "vanilla-egg-custard",
+    "path": "/es/recipes/profiteroles-sin-gluten?cream=vanilla-egg-custard&mode=scale&scale=2",
+    "review": "¿Qué necesitas comprar?\n\nProfiteroles sin gluten · 2×\n\nDeja marcados los productos que necesitas comprar.\n\nSeleccionar todo\nQuitar todas las marcas\nMasa choux\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\n220 g\nAzúcar glas\n4,71 g\nSal\nSegún sea necesario\nAgua\n260 ml\nMantequilla sin sal\nFría y cortada en dados.\n140 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\n8 uds.\nCrema pastelera de vainilla\nLeche entera\n1140 ml\nAzúcar\n260 g\nAlmidón de maíz\n56 g\nSal\nSegún sea necesario\nYemas de huevo\n12 uds.\nExtracto de vainilla\nSegún sea necesario\nMantequilla sin sal\nFría y cortada en cubos pequeños.\n220 g\nAñadir a la lista (12)",
+    "shopping": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (0)\nVaciar todo\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\nPara Profiteroles\n220 g\nazúcar glas\nPara Profiteroles\n4,71 g\nsal\nPara Profiteroles\nSegún sea necesario\nmantequilla\nFría y cortada en dados.\nPara Profiteroles\n140 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\nPara Profiteroles\n8 uds.\nLeche entera\nPara Profiteroles\n1140 ml\nAzúcar\nPara Profiteroles\n260 g\nAlmidón de maíz\nPara Profiteroles\n56 g\nSal\nPara Profiteroles\nSegún sea necesario\nYemas de huevo\nPara Profiteroles\n12 uds.\nExtracto de vainilla\nPara Profiteroles\nSegún sea necesario\nMantequilla sin sal\nFría y cortada en cubos pequeños.\nPara Profiteroles\n220 g\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-milk:ml\",\"ingredientId\":\"cream-vanilla-egg-custard-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":1140,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-milk\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-milk\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-sugar:g\",\"ingredientId\":\"cream-vanilla-egg-custard-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":260,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-sugar\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-corn-starch:g\",\"ingredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"quantity\":{\"kind\":\"exact\",\"value\":56,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-corn-starch\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-corn-starch\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-salt:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-salt\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-egg-yolks:piece\",\"ingredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"quantity\":{\"kind\":\"exact\",\"value\":12,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-egg-yolks\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-egg-yolks\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-vanilla:as-needed\",\"ingredientId\":\"cream-vanilla-egg-custard-vanilla\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-vanilla\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-vanilla\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-egg-custard-butter:g\",\"ingredientId\":\"cream-vanilla-egg-custard-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:25.883Z\",\"updatedAt\":\"2026-09-27T11:40:25.883Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-egg-custard\",\"ingredientLineId\":\"cream-vanilla-egg-custard-butter\",\"sectionId\":\"cream-vanilla-egg-custard-custard\",\"selectedIngredientId\":\"cream-vanilla-egg-custard-butter\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Tamiza los ingredientes secos"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Derrite la mantequilla en el agua"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cuece la base de la masa"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Incorpora los huevos poco a poco"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Forma las piezas"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Hornea hasta que estén dorados"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Deja salir el vapor y seca"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Calienta la leche"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Prepara la base de yemas"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Templa las yemas"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cuece hasta que espese"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Termina y enfría la crema"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Rellena las piezas frías"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "es",
+    "host": "eclairs",
+    "cream": "eggless-vanilla-custard",
+    "path": "/es/recipes/profiteroles-sin-gluten?cream=eggless-vanilla-custard&mode=scale&scale=2",
+    "review": "¿Qué necesitas comprar?\n\nProfiteroles sin gluten · 2×\n\nDeja marcados los productos que necesitas comprar.\n\nSeleccionar todo\nQuitar todas las marcas\nMasa choux\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\n220 g\nAzúcar glas\n4,71 g\nSal\nSegún sea necesario\nAgua\n260 ml\nMantequilla sin sal\nFría y cortada en dados.\n140 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\n8 uds.\nCrema de vainilla sin huevo\nLeche\n3000 ml\nAzúcar\n240 g\nHarina Schär Mix B Bread\n240 g\nMantequilla\nAblandada para poder trabajarla con un tenedor o una cuchara.\n400 g\nVainilla\nAñade al gusto.\nSegún sea necesario\nAñadir a la lista (10)",
+    "shopping": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (0)\nVaciar todo\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\nPara Profiteroles\n220 g\nazúcar glas\nPara Profiteroles\n4,71 g\nsal\nPara Profiteroles\nSegún sea necesario\nmantequilla\nFría y cortada en dados.\nPara Profiteroles\n140 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\nPara Profiteroles\n8 uds.\nLeche\nPara Profiteroles\n3000 ml\nAzúcar\nPara Profiteroles\n240 g\nHarina Schär Mix B Bread\nPara Profiteroles\n240 g\nMantequilla\nAblandada para poder trabajarla con un tenedor o una cuchara.\nPara Profiteroles\n400 g\nVainilla\nAñade al gusto.\nPara Profiteroles\nSegún sea necesario\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-milk:ml\",\"ingredientId\":\"cream-eggless-vanilla-custard-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":3000,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-milk\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-milk\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-sugar:g\",\"ingredientId\":\"cream-eggless-vanilla-custard-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-sugar\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-flour:g\",\"ingredientId\":\"cream-eggless-vanilla-custard-flour\",\"quantity\":{\"kind\":\"exact\",\"value\":240,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-flour\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-butter:g\",\"ingredientId\":\"cream-eggless-vanilla-custard-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":400,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-butter\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-eggless-vanilla-custard-vanilla:as-needed\",\"ingredientId\":\"cream-eggless-vanilla-custard-vanilla\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:28.926Z\",\"updatedAt\":\"2026-09-27T11:40:28.926Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-eggless-vanilla-custard\",\"ingredientLineId\":\"cream-eggless-vanilla-custard-vanilla\",\"sectionId\":\"cream-eggless-vanilla-custard-custard\",\"selectedIngredientId\":\"cream-eggless-vanilla-custard-vanilla\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Tamiza los ingredientes secos"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Derrite la mantequilla en el agua"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cuece la base de la masa"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Incorpora los huevos poco a poco"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Forma las piezas"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Hornea hasta que estén dorados"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Deja salir el vapor y seca"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Prepara la pasta de mantequilla y harina"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Añade la mitad de la leche"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Añade el resto de la leche y cuece"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cubre y enfría"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Rellena las piezas frías"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "locale": "es",
+    "host": "eclairs",
+    "cream": "vanilla-buttercream",
+    "path": "/es/recipes/profiteroles-sin-gluten?cream=vanilla-buttercream&mode=scale&scale=2",
+    "review": "¿Qué necesitas comprar?\n\nProfiteroles sin gluten · 2×\n\nDeja marcados los productos que necesitas comprar.\n\nSeleccionar todo\nQuitar todas las marcas\nMasa choux\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\n220 g\nAzúcar glas\n4,71 g\nSal\nSegún sea necesario\nAgua\n260 ml\nMantequilla sin sal\nFría y cortada en dados.\n140 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\n8 uds.\nCrema de mantequilla\nMantequilla\nCon un 82 % de grasa o más; blanda pero no derretida.\n400 g\nAzúcar\n140 g\nHuevos\n4 uds.\nAzúcar vainillado\n20 g\nLeche\n200 ml\nAñadir a la lista (10)",
+    "shopping": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nTU PLAN DE REPOSTERÍA\n\nLista de compra\nGuardada en este navegador. La lista permanece hasta que la vacíes.\nQuitar comprados (0)\nVaciar todo\nMezcla de harina Schär Mix B Bread\nEs la mezcla exacta utilizada en el horneado exitoso.\nPara Profiteroles\n220 g\nazúcar glas\nPara Profiteroles\n4,71 g\nsal\nPara Profiteroles\nSegún sea necesario\nmantequilla\nFría y cortada en dados.\nPara Profiteroles\n140 g\nHuevos pequeños\nLigeramente batidos. En la versión probada se usaron 4 huevos pequeños.\nPara Profiteroles\n8 uds.\nMantequilla\nCon un 82 % de grasa o más; blanda pero no derretida.\nPara Profiteroles\n400 g\nAzúcar\nPara Profiteroles\n140 g\nHuevos\nPara Profiteroles\n4 uds.\nAzúcar vainillado\nPara Profiteroles\n20 g\nLeche\nPara Profiteroles\n200 ml\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "stored": {
+      "bake-again:shopping:v2": "{\"schemaVersion\":2,\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"items\":[{\"id\":\"flour:g\",\"ingredientId\":\"flour\",\"quantity\":{\"kind\":\"exact\",\"value\":220,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"flour\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"flour\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"powdered-sugar:g\",\"ingredientId\":\"powdered-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":4.7084,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"powdered-sugar\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"powdered-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"salt:as-needed\",\"ingredientId\":\"salt\",\"quantity\":null,\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"salt\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"salt\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"butter:g\",\"ingredientId\":\"butter\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"butter\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"eggs:piece\",\"ingredientId\":\"eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":8,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"eggs\",\"sectionId\":\"choux\",\"selectedIngredientId\":\"eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-butter:g\",\"ingredientId\":\"cream-vanilla-buttercream-butter\",\"quantity\":{\"kind\":\"exact\",\"value\":400,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-butter\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-butter\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":140,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-eggs:piece\",\"ingredientId\":\"cream-vanilla-buttercream-eggs\",\"quantity\":{\"kind\":\"exact\",\"value\":4,\"unit\":\"piece\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-eggs\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-eggs\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-vanilla-sugar:g\",\"ingredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"quantity\":{\"kind\":\"exact\",\"value\":20,\"unit\":\"g\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-vanilla-sugar\",\"configurationKey\":\"scale:2\"}]},{\"id\":\"cream-vanilla-buttercream-milk:ml\",\"ingredientId\":\"cream-vanilla-buttercream-milk\",\"quantity\":{\"kind\":\"exact\",\"value\":200,\"unit\":\"ml\"},\"checked\":false,\"createdAt\":\"2026-09-27T11:40:31.834Z\",\"updatedAt\":\"2026-09-27T11:40:31.834Z\",\"sources\":[{\"recipeId\":\"eclairs\",\"recipeVersionId\":\"eclairs-source-v1-cream-vanilla-buttercream\",\"ingredientLineId\":\"cream-vanilla-buttercream-milk\",\"sectionId\":\"cream-vanilla-buttercream-buttercream\",\"selectedIngredientId\":\"cream-vanilla-buttercream-milk\",\"configurationKey\":\"scale:2\"}]}]}"
+    },
+    "technicalIds": false,
+    "steps": [
+      {
+        "title": [
+          "Tamiza los ingredientes secos"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Derrite la mantequilla en el agua"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cuece la base de la masa"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Incorpora los huevos poco a poco"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Forma las piezas"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Hornea hasta que estén dorados"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Deja salir el vapor y seca"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Cuece la base de huevo y leche"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Enfría la base"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Bate la mantequilla"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Añade gradualmente la base cocida"
+        ],
+        "status": "suggested"
+      },
+      {
+        "title": [
+          "Rellena las piezas frías"
+        ],
+        "status": "suggested"
+      }
+    ],
+    "completed": true
+  }
+]

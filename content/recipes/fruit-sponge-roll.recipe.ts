@@ -102,9 +102,9 @@ function ingredientSections(locale: Locale): StructuredIngredientSection[] {
           quantity: quantity.nameOnly,
           note: text(
             locale,
-            'Blueberry or raspberry are the author’s favourites.',
-            'Los sabores favoritos de la autora son arándano o frambuesa.',
-            'Фаворити авторки — чорничне або малинове.',
+            'Blueberry or raspberry jam works well.',
+            'Queda bien con mermelada de arándanos o frambuesa.',
+            'Добре підходить чорничне або малинове.',
           ),
         },
         {
@@ -217,9 +217,9 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       ),
       body: text(
         locale,
-        'Heat the oven within the recorded 180–200°C range. Line a rimmed baking tray with parchment and spread the batter into a thin, even rectangle. Bake for 15–20 minutes.',
-        'Calienta el horno dentro del intervalo anotado de 180–200°C. Forra una bandeja con borde con papel de horno y extiende la masa en un rectángulo fino y uniforme. Hornea durante 15–20 minutos.',
-        'Розігрійте духовку в межах записаного діапазону 180–200°C. Застеліть пергаментом деко з бортиками й розподіліть тісто тонким рівним прямокутником. Випікайте 15–20 хвилин.',
+        'Preheat the oven to 180–200°C. Line a rimmed baking tray with parchment and spread the batter into a thin, even rectangle. Bake for 15–20 minutes.',
+        'Precalienta el horno a 180–200°C. Forra una bandeja con borde con papel de horno y extiende la masa en un rectángulo fino y uniforme. Hornea durante 15–20 minutos.',
+        'Розігрійте духовку до 180–200°C. Застеліть пергаментом деко з бортиками й розподіліть тісто тонким рівним прямокутником. Випікайте 15–20 хвилин.',
       ),
       meta: text(
         locale,
@@ -457,6 +457,7 @@ function content(locale: Locale): RecipeSourceDraftContent {
 export const fruitSpongeRollRecipe = {
   id: 'fruit-sponge-roll',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',
     locator: 'Recipe Archive · Бісквітний рулет з фруктами',

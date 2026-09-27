@@ -10,7 +10,7 @@ const copy = {
     title: 'Сметанний крем',
     names: ['Сметана', 'Цукор', 'Лимонний сік'],
     evidence:
-      'Авторка готувала цей крем для двох прошарків торта діаметром 24 см.',
+      'Цей крем готували для двох прошарків торта діаметром 24 см.',
     yield: '1 порція крему',
     step: 'Приготуйте сметанний крем',
     body: 'Перемішайте сметану з цукром ложкою до однорідності. Якщо хочете більш повітряний крем, збийте його міксером або в комбайні з насадкою-вінчиком. За бажанням додайте лимонний сік: він дасть легкий аромат і підкреслить кислинку.',
@@ -20,7 +20,7 @@ const copy = {
   en: {
     title: 'Sour cream filling',
     names: ['Sour cream', 'Sugar', 'Lemon juice'],
-    evidence: 'The author made this filling for two layers in a 24 cm cake.',
+    evidence: 'This filling has been used for two layers in a 24 cm cake.',
     yield: '1 batch of filling',
     step: 'Make the sour cream filling',
     body: 'Stir the sour cream and sugar with a spoon until smooth. For a lighter filling, beat with a hand mixer or a stand mixer fitted with a whisk. Add the optional lemon juice for a gentle citrus aroma and a little extra tang.',
@@ -31,7 +31,7 @@ const copy = {
     title: 'Crema de nata agria',
     names: ['Nata agria', 'Azúcar', 'Zumo de limón'],
     evidence:
-      'La autora preparó esta crema para dos capas de relleno en una tarta de 24 cm.',
+      'Esta crema se ha preparado para dos capas de relleno en una tarta de 24 cm.',
     yield: '1 tanda de crema',
     step: 'Prepara la crema de nata agria',
     body: 'Mezcla la nata agria con el azúcar con una cuchara hasta que quede homogénea. Para una crema más aireada, bate con una batidora de varillas o un robot con varillas. Si quieres, añade el zumo de limón para darle aroma y un toque más ácido.',
@@ -105,6 +105,7 @@ export function sourCreamContent(
 export const sourCreamRecipe = {
   id: 'sour-cream',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'docs/content-model/celebration-cake-author-notes.md',
     locator:

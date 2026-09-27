@@ -8,8 +8,8 @@ export const glutenFreeNapoleonRecipe = {
   publicationStatus: 'published',
   translationState: {
     uk: 'reviewed',
-    en: 'draftTranslation',
-    es: 'draftTranslation',
+    en: 'reviewed',
+    es: 'reviewed',
   },
   slug: {
     uk: 'bezghliutenovyi-napoleon',
@@ -444,7 +444,7 @@ export const glutenFreeNapoleonRecipe = {
               ingredientId: 'thick-natural-yogurt',
               name: {
                 uk: 'густий натуральний йогурт',
-                en: 'thick natural yogurt',
+                en: 'thick natural yoghurt',
                 es: 'yogur natural espeso',
               },
             },
@@ -689,9 +689,13 @@ export const glutenFreeNapoleonRecipe = {
   steps: [
     {
       id: 'mix-dry-dough',
-      title: { uk: 'Змішайте сухі інгредієнти' },
+      title: {
+        uk: 'Змішайте сухі інгредієнти',
+        en: 'Mix the dry ingredients',
+        es: 'Mezcla los ingredientes secos',
+      },
       instruction: {
-        uk: 'У чаші комбайна змішати Schär Mix B, обидва крохмалі, ксантан, розпушувач, сіль і цукор 5–10 секунд.',
+        uk: 'У чаші комбайна змішайте Schär Mix B, обидва крохмалі, ксантан, розпушувач, сіль і цукор 5–10 секунд.',
         en: 'In a food processor, mix the Schär Mix B, both starches, xanthan, baking powder, salt and sugar for 5–10 seconds.',
         es: 'En el robot de cocina, mezcla Schär Mix B, los dos almidones, la goma xantana, la levadura química, la sal y el azúcar durante 5–10 segundos.',
       },
@@ -709,9 +713,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'cut-in-butter',
-      title: { uk: 'Порубайте холодне масло' },
+      title: {
+        uk: 'Порубайте холодне масло',
+        en: 'Cut in the cold butter',
+        es: 'Incorpora la mantequilla fría',
+      },
       instruction: {
-        uk: 'Нарізати холодне масло кубиками, покласти на 10–15 хвилин у морозилку, додати до сухої суміші й зробити приблизно 10 коротких імпульсів.',
+        uk: 'Наріжте холодне масло кубиками, покладіть на 10–15 хвилин у морозилку, додайте до сухої суміші й зробіть приблизно 10 коротких імпульсів.',
         en: 'Cube the cold butter, freeze it for 10–15 minutes, add it to the dry mixture and pulse about ten times.',
         es: 'Corta la mantequilla fría en dados, déjala 10–15 minutos en el congelador, añádela a la mezcla seca y da unos diez impulsos cortos.',
       },
@@ -737,9 +745,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'mix-wet-dough',
-      title: { uk: 'Змішайте рідкі інгредієнти' },
+      title: {
+        uk: 'Змішайте рідкі інгредієнти',
+        en: 'Mix the wet ingredients',
+        es: 'Mezcla los ingredientes líquidos',
+      },
       instruction: {
-        uk: 'Змішати яйця, обраний кисломолочний продукт, соняшникову олію та лимонний сік лише до однорідності.',
+        uk: 'Змішайте яйця, обраний кисломолочний продукт, соняшникову олію та лимонний сік лише до однорідності.',
         en: 'Mix the eggs, chosen cultured dairy, sunflower oil and lemon juice only until smooth.',
         es: 'Mezcla los huevos, el lácteo fermentado elegido, el aceite de girasol y el zumo de limón solo hasta obtener una mezcla homogénea.',
       },
@@ -753,9 +765,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'combine-dough',
-      title: { uk: 'З’єднайте тісто' },
+      title: {
+        uk: 'З’єднайте тісто',
+        en: 'Bring the dough together',
+        es: 'Une la masa',
+      },
       instruction: {
-        uk: 'Влити рідину в суху суміш і змішати короткими імпульсами. За потреби додати холодну воду.',
+        uk: 'Влийте рідину в суху суміш і змішайте короткими імпульсами. За потреби додайте холодну воду.',
         en: 'Pour the liquid into the dry mixture and combine with short pulses. Add cold water as needed.',
         es: 'Vierte la mezcla líquida sobre la seca y mezcla con impulsos cortos. Añade agua fría según sea necesario.',
       },
@@ -776,9 +792,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'fold-dough',
-      title: { uk: 'Складіть тісто' },
+      title: {
+        uk: 'Складіть тісто',
+        en: 'Fold the dough',
+        es: 'Pliega la masa',
+      },
       instruction: {
-        uk: 'Швидко зібрати тісто руками, скласти 2–3 рази й сформувати диск. Не вимішувати довго.',
+        uk: 'Швидко зберіть тісто руками, складіть 2–3 рази й сформуйте диск. Не вимішуйте довго.',
         en: 'Quickly bring the dough together by hand, fold it 2–3 times and shape it into a disc. Do not knead for long.',
         es: 'Junta rápidamente la masa con las manos, pliégala 2–3 veces y forma un disco. No la amases mucho tiempo.',
       },
@@ -786,9 +806,18 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'divide-and-chill',
-      title: { uk: 'Розділіть і охолодіть' },
+      quantityMentions: [{
+        text: { uk: '12', en: 'twelve', es: 'doce' },
+        quantity: { kind: 'exact', value: 12, unit: 'piece' },
+        numberOnly: true,
+      }],
+      title: {
+        uk: 'Розділіть і охолодіть',
+        en: 'Divide and chill',
+        es: 'Divide y enfría',
+      },
       instruction: {
-        uk: 'Розділити тісто на 12 дисків, кожен загорнути й охолоджувати щонайменше 2 години; можна залишити на ніч.',
+        uk: 'Розділіть тісто на 12 дисків, кожен загорніть і охолоджуйте щонайменше 2 години. Можна залишити на ніч.',
         en: 'Divide the dough into twelve discs, wrap each one and chill for at least 2 hours; they may be left overnight.',
         es: 'Divide la masa en doce discos, envuelve cada uno y refrigera durante al menos 2 horas; pueden dejarse toda la noche.',
       },
@@ -798,9 +827,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'temper-disc',
-      title: { uk: 'Підготуйте один диск' },
+      title: {
+        uk: 'Підготуйте один диск',
+        en: 'Soften one disc',
+        es: 'Deja templar un disco',
+      },
       instruction: {
-        uk: 'Діставати по одному диску. Якщо він дуже твердий, залишити на столі на 5–10 хвилин.',
+        uk: 'Діставайте по одному диску. Якщо він дуже твердий, залиште на столі на 5–10 хвилин.',
         en: 'Take out one disc at a time. If it is very firm, leave it on the counter for 5–10 minutes.',
         es: 'Saca un disco cada vez. Si está muy duro, déjalo sobre la encimera durante 5–10 minutos.',
       },
@@ -809,9 +842,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'roll-layer',
-      title: { uk: 'Розкачайте й обріжте корж' },
+      title: {
+        uk: 'Розкачайте й обріжте корж',
+        en: 'Roll and trim a layer',
+        es: 'Estira y recorta una capa',
+      },
       instruction: {
-        uk: 'Розкачати диск між двома листами пергаменту до товщини приблизно 1,5 мм. Вирізати круг діаметром 28 см, залишити обрізки поруч і проколоти виделкою.',
+        uk: 'Розкачайте диск між двома листами пергаменту до товщини приблизно 1,5 мм. Виріжте круг діаметром 28 см, залиште обрізки поруч і проколіть виделкою.',
         en: 'Roll the disc between two sheets of parchment to about 1.5 mm thick. Cut a 28 cm circle, leave the scraps beside it and prick with a fork.',
         es: 'Estira el disco entre dos hojas de papel de horno hasta unos 1,5 mm. Corta un círculo de 28 cm, deja los recortes al lado y pínchalo con un tenedor.',
       },
@@ -832,9 +869,9 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'bake-layer',
-      title: { uk: 'Спечіть корж' },
+      title: { uk: 'Спечіть корж', en: 'Bake the layer', es: 'Hornea la capa' },
       instruction: {
-        uk: 'Випікати корж разом з обрізками при 190°C приблизно 7–10 хвилин.',
+        uk: 'Випікайте корж разом з обрізками при 190°C приблизно 7–10 хвилин.',
         en: 'Bake the layer with its scraps at 190°C for about 7–10 minutes.',
         es: 'Hornea la capa con sus recortes a 190°C durante unos 7–10 minutos.',
       },
@@ -857,9 +894,17 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'heat-milk',
-      title: { uk: 'Нагрійте молоко' },
+      quantityMentions: [{
+        text: { uk: '600–650 мл', en: '600–650 ml', es: '600–650 ml' },
+        quantity: { kind: 'range', min: 600, max: 650, unit: 'ml' },
+      }],
+      title: {
+        uk: 'Нагрійте молоко',
+        en: 'Heat the milk',
+        es: 'Calienta la leche',
+      },
       instruction: {
-        uk: 'Відлити 600–650 мл холодного молока. Решту молока нагріти майже до кипіння.',
+        uk: 'Відлийте 600–650 мл холодного молока. Решту молока нагрійте майже до кипіння.',
         en: 'Set aside 600–650 ml of cold milk. Heat the remaining milk until almost boiling.',
         es: 'Reserva 600–650 ml de leche fría. Calienta el resto de la leche hasta casi hervir.',
       },
@@ -868,9 +913,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'mix-custard-base',
-      title: { uk: 'Змішайте основу крему' },
+      title: {
+        uk: 'Змішайте основу крему',
+        en: 'Mix the custard base',
+        es: 'Prepara la base de la crema',
+      },
       instruction: {
-        uk: 'У великій мисці змішати цукор, обидва крохмалі, ванільний цукор і сіль. Додати відлите холодне молоко й розмішати до гладкості, потім додати 4 яйця.',
+        uk: 'У великій мисці змішайте цукор, обидва крохмалі, ванільний цукор і сіль. Додайте відлите холодне молоко й розмішайте до гладкості, потім додайте 4 яйця.',
         en: 'In a large bowl, combine the sugar, both starches, vanilla sugar and salt. Add the reserved cold milk and stir until smooth, then add the four eggs.',
         es: 'En un bol grande, mezcla el azúcar, los dos almidones, el azúcar vainillado y la sal. Añade la leche fría reservada y remueve hasta que quede liso; incorpora después los cuatro huevos.',
       },
@@ -887,9 +936,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'temper-custard',
-      title: { uk: 'Темперуйте яєчну суміш' },
+      title: {
+        uk: 'Темперуйте яєчну суміш',
+        en: 'Temper the egg mixture',
+        es: 'Templa la mezcla de huevo',
+      },
       instruction: {
-        uk: 'Влити 2–3 ополоники гарячого молока в яєчно-крохмальну суміш, перемішати й повернути все в каструлю.',
+        uk: 'Влийте 2–3 ополоники гарячого молока в яєчно-крохмальну суміш, перемішайте й поверніть все в каструлю.',
         en: 'Whisk 2–3 ladlefuls of hot milk into the egg and starch mixture, then return everything to the saucepan.',
         es: 'Incorpora 2–3 cucharones de leche caliente a la mezcla de huevos y almidón, remueve y devuelve todo a la cacerola.',
       },
@@ -898,9 +951,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'cook-custard',
-      title: { uk: 'Зваріть крем' },
+      title: {
+        uk: 'Зваріть крем',
+        en: 'Cook the custard',
+        es: 'Cuece la crema',
+      },
       instruction: {
-        uk: 'Варити на середньому вогні, постійно працюючи вінчиком. Після перших бульбашок варити ще 30–60 секунд.',
+        uk: 'Варіть на середньому вогні, постійно працюючи вінчиком. Після перших бульбашок варіть ще 30–60 секунд.',
         en: 'Cook over medium heat, whisking constantly. After the first bubbles appear, cook for another 30–60 seconds.',
         es: 'Cocina a fuego medio, batiendo constantemente. Cuando aparezcan las primeras burbujas, cocina 30–60 segundos más.',
       },
@@ -921,9 +978,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'finish-custard',
-      title: { uk: 'Додайте масло' },
+      title: {
+        uk: 'Додайте масло',
+        en: 'Add the butter',
+        es: 'Añade la mantequilla',
+      },
       instruction: {
-        uk: 'Зняти крем з вогню, додати масло й розмішати до однорідності.',
+        uk: 'Зніміть крем з вогню, додайте масло й розмішайте до однорідності.',
         en: 'Remove the custard from the heat, add the butter and stir until smooth.',
         es: 'Retira la crema del fuego, añade la mantequilla y remueve hasta que quede homogénea.',
       },
@@ -933,9 +994,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'toast-walnuts',
-      title: { uk: 'Підсушіть волоські горіхи' },
+      title: {
+        uk: 'Підсушіть волоські горіхи',
+        en: 'Toast the walnuts',
+        es: 'Tuesta las nueces',
+      },
       instruction: {
-        uk: 'Підсушити волоські горіхи при 160°C 8–10 хвилин.',
+        uk: 'Підсушіть волоські горіхи при 160°C 8–10 хвилин.',
         en: 'Toast the walnuts at 160°C for 8–10 minutes.',
         es: 'Tuesta las nueces a 160°C durante 8–10 minutos.',
       },
@@ -945,9 +1010,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'toast-almonds',
-      title: { uk: 'Підсушіть мигдальні пластівці' },
+      title: {
+        uk: 'Підсушіть мигдальні пластівці',
+        en: 'Toast the almonds',
+        es: 'Tuesta las almendras',
+      },
       instruction: {
-        uk: 'Підсушити мигдальні пластівці при 160°C 4–5 хвилин.',
+        uk: 'Підсушіть мигдальні пластівці при 160°C 4–5 хвилин.',
         en: 'Toast the flaked almonds at 160°C for 4–5 minutes.',
         es: 'Tuesta las almendras laminadas a 160°C durante 4–5 minutos.',
       },
@@ -957,9 +1026,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'assemble-cake',
-      title: { uk: 'Складіть два торти' },
+      title: {
+        uk: 'Складіть два торти',
+        en: 'Assemble the cakes',
+        es: 'Monta las tartas',
+      },
       instruction: {
-        uk: 'Скласти два торти по 6 коржів. Використовувати крем теплим. Нанести крем на кожен корж, додаючи волоські горіхи через один шар. Зверху посипати крихтою від коржів і мигдальними пластівцями.',
+        uk: 'Складіть два торти по 6 коржів. Використовуйте крем теплим. Нанесіть крем на кожен корж, додаючи волоські горіхи через один шар. Зверху посипте крихтою від коржів і мигдальними пластівцями.',
         en: 'Assemble two cakes with six layers each. Use the custard while warm. Spread it on every layer, adding walnuts to every other layer. Finish with layer crumbs and flaked almonds.',
         es: 'Monta dos tartas de seis capas cada una. Usa la crema templada. Extiéndela sobre cada capa y añade nueces en capas alternas. Termina con migas de los recortes y almendras laminadas.',
       },
@@ -968,9 +1041,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'rest-assembled-cake',
-      title: { uk: 'Залиште при кімнатній температурі' },
+      title: {
+        uk: 'Залиште при кімнатній температурі',
+        en: 'Rest at room temperature',
+        es: 'Deja reposar a temperatura ambiente',
+      },
       instruction: {
-        uk: 'Після складання залишити торт приблизно на 1 годину при кімнатній температурі.',
+        uk: 'Після складання залиште торт приблизно на 1 годину при кімнатній температурі.',
         en: 'After assembly, leave the cake at room temperature for about 1 hour.',
         es: 'Después del montaje, deja la tarta aproximadamente 1 hora a temperatura ambiente.',
       },
@@ -979,9 +1056,13 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'refrigerate-cake',
-      title: { uk: 'Охолодіть до наступного дня' },
+      title: {
+        uk: 'Охолодіть до наступного дня',
+        en: 'Chill overnight',
+        es: 'Refrigera hasta el día siguiente',
+      },
       instruction: {
-        uk: 'Поставити торт у холодильник на 12–24 години. Найкращий смак — наступного дня.',
+        uk: 'Поставте торт у холодильник на 12–24 години. Найкращий смак — наступного дня.',
         en: 'Refrigerate the cake for 12–24 hours. It tastes best the next day.',
         es: 'Refrigera la tarta durante 12–24 horas. Está mejor al día siguiente.',
       },
@@ -991,7 +1072,7 @@ export const glutenFreeNapoleonRecipe = {
   ],
   storage: null,
   makeAhead: {
-    uk: 'Тісто можна охолоджувати на ніч. Після складання торт дозріває в холодильнику 12–24 години; найкращий смак — наступного дня.',
+    uk: 'Тісто можна охолоджуйте на ніч. Після складання торт дозріває в холодильнику 12–24 години; найкращий смак — наступного дня.',
     en: 'The dough may be chilled overnight. After assembly, refrigerate the cake for 12–24 hours; it tastes best the next day.',
     es: 'La masa puede refrigerarse toda la noche. Después del montaje, deja la tarta 12–24 horas en la nevera; está mejor al día siguiente.',
   },
@@ -1267,7 +1348,7 @@ export const glutenFreeNapoleonRecipe = {
       area: 'ingredient',
       field: 'ingredientSections.layers.cultured-dairy-dough',
       question:
-        'Which cultured dairy is the default, and have both sour cream and thick natural yogurt been tested?',
+        'Which cultured dairy is the default, and have both sour cream and thick natural yoghurt been tested?',
       publicationBlocking: false,
       sourceIds: ['archive-recipe'],
     },

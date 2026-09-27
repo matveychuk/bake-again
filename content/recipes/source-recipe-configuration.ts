@@ -1,6 +1,6 @@
 import type { AssistantConfiguration } from '../../lib/assistant/contracts.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
-import { formatNumber } from '../../lib/i18n/format.ts';
+import { formatNumber, formatQuantity } from '../../lib/i18n/format.ts';
 import { getUiMessages } from '../../lib/i18n/messages.ts';
 import {
   findScalingAnchor,
@@ -196,10 +196,12 @@ function scaledYield(
   return { ...sourceYield, count, label };
 }
 
-/** Applies quantity and yield changes only; known base timings remain unchanged. */
+/** Scale explicitly annotated amounts in prose, preserving times and temperatures. */
 export function applySourceRecipeConfiguration(
   content: StructuredRecipeContent,
-  configuration: SourceRecipeConfiguration,
+  configuration:
+    | SourceRecipeConfiguration
+    | { kind: 'adjusted'; scaleFactor: number },
   locale: AppLocale,
 ): StructuredRecipeContent {
   if (configuration.kind !== 'adjusted') return content;
@@ -208,9 +210,33 @@ export function applySourceRecipeConfiguration(
   return {
     ...content,
     evidence: {
-      status: 'calculated',
-      explanation: getUiMessages(locale).status.calculated.explanation,
+      status:
+        content.evidence?.status === 'suggested' ? 'suggested' : 'calculated',
+      explanation: [
+        content.evidence?.status === 'suggested'
+          ? content.evidence.explanation
+          : null,
+        getUiMessages(locale).status.calculated.explanation,
+      ]
+        .filter(Boolean)
+        .join(' '),
     },
+    steps: content.steps.map((step) => ({
+      ...step,
+      body: (step.quantityMentions ?? []).reduce(
+        (body, mention) =>
+          body.replaceAll(
+            mention.text,
+            mention.numberOnly && mention.quantity.kind === 'exact'
+              ? formatNumber(locale, mention.quantity.value * factor)
+              : formatQuantity(
+                  locale,
+                  scaleStructuredQuantity(mention.quantity, factor),
+                ),
+          ),
+        step.body,
+      ),
+    })),
     yield: recipeYield,
     overview: {
       ...content.overview,

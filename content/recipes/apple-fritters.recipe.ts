@@ -1,9 +1,12 @@
+import { localizeRecipeContent } from "./localize-content.ts";
+import { apple_frittersEs } from "./translations/apple-fritters.es.ts";
 import type { RecipeSourceDraft } from './source-recipe.types.ts';
 import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
-export const appleFrittersRecipe = {
+const appleFrittersRecipeBase = {
   id: 'apple-fritters',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   presentation: 'concise',
   showImageNote: false,
   source: {
@@ -55,7 +58,7 @@ export const appleFrittersRecipe = {
         },
         {
           id: 'kefir-or-yogurt',
-          name: 'Kefir or natural yogurt',
+          name: 'Kefir or natural yoghurt',
           quantity: {
             base: { kind: 'exact', value: 150, unit: 'g' },
             shopping: { mode: 'base' },
@@ -74,11 +77,11 @@ export const appleFrittersRecipe = {
             equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
             shopping: { mode: 'nameOnly' },
           },
-          note: 'Use 1 tbsp sugar, or mash 1 ripe soft banana and add it instead of the sugar.',
+          note: 'Use the sugar amount shown. To replace it, mash one ripe soft banana per tablespoon of sugar.',
         },
         {
           id: 'baking-soda',
-          name: 'Baking soda',
+          name: 'Bicarbonate of soda',
           quantity: quantityFromSpoons('baking-soda', 0.5, 'tsp'),
         },
         {
@@ -111,7 +114,7 @@ export const appleFrittersRecipe = {
     {
       id: 'mix-batter',
       title: 'Mix the batter',
-      body: 'Crack the eggs directly into the grated apples. Add the kefir or yogurt and the sugar, or the mashed banana instead of sugar, then mix. Add the Schär Mix B Bread flour and baking soda and stir until combined.',
+      body: 'Crack the eggs directly into the grated apples. Add the kefir or yoghurt and the sugar, or the mashed banana instead of sugar, then mix. Add the Schär Mix B Bread flour and bicarbonate of soda and stir until combined.',
       cookIngredients: [
         { ingredientId: 'eggs' },
         { ingredientId: 'kefir-or-yogurt' },
@@ -222,7 +225,7 @@ export const appleFrittersRecipe = {
                 equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
                 shopping: { mode: 'nameOnly' },
               },
-              note: 'Візьміть 1 ст. л. цукру або розімніть 1 стиглий м’який банан і додайте замість цукру.',
+              note: 'Візьміть зазначену кількість цукру. Для заміни розімніть один стиглий м’який банан на кожну столову ложку цукру.',
             },
             {
               id: 'baking-soda',
@@ -303,5 +306,13 @@ export const appleFrittersRecipe = {
         },
       ],
     },
+  },
+} satisfies RecipeSourceDraft;
+
+export const appleFrittersRecipe = {
+  ...appleFrittersRecipeBase,
+  translations: {
+    ...appleFrittersRecipeBase.translations,
+    es: localizeRecipeContent(appleFrittersRecipeBase.translations.uk, apple_frittersEs),
   },
 } satisfies RecipeSourceDraft;

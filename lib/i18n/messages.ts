@@ -64,6 +64,8 @@ type UiMessages = {
     unavailableTitle: string;
     unavailableLink: string;
     unavailableRecord: string;
+    fractionalIngredients: string;
+    unsupportedConfiguration: string;
     adjustedStatus: string;
     progress: (current: number, total: number) => string;
     progressLabel: string;
@@ -124,8 +126,6 @@ type UiMessages = {
     geometry: string;
     flour: string;
     toConfirm: string;
-    authorPhotoPending: string;
-    generatedPreviewPending: string;
     beforeStart: string;
     planAhead: string;
     keepInMind: string;
@@ -284,7 +284,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         { id: 'breakfast', label: 'For breakfast' },
         { id: 'everyday', label: 'For every day' },
         { id: 'celebration', label: 'For a celebration' },
-        { id: 'cottage-cheese', label: 'With cottage cheese' },
+        { id: 'cottage-cheese', label: 'With curd cheese' },
         { id: 'batter-on-hand', label: 'Batter on hand' },
       ],
       recipesEyebrow: 'Find your next bake',
@@ -297,7 +297,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       testedExplanation: 'Baked as written.',
       trustNote:
         'Every recipe names the flour mix, form and quantity actually used. A tested original may still have a calculated variation.',
-      howWeTest: 'How we test recipes',
+      howWeTest: 'How recipes are tested',
     },
     catalog: {
       draftsIntro: 'Recipes in progress, before publication.',
@@ -317,9 +317,11 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       backToRecipe: 'Back to recipe',
       exit: 'Exit Cook Mode',
       unavailableKicker: 'Cook Mode is not ready yet',
-      unavailableTitle: 'The source does not contain a usable method.',
+      unavailableTitle: 'Cooking cannot start yet.',
       unavailableLink: 'Read the recipe record',
       unavailableRecord: 'This recipe record is not available.',
+      fractionalIngredients: 'This amount gives fractional eggs or other whole ingredients that need manual adjustment. Return to the recipe and choose a different amount before starting Cook Mode.',
+      unsupportedConfiguration: 'This configuration needs manual adjustment. Return to the recipe and choose a supported configuration before starting Cook Mode.',
       adjustedStatus: 'Calculated',
       progress: (current, total) => `Step ${current} of ${total}`,
       progressLabel: 'Cook Mode progress',
@@ -386,8 +388,6 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       geometry: 'Form / pan',
       flour: 'Flour',
       toConfirm: 'To confirm',
-      authorPhotoPending: 'Author photo · review pending',
-      generatedPreviewPending: 'Generated preview · approval pending',
       beforeStart: 'Before you start',
       planAhead: 'Plan for the rest.',
       keepInMind: 'Keep this in mind',
@@ -396,7 +396,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       creamOptionsEyebrow: 'Filling',
       creamOptionsTitle: 'Choose a cream.',
       creamOptionsIntro: () =>
-        'All of these creams are tested for this recipe.',
+        'Choose a filling. Your choice changes the ingredients and preparation steps.',
       creamRecommended: 'Recommended',
       creamSelectedEyebrow: 'Selected cream',
       creamRecipeEyebrow: 'Cream recipe',
@@ -584,7 +584,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         { id: 'breakfast', label: 'Para desayunar' },
         { id: 'everyday', label: 'Para cada día' },
         { id: 'celebration', label: 'Para una celebración' },
-        { id: 'cottage-cheese', label: 'Con requesón' },
+        { id: 'cottage-cheese', label: 'Con tvorog' },
         { id: 'batter-on-hand', label: 'Masa lista' },
       ],
       recipesEyebrow: 'Tu próxima receta',
@@ -597,7 +597,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       testedExplanation: 'Horneada tal como está escrita.',
       trustNote:
         'Cada receta indica la mezcla de harina, el molde y la cantidad usados. Una receta original probada puede tener una variante calculada.',
-      howWeTest: 'Cómo probamos las recetas',
+      howWeTest: 'Cómo se prueban las recetas',
     },
     catalog: {
       draftsIntro: 'Recetas en preparación, antes de publicarlas.',
@@ -617,9 +617,11 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       backToRecipe: 'Volver a la receta',
       exit: 'Salir del modo Cocina',
       unavailableKicker: 'El modo Cocina todavía no está listo',
-      unavailableTitle: 'La fuente no contiene un método utilizable.',
+      unavailableTitle: 'Aún no se puede empezar a cocinar.',
       unavailableLink: 'Leer la ficha de la receta',
       unavailableRecord: 'Esta ficha de receta no está disponible.',
+      fractionalIngredients: 'Esta cantidad da fracciones de huevos u otros ingredientes enteros que requieren un ajuste manual. Vuelve a la receta y elige otra cantidad antes de iniciar el modo Cocina.',
+      unsupportedConfiguration: 'Esta configuración requiere un ajuste manual. Vuelve a la receta y elige una configuración compatible antes de iniciar el modo Cocina.',
       adjustedStatus: 'Calculada',
       progress: (current, total) => `Paso ${current} de ${total}`,
       progressLabel: 'Progreso del modo Cocina',
@@ -686,8 +688,6 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       geometry: 'Molde / sartén',
       flour: 'Harina',
       toConfirm: 'Por confirmar',
-      authorPhotoPending: 'Foto de la autora · revisión pendiente',
-      generatedPreviewPending: 'Vista previa generada · aprobación pendiente',
       beforeStart: 'Antes de empezar',
       planAhead: 'Planifica con antelación.',
       keepInMind: 'Tenlo en cuenta',
@@ -697,7 +697,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       creamOptionsEyebrow: 'Relleno',
       creamOptionsTitle: 'Elige una crema.',
       creamOptionsIntro: () =>
-        'Todas estas cremas están probadas para esta receta.',
+        'Elige el relleno. Tu elección cambia los ingredientes y los pasos de preparación.',
       creamRecommended: 'Recomendada',
       creamSelectedEyebrow: 'Crema elegida',
       creamRecipeEyebrow: 'Receta de crema',
@@ -887,7 +887,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         { id: 'breakfast', label: 'На сніданок' },
         { id: 'everyday', label: 'На щодень' },
         { id: 'celebration', label: 'Для свята' },
-        { id: 'cottage-cheese', label: 'З творогом' },
+        { id: 'cottage-cheese', label: 'Із сиром' },
         { id: 'batter-on-hand', label: 'Тісто про запас' },
       ],
       recipesEyebrow: 'Що приготуємо?',
@@ -912,7 +912,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       testedExplanation: 'Випечено саме за цим записом.',
       trustNote:
         'У кожному рецепті вказано використані борошняну суміш, форму й кількість. У перевіреного оригіналу може бути розрахований варіант.',
-      howWeTest: 'Як ми перевіряємо рецепти',
+      howWeTest: 'Як перевіряють рецепти',
     },
     catalog: {
       draftsIntro: 'Рецепти в роботі, які ще не опубліковані.',
@@ -932,9 +932,11 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       backToRecipe: 'Повернутися до рецепта',
       exit: 'Вийти з режиму приготування',
       unavailableKicker: 'Режим приготування ще не готовий',
-      unavailableTitle: 'Джерело не містить придатного способу приготування.',
+      unavailableTitle: 'Поки що неможливо почати приготування.',
       unavailableLink: 'Переглянути запис рецепта',
       unavailableRecord: 'Цей запис рецепта недоступний.',
+      fractionalIngredients: 'Ця кількість дає дробові яйця або інші цілі інгредієнти, які потребують ручного коригування. Поверніться до рецепта й оберіть іншу кількість перед початком покрокового приготування.',
+      unsupportedConfiguration: 'Ця конфігурація потребує ручного коригування. Поверніться до рецепта й оберіть підтримувану конфігурацію перед початком покрокового приготування.',
       adjustedStatus: 'Розраховано',
       progress: (current, total) => `Крок ${current} з ${total}`,
       progressLabel: 'Перебіг режиму приготування',
@@ -1001,8 +1003,6 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       geometry: 'Форма / пательня',
       flour: 'Борошно',
       toConfirm: 'Потребує уточнення',
-      authorPhotoPending: 'Фото авторки · очікує перевірки',
-      generatedPreviewPending: 'Згенерований прев’ю · очікує схвалення',
       beforeStart: 'Перед початком',
       planAhead: 'Сплануйте заздалегідь.',
       keepInMind: 'Зверніть увагу',
@@ -1010,7 +1010,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       ingredientsIntro: 'Умови й неуточнені деталі залишаються видимими.',
       creamOptionsEyebrow: 'Начинка',
       creamOptionsTitle: 'Оберіть крем.',
-      creamOptionsIntro: () => 'Усі ці креми перевірені для цього рецепта.',
+      creamOptionsIntro: () => 'Оберіть начинку. Від вибору залежать інгредієнти та кроки приготування.',
       creamRecommended: 'Рекомендовано',
       creamSelectedEyebrow: 'Вибраний крем',
       creamRecipeEyebrow: 'Рецепт крему',
@@ -1056,17 +1056,17 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
     status: {
       tested: {
         label: 'Перевірено',
-        explanation: 'Цю точну версію успішно випікали.',
+        explanation: 'Цю версію успішно приготували.',
         repeatedExplanation: 'Готували багато разів.',
       },
       calculated: {
         label: 'Розраховано',
         explanation:
-          'Кількості перераховано. Цю версію не перевірено випіканням.',
+          'Кількості перераховано. Цю версію ще не перевіряли на практиці.',
       },
       suggested: {
         label: 'Запропоновано',
-        explanation: 'Ідея для спроби. Цю зміну не перевірено випіканням.',
+        explanation: 'Ідея для спроби. Цю зміну ще не перевіряли на практиці.',
       },
     },
     metadata: {

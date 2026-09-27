@@ -9,8 +9,8 @@ export const crinkleCookiesRecipe = {
   publicationStatus: 'published',
   translationState: {
     uk: 'reviewed',
-    en: 'draftTranslation',
-    es: 'draftTranslation',
+    en: 'reviewed',
+    es: 'reviewed',
   },
   slug: {
     uk: 'marmurove-pechyvo-trishchynky',
@@ -256,7 +256,7 @@ export const crinkleCookiesRecipe = {
               ingredientId: 'powdered-sugar',
               name: {
                 uk: 'цукрова пудра',
-                en: 'powdered sugar',
+                en: 'icing sugar',
                 es: 'azúcar glas',
               },
             },
@@ -325,7 +325,7 @@ export const crinkleCookiesRecipe = {
       },
       instruction: {
         uk: 'Не дістаючи тісто з холодильника, розігрійте духовку до 180°C, верхній і нижній нагрів. Застеліть деко пергаментом і насипте цукрову пудру в миску.',
-        en: 'Leave the dough in the refrigerator while you preheat the oven to 180°C with top-and-bottom heat. Line a tray with parchment and put the powdered sugar in a bowl.',
+        en: 'Leave the dough in the refrigerator while you preheat the oven to 180°C with top-and-bottom heat. Line a tray with parchment and put the icing sugar in a bowl.',
         es: 'Deja la masa en la nevera mientras precalientas el horno a 180°C con calor arriba y abajo. Forra una bandeja con papel y pon el azúcar glas en un bol.',
       },
       ingredientLineIds: ['powdered-sugar'],
@@ -341,7 +341,7 @@ export const crinkleCookiesRecipe = {
       },
       instruction: {
         uk: 'Набирайте холодне тісто ложкою й швидко скачуйте кульки розміром із волоський горіх. Одразу обкачуйте в щільному шарі пудри й викладайте на деко на великій відстані одна від одної.',
-        en: 'Scoop the cold dough with a spoon and quickly roll walnut-sized balls. Immediately coat them in a thick layer of powdered sugar and place them well apart on the tray.',
+        en: 'Scoop the cold dough with a spoon and quickly roll walnut-sized balls. Immediately coat them in a thick layer of icing sugar and place them well apart on the tray.',
         es: 'Toma la masa fría con una cuchara y forma rápidamente bolas del tamaño de una nuez. Rebózalas enseguida en una capa gruesa de azúcar glas y colócalas bien separadas en la bandeja.',
       },
       ingredientLineIds: ['powdered-sugar'],
@@ -464,7 +464,7 @@ export const crinkleCookiesRecipe = {
           stepId: 'shape-and-coat',
           instruction: {
             uk: 'Під час формування вставити в кожну кульку волоський горіх або горіх пекан, потім обкачати в цукровій пудрі.',
-            en: 'While shaping, insert a walnut or pecan into each dough ball, then coat it in powdered sugar.',
+            en: 'While shaping, insert a walnut or pecan into each dough ball, then coat it in icing sugar.',
             es: 'Al formar las bolas, introduce una nuez o una nuez pecana en cada una y rebózala después en azúcar glas.',
           },
         },
@@ -480,7 +480,7 @@ export const crinkleCookiesRecipe = {
       usage: ['hero', 'gallery'],
       alt: {
         uk: 'Шоколадне печиво тріщинки в цукровій пудрі на керамічній тарілці',
-        en: 'Chocolate crinkle cookies dusted with powdered sugar on a ceramic plate',
+        en: 'Chocolate crinkle cookies dusted with icing sugar on a ceramic plate',
         es: 'Galletas craqueladas de chocolate con azúcar glas sobre un plato de cerámica',
       },
     },
@@ -524,7 +524,7 @@ export const crinkleCookiesRecipe = {
       usage: ['step'],
       alt: {
         uk: 'Руки швидко округлюють шоколадне тісто над мискою з цукровою пудрою; поруч лежить обкачана кулька',
-        en: 'Hands quickly round chocolate dough over a bowl of powdered sugar beside a fully coated ball',
+        en: 'Hands quickly round chocolate dough over a bowl of icing sugar beside a fully coated ball',
         es: 'Unas manos redondean rápidamente masa de chocolate sobre un bol con azúcar glas junto a una bola ya rebozada',
       },
     },

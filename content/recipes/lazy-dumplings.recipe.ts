@@ -12,7 +12,7 @@ const copy = {
     yield: '100 лінивих вареників',
     section: 'Ліниві вареники',
     ingredients: [
-      'Творог',
+      'Кисломолочний сир',
       'Яйця',
       'Цукор',
       'Борошно Schär Mix B Bread',
@@ -32,7 +32,7 @@ const copy = {
       'Зваріть вареники',
     ],
     instructions: [
-      'Перемішайте творог, яйця й цукор виделкою або в комбайні насадкою-тістомісом.',
+      'Перемішайте кисломолочний сир, яйця й цукор виделкою або в комбайні насадкою-тістомісом.',
       'З’єднайте борошно з тапіоковим крохмалем і вмішайте в основу. Тісто має залишитися липким — не ущільнюйте його додатковим борошном.',
       'Нещільно накрийте миску й залиште на 15–30 хвилин.',
       'Присипте поверхню й тісто борошном. Обережно розкачайте в ковбаску, не вмішуючи борошно всередину.',
@@ -44,7 +44,7 @@ const copy = {
     ],
     freezing: 'Для заморожування розкладіть сирі вареники в один шар на таці.',
     alts: [
-      'Творог, яйця й цукор у мисці комбайна',
+      'Кисломолочний сир, яйця й цукор у мисці комбайна',
       'Борошно й тапіоковий крохмаль у липкому тісті',
       'Руки формують ковбаску з тіста на присипаній борошном поверхні',
       'Кульки вареників і нарізане тісто на присипаній борошном поверхні',
@@ -56,7 +56,7 @@ const copy = {
     yield: '100 lazy dumplings',
     section: 'Dumplings',
     ingredients: [
-      'Cottage cheese',
+      'Tvorog (curd cheese)',
       'Eggs',
       'Sugar',
       'Schär Mix B Bread flour',
@@ -76,7 +76,7 @@ const copy = {
       'Boil the dumplings',
     ],
     instructions: [
-      'Mix the cottage cheese, eggs and sugar with a fork or in a food processor fitted with a dough hook.',
+      'Mix the tvorog, eggs and sugar with a fork or in a food processor fitted with a dough attachment.',
       'Combine the flour and tapioca starch and mix into the base. The dough should stay sticky — do not add extra flour to firm it up.',
       'Cover the bowl loosely and leave for 15–30 minutes.',
       'Dust the surface and dough with flour. Gently roll into a log without kneading the dusting flour into the dough.',
@@ -89,7 +89,7 @@ const copy = {
     freezing:
       'To freeze, arrange the uncooked dumplings in a single layer on a tray.',
     alts: [
-      'Cottage cheese, eggs and sugar in a food processor bowl',
+      'Tvorog curd cheese, eggs and sugar in a food processor bowl',
       'Flour and tapioca starch in sticky cottage-cheese dough',
       'Hands shaping a dough log on a floured surface',
       'Round dumplings and cut dough on a floured surface',
@@ -98,10 +98,10 @@ const copy = {
   },
   es: {
     evidence: 'Esta versión se ha preparado con éxito.',
-    yield: '100 ñoquis de requesón',
-    section: 'Ñoquis de requesón',
+    yield: '100 váreniki de tvorog',
+    section: 'Váreniki de tvorog',
     ingredients: [
-      'Requesón',
+      'Tvorog (queso fresco de leche fermentada)',
       'Huevos',
       'Azúcar',
       'Harina Schär Mix B Bread',
@@ -118,24 +118,24 @@ const copy = {
       'Deja reposar la masa',
       'Forma un cilindro',
       'Forma las bolitas',
-      'Cuece los ñoquis',
+      'Cuece los váreniki',
     ],
     instructions: [
-      'Mezcla el requesón, los huevos y el azúcar con un tenedor o en un robot de cocina con gancho de amasar.',
+      'Mezcla el tvorog, los huevos y el azúcar con un tenedor o en un robot de cocina con accesorio para amasar.',
       'Combina la harina con el almidón de tapioca e incorpóralos a la base. La masa debe quedar pegajosa; no añadas más harina para endurecerla.',
       'Cubre el bol sin apretar y deja reposar durante 15–30 minutos.',
       'Enharina la superficie y la masa. Forma un cilindro con cuidado, sin amasar la harina de espolvorear dentro de la masa.',
       'Corta en trozos pequeños. Cubre los cortes con harina y haz rodar suavemente cada trozo entre las palmas para formar una bolita.',
     ],
     cooking: [
-      'Añade los ñoquis al agua hirviendo en tandas pequeñas. Pasa suavemente una espumadera por el fondo para que no se peguen.',
-      'Cuando el agua vuelva a hervir y los ñoquis suban, baja el fuego. Cuécelos a hervor suave durante 1–2 minutos más y retíralos con una espumadera.',
+      'Añade los váreniki al agua hirviendo en tandas pequeñas. Pasa suavemente una espumadera por el fondo para que no se peguen.',
+      'Cuando el agua vuelva a hervir y los váreniki suban, baja el fuego. Cuécelos a hervor suave durante 1–2 minutos más y retíralos con una espumadera.',
     ],
     freezing:
-      'Para congelarlos, coloca los ñoquis crudos en una sola capa sobre una bandeja.',
+      'Para congelarlos, coloca los váreniki crudos en una sola capa sobre una bandeja.',
     alts: [
-      'Requesón, huevos y azúcar en el bol de un robot de cocina',
-      'Harina y almidón de tapioca en una masa pegajosa de requesón',
+      'Tvorog, huevos y azúcar en el bol de un robot de cocina',
+      'Harina y almidón de tapioca en una masa pegajosa de tvorog',
       'Manos formando un cilindro de masa sobre una superficie enharinada',
       'Bolitas y masa cortada sobre una superficie enharinada',
       'Ñoquis flotando en agua, con uno sobre una espumadera',
@@ -296,6 +296,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
 export const lazyDumplingsRecipe = {
   id: 'lazy-dumplings',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',
     locator:

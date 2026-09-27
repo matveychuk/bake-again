@@ -1,0 +1,498 @@
+[
+  {
+    "name": "selection-empty",
+    "url": "http://localhost:3001/en/recipes/gluten-free-crepes",
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\nRecipes\n\nBREAKFAST\n\nGluten-free\ncrepes\n\nThin crepes made with milk.\n\nTested\n\nThis exact version has been cooked successfully.\n\nACTIVE TIME\n40 min\nYIELD\n10 crepes\nDIFFICULTY\nMedium\n\nTotal time: 1 hour\n\nIncludes 15–20 min of batter rest.\n\nFLOUR\nSchär Mix B Bread\nJump to ingredients\nJump to steps\nQuantity\n\nBase recipe: Eggs — 5 pcs · 10 crepes\n\n28 cm round pan\n\nScale recipe\nUse what I have\nBATCH SCALE\n0.5×\n1×\n1.5×\n2×\nIngredients\nTo shopping list…\nEggs\n5 pcs\n280 g\nSchär Mix B Bread flour\n140 g\n7 tbsp\nMilk\n500 ml\nSugar\n20 g\n1 tbsp\nSalt\n1 pinch\nHot water\n50 ml\nNeutral oil\n25 g\nOil for the pan\nFor greasing.\nMethod\nCook step by step\n\nOne step at a time, with ingredients and timers close at hand.\n\n01\nBlend a thick base\n\nTIPLumps break up more easily in a thick base.\n\nCombine the eggs, flour, sugar and salt. Pour in a little milk — just enough for the blender or mixer to work. Blend to a smooth, thick base with no lumps.\n\n02\nAdd the milk and rest\n\nGradually mix in the remaining milk. Leave to rest for 15–20 minutes.\n\n03\nAdd the water and oil\n\nMix in the hot water, then the oil. The batter should spread easily across the pan.\n\n04\nCook the crepes\n\nBefore the first crepe, coat the pan with a thin layer of oil. Pour in the batter and tilt the pan to spread it. When the surface is matte with small holes and the edges release easily, loosen them with a spatula, flip the crepe and finish cooking the other side.\n\n1\nBefore flipping\n2\nReleasing the edge\n3\nAfter flipping\nBake Again\n.\nAbout\nPrivacy and your saved items\nWhat do you need to buy?\n\nGluten-free crepes · 1×\n\nLeave selected the products you need to buy.\n\nSelect all\nClear all selections\nCrepe batter\nEggs\n5 pcs\nSchär Mix B Bread flour\n140 g\nMilk\n500 ml\nSugar\n20 g\nSalt\nAs needed\nHot water\n50 ml\nNeutral oil\n25 g\nOil for the pan\nFor greasing.\nAs needed\nSelect at least one ingredient.\nAdd to list (0)",
+    "buttons": [
+      {
+        "text": "",
+        "label": "Close",
+        "disabled": false
+      },
+      {
+        "text": "Select all",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Clear all selections",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Add to list (0)",
+        "label": null,
+        "disabled": true
+      }
+    ],
+    "focus": {
+      "tag": "BUTTON",
+      "text": "Clear all selections"
+    }
+  },
+  {
+    "name": "shopping-controls",
+    "url": "http://localhost:3001/en/shopping-list",
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nEggs\nFor Thin breakfast crepes\n5 pcs\nSchär Mix B Bread flour\nFor Thin breakfast crepes\n140 g\nmilk\nFor Thin breakfast crepes\n500 ml\nSugar\nFor Thin breakfast crepes\n20 g\nsalt\nFor Thin breakfast crepes\nAs needed\ncold water\nFor Thin breakfast crepes\n50 ml\nNeutral oil\nFor Thin breakfast crepes\n25 g\nOil for the pan\nFor greasing.\nFor Thin breakfast crepes\nAs needed\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "buttons": [
+      {
+        "text": "EN",
+        "label": "Change language",
+        "disabled": false
+      },
+      {
+        "text": "Remove bought (0)",
+        "label": null,
+        "disabled": true
+      },
+      {
+        "text": "Clear all",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Eggs",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Schär Mix B Bread flour",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: milk",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Sugar",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: salt",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: cold water",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Neutral oil",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Oil for the pan",
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "BODY",
+      "text": "Skip to contentBake Again.RecipesSavedShopping listAboutENYour baking "
+    }
+  },
+  {
+    "name": "shopping-one-removed",
+    "url": "http://localhost:3001/en/shopping-list",
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nSchär Mix B Bread flour\nFor Thin breakfast crepes\n140 g\nmilk\nFor Thin breakfast crepes\n500 ml\nSugar\nFor Thin breakfast crepes\n20 g\nsalt\nFor Thin breakfast crepes\nAs needed\ncold water\nFor Thin breakfast crepes\n50 ml\nNeutral oil\nFor Thin breakfast crepes\n25 g\nOil for the pan\nFor greasing.\nFor Thin breakfast crepes\nAs needed\nEggs removed.\nUndo\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "buttons": [
+      {
+        "text": "EN",
+        "label": "Change language",
+        "disabled": false
+      },
+      {
+        "text": "Remove bought (0)",
+        "label": null,
+        "disabled": true
+      },
+      {
+        "text": "Clear all",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Schär Mix B Bread flour",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: milk",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Sugar",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: salt",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: cold water",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Neutral oil",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Oil for the pan",
+        "disabled": false
+      },
+      {
+        "text": "Undo",
+        "label": null,
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "BODY",
+      "text": "Skip to contentBake Again.RecipesSavedShopping listAboutENYour baking "
+    }
+  },
+  {
+    "name": "shopping-restored",
+    "url": "http://localhost:3001/en/shopping-list",
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (0)\nClear all\nSchär Mix B Bread flour\nFor Thin breakfast crepes\n140 g\nmilk\nFor Thin breakfast crepes\n500 ml\nSugar\nFor Thin breakfast crepes\n20 g\nsalt\nFor Thin breakfast crepes\nAs needed\ncold water\nFor Thin breakfast crepes\n50 ml\nNeutral oil\nFor Thin breakfast crepes\n25 g\nOil for the pan\nFor greasing.\nFor Thin breakfast crepes\nAs needed\nEggs\nFor Thin breakfast crepes\n5 pcs\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "buttons": [
+      {
+        "text": "EN",
+        "label": "Change language",
+        "disabled": false
+      },
+      {
+        "text": "Remove bought (0)",
+        "label": null,
+        "disabled": true
+      },
+      {
+        "text": "Clear all",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Schär Mix B Bread flour",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: milk",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Sugar",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: salt",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: cold water",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Neutral oil",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Oil for the pan",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Eggs",
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "BODY",
+      "text": "Skip to contentBake Again.RecipesSavedShopping listAboutENYour baking "
+    }
+  },
+  {
+    "name": "shopping-all-bought",
+    "url": "http://localhost:3001/en/shopping-list",
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nYOUR BAKING PLAN\n\nShopping list\nSaved in this browser. The list stays here until you clear it.\nRemove bought (8)\nClear all\nEverything is bought.\nRemove bought (8)\nSchär Mix B Bread flour\nFor Thin breakfast crepes\n140 g\nmilk\nFor Thin breakfast crepes\n500 ml\nSugar\nFor Thin breakfast crepes\n20 g\nsalt\nFor Thin breakfast crepes\nAs needed\ncold water\nFor Thin breakfast crepes\n50 ml\nNeutral oil\nFor Thin breakfast crepes\n25 g\nOil for the pan\nFor greasing.\nFor Thin breakfast crepes\nAs needed\nEggs\nFor Thin breakfast crepes\n5 pcs\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "buttons": [
+      {
+        "text": "EN",
+        "label": "Change language",
+        "disabled": false
+      },
+      {
+        "text": "Remove bought (8)",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Clear all",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Remove bought (8)",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Schär Mix B Bread flour",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: milk",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Sugar",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: salt",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: cold water",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Neutral oil",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Oil for the pan",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove item: Eggs",
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "SPAN",
+      "text": ""
+    }
+  },
+  {
+    "name": "saved-en",
+    "url": "http://localhost:3001/en/saved",
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nWANT TO BAKE\n\nSaved recipes\nThin breakfast crepes\nTotal time: 1 hour\nDifficulty: Medium\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "buttons": [
+      {
+        "text": "EN",
+        "label": "Change language",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Remove from Saved: Thin breakfast crepes",
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "BODY",
+      "text": "Skip to contentBake Again.RecipesSavedShopping listAboutENWant to bake"
+    }
+  },
+  {
+    "name": "removed-saved-en",
+    "url": "http://localhost:3001/en/saved",
+    "text": "Skip to content\nBake Again\n.\nRecipes\nSaved\nShopping list\nAbout\nEN\n\nWANT TO BAKE\n\nSaved recipes\nNo recipes saved yet.\n\nUse the bookmark on a recipe to keep it here for later.\n\nBrowse recipes\nBake Again\n.\nAbout\nPrivacy and your saved items",
+    "buttons": [
+      {
+        "text": "EN",
+        "label": "Change language",
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "BODY",
+      "text": "Skip to contentBake Again.RecipesSavedShopping listAboutENWant to bake"
+    }
+  },
+  {
+    "name": "saved-es",
+    "url": "http://localhost:3001/es/saved",
+    "text": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nQUIERO PREPARAR\n\nRecetas guardadas\nCrepes finos para el desayuno\nTiempo total: 1 h\nDificultad: Media\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "buttons": [
+      {
+        "text": "ES",
+        "label": "Cambiar idioma",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Quitar de Guardadas: Crepes finos para el desayuno",
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "BODY",
+      "text": "Saltar al contenidoBake Again.RecetasGuardadasLista de compraNosotrosE"
+    }
+  },
+  {
+    "name": "removed-saved-es",
+    "url": "http://localhost:3001/es/saved",
+    "text": "Saltar al contenido\nBake Again\n.\nRecetas\nGuardadas\nLista de compra\nNosotros\nES\n\nQUIERO PREPARAR\n\nRecetas guardadas\nTodavía no has guardado recetas.\n\nPulsa el marcador de una receta para guardarla aquí y volver a ella.\n\nVer recetas\nBake Again\n.\nNosotros\nPrivacidad y tus datos guardados",
+    "buttons": [
+      {
+        "text": "ES",
+        "label": "Cambiar idioma",
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "BODY",
+      "text": "Saltar al contenidoBake Again.RecetasGuardadasLista de compraNosotrosE"
+    }
+  },
+  {
+    "name": "cream-keyboard-focus",
+    "url": "http://localhost:3001/uk/recipes/bezghliutenovi-profitroli?cream=vanilla-buttercream#cream-options",
+    "text": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\nРецепти\n\nЗАВАРНЕ ТІСТО / ДЕСЕРТ\n\nБезглютенові\nпрофітролі\n\nПорожнисті заварні тістечка з тонкою золотистою оболонкою й ніжною начинкою.\n\nЗапропоновано\n\nПоєднання з вибраним кремом пропонується до випробування; успішне приготування саме цієї версії не підтверджено. Основа: Перевірено. Крем: Перевірено.\n\nАКТИВНИЙ ЧАС\n15 хв\nВИХІД\nБлизько 20 профітролів розміром із волоський горіх\nСКЛАДНІСТЬ\nСередня\nБОРОШНО\nSchär Mix B Bread\nДо інгредієнтів\nДо кроків\n\nВИБРАНИЙ КРЕМ\n\nВанільний масляний крем\nПереглянути рецепт крему\nЗмінити крем\n\nПЕРЕД ПОЧАТКОМ\n\nСплануйте заздалегідь.\nЗверніть увагу\n\nЗаздалегідь приготуйте вибраний крем і повністю охолодіть його. Наповнюйте лише повністю охололі оболонки.\n\nЗверніть увагу\n\nЯкщо ви забули дістати масло заздалегідь, скористайтеся швидким способом розм’якшення. Як розм’якшити масло\n\nКількість\n\nБазовий рецепт: Борошняна суміш Schär Mix B Bread — 110 г · Близько 20 профітролів розміром із волоський горіх\n\nПрофітролі розміром із волоський горіх\n\nЗмінити кількість\nВикористати наявне\nМАСШТАБ РЕЦЕПТА\n0,5×\n1×\n1,5×\n2×\nІнгредієнти\nДо списку покупок…\nЗаварне тісто\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\n110 г\n5,5 ст. л.\nЦукрова пудра\n2,35 г\n1 ч. л.\nСіль\n1 дрібка\nВода\n130 мл\nНесолоне вершкове масло\nОхолоджене й нарізане кубиками.\n70 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\n4 шт.\nМасляний крем\nВершкове масло\nЖирністю від 82%; м’яке, але не розтоплене.\n200 г\nЦукор\n70 г\n3,5 ст. л.\nЯйця\n2 шт.\nВанільний цукор\n10 г\nМолоко\n100 мл\nПриготування\nГотувати покроково\n\nОдин крок на екрані, інгредієнти й таймери під рукою.\n\n01\nПросійте сухі інгредієнти\n\nПросійте в невелику миску борошняну суміш Schär Mix B Bread, цукрову пудру й сіль.\n\n02\nРозтопіть масло у воді\n\nПОРАДАСпочатку нагрівайте повільно, щоб масло встигло розтанути до помітного випаровування води.\n\nПокладіть воду й масло в невелику каструлю. Нагрівайте на слабкому вогні, доки масло не розтане, а потім доведіть суміш до кипіння.\n\n03\nЗаваріть основу\n\nПОРАДАПеред додаванням яєць дайте основі трохи охолонути, щоб яйця не згорнулися.\n\nОдразу всипте всю суху суміш і зніміть каструлю з вогню. Енергійно вимішуйте лопаткою, доки тісто не збереться докупи й не відійде від стінок. Ненадовго поверніть на слабкий вогонь, а потім відставте на кілька хвилин, продовжуючи перемішувати й випускаючи гарячу пару.\n\n04\nПоступово введіть яйця\n\nПОРАДАУ перевіреній випічці ідеально підійшли 4 маленькі яйця. Перед останньою порцією обов’язково перевірте консистенцію.\n\nДодавайте злегка збиті яйця невеликими порціями, щоразу ретельно вимішуючи, доки тісто не стане м’яким, гладким і блискучим.\n\nОРІЄНТИРТісто блискуче, тримає форму й повільно спадає з лопатки важкою стрічкою.\n\n05\nВідсадіть заготовки\n\nПерекладіть тісто в кондитерський мішок із насадкою приблизно 1,5 см. Відсадіть на деко кульки розміром із волоський горіх, залишаючи між ними місце.\n\nОРІЄНТИРЗаготовки тримають форму й не розпливаються пласкими калюжами.\n\n200°C · 10 ХВ, ПОТІМ 180°C · 15 ХВ\n\n06\nВипечіть до золотистого кольору\n\nНе відкривайте духовку між етапами й випікайте, доки оболонки добре не піднімуться та не стануть золотистими.\n\nОРІЄНТИРОболонки добре піднялися, стали золотистими й міцними, а не блідими чи м’якими.\n\n07\nВипустіть пару й досушіть\n\nВийміть деко й зробіть невеликий отвір у дні кожної оболонки. Поверніть їх у духовку ще на кілька хвилин, щоб середина підсохла, а потім повністю остудіть.\n\nОРІЄНТИРОхололі оболонки легкі, сухі й порожнисті та не осідають.\n\n08\nЗаваріть яєчно-молочну основу\n\nПОРАДАПроводьте вінчиком по дну та кутах, щоб яйця не схопилися окремими шматочками.\n\nЗмішайте в сотейнику молоко, яйця, звичайний і ванільний цукор. Нагрівайте, постійно працюючи вінчиком. Коли маса почне булькати, зменште вогонь і варіть до загустіння.\n\nОРІЄНТИРОснова гладка й достатньо густа, щоб слід від вінчика ненадовго залишався видимим.\n\n09\nОхолодіть основу\n\nПерекладіть заварену основу в чисту миску, накрийте поверхню в контакт і повністю охолодіть до кімнатної температури.\n\nОРІЄНТИРОснова густа й не тепліша за розм’якшене масло.\n\n10\nЗбийте масло\n\nПОРАДАОдин-два рази зберіть масло зі стінок миски, щоб воно збивалося рівномірно.\nЯкщо ви забули дістати масло заздалегідь, скористайтеся швидким способом розм’якшення. Як розм’якшити масло\n\nЗбивайте м’яке масло, доки воно не посвітлішає, не стане гладким і помітно пишнішим.\n\n11\nПоступово додайте заварену основу\n\nНе припиняючи збивати, додавайте охолоджену основу до масла по одній ложці. Збивайте, доки крем не стане густим, гладким і блискучим.\n\nОРІЄНТИРКрем однорідний і блискучий та тримає чіткий слід від вінчика.\n\n12\nНаповніть охололі оболонки\n\nПерекладіть приготований крем у кондитерський мішок і наповніть повністю охололі оболонки через отвори внизу.\n\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "buttons": [
+      {
+        "text": "Укр",
+        "label": "Змінити мову",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Зберегти рецепт: Профітролі",
+        "disabled": false
+      },
+      {
+        "text": "Змінити крем",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Змінити кількість",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Використати наявне",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "0,5×",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "1×",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "1,5×",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "2×",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "До списку покупок…",
+        "label": null,
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "BODY",
+      "text": "Перейти до вмістуBake Again.РецептиЗбереженіСписок покупокПро насУкрРе"
+    }
+  },
+  {
+    "name": "cream-keyboard-next-tab",
+    "url": "http://localhost:3001/uk/recipes/bezghliutenovi-profitroli?cream=vanilla-buttercream#cream-options",
+    "text": "Перейти до вмісту\nBake Again\n.\nРецепти\nЗбережені\nСписок покупок\nПро нас\nУкр\nРецепти\n\nЗАВАРНЕ ТІСТО / ДЕСЕРТ\n\nБезглютенові\nпрофітролі\n\nПорожнисті заварні тістечка з тонкою золотистою оболонкою й ніжною начинкою.\n\nЗапропоновано\n\nПоєднання з вибраним кремом пропонується до випробування; успішне приготування саме цієї версії не підтверджено. Основа: Перевірено. Крем: Перевірено.\n\nАКТИВНИЙ ЧАС\n15 хв\nВИХІД\nБлизько 20 профітролів розміром із волоський горіх\nСКЛАДНІСТЬ\nСередня\nБОРОШНО\nSchär Mix B Bread\nДо інгредієнтів\nДо кроків\n\nВИБРАНИЙ КРЕМ\n\nВанільний масляний крем\nПереглянути рецепт крему\nЗмінити крем\n\nПЕРЕД ПОЧАТКОМ\n\nСплануйте заздалегідь.\nЗверніть увагу\n\nЗаздалегідь приготуйте вибраний крем і повністю охолодіть його. Наповнюйте лише повністю охололі оболонки.\n\nЗверніть увагу\n\nЯкщо ви забули дістати масло заздалегідь, скористайтеся швидким способом розм’якшення. Як розм’якшити масло\n\nКількість\n\nБазовий рецепт: Борошняна суміш Schär Mix B Bread — 110 г · Близько 20 профітролів розміром із волоський горіх\n\nПрофітролі розміром із волоський горіх\n\nЗмінити кількість\nВикористати наявне\nМАСШТАБ РЕЦЕПТА\n0,5×\n1×\n1,5×\n2×\nІнгредієнти\nДо списку покупок…\nЗаварне тісто\nБорошняна суміш Schär Mix B Bread\nСаме цю суміш використано в успішній випічці.\n110 г\n5,5 ст. л.\nЦукрова пудра\n2,35 г\n1 ч. л.\nСіль\n1 дрібка\nВода\n130 мл\nНесолоне вершкове масло\nОхолоджене й нарізане кубиками.\n70 г\nМаленькі яйця\nЗлегка збийте. У перевіреній версії використано 4 маленькі яйця.\n4 шт.\nМасляний крем\nВершкове масло\nЖирністю від 82%; м’яке, але не розтоплене.\n200 г\nЦукор\n70 г\n3,5 ст. л.\nЯйця\n2 шт.\nВанільний цукор\n10 г\nМолоко\n100 мл\nПриготування\nГотувати покроково\n\nОдин крок на екрані, інгредієнти й таймери під рукою.\n\n01\nПросійте сухі інгредієнти\n\nПросійте в невелику миску борошняну суміш Schär Mix B Bread, цукрову пудру й сіль.\n\n02\nРозтопіть масло у воді\n\nПОРАДАСпочатку нагрівайте повільно, щоб масло встигло розтанути до помітного випаровування води.\n\nПокладіть воду й масло в невелику каструлю. Нагрівайте на слабкому вогні, доки масло не розтане, а потім доведіть суміш до кипіння.\n\n03\nЗаваріть основу\n\nПОРАДАПеред додаванням яєць дайте основі трохи охолонути, щоб яйця не згорнулися.\n\nОдразу всипте всю суху суміш і зніміть каструлю з вогню. Енергійно вимішуйте лопаткою, доки тісто не збереться докупи й не відійде від стінок. Ненадовго поверніть на слабкий вогонь, а потім відставте на кілька хвилин, продовжуючи перемішувати й випускаючи гарячу пару.\n\n04\nПоступово введіть яйця\n\nПОРАДАУ перевіреній випічці ідеально підійшли 4 маленькі яйця. Перед останньою порцією обов’язково перевірте консистенцію.\n\nДодавайте злегка збиті яйця невеликими порціями, щоразу ретельно вимішуючи, доки тісто не стане м’яким, гладким і блискучим.\n\nОРІЄНТИРТісто блискуче, тримає форму й повільно спадає з лопатки важкою стрічкою.\n\n05\nВідсадіть заготовки\n\nПерекладіть тісто в кондитерський мішок із насадкою приблизно 1,5 см. Відсадіть на деко кульки розміром із волоський горіх, залишаючи між ними місце.\n\nОРІЄНТИРЗаготовки тримають форму й не розпливаються пласкими калюжами.\n\n200°C · 10 ХВ, ПОТІМ 180°C · 15 ХВ\n\n06\nВипечіть до золотистого кольору\n\nНе відкривайте духовку між етапами й випікайте, доки оболонки добре не піднімуться та не стануть золотистими.\n\nОРІЄНТИРОболонки добре піднялися, стали золотистими й міцними, а не блідими чи м’якими.\n\n07\nВипустіть пару й досушіть\n\nВийміть деко й зробіть невеликий отвір у дні кожної оболонки. Поверніть їх у духовку ще на кілька хвилин, щоб середина підсохла, а потім повністю остудіть.\n\nОРІЄНТИРОхололі оболонки легкі, сухі й порожнисті та не осідають.\n\n08\nЗаваріть яєчно-молочну основу\n\nПОРАДАПроводьте вінчиком по дну та кутах, щоб яйця не схопилися окремими шматочками.\n\nЗмішайте в сотейнику молоко, яйця, звичайний і ванільний цукор. Нагрівайте, постійно працюючи вінчиком. Коли маса почне булькати, зменште вогонь і варіть до загустіння.\n\nОРІЄНТИРОснова гладка й достатньо густа, щоб слід від вінчика ненадовго залишався видимим.\n\n09\nОхолодіть основу\n\nПерекладіть заварену основу в чисту миску, накрийте поверхню в контакт і повністю охолодіть до кімнатної температури.\n\nОРІЄНТИРОснова густа й не тепліша за розм’якшене масло.\n\n10\nЗбийте масло\n\nПОРАДАОдин-два рази зберіть масло зі стінок миски, щоб воно збивалося рівномірно.\nЯкщо ви забули дістати масло заздалегідь, скористайтеся швидким способом розм’якшення. Як розм’якшити масло\n\nЗбивайте м’яке масло, доки воно не посвітлішає, не стане гладким і помітно пишнішим.\n\n11\nПоступово додайте заварену основу\n\nНе припиняючи збивати, додавайте охолоджену основу до масла по одній ложці. Збивайте, доки крем не стане густим, гладким і блискучим.\n\nОРІЄНТИРКрем однорідний і блискучий та тримає чіткий слід від вінчика.\n\n12\nНаповніть охололі оболонки\n\nПерекладіть приготований крем у кондитерський мішок і наповніть повністю охололі оболонки через отвори внизу.\n\nBake Again\n.\nПро нас\nПриватність і ваші збереження",
+    "buttons": [
+      {
+        "text": "Укр",
+        "label": "Змінити мову",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "label": "Зберегти рецепт: Профітролі",
+        "disabled": false
+      },
+      {
+        "text": "Змінити крем",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Змінити кількість",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Використати наявне",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "0,5×",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "1×",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "1,5×",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "2×",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "До списку покупок…",
+        "label": null,
+        "disabled": false
+      }
+    ],
+    "focus": {
+      "tag": "A",
+      "text": "Переглянути рецепт крему"
+    }
+  }
+]

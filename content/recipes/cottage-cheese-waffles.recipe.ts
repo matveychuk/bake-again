@@ -20,7 +20,7 @@ const stepCopy = {
       'Bake the waffles',
     ],
     instructions: [
-      'Blend the cottage cheese, eggs and yogurt until smooth, with no noticeable lumps.',
+      'Blend the tvorog, eggs and yoghurt until smooth, with no noticeable lumps.',
       'Mix in the neutral oil or melted butter, sugar, salt and vanilla.',
       'In a separate bowl, mix the flour, corn starch and baking powder. Add to the base and stir until no dry flour remains.',
       'Leave to rest for 7–10 minutes.',
@@ -28,9 +28,9 @@ const stepCopy = {
     ],
     alts: {
       ingredients:
-        'Cottage cheese, eggs and natural yogurt together in a white bowl before blending',
+        'Tvorog curd cheese, eggs and natural yoghurt together in a white bowl before blending',
       blended:
-        'Smooth cottage-cheese, egg and yogurt base with an immersion blender in the bowl',
+        'Smooth cottage-cheese, egg and yoghurt base with an immersion blender in the bowl',
       flour: 'Gluten-free flour added to the wet waffle base before mixing',
       batter: 'Thick, smooth waffle batter lifted on a spoon above the bowl',
       filling:
@@ -49,7 +49,7 @@ const stepCopy = {
       'Спечіть вафлі',
     ],
     instructions: [
-      'Збийте блендером творог, яйця та йогурт до гладкої маси без помітних грудочок.',
+      'Збийте блендером кисломолочний сир, яйця та йогурт до гладкої маси без помітних грудочок.',
       'Вмішайте олію без запаху або розтоплене вершкове масло, цукор, сіль і ваніль.',
       'В окремій мисці змішайте борошно, крохмаль і розпушувач. Додайте до основи й перемішайте, щоб не залишилося сухого борошна.',
       'Залиште на 7–10 хвилин.',
@@ -57,16 +57,16 @@ const stepCopy = {
     ],
     alts: {
       ingredients:
-        'Творог, яйця та натуральний йогурт у білій мисці перед збиванням',
+        'Кисломолочний сир, яйця та натуральний йогурт у білій мисці перед збиванням',
       blended:
-        'Гладка основа з творогу, яєць і йогурту із занурювальним блендером у мисці',
+        'Гладка основа з кисломолочного сиру, яєць і йогурту із занурювальним блендером у мисці',
       flour:
         'Безглютенове борошно, додане до вологої основи для вафель перед перемішуванням',
       batter: 'Густе гладке тісто для вафель на ложці над мискою',
       filling:
         'Тісто для вафель з ягодами викладають ложкою в розігріту вафельницю',
-      baked: 'Дві золотисті творожні вафлі з ягодами у відкритій вафельниці',
-      served: 'Золотисті творожні вафлі з ягодами на світло-зеленій тарілці',
+      baked: 'Дві золотисті сирні вафлі з ягодами у відкритій вафельниці',
+      served: 'Золотисті сирні вафлі з ягодами на світло-зеленій тарілці',
     },
   },
   es: {
@@ -78,7 +78,7 @@ const stepCopy = {
       'Hornea los gofres',
     ],
     instructions: [
-      'Tritura el requesón, los huevos y el yogur hasta obtener una mezcla lisa, sin grumos perceptibles.',
+      'Tritura el tvorog, los huevos y el yogur hasta obtener una mezcla lisa, sin grumos perceptibles.',
       'Incorpora el aceite neutro o la mantequilla derretida, el azúcar, la sal y la vainilla.',
       'En otro bol, mezcla la harina, el almidón de maíz y la levadura química. Incorpóralos a la base y remueve hasta que no quede harina seca.',
       'Deja reposar durante 7–10 minutos.',
@@ -86,9 +86,9 @@ const stepCopy = {
     ],
     alts: {
       ingredients:
-        'Requesón, huevos y yogur natural juntos en un bol blanco antes de triturarlos',
+        'Tvorog, huevos y yogur natural juntos en un bol blanco antes de triturarlos',
       blended:
-        'Base lisa de requesón, huevos y yogur con una batidora de mano dentro del bol',
+        'Base lisa de tvorog, huevos y yogur con una batidora de mano dentro del bol',
       flour:
         'Harina sin gluten añadida a la base húmeda de los gofres antes de mezclar',
       batter:
@@ -96,9 +96,9 @@ const stepCopy = {
       filling:
         'Masa para gofres con frutos rojos colocada con una cuchara en la gofrera caliente',
       baked:
-        'Dos gofres dorados de requesón con frutos rojos en una gofrera abierta',
+        'Dos gofres dorados de tvorog con frutos rojos en una gofrera abierta',
       served:
-        'Gofres dorados de requesón con frutos rojos en un plato verde claro',
+        'Gofres dorados de tvorog con frutos rojos en un plato verde claro',
     },
   },
 } as const;
@@ -200,10 +200,11 @@ function stepsForLocale(locale: RecipeLocale): StructuredRecipeStep[] {
 
 export const cottageCheeseWafflesRecipe = {
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   id: 'cottage-cheese-waffles',
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',
-    locator: 'Recipe Archive · Творожні вафлі',
+    locator: 'Recipe Archive · Сирні вафлі',
   },
   completeness: 'readyToReview',
   presentation: 'concise',
@@ -243,7 +244,7 @@ export const cottageCheeseWafflesRecipe = {
       ingredients: [
         {
           id: 'cottage-cheese',
-          name: 'Cottage cheese',
+          name: 'Tvorog (curd cheese)',
           quantity: {
             base: { kind: 'exact', value: 200, unit: 'g' },
             shopping: { mode: 'base' },
@@ -259,7 +260,7 @@ export const cottageCheeseWafflesRecipe = {
         },
         {
           id: 'yogurt',
-          name: 'Natural yogurt',
+          name: 'Natural yoghurt',
           quantity: {
             base: { kind: 'exact', value: 100, unit: 'ml' },
             shopping: { mode: 'base' },
@@ -349,7 +350,7 @@ export const cottageCheeseWafflesRecipe = {
           ingredients: [
             {
               id: 'cottage-cheese',
-              name: 'Творог',
+              name: 'Кисломолочний сир',
               quantity: translatedQuantity,
             },
             { id: 'eggs', name: 'Яйця', quantity: translatedQuantity },
@@ -422,7 +423,7 @@ export const cottageCheeseWafflesRecipe = {
           ingredients: [
             {
               id: 'cottage-cheese',
-              name: 'Requesón',
+              name: 'Tvorog (queso fresco de leche fermentada)',
               quantity: translatedQuantity,
             },
             { id: 'eggs', name: 'Huevos', quantity: translatedQuantity },

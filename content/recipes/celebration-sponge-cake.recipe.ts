@@ -21,7 +21,7 @@ const copy = {
     eggs: 'Яйця',
     salt: 'Сіль',
     vanilla: 'Ваніль',
-    taste: 'За смаком; авторка не зазначила точної кількості.',
+    taste: 'Додайте до смаку.',
     buttercream: 'Масляний крем',
     buttercreamNames: [
       'Вершкове масло',
@@ -69,7 +69,7 @@ const copy = {
     cutAlt:
       'Приклад розрізу: три бісквітні коржі, два сметанні прошарки й шоколадна глазур',
     authorAlt:
-      'Авторський торт із шоколадною глазур’ю, полуницею, лохиною, виноградом і кремовими квіточками',
+      'Торт із шоколадною глазур’ю, полуницею, лохиною, виноградом і кремовими квіточками',
   },
   en: {
     yield: '1 tall cake · 24 cm',
@@ -82,11 +82,11 @@ const copy = {
     eggs: 'Eggs',
     salt: 'Salt',
     vanilla: 'Vanilla',
-    taste: 'To taste; the author did not specify an amount.',
+    taste: 'To taste.',
     buttercream: 'Buttercream',
     buttercreamNames: [
       'Butter',
-      'Powdered sugar',
+      'Icing sugar',
       'Cream cheese',
       'Lemon juice',
       'Food colouring',
@@ -101,7 +101,7 @@ const copy = {
     buttercreamTitle:
       'Make the buttercream for the sides and, optionally, flowers on top',
     buttercreamBody:
-      'Beat the soft butter until pale and fluffy. Add the powdered sugar in batches, then gradually beat in the lemon juice. Optionally add cream cheese for a lighter consistency and 1 drop of food colouring.',
+      'Beat the soft butter until pale and fluffy. Add the icing sugar in batches, then gradually beat in the lemon juice. Optionally add cream cheese for a lighter consistency and 1 drop of food colouring.',
     buttercreamCue: 'The buttercream is smooth, fluffy and holds a piped ridge.',
     fruit: 'Fruit or berries',
     soak: 'Apple juice or sweet tea',
@@ -128,7 +128,7 @@ const copy = {
     cutAlt:
       'Illustrative cut cake with three sponge layers, two sour cream fillings and chocolate glaze',
     authorAlt:
-      'The author’s cake with chocolate glaze, strawberries, blueberries, grapes and piped flowers',
+      'Cake with chocolate glaze, strawberries, blueberries, grapes and piped flowers',
   },
   es: {
     yield: '1 tarta alta · 24 cm',
@@ -141,7 +141,7 @@ const copy = {
     eggs: 'Huevos',
     salt: 'Sal',
     vanilla: 'Vainilla',
-    taste: 'Al gusto; la autora no indicó una cantidad.',
+    taste: 'Al gusto.',
     buttercream: 'Crema de mantequilla',
     buttercreamNames: [
       'Mantequilla',
@@ -189,7 +189,7 @@ const copy = {
     cutAlt:
       'Ejemplo de corte con tres capas de bizcocho, dos rellenos de nata agria y glaseado de chocolate',
     authorAlt:
-      'Tarta de la autora con chocolate, fresas, arándanos, uvas y flores de crema',
+      'Tarta con chocolate, fresas, arándanos, uvas y flores de crema',
   },
 } as const;
 
@@ -464,6 +464,7 @@ export function celebrationSpongeCakeContent(
 export const celebrationSpongeCakeRecipe = {
   id: 'celebration-sponge-cake',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'docs/content-model/celebration-cake-author-notes.md',
     locator:

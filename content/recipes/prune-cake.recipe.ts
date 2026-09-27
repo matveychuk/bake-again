@@ -39,7 +39,7 @@ function ingredientSections(locale: Locale): StructuredIngredientSection[] {
           id: 'greek-yogurt',
           name: text(
             locale,
-            'Thick Greek yogurt',
+            'Thick Greek yoghurt',
             'Yogur griego espeso',
             'Густий грецький йогурт',
           ),
@@ -110,7 +110,7 @@ function ingredientSections(locale: Locale): StructuredIngredientSection[] {
           id: 'cream-base',
           name: text(
             locale,
-            'Sour cream and Greek yogurt',
+            'Sour cream and Greek yoghurt',
             'Nata agria y yogur griego',
             'Сметана та грецький йогурт',
           ),
@@ -240,7 +240,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
         'Додайте йогурт, олію та згущене молоко',
       ),
       body: t(
-        'Mix the yogurt, oil and condensed milk separately. Stir a little egg mixture into them, then gently fold this back into the remaining eggs with a spatula.',
+        'Mix the yoghurt, oil and condensed milk separately. Stir a little egg mixture into them, then gently fold this back into the remaining eggs with a spatula.',
         'Mezcla aparte el yogur, el aceite y la leche condensada. Añade un poco de huevo batido y después incorpora todo al resto del huevo con una espátula y movimientos envolventes.',
         'Окремо змішайте йогурт, олію та згущене молоко. Вмішайте трохи яєчної маси, потім обережно з’єднайте з рештою збитих яєць лопаткою.',
       ),
@@ -356,7 +356,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
         'Приготуйте крем і чорнослив',
       ),
       body: t(
-        'Mix the sour cream and Greek yogurt with the sugar and lemon juice until smooth and the sugar has dissolved. Chop the prunes, reserve a little for decoration and fold the rest into the cream. Keep chilled until assembly.',
+        'Mix the sour cream and Greek yoghurt with the sugar and lemon juice until smooth and the sugar has dissolved. Chop the prunes, reserve a little for decoration and fold the rest into the cream. Keep chilled until assembly.',
         'Mezcla la nata agria y el yogur griego con el azúcar y el zumo de limón hasta que quede homogéneo y se disuelva el azúcar. Pica las ciruelas pasas, reserva unas pocas para decorar e incorpora el resto a la crema. Guarda en la nevera hasta montar.',
         'Змішайте сметану та грецький йогурт із цукром і лимонним соком до однорідності й розчинення цукру. Наріжте чорнослив, трохи відкладіть для декору, решту вмішайте в крем. До складання тримайте в холодильнику.',
       ),
@@ -494,15 +494,15 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
     beforeStart: [
       text(
         locale,
-        'Use thick yogurt and sour cream without separated whey.',
+        'Use thick yoghurt and sour cream without separated whey.',
         'Usa yogur y nata agria espesos, sin suero separado.',
         'Йогурт і сметану беріть густі, без відділеної сироватки.',
       ),
       text(
         locale,
-        'The 700 g cream base is sour cream and Greek yogurt combined, not 700 g of each.',
-        'Los 700 g de la base de crema son de nata agria y yogur juntos, no 700 g de cada uno.',
-        'Для крему потрібно 700 г сметани та йогурту разом, а не по 700 г кожного.',
+        'Use the listed cream-base weight for sour cream and Greek yoghurt combined, not that weight of each.',
+        'El peso indicado para la base de crema es el de la nata agria y el yogur juntos, no el de cada uno.',
+        'Зазначена маса основи крему — це сметана та йогурт разом, а не така маса кожного продукту.',
       ),
     ],
     timing: {
@@ -550,6 +550,7 @@ function recipeContent(locale: Locale): RecipeSourceDraftContent {
 export const pruneCakeRecipe = {
   id: 'prune-cake',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'docs/content-model/prune-cake-author-notes.md',
     locator:

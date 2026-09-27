@@ -145,6 +145,7 @@ export function chocolateGlazeContent(
 export const chocolateGlazeRecipe = {
   id: 'chocolate-glaze',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'content/recipes/prune-cake.recipe.ts',
     locator:

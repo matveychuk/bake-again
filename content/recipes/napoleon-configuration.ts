@@ -1,5 +1,7 @@
 import { calculateRecipeConfiguration } from './calculate-configuration.ts';
 import { glutenFreeNapoleonRecipe } from './gluten-free-napoleon.recipe.ts';
+import type { AppLocale } from '../../lib/i18n/config.ts';
+import { getUiMessages } from '../../lib/i18n/messages.ts';
 import type {
   BatchScaleFactor,
   CalculatedRecipeConfiguration,
@@ -78,6 +80,48 @@ export function parseNapoleonConfiguration(
     geometryId: supportedGeometry,
     quantityAdjustment: { mode: 'batchScale', factor },
   };
+}
+
+/** Resolve the requested Cook version without substituting a different recipe. */
+export function resolveNapoleonCookConfiguration(
+  search: string,
+  locale: AppLocale,
+) {
+  const params = new URLSearchParams(search);
+  const messages = getUiMessages(locale);
+  if (params.get('mode') === 'ingredient') {
+    const amount = Number(params.get('amount'));
+    if (!Number.isFinite(amount) || amount <= 0) {
+      return { kind: 'blocked', reason: messages.scaling.positiveAmount } as const;
+    }
+    if (
+      amount < 100 ||
+      (params.has('ingredient') && params.get('ingredient') !== 'schar-mix-b') ||
+      (params.has('unit') && params.get('unit') !== 'g')
+    ) {
+      return { kind: 'blocked', reason: messages.scaling.supportedAmount } as const;
+    }
+  }
+  const selection = parseNapoleonConfiguration(params);
+  const configuration = calculateNapoleonConfiguration(selection);
+  if (!configuration.cookMode.eligible) {
+    return {
+      kind: 'blocked',
+      reason: configuration.warnings.some(
+        (warning) => warning.code === 'fractional-discrete-ingredient',
+      )
+        ? messages.cook.fractionalIngredients
+        : messages.cook.unsupportedConfiguration,
+    } as const;
+  }
+  return {
+    kind: 'ready',
+    selection,
+    configuration,
+    isAdjusted:
+      selection.geometryId !== napoleonBaseSelection.geometryId ||
+      Math.abs(configuration.totalScaleFactor - 1) > 0.000001,
+  } as const;
 }
 
 export function formatQuantity(amount: Quantity | null) {

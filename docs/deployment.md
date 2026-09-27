@@ -18,8 +18,10 @@ Site automatically.
 `pull-request.yml` runs on PRs targeting `main`, with read-only repository permission
 and no OpenAI secret context. In order it runs locked installation, typecheck, lint,
 foundation tests, no-live-API assistant tests, the critical eval gate, recipe
-validation and the production build. The workflow uploads no artifacts and configures
-no cache.
+validation and the production build. It then starts that build locally and runs
+`npm run test:release-render` against the rendered recipe and Cook Mode HTML. The
+manual release gate runs the same check. Neither check publishes a site. The workflow
+uploads no artifacts and configures no cache.
 
 `npm run build` first runs `media:prepare`. Source-quality PNG/JPEG files remain under
 `media/web-source/`; the generated `public/` tree contains referenced WebP assets and

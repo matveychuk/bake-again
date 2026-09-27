@@ -2,14 +2,10 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { CookModePage } from '@/components/cook-mode/cook-mode-page';
 import { getCookModeDefinition } from '@/content/recipes/cook-mode-registry';
-import { personalStateRecipes } from '@/content/recipes/registry';
-import { isAppLocale, localeMetadata } from '@/lib/i18n/config';
+import { isAppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
-import {
-  getPreviewRobots,
-  getPublishableRecipeLocales,
-  isRecipeLocalePublishable,
-} from '@/lib/i18n/publication';
+import { recipeIdForSlug, recipePresentation } from '@/lib/seo/recipes';
+import { absoluteUrl } from '@/lib/seo/site';
 import {
   getLegacySlugForRecipeId,
   getLocalizedRecipePath,
@@ -19,6 +15,7 @@ import {
 
 type LocalizedCookRouteProps = {
   params: Promise<{ locale: string; slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({
@@ -27,48 +24,41 @@ export async function generateMetadata({
   const { locale: localeParam, slug } = await params;
   if (!isAppLocale(localeParam)) return {};
 
-  const recipeId = getRecipeIdFromLocalizedSlug(localeParam, slug);
-  const recipe = personalStateRecipes.find(
-    (candidate) => candidate.id === recipeId,
-  );
-  if (!recipe) return { robots: { index: false, follow: false } };
-
-  const isPublishable = isRecipeLocalePublishable(recipe, localeParam);
-  const metadata = getUiMessages(localeParam).metadata.cook(
-    recipe.title[localeParam],
-  );
+  const recipeId = recipeIdForSlug(localeParam, slug);
+  const page = recipeId ? recipePresentation(recipeId, localeParam) : null;
   return {
-    ...metadata,
-    robots: getPreviewRobots(isPublishable),
-    ...(isPublishable && {
-      alternates: {
-        canonical: getLocalizedRecipePath(recipe.id, localeParam, '/cook')!,
-        languages: Object.fromEntries(
-          getPublishableRecipeLocales(recipe).map((locale) => [
-            localeMetadata[locale].bcp47,
-            getLocalizedRecipePath(recipe.id, locale, '/cook')!,
-          ]),
-        ),
-      },
-    }),
+    ...(page && getUiMessages(localeParam).metadata.cook(page.title)),
+    robots: { index: false, follow: true },
+    ...(page && { alternates: { canonical: absoluteUrl(page.path) } }),
   };
 }
 
 export default async function LocalizedRecipeCookModeRoute({
   params,
+  searchParams,
 }: LocalizedCookRouteProps) {
   const { locale, slug } = await params;
   if (!isAppLocale(locale)) notFound();
 
   const recipeId = getRecipeIdFromLocalizedSlug(locale, slug);
   const legacySlug = recipeId
-    ? (getLegacySlugForRecipeId(recipeId) ?? slug)
+    ? (getLegacySlugForRecipeId(recipeId) ?? recipeId)
     : slug;
   const definition = getCookModeDefinition(legacySlug, locale);
   if (!definition) notFound();
   const detailHref = recipeId
     ? getLocalizedRecipePath(recipeId, locale)!
     : `/${locale}/recipes/${slug}`;
+  const requestedSearchParams = await searchParams;
+  const configurationSearch = new URLSearchParams(
+    Object.entries(requestedSearchParams).flatMap(([key, value]) =>
+      value === undefined
+        ? []
+        : (Array.isArray(value) ? value : [value]).map(
+            (item) => [key, item] as [string, string],
+          ),
+    ),
+  ).toString();
 
   return (
     <CookModePage
@@ -76,6 +66,7 @@ export default async function LocalizedRecipeCookModeRoute({
       detailHref={detailHref}
       homeHref={localeHomePath(locale)}
       locale={locale}
+      configurationSearch={configurationSearch}
     />
   );
 }

@@ -176,6 +176,10 @@ function steps(locale: Locale): StructuredRecipeStep[] {
     },
     {
       id: 'whip-eggs',
+      quantityMentions: [{
+        text: text(locale, '2 tablespoons', '2 cucharadas', '2 столовими ложками'),
+        quantity: { kind: 'exact', value: 2, unit: 'tbsp' },
+      }],
       title: text(
         locale,
         'Whip the whites and yolks separately',
@@ -244,6 +248,10 @@ function steps(locale: Locale): StructuredRecipeStep[] {
     },
     {
       id: 'fold-butter',
+      quantityMentions: [{
+        text: text(locale, '50 g', '50 g', '50 г'),
+        quantity: quantities.butter.base,
+      }],
       title: text(
         locale,
         'Fold in the butter',
@@ -390,6 +398,7 @@ function contentForLocale(locale: Locale): RecipeSourceDraftContent {
 export const plumCakeRecipe = {
   id: 'plum-cake',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'media/recipes/plum-cake/REVISION-2026-09-25.md',
     locator:

@@ -1,5 +1,18 @@
 # Design system changelog
 
+## 2026-09-26 · Impersonal multilingual recipe copy and metadata
+
+- Standardized reader-facing UK/EN/ES copy and food descriptions; removed public
+  image-origin overlays while retaining internal source and media provenance.
+- Added five missing Spanish recipe versions and synchronized carrot-cake steps
+  with the Ukrainian source. Recipe quantities and evidence status are unchanged.
+- Kept unavailable Cook Mode guidance accurate for missing cream selections and
+  used localized editorial gaps instead of legacy source-record notes.
+- Documented the image-caption rule and updated the Design Lab video example.
+- Added localized SEO fields, canonical/hreflang, Recipe JSON-LD and sitemap/robots.
+  Adjusted configurations and personal workflow pages do not become search recipes.
+- Checked layouts at 390, 900 and 1440 px across the three languages.
+
 ## 2026-09-26 · Localized recipe discovery order
 
 - Applied the approved 15-recipe editorial order separately for Ukrainian, Spanish
@@ -691,3 +704,25 @@
 
 - Renamed the bake-memory eyebrow to “Your recipe note” and updated its Ukrainian
   and Spanish translations. The Design Lab example now uses the same wording.
+
+## 2026-09-27 — release audit fixes
+
+- Keep evidence specific to optional recipe + cream combinations, including scaled
+  versions, and expose the localized badge in Cook Mode.
+- Share canonical localized method content and explicit quantity scaling with Cook Mode.
+- Add localized 404 recovery using existing page and button patterns.
+- Let mobile Cook navigation allocate natural widths and wrap actions at enlarged text;
+  reserve proportional bottom space and keep header evidence readable.
+- Add all-language release state examples to Design Lab; preserve existing tokens.
+
+
+## 2026-09-27 — re-audit follow-up (D01, R01, R02)
+
+- Render configured method steps on recipe detail, matching the ingredients and Cook Mode.
+- Block unresolved Napoleon quantities/geometry with a localized explanation, preserving
+  the requested URL instead of silently starting a Tested base configuration.
+- Render the requested Cook configuration from the initial HTML, before hydration.
+- Make prune-cream and apple-fritter notes valid at every scale without changing base
+  quantities, ratios, IDs or stored data. Clarify the cream-selector documentation.
+- Add the multilingual scaling-consistency Design Lab example and production-render
+  regression checks to both the pull-request workflow and manual release gate.

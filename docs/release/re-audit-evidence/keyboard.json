@@ -1,0 +1,725 @@
+[
+  {
+    "locale": "uk",
+    "width": 390,
+    "skip": {
+      "text": "Перейти до вмісту",
+      "outline": "3px"
+    },
+    "skipTarget": "recipe-content",
+    "languageFocus": "Español",
+    "languageReturned": true,
+    "dialogFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "shoppingReturned": true,
+    "cookFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cookReturned": true,
+    "step2": [
+      "Додайте молоко й залиште тісто"
+    ],
+    "nav": {
+      "height": 72,
+      "buttons": [
+        {
+          "text": "Назад",
+          "width": 142.265625,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        },
+        {
+          "text": "Готово, далі",
+          "width": 207.734375,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        }
+      ]
+    },
+    "notFoundStatus": 404,
+    "notFoundText": "Сторінку не знайдено",
+    "notFoundOutline": "3px",
+    "catalogReturned": true,
+    "zoom": {
+      "overflow": false,
+      "bodyWidth": 390
+    }
+  },
+  {
+    "locale": "uk",
+    "width": 900,
+    "skip": {
+      "text": "Перейти до вмісту",
+      "outline": "3px"
+    },
+    "skipTarget": "recipe-content",
+    "languageFocus": "Español",
+    "languageReturned": true,
+    "dialogFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "shoppingReturned": true,
+    "cookFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cookReturned": true,
+    "step2": [
+      "Додайте молоко й залиште тісто"
+    ],
+    "nav": {
+      "height": 72,
+      "buttons": [
+        {
+          "text": "Назад",
+          "width": 397.265625,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        },
+        {
+          "text": "Готово, далі",
+          "width": 462.734375,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        }
+      ]
+    },
+    "notFoundStatus": 404,
+    "notFoundText": "Сторінку не знайдено",
+    "notFoundOutline": "3px",
+    "catalogReturned": true
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "skip": {
+      "text": "Перейти до вмісту",
+      "outline": "3px"
+    },
+    "skipTarget": "recipe-content",
+    "languageFocus": "Укр",
+    "languageReturned": true,
+    "dialogFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "shoppingReturned": true,
+    "cookFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cookReturned": true,
+    "step2": [
+      "Додайте молоко й залиште тісто"
+    ],
+    "nav": {
+      "height": 65,
+      "buttons": [
+        {
+          "text": "Назад",
+          "width": 209.40625,
+          "height": 48,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        },
+        {
+          "text": "Готово, далі",
+          "width": 498.59375,
+          "height": 48,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        }
+      ]
+    },
+    "notFoundStatus": 404,
+    "notFoundText": "Сторінку не знайдено",
+    "notFoundOutline": "3px",
+    "catalogReturned": true
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "skip": {
+      "text": "Skip to content",
+      "outline": "3px"
+    },
+    "skipTarget": "recipe-content",
+    "languageFocus": "EN",
+    "languageReturned": true,
+    "dialogFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "shoppingReturned": true,
+    "cookFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cookReturned": true,
+    "step2": [
+      "Add the milk and rest"
+    ],
+    "nav": {
+      "height": 72,
+      "buttons": [
+        {
+          "text": "Previous",
+          "width": 156.140625,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        },
+        {
+          "text": "Done, next",
+          "width": 193.859375,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        }
+      ]
+    },
+    "notFoundStatus": 404,
+    "notFoundText": "Page not found",
+    "notFoundOutline": "3px",
+    "catalogReturned": true,
+    "zoom": {
+      "overflow": false,
+      "bodyWidth": 390
+    }
+  },
+  {
+    "locale": "en",
+    "width": 900,
+    "skip": {
+      "text": "Skip to content",
+      "outline": "3px"
+    },
+    "skipTarget": "recipe-content",
+    "languageFocus": "English",
+    "languageReturned": true,
+    "dialogFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "shoppingReturned": true,
+    "cookFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cookReturned": true,
+    "step2": [
+      "Add the milk and rest"
+    ],
+    "nav": {
+      "height": 72,
+      "buttons": [
+        {
+          "text": "Previous",
+          "width": 411.140625,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        },
+        {
+          "text": "Done, next",
+          "width": 448.859375,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        }
+      ]
+    },
+    "notFoundStatus": 404,
+    "notFoundText": "Page not found",
+    "notFoundOutline": "3px",
+    "catalogReturned": true
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "skip": {
+      "text": "Skip to content",
+      "outline": "3px"
+    },
+    "skipTarget": "recipe-content",
+    "languageFocus": "Español",
+    "languageReturned": true,
+    "dialogFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "shoppingReturned": true,
+    "cookFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cookReturned": true,
+    "step2": [
+      "Add the milk and rest"
+    ],
+    "nav": {
+      "height": 65,
+      "buttons": [
+        {
+          "text": "Previous",
+          "width": 209.40625,
+          "height": 48,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        },
+        {
+          "text": "Done, next",
+          "width": 498.59375,
+          "height": 48,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        }
+      ]
+    },
+    "notFoundStatus": 404,
+    "notFoundText": "Page not found",
+    "notFoundOutline": "3px",
+    "catalogReturned": true
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "skip": {
+      "text": "Saltar al contenido",
+      "outline": "3px"
+    },
+    "skipTarget": "recipe-content",
+    "languageFocus": "Español",
+    "languageReturned": true,
+    "dialogFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "shoppingReturned": true,
+    "cookFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cookReturned": true,
+    "step2": [
+      "Añade la leche y deja reposar"
+    ],
+    "nav": {
+      "height": 72,
+      "buttons": [
+        {
+          "text": "Anterior",
+          "width": 139.015625,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        },
+        {
+          "text": "Listo, siguiente",
+          "width": 210.984375,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        }
+      ]
+    },
+    "notFoundStatus": 404,
+    "notFoundText": "Página no encontrada",
+    "notFoundOutline": "3px",
+    "catalogReturned": true,
+    "zoom": {
+      "overflow": false,
+      "bodyWidth": 390
+    }
+  },
+  {
+    "locale": "es",
+    "width": 900,
+    "skip": {
+      "text": "Saltar al contenido",
+      "outline": "3px"
+    },
+    "skipTarget": "recipe-content",
+    "languageFocus": "Español",
+    "languageReturned": true,
+    "dialogFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "shoppingReturned": true,
+    "cookFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cookReturned": true,
+    "step2": [
+      "Añade la leche y deja reposar"
+    ],
+    "nav": {
+      "height": 72,
+      "buttons": [
+        {
+          "text": "Anterior",
+          "width": 394.015625,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        },
+        {
+          "text": "Listo, siguiente",
+          "width": 465.984375,
+          "height": 55,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        }
+      ]
+    },
+    "notFoundStatus": 404,
+    "notFoundText": "Página no encontrada",
+    "notFoundOutline": "3px",
+    "catalogReturned": true
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "skip": {
+      "text": "Saltar al contenido",
+      "outline": "3px"
+    },
+    "skipTarget": "recipe-content",
+    "languageFocus": "English",
+    "languageReturned": true,
+    "dialogFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "shoppingReturned": true,
+    "cookFocus": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cookReturned": true,
+    "step2": [
+      "Añade la leche y deja reposar"
+    ],
+    "nav": {
+      "height": 65,
+      "buttons": [
+        {
+          "text": "Anterior",
+          "width": 209.40625,
+          "height": 48,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        },
+        {
+          "text": "Listo, siguiente",
+          "width": 498.59375,
+          "height": 48,
+          "whiteSpace": "normal",
+          "wordBreak": "normal"
+        }
+      ]
+    },
+    "notFoundStatus": 404,
+    "notFoundText": "Página no encontrada",
+    "notFoundOutline": "3px",
+    "catalogReturned": true
+  }
+]

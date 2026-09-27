@@ -289,6 +289,7 @@ function detailedRecipeContent(
       id: step.id,
       title: step.title?.[locale] ?? step.instruction[locale],
       body: step.instruction[locale],
+      quantityMentions: step.quantityMentions?.map(mention => ({ ...mention, text: mention.text[locale] })),
       cookIngredients: step.ingredientLineIds.map((ingredientId) => ({
         ingredientId,
       })),

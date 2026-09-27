@@ -1,3 +1,4 @@
+import { getLocalizedRecipePath } from '../../lib/i18n/routes.ts';
 import { recipeInventory } from './inventory.ts';
 import { catalogLocaleCopy } from './catalog-locales.ts';
 import { catalogOrder } from './catalog-order.ts';
@@ -72,7 +73,7 @@ export function getRecipeCatalog(
         image: recipe.image,
         imageKind: recipe.imageKind,
         alt: copy?.alt[locale] ?? recipe.imageAlt,
-        href: `/recipes/${recipe.slug}`,
+        href: getLocalizedRecipePath(recipe.id, locale)!,
         publicationStatus,
         collections: recipe.collectionIds.map((id) => ({
           id,

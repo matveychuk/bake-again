@@ -54,14 +54,14 @@ void test('concise detailed cookies preserve chilling/baking timers and omit rem
   }
 });
 
-void test('carrot cake preserves locale-specific steps, ingredients and the baking timer', () => {
+void test('carrot cake preserves aligned localized steps, ingredients and the baking timer', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
     const content = getRecipeContent('carrot-cake', locale)!;
     const steps = createSourceCookSteps(content, locale);
     assert.equal(content.evidence?.status, 'tested');
-    assert.equal(steps.length, locale === 'uk' ? 6 : 7);
+    assert.equal(steps.length, 6);
     assert.deepEqual(steps[0].stepIds, [
-      locale === 'uk' ? 'prepare-add-ins' : 'prepare-pan',
+      'prepare-add-ins',
     ]);
     assert.deepEqual(
       steps
@@ -78,15 +78,13 @@ void test('carrot cake preserves locale-specific steps, ingredients and the baki
     const baking = steps.at(-1)!;
     assert.deepEqual(baking.timerOptionsSeconds, [2100, 2400]);
     assert.equal(baking.media?.length, 2);
-    if (locale === 'uk') {
+    {
       assert.match(steps[0].tip ?? '', /200°C/);
       assert.deepEqual(
         baking.ingredients.map((ingredient) => ingredient.id),
         ['pan-butter', 'pan-cinnamon'],
       );
       assert.equal(steps.filter((step) => step.checkpoint).length, 3);
-    } else {
-      assert(steps.every((step) => !step.checkpoint));
     }
   }
 });
@@ -352,7 +350,7 @@ void test('cinnamon-roll Cook Mode keeps baking and finishing as separate steps'
   assert.match(steps[7].instructions[0] ?? '', /Випікайте при 180°C/i);
   assert.equal(steps[7].timerSeconds, 1200);
   assert.equal(steps[7].media?.[0]?.id, 'cinnamon-rolls-lightly-golden-v1');
-  assert.equal(steps[8].title, 'Додайте обраний фініш');
+  assert.equal(steps[8].title, 'Додайте обране покриття');
   assert.equal(steps[8].media?.[0]?.id, 'cinnamon-rolls-cream-cheese-glaze-v1');
   assert.deepEqual(
     steps[8].ingredients.map((ingredient) => ingredient.id),

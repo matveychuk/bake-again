@@ -61,7 +61,7 @@ export const spoonWeightTable = {
     note: 'Author measurement: 10 tbsp = 200 g.',
   },
   'powdered-sugar': {
-    label: 'Powdered sugar, unsifted',
+    label: 'Icing sugar, unsifted',
     preferredUnit: 'tbsp',
     measures: {
       tsp: { grams: 113 / 48, evidence: 'reference' },
@@ -118,7 +118,7 @@ export const spoonWeightTable = {
     note: 'Author measurement: 3 tsp = 15 g.',
   },
   'baking-soda': {
-    label: 'Baking soda',
+    label: 'Bicarbonate of soda',
     preferredUnit: 'tsp',
     measures: {
       tsp: { grams: 6, evidence: 'reference' },

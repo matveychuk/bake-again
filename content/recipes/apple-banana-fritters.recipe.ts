@@ -1,9 +1,12 @@
+import { localizeRecipeContent } from "./localize-content.ts";
+import { apple_banana_frittersEs } from "./translations/apple-banana-fritters.es.ts";
 import type { RecipeSourceDraft } from './source-recipe.types.ts';
 import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 
-export const appleBananaFrittersRecipe = {
+const appleBananaFrittersRecipeBase = {
   id: 'apple-banana-fritters',
   publicationStatus: 'unpublished',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'content/recipes/apple-fritters.recipe.ts',
     locator:
@@ -53,7 +56,7 @@ export const appleBananaFrittersRecipe = {
         },
         {
           id: 'kefir-or-yogurt',
-          name: 'Kefir or natural yogurt',
+          name: 'Kefir or natural yoghurt',
           quantity: {
             base: { kind: 'exact', value: 160, unit: 'g' },
             shopping: { mode: 'base' },
@@ -66,7 +69,7 @@ export const appleBananaFrittersRecipe = {
         },
         {
           id: 'baking-soda',
-          name: 'Baking soda',
+          name: 'Bicarbonate of soda',
           quantity: quantityFromSpoons('baking-soda', 0.5, 'tsp'),
         },
         {
@@ -93,7 +96,7 @@ export const appleBananaFrittersRecipe = {
     {
       id: 'mix-wet',
       title: 'Whisk the wet base',
-      body: 'In a separate bowl, whisk the egg with the kefir or yogurt. Whisk in the mashed banana until evenly combined.',
+      body: 'In a separate bowl, whisk the egg with the kefir or yoghurt. Whisk in the mashed banana until evenly combined.',
       checkpoint:
         'The wet mixture is creamy and evenly flecked with banana, without large lumps.',
       cookIngredients: [
@@ -111,7 +114,7 @@ export const appleBananaFrittersRecipe = {
     {
       id: 'finish-batter',
       title: 'Finish the batter',
-      body: 'Add the Schär Mix B Bread flour and baking soda. Whisk thoroughly until the batter is uniform and as thick as sour cream.',
+      body: 'Add the Schär Mix B Bread flour and bicarbonate of soda. Whisk thoroughly until the batter is uniform and as thick as sour cream.',
       checkpoint:
         'The batter holds a small mound on the spoon, then falls slowly rather than running.',
       tip: 'Because banana moisture varies, do not add extra liquid if the batter is already looser than this cue; record the result for the bake test.',
@@ -151,7 +154,7 @@ export const appleBananaFrittersRecipe = {
     },
   ],
   gapNote:
-    'Bake-test the banana substitution before publication. Record whether 160 g kefir or yogurt still gives the right batter consistency, then record the yield, total cooking time and approximate amount of frying oil.',
+    'Bake-test the banana substitution before publication. Record whether 160 g kefir or yoghurt still gives the right batter consistency, then record the yield, total cooking time and approximate amount of frying oil.',
   translations: {
     uk: {
       completeness: 'readyToReview',
@@ -307,5 +310,13 @@ export const appleBananaFrittersRecipe = {
       gapNote:
         'Перед публікацією перевірте заміну цукру бананом на пательні. Запишіть, чи дають 160 г кефіру або йогурту правильну густоту тіста, а також вихід, загальний час приготування та приблизну кількість олії.',
     },
+  },
+} satisfies RecipeSourceDraft;
+
+export const appleBananaFrittersRecipe = {
+  ...appleBananaFrittersRecipeBase,
+  translations: {
+    ...appleBananaFrittersRecipeBase.translations,
+    es: localizeRecipeContent(appleBananaFrittersRecipeBase.translations.uk, apple_banana_frittersEs),
   },
 } satisfies RecipeSourceDraft;

@@ -3,8 +3,11 @@ import type {
   GeometryApplication,
   GeometryKind,
   IngredientQuantity,
+  Quantity,
   RecipeCreamOptions,
   RecipeDifficulty,
+  RecipeLocale,
+  TranslationState,
   YieldOption,
 } from './recipe.types.ts';
 
@@ -74,6 +77,8 @@ export type StructuredRecipeStep = {
   id: string;
   title: string;
   body: string;
+  /** Explicit ingredient amounts in prose; timings and technique counts are never scaled. */
+  quantityMentions?: Array<{ text: string; quantity: Quantity; numberOnly?: boolean }>;
   meta?: string;
   checkpoint?: string;
   tip?: string;
@@ -135,6 +140,7 @@ export type RecipeSourceDraftContent = {
 export type RecipeSourceDraft = RecipeSourceDraftContent & {
   id: string;
   publicationStatus: 'unpublished' | 'published';
+  translationState?: Record<RecipeLocale, TranslationState>;
   source?: { file: string; locator: string };
   /** Reviewed reader-facing translations; source facts are never inferred here. */
   translations?: Partial<Record<'es' | 'uk', RecipeSourceDraftContent>>;

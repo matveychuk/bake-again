@@ -46,6 +46,9 @@ jobs:
       - name: Foundation tests
         run: npm run test:foundation
 
+      - name: SEO metadata tests
+        run: npm run test:seo
+
       - name: Assistant tests (no live API)
         run: npm run test:assistant
 
@@ -57,3 +60,14 @@ jobs:
 
       - name: Production build without secrets
         run: npm run build
+
+      - name: Rendered recipe regressions
+        run: |
+          npm run start -- --port 3011 > /tmp/bake-again-render-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..60}; do
+            if curl --fail --silent http://localhost:3011/en > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:release-render

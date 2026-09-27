@@ -590,6 +590,14 @@ void test('stores four tested reusable creams with ingredients and practical gui
   );
 
   const eggless = getRecipeContent('eggless-vanilla-custard', 'uk')!;
+  const egglessFlour = eggless.ingredientSections[0].ingredients.find(
+    (ingredient) => ingredient.id === 'flour',
+  )!;
+  assert.equal(egglessFlour.name, 'Борошно Schär Mix B Bread');
+  assert.deepEqual(egglessFlour.quantity.base, {
+    kind: 'exact', value: 120, unit: 'g',
+  });
+  assert.deepEqual(egglessFlour.quantity.shopping, { mode: 'base' });
   assert.deepEqual(
     eggless.ingredientSections[0].ingredients.find(
       (ingredient) => ingredient.id === 'milk',
@@ -668,7 +676,7 @@ void test('keeps the source-backed cinnamon rolls cookable in Ukrainian', () => 
   assert.match(recipe?.steps[0]?.checkpoint ?? '', /бульбашки|піна/i);
   assert.equal(recipe?.steps[6]?.meta, '40–60 хв · 180°C');
   assert.match(recipe?.steps[7]?.tip ?? '', /перепечені/i);
-  assert.equal(recipe?.steps[8]?.title, 'Додайте обраний фініш');
+  assert.equal(recipe?.steps[8]?.title, 'Додайте обране покриття');
   assert.deepEqual(
     recipe?.steps.flatMap((step) => step.media?.map((item) => item.id) ?? []),
     [
@@ -683,7 +691,7 @@ void test('keeps the source-backed cinnamon rolls cookable in Ukrainian', () => 
       'cinnamon-rolls-cream-cheese-glaze-v1',
     ],
   );
-  assert.match(recipe?.gapNote ?? '', /начинку й фініш/i);
+  assert.match(recipe?.gapNote ?? '', /начинку й покриття/i);
 });
 
 void test('keeps the published prune cake structured', () => {
@@ -947,7 +955,7 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
     value: 450,
     unit: 'g',
   });
-  assert.equal(cottageCheese?.name, 'Творог');
+  assert.equal(cottageCheese?.name, 'Кисломолочний сир');
   assert.equal(cottageCheese?.quantity.equivalent, undefined);
   assert.equal(cottageCheese?.note, undefined);
   assert.deepEqual(sugar?.quantity.base, {

@@ -36,7 +36,7 @@ export const recipeCollections: readonly RecipeCollection[] = [
   },
   {
     id: 'cottage-cheese',
-    title: { uk: 'З творогом', en: 'With cottage cheese', es: 'Con requesón' },
+    title: { uk: 'Із сиром', en: 'With curd cheese', es: 'Con tvorog' },
   },
   {
     id: 'batter-on-hand',

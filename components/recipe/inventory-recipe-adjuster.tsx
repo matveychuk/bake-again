@@ -339,9 +339,10 @@ export function InventoryRecipeAdjuster({
             {concise ? (
               adjusted && (
                 <div className={styles.result} aria-live="polite">
-                  <EvidenceBadge locale={locale} status="calculated" />
+                  <EvidenceBadge locale={locale} status={recipe?.evidence?.status === 'suggested' ? 'suggested' : 'calculated'} />
                   <p>
                     {formattedScaleFactor}×.{' '}
+                    {recipe?.evidence?.status === 'suggested' && `${recipe.evidence.explanation} `}
                     {messages.status.calculated.explanation}
                   </p>
                   {fractionalEggs && <p>{readerCopy.fractionalEggs}</p>}
@@ -452,12 +453,8 @@ export function InventoryRecipeAdjuster({
           </div>
         ) : (
           <div className={styles.pending}>
-            <h3>Recipe details pending</h3>
-            <p>
-              This working recipe is verified by the author, but its exact
-              ingredients and method have not yet been transferred into the
-              inventory.
-            </p>
+            <h3>{getUiMessages(locale).recipe.methodPending}</h3>
+            <p>{getUiMessages(locale).recipe.methodPendingDescription}</p>
           </div>
         )}
       </div>

@@ -297,6 +297,7 @@ export function spongeCakeContent(locale: RecipeLocale): RecipeSourceDraftConten
 export const spongeCakeRecipe = {
   id: 'sponge-cake',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',
     locator:

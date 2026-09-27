@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/seo/metadata';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/site/site-header';
@@ -18,10 +19,12 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isAppLocale(locale)) return {};
-  return {
+  return pageMetadata({
     title: `${softenButter[locale].title} — Bake Again`,
     description: softenButter[locale].intro,
-  };
+    locale,
+    path: softenButterPath(locale),
+  });
 }
 
 export default async function SoftenButterPage({ params }: Props) {

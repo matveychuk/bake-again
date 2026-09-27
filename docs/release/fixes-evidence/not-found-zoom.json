@@ -1,0 +1,83 @@
+[
+  {
+    "width": 390,
+    "l": "uk",
+    "status": 404,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "l": "en",
+    "status": 404,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "l": "es",
+    "status": 404,
+    "overflow": false
+  },
+  {
+    "width": 900,
+    "l": "uk",
+    "status": 404,
+    "overflow": false
+  },
+  {
+    "width": 900,
+    "l": "en",
+    "status": 404,
+    "overflow": false
+  },
+  {
+    "width": 900,
+    "l": "es",
+    "status": 404,
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "l": "uk",
+    "status": 404,
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "l": "en",
+    "status": 404,
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "l": "es",
+    "status": 404,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "path": "/es/recipes/crepes-sin-gluten/cook",
+    "textSize": "200%",
+    "overflow": false,
+    "navigation": [
+      {
+        "height": 281.78125,
+        "padding": 329.781,
+        "badgeHeight": 59.390625
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "path": "/uk/recipes/bezghliutenovi-profitroli?cream=vanilla-egg-custard",
+    "textSize": "200%",
+    "overflow": false,
+    "navigation": []
+  },
+  {
+    "width": 390,
+    "path": "/en/missing-page",
+    "textSize": "200%",
+    "overflow": false,
+    "navigation": []
+  }
+]

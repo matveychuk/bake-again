@@ -1,0 +1,119 @@
+[
+  {
+    "width": 390,
+    "l": "uk",
+    "skip": {
+      "text": "Перейти до вмісту",
+      "outline": "3px"
+    },
+    "language": true,
+    "shoppingModal": true,
+    "cookDrawer": true,
+    "overflow": false,
+    "recovery": true
+  },
+  {
+    "width": 390,
+    "l": "en",
+    "skip": {
+      "text": "Skip to content",
+      "outline": "3px"
+    },
+    "language": true,
+    "shoppingModal": true,
+    "cookDrawer": true,
+    "overflow": false,
+    "recovery": true
+  },
+  {
+    "width": 390,
+    "l": "es",
+    "skip": {
+      "text": "Saltar al contenido",
+      "outline": "3px"
+    },
+    "language": true,
+    "shoppingModal": true,
+    "cookDrawer": true,
+    "overflow": false,
+    "recovery": true
+  },
+  {
+    "width": 900,
+    "l": "uk",
+    "skip": {
+      "text": "Перейти до вмісту",
+      "outline": "3px"
+    },
+    "language": true,
+    "shoppingModal": true,
+    "cookDrawer": true,
+    "overflow": false,
+    "recovery": true
+  },
+  {
+    "width": 900,
+    "l": "en",
+    "skip": {
+      "text": "Skip to content",
+      "outline": "3px"
+    },
+    "language": true,
+    "shoppingModal": true,
+    "cookDrawer": true,
+    "overflow": false,
+    "recovery": true
+  },
+  {
+    "width": 900,
+    "l": "es",
+    "skip": {
+      "text": "Saltar al contenido",
+      "outline": "3px"
+    },
+    "language": true,
+    "shoppingModal": true,
+    "cookDrawer": true,
+    "overflow": false,
+    "recovery": true
+  },
+  {
+    "width": 1440,
+    "l": "uk",
+    "skip": {
+      "text": "Перейти до вмісту",
+      "outline": "3px"
+    },
+    "language": true,
+    "shoppingModal": true,
+    "cookDrawer": true,
+    "overflow": false,
+    "recovery": true
+  },
+  {
+    "width": 1440,
+    "l": "en",
+    "skip": {
+      "text": "Skip to content",
+      "outline": "3px"
+    },
+    "language": true,
+    "shoppingModal": true,
+    "cookDrawer": true,
+    "overflow": false,
+    "recovery": true
+  },
+  {
+    "width": 1440,
+    "l": "es",
+    "skip": {
+      "text": "Saltar al contenido",
+      "outline": "3px"
+    },
+    "language": true,
+    "shoppingModal": true,
+    "cookDrawer": true,
+    "overflow": false,
+    "recovery": true
+  }
+]

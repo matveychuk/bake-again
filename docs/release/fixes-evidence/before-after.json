@@ -1,0 +1,818 @@
+[
+  {
+    "defect": "D01",
+    "id": "plum-cake",
+    "locale": "uk",
+    "before": [
+      {
+        "id": "whip-eggs",
+        "title": "Окремо збийте білки та жовтки",
+        "body": "Відокремте білки від жовтків. Жовтки збийте з 2 столовими ложками цукру до посвітління. У чистій сухій мисці збийте білки, поступово додаючи решту цукру. Обережно вмішайте жовтки у збиті білки.",
+        "checkpoint": "Білки тримають форму, після з’єднання маса залишається повітряною.",
+        "cookIngredients": [
+          {
+            "ingredientId": "eggs"
+          },
+          {
+            "ingredientId": "sugar"
+          }
+        ],
+        "media": [
+          {
+            "id": "whipped-whites-author-v1",
+            "src": "/media/recipes/plum-cake/selected/whipped-whites-author-v1.webp",
+            "alt": "Збиті білки"
+          }
+        ]
+      },
+      {
+        "id": "fold-butter",
+        "title": "Додайте масло",
+        "body": "Розтопіть 50 г масла й дайте охолонути до ледь теплого. Додайте до масла 3–4 ложки тіста та перемішайте до однорідності. Поверніть суміш у миску з рештою тіста й обережно вмішайте лопаткою.",
+        "checkpoint": "Масло повністю з’єдналося з тістом, жирних смуг немає.",
+        "tip": "Розтопіть масло ще до збивання яєць — воно встигне охолонути.",
+        "cookIngredients": [
+          {
+            "ingredientId": "butter"
+          }
+        ],
+        "media": [
+          {
+            "id": "butter-batter-author-v1",
+            "src": "/media/recipes/plum-cake/selected/butter-batter-author-v1.webp",
+            "alt": "Невелика порція тіста з розтопленим маслом"
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "whip-eggs",
+        "quantityMentions": [
+          {
+            "text": "2 столовими ложками",
+            "quantity": {
+              "kind": "exact",
+              "value": 2,
+              "unit": "tbsp"
+            }
+          }
+        ],
+        "title": "Окремо збийте білки та жовтки",
+        "body": "Відокремте білки від жовтків. Жовтки збийте з 4 ст. л. цукру до посвітління. У чистій сухій мисці збийте білки, поступово додаючи решту цукру. Обережно вмішайте жовтки у збиті білки.",
+        "checkpoint": "Білки тримають форму, після з’єднання маса залишається повітряною.",
+        "cookIngredients": [
+          {
+            "ingredientId": "eggs"
+          },
+          {
+            "ingredientId": "sugar"
+          }
+        ],
+        "media": [
+          {
+            "id": "whipped-whites-author-v1",
+            "src": "/media/recipes/plum-cake/selected/whipped-whites-author-v1.webp",
+            "alt": "Збиті білки"
+          }
+        ]
+      },
+      {
+        "id": "fold-butter",
+        "quantityMentions": [
+          {
+            "text": "50 г",
+            "quantity": {
+              "kind": "exact",
+              "value": 50,
+              "unit": "g"
+            }
+          }
+        ],
+        "title": "Додайте масло",
+        "body": "Розтопіть 100 г масла й дайте охолонути до ледь теплого. Додайте до масла 3–4 ложки тіста та перемішайте до однорідності. Поверніть суміш у миску з рештою тіста й обережно вмішайте лопаткою.",
+        "checkpoint": "Масло повністю з’єдналося з тістом, жирних смуг немає.",
+        "tip": "Розтопіть масло ще до збивання яєць — воно встигне охолонути.",
+        "cookIngredients": [
+          {
+            "ingredientId": "butter"
+          }
+        ],
+        "media": [
+          {
+            "id": "butter-batter-author-v1",
+            "src": "/media/recipes/plum-cake/selected/butter-batter-author-v1.webp",
+            "alt": "Невелика порція тіста з розтопленим маслом"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "defect": "D01",
+    "id": "gluten-free-napoleon",
+    "locale": "uk",
+    "before": [
+      {
+        "id": "divide-and-chill",
+        "title": "Розділіть і охолодіть",
+        "body": "Розділіть тісто на 12 дисків, кожен загорніть і охолоджуйте щонайменше 2 години. Можна залишити на ніч.",
+        "cookIngredients": [],
+        "meta": "Щонайменше 2 год",
+        "media": [
+          {
+            "id": "napoleon-dough-discs-v3",
+            "src": "/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.webp",
+            "alt": "Дванадцять однакових дисків тіста, окремо загорнутих для охолодження"
+          }
+        ]
+      },
+      {
+        "id": "heat-milk",
+        "title": "Нагрійте молоко",
+        "body": "Відлийте 600–650 мл холодного молока. Решту молока нагрійте майже до кипіння.",
+        "cookIngredients": [
+          {
+            "ingredientId": "milk-custard"
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "divide-and-chill",
+        "title": "Розділіть і охолодіть",
+        "body": "Розділіть тісто на 24 дисків, кожен загорніть і охолоджуйте щонайменше 2 години. Можна залишити на ніч.",
+        "quantityMentions": [
+          {
+            "text": "12",
+            "quantity": {
+              "kind": "exact",
+              "value": 12,
+              "unit": "piece"
+            },
+            "numberOnly": true
+          }
+        ],
+        "cookIngredients": [],
+        "meta": "Щонайменше 2 год",
+        "media": [
+          {
+            "id": "napoleon-dough-discs-v3",
+            "src": "/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.webp",
+            "alt": "Дванадцять однакових дисків тіста, окремо загорнутих для охолодження"
+          }
+        ]
+      },
+      {
+        "id": "heat-milk",
+        "title": "Нагрійте молоко",
+        "body": "Відлийте 1 200–1 300 мл холодного молока. Решту молока нагрійте майже до кипіння.",
+        "quantityMentions": [
+          {
+            "text": "600–650 мл",
+            "quantity": {
+              "kind": "range",
+              "min": 600,
+              "max": 650,
+              "unit": "ml"
+            }
+          }
+        ],
+        "cookIngredients": [
+          {
+            "ingredientId": "milk-custard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "defect": "D01",
+    "id": "plum-cake",
+    "locale": "en",
+    "before": [
+      {
+        "id": "whip-eggs",
+        "title": "Whip the whites and yolks separately",
+        "body": "Separate the eggs. Beat the yolks with 2 tablespoons of the sugar until pale. In a clean, dry bowl, whip the whites, gradually adding the remaining sugar. Gently fold the yolks into the whites.",
+        "checkpoint": "The whites hold their shape; the combined mixture remains airy.",
+        "cookIngredients": [
+          {
+            "ingredientId": "eggs"
+          },
+          {
+            "ingredientId": "sugar"
+          }
+        ],
+        "media": [
+          {
+            "id": "whipped-whites-author-v1",
+            "src": "/media/recipes/plum-cake/selected/whipped-whites-author-v1.webp",
+            "alt": "Whipped egg whites"
+          }
+        ]
+      },
+      {
+        "id": "fold-butter",
+        "title": "Fold in the butter",
+        "body": "Melt 50 g butter and let it cool until just warm. Mix 3–4 spoonfuls of batter into the butter until smooth. Return this mixture to the main bowl and gently fold together.",
+        "checkpoint": "The butter is fully incorporated, with no oily streaks.",
+        "tip": "Melt the butter before whipping the eggs so it has time to cool.",
+        "cookIngredients": [
+          {
+            "ingredientId": "butter"
+          }
+        ],
+        "media": [
+          {
+            "id": "butter-batter-author-v1",
+            "src": "/media/recipes/plum-cake/selected/butter-batter-author-v1.webp",
+            "alt": "A small portion of batter mixed with melted butter"
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "whip-eggs",
+        "quantityMentions": [
+          {
+            "text": "2 tablespoons",
+            "quantity": {
+              "kind": "exact",
+              "value": 2,
+              "unit": "tbsp"
+            }
+          }
+        ],
+        "title": "Whip the whites and yolks separately",
+        "body": "Separate the eggs. Beat the yolks with 4 tbsp of the sugar until pale. In a clean, dry bowl, whip the whites, gradually adding the remaining sugar. Gently fold the yolks into the whites.",
+        "checkpoint": "The whites hold their shape; the combined mixture remains airy.",
+        "cookIngredients": [
+          {
+            "ingredientId": "eggs"
+          },
+          {
+            "ingredientId": "sugar"
+          }
+        ],
+        "media": [
+          {
+            "id": "whipped-whites-author-v1",
+            "src": "/media/recipes/plum-cake/selected/whipped-whites-author-v1.webp",
+            "alt": "Whipped egg whites"
+          }
+        ]
+      },
+      {
+        "id": "fold-butter",
+        "quantityMentions": [
+          {
+            "text": "50 g",
+            "quantity": {
+              "kind": "exact",
+              "value": 50,
+              "unit": "g"
+            }
+          }
+        ],
+        "title": "Fold in the butter",
+        "body": "Melt 100 g butter and let it cool until just warm. Mix 3–4 spoonfuls of batter into the butter until smooth. Return this mixture to the main bowl and gently fold together.",
+        "checkpoint": "The butter is fully incorporated, with no oily streaks.",
+        "tip": "Melt the butter before whipping the eggs so it has time to cool.",
+        "cookIngredients": [
+          {
+            "ingredientId": "butter"
+          }
+        ],
+        "media": [
+          {
+            "id": "butter-batter-author-v1",
+            "src": "/media/recipes/plum-cake/selected/butter-batter-author-v1.webp",
+            "alt": "A small portion of batter mixed with melted butter"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "defect": "D01",
+    "id": "gluten-free-napoleon",
+    "locale": "en",
+    "before": [
+      {
+        "id": "divide-and-chill",
+        "title": "Divide and chill",
+        "body": "Divide the dough into twelve discs, wrap each one and chill for at least 2 hours; they may be left overnight.",
+        "cookIngredients": [],
+        "meta": "At least 2 hours",
+        "media": [
+          {
+            "id": "napoleon-dough-discs-v3",
+            "src": "/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.webp",
+            "alt": "Twelve even dough discs individually wrapped for chilling"
+          }
+        ]
+      },
+      {
+        "id": "heat-milk",
+        "title": "Heat the milk",
+        "body": "Set aside 600–650 ml of cold milk. Heat the remaining milk until almost boiling.",
+        "cookIngredients": [
+          {
+            "ingredientId": "milk-custard"
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "divide-and-chill",
+        "title": "Divide and chill",
+        "body": "Divide the dough into 24 discs, wrap each one and chill for at least 2 hours; they may be left overnight.",
+        "quantityMentions": [
+          {
+            "text": "twelve",
+            "quantity": {
+              "kind": "exact",
+              "value": 12,
+              "unit": "piece"
+            },
+            "numberOnly": true
+          }
+        ],
+        "cookIngredients": [],
+        "meta": "At least 2 hours",
+        "media": [
+          {
+            "id": "napoleon-dough-discs-v3",
+            "src": "/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.webp",
+            "alt": "Twelve even dough discs individually wrapped for chilling"
+          }
+        ]
+      },
+      {
+        "id": "heat-milk",
+        "title": "Heat the milk",
+        "body": "Set aside 1,200–1,300 ml of cold milk. Heat the remaining milk until almost boiling.",
+        "quantityMentions": [
+          {
+            "text": "600–650 ml",
+            "quantity": {
+              "kind": "range",
+              "min": 600,
+              "max": 650,
+              "unit": "ml"
+            }
+          }
+        ],
+        "cookIngredients": [
+          {
+            "ingredientId": "milk-custard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "defect": "D01",
+    "id": "plum-cake",
+    "locale": "es",
+    "before": [
+      {
+        "id": "whip-eggs",
+        "title": "Bate las claras y las yemas por separado",
+        "body": "Separa los huevos. Bate las yemas con 2 cucharadas del azúcar hasta que aclaren. En un bol limpio y seco, monta las claras añadiendo poco a poco el azúcar restante. Incorpora las yemas a las claras con movimientos envolventes.",
+        "checkpoint": "Las claras mantienen la forma y la mezcla conserva el aire al unirla.",
+        "cookIngredients": [
+          {
+            "ingredientId": "eggs"
+          },
+          {
+            "ingredientId": "sugar"
+          }
+        ],
+        "media": [
+          {
+            "id": "whipped-whites-author-v1",
+            "src": "/media/recipes/plum-cake/selected/whipped-whites-author-v1.webp",
+            "alt": "Claras montadas"
+          }
+        ]
+      },
+      {
+        "id": "fold-butter",
+        "title": "Incorpora la mantequilla",
+        "body": "Derrite 50 g de mantequilla y deja templar. Mézclala con 3–4 cucharadas de masa hasta que quede homogénea. Devuelve la mezcla al bol principal e incorpora con movimientos envolventes.",
+        "checkpoint": "La mantequilla está integrada, sin vetas de grasa.",
+        "tip": "Derrite la mantequilla antes de batir los huevos para que tenga tiempo de templarse.",
+        "cookIngredients": [
+          {
+            "ingredientId": "butter"
+          }
+        ],
+        "media": [
+          {
+            "id": "butter-batter-author-v1",
+            "src": "/media/recipes/plum-cake/selected/butter-batter-author-v1.webp",
+            "alt": "Una porción de masa con mantequilla derretida"
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "whip-eggs",
+        "quantityMentions": [
+          {
+            "text": "2 cucharadas",
+            "quantity": {
+              "kind": "exact",
+              "value": 2,
+              "unit": "tbsp"
+            }
+          }
+        ],
+        "title": "Bate las claras y las yemas por separado",
+        "body": "Separa los huevos. Bate las yemas con 4 cdas. del azúcar hasta que aclaren. En un bol limpio y seco, monta las claras añadiendo poco a poco el azúcar restante. Incorpora las yemas a las claras con movimientos envolventes.",
+        "checkpoint": "Las claras mantienen la forma y la mezcla conserva el aire al unirla.",
+        "cookIngredients": [
+          {
+            "ingredientId": "eggs"
+          },
+          {
+            "ingredientId": "sugar"
+          }
+        ],
+        "media": [
+          {
+            "id": "whipped-whites-author-v1",
+            "src": "/media/recipes/plum-cake/selected/whipped-whites-author-v1.webp",
+            "alt": "Claras montadas"
+          }
+        ]
+      },
+      {
+        "id": "fold-butter",
+        "quantityMentions": [
+          {
+            "text": "50 g",
+            "quantity": {
+              "kind": "exact",
+              "value": 50,
+              "unit": "g"
+            }
+          }
+        ],
+        "title": "Incorpora la mantequilla",
+        "body": "Derrite 100 g de mantequilla y deja templar. Mézclala con 3–4 cucharadas de masa hasta que quede homogénea. Devuelve la mezcla al bol principal e incorpora con movimientos envolventes.",
+        "checkpoint": "La mantequilla está integrada, sin vetas de grasa.",
+        "tip": "Derrite la mantequilla antes de batir los huevos para que tenga tiempo de templarse.",
+        "cookIngredients": [
+          {
+            "ingredientId": "butter"
+          }
+        ],
+        "media": [
+          {
+            "id": "butter-batter-author-v1",
+            "src": "/media/recipes/plum-cake/selected/butter-batter-author-v1.webp",
+            "alt": "Una porción de masa con mantequilla derretida"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "defect": "D01",
+    "id": "gluten-free-napoleon",
+    "locale": "es",
+    "before": [
+      {
+        "id": "divide-and-chill",
+        "title": "Divide y enfría",
+        "body": "Divide la masa en doce discos, envuelve cada uno y refrigera durante al menos 2 horas; pueden dejarse toda la noche.",
+        "cookIngredients": [],
+        "meta": "Como mínimo 2 h",
+        "media": [
+          {
+            "id": "napoleon-dough-discs-v3",
+            "src": "/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.webp",
+            "alt": "Doce discos de masa iguales envueltos individualmente para refrigerarlos"
+          }
+        ]
+      },
+      {
+        "id": "heat-milk",
+        "title": "Calienta la leche",
+        "body": "Reserva 600–650 ml de leche fría. Calienta el resto de la leche hasta casi hervir.",
+        "cookIngredients": [
+          {
+            "ingredientId": "milk-custard"
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "divide-and-chill",
+        "title": "Divide y enfría",
+        "body": "Divide la masa en 24 discos, envuelve cada uno y refrigera durante al menos 2 horas; pueden dejarse toda la noche.",
+        "quantityMentions": [
+          {
+            "text": "doce",
+            "quantity": {
+              "kind": "exact",
+              "value": 12,
+              "unit": "piece"
+            },
+            "numberOnly": true
+          }
+        ],
+        "cookIngredients": [],
+        "meta": "Como mínimo 2 h",
+        "media": [
+          {
+            "id": "napoleon-dough-discs-v3",
+            "src": "/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.webp",
+            "alt": "Doce discos de masa iguales envueltos individualmente para refrigerarlos"
+          }
+        ]
+      },
+      {
+        "id": "heat-milk",
+        "title": "Calienta la leche",
+        "body": "Reserva 1200–1300 ml de leche fría. Calienta el resto de la leche hasta casi hervir.",
+        "quantityMentions": [
+          {
+            "text": "600–650 ml",
+            "quantity": {
+              "kind": "range",
+              "min": 600,
+              "max": 650,
+              "unit": "ml"
+            }
+          }
+        ],
+        "cookIngredients": [
+          {
+            "ingredientId": "milk-custard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "mascarpone-whipped-cream",
+    "locale": "uk",
+    "before": {
+      "status": "tested",
+      "explanation": "Саме це заварне тісто на Schär Mix B Bread із 4 маленькими яйцями успішно випікалося й дало близько 20 профітролів."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "Успішне приготування цього поєднання з кремом ще не підтверджено. Початкові рецепти: Основа: Перевірено. Крем: Перевірено."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "vanilla-egg-custard",
+    "locale": "uk",
+    "before": {
+      "status": "tested",
+      "explanation": "Саме це заварне тісто на Schär Mix B Bread із 4 маленькими яйцями успішно випікалося й дало близько 20 профітролів."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "Успішне приготування цього поєднання з кремом ще не підтверджено. Початкові рецепти: Основа: Перевірено. Крем: Перевірено."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "eggless-vanilla-custard",
+    "locale": "uk",
+    "before": {
+      "status": "tested",
+      "explanation": "Саме це заварне тісто на Schär Mix B Bread із 4 маленькими яйцями успішно випікалося й дало близько 20 профітролів."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "Успішне приготування цього поєднання з кремом ще не підтверджено. Початкові рецепти: Основа: Перевірено. Крем: Перевірено."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "vanilla-buttercream",
+    "locale": "uk",
+    "before": {
+      "status": "tested",
+      "explanation": "Саме це заварне тісто на Schär Mix B Bread із 4 маленькими яйцями успішно випікалося й дало близько 20 профітролів."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "Успішне приготування цього поєднання з кремом ще не підтверджено. Початкові рецепти: Основа: Перевірено. Крем: Перевірено."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "fruit-sponge-roll",
+    "creamId": "mascarpone-whipped-cream",
+    "locale": "uk",
+    "before": {
+      "status": "tested",
+      "explanation": "Цю основу бісквітного рулету успішно випікали."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "Успішне приготування цього поєднання з кремом ще не підтверджено. Початкові рецепти: Основа: Перевірено. Крем: Перевірено."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "fruit-sponge-roll",
+    "creamId": "vanilla-buttercream",
+    "locale": "uk",
+    "before": {
+      "status": "tested",
+      "explanation": "Цю основу бісквітного рулету успішно випікали."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "Успішне приготування цього поєднання з кремом ще не підтверджено. Початкові рецепти: Основа: Перевірено. Крем: Перевірено."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "mascarpone-whipped-cream",
+    "locale": "en",
+    "before": {
+      "status": "tested",
+      "explanation": "This exact choux made with Schär Mix B Bread and 4 small eggs baked successfully and yielded about 20 profiteroles."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "A successful bake of this combination has not been confirmed. Original recipes: Base: Tested. Cream: Tested."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "vanilla-egg-custard",
+    "locale": "en",
+    "before": {
+      "status": "tested",
+      "explanation": "This exact choux made with Schär Mix B Bread and 4 small eggs baked successfully and yielded about 20 profiteroles."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "A successful bake of this combination has not been confirmed. Original recipes: Base: Tested. Cream: Tested."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "eggless-vanilla-custard",
+    "locale": "en",
+    "before": {
+      "status": "tested",
+      "explanation": "This exact choux made with Schär Mix B Bread and 4 small eggs baked successfully and yielded about 20 profiteroles."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "A successful bake of this combination has not been confirmed. Original recipes: Base: Tested. Cream: Tested."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "vanilla-buttercream",
+    "locale": "en",
+    "before": {
+      "status": "tested",
+      "explanation": "This exact choux made with Schär Mix B Bread and 4 small eggs baked successfully and yielded about 20 profiteroles."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "A successful bake of this combination has not been confirmed. Original recipes: Base: Tested. Cream: Tested."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "fruit-sponge-roll",
+    "creamId": "mascarpone-whipped-cream",
+    "locale": "en",
+    "before": {
+      "status": "tested",
+      "explanation": "This sponge-roll base was baked successfully."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "A successful bake of this combination has not been confirmed. Original recipes: Base: Tested. Cream: Tested."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "fruit-sponge-roll",
+    "creamId": "vanilla-buttercream",
+    "locale": "en",
+    "before": {
+      "status": "tested",
+      "explanation": "This sponge-roll base was baked successfully."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "A successful bake of this combination has not been confirmed. Original recipes: Base: Tested. Cream: Tested."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "mascarpone-whipped-cream",
+    "locale": "es",
+    "before": {
+      "status": "tested",
+      "explanation": "Esta masa choux con Schär Mix B Bread y 4 huevos pequeños se horneó con éxito y rindió unos 20 profiteroles."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "No se ha confirmado la preparación con éxito de esta combinación. Recetas originales: Base: Probada. Crema: Probada."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "vanilla-egg-custard",
+    "locale": "es",
+    "before": {
+      "status": "tested",
+      "explanation": "Esta masa choux con Schär Mix B Bread y 4 huevos pequeños se horneó con éxito y rindió unos 20 profiteroles."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "No se ha confirmado la preparación con éxito de esta combinación. Recetas originales: Base: Probada. Crema: Probada."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "eggless-vanilla-custard",
+    "locale": "es",
+    "before": {
+      "status": "tested",
+      "explanation": "Esta masa choux con Schär Mix B Bread y 4 huevos pequeños se horneó con éxito y rindió unos 20 profiteroles."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "No se ha confirmado la preparación con éxito de esta combinación. Recetas originales: Base: Probada. Crema: Probada."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "eclairs",
+    "creamId": "vanilla-buttercream",
+    "locale": "es",
+    "before": {
+      "status": "tested",
+      "explanation": "Esta masa choux con Schär Mix B Bread y 4 huevos pequeños se horneó con éxito y rindió unos 20 profiteroles."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "No se ha confirmado la preparación con éxito de esta combinación. Recetas originales: Base: Probada. Crema: Probada."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "fruit-sponge-roll",
+    "creamId": "mascarpone-whipped-cream",
+    "locale": "es",
+    "before": {
+      "status": "tested",
+      "explanation": "Esta base de brazo de gitano se horneó con éxito."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "No se ha confirmado la preparación con éxito de esta combinación. Recetas originales: Base: Probada. Crema: Probada."
+    }
+  },
+  {
+    "defect": "D04",
+    "id": "fruit-sponge-roll",
+    "creamId": "vanilla-buttercream",
+    "locale": "es",
+    "before": {
+      "status": "tested",
+      "explanation": "Esta base de brazo de gitano se horneó con éxito."
+    },
+    "after": {
+      "status": "suggested",
+      "explanation": "No se ha confirmado la preparación con éxito de esta combinación. Recetas originales: Base: Probada. Crema: Probada."
+    }
+  }
+]

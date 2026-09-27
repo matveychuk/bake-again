@@ -58,10 +58,10 @@ function mascarponeCreamContent(locale: CreamLocale): RecipeSourceDraftContent {
     es: {
       section: 'Crema',
       cream: 'Nata para montar',
-      creamNote: 'Manténla refrigerada hasta el momento de batir.',
+      creamNote: 'Mantenla refrigerada hasta el momento de batir.',
       sugar: 'Azúcar',
       mascarpone: 'Mascarpone',
-      mascarponeNote: 'Manténlo refrigerado hasta que lo necesites.',
+      mascarponeNote: 'Mantenlo refrigerado hasta que lo necesites.',
       prepareTitle: 'Enfría los ingredientes y utensilios',
       prepareBody:
         'Mantén fríos la nata y el mascarpone. Si la cocina está caliente, enfría también el bol y las varillas.',
@@ -494,11 +494,7 @@ const egglessCustardQuantity = {
     shopping: { mode: 'base' },
   },
   sugar: quantityFromSpoons('granulated-sugar', 6, 'tbsp'),
-  flour: {
-    base: null,
-    equivalent: { kind: 'exact', value: 6, unit: 'tbsp' },
-    shopping: { mode: 'nameOnly' },
-  },
+  flour: quantityFromSpoons('schar-mix-b', 6, 'tbsp'),
   butter: {
     base: { kind: 'exact', value: 200, unit: 'g' },
     shopping: { mode: 'base' },
@@ -512,9 +508,7 @@ function egglessCustardContent(locale: CreamLocale): RecipeSourceDraftContent {
       section: 'Eggless vanilla custard',
       milk: 'Milk',
       sugar: 'Sugar',
-      flour: 'Flour',
-      flourNote:
-        'The recorded recipe uses 6 tablespoons; the flour type and gram weight are not recorded.',
+      flour: 'Schär Mix B Bread flour blend',
       butter: 'Butter',
       butterNote: 'Softened so it can be worked with a fork or spoon.',
       vanilla: 'Vanilla',
@@ -552,9 +546,7 @@ function egglessCustardContent(locale: CreamLocale): RecipeSourceDraftContent {
       section: 'Crema de vainilla sin huevo',
       milk: 'Leche',
       sugar: 'Azúcar',
-      flour: 'Harina',
-      flourNote:
-        'La receta registrada usa 6 cucharadas; no se indican el tipo de harina ni su peso en gramos.',
+      flour: 'Harina Schär Mix B Bread',
       butter: 'Mantequilla',
       butterNote:
         'Ablandada para poder trabajarla con un tenedor o una cuchara.',
@@ -593,9 +585,7 @@ function egglessCustardContent(locale: CreamLocale): RecipeSourceDraftContent {
       section: 'Ванільний заварний крем без яєць',
       milk: 'Молоко',
       sugar: 'Цукор',
-      flour: 'Борошно',
-      flourNote:
-        'У записаному рецепті — 6 столових ложок; вид борошна та його вагу в грамах не вказано.',
+      flour: 'Борошно Schär Mix B Bread',
       butter: 'Вершкове масло',
       butterNote: 'М’яке, щоб його можна було розім’яти виделкою або ложкою.',
       vanilla: 'Ваніль',
@@ -688,7 +678,6 @@ function egglessCustardContent(locale: CreamLocale): RecipeSourceDraftContent {
             id: 'flour',
             name: copy.flour,
             quantity: egglessCustardQuantity.flour,
-            note: copy.flourNote,
           },
           {
             id: 'butter',
@@ -1031,6 +1020,7 @@ function buttercreamContent(locale: CreamLocale): RecipeSourceDraftContent {
 export const mascarponeWhippedCreamRecipe = {
   id: 'mascarpone-whipped-cream',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'docs/reference/recipe-inventory.xlsx',
     locator: 'Recipe Archive · Бісквітний рулет з фруктами · крем',
@@ -1045,6 +1035,7 @@ export const mascarponeWhippedCreamRecipe = {
 export const vanillaEggCustardRecipe = {
   id: 'vanilla-egg-custard',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'User-confirmed cream set, 2026-09-20',
     locator: 'Vanilla custard with egg yolks',
@@ -1059,9 +1050,10 @@ export const vanillaEggCustardRecipe = {
 export const egglessVanillaCustardRecipe = {
   id: 'eggless-vanilla-custard',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'User-provided recipe, 2026-09-20',
-    locator: '1.5 l milk · 6 tbsp sugar · 6 tbsp flour · 200 g butter',
+    locator: '1.5 l milk · 6 tbsp sugar · 6 tbsp Schär Mix B Bread · 200 g butter; flour confirmed by the user on 2026-09-27, 120 g from the shared spoon calculator',
   },
   ...egglessCustardContent('en'),
   translations: {
@@ -1073,6 +1065,7 @@ export const egglessVanillaCustardRecipe = {
 export const vanillaButtercreamRecipe = {
   id: 'vanilla-buttercream',
   publicationStatus: 'published',
+  translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
     file: 'User-confirmed cream set, 2026-09-20',
     locator: 'Vanilla buttercream based on the Charlotte method',
