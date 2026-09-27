@@ -3,8 +3,8 @@
 ## Shared link preview
 
 - The homepage and other non-recipe public pages share the 1200 × 630 image at
-  `media/web-source/social/bake-again-share-v2.png`, published as the generated
-  `/social/bake-again-share-v2.webp`. The card uses the approved surface, text and
+  `media/web-source/social/bake-again-share-v3.png`, published as the generated
+  `/social/bake-again-share-v3.webp`. The card uses the approved surface, text and
   terracotta colours with the existing Napoleon photograph; food remains dominant.
 - Open Graph and Twitter metadata include an absolute image URL, dimensions and
   descriptive alt text. Titles and descriptions remain localized in HTML metadata.
