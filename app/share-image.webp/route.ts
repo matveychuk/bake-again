@@ -1,11 +1,13 @@
-/** Serve the generated sharing image with its media type on Sites. */
+/** Serve the prepared WebP sharing image with its media type on Sites. */
 async function shareImage(request: Request, head = false): Promise<Response> {
   const { env } = await import('cloudflare:workers');
-  const assets = (env as { ASSETS?: { fetch: (request: Request) => Promise<Response> } })
+  const assets = (env as { ASSETS?: { fetch: (url: URL) => Promise<Response> } })
     .ASSETS;
-  if (!assets) return new Response(null, { status: 404 });
+  if (!assets) return new Response(null, { status: 503 });
 
-  const asset = await assets.fetch(request);
+  const asset = await assets.fetch(
+    new URL('/social/bake-again-share-v3.webp', request.url),
+  );
   if (!asset.ok) return asset;
   const headers = new Headers(asset.headers);
   headers.set('Content-Type', 'image/webp');

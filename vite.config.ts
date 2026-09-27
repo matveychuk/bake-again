@@ -17,7 +17,6 @@ const localBindingConfig = {
   compatibility_flags: ['nodejs_compat'],
   assets: {
     binding: 'ASSETS',
-    run_worker_first: ['/social/bake-again-share-v3.webp'],
   },
   d1_databases: d1
     ? [

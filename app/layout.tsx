@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       'Невелика колекція ретельно перевірених безглютенових рецептів.',
     siteName: 'Bake Again',
     images: [{
-      url: '/social/bake-again-share-v3.webp',
+      url: '/share-image.webp',
       width: 1200,
       height: 630,
       type: 'image/webp',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/social/bake-again-share-v3.webp'],
+    images: ['/share-image.webp'],
   },
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' }],

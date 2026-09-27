@@ -9,9 +9,9 @@
 - Open Graph and Twitter metadata include an absolute image URL, dimensions and
   descriptive alt text. Titles and descriptions remain localized in HTML metadata.
   Recipe pages continue to use their own recipe photographs.
-- The sharing image URL passes through a single Worker route using the generated
-  asset binding. This preserves the generated WebP URL while serving it with an
-  `image/webp` response type for link-preview crawlers.
+- `/share-image.webp` serves the prepared WebP from the generated
+  `/social/bake-again-share-v3.webp` asset through a Worker route. This adds the
+  `image/webp` response type required by link-preview crawlers on Sites.
 - The Design Lab colour section displays the production sharing image.
 
 ## Home discovery

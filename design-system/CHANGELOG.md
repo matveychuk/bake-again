@@ -6,8 +6,9 @@
   and semantic brand colours.
 - Added localized Open Graph image descriptions and a large sharing image to public
   page metadata while retaining recipe-specific photographs.
-- Declared the sharing image's `image/webp` type in metadata. A focused Worker
-  route sets its response type because Sites static delivery used a generic type.
+- Declared the sharing image's `image/webp` type in metadata. A dedicated
+  `/share-image.webp` Worker route serves the prepared asset with that type
+  because Sites static delivery used a generic type.
 - Versioned the image URL so messaging apps request the newly published asset.
 - Added the production preview to the Design Lab colour section.
 

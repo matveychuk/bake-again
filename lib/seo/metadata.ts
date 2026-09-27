@@ -25,7 +25,7 @@ export function pageMetadata({
   image?: string;
   imageAlt?: string;
 }): Metadata {
-  const defaultShareImage = '/social/bake-again-share-v3.webp';
+  const defaultShareImage = '/share-image.webp';
   const defaultShareImageAlt: Record<AppLocale, string> = {
     uk: 'Наполеон із видимими тонкими коржами поруч із назвою Bake Again',
     en: 'Napoleon cake with visible thin layers beside the Bake Again name',
