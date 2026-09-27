@@ -473,7 +473,7 @@ remains in the footer.
 
 ## Analytics behavior
 
-Shared controls emit the events listed in `docs/analytics.md` after their relevant
+Shared controls emit the events defined in `lib/analytics/umami.ts` after their relevant
 action, without changing focus, labels or visual states. Search records submission
 without its text; persistence actions record confirmed changes. Existing Design Lab
 examples retain these handlers, but analytics never loads on the Design Lab route.

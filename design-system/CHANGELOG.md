@@ -1,5 +1,16 @@
 # Design system changelog
 
+## 2026-09-27 · Repository cleanup
+
+- Removed unused starter UI components, the detached palette-review switcher and
+  an unused Cook Mode wrapper after checking imports from routes, tests and Design Lab.
+- Removed the switcher's inactive global CSS; production tokens and active component
+  variants remain unchanged. Design Lab and automated tests remain maintained sources.
+- Removed a nested paragraph from the Design Lab plan-ahead example that caused
+  a React hydration error; the example now uses the shared component correctly.
+- Historical audits, creative working files and unused media are no longer repository
+  inputs. Analytics event contracts remain in `lib/analytics/umami.ts` and its tests.
+
 ## 2026-09-27 · Pre-publication configuration recovery
 
 - Shared the existing unavailable Cook treatment with a recipe-detail variant and explicit base-recipe recovery for unsupported parameters and geometry.

@@ -44,6 +44,11 @@ next-env.d.ts
 /public/media/
 /public/social/
 
-# Keep large original photo and video files local until the media workflow is finalized.
-media/recipes/*/original/*
-!media/recipes/*/original/.gitkeep
+# Private reference documents, audit output and local creative work.
+# These are not inputs to the application or its automated tests.
+/docs/
+/.pnpm-store/
+/figma-plugin/
+/media/*
+!/media/README.md
+!/media/web-source/

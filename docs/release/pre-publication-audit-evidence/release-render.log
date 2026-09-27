@@ -1,5 +1,0 @@
-
-> bake-again@0.1.0 test:release-render
-> node scripts/check-release-render.mjs
-
-Passed 36 rendered recipe regression checks (UK/EN/ES).

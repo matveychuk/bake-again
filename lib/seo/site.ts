@@ -1,4 +1,4 @@
-/** Primary domain recorded in docs/services-register.uk.md (2026-09-25). */
+/** Canonical production origin for public recipe URLs. */
 export const siteOrigin = 'https://bakeagain.com';
 export const siteName = 'Bake Again';
 

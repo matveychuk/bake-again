@@ -1,21 +1,19 @@
-# Recipe media
+# Website media
 
-Store camera originals and videos under `media/recipes/<recipe-id>/original/`.
-
-Keep working files under `media/recipes/<recipe-id>/working/`. Both locations are kept
-out of the deployment bundle, and camera originals remain ignored by Git until a
-separate backup workflow is approved.
-
-When an image is ready for the website, place its source-quality PNG or JPEG under
-`media/web-source/`, mirroring the desired public path. For example:
+Keep only website source assets under `media/web-source/`, mirroring their public
+paths. Reference the generated `.webp` URL from product code. For example:
 
 ```text
 media/web-source/images/recipes/banana-bread-card-v1.png
   -> /images/recipes/banana-bread-card-v1.webp
 ```
 
-Reference the `.webp` URL from product code, then run `npm run media:prepare`. The
-script creates only referenced delivery assets in `public/`, resizes images wider than
-1800 px, removes metadata, uses WebP quality 82 and enforces a 64 MiB publish budget.
-It runs automatically before local development and production builds. Source-quality
-files remain in GitHub; generated delivery files do not.
+`npm run media:prepare` generates referenced assets in `public/`, caps raster width
+at 1800 px, removes metadata from generated images, uses WebP quality 82 and enforces
+a 64 MiB publish budget. It runs before development and production builds.
+Source-quality files remain in Git; generated delivery files do not.
+
+Camera originals, alternate edits, social exports and working files belong in local
+ignored directories or a separate private archive. Do not commit or deploy them.
+Removing metadata from generated WebP files does not clean metadata from the source
+assets; review source files separately before making the repository public.

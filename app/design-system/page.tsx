@@ -570,12 +570,7 @@ export default function DesignSystemPage() {
                       <RecipePlanItem
                         label={getUiMessages(locale).recipe.keepInMind}
                       >
-                        <p>
-                          {
-                            getRecipeContent('prune-cake', locale)
-                              ?.beforeStart?.[1]
-                          }
-                        </p>
+                        {getRecipeContent('prune-cake', locale)?.beforeStart?.[1]}
                       </RecipePlanItem>
                       <p>
                         {

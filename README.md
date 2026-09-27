@@ -1,178 +1,101 @@
 # Bake Again
 
-Bake Again is a multilingual gluten-free baking product built around a small collection
-of repeatedly tested home recipes.
+[Bake Again](https://bakeagain.com) is a gluten-free recipe website in Ukrainian,
+English and Spanish. It includes recipe search, ingredient scaling, a shopping
+list, saved recipes and step-by-step Cook Mode with timers. Personal cooking state
+is stored locally in the browser.
 
-The product promise is **Bake what you love. Know what works.** Its operating principle
-is **Fewer recipes. More confidence.** Recipe completeness and honest adaptation-specific
-provenance take priority over catalogue size.
+Recipe provenance is specific to each version: **Tested**, **Calculated** and
+**Suggested** are distinct states. Prepared step questions return reviewed recipe
+content without calling AI. Custom questions use a server-side assistant, guarded
+by Turnstile, signed sessions, shared request quotas and spending limits.
 
-`Bake Again` remains the working product name. The stable recipe IDs and content
-architecture do not depend on the final naming decision.
+## Run locally
 
-## Current product status
+Use Node.js 22.13.0 or newer.
 
-The product foundation is implemented and locally healthy:
-
-- Warm Precision / Review applied is the approved visual baseline.
-- The repository, design system, multilingual architecture and recipe schema are in place.
-- Home, recipe catalogue, Recipe Detail, basic Cook Mode, Save, local shopping list and
-  supported deterministic scaling are implemented.
-- The catalogue contains 17 stable recipe records.
-- Crinkle Cookies and Gluten-Free Napoleon use the full multilingual `RecipeDraft` model.
-- Six additional recipes preserve usable source transcriptions and are ready to migrate
-  into the complete model; the remaining nine have incomplete source material.
-- Missing facts remain explicit and cannot inherit Tested status.
-- The contextual assistant and controlled actions are implemented behind a release flag.
-- CI, production authorization and post-deploy smoke workflows are configured for
-  OpenAI Sites.
-
-No recipe is currently publication-ready. All recipe routes remain editorial previews,
-and Spanish and Ukrainian UI copy remain under review. The assistant must remain disabled
-until its separate release gates pass.
-
-## Launch milestone
-
-The next milestone is an owner-reviewed public MVP with:
-
-- three complete launch recipes representing a simple recipe, a complex recipe and an
-  everyday repeat-use recipe;
-- an explicitly chosen language-release policy;
-- Search and practical catalogue filters;
-- the complete Save → Shopping list → Cook Mode → Baked → Private note journey;
-- production-ready photography, structured SEO, privacy pages and basic analytics;
-- the contextual assistant kept disabled unless its independent release track is complete.
-
-Crinkle Cookies, Gluten-Free Napoleon and Crepes are the recommended first launch slice.
-The exact set remains an owner decision and must not be published until every selected
-recipe passes the publication readiness gate.
-
-## Remaining work
-
-### 1. Close launch decisions
-
-- Confirm the first public recipe set and publication sequence.
-- Decide whether English launches first or EN, ES and UK launch together.
-- Confirm the product name, domain and wordmark before public release.
-- Approve the photography system and the minimum original-media standard for launch.
-
-### 2. Make the launch recipes publication-ready
-
-For every selected recipe:
-
-- complete quantities, flour details, yield, form, active time and elapsed time;
-- finish the ordered method, checkpoints, practical guidance, storage and make-ahead copy;
-- confirm the provenance of every public variation;
-- select a finished-food image, verify media rights and complete descriptive alt text;
-- review the Ukrainian source and the English and Spanish translations;
-- resolve or explicitly approve every `contentGaps` entry;
-- change `publicationStatus` and locale translation states only after owner review.
-
-Known blockers for Crinkle Cookies are total elapsed time, powdered-sugar quantity,
-storage, final media and translation review. Known blockers for Napoleon are total time,
-the provisional milk quantity, the cultured-dairy choice, the 24 cm adaptation, storage,
-final media and translation review.
-
-### 3. Complete the core MVP journeys
-
-- Add simple localized search and a small set of practical filters.
-- Connect Home discovery entries to real filtered results.
-- Add Mark as Baked, Recently viewed and one local private note per baked recipe.
-- Persist the active Cook Mode step and supported recipe configuration.
-- Add Cook Mode completion and screen wake lock where supported.
-- Make the ingredient and shopping-list flow available in every launch locale.
-- Add print and share support.
-- Add localized About and Privacy pages and replace the Design System footer link on
-  public product pages.
-
-### 4. Finish SEO, measurement and acquisition
-
-- Add Recipe structured data and a production sitemap/robots policy.
-- Verify localized canonical URLs, hreflang, metadata and OpenGraph assets after the
-  publication gates open.
-- Add privacy-conscious analytics for recipe visits, successful search, saves, shopping
-  use, Cook Mode completion and return visits.
-- Prepare the initial Instagram recipe assets and direct every post to its canonical
-  localized recipe page.
-
-### 5. Verify product quality and release
-
-- Test the complete product at 390 px, 900 px and 1440 px in every launch locale.
-- Verify long Ukrainian, Spanish and English copy, 200% text zoom, keyboard navigation,
-  screen-reader output, focus order and AA contrast.
-- Add end-to-end coverage for Search → Recipe → Save → Shopping → Cook → Baked → Note.
-- Verify print output, image delivery, performance and Core Web Vitals.
-- Run the protected release workflow, deploy the exact authorized commit through Sites
-  and complete the post-deploy smoke test before changing the audience.
-
-### 6. Complete the assistant release track separately
-
-The assistant is not a blocker for the recipe MVP. Keep `ASSISTANT_ENABLED=false` until:
-
-- Sites runtime secrets are configured;
-- shared atomic quota and budget enforcement is implemented;
-- capped live multilingual and adversarial evaluations pass;
-- the intermittent Wrangler chunked-request restart is resolved or independently cleared;
-- actual screen-reader speech is verified;
-- the deployed candidate passes its post-deploy smoke question.
-
-See [the current assistant release audit](docs/assistant-release-audit.md) for evidence and
-the exact remaining gates.
-
-## Deliberately deferred
-
-Do not add these before launch evidence justifies them:
-
-- accounts, authentication and cloud synchronization;
-- custom collections and household sharing;
-- ratings, comments or community recipes;
-- universal form conversion or arbitrary substitution;
-- newsletter, affiliate, subscription or premium systems;
-- native applications, voice interaction or nutrition/wellness positioning.
-
-## Repository structure
-
-Owner reference: [Довідник сервісів і доступів — домен, хостинг, аналітика та продовження](docs/services-register.uk.md).
-
-```text
-content/recipes/       Structured multilingual recipe content
-design-system/         Approved tokens, components, patterns and change history
-docs/content-model/    Recipe schema decisions and authoring workflow
-docs/reference/        Historical briefs, research and recipe inventory
-media/web-source/      Source-quality media retained in GitHub; build input only
-media/recipes/         Camera originals and working recipe media; never deployed
-public/                Generated WebP/video delivery assets plus static files
+```sh
+npm ci
+cp .env.example .env.local
+npm run dev
 ```
 
-The initial collection remains repository-authored; no CMS or database is required.
-Production is hosted through OpenAI Sites. Read [the deployment runbook](docs/deployment.md)
-before changing runtime configuration or preparing a release.
+The assistant is disabled by default. Recipes, prepared answers and local personal
+features work without paid API credentials. Never commit `.env.local` or real keys.
 
-## Validation
+## Source layout
 
-Run the same core checks used by CI:
+| Path | Purpose |
+| --- | --- |
+| `app/` | Localized pages, API routes and the internal Design Lab |
+| `components/` | Components used by the website and Design Lab |
+| `content/` | Recipe content, translations, step help and provenance |
+| `lib/` | Recipe behavior, local persistence, analytics, SEO and server-side AI |
+| `design-system/` | Approved semantic tokens and component rules |
+| `media/web-source/` | Source-quality assets needed to build the website |
+| `public/` | Static favicon and generated delivery media |
+| `db/`, `drizzle/` | Shared assistant quota schema and database migrations |
+| `scripts/`, `evals/`, `.github/` | Build preparation, checks and release workflows |
+
+Keep tests and their fixtures with the source. `step-help.review.json` is the
+reviewed-content snapshot used by the step-help tests. The Design Lab at
+`/design-system` demonstrates the production components.
+
+Private service records, historical briefs, audit reports and creative working files
+are kept outside Git. Recipe source references retain the original document labels
+for provenance; these labels are not runtime file dependencies or public links.
+
+## Media
+
+Read [the media workflow](media/README.md) before adding images. Keep source-quality
+assets in `media/web-source/` and reference their generated `.webp` URLs in code.
+`npm run media:prepare` runs automatically before `dev` and `build`, generates only
+referenced assets and enforces the 64 MiB delivery budget. Never copy source or camera
+original directories into a deployment bundle.
+
+## Checks
 
 ```sh
 npm run typecheck
 npm run lint
 npm run test:foundation
+npm run test:analytics
+npm run test:seo
 npm run test:assistant
 npm run eval:assistant
+node --test scripts/validate-production-config.test.mjs
 npm run validate:recipes
 npm run build
 ```
 
-Reference strategy and specifications:
+After starting the production build on port 3011, run `npm run test:release-render`.
+CI performs this check automatically. Tests and assistant evals do not call the live
+AI API. Check responsive behavior at 390, 900 and 1440 px after interface changes.
 
-- [Future newsletter, recipe-digest and baking-techniques strategy (Ukrainian)](docs/strategy/newsletter-after-backend.uk.md)
+## Hosting and runtime configuration
 
-- [Brand strategy v2](docs/reference/Gluten-Free_Baking_Brand_Strategy_v2.docx)
-- [Product and Engineering Brief v1](<docs/reference/Gluten-Free Baking — Product & Engineering Brief v1.md>)
-- [UX and Information Architecture Specification v1](docs/reference/UX-IA-Specification-v1.md)
-- [Recipe content model](docs/content-model/README.md)
+Production uses OpenAI Sites, identified by `.openai/hosting.json`. The build emits
+a Worker-compatible bundle; do not deploy it to a separate Cloudflare Worker.
+Sites provisions the `ASSISTANT_QUOTAS` D1 binding and applies the committed migrations.
 
-## Basic analytics
+Configure server-only secrets in the Sites runtime:
 
-Umami Cloud tracks production pageviews and key recipe actions. See
-[the analytics event reference](docs/analytics.md) for coverage, privacy and verification.
-Run `npm run test:analytics` to check the payload boundary.
+- `OPENAI_API_KEY`
+- `TURNSTILE_SECRET_KEY`
+- `ASSISTANT_SESSION_SECRET` — at least 32 random characters
+
+The non-secret settings and their defaults are listed in `.env.example`.
+`TURNSTILE_SITE_KEY` is the browser-visible widget key; `ASSISTANT_ALLOWED_HOSTNAME`
+must match the site's hostname. Enable AI only after real Turnstile credentials,
+shared quotas and budget limits are configured. Builds do not need runtime secrets.
+
+The manual `production-release.yml` workflow validates an exact `main` commit before
+an owner-operated Sites deployment. Its GitHub `production` environment settings
+are separate from the Sites runtime. GitHub Secrets do not automatically configure
+the deployed website; the release workflow checks presence booleans only when its
+assistant flag is enabled. Keep `PRODUCTION_URL` set to `https://bakeagain.com`.
+After deploying, run `post-deploy-smoke.yml` with the actual audience (`public` for
+the live site). The workflows do not publish automatically or change site access.
+
+Repository cleanup does not remove files or author metadata from old Git commits.
+Review and sanitize history separately before changing repository visibility.

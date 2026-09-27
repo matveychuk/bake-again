@@ -1,8 +1,0 @@
-{
-  "name": "Bake Again Product Screens Builder",
-  "id": "bake-again-product-screens-builder-local",
-  "api": "1.0.0",
-  "main": "product-screens.js",
-  "editorType": ["figma"],
-  "documentAccess": "dynamic-page"
-}
