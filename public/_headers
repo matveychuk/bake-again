@@ -3,5 +3,5 @@
   Cache-Control: public, max-age=31536000, immutable
 
 # Sites currently serves WebP assets as application/octet-stream by default.
-/social/bake-again-share-v1.webp
+/social/bake-again-share-v2.webp
   Content-Type: image/webp
