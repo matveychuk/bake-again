@@ -1063,12 +1063,12 @@ export default function DesignSystemPage() {
             <div className={styles.componentBlock} id="step-questions">
               <div className={styles.componentLabel}>
                 <strong>Prepared step questions · UK / EN / ES</strong>
-                <span>Recipe-backed answers · no AI request · no evidence badge · simple steps have no trigger</span>
+                <span>Recipe-backed answers · custom questions for every recipe · simple steps use the general question entry</span>
               </div>
               {(['uk', 'en', 'es'] as const).map((locale) => {
                 const step = getRecipeContent('eclairs', locale)!.steps.find(step => step.id === 'add-eggs')!;
                 return <AssistantProvider key={locale} recipeId="eclairs" recipeVersionId="eclairs-source-v1"
-                  recipeTitle={step.title} locale={locale} surface="recipe-detail" liveEnabled={false}>
+                  recipeTitle={step.title} locale={locale} surface="recipe-detail">
                   <div lang={locale} className={styles.assistantExample}>
                     <RecipeStepContent title={step.title} locale={locale}
                       checkpointLabel={getUiMessages(locale).recipe.checkpoint}

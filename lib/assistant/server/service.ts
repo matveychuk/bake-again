@@ -1,6 +1,5 @@
 import { calculateRecipeConfiguration } from '../../../content/recipes/calculate-configuration.ts';
 import {
-  getRecipeDocument,
   type RecipeDocument,
 } from '../../../content/recipes/registry.ts';
 import {
@@ -39,8 +38,7 @@ import {
   type AssistantTelemetry,
   type AssistantTokenUsage,
 } from './telemetry.ts';
-
-const enabledRecipeIds = new Set(['gluten-free-napoleon']);
+import { getAssistantRecipeDocument } from './source-recipe.ts';
 
 const messages = {
   insufficient: {
@@ -74,7 +72,7 @@ export interface AssistantService {
 interface AssistantServiceDependencies {
   config: AssistantRuntimeConfig;
   provider: AssistantProvider;
-  resolveRecipe?: (recipeId: string) => RecipeDocument | null;
+  resolveRecipe?: (recipeId: string, recipeVersionId?: string) => RecipeDocument | null;
   isRecipeEnabled?: (recipeId: string) => boolean;
   isRecipeLocaleAllowed?: (
     recipe: Extract<RecipeDocument, { kind: 'detailed' }>['recipe'],
@@ -203,8 +201,8 @@ function mapProviderFailure(
 export function createAssistantService({
   config,
   provider,
-  resolveRecipe = getRecipeDocument,
-  isRecipeEnabled = (recipeId) => enabledRecipeIds.has(recipeId),
+  resolveRecipe = getAssistantRecipeDocument,
+  isRecipeEnabled = () => true,
   isRecipeLocaleAllowed = isRecipeLocalePublishable,
   isUiLocaleAllowed = isUiLocalePublishable,
   telemetry = noOpAssistantTelemetry,
@@ -224,7 +222,7 @@ export function createAssistantService({
       try {
         if (!config.enabled)
           throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
-        const document = resolveRecipe(request.recipeId);
+        const document = resolveRecipe(request.recipeId, request.recipeVersionId);
         if (
           !document ||
           document.kind !== 'detailed' ||

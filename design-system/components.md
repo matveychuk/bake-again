@@ -549,11 +549,14 @@ examples retain these handlers, but analytics never loads on the Design Lab rout
 - Keep selected questions visible for switching answers. Source quantities are resolved
   after scaling; composed creams retain their own questions. Grouped steps combine only
   their own prepared answers. Do not add universal mixing/texture prompts.
-- The separately labelled typed-question composer is shown only where live assistance
-  is supported. Its next request includes the selected prepared question and answer.
-  A general typed-question entry remains available on simple steps in supported Cook Mode.
-- `/design-system#step-questions` demonstrates the production drawer in UK/EN/ES without
-  any live API dependency. All text wraps at 390/900/1440px and 200% text enlargement.
+- The separately labelled typed-question composer is available for every published
+  recipe, in Recipe Detail and Cook Mode. Its next request includes the selected
+  prepared question and answer. A general typed-question entry remains available on
+  simple steps without prepared help. Source records use a server-only projection of
+  recorded facts; missing details, publication, scaling and composition evidence remain explicit.
+- `/design-system#step-questions` demonstrates the production drawer and composer in
+  UK/EN/ES. Opening a prepared answer makes no API request. All text wraps at
+  390/900/1440px and 200% text enlargement.
 
 ### Custom assistant verification and limits
 

@@ -154,7 +154,7 @@ export function InventoryRecipeDetail({
   if (selectedCreamRecipeId) cookModeParams.set('cream', selectedCreamRecipeId);
   const cookModeSearch = cookModeParams.toString();
   const cookModePath = `${recipePath}/cook${cookModeSearch ? `?${cookModeSearch}` : ''}`;
-  const sourceVersionId = `${structured?.versionId ?? `${recipe.id}-source-v1`}${selectedCreamRecipeId ? `-cream-${selectedCreamRecipeId}` : ''}`;
+  const sourceVersionId = `${getRecipeDocument(recipe.id)?.recipe.versionId ?? `${recipe.id}-source-v1`}${selectedCreamRecipeId ? `-cream-${selectedCreamRecipeId}` : ''}`;
   const backHref = `${isDraft ? localeDraftsPath(locale) : localeHomePath(locale)}#recipes`;
   const backLabel = isDraft
     ? getUiMessages(locale).navigation.drafts
@@ -193,7 +193,7 @@ export function InventoryRecipeDetail({
   return (
     <AssistantProvider key={`${helpVersion}:${configurationSearch}`} recipeId={recipe.id} recipeVersionId={helpVersion}
       recipeTitle={detailTitle} locale={locale} surface="recipe-detail"
-      liveEnabled={recipe.id === 'gluten-free-napoleon' && Boolean(helpConfiguration)}>
+      liveEnabled={Boolean(helpConfiguration)}>
     <main className={styles.page}>
       {structuredData && (
         <script
@@ -371,7 +371,7 @@ export function InventoryRecipeDetail({
           >
             {concise ? readerCopy.method : messages.stepByStep}
           </SectionTitle>
-          {recipe.id === 'gluten-free-napoleon' && helpConfiguration && (
+          {helpConfiguration && (
             <AssistantTrigger configuration={helpConfiguration} scope={{ kind: 'recipe' }} label={stepHelpMessages[locale].chat} />
           )}
           <RecipeCookEntry

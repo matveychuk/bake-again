@@ -48,10 +48,7 @@ function createInventoryCookMode(
 ): CookModeDefinition {
   const structured = getRecipeContent(recipe.id, locale);
   const document = getRecipeDocument(recipe.id);
-  const baseVersionId =
-    document?.kind === 'detailed'
-      ? document.recipe.versionId
-      : (structured?.versionId ?? `${recipe.id}-source-v1`);
+  const baseVersionId = document?.recipe.versionId ?? `${recipe.id}-source-v1`;
   const baseForCookMode = structured
     ? composeRecipeWithCream(structured, null, null)
     : null;
@@ -60,6 +57,7 @@ function createInventoryCookMode(
     recipeId: recipe.id,
     recipeVersionId: baseVersionId,
     recipeTitle: recipeDetailTitles[recipe.id]?.[locale] ?? recipe.title,
+    assistant: { recipeId: recipe.id, recipeVersionId: baseVersionId },
     detailHref: `/recipes/${recipe.slug}`,
     totalSteps:
       baseForCookMode && isSourceCookModeAvailable(baseForCookMode)

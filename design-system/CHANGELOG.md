@@ -1,5 +1,17 @@
 # Design system changelog
 
+## 2026-09-29 · Custom questions across the recipe collection
+
+- Removed the Napoleon-only custom-question restriction from Recipe Detail, Cook Mode
+  and the server service. Published recipes use their canonical locale, version,
+  selected portion, step IDs and validated cream selection.
+- Added a server-only adapter for source-backed recipe records, preserving missing
+  information and explicit Tested / Calculated / Suggested evidence. Draft publication
+  states are not promoted. Existing quotas and verification remain in force.
+- Whole-recipe questions include the method. Repeated facts are referenced in a compact
+  model envelope; the bounded input estimate is reserved by the existing budget guard.
+- Updated the shared Design Lab step-help examples to show the typed composer.
+
 ## 2026-09-27 · Shared link preview
 
 - Added a food-led 1200 × 630 sharing card based on the existing Napoleon photograph

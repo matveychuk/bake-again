@@ -29,12 +29,13 @@ import type {
   TrustedRecipeContext,
 } from './context.types.ts';
 import { resolveContextEvidence, type ContextEvidence } from './provenance.ts';
-import { createActionCatalog } from '../actions.ts';
+import { assistantEnvelope } from './envelope.ts';
 
 export const ASSISTANT_CONTEXT_POLICY_VERSION = 'context-v1';
 const inputId = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/;
 const contextByteLimit = 48 * 1024;
-const inputTokenLimit = 8000;
+// Whole-recipe questions include the method; quotas reserve this bounded estimate.
+const inputTokenLimit = 24000;
 
 const localized = {
   en: {
@@ -433,10 +434,12 @@ function projectStep(
   };
 }
 
-export function buildTrustedRecipeContext(value: unknown): ContextResult {
+export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeDraft): ContextResult {
   const parsed = parseInput(value);
   if (typeof parsed === 'string') return unavailable(parsed);
-  const document = getRecipeDocument(parsed.recipeId);
+  const document = serverRecipe?.id === parsed.recipeId
+    ? { kind: 'detailed' as const, recipe: serverRecipe }
+    : getRecipeDocument(parsed.recipeId);
   if (!document) return unavailable('RECIPE_NOT_FOUND', parsed.locale);
   if (document.kind === 'sourceDraft')
     return unavailable('SOURCE_DRAFT_UNAVAILABLE', parsed.locale);
@@ -663,11 +666,13 @@ export function buildTrustedRecipeContext(value: unknown): ContextResult {
           : recipe.geometry.default.id,
     },
     steps:
-      parsed.scope === 'step'
-        ? selectedSteps.map((step) =>
+      parsed.scope === 'step' || parsed.scope === 'recipe'
+        ? (parsed.scope === 'step' ? selectedSteps : recipe.steps).map((step) =>
             projectStep(
               recipe,
-              step,
+              parsed.scope === 'recipe'
+                ? { ...step, guidance: step.guidance?.filter(item => !item.id.startsWith('prepared-help-')) }
+                : step,
               parsed.locale,
               sourceIds,
               allGaps,
@@ -821,7 +826,7 @@ export function buildAssistantContext(
       ? { stepIds: request.scope.stepIds }
       : {}),
     configuration: request.configuration,
-  });
+  }, recipe);
   if (!result.available) return null;
   const evidence = new Map<string, ContextEvidenceBlock>();
   let sequence = 0;
@@ -886,17 +891,7 @@ export function buildAssistantContext(
   }
   const estimatedInputTokens = Math.ceil(
     new TextEncoder().encode(
-      JSON.stringify({
-        instructions: instructionText,
-        context: result.context,
-        evidenceCatalog: [...evidence.values()],
-        actionCatalog: [
-          ...createActionCatalog(request, 'catalog').entries(),
-        ].map(([id, action]) => ({ id, kind: action.kind })),
-        locale: request.locale,
-        question: request.question,
-        history: request.history,
-      }),
+      instructionText + JSON.stringify(assistantEnvelope(request, { context: result.context, evidence, estimatedInputTokens: 0 })),
     ).length / 2,
   );
   if (estimatedInputTokens > inputTokenLimit) return null;
