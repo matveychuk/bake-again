@@ -10,9 +10,8 @@ export type {
   CookStep,
 } from '@/components/cook-mode/cook-mode.types';
 
-/** Only the two existing finishing groups combine canonical steps. */
+/** Combine the two consecutive resting phases in Cook Mode. */
 export function napoleonCookGroup(stepId: string) {
-  if (['toast-walnuts', 'toast-almonds'].includes(stepId)) return 'toast-nuts';
   if (['rest-assembled-cake', 'refrigerate-cake'].includes(stepId))
     return 'rest-cake';
   return stepId;

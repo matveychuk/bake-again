@@ -5,10 +5,10 @@ import { isAssistantResponseV1, parseAssistantRequest } from './schemas.ts';
 const validRequest = {
   schemaVersion: 1,
   recipeId: 'gluten-free-napoleon',
-  recipeVersionId: 'gluten-free-napoleon-v2',
+  recipeVersionId: 'gluten-free-napoleon-v4',
   locale: 'en',
   surface: 'recipe-detail',
-  scope: { kind: 'step', stepIds: ['toast-walnuts', 'toast-almonds'] },
+  scope: { kind: 'step', stepIds: ['rest-assembled-cake', 'refrigerate-cake'] },
   configuration: { kind: 'base' },
   question: '  How do I toast the nuts?  ',
   history: [{ role: 'user', text: ' Earlier question ' }],
@@ -22,7 +22,7 @@ void test('parses the strict request contract and trims prose', () => {
   assert.equal(result.data.history[0]?.text, 'Earlier question');
   assert.deepEqual(result.data.scope, {
     kind: 'step',
-    stepIds: ['toast-walnuts', 'toast-almonds'],
+    stepIds: ['rest-assembled-cake', 'refrigerate-cake'],
   });
 });
 

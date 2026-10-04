@@ -116,10 +116,10 @@ void test('selects the requested locale for a detailed recipe', () => {
   assert.equal(recipe?.beforeStart?.length, 2);
   assert.match(recipe?.beforeStart?.[0] ?? '', /пергамент.*всіх коржів/i);
   assert.equal(recipe?.evidence?.status, 'tested');
-  assert.equal(recipe?.steps.length, 17);
+  assert.equal(recipe?.steps.length, 16);
   assert.equal(recipe?.steps[0]?.title, 'Масляна крихта');
   assert.equal(recipe?.steps[0]?.meta, undefined);
-  assert.equal(recipe?.steps.at(-1)?.title, 'Охолодіть до наступного дня');
+  assert.equal(recipe?.steps.at(-1)?.title, 'Ніч у холодильнику');
   assert.deepEqual(amount('schar-mix-b'), {
     kind: 'exact',
     value: 500,
@@ -127,7 +127,7 @@ void test('selects the requested locale for a detailed recipe', () => {
   });
   assert.deepEqual(amount('eggs-custard'), {
     kind: 'exact',
-    value: 4,
+    value: 6,
     unit: 'piece',
   });
   assert.equal(amount('egg-whites-custard'), undefined);
@@ -136,19 +136,19 @@ void test('selects the requested locale for a detailed recipe', () => {
     value: 400,
     unit: 'g',
   });
-  assert.deepEqual(amount('corn-starch-custard'), {
+  assert.deepEqual(amount('starch-custard'), {
     kind: 'exact',
-    value: 170,
+    value: 30,
     unit: 'g',
   });
   const custardCornStarch = ingredients?.find(
-    (ingredient) => ingredient.id === 'corn-starch-custard',
+    (ingredient) => ingredient.id === 'starch-custard',
   );
   const cornStarchEquivalent = custardCornStarch?.quantity.equivalent;
   assert.equal(cornStarchEquivalent?.kind, 'exact');
   assert.equal(cornStarchEquivalent?.unit, 'tbsp');
   assert(cornStarchEquivalent?.kind === 'exact');
-  assert.equal(Math.round(cornStarchEquivalent.value * 10) / 10, 24.3);
+  assert.equal(cornStarchEquivalent.value, 2);
   assert.deepEqual(amount('butter-custard'), {
     kind: 'exact',
     value: 100,
@@ -156,7 +156,7 @@ void test('selects the requested locale for a detailed recipe', () => {
   });
   assert.deepEqual(amount('vanilla-sugar-custard'), {
     kind: 'exact',
-    value: 24,
+    value: 16,
     unit: 'g',
   });
   assert.deepEqual(amount('walnuts'), {
@@ -164,11 +164,7 @@ void test('selects the requested locale for a detailed recipe', () => {
     value: 150,
     unit: 'g',
   });
-  assert.deepEqual(amount('flaked-almonds'), {
-    kind: 'exact',
-    value: 50,
-    unit: 'g',
-  });
+  assert.equal(amount('flaked-almonds'), undefined);
   assert.equal(recipe?.gapNote, undefined);
   assert.deepEqual(
     recipe?.steps
@@ -178,7 +174,7 @@ void test('selects the requested locale for a detailed recipe', () => {
   );
   assert.equal(
     recipe?.steps.find((step) => step.id === 'assemble-cake')?.media?.[0]?.id,
-    'napoleon-round-six-layer-assembly-v3',
+    'napoleon-author-plain-layer-v1',
   );
   assert(
     recipe?.steps

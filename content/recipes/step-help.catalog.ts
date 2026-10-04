@@ -147,9 +147,9 @@ export const stepHelpCatalog: Record<
     'heat-milk': help(
       q(
         'body',
-        'Яку частину молока залишити холодною для крему?',
-        'How much milk should I reserve cold for the custard?',
-        '¿Qué cantidad de leche debo reservar fría para la crema?',
+        'Скільки молока нагріти для крему?',
+        'How much milk should I heat for the custard?',
+        '¿Cuánta leche debo calentar para la crema?',
       ),
     ),
     'mix-custard-base': skip(
@@ -166,29 +166,24 @@ export const stepHelpCatalog: Record<
     'cook-custard': help(
       q(
         'checkpoint',
-        'Від якого моменту відраховувати останні секунди варіння крему?',
-        'When do I start counting the final seconds of cooking the custard?',
-        '¿Desde qué momento cuento los últimos segundos de cocción de la crema?',
+        'Коли вимикати вогонь під кремом?',
+        'When should I turn off the heat under the custard?',
+        '¿Cuándo debo apagar el fuego de la crema?',
       ),
     ),
     'finish-custard': skip(
       'Додавання масла після зняття з вогню вже прямо описане.',
     ),
-    'toast-walnuts': skip(
-      'Температура і тривалість підсушування вказані; додаткових підтверджених ознак немає.',
-    ),
-    'toast-almonds': skip(
-      'Температура і тривалість підсушування вказані; додаткових підтверджених ознак немає.',
-    ),
+    'prepare-nuts': skip('Горіхи необов’язкові; вибір і подрібнення вже описані.'),
     'assemble-cake': help(
       text(
         'body',
         'Теплим чи холодним кремом перемазувати коржі?',
         'Should I spread warm or cold custard between the layers?',
         '¿Debo rellenar las capas con la crema templada o fría?',
-        'Для складання «Наполеона» використовуйте теплий крем. Наносьте його на кожен корж; волоські горіхи додавайте через один шар.',
-        'Use warm custard to assemble the Napoleon. Spread it on every layer, adding walnuts to alternate layers.',
-        'Monta la tarta Napoleón con la crema templada. Extiéndela en cada capa y añade nueces en capas alternas.',
+        'Для складання «Наполеона» використовуйте теплий крем. Наносьте його на кожен корж; за бажанням додавайте горіхи в кожен прошарок або через один.',
+        'Use warm custard to assemble the Napoleon. Spread it on every layer, adding optional nuts to every layer or alternate layers.',
+        'Monta la tarta Napoleón con la crema templada. Extiéndela en cada capa y, si lo deseas, añade frutos secos en cada capa o en capas alternas.',
       ),
     ),
     'rest-assembled-cake': skip('Тривалість і місце витримки вже зазначені.'),

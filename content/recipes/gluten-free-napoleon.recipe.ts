@@ -4,7 +4,7 @@ import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
 export const glutenFreeNapoleonRecipe = {
   schemaVersion: 2,
   id: 'gluten-free-napoleon',
-  versionId: 'gluten-free-napoleon-v3',
+  versionId: 'gluten-free-napoleon-v4',
   publicationStatus: 'published',
   translationState: {
     uk: 'reviewed',
@@ -22,17 +22,17 @@ export const glutenFreeNapoleonRecipe = {
     es: 'Tarta Napoleón sin gluten',
   },
   summary: {
-    uk: 'Торти по 6 тонких коржів діаметром 24 см із теплим заварним кремом і горіхами.',
-    en: 'Cakes with six thin 24 cm layers each, warm custard and nuts.',
-    es: 'Tartas con seis capas finas de 24 cm cada una, crema pastelera templada y frutos secos.',
+    uk: 'Торти по 6 тонких коржів діаметром 24 см із заварним кремом; горіхи — за бажанням.',
+    en: 'Cakes with six thin 24 cm layers each and custard; nuts are optional.',
+    es: 'Tartas de seis capas finas de 24 cm con crema pastelera; los frutos secos son opcionales.',
   },
   categoryIds: ['celebration', 'layer-cake'],
   situationIds: ['celebration'],
   difficulty: 'advanced',
   baseProvenance: {
     state: 'tested',
-    sourceIds: ['author-bake-2026-10-04'],
-    note: 'Author baked and photographed this sour-cream dough version, then approved the method with 250 g butter, a 24 cm template and a 200°C oven. The repeated-bake history of v2 is not evidence for v3.',
+    sourceIds: ['author-bake-2026-10-04', 'author-custard-2026-10-04'],
+    note: 'Author baked and photographed the 24 cm sour-cream dough at 200°C and confirmed the new 2 l milk, 6 egg custard and two six-layer cakes, one plain and one with nuts. Earlier versions’ repeated-bake history does not apply to this version.',
   },
   timing: {
     activeMinutes: 60,
@@ -89,34 +89,6 @@ export const glutenFreeNapoleonRecipe = {
           unit: 'minute',
         },
         relatedStepId: 'bake-layer',
-      },
-      {
-        id: 'toast-walnuts',
-        label: {
-          uk: 'Підсушування волоських горіхів',
-          en: 'Toasting walnuts',
-          es: 'Tostado de las nueces',
-        },
-        duration: {
-          kind: 'range',
-          min: 8,
-          max: 10,
-          unit: 'minute',
-        },
-      },
-      {
-        id: 'toast-almonds',
-        label: {
-          uk: 'Підсушування мигдальних пластівців',
-          en: 'Toasting flaked almonds',
-          es: 'Tostado de las almendras laminadas',
-        },
-        duration: {
-          kind: 'range',
-          min: 4,
-          max: 5,
-          unit: 'minute',
-        },
       },
       {
         id: 'room-temperature-rest',
@@ -564,9 +536,9 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Crema pastelera',
       },
       provenance: {
-        state: 'repeatedlyVerified',
-        sourceIds: ['archive-recipe', 'inventory-row', 'author-update'],
-        note: 'The current custard formula was confirmed by the author for the repeatedly baked base recipe.',
+        state: 'tested',
+        sourceIds: ['author-custard-2026-10-04'],
+        note: 'Author-confirmed 2026-10-04 custard formula. Butter remains the existing 100 g; starch alternatives follow author guidance, not a separate bake-test of each option.',
       },
       lines: [
         {
@@ -574,12 +546,22 @@ export const glutenFreeNapoleonRecipe = {
           options: [
             {
               ingredientId: 'milk',
-              name: { uk: 'молоко', en: 'milk', es: 'leche' },
+              name: {
+                uk: 'молоко',
+                en: 'milk',
+                es: 'leche',
+              },
             },
           ],
           quantity: {
-            base: { kind: 'exact', value: 2500, unit: 'ml' },
-            shopping: { mode: 'base' },
+            base: {
+              kind: 'exact',
+              value: 2000,
+              unit: 'ml',
+            },
+            shopping: {
+              mode: 'base',
+            },
           },
         },
         {
@@ -587,27 +569,64 @@ export const glutenFreeNapoleonRecipe = {
           options: [
             {
               ingredientId: 'whole-egg',
-              name: { uk: 'яйця', en: 'eggs', es: 'huevos' },
+              name: {
+                uk: 'яйця',
+                en: 'eggs',
+                es: 'huevos',
+              },
             },
           ],
           quantity: {
-            base: { kind: 'exact', value: 4, unit: 'piece' },
-            shopping: { mode: 'base' },
+            base: {
+              kind: 'exact',
+              value: 6,
+              unit: 'piece',
+            },
+            shopping: {
+              mode: 'base',
+            },
           },
-          scaling: { kind: 'discrete', increment: 1, rounding: 'manual' },
+          scaling: {
+            kind: 'discrete',
+            increment: 1,
+            rounding: 'manual',
+          },
         },
         {
           id: 'sugar-custard',
           options: [
             {
               ingredientId: 'granulated-sugar',
-              name: { uk: 'цукор', en: 'sugar', es: 'azúcar' },
+              name: {
+                uk: 'цукор',
+                en: 'sugar',
+                es: 'azúcar',
+              },
             },
           ],
           quantity: quantityFromGrams('granulated-sugar', 400),
         },
         {
-          id: 'corn-starch-custard',
+          id: 'flour-custard',
+          options: [
+            {
+              ingredientId: 'schar-mix-b',
+              name: {
+                uk: 'борошно Schär Mix B',
+                en: 'Schär Mix B flour',
+                es: 'harina Schär Mix B',
+              },
+            },
+          ],
+          quantity: quantityFromGrams('schar-mix-b', 40),
+        },
+        {
+          id: 'starch-custard',
+          qualifier: {
+            uk: 'або тапіоковий крохмаль',
+            en: 'or tapioca starch',
+            es: 'o almidón de tapioca',
+          },
           options: [
             {
               ingredientId: 'corn-starch',
@@ -617,12 +636,6 @@ export const glutenFreeNapoleonRecipe = {
                 es: 'almidón de maíz',
               },
             },
-          ],
-          quantity: quantityFromGrams('corn-starch', 170),
-        },
-        {
-          id: 'tapioca-custard',
-          options: [
             {
               ingredientId: 'tapioca-starch',
               name: {
@@ -632,7 +645,27 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          quantity: quantityFromGrams('tapioca-starch', 20),
+          choose: 1,
+          quantity: {
+            base: {
+              kind: 'exact',
+              value: 30,
+              unit: 'g',
+            },
+            equivalent: {
+              kind: 'exact',
+              value: 2,
+              unit: 'tbsp',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
+          provenance: {
+            state: 'authorGuidance',
+            sourceIds: ['author-custard-2026-10-04'],
+            note: 'Author specifies 30 g (2 tbsp using her measure), choosing corn or tapioca starch. This recipe-specific spoon measure does not change the general conversion table.',
+          },
         },
         {
           id: 'butter-custard',
@@ -647,8 +680,14 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           quantity: {
-            base: { kind: 'exact', value: 100, unit: 'g' },
-            shopping: { mode: 'base' },
+            base: {
+              kind: 'exact',
+              value: 100,
+              unit: 'g',
+            },
+            shopping: {
+              mode: 'base',
+            },
           },
         },
         {
@@ -664,24 +703,15 @@ export const glutenFreeNapoleonRecipe = {
             },
           ],
           quantity: {
-            base: { kind: 'exact', value: 24, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-        },
-        {
-          id: 'salt-custard',
-          options: [
-            {
-              ingredientId: 'salt',
-              name: { uk: 'сіль', en: 'salt', es: 'sal' },
+            base: {
+              kind: 'exact',
+              value: 16,
+              unit: 'g',
             },
-          ],
-          quantity: {
-            base: null,
-            equivalent: { kind: 'exact', value: 1, unit: 'pinch' },
-            shopping: { mode: 'nameOnly' },
+            shopping: {
+              mode: 'base',
+            },
           },
-          scaling: { kind: 'fixed' },
         },
       ],
     },
@@ -695,6 +725,7 @@ export const glutenFreeNapoleonRecipe = {
       lines: [
         {
           id: 'walnuts',
+          qualifier: { uk: 'або пекан', en: 'or pecans', es: 'o pecanas' },
           options: [
             {
               ingredientId: 'walnut',
@@ -704,27 +735,31 @@ export const glutenFreeNapoleonRecipe = {
                 es: 'nueces',
               },
             },
-          ],
-          quantity: {
-            base: { kind: 'exact', value: 150, unit: 'g' },
-            shopping: { mode: 'base' },
-          },
-        },
-        {
-          id: 'flaked-almonds',
-          options: [
             {
-              ingredientId: 'flaked-almond',
+              ingredientId: 'pecan',
               name: {
-                uk: 'мигдальні пластівці',
-                en: 'flaked almonds',
-                es: 'almendras laminadas',
+                uk: 'пекан',
+                en: 'pecans',
+                es: 'nueces pecanas',
               },
             },
           ],
           quantity: {
-            base: { kind: 'exact', value: 50, unit: 'g' },
-            shopping: { mode: 'base' },
+            base: {
+              kind: 'exact',
+              value: 150,
+              unit: 'g',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
+          optional: true,
+          choose: 1,
+          preparation: {
+            uk: 'сирі або підсушені, подрібнені',
+            en: 'raw or toasted, chopped',
+            es: 'crudas o tostadas, picadas',
           },
         },
       ],
@@ -1014,114 +1049,123 @@ export const glutenFreeNapoleonRecipe = {
     },
     {
       id: 'heat-milk',
+      title: {
+        uk: 'Молоко для крему',
+        en: 'Milk for the custard',
+        es: 'Leche para la crema',
+      },
+      instruction: {
+        uk: 'Налийте все молоко (2000 мл) у велику каструлю й доведіть до кипіння.',
+        en: 'Pour all the milk (2000 ml) into a large saucepan and bring to a boil.',
+        es: 'Vierte toda la leche (2000 ml) en una cacerola grande y llévala a ebullición.',
+      },
       quantityMentions: [
         {
           text: {
-            uk: '600–650 мл',
-            en: '600–650 ml',
-            es: '600–650 ml',
+            uk: '2000 мл',
+            en: '2000 ml',
+            es: '2000 ml',
           },
           quantity: {
-            kind: 'range',
-            min: 600,
-            max: 650,
+            kind: 'exact',
+            value: 2000,
             unit: 'ml',
           },
         },
       ],
-      title: {
-        uk: 'Нагрійте молоко',
-        en: 'Heat the milk',
-        es: 'Calienta la leche',
-      },
-      instruction: {
-        uk: 'Відлийте 600–650 мл холодного молока. Решту молока нагрійте майже до кипіння.',
-        en: 'Set aside 600–650 ml of cold milk. Heat the remaining milk until almost boiling.',
-        es: 'Reserva 600–650 ml de leche fría. Calienta el resto de la leche hasta casi hervir.',
-      },
       ingredientLineIds: ['milk-custard'],
       equipmentIds: ['large-saucepan'],
+      mediaIds: ['napoleon-author-milk-v1'],
     },
     {
       id: 'mix-custard-base',
+      title: {
+        uk: 'Яєчна основа',
+        en: 'Egg mixture',
+        es: 'Mezcla de huevo',
+      },
+      instruction: {
+        uk: 'У великій мисці з’єднайте цукор, борошно, крохмаль, ванільний цукор і яйця для крему — 6 шт. Збийте вінчиком до однорідності.',
+        en: 'In a large bowl, combine the sugar, flour, starch, vanilla sugar and custard eggs — 6 pcs. Whisk until smooth.',
+        es: 'En un bol grande, mezcla el azúcar, la harina, el almidón, el azúcar vainillado y los huevos para la crema: 6 uds. Bate con varillas hasta obtener una mezcla homogénea.',
+      },
       quantityMentions: [
         {
           text: {
-            uk: '4 шт.',
-            en: '4 pcs',
-            es: '4 uds.',
+            uk: '6 шт.',
+            en: '6 pcs',
+            es: '6 uds.',
           },
           quantity: {
             kind: 'exact',
-            value: 4,
+            value: 6,
             unit: 'piece',
           },
         },
       ],
-      title: {
-        uk: 'Змішайте основу крему',
-        en: 'Mix the custard base',
-        es: 'Prepara la base de la crema',
-      },
-      instruction: {
-        uk: 'У великій мисці змішайте цукор, обидва крохмалі, ванільний цукор і сіль. Додайте відлите холодне молоко й розмішайте до гладкості, потім додайте яйця для крему — 4 шт.',
-        en: 'In a large bowl, combine the sugar, both starches, vanilla sugar and salt. Add the reserved cold milk and stir until smooth, then add the custard eggs — 4 pcs.',
-        es: 'En un bol grande, mezcla el azúcar, los dos almidones, el azúcar vainillado y la sal. Añade la leche fría reservada y remueve hasta que quede liso; incorpora después los huevos para la crema: 4 uds.',
-      },
       ingredientLineIds: [
         'sugar-custard',
-        'corn-starch-custard',
-        'tapioca-custard',
+        'flour-custard',
+        'starch-custard',
         'vanilla-sugar-custard',
-        'salt-custard',
-        'milk-custard',
         'eggs-custard',
       ],
       equipmentIds: ['whisk'],
+      mediaIds: ['napoleon-author-custard-base-v1'],
     },
     {
       id: 'temper-custard',
       title: {
-        uk: 'Темперуйте яєчну суміш',
-        en: 'Temper the egg mixture',
-        es: 'Templa la mezcla de huevo',
+        uk: 'Поступове нагрівання яєць',
+        en: 'Warming the egg mixture',
+        es: 'Templado de los huevos',
       },
       instruction: {
-        uk: 'Влийте 2–3 ополоники гарячого молока в яєчно-крохмальну суміш, перемішайте й поверніть все в каструлю.',
-        en: 'Whisk 2–3 ladlefuls of hot milk into the egg and starch mixture, then return everything to the saucepan.',
-        es: 'Incorpora 2–3 cucharones de leche caliente a la mezcla de huevos y almidón, remueve y devuelve todo a la cacerola.',
+        uk: 'Відберіть із каструлі гаряче молоко для темперування — приблизно 2 склянки. Вливайте його в яєчну суміш тонкою цівкою, постійно перемішуючи вінчиком, до однорідності.',
+        en: 'Take about 2 cups of hot milk from the saucepan. Pour it into the egg mixture in a thin stream, whisking continuously until smooth.',
+        es: 'Retira unas 2 tazas de leche caliente de la cacerola. Viértela en un hilo fino sobre la mezcla de huevo, batiendo continuamente hasta integrar.',
       },
-      ingredientLineIds: ['milk-custard'],
-      equipmentIds: ['large-saucepan', 'whisk'],
+      quantityMentions: [
+        {
+          text: {
+            uk: '2 склянки',
+            en: '2 cups',
+            es: '2 tazas',
+          },
+          quantity: {
+            kind: 'exact',
+            value: 2,
+            unit: 'cup',
+          },
+        },
+      ],
+      ingredientLineIds: [],
+      equipmentIds: ['whisk'],
+      mediaIds: ['napoleon-author-tempering-v1'],
     },
     {
       id: 'cook-custard',
       title: {
-        uk: 'Зваріть крем',
-        en: 'Cook the custard',
-        es: 'Cuece la crema',
+        uk: 'Загущення крему',
+        en: 'Thickening the custard',
+        es: 'Espesado de la crema',
       },
       instruction: {
-        uk: 'Варіть на середньому вогні, постійно працюючи вінчиком. Після перших бульбашок варіть ще 30–60 секунд.',
-        en: 'Cook over medium heat, whisking constantly. After the first bubbles appear, cook for another 30–60 seconds.',
-        es: 'Cocina a fuego medio, batiendo constantemente. Cuando aparezcan las primeras burbujas, cocina 30–60 segundos más.',
+        uk: 'Влийте яєчну суміш у гаряче молоко, постійно помішуючи. Прогрівайте, проводячи вінчиком або лопаткою по всьому дну й піднімаючи густішу масу, щоб вона не прилипала й не підгоряла.',
+        en: 'Pour the egg mixture into the hot milk, stirring continuously. Heat while sweeping the whisk or spatula across the entire bottom and lifting the thickening mixture to prevent sticking or scorching.',
+        es: 'Vierte la mezcla de huevo en la leche caliente sin dejar de remover. Calienta pasando las varillas o una espátula por todo el fondo y levantando la mezcla que espesa para que no se pegue ni se queme.',
       },
       ingredientLineIds: [],
-      duration: {
-        kind: 'range',
-        min: 30,
-        max: 60,
-        unit: 'second',
-      },
       equipmentIds: ['large-saucepan', 'whisk'],
+      mediaIds: ['napoleon-author-custard-texture-v1'],
       guidance: [
         {
           id: 'first-bubbles',
           kind: 'checkpoint',
           text: {
-            uk: 'Відраховуйте фінальні 30–60 секунд після появи перших бульбашок.',
-            en: 'Start the final 30–60 seconds when the first bubbles appear.',
-            es: 'Empieza a contar los últimos 30–60 segundos cuando aparezcan las primeras burbujas.',
+            uk: 'Щойно крем загусне й з’являться перші бульбашки, вимкніть вогонь.',
+            en: 'Turn off the heat as soon as the custard thickens and the first bubbles appear.',
+            es: 'Apaga el fuego en cuanto la crema espese y aparezcan las primeras burbujas.',
           },
         },
       ],
@@ -1129,95 +1173,72 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'finish-custard',
       title: {
-        uk: 'Додайте масло',
-        en: 'Add the butter',
-        es: 'Añade la mantequilla',
+        uk: 'Масло в гарячий крем',
+        en: 'Butter to finish',
+        es: 'Acabado con mantequilla',
       },
       instruction: {
-        uk: 'Зніміть крем з вогню, додайте масло й розмішайте до однорідності.',
-        en: 'Remove the custard from the heat, add the butter and stir until smooth.',
-        es: 'Retira la crema del fuego, añade la mantequilla y remueve hasta que quede homogénea.',
+        uk: 'Додайте масло й перемішуйте, доки воно повністю розтане та з’єднається з кремом.',
+        en: 'Add the butter and stir until it has completely melted into the custard.',
+        es: 'Añade la mantequilla y remueve hasta que se funda por completo y se integre en la crema.',
       },
       ingredientLineIds: ['butter-custard'],
       equipmentIds: ['whisk'],
-      mediaIds: ['napoleon-finished-custard-v3'],
     },
     {
-      id: 'toast-walnuts',
+      id: 'prepare-nuts',
       title: {
-        uk: 'Підсушіть волоські горіхи',
-        en: 'Toast the walnuts',
-        es: 'Tuesta las nueces',
+        uk: 'Горіхи за бажанням',
+        en: 'Optional nuts',
+        es: 'Frutos secos opcionales',
       },
       instruction: {
-        uk: 'Підсушіть волоські горіхи при 160°C 8–10 хвилин.',
-        en: 'Toast the walnuts at 160°C for 8–10 minutes.',
-        es: 'Tuesta las nueces a 160°C durante 8–10 minutos.',
+        uk: 'Поки готується крем, подрібніть сирі або підсушені волоські горіхи чи пекан до невеликих шматочків.',
+        en: 'While the custard is cooking, chop raw or toasted walnuts or pecans into small pieces.',
+        es: 'Mientras se prepara la crema, pica nueces o pecanas, crudas o tostadas, en trozos pequeños.',
       },
       ingredientLineIds: ['walnuts'],
-      duration: {
-        kind: 'range',
-        min: 8,
-        max: 10,
-        unit: 'minute',
-      },
-      temperature: {
-        value: 160,
-        unit: 'C',
-        ovenMode: 'conventional',
-      },
-    },
-    {
-      id: 'toast-almonds',
-      title: {
-        uk: 'Підсушіть мигдальні пластівці',
-        en: 'Toast the almonds',
-        es: 'Tuesta las almendras',
-      },
-      instruction: {
-        uk: 'Підсушіть мигдальні пластівці при 160°C 4–5 хвилин.',
-        en: 'Toast the flaked almonds at 160°C for 4–5 minutes.',
-        es: 'Tuesta las almendras laminadas a 160°C durante 4–5 minutos.',
-      },
-      ingredientLineIds: ['flaked-almonds'],
-      duration: {
-        kind: 'range',
-        min: 4,
-        max: 5,
-        unit: 'minute',
-      },
-      temperature: {
-        value: 160,
-        unit: 'C',
-        ovenMode: 'conventional',
-      },
     },
     {
       id: 'assemble-cake',
       title: {
-        uk: 'Складіть торти',
-        en: 'Assemble the cakes',
-        es: 'Monta las tartas',
+        uk: 'Шари й оздоблення',
+        en: 'Layers and finish',
+        es: 'Capas y acabado',
       },
       instruction: {
-        uk: 'На кожен торт використайте 6 коржів. Використовуйте крем теплим. Нанесіть крем на кожен корж, додаючи волоські горіхи через один шар. Зверху посипте крихтою від коржів і мигдальними пластівцями.',
-        en: 'Use six layers for each cake. Use the custard while warm. Spread it on every layer, adding walnuts to every other layer. Finish with layer crumbs and flaked almonds.',
-        es: 'Usa seis capas para cada tarta. Usa la crema templada. Extiéndela sobre cada capa y añade nueces en capas alternas. Termina con migas de los recortes y almendras laminadas.',
+        uk: 'На кожен торт використайте 6 коржів, перемазуючи кожен теплим кремом. За бажанням додавайте горіхи в кожен прошарок або через один. Зверху посипте крихтою зі спечених обрізків.',
+        en: 'Use six pastry layers for each cake, spreading warm custard over each one. If using nuts, add them to every layer or alternate layers. Top with crumbs from the baked trimmings.',
+        es: 'Usa seis discos por tarta y reparte crema templada sobre cada uno. Si usas frutos secos, añádelos en cada capa o en capas alternas. Cubre con migas de los recortes horneados.',
       },
-      ingredientLineIds: ['walnuts', 'flaked-almonds'],
-      mediaIds: ['napoleon-round-six-layer-assembly-v3'],
+      ingredientLineIds: ['walnuts'],
+      mediaIds: [
+        'napoleon-author-plain-layer-v1',
+        'napoleon-author-nut-layer-v1',
+      ],
+      guidance: [
+        {
+          id: 'family-cakes',
+          kind: 'practicalTip',
+          text: {
+            uk: 'Мій син не дуже любить горіхи, тому з цієї порції я роблю два торти по шість коржів: один лише з кремом, другий — із горішками. Так смакує всім.',
+            en: 'My son is not keen on nuts, so I make two six-layer cakes from this batch: one with custard only and one with nuts. That way, everyone enjoys it.',
+            es: 'A mi hijo no le gustan mucho los frutos secos, así que con esta cantidad preparo dos tartas de seis capas: una solo con crema y otra con nueces. Así hay para todos los gustos.',
+          },
+        },
+      ],
     },
     {
       id: 'rest-assembled-cake',
       title: {
-        uk: 'Залиште при кімнатній температурі',
-        en: 'Rest at room temperature',
-        es: 'Deja reposar a temperatura ambiente',
+        uk: 'Коротка витримка',
+        en: 'A short rest',
+        es: 'Reposo breve',
       },
       instruction: {
-        uk: 'Після складання залиште торт приблизно на 1 годину при кімнатній температурі.',
-        en: 'After assembly, leave the cake at room temperature for about 1 hour.',
-        es: 'Después del montaje, deja la tarta aproximadamente 1 hora a temperatura ambiente.',
+        uk: 'Залиште торти приблизно на 1 годину при кімнатній температурі, щоб вони трохи стабілізувалися.',
+        en: 'Leave the cakes at room temperature for about 1 hour to let them settle a little.',
+        es: 'Deja las tartas a temperatura ambiente aproximadamente 1 hora para que se asienten un poco.',
       },
       ingredientLineIds: [],
       duration: {
@@ -1225,18 +1246,19 @@ export const glutenFreeNapoleonRecipe = {
         value: 1,
         unit: 'hour',
       },
+      mediaIds: ['napoleon-author-hero-v1'],
     },
     {
       id: 'refrigerate-cake',
       title: {
-        uk: 'Охолодіть до наступного дня',
-        en: 'Chill overnight',
-        es: 'Refrigera hasta el día siguiente',
+        uk: 'Ніч у холодильнику',
+        en: 'Overnight in the fridge',
+        es: 'Una noche en la nevera',
       },
       instruction: {
-        uk: 'Поставте торт у холодильник на 12–24 години. Найкращий смак — наступного дня.',
-        en: 'Refrigerate the cake for 12–24 hours. It tastes best the next day.',
-        es: 'Refrigera la tarta durante 12–24 horas. Está mejor al día siguiente.',
+        uk: 'Охолоджуйте 12–24 години: за цей час коржі просочаться кремом. Найкраще подавати наступного дня.',
+        en: 'Chill for 12–24 hours so the pastry layers absorb the custard. Serve the next day for the best flavour.',
+        es: 'Refrigera durante 12–24 horas para que las capas absorban la crema. Sírvela al día siguiente para disfrutarla en su mejor momento.',
       },
       ingredientLineIds: [],
       duration: {
@@ -1249,30 +1271,11 @@ export const glutenFreeNapoleonRecipe = {
   ],
   storage: null,
   makeAhead: {
-    uk: 'Тісто можна охолоджуйте на ніч. Після складання торт дозріває в холодильнику 12–24 години; найкращий смак — наступного дня.',
+    uk: 'Тісто можна охолоджувати всю ніч. Після складання торт дозріває в холодильнику 12–24 години; найкращий смак — наступного дня.',
     en: 'The dough may be chilled overnight. After assembly, refrigerate the cake for 12–24 hours; it tastes best the next day.',
     es: 'La masa puede refrigerarse toda la noche. Después del montaje, deja la tarta 12–24 horas en la nevera; está mejor al día siguiente.',
   },
   variations: [
-    {
-      id: 'less-rich-base',
-      dimension: 'fat',
-      label: {
-        uk: 'Менш жирна базова версія',
-        en: 'Less-rich base version',
-        es: 'Versión base menos grasa',
-      },
-      description: {
-        uk: 'Поточна базова версія використовує 120 г вершкового масла та 50 г олії.',
-        en: 'The current base uses 120 g butter and 50 g oil.',
-        es: 'La versión base actual usa 120 g de mantequilla y 50 g de aceite.',
-      },
-      provenance: {
-        state: 'repeatedlyVerified',
-        sourceIds: ['inventory-row', 'archive-status-note'],
-      },
-      availability: 'default',
-    },
     {
       id: 'more-custard',
       dimension: 'method',
@@ -1351,19 +1354,8 @@ export const glutenFreeNapoleonRecipe = {
       availability: 'hiddenUntilConfirmed',
     },
   ],
-  heroMediaId: 'napoleon-generated-card-v3',
+  heroMediaId: 'napoleon-author-hero-v1',
   media: [
-    {
-      id: 'napoleon-generated-card-v3',
-      type: 'image',
-      path: '/images/recipes/gluten-free-napoleon-card-v3.webp',
-      usage: ['hero', 'gallery'],
-      alt: {
-        uk: 'Безглютеновий торт Наполеон із шістьма тонкими коржами, заварним кремом і горіхами',
-        en: 'Gluten-free Napoleon cake with six thin layers, custard and nuts',
-        es: 'Tarta Napoleón sin gluten con seis capas finas, crema pastelera y frutos secos',
-      },
-    },
     {
       id: 'napoleon-author-crumb-v1',
       type: 'image',
@@ -1473,26 +1465,88 @@ export const glutenFreeNapoleonRecipe = {
       fit: 'cover',
     },
     {
-      id: 'napoleon-finished-custard-v3',
+      id: 'napoleon-author-hero-v1',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/finished-custard-v3.webp',
-      usage: ['step'],
+      path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-author-v1.webp',
+      usage: ['hero', 'gallery', 'step'],
       alt: {
-        uk: 'Густий гладкий ванільний заварний крем після додавання масла',
-        en: 'Thick smooth vanilla custard after the butter has been added',
-        es: 'Crema pastelera de vainilla espesa y lisa después de añadir la mantequilla',
+        uk: 'Наполеон із заварним кремом, вкритий золотистою крихтою',
+        en: 'Napoleon cake with custard and a golden crumb coating',
+        es: 'Tarta Napoleón con crema pastelera y cobertura de migas doradas',
       },
+      fit: 'cover',
     },
     {
-      id: 'napoleon-round-six-layer-assembly-v3',
+      id: 'napoleon-author-milk-v1',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/selected/round-six-layer-assembly-v3.webp',
+      path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/milk-author-v1.webp',
       usage: ['step'],
       alt: {
-        uk: 'Теплий крем розподіляють по круглому коржу під час складання шестишарового Наполеона',
-        en: 'Warm custard being spread over a round layer while assembling a six-layer Napoleon cake',
-        es: 'Crema templada extendida sobre una capa redonda durante el montaje de una tarta Napoleón de seis capas',
+        uk: 'Молоко в каструлі перед приготуванням крему',
+        en: 'Milk in the saucepan for the custard',
+        es: 'Leche en la cacerola para preparar la crema',
       },
+      fit: 'cover',
+    },
+    {
+      id: 'napoleon-author-custard-base-v1',
+      type: 'image',
+      path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/custard-base-author-v1.webp',
+      usage: ['step'],
+      alt: {
+        uk: 'Однорідна яєчна основа крему з вінчиком у мисці',
+        en: 'Smooth egg mixture with a whisk in the bowl',
+        es: 'Mezcla de huevo homogénea con varillas en el bol',
+      },
+      fit: 'cover',
+    },
+    {
+      id: 'napoleon-author-tempering-v1',
+      type: 'image',
+      path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/tempering-author-v1.webp',
+      usage: ['step'],
+      alt: {
+        uk: 'Яєчна суміш після додавання гарячого молока, поруч каструля',
+        en: 'Egg mixture after adding hot milk, beside the saucepan',
+        es: 'Mezcla de huevo tras añadir leche caliente, junto a la cacerola',
+      },
+      fit: 'cover',
+    },
+    {
+      id: 'napoleon-author-custard-texture-v1',
+      type: 'image',
+      path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/custard-texture-author-v1.webp',
+      usage: ['step'],
+      alt: {
+        uk: 'Густий заварний крем стікає з ложки в каструлю',
+        en: 'Thick custard flowing from a spoon into the saucepan',
+        es: 'Crema pastelera espesa cayendo de la cuchara a la cacerola',
+      },
+      fit: 'cover',
+    },
+    {
+      id: 'napoleon-author-plain-layer-v1',
+      type: 'image',
+      path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/plain-layer-author-v1.webp',
+      usage: ['step'],
+      alt: {
+        uk: 'Корж Наполеона з рівним шаром заварного крему',
+        en: 'Napoleon pastry layer covered with custard',
+        es: 'Disco de Napoleón cubierto de crema pastelera',
+      },
+      fit: 'cover',
+    },
+    {
+      id: 'napoleon-author-nut-layer-v1',
+      type: 'image',
+      path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/nut-layer-author-v1.webp',
+      usage: ['step'],
+      alt: {
+        uk: 'Корж із заварним кремом і подрібненими горіхами',
+        en: 'Pastry layer with custard and chopped nuts',
+        es: 'Disco con crema pastelera y frutos secos picados',
+      },
+      fit: 'cover',
     },
   ],
   relatedRecipeIds: [],
@@ -1532,7 +1586,14 @@ export const glutenFreeNapoleonRecipe = {
       file: 'Current Codex conversation, 2026-10-04',
       locator:
         'Author process photographs IMG_1715–IMG_1733 and approved seven-step method; subsequent confirmation of 250 g butter, 24 cm and 200°C.',
-      note: 'Source originals and image edit prompts are retained under media/recipes/gluten-free-napoleon/original/2026-10-04 and working/2026-10-04. Process photos have background/plate edits; hero and custard/assembly illustrations retain their existing origin.',
+      note: 'Dough originals and background-edit prompts are retained under media/recipes/gluten-free-napoleon/original/2026-10-04 and working/2026-10-04.',
+    },
+    {
+      id: 'author-custard-2026-10-04',
+      file: 'Current Codex conversation, 2026-10-04',
+      locator:
+        'Author photographs IMG_1735–IMG_1758 and recorded custard/assembly method; explicit ingredient clarification: 6 eggs, 400 g sugar, 16 g vanilla sugar, 40 g Schär Mix B (2 tbsp), 30 g corn or tapioca starch (2 tbsp), 2 l milk.',
+      note: 'Butter retained at 100 g from prior recipe. Photo originals and MOV retained in original/2026-10-04-custard; selected photo edits and prompts in working/2026-10-04-custard. Hero and process media are edited author photos: backgrounds, plate colour, framing and light balance adjusted with built-in image_gen; food preserved.',
     },
   ],
   contentGaps: [

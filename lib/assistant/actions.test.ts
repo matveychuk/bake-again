@@ -182,7 +182,9 @@ void test('single-option lines resolve canonically and preserve unresolved gaps'
   const gap = review.lines.find((line) => line.hasGaps)!;
   assert.ok(gap);
   assert.notEqual(gap.status, 'Tested');
-  const confirmed = resolveActionReview(proposal, {}, true);
+  assert.throws(() => resolveActionReview(proposal, {}, true), { code: 'CHOICE_REQUIRED' });
+  const choices = Object.fromEntries(review.lines.filter(line => line.options.length > 1).map(line => [line.ingredientLineId, line.options[0].ingredientId]));
+  const confirmed = resolveActionReview(proposal, choices, true);
   assert.equal(confirmed.proposal.status, 'Suggested');
   assert.notEqual(
     confirmed.lines.find((line) => line.ingredientLineId === gap.ingredientLineId)!.status,

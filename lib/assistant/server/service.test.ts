@@ -357,14 +357,14 @@ for (const locale of ['uk', 'en', 'es'] as const) {
       scope: { kind: 'step', stepIds: ['heat-milk'] },
     };
     const text = {
-      uk: 'Залиште холодним 600–650 мл молока.',
-      en: 'Keep 600–650 ml of milk cold.',
-      es: 'Reserva 600–650 ml de leche fría.',
+      uk: 'Нагрійте все молоко — 2000 мл.',
+      en: 'Heat all the milk — 2000 ml.',
+      es: 'Calienta toda la leche — 2000 ml.',
     }[locale];
     const response = await service({
       async answer(_request, projection) {
         const entry = [...projection.evidence.entries()].find(([, fact]) =>
-          fact.text.includes('600–650'),
+          fact.text.includes('2000'),
         );
         assert.ok(entry);
         return {
@@ -384,7 +384,7 @@ for (const locale of ['uk', 'en', 'es'] as const) {
     assert.ok(response.ok);
     assert.equal(response.blocks.length, 1);
     assert.equal(response.blocks[0]!.kind, 'evidence');
-    assert.match(response.blocks[0]!.text, /600–650/);
+    assert.match(response.blocks[0]!.text, /2000/);
   });
 }
 for (const scenario of [
@@ -404,7 +404,7 @@ for (const scenario of [
       service({
         async answer(_request, projection) {
           const entry = [...projection.evidence.entries()].find(([, fact]) =>
-            fact.text.includes('600–650'),
+            fact.text.includes('2000'),
           );
           assert.ok(entry);
           return {
@@ -421,8 +421,8 @@ for (const scenario of [
                   scenario === 'invented-number'
                     ? 'Залиште 999 мл молока.'
                     : scenario === 'false-status'
-                      ? 'Перевірено: залиште 600–650 мл.'
-                      : 'Залиште 600–650 мл молока.',
+                      ? 'Перевірено: нагрійте 2000 мл.'
+                      : 'Нагрійте 2000 мл молока.',
                 evidenceIds: [
                   scenario === 'unknown-source' ? 'e999999' : entry[0],
                 ],

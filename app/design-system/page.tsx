@@ -417,7 +417,7 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Site navigation</strong>
                 <span>
-                  Shared header: one sticky row and a disclosure on mobile
+                  Shared header: underlined current page and a quiet trailing shopping utility
                 </span>
               </div>
               <div className={styles.siteHeaderExample}>

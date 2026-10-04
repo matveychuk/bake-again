@@ -14,6 +14,22 @@ void test('formats decimal quantities and units for every supported locale', () 
   assert.equal(formatQuantity('uk', quantity), '1,5 ч. л.');
 });
 
+void test('keeps Ukrainian cup amounts grammatical when a recipe is scaled', () => {
+  for (const [value, label] of [
+    [1, '1 склянка'],
+    [2, '2 склянки'],
+    [3, '3 склянки'],
+    [4, '4 склянки'],
+    [5, '5 склянок'],
+    [1.5, '1,5 склянки'],
+  ] as const) {
+    assert.equal(
+      formatQuantity('uk', { kind: 'exact', value, unit: 'cup' }),
+      label,
+    );
+  }
+});
+
 void test('formats ranges and minimum durations without English-only grammar', () => {
   assert.equal(
     formatDuration('es', { kind: 'range', min: 8, max: 10, unit: 'minute' }),

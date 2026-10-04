@@ -461,10 +461,13 @@ variation.
 
 The Recipes navigation item returns to the home recipe collection, using the same URL as
 the Bake Again wordmark. Saved and Shopping list remain separate primary destinations;
-About comes last so the practical destinations stay together. At 620px and below, the
+About follows Saved. Shopping list is a quiet utility link at the end, with a trailing
+bag icon and a little extra separation on desktop. In the mobile disclosure, a subtle
+divider separates it from the main links; its label shares their starting edge. At 620px and below, the
 header is one sticky row with the wordmark, separate language switcher and a labelled
 Menu disclosure. Its links open in a surface below the header, retain their current-page
-indicator and remain available without JavaScript. The menu has a 44px trigger and
+indicator and remain available without JavaScript. The current destination uses only
+a text underline, without a filled background. The menu has a 44px trigger and
 links, visible keyboard focus and space for translated labels to wrap. The desktop
 navigation remains inline. Drafts appears only in a development build on
 localhost, 127.0.0.1 or ::1. Its route and unpublished recipe/Cook Mode URLs are

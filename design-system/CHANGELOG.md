@@ -917,3 +917,9 @@
 - Added localized custom-question allowance and deferred verification to the shared drawer.
 - Kept prepared answers unlimited and available during AI/verification outages.
 - Reused existing retry, composer and status styles; documented the Design Lab example.
+
+## 2026-10-04 · Quieter site navigation
+
+- Kept only the text underline for the active navigation destination.
+- Moved Shopping list to a quiet trailing utility link with a trailing bag icon; the mobile menu uses a subtle divider and aligned labels.
+- Updated the shared Design Lab header example and navigation contract.

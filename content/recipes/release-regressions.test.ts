@@ -216,9 +216,8 @@ void test('Napoleon milk allocation and disc count scale, while base facts stay 
         .find((s) => s.id === 'heat-milk')!
         .body.includes(
           formatQuantity(locale, {
-            kind: 'range',
-            min: 1200,
-            max: 1300,
+            kind: 'exact',
+            value: 4000,
             unit: 'ml',
           }),
         ),
@@ -258,7 +257,7 @@ void test('Napoleon custard eggs agree with ingredients and Cook Mode at every s
           expected,
         ),
       );
-      for (const id of ['bake-layer', 'toast-almonds', 'refrigerate-cake']) {
+      for (const id of ['bake-layer', 'prepare-nuts', 'refrigerate-cake']) {
         assert.equal(
           recipe.steps.find((step) => step.id === id)!.body,
           base.steps.find((step) => step.id === id)!.body,

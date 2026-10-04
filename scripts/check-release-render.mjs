@@ -50,9 +50,9 @@ for (const [locale, [plum, napoleon, prune, apple]] of Object.entries(paths)) {
       {
         slug: napoleon,
         expected: [
-          `${4 * scale} ${{ uk: 'шт.', en: 'pcs', es: 'uds.' }[locale]}`,
+          `${6 * scale} ${{ uk: 'шт.', en: 'pcs', es: 'uds.' }[locale]}`,
           String(12 * scale),
-          `${formatted(600 * scale)}–${formatted(650 * scale)} ${locale === 'uk' ? 'мл' : 'ml'}`,
+          `${formatted(2000 * scale)} ${locale === 'uk' ? 'мл' : 'ml'}`,
         ],
       },
     ]) {
@@ -118,7 +118,7 @@ for (const [locale, [plum, napoleon, prune, apple]] of Object.entries(paths)) {
       checks++;
     }
   }
-  for (const amount of [200, 225, 450, 900]) {
+  for (const amount of [200, 250, 500, 1000]) {
     const response = await fetch(
       new URL(
         `/${locale}/recipes/${napoleon}/cook?mode=ingredient&ingredient=schar-mix-b&amount=${amount}&unit=g`,
@@ -141,7 +141,7 @@ for (const [locale, [plum, napoleon, prune, apple]] of Object.entries(paths)) {
     } else {
       assert(
         visible.includes(
-          `data-status="${amount === 450 ? 'tested' : 'calculated'}"`,
+          `data-status="${amount === 500 ? 'tested' : 'calculated'}"`,
         ),
       );
       assert(visible.includes(`${amount} ${locale === 'uk' ? 'г' : 'g'}`));

@@ -98,6 +98,10 @@ export function formatUnit(
   unit: Unit,
   value: number,
 ): string {
+  if (locale === 'uk' && unit === 'cup') {
+    const form = new Intl.PluralRules('uk').select(value);
+    return form === 'one' ? 'склянка' : form === 'many' ? 'склянок' : 'склянки';
+  }
   return unitLabels[locale][unit][pluralForm(locale, value)];
 }
 

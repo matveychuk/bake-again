@@ -101,9 +101,9 @@ void test('step scope requires real, unique canonical steps; titles and ordinals
   assert.deepEqual(
     context({
       scope: 'step',
-      stepIds: ['toast-walnuts', 'toast-almonds'],
+      stepIds: ['rest-assembled-cake', 'refrigerate-cake'],
     }).steps.map((step) => step.id),
-    ['toast-walnuts', 'toast-almonds'],
+    ['rest-assembled-cake', 'refrigerate-cake'],
   );
 });
 
@@ -229,7 +229,7 @@ void test('verified custard and narrower dairy guidance preserve their own prove
   const result = context();
   assert.equal(result.recipe.evidence.status, 'Tested');
   const milk = result.ingredients.find((line) => line.id === 'milk-custard');
-  assert.equal(milk?.amount.evidence.sourceState, 'repeatedlyVerified');
+  assert.equal(milk?.amount.evidence.sourceState, 'tested');
   assert.equal(milk?.amount.evidence.status, 'Tested');
   assert.deepEqual(milk?.amount.evidence.gapIds, []);
   const dairy = result.ingredients.find(
@@ -346,7 +346,7 @@ void test('adjusted quantities are recomputed without inheriting Tested', () => 
   }
   const milk = result.ingredients.find((line) => line.id === 'milk-custard')!;
   assert.equal(milk.amount.evidence.status, 'Calculated');
-  assert.equal(milk.amount.evidence.sourceState, 'repeatedlyVerified');
+  assert.equal(milk.amount.evidence.sourceState, 'tested');
   assert.deepEqual(milk.amount.evidence.limitations, []);
   assert.deepEqual(milk.amount.evidence.gapIds, []);
   assert.equal(result.timing?.basis, 'canonical-base');

@@ -203,16 +203,24 @@ export function getCookModeDefinition(
           ingredientSections: canonicalSource.ingredientSections.map(
             (section) => ({
               ...section,
-              ingredients: section.ingredients.map((ingredient) => ({
-                ...ingredient,
+              ingredients: section.ingredients.map((ingredient) => {
                 // Keep the source's alternatives visible in both Cook ingredient views.
-                name:
+                const name =
                   lines
                     .find((line) => line.id === ingredient.id)
                     ?.options.map((option) => option.name[locale])
                     .join({ uk: ' або ', en: ' or ', es: ' o ' }[locale]) ??
-                  ingredient.name,
-              })),
+                  ingredient.name;
+                return {
+                  ...ingredient,
+                  name,
+                  // Reader notes can repeat an alternative already included above.
+                  note: ingredient.note
+                    ?.split(' · ')
+                    .filter((note) => !name.includes(note))
+                    .join(' · ') || undefined,
+                };
+              }),
             }),
           ),
         };

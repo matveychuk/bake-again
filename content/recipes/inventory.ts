@@ -504,10 +504,10 @@ export const recipeInventory: InventoryRecipe[] = [
     scalingAnchorIngredientId: 'schar-mix-b',
     launchPriority: 'High',
     heroCandidate: 'Yes',
-    image: '/images/recipes/gluten-free-napoleon-card-v3.webp',
-    imageKind: 'generated-preview',
-    imageAlt:
-      'Gluten-free Napoleon cake with six thin layers, custard and nuts',
+    image:
+      '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-author-v1.webp',
+    imageKind: 'edited-author-photo',
+    imageAlt: 'Napoleon cake with custard and a golden crumb coating',
     summary:
       'A many-layered gluten-free celebration cake with warm custard and a long overnight rest.',
     source:

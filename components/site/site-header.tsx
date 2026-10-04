@@ -76,22 +76,22 @@ export async function SiteHeader({
         {messages.navigation.saved}
       </a>
       <a
-        className="nav-bag"
-        href={localeShoppingListPath(locale)}
-        aria-current={
-          pathname === localeShoppingListPath(locale) ? 'page' : undefined
-        }
-      >
-        <ShoppingBag aria-hidden="true" size={17} strokeWidth={1.7} />
-        {messages.navigation.shoppingList}
-      </a>
-      <a
         href={localeAboutPath(locale)}
         aria-current={
           pathname === localeAboutPath(locale) ? 'page' : undefined
         }
       >
         {messages.navigation.about}
+      </a>
+      <a
+        className="nav-bag"
+        href={localeShoppingListPath(locale)}
+        aria-current={
+          pathname === localeShoppingListPath(locale) ? 'page' : undefined
+        }
+      >
+        <span>{messages.navigation.shoppingList}</span>
+        <ShoppingBag aria-hidden="true" size={17} strokeWidth={1.7} />
       </a>
     </>
   );

@@ -77,17 +77,17 @@ export const recipeSeo: Record<string, RecipeSeoCopy> = {
     uk: {
       title: 'Безглютеновий Наполеон',
       description:
-        'Безглютеновий Наполеон із тонких коржів, заварного крему та горіхів. Рецепт на два торти діаметром 24 см, по шість коржів у кожному.',
+        'Безглютеновий Наполеон із тонких коржів і заварного крему, з горіхами за бажанням. Рецепт на два торти діаметром 24 см, по шість коржів у кожному.',
     },
     en: {
       title: 'Gluten-Free Napoleon Cake',
       description:
-        'Gluten-free Napoleon cake with thin pastry layers, custard and nuts. Makes two 24 cm cakes with six layers each; follow the method step by step.',
+        'Gluten-free Napoleon cake with thin pastry layers, custard and optional nuts. Makes two 24 cm cakes with six layers each; follow the method step by step.',
     },
     es: {
       title: 'Tarta Napoleón sin gluten',
       description:
-        'Tarta Napoleón sin gluten con capas finas, crema pastelera y frutos secos. Receta para dos tartas de 24 cm, con seis capas cada una.',
+        'Tarta Napoleón sin gluten con capas finas, crema pastelera y frutos secos opcionales. Receta para dos tartas de 24 cm, con seis capas cada una.',
     },
   },
   'crinkle-cookies': {
