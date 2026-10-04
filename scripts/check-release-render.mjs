@@ -128,14 +128,14 @@ for (const [locale, [plum, napoleon, prune, apple]] of Object.entries(paths)) {
     assert.equal(response.status, 200);
     const html = await response.text();
     const visible = html.slice(0, html.indexOf('</main>'));
-    if (amount === 200) {
+    if (amount === 200 || amount === 250) {
       assert(visible.includes('id="cook-mode-unavailable-title"'));
       assert(
         !visible.includes('data-status='),
         'Blocked SSR must not show Tested',
       );
       assert(
-        visible.includes('amount=200'),
+        visible.includes(`amount=${amount}`),
         'Blocked SSR must preserve the requested amount',
       );
     } else {
@@ -144,7 +144,8 @@ for (const [locale, [plum, napoleon, prune, apple]] of Object.entries(paths)) {
           `data-status="${amount === 500 ? 'tested' : 'calculated'}"`,
         ),
       );
-      assert(visible.includes(`${amount} ${locale === 'uk' ? 'г' : 'g'}`));
+      // The first dough step uses half of the batch flour; the rest is added later.
+      assert(visible.includes(`${amount / 2} ${locale === 'uk' ? 'г' : 'g'}`));
     }
     checks++;
   }
