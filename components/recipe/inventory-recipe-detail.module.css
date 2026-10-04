@@ -1,33 +1,6 @@
 .page {
   min-height: 100vh;
 }
-.breadcrumb {
-  width: min(
-    calc(100% - (var(--layout-gutter-desktop) * 2)),
-    var(--layout-max-content)
-  );
-  margin: var(--space-3) auto;
-  display: flex;
-  gap: var(--space-4);
-  color: var(--color-text-secondary);
-  font-size: 0.78rem;
-  flex-wrap: wrap;
-  overflow-wrap: anywhere;
-}
-.breadcrumb a {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  color: var(--color-text-primary);
-  font-weight: 700;
-  text-decoration: none;
-}
-.breadcrumb span::before {
-  content: '/';
-  margin-right: var(--space-4);
-  opacity: 0.45;
-}
 .hero {
   width: min(
     calc(100% - (var(--layout-gutter-desktop) * 2)),
@@ -82,6 +55,18 @@
   min-width: 0;
   margin: 0;
   overflow-wrap: anywhere;
+}
+.heroBack a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-small);
+  font-weight: 750;
+  letter-spacing: normal;
+  text-decoration: none;
+  text-transform: none;
 }
 .heroActions {
   min-width: 0;
@@ -216,13 +201,20 @@
   line-height: 1.6;
 }
 .method {
-  padding: var(--space-12) max(var(--layout-gutter-desktop), calc((100vw - 1240px) / 2)) var(--space-16);
+  padding: var(--space-12)
+    max(var(--layout-gutter-desktop), calc((100vw - 1240px) / 2))
+    var(--space-16);
   background: var(--color-background-surface);
 }
-.method h2 { margin-top: 0; }
+.method h2 {
+  margin-top: 0;
+}
 .methodHeading {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(
+      0,
+      var(--layout-assistant-drawer)
+    );
   align-items: start;
   gap: var(--space-8);
 }
@@ -235,33 +227,14 @@
   list-style: none;
 }
 .steps > li {
-  padding: var(--space-6) 0;
-  display: grid;
-  grid-template-columns: 65px minmax(0, 1fr);
-  gap: 0;
+  padding: var(--space-4) 0;
   border-top: 1px solid var(--color-border-subtle);
 }
 .stepMedia {
-  grid-column: 2;
-  grid-row: 3;
-}
-.stepNumber {
-  grid-column: 1;
-  grid-row: 2;
-  align-self: baseline;
-  color: var(--color-action-primary);
-  font-family: var(--font-family-display);
-  font-size: 1.2rem;
+  margin-inline-start: var(--space-16);
 }
 .stepContent {
   min-width: 0;
-  grid-column: 2;
-  grid-row: 2;
-  align-self: baseline;
-}
-.stepWithMedia > div[aria-label] {
-  grid-column: 2;
-  grid-row: 3;
 }
 .steps h3 {
   margin: 0 0 var(--space-3);
@@ -275,16 +248,6 @@
   color: var(--color-text-secondary);
   font-size: var(--font-size-body);
   line-height: 1.6;
-}
-.stepMeta {
-  grid-column: 2;
-  grid-row: 1;
-  margin: 0 0 var(--space-2);
-  color: var(--color-action-primary-strong) !important;
-  font-size: var(--font-size-label) !important;
-  font-weight: 750;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 .pending {
   padding: 24px;
@@ -324,10 +287,6 @@
 }
 
 @media (max-width: 900px) {
-  .breadcrumb {
-    width: calc(100% - (var(--layout-gutter-mobile) * 2));
-    margin: var(--space-4) auto;
-  }
   .hero {
     width: calc(100% - (var(--layout-gutter-mobile) * 2));
     display: grid;
@@ -370,12 +329,8 @@
   .methodHeading > :last-child {
     justify-self: start;
   }
-  .steps > li {
-    grid-template-columns: 45px 1fr;
-  }
-  .stepWithMedia > div[aria-label] {
-    grid-column: 1 / -1;
-    margin-top: var(--space-6);
+  .stepMedia {
+    margin-inline-start: var(--space-12);
   }
   .publication {
     width: calc(100% - (var(--layout-gutter-mobile) * 2));
@@ -403,7 +358,7 @@
     order: 1;
   }
   .hero h1 {
-    font-size: clamp(2.5rem, 12vw, 3.5rem);
+    font-size: var(--font-size-recipe-title-mobile);
   }
   .beforeStart {
     display: block;
@@ -415,23 +370,16 @@
 }
 
 @media (max-width: 560px) {
-  .breadcrumb span {
+  .stepMedia {
+    margin-inline-start: 0;
+  }
+
+  .heroTopline p {
     display: none;
   }
   .heroTopline {
     align-items: flex-start;
-  }
-  .stepMedia {
-    grid-column: 1 / -1;
-  }
-  .steps > li {
-    grid-template-columns: var(--space-12) minmax(0, 1fr);
-  }
-  .stepContent {
-    grid-column: 1 / -1;
-  }
-  .stepContent > [data-recipe-step-header] {
-    padding-inline-start: var(--space-12);
+    flex-wrap: nowrap;
   }
 }
 .page h2,

@@ -99,7 +99,7 @@ void test('shows localized planning guidance without inventing a total time', ()
   }
   assert.equal(
     getRecipeContent('gluten-free-napoleon', 'uk')?.evidence?.explanation,
-    'Готували багато разів.',
+    'Цю версію успішно приготували.',
   );
 });
 
@@ -114,15 +114,15 @@ void test('selects the requested locale for a detailed recipe', () => {
   assert.equal(recipe?.ingredientSections[0]?.title, 'Коржі');
   assert.match(recipe?.beforeStart?.[0] ?? '', /[А-Яа-яІіЇїЄє]/);
   assert.equal(recipe?.beforeStart?.length, 2);
-  assert.match(recipe?.beforeStart?.[0] ?? '', /пергаменту.*всіх коржів/i);
+  assert.match(recipe?.beforeStart?.[0] ?? '', /пергамент.*всіх коржів/i);
   assert.equal(recipe?.evidence?.status, 'tested');
-  assert.equal(recipe?.steps.length, 19);
-  assert.equal(recipe?.steps[0]?.title, 'Змішайте сухі інгредієнти');
-  assert.equal(recipe?.steps[0]?.meta, '5–10 с');
+  assert.equal(recipe?.steps.length, 17);
+  assert.equal(recipe?.steps[0]?.title, 'Масляна крихта');
+  assert.equal(recipe?.steps[0]?.meta, undefined);
   assert.equal(recipe?.steps.at(-1)?.title, 'Охолодіть до наступного дня');
   assert.deepEqual(amount('schar-mix-b'), {
     kind: 'exact',
-    value: 450,
+    value: 500,
     unit: 'g',
   });
   assert.deepEqual(amount('eggs-custard'), {
@@ -174,11 +174,7 @@ void test('selects the requested locale for a detailed recipe', () => {
     recipe?.steps
       .find((step) => step.id === 'cut-in-butter')
       ?.media?.map((item) => item.id),
-    [
-      'napoleon-butter-ready-v1',
-      'napoleon-butter-early-pulse-v1',
-      'napoleon-butter-crumb-v1',
-    ],
+    ['napoleon-author-crumb-v1'],
   );
   assert.equal(
     recipe?.steps.find((step) => step.id === 'assemble-cake')?.media?.[0]?.id,
@@ -491,10 +487,8 @@ void test('keeps the tested profiterole quantities, yield and Ukrainian guidance
 
   assert.equal(recipe?.evidence?.status, 'tested');
   assert.match(recipe?.evidence?.explanation ?? '', /20 профітролів/i);
-  assert.equal(
-    recipe?.yield?.label,
-    'Близько 20 профітролів розміром із волоський горіх',
-  );
+  assert.equal(recipe?.yield?.label, 'Близько 20 профітролів');
+  assert.match(recipe?.geometry?.label ?? '', /волоський горіх/);
   assert.equal(recipe?.overview.timing.totalElapsedMinutes, null);
   assert.equal(recipe?.overview.difficulty, 'medium');
   assert.equal(recipe?.presentation, 'concise');

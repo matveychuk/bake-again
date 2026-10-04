@@ -19,13 +19,37 @@ export function RecipeIngredientList({
   className,
   locale = 'en',
   variant = 'full',
+  sections,
 }: {
   items: RecipeIngredientListItem[];
   className?: string;
   locale?: AppLocale;
   variant?: 'full' | 'compact';
+  sections?: Array<{
+    id: string;
+    title: string;
+    items: RecipeIngredientListItem[];
+  }>;
 }) {
   const optionalLabel = getUiMessages(locale).recipe.optional;
+
+  if (sections && sections.length > 1) {
+    return (
+      <div className={styles.sections}>
+        {sections.map((section) => (
+          <section key={section.id}>
+            <h3>{section.title}</h3>
+            <RecipeIngredientList
+              items={section.items}
+              locale={locale}
+              variant={variant}
+              className={className}
+            />
+          </section>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <ul

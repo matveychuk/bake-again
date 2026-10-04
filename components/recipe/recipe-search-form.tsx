@@ -11,23 +11,30 @@ export function RecipeSearchForm({
   collectionId,
   id = 'recipe-search',
   action,
+  compactMobile = false,
 }: {
   locale: AppLocale;
   query?: string;
   collectionId?: RecipeCollectionId | null;
   id?: string;
   action?: string;
+  compactMobile?: boolean;
 }) {
   const messages = getUiMessages(locale).home;
   return (
     <search aria-label={messages.searchLabel}>
       <form
         data-analytics-search="true"
-        className="search-form"
+        className={`search-form${compactMobile ? ' search-form--compact-mobile' : ''}`}
         action={action ?? `${localeHomePath(locale)}#recipes`}
         method="get"
       >
-        <Search aria-hidden="true" size={21} strokeWidth={1.7} />
+        <Search
+          className="search-form__leading-icon"
+          aria-hidden="true"
+          size={21}
+          strokeWidth={1.7}
+        />
         <label className="sr-only" htmlFor={id}>
           {messages.searchLabel}
         </label>
@@ -43,7 +50,18 @@ export function RecipeSearchForm({
         {collectionId && (
           <input type="hidden" name="collection" value={collectionId} />
         )}
-        <Button type="submit">{messages.searchAction}</Button>
+        <Button
+          type="submit"
+          aria-label={compactMobile ? messages.searchAction : undefined}
+        >
+          <Search
+            className="search-form__submit-icon"
+            aria-hidden="true"
+            size={20}
+            strokeWidth={1.8}
+          />
+          <span className="search-form__submit-label">{messages.searchAction}</span>
+        </Button>
       </form>
     </search>
   );

@@ -147,7 +147,7 @@ void test('Cook Mode ineligibility cannot be forged; open-scaling only opens rep
     surface: 'cook-mode',
     configuration: {
       kind: 'adjusted',
-      geometryId: 'round-24cm-preview',
+      geometryId: 'round-28cm-preview',
       quantityAdjustment: { mode: 'batchScale', factor: 0.5 },
     },
   };
@@ -164,7 +164,7 @@ void test('Cook Mode ineligibility cannot be forged; open-scaling only opens rep
   );
 });
 
-void test('choice lines require an explicit human ingredient selection and preserve gaps', () => {
+void test('single-option lines resolve canonically and preserve unresolved gaps', () => {
   const request: AssistantRequestV1 = {
     ...actionRequest,
     scope: { kind: 'recipe' },
@@ -175,24 +175,17 @@ void test('choice lines require an explicit human ingredient selection and prese
     'choice',
   );
   const review = resolveActionReview(proposal);
-  const choice = review.lines.find((line) => line.options.length > 1)!;
-  assert.ok(choice);
-  assert.equal(choice.selectedIngredientId, null);
-  assert.notEqual(choice.status, 'Tested');
-  assert.throws(() => resolveActionReview(proposal, {}, true), {
-    code: 'CHOICE_REQUIRED',
-  });
-  const choices = Object.fromEntries(
-    review.lines
-      .filter((line) => line.options.length > 1)
-      .map((line) => [line.ingredientLineId, line.options[0].ingredientId]),
-  );
-  const confirmed = resolveActionReview(proposal, choices, true);
+  const flour = review.lines.find((line) => line.ingredientLineId === 'schar-mix-b')!;
+  assert.equal(flour.options.length, 1);
+  assert.equal(flour.selectedIngredientId, flour.options[0].ingredientId);
+  assert.throws(() => resolveActionReview(proposal, { [flour.ingredientLineId]: 'forged' }, true));
+  const gap = review.lines.find((line) => line.hasGaps)!;
+  assert.ok(gap);
+  assert.notEqual(gap.status, 'Tested');
+  const confirmed = resolveActionReview(proposal, {}, true);
   assert.equal(confirmed.proposal.status, 'Suggested');
   assert.notEqual(
-    confirmed.lines.find(
-      (line) => line.ingredientLineId === choice.ingredientLineId,
-    )!.status,
+    confirmed.lines.find((line) => line.ingredientLineId === gap.ingredientLineId)!.status,
     'Tested',
   );
 });

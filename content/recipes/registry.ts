@@ -290,9 +290,13 @@ function detailedRecipeContent(
       id: step.id,
       title: step.title?.[locale] ?? step.instruction[locale],
       body: step.instruction[locale],
-      quantityMentions: step.quantityMentions?.map(mention => ({ ...mention, text: mention.text[locale] })),
+      quantityMentions: step.quantityMentions?.map((mention) => ({
+        ...mention,
+        text: mention.text[locale],
+      })),
       cookIngredients: step.ingredientLineIds.map((ingredientId) => ({
         ingredientId,
+        fraction: step.ingredientFractions?.[ingredientId],
       })),
       meta:
         recipe.presentation === 'concise'
@@ -316,6 +320,7 @@ function detailedRecipeContent(
           {
             id: item.id,
             src: item.path,
+            fit: item.fit,
             alt: item.alt[locale],
             caption: item.caption?.[locale],
           },
@@ -425,10 +430,17 @@ function getRecipeContentWithoutHelp(
 }
 
 /** Keep prepared help attached to canonical identity before any composition. */
-export function getRecipeContent(recipeId: string, locale: AppLocale = 'en'): StructuredRecipeContent | null {
+export function getRecipeContent(
+  recipeId: string,
+  locale: AppLocale = 'en',
+): StructuredRecipeContent | null {
   const content = getRecipeContentWithoutHelp(recipeId, locale);
   if (!content) return null;
-  return { ...content, steps: content.steps.map(step => ({
-    ...step, help: getStepHelpDefinitions(recipeId, step.id, locale),
-  })) };
+  return {
+    ...content,
+    steps: content.steps.map((step) => ({
+      ...step,
+      help: getStepHelpDefinitions(recipeId, step.id, locale),
+    })),
+  };
 }

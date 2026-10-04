@@ -24,6 +24,8 @@ export type CookStep = {
   tip?: string;
   timerSeconds?: number;
   timerOptionsSeconds?: number[];
+  /** Localized phase names keyed by duration; used when a step has multiple phases. */
+  timerOptionLabels?: Record<number, string>;
   media?: CookMediaItem[];
 };
 
@@ -41,9 +43,17 @@ export type CookModeDefinition = {
     /** Exact composed version, including a selected cream when applicable. */
     recipeVersionId?: string;
     isAdjusted: boolean;
-    evidence?: { status: 'tested' | 'calculated' | 'suggested'; explanation: string };
+    evidence?: {
+      status: 'tested' | 'calculated' | 'suggested';
+      explanation: string;
+    };
     steps: CookStep[];
     allIngredients?: CookIngredient[];
+    ingredientSections?: Array<{
+      id: string;
+      title: string;
+      items: CookIngredient[];
+    }>;
     assistantConfiguration?: AssistantConfiguration;
     unavailableReason?: string;
   };

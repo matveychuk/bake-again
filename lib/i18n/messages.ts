@@ -1,7 +1,17 @@
 import type { AppLocale } from './config';
 
+function methodStepCount(locale: AppLocale, count: number): string {
+  const form = new Intl.PluralRules(locale).select(count);
+  if (locale === 'uk') {
+    return `${count} ${form === 'one' ? 'крок' : form === 'few' ? 'кроки' : 'кроків'}`;
+  }
+  if (locale === 'es') return `${count} ${form === 'one' ? 'paso' : 'pasos'}`;
+  return `${count} ${form === 'one' ? 'step' : 'steps'}`;
+}
+
 type UiMessages = {
   navigation: {
+    menu: string;
     recipes: string;
     about: string;
     drafts: string;
@@ -94,6 +104,7 @@ type UiMessages = {
     resetTimer: string;
     keepScreenAwake: string;
     screenAwake: string;
+    screenAwakeError: string;
     stepChanged: (current: number, total: number, title: string) => string;
     completedSteps: (completed: number, total: number) => string;
     cookingComplete: string;
@@ -144,7 +155,6 @@ type UiMessages = {
     optional: string;
     markIngredientPrepared: (name: string) => string;
     method: (count: number) => string;
-    stepByStep: string;
     openCookMode: string;
     methodPending: string;
     methodPendingDescription: string;
@@ -248,6 +258,7 @@ type UiMessages = {
 export const uiMessages: Record<AppLocale, UiMessages> = {
   en: {
     navigation: {
+      menu: 'Menu',
       recipes: 'Recipes',
       about: 'About',
       drafts: 'Drafts',
@@ -355,6 +366,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       resetTimer: 'Reset timer',
       keepScreenAwake: 'Keep screen awake',
       screenAwake: 'Screen stays awake',
+      screenAwakeError:
+        'Could not keep the screen awake. Check your browser or battery settings.',
       stepChanged: (current, total, title) =>
         `Step ${current} of ${total}: ${title}`,
       completedSteps: (completed, total) =>
@@ -411,8 +424,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       chooseCream: (name) => `Choose ${name}`,
       optional: 'optional',
       markIngredientPrepared: (name) => `Mark ${name} as prepared`,
-      method: (count) => `Method · ${count} steps`,
-      stepByStep: 'Make it step by step.',
+      method: (count) => methodStepCount('en', count),
       openCookMode: 'Open Cook Mode',
       methodPending: 'Method pending',
       methodPendingDescription:
@@ -554,6 +566,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
   },
   es: {
     navigation: {
+      menu: 'Menú',
       recipes: 'Recetas',
       about: 'Nosotros',
       drafts: 'Borradores',
@@ -661,6 +674,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       resetTimer: 'Reiniciar temporizador',
       keepScreenAwake: 'Mantener pantalla activa',
       screenAwake: 'Pantalla activa',
+      screenAwakeError:
+        'No se pudo mantener la pantalla activa. Revisa el navegador o la batería.',
       stepChanged: (current, total, title) =>
         `Paso ${current} de ${total}: ${title}`,
       completedSteps: (completed, total) =>
@@ -718,8 +733,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       chooseCream: (name) => `Elegir ${name}`,
       optional: 'opcional',
       markIngredientPrepared: (name) => `Marcar ${name} como preparado`,
-      method: (count) => `Método · ${count} pasos`,
-      stepByStep: 'Hazlo paso a paso.',
+      method: (count) => methodStepCount('es', count),
       openCookMode: 'Abrir modo Cocina',
       methodPending: 'Método pendiente',
       methodPendingDescription:
@@ -863,6 +877,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
   },
   uk: {
     navigation: {
+      menu: 'Меню',
       recipes: 'Рецепти',
       about: 'Про нас',
       drafts: 'Чернетки',
@@ -982,6 +997,8 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       resetTimer: 'Скинути таймер',
       keepScreenAwake: 'Не вимикати екран',
       screenAwake: 'Екран не вимикається',
+      screenAwakeError:
+        'Не вдалося втримати екран активним. Перевірте браузер або режим економії заряду.',
       stepChanged: (current, total, title) =>
         `Крок ${current} з ${total}: ${title}`,
       completedSteps: (completed, total) =>
@@ -1039,8 +1056,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       optional: 'необов’язково',
       markIngredientPrepared: (name) =>
         `Позначити «${name}» як підготовлений інгредієнт`,
-      method: (count) => `Спосіб · ${count} кроків`,
-      stepByStep: 'Готуйте крок за кроком.',
+      method: (count) => methodStepCount('uk', count),
       openCookMode: 'Відкрити режим приготування',
       methodPending: 'Спосіб ще не додано',
       methodPendingDescription:

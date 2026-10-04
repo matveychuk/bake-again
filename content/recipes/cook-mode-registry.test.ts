@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   createSourceCookIngredients,
+  createSourceCookIngredientSections,
   createSourceCookSteps,
   isSourceCookModeAvailable,
 } from './cook-mode-adapter.ts';
@@ -60,9 +61,7 @@ void test('carrot cake preserves aligned localized steps, ingredients and the ba
     const steps = createSourceCookSteps(content, locale);
     assert.equal(content.evidence?.status, 'tested');
     assert.equal(steps.length, 6);
-    assert.deepEqual(steps[0].stepIds, [
-      'prepare-add-ins',
-    ]);
+    assert.deepEqual(steps[0].stepIds, ['prepare-add-ins']);
     assert.deepEqual(
       steps
         .find((step) => step.stepIds.includes('blend-carrots'))
@@ -335,6 +334,44 @@ void test('eclairs Cook Mode keeps the four Ukrainian checkpoint photos', () => 
   assert.equal(steps[3].media?.[0]?.id, 'eclairs-heavy-ribbon-v2');
   assert.equal(steps[4].media?.[0]?.id, 'eclairs-piped-profiteroles-v2');
   assert.equal(steps[6].media?.[0]?.id, 'eclairs-dry-hollow-shells-v2');
+});
+
+void test('both profiterole oven phases are available without scaling their duration', () => {
+  for (const locale of ['uk', 'en', 'es'] as const) {
+    const content = getRecipeContent('eclairs', locale)!;
+    const configured = applySourceRecipeConfiguration(
+      content,
+      { kind: 'adjusted', scaleFactor: 2 },
+      locale,
+    );
+    const bake = createSourceCookSteps(configured, locale).find((step) =>
+      step.stepIds.includes('bake'),
+    )!;
+    assert.deepEqual(bake.timerOptionsSeconds, [600, 900]);
+    assert.equal(bake.timerSeconds, 600);
+    assert.match(bake.timerOptionLabels![600], /200°C/);
+    assert.match(bake.timerOptionLabels![900], /180°C/);
+  }
+});
+
+void test('Cook drawer groups retain every scaled ingredient and localized section title', () => {
+  for (const locale of ['uk', 'en', 'es'] as const) {
+    const content = applySourceRecipeConfiguration(
+      getRecipeContent('gluten-free-napoleon', locale)!,
+      { kind: 'adjusted', scaleFactor: 2 },
+      locale,
+    );
+    const sections = createSourceCookIngredientSections(content, locale);
+    assert.deepEqual(
+      sections.map(({ title }) => title),
+      content.ingredientSections.map(({ title }) => title),
+    );
+    assert.deepEqual(
+      sections.flatMap(({ items }) => items),
+      createSourceCookIngredients(content, locale),
+    );
+    assert.ok(sections.length > 1);
+  }
 });
 
 void test('cinnamon-roll Cook Mode keeps baking and finishing as separate steps', () => {

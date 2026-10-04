@@ -28,6 +28,9 @@ export function RecipeOverview({
   const totalTime = minutesLabel(locale, overview?.timing.totalElapsedMinutes);
   const note = overview?.timing.planningNote;
   const difficulty = overview?.difficulty;
+  const longTestedExplanation =
+    content?.evidence?.status === 'tested' &&
+    content.evidence.explanation.length > 100;
 
   return (
     <div className={styles.overview}>
@@ -40,9 +43,17 @@ export function RecipeOverview({
                 locale={locale}
                 status={content.evidence.status}
               />
-              {content.evidence.explanation && (
-                <p>{content.evidence.explanation}</p>
-              )}
+              {content.evidence.explanation &&
+                (longTestedExplanation ? (
+                  <details className={styles.evidenceDetails}>
+                    <summary>
+                      {getUiMessages(locale).status.tested.explanation}
+                    </summary>
+                    <p>{content.evidence.explanation}</p>
+                  </details>
+                ) : (
+                  <p>{content.evidence.explanation}</p>
+                ))}
             </>
           ) : (
             <>

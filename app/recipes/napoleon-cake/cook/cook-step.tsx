@@ -1,5 +1,6 @@
 import { List, ListChecks } from 'lucide-react';
 import { AssistantTrigger } from '@/components/assistant';
+import { assistantMessages } from '@/components/assistant/assistant.messages';
 import { stepHelpMessages } from '@/components/assistant/step-help.messages';
 import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
 import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
@@ -9,6 +10,7 @@ import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import type { CookStep as CookStepData } from './cook-mode.data';
 import { CookTimer } from './cook-timer';
+import { CookWakeLock } from './cook-wake-lock';
 import styles from './cook-mode.module.css';
 
 type CookStepProps = {
@@ -63,19 +65,6 @@ export function CookStep({
       <RecipeStepContent
         technique={step.technique}
         locale={locale}
-        action={
-          assistant && step.preparedAnswers?.length ? (
-            <AssistantTrigger
-              className={styles.ask}
-              compact
-              configuration={assistant.configuration}
-              label={stepHelpMessages[assistant.locale].trigger}
-              preparedAnswers={step.preparedAnswers}
-              scope={{ kind: 'step', stepIds: step.stepIds }}
-              stepTitle={step.title}
-            />
-          ) : undefined
-        }
         checkpoint={step.checkpoint}
         checkpointLabel={messages.recipe.checkpoint}
         headingId="cook-step-title"
@@ -113,12 +102,32 @@ export function CookStep({
         )}
       </RecipeStepContent>
 
+      <div className={styles.stepTools}>
+        {assistant && (
+          <AssistantTrigger
+            className={styles.ask}
+            compact
+            configuration={assistant.configuration}
+            label={
+              step.preparedAnswers?.length
+                ? stepHelpMessages[assistant.locale].trigger
+                : assistantMessages[assistant.locale].trigger.step
+            }
+            preparedAnswers={step.preparedAnswers}
+            scope={{ kind: 'step', stepIds: step.stepIds }}
+            stepTitle={step.title}
+          />
+        )}
+        <CookWakeLock locale={locale} />
+      </div>
+
       {step.timerSeconds && (
         <CookTimer
           remaining={remaining}
           running={timerRunning}
           options={step.timerOptionsSeconds ?? [step.timerSeconds]}
           selectedSeconds={selectedTimerSeconds}
+          optionLabels={step.timerOptionLabels}
           onSelectDuration={onSelectTimerDuration}
           onToggle={onToggleTimer}
           onReset={onResetTimer}
@@ -133,7 +142,6 @@ export function CookStep({
           variant="cook"
         />
       )}
-
     </article>
   );
 }

@@ -276,8 +276,14 @@ export interface RecipeStep {
   /** A concise action title may be added one reviewed locale at a time. */
   title?: Partial<LocalizedText>;
   instruction: LocalizedText;
-  quantityMentions?: Array<{ text: LocalizedText; quantity: Quantity; numberOnly?: boolean }>;
+  quantityMentions?: Array<{
+    text: LocalizedText;
+    quantity: Quantity;
+    numberOnly?: boolean;
+  }>;
   ingredientLineIds: string[];
+  /** Fraction of an ingredient's batch amount used in this step (default: all). */
+  ingredientFractions?: Record<string, number>;
   duration?: Duration;
   temperature?: Temperature;
   equipmentIds?: string[];
@@ -335,6 +341,8 @@ export interface RecipeMedia {
   id: string;
   type: 'image' | 'video';
   path: string;
+  /** Preserve the whole frame when process details must not be cropped. */
+  fit?: 'cover' | 'contain';
   posterPath?: string;
   usage: Array<'hero' | 'step' | 'gallery' | 'social'>;
   alt: LocalizedText;

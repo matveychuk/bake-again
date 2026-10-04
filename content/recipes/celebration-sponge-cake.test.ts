@@ -111,7 +111,7 @@ void test('author eight-egg formula is distinct from a scaled five-egg sponge in
     assert.deepEqual(
       cookSteps.find((step) => step.stepIds.includes('sponge-bake'))
         ?.timerOptionsSeconds,
-      [3600, 4200],
+      [3600, 4200, 1800],
     );
     assert(
       !cookSteps

@@ -39,6 +39,8 @@ for (const locale of ['uk', 'en', 'es'] as const) {
     }
     for (const query of [
       'mode=ingredient&ingredient=eggs&amount=450&unit=g',
+      'mode=ingredient&ingredient=schar-mix-b&amount=250&unit=g',
+      'geometry=round-28cm-6-layers-each&mode=scale&scale=1',
       'mode=ingredient&ingredient=schar-mix-b&amount=450&unit=ml',
       'mode=ingredient&ingredient=schar-mix-b&amount=450&unit=invalid',
       'geometry=round-24cm-preview&mode=scale&scale=1',
@@ -48,9 +50,8 @@ for (const locale of ['uk', 'en', 'es'] as const) {
         'blocked',
       );
     for (const [amount, factor] of [
-      [225, 0.5],
-      [450, 1],
-      [900, 2],
+      [500, 1],
+      [1000, 2],
     ]) {
       const state = resolveNapoleonCookConfiguration(
         `mode=ingredient&ingredient=schar-mix-b&amount=${amount}&unit=g`,

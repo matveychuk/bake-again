@@ -35,11 +35,26 @@
   .heading {
     align-items: stretch;
     flex-direction: column;
+    gap: var(--space-3);
     padding-bottom: var(--space-4);
+  }
+
+  .heading > :first-child {
+    flex: 1 1 auto;
   }
 
   .heading > :last-child {
     width: 100%;
-    align-self: stretch;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .heading h2 {
+    font-size: var(--font-size-drawer-title);
+  }
+
+  .heading :global([data-slot='button']) {
+    width: 100%;
+    padding-inline: var(--space-3);
   }
 }

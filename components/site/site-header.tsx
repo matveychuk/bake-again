@@ -1,5 +1,5 @@
 import { canViewDrafts } from '@/lib/runtime/local-development.server';
-import { ShoppingBag } from 'lucide-react';
+import { Menu, ShoppingBag, X } from 'lucide-react';
 import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import {
@@ -43,6 +43,59 @@ export async function SiteHeader({
                   ? 'recipe-content'
                   : 'hero-title';
 
+  const navigationLinks = (
+    <>
+      <a
+        href={resolvedHomeHref}
+        aria-current={
+          pathname === resolvedHomeHref
+            ? 'page'
+            : pathname?.includes('/recipes/')
+              ? 'location'
+              : undefined
+        }
+      >
+        {messages.navigation.recipes}
+      </a>
+      {showDrafts && (
+        <a
+          href={localeDraftsPath(locale)}
+          aria-current={
+            pathname === localeDraftsPath(locale) ? 'page' : undefined
+          }
+        >
+          {messages.navigation.drafts}
+        </a>
+      )}
+      <a
+        href={localeSavedPath(locale)}
+        aria-current={
+          pathname === localeSavedPath(locale) ? 'page' : undefined
+        }
+      >
+        {messages.navigation.saved}
+      </a>
+      <a
+        className="nav-bag"
+        href={localeShoppingListPath(locale)}
+        aria-current={
+          pathname === localeShoppingListPath(locale) ? 'page' : undefined
+        }
+      >
+        <ShoppingBag aria-hidden="true" size={17} strokeWidth={1.7} />
+        {messages.navigation.shoppingList}
+      </a>
+      <a
+        href={localeAboutPath(locale)}
+        aria-current={
+          pathname === localeAboutPath(locale) ? 'page' : undefined
+        }
+      >
+        {messages.navigation.about}
+      </a>
+    </>
+  );
+
   return (
     <header className="site-header">
       <a className="skip-link" href={`#${skipTarget}`}>
@@ -52,62 +105,33 @@ export async function SiteHeader({
 
       <nav
         aria-label={messages.a11y.primaryNavigation}
-        className={showDrafts ? undefined : 'site-nav--public'}
+        className={`site-nav-desktop${showDrafts ? '' : ' site-nav--public'}`}
       >
-        <a
-          href={resolvedHomeHref}
-          aria-current={
-            pathname === resolvedHomeHref
-              ? 'page'
-              : pathname?.includes('/recipes/')
-                ? 'location'
-                : undefined
-          }
-        >
-          {messages.navigation.recipes}
-        </a>
-        {showDrafts && (
-          <a
-            href={localeDraftsPath(locale)}
-            aria-current={
-              pathname === localeDraftsPath(locale) ? 'page' : undefined
-            }
-          >
-            {messages.navigation.drafts}
-          </a>
-        )}
-        <a
-          href={localeSavedPath(locale)}
-          aria-current={
-            pathname === localeSavedPath(locale) ? 'page' : undefined
-          }
-        >
-          {messages.navigation.saved}
-        </a>
-        <a
-          className="nav-bag"
-          href={localeShoppingListPath(locale)}
-          aria-current={
-            pathname === localeShoppingListPath(locale) ? 'page' : undefined
-          }
-        >
-          <ShoppingBag aria-hidden="true" size={17} strokeWidth={1.7} />
-          {messages.navigation.shoppingList}
-        </a>
-        <a
-          href={localeAboutPath(locale)}
-          aria-current={
-            pathname === localeAboutPath(locale) ? 'page' : undefined
-          }
-        >
-          {messages.navigation.about}
-        </a>
+        {navigationLinks}
       </nav>
 
       <LanguageSwitcher
         locale={locale}
         pathname={pathname ?? resolvedHomeHref}
       />
+      <details className="site-mobile-menu">
+        <summary>
+          <Menu
+            className="site-mobile-menu__open-icon"
+            aria-hidden="true"
+            size={20}
+          />
+          <X
+            className="site-mobile-menu__close-icon"
+            aria-hidden="true"
+            size={20}
+          />
+          <span>{messages.navigation.menu}</span>
+        </summary>
+        <nav aria-label={messages.a11y.primaryNavigation}>
+          {navigationLinks}
+        </nav>
+      </details>
     </header>
   );
 }

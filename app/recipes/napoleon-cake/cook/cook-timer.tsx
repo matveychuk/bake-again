@@ -1,3 +1,7 @@
+'use client';
+
+import { useId } from 'react';
+import { formatDuration, formatElapsedMinutes } from '@/lib/i18n/format';
 import { Button } from '@/components/ui/button';
 import { Clock3, Pause, Play, RotateCcw } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -17,6 +21,7 @@ type CookTimerProps = {
   running: boolean;
   options: number[];
   selectedSeconds: number;
+  optionLabels?: Record<number, string>;
   onSelectDuration: (seconds: number) => void;
   onToggle: () => void;
   onReset: () => void;
@@ -28,15 +33,21 @@ export function CookTimer({
   running,
   options,
   selectedSeconds,
+  optionLabels,
   onSelectDuration,
   onToggle,
   onReset,
   locale,
 }: CookTimerProps) {
   const messages = getUiMessages(locale).cook;
+  const phaseGroupName = useId();
 
   return (
-    <section className={styles.timer} aria-label={messages.timerLabel}>
+    <section
+      className={styles.timer}
+      data-phased={optionLabels ? true : undefined}
+      aria-label={messages.timerLabel}
+    >
       <div>
         <Clock3 size={20} />
         <span>
@@ -45,7 +56,7 @@ export function CookTimer({
         </span>
       </div>
       <div className={styles.timerActions}>
-        {options.length > 1 && (
+        {options.length > 1 && !optionLabels && (
           <label>
             <span className="sr-only">{messages.timerDuration}</span>
             <select
@@ -80,6 +91,32 @@ export function CookTimer({
           <RotateCcw size={16} />
         </Button>
       </div>
+      {optionLabels && (
+        <fieldset className={styles.timerPhases} disabled={running}>
+          <legend>{messages.timerDuration}</legend>
+          {options.map((seconds) => (
+            <label key={seconds}>
+              <input
+                type="radio"
+                name={phaseGroupName}
+                value={seconds}
+                checked={selectedSeconds === seconds}
+                onChange={() => onSelectDuration(seconds)}
+              />
+              <span>
+                {optionLabels[seconds]} ·{' '}
+                {seconds < 60
+                  ? formatDuration(locale, {
+                      kind: 'exact',
+                      value: seconds,
+                      unit: 'second',
+                    })
+                  : formatElapsedMinutes(locale, seconds / 60)}
+              </span>
+            </label>
+          ))}
+        </fieldset>
+      )}
     </section>
   );
 }

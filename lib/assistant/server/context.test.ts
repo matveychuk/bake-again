@@ -158,10 +158,9 @@ void test('all three locales use canonical copy with shared facts and provenance
 
 void test('flour context only contains flour-system lines, not custard or unrelated content', () => {
   const result = context({ scope: 'flour' });
-  assert.deepEqual(
-    result.ingredients.map((line) => line.id).sort(),
-    ['schar-mix-b', 'tapioca-dough', 'corn-starch-dough', 'xanthan'].sort(),
-  );
+  assert.deepEqual(result.ingredients.map((line) => line.id).sort(), [
+    'schar-mix-b',
+  ]);
   assert.equal(result.timing, null);
   assert.equal(result.storage, null);
   assert.deepEqual(result.steps, []);
@@ -180,7 +179,7 @@ void test('flour context only contains flour-system lines, not custard or unrela
   );
 });
 
-void test('step context uses canonical instructions and keeps dependency gaps', () => {
+void test('step context uses the confirmed sour-cream method without the resolved dairy gap', () => {
   const result = context({
     scope: 'step',
     stepId: 'mix-wet-dough',
@@ -194,24 +193,17 @@ void test('step context uses canonical instructions and keeps dependency gaps', 
   assert.ok(step);
   assert.equal(result.steps.length, 1);
   assert.equal(result.steps[0].instruction.value, step.instruction.uk);
-  assert.equal(result.steps[0].instruction.evidence.status, null);
-  assert.ok(
-    result.steps[0].instruction.evidence.gapIds.includes(
-      'confirm-dairy-choice',
-    ),
-  );
+  assert.equal(result.steps[0].instruction.evidence.status, 'Tested');
+  assert.deepEqual(result.steps[0].instruction.evidence.gapIds, []);
   assert.equal(result.flour, null);
   assert.ok(
     result.ingredients.some(
-      (line) =>
-        line.id === 'cultured-dairy-dough' &&
-        line.options.length === 2 &&
-        line.choose === 1,
+      (line) => line.id === 'cultured-dairy-dough' && line.options.length === 1,
     ),
   );
   assert.deepEqual(
     result.gaps.map((gap) => gap.id),
-    ['confirm-dairy-choice'],
+    [],
   );
 });
 
@@ -243,8 +235,8 @@ void test('verified custard and narrower dairy guidance preserve their own prove
   const dairy = result.ingredients.find(
     (line) => line.id === 'cultured-dairy-dough',
   );
-  assert.equal(dairy?.amount.evidence.sourceState, 'authorGuidance');
-  assert.equal(dairy?.amount.evidence.status, null);
+  assert.equal(dairy?.amount.evidence.sourceState, 'tested');
+  assert.equal(dairy?.amount.evidence.status, 'Tested');
   assert.equal(
     result.ingredients.find((line) => line.id === 'schar-mix-b')?.amount
       .evidence.status,
@@ -281,10 +273,9 @@ void test('unknowns stay null and gaps omit private editorial questions and sour
     'author-update',
   ])
     assert.equal(serialized.includes(excluded), false, excluded);
-  assert.ok(
-    result.gaps.some(
-      (gap) => gap.id === 'confirm-dairy-choice' && !gap.publicationBlocking,
-    ),
+  assert.equal(
+    result.gaps.some((gap) => gap.id === 'confirm-dairy-choice'),
+    false,
   );
   assert.equal(
     result.gaps.some(
@@ -300,12 +291,12 @@ void test('geometry alternatives and variations have their own status, never bas
   assert.equal(result.geometry.base.value.application, 'roll-and-trim');
   assert.equal(result.yield.base.value.amount, 2);
   const preview = result.geometry.alternatives.find(
-    (item) => item.value.id === 'round-24cm-preview',
+    (item) => item.value.id === 'round-28cm-preview',
   );
   assert.equal(preview?.evidence.status, 'Calculated');
   assert.equal(preview?.value.layerCount, null);
   assert.equal(preview?.value.availability, 'previewOnly');
-  assert.ok(preview?.evidence.gapIds.includes('validate-24cm-form'));
+  assert.ok(preview?.evidence.gapIds.includes('validate-28cm-form'));
   const document = getRecipeDocument(base.recipeId);
   assert.ok(document?.kind === 'detailed');
   for (const variation of result.variations) {
@@ -321,7 +312,7 @@ void test('geometry alternatives and variations have their own status, never bas
 void test('adjusted quantities are recomputed without inheriting Tested', () => {
   const configuration = {
     kind: 'adjusted',
-    geometryId: 'round-24cm-preview',
+    geometryId: 'round-28cm-preview',
     quantityAdjustment: { mode: 'batchScale', factor: 0.5 },
   } as const;
   const result = context({ configuration });
@@ -366,7 +357,7 @@ void test('adjusted quantities are recomputed without inheriting Tested', () => 
 void test('a 1× adjusted selection and adjusted step guidance never become Tested', () => {
   const configuration = {
     kind: 'adjusted',
-    geometryId: 'round-28cm-6-layers-each',
+    geometryId: 'round-24cm-6-layers-each',
     quantityAdjustment: { mode: 'batchScale', factor: 1 },
   } as const;
   const result = context({
@@ -391,7 +382,7 @@ void test('use-what-I-have quantities come from the canonical calculator', () =>
   const result = context({
     configuration: {
       kind: 'adjusted',
-      geometryId: 'round-28cm-6-layers-each',
+      geometryId: 'round-24cm-6-layers-each',
       quantityAdjustment: {
         mode: 'useWhatIHave',
         anchorIngredientLineId: 'schar-mix-b',
@@ -414,7 +405,7 @@ void test('use-what-I-have quantities come from the canonical calculator', () =>
 void test('rejects forged, unsupported, non-finite and overflowing configurations', () => {
   const adjusted = {
     kind: 'adjusted',
-    geometryId: 'round-28cm-6-layers-each',
+    geometryId: 'round-24cm-6-layers-each',
     quantityAdjustment: { mode: 'batchScale', factor: 2 },
   };
   for (const configuration of [
@@ -479,5 +470,5 @@ void test('output and selection are detached; mutations never alter canonical re
   if (amount?.kind === 'exact') amount.value = 999;
   assert.equal(JSON.stringify(recipeDocuments), before);
   assert.notEqual(context().ingredients[0].options[0].name, 'changed');
-  assert.equal(context().geometry.base.value.diameterCm, 28);
+  assert.equal(context().geometry.base.value.diameterCm, 24);
 });

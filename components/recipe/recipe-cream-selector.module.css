@@ -188,11 +188,15 @@
 }
 
 .description {
+  display: block;
   margin: var(--space-3) 0 var(--space-4);
   color: var(--color-text-secondary);
   font-size: var(--font-size-body-small);
   line-height: var(--line-height-body);
   text-wrap: pretty;
+}
+.detailsToggle {
+  display: none;
 }
 
 .viewRecipe {
@@ -272,6 +276,10 @@
 
   .selection {
     grid-column: 1 / -1;
+    min-height: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .option:has(.recommended) {
@@ -280,6 +288,20 @@
 
   .description {
     margin: var(--space-2) 0 0;
+  }
+
+  .section:not([data-details]) .description,
+  .section:not([data-details]) .viewRecipe {
+    display: none;
+  }
+
+  .detailsToggle {
+    display: inline-flex;
+    padding-inline: 0;
+  }
+
+  .optionTopline strong {
+    font-size: var(--font-size-body);
   }
 
   .viewRecipe {

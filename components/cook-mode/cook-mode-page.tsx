@@ -1,6 +1,5 @@
 'use client';
 
-import { stepHelpMessages } from '@/components/assistant/step-help.messages';
 import { EvidenceBadge } from '@/components/recipe/evidence-badge';
 
 /* oxlint-disable react-compiler/react-compiler -- Restore the versioned browser session once after hydration. */
@@ -10,7 +9,7 @@ import { trackEvent } from '@/lib/analytics/umami';
 import { RecipeConfigurationUnavailable } from '@/components/recipe/recipe-configuration-unavailable';
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import { ArrowLeft, Clock3, NotebookPen, X } from 'lucide-react';
-import { AssistantProvider, AssistantTrigger } from '@/components/assistant';
+import { AssistantProvider } from '@/components/assistant';
 import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
 import {
   Drawer,
@@ -23,7 +22,6 @@ import { CookCompletion } from '@/app/recipes/napoleon-cake/cook/cook-completion
 import { CookNavigation } from '@/app/recipes/napoleon-cake/cook/cook-navigation';
 import { CookProgress } from '@/app/recipes/napoleon-cake/cook/cook-progress';
 import { CookStep } from '@/app/recipes/napoleon-cake/cook/cook-step';
-import { CookWakeLock } from '@/app/recipes/napoleon-cake/cook/cook-wake-lock';
 import styles from '@/app/recipes/napoleon-cake/cook/cook-mode.module.css';
 import { getCookModeDefinition } from '@/content/recipes/cook-mode-registry';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -387,15 +385,6 @@ export function CookModePage({
           Bake Again<span>.</span>
         </a>
         <div className={styles.headerTools}>
-          <CookWakeLock locale={locale} />
-          {definition.assistant && state.assistantConfiguration && step && !isComplete && (
-            <AssistantTrigger
-              configuration={state.assistantConfiguration}
-              scope={{ kind: 'step', stepIds: step.stepIds }}
-              stepTitle={step.title}
-              label={stepHelpMessages[locale].chat}
-            />
-          )}
           <p>
             {definition.recipeTitle}
             {state.isAdjusted && !state.evidence
@@ -498,7 +487,9 @@ export function CookModePage({
                 onShowAllSteps={() => setStepsOpen(true)}
                 onShowIngredients={() => setIngredientsOpen(true)}
                 assistant={
-                  { configuration: state.assistantConfiguration ?? { kind: 'base' }, locale }
+                  definition.assistant && state.assistantConfiguration
+                    ? { configuration: state.assistantConfiguration, locale }
+                    : undefined
                 }
                 locale={locale}
               />
@@ -560,6 +551,7 @@ export function CookModePage({
           <div className={styles.ingredientsDrawerBody}>
             <RecipeIngredientList
               items={state.allIngredients ?? []}
+              sections={state.ingredientSections}
               locale={locale}
             />
           </div>

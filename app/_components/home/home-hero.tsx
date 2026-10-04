@@ -31,7 +31,12 @@ export function HomeHero({ locale, query = '', selectedCollectionId }: { locale:
           {messages.intro}
         </p>
 
-        <RecipeSearchForm locale={locale} query={query} collectionId={selectedCollectionId} />
+        <RecipeSearchForm
+          locale={locale}
+          query={query}
+          collectionId={selectedCollectionId}
+          compactMobile
+        />
 
         <p className="search-hint">{messages.collectionCount(catalog.length)}</p>
       </div>

@@ -25,6 +25,12 @@ export function pageMetadata({
   image?: string;
   imageAlt?: string;
 }): Metadata {
+  const defaultShareImage = '/share-image.webp';
+  const defaultShareImageAlt: Record<AppLocale, string> = {
+    uk: 'Наполеон із видимими тонкими коржами поруч із назвою Bake Again',
+    en: 'Napoleon cake with visible thin layers beside the Bake Again name',
+    es: 'Tarta Napoleón con capas finas visibles junto al nombre Bake Again',
+  };
   const ready = indexable && isUiLocalePublishable(locale);
   const languages = Object.fromEntries(
     locales
@@ -34,9 +40,12 @@ export function pageMetadata({
         absoluteUrl(path.replace(/^\/(uk|en|es)(?=\/|$)/, `/${language}`)),
       ]),
   );
-  const images = image
-    ? [{ url: absoluteUrl(image), alt: imageAlt ?? title }]
-    : undefined;
+  const shareImage = image ?? defaultShareImage;
+  const images = [{
+    url: absoluteUrl(shareImage),
+    alt: imageAlt ?? (image ? title : defaultShareImageAlt[locale]),
+    ...(!image && { width: 1200, height: 630, type: 'image/webp' }),
+  }];
   return {
     title,
     description,
@@ -51,13 +60,13 @@ export function pageMetadata({
       siteName,
       locale: { uk: 'uk_UA', en: 'en_GB', es: 'es_ES' }[locale],
       url: absoluteUrl(path),
-      ...(images && { images }),
+      images,
     },
     twitter: {
-      card: image ? 'summary_large_image' : 'summary',
+      card: 'summary_large_image',
       title,
       description,
-      ...(image && { images: [absoluteUrl(image)] }),
+      images: [absoluteUrl(shareImage)],
     },
   };
 }

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics/umami';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { ShoppingBag } from 'lucide-react';
+import { Calculator, ChevronDown, Lightbulb, ShoppingBag } from 'lucide-react';
 import { SectionTitle } from '@/components/foundations/section-title';
 import {
   findScalingAnchor,
@@ -67,6 +67,10 @@ export function InventoryRecipeAdjuster({
   const searchParams = useSearchParams();
   const availableInputId = useId();
   const availableErrorId = `${availableInputId}-error`;
+  const controlsId = `${availableInputId}-controls`;
+  const [mobileControlsOpen, setMobileControlsOpen] = useState(
+    configuration.kind === 'invalid',
+  );
   const [mode, setMode] = useState<'scale' | 'ingredient'>(configuration.mode);
   const [scale, setScale] = useState(
     configuration.mode === 'scale' ? configuration.scaleFactor : 1,
@@ -220,7 +224,73 @@ export function InventoryRecipeAdjuster({
       className={`${styles.planning} ${concise ? styles.concise : ''}`}
       id="adjust-recipe"
     >
-      <aside className={styles.controls}>
+      <div className={styles.ingredientHeading}>
+        <RecipeIngredientHeading
+          action={
+            personalRecipe || sourceShoppingRecipe ? (
+              <AddRecipeIngredientsControl
+                configurationKey={sourceRecipeConfigurationKey(
+                  draftConfiguration,
+                )}
+                context={`${sourceShoppingRecipe?.title ?? personalRecipe?.title[locale] ?? ''} · ${formattedScaleFactor}×`}
+                disabled={invalidAmount}
+                disabledReason={scaling.positiveAmount}
+                locale={locale}
+                recipe={personalRecipe ?? sourceShoppingRecipe!}
+                scaleFactor={scaleFactor ?? 1}
+              />
+            ) : (
+              <Button
+                disabled
+                title={messages.personal.testedBaseOnly}
+                type="button"
+              >
+                <ShoppingBag aria-hidden="true" size={17} />{' '}
+                {messages.personal.addAll}
+              </Button>
+            )
+          }
+          eyebrow={
+            concise || !showWorkingRecord
+              ? undefined
+              : messages.recipe.workingRecord
+          }
+          title={messages.recipe.ingredients}
+        />
+      </div>
+      <button
+        type="button"
+        className={styles.mobileAdjustToggle}
+        aria-controls={controlsId}
+        aria-expanded={mobileControlsOpen}
+        onClick={() => setMobileControlsOpen((open) => !open)}
+      >
+        <span className={styles.mobileAdjustText}>
+          <strong>{concise ? readerCopy.quantity : scaling.title}</strong>
+          {invalidAmount ? (
+            <small>{scaling.positiveAmount}</small>
+          ) : adjusted ? (
+            <small className={styles.mobileAdjustStatus}>
+              <span>{formattedScaleFactor}× ·</span>
+              {recipe?.evidence?.status === 'suggested' ? (
+                <Lightbulb aria-hidden="true" size={14} />
+              ) : (
+                <Calculator aria-hidden="true" size={14} />
+              )}
+              <span>
+                {recipe?.evidence?.status === 'suggested'
+                  ? messages.status.suggested.label
+                  : messages.status.calculated.label}
+              </span>
+            </small>
+          ) : null}
+        </span>
+        <ChevronDown aria-hidden="true" size={20} />
+      </button>
+      <aside
+        className={`${styles.controls} ${mobileControlsOpen ? styles.controlsOpen : ''}`}
+        id={controlsId}
+      >
         <SectionTitle
           eyebrow={concise ? undefined : scaling.eyebrow}
           eyebrowClassName={styles.eyebrow}
@@ -339,10 +409,18 @@ export function InventoryRecipeAdjuster({
             {concise ? (
               adjusted && (
                 <div className={styles.result} aria-live="polite">
-                  <EvidenceBadge locale={locale} status={recipe?.evidence?.status === 'suggested' ? 'suggested' : 'calculated'} />
+                  <EvidenceBadge
+                    locale={locale}
+                    status={
+                      recipe?.evidence?.status === 'suggested'
+                        ? 'suggested'
+                        : 'calculated'
+                    }
+                  />
                   <p>
                     {formattedScaleFactor}×.{' '}
-                    {recipe?.evidence?.status === 'suggested' && `${recipe.evidence.explanation} `}
+                    {recipe?.evidence?.status === 'suggested' &&
+                      `${recipe.evidence.explanation} `}
                     {messages.status.calculated.explanation}
                   </p>
                   {fractionalEggs && <p>{readerCopy.fractionalEggs}</p>}
@@ -363,38 +441,6 @@ export function InventoryRecipeAdjuster({
         )}
       </aside>
       <div className={styles.content}>
-        <RecipeIngredientHeading
-          action={
-            personalRecipe || sourceShoppingRecipe ? (
-              <AddRecipeIngredientsControl
-                configurationKey={sourceRecipeConfigurationKey(
-                  draftConfiguration,
-                )}
-                context={`${sourceShoppingRecipe?.title ?? personalRecipe?.title[locale] ?? ''} · ${formattedScaleFactor}×`}
-                disabled={invalidAmount}
-                disabledReason={scaling.positiveAmount}
-                locale={locale}
-                recipe={personalRecipe ?? sourceShoppingRecipe!}
-                scaleFactor={scaleFactor ?? 1}
-              />
-            ) : (
-              <Button
-                disabled
-                title={messages.personal.testedBaseOnly}
-                type="button"
-              >
-                <ShoppingBag aria-hidden="true" size={17} />{' '}
-                {messages.personal.addAll}
-              </Button>
-            )
-          }
-          eyebrow={
-            concise || !showWorkingRecord
-              ? undefined
-              : messages.recipe.workingRecord
-          }
-          title={messages.recipe.ingredients}
-        />
         {recipe ? (
           <>
             <RecipeIngredientChecklist

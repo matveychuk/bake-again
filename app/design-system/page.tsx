@@ -1,5 +1,9 @@
+import { AboutFamilyPhotos, AboutRecipeStatuses } from '@/app/_components/about/about-page';
+import aboutStyles from '@/app/_components/about/about-page.module.css';
+import { aboutPageContent } from '@/content/about';
 import { resolveStepHelp } from '@/content/recipes/step-help';
 import { stepHelpMessages } from '@/components/assistant/step-help.messages';
+import { assistantMessages } from '@/components/assistant/assistant.messages';
 import { RecipeConfigurationUnavailable } from '@/components/recipe/recipe-configuration-unavailable';
 import { formatQuantity } from '@/lib/i18n/format';
 import { NotFoundContent } from '@/components/site/not-found-content';
@@ -32,13 +36,21 @@ import { RecipeStepContent } from '@/components/recipe/recipe-step-content';
 import { RecipePlanItem } from '@/components/recipe/recipe-plan-item';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { RecipeSearchForm } from '@/components/recipe/recipe-search-form';
+import { SiteHeader } from '@/components/site/site-header';
 import { RecipeCard } from '@/components/recipe/recipe-card';
-import { CookToolsExample } from '@/components/cook-mode/cook-tools-example';
+import {
+  CookToolsExample,
+  CookTimerExample,
+} from '@/components/cook-mode/cook-tools-example';
+import { createSourceCookSteps } from '@/content/recipes/cook-mode-adapter';
+import { RecipeIngredientHeading } from '@/components/recipe/recipe-ingredient-heading';
+import shoppingControlStyles from '@/components/recipe/add-recipe-ingredients-control.module.css';
 import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { getRecipeCatalog } from '@/content/recipes/catalog';
 import { getLocalizedRecipePath } from '@/lib/i18n/routes';
 import { RecipeOverview } from '@/components/recipe/recipe-overview';
 import { RecipeBackLink } from '@/components/recipe/recipe-back-link';
+import { SaveRecipeControl } from '@/components/recipe/save-recipe-control';
 import {
   RecipeCookEntry,
   RecipeSectionNavigation,
@@ -49,7 +61,10 @@ import { localeMetadata } from '@/lib/i18n/config';
 import { RecipeCreamSelector } from '@/components/recipe/recipe-cream-selector';
 import { InventoryRecipeAdjuster } from '@/components/recipe/inventory-recipe-adjuster';
 import { StepMediaSequence } from '@/components/recipe/step-media-sequence';
-import { getRecipeContent } from '@/content/recipes/registry';
+import {
+  getRecipeContent,
+  getRecipeDocument,
+} from '@/content/recipes/registry';
 import { applySourceRecipeConfiguration } from '@/content/recipes/source-recipe-configuration';
 import { resolveNapoleonCookConfiguration } from '@/content/recipes/napoleon-configuration';
 import { composeRecipeWithCream } from '@/content/recipes/cream-composition';
@@ -199,7 +214,7 @@ export default function DesignSystemPage() {
             <p className={styles.eyebrow}>
               Bake Again · product design language
             </p>
-            <h1>
+            <h1 id="hero-title">
               Warm enough to invite.
               <br />
               <em>Precise enough to trust.</em>
@@ -248,6 +263,18 @@ export default function DesignSystemPage() {
               terracotta marks action and proof. Large areas of saturated colour
               are exceptional.
             </p>
+            <figure className={styles.sharingPreview}>
+              {/* oxlint-disable-next-line next/no-img-element -- Display the exact generated sharing asset. */}
+              <img
+                src="/social/bake-again-share-v3.webp"
+                width="600"
+                height="315"
+                alt="Bake Again link preview with a layered Napoleon cake"
+              />
+              <figcaption>
+                Homepage link preview · food leads, brand stays quiet.
+              </figcaption>
+            </figure>
           </section>
 
           <section className={styles.section} id="type">
@@ -319,6 +346,18 @@ export default function DesignSystemPage() {
             </div>
           </section>
 
+          <section className={styles.section} id="family-story">
+            <h2>Family story · About page</h2>
+            <p>Original family photographs, uncropped, with readable captions. The shared title scales from 40 to 64px.</p>
+            <div className={aboutStyles.hero} lang="uk">
+              <div className={aboutStyles.heroCopy}><h2 style={{ fontFamily: 'var(--font-family-display-cyrillic)' }}>{aboutPageContent.uk.title}</h2></div>
+              <p className={aboutStyles.standfirst}>{aboutPageContent.uk.standfirst}</p>
+            </div>
+            <AboutFamilyPhotos locale="uk" />
+            <AboutRecipeStatuses locale="uk" id="about-statuses-example" />
+            <p><a href="/uk/about">Українська</a> · <a href="/es/about">Español</a> · <a href="/en/about">English</a></p>
+          </section>
+
           <section className={styles.section} id="components">
             <NumberedSectionTitle
               number="05"
@@ -360,9 +399,10 @@ export default function DesignSystemPage() {
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}>
                 <strong>Search</strong>
-                <span>One clear task and one primary action</span>
+                <span>Shared search, with a compact mobile hero variant</span>
               </div>
               <RecipeSearchForm locale="en" id="ds-search" />
+              <RecipeSearchForm locale="en" id="ds-search-hero" compactMobile />
               <p>
                 Search names, ingredients and collections. Try “млинки”,
                 “оладки” or “breakfast”. Exact titles rank first; aliases and
@@ -371,6 +411,18 @@ export default function DesignSystemPage() {
               <a href="/uk?q=млинки#recipes">Alias results</a>
               {' · '}
               <a href="/es?q=receta-inexistente#recipes">Empty results</a>
+            </div>
+
+            <div className={styles.componentBlock}>
+              <div className={styles.componentLabel}>
+                <strong>Site navigation</strong>
+                <span>
+                  Shared header: one sticky row and a disclosure on mobile
+                </span>
+              </div>
+              <div className={styles.siteHeaderExample}>
+                <SiteHeader locale="en" pathname="/en" />
+              </div>
             </div>
 
             <div className={styles.componentBlock}>
@@ -514,6 +566,10 @@ export default function DesignSystemPage() {
               </div>
               <div className={styles.recipeOverviewExample}>
                 <RecipeOverview
+                  content={getRecipeContent('eclairs', 'uk')}
+                  locale="uk"
+                />
+                <RecipeOverview
                   content={getRecipeContent('gluten-free-napoleon', 'uk')}
                   locale="uk"
                 />
@@ -580,7 +636,10 @@ export default function DesignSystemPage() {
                       <RecipePlanItem
                         label={getUiMessages(locale).recipe.keepInMind}
                       >
-                        {getRecipeContent('prune-cake', locale)?.beforeStart?.[1]}
+                        {
+                          getRecipeContent('prune-cake', locale)
+                            ?.beforeStart?.[1]
+                        }
                       </RecipePlanItem>
                       <p>
                         {
@@ -667,40 +726,73 @@ export default function DesignSystemPage() {
 
             <div className={styles.componentBlock} id="recipe-reading-actions">
               <div className={styles.componentLabel}>
-                <strong>Recipe navigation and cooking entry</strong>
+                <strong>Recipe hero navigation and cooking entry</strong>
                 <span>
-                  Native section links · Cook entry in three languages · open
-                  each example to review wrapping navigation at 200% text
+                  Back and Save share the mobile hero row · native section links
+                  · Cook first, recipe-wide question second
                 </span>
               </div>
               <div className={styles.recipeOverviewExample}>
                 {(['uk', 'en', 'es'] as const).map((locale) => (
-                  <div key={locale} lang={locale}>
-                    <RecipeBackLink
-                      fallbackHref={`/${locale}#recipes`}
-                      fallbackLabel={getUiMessages(locale).recipe.backToRecipes}
-                      returnLabel={getUiMessages(locale).cook.returnToRecipe}
-                    />
-                    <RecipeSectionNavigation
-                      locale={locale}
-                      ingredientsHref={`#reading-ingredients-${locale}`}
-                      methodHref={`#reading-method-${locale}`}
-                    />
-                    <h3 id={`reading-ingredients-${locale}`} tabIndex={-1}>
-                      {getUiMessages(locale).recipe.ingredients}
-                    </h3>
-                    <h3 id={`reading-method-${locale}`} tabIndex={-1}>
-                      {recipeReaderCopy[locale].method}
-                    </h3>
-                    <RecipeCookEntry
-                      locale={locale}
-                      href={getLocalizedRecipePath(
-                        'plum-cake',
-                        locale,
-                        '/cook',
-                      )!}
-                    />
-                  </div>
+                  <AssistantProvider
+                    key={locale}
+                    recipeId="plum-cake"
+                    recipeVersionId={
+                      getRecipeDocument('plum-cake')?.recipe.versionId ??
+                      'plum-cake-source-v1'
+                    }
+                    recipeTitle={recipeDetailTitles['plum-cake'][locale]}
+                    locale={locale}
+                    surface="recipe-detail"
+                  >
+                    <div lang={locale}>
+                      <div className={styles.recipeHeroActionsExample}>
+                        <RecipeBackLink
+                          fallbackHref={`/${locale}#recipes`}
+                          fallbackLabel={
+                            getUiMessages(locale).recipe.backToRecipes
+                          }
+                          returnLabel={
+                            getUiMessages(locale).cook.returnToRecipe
+                          }
+                        />
+                        <SaveRecipeControl
+                          locale={locale}
+                          recipeId="plum-cake"
+                          title={recipeDetailTitles['plum-cake'][locale]}
+                        />
+                      </div>
+                      <RecipeSectionNavigation
+                        locale={locale}
+                        ingredientsHref={`#reading-ingredients-${locale}`}
+                        methodHref={`#reading-method-${locale}`}
+                      />
+                      <h3 id={`reading-ingredients-${locale}`} tabIndex={-1}>
+                        {getUiMessages(locale).recipe.ingredients}
+                      </h3>
+                      <p className={styles.eyebrow}>
+                        {getUiMessages(locale).recipe.method(19)}
+                      </p>
+                      <h3 id={`reading-method-${locale}`} tabIndex={-1}>
+                        {recipeReaderCopy[locale].method}
+                      </h3>
+                      <RecipeCookEntry
+                        locale={locale}
+                        href={getLocalizedRecipePath(
+                          'plum-cake',
+                          locale,
+                          '/cook',
+                        )!}
+                        secondaryAction={
+                          <AssistantTrigger
+                            configuration={{ kind: 'base' }}
+                            label={assistantMessages[locale].trigger.recipe}
+                            scope={{ kind: 'recipe' }}
+                          />
+                        }
+                      />
+                    </div>
+                  </AssistantProvider>
                 ))}
               </div>
             </div>
@@ -709,7 +801,8 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Concise recipe</strong>
                 <span>
-                  Edited copy · optional captions · badge-only evidence
+                  Edited copy · mobile ingredients-first adjustment · badge-only
+                  evidence
                 </span>
               </div>
               {(['uk', 'en', 'es'] as const).map((locale) => {
@@ -812,6 +905,23 @@ export default function DesignSystemPage() {
                     <p>
                       One photo keeps the same size as each photo in a sequence.
                     </p>
+                    <p>
+                      Landscape process photos fill the 4:3 frame while keeping
+                      the food and preparation details visible.
+                    </p>
+                    <p>
+                      In numbered recipe steps, photos align with the instruction
+                      text at desktop, tablet and mobile widths. See the live
+                      Napoleon recipe reference below.
+                    </p>
+                    <StepMediaSequence
+                      items={
+                        getRecipeContent('gluten-free-napoleon', 'en')!.steps[0]
+                          .media!
+                      }
+                      ariaLabel={`${variant}: complete process photo`}
+                      variant={variant}
+                    />
                     <StepMediaSequence
                       items={
                         getRecipeContent('sponge-cake', 'en')!.steps[0].media!
@@ -905,7 +1015,7 @@ export default function DesignSystemPage() {
                   </Button>
                   <div className={styles.shoppingReviewExample}>
                     <strong>What do you need to buy?</strong>
-                    <small>Napoleon cake · 28 cm · 1×</small>
+                    <small>Napoleon cake · 24 cm · 1×</small>
                     <p>Leave selected the products you need to buy.</p>
                     <nav aria-label="Shopping selection">
                       <button type="button">Select all</button>
@@ -943,6 +1053,24 @@ export default function DesignSystemPage() {
                 </span>
               </div>
               <div className={styles.ingredientExample}>
+                <RecipeIngredientHeading
+                  title="Інгредієнти"
+                  id="mobile-ingredients-example"
+                  action={
+                    <div className={shoppingControlStyles.control}>
+                      <div className={shoppingControlStyles.actions}>
+                        <Button variant="outline">
+                          <Check aria-hidden="true" size={16} />У списку покупок
+                          · 8
+                        </Button>
+                        <Button>
+                          <ShoppingBag aria-hidden="true" size={16} />
+                          Додати ще одну порцію…
+                        </Button>
+                      </div>
+                    </div>
+                  }
+                />
                 <RecipeIngredientChecklist
                   sections={[
                     {
@@ -971,14 +1099,25 @@ export default function DesignSystemPage() {
 
             <div className={styles.componentBlock}>
               <div className={styles.componentLabel}>
-                <strong>Cook ingredients and tools drawer</strong>
+                <strong>Cook tools and drawers</strong>
                 <span>
-                  Dividers between rows only · full width on mobile · visible
-                  Close · Escape and focus return · fixed header and scrollable
-                  content
+                  Shared number circles and row dividers · full width on mobile
+                  · visible Close · Escape and focus return · labelled screen
+                  wake control with active and error states
                 </span>
               </div>
               <CookToolsExample />
+              {(['uk', 'en', 'es'] as const).map((locale) => (
+                <div key={locale} lang={locale}>
+                  <CookTimerExample
+                    locale={locale}
+                    step={createSourceCookSteps(
+                      getRecipeContent('eclairs', locale)!,
+                      locale,
+                    ).find((step) => step.stepIds.includes('bake'))!}
+                  />
+                </div>
+              ))}
             </div>
 
             <div className={styles.componentBlock} id="technique-help">
@@ -1052,24 +1191,72 @@ export default function DesignSystemPage() {
 
             <div className={styles.componentBlock} id="step-questions">
               <div className={styles.componentLabel}>
-                <strong>Prepared step questions · UK / EN / ES</strong>
-                <span>Recipe-backed answers · no AI request · no evidence badge · simple steps have no trigger</span>
+                <strong>Compact method steps · UK / EN / ES</strong>
+                <span>
+                  Desktop: terracotta time above the title, Questions beside it
+                  · Mobile: number, secondary time and Questions in one row ·
+                  examples with both, either or neither optional control
+                </span>
               </div>
               {(['uk', 'en', 'es'] as const).map((locale) => {
-                const step = getRecipeContent('eclairs', locale)!.steps.find(step => step.id === 'add-eggs')!;
-                return <AssistantProvider key={locale} recipeId="eclairs" recipeVersionId="eclairs-source-v1"
-                  recipeTitle={step.title} locale={locale} surface="recipe-detail" liveEnabled={false}>
-                  <div lang={locale} className={styles.assistantExample}>
-                    <RecipeStepContent title={step.title} locale={locale}
-                      checkpointLabel={getUiMessages(locale).recipe.checkpoint}
-                      tipLabel={getUiMessages(locale).recipe.tip}
-                      action={<AssistantTrigger configuration={{ kind: 'base' }}
-                        scope={{ kind: 'step', stepIds: [step.id] }} stepTitle={step.title}
-                        label={stepHelpMessages[locale].trigger} preparedAnswers={resolveStepHelp(step)} />}>
-                      <p>{step.body}</p>
-                    </RecipeStepContent>
-                  </div>
-                </AssistantProvider>;
+                const steps = getRecipeContent(
+                  'gluten-free-napoleon',
+                  locale,
+                )!.steps;
+                return (
+                  <AssistantProvider
+                    key={locale}
+                    recipeId="gluten-free-napoleon"
+                    recipeVersionId={
+                      getRecipeDocument('gluten-free-napoleon')!.recipe
+                        .versionId ?? 'gluten-free-napoleon-source-v1'
+                    }
+                    recipeTitle={
+                      recipeDetailTitles['gluten-free-napoleon'][locale]
+                    }
+                    locale={locale}
+                    surface="recipe-detail"
+                  >
+                    <div lang={locale} className={styles.methodStepExamples}>
+                      {[0, 1, 2, 4].map((index) => {
+                        const step = steps[index];
+                        const answers = resolveStepHelp(step);
+                        return (
+                          <RecipeStepContent
+                            key={step.id}
+                            stepNumber={String(index + 1).padStart(2, '0')}
+                            meta={step.meta}
+                            title={step.title}
+                            locale={locale}
+                            actionPlacement="metadata"
+                            checkpoint={step.checkpoint}
+                            checkpointLabel={
+                              getUiMessages(locale).recipe.checkpoint
+                            }
+                            tipLabel={getUiMessages(locale).recipe.tip}
+                            action={
+                              answers.length ? (
+                                <AssistantTrigger
+                                  configuration={{ kind: 'base' }}
+                                  scope={{ kind: 'step', stepIds: [step.id] }}
+                                  stepTitle={step.title}
+                                  compact
+                                  label={
+                                    stepHelpMessages[locale].compactTrigger
+                                  }
+                                  ariaLabel={`${stepHelpMessages[locale].trigger}: ${step.title}`}
+                                  preparedAnswers={answers}
+                                />
+                              ) : undefined
+                            }
+                          >
+                            <p>{step.body}</p>
+                          </RecipeStepContent>
+                        );
+                      })}
+                    </div>
+                  </AssistantProvider>
+                );
               })}
             </div>
 
@@ -1079,7 +1266,8 @@ export default function DesignSystemPage() {
                 <span>
                   Shared Recipe and Cook drawer · compact contextual title ·
                   loading announcement · Close focus after submit/review ·
-                  localized offline retry · scrollable at 200% text · custom-question limits · verification after input focus
+                  localized offline retry · scrollable at 200% text ·
+                  custom-question limits · verification after input focus
                 </span>
               </div>
               <div className={styles.assistantExample}>
@@ -1138,7 +1326,7 @@ export default function DesignSystemPage() {
               <Check aria-hidden="true" size={20} />
               <div>
                 <strong>Tested configuration</strong>
-                <p>Schär Mix B · 28 cm round form · 12 layers</p>
+                <p>Schär Mix B · 24 cm round form · 12 layers</p>
               </div>
             </div>
           </section>

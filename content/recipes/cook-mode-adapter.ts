@@ -5,6 +5,7 @@ import type {
 } from '../../components/cook-mode/cook-mode.types.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
 import { formatQuantity } from '../../lib/i18n/format.ts';
+import type { Quantity } from './recipe.types.ts';
 import type {
   StructuredIngredient,
   StructuredRecipeContent,
@@ -25,17 +26,47 @@ function durationOptionsSeconds(
   structured: StructuredRecipeContent,
   stepIds: string[],
 ): number[] | undefined {
-  const duration = structured.timing?.phases.find(
+  const phases = structured.timing?.phases.filter(
     (phase) => phase.relatedStepId && stepIds.includes(phase.relatedStepId),
-  )?.duration;
-  if (!duration) return undefined;
-  const multiplier =
-    duration.unit === 'hour' ? 3600 : duration.unit === 'minute' ? 60 : 1;
-  if (duration.kind === 'range') {
-    return [...new Set([duration.min * multiplier, duration.max * multiplier])];
+  );
+  if (!phases?.length) return undefined;
+  return [
+    ...new Set(
+      phases.flatMap(({ duration }) => {
+        const multiplier =
+          duration.unit === 'hour' ? 3600 : duration.unit === 'minute' ? 60 : 1;
+        if (duration.kind === 'range') {
+          return [duration.min * multiplier, duration.max * multiplier];
+        }
+        const value =
+          duration.kind === 'minimum' ? duration.min : duration.value;
+        return [value * multiplier];
+      }),
+    ),
+  ];
+}
+
+function timerOptionLabels(
+  structured: StructuredRecipeContent,
+  stepIds: string[],
+) {
+  const phases = structured.timing?.phases.filter(
+    (phase) => phase.relatedStepId && stepIds.includes(phase.relatedStepId),
+  );
+  if (!phases || phases.length < 2) return undefined;
+  const labels: Record<number, string> = {};
+  for (const phase of phases) {
+    const seconds = durationOptionsSeconds(
+      { ...structured, timing: { ...structured.timing!, phases: [phase] } },
+      stepIds,
+    )!;
+    for (const value of seconds) {
+      labels[value] = labels[value]
+        ? `${labels[value]} / ${phase.label}`
+        : phase.label;
+    }
   }
-  const value = duration.kind === 'minimum' ? duration.min : duration.value;
-  return [value * multiplier];
+  return labels;
 }
 
 function ingredientMap(structured: StructuredRecipeContent) {
@@ -52,18 +83,25 @@ function cookIngredient(
   usage: NonNullable<StructuredRecipeStep['cookIngredients']>[number],
 ): CookIngredient {
   const showQuantity = usage.quantity !== 'omit';
+  const portion = (amount: Quantity | null | undefined): Quantity | null => {
+    if (!amount) return null;
+    const fraction = usage.fraction ?? 1;
+    return amount.kind === 'range'
+      ? { ...amount, min: amount.min * fraction, max: amount.max * fraction }
+      : { ...amount, value: amount.value * fraction };
+  };
   return {
     id: ingredient.id,
     name: ingredient.name,
     primary: showQuantity
       ? formatQuantity(
           locale,
-          ingredient.quantity.base ?? ingredient.quantity.equivalent ?? null,
+          portion(ingredient.quantity.base ?? ingredient.quantity.equivalent),
         )
       : undefined,
     secondary:
       showQuantity && ingredient.quantity.base && ingredient.quantity.equivalent
-        ? formatQuantity(locale, ingredient.quantity.equivalent)
+        ? formatQuantity(locale, portion(ingredient.quantity.equivalent))
         : undefined,
     note: usage.note ?? ingredient.note,
   };
@@ -80,6 +118,19 @@ export function createSourceCookIngredients(
       }),
     ),
   );
+}
+
+export function createSourceCookIngredientSections(
+  structured: StructuredRecipeContent,
+  locale: AppLocale,
+) {
+  return structured.ingredientSections.map((section) => ({
+    id: section.id,
+    title: section.title,
+    items: section.ingredients.map((ingredient) =>
+      cookIngredient(ingredient, locale, { ingredientId: ingredient.id }),
+    ),
+  }));
 }
 
 /**
@@ -109,7 +160,8 @@ export function createSourceCookSteps(
     );
     const timers = durationOptionsSeconds(structured, stepIds);
     const media = steps.flatMap((step) =>
-      (step.media ?? []).map(({ id, src, alt, title, caption, type }) => ({
+      (step.media ?? []).map(({ id, src, alt, title, caption, type, fit }) => ({
+        fit,
         type,
         id,
         src,
@@ -138,6 +190,7 @@ export function createSourceCookSteps(
       tip: steps.flatMap((step) => step.tip ?? []).join(' ') || undefined,
       timerSeconds: timers?.[0],
       timerOptionsSeconds: timers,
+      timerOptionLabels: timerOptionLabels(structured, stepIds),
       media: media.length > 0 ? media : undefined,
     };
   });

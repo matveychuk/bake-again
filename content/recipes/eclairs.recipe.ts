@@ -49,7 +49,7 @@ export const eclairsRecipe = {
   },
   yield: {
     id: 'twenty-profiteroles',
-    label: 'About 20 walnut-size profiteroles',
+    label: 'About 20 profiteroles',
     count: { kind: 'exact', value: 20 },
     unit: 'batch',
   },
@@ -215,7 +215,7 @@ export const eclairsRecipe = {
       },
       yield: {
         id: 'twenty-profiteroles',
-        label: 'Близько 20 профітролів розміром із волоський горіх',
+        label: 'Близько 20 профітролів',
         count: { kind: 'exact', value: 20 },
         unit: 'batch',
       },
@@ -384,7 +384,7 @@ export const eclairsRecipe = {
       },
       yield: {
         id: 'twenty-profiteroles',
-        label: 'Unos 20 profiteroles del tamaño de una nuez',
+        label: 'Unos 20 profiteroles',
         count: { kind: 'exact', value: 20 },
         unit: 'batch',
       },

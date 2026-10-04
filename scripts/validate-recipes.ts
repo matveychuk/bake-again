@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {
-  napoleon24cmHalfBatch,
-  napoleon28cmFrom200gFlour,
+  napoleon28cmHalfBatch,
+  napoleon24cmFrom200gFlour,
 } from '../content/recipes/configuration.examples.ts';
 import { crinkleCookiesRecipe } from '../content/recipes/crinkle-cookies.recipe.ts';
 import { glutenFreeNapoleonRecipe } from '../content/recipes/gluten-free-napoleon.recipe.ts';
@@ -138,22 +138,22 @@ assert.equal(
   null,
 );
 
-assert.equal(napoleon24cmHalfBatch.status, 'Calculated');
-assert.equal(napoleon24cmHalfBatch.provenance, 'Calculated');
+assert.equal(napoleon28cmHalfBatch.status, 'Calculated');
+assert.equal(napoleon28cmHalfBatch.provenance, 'Calculated');
 assert(
-  Math.abs(napoleon24cmHalfBatch.totalScaleFactor - (24 / 28) ** 2 * 0.5) <
+  Math.abs(napoleon28cmHalfBatch.totalScaleFactor - (28 / 24) ** 2 * 0.5) <
     1e-12,
 );
-assert.equal(napoleon24cmHalfBatch.cookMode.eligible, false);
+assert.equal(napoleon28cmHalfBatch.cookMode.eligible, false);
 
-assert.equal(napoleon28cmFrom200gFlour.status, 'Calculated');
-assert.equal(napoleon28cmFrom200gFlour.provenance, 'Calculated');
-assert.equal(napoleon28cmFrom200gFlour.totalScaleFactor, 200 / 450);
-const flourAmount = napoleon28cmFrom200gFlour.ingredientAmounts.find(
+assert.equal(napoleon24cmFrom200gFlour.status, 'Calculated');
+assert.equal(napoleon24cmFrom200gFlour.provenance, 'Calculated');
+assert.equal(napoleon24cmFrom200gFlour.totalScaleFactor, 200 / 500);
+const flourAmount = napoleon24cmFrom200gFlour.ingredientAmounts.find(
   ({ ingredientLineId }) => ingredientLineId === 'schar-mix-b',
 )?.amount;
 assert.equal(flourAmount?.kind === 'exact' && flourAmount.value, 200);
-assert.equal(napoleon28cmFrom200gFlour.cookMode.eligible, false);
+assert.equal(napoleon24cmFrom200gFlour.cookMode.eligible, false);
 
 const napoleonBaseConfiguration = calculateNapoleonConfiguration(
   napoleonBaseSelection,
@@ -170,19 +170,19 @@ console.log(
   `Validated ${validatedRecipeCount} canonical recipes and 2 calculated configuration fixtures.`,
 );
 console.log({
-  napoleon24cmHalfBatch: {
-    totalScaleFactor: napoleon24cmHalfBatch.totalScaleFactor,
-    cookMode: napoleon24cmHalfBatch.cookMode,
+  napoleon28cmHalfBatch: {
+    totalScaleFactor: napoleon28cmHalfBatch.totalScaleFactor,
+    cookMode: napoleon28cmHalfBatch.cookMode,
     warningCodes: [
-      ...new Set(napoleon24cmHalfBatch.warnings.map(({ code }) => code)),
+      ...new Set(napoleon28cmHalfBatch.warnings.map(({ code }) => code)),
     ],
   },
-  napoleon28cmFrom200gFlour: {
-    totalScaleFactor: napoleon28cmFrom200gFlour.totalScaleFactor,
+  napoleon24cmFrom200gFlour: {
+    totalScaleFactor: napoleon24cmFrom200gFlour.totalScaleFactor,
     flourAmount,
-    cookMode: napoleon28cmFrom200gFlour.cookMode,
+    cookMode: napoleon24cmFrom200gFlour.cookMode,
     warningCodes: [
-      ...new Set(napoleon28cmFrom200gFlour.warnings.map(({ code }) => code)),
+      ...new Set(napoleon24cmFrom200gFlour.warnings.map(({ code }) => code)),
     ],
   },
 });

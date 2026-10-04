@@ -28,7 +28,9 @@ export function CookWakeLock({ locale }: { locale: AppLocale }) {
   const messages = getUiMessages(locale).cook;
   const sentinel = useRef<WakeLockSentinelLike | null>(null);
   const requested = useRef(false);
+  const acquiring = useRef(false);
   const [active, setActive] = useState(false);
+  const [error, setError] = useState(false);
   const supported = useSyncExternalStore(
     () => () => undefined,
     () => Boolean((navigator as NavigatorWithWakeLock).wakeLock),
@@ -37,15 +39,35 @@ export function CookWakeLock({ locale }: { locale: AppLocale }) {
 
   const acquire = useCallback(async () => {
     const wakeLock = (navigator as NavigatorWithWakeLock).wakeLock;
-    if (!wakeLock) return;
+    if (
+      !wakeLock ||
+      acquiring.current ||
+      (sentinel.current && !sentinel.current.released)
+    )
+      return;
+    acquiring.current = true;
+    setError(false);
     try {
       const next = await wakeLock.request('screen');
+      if (!requested.current) {
+        await next.release();
+        return;
+      }
       sentinel.current = next;
       setActive(true);
-      next.addEventListener('release', () => setActive(false));
+      next.addEventListener('release', () => {
+        if (sentinel.current === next) sentinel.current = null;
+        setActive(false);
+        if (requested.current && document.visibilityState === 'visible') {
+          setError(true);
+        }
+      });
     } catch {
       requested.current = false;
       setActive(false);
+      setError(true);
+    } finally {
+      acquiring.current = false;
     }
   }, []);
 
@@ -66,6 +88,7 @@ export function CookWakeLock({ locale }: { locale: AppLocale }) {
   async function toggle() {
     if (active) {
       requested.current = false;
+      setError(false);
       await sentinel.current?.release();
       sentinel.current = null;
       setActive(false);
@@ -78,20 +101,25 @@ export function CookWakeLock({ locale }: { locale: AppLocale }) {
   const label = active ? messages.screenAwake : messages.keepScreenAwake;
   if (!supported) return null;
   return (
-    <button
-      className={styles.wakeLock}
-      type="button"
-      aria-pressed={active}
-      aria-label={label}
-      title={label}
-      onClick={() => void toggle()}
-    >
-      {active ? (
-        <MonitorCheck aria-hidden="true" size={17} />
-      ) : (
-        <MonitorUp aria-hidden="true" size={17} />
+    <div className={styles.wakeLockControl}>
+      <button
+        className={styles.wakeLock}
+        type="button"
+        aria-pressed={active}
+        onClick={() => void toggle()}
+      >
+        {active ? (
+          <MonitorCheck aria-hidden="true" size={17} />
+        ) : (
+          <MonitorUp aria-hidden="true" size={17} />
+        )}
+        <span>{label}</span>
+      </button>
+      {error && (
+        <output className={styles.wakeLockError}>
+          {messages.screenAwakeError}
+        </output>
       )}
-      <span>{label}</span>
-    </button>
+    </div>
   );
 }

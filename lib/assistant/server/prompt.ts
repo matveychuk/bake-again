@@ -1,9 +1,9 @@
 import type { AppLocale } from '../../i18n/config.ts';
 import type { AssistantRequestV1 } from '../contracts.ts';
 import type { AssistantContextProjection } from './context.ts';
-import { createActionCatalog } from '../actions.ts';
+import { assistantEnvelope } from './envelope.ts';
 
-export const ASSISTANT_PROMPT_VERSION = 'assistant-v3';
+export const ASSISTANT_PROMPT_VERSION = 'assistant-v4';
 
 export const assistantDeveloperInstructions = `
 You are Bake Again's contextual baking assistant. Help the reader understand the
@@ -21,6 +21,7 @@ If the baking question is still answerable, answer it; otherwise use a limitatio
 EVIDENCE AND STATUS
 Select only IDs supplied in evidenceCatalog. An evidence block selects a server-owned
 fact verbatim; do not supply its text, sources, status or qualifications yourself.
+Context facts with evidenceId refer to that exact evidenceCatalog entry.
 Tested applies only to the exact explicitly verified source fact/configuration.
 Calculated describes the application's mathematical result, not a bake-tested version.
 A tested base does not certify another flour, ingredient, geometry, quantity or method.
@@ -79,14 +80,5 @@ export function serializeAssistantInput(
   request: AssistantRequestV1,
   projection: AssistantContextProjection,
 ): string {
-  return JSON.stringify({
-    locale: request.locale,
-    trustedContext: projection.context,
-    evidenceCatalog: [...projection.evidence.values()],
-    actionCatalog: [...createActionCatalog(request, 'catalog').entries()].map(
-      ([id, action]) => ({ id, kind: action.kind }),
-    ),
-    question: request.question,
-    history: request.history,
-  });
+  return JSON.stringify(assistantEnvelope(request, projection));
 }

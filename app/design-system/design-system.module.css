@@ -24,6 +24,9 @@
 .wordmark span {
   color: var(--color-action-primary);
 }
+.siteHeaderExample :global(.site-header) {
+  width: 100%;
+}
 .version {
   color: var(--color-text-secondary);
   font-size: 0.75rem;
@@ -159,6 +162,23 @@
 
 .faviconExample img {
   flex: none;
+}
+
+.sharingPreview {
+  max-width: 600px;
+  margin: var(--space-12) 0 0;
+}
+
+.sharingPreview img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sharingPreview figcaption {
+  margin-top: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-small);
 }
 
 .section {
@@ -382,6 +402,17 @@
   display: grid;
   gap: var(--space-4);
 }
+.methodStepExamples {
+  max-width: var(--layout-step-media);
+}
+.methodStepExamples > div {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+}
+.methodStepExamples h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-drawer-title);
+}
 .personalExample {
   display: grid;
   gap: var(--space-3);
@@ -432,6 +463,24 @@
 }
 .recipeOverviewExample {
   max-width: 720px;
+}
+@media (max-width: 700px) {
+  .recipeDetailTitleExample { font-size: var(--font-size-recipe-title-mobile); }
+}
+.recipeHeroActionsExample {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.recipeHeroActionsExample a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-small);
+  font-weight: 750;
 }
 .stepPhotographyExamples {
   min-width: 0;

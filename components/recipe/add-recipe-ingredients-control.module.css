@@ -265,6 +265,7 @@
   }
   .actions {
     display: grid;
+    justify-content: stretch;
   }
   .trigger,
   .inList {

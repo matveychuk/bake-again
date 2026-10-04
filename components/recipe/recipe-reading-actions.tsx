@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 /* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Play } from 'lucide-react';
@@ -37,28 +38,33 @@ export function RecipeCookEntry({
   href,
   needsCream = false,
   hasMethod = true,
+  secondaryAction,
 }: {
   locale: AppLocale;
   href: string;
   needsCream?: boolean;
   hasMethod?: boolean;
+  secondaryAction?: ReactNode;
 }) {
   const copy = recipeReaderCopy[locale];
   const messages = getUiMessages(locale).recipe;
   return (
     <div className={styles.cookEntry}>
-      <Button variant="default" href={href}>
-        {!needsCream && (
-          <Play size={16} fill="currentColor" aria-hidden="true" />
-        )}
-        <span>
-          {needsCream
-            ? messages.chooseCreamBeforeCooking
-            : hasMethod
-              ? copy.cookStepByStep
-              : messages.openCookMode}
-        </span>
-      </Button>
+      <div className={styles.cookActions}>
+        <Button variant="default" href={href}>
+          {!needsCream && (
+            <Play size={16} fill="currentColor" aria-hidden="true" />
+          )}
+          <span>
+            {needsCream
+              ? messages.chooseCreamBeforeCooking
+              : hasMethod
+                ? copy.cookStepByStep
+                : messages.openCookMode}
+          </span>
+        </Button>
+        {secondaryAction}
+      </div>
       <p>
         {hasMethod
           ? copy.cookModeDescription

@@ -25,6 +25,23 @@
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-control);
 }
+.evidenceDetails {
+  flex: 1 1 0;
+  min-width: min(100%, 12em);
+  color: var(--color-text-secondary);
+}
+.evidenceDetails summary {
+  min-height: var(--space-12);
+  cursor: pointer;
+  padding-block: var(--space-2);
+}
+.evidenceDetails summary:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+.evidenceDetails p {
+  margin-top: var(--space-2);
+}
 .badge svg {
   flex-shrink: 0;
 }

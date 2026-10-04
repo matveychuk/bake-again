@@ -37,6 +37,13 @@
   max-width: var(--layout-assistant-drawer);
 }
 
+.cookActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
 .navigation a:focus-visible {
   outline: 3px solid var(--color-focus-ring);
   outline-offset: var(--space-1);

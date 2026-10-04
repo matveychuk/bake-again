@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { RecipeRelatedLink } from '@/components/recipe/recipe-related-link';
 
 import { trackEvent } from '@/lib/analytics/umami';
-import { useState } from 'react';
+import { useId, useState } from 'react';
+import { recipeReaderCopy } from '@/content/recipes/reader-copy';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChevronRight } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -30,6 +31,8 @@ export function RecipeCreamSelector({
   selectedRecipeId: string | null;
 }) {
   const [expanded, setExpanded] = useState(!selectedRecipeId);
+  const [detailsVisible, setDetailsVisible] = useState(false);
+  const optionsId = useId();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -77,18 +80,33 @@ export function RecipeCreamSelector({
   }
 
   return (
-    <section className={styles.section} id="cream-options">
+    <section
+      className={styles.section}
+      id="cream-options"
+      data-details={detailsVisible || undefined}
+    >
       <div className={styles.heading}>
         <p className={styles.eyebrow}>{messages.creamOptionsEyebrow}</p>
         <h2>{messages.creamOptionsTitle}</h2>
         <p className={styles.intro}>{messages.creamOptionsIntro()}</p>
+        <Button
+          className={styles.detailsToggle}
+          variant="link"
+          aria-expanded={detailsVisible}
+          aria-controls={optionsId}
+          onClick={() => setDetailsVisible(!detailsVisible)}
+        >
+          {detailsVisible
+            ? recipeReaderCopy[locale].hideCreamDetails
+            : recipeReaderCopy[locale].compareCreams}
+        </Button>
       </div>
 
       <fieldset className={styles.fieldset}>
         <legend className={styles.visuallyHidden}>
           {messages.creamOptionsTitle}
         </legend>
-        <div className={styles.options}>
+        <div className={styles.options} id={optionsId}>
           {options.map((option) => {
             const selectedOption = option.id === selectedRecipeId;
             const recommendedOption = option.id === recommendedRecipeId;

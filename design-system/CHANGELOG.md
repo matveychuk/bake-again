@@ -1,5 +1,156 @@
 # Design system changelog
 
+## 2026-10-04 · About status explanation
+
+- Replaced the repeated testing link, eyebrow and heading with one Recipe statuses
+  heading and a short scope introduction in UK/EN/ES. Definitions precede the
+  adaptation note; status words, icons and evidence requirements remain explicit.
+- Kept incoming `how-we-test` links working. Replaced the heavy divider with the
+  subtle border token and reduced compact spacing to 32px on either side.
+- Added the shared production section to the About Design Lab example.
+
+## 2026-10-04 · Tablet step photo alignment
+
+- Aligned recipe step photos with the text gutter at 561–900px using `space-12`.
+  Kept the existing desktop gutter and flush mobile alignment. Updated the Design
+  Lab photography guidance and verified the shared Napoleon recipe reference.
+
+## 2026-10-04 · Family story for the About page
+
+- Extended the editorial About page with original family photographs, localized age
+  captions and a concise first-person story in Ukrainian, Spanish and English.
+- Added a 40–64px story-title token and the shared photo composition to Design Lab.
+- Reused the existing plum-cake photograph and recipe links; preserved the testing
+  anchor and adaptation-specific status explanations.
+
+## 2026-10-04 · Landscape Napoleon photography
+
+- Reframed eight author photos to horizontal 4:3 and retained the already-horizontal
+  dough-ball photograph. All nine now fill their frames with cover fitting.
+- Reviewed each composition for visible food and preparation details; updated the
+  shared Recipe detail / Cook Mode example and media preparation outputs.
+
+## 2026-10-04 · Mobile reading and cooking rhythm
+
+- Added semantic 32px mobile section and 40px recipe title roles. Tightened mobile
+  catalogue spacing to 32px before the heading and 24px before the cards.
+- Gave Ingredients a separate mobile heading row, including existing shopping-list
+  actions. Added the crowded state to Design Lab.
+- Made long Tested evidence expandable while preserving the full explanation and
+  keeping Calculated/Suggested scope visible. Shortened profiterole yield copy while
+  retaining walnut-size guidance in geometry and instructions.
+- Made mobile cream choices compact, with an explicit comparison disclosure.
+- Moved Cook contextual tools after the instructions and emphasized timing. Retained
+  ingredient sections in the drawer and exposed every timing phase, including both
+  profiterole oven stages. Added localized timer examples and adapter regressions.
+
+## 2026-10-04 · Author process photos and divided ingredients
+
+- Added an optional contain fit for process images to preserve portrait details in
+  the existing photo frame. Added the Napoleon author photo to Design Lab.
+- Cook ingredient rows now support a canonical fraction of the current batch amount,
+  keeping flour split between stages consistent with scaled instructions.
+- Updated the Napoleon reference to the approved seven dough steps, author photos,
+  250 g butter, 24 cm template and 200°C. The new version has its own Tested evidence.
+
+## 2026-10-03 · Desktop method rhythm
+
+- Placed Questions beside the title on wider screens, eliminating the standalone
+  action row for steps without time. Restored terracotta timing labels on desktop;
+  retained the compact mobile metadata row and its secondary timing colour.
+- Reduced method-item vertical padding from 24px to 16px. Updated the shared
+  Design Lab examples and responsive component contract.
+
+## 2026-10-03 · Method metadata hierarchy
+
+- Kept step numbers terracotta while changing time and temperature to secondary
+  text at weight 600, separating navigation from practical metadata. Questions
+  retain primary text, an icon and underline. Updated the Design Lab reference.
+
+## 2026-10-03 · Compact mobile method steps
+
+- Extended `RecipeStepContent` with a numbered variant and optional metadata action.
+  Phones group number, time and Questions above a full-width title. Wider screens keep
+  the number gutter; missing time or questions leave no empty placeholder.
+- Shortened the visible question action while preserving a full accessible name and
+  44px target. Added all four optional-content combinations to Design Lab in UK/EN/ES.
+
+## 2026-10-03 · Distinct method heading and Cook action
+
+- Renamed the full recipe method heading to the localized “Method” label with a
+  concise step count. The guided “Cook step by step” button now has its own distinct
+  purpose. Updated the Design Lab example in all three languages.
+
+## 2026-10-03 · Compact recipe hero
+
+- Moved the recipe return link into the hero beside Save, removing the separate
+  breadcrumb row. Omitted the category label on phones so the title and practical
+  recipe facts start higher. Updated the Design Lab navigation example.
+
+## 2026-10-03 · Clear Cook Mode controls
+
+- Reduced the Cook Mode header to navigation, recipe identity and evidence on mobile.
+- Moved the AI entry to each current step, including steps without prepared questions.
+- Kept the screen-awake control visibly labelled beside the working step and added
+  active and failure feedback. Updated its production example in Design Lab.
+
+## 2026-10-03 · Cook step number alignment
+
+- Centred the numerals in Cook Mode's active and inactive progress circles.
+- Added the production all-steps list to Design Lab's Cook tools example for
+  responsive review.
+
+## 2026-10-03 · Clear recipe and step questions
+
+- Grouped the method's Cook entry with a quieter, explicitly recipe-wide question
+  action. The method heading and actions now form one row on wide screens and a compact
+  stack on phones.
+- Moved recipe-detail step questions beneath the instruction and checkpoint while
+  retaining the contextual heading action in Cook Mode. Clarified the step trigger
+  labels and the AI composer scope in Ukrainian, English and Spanish.
+- Updated the interactive Design Lab examples and recipe reading guidance.
+
+## 2026-10-03 · Mobile recipe ingredients
+
+- Moved the shared Ingredients heading ahead of quantity controls in the mobile recipe
+  reading order and kept its shopping action in the same row at standard phone width.
+- Added a compact, accessible quantity disclosure above the ingredient rows. It opens
+  for invalid configurations and summarizes the selected scale and evidence when
+  collapsed; desktop retains its side-by-side layout.
+- Updated the shared Design Lab recipe example and recipe planning guidance.
+
+## 2026-10-03 · Compact mobile discovery
+
+- Replaced the two-row mobile header with a sticky single-row header and a labelled
+  navigation disclosure. The language switcher remains visible beside it.
+- Added a one-row mobile hero variant of the shared recipe search form. Results and
+  drafts keep the full search form; search URLs and query behaviour are unchanged.
+- Added the shared header and compact search variant to Design Lab.
+
+## 2026-09-29 · Custom questions across the recipe collection
+
+- Removed the Napoleon-only custom-question restriction from Recipe Detail, Cook Mode
+  and the server service. Published recipes use their canonical locale, version,
+  selected portion, step IDs and validated cream selection.
+- Added a server-only adapter for source-backed recipe records, preserving missing
+  information and explicit Tested / Calculated / Suggested evidence. Draft publication
+  states are not promoted. Existing quotas and verification remain in force.
+- Whole-recipe questions include the method. Repeated facts are referenced in a compact
+  model envelope; the bounded input estimate is reserved by the existing budget guard.
+- Updated the shared Design Lab step-help examples to show the typed composer.
+
+## 2026-09-27 · Shared link preview
+
+- Added a food-led 1200 × 630 sharing card based on the existing Napoleon photograph
+  and semantic brand colours.
+- Added localized Open Graph image descriptions and a large sharing image to public
+  page metadata while retaining recipe-specific photographs.
+- Declared the sharing image's `image/webp` type in metadata. A dedicated
+  `/share-image.webp` Worker route serves the prepared asset with that type
+  because Sites static delivery used a generic type.
+- Versioned the image URL so messaging apps request the newly published asset.
+- Added the production preview to the Design Lab colour section.
+
 ## 2026-09-27 · Repository cleanup
 
 - Removed unused starter UI components, the detached palette-review switcher and

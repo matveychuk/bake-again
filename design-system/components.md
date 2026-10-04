@@ -77,7 +77,10 @@
 - Warm-white surface, subtle chocolate border and search icon.
 - Placeholder uses secondary text colour and must remain readable.
 - Submit action uses the primary button treatment.
-- On narrow screens the action may move below the input.
+- The homepage uses the shared `compactMobile` variant at 620px and below: one
+  row with a labelled search input and a 48px icon submit button. The visible
+  button label returns at larger widths. Results and drafts retain the full
+  form so the query can be refined in context.
 
 ## Recipe card
 
@@ -169,6 +172,10 @@
 
 ## Cream choice cards
 
+- At phone widths, use the same cards as compact labelled radio rows. A localized
+  Compare creams disclosure reveals descriptions and source links. On wider screens
+  details remain visible. Selecting a radio remains the only action that chooses a cream.
+
 - Describe compatible creams without claiming the exact host + cream combination has
   been tested. Show the composition evidence in the overview, not on every choice card.
 - Place a compact chocolate Recommended label across the preferred card's top border.
@@ -219,6 +226,11 @@ list · n` link and show an announced confirmation with View list and Undo. If s
   presents a localized error rather than implying the ingredients were saved.
 - Recipe detail variants share the same Ingredients heading and read-only row primitives;
   recipe maturity may change the status copy or disable shopping, but not the layout.
+- At mobile widths, place the Ingredients heading and shopping action together before
+  the ingredient list. Show the quantity adjustment as a compact disclosure between
+  them and the list; keep it closed by default and summarize the current scale and
+  evidence status when changed. Invalid configurations open the controls so the error
+  remains visible. Desktop keeps the controls beside the ingredients.
 - Source-backed recipe pages show the shared adjustment controls in English, Spanish and
   Ukrainian. Keep control labels, ingredient names, quantities, notes and shopping labels
   in the active locale. The supported numeric anchor is recipe-specific; recipes without
@@ -266,13 +278,20 @@ variation.
   or a same-site recipe referrer, and then uses native history to return to the exact
   recipe. It otherwise remains an ordinary localized catalogue link, including without
   JavaScript. Never encode a parent recipe in the shareable URL.
+- Put the single `RecipeBackLink` inside the recipe hero beside Save. This gives phones
+  one short utility row above the title instead of a separate breadcrumb block. Keep
+  the category for wider layouts, and omit its repeated label on phones.
 - The recipe hero uses `RecipeSectionNavigation`: left-aligned native links labelled
   “Jump to ingredients” and “Jump to steps”, with decorative down arrows. These scroll
   to sections on the same page; do not style them as tabs or hide either section.
   Keep 44px targets, visible focus, wrapping translations and focusable destinations.
 - `RecipeCookEntry` places one primary “Cook step by step” action beside the written
-  method, with a short explanation of the separate, one-step-at-a-time view. On narrow
-  screens it stacks below the method heading. Do not repeat the launch in the hero.
+  method, with a short explanation of the separate, one-step-at-a-time view. A quieter
+  secondary “Ask about this recipe” action sits beside the Cook entry and opens the
+  recipe-wide assistant scope. On narrow screens the actions wrap beneath the method
+  heading. Label the written section “Method” (localized) with the step count above it;
+  reserve “Cook step by step” for the action that opens the guided mode. Do not repeat
+  the launch in the hero.
 - Preserve the exact configuration and selected cream in the Cook URL. When cream
   selection is required, keep the existing “Choose cream first” entry instead.
 - `/design-system#recipe-reading-actions` demonstrates the production back control,
@@ -287,6 +306,13 @@ variation.
 
 ## Step media sequence
 
+- Recipe process photographs should be composed for the horizontal 4:3 frame and
+  use `fit: 'cover'` to fill it without sidebars. Preserve food, folds and parchment
+  edges when reframing portrait originals; extend the background when needed.
+  Recipe detail and Cook Mode share the same asset and fitting.
+  `/design-system#step-photography` demonstrates the landscape author Napoleon photo.
+  The optional contain setting remains available for media that must be shown whole.
+
 - Image titles and captions are optional. Render a caption only when it adds information
   beyond the step instruction; preserve descriptive alternative text in every case.
   The caption-free example is `/design-system#concise-recipe`.
@@ -294,6 +320,10 @@ variation.
 - Keep the step number on the same baseline as the step title. Optional timing or other
   compact metadata sits in its own row above both; explanatory copy and callouts remain
   below the title.
+- Recipe photos align with the instruction text: use the step-number gutter of
+  `space-16` above 900px and `space-12` at 561–900px. At 560px and below, both text
+  and photos start at the step's left edge. The live Napoleon Design Lab reference
+  uses these production breakpoints.
 - Use one ordered sequence when several images explain distinct states within a single
   recipe step. Keep each image, title, caption and descriptive alternative text together.
 - Show three images in a row on wide screens. From 561–900px, use a compact horizontal
@@ -321,6 +351,12 @@ variation.
   keyboard-focusable scroll region.
 
 ## Recipe ingredient rows
+
+- A canonical step may specify `ingredientFractions` for an ingredient split between
+  stages. Cook Mode applies that fraction to the current batch amount and its spoon
+  equivalent; the recipe list and shopping list retain the complete batch amount.
+  Napoleon's first and third steps each use half of the main flour amount. The live
+  Napoleon Design Lab reference shows the same instructions and source quantities.
 
 - `RecipeIngredientList` owns the read-only name, amount, equivalent and note layout used
   by recipe detail, per-step Cook quantities and the Cook ingredients drawer.
@@ -372,11 +408,20 @@ variation.
   captions remain available.
 - The multilingual interactive reference is `/design-system#concise-recipe`.
 
-- `RecipeStepContent` owns the shared reading order on recipe detail and in Cook Mode:
-  heading and contextual assistant action, optional tip, instruction, then optional
-  checkpoint. A tip always appears before the instruction.
-- Keep `Ask about this step` in the heading row on wide screens. Let it wrap below the
-  heading on narrow screens and preserve a 44px target.
+- `RecipeStepContent` owns the shared reading order on recipe detail and in Cook Mode.
+  A tip always appears before the instruction and a checkpoint follows it. Its numbered
+  recipe-detail variant accepts `stepNumber`, optional `meta` and the `metadata` action
+  placement. On phones, number, time and a short “Questions” action share the top row;
+  the title and instruction use the full width below. Absent optional items reserve no
+  space. Wider layouts retain the number gutter and place Questions beside the title;
+  only actual time metadata creates a row above it. The action keeps its full step-specific
+  accessible name and a 44px target. Cook Mode retains its action beside the heading.
+  Keep the number terracotta. On phones, time and temperature use secondary text at
+  weight 600; wider layouts use strong terracotta at weight 750 above the title.
+  The Questions action uses primary text, its icon and underline. Weight and placement
+  reinforce this hierarchy alongside colour.
+  Method list items use 16px vertical padding on either side of each divider.
+  `/design-system#step-questions` shows time-only, help-only, both and neither in UK/EN/ES.
 - `RecipeStepGuidance` renders both `checkpoint` and `tip` semantics inside that structure.
   Preserve the icon and written label; colour only reinforces the meaning.
 - Use the compact `inline` tip variant for practical advice. Its warm background,
@@ -416,9 +461,12 @@ variation.
 
 The Recipes navigation item returns to the home recipe collection, using the same URL as
 the Bake Again wordmark. Saved and Shopping list remain separate primary destinations;
-About comes last so the practical destinations stay together. Without the local Drafts
-destination, all four links remain on one row at 390px in every supported language. A
-clear language switcher stays separate. Drafts appears only in a development build on
+About comes last so the practical destinations stay together. At 620px and below, the
+header is one sticky row with the wordmark, separate language switcher and a labelled
+Menu disclosure. Its links open in a surface below the header, retain their current-page
+indicator and remain available without JavaScript. The menu has a 44px trigger and
+links, visible keyboard focus and space for translated labels to wrap. The desktop
+navigation remains inline. Drafts appears only in a development build on
 localhost, 127.0.0.1 or ::1. Its route and unpublished recipe/Cook Mode URLs are
 unavailable outside that local environment, including production on localhost. Privacy
 remains in the footer.
@@ -453,10 +501,17 @@ remains in the footer.
 
 ## Cook tools and persistent timer
 
+- Preserve ingredient section titles in the drawer using the shared ingredient list's
+  `sections` composition. Multi-phase timers expose labelled duration radios with
+  wrapping text, rather than silently showing only the first phase. Design Lab shows
+  the profiterole 200°C / 180°C example in Ukrainian, English and Spanish.
+
 - Ingredients and all-steps panels use the existing Drawer with a rightward dismiss direction, the assistant drawer width token, full viewport height and full width on mobile.
 - A fixed header contains a 24px display title and a labelled 48px Close button; the body scrolls independently. Escape, focus containment and focus return come from the shared primitive.
 - An active timer on another step is shown as a compact button with remaining time and step title. Pressing it returns to that step. Do not announce every tick to screen readers.
-- The Design Lab Cook tools example uses the production drawer classes and ingredient-list component.
+- The Design Lab Cook tools example uses the production drawer classes,
+  ingredient-list component and `CookProgress` step circles. Keep the number optically
+  centred in both active and inactive circles.
 
 ## Shared evidence badge
 
@@ -549,11 +604,15 @@ examples retain these handlers, but analytics never loads on the Design Lab rout
 - Keep selected questions visible for switching answers. Source quantities are resolved
   after scaling; composed creams retain their own questions. Grouped steps combine only
   their own prepared answers. Do not add universal mixing/texture prompts.
-- The separately labelled typed-question composer is shown only where live assistance
-  is supported. Its next request includes the selected prepared question and answer.
-  A general typed-question entry remains available on simple steps in supported Cook Mode.
-- `/design-system#step-questions` demonstrates the production drawer in UK/EN/ES without
-  any live API dependency. All text wraps at 390/900/1440px and 200% text enlargement.
+- The separately labelled typed-question composer is available for every published
+  recipe, in Recipe Detail and Cook Mode. Its next request includes the selected
+  prepared question and answer. Cook Mode places the typed-question entry beside the
+  current step, including simple steps without prepared help; its header stays focused
+  on navigation, recipe identity and evidence. Source records use a server-only projection of
+  recorded facts; missing details, publication, scaling and composition evidence remain explicit.
+- `/design-system#step-questions` demonstrates the production drawer and composer in
+  UK/EN/ES. Opening a prepared answer makes no API request. All text wraps at
+  390/900/1440px and 200% text enlargement.
 
 ### Custom assistant verification and limits
 
@@ -564,3 +623,13 @@ fresh token. A localized status and retry control keep verification outages reco
 Prepared questions remain usable through every verification or AI failure. The widget
 uses Cloudflare's flexible size; text uses semantic tokens. The contextual assistant
 example in the Design Lab demonstrates the composer and offline-verification state.
+
+## About family photographs
+
+`AboutFamilyPhotos` extends the existing About page composition and is demonstrated
+in Design Lab. Two semantic figures retain the supplied photographs in full,
+with localized descriptive alt text, visible age captions and a shared note.
+Use equal image heights on wide screens through their natural 4:3 / 3:2 proportions;
+stack in reading order on phones. No overlays, rotation, generated faces or baked-in text.
+The editorial title uses `font-size-story-title` (40–64px). Recipe evidence remains
+in the existing About testing section with its canonical badges and anchor.

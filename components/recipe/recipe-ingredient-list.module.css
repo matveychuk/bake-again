@@ -64,3 +64,14 @@
     grid-template-columns: minmax(88px, 112px) minmax(0, 1fr);
   }
 }
+.sections {
+  display: grid;
+  gap: var(--space-6);
+}
+.sections h3 {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-drawer-title);
+  line-height: var(--line-height-body);
+  overflow-wrap: anywhere;
+}

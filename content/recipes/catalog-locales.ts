@@ -485,9 +485,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Святковий торт',
     },
     summary: {
-      en: 'Cakes with six thin 28 cm layers each, warm custard and nuts.',
-      es: 'Tartas con seis capas finas de 28 cm, crema pastelera templada y frutos secos.',
-      uk: 'Торти по шість тонких коржів 28 см із теплим заварним кремом і горіхами.',
+      en: 'Cakes with six thin 24 cm layers each, warm custard and nuts.',
+      es: 'Tartas con seis capas finas de 24 cm, crema pastelera templada y frutos secos.',
+      uk: 'Торти по шість тонких коржів 24 см із теплим заварним кремом і горіхами.',
     },
     alt: previewAlt(
       'Gluten-free Napoleon cake with six thin layers, custard and nuts',

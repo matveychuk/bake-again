@@ -7,6 +7,7 @@ export type StepMediaItem = {
   type?: 'image' | 'video';
   id: string;
   src: string;
+  fit?: 'cover' | 'contain';
   alt: string;
   title?: string;
   caption?: string;
@@ -53,6 +54,11 @@ export function StepMediaSequence({
               ) : (
                 <Image
                   src={item.src}
+                  style={
+                    item.fit === 'contain'
+                      ? { objectFit: 'contain' }
+                      : undefined
+                  }
                   alt={item.alt}
                   fill
                   sizes="(min-width: 901px) 400px, (min-width: 561px) 52vw, 82vw"

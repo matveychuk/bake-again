@@ -86,7 +86,6 @@
 .headerTools {
   justify-self: end;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
 }
@@ -98,9 +97,19 @@
 .headerTools p,
 .header > p {
   margin: 0;
+  min-width: 0;
   color: var(--color-text-secondary);
   font-size: var(--font-size-label);
   font-weight: 700;
+}
+
+.wakeLockControl {
+  min-height: 44px;
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 .wakeLock {
@@ -115,6 +124,14 @@
   cursor: pointer;
   font-size: var(--font-size-label);
   font-weight: 750;
+}
+
+.wakeLockError {
+  max-width: var(--layout-cook-reading);
+  color: var(--color-action-primary-strong);
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-body);
+  text-align: right;
 }
 
 .wakeLock[aria-pressed='true'] {
@@ -245,7 +262,7 @@
 .progressStepNumber {
   display: block;
   line-height: 1;
-  transform: translateY(-1px);
+  transform: translateY(1px);
 }
 
 .rail li .activeStep,
@@ -333,6 +350,77 @@
 
 .step {
   width: 100%;
+}
+
+.step > .meta {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  letter-spacing: normal;
+  text-transform: none;
+  margin: 0 0 var(--space-2);
+}
+
+.stepTools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-3);
+  max-width: var(--layout-cook-reading);
+}
+.stepTools .wakeLockControl {
+  margin: 0;
+  align-items: flex-start;
+}
+.stepTools .wakeLock {
+  font-size: var(--font-size-body-small);
+}
+.stepTools .ask {
+  font-size: var(--font-size-body-small);
+}
+
+.timer[data-phased] {
+  flex-wrap: wrap;
+}
+.timerPhases {
+  flex-basis: 100%;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.timerPhases legend {
+  font-size: var(--font-size-body-small);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+.timerPhases label {
+  min-height: var(--space-12);
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body);
+  padding: var(--space-2);
+  border: 1px solid var(--color-border-subtle);
+  cursor: pointer;
+}
+.timerPhases label + label {
+  margin-top: var(--space-2);
+}
+.timerPhases label:has(:checked) {
+  background: var(--color-background-panel-subtle);
+}
+.timerPhases input {
+  accent-color: var(--color-action-primary-strong);
+  flex-shrink: 0;
+}
+.timerPhases input:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+.timerPhases:disabled label {
+  cursor: default;
 }
 
 .mobileProgress {
@@ -653,20 +741,8 @@
   .headerTools p,
   .header > p {
     justify-self: end;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .wakeLock {
-    width: 44px;
-    flex: 0 0 44px;
-    padding: 0;
-    justify-content: center;
-  }
-
-  .wakeLock span {
-    display: none;
+    overflow-wrap: anywhere;
+    line-height: var(--line-height-body);
   }
 
   .wordmark {
@@ -689,19 +765,23 @@
 
   .workColumn {
     width: 100%;
-    padding: var(--space-6) var(--layout-gutter-mobile)
+    padding: var(--space-3) var(--layout-gutter-mobile)
       calc(var(--cook-actions-height, var(--space-16)) + var(--space-6));
   }
 
   .mobileProgress {
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-3);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-2);
     color: var(--color-text-secondary);
-    font-size: var(--font-size-label);
+    font-size: var(--font-size-body-small);
     font-weight: 750;
+  }
+
+  .mobileProgress:has(+ .wakeLockControl) {
+    margin-bottom: var(--space-2);
   }
 
   .mobileProgress > span {
@@ -718,7 +798,7 @@
     border: 0;
     background: transparent;
     color: var(--color-action-primary-strong);
-    font-size: var(--font-size-label);
+    font-size: var(--font-size-body-small);
     font-weight: 750;
   }
 

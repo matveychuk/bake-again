@@ -3,11 +3,19 @@
   margin: var(--space-16) auto var(--space-16);
   display: grid;
   grid-template-columns: 350px minmax(0, 1fr);
-  gap: var(--space-16);
+  column-gap: var(--space-16);
+  row-gap: var(--space-4);
   align-items: start;
+}
+.ingredientHeading {
+  min-width: 0;
+  grid-column: 2;
+  grid-row: 1;
 }
 .content {
   min-width: 0;
+  grid-column: 2;
+  grid-row: 2;
 }
 .concise .intro,
 .concise .result,
@@ -25,15 +33,17 @@
   outline: 2px solid var(--color-focus-ring);
   outline-offset: var(--space-1);
 }
-.content > :nth-child(2) {
-  margin-top: var(--space-4);
-}
 .controls {
+  grid-column: 1;
+  grid-row: 1 / span 2;
   position: sticky;
   top: var(--space-6);
   padding: var(--space-6);
   border: 1px solid var(--color-border-subtle);
   background: var(--color-background-surface);
+}
+.mobileAdjustToggle {
+  display: none;
 }
 .controls h2 {
   margin: var(--space-2) 0 0;
@@ -232,7 +242,7 @@
     width: calc(100% - (var(--layout-gutter-mobile) * 2));
     margin: var(--space-12) auto;
     grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
-    gap: var(--space-8);
+    column-gap: var(--space-8);
   }
   .controls {
     width: 100%;
@@ -247,7 +257,75 @@
 @media (max-width: 700px) {
   .planning {
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-8);
+    row-gap: var(--space-4);
+  }
+  .ingredientHeading,
+  .controls,
+  .content {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .mobileAdjustToggle {
+    width: 100%;
+    min-height: 44px;
+    padding: var(--space-2) var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-control);
+    background: var(--color-background-surface);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    text-align: left;
+  }
+  .mobileAdjustToggle svg {
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+  .mobileAdjustToggle[aria-expanded='true'] svg {
+    transform: rotate(180deg);
+  }
+  .mobileAdjustText {
+    min-width: 0;
+    display: grid;
+    gap: var(--space-1);
+  }
+  .mobileAdjustText strong {
+    font-size: var(--font-size-body-small);
+    font-weight: 750;
+    overflow-wrap: anywhere;
+  }
+  .mobileAdjustText small {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-label);
+    overflow-wrap: anywhere;
+  }
+  .mobileAdjustStatus {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+  .mobileAdjustToggle:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: var(--space-1);
+  }
+  .controls {
+    display: none;
+  }
+  .controlsOpen {
+    display: block;
+  }
+  .content {
+    margin-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileAdjustToggle svg {
+    transition: none;
   }
 }
 

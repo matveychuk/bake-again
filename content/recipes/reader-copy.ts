@@ -4,6 +4,8 @@ import type { AppLocale } from '../../lib/i18n/config.ts';
 export const recipeReaderCopy = {
   uk: {
     quantity: 'Кількість',
+    compareCreams: 'Порівняти креми',
+    hideCreamDetails: 'Згорнути подробиці',
     base: 'Базовий рецепт',
     method: 'Приготування',
     cookMode: 'Режим приготування',
@@ -12,13 +14,15 @@ export const recipeReaderCopy = {
     toSteps: 'До кроків',
     cookStepByStep: 'Готувати покроково',
     cookModeDescription:
-      'Один крок на екрані, інгредієнти й таймери під рукою.',
+      'У режимі приготування — один крок на екрані, інгредієнти й таймери під рукою.',
     recipeParts: 'Складові рецепта',
     fractionalEggs:
       'Кількість яєць дробова — відміряйте потрібну частину збитого яйця.',
   },
   en: {
     quantity: 'Quantity',
+    compareCreams: 'Compare creams',
+    hideCreamDetails: 'Hide details',
     base: 'Base recipe',
     method: 'Method',
     cookMode: 'Cook Mode',
@@ -27,13 +31,15 @@ export const recipeReaderCopy = {
     toSteps: 'Jump to steps',
     cookStepByStep: 'Cook step by step',
     cookModeDescription:
-      'One step at a time, with ingredients and timers close at hand.',
+      'Cook Mode shows one step at a time, with ingredients and timers close at hand.',
     recipeParts: 'Recipe components',
     fractionalEggs:
       'The egg quantity is fractional — measure the required portion of a beaten egg.',
   },
   es: {
     quantity: 'Cantidad',
+    compareCreams: 'Comparar cremas',
+    hideCreamDetails: 'Ocultar detalles',
     base: 'Receta base',
     method: 'Preparación',
     cookMode: 'Modo de cocina',
@@ -42,7 +48,7 @@ export const recipeReaderCopy = {
     toSteps: 'Ir a los pasos',
     cookStepByStep: 'Cocinar paso a paso',
     cookModeDescription:
-      'Un paso en pantalla, con ingredientes y temporizadores a mano.',
+      'El modo de cocina muestra un paso a la vez, con ingredientes y temporizadores a mano.',
     recipeParts: 'Componentes de la receta',
     fractionalEggs:
       'La cantidad de huevos es fraccionaria: mide la porción necesaria de un huevo batido.',

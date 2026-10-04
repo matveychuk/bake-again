@@ -60,6 +60,9 @@ they are not separate statuses.
 - Before any Instagram strategy, account setup, post, Reel, Story or advertising task,
   read [the Instagram working document](docs/strategy/instagram.uk.md), its publication
   register and the relevant linked post records. Use these files across chats.
+- Keep the append-only [publication history](media/instagram/publication-history.uk.md)
+  current, including deleted posts and repeat publications. New post packages live in
+  `media/instagram/IG-XXX/for-phone/`; local review files are not Instagram drafts.
 - Distinguish user-approved decisions, proposals and verified completed actions.
   Do not turn an earlier assistant recommendation into an approved decision.
 - After meaningful Instagram work, update the working document's current state,

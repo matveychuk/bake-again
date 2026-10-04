@@ -10,6 +10,7 @@ import type { AppLocale } from '@/lib/i18n/config';
 import { recipeDetailTitles } from './catalog-locales';
 import {
   createSourceCookIngredients,
+  createSourceCookIngredientSections,
   createSourceCookSteps,
   isSourceCookModeAvailable,
 } from './cook-mode-adapter';
@@ -48,10 +49,7 @@ function createInventoryCookMode(
 ): CookModeDefinition {
   const structured = getRecipeContent(recipe.id, locale);
   const document = getRecipeDocument(recipe.id);
-  const baseVersionId =
-    document?.kind === 'detailed'
-      ? document.recipe.versionId
-      : (structured?.versionId ?? `${recipe.id}-source-v1`);
+  const baseVersionId = document?.recipe.versionId ?? `${recipe.id}-source-v1`;
   const baseForCookMode = structured
     ? composeRecipeWithCream(structured, null, null)
     : null;
@@ -60,6 +58,7 @@ function createInventoryCookMode(
     recipeId: recipe.id,
     recipeVersionId: baseVersionId,
     recipeTitle: recipeDetailTitles[recipe.id]?.[locale] ?? recipe.title,
+    assistant: { recipeId: recipe.id, recipeVersionId: baseVersionId },
     detailHref: `/recipes/${recipe.slug}`,
     totalSteps:
       baseForCookMode && isSourceCookModeAvailable(baseForCookMode)
@@ -144,6 +143,10 @@ function createInventoryCookMode(
           configured && configuration.kind !== 'invalid'
             ? createSourceCookIngredients(configured, locale)
             : [],
+        ingredientSections:
+          configured && configuration.kind !== 'invalid'
+            ? createSourceCookIngredientSections(configured, locale)
+            : [],
         assistantConfiguration: configured
           ? sourceAssistantConfiguration(recipe.id, configured, configuration)
           : undefined,
@@ -223,7 +226,7 @@ export function getCookModeDefinition(
             : { kind: 'base', mode: 'scale', scaleFactor: 1 },
           locale,
         );
-        // Preserve the existing 17 groups and canonical IDs used by stored sessions.
+        // Group the current recipe version; the version ID isolates older stored sessions.
         const grouped = {
           ...configured,
           steps: configured.steps.map((step) => ({
@@ -238,6 +241,7 @@ export function getCookModeDefinition(
           evidence: configured.evidence,
           steps: createSourceCookSteps(grouped, locale),
           allIngredients: createSourceCookIngredients(configured, locale),
+          ingredientSections: createSourceCookIngredientSections(configured, locale),
         };
       },
     };

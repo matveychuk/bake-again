@@ -79,7 +79,11 @@ export type StructuredRecipeStep = {
   title: string;
   body: string;
   /** Explicit ingredient amounts in prose; timings and technique counts are never scaled. */
-  quantityMentions?: Array<{ text: string; quantity: Quantity; numberOnly?: boolean }>;
+  quantityMentions?: Array<{
+    text: string;
+    quantity: Quantity;
+    numberOnly?: boolean;
+  }>;
   meta?: string;
   checkpoint?: string;
   tip?: string;
@@ -93,12 +97,14 @@ export type StructuredRecipeStep = {
   cookIngredients?: Array<{
     ingredientId: string;
     quantity?: 'full' | 'omit';
+    fraction?: number;
     note?: string;
   }>;
   media?: Array<{
     type?: 'image' | 'video';
     id: string;
     src: string;
+    fit?: 'cover' | 'contain';
     alt: string;
     title?: string;
     caption?: string;

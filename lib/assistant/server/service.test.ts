@@ -69,7 +69,7 @@ void test('model-selected shopping action is rejected when the deterministic cat
     ...request,
     configuration: {
       kind: 'adjusted',
-      geometryId: 'round-24cm-preview',
+      geometryId: 'round-28cm-preview',
       quantityAdjustment: { mode: 'batchScale', factor: 0.5 },
     },
   };
@@ -192,7 +192,7 @@ void test('rejects a calculation preview that is ineligible for Cook Mode withou
         surface: 'cook-mode',
         configuration: {
           kind: 'adjusted',
-          geometryId: 'round-24cm-preview',
+          geometryId: 'round-28cm-preview',
           quantityAdjustment: { mode: 'batchScale', factor: 0.5 },
         },
       },
@@ -279,52 +279,162 @@ void test('records allowlisted content-free telemetry with model, latency, usage
 });
 
 void test('shared quota denial remains a quota error instead of a generic provider failure', async () => {
-  await assert.rejects(service({ answer: async () => { throw new AssistantServiceError('BUDGET_EXHAUSTED', 503); } }).respond(request, {
-    requestId: 'budget-denied', signal: new AbortController().signal,
-  }), { code: 'BUDGET_EXHAUSTED' });
+  await assert.rejects(
+    service({
+      answer: async () => {
+        throw new AssistantServiceError('BUDGET_EXHAUSTED', 503);
+      },
+    }).respond(request, {
+      requestId: 'budget-denied',
+      signal: new AbortController().signal,
+    }),
+    { code: 'BUDGET_EXHAUSTED' },
+  );
 });
 
 void test('budget rejection prevents all model calls; provider failure still releases only concurrency', async () => {
-  let calls = 0; let releases = 0; let reserved = 0;
-  const upstream: AssistantProvider = { async answer() { calls++; throw new Error('timeout after possible billing'); } };
-  const denied = protectAssistantProvider(upstream, { async allowVerification() {}, async reserve() { throw new AssistantServiceError('BUDGET_EXHAUSTED', 503); } }, { sessionKey: 's', networkKey: 'n' }, 2000);
-  await assert.rejects(service(denied).respond(request, { requestId: 'denied', signal: new AbortController().signal }), { code: 'BUDGET_EXHAUSTED' });
+  let calls = 0;
+  let releases = 0;
+  let reserved = 0;
+  const upstream: AssistantProvider = {
+    async answer() {
+      calls++;
+      throw new Error('timeout after possible billing');
+    },
+  };
+  const denied = protectAssistantProvider(
+    upstream,
+    {
+      async allowVerification() {},
+      async reserve() {
+        throw new AssistantServiceError('BUDGET_EXHAUSTED', 503);
+      },
+    },
+    { sessionKey: 's', networkKey: 'n' },
+    2000,
+  );
+  await assert.rejects(
+    service(denied).respond(request, {
+      requestId: 'denied',
+      signal: new AbortController().signal,
+    }),
+    { code: 'BUDGET_EXHAUSTED' },
+  );
   assert.equal(calls, 0);
-  const protectedProvider = protectAssistantProvider(upstream, { async allowVerification() {}, async reserve(_actor, _id, cost) { reserved += cost; return { async release() { releases++; } }; } }, { sessionKey: 's', networkKey: 'n' }, 2000);
-  await assert.rejects(service(protectedProvider).respond(request, { requestId: 'timed-out', signal: new AbortController().signal }), { code: 'SERVICE_UNAVAILABLE' });
-  assert.equal(calls, 1); assert.equal(releases, 1); assert.equal(reserved, 33000);
+  const protectedProvider = protectAssistantProvider(
+    upstream,
+    {
+      async allowVerification() {},
+      async reserve(_actor, _id, cost) {
+        reserved += cost;
+        return {
+          async release() {
+            releases++;
+          },
+        };
+      },
+    },
+    { sessionKey: 's', networkKey: 'n' },
+    2000,
+  );
+  await assert.rejects(
+    service(protectedProvider).respond(request, {
+      requestId: 'timed-out',
+      signal: new AbortController().signal,
+    }),
+    { code: 'SERVICE_UNAVAILABLE' },
+  );
+  assert.equal(calls, 1);
+  assert.equal(releases, 1);
+  assert.equal(reserved, 33000);
 });
 
 for (const locale of ['uk', 'en', 'es'] as const) {
   void test(`keeps source quantities when ${locale} model redundantly repeats them in an explanation`, async () => {
-    const input: AssistantRequestV1 = { ...request, locale, scope: { kind: 'step', stepIds: ['heat-milk'] } };
-    const text = { uk: 'Залиште холодним 600–650 мл молока.', en: 'Keep 600–650 ml of milk cold.', es: 'Reserva 600–650 ml de leche fría.' }[locale];
-    const response = await service({ async answer(_request, projection) {
-      const entry = [...projection.evidence.entries()].find(([, fact]) => fact.text.includes('600–650'));
-      assert.ok(entry);
-      return { locale, actionId: null, outcome: 'answered', blocks: [
-        { kind: 'evidence', evidenceId: entry[0] },
-        { kind: 'explanation', text, evidenceIds: [entry[0]] },
-      ] };
-    } }).respond(input, { requestId: 'numeric-repeat', signal: new AbortController().signal });
+    const input: AssistantRequestV1 = {
+      ...request,
+      locale,
+      scope: { kind: 'step', stepIds: ['heat-milk'] },
+    };
+    const text = {
+      uk: 'Залиште холодним 600–650 мл молока.',
+      en: 'Keep 600–650 ml of milk cold.',
+      es: 'Reserva 600–650 ml de leche fría.',
+    }[locale];
+    const response = await service({
+      async answer(_request, projection) {
+        const entry = [...projection.evidence.entries()].find(([, fact]) =>
+          fact.text.includes('600–650'),
+        );
+        assert.ok(entry);
+        return {
+          locale,
+          actionId: null,
+          outcome: 'answered',
+          blocks: [
+            { kind: 'evidence', evidenceId: entry[0] },
+            { kind: 'explanation', text, evidenceIds: [entry[0]] },
+          ],
+        };
+      },
+    }).respond(input, {
+      requestId: 'numeric-repeat',
+      signal: new AbortController().signal,
+    });
     assert.ok(response.ok);
     assert.equal(response.blocks.length, 1);
     assert.equal(response.blocks[0]!.kind, 'evidence');
     assert.match(response.blocks[0]!.text, /600–650/);
   });
 }
-for (const scenario of ['invented-number', 'unselected-source', 'false-status', 'suggestion', 'unknown-source'] as const) {
+for (const scenario of [
+  'invented-number',
+  'unselected-source',
+  'false-status',
+  'suggestion',
+  'unknown-source',
+] as const) {
   void test(`numeric repetition recovery still rejects ${scenario}`, async () => {
-    const input: AssistantRequestV1 = { ...request, locale: 'uk', scope: { kind: 'step', stepIds: ['heat-milk'] } };
-    await assert.rejects(service({ async answer(_request, projection) {
-      const entry = [...projection.evidence.entries()].find(([, fact]) => fact.text.includes('600–650'));
-      assert.ok(entry);
-      return { locale: 'uk', actionId: null, outcome: 'answered', blocks: [
-        ...(scenario === 'unselected-source' ? [] : [{ kind: 'evidence' as const, evidenceId: entry[0] }]),
-        { kind: scenario === 'suggestion' ? 'suggestion' : 'explanation',
-          text: scenario === 'invented-number' ? 'Залиште 999 мл молока.' : scenario === 'false-status' ? 'Перевірено: залиште 600–650 мл.' : 'Залиште 600–650 мл молока.',
-          evidenceIds: [scenario === 'unknown-source' ? 'e999999' : entry[0]] },
-      ] };
-    } }).respond(input, { requestId: 'unsafe-numeric-repeat', signal: new AbortController().signal }), { code: 'INVALID_UPSTREAM_RESPONSE' });
+    const input: AssistantRequestV1 = {
+      ...request,
+      locale: 'uk',
+      scope: { kind: 'step', stepIds: ['heat-milk'] },
+    };
+    await assert.rejects(
+      service({
+        async answer(_request, projection) {
+          const entry = [...projection.evidence.entries()].find(([, fact]) =>
+            fact.text.includes('600–650'),
+          );
+          assert.ok(entry);
+          return {
+            locale: 'uk',
+            actionId: null,
+            outcome: 'answered',
+            blocks: [
+              ...(scenario === 'unselected-source'
+                ? []
+                : [{ kind: 'evidence' as const, evidenceId: entry[0] }]),
+              {
+                kind: scenario === 'suggestion' ? 'suggestion' : 'explanation',
+                text:
+                  scenario === 'invented-number'
+                    ? 'Залиште 999 мл молока.'
+                    : scenario === 'false-status'
+                      ? 'Перевірено: залиште 600–650 мл.'
+                      : 'Залиште 600–650 мл молока.',
+                evidenceIds: [
+                  scenario === 'unknown-source' ? 'e999999' : entry[0],
+                ],
+              },
+            ],
+          };
+        },
+      }).respond(input, {
+        requestId: 'unsafe-numeric-repeat',
+        signal: new AbortController().signal,
+      }),
+      { code: 'INVALID_UPSTREAM_RESPONSE' },
+    );
   });
 }
