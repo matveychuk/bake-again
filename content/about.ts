@@ -5,6 +5,16 @@ export type AboutPageContent = {
   eyebrow: string;
   title: string;
   standfirst: string;
+  photosLabel: string;
+  photosIntro: string;
+  photoThenCaption: string;
+  photoNowCaption: string;
+  photoThenAlt: string;
+  photoNowAlt: string;
+  collectionTitle: string;
+  collectionBody: string;
+  foodAlt: string;
+  foodCaption: string;
   storyTitle: string;
   story: string[];
   pullQuote: string;
@@ -19,21 +29,23 @@ export type AboutPageContent = {
   recipesLink: string;
 };
 
+// Family facts and photographs: IG-002; website adaptation requested 2026-10-04.
 export const aboutPageContent: Record<AppLocale, AboutPageContent> = {
   "uk": {
     "metadata": {
       "title": "Про Bake Again та перевірку рецептів — Bake Again",
-      "description": "Сімейна колекція безглютенової випічки: як перевіряють рецепти й що означають статуси Перевірено, Розраховано та Запропоновано."
+      "description": "Саша та її сім’я: десять років безглютенової випічки, фотографії Івана у 4 і 14 років та рецепти, які тепер готують для всіх."
     },
     "eyebrow": "Про Bake Again",
-    "title": "Рецепти, до яких хочеться повертатися.",
-    "standfirst": "Bake Again — колекція безглютенових рецептів, що виросла із сімейної кухні та пошуку знайомого смаку.",
-    "storyTitle": "Як усе почалося",
+    "title": "Спочатку для сина. Тепер для всієї сім’ї.",
+    "standfirst": "Привіт, я Саша. Bake Again — це рецепти безглютенової випічки з нашої сімейної кухні. За кожним із них — спроби, зміни й те, що нам справді смакує.",
+    "storyTitle": "Два тіста, дві миски. А потім — одна випічка на всіх.",
     "story": [
-      "У 2015–2016 роках потреба в безглютеновому харчуванні змінила звичну сімейну випічку. Почався пошук борошна, пропорцій і способів приготування, з якими улюблені страви знову вдавалися.",
-      "Знайомі рецепти поступово адаптували: пробували різні суміші, уточнювали пропорції й поверталися до невдалих спроб. За роки зібралася колекція, яку тепер можна знайти в Bake Again — із практичними деталями для повторення результату."
+      "Спочатку ми готували без глютену тільки для сина. Приблизно два роки пекли окремо для нього й окремо для нас: два варіанти млинців, два варіанти випічки на день народження.",
+      "З часом безглютенова випічка стала виходити такою, що різниці у смаку ми вже не відчували. А дещо нам навіть більше подобалося без глютену. Поступово звичайне борошно з нашого дому зникло.",
+      "Тепер усю випічку робимо без глютену. Не треба готувати окремо: всі їдять те саме, і всім смачно."
     ],
-    "pullQuote": "Знайома випічка може знову стати улюбленою їжею.",
+    "pullQuote": "Одні млинці на всіх. І один торт на свято.",
     "testingEyebrow": "Перевірка на практиці",
     "testingTitle": "Що означає перевірений рецепт",
     "testingIntro": [
@@ -52,22 +64,33 @@ export const aboutPageContent: Record<AppLocale, AboutPageContent> = {
       "Для першої спроби орієнтуйтеся на інгредієнти й форму, зазначені в перевіреній версії. Якщо змінюєте рецепт, зверніть увагу на статус адаптації.",
       "Практичні підказки, покроковий режим і список покупок допомагають спланувати приготування та повернутися до улюблених рецептів."
     ],
-    "recipesLink": "Переглянути рецепти"
+    "recipesLink": "Переглянути рецепти",
+    "photosLabel": "Наша сім’я: два фото, десять років між ними",
+    "photosIntro": "На цих фото Івану 4 і 14 років. Між ними — десять років нашої безглютенової випічки.",
+    "photoThenCaption": "Івану 4 роки",
+    "photoNowCaption": "Івану 14 років",
+    "photoThenAlt": "Наша сім’я з маленьким Іваном на сходах біля дерев’яного будинку.",
+    "photoNowAlt": "Наша сім’я з Іваном-підлітком обіймається за столом у саду.",
+    "collectionTitle": "З нашої кухні — у вашу",
+    "collectionBody": "За ці роки назбиралося багато рецептів: від млинців на сніданок до святкових тортів. Я зібрала їх у Bake Again із пропорціями, назвами сумішей і підказками, які допомагають у приготуванні. Сподіваюся, тут ви теж знайдете те, що захочеться спекти ще раз.",
+    "foodAlt": "Сливовий пиріг із золотистою скоринкою та скибочками слив.",
+    "foodCaption": "Сливовий пиріг із нашої колекції"
   },
   "en": {
     "metadata": {
       "title": "About Bake Again and recipe testing — Bake Again",
-      "description": "A family collection of gluten-free recipes, with a clear explanation of Tested, Calculated and Suggested versions."
+      "description": "Meet Sasha and her family: ten years of gluten-free baking, Ivan at ages 4 and 14, and recipes they now make for everyone."
     },
     "eyebrow": "About Bake Again",
-    "title": "Recipes worth coming back to.",
-    "standfirst": "Bake Again is a collection of gluten-free recipes that grew from a family kitchen and a search for familiar flavours.",
-    "storyTitle": "How it began",
+    "title": "First for our son. Now for the whole family.",
+    "standfirst": "Hi, I’m Sasha. Bake Again brings together gluten-free baking recipes from our family kitchen. Behind each one are attempts, adjustments and the food we love.",
+    "storyTitle": "Two batters, two bowls. Then one bake for everyone.",
     "story": [
-      "In 2015–2016, a need to eat gluten-free changed everyday baking in one family kitchen. Finding the right flours, proportions and methods became a way to enjoy familiar dishes again.",
-      "Favourite recipes were gradually adapted, different flour blends tried and quantities refined. Over the years, those recipes became the Bake Again collection, with practical details to help recreate the results."
+      "At first, we baked gluten-free only for our son. For about two years we made separate versions for him and for us: two batches of pancakes, two kinds of birthday baking.",
+      "Over time, our gluten-free baking got to the point where we could no longer taste the difference. We even preferred some of the gluten-free versions. Gradually, regular flour disappeared from our home.",
+      "Now all our baking is gluten-free. We no longer need to bake separately: everyone eats the same thing, and we all enjoy it."
     ],
-    "pullQuote": "Familiar bakes can become favourite food again.",
+    "pullQuote": "One batch of pancakes for everyone. One cake to celebrate.",
     "testingEyebrow": "Tested in the kitchen",
     "testingTitle": "What a tested recipe means",
     "testingIntro": [
@@ -86,22 +109,33 @@ export const aboutPageContent: Record<AppLocale, AboutPageContent> = {
       "For a first attempt, follow the ingredients and tin size given in the tested version. If you make a change, check the status of that adaptation.",
       "Practical tips, step-by-step cooking and a shopping list help you plan a bake and return to favourite recipes."
     ],
-    "recipesLink": "Explore the recipes"
+    "recipesLink": "Explore the recipes",
+    "photosLabel": "Our family: two photographs, ten years apart",
+    "photosIntro": "Ivan is 4 in one photo and 14 in the other. Between them are ten years of gluten-free baking in our family.",
+    "photoThenCaption": "Ivan, age 4",
+    "photoNowCaption": "Ivan, age 14",
+    "photoThenAlt": "Our family with young Ivan on the steps of a wooden house.",
+    "photoNowAlt": "Our family with teenage Ivan embracing at a garden table.",
+    "collectionTitle": "From our kitchen to yours",
+    "collectionBody": "Over the years, we’ve collected plenty of recipes, from breakfast pancakes to celebration cakes. I brought them together in Bake Again with quantities, the flour blends I use and practical tips. I hope you find something here you’ll want to bake again.",
+    "foodAlt": "Golden plum cake topped with plum slices.",
+    "foodCaption": "Plum cake from our collection"
   },
   "es": {
     "metadata": {
       "title": "Sobre Bake Again y las pruebas de recetas — Bake Again",
-      "description": "Una colección familiar de recetas sin gluten y una explicación de las versiones Probada, Calculada y Sugerida."
+      "description": "Conoce a Sasha y a su familia: diez años de repostería sin gluten, Iván a los 4 y 14 años y recetas que ahora disfrutan todos."
     },
     "eyebrow": "Sobre Bake Again",
-    "title": "Recetas que apetece repetir.",
-    "standfirst": "Bake Again es una colección de recetas sin gluten nacida en una cocina familiar, con la idea de recuperar sabores conocidos.",
-    "storyTitle": "Cómo empezó",
+    "title": "Primero para nuestro hijo. Ahora para toda la familia.",
+    "standfirst": "Hola, soy Sasha. Bake Again reúne las recetas de repostería sin gluten de nuestra cocina familiar. Detrás de cada una hay pruebas, ajustes y sabores que nos encantan.",
+    "storyTitle": "Dos masas, dos boles. Después, una misma receta para todos.",
     "story": [
-      "En 2015–2016, la necesidad de comer sin gluten cambió la repostería cotidiana de una familia. Comenzó entonces la búsqueda de harinas, proporciones y técnicas con las que volver a disfrutar de los platos de siempre.",
-      "Poco a poco se adaptaron las recetas, se probaron distintas mezclas de harina y se ajustaron cantidades. Con los años se formó la colección de Bake Again, con detalles prácticos que ayudan a repetir el resultado."
+      "Al principio preparábamos repostería sin gluten solo para nuestro hijo. Durante unos dos años hacíamos una versión para él y otra para nosotros: dos masas de crepes, dos opciones para los cumpleaños.",
+      "Con el tiempo, la repostería sin gluten nos salía tan bien que ya no notábamos diferencia de sabor. Algunas recetas incluso nos gustaban más sin gluten. Poco a poco, la harina convencional desapareció de casa.",
+      "Ahora toda nuestra repostería es sin gluten. Ya no hace falta preparar dos versiones: todos comemos lo mismo y todos lo disfrutamos."
     ],
-    "pullQuote": "La repostería de siempre puede volver a ser la favorita.",
+    "pullQuote": "Los mismos crepes para todos. Una sola tarta para celebrar.",
     "testingEyebrow": "Pruebas en la cocina",
     "testingTitle": "Qué significa una receta probada",
     "testingIntro": [
@@ -120,6 +154,16 @@ export const aboutPageContent: Record<AppLocale, AboutPageContent> = {
       "La primera vez, sigue los ingredientes y el tamaño de molde de la versión probada. Si introduces cambios, consulta el estado de la adaptación.",
       "Los consejos prácticos, el modo paso a paso y la lista de la compra ayudan a organizar la preparación y repetir tus recetas favoritas."
     ],
-    "recipesLink": "Ver las recetas"
+    "recipesLink": "Ver las recetas",
+    "photosLabel": "Nuestra familia: dos fotos, diez años entre ellas",
+    "photosIntro": "En estas fotos Iván tiene 4 y 14 años. Entre ellas hay diez años de repostería sin gluten en nuestra familia.",
+    "photoThenCaption": "Iván, 4 años",
+    "photoNowCaption": "Iván, 14 años",
+    "photoThenAlt": "Nuestra familia con Iván de pequeño en los escalones de una casa de madera.",
+    "photoNowAlt": "Nuestra familia con Iván adolescente, abrazados junto a una mesa en el jardín.",
+    "collectionTitle": "De nuestra cocina a la tuya",
+    "collectionBody": "Con los años hemos reunido muchas recetas, desde crepes para desayunar hasta tartas para celebrar. Las he recogido en Bake Again con cantidades, las mezclas de harina que uso y consejos prácticos. Espero que encuentres algo que te apetezca volver a preparar.",
+    "foodAlt": "Pastel de ciruelas dorado con rodajas de ciruela en la superficie.",
+    "foodCaption": "Pastel de ciruelas de nuestra colección"
   }
 };

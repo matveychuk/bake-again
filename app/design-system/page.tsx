@@ -1,3 +1,6 @@
+import { AboutFamilyPhotos } from '@/app/_components/about/about-page';
+import aboutStyles from '@/app/_components/about/about-page.module.css';
+import { aboutPageContent } from '@/content/about';
 import { resolveStepHelp } from '@/content/recipes/step-help';
 import { stepHelpMessages } from '@/components/assistant/step-help.messages';
 import { RecipeConfigurationUnavailable } from '@/components/recipe/recipe-configuration-unavailable';
@@ -327,6 +330,17 @@ export default function DesignSystemPage() {
                 <strong>Circles</strong> only for save actions and proof marks.
               </p>
             </div>
+          </section>
+
+          <section className={styles.section} id="family-story">
+            <h2>Family story · About page</h2>
+            <p>Original family photographs, uncropped, with readable captions. The shared title scales from 40 to 64px.</p>
+            <div className={aboutStyles.hero} lang="uk">
+              <div className={aboutStyles.heroCopy}><h2 style={{ fontFamily: 'var(--font-family-display-cyrillic)' }}>{aboutPageContent.uk.title}</h2></div>
+              <p className={aboutStyles.standfirst}>{aboutPageContent.uk.standfirst}</p>
+            </div>
+            <AboutFamilyPhotos locale="uk" />
+            <p><a href="/uk/about">Українська</a> · <a href="/es/about">Español</a> · <a href="/en/about">English</a></p>
           </section>
 
           <section className={styles.section} id="components">

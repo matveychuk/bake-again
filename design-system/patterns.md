@@ -35,6 +35,13 @@ to the same lists. Design Lab shows the first six published cards in uk/es/en.
 
 ## Editorial story page
 
+The About page opens with a personal introduction and a pair of original family
+photographs. Preserve their full proportions, put ages in semantic captions rather
+than in the image, and stack the photographs below 620px. Age labels are supplied
+by the family, never inferred from EXIF. Follow the story with an existing food
+photograph and a direct recipe/catalogue link. The story-title token scales from
+40 to 64px and supports Ukrainian, Spanish and English.
+
 The About page keeps the family story concise and follows it with the practical testing
 method. Use one editorial headline, a short standfirst and a restrained pull quote; do not
 turn the page into a personal-feed or lifestyle-blog layout. The testing section reuses the

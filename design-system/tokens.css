@@ -36,6 +36,7 @@ html[data-palette='selected-mix'] {
   --font-size-cook-step-title-min: 2rem;
   --font-size-cook-step-title-max: 2.5rem;
   --font-size-title-small: clamp(2rem, 3vw, 3rem);
+  --font-size-story-title: clamp(2.5rem, 4.4vw, 4rem);
   --font-size-title-large: clamp(4.6rem, 6.2vw, 6.7rem);
   --line-height-tight: 1;
   --line-height-body: 1.55;

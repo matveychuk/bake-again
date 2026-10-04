@@ -1,5 +1,13 @@
 # Design system changelog
 
+## 2026-10-04 · Family story for the About page
+
+- Extended the editorial About page with original family photographs, localized age
+  captions and a concise first-person story in Ukrainian, Spanish and English.
+- Added a 40–64px story-title token and the shared photo composition to Design Lab.
+- Reused the existing plum-cake photograph and recipe links; preserved the testing
+  anchor and adaptation-specific status explanations.
+
 ## 2026-09-29 · Custom questions across the recipe collection
 
 - Removed the Napoleon-only custom-question restriction from Recipe Detail, Cook Mode

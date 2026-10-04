@@ -567,3 +567,13 @@ fresh token. A localized status and retry control keep verification outages reco
 Prepared questions remain usable through every verification or AI failure. The widget
 uses Cloudflare's flexible size; text uses semantic tokens. The contextual assistant
 example in the Design Lab demonstrates the composer and offline-verification state.
+
+## About family photographs
+
+`AboutFamilyPhotos` extends the existing About page composition and is demonstrated
+in Design Lab. Two semantic figures retain the supplied photographs in full,
+with localized descriptive alt text, visible age captions and a shared note.
+Use equal image heights on wide screens through their natural 4:3 / 3:2 proportions;
+stack in reading order on phones. No overlays, rotation, generated faces or baked-in text.
+The editorial title uses `font-size-story-title` (40–64px). Recipe evidence remains
+in the existing About testing section with its canonical badges and anchor.
