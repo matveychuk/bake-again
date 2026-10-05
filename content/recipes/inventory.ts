@@ -56,7 +56,7 @@ export const recipeInventory: InventoryRecipe[] = [
     launchPriority: 'High',
     heroCandidate: 'Yes',
     image:
-      '/media/recipes/celebration-sponge-cake/selected/author-cake-warm-precision-v1.webp',
+      '/media/recipes/celebration-sponge-cake/selected/author-cake-tea-editorial-v2.webp',
     imageKind: 'edited-author-photo',
     imageAlt: 'Tall homemade fruit cake with chocolate glaze and cream flowers',
     summary:
@@ -484,11 +484,11 @@ export const recipeInventory: InventoryRecipe[] = [
     collectionIds: ['celebration'],
     testingStatus: 'Core verified',
     flour: schar,
-    difficulty: 'Advanced',
+    difficulty: 'Medium',
     activeTime: '1 h',
     totalTime: null,
     localizedFacts: {
-      difficulty: { en: 'Advanced', es: 'Avanzada', uk: 'Складна' },
+      difficulty: { en: 'Medium', es: 'Media', uk: 'Середня' },
       activeTime: { en: '1 hr', es: '1 h', uk: '1 год' },
       totalTime: {
         en: 'Best the next day',
@@ -505,7 +505,7 @@ export const recipeInventory: InventoryRecipe[] = [
     launchPriority: 'High',
     heroCandidate: 'Yes',
     image:
-      '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-author-v1.webp',
+      '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-tea-editorial-v2.webp',
     imageKind: 'edited-author-photo',
     imageAlt: 'Napoleon cake with custard and a golden crumb coating',
     summary:
@@ -797,7 +797,7 @@ export const recipeInventory: InventoryRecipe[] = [
     },
     launchPriority: 'Medium',
     heroCandidate: 'No',
-    image: '/images/recipes/prune-cake-author-hero-v2.webp',
+    image: '/images/recipes/prune-cake-tea-editorial-v3.webp',
     imageKind: 'edited-author-photo',
     imageAlt:
       'Chocolate prune cake with a mound of cream-coated cake pieces, glaze and nuts',

@@ -266,10 +266,10 @@ export default function DesignSystemPage() {
             <figure className={styles.sharingPreview}>
               {/* oxlint-disable-next-line next/no-img-element -- Display the exact generated sharing asset. */}
               <img
-                src="/social/bake-again-share-v3.webp"
+                src="/social/bake-again-share-v4.webp"
                 width="600"
                 height="315"
-                alt="Bake Again link preview with a layered Napoleon cake"
+                alt="Bake Again link preview with Napoleon cake, a teacup and teapot"
               />
               <figcaption>
                 Homepage link preview · food leads, brand stays quiet.

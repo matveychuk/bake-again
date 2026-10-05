@@ -25,11 +25,11 @@ export function pageMetadata({
   image?: string;
   imageAlt?: string;
 }): Metadata {
-  const defaultShareImage = '/share-image.webp';
+  const defaultShareImage = '/share-image-v4.webp';
   const defaultShareImageAlt: Record<AppLocale, string> = {
-    uk: 'Наполеон із видимими тонкими коржами поруч із назвою Bake Again',
-    en: 'Napoleon cake with visible thin layers beside the Bake Again name',
-    es: 'Tarta Napoleón con capas finas visibles junto al nombre Bake Again',
+    uk: 'Наполеон із чашкою та чайником поруч із назвою Bake Again',
+    en: 'Napoleon cake with a teacup and teapot beside the Bake Again name',
+    es: 'Tarta Napoleón con taza y tetera junto al nombre Bake Again',
   };
   const ready = indexable && isUiLocalePublishable(locale);
   const languages = Object.fromEntries(

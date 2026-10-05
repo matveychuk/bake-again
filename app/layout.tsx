@@ -35,16 +35,16 @@ export const metadata: Metadata = {
       'Невелика колекція ретельно перевірених безглютенових рецептів.',
     siteName: 'Bake Again',
     images: [{
-      url: '/share-image.webp',
+      url: '/share-image-v4.webp',
       width: 1200,
       height: 630,
       type: 'image/webp',
-      alt: 'Наполеон із видимими тонкими коржами поруч із назвою Bake Again',
+      alt: 'Наполеон із чашкою та чайником поруч із назвою Bake Again',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/share-image.webp'],
+    images: ['/share-image-v4.webp'],
   },
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' }],

@@ -28,7 +28,7 @@ export const glutenFreeNapoleonRecipe = {
   },
   categoryIds: ['celebration', 'layer-cake'],
   situationIds: ['celebration'],
-  difficulty: 'advanced',
+  difficulty: 'medium',
   baseProvenance: {
     state: 'tested',
     sourceIds: ['author-bake-2026-10-04', 'author-custard-2026-10-04'],
@@ -1467,7 +1467,7 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'napoleon-author-hero-v1',
       type: 'image',
-      path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-author-v1.webp',
+      path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-tea-editorial-v2.webp',
       usage: ['hero', 'gallery', 'step'],
       alt: {
         uk: 'Наполеон із заварним кремом, вкритий золотистою крихтою',

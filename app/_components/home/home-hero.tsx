@@ -44,7 +44,7 @@ export function HomeHero({ locale, query = '', selectedCollectionId }: { locale:
       <div className="hero-visual">
         <div className="hero-image-frame">
           <Image
-            src={featured?.image ?? "/images/recipes/gluten-free-napoleon-card-v1.webp"}
+            src={featured?.image ?? "/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-tea-editorial-v2.webp"}
             alt={featured?.alt ?? (locale === 'uk' ? 'Безглютеновий Наполеон із багатьма тонкими коржами та відрізаним шматком' : locale === 'es' ? 'Tarta Napoleón sin gluten con muchas capas finas y una porción cortada' : 'Gluten-free Napoleon cake with many thin layers and a cut slice')}
             fill
             priority

@@ -110,6 +110,6 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.svg|share-image.webp|sitemap.xml|robots.txt|images/|media/|social/|api/).*)',
+    '/((?!_next/static|_next/image|favicon.svg|share-image.webp|share-image-v4.webp|sitemap.xml|robots.txt|images/|media/|social/|api/).*)',
   ],
 };

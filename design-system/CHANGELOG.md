@@ -923,3 +923,10 @@
 - Kept only the text underline for the active navigation destination.
 - Moved Shopping list to a quiet trailing utility link with a trailing bag icon; the mobile menu uses a subtle divider and aligned labels.
 - Updated the shared Design Lab header example and navigation contract.
+
+
+## 2026-10-05 — Tea setting in cake photography and sharing preview
+
+- Promoted the reviewed author Napoleon photo with ivory linen, glass teapot and porcelain cup; matched the backgrounds of the prune and celebration cakes without changing recipe facts.
+- Updated the sharing image and Design Lab example to v4. A versioned `/share-image-v4.webp` crawler route serves prepared WebP with its explicit media type; the earlier route remains an alias. Recipe links use their respective new catalogue photos.
+- Original photographs and previous source assets remain available; only referenced delivery files enter the media bundle.

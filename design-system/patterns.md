@@ -3,14 +3,14 @@
 ## Shared link preview
 
 - The homepage and other non-recipe public pages share the 1200 × 630 image at
-  `media/web-source/social/bake-again-share-v3.png`, published as the generated
-  `/social/bake-again-share-v3.webp`. The card uses the approved surface, text and
-  terracotta colours with the existing Napoleon photograph; food remains dominant.
+  `media/web-source/social/bake-again-share-v4.png`, published as the generated
+  `/social/bake-again-share-v4.webp`. The card uses the approved surface, text and
+  terracotta colours with the author’s Napoleon photograph with tea and ivory linen; food remains dominant.
 - Open Graph and Twitter metadata include an absolute image URL, dimensions and
   descriptive alt text. Titles and descriptions remain localized in HTML metadata.
   Recipe pages continue to use their own recipe photographs.
-- `/share-image.webp` serves the prepared WebP from the generated
-  `/social/bake-again-share-v3.webp` asset through a Worker route. This adds the
+- `/share-image-v4.webp` (and the retained `/share-image.webp` alias) serves the prepared WebP from the generated
+  `/social/bake-again-share-v4.webp` asset through a Worker route. This adds the
   `image/webp` response type required by link-preview crawlers on Sites.
 - The Design Lab colour section displays the production sharing image.
 

@@ -58,7 +58,7 @@ void test('localized public pages expose a sharing image while recipes keep thei
     assert.equal(typeof image, 'object');
     if (typeof image === 'string' || image instanceof URL)
       throw new Error('Expected image metadata');
-    assert.equal(image.url, 'https://bakeagain.com/share-image.webp');
+    assert.equal(image.url, 'https://bakeagain.com/share-image-v4.webp');
     assert.equal(image.width, 1200);
     assert.equal(image.height, 630);
     assert.equal((metadata.twitter as { card?: string })?.card, 'summary_large_image');
@@ -71,7 +71,7 @@ void test('localized public pages expose a sharing image while recipes keep thei
   assert.equal(typeof recipeImage, 'object');
   if (typeof recipeImage === 'string' || recipeImage instanceof URL)
     throw new Error('Expected recipe image metadata');
-  assert.notEqual(recipeImage.url, 'https://bakeagain.com/share-image.webp');
+  assert.notEqual(recipeImage.url, 'https://bakeagain.com/share-image-v4.webp');
 });
 
 void test('sitemap contains only published canonical pages and reciprocal language links', () => {

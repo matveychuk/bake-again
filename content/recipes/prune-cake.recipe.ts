@@ -445,7 +445,7 @@ function steps(locale: Locale): StructuredRecipeStep[] {
       media: [
         {
           id: 'prune-cake-finished-author-v2',
-          src: '/images/recipes/prune-cake-author-hero-v2.webp',
+          src: '/images/recipes/prune-cake-tea-editorial-v3.webp',
           alt: t(
             'Chocolate prune cake with cream, chocolate glaze and chopped nuts',
             'Tarta de chocolate y ciruelas pasas con crema, glaseado y frutos secos picados',
