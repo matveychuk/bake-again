@@ -37,6 +37,8 @@ import { RecipePlanItem } from '@/components/recipe/recipe-plan-item';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { RecipeSearchForm } from '@/components/recipe/recipe-search-form';
 import { SiteHeader } from '@/components/site/site-header';
+import { SiteFooter } from '@/components/site/site-footer';
+import { SocialLinks } from '@/components/site/social-links';
 import { RecipeCard } from '@/components/recipe/recipe-card';
 import {
   CookToolsExample,
@@ -413,16 +415,25 @@ export default function DesignSystemPage() {
               <a href="/es?q=receta-inexistente#recipes">Empty results</a>
             </div>
 
-            <div className={styles.componentBlock}>
+            <div className={`${styles.componentBlock} ${styles.navigationBlock}`}>
               <div className={styles.componentLabel}>
                 <strong>Site navigation</strong>
                 <span>
-                  Shared header: underlined current page and a quiet trailing shopping utility
+                  Ukrainian-only social profiles: outline header links, an editorial
+                  follow invitation and quiet footer links. On mobile, the social row
+                  scrolls away while navigation stays sticky. English and Spanish
+                  omit all social links and the invitation. Shopping list keeps an
+                  accessible icon on desktop and its full name in the mobile menu.
                 </span>
               </div>
-              <div className={styles.siteHeaderExample}>
-                <SiteHeader locale="en" pathname="/en" />
-              </div>
+              {(['uk', 'es', 'en'] as const).map((locale) => (
+                <div key={locale} className={styles.siteHeaderExample} lang={locale}>
+                  <h3>{{ uk: 'Українська · соціальні посилання', es: 'Español · sin enlaces sociales', en: 'English · no social links' }[locale]}</h3>
+                  <SiteHeader locale={locale} pathname={`/${locale}`} />
+                  <SocialLinks locale={locale} variant="follow" id={`ds-social-follow-${locale}`} />
+                  <SiteFooter locale={locale} />
+                </div>
+              ))}
             </div>
 
             <div className={styles.componentBlock}>

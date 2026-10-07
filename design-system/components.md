@@ -461,11 +461,14 @@ variation.
 
 The Recipes navigation item returns to the home recipe collection, using the same URL as
 the Bake Again wordmark. Saved and Shopping list remain separate primary destinations;
-About follows Saved. Shopping list is a quiet utility link at the end, with a trailing
-bag icon and a little extra separation on desktop. In the mobile disclosure, a subtle
+About follows Saved. Shopping list is a quiet icon-only bag link at the end, with a
+44px target, a localized accessible name and a hover title. On its current page, a
+bottom rule reinforces its active state. In the mobile disclosure, keep the full label; a subtle
 divider separates it from the main links; its label shares their starting edge. At 620px and below, the
-header is one sticky row with the wordmark, separate language switcher and a labelled
-Menu disclosure. Its links open in a surface below the header, retain their current-page
+header has one row with the wordmark, separate language switcher and a labelled
+Menu disclosure. Ukrainian pages place a separate Instagram/Facebook row immediately
+after the header, outside the menu and outside the sticky area: it scrolls away normally.
+The compact navigation stays sticky at every width. Its links open in a surface below the header, retain their current-page
 indicator and remain available without JavaScript. The current destination uses only
 a text underline, without a filled background. The menu has a 44px trigger and
 links, visible keyboard focus and space for translated labels to wrap. The desktop
@@ -473,6 +476,29 @@ navigation remains inline. Drafts appears only in a development build on
 localhost, 127.0.0.1 or ::1. Its route and unpublished recipe/Cook Mode URLs are
 unavailable outside that local environment, including production on localhost. Privacy
 remains in the footer.
+
+`SocialLinks` renders only for Ukrainian (`uk`); English and Spanish render no social
+links, invitation or empty mobile row. The current social content is Ukrainian, and
+the owner explicitly chose to omit social promotion from the other site languages.
+The component extends the shared Button with three composition variants:
+
+- `header`: outline buttons with icons and full platform names, aligned with the
+  navigation. Omit the extra “Стежте за нами” line at every width; the editorial
+  follow section carries the invitation and its benefit.
+- `follow`: a compact editorial “Печімо разом” section describing new gluten-free
+  recipes, short videos and practical tips. Equal primary links say “Підписатися в
+  Instagram” and “Підписатися у Facebook”; no platform priority is inferred.
+  Place once before the footer on Home and About, and after the recipe content.
+  Omit it from Cook Mode, utility pages and unavailable recipe configurations.
+- `footer`: quiet icon-and-name text links with no repeated invitation.
+
+Keep 44px targets, visible focus, semantic tokens and wrapping text. Mobile follow
+buttons stack at full width. These are profile links, not sharing actions or an
+automatic subscription; native same-tab navigation preserves Back and modified clicks.
+Use the single profile registry in the component for every placement. Analytics
+records `social_profile_open` with allowlisted platform, placement and locale;
+never describe clicks as confirmed follows. The Design Lab navigation example renders
+all three locales, including the Ukrainian follow section and absent es/en social UI.
 
 ### Language switcher
 

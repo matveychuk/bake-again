@@ -1,5 +1,34 @@
 # Design system changelog
 
+## 2026-10-07 · Social follow invitation after independent review
+
+- Applied the owner's review decision: social promotion is Ukrainian-only. English
+  and Spanish render no social profile links, follow invitation or empty mobile row.
+- Header links now use the shared outline Button; footer links use its quiet link
+  variant. Icons and full platform names remain visible with 44px minimum targets.
+- Removed the extra header invitation line; named links align with the navigation,
+  while the editorial section carries the explicit reason to follow.
+- Moved the mobile social row outside the sticky header. Only compact navigation
+  stays visible while reading; anchor offsets and menu height reflect that layout.
+- Extended SocialLinks with an editorial “Печімо разом” follow variant before the
+  Home/About footer and after recipe content, with equal primary platform links.
+- Added allowlisted social_profile_open analytics by platform, placement and locale,
+  preserving DNT, production-only collection and private-data filtering.
+- Updated Design Lab to show the Ukrainian flow and the social-free es/en variants.
+
+## 2026-10-07 · Social profile navigation
+
+- Added shared Instagram/Facebook profile links using the existing primary Button,
+  with written names at every width and a localized Follow along invitation above.
+  The stronger call to action follows the owner's review of the initial icon treatment.
+- Simplified desktop Shopping list navigation to a 44px bag icon with a localized
+  accessible name and tooltip; retained the written name in the mobile menu.
+- Omitted the invitation line in the mobile header after review, preserving both
+  named social buttons and the footer invitation.
+- Kept social links outside the mobile menu and made the shared header sticky at all
+  widths. Extended the Design Lab navigation example with the production footer.
+- Preserved semantic tokens, accessible platform names and 44px keyboard/touch targets.
+
 ## 2026-10-04 · About status explanation
 
 - Replaced the repeated testing link, eyebrow and heading with one Recipe statuses

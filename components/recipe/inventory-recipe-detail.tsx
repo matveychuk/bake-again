@@ -26,6 +26,7 @@ import { RecipeRelatedLink } from '@/components/recipe/recipe-related-link';
 import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
+import { SocialLinks } from '@/components/site/social-links';
 import type { InventoryRecipe } from '@/content/recipes/inventory';
 import type { RecipeDraft } from '@/content/recipes/recipe.types';
 import {
@@ -467,6 +468,7 @@ export function InventoryRecipeDetail({
               <p>{copy?.publicationNote?.[locale] ?? structured?.gapNote}</p>
             </aside>
           )}
+        <SocialLinks locale={locale} variant="follow" />
         <SiteFooter locale={locale} />
       </main>
     </AssistantProvider>

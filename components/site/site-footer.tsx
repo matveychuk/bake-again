@@ -6,6 +6,7 @@ import { getUiMessages } from '@/lib/i18n/messages';
 import { privacyContent } from '@/content/privacy';
 import { canViewDrafts } from '@/lib/runtime/local-development.server';
 import styles from './site-footer.module.css';
+import { SocialLinks } from './social-links';
 
 export async function SiteFooter({
   locale = defaultLocale,
@@ -17,6 +18,7 @@ export async function SiteFooter({
   return (
     <footer>
       <Wordmark href={localeHomePath(locale)} locale={locale} />
+      <SocialLinks locale={locale} />
       <nav
         className={styles.links}
         aria-label={

@@ -3,6 +3,7 @@ import { EvidenceBadge, type EvidenceStatus } from '@/components/recipe/evidence
 import { Eyebrow } from '@/components/foundations/eyebrow';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
+import { SocialLinks } from '@/components/site/social-links';
 import { aboutPageContent } from '@/content/about';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getLocalizedRecipePath, localeAboutPath, localeHomePath } from '@/lib/i18n/routes';
@@ -72,6 +73,7 @@ export function AboutPage({ locale }: { locale: AppLocale }) {
 
         <AboutRecipeStatuses locale={locale} />
       </article>
+      <SocialLinks locale={locale} variant="follow" />
       <SiteFooter locale={locale} />
     </main>
   );

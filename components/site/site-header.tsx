@@ -11,6 +11,7 @@ import {
 } from '@/lib/i18n/routes';
 import { LanguageSwitcher } from './language-switcher';
 import { Wordmark } from './wordmark';
+import { SocialLinks } from './social-links';
 
 type SiteHeaderProps = {
   homeHref?: string;
@@ -69,23 +70,21 @@ export async function SiteHeader({
       )}
       <a
         href={localeSavedPath(locale)}
-        aria-current={
-          pathname === localeSavedPath(locale) ? 'page' : undefined
-        }
+        aria-current={pathname === localeSavedPath(locale) ? 'page' : undefined}
       >
         {messages.navigation.saved}
       </a>
       <a
         href={localeAboutPath(locale)}
-        aria-current={
-          pathname === localeAboutPath(locale) ? 'page' : undefined
-        }
+        aria-current={pathname === localeAboutPath(locale) ? 'page' : undefined}
       >
         {messages.navigation.about}
       </a>
       <a
         className="nav-bag"
         href={localeShoppingListPath(locale)}
+        aria-label={messages.navigation.shoppingList}
+        title={messages.navigation.shoppingList}
         aria-current={
           pathname === localeShoppingListPath(locale) ? 'page' : undefined
         }
@@ -97,41 +96,51 @@ export async function SiteHeader({
   );
 
   return (
-    <header className="site-header">
-      <a className="skip-link" href={`#${skipTarget}`}>
-        {messages.a11y.skipNavigation}
-      </a>
-      <Wordmark href={resolvedHomeHref} locale={locale} />
+    <>
+      <header className="site-header">
+        <a className="skip-link" href={`#${skipTarget}`}>
+          {messages.a11y.skipNavigation}
+        </a>
+        <Wordmark href={resolvedHomeHref} locale={locale} />
 
-      <nav
-        aria-label={messages.a11y.primaryNavigation}
-        className={`site-nav-desktop${showDrafts ? '' : ' site-nav--public'}`}
-      >
-        {navigationLinks}
-      </nav>
-
-      <LanguageSwitcher
-        locale={locale}
-        pathname={pathname ?? resolvedHomeHref}
-      />
-      <details className="site-mobile-menu">
-        <summary>
-          <Menu
-            className="site-mobile-menu__open-icon"
-            aria-hidden="true"
-            size={20}
-          />
-          <X
-            className="site-mobile-menu__close-icon"
-            aria-hidden="true"
-            size={20}
-          />
-          <span>{messages.navigation.menu}</span>
-        </summary>
-        <nav aria-label={messages.a11y.primaryNavigation}>
+        <nav
+          aria-label={messages.a11y.primaryNavigation}
+          className={`site-nav-desktop${showDrafts ? '' : ' site-nav--public'}`}
+        >
           {navigationLinks}
         </nav>
-      </details>
-    </header>
+
+        <div className="site-header-tools">
+          <SocialLinks locale={locale} variant="header" />
+          <LanguageSwitcher
+            locale={locale}
+            pathname={pathname ?? resolvedHomeHref}
+          />
+        </div>
+        <details className="site-mobile-menu">
+          <summary>
+            <Menu
+              className="site-mobile-menu__open-icon"
+              aria-hidden="true"
+              size={20}
+            />
+            <X
+              className="site-mobile-menu__close-icon"
+              aria-hidden="true"
+              size={20}
+            />
+            <span>{messages.navigation.menu}</span>
+          </summary>
+          <nav aria-label={messages.a11y.primaryNavigation}>
+            {navigationLinks}
+          </nav>
+        </details>
+      </header>
+      {locale === 'uk' && (
+        <div className="site-mobile-social">
+          <SocialLinks locale={locale} variant="header" />
+        </div>
+      )}
+    </>
   );
 }

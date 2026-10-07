@@ -74,6 +74,15 @@ AI API. Check responsive behavior at 390, 900 and 1440 px after interface change
 
 ## Hosting and runtime configuration
 
+Social profile links appear only on Ukrainian pages. The existing Umami installation
+records `social_profile_open` with `platform` (`instagram` or `facebook`), `placement`
+(`header`, `follow` or `footer`) and `locale` (`uk`). The recorded page path identifies
+Home, About or a recipe; query strings, hashes and destination URLs are not collected.
+This measures profile-opening clicks, not confirmed follows. Left/keyboard and middle
+clicks retain native navigation. Localhost, preview, internal routes and Do Not Track
+remain excluded. Use the event breakdown by placement and platform to compare entry
+points once the change is deployed; local QA must not populate production analytics.
+
 Production uses OpenAI Sites, identified by `.openai/hosting.json`. The build emits
 a Worker-compatible bundle; do not deploy it to a separate Cloudflare Worker.
 Sites provisions the `ASSISTANT_QUOTAS` D1 binding and applies the committed migrations.

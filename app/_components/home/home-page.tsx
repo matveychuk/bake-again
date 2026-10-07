@@ -1,5 +1,6 @@
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
+import { SocialLinks } from '@/components/site/social-links';
 import type { AppLocale } from '@/lib/i18n/config';
 import type { RecipeCollectionId } from '@/content/recipes/collections';
 import { localeHomePath } from '@/lib/i18n/routes';
@@ -26,6 +27,7 @@ export function HomePage({
       <HomeDiscovery locale={locale} query={query} />
       <HomeRecipes locale={locale} selectedCollectionId={selectedCollectionId} query={query} />
       <HomeTrust locale={locale} />
+      <SocialLinks locale={locale} variant="follow" />
       <SiteFooter locale={locale} />
     </main>
   );
