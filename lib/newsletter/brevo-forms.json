@@ -1,0 +1,501 @@
+{
+  "status": "compact-email-only-prepared-launch-blocked",
+  "copyVersion": "2026-10-10-v3-compact-notice",
+  "provider": "Brevo",
+  "sender": "bakeagain.recipes@gmail.com",
+  "replyTo": "bakeagain.recipes@gmail.com",
+  "senderIdentity": {
+    "name": "Bake Again",
+    "email": "bakeagain.recipes@gmail.com",
+    "replyTo": "bakeagain.recipes@gmail.com",
+    "mailboxObservedAt": "2026-10-09",
+    "status": "owner-approved-brevo-verified",
+    "verifiedInBrevo": true,
+    "verifiedAt": "2026-10-09",
+    "verificationEmailsSent": 1,
+    "templateSenderAndReplyToSaved": [
+      5,
+      6,
+      7
+    ],
+    "providerDomainReplacement": "brevosend.com",
+    "domainAuthenticated": false
+  },
+  "settings": {
+    "confirmation": "double-opt-in",
+    "consentRequired": true,
+    "consentPrechecked": false,
+    "languageRequired": false,
+    "finalConfirmationEmail": false,
+    "unsubscribeConfirmationEmail": false,
+    "teamNotificationEmail": false,
+    "captcha": "required-before-launch",
+    "signupUrls": {
+      "en": "https://67fba9aa.sibforms.com/serve/MUIFACoVi4wY2y6Ef5AOKyTnP8n2aHyGfsgGCIqNgxnKvwMtNy6La5IIEN0g7OBm9lpPHsKB0wQKlZ5HDRHLOOs70eRdXUHmCNZcHzF588rtZfsswHdwGWIWOk4-9nbJNBILLmpNp2dYc0QZtMJk4VQJSFDQEzyY_UaFs4JfDcUOSCmRU8SXqMEcjGbv7jiLLlOI3yiD-uMmlDHHmw==",
+      "uk": "https://67fba9aa.sibforms.com/serve/MUIFAGin0tF4IixejaYhaYtLly8nfeWOmqAW7AaG7PVJvfnzYCppFYlVxOTi63qBP1DFdpqxGuh2q3-CDdUa4EuvGj7UPiCeFMfSOIEa2wGb5vK_wJJvt_4IZlPV9Chd9TYLSuYWNihVkTBNKrQXG185EYlu8_9VFGGwgFgOzCq0QdVz6rVuwRZTsQhZshtl27LJqUgrd0UGqVgS5Q==",
+      "es": "https://67fba9aa.sibforms.com/serve/MUIFAHHSJL7ZuYlEhVmbd74hxPcG39gMgiUHCY1LBRnkeZe6XzUXgs9xG0yRaMHiLviJUUtqBjOdA8tnLWamuiqYMTFJpQD8lsTDAbQGytyXfKjCE8xh80cgu-W1mFcNqWbOLDw15CnrAyew-jh68Bul2aVsnJXO6QoX2qmJaGcanPz46LdrJl0EhHx-OaVyE30qiLne2xmlZUJ0qQ=="
+    },
+    "unsubscribeUrls": {
+      "uk": "https://67fba9aa.sibforms.com/serve/MUIFAAUzYKi1luiEwZ-wmNvFYt8bqi-Xp5JFNWzH5LIfW0jcvy1tEw-VGl3Z5bqNVEj_vh-wMKp0g4HFXYtkoAGWnAyByV0z9Dsic5o_Hpz3m1RiwoCM-6v3YipE7sIxrHuU_OUvBB2iDjaMzBFB4BU1q4bBd6J1DCwGBTY6chiB7pu7awoW40pIi9hVBzbk5YvLKwj9FsSmGKJp8Q==",
+      "es": "https://67fba9aa.sibforms.com/serve/MUIFADLnZ2Rg7jfoxc3SkFaxJ73wpWnN0yOvk8QR8cRH_jjzVkgUJswUllHsVtIr-VukBlc0teObKjyiakhhcenIrOcPMHzyl1hgPE0xvAakValMXDyGgLs5OrvXkXor4e5ZuRllcBf_femFvQoj4hu8_R8CHg_JbCGtcRvOQA1Bbr7q7Mkd1lt7k_domPnPpl5LdLdxImftIUC_Ww==",
+      "en": "https://67fba9aa.sibforms.com/serve/MUIFALyAPyN94AQbibOqRs4q2_5mp2ggle_-_1-QH0Y8B4wTquJp6dLpxj1XChoagoEIQx0bfucFSIMGrddWMBISIC-lE51rP5JfnTSvxePA3ePe9gpHrIv1kmZMpIl1pl916gkZmSWpBcrlSEkLMrnjL5SyYRTWAg0Y7FR30jrF0q6qv2BNv4tOdHRFCeDACLjvKJKhxq5jPVvdeA=="
+    },
+    "consentControl": "explicit-subscribe-button-plus-double-opt-in",
+    "consentCheckboxPresent": false,
+    "languageRouting": "form-specific-list-after-double-opt-in",
+    "audienceLists": {
+      "uk": "Bake Again — Newsletter — UK",
+      "es": "Bake Again — Newsletter — ES",
+      "en": "Bake Again — Newsletter — EN"
+    },
+    "masterListRetained": true,
+    "consentNoticeVariant": "compact-text-with-privacy-link; purpose-and-language-in-intro",
+    "providerDeclarationIllustration": false
+  },
+  "languageOptions": [
+    {
+      "value": "uk",
+      "label": "Українська",
+      "brevoCategoryValue": 1
+    },
+    {
+      "value": "es",
+      "label": "Español",
+      "brevoCategoryValue": 2
+    },
+    {
+      "value": "en",
+      "label": "English",
+      "brevoCategoryValue": 3
+    }
+  ],
+  "locales": {
+    "uk": {
+      "signupName": "Bake Again — UK — Signup — DOI",
+      "unsubscribeName": "Bake Again — UK — Unsubscribe",
+      "confirmationTemplateName": "Bake Again — UK — Confirm subscription",
+      "privacyUrl": "https://bakeagain.com/uk/privacy",
+      "signup": {
+        "title": "Нові рецепти — на пошту",
+        "description": "Нові рецепти й матеріали для випічки від Bake Again українською. Підписку потрібно підтвердити електронною поштою.",
+        "emailLabel": "Електронна пошта",
+        "emailHelp": "Вкажіть адресу, на яку хочете отримувати листи.",
+        "consent": "Підписуючись, ви погоджуєтеся на цю розсилку. Відписатися можна будь-коли.",
+        "privacyLabel": "Приватність",
+        "processorNotice": "Дані обробляє Brevo.",
+        "submit": "Підписатися на листи",
+        "success": "Запит прийнято. Якщо потрібне підтвердження, перевірте пошту та натисніть посилання в листі. Без підтвердження нова підписка не активується.",
+        "invalid": "Перевірте email-адресу.",
+        "error": "Не вдалося обробити запит. Спробуйте пізніше.",
+        "required": "Вкажіть email-адресу.",
+        "noticeVariant": "compact-text-before-submit"
+      },
+      "confirmation": {
+        "subject": "Підтвердьте підписку на Bake Again",
+        "preview": "Один крок, щоб отримувати нові рецепти.",
+        "title": "Підтвердьте підписку",
+        "body": "Натисніть кнопку, щоб підтвердити наведену нижче згоду та отримувати листи від Bake Again українською. Якщо ви не подавали запит, нічого не робіть: нова підписка не активується.",
+        "action": "Підтвердити підписку",
+        "actionType": "Brevo Double opt-in link",
+        "consentSource": "confirmation.consent",
+        "confirmedPage": "Підписку підтверджено. Дякуємо! Відписатися можна в кожному листі.",
+        "consent": "Натискаючи «Підписатися на листи», ви погоджуєтеся отримувати листи від Bake Again про нові рецепти та матеріали для випічки українською. Відписатися можна будь-коли."
+      },
+      "unsubscribe": {
+        "title": "Відписатися від листів Bake Again",
+        "description": "Вкажіть адресу, щоб припинити отримувати розсилку Bake Again. Це не видаляє ваш акаунт або збережені рецепти.",
+        "emailLabel": "Електронна пошта",
+        "submit": "Відписатися",
+        "success": "Запит оброблено. На вказану адресу більше не надсилатимемо розсилку Bake Again.",
+        "invalid": "Перевірте email-адресу.",
+        "error": "Не вдалося обробити запит. Спробуйте пізніше або скористайтеся посиланням відписки в листі.",
+        "required": "Вкажіть email-адресу.",
+        "campaignLinkLabel": "Відписатися від розсилки"
+      }
+    },
+    "es": {
+      "signupName": "Bake Again — ES — Signup — DOI",
+      "unsubscribeName": "Bake Again — ES — Unsubscribe",
+      "confirmationTemplateName": "Bake Again — ES — Confirm subscription",
+      "privacyUrl": "https://bakeagain.com/es/privacy",
+      "signup": {
+        "title": "Nuevas recetas en tu correo",
+        "description": "Nuevas recetas y recursos de repostería de Bake Again en español. Confirma la suscripción por correo electrónico.",
+        "emailLabel": "Correo electrónico",
+        "emailHelp": "Introduce la dirección en la que quieres recibir los correos.",
+        "consent": "Al suscribirte, aceptas recibir estos correos. Puedes darte de baja en cualquier momento.",
+        "privacyLabel": "Privacidad",
+        "processorNotice": "Brevo trata tus datos.",
+        "submit": "Suscribirme por correo",
+        "success": "Solicitud recibida. Si es necesario confirmar, revisa tu correo y pulsa el enlace del mensaje. Una nueva suscripción no se activa sin confirmación.",
+        "invalid": "Revisa la dirección de correo electrónico.",
+        "error": "No se ha podido procesar la solicitud. Inténtalo más tarde.",
+        "required": "Introduce tu dirección de correo electrónico.",
+        "noticeVariant": "compact-text-before-submit"
+      },
+      "confirmation": {
+        "subject": "Confirma tu suscripción a Bake Again",
+        "preview": "Un paso para recibir nuevas recetas.",
+        "title": "Confirma tu suscripción",
+        "body": "Pulsa el botón para confirmar el consentimiento que aparece a continuación y recibir correos de Bake Again en español. Si no has enviado esta solicitud, no hagas nada: la nueva suscripción no se activará.",
+        "action": "Confirmar mi suscripción",
+        "actionType": "Brevo Double opt-in link",
+        "consentSource": "confirmation.consent",
+        "confirmedPage": "Suscripción confirmada. ¡Gracias! Puedes darte de baja en cada mensaje.",
+        "consent": "Al pulsar «Suscribirme por correo», aceptas recibir correos de Bake Again sobre nuevas recetas y recursos de repostería en español. Puedes darte de baja en cualquier momento."
+      },
+      "unsubscribe": {
+        "title": "Darte de baja de los correos de Bake Again",
+        "description": "Introduce tu dirección para dejar de recibir la newsletter de Bake Again. Esto no elimina tu cuenta ni tus recetas guardadas.",
+        "emailLabel": "Correo electrónico",
+        "submit": "Darme de baja",
+        "success": "Solicitud procesada. No enviaremos más newsletters de Bake Again a la dirección indicada.",
+        "invalid": "Revisa la dirección de correo.",
+        "error": "No se ha podido procesar la solicitud. Inténtalo más tarde o utiliza el enlace de baja de un correo.",
+        "required": "Introduce tu dirección de correo.",
+        "campaignLinkLabel": "Darme de baja de la newsletter"
+      }
+    },
+    "en": {
+      "signupName": "Bake Again — EN — Signup — DOI",
+      "unsubscribeName": "Bake Again — EN — Unsubscribe",
+      "confirmationTemplateName": "Bake Again — EN — Confirm subscription",
+      "privacyUrl": "https://bakeagain.com/en/privacy",
+      "signup": {
+        "title": "New recipes in your inbox",
+        "description": "New recipes and baking resources from Bake Again in English. Confirm your subscription by email.",
+        "emailLabel": "Email address",
+        "emailHelp": "Enter the address where you would like to receive emails.",
+        "consent": "By subscribing, you agree to these emails. Unsubscribe at any time.",
+        "privacyLabel": "Privacy",
+        "processorNotice": "Brevo processes your data.",
+        "submit": "Subscribe to emails",
+        "success": "Request received. If confirmation is needed, check your inbox and click the link in the email. A new subscription is not activated without confirmation.",
+        "invalid": "Check your email address.",
+        "error": "Your request could not be processed. Please try again later.",
+        "required": "Enter your email address.",
+        "noticeVariant": "compact-text-before-submit"
+      },
+      "confirmation": {
+        "subject": "Confirm your Bake Again subscription",
+        "preview": "One step to receive new recipes.",
+        "title": "Confirm your subscription",
+        "body": "Click the button to confirm the consent below and receive Bake Again emails in English. If you did not make this request, do nothing: the new subscription will not be activated.",
+        "action": "Confirm my subscription",
+        "actionType": "Brevo Double opt-in link",
+        "consentSource": "confirmation.consent",
+        "confirmedPage": "Subscription confirmed. Thank you! You can unsubscribe in every email.",
+        "consent": "By clicking “Subscribe to emails”, you agree to receive emails from Bake Again about new recipes and baking resources in English. You can unsubscribe at any time."
+      },
+      "unsubscribe": {
+        "title": "Unsubscribe from Bake Again emails",
+        "description": "Enter your address to stop receiving the Bake Again newsletter. This does not delete your account or saved recipes.",
+        "emailLabel": "Email address",
+        "submit": "Unsubscribe",
+        "success": "Request processed. We will no longer send the Bake Again newsletter to the address provided.",
+        "invalid": "Check your email address.",
+        "error": "Your request could not be processed. Please try again later or use the unsubscribe link in an email.",
+        "required": "Enter your email address.",
+        "campaignLinkLabel": "Unsubscribe from the newsletter"
+      }
+    }
+  },
+  "listName": "Bake Again — Newsletter",
+  "languageAttribute": "NEWSLETTER_LANGUAGE",
+  "verification": {
+    "checkedAt": "2026-10-09",
+    "hostedContentReviewed": true,
+    "responsiveWidths": [
+      390,
+      900,
+      1440
+    ],
+    "domainAuthenticated": false,
+    "senderApproved": true,
+    "senderVerified": true,
+    "captchaConfigured": false,
+    "localizedTemplatesAssigned": true,
+    "deliveryTested": true,
+    "suppressionTested": false,
+    "newsletterEnabled": false,
+    "isolatedLocalPreviewEnabled": true,
+    "localPreviewUrl": "http://localhost:3047/uk",
+    "deliveryTestedLocales": [
+      "uk"
+    ],
+    "doiTest": {
+      "locale": "uk",
+      "checkedAt": "2026-10-09",
+      "recipientRole": "owner-primary-mailbox",
+      "ownerConfirmedExactAddress": true,
+      "entryPoint": "local-site-hosted-form",
+      "consentCheckedByRequest": true,
+      "listMembersBeforeConfirmation": 0,
+      "listMembersAfterConfirmation": 1,
+      "storedLanguage": "Українська",
+      "confirmationEmailsSent": 1,
+      "confirmationPageLanguage": "es",
+      "localizedConfirmationPageVerified": false,
+      "duplicateOrReplayTested": false
+    },
+    "observedDelivery": {
+      "from": "bakeagain.recipes@12416640.brevosend.com",
+      "replyTo": "bakeagain.recipes@gmail.com",
+      "signedBy": "brevosend.com",
+      "tls": true,
+      "mailboxPlacement": "Inbox",
+      "nativeUnsubscribeLinkResolved": true
+    },
+    "unsubscribeTestDeferredByOwner": true,
+    "unsubscribeTestDeferredAt": "2026-10-09",
+    "signupStyleReview": {
+      "checkedAt": "2026-10-09",
+      "locales": [
+        "uk",
+        "es",
+        "en"
+      ],
+      "responsiveWidths": [
+        390,
+        900,
+        1440
+      ],
+      "horizontalOverflow": false,
+      "formsSubmitted": 0,
+      "emailsSent": 0,
+      "consentRemainsUnchecked": true,
+      "evidence": "outputs/newsletter/signup-brand-review.json",
+      "copyVersion": "2026-10-09-v1"
+    },
+    "languageDefaultReview": {
+      "checkedAt": "2026-10-09",
+      "ownerRequested": true,
+      "hostedDefaultConfigured": false,
+      "editorDefaultControlFound": false,
+      "testedLocale": "uk",
+      "urlParameter": "NEWSLETTER_LANGUAGE=1",
+      "urlPrefillWorked": false,
+      "formsSubmitted": 0,
+      "emailsSent": 0,
+      "supersededBy": "2026-10-09-v2-email-only; language is routed by list rather than a field"
+    },
+    "emailOnlyRevision": {
+      "copyVersion": "2026-10-09-v2-email-only",
+      "status": "provider-saved-browser-reviewed",
+      "deliveryTested": false,
+      "suppressionTested": false,
+      "formsSubmitted": 0,
+      "emailsSent": 0,
+      "checkedAt": "2026-10-09",
+      "locales": [
+        "uk",
+        "es",
+        "en"
+      ],
+      "responsiveWidths": [
+        390,
+        900,
+        1440
+      ],
+      "visibleEditableFields": [
+        "EMAIL"
+      ],
+      "consentCheckboxPresent": false,
+      "languageControlPresent": false,
+      "audienceListAssignmentsReviewed": true,
+      "confirmationTemplatesMatched": true,
+      "consentEvidenceMechanism": "visible purpose-specific subscribe statement plus native double-opt-in confirmation; record audit pending authorized test",
+      "consentRecordAuditTested": false,
+      "horizontalOverflow": false,
+      "keyboardFocusReviewed": true,
+      "buildPassed": true,
+      "evidence": "outputs/newsletter/email-only-review.json",
+      "validationMessagesReviewed": true,
+      "privacyLayoutsReviewed": 9,
+      "supersededBy": "2026-10-10-v3-compact-notice; layout review retained as historical evidence"
+    },
+    "deliveryTestedCopyVersion": "2026-10-09-v1",
+    "currentFlowDeliveryTested": false,
+    "compactNoticeRevision": {
+      "copyVersion": "2026-10-10-v3-compact-notice",
+      "status": "provider-saved-browser-reviewed",
+      "locales": [
+        "uk",
+        "es",
+        "en"
+      ],
+      "widths": [
+        390,
+        900,
+        1440
+      ],
+      "visibleEditableFields": [
+        "EMAIL"
+      ],
+      "consentCheckboxPresent": false,
+      "languageSelectorPresent": false,
+      "providerDeclarationIllustration": false,
+      "noticeBeforeSubmit": true,
+      "noticeFontSizeToken": "font-size-body-small",
+      "noticeFontSizePixels": 14,
+      "purposeAndLanguageInIntro": true,
+      "privacyLinksReviewed": true,
+      "horizontalOverflow": false,
+      "confirmationScopeUnchanged": true,
+      "confirmationTemplatesChanged": false,
+      "currentFlowDeliveryTested": false,
+      "formsSubmitted": 0,
+      "emailsSent": 0,
+      "evidence": "outputs/newsletter/compact-signup-review.json",
+      "keyboardFocusReviewed": true,
+      "preparationPassed": true,
+      "doiHtmlByteIdentical": true
+    }
+  },
+  "providerRecords": {
+    "formIds": {
+      "signup": {
+        "uk": "6ac93c3313ad4c2e1f4a24a8",
+        "es": "6ac93dd60accffc5587b6b2d",
+        "en": "6ac93f29570287996ef46a20"
+      },
+      "unsubscribe": {
+        "uk": "6ac93faa73668ab1123887bf",
+        "es": "6ac93fe973668ab1123887c6",
+        "en": "6ac9403073668ab1123887d3"
+      }
+    },
+    "confirmationTemplateIds": {
+      "uk": 5,
+      "es": 6,
+      "en": 7
+    },
+    "confirmationTemplatesActive": true,
+    "currentFormTemplate": {
+      "uk": 5,
+      "es": 6,
+      "en": 7
+    },
+    "testCampaign": {
+      "id": 8,
+      "name": "Bake Again — UK — Local signup test — 2026-10-09",
+      "status": "sent-delivery-verified",
+      "subject": "Bake Again — тест розсилки українською",
+      "nativeUnsubscribePlaceholder": "{{ unsubscribe }}",
+      "unsubscribePage": "Brevo default",
+      "sent": true,
+      "sentAt": "2026-10-09T23:10:00+02:00",
+      "recipientCount": 1,
+      "recipientSelection": "exact individual owner-primary contact",
+      "testMessagesSent": 1,
+      "receivedInGmail": true
+    },
+    "newsletterDesignTemplate": {
+      "id": 9,
+      "locale": "uk",
+      "name": "Bake Again — UK — Newsletter — Warm Precision",
+      "status": "inactive",
+      "editor": "custom-html",
+      "savedAt": "2026-10-09",
+      "sender": "bakeagain.recipes@gmail.com",
+      "replyTo": "bakeagain.recipes@gmail.com",
+      "deliveryTested": false,
+      "emailsSent": 0,
+      "localVariants": [
+        "uk",
+        "es",
+        "en"
+      ],
+      "providerVariants": [
+        "uk"
+      ],
+      "previewWidths": [
+        390,
+        900,
+        1440
+      ],
+      "copyStatus": "palette-review-draft"
+    },
+    "signupStyle": {
+      "source": "design-system/tokens.css",
+      "page": "--color-background-page",
+      "surface": "--color-background-surface",
+      "headingColor": "--color-text-primary",
+      "buttonBackground": "--color-action-primary",
+      "buttonText": "--color-text-on-accent",
+      "buttonRadius": "--radius-control",
+      "headingFont": "Georgia, serif (existing display fallback)",
+      "savedLocales": [
+        "uk",
+        "es",
+        "en"
+      ]
+    },
+    "confirmationCopyVersion": "2026-10-09-v2-email-only",
+    "audienceListNames": {
+      "uk": "Bake Again — Newsletter — UK",
+      "es": "Bake Again — Newsletter — ES",
+      "en": "Bake Again — Newsletter — EN"
+    }
+  },
+  "revisionHistory": [
+    {
+      "copyVersion": "2026-10-09-v1",
+      "locale": "uk",
+      "description": "Листи від Bake Again про нові рецепти та матеріали для випічки. Оберіть мову листів і підтвердьте підписку електронною поштою.",
+      "consent": "Я хочу отримувати листи від Bake Again про нові рецепти та матеріали для випічки. Я ознайомився/ознайомилася з інформацією про приватність. Відписатися можна в кожному листі.",
+      "processorNotice": "Форму й розсилку обслуговує Brevo. Ваша email-адреса, вибрана мова та відомості про згоду передаються Brevo для обробки підписки й надсилання листів.",
+      "languageRequired": true,
+      "consentCheckboxPresent": true
+    },
+    {
+      "copyVersion": "2026-10-09-v1",
+      "locale": "es",
+      "description": "Correos de Bake Again sobre nuevas recetas y materiales de repostería. Elige el idioma y confirma tu suscripción por correo.",
+      "consent": "Quiero recibir correos de Bake Again sobre nuevas recetas y materiales de repostería. He leído la información de privacidad. Puedo darme de baja en cada mensaje.",
+      "processorNotice": "Brevo gestiona el formulario y el envío de correos. Tu dirección de correo, el idioma elegido y los datos de consentimiento se transfieren a Brevo para gestionar la suscripción y enviar los mensajes.",
+      "languageRequired": true,
+      "consentCheckboxPresent": true
+    },
+    {
+      "copyVersion": "2026-10-09-v1",
+      "locale": "en",
+      "description": "Emails from Bake Again about new recipes and baking resources. Choose your email language and confirm your subscription by email.",
+      "consent": "I want to receive emails from Bake Again about new recipes and baking resources. I have read the privacy information. I can unsubscribe in every email.",
+      "processorNotice": "Brevo handles this form and email delivery. Your email address, chosen language and consent details are transferred to Brevo to manage your subscription and send emails.",
+      "languageRequired": true,
+      "consentCheckboxPresent": true
+    },
+    {
+      "copyVersion": "2026-10-09-v2-email-only",
+      "locale": "uk",
+      "description": "Нові рецепти й матеріали для випічки від Bake Again українською. Підписку потрібно підтвердити електронною поштою.",
+      "consent": "Натискаючи «Підписатися на листи», ви погоджуєтеся отримувати листи від Bake Again про нові рецепти та матеріали для випічки українською. Відписатися можна будь-коли.",
+      "processorNotice": "Форму й розсилку обслуговує Brevo. Ваша email-адреса та відомості про підписку передаються Brevo для її обробки й надсилання листів.",
+      "languageRequired": false,
+      "consentCheckboxPresent": false,
+      "providerDeclarationIllustration": true
+    },
+    {
+      "copyVersion": "2026-10-09-v2-email-only",
+      "locale": "es",
+      "description": "Nuevas recetas y recursos de repostería de Bake Again en español. Confirma la suscripción por correo electrónico.",
+      "consent": "Al pulsar «Suscribirme por correo», aceptas recibir correos de Bake Again sobre nuevas recetas y recursos de repostería en español. Puedes darte de baja en cualquier momento.",
+      "processorNotice": "Brevo gestiona el formulario y los envíos. Tu dirección de correo y los datos de la suscripción se transmiten a Brevo para gestionarla y enviar los mensajes.",
+      "languageRequired": false,
+      "consentCheckboxPresent": false,
+      "providerDeclarationIllustration": true
+    },
+    {
+      "copyVersion": "2026-10-09-v2-email-only",
+      "locale": "en",
+      "description": "New recipes and baking resources from Bake Again in English. Confirm your subscription by email.",
+      "consent": "By clicking “Subscribe to emails”, you agree to receive emails from Bake Again about new recipes and baking resources in English. You can unsubscribe at any time.",
+      "processorNotice": "Brevo handles this form and the emails. Your email address and subscription information are sent to Brevo to manage your subscription and send the emails.",
+      "languageRequired": false,
+      "consentCheckboxPresent": false,
+      "providerDeclarationIllustration": true
+    }
+  ],
+  "languageAttributeRole": "legacy-tested-contact-only; use form-specific audience lists for new signup routing"
+}

@@ -1,5 +1,108 @@
 # Design system changelog
 
+## 2026-10-10 · Account email rate-limit feedback
+
+- Observed a successful signup followed by a repeated request within 60 seconds.
+  Auth 429 now explains waiting and checking inbox/spam in UK/EN/ES, without
+  exposing provider errors or suggesting that the earlier request failed.
+- Added the notice to the existing account Design Lab example.
+- UK/EN/ES wrapping passes at 390/900/1440px; typecheck and lint pass.
+
+## 2026-10-10 · Consistent home and recipe page endings
+
+- Removed the social row from the newsletter and the separate social follow section
+  from recipe endings. Both now use the same email-only invitation and SiteFooter,
+  with a single social row in the closing area.
+- Disabled newsletter configuration renders no replacement promotion. Header links
+  and the editorial About follow section retain their existing roles.
+- Updated Design Lab with the shared newsletter/footer composition in UK/EN/ES.
+- Verified Home and a published recipe in all three languages at 390/900/1440px:
+  no overflow, no social links inside email invitations, no extra follow sections,
+  one footer pair in UK and none in EN/ES. Typecheck, targeted lint and build pass.
+  Evidence: `outputs/newsletter/page-endings/review.json`.
+
+## 2026-10-10 · Homepage newsletter invitation and delayed dialog
+
+- Combined the enabled home email invitation and social follow promotion into one
+  compact editorial strip. Reduced title scale, retained concise copy and made the
+  email link the sole primary action; social links use the existing quiet variant.
+- Extended the existing Dialog with a food photograph and UK/EN/ES invitation,
+  visible dismissal, focus management and reduced motion. Added manual Design Lab
+  previews; actual subscription remains on the configured hosted form.
+- Added a 45-second active-home-view gate, recipe visibility, interaction/overlay
+  deferral and local repeat suppression. Seeing the inline block cancels that visit's
+  prompt. Preference is independent of account data and subscription status.
+- Verified UK/EN/ES inline and dialog layouts at 390/900/1440px, automatic
+  display, focus containment and Escape. Typecheck, targeted lint, five newsletter
+  tests and build passed. Evidence: `outputs/newsletter/home-invitation/`.
+- Production enablement and provider setup are unchanged; no website publication.
+
+## 2026-10-10 · Compact newsletter notice
+
+- Replaced the large native GDPR block and illustration with a short 14px Text
+  notice in all three hosted forms, at the owner’s request. Consent, withdrawal,
+  Brevo processing and privacy link remain; purpose and language appear above.
+- Recorded full DOI consent separately so email templates and Design Lab previews
+  remain unchanged. Nine responsive layouts passed; no subscription or email sent.
+
+## 2026-10-09 · Email-only newsletter forms
+
+- Removed language and consent controls from all three hosted signup forms at the
+  owner's explicit request. Retained visible consent/privacy/withdrawal copy and
+  DOI; language is routed through form-specific lists, without prechecked consent.
+- Aligned versioned UK/ES/EN DOI text and local Email Design Lab with the forms.
+  Updated localized privacy copy; existing tokens, site CTA and form URLs remain.
+- 18 hosted/DOI layouts passed at 390/900/1440px, keyboard focus and build passed.
+  No form submit, email send, contact move, paid service or website publication.
+  This revision still needs an authorized delivery/consent-record test.
+
+## 2026-10-09 · Simplified newsletter invitation
+
+- Removed provider handoff and confirmation/unsubscribe helper lines from the
+  enabled UK/ES/EN invitation at the owner's request. Title, short benefit and
+  existing outline CTA remain; the inert Design Lab note stays visible.
+- Hosted signup retains the actual consent and unsubscribe information. Saved
+  UK/ES/EN hosted forms with the existing Georgia fallback, primary action colour,
+  on-accent text and control radius; native Brevo controls remain.
+- Website invitation and hosted forms passed all three locales at 390/900/1440px
+  without overflow. Build passed; no submit, email send or site publication.
+
+## 2026-10-09 · Newsletter email palette draft
+
+- Extended the existing email composition with a campaign variant: cream page,
+  warm white surface, brown editorial typography, terracotta CTA and subtle footer.
+  All colours and spacing resolve from existing semantic tokens; no new palette.
+- Added generated UK/ES/EN campaign HTML and a separate local Email Design Lab.
+  Checked 390/900/1440px and keyboard focus; this is browser layout verification.
+- Saved the UK custom HTML as inactive Brevo template #9 with business sender/reply-to.
+  No additional email, activation or site publication; unsubscribe testing deferred
+  at the owner's request. Introductory copy is a palette review draft.
+
+## 2026-10-09 · Brevo newsletter preparation
+
+- Prepared localized hosted signup/unsubscribe copy and DOI email templates.
+  Email colours, spacing and font fallbacks derive from existing semantic tokens.
+- Improved provider link/help contrast and applied page/surface/text tokens through
+  Brevo's editor. Native provider controls and its RGPD illustration remain.
+- Kept the existing invitation and inert UK/ES/EN Design Lab examples unchanged;
+  the local connection stays disabled pending domain, sender, CAPTCHA and delivery.
+- Added three-language privacy copy locally; no website publication or email send.
+
+## 2026-10-09 · Recipe utilities and newsletter connection point
+
+- Added quiet Share and Print/PDF actions using the existing Button. Sharing uses
+  native device sharing with a labelled, copyable link fallback; cancelled sharing
+  stays silent. Links contain only the resolved recipe, language, cream and quantities.
+- Added a clean printable recipe view using the same resolved content, ingredient
+  list, method and evidence components. It retains calculated/suggested provenance,
+  chosen cream, geometry, source version and recipe URL; private notes stay private.
+- Added browser-local recently viewed recipes with compact RecipeCards and a clear
+  action. The compact card supports h3 when nested below a section h2. History stores
+  at most 12 published IDs; shows three other recipes with translated catalogue copy.
+- Added a provider-hosted newsletter invitation, absent until explicitly configured
+  for the current language. The Design Lab example is disabled and collects no data.
+- Added three-language Design Lab examples and documented the new component contracts.
+
 ## 2026-10-07 · Social follow invitation after independent review
 
 - Applied the owner's review decision: social promotion is Ukrainian-only. English
@@ -959,3 +1062,60 @@
 - Promoted the reviewed author Napoleon photo with ivory linen, glass teapot and porcelain cup; matched the backgrounds of the prune and celebration cakes without changing recipe facts.
 - Updated the sharing image and Design Lab example to v4. A versioned `/share-image-v4.webp` crawler route serves prepared WebP with its explicit media type; the earlier route remains an alias. Recipe links use their respective new catalogue photos.
 - Original photographs and previous source assets remain available; only referenced delivery files enter the media bundle.
+
+## 2026-10-09 — Phase C local account components
+
+- Added token-based account fields, collection editor, conflict/import/deletion states
+  and quiet sync notice using the shared Button; localized uk/es/en examples in Design Lab.
+- Distinguished on-device save from confirmed cloud sync. Guest recipe/Cook layouts and
+  adaptation provenance remain unchanged. External login remains gated until verified.
+
+## 2026-10-10 — Account confirmation email
+
+- Extended the existing email composition with a branded UK/ES/EN auth variant.
+- Added inert Auth Email Design Lab examples and signup locale metadata.
+- Newsletter and DOI generated output remains byte-for-byte unchanged.
+
+## 2026-10-10 — Simple account-only saves
+
+- Added an in-place sign-in gate for personal saves, preserving selections/drafts.
+- Removed guest import, retry controls and routine sync indicators from the UI.
+- Moved collections to Saved; simplified My account and kept data controls folded.
+- Added show-password/autofill and minimum 8 without composition rules.
+- Verified UK/ES/EN at 390/900/1440; raised the provider minimum from 6 to 8.
+
+## 2026-10-10 — Account and personal navigation review
+
+- Move Shopping and Account to the header utility group; add a shared-dropdown avatar
+  menu with native destination links and sign-out. Compact navigation begins at 1120px;
+  mobile language selection moves into Menu, keeping shopping/account directly available.
+- Compose Account from visible email, practical destination links, security, data/privacy
+  and sign-out. Chevron disclosures identify password/deletion controls. Keep recovery
+  independent of personal-data availability and reset hidden deletion confirmation.
+- Give guest auth modes explicit headings, contextual explanations and focus handling.
+  Use neutral Close in the gate and consistent guest personal-page headings/loading.
+- Reuse these production sections in UK/EN/ES Design Lab fixtures. Existing semantic
+  tokens cover all new composition; account avatars extend the documented round marks.
+- Verification: typecheck, lint, production build (including media preparation) and all
+  47 personal-data tests passed. Browser QA covered signed-in and isolated guest views
+  in UK/EN/ES at 390/900/1440px without horizontal overflow, avatar-menu navigation,
+  keyboard dismissal/focus return, mobile language selection, auth-mode heading focus,
+  guest Saved/Shopping, and clearing deletion confirmation on collapse. Design Lab's
+  long fictional email wraps at 390px. Existing sign-in was preserved; no password
+  change, email delivery, data deletion or new authentication was submitted.
+
+## 2026-10-10 — Simplify account settings
+
+- Remove the account data/privacy section, including export and bulk-deletion controls.
+  Remove the corresponding availability claim from privacy copy in UK/EN/ES.
+- Move sign-out to a shared, accessible ghost icon Button at the right of the account
+  heading; reuse AccountHeading in the Design Lab. Keep the existing sign-out handler
+  and pending-save protection.
+- Persistent browser authentication remains enabled (localStorage, persistSession and
+  automatic token refresh); no application-level session deadline is introduced.
+- Verified typecheck, lint and production build (144 prepared media files, 30.12 MiB).
+  Signed-in UK/EN/ES layouts pass at 390/900/1440px; the UK guest layout passes the
+  same widths and has no sign-out control. The sign-out icon has a visible keyboard
+  focus ring. Existing login survives fresh page loads; no credentials were submitted.
+- Read-only hosted Supabase verification: session lifetime and inactivity timeout are
+  both 0 (never), single-session enforcement is off, and access-token expiry is 3600s.

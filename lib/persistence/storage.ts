@@ -1,18 +1,29 @@
+import { createGuestStorage } from './guest-storage.ts';
 export type StorageLike = Pick<Storage, 'getItem' | 'setItem'>;
+
+const guestStorage = createGuestStorage(() =>
+  typeof window === 'undefined' ? null : window.localStorage,
+);
+let accountOverride: StorageLike | null = null;
+export function setAccountStorage(storage: StorageLike | null) {
+  accountOverride = storage;
+  if (typeof window !== 'undefined')
+    window.dispatchEvent(new StorageEvent('storage', { key: null }));
+}
 
 const changeEventName = 'bake-again:persistence-change';
 
 export function getBrowserStorage(): StorageLike | null {
   if (typeof window === 'undefined') return null;
 
-  try {
-    return window.localStorage;
-  } catch {
-    return null;
-  }
+  if (accountOverride) return accountOverride;
+  return guestStorage;
 }
 
-export function readStorageValue(key: string, storage = getBrowserStorage()): string | null {
+export function readStorageValue(
+  key: string,
+  storage = getBrowserStorage(),
+): string | null {
   if (!storage) return null;
 
   try {
@@ -41,11 +52,14 @@ export function writeStorageValue(
   return true;
 }
 
-export function subscribeToStorageKey(key: string, onChange: () => void): () => void {
+export function subscribeToStorageKey(
+  key: string,
+  onChange: () => void,
+): () => void {
   if (typeof window === 'undefined') return () => undefined;
 
   const handleStorage = (event: StorageEvent) => {
-    if (event.key === key) onChange();
+    if (event.key === key || event.key === null) onChange();
   };
   const handleLocalChange = (event: Event) => {
     if (event instanceof CustomEvent && event.detail === key) onChange();

@@ -1,0 +1,41 @@
+{
+  "uk": {
+    "subject": "Підтвердьте пошту — Bake Again",
+    "preheader": "Ще один крок до вашого акаунта Bake Again.",
+    "eyebrow": "Ваш акаунт",
+    "title": "Підтвердьте вашу пошту",
+    "greeting": "Вітаємо в Bake Again!",
+    "body": "Натисніть кнопку нижче, щоб підтвердити адресу електронної пошти й завершити створення акаунта.",
+    "note": "Якщо ви не створювали акаунт, просто проігноруйте цей лист.",
+    "action": "Підтвердити пошту",
+    "signature": "До зустрічі,",
+    "subscriptionNote": "Це службовий лист про ваш акаунт. Реєстрація не підписує вас на розсилку.",
+    "privacy": "Приватність"
+  },
+  "es": {
+    "subject": "Confirma tu correo — Bake Again",
+    "preheader": "Un paso más para crear tu cuenta de Bake Again.",
+    "eyebrow": "Tu cuenta",
+    "title": "Confirma tu correo",
+    "greeting": "¡Te damos la bienvenida a Bake Again!",
+    "body": "Pulsa el botón para confirmar tu dirección de correo electrónico y terminar de crear tu cuenta.",
+    "note": "Si no has creado una cuenta, puedes ignorar este mensaje.",
+    "action": "Confirmar mi correo",
+    "signature": "Hasta pronto,",
+    "subscriptionNote": "Este es un mensaje de servicio sobre tu cuenta. Registrarte no te suscribe al boletín.",
+    "privacy": "Privacidad"
+  },
+  "en": {
+    "subject": "Confirm your email — Bake Again",
+    "preheader": "One more step to your Bake Again account.",
+    "eyebrow": "Your account",
+    "title": "Confirm your email",
+    "greeting": "Welcome to Bake Again!",
+    "body": "Use the button below to confirm your email address and finish creating your account.",
+    "note": "If you did not create an account, you can ignore this email.",
+    "action": "Confirm email",
+    "signature": "See you soon,",
+    "subscriptionNote": "This is a service email about your account. Creating an account does not subscribe you to the newsletter.",
+    "privacy": "Privacy"
+  }
+}

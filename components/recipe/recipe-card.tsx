@@ -31,9 +31,11 @@ function CardFactText({ text }: { text: string }) {
 export function RecipeCard({
   recipe,
   variant = 'full',
+  headingLevel,
 }: {
   recipe: RecipeCardData;
   variant?: 'full' | 'compact';
+  headingLevel?: 'h2' | 'h3';
 }) {
   const locale = recipe.locale ?? 'en';
   const messages = getUiMessages(locale);
@@ -41,7 +43,7 @@ export function RecipeCard({
   const collectionPath = draft
     ? localeDraftsPath(locale)
     : localeHomePath(locale);
-  const Heading = variant === 'compact' ? 'h2' : 'h3';
+  const Heading = headingLevel ?? (variant === 'compact' ? 'h2' : 'h3');
   return (
     <article
       lang={locale}

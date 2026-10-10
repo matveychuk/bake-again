@@ -15,18 +15,24 @@
     "format": "oxfmt",
     "typecheck": "tsc --noEmit --incremental false",
     "test:foundation": "node --experimental-strip-types --experimental-specifier-resolution=node --test lib/i18n/*.test.ts lib/persistence/*.test.ts content/recipes/*.test.ts",
+    "test:personal": "node --experimental-strip-types --test lib/personal/*.test.ts lib/personal/server/*.test.ts",
+    "test:personal:d1": "node scripts/check-personal-d1.mjs",
     "test:seo": "node --experimental-strip-types --test lib/seo/*.test.ts",
     "test:assistant": "node --experimental-strip-types --experimental-specifier-resolution=node --test lib/assistant/*.test.ts lib/assistant/server/*.test.ts app/api/assistant/*.test.ts app/api/assistant/actions/review/*.test.ts components/assistant/*.test.ts",
     "eval:assistant": "node --experimental-strip-types --experimental-specifier-resolution=node --test evals/*.test.ts",
     "smoke:site": "node scripts/smoke-site.mjs",
     "validate:recipes": "node --experimental-strip-types --experimental-specifier-resolution=node scripts/validate-recipes.ts",
     "test:analytics": "node --experimental-strip-types --test lib/analytics/*.test.ts",
+    "test:newsletter": "node --experimental-strip-types --test lib/newsletter/*.test.ts",
+    "test:recipe-utilities": "node scripts/check-recipe-utilities.mjs",
     "media:prepare": "node scripts/prepare-media.mjs",
     "test:release-render": "node scripts/check-release-render.mjs",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "newsletter:prepare": "node scripts/prepare-newsletter-templates.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
+    "@supabase/supabase-js": "2.117.3",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "lucide-react": "1.31.0",
@@ -42,6 +48,7 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.37.1",
     "@cloudflare/workers-types": "4.20260515.1",
+    "@electric-sql/pglite": "0.5.8",
     "@openai/sites-vite-plugin": "0.2.0",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",

@@ -26,7 +26,6 @@ import { RecipeRelatedLink } from '@/components/recipe/recipe-related-link';
 import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
-import { SocialLinks } from '@/components/site/social-links';
 import type { InventoryRecipe } from '@/content/recipes/inventory';
 import type { RecipeDraft } from '@/content/recipes/recipe.types';
 import {
@@ -61,6 +60,12 @@ import { InventoryRecipeAdjuster } from './inventory-recipe-adjuster';
 import { SaveRecipeControl } from './save-recipe-control';
 import { RecipeCreamSelector } from './recipe-cream-selector';
 import styles from './inventory-recipe-detail.module.css';
+import { recipePublicLink } from '@/content/recipes/recipe-public-link';
+import { RecipeUtilityActions } from './recipe-utility-actions';
+import { RecipePrintView } from './recipe-print-view';
+import { RecentRecipes } from '@/components/personal-state/recent-recipes';
+import { getRecipeCatalog } from '@/content/recipes/catalog';
+import { NewsletterSignup } from '@/components/site/newsletter-signup';
 
 export function InventoryRecipeDetail({
   recipe,
@@ -200,6 +205,33 @@ export function InventoryRecipeDetail({
     : undefined;
   const helpVersion =
     document?.kind === 'detailed' ? document.recipe.versionId : sourceVersionId;
+  const publicLink = !isDraft
+    ? recipePublicLink(recipe.id, locale, configuration, selectedCreamRecipeId)
+    : null;
+  if (
+    new URLSearchParams(configurationSearch).get('view') === 'print' &&
+    publicLink &&
+    configuredStructured &&
+    configuration.kind !== 'invalid'
+  ) {
+    return (
+      <RecipePrintView
+        content={configuredStructured}
+        locale={locale}
+        title={detailTitle}
+        href={publicLink.href}
+        url={publicLink.url}
+        version={sourceVersionId}
+        factor={configuration.scaleFactor}
+        creamTitle={
+          selectedCreamRecipeId
+            ? getCreamOptionCopy(selectedCreamRecipeId, locale).title
+            : undefined
+        }
+        needsCream={Boolean(structured?.creamOptions && !selectedCreamRecipeId)}
+      />
+    );
+  }
   return (
     <AssistantProvider
       key={`${helpVersion}:${configurationSearch}`}
@@ -270,6 +302,15 @@ export function InventoryRecipeDetail({
               showWorkingRecord={isDraft}
             />
             <RecipeSectionNavigation locale={locale} />
+            {publicLink && (
+              <RecipeUtilityActions
+                key={publicLink.url}
+                locale={locale}
+                title={detailTitle}
+                url={publicLink.url}
+                printHref={publicLink.printHref}
+              />
+            )}
           </div>
         </section>
 
@@ -468,7 +509,14 @@ export function InventoryRecipeDetail({
               <p>{copy?.publicationNote?.[locale] ?? structured?.gapNote}</p>
             </aside>
           )}
-        <SocialLinks locale={locale} variant="follow" />
+        {!isDraft && (
+          <RecentRecipes
+            locale={locale}
+            recipes={getRecipeCatalog(locale)}
+            currentRecipeId={recipe.id}
+          />
+        )}
+        {!isDraft && <NewsletterSignup locale={locale} />}
         <SiteFooter locale={locale} />
       </main>
     </AssistantProvider>

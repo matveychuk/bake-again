@@ -1,5 +1,104 @@
 # Base components
 
+## Recipe utilities (2026-10-09)
+
+- `RecipeUtilityActions` uses existing ghost Buttons after the recipe jump links.
+  An inline labelled URL field, Copy button, live result and Close button returning
+  focus to Share are always available. Supported devices also get Send using for
+  native sharing. Both preserve the current resolved quantities and cream. Browser
+  permission failure offers manual copying; cancellation never announces success.
+- `RecipePrintView` is reached with `view=print` on the recipe's localized URL.
+  It consumes the same composed/scaled structured recipe as the normal view and
+  reuses RecipeOverview, RecipeIngredientChecklist and RecipeStepContent. The screen
+  toolbar provides Back and Print/PDF; print media hides it. There are no private
+  notes, shopping state, AI controls, social links or tracking parameters in output.
+  `RecipeOverview.expandEvidence` prints the full evidence explanation without a
+  closed disclosure. Selected quantities always retain their own evidence status.
+- `RecentRecipes` reuses compact RecipeCards. `RecipeCard.headingLevel` supports h3
+  beneath the block's h2 without changing the compact visual treatment. Clear history
+  affects only viewing history, preserves focus and announces its result. Empty
+  history occupies no space, except immediately after a clear confirmation. Design
+  Lab fixtures use `preview` and do not read/write history.
+- `NewsletterInvitation` is a compact editorial strip: 24px display heading, short
+  benefit copy and one shared primary Button linking directly to the hosted form.
+  Home and recipe pages use the same email-only composition before SiteFooter.
+  Social profiles appear once in that footer, never inside the invitation or in an
+  adjacent follow section. Disabled signup renders nothing; the footer remains.
+- The same component extends the shared Dialog with an editorial invitation:
+  Bake Again wordmark, existing Napoleon food photo, localized title/body, primary
+  hosted-form link, visible Close and “Not now”. Square surface, existing tokens,
+  scrollable height, focus containment/return, Escape and reduced-motion support.
+- `autoPrompt` is enabled only on the unfiltered home page. Require 45 seconds in
+  a visible, focused tab, reaching recipes and three seconds without interaction.
+  Defer while controls are focused or another dialog/menu is open. Seeing the inline
+  strip cancels this visit's prompt. Show/dismiss pauses for 30 days; hosted-form
+  handoff pauses for 180 days. Browser-only preference is separate from account
+  data, marketing consent and verified subscription. Storage failure disables the
+  automatic prompt but leaves manual links available.
+- No destination means an inert Design Lab preview with a manual dialog trigger:
+  no timer, persistence or external subscription action. The real server wrapper
+  renders signup only with enabled, complete language-specific HTTPS configuration.
+  No provider script, email field, frequency promise or extra helper copy is added.
+
+See `/design-system#recipe-utilities` for UK/EN/ES examples and links to a scaled
+printable recipe. All additions use existing semantic tokens.
+
+Brevo integration keeps the production invitation disabled. The owner’s
+2026-10-09 copy review simplified its enabled local composition as described above.
+Provider-hosted UK/ES/EN drafts are external to the Design Lab; their copy, form
+IDs and readiness are recorded in `lib/newsletter/brevo-forms.json`. Local DOI
+email previews in `lib/newsletter/templates/` derive colours, spacing and email-safe
+font fallbacks from `tokens.css`, through `npm run newsletter:prepare`. They are
+confirmation messages, not a new product card or a campaign design. Never treat
+the inert Design Lab examples or a reviewed hosted layout as proof of delivery.
+
+Hosted compact-notice variant (2026-10-10, owner request): purpose and locale
+remain in the introduction, followed by required EMAIL, one small Text notice
+and the existing CTA. The notice includes consent, withdrawal, Brevo processing
+and the localized privacy link. It reuses `font-size-body-small` (14px); the native
+GDPR illustration is removed. The Email Design Lab retains the full scope statement
+from `confirmation.consent`. All nine hosted layouts passed the required widths.
+
+Hosted signup review (2026-10-09, historical): all three Brevo forms reuse the page/surface/
+text tokens with the existing Georgia display fallback. Native submit buttons now
+use `action.primary`, `text.onAccent` and `radius.control`. Consent/privacy copy,
+DOI settings and the provider RGPD illustration remain. Both the website invitation
+and hosted forms were checked at 390/900/1440px in UK/ES/EN without overflow or submit.
+This external review is recorded in the newsletter manifest and setup handoff.
+
+Email-only hosted signup revision (2026-10-09) removes the language selector and
+consent checkbox at the owner's request. EMAIL and the existing primary submit
+button are the only subscription controls. Visible purpose-specific consent,
+unsubscribe/privacy and processor copy precedes the button. Native DOI confirms
+the request; language-specific lists route audiences without asking readers to
+select language. No hidden/prechecked consent value is injected. Colours/fonts
+remain the previously reviewed tokens. The Email Design Lab DOI examples use the
+same versioned consent copy as #5/#6/#7. Hosted and DOI layouts passed all locales
+at 390/900/1440px; this revision has not been submitted or delivered.
+
+### Newsletter email variant (2026-10-09)
+
+The campaign variant extends the existing table-based email composition in
+`scripts/prepare-newsletter-templates.mjs`. It resolves the same semantic page,
+surface, subtle-panel, text and action tokens into inline HTML values and `bgcolor`
+attributes. Keep the narrow reading column, square surfaces, wordmark with an
+accent period, editorial heading and one primary CTA. Colours and spacing come
+from `tokens.css`; Georgia and Arial are its email-safe fallback fonts.
+
+`lib/newsletter/templates/index.html` is the generated **Email Design Lab** with
+UK/ES/EN campaign and DOI examples. It runs as a separate loopback preview, not a
+new public website route. The three campaign examples were checked at
+390/900/1440px with wrapping copy and visible keyboard focus. Future recipe issues
+should place their reviewed food image and practical recipe facts in the content
+area; this introductory copy is a draft for reviewing the palette.
+
+Marketing templates retain the native `{{ unsubscribe }}` placeholder and localized
+privacy links in a quiet footer. The preview is not a subscription or unsubscribe
+test. The owner deferred unsubscribe testing. Brevo draft #9 contains the UK HTML,
+is inactive and has not been sent; ES/EN campaign HTML currently exists locally.
+Gmail/Outlook rendering, automatic dark mode and provider-added Free branding need
+an authorized delivery check. Do not claim browser preview proves email delivery.
+
 ## Browser icon
 
 - `public/favicon.svg` is the compact `B.` mark derived from the Bake Again wordmark.
@@ -460,22 +559,21 @@ variation.
 ## Navigation
 
 The Recipes navigation item returns to the home recipe collection, using the same URL as
-the Bake Again wordmark. Saved and Shopping list remain separate primary destinations;
-About follows Saved. Shopping list is a quiet icon-only bag link at the end, with a
-44px target, a localized accessible name and a hover title. On its current page, a
-bottom rule reinforces its active state. In the mobile disclosure, keep the full label; a subtle
-divider separates it from the main links; its label shares their starting edge. At 620px and below, the
-header has one row with the wordmark, separate language switcher and a labelled
-Menu disclosure. Ukrainian pages place a separate Instagram/Facebook row immediately
-after the header, outside the menu and outside the sticky area: it scrolls away normally.
-The compact navigation stays sticky at every width. Its links open in a surface below the header, retain their current-page
-indicator and remain available without JavaScript. The current destination uses only
-a text underline, without a filled background. The menu has a 44px trigger and
-links, visible keyboard focus and space for translated labels to wrap. The desktop
-navigation remains inline. Drafts appears only in a development build on
-localhost, 127.0.0.1 or ::1. Its route and unpublished recipe/Cook Mode URLs are
-unavailable outside that local environment, including production on localhost. Privacy
-remains in the footer.
+the Bake Again wordmark. Saved and About remain primary destinations. Shopping is a
+44px icon link in the utility group, followed by AccountLink at the far right. Guests
+see a user icon and Sign in (icon-only with an accessible name on mobile); signed-in
+readers see a round user trigger opening the shared DropdownMenu. The menu repeats
+Saved and Shopping, then Account settings and Sign out. Links remain native anchors,
+current links have a written underline, and the trigger uses visible keyboard focus.
+The neutral avatar does not imply an uploaded photo or expose initials from an email.
+
+At 1120px and below, move primary links into the Menu disclosure before they wrap.
+The visual and keyboard order is Menu, wordmark, language, shopping, account. At 620px
+and below language moves inside Menu. Account and shopping remain immediately
+available. Menu has a labelled 44px trigger and wrapping links on a bounded scrolling
+surface. The header stays sticky. Account, Saved and Shopping omit header/social
+promotion; their footer retains it. Other Ukrainian pages keep their mobile social
+row below the header. Drafts remains local-development-only. Privacy stays in the footer.
 
 `SocialLinks` renders only for Ukrainian (`uk`); English and Spanish render no social
 links, invitation or empty mobile row. The current social content is Ukrainian, and
@@ -483,12 +581,13 @@ the owner explicitly chose to omit social promotion from the other site language
 The component extends the shared Button with three composition variants:
 
 - `header`: outline buttons with icons and full platform names, aligned with the
-  navigation. Omit the extra “Стежте за нами” line at every width; the editorial
-  follow section carries the invitation and its benefit.
+  navigation. Omit the extra “Стежте за нами” line at every width. Header entry
+  points are distinct from the single social row at the end of each page.
 - `follow`: a compact editorial “Печімо разом” section describing new gluten-free
   recipes, short videos and practical tips. Equal primary links say “Підписатися в
   Instagram” and “Підписатися у Facebook”; no platform priority is inferred.
-  Place once before the footer on Home and About, and after the recipe content.
+  Retained for the editorial About page only. Home and recipe pages use an
+  email-only invitation followed by the standard footer; omit this follow section.
   Omit it from Cook Mode, utility pages and unavailable recipe configurations.
 - `footer`: quiet icon-and-name text links with no repeated invitation.
 
@@ -498,7 +597,8 @@ automatic subscription; native same-tab navigation preserves Back and modified c
 Use the single profile registry in the component for every placement. Analytics
 records `social_profile_open` with allowlisted platform, placement and locale;
 never describe clicks as confirmed follows. The Design Lab navigation example renders
-all three locales, including the Ukrainian follow section and absent es/en social UI.
+all three locales, including the shared newsletter/footer ending and absent es/en
+social UI. Email invitations remain available in every configured language.
 
 ### Language switcher
 
@@ -662,3 +762,60 @@ Use equal image heights on wide screens through their natural 4:3 / 3:2 proporti
 stack in reading order on phones. No overlays, rotation, generated faces or baked-in text.
 The editorial title uses `font-size-story-title` (40–64px). Recipe evidence remains
 in the existing About testing section with its canonical badges and anchor.
+
+### Personal account (phase C)
+
+**2026-10-10 supersedes the guest/import behavior below:** personal saves now
+require an account. AccountActionGate extends Dialog and AccountFields, keeping
+the current recipe, selections and note draft mounted during sign-in. It consumes
+the selected action once after account initialization; closing cancels the action
+and restores focus. Minimum password length is 8, without composition rules.
+Show-password and login/signup autofill are available. Recovery requests only email.
+
+My account uses a 720px maximum reading column. Show a neutral round identity mark
+and wrapping email first, followed by two practical links to Saved and Shopping.
+Use quiet square surfaces, semantic tokens and the existing Buttons. Sign-in and
+security contains an explicit chevron disclosure for password change. AccountHeading
+places the shared ghost icon Button (LogOut, 44px target) beside the title, with a
+localized accessible name and tooltip. Disable it while an action is pending. The
+account page has no data/privacy, export or deletion section. Recovery remains
+available even when the personal-data service cannot initialize.
+
+AccountFields shows a heading and explanation for the active login/signup/reset mode;
+mode changes move focus to that heading and clear stale feedback. The action gate uses
+Close in every context, keeps Escape/focus return and resumes the pending action once.
+Saved and Shopping reuse their normal page-title treatment for guests, display neutral
+loading until identity resolves, and route an authenticated service failure to settings.
+No guest login prompt flashes during initialization. AccountExample in the Design Lab
+reuses AccountHeading, AccountIdentity, AccountDestinations, AccountSettings and AccountFields in all
+three locales; mutation callbacks are inert. Collections belong to Saved recipes. Normal UI has no guest import,
+manual sync retry or pending marker. Actual errors/conflicts remain visible.
+Guest Cook Mode uses temporary memory only; Save note opens sign-in. Auth session
+and account cache remain internal reliability mechanisms. Account changes/sign-out
+reset private UI; sign-out stops if pending saves cannot complete.
+The UK/ES/EN gate was checked at 390/900/1440 CSS pixels, with no overflow and
+keyboard dismissal. The existing Design Lab reuses its fields and copy.
+
+`components/account` reuses Button and the existing quiet personal-page layout. Labelled
+native email/password/name fields extend the form pattern with 44px targets, semantic
+tokens, visible focus and wrapping actions. Collection membership uses labelled native
+checkboxes in a fieldset. Conflicts show both values and explicit choices. Bulk export
+and personal-data deletion are not exposed in the account UI.
+`/design-system#personal-account` demonstrates the production field and collection editor
+in uk/es/en without sending authentication requests. Login availability and sync status
+are separate. A locally saved note must not be described as cloud-synchronized.
+Auth rate limits use a localized waiting/inbox notice rather than a generic failure.
+The Design Lab shows this notice in all three languages without sending emails.
+
+### Account confirmation email variant (2026-10-10)
+
+The shared email generator now renders an auth variant using the same token-derived
+inline layout, wordmark, heading and CTA as the newsletter. It omits marketing
+unsubscribe and states that creating an account does not subscribe the reader.
+Copy: `lib/personal/auth-email-copy.json`. Generated Supabase HTML and subject:
+`lib/personal/email-templates/confirm-signup*`. Local Auth Email Design Lab:
+`lib/personal/email-templates/index.html`, loopback port 3058. Preview CTA is inert.
+Signup passes the whitelisted route locale in user metadata; Go branches choose
+fixed ES/EN copy and default to UK. Metadata has no authorization role. The native
+`{{ .ConfirmationURL }}` stays intact. UK/ES/EN checked at 390/900/1440px without
+horizontal overflow; actual new-template email-client delivery remains unverified.

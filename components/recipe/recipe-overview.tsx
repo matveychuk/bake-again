@@ -17,11 +17,13 @@ export function RecipeOverview({
   locale,
   showFlour = true,
   showWorkingRecord = true,
+  expandEvidence = false,
 }: {
   content: Pick<StructuredRecipeContent, 'overview' | 'evidence'> | null;
   locale: AppLocale;
   showFlour?: boolean;
   showWorkingRecord?: boolean;
+  expandEvidence?: boolean;
 }) {
   const messages = getUiMessages(locale).recipe;
   const overview = content?.overview;
@@ -44,7 +46,7 @@ export function RecipeOverview({
                 status={content.evidence.status}
               />
               {content.evidence.explanation &&
-                (longTestedExplanation ? (
+                (longTestedExplanation && !expandEvidence ? (
                   <details className={styles.evidenceDetails}>
                     <summary>
                       {getUiMessages(locale).status.tested.explanation}

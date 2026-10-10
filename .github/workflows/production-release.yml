@@ -46,6 +46,12 @@ jobs:
       - name: Foundation tests
         run: npm run test:foundation
 
+      - name: Personal foundation access and migration tests
+        run: npm run test:personal
+
+      - name: Personal foundation local D1 migration checks
+        run: npm run test:personal:d1
+
       - name: SEO metadata tests
         run: npm run test:seo
 

@@ -1,5 +1,8 @@
 'use client';
 
+import { useAccount } from '@/components/account/account-provider';
+import { requestPersonalAction } from '@/lib/personal/action-gate';
+import { AccountSyncNotice } from '@/components/account/account-sync-notice';
 import { EvidenceBadge } from '@/components/recipe/evidence-badge';
 
 /* oxlint-disable react-compiler/react-compiler -- Restore the versioned browser session once after hydration. */
@@ -7,7 +10,13 @@ import { EvidenceBadge } from '@/components/recipe/evidence-badge';
 import { trackEvent } from '@/lib/analytics/umami';
 /* oxlint-disable next/no-html-link-for-pages -- Match native recipe navigation; hydrated next/link fails in the production runtime. */
 import { RecipeConfigurationUnavailable } from '@/components/recipe/recipe-configuration-unavailable';
-import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import { ArrowLeft, Clock3, NotebookPen, X } from 'lucide-react';
 import { AssistantProvider } from '@/components/assistant';
 import { RecipeIngredientList } from '@/components/recipe/recipe-ingredient-list';
@@ -95,11 +104,13 @@ export function CookModePage({
     () => cookSteps.flatMap((cookStep) => cookStep.stepIds),
     [cookSteps],
   );
+  const account = useAccount();
   const [stepIndex, setStepIndex] = useState(0);
   const [completedStepIds, setCompletedStepIds] = useState<string[]>([]);
   const [timer, setTimer] = useState<CookTimerState | null>(null);
   const [completedAt, setCompletedAt] = useState<string | null>(null);
   const [note, setNote] = useState('');
+  const lastBakeSignature = useRef('');
   const [noteSaveStatus, setNoteSaveStatus] = useState<
     'saving' | 'saved' | 'error'
   >('saved');
@@ -152,6 +163,9 @@ export function CookModePage({
       configuration,
     );
     setPreviousBake(baked);
+    lastBakeSignature.current = saved?.completedAt
+      ? JSON.stringify([configurationKey, saved.completedAt, saved.note])
+      : '';
     if (saved) {
       const savedIndex = cookSteps.findIndex((candidate) =>
         candidate.stepIds.includes(saved.currentStepId),
@@ -222,7 +236,12 @@ export function CookModePage({
       undefined,
       configurationKey,
     );
-    if (!completedAt) return;
+    if (!completedAt || !account.engine) return;
+    const signature = JSON.stringify([configurationKey, completedAt, note]);
+    if (lastBakeSignature.current === signature) {
+      setNoteSaveStatus(sessionSaved ? 'saved' : 'error');
+      return;
+    }
 
     const now = new Date().toISOString();
     const record: BakeRecordV1 = {
@@ -234,9 +253,11 @@ export function CookModePage({
       noteUpdatedAt: now,
     };
     const memorySaved = persistBakeRecord(record);
+    if (memorySaved) lastBakeSignature.current = signature;
     setPreviousBake(record);
     setNoteSaveStatus(sessionSaved && memorySaved ? 'saved' : 'error');
   }, [
+    account.engine,
     completedAt,
     completedStepIds,
     configuration,
@@ -255,6 +276,7 @@ export function CookModePage({
   if (state.unavailableReason) {
     return (
       <main className={styles.page}>
+        <AccountSyncNotice locale={locale} />
         <header className={styles.header}>
           <a href={resolvedDetailHref} className={styles.exit}>
             <ArrowLeft size={17} /> {messages.backToRecipe}
@@ -377,6 +399,7 @@ export function CookModePage({
 
   const page = (
     <main className={styles.page}>
+      <AccountSyncNotice locale={locale} />
       <header className={styles.header}>
         <a href={resolvedDetailHref} className={styles.exit}>
           <ArrowLeft size={17} /> {messages.exit}
@@ -422,7 +445,17 @@ export function CookModePage({
               totalSteps={cookSteps.length}
               detailHref={resolvedDetailHref}
               note={note}
-              noteSaveStatus={noteSaveStatus}
+              noteSaveStatus={
+                account.error ||
+                account.engine?.error ||
+                account.engine?.conflicts.length
+                  ? 'error'
+                  : account.engine?.pendingCount
+                    ? 'saving'
+                    : noteSaveStatus
+              }
+              isGuest={!account.engine}
+              onSaveNote={() => requestPersonalAction(locale, () => {})}
               onNoteChange={changeNote}
               onRestart={restart}
               locale={locale}

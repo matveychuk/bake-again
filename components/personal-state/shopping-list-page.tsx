@@ -1,4 +1,7 @@
 'use client';
+import { useAccount } from '@/components/account/account-provider';
+import { requestPersonalAction } from '@/lib/personal/action-gate';
+import { accountCopy } from '@/components/account/copy';
 
 import { Button } from '@/components/ui/button';
 
@@ -16,7 +19,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { ingredientName, itemNotes, sourceRecipes } from '@/content/recipes/shopping-copy';
+import {
+  ingredientName,
+  itemNotes,
+  sourceRecipes,
+} from '@/content/recipes/shopping-copy';
 import { type RecipeCatalogEntry } from '@/content/recipes/catalog';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
@@ -45,6 +52,8 @@ export function ShoppingListPage({
   const [removed, setRemoved] = useState<ShoppingItemV1 | null>(null);
   const [clearOpen, setClearOpen] = useState(false);
   const messages = getUiMessages(locale).personal;
+  const account = useAccount();
+  const ac = accountCopy[locale];
   const checkedCount = useMemo(
     () => items.filter((item) => item.checked).length,
     [items],
@@ -68,6 +77,34 @@ export function ShoppingListPage({
     setRemoved(null);
   }
 
+  if (!account.engine)
+    return (
+      <section className={styles.page} aria-labelledby="shopping-title">
+        <div className={styles.heading}>
+          <p>{messages.shoppingEyebrow}</p>
+          <h1 id="shopping-title" tabIndex={-1}>
+            {messages.shoppingTitle}
+          </h1>
+        </div>
+        <div className={styles.guest}>
+          <output aria-live="polite">
+            {!account.ready
+              ? ac.loading
+              : account.identity
+                ? ac.error
+                : ac.guest}
+          </output>
+          {account.ready &&
+            (account.identity ? (
+              <Button href={`/${locale}/account`}>{ac.settings}</Button>
+            ) : (
+              <Button onClick={() => requestPersonalAction(locale, () => {})}>
+                {ac.login}
+              </Button>
+            ))}
+        </div>
+      </section>
+    );
   return (
     <section className={styles.page} aria-labelledby="shopping-title">
       <div className={styles.heading}>
@@ -78,6 +115,9 @@ export function ShoppingListPage({
         <span>{messages.storedInBrowser}</span>
       </div>
 
+      {(account.error || account.engine.error) && (
+        <p role="alert">{ac.saveError}</p>
+      )}
       {items.length === 0 ? (
         <div className={styles.empty}>
           <h2>{messages.shoppingEmpty}</h2>

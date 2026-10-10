@@ -1,0 +1,92 @@
+.page {
+  max-width: var(--layout-cook-reading);
+  margin: 0 auto;
+  padding: var(--space-8) var(--layout-gutter-mobile);
+  color: var(--color-text-primary);
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  margin-bottom: var(--space-8);
+}
+.toolbar p {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-small);
+}
+.recipe {
+  overflow-wrap: anywhere;
+  line-height: var(--line-height-body);
+}
+.recipe h1 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-recipe-title-mobile);
+  line-height: 1.15;
+  margin: var(--space-3) 0 var(--space-6);
+}
+.recipe h2 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-section-title-mobile);
+  margin-bottom: var(--space-4);
+}
+.recipe > section {
+  margin-top: var(--space-8);
+}
+.brand {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-drawer-title);
+}
+.notice {
+  border-left: 2px solid var(--color-action-primary);
+  padding-left: var(--space-3);
+}
+.steps {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-6);
+}
+.source {
+  border-top: 1px solid var(--color-border-subtle);
+  margin-top: var(--space-8);
+  padding-top: var(--space-3);
+  font-size: var(--font-size-body-small);
+}
+@media print {
+  :global(body:has([data-recipe-print])) {
+    background: transparent;
+  }
+  .page {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--font-size-body-small);
+  }
+  .toolbar {
+    display: none;
+  }
+  .recipe h1 {
+    font-size: var(--font-size-section-title-mobile);
+  }
+  .recipe h2 {
+    font-size: var(--font-size-drawer-title);
+    break-after: avoid;
+  }
+  .recipe h3 {
+    break-after: avoid;
+  }
+  .steps {
+    display: block;
+  }
+  .steps > li {
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
+  }
+  .recipe p {
+    orphans: 3;
+    widows: 3;
+  }
+}

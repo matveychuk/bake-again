@@ -1,3 +1,4 @@
+import { accountCopy } from '@/components/account/copy';
 import { Button } from '@/components/ui/button';
 /* oxlint-disable next/no-html-link-for-pages -- Keep recipe recovery independent of hydration. */
 import { CheckCircle2, RotateCcw, Save } from 'lucide-react';
@@ -11,6 +12,8 @@ export function CookCompletion({
   detailHref,
   note,
   noteSaveStatus,
+  isGuest = false,
+  onSaveNote,
   onNoteChange,
   onRestart,
   locale,
@@ -20,6 +23,8 @@ export function CookCompletion({
   detailHref: string;
   note: string;
   noteSaveStatus: 'saving' | 'saved' | 'error';
+  isGuest?: boolean;
+  onSaveNote?: () => void;
   onNoteChange: (note: string) => void;
   onRestart: () => void;
   locale: AppLocale;
@@ -45,18 +50,24 @@ export function CookCompletion({
         onChange={(event) => onNoteChange(event.target.value)}
         placeholder={messages.privateNotePlaceholder}
       />
-      <p
-        aria-live="polite"
-        className={styles.noteSaveStatus}
-        role={noteSaveStatus === 'error' ? 'alert' : undefined}
-      >
-        <Save aria-hidden="true" size={15} />
-        {noteSaveStatus === 'saving'
-          ? messages.noteSaving
-          : noteSaveStatus === 'error'
-            ? messages.noteSaveFailed
-            : messages.noteSaved}
-      </p>
+      {isGuest ? (
+        <Button type="button" onClick={onSaveNote}>
+          {accountCopy[locale].saveNote}
+        </Button>
+      ) : (
+        <p
+          aria-live="polite"
+          className={styles.noteSaveStatus}
+          role={noteSaveStatus === 'error' ? 'alert' : undefined}
+        >
+          <Save aria-hidden="true" size={15} />
+          {noteSaveStatus === 'saving'
+            ? messages.noteSaving
+            : noteSaveStatus === 'error'
+              ? messages.noteSaveFailed
+              : messages.noteSaved}
+        </p>
+      )}
       <p className={styles.completionNextSteps}>
         {messages.completionNextSteps}
       </p>

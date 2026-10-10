@@ -1,0 +1,381 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "e113c362-f162-4557-97f8-3c3344a1b804",
+  "prevId": "fd5aec47-ecea-45db-a493-71e4cd97d685",
+  "tables": {
+    "assistant_quota_reservations": {
+      "name": "assistant_quota_reservations",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "session_key": {
+          "name": "session_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "network_key": {
+          "name": "network_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "lease_until": {
+          "name": "lease_until",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "reserved_microusd": {
+          "name": "reserved_microusd",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "assistant_quota_created": {
+          "name": "assistant_quota_created",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "assistant_quota_session": {
+          "name": "assistant_quota_session",
+          "columns": [
+            "session_key",
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "assistant_quota_network": {
+          "name": "assistant_quota_network",
+          "columns": [
+            "network_key",
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "assistant_reserved_nonnegative": {
+          "name": "assistant_reserved_nonnegative",
+          "value": "\"assistant_quota_reservations\".\"reserved_microusd\" >= 0"
+        }
+      }
+    },
+    "assistant_verification_attempts": {
+      "name": "assistant_verification_attempts",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "network_key": {
+          "name": "network_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "assistant_verification_network": {
+          "name": "assistant_verification_network",
+          "columns": [
+            "network_key",
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "assistant_verification_created": {
+          "name": "assistant_verification_created",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "personal_accounts": {
+      "name": "personal_accounts",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "disabled_at": {
+          "name": "disabled_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "personal_account_id_length": {
+          "name": "personal_account_id_length",
+          "value": "length(\"personal_accounts\".\"id\") = 36"
+        },
+        "personal_account_time": {
+          "name": "personal_account_time",
+          "value": "\"personal_accounts\".\"created_at\" >= 0 AND (\"personal_accounts\".\"disabled_at\" IS NULL OR \"personal_accounts\".\"disabled_at\" >= 0)"
+        }
+      }
+    },
+    "personal_identities": {
+      "name": "personal_identities",
+      "columns": {
+        "issuer": {
+          "name": "issuer",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "subject": {
+          "name": "subject",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revoked_at": {
+          "name": "revoked_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "personal_identity_account": {
+          "name": "personal_identity_account",
+          "columns": [
+            "account_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "personal_identities_account_id_personal_accounts_id_fk": {
+          "name": "personal_identities_account_id_personal_accounts_id_fk",
+          "tableFrom": "personal_identities",
+          "tableTo": "personal_accounts",
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "personal_identities_issuer_subject_pk": {
+          "columns": [
+            "issuer",
+            "subject"
+          ],
+          "name": "personal_identities_issuer_subject_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "personal_identity_bounds": {
+          "name": "personal_identity_bounds",
+          "value": "length(\"personal_identities\".\"issuer\") BETWEEN 1 AND 256 AND length(\"personal_identities\".\"subject\") BETWEEN 1 AND 1024"
+        },
+        "personal_identity_time": {
+          "name": "personal_identity_time",
+          "value": "\"personal_identities\".\"created_at\" >= 0 AND (\"personal_identities\".\"revoked_at\" IS NULL OR \"personal_identities\".\"revoked_at\" >= 0)"
+        }
+      }
+    },
+    "personal_records": {
+      "name": "personal_records",
+      "columns": {
+        "account_id": {
+          "name": "account_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "record_key": {
+          "name": "record_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "schema_version": {
+          "name": "schema_version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "payload_json": {
+          "name": "payload_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "personal_records_account_id_personal_accounts_id_fk": {
+          "name": "personal_records_account_id_personal_accounts_id_fk",
+          "tableFrom": "personal_records",
+          "tableTo": "personal_accounts",
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "personal_records_account_id_kind_record_key_pk": {
+          "columns": [
+            "account_id",
+            "kind",
+            "record_key"
+          ],
+          "name": "personal_records_account_id_kind_record_key_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "personal_record_kind": {
+          "name": "personal_record_kind",
+          "value": "\"personal_records\".\"kind\" IN ('saved-recipe','shopping-item','recipe-note','bake-record','collection')"
+        },
+        "personal_record_key_bounds": {
+          "name": "personal_record_key_bounds",
+          "value": "length(\"personal_records\".\"record_key\") BETWEEN 1 AND 1024"
+        },
+        "personal_record_version": {
+          "name": "personal_record_version",
+          "value": "\"personal_records\".\"schema_version\" = 1 AND \"personal_records\".\"revision\" BETWEEN 1 AND 9007199254740991"
+        },
+        "personal_record_time": {
+          "name": "personal_record_time",
+          "value": "\"personal_records\".\"updated_at\" >= 0 AND (\"personal_records\".\"deleted_at\" IS NULL OR \"personal_records\".\"deleted_at\" = \"personal_records\".\"updated_at\")"
+        },
+        "personal_record_payload": {
+          "name": "personal_record_payload",
+          "value": "(\"personal_records\".\"deleted_at\" IS NOT NULL AND \"personal_records\".\"payload_json\" IS NULL) OR (\"personal_records\".\"deleted_at\" IS NULL AND \"personal_records\".\"payload_json\" IS NOT NULL AND json_valid(\"personal_records\".\"payload_json\") AND length(CAST(\"personal_records\".\"payload_json\" AS BLOB)) <= 32768)"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

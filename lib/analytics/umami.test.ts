@@ -170,3 +170,8 @@ void test('social analytics reject unknown dimensions, non-Ukrainian and interna
     );
   }
 });
+
+void test('private account and authentication callback pages are excluded from analytics',()=>{
+ for(const locale of ['uk','es','en'])assert.equal(analyticsAllowed('bakeagain.com',`/${locale}/account`),false);
+ assert.equal(sanitizeAnalyticsPayload('event',{url:'https://bakeagain.com/uk/account?code=secret-code&recovery=1'}),false);
+});

@@ -9,12 +9,20 @@ export const privacyContent: Record<
     intro: 'Як Bake Again зберігає ваші рецепти, покупки та нотатки.',
     sections: [
       {
-        title: 'У цьому браузері',
-        body: 'Збережені рецепти, список покупок, прогрес приготування, таймери, приватні нотатки та вибір мови зберігаються локально в браузері. Ці дані не синхронізуються з іншими пристроями. Ваша нотатка не публікується як відгук і не змінює статус рецепта.',
+        title: 'Ваш акаунт і пристрій',
+        body: 'Збережені рецепти, покупки, приватні нотатки, записи випікання та колекції доступні після входу й зберігаються в Supabase. Гостьові персональні збереження та перенесення з браузера не використовуються. Під час входу браузер зберігає сесію й тимчасовий кеш акаунта для надійного надсилання змін. Чернетка нотатки без входу залишається лише у відкритій сторінці. Прогрес приготування та таймери не синхронізуються. Вибір мови зберігається на пристрої. Нотатка не публікується як відгук і не змінює статус рецепта.',
       },
       {
         title: 'Керуйте збереженнями',
-        body: 'Закладка прибирає рецепт зі збережених. У списку покупок можна видалити окремий продукт або очистити весь список. Нотатку можна змінити після приготування. Очищення даних цього сайту в налаштуваннях браузера видаляє всі ці локальні збереження.',
+        body: 'Закладка прибирає рецепт зі збережених. У списку покупок можна видалити окремий продукт або очистити весь список. Нотатку можна змінити після приготування. Очищення даних сайту в браузері видаляє локальні збереження, але не хмарні. Перед виходом сайт намагається зберегти зміни; якщо це не вдалося, вихід зупиняється. Після виходу кеш акаунта очищається.',
+      },
+      {
+        title: 'Нещодавно переглянуті рецепти',
+        body: 'У цьому браузері зберігаються ідентифікатори останніх 12 переглянутих опублікованих рецептів. На головній і на сторінках рецептів показуються до трьох із них. Кнопка «Очистити історію» видаляє лише історію переглядів: збережені рецепти, список покупок і приватні нотатки залишаються. Ця історія не надсилається на сервер.',
+      },
+      {
+        title: 'Якщо підписуєтеся на листи',
+        body: 'Коли форма підписки доступна, вона відкривається на сторінці Brevo. Ви вказуєте email-адресу й натискаєте «Підписатися на листи», погоджуючись отримувати розсилку Bake Again про нові рецепти та матеріали для випічки. Мова розсилки відповідає мові форми; окремо вибирати її не потрібно. Brevo обробляє email-адресу, мовний список і відомості про підтвердження підписки. Нова підписка активується після підтвердження в листі. Відписатися можна через посилання в кожному листі; це не видаляє акаунт або збережені рецепти. Покупка чи створення акаунта не підписує вас на розсилку. Ця сторінка сайту сама не збирає email-адреси. Щоб не повторювати пропозицію підписки, браузер локально запам’ятовує паузу на 30 днів після показу чи закриття та на 180 днів після переходу до форми. Ця позначка не є підтвердженням підписки й не синхронізується з акаунтом.',
       },
       {
         title: 'Базова статистика',
@@ -31,12 +39,20 @@ export const privacyContent: Record<
     intro: 'How Bake Again stores your recipes, shopping and notes.',
     sections: [
       {
-        title: 'In this browser',
-        body: 'Saved recipes, shopping lists, cooking progress, timers, private notes and your language preference are stored locally in your browser. They do not sync to other devices. Your private note is not published as a review and does not change the recipe’s testing status.',
+        title: 'Your account and device',
+        body: 'Saved recipes, shopping, private notes, bake records and collections require sign-in and are stored in Supabase. Guest personal storage and browser imports are not used. The browser stores the sign-in session and a temporary account cache for reliable delivery of changes. A note drafted before signing in stays only on the open page. Cooking progress and timers do not sync. Language preferences stay on your device. Your note is not published as a review and does not change the recipe’s testing status.',
       },
       {
         title: 'Manage your saved items',
-        body: 'Use the bookmark to remove a saved recipe. You can remove individual products or clear your shopping list. Edit a private note after cooking. Clearing this site’s data in your browser settings removes all of these local saved items.',
+        body: 'Use the bookmark to remove a saved recipe. You can remove individual products or clear your shopping list. Edit a private note after cooking. Clearing site data in your browser removes local items, but not cloud records. Before signing out, the site attempts to save pending changes; sign-out stops if saving fails. The account cache is cleared after sign-out.',
+      },
+      {
+        title: 'Recently viewed recipes',
+        body: 'This browser stores the IDs of your last 12 viewed published recipes. Up to three appear on the home and recipe pages. Clear history removes only viewing history: saved recipes, shopping lists and private notes remain. This history is not sent to the server.',
+      },
+      {
+        title: 'If you subscribe to emails',
+        body: 'When a signup form is available, it opens on a Brevo page. You enter your email address and click “Subscribe to emails” to agree to receive Bake Again emails about new recipes and baking resources. The email language matches the form language; no separate selection is needed. Brevo processes your email address, language-specific list and subscription confirmation records. A new subscription activates after email confirmation. You can unsubscribe through the link in every email; this does not delete your account or saved recipes. Buying something or creating an account does not subscribe you to the newsletter. This site page itself does not collect email addresses. To avoid repeating the invitation, the browser locally remembers a 30-day pause after showing or dismissing it, or 180 days after opening the signup form. This preference is not proof of subscription and does not sync with your account.',
       },
       {
         title: 'Basic analytics',
@@ -53,12 +69,20 @@ export const privacyContent: Record<
     intro: 'Cómo guarda Bake Again tus recetas, compras y notas.',
     sections: [
       {
-        title: 'En este navegador',
-        body: 'Las recetas guardadas, la lista de la compra, el progreso de preparación, los temporizadores, las notas privadas y el idioma se guardan localmente en tu navegador. No se sincronizan con otros dispositivos. Tu nota privada no se publica como reseña ni cambia el estado de prueba de la receta.',
+        title: 'Tu cuenta y dispositivo',
+        body: 'Las recetas guardadas, compras, notas privadas, registros de horneado y colecciones requieren iniciar sesión y se guardan en Supabase. No se usan guardados personales de invitado ni importaciones del navegador. El navegador conserva la sesión y una caché temporal de la cuenta para enviar los cambios de forma fiable. Una nota redactada sin iniciar sesión permanece solo en la página abierta. El progreso y los temporizadores no se sincronizan. El idioma se recuerda en el dispositivo. Tu nota no se publica como reseña ni cambia el estado de prueba de la receta.',
       },
       {
         title: 'Gestiona tus datos guardados',
-        body: 'Usa el marcador para quitar una receta guardada. Puedes eliminar productos individuales o vaciar la lista de la compra. Puedes editar una nota al terminar de cocinar. Borrar los datos de este sitio en los ajustes del navegador elimina todos estos datos locales.',
+        body: 'Usa el marcador para quitar una receta guardada. Puedes eliminar productos individuales o vaciar la lista de la compra. Puedes editar una nota al terminar de cocinar. Borrar los datos del sitio en el navegador elimina los datos locales, pero no los registros de la nube. Antes de salir, el sitio intenta guardar los cambios pendientes; si falla, se detiene la salida. Al salir se borra la caché de la cuenta.',
+      },
+      {
+        title: 'Recetas vistas recientemente',
+        body: 'Este navegador guarda los identificadores de las últimas 12 recetas publicadas que has visitado. Se muestran hasta tres en el inicio y en las páginas de recetas. Borrar historial elimina solo el historial de visitas: conserva tus recetas guardadas, la lista de la compra y las notas privadas. Este historial no se envía al servidor.',
+      },
+      {
+        title: 'Si te suscribes a los correos',
+        body: 'Cuando el formulario de suscripción está disponible, se abre en una página de Brevo. Introduces tu dirección de correo y pulsas «Suscribirme por correo» para aceptar recibir mensajes de Bake Again sobre nuevas recetas y recursos de repostería. El idioma de los correos corresponde al del formulario; no hace falta seleccionarlo aparte. Brevo trata tu dirección de correo, la lista por idioma y los registros de confirmación de la suscripción. Una nueva suscripción se activa tras confirmarla por correo. Puedes darte de baja mediante el enlace de cada mensaje; esto no elimina tu cuenta ni tus recetas guardadas. Comprar o crear una cuenta no te suscribe a la newsletter. Esta página del sitio no recoge direcciones de correo. Para no repetir la invitación, el navegador recuerda localmente una pausa de 30 días tras mostrarla o cerrarla, o de 180 días tras abrir el formulario. Esta preferencia no confirma una suscripción ni se sincroniza con tu cuenta.',
       },
       {
         title: 'Estadísticas básicas',

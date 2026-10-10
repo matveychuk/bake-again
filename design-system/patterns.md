@@ -40,6 +40,18 @@ source order. Newly published recipes without a curated position appear at the e
 in source order; ordering never publishes a draft. Seasonal changes are explicit edits
 to the same lists. Design Lab shows the first six published cards in uk/es/en.
 
+## Home newsletter invitation
+
+After the recipe evidence section, use one compact invitation with a single primary
+email action, followed by SiteFooter. Use this same ending after recipe content and
+recent recipes. Social profiles belong to the footer only within this closing area;
+do not repeat them inside the email block or add a separate social follow section.
+If signup is disabled, go directly to the footer. The delayed Dialog is optional discovery,
+never an immediate entrance gate. Its 45-second active-view threshold is an initial
+editorial choice, not a measured conversion optimum. Recipe pages keep only the inline
+invitation; search and collection results never trigger the modal. Design Lab includes
+manual UK/EN/ES modal previews with disabled subscription actions.
+
 ## Editorial story page
 
 The About page opens with a personal introduction and a pair of original family
@@ -223,3 +235,13 @@ use one column and long translated strings wrap naturally.
   by 32px from the heading/action group to the first rule and 16px before the first
   step content. Use spacing tokens, not accumulated one-off gaps.
 - Language changes preserve query/filter, cream and recipe configuration, plus the existing section anchor.
+
+## Account navigation and settings (2026-10-10)
+
+Keep frequent recipe tasks one click away: shopping remains beside the rightmost
+account control and both Saved and Shopping also appear in the account menu and page.
+The account page prioritizes identity and those destinations before password settings.
+Place the labelled sign-out icon at the right of the account heading. Do not show a
+data/privacy, export or bulk-deletion section.
+Guest sign-in modes have their own headings; initialization is a neutral loading state,
+not proof that someone is signed out. Personal pages omit header social promotion.

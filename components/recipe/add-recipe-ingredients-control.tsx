@@ -1,4 +1,5 @@
 'use client';
+import { requestPersonalAction } from '@/lib/personal/action-gate';
 
 import { Button } from '@/components/ui/button';
 
@@ -540,7 +541,7 @@ export function AddRecipeIngredientsControl({
             <Button
               className={styles.submit}
               disabled={!complete}
-              onClick={addIngredients}
+              onClick={() => requestPersonalAction(locale, addIngredients)}
               type="button"
             >
               {messages.addSelected(selectedCount)}

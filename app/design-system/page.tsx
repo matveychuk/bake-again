@@ -1,4 +1,8 @@
-import { AboutFamilyPhotos, AboutRecipeStatuses } from '@/app/_components/about/about-page';
+import { AccountExample } from '@/components/account/account-example';
+import {
+  AboutFamilyPhotos,
+  AboutRecipeStatuses,
+} from '@/app/_components/about/about-page';
 import aboutStyles from '@/app/_components/about/about-page.module.css';
 import { aboutPageContent } from '@/content/about';
 import { resolveStepHelp } from '@/content/recipes/step-help';
@@ -38,7 +42,6 @@ import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { RecipeSearchForm } from '@/components/recipe/recipe-search-form';
 import { SiteHeader } from '@/components/site/site-header';
 import { SiteFooter } from '@/components/site/site-footer';
-import { SocialLinks } from '@/components/site/social-links';
 import { RecipeCard } from '@/components/recipe/recipe-card';
 import {
   CookToolsExample,
@@ -78,6 +81,10 @@ import { glutenFreeNapoleonRecipe } from '@/content/recipes/gluten-free-napoleon
 import { recipeDetailTitles } from '@/content/recipes/catalog-locales';
 import { getCreamOptionCopy } from '@/content/recipes/cream-option-copy';
 import styles from './design-system.module.css';
+import { RecipeUtilityActions } from '@/components/recipe/recipe-utility-actions';
+import { recipePublicLink } from '@/content/recipes/recipe-public-link';
+import { RecentRecipes } from '@/components/personal-state/recent-recipes';
+import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
 
 export const metadata: Metadata = {
   title: 'Design System v1 — Bake Again',
@@ -350,16 +357,43 @@ export default function DesignSystemPage() {
 
           <section className={styles.section} id="family-story">
             <h2>Family story · About page</h2>
-            <p>Original family photographs, uncropped, with readable captions. The shared title scales from 40 to 64px.</p>
+            <p>
+              Original family photographs, uncropped, with readable captions.
+              The shared title scales from 40 to 64px.
+            </p>
             <div className={aboutStyles.hero} lang="uk">
-              <div className={aboutStyles.heroCopy}><h2 style={{ fontFamily: 'var(--font-family-display-cyrillic)' }}>{aboutPageContent.uk.title}</h2></div>
-              <p className={aboutStyles.standfirst}>{aboutPageContent.uk.standfirst}</p>
+              <div className={aboutStyles.heroCopy}>
+                <h2
+                  style={{ fontFamily: 'var(--font-family-display-cyrillic)' }}
+                >
+                  {aboutPageContent.uk.title}
+                </h2>
+              </div>
+              <p className={aboutStyles.standfirst}>
+                {aboutPageContent.uk.standfirst}
+              </p>
             </div>
             <AboutFamilyPhotos locale="uk" />
             <AboutRecipeStatuses locale="uk" id="about-statuses-example" />
-            <p><a href="/uk/about">Українська</a> · <a href="/es/about">Español</a> · <a href="/en/about">English</a></p>
+            <p>
+              <a href="/uk/about">Українська</a> ·{' '}
+              <a href="/es/about">Español</a> · <a href="/en/about">English</a>
+            </p>
           </section>
 
+          <section
+            className={styles.section}
+            id="personal-account"
+            aria-label="Personal accounts — identity, settings and sign-in"
+          >
+            <p>
+              Local component examples with fictional identity data. Settings actions
+              are inert; forms do not create accounts or send emails.
+            </p>
+            {(['uk', 'es', 'en'] as const).map((locale) => (
+              <AccountExample key={locale} locale={locale} />
+            ))}
+          </section>
           <section className={styles.section} id="components">
             <NumberedSectionTitle
               number="05"
@@ -415,22 +449,40 @@ export default function DesignSystemPage() {
               <a href="/es?q=receta-inexistente#recipes">Empty results</a>
             </div>
 
-            <div className={`${styles.componentBlock} ${styles.navigationBlock}`}>
+            <div
+              className={`${styles.componentBlock} ${styles.navigationBlock}`}
+            >
               <div className={styles.componentLabel}>
                 <strong>Site navigation</strong>
                 <span>
-                  Ukrainian-only social profiles: outline header links, an editorial
-                  follow invitation and quiet footer links. On mobile, the social row
-                  scrolls away while navigation stays sticky. English and Spanish
-                  omit all social links and the invitation. Shopping list keeps an
-                  accessible icon on desktop and its full name in the mobile menu.
+                  Ukrainian-only social profiles: outline header links and quiet
+                  footer links. Home and recipe endings share an email-only
+                  invitation followed by the footer, without adjacent social
+                  links. On mobile,
+                  the social row scrolls away while navigation stays sticky.
+                  English and Spanish omit social links; the email invitation
+                  is localized.
+                  Shopping list keeps an accessible icon on desktop and its full
+                  name in the mobile menu.
                 </span>
               </div>
               {(['uk', 'es', 'en'] as const).map((locale) => (
-                <div key={locale} className={styles.siteHeaderExample} lang={locale}>
-                  <h3>{{ uk: 'Українська · соціальні посилання', es: 'Español · sin enlaces sociales', en: 'English · no social links' }[locale]}</h3>
+                <div
+                  key={locale}
+                  className={styles.siteHeaderExample}
+                  lang={locale}
+                >
+                  <h3>
+                    {
+                      {
+                        uk: 'Українська · соціальні посилання',
+                        es: 'Español · sin enlaces sociales',
+                        en: 'English · no social links',
+                      }[locale]
+                    }
+                  </h3>
                   <SiteHeader locale={locale} pathname={`/${locale}`} />
-                  <SocialLinks locale={locale} variant="follow" id={`ds-social-follow-${locale}`} />
+                  <NewsletterInvitation locale={locale} />
                   <SiteFooter locale={locale} />
                 </div>
               ))}
@@ -808,6 +860,45 @@ export default function DesignSystemPage() {
               </div>
             </div>
 
+            <div className={styles.componentBlock} id="recipe-utilities">
+              <div className={styles.componentLabel}>
+                <strong>Share, print and return to a recipe</strong>
+                <span>
+                  Resolved configuration links · local history · provider-hosted
+                  email signup
+                </span>
+              </div>
+              <div className={styles.recipeOverviewExample}>
+                {(['uk', 'en', 'es'] as const).map((locale) => {
+                  const links = recipePublicLink('plum-cake', locale, {
+                    kind: 'adjusted',
+                    mode: 'scale',
+                    scaleFactor: 2,
+                  })!;
+                  return (
+                    <div
+                      key={locale}
+                      lang={locale}
+                      id={`recipe-utilities-${locale}`}
+                    >
+                      <RecipeUtilityActions
+                        locale={locale}
+                        title={recipeDetailTitles['plum-cake'][locale]}
+                        url={links.url}
+                        printHref={links.printHref}
+                      />
+                      <RecentRecipes
+                        locale={locale}
+                        recipes={getRecipeCatalog(locale)}
+                        preview
+                      />
+                      <NewsletterInvitation locale={locale} />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
             <div className={styles.componentBlock} id="concise-recipe">
               <div className={styles.componentLabel}>
                 <strong>Concise recipe</strong>
@@ -921,9 +1012,9 @@ export default function DesignSystemPage() {
                       the food and preparation details visible.
                     </p>
                     <p>
-                      In numbered recipe steps, photos align with the instruction
-                      text at desktop, tablet and mobile widths. See the live
-                      Napoleon recipe reference below.
+                      In numbered recipe steps, photos align with the
+                      instruction text at desktop, tablet and mobile widths. See
+                      the live Napoleon recipe reference below.
                     </p>
                     <StepMediaSequence
                       items={

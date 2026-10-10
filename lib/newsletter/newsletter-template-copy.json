@@ -1,0 +1,44 @@
+{
+  "uk": {
+    "subject": "Нові рецепти Bake Again",
+    "preheader": "Рецепти й практичні матеріали для домашньої випічки.",
+    "eyebrow": "Листи з Bake Again",
+    "title": "Печімо знову",
+    "greeting": "Вітаю!",
+    "body": "Тут ділитимемося новими рецептами та практичними матеріалами для домашньої випічки.",
+    "note": "А поки можна вибрати, що спекти наступного разу, серед рецептів на сайті.",
+    "action": "До рецептів",
+    "signature": "До зустрічі на кухні,",
+    "subscriptionNote": "Ви отримуєте цей лист, бо підтвердили підписку на новини Bake Again українською.",
+    "privacy": "Приватність",
+    "unsubscribe": "Відписатися"
+  },
+  "es": {
+    "subject": "Nuevas recetas de Bake Again",
+    "preheader": "Recetas y recursos prácticos para hornear en casa.",
+    "eyebrow": "Cartas de Bake Again",
+    "title": "Volvamos a hornear",
+    "greeting": "¡Hola!",
+    "body": "Aquí compartiremos nuevas recetas y recursos prácticos para hornear en casa.",
+    "note": "Mientras tanto, puedes elegir qué preparar la próxima vez entre las recetas de la web.",
+    "action": "Ver las recetas",
+    "signature": "Nos vemos en la cocina,",
+    "subscriptionNote": "Recibes este email porque confirmaste tu suscripción a las novedades de Bake Again en español.",
+    "privacy": "Privacidad",
+    "unsubscribe": "Cancelar la suscripción"
+  },
+  "en": {
+    "subject": "New recipes from Bake Again",
+    "preheader": "Recipes and practical resources for baking at home.",
+    "eyebrow": "Letters from Bake Again",
+    "title": "Let’s bake again",
+    "greeting": "Hello!",
+    "body": "Here we’ll share new recipes and practical resources for baking at home.",
+    "note": "In the meantime, you can choose what to bake next from the recipes on the website.",
+    "action": "Explore the recipes",
+    "signature": "See you in the kitchen,",
+    "subscriptionNote": "You received this email because you confirmed your subscription to Bake Again news in English.",
+    "privacy": "Privacy",
+    "unsubscribe": "Unsubscribe"
+  }
+}

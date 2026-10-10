@@ -376,14 +376,14 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       completeTitle: 'Cooking complete.',
       privateNote: 'Private note',
       privateNoteDescription:
-        'Optional. Changes are saved automatically in this browser.',
+        'Optional. Only you can see this note. Saving requires an account.',
       privateNotePlaceholder: 'What would you remember or change next time?',
       noteSaving: 'Saving…',
-      noteSaved: 'Saved automatically in this browser.',
+      noteSaved: 'Saved to your account.',
       noteSaveFailed:
-        'This note could not be saved in this browser. Please try again.',
+        'Could not save this note. Check your connection.',
       completionNextSteps:
-        'You can return to the recipe or cook again — your note is already saved.',
+        'You can return to the recipe or start another bake.',
       previousNote: 'From your last bake',
       previousNoteDescription: 'Keep this in mind as you cook.',
       returnToRecipe: 'Return to recipe',
@@ -510,7 +510,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       bakedTitle: 'You made this recipe',
       bakedOn: (date) => `Last made ${date}`,
       bakedAdjusted: 'Made with an adjusted, untested configuration.',
-      bakedStoredInBrowser: 'Private to this browser.',
+      bakedStoredInBrowser: 'Private note in your account.',
       privateNote: 'Your private note',
       shoppingTitle: 'Shopping list',
       shoppingEyebrow: 'Your baking plan',
@@ -518,7 +518,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       shoppingEmptyBody:
         'Add products from a recipe when you are ready to plan a bake.',
       storedInBrowser:
-        'Saved in this browser. The list stays here until you clear it.',
+        'Your shopping list is saved to your account.',
       addIngredients: 'To shopping list…',
       addAll: 'To shopping list…',
       reviewIngredients: 'What do you need to buy?',
@@ -540,7 +540,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       alreadyInShoppingList: 'Already in the shopping list',
       selectAtLeastOne: 'Select at least one ingredient.',
       shoppingSaveFailed:
-        'The shopping list could not be saved in this browser. Please try again.',
+        'Could not save the shopping list. Check your connection.',
       chooseOptionBeforeAdding:
         'Choose an option for every selected “Choose one” ingredient.',
       removeItem: 'Remove item',
@@ -684,14 +684,14 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       completeTitle: 'La receta está lista.',
       privateNote: 'Nota privada',
       privateNoteDescription:
-        'Opcional. Los cambios se guardan automáticamente en este navegador.',
+        'Opcional. Solo tú puedes ver esta nota. Para guardarla necesitas una cuenta.',
       privateNotePlaceholder: '¿Qué quieres recordar o cambiar la próxima vez?',
       noteSaving: 'Guardando…',
-      noteSaved: 'Guardada automáticamente en este navegador.',
+      noteSaved: 'Guardada en tu cuenta.',
       noteSaveFailed:
-        'No se ha podido guardar esta nota en el navegador. Inténtalo de nuevo.',
+        'No se pudo guardar la nota. Revisa la conexión.',
       completionNextSteps:
-        'Puedes volver a la receta o prepararla de nuevo: tu nota ya está guardada.',
+        'Puedes volver a la receta o empezar de nuevo.',
       previousNote: 'De la última vez',
       previousNoteDescription: 'Tenlo en cuenta mientras preparas la receta.',
       returnToRecipe: 'Volver a la receta',
@@ -821,7 +821,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       bakedTitle: 'Ya preparaste esta receta',
       bakedOn: (date) => `Última preparación: ${date}`,
       bakedAdjusted: 'Preparada con una configuración ajustada sin probar.',
-      bakedStoredInBrowser: 'Privado en este navegador.',
+      bakedStoredInBrowser: 'Nota privada en tu cuenta.',
       privateNote: 'Tu nota privada',
       shoppingTitle: 'Lista de compra',
       shoppingEyebrow: 'Tu plan de repostería',
@@ -829,7 +829,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       shoppingEmptyBody:
         'Añade productos desde una receta cuando quieras planificar lo que vas a hornear.',
       storedInBrowser:
-        'Guardada en este navegador. La lista permanece hasta que la vacíes.',
+        'La lista de compra se guarda en tu cuenta.',
       addIngredients: 'A la lista de compra…',
       addAll: 'A la lista de compra…',
       reviewIngredients: '¿Qué necesitas comprar?',
@@ -851,7 +851,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       alreadyInShoppingList: 'Ya está en la lista de compra',
       selectAtLeastOne: 'Selecciona al menos un ingrediente.',
       shoppingSaveFailed:
-        'No se ha podido guardar la lista de compra en este navegador. Inténtalo de nuevo.',
+        'No se pudo guardar la lista de compra. Revisa la conexión.',
       chooseOptionBeforeAdding:
         'Elige una opción para cada ingrediente seleccionado de “Elige una opción”.',
       removeItem: 'Eliminar artículo',
@@ -1007,14 +1007,14 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       completeTitle: 'Приготування завершено.',
       privateNote: 'Приватна нотатка',
       privateNoteDescription:
-        'Необов’язково. Зміни автоматично зберігаються в цьому браузері.',
+        'Необов’язково. Цю нотатку бачите лише ви. Для збереження потрібен акаунт.',
       privateNotePlaceholder: 'Що запам’ятати або змінити наступного разу?',
       noteSaving: 'Зберігаємо…',
-      noteSaved: 'Автоматично збережено в цьому браузері.',
+      noteSaved: 'Збережено в акаунті.',
       noteSaveFailed:
-        'Не вдалося зберегти нотатку в цьому браузері. Спробуйте ще раз.',
+        'Не вдалося зберегти нотатку. Перевірте з’єднання.',
       completionNextSteps:
-        'Можна повернутися до рецепта або почати знову — нотатку вже збережено.',
+        'Можна повернутися до рецепта або почати знову.',
       previousNote: 'З минулого приготування',
       previousNoteDescription: 'Зверніть на це увагу під час приготування.',
       returnToRecipe: 'Повернутися до рецепта',
@@ -1143,7 +1143,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       bakedTitle: 'Ви вже готували цей рецепт',
       bakedOn: (date) => `Востаннє готували ${date}`,
       bakedAdjusted: 'Готували зі зміненою неперевіреною конфігурацією.',
-      bakedStoredInBrowser: 'Приватно й лише в цьому браузері.',
+      bakedStoredInBrowser: 'Приватна нотатка у вашому акаунті.',
       privateNote: 'Ваша приватна нотатка',
       shoppingTitle: 'Список покупок',
       shoppingEyebrow: 'Ваш план випічки',
@@ -1151,7 +1151,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       shoppingEmptyBody:
         'Додайте продукти з рецепта, коли будете планувати випічку.',
       storedInBrowser:
-        'Збережено в цьому браузері. Список залишається, доки ви його не очистите.',
+        'Список покупок зберігається у вашому акаунті.',
       addIngredients: 'До списку покупок…',
       addAll: 'До списку покупок…',
       reviewIngredients: 'Що потрібно купити?',
@@ -1182,7 +1182,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       alreadyInShoppingList: 'Уже є у списку покупок',
       selectAtLeastOne: 'Оберіть хоча б один інгредієнт.',
       shoppingSaveFailed:
-        'Не вдалося зберегти список покупок у цьому браузері. Спробуйте ще раз.',
+        'Не вдалося зберегти список покупок. Перевірте з’єднання.',
       chooseOptionBeforeAdding:
         'Оберіть варіант для кожного обраного інгредієнта «Оберіть один варіант».',
       removeItem: 'Видалити позицію',
