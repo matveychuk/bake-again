@@ -42,6 +42,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   return (
     <>
       <div
+        className="site-app-shell"
         key={`${state.viewEpoch}:${booted}`}
         aria-busy={!state.ready}
         inert={!state.ready || undefined}

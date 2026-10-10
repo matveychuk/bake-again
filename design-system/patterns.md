@@ -42,6 +42,10 @@ to the same lists. Design Lab shows the first six published cards in uk/es/en.
 
 ## Home newsletter invitation
 
+The shared page shell fills the viewport. On short pages, SiteFooter follows the
+available space at the bottom; on long pages, it follows the content in normal
+document flow. It never overlays page content.
+
 After the recipe evidence section, use one compact invitation with a single primary
 email action, followed by SiteFooter. Use this same ending after recipe content and
 recent recipes. Social profiles belong to the footer only within this closing area;

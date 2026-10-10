@@ -463,7 +463,8 @@ export default function DesignSystemPage() {
                   English and Spanish omit social links; the email invitation
                   is localized.
                   Shopping list keeps an accessible icon on desktop and its full
-                  name in the mobile menu.
+                  name in the mobile menu. The short-page preview keeps its
+                  footer at the bottom of the page without overlaying content.
                 </span>
               </div>
               {(['uk', 'es', 'en'] as const).map((locale) => (

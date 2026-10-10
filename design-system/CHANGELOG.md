@@ -1,5 +1,12 @@
 # Design system changelog
 
+## 2026-10-10 · Short-page footer placement
+
+- The shared account-aware page shell now fills the viewport and places SiteFooter
+  at the bottom on short pages, including an empty shopping list. Long pages keep
+  the footer after their content in normal document flow.
+- Updated the Design Lab navigation preview and page-shell guidance.
+
 ## 2026-10-10 · Account email rate-limit feedback
 
 - Observed a successful signup followed by a repeated request within 60 seconds.
