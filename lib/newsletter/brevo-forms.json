@@ -497,5 +497,20 @@
       "providerDeclarationIllustration": true
     }
   ],
-  "languageAttributeRole": "legacy-tested-contact-only; use form-specific audience lists for new signup routing"
+  "languageAttributeRole": "legacy-tested-contact-only; use form-specific audience lists for new signup routing",
+  "sendingDomainAuthentication": {
+    "domain": "bakeagain.com",
+    "status": "authenticated-in-brevo",
+    "verifiedAt": "2026-10-11",
+    "records": [
+      "TXT @ brevo-code",
+      "CNAME brevo1._domainkey",
+      "CNAME brevo2._domainkey",
+      "TXT _dmarc"
+    ],
+    "providerResult": "Your domain has been authenticated.",
+    "senderUnchanged": true,
+    "senderDomainNote": "Current approved sender is Gmail; authentication of bakeagain.com does not authenticate gmail.com.",
+    "evidence": "output/activation/brevo-domain-authenticated.png"
+  }
 }
