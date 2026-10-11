@@ -1,4 +1,12 @@
-# Website media
+# Bake Again media
+
+Recipe originals and working assets live under `media/recipes/<id>/`; social
+packages live under `media/instagram/IG-XXX/` and are linked from post records.
+Recipe PDF working masters belong to the recipe, with optimized delivery copies
+in `output/pdf/`. See [the storage map](../docs/media-storage.uk.md) for current
+locations, the crepes v5 index and cleanup rules.
+
+## Website media
 
 Keep only website source assets under `media/web-source/`, mirroring their public
 paths. Reference the generated `.webp` URL from product code. For example:

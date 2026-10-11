@@ -1,0 +1,20 @@
+{
+  "$schema": "./recipe.schema.json",
+  "title": "",
+  "locale": "uk",
+  "canonicalSource": "",
+  "recipeUrl": "",
+  "measurementMode": "",
+  "cover": {
+    "primaryTitle": "Безглютенові",
+    "accentTitle": "",
+    "facts": "",
+    "glutenFree": true,
+    "hero": {"image":"","alt":"","crop":[0,0,1,1]},
+    "flour": null
+  },
+  "ingredients": [{"name":"","quantity":"","section":""}],
+  "steps": [{"id":"","title":"","ingredients":"","body":"","time":null,"tip":null,"checkpoint":null,"image":"","crop":[0,0,1,1],"alt":""}],
+  "sourceCorrections": [],
+  "contentChecks": {"quantitiesAndStepsChecked":false,"timingsChecked":false,"adaptationStatusChecked":false}
+}

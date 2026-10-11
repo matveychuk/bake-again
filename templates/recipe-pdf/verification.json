@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-11",
+  "packageVersion": "1.0",
+  "scope": "Reusable Ukrainian mobile recipe PDF package; internal fixtures are not new customer recipes.",
+  "reference": {
+    "path": "templates/recipe-pdf/reference/crepes-v5.pdf",
+    "bytes": 636288,
+    "sha256": "9dcb063059e17ce6e8a884bd2e1c5e7a21ef770e817925a3bb61865c55926c76",
+    "originalUnchanged": true
+  },
+  "fixtures": [
+    {
+      "fixture": "crepes-7-steps",
+      "pdf": "tmp/pdfs/recipe-template-check/crepes.pdf",
+      "pages": 9,
+      "bytes": 647483,
+      "sha256": "90cc0d3daf5544fa61874ec8d491c7e5f7f4c4e039482486fb9db5783fbf21b1",
+      "allPages390px": "visually reviewed",
+      "sourceAndDeliveryText": "equal",
+      "sourceAndDeliveryRecipeLinks": "equal",
+      "boundsAndOverlap": "passed",
+      "distinctRegularSemiboldBold": "passed"
+    },
+    {
+      "fixture": "pagination-3-steps-18-rows",
+      "pdf": "tmp/pdfs/recipe-template-check/pagination.pdf",
+      "pages": 7,
+      "bytes": 376906,
+      "sha256": "790f1520e4d3106c6513ed849ee968b5d20d73a22673f32cddcde2ea11132527",
+      "allPages390px": "visually reviewed",
+      "sourceAndDeliveryText": "equal",
+      "sourceAndDeliveryRecipeLinks": "equal",
+      "boundsAndOverlap": "passed",
+      "distinctRegularSemiboldBold": "passed"
+    }
+  ],
+  "visualReview": {
+    "390px": "all 16 pages reviewed",
+    "900px": "blender step, full tool and guidance labels reviewed",
+    "1440px": "continued ingredient table and group headings reviewed"
+  },
+  "validation": {
+    "filledExample": "passed",
+    "blankTemplate": "rejected: Заповніть поле title.",
+    "emptyCrop": "rejected: crop має бути [left, top, right, bottom], 0..1, з додатною площею."
+  },
+  "phoneDeliveryTest": {
+    "status": "pending",
+    "note": "No actual delivery or phone opening performed for internal fixtures; a future customer PDF requires its own test."
+  },
+  "existingRecipePdf": "unchanged",
+  "websitePublication": "not performed",
+  "temporaryFixturesRemovedAt": "2026-10-11",
+  "temporaryFixturesNote": "Removed after review at user request; recorded hashes and QA results remain historical evidence."
+}

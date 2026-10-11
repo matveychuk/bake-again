@@ -819,3 +819,9 @@ Signup passes the whitelisted route locale in user metadata; Go branches choose
 fixed ES/EN copy and default to UK. Metadata has no authorization role. The native
 `{{ .ConfirmationURL }}` stays intact. UK/ES/EN checked at 390/900/1440px without
 horizontal overflow; actual new-template email-client delivery remains unverified.
+
+### Payhip hosted commerce adaptation (2026-10-10)
+
+Native provider buttons, inputs and text wordmark reuse semantic tokens through the generated CSS in `media/commerce/payhip-test-2026-10-10/styling/`. No new website component or token is introduced. Its local `index.html` is the matching external-provider Design Lab with UK/ES/EN wrapping examples. Store and checkout skins are published and checked at 390/900/1440px. The legacy download page and payment-field iframes remain provider-owned. See the styling README for regeneration, limitations and field-level rollback.
+
+Payhip customer-library variant extends the same generated adaptation with `account.css`; its example lives in the external-provider Design Lab. It does not propagate to the Beta Content Editor download frame. Receipt branding uses a token-colored Newsreader outlined PNG plus native subject/message settings; no custom email HTML template is available in this settings screen.

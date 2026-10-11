@@ -1,0 +1,26 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Bake Again PDF recipe data",
+  "type":"object",
+  "required":["title","locale","canonicalSource","recipeUrl","measurementMode","cover","ingredients","steps","contentChecks"],
+  "properties": {
+    "title":{"type":"string","minLength":1},
+    "locale":{"const":"uk","description":"Current renderer uses Ukrainian labels and Literata. Other locales require matching labels and glyph verification."},
+    "canonicalSource":{"type":"string","minLength":1},
+    "recipeUrl":{"type":"string","pattern":"^https://"},
+    "measurementMode":{"enum":["author-spoons","grams","mixed"]},
+    "cover":{"type":"object","required":["primaryTitle","accentTitle","facts","hero"],"properties":{
+      "primaryTitle":{"type":"string","minLength":1},"accentTitle":{"type":"string","minLength":1},"facts":{"type":"string","minLength":1},"glutenFree":{"type":"boolean"},
+      "hero":{"$ref":"#/$defs/image"},
+      "flour":{"anyOf":[{"type":"null"},{"type":"object","required":["name","image","alt"],"properties":{"name":{"type":"string","minLength":1},"image":{"type":"string","minLength":1},"alt":{"type":"string","minLength":1}}}]}
+    }},
+    "ingredients":{"type":"array","minItems":1,"items":{"type":"object","required":["name","quantity"],"properties":{"name":{"type":"string","minLength":1},"quantity":{"type":"string","minLength":1},"section":{"type":"string"}}}},
+    "steps":{"type":"array","minItems":1,"items":{"type":"object","required":["id","title","body","image","alt"],"properties":{"id":{"type":"string","minLength":1},"title":{"type":"string","minLength":1},"body":{"type":"string","minLength":1},"ingredients":{"type":"string"},"time":{"type":["string","null"]},"tip":{"type":["string","null"]},"checkpoint":{"type":["string","null"]},"image":{"type":"string","minLength":1},"alt":{"type":"string","minLength":1},"crop":{"$ref":"#/$defs/crop"}}}},
+    "sourceCorrections":{"type":"array","description":"Author corrections and evidence; retained in source data, not consumer PDF."},
+    "contentChecks":{"type":"object","required":["quantitiesAndStepsChecked","timingsChecked","adaptationStatusChecked"],"properties":{"quantitiesAndStepsChecked":{"const":true},"timingsChecked":{"const":true},"adaptationStatusChecked":{"const":true}}}
+  },
+  "$defs": {
+    "crop":{"type":"array","minItems":4,"maxItems":4,"items":{"type":"number","minimum":0,"maximum":1}},
+    "image":{"type":"object","required":["image","alt"],"properties":{"image":{"type":"string","minLength":1},"alt":{"type":"string","minLength":1},"crop":{"$ref":"#/$defs/crop"}}}
+  }
+}

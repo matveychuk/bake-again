@@ -37,6 +37,10 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+/output/
+/tmp/
+__pycache__/
+*.pyc
 
 # Generated web media. Keep source-quality assets in media/web-source and run
 # `npm run media:prepare` (also runs automatically before dev and build).

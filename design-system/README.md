@@ -27,6 +27,8 @@ production CSS.
 - `patterns.md` — product-level composition rules.
 - `status-provenance.md` — evidence states and required language.
 - `accessibility-localisation.md` — inclusive and multilingual requirements.
+- `pdf-recipes.uk.md` — reusable mobile recipe PDF rules, linked data/layout package,
+  typography, image fidelity and delivery verification.
 - `tokens.json` — portable semantic tokens.
 - `tokens.css` — web token implementation.
 - `CHANGELOG.md` — approved system changes.
@@ -39,4 +41,3 @@ production CSS.
 - Precision through structure, copy and provenance.
 - Quality before catalogue volume.
 - Clear uncertainty rather than false confidence.
-

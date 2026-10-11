@@ -24,6 +24,11 @@ Before changing product UI, read `design-system/README.md` and the relevant file
 
 ## Media publishing
 
+- Follow [the media storage map](docs/media-storage.uk.md): recipe sources and PDF
+  masters belong to the recipe; Reel/carousel packages belong to their IG post.
+  Check live dependencies before removing obsolete versions and preserve camera
+  originals, current masters and publication history.
+
 - Keep the source-quality version of every website image under `media/web-source/`,
   mirroring its intended public path. Do not put source PNG/JPEG files in `public/`.
 - Product code must reference the generated `.webp` URL. Use concise descriptive alt
@@ -37,6 +42,28 @@ Before changing product UI, read `design-system/README.md` and the relevant file
   `media/web-source/` when it is ready for the site.
 - Never bypass the media preparation step or copy an entire source/original directory
   into a deployment bundle.
+
+## Downloadable files
+
+- Before creating or editing any recipe PDF, read
+  [the reusable PDF recipe rules](design-system/pdf-recipes.uk.md) and
+  [the recipe PDF package](templates/recipe-pdf/README.uk.md). Use its data structure,
+  prepared fonts and generator where they fit the recipe; extend a documented variant
+  when needed. Keep the 390 × 720 mobile format, website ingredient/guidance patterns,
+  visible cooking tools and clean consumer copy. Quantities, units, timings, yield,
+  flour identity and evidence must come from that recipe and explicit author corrections,
+  never from the crepe example.
+
+- Optimize every file intended for customer download (PDF, image, video or archive)
+  for its delivery channel before uploading or linking it on the website, in a bot
+  or in messages. Use the smallest practical size that preserves readability and
+  useful visual quality; an upload size limit is not a target size.
+- Keep source-quality originals and create a separate optimized delivery copy.
+  For PDFs, compress and resize embedded images while preserving sharp text,
+  recipe content, layout and working links.
+- Record the final file size, inspect the optimized output and test opening it on
+  a phone through the actual delivery link or button. Distinguish HTTP download
+  timings from phone opening and saving; record only confirmed results.
 
 ## Status language
 
@@ -71,6 +98,14 @@ they are not separate statuses.
 - Use [the post record template](docs/instagram/post-template.uk.md) for concrete
   content drafts. Record recipe identity/version, copy, media paths, language, CTA,
   actual destination URL and any known previous related posts before creating more.
+- Deliver finished publication materials through iCloud by default, following
+  [the publication handoff rules](docs/instagram/templates.uk.md#передача-готових-матеріалів-через-icloud).
+  Sasha confirmed the matching Apple Account and working sync on 2026-10-11.
+  Import optimized final slides, video and cover into a regular Mac Photos album
+  named `IG-XXX — Title — vN`; put the caption, numbered alt descriptions and
+  posting instructions in an identically named iCloud Note. Keep the local
+  `for-phone/` package and originals. Record Mac import and phone availability
+  separately; use AirDrop/ZIP only as a fallback. Handoff does not publish or schedule.
 - A draft is not a publication. Record publication only after a verified platform
   result or the user's confirmation, with its permalink when available. Account
   creation, publishing, scheduling and ad spending require authorization in the

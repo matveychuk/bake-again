@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "baseline": "Warm Precision / Review applied",
+  "page": {"widthPt":390,"heightPt":720,"marginToken":"space-6","contentBottomInsetPt":64},
+  "type": {"bodyPt":16,"bodyLeadingPt":24,"stepTitlePt":32,"stepTitleLeadingPt":38,"coverPrimaryPt":40,"coverPrimaryLeadingPt":48,"coverAccentPt":44,"coverAccentLeadingPt":52,"stepIngredientsPt":14,"guidanceBodyPt":14,"guidanceLeadingPt":20,"guidanceLabelPt":12,"guidanceLabelWeight":700},
+  "media": {"stepMaxHeightPt":256.5,"stepMinHeightPt":176,"deliveryMaxWidthPx":800,"deliveryMaxHeightPx":1000,"deliveryJpegQuality":76,"masterMaxDimensionPx":2000,"masterJpegQuality":94},
+  "tokensFile": "design-system/tokens.css",
+  "semanticColors": {"page":"color-background-page","text":"color-text-primary","secondary":"color-text-secondary","accent":"color-action-primary","accentStrong":"color-action-primary-strong","checkpoint":"color-background-panel-subtle","tip":"color-status-suggested-background"},
+  "fonts": {"body":"Manrope-Regular.ttf","bodyStrong":"Manrope-Semibold.ttf","guidanceLabel":"Manrope-LabelBold.ttf","display":"Literata-Semibold.ttf","displayItalic":"Literata-Italic.ttf","brand":"Newsreader-Semibold.ttf"},
+  "reference": "templates/recipe-pdf/reference/crepes-v5.pdf"
+}

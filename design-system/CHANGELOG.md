@@ -1,5 +1,24 @@
 # Design system changelog
 
+## 2026-10-11 · Reusable mobile recipe PDF package
+
+- Saved the approved crepes v5 PDF treatment in `pdf-recipes.uk.md` and linked it
+  from project instructions. Recipe-specific quantities, timings and evidence stay
+  in each recipe's data rather than becoming template defaults.
+- Added `templates/recipe-pdf/` with a data schema, blank input, reference PDF,
+  licensed fonts and layout configuration, plus `scripts/recipe-pdf/build.py`.
+  Reuses existing semantic colours and typefaces; no website UI changed.
+- Verified 7-step and 3-step layouts, a paginated 18-row ingredient table, visible
+  guidance labels and preserved cooking tools. Rendered every page at 390px and
+  inspected detailed layouts at 900/1440px. Text and links survive optimization;
+  actual phone delivery remains pending. Evidence: template `verification.json`.
+
+## 2026-10-10 · Payhip hosted commerce adaptation
+
+- Applied existing semantic tokens to Payhip storefront and digital checkout, including native buttons, fields, text wordmark and focus outlines. No new tokens or website components.
+- Added generated CSS source and a local provider Design Lab with UK/ES/EN long-copy fixtures in `media/commerce/payhip-test-2026-10-10/styling/`.
+- Verified two product pages and checkouts at 390/900/1440px; primary button contrast 5.45:1. Legacy download page unchanged.
+
 ## 2026-10-10 · Short-page footer placement
 
 - The shared account-aware page shell now fills the viewport and places SiteFooter
@@ -1126,3 +1145,9 @@
   focus ring. Existing login survives fresh page loads; no credentials were submitted.
 - Read-only hosted Supabase verification: session lifetime and inactivity timeout are
   both 0 (never), single-session enforcement is off, and access-token expiry is 3600s.
+
+## 2026-10-10 — Payhip receipt and customer library
+
+- Add token-derived `account.css` and a library example to the external-provider Design Lab. Publish the library skin and receipt wordmark/UK subject and body.
+- Configure both trial download pages through Beta Content Editor with UK guidance and optimized delivery files. The final download frame does not inherit library CSS; retain its native controls.
+- Verify both actual downloads by SHA-256 and 390/900/1440 widths. New receipt email-client rendering and new-copy phone opening/saving remain unverified.

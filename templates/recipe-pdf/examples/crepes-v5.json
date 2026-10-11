@@ -1,0 +1,189 @@
+{
+  "title": "Безглютенові млинці",
+  "locale": "uk",
+  "canonicalSource": "content/recipes/crepes.recipe.ts",
+  "recipeUrl": "https://bakeagain.com/uk/recipes/bezghliutenovi-mlyntsi",
+  "ingredients": [
+    {
+      "name": "Яйця",
+      "quantity": "5 шт."
+    },
+    {
+      "name": "Борошно",
+      "quantity": "6 ст. л.<br/>з гіркою"
+    },
+    {
+      "name": "Цукор",
+      "quantity": "1 ст. л."
+    },
+    {
+      "name": "Сіль",
+      "quantity": "Дрібка"
+    },
+    {
+      "name": "Молоко",
+      "quantity": "500 мл"
+    },
+    {
+      "name": "Гаряча вода",
+      "quantity": "50 мл<br/>≈ 3 ст. л."
+    },
+    {
+      "name": "Олія без запаху",
+      "quantity": "5 ст. л."
+    }
+  ],
+  "steps": [
+    {
+      "id": "start-batter",
+      "title": "Збийте густу основу",
+      "ingredients": "5 яєць · 6 ст. л. борошна з гіркою<br/>1 ст. л. цукру · дрібка солі",
+      "tip": "Влийте трохи молока із 500 мл, щоб блендер міг працювати.",
+      "body": "З’єднайте яйця, борошно, цукор і сіль. Збийте до гладкої густої маси.",
+      "checkpoint": "Густа гладка основа без грудочок.",
+      "image": "../../../media/recipes/crepes/working/pdf-final-v5/source-images/batter-blender.png",
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "alt": "Нога занурювального блендера збиває густу жовту основу в білій мисці на світлому мармурі"
+    },
+    {
+      "id": "add-milk",
+      "title": "Вмішайте молоко",
+      "ingredients": "Решта молока із загальних 500 мл",
+      "body": "Поступово вмішайте решту молока. Залиште тісто відпочити.",
+      "time": "15-20 хв відпочинку",
+      "checkpoint": "Тісто рідке й однорідне, без грудочок.",
+      "image": "../../../media/recipes/crepes/working/pdf-final-v5/source-images/milk.png",
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "alt": "Молоко наливають у миску з тістом і перемішують ложкою"
+    },
+    {
+      "id": "add-water",
+      "title": "Додайте воду",
+      "ingredients": "50 мл гарячої води · ≈ 3 ст. л.",
+      "body": "Після відпочинку вмішайте гарячу воду в тісто.",
+      "checkpoint": "Вода рівномірно змішана з тістом.",
+      "image": "../../../media/recipes/crepes/working/pdf-final-v5/source-images/water.png",
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "alt": "Прозору воду зі склянки наливають у столову ложку над тістом"
+    },
+    {
+      "id": "add-oil",
+      "title": "Додайте олію",
+      "ingredients": "5 ст. л. олії без запаху",
+      "body": "Після води додайте олію й ретельно перемішайте тісто.",
+      "checkpoint": "Олія змішана рівномірно, без жирного шару на поверхні.",
+      "image": "../../../media/recipes/crepes/working/pdf-final-v5/source-images/oil.png",
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "alt": "Олію з пляшки наливають у столову ложку над мискою з тістом"
+    },
+    {
+      "id": "pour-batter",
+      "title": "Розподіліть тісто",
+      "ingredients": "Готове тісто",
+      "tip": "Змастіть пательню олією перед першим млинцем.",
+      "body": "Налийте тісто на розігріту пательню й розподіліть його, нахиляючи її.",
+      "checkpoint": "Тісто вкриває пательню тонким шаром.",
+      "image": "../../../media/recipes/crepes/working/pdf-final-v5/source-images/pour-real-hob.png",
+      "crop": [
+        0,
+        0.17,
+        1,
+        0.72
+      ],
+      "alt": "Тісто з ополоника наливають у пательню на справжній білій плиті"
+    },
+    {
+      "id": "check-edge",
+      "title": "Перевірте край",
+      "ingredients": "Млинець на пательні",
+      "body": "Дочекайтеся, коли поверхня стане матовою, а краї злегка підсмажаться.",
+      "checkpoint": "Краї легко відділяються від пательні; можна перевертати.",
+      "image": "../../../media/recipes/crepes/working/pdf-final-v5/source-images/edge-real-hob.png",
+      "crop": [
+        0,
+        0.17,
+        1,
+        0.75
+      ],
+      "alt": "Дерев’яна лопатка піддіває підсмажений край млинця з дрібними отворами"
+    },
+    {
+      "id": "flip-crepe",
+      "title": "Переверніть млинець",
+      "ingredients": "Млинець із вільним краєм",
+      "body": "Підсуньте лопатку під край млинця й переверніть його. Або переверніть руками, якщо зручно. Досмажте другий бік приблизно 10 секунд. Так само приготуйте решту тіста.",
+      "checkpoint": "Другий бік злегка золотистий.",
+      "image": "../../../media/recipes/crepes/working/pdf-final-v5/source-images/golden-real-hob.png",
+      "crop": [
+        0.03,
+        0.17,
+        1,
+        0.75
+      ],
+      "alt": "Золотистий бік тонкого млинця після перевертання на пательні",
+      "time": "≈ 10 с · другий бік"
+    }
+  ],
+  "cover": {
+    "primaryTitle": "Безглютенові",
+    "accentTitle": "млинці",
+    "facts": "15 млинців · пательня 24 см",
+    "glutenFree": true,
+    "hero": {
+      "image": "../../../media/recipes/crepes/working/pdf-final-v5/source-images/hero.png",
+      "alt": "Тонкі млинці на білій тарілці з чайником, чашками й квітами",
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "flour": {
+      "name": "Schär Mix B Bread",
+      "image": "../../../media/recipes/crepes/working/pdf-final-v5/source-images/schar-pack.webp",
+      "alt": "Пачка Schär Mix B Bread"
+    }
+  },
+  "measurementMode": "author-spoons",
+  "sourceCorrections": [
+    {
+      "flourTbspHeaped": 6,
+      "eggs": 5,
+      "oilTbsp": 5,
+      "oilWeighed": false,
+      "waterMl": 50,
+      "waterTbspApprox": 3,
+      "yield": 15,
+      "panCm": 24,
+      "sourceFileChanged": false,
+      "testedStatusInherited": false,
+      "secondSideSecondsApprox": 10
+    }
+  ],
+  "contentChecks": {
+    "quantitiesAndStepsChecked": true,
+    "timingsChecked": true,
+    "adaptationStatusChecked": true
+  }
+}
