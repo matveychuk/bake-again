@@ -1,6 +1,7 @@
 'use client';
 import {
   useEffect,
+  useId,
   useRef,
   useState,
   type SubmitEvent as ReactSubmitEvent,
@@ -20,7 +21,12 @@ import type {
 } from '@/lib/personal/contracts';
 import { Button } from '@/components/ui/button';
 import { useAccount } from './account-provider';
-import { authClient, signOut } from '@/lib/personal/browser';
+import {
+  authClient,
+  signOut,
+  completePasswordRecovery,
+  clearAuthLinkError,
+} from '@/lib/personal/browser';
 import { accountCopy } from './copy';
 import styles from './account.module.css';
 type RecipeOption = { id: string; title: string };
@@ -33,6 +39,7 @@ export function AccountFields({
   contextual = false,
   onModeChange,
   emailRequest = null,
+  initialMode = 'login',
   onEmailRequestClear,
 }: {
   locale: AppLocale;
@@ -41,11 +48,12 @@ export function AccountFields({
   contextual?: boolean;
   onModeChange?: () => void;
   emailRequest?: EmailRequest | null;
+  initialMode?: 'login' | 'signup' | 'reset';
   onEmailRequestClear?: () => void;
   onSubmit: (event: ReactSubmitEvent<HTMLFormElement>) => void;
 }) {
   const c = accountCopy[locale];
-  const [mode, setMode] = useState<'login' | 'signup' | 'reset'>('login');
+  const [mode, setMode] = useState<'login' | 'signup' | 'reset'>(initialMode);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const Heading = `h${headingLevel}` as const;
@@ -358,44 +366,159 @@ export function AccountHeading({
   );
 }
 
-export function AccountSettings({
+export function PasswordFields({
   locale,
   busy = false,
-  recovery = false,
   onPassword,
 }: {
   locale: AppLocale;
   busy?: boolean;
-  recovery?: boolean;
+  onPassword: (event: ReactSubmitEvent<HTMLFormElement>) => void;
+}) {
+  const c = accountCopy[locale];
+  const [showPassword, setShowPassword] = useState(false);
+  const helpId = useId();
+  return (
+    <form
+      className={styles.form}
+      onSubmit={(event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const password = form.elements.namedItem(
+          'new-password',
+        ) as HTMLInputElement;
+        const repeat = form.elements.namedItem(
+          'repeat-password',
+        ) as HTMLInputElement;
+        repeat.setCustomValidity(
+          password.value === repeat.value ? '' : c.passwordMismatch,
+        );
+        if (form.reportValidity()) onPassword(event);
+      }}
+    >
+      <label className={styles.field}>
+        {c.newPasswordLabel}
+        <input
+          name="new-password"
+          type={showPassword ? 'text' : 'password'}
+          autoComplete="new-password"
+          minLength={8}
+          maxLength={128}
+          required
+          aria-describedby={helpId}
+          onChange={(event) => {
+            const repeat = event.currentTarget.form?.elements.namedItem(
+              'repeat-password',
+            ) as HTMLInputElement | null;
+            repeat?.setCustomValidity('');
+          }}
+        />
+      </label>
+      <p id={helpId} className={styles.finePrint}>
+        {c.passwordHelp}
+      </p>
+      <label className={styles.field}>
+        {c.repeatPassword}
+        <input
+          name="repeat-password"
+          type={showPassword ? 'text' : 'password'}
+          autoComplete="new-password"
+          minLength={8}
+          maxLength={128}
+          required
+          onChange={(event) => event.currentTarget.setCustomValidity('')}
+        />
+      </label>
+      <label className={styles.check}>
+        <input
+          type="checkbox"
+          checked={showPassword}
+          onChange={(event) => setShowPassword(event.target.checked)}
+        />
+        {c.showPassword}
+      </label>
+      <Button type="submit" disabled={busy}>
+        {busy ? c.saving : c.newPassword}
+      </Button>
+    </form>
+  );
+}
+
+export function AccountSettings({
+  locale,
+  busy = false,
+  onPassword,
+}: {
+  locale: AppLocale;
+  busy?: boolean;
   onPassword: (event: ReactSubmitEvent<HTMLFormElement>) => void;
 }) {
   const c = accountCopy[locale];
   return (
     <section className={styles.settingsSection}>
       <h2>{c.security}</h2>
-      <details open={recovery || undefined} className={styles.disclosure}>
+      <details className={styles.disclosure}>
         <summary>
           {c.changePassword}
           <ChevronDown aria-hidden="true" size={20} />
         </summary>
-        <form className={styles.form} onSubmit={onPassword}>
-          <label className={styles.field}>
-            {c.password}
-            <input
-              name="new-password"
-              type="password"
-              autoComplete="new-password"
-              minLength={8}
-              maxLength={128}
-              required
-            />
-          </label>
-          <Button type="submit" disabled={busy}>
-            {c.newPassword}
-          </Button>
-        </form>
+        <PasswordFields locale={locale} busy={busy} onPassword={onPassword} />
       </details>
     </section>
+  );
+}
+
+export function AccountRecovery({
+  locale,
+  email,
+  busy = false,
+  saved = false,
+  message = '',
+  headingLevel = 1,
+  focusOnMount = true,
+  onPassword,
+  onContinue,
+}: {
+  locale: AppLocale;
+  email: string | null;
+  busy?: boolean;
+  saved?: boolean;
+  message?: string;
+  headingLevel?: 1 | 2;
+  focusOnMount?: boolean;
+  onPassword: (event: ReactSubmitEvent<HTMLFormElement>) => void;
+  onContinue: () => void;
+}) {
+  const c = accountCopy[locale];
+  const Heading = `h${headingLevel}` as const;
+  const heading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    if (focusOnMount) heading.current?.focus();
+  }, [saved, focusOnMount]);
+  return (
+    <div className={styles.form}>
+      <div className={styles.intro}>
+        <Heading
+          ref={heading}
+          id={headingLevel === 1 ? 'account-title' : undefined}
+          tabIndex={-1}
+        >
+          {saved ? c.passwordChanged : c.setPassword}
+        </Heading>
+        <p>{saved ? c.passwordSavedBody : c.recoveryIntro}</p>
+      </div>
+      <AccountIdentity locale={locale} email={email} />
+      {message && (
+        <p role="alert" className={styles.notice}>
+          {message}
+        </p>
+      )}
+      {saved ? (
+        <Button onClick={onContinue}>{c.goToAccount}</Button>
+      ) : (
+        <PasswordFields locale={locale} busy={busy} onPassword={onPassword} />
+      )}
+    </div>
   );
 }
 
@@ -414,6 +537,7 @@ export function AccountPage({
     [message, setMessage] = useState('');
   const [emailRequest, setEmailRequest] = useState<EmailRequest | null>(null);
   const running = useRef(false);
+  const [recoverySaved, setRecoverySaved] = useState(false);
   const engine = state.engine;
   async function run(fn: () => Promise<unknown> | void) {
     if (running.current) return;
@@ -429,6 +553,34 @@ export function AccountPage({
       setBusy(false);
     }
   }
+  if ((state.recovery || recoverySaved) && state.ready && state.identity)
+    return (
+      <section
+        className={`${styles.page} ${styles.accountPage} ${styles.authPage}`}
+        aria-labelledby="account-title"
+      >
+        <AccountRecovery
+          locale={locale}
+          email={state.email}
+          busy={busy}
+          saved={recoverySaved}
+          message={message}
+          onContinue={() => setRecoverySaved(false)}
+          onPassword={(event) => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            void run(async () => {
+              const { error } = await authClient().auth.updateUser({
+                password: String(data.get('new-password')),
+              });
+              if (error) throw error;
+              setRecoverySaved(true);
+              completePasswordRecovery();
+            });
+          }}
+        />
+      </section>
+    );
   return (
     <section
       className={`${styles.page} ${styles.accountPage} ${!engine && !state.identity ? styles.authPage : ''}`}
@@ -451,7 +603,14 @@ export function AccountPage({
         )}
       {engine && !embedded && <AccountDestinations locale={locale} />}
       <output aria-live="polite">
-        {message || (!state.ready ? c.loading : state.error ? c.error : '')}
+        {message ||
+          (!state.ready
+            ? c.loading
+            : state.error === 'INVALID_AUTH_LINK'
+              ? c.invalidAuthLink
+              : state.error
+                ? c.error
+                : '')}
       </output>
       {!engine && state.ready && !state.identity && (
         <>
@@ -461,9 +620,15 @@ export function AccountPage({
             <AccountFields
               locale={locale}
               busy={busy}
+              initialMode={
+                state.error === 'INVALID_AUTH_LINK' ? 'reset' : 'login'
+              }
               headingLevel={embedded ? 2 : 1}
               contextual={embedded}
-              onModeChange={() => setMessage('')}
+              onModeChange={() => {
+                setMessage('');
+                clearAuthLinkError();
+              }}
               emailRequest={emailRequest}
               onEmailRequestClear={() => setEmailRequest(null)}
               onSubmit={(event) => {
@@ -503,6 +668,7 @@ export function AccountPage({
                     throw result.error;
                   }
                   if (action === 'signup' || action === 'reset') {
+                    clearAuthLinkError();
                     setEmailRequest({ kind: action, email });
                   }
                 });
@@ -560,19 +726,20 @@ export function AccountPage({
           ))}
         </>
       )}
-      {(engine || state.recovery) && (
+      {engine && (
         <AccountSettings
           locale={locale}
           busy={busy}
-          recovery={state.recovery}
           onPassword={(event) => {
             event.preventDefault();
-            const data = new FormData(event.currentTarget);
+            const form = event.currentTarget;
+            const data = new FormData(form);
             void run(async () => {
               const { error } = await authClient().auth.updateUser({
                 password: data.get('new-password') as string,
               });
               if (error) throw error;
+              form.reset();
               setMessage(c.passwordChanged);
             });
           }}

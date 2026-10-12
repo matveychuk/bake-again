@@ -1,5 +1,18 @@
 export const accountCopy = {
   uk: {
+    setPassword: 'Встановіть новий пароль',
+    newPasswordLabel: 'Новий пароль',
+    repeatPassword: 'Повторіть новий пароль',
+    passwordHelp: 'Щонайменше 8 символів.',
+    passwordMismatch: 'Паролі не збігаються. Повторіть новий пароль.',
+    recoveryIntro:
+      'Пошта вже підтверджена посиланням. Встановіть новий пароль для цього акаунта.',
+    passwordSavedBody:
+      'Новий пароль збережено. Використовуйте його для наступного входу.',
+    goToAccount: 'Перейти до акаунта',
+    invalidAuthLink:
+      'Посилання недійсне або його термін дії минув. Запитайте новий лист і відкрийте найновіше посилання.',
+
     passwordChanged: 'Пароль змінено.',
     showPassword: 'Показати пароль',
     changePassword: 'Змінити пароль',
@@ -40,7 +53,7 @@ export const accountCopy = {
     resetSent:
       'Якщо для цієї адреси доступне відновлення, ви отримаєте лист. Перейдіть за посиланням у ньому й задайте новий пароль.',
     emailHelp:
-      'Лист може надійти за кілька хвилин. Перевірте також спам і відкрийте посилання в цьому браузері.',
+      'Лист може надійти за кілька хвилин. Перевірте також спам і відкрийте посилання з найновішого листа.',
     backToLogin: 'Повернутися до входу',
     changeEmail: 'Вказати іншу пошту',
     sent: 'Якщо запит можна виконати, на вашу адресу прийде лист. Відкрийте його в цьому браузері.',
@@ -83,6 +96,19 @@ export const accountCopy = {
     draft: 'Завантажити ненадіслану чернетку',
   },
   en: {
+    setPassword: 'Set your new password',
+    newPasswordLabel: 'New password',
+    repeatPassword: 'Repeat new password',
+    passwordHelp: 'At least 8 characters.',
+    passwordMismatch: 'The passwords do not match. Repeat your new password.',
+    recoveryIntro:
+      'The email link has verified your address. Set a new password for this account.',
+    passwordSavedBody:
+      'Your new password has been saved. Use it the next time you sign in.',
+    goToAccount: 'Go to my account',
+    invalidAuthLink:
+      'This link is invalid or has expired. Request a new email and open the most recent link.',
+
     passwordChanged: 'Password changed.',
     showPassword: 'Show password',
     changePassword: 'Change password',
@@ -122,7 +148,7 @@ export const accountCopy = {
     resetSent:
       'If password recovery is available for this address, you will receive an email. Follow its link to choose a new password.',
     emailHelp:
-      'The email may take a few minutes. Check your spam folder too, and open the link in this browser.',
+      'The email may take a few minutes. Check your spam folder too, and open the link in the most recent email.',
     backToLogin: 'Back to sign in',
     changeEmail: 'Use another email',
     sent: 'If the request can be completed, you will receive an email. Open it in this browser.',
@@ -166,6 +192,20 @@ export const accountCopy = {
     draft: 'Download unsent draft',
   },
   es: {
+    setPassword: 'Establece una nueva contraseña',
+    newPasswordLabel: 'Nueva contraseña',
+    repeatPassword: 'Repite la nueva contraseña',
+    passwordHelp: 'Al menos 8 caracteres.',
+    passwordMismatch:
+      'Las contraseñas no coinciden. Repite la nueva contraseña.',
+    recoveryIntro:
+      'El enlace ha verificado tu correo. Establece una nueva contraseña para esta cuenta.',
+    passwordSavedBody:
+      'Tu nueva contraseña se ha guardado. Úsala la próxima vez que entres.',
+    goToAccount: 'Ir a mi cuenta',
+    invalidAuthLink:
+      'Este enlace no es válido o ha caducado. Solicita otro correo y abre el enlace más reciente.',
+
     passwordChanged: 'Contraseña actualizada.',
     showPassword: 'Mostrar contraseña',
     changePassword: 'Cambiar contraseña',
@@ -206,7 +246,7 @@ export const accountCopy = {
     resetSent:
       'Si esta dirección permite recuperar la contraseña, recibirás un correo. Sigue el enlace para elegir una nueva contraseña.',
     emailHelp:
-      'El correo puede tardar unos minutos. Revisa también spam y abre el enlace en este navegador.',
+      'El correo puede tardar unos minutos. Revisa también spam y abre el enlace del correo más reciente.',
     backToLogin: 'Volver al acceso',
     changeEmail: 'Usar otro correo',
     sent: 'Si se puede completar la solicitud, recibirás un correo. Ábrelo en este navegador.',

@@ -39,12 +39,18 @@ const previewLinks = [];
 const authCopy = JSON.parse(await readFile(new URL('../lib/personal/auth-email-copy.json', import.meta.url), 'utf8'));
 const authOutput = new URL('../lib/personal/email-templates/', import.meta.url);
 await mkdir(authOutput, { recursive: true });
-const authTemplates = {};
+const recoveryCopy = JSON.parse(await readFile(new URL('../lib/personal/recovery-email-copy.json', import.meta.url), 'utf8'));
+const authTemplates = { confirmation: {}, recovery: {} };
 // Auth is a variant of the same email composition, without marketing consent or unsubscribe.
-for (const [locale, copy, isAuth] of [
-  ...Object.entries(newsletterCopy).map(([locale, copy]) => [locale, copy, false]),
-  ...Object.entries(authCopy).map(([locale, copy]) => [locale, copy, true]),
+for (const [locale, copy, authKind] of [
+  ...Object.entries(newsletterCopy).map(([locale, copy]) => [locale, copy, null]),
+  ...Object.entries(authCopy).map(([locale, copy]) => [locale, copy, 'confirmation']),
+  ...Object.entries(recoveryCopy).map(([locale, copy]) => [locale, copy, 'recovery']),
 ]) {
+  const isAuth = Boolean(authKind);
+  // Fragment keeps the one-use token out of HTTP logs/referrers. The account
+  // client consumes it with verifyOtp; no originating browser verifier is needed.
+  const authLink = `{{ .RedirectTo }}#token_hash={{ .TokenHash }}&amp;type=${authKind === 'recovery' ? 'recovery' : 'email'}`;
   const displayFont = emailFont(locale === 'uk' ? 'font-family-display-cyrillic' : 'font-family-display');
   const home = `https://bakeagain.com/${locale}`;
   const bodyText = `margin:0 0 ${pixels('space-6')};font-family:${emailFont('font-family-body')};font-size:${pixels('font-size-body')};line-height:${token('line-height-body')};color:${token('color-text-primary')};`;
@@ -64,7 +70,7 @@ for (const [locale, copy, isAuth] of [
 <p style="${bodyText}">${escape(copy.greeting)}</p>
 <p style="${bodyText}">${escape(copy.body)}</p>
 <p style="${bodyText}">${escape(copy.note)}</p>
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 ${pixels('space-8')};"><tr><td bgcolor="${token('color-action-primary')}" style="background-color:${token('color-action-primary')};border-radius:${pixels('radius-control')};"><a href="${isAuth ? '{{ .ConfirmationURL }}' : `${home}#recipes`}" style="display:inline-block;padding:${pixels('space-3')} ${pixels('space-6')};border:1px solid ${token('color-action-primary')};border-radius:${pixels('radius-control')};font-family:${emailFont('font-family-body')};font-size:${pixels('font-size-body')};line-height:${token('line-height-body')};font-weight:bold;text-decoration:none;color:${token('color-text-on-accent')};">${escape(copy.action)}</a></td></tr></table>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 ${pixels('space-8')};"><tr><td bgcolor="${token('color-action-primary')}" style="background-color:${token('color-action-primary')};border-radius:${pixels('radius-control')};"><a href="${isAuth ? authLink : `${home}#recipes`}" style="display:inline-block;padding:${pixels('space-3')} ${pixels('space-6')};border:1px solid ${token('color-action-primary')};border-radius:${pixels('radius-control')};font-family:${emailFont('font-family-body')};font-size:${pixels('font-size-body')};line-height:${token('line-height-body')};font-weight:bold;text-decoration:none;color:${token('color-text-on-accent')};">${escape(copy.action)}</a></td></tr></table>
 <p style="margin:0;font-family:${emailFont('font-family-body')};font-size:${pixels('font-size-body')};line-height:${token('line-height-body')};color:${token('color-text-secondary')};">${escape(copy.signature)}<br><strong style="color:${token('color-text-primary')};">Bake Again</strong></p>
 </td></tr>
 <tr><td class="email-inner" bgcolor="${token('color-background-panel-subtle')}" style="padding:${pixels('space-6')} ${pixels('space-8')};background-color:${token('color-background-panel-subtle')};font-family:${emailFont('font-family-body')};font-size:${pixels('font-size-body-small')};line-height:${token('line-height-body')};color:${token('color-text-secondary')};">
@@ -76,8 +82,8 @@ for (const [locale, copy, isAuth] of [
 </body></html>
 `;
   if (isAuth) {
-    authTemplates[locale] = html;
-    await writeFile(new URL(`${locale}-confirmation-preview.html`, authOutput), html.replace('{{ .ConfirmationURL }}', '#email-preview'));
+    authTemplates[authKind][locale] = html;
+    await writeFile(new URL(`${locale}-${authKind}-preview.html`, authOutput), html.replace(authLink, '#email-preview'));
     continue;
   }
   await writeFile(new URL(`${locale}-newsletter.html`, output), html);
@@ -90,7 +96,9 @@ console.log('Prepared 3 DOI and 3 newsletter templates plus the local Email Desi
 function localized(values) {
   return `{{ if eq .Data.locale "es" }}${values.es}{{ else if eq .Data.locale "en" }}${values.en}{{ else }}${values.uk}{{ end }}`;
 }
-await writeFile(new URL('confirm-signup.html', authOutput), localized(authTemplates));
+await writeFile(new URL('confirm-signup.html', authOutput), localized(authTemplates.confirmation));
 await writeFile(new URL('confirm-signup-subject.txt', authOutput), localized(Object.fromEntries(Object.entries(authCopy).map(([locale, copy]) => [locale, copy.subject]))));
-await writeFile(new URL('index.html', authOutput), `<!doctype html><html lang="uk"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bake Again — Auth Email Design Lab</title><body><h1>Лист підтвердження акаунта</h1><p>Локальні приклади. Кнопка не підтверджує акаунт і не надсилає листів.</p><ul>${['uk','es','en'].map(locale => `<li><a href="${locale}-confirmation-preview.html">${locale.toUpperCase()}</a></li>`).join('')}</ul></body></html>`);
-console.log('Prepared localized Supabase confirmation and 3 inert auth previews; nothing sent.');
+await writeFile(new URL('reset-password.html', authOutput), localized(authTemplates.recovery));
+await writeFile(new URL('reset-password-subject.txt', authOutput), localized(Object.fromEntries(Object.entries(recoveryCopy).map(([locale, copy]) => [locale, copy.subject]))));
+await writeFile(new URL('index.html', authOutput), `<!doctype html><html lang="uk"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bake Again — Auth Email Design Lab</title><body><h1>Службові листи акаунта</h1><p>Локальні приклади. Кнопка не підтверджує акаунт і не надсилає листів.</p><ul>${['uk','es','en'].map(locale => `<li><a href="${locale}-confirmation-preview.html">${locale.toUpperCase()} — підтвердження</a> · <a href="${locale}-recovery-preview.html">відновлення пароля</a></li>`).join('')}</ul></body></html>`);
+console.log('Prepared localized Supabase confirmation/recovery and 6 inert auth previews; nothing sent.');
