@@ -17,7 +17,10 @@
 - `RecentRecipes` reuses compact RecipeCards. `RecipeCard.headingLevel` supports h3
   beneath the block's h2 without changing the compact visual treatment. Clear history
   affects only viewing history, preserves focus and announces its result. Empty
-  history occupies no space, except immediately after a clear confirmation. Design
+  history occupies no space, except immediately after a clear confirmation. The
+  section fills its available width up to the page token, including in the flex page
+  shell; inline-size containment must not collapse its intrinsic width. History
+  remains browser-local and independent of signed-in Saved recipes. Design
   Lab fixtures use `preview` and do not read/write history.
 - `NewsletterInvitation` is a compact editorial strip: 24px display heading, short
   benefit copy and one shared primary Button linking directly to the hosted form.

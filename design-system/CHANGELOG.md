@@ -1151,3 +1151,13 @@
 - Add token-derived `account.css` and a library example to the external-provider Design Lab. Publish the library skin and receipt wordmark/UK subject and body.
 - Configure both trial download pages through Beta Content Editor with UK guidance and optimized delivery files. The final download frame does not inherit library CSS; retain its native controls.
 - Verify both actual downloads by SHA-256 and 390/900/1440 widths. New receipt email-client rendering and new-copy phone opening/saving remain unverified.
+
+## 2026-10-12 · Recently viewed section width
+
+- Give RecentRecipes an explicit available width within the shared flex page shell,
+  capped by the existing page-width token. Inline-size containment no longer
+  collapses the heading, Clear button and compact recipe cards into a narrow column.
+- Keep viewing history browser-local and independent of account saves. The existing
+  UK/EN/ES Design Lab examples reuse the corrected section; no tokens changed.
+- Verified the real home section in UK/EN/ES at 390/900/1440 CSS px without
+  page, section or card overflow; existing compact-card fixtures also wrap.

@@ -865,8 +865,8 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Share, print and return to a recipe</strong>
                 <span>
-                  Resolved configuration links · local history · provider-hosted
-                  email signup
+                  Resolved configuration links · full-width browser-local history ·
+                  provider-hosted email signup
                 </span>
               </div>
               <div className={styles.recipeOverviewExample}>
