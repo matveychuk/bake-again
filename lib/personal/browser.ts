@@ -266,7 +266,20 @@ export async function startAccount() {
         },
       });
       client.auth.onAuthStateChange((event, session) => {
-        if (initializing) return;
+        // A delayed initial stored session must not override a failed email link.
+        if (
+          initializing ||
+          event === 'INITIAL_SESSION' ||
+          state.error === 'INVALID_AUTH_LINK'
+        )
+          return;
+        state = {
+          ...state,
+          recovery: recoveryMatches(
+            sessionStorage.getItem(recoveryKey),
+            session?.user.id,
+          ),
+        };
         if (event === 'SIGNED_OUT') {
           sessionStorage.removeItem(recoveryKey);
           state = { ...state, recovery: false };
