@@ -84,12 +84,25 @@ they are not separate statuses.
 
 ## Instagram continuity
 
+- For new Reels and Stories, apply the approved food-first defaults in
+  [Instagram templates](docs/instagram/templates.uk.md) and reuse
+  [the Reel package](templates/instagram-reels/README.uk.md): compact header,
+  soft feathered header-to-image transition on every shot, large fixed badge,
+  horizontal opening stamp, and a separate full-screen Story export.
+
 - Before any Instagram strategy, account setup, post, Reel, Story or advertising task,
   read [the Instagram working document](docs/strategy/instagram.uk.md), its publication
   register and the relevant linked post records. Use these files across chats.
 - Keep the append-only [publication history](media/instagram/publication-history.uk.md)
   current, including deleted posts and repeat publications. New post packages live in
   `media/instagram/IG-XXX/for-phone/`; local review files are not Instagram drafts.
+- Give every Instagram package a searchable human name as well as its ID:
+  `Reels — Topic — IG-XXX`, `Карусель — Topic — IG-XXX`,
+  `Сторіс — Topic — IG-XXX` or `Допис — Topic — IG-XXX`.
+  Maintain a named folder link in `media/instagram/` to its existing `IG-XXX/`
+  source and record it in `media/instagram/publication-names.uk.json`. Do not
+  duplicate media or break existing paths. New Photos albums and iCloud Notes use
+  `Format — Topic — IG-XXX — vN`; record the actual names of older handoffs.
 - Distinguish user-approved decisions, proposals and verified completed actions.
   Do not turn an earlier assistant recommendation into an approved decision.
 - After meaningful Instagram work, update the working document's current state,
@@ -102,7 +115,7 @@ they are not separate statuses.
   [the publication handoff rules](docs/instagram/templates.uk.md#передача-готових-матеріалів-через-icloud).
   Sasha confirmed the matching Apple Account and working sync on 2026-10-11.
   Import optimized final slides, video and cover into a regular Mac Photos album
-  named `IG-XXX — Title — vN`; put the caption, numbered alt descriptions and
+  named `Format — Title — IG-XXX — vN`; put the caption, numbered alt descriptions and
   posting instructions in an identically named iCloud Note. Keep the local
   `for-phone/` package and originals. Record Mac import and phone availability
   separately; use AirDrop/ZIP only as a fallback. Handoff does not publish or schedule.

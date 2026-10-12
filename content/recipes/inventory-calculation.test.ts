@@ -128,14 +128,14 @@ void test('scales the reviewed dumpling base and spoon equivalents from cottage 
       (section) => section.ingredients,
     );
     const anchor = findScalingAnchor(ingredients, 'cottage-cheese')!;
-    assert.equal(anchor.amount.minimum, 450);
-    for (const factor of [0.5, 2, 300 / 450]) {
+    assert.equal(anchor.amount.minimum, 500);
+    for (const factor of [0.5, 2, 300 / 500]) {
       for (const [id, base] of [
-        ['cottage-cheese', 450],
+        ['cottage-cheese', 500],
         ['eggs', 2],
         ['sugar', 60],
         ['flour', 100],
-        ['tapioca', 7],
+        ['tapioca', 10],
       ] as const) {
         const ingredient = ingredients.find((item) => item.id === id)!;
         assert.deepEqual(

@@ -8,7 +8,7 @@ import { quantityFromGrams } from './spoon-weights.ts';
 
 const copy = {
   uk: {
-    evidence: 'Цю версію успішно готували.',
+    evidence: 'Авторські пропорції уточнено за успішно приготовленою партією зі зйомки 11.10.2026.',
     yield: '100 лінивих вареників',
     section: 'Ліниві вареники',
     ingredients: [
@@ -52,7 +52,7 @@ const copy = {
     ],
   },
   en: {
-    evidence: 'This exact version has been cooked successfully.',
+    evidence: 'Author-corrected quantities for the successfully cooked batch filmed on 11 October 2026.',
     yield: '100 lazy dumplings',
     section: 'Dumplings',
     ingredients: [
@@ -97,7 +97,7 @@ const copy = {
     ],
   },
   es: {
-    evidence: 'Esta versión se ha preparado con éxito.',
+    evidence: 'Cantidades corregidas por la autora para la tanda preparada con éxito y grabada el 11 de octubre de 2026.',
     yield: '100 váreniki de tvorog',
     section: 'Váreniki de tvorog',
     ingredients: [
@@ -216,6 +216,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
     },
   ];
   return {
+    versionId: 'lazy-dumplings-source-v2',
     completeness: 'readyToReview',
     presentation: 'concise',
     evidence: { status: 'tested', explanation: text.evidence },
@@ -253,7 +254,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
             id: 'cottage-cheese',
             name: text.ingredients[0],
             quantity: {
-              base: { kind: 'exact', value: 450, unit: 'g' },
+              base: { kind: 'exact', value: 500, unit: 'g' },
               shopping: { mode: 'base' },
             },
           },
@@ -281,7 +282,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
             id: 'tapioca',
             name: text.ingredients[4],
             quantity: {
-              base: { kind: 'exact', value: 7, unit: 'g' },
+              base: { kind: 'exact', value: 10, unit: 'g' },
               equivalent: { kind: 'exact', value: 1, unit: 'tbsp' },
               shopping: { mode: 'base' },
             },
@@ -298,9 +299,9 @@ export const lazyDumplingsRecipe = {
   publicationStatus: 'published',
   translationState: { uk: 'reviewed', en: 'reviewed', es: 'reviewed' },
   source: {
-    file: 'docs/reference/recipe-inventory.xlsx',
+    file: 'docs/reference/lazy-dumplings-author-correction-2026-10-12.uk.md',
     locator:
-      'Recipe Archive · Ліниві вареники; author-reviewed quantities and method',
+      'Author correction 2026-10-12 · 500 g curd, 2 eggs, 100 g flour, 10 g tapioca (1 tbsp), 60 g sugar; prior author-reviewed method retained',
   },
   ...contentForLocale('en'),
   translations: { uk: contentForLocale('uk'), es: contentForLocale('es') },

@@ -27,6 +27,7 @@ production CSS.
 - `patterns.md` — product-level composition rules.
 - `status-provenance.md` — evidence states and required language.
 - `accessibility-localisation.md` — inclusive and multilingual requirements.
+- `instagram-reels.uk.md` — approved social video layout and reusable horizontal stamp.
 - `pdf-recipes.uk.md` — reusable mobile recipe PDF rules, linked data/layout package,
   typography, image fidelity and delivery verification.
 - `tokens.json` — portable semantic tokens.

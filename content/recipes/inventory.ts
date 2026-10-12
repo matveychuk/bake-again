@@ -138,7 +138,7 @@ export const recipeInventory: InventoryRecipe[] = [
       'Ukrainian lazy cottage-cheese dumplings with sour cream and butter',
     summary: 'Tender cottage-cheese dumplings.',
     source:
-      'Handwritten notebook page, IMG_1277.jpeg, with author-confirmed working quantities and method',
+      'Handwritten notebook page, IMG_1277.jpeg; author-corrected quantities on 2026-10-12 for the batch filmed on 2026-10-11; prior author-reviewed method',
     archiveSections: [
       {
         title: 'Ingredients · original notes',
@@ -149,6 +149,11 @@ export const recipeInventory: InventoryRecipe[] = [
         title: 'Method · original notes',
         content:
           'Творог, яйця й цукор перемішати. Борошно і крохмаль перемішати та додати в творог. Вимішати й дати постояти 15–30 хв.\n\nВаріант на 7 пачок: 7 яєць, 10 ст. л. цукру, 300 г борошна, 25 г тапіоки.',
+      },
+      {
+        title: 'Ingredients · author correction · 2026-10-12',
+        content:
+          '500 г кисломолочного сиру\n2 яйця\n100 г Schär Mix B Bread (≈ 5 ст. л. за таблицею; назву суміші для знятої партії ще уточнюємо)\n10 г тапіоки (1 ст. л. — авторська мірка тільки цього рецепта)\n60 г цукру (≈ 3 ст. л. за таблицею)\n\nПопередні нотатки збережені як архів, не як актуальна рецептура.',
       },
     ],
     needsBeforePublishing:

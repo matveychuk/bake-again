@@ -1,0 +1,17 @@
+{
+  "width": 456,
+  "height": 104,
+  "fontSize": 44,
+  "endCenterX": 788,
+  "endCenterTop": 156,
+  "startCenterX": 540,
+  "startCenterTop": 960,
+  "startScale": 2.3,
+  "startAngleDegrees": 0,
+  "holdSeconds": 0.65,
+  "travelSeconds": 0.85,
+  "duration": 2,
+  "status": "Approved by Sasha 2026-10-12; default for future Reels and Stories",
+  "paletteSource": "approved IG-009 reel-v7 timeline colors",
+  "font": "Manrope-Semibold.ttf"
+}
