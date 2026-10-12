@@ -52,6 +52,16 @@ font fallbacks from `tokens.css`, through `npm run newsletter:prepare`. They are
 confirmation messages, not a new product card or a campaign design. Never treat
 the inert Design Lab examples or a reviewed hosted layout as proof of delivery.
 
+Hosted signup security extension (2026-10-12): UK/ES/EN native Brevo forms
+add Cloudflare Turnstile after the compact consent notice and before the existing
+submit button. Each form has its own Managed widget for `sibforms.com`, without
+pre-clearance. Provider-owned challenge styling and language follow Cloudflare;
+Bake Again copy, semantic palette and email-only fields retain the reviewed variant.
+The existing Email Design Lab remains a DOI email preview; the live hosted forms
+are the matching security examples, recorded in `lib/newsletter/brevo-forms.json`.
+All nine widths passed and automatic client success was observed in each locale.
+No submit, delivery, server-validation or suppression result is implied.
+
 Hosted compact-notice variant (2026-10-10, owner request): purpose and locale
 remain in the introduction, followed by required EMAIL, one small Text notice
 and the existing CTA. The notice includes consent, withdrawal, Brevo processing

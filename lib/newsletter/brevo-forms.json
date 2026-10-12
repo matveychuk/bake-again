@@ -29,7 +29,7 @@
     "finalConfirmationEmail": false,
     "unsubscribeConfirmationEmail": false,
     "teamNotificationEmail": false,
-    "captcha": "required-before-launch",
+    "captcha": "cloudflare-turnstile-managed",
     "signupUrls": {
       "en": "https://67fba9aa.sibforms.com/serve/MUIFACoVi4wY2y6Ef5AOKyTnP8n2aHyGfsgGCIqNgxnKvwMtNy6La5IIEN0g7OBm9lpPHsKB0wQKlZ5HDRHLOOs70eRdXUHmCNZcHzF588rtZfsswHdwGWIWOk4-9nbJNBILLmpNp2dYc0QZtMJk4VQJSFDQEzyY_UaFs4JfDcUOSCmRU8SXqMEcjGbv7jiLLlOI3yiD-uMmlDHHmw==",
       "uk": "https://67fba9aa.sibforms.com/serve/MUIFAGin0tF4IixejaYhaYtLly8nfeWOmqAW7AaG7PVJvfnzYCppFYlVxOTi63qBP1DFdpqxGuh2q3-CDdUa4EuvGj7UPiCeFMfSOIEa2wGb5vK_wJJvt_4IZlPV9Chd9TYLSuYWNihVkTBNKrQXG185EYlu8_9VFGGwgFgOzCq0QdVz6rVuwRZTsQhZshtl27LJqUgrd0UGqVgS5Q==",
@@ -213,7 +213,7 @@
     "domainAuthenticated": false,
     "senderApproved": true,
     "senderVerified": true,
-    "captchaConfigured": false,
+    "captchaConfigured": true,
     "localizedTemplatesAssigned": true,
     "deliveryTested": true,
     "suppressionTested": false,
@@ -350,6 +350,32 @@
       "keyboardFocusReviewed": true,
       "preparationPassed": true,
       "doiHtmlByteIdentical": true
+    },
+    "turnstileReview": {
+      "checkedAt": "2026-10-12",
+      "status": "provider-saved-client-success-observed",
+      "locales": [
+        "uk",
+        "es",
+        "en"
+      ],
+      "hostname": "sibforms.com",
+      "mode": "Managed",
+      "preClearance": false,
+      "separateWidgetPerLocale": true,
+      "placement": "after-compact-notice-before-submit",
+      "responsiveWidths": [
+        390,
+        900,
+        1440
+      ],
+      "horizontalOverflow": false,
+      "keyboardPrivacyFocusVisible": true,
+      "interactiveChallengesSolved": 0,
+      "formsSubmitted": 0,
+      "emailsSent": 0,
+      "serverVerificationTested": false,
+      "evidence": "output/activation/brevo-turnstile-review.json"
     }
   },
   "providerRecords": {

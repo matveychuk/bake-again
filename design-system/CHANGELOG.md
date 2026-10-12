@@ -1,5 +1,15 @@
 # Design system changelog
 
+## 2026-10-12 · Hosted newsletter Turnstile
+
+- Extended the existing compact Brevo signup variant with native Cloudflare
+  Turnstile before submit, using separate Managed widgets for UK/ES/EN.
+- Retained the existing form palette, copy, privacy links, language lists and DOI.
+  Updated the newsletter manifest and external-example contract.
+- Reviewed 390/900/1440px in each locale without overflow and with visible privacy
+  keyboard focus; automatic client success observed. Submission and delivery remain
+  pending. Evidence: `output/activation/brevo-turnstile-review.json`.
+
 ## 2026-10-11 · Reusable mobile recipe PDF package
 
 - Saved the approved crepes v5 PDF treatment in `pdf-recipes.uk.md` and linked it
