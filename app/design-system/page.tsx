@@ -460,6 +460,8 @@ export default function DesignSystemPage() {
                   invitation followed by the footer, without adjacent social
                   links. On mobile,
                   the social row scrolls away while navigation stays sticky.
+                  The opaque page-colour header band and its lower divider span
+                  the screen, including over lighter recipe sections.
                   English and Spanish omit social links; the email invitation
                   is localized.
                   Shopping list keeps an accessible icon on desktop and its full
@@ -483,6 +485,9 @@ export default function DesignSystemPage() {
                     }
                   </h3>
                   <SiteHeader locale={locale} pathname={`/${locale}`} />
+                  <div className={styles.siteHeaderContrast}>
+                    Lighter recipe surface below the continuous header band.
+                  </div>
                   <NewsletterInvitation locale={locale} />
                   <SiteFooter locale={locale} />
                 </div>

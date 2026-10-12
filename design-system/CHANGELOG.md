@@ -1,5 +1,15 @@
 # Design system changelog
 
+## 2026-10-12 · Continuous sticky header background
+
+- Extend the shared header background and lower divider across the viewport,
+  including over lighter recipe sections, while keeping navigation aligned to
+  the existing page width and responsive gutters.
+- Align the compact Menu surface with those gutters. Update the Design Lab
+  navigation example with a contrasting recipe surface.
+- Verified UK/ES/EN at 390/900/1440px without horizontal overflow, mobile Menu
+  bounds and keyboard focus, and full-width background at 1920px.
+
 ## 2026-10-12 · Hosted newsletter Turnstile
 
 - Extended the existing compact Brevo signup variant with native Cloudflare
