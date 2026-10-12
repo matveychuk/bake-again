@@ -584,7 +584,10 @@ At 1120px and below, move primary links into the Menu disclosure before they wra
 The visual and keyboard order is Menu, wordmark, language, shopping, account. At 620px
 and below language moves inside Menu. Account and shopping remain immediately
 available. Menu has a labelled 44px trigger and wrapping links on a bounded scrolling
-surface. The header stays sticky. Account, Saved and Shopping omit header/social
+surface. The header stays sticky. Its opaque page-background band and lower
+divider span the full viewport, while navigation retains the page maximum width
+and responsive gutters. The Menu aligns with those gutters on its own bounded
+surface. Account, Saved and Shopping omit header/social
 promotion; their footer retains it. Other Ukrainian pages keep their mobile social
 row below the header. Drafts remains local-development-only. Privacy stays in the footer.
 

@@ -90,7 +90,8 @@ textarea:focus-visible {
   position: sticky;
   z-index: 40;
   top: 0;
-  width: min(100% - 2 * var(--layout-gutter-desktop), var(--layout-max-page));
+  width: 100%;
+  padding-inline: max(var(--layout-gutter-desktop), calc((100% - var(--layout-max-page)) / 2));
   min-height: calc(var(--space-16) + var(--space-6));
   padding-block: var(--space-2);
   background: var(--color-background-page);
@@ -806,7 +807,8 @@ footer p {
 }
 
 @media (max-width: 900px) {
-  .site-header, .hero, .recipes-section, .trust-section, footer {
+  .site-header { padding-inline: var(--layout-gutter-mobile); }
+  .hero, .recipes-section, .trust-section, footer {
     width: min(
       calc(100% - (var(--layout-gutter-mobile) * 2)),
       var(--layout-max-content)
@@ -1122,8 +1124,11 @@ footer p {
   .site-mobile-menu summary:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: var(--space-1); }
   .site-mobile-menu__close-icon, .site-mobile-menu[open] .site-mobile-menu__open-icon { display: none; }
   .site-mobile-menu[open] .site-mobile-menu__close-icon { display: block; }
-  .site-header .site-mobile-menu nav { position: absolute; top: 100%; left: 0; right: auto; display: flex; flex-direction: column; align-items: stretch; gap: 0; width: min(var(--layout-assistant-drawer),100%); max-height: calc(100dvh - var(--space-16) - var(--space-4)); overflow-y: auto; padding: var(--space-2); border: 1px solid var(--color-border-subtle); background: var(--color-background-surface); box-shadow: var(--shadow-raised); }
+  .site-header .site-mobile-menu nav { position: absolute; top: 100%; left: var(--layout-gutter-desktop); right: auto; display: flex; flex-direction: column; align-items: stretch; gap: 0; width: min(var(--layout-assistant-drawer),calc(100% - 2 * var(--layout-gutter-desktop))); max-height: calc(100dvh - var(--space-16) - var(--space-4)); overflow-y: auto; padding: var(--space-2); border: 1px solid var(--color-border-subtle); background: var(--color-background-surface); box-shadow: var(--shadow-raised); }
   .site-header .site-mobile-menu nav a { padding: var(--space-2) var(--space-3); min-height: calc(var(--space-8) + var(--space-3)); }
+}
+@media (max-width: 900px) {
+  .site-header .site-mobile-menu nav { left: var(--layout-gutter-mobile); width: min(var(--layout-assistant-drawer),calc(100% - 2 * var(--layout-gutter-mobile))); }
 }
 @media (max-width: 620px) {
   .site-header { padding-inline: var(--layout-gutter-mobile); gap: var(--space-2); }
