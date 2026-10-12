@@ -785,7 +785,13 @@ account page has no data/privacy, export or deletion section. Recovery remains
 available even when the personal-data service cannot initialize.
 
 AccountFields shows a heading and explanation for the active login/signup/reset mode;
-mode changes move focus to that heading and clear stale feedback. The action gate uses
+mode changes move focus to that heading and clear stale feedback. Successful signup
+and recovery requests replace the form with a focused Check your email state, the
+requested address and localized next steps. No send/submit button remains; Back to
+sign in and Use another email are explicit navigation choices. Password fields
+unmount after the request. Recovery feedback never confirms account existence.
+Account actions prevent concurrent submissions. Inert completion examples cover
+signup and recovery in all three languages. The action gate uses
 Close in every context, keeps Escape/focus return and resumes the pending action once.
 Saved and Shopping reuse their normal page-title treatment for guests, display neutral
 loading until identity resolves, and route an authenticated service failure to settings.

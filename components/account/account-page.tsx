@@ -1,5 +1,10 @@
 'use client';
-import { useRef, useState, type SubmitEvent as ReactSubmitEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type SubmitEvent as ReactSubmitEvent,
+} from 'react';
 import {
   ArrowRight,
   Bookmark,
@@ -19,6 +24,7 @@ import { authClient, signOut } from '@/lib/personal/browser';
 import { accountCopy } from './copy';
 import styles from './account.module.css';
 type RecipeOption = { id: string; title: string };
+type EmailRequest = { kind: 'signup' | 'reset'; email: string };
 export function AccountFields({
   locale,
   onSubmit,
@@ -26,23 +32,75 @@ export function AccountFields({
   headingLevel = 2,
   contextual = false,
   onModeChange,
+  emailRequest = null,
+  onEmailRequestClear,
 }: {
   locale: AppLocale;
   busy?: boolean;
   headingLevel?: 1 | 2;
   contextual?: boolean;
   onModeChange?: () => void;
+  emailRequest?: EmailRequest | null;
+  onEmailRequestClear?: () => void;
   onSubmit: (event: ReactSubmitEvent<HTMLFormElement>) => void;
 }) {
   const c = accountCopy[locale];
   const [mode, setMode] = useState<'login' | 'signup' | 'reset'>('login');
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
   const Heading = `h${headingLevel}` as const;
   const heading = useRef<HTMLHeadingElement>(null);
+  const hasEmailRequest = Boolean(emailRequest);
+  const hadEmailRequest = useRef(hasEmailRequest);
+  const focusRequested = useRef(false);
+  useEffect(() => {
+    if ((!hadEmailRequest.current && hasEmailRequest) || focusRequested.current)
+      heading.current?.focus();
+    hadEmailRequest.current = hasEmailRequest;
+    focusRequested.current = false;
+  }, [hasEmailRequest, mode]);
   function changeMode(next: typeof mode) {
+    focusRequested.current = true;
     setMode(next);
     onModeChange?.();
-    heading.current?.focus();
+  }
+  if (emailRequest) {
+    const returnTo = (next: typeof mode) => {
+      setEmail(emailRequest.email);
+      setShowPassword(false);
+      onEmailRequestClear?.();
+      changeMode(next);
+    };
+    return (
+      <div className={styles.form}>
+        <div className={styles.intro}>
+          <Heading
+            ref={heading}
+            id={headingLevel === 1 ? 'account-title' : undefined}
+            tabIndex={-1}
+          >
+            {c.checkEmail}
+          </Heading>
+        </div>
+        <div className={styles.notice} role="status">
+          <p>{c.requestAccepted}</p>
+          <p className={styles.email}>
+            <strong>{emailRequest.email}</strong>
+          </p>
+          <p>{emailRequest.kind === 'signup' ? c.signupSent : c.resetSent}</p>
+        </div>
+        <p className={styles.finePrint}>{c.emailHelp}</p>
+        <div className={styles.actions}>
+          <Button onClick={() => returnTo('login')}>{c.backToLogin}</Button>
+          <Button variant="link" onClick={() => returnTo(emailRequest.kind)}>
+            {c.changeEmail}
+          </Button>
+        </div>
+        <p className={styles.finePrint}>
+          {c.authNote} <a href={`/${locale}/privacy`}>{c.privacy}</a>
+        </p>
+      </div>
+    );
   }
   return (
     <form className={styles.form} onSubmit={onSubmit}>
@@ -72,6 +130,8 @@ export function AccountFields({
           autoComplete="email"
           required
           maxLength={254}
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
       </label>
       {mode !== 'reset' && (
@@ -352,8 +412,12 @@ export function AccountPage({
   const c = accountCopy[locale];
   const [busy, setBusy] = useState(false),
     [message, setMessage] = useState('');
+  const [emailRequest, setEmailRequest] = useState<EmailRequest | null>(null);
+  const running = useRef(false);
   const engine = state.engine;
   async function run(fn: () => Promise<unknown> | void) {
+    if (running.current) return;
+    running.current = true;
     setBusy(true);
     setMessage('');
     try {
@@ -361,6 +425,7 @@ export function AccountPage({
     } catch {
       setMessage(c.error);
     } finally {
+      running.current = false;
       setBusy(false);
     }
   }
@@ -399,8 +464,11 @@ export function AccountPage({
               headingLevel={embedded ? 2 : 1}
               contextual={embedded}
               onModeChange={() => setMessage('')}
+              emailRequest={emailRequest}
+              onEmailRequestClear={() => setEmailRequest(null)}
               onSubmit={(event) => {
                 event.preventDefault();
+                if (emailRequest) return;
                 const data = new FormData(event.currentTarget);
                 const action = (
                   event.nativeEvent as SubmitEvent
@@ -434,7 +502,9 @@ export function AccountPage({
                     }
                     throw result.error;
                   }
-                  if (action !== 'login') setMessage(c.sent);
+                  if (action === 'signup' || action === 'reset') {
+                    setEmailRequest({ kind: action, email });
+                  }
                 });
               }}
             />

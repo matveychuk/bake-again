@@ -23,6 +23,10 @@ export function AccountExample({ locale }: { locale: AppLocale }) {
     recipeIds: ['napoleon'],
   });
   const c = accountCopy[locale];
+  const [emailRequest, setEmailRequest] = useState<{
+    kind: 'signup' | 'reset';
+    email: string;
+  } | null>(null);
   return (
     <div className={styles.page} lang={locale} data-account-example={locale}>
       <AccountHeading locale={locale} headingLevel={2} onSignOut={() => {}} />
@@ -38,10 +42,26 @@ export function AccountExample({ locale }: { locale: AppLocale }) {
       <div className={styles.section}>
         <AccountFields
           locale={locale}
-          onSubmit={(event) => event.preventDefault()}
+          emailRequest={emailRequest}
+          onEmailRequestClear={() => setEmailRequest(null)}
+          onSubmit={(event) => {
+            event.preventDefault();
+            const action = (
+              event.nativeEvent as SubmitEvent
+            ).submitter?.getAttribute('value');
+            if (action === 'signup' || action === 'reset') {
+              setEmailRequest({
+                kind: action,
+                email: String(new FormData(event.currentTarget).get('email')),
+              });
+            }
+          }}
         />
       </div>
       <p className={styles.notice}>{c.rateLimited}</p>
+      {(['signup', 'reset'] as const).map((kind) => (
+        <EmailRequestExample key={kind} locale={locale} kind={kind} />
+      ))}
       <h2>{c.collections}</h2>
       <CollectionEditor
         locale={locale}
@@ -72,6 +92,29 @@ export function AccountExample({ locale }: { locale: AppLocale }) {
         }
       />
       <p className={styles.notice}>{c.gateBody}</p>
+    </div>
+  );
+}
+
+function EmailRequestExample({
+  locale,
+  kind,
+}: {
+  locale: AppLocale;
+  kind: 'signup' | 'reset';
+}) {
+  const [request, setRequest] = useState<{
+    kind: 'signup' | 'reset';
+    email: string;
+  } | null>({ kind, email: 'baker.with.a.long.email.address@example.com' });
+  return (
+    <div className={styles.section} data-email-request-example={kind}>
+      <AccountFields
+        locale={locale}
+        emailRequest={request}
+        onEmailRequestClear={() => setRequest(null)}
+        onSubmit={(event) => event.preventDefault()}
+      />
     </div>
   );
 }
