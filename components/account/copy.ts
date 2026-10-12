@@ -3,7 +3,16 @@ export const accountCopy = {
     setPassword: 'Встановіть новий пароль',
     newPasswordLabel: 'Новий пароль',
     repeatPassword: 'Повторіть новий пароль',
-    passwordHelp: 'Щонайменше 8 символів.',
+    passwordHelp:
+      'Щонайменше 8 символів. Пароль має відрізнятися від попереднього.',
+    passwordUnchanged:
+      'Цей пароль уже використовується. Введіть інший новий пароль у двох полях.',
+    passwordWeak:
+      'Цей пароль не відповідає вимогам безпеки. Виберіть надійніший пароль щонайменше з 8 символів.',
+    passwordSessionExpired:
+      'Для зміни пароля потрібно знову підтвердити вхід. Запитайте новий лист відновлення й відкрийте найновіше посилання.',
+    passwordConnectionError:
+      'Не вдалося зв’язатися із сервером. Перевірте з’єднання й повторіть збереження пароля.',
     passwordMismatch: 'Паролі не збігаються. Повторіть новий пароль.',
     recoveryIntro:
       'Пошта вже підтверджена посиланням. Встановіть новий пароль для цього акаунта.',
@@ -99,7 +108,16 @@ export const accountCopy = {
     setPassword: 'Set your new password',
     newPasswordLabel: 'New password',
     repeatPassword: 'Repeat new password',
-    passwordHelp: 'At least 8 characters.',
+    passwordHelp:
+      'At least 8 characters. Use a different password from your previous one.',
+    passwordUnchanged:
+      'You already use this password. Enter a different new password in both fields.',
+    passwordWeak:
+      'This password does not meet the security requirements. Choose a stronger password with at least 8 characters.',
+    passwordSessionExpired:
+      'Verify your sign-in again to change your password. Request a new recovery email and open the most recent link.',
+    passwordConnectionError:
+      'We could not reach the server. Check your connection and try saving your password again.',
     passwordMismatch: 'The passwords do not match. Repeat your new password.',
     recoveryIntro:
       'The email link has verified your address. Set a new password for this account.',
@@ -195,7 +213,16 @@ export const accountCopy = {
     setPassword: 'Establece una nueva contraseña',
     newPasswordLabel: 'Nueva contraseña',
     repeatPassword: 'Repite la nueva contraseña',
-    passwordHelp: 'Al menos 8 caracteres.',
+    passwordHelp:
+      'Al menos 8 caracteres. Debe ser distinta de tu contraseña anterior.',
+    passwordUnchanged:
+      'Ya utilizas esta contraseña. Escribe una nueva contraseña distinta en ambos campos.',
+    passwordWeak:
+      'Esta contraseña no cumple los requisitos de seguridad. Elige una contraseña más segura de al menos 8 caracteres.',
+    passwordSessionExpired:
+      'Vuelve a verificar el acceso para cambiar tu contraseña. Solicita otro correo de recuperación y abre el enlace más reciente.',
+    passwordConnectionError:
+      'No se pudo conectar con el servidor. Revisa la conexión e intenta guardar la contraseña otra vez.',
     passwordMismatch:
       'Las contraseñas no coinciden. Repite la nueva contraseña.',
     recoveryIntro:

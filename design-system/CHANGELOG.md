@@ -1185,3 +1185,16 @@
   generator. Confirmation and recovery links verify a one-use token on the
   account page, including when opened in another browser. Invalid links offer a
   new request instead of silently presenting normal login.
+
+## 2026-10-12 · Password update feedback
+
+- Reused the recovery and account settings forms with localized, actionable password
+  errors. An unchanged password now asks for a different password in both fields;
+  provider error text and credentials never enter consumer copy.
+- Added the different-password reminder and unchanged-password alert to the shared
+  UK/ES/EN Design Lab recovery examples. Existing tokens and controls are retained.
+- Supabase Auth logs confirmed the owner’s failed update at 18:05:12 UTC returned
+  422 because the new password matched the previous one. A successful owner retry
+  and subsequent sign-in remain required before activating production accounts.
+- Verified UK/ES/EN at 390/900/1440px without overflow; 55 personal-data and
+  auth regression tests passed, including password error classification/privacy.

@@ -68,6 +68,7 @@ export function AccountExample({ locale }: { locale: AppLocale }) {
           locale={locale}
           headingLevel={2}
           focusOnMount={false}
+          message={c.passwordUnchanged}
           email="baker.with.a.long.email.address@example.com"
           onPassword={(event) => event.preventDefault()}
           onContinue={() => {}}
