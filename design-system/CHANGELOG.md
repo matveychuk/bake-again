@@ -1171,3 +1171,16 @@
   UK/EN/ES Design Lab examples reuse the corrected section; no tokens changed.
 - Verified the real home section in UK/EN/ES at 390/900/1440 CSS px without
   page, section or card overflow; existing compact-card fixtures also wrap.
+
+## 2026-10-12 · Account email request completion
+
+- Extend AccountFields with a focused Check your email completion screen after
+  successful signup/recovery requests. Show the requested address, localized
+  next steps and inbox/spam guidance; remove the sending form and submit button.
+- Offer explicit Back to sign in and Use another email actions. The password input
+  unmounts after submission. Recovery copy does not disclose account existence.
+- Guard running account actions synchronously against double submits; errors and
+  rate limits keep their feedback without claiming delivery.
+- Add inert signup/recovery completion examples in UK/EN/ES to the Account Design Lab.
+- Verified 18 completion layouts (2 requests x 3 locales x 3 widths), real recovery
+  request/delivery, removed submit form, focused heading and both return actions.

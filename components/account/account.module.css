@@ -63,6 +63,13 @@
   border-left: 2px solid var(--color-action-primary);
   overflow-wrap: anywhere;
 }
+.notice p + p {
+  margin-top: var(--space-3);
+}
+.form :is(h1, h2):focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
 .choices {
   display: grid;
   gap: var(--space-2);

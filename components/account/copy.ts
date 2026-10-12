@@ -33,6 +33,16 @@ export const accountCopy = {
     signup: 'Створити акаунт',
     reset: 'Відновити пароль',
     newPassword: 'Зберегти новий пароль',
+    checkEmail: 'Перевірте пошту',
+    requestAccepted: 'Запит прийнято для адреси:',
+    signupSent:
+      'Відкрийте лист підтвердження й перейдіть за посиланням, щоб завершити створення акаунта. Потім увійдіть.',
+    resetSent:
+      'Якщо для цієї адреси доступне відновлення, ви отримаєте лист. Перейдіть за посиланням у ньому й задайте новий пароль.',
+    emailHelp:
+      'Лист може надійти за кілька хвилин. Перевірте також спам і відкрийте посилання в цьому браузері.',
+    backToLogin: 'Повернутися до входу',
+    changeEmail: 'Вказати іншу пошту',
     sent: 'Якщо запит можна виконати, на вашу адресу прийде лист. Відкрийте його в цьому браузері.',
     error: 'Не вдалося виконати дію. Перевірте дані або спробуйте пізніше.',
     rateLimited:
@@ -105,6 +115,16 @@ export const accountCopy = {
     signup: 'Create account',
     reset: 'Reset password',
     newPassword: 'Save new password',
+    checkEmail: 'Check your email',
+    requestAccepted: 'Request accepted for:',
+    signupSent:
+      'Open the confirmation email and follow its link to finish creating your account. Then sign in.',
+    resetSent:
+      'If password recovery is available for this address, you will receive an email. Follow its link to choose a new password.',
+    emailHelp:
+      'The email may take a few minutes. Check your spam folder too, and open the link in this browser.',
+    backToLogin: 'Back to sign in',
+    changeEmail: 'Use another email',
     sent: 'If the request can be completed, you will receive an email. Open it in this browser.',
     error:
       'The action could not be completed. Check your details or try again later.',
@@ -179,6 +199,16 @@ export const accountCopy = {
     signup: 'Crear cuenta',
     reset: 'Restablecer contraseña',
     newPassword: 'Guardar nueva contraseña',
+    checkEmail: 'Revisa tu correo',
+    requestAccepted: 'Solicitud recibida para:',
+    signupSent:
+      'Abre el correo de confirmación y sigue el enlace para terminar de crear tu cuenta. Después, inicia sesión.',
+    resetSent:
+      'Si esta dirección permite recuperar la contraseña, recibirás un correo. Sigue el enlace para elegir una nueva contraseña.',
+    emailHelp:
+      'El correo puede tardar unos minutos. Revisa también spam y abre el enlace en este navegador.',
+    backToLogin: 'Volver al acceso',
+    changeEmail: 'Usar otro correo',
     sent: 'Si se puede completar la solicitud, recibirás un correo. Ábrelo en este navegador.',
     error:
       'No se pudo completar la acción. Revisa tus datos o inténtalo más tarde.',
