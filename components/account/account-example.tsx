@@ -6,6 +6,7 @@ import {
   AccountIdentity,
   AccountDestinations,
   AccountSettings,
+  AccountRecovery,
   CollectionEditor,
 } from './account-page';
 import { accountCopy } from './copy';
@@ -62,6 +63,16 @@ export function AccountExample({ locale }: { locale: AppLocale }) {
       {(['signup', 'reset'] as const).map((kind) => (
         <EmailRequestExample key={kind} locale={locale} kind={kind} />
       ))}
+      <div className={styles.section} data-recovery-example={locale}>
+        <AccountRecovery
+          locale={locale}
+          headingLevel={2}
+          focusOnMount={false}
+          email="baker.with.a.long.email.address@example.com"
+          onPassword={(event) => event.preventDefault()}
+          onContinue={() => {}}
+        />
+      </div>
       <h2>{c.collections}</h2>
       <CollectionEditor
         locale={locale}

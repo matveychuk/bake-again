@@ -1,6 +1,7 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { PersonalSyncEngine, SyncFailure } from './sync-engine.ts';
 import { accountStorage, guestRecords } from './legacy-bridge.ts';
+import { readAuthLink, verifyAuthLink, recoveryMatches } from './auth-link.ts';
 import { setAccountStorage } from '../persistence/storage.ts';
 import type { PersonalSnapshot, SyncAction } from './sync-contracts.ts';
 export type AccountState = {
@@ -32,6 +33,18 @@ let epoch = 0;
 let timer: ReturnType<typeof setTimeout> | undefined;
 let attempts = 0;
 const listeners = new Set<() => void>();
+const recoveryKey = 'bake-again:password-recovery';
+export function completePasswordRecovery() {
+  sessionStorage.removeItem(recoveryKey);
+  state = { ...state, recovery: false };
+  emit();
+}
+export function clearAuthLinkError() {
+  if (state.error === 'INVALID_AUTH_LINK') {
+    state = { ...state, error: null };
+    emit();
+  }
+}
 const cachePrefix = 'bake-again:account-cache:';
 const shield = {
   getItem: () => null,
@@ -213,6 +226,12 @@ async function establish(identity: string | null, email: string | null = null) {
 export async function startAccount() {
   if (starting) return starting;
   starting = (async () => {
+    const callbackUrl = new URL(location.href);
+    const link = readAuthLink(callbackUrl);
+    // Capture once in memory, then remove email credentials before any request.
+    if (link.kind !== 'none')
+      history.replaceState(null, '', callbackUrl.pathname);
+    let initializing = true;
     try {
       const response = await fetch('/api/personal/v1/config', {
         cache: 'no-store',
@@ -247,27 +266,44 @@ export async function startAccount() {
         },
       });
       client.auth.onAuthStateChange((event, session) => {
-        if (event === 'PASSWORD_RECOVERY') state = { ...state, recovery: true };
+        if (initializing) return;
+        if (event === 'SIGNED_OUT') {
+          sessionStorage.removeItem(recoveryKey);
+          state = { ...state, recovery: false };
+        }
         // Never await another Auth operation inside the SDK callback's lock.
         setTimeout(() => {
           void establish(session?.user.id ?? null, session?.user.email ?? null);
         }, 0);
       });
-      const url = new URL(location.href);
-      const code = url.searchParams.get('code');
-      if (code && /^\/(uk|es|en)\/account$/.test(url.pathname)) {
-        const recovery = url.searchParams.get('recovery') === '1';
-        history.replaceState(null, '', url.pathname); // remove credentials before any navigation/analytics
-        const { error } = await client.auth.exchangeCodeForSession(code);
-        if (error) throw new Error('INVALID_AUTH_LINK');
-        state = { ...state, recovery };
-      }
-      const { data, error } = await client.auth.getSession();
+      const verified = await verifyAuthLink(client.auth, link);
+      const { data, error } = verified
+        ? { data: { session: verified.session }, error: null }
+        : await client.auth.getSession();
       if (error) throw error;
+      if (verified) {
+        sessionStorage.removeItem(recoveryKey);
+        if (verified.recovery)
+          sessionStorage.setItem(
+            recoveryKey,
+            JSON.stringify({
+              identity: verified.session.user.id,
+              expiresAt: Date.now() + 3600000,
+            }),
+          );
+      }
+      state = {
+        ...state,
+        recovery: recoveryMatches(
+          sessionStorage.getItem(recoveryKey),
+          data.session?.user.id,
+        ),
+      };
       await establish(
         data.session?.user.id ?? null,
         data.session?.user.email ?? null,
       );
+      initializing = false;
       window.addEventListener('focus', () => {
         if (state.engine && !state.engine.pendingCount)
           void state.engine.refresh().catch(() => {
@@ -293,14 +329,24 @@ export async function startAccount() {
           void establish(null);
         }
       });
-    } catch {
-      state = { ...state, ready: true, error: 'SERVICE_UNAVAILABLE' };
+    } catch (error) {
+      initializing = false;
+      state = {
+        ...state,
+        ready: true,
+        recovery: false,
+        error:
+          error instanceof Error && error.message === 'INVALID_AUTH_LINK'
+            ? 'INVALID_AUTH_LINK'
+            : 'SERVICE_UNAVAILABLE',
+      };
       emit();
     }
   })();
   return starting;
 }
 export async function signOut() {
+  sessionStorage.removeItem(recoveryKey);
   // Do not discard a pending save silently when the reader signs out.
   if (state.engine?.pendingCount) {
     await state.engine.flush();

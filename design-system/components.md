@@ -55,6 +55,16 @@ font fallbacks from `tokens.css`, through `npm run newsletter:prepare`. They are
 confirmation messages, not a new product card or a campaign design. Never treat
 the inert Design Lab examples or a reviewed hosted layout as proof of delivery.
 
+Hosted signup security extension (2026-10-12): UK/ES/EN native Brevo forms
+add Cloudflare Turnstile after the compact consent notice and before the existing
+submit button. Each form has its own Managed widget for `sibforms.com`, without
+pre-clearance. Provider-owned challenge styling and language follow Cloudflare;
+Bake Again copy, semantic palette and email-only fields retain the reviewed variant.
+The existing Email Design Lab remains a DOI email preview; the live hosted forms
+are the matching security examples, recorded in `lib/newsletter/brevo-forms.json`.
+All nine widths passed and automatic client success was observed in each locale.
+No submit, delivery, server-validation or suppression result is implied.
+
 Hosted compact-notice variant (2026-10-10, owner request): purpose and locale
 remain in the introduction, followed by required EMAIL, one small Text notice
 and the existing CTA. The notice includes consent, withdrawal, Brevo processing
@@ -782,7 +792,14 @@ security contains an explicit chevron disclosure for password change. AccountHea
 places the shared ghost icon Button (LogOut, 44px target) beside the title, with a
 localized accessible name and tooltip. Disable it while an action is pending. The
 account page has no data/privacy, export or deletion section. Recovery remains
-available even when the personal-data service cannot initialize.
+available even when the personal-data service cannot initialize. A verified
+recovery link opens the dedicated AccountRecovery variant, with a read-only
+verified email and shared PasswordFields: new password, repeated password,
+8-character guidance and show-password. Mismatches use localized native validity.
+A successful save replaces the fields with confirmation and an explicit account
+link. The temporary recovery marker is scoped to the verified user, expires after
+one hour, survives reload in this tab, and clears on completion/sign-out. Recovery
+forms never fall back to another account when a link fails verification.
 
 AccountFields shows a heading and explanation for the active login/signup/reset mode;
 mode changes move focus to that heading and clear stale feedback. Successful signup
@@ -825,9 +842,14 @@ Copy: `lib/personal/auth-email-copy.json`. Generated Supabase HTML and subject:
 `lib/personal/email-templates/confirm-signup*`. Local Auth Email Design Lab:
 `lib/personal/email-templates/index.html`, loopback port 3058. Preview CTA is inert.
 Signup passes the whitelisted route locale in user metadata; Go branches choose
-fixed ES/EN copy and default to UK. Metadata has no authorization role. The native
-`{{ .ConfirmationURL }}` stays intact. UK/ES/EN checked at 390/900/1440px without
-horizontal overflow; actual new-template email-client delivery remains unverified.
+fixed ES/EN copy and default to UK. Metadata has no authorization role. The confirmation and recovery variants use the whitelisted `{{ .RedirectTo }}`
+with a one-use `{{ .TokenHash }}` fragment and explicit email/recovery type. The
+client verifies it with Supabase before using the returned identity; URL email is
+never trusted. Fragments are removed before requests. Older PKCE links remain
+supported in their originating browser; invalid links show a new-request path.
+Generated recovery copy lives in `lib/personal/recovery-email-copy.json` and
+`email-templates/reset-password*`. Both variants have inert UK/ES/EN previews.
+The token-derived newsletter composition stays unchanged.
 
 ### Payhip hosted commerce adaptation (2026-10-10)
 

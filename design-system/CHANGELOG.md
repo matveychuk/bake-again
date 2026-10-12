@@ -1174,3 +1174,14 @@
 - Add inert signup/recovery completion examples in UK/EN/ES to the Account Design Lab.
 - Verified 18 completion layouts (2 requests x 3 locales x 3 widths), real recovery
   request/delivery, removed submit form, focused heading and both return actions.
+
+
+## 2026-10-12 · Password recovery and service emails
+
+- Extended the account form with a dedicated verified recovery state, known email,
+  matching new-password fields and a completion view. Reuses existing tokens,
+  Buttons and identity treatment; Design Lab includes all three languages.
+- Added the localized recovery email variant to the existing token-derived email
+  generator. Confirmation and recovery links verify a one-use token on the
+  account page, including when opened in another browser. Invalid links offer a
+  new request instead of silently presenting normal login.
