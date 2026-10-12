@@ -1,5 +1,5 @@
 {
-  "status": "compact-email-only-prepared-launch-blocked",
+  "status": "compact-email-only-enabled-end-to-end-verified",
   "copyVersion": "2026-10-10-v3-compact-notice",
   "provider": "Brevo",
   "sender": "bakeagain.recipes@gmail.com",
@@ -203,25 +203,27 @@
   "listName": "Bake Again — Newsletter",
   "languageAttribute": "NEWSLETTER_LANGUAGE",
   "verification": {
-    "checkedAt": "2026-10-09",
+    "checkedAt": "2026-10-12",
     "hostedContentReviewed": true,
     "responsiveWidths": [
       390,
       900,
       1440
     ],
-    "domainAuthenticated": false,
+    "domainAuthenticated": true,
     "senderApproved": true,
     "senderVerified": true,
     "captchaConfigured": true,
     "localizedTemplatesAssigned": true,
     "deliveryTested": true,
-    "suppressionTested": false,
-    "newsletterEnabled": false,
+    "suppressionTested": true,
+    "newsletterEnabled": true,
     "isolatedLocalPreviewEnabled": true,
     "localPreviewUrl": "http://localhost:3047/uk",
     "deliveryTestedLocales": [
-      "uk"
+      "uk",
+      "es",
+      "en"
     ],
     "doiTest": {
       "locale": "uk",
@@ -246,7 +248,7 @@
       "mailboxPlacement": "Inbox",
       "nativeUnsubscribeLinkResolved": true
     },
-    "unsubscribeTestDeferredByOwner": true,
+    "unsubscribeTestDeferredByOwner": false,
     "unsubscribeTestDeferredAt": "2026-10-09",
     "signupStyleReview": {
       "checkedAt": "2026-10-09",
@@ -314,8 +316,8 @@
       "privacyLayoutsReviewed": 9,
       "supersededBy": "2026-10-10-v3-compact-notice; layout review retained as historical evidence"
     },
-    "deliveryTestedCopyVersion": "2026-10-09-v1",
-    "currentFlowDeliveryTested": false,
+    "deliveryTestedCopyVersion": "2026-10-10-v3-compact-notice",
+    "currentFlowDeliveryTested": true,
     "compactNoticeRevision": {
       "copyVersion": "2026-10-10-v3-compact-notice",
       "status": "provider-saved-browser-reviewed",
@@ -376,6 +378,103 @@
       "emailsSent": 0,
       "serverVerificationTested": false,
       "evidence": "output/activation/brevo-turnstile-review.json"
+    },
+    "currentFlowEndToEndTest": {
+      "checkedAt": "2026-10-12",
+      "copyVersion": "2026-10-10-v3-compact-notice",
+      "status": "owned-alias-end-to-end-verified",
+      "recipientRole": "three owner-authorized plus aliases; primary mailbox remains subscribed",
+      "locales": [
+        "uk",
+        "es",
+        "en"
+      ],
+      "formsSubmitted": 4,
+      "confirmationEmailsReceived": 4,
+      "marketingEmailsReceived": 3,
+      "confirmedTestContacts": 3,
+      "confirmedOnlyAfterEmailClick": true,
+      "exactLanguageListsVerified": true,
+      "audienceListIds": {
+        "master": 3,
+        "uk": 4,
+        "es": 5,
+        "en": 6
+      },
+      "consentRecord": "native form source, transactional confirmation click and dated subscription/list events",
+      "campaignIds": {
+        "en": 10,
+        "es": 11,
+        "uk": 12
+      },
+      "marketingRecipientCountPerCampaign": 1,
+      "nativeUnsubscribeCompletedLocales": [
+        "uk",
+        "es",
+        "en"
+      ],
+      "marketingBlocklistedLocales": [
+        "uk",
+        "es",
+        "en"
+      ],
+      "suppressionVerification": {
+        "campaignDraftId": 13,
+        "selectedOwnedAliases": 3,
+        "eligibleRecipients": 0,
+        "saveDisabled": true,
+        "suppressionMessagesSent": 0,
+        "cachedCopyCountWasStale": true
+      },
+      "confirmationReplayTestedLocales": [
+        "uk",
+        "es"
+      ],
+      "confirmationReplayCreatedDuplicateContact": false,
+      "repeatedSignupTestedLocale": "uk",
+      "repeatedSignupResponse": "same non-enumerating request-received notice; another DOI email delivered; no duplicate contact",
+      "repeatedSignupConfirmationClicked": false,
+      "mailboxPlacement": {
+        "uk": "Gmail Inbox / Updates",
+        "es": "Gmail Inbox / Promotions",
+        "en": "Gmail Inbox / Updates"
+      },
+      "mailAuthentication": {
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "fromDomain": "brevosend.com",
+        "replyTo": "bakeagain.recipes@gmail.com"
+      },
+      "nativeConfirmationPageLanguageObserved": "es (browser language)",
+      "nativeUnsubscribePageLanguageObserved": "es; successful unsubscribe feedback in en",
+      "turnstileClientSuccessBeforeSubmit": true,
+      "interactiveChallengesManuallySolved": 0,
+      "captchaNegativeTokenTested": false,
+      "rateLimitStressTested": false,
+      "providerTimeoutInjectionTested": false,
+      "hardBounceSimulated": false,
+      "phoneEmailClientTested": false,
+      "outlookEmailClientTested": false,
+      "replyDeliveryTested": false,
+      "primaryOwnerSubscriptionPreserved": true,
+      "evidence": "output/activation/newsletter-e2e-2026-10-12.json"
+    },
+    "newsletterLaunch": {
+      "enabledAt": "2026-10-12",
+      "runtimeRevision": 5,
+      "savedVersion": 51,
+      "sourceCommit": "4bac3fa85239fd952a976c96ea65dd9d646f8516",
+      "deploymentId": "appgdep_6accbbba54908191bd001a5dd926e88c",
+      "status": "succeeded",
+      "url": "https://bakeagain.com",
+      "liveLocaleLinksVerified": [
+        "uk",
+        "es",
+        "en"
+      ],
+      "personalAuthReady": false,
+      "personalSyncEnabled": false
     }
   },
   "providerRecords": {

@@ -1,8 +1,8 @@
 # Newsletter connection
 
 The owner selected Brevo Free for the newsletter on 2026-10-09. The site supports
-a provider-hosted signup form; the production invitation remains disabled until
-the real forms and delivery flows are verified. This layer does not collect email
+a provider-hosted signup form; the production invitation was enabled on
+2026-10-12 after owned-address delivery and unsubscribe tests. This layer does not collect email
 addresses, write a subscriber database, send mail or load provider scripts.
 
 `NewsletterSignup` reads runtime bindings (Cloudflare Workers, Node for tests).
@@ -12,6 +12,46 @@ language has no fallback to another audience. Preview the inert layout in
 `/design-system#recipe-utilities`.
 
 ## Connect Brevo after external verification
+
+### Current production state, 2026-10-12
+
+The owner authorized three distinct plus aliases for UK/ES/EN subscription,
+confirmation, newsletter delivery and unsubscribe tests. The current compact
+notice and Managed Turnstile forms accepted submissions. Each new contact appeared
+only after its DOI click, with native form-source/confirmation history, master list
+#3 and exactly its matching language list (#4 UK, #5 ES, #6 EN). Native language
+lists are authoritative; the legacy language attribute remains blank.
+
+Campaigns #10 EN, #11 ES and #12 UK each targeted one exact owned alias. All three
+arrived in Gmail Inbox; ES was categorized Promotions, UK/EN Updates. SPF, DKIM
+and DMARC passed for the actual `brevosend.com` From domain; Reply-To remains
+the approved business Gmail. Authentication of `bakeagain.com` does not change
+this Gmail sender rewriting.
+
+All three received native unsubscribe links worked and set Email campaigns to
+Blocklisted. Selecting the three aliases together in suppression draft #13 showed
+**0 recipients** and disabled Save. No suppression message was sent. Copied
+campaign summaries briefly retained stale counts; use recalculated recipient
+selection and native subscription status. The primary owner contact remains
+subscribed. UK/ES DOI replays returned success without duplicate contacts. A UK
+repeat signup returned the same non-enumerating notice and another DOI email;
+that extra confirmation was not clicked. Four DOI emails and three marketing
+emails were received in total. This does not verify rate limiting.
+
+Default Brevo DOI pages use browser language; here they displayed Spanish. Native
+unsubscribe confirmation displayed Spanish, with English success feedback.
+See [Brevo form documentation](https://help.brevo.com/hc/en-us/articles/208771869-Create-a-sign-up-form-in-Brevo).
+Phone/Outlook rendering, reply delivery, CAPTCHA negative-token rejection,
+rate-limit stress, injected provider timeouts and hard bounces were not tested.
+Historical layout-only reviews below retain their original zero-send counts.
+
+Runtime revision 5 enables only `NEWSLETTER_ENABLED`; the reviewed per-language
+URLs match the manifest. Saved site version 51 was deployed successfully on
+2026-10-12 and all three live homepage links reached matching forms. Personal
+Auth/sync remain disabled pending backup/restore and sign-in verification.
+Evidence and accurate test scope are recorded in `brevo-forms.json` and the ignored
+`output/activation/newsletter-e2e-2026-10-12.json`. The dated sections below are
+historical records, not the current launch status.
 
 ### Current setup, 2026-10-09
 
