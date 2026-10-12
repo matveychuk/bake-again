@@ -935,6 +935,7 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
     (ingredient) => ingredient.id === 'cottage-cheese',
   );
   const sugar = ingredients.find((ingredient) => ingredient.id === 'sugar');
+  const flour = ingredients.find((ingredient) => ingredient.id === 'flour');
   const tapioca = ingredients.find((ingredient) => ingredient.id === 'tapioca');
   const shaping = recipe?.steps.find((step) => step.id === 'shape-dumplings');
   const cooking = recipe?.steps.find((step) => step.id === 'cook-dumplings');
@@ -944,7 +945,7 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
 
   assert.deepEqual(cottageCheese?.quantity.base, {
     kind: 'exact',
-    value: 450,
+    value: 500,
     unit: 'g',
   });
   assert.equal(cottageCheese?.name, 'Кисломолочний сир');
@@ -962,7 +963,7 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
   });
   assert.deepEqual(tapioca?.quantity.base, {
     kind: 'exact',
-    value: 7,
+    value: 10,
     unit: 'g',
   });
   assert.deepEqual(tapioca?.quantity.equivalent, {
@@ -970,6 +971,17 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
     value: 1,
     unit: 'tbsp',
   });
+  assert.deepEqual(flour?.quantity.base, {
+    kind: 'exact',
+    value: 100,
+    unit: 'g',
+  });
+  assert.deepEqual(flour?.quantity.equivalent, {
+    kind: 'exact',
+    value: 5,
+    unit: 'tbsp',
+  });
+  assert.equal(recipe?.versionId, 'lazy-dumplings-source-v2');
   assert.match(shaping?.tip ?? '', /в один шар/);
   assert(!ingredients.some((ingredient) => ingredient.id === 'water'));
   assert.equal(recipe?.presentation, 'concise');

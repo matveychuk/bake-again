@@ -1,0 +1,38 @@
+{
+  "approved": "2026-10-12",
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "picture": {
+    "top": 340,
+    "width": 1080,
+    "height": 1580,
+    "bottomBand": 0
+  },
+  "headerTransition": {
+    "kind": "opacity-gradient feather, not blur of food",
+    "height": 44,
+    "from": "header color at picture top",
+    "to": "transparent over same photo/video",
+    "everyShot": true
+  },
+  "title": {
+    "font": "Literata-Semibold",
+    "maximumSize": 62,
+    "top": 222,
+    "firstTitleWidth": 1016,
+    "firstTitleLeft": 32,
+    "firstTitleLines": 1,
+    "overflow": "shorten copy; inspect actual glyph bounds"
+  },
+  "badge": "badge-horizontal-v1.json",
+  "palette": {
+    "default": "Warm Precision cream / terracotta / chocolate",
+    "IG-009": "approved apricot variant; not compulsory globally"
+  },
+  "cover": "settled badge; no large stamp over food",
+  "story": "separate 9:16 MP4; upload from gallery; own CTA",
+  "duration": "content-dependent; IG-009 examples 20s Reel / 12s Story"
+}

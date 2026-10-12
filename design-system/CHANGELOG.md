@@ -1162,6 +1162,10 @@
 - Configure both trial download pages through Beta Content Editor with UK guidance and optimized delivery files. The final download frame does not inherit library CSS; retain its native controls.
 - Verify both actual downloads by SHA-256 and 390/900/1440 widths. New receipt email-client rendering and new-copy phone opening/saving remain unverified.
 
+## 2026-10-12 — Reel / Story food-first approved
+
+Approved by Sasha: expanded food area, compact copy, soft feathered header-to-photo edge on every scene, larger gluten-free badge and horizontal stamp-to-badge opening. Reusable Swift component, JSON parameters and transparent PNG sequence saved in templates/instagram-reels. Separate 9:16 Story export is now the default. Media Design Lab example: media/instagram/templates/reels-food-first-v1/review.html. Web components and carousel patterns unchanged.
+
 ## 2026-10-12 · Recently viewed section width
 
 - Give RecentRecipes an explicit available width within the shared flex page shell,
@@ -1184,6 +1188,12 @@
 - Add inert signup/recovery completion examples in UK/EN/ES to the Account Design Lab.
 - Verified 18 completion layouts (2 requests x 3 locales x 3 widths), real recovery
   request/delivery, removed submit form, focused heading and both return actions.
+
+## 2026-10-12 · Optional Reel badge letter spacing
+
+- Extend the existing GlutenFreeBadge component with optional configuration `letterSpacing`; omit it to preserve the approved default. Keep motion, glyph-bound centering and overflow checks.
+- Document an IG-011 review variant using the existing Manrope Bold 700 font, 44 px, 1.2 px tracking and 24 px extra separation before the food image. No new global visual approval or changes to the default JSON/PNG overlay.
+- Add the variant to the Media Design Lab. Verified 180 decoded frames, full playback, controls and both review/lab layouts at 390/900/1440 px.
 
 
 ## 2026-10-12 · Password recovery and service emails
