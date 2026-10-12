@@ -28,6 +28,7 @@ import {
   clearAuthLinkError,
 } from '@/lib/personal/browser';
 import { accountCopy } from './copy';
+import { passwordErrorKey } from '@/lib/personal/password-error';
 import styles from './account.module.css';
 type RecipeOption = { id: string; title: string };
 type EmailRequest = { kind: 'signup' | 'reset'; email: string };
@@ -539,15 +540,18 @@ export function AccountPage({
   const running = useRef(false);
   const [recoverySaved, setRecoverySaved] = useState(false);
   const engine = state.engine;
-  async function run(fn: () => Promise<unknown> | void) {
+  async function run(
+    fn: () => Promise<unknown> | void,
+    errorMessage: (error: unknown) => string = () => c.error,
+  ) {
     if (running.current) return;
     running.current = true;
     setBusy(true);
     setMessage('');
     try {
       await fn();
-    } catch {
-      setMessage(c.error);
+    } catch (error) {
+      setMessage(errorMessage(error));
     } finally {
       running.current = false;
       setBusy(false);
@@ -569,14 +573,17 @@ export function AccountPage({
           onPassword={(event) => {
             event.preventDefault();
             const data = new FormData(event.currentTarget);
-            void run(async () => {
-              const { error } = await authClient().auth.updateUser({
-                password: String(data.get('new-password')),
-              });
-              if (error) throw error;
-              setRecoverySaved(true);
-              completePasswordRecovery();
-            });
+            void run(
+              async () => {
+                const { error } = await authClient().auth.updateUser({
+                  password: String(data.get('new-password')),
+                });
+                if (error) throw error;
+                setRecoverySaved(true);
+                completePasswordRecovery();
+              },
+              (error) => c[passwordErrorKey(error)],
+            );
           }}
         />
       </section>
@@ -734,14 +741,17 @@ export function AccountPage({
             event.preventDefault();
             const form = event.currentTarget;
             const data = new FormData(form);
-            void run(async () => {
-              const { error } = await authClient().auth.updateUser({
-                password: data.get('new-password') as string,
-              });
-              if (error) throw error;
-              form.reset();
-              setMessage(c.passwordChanged);
-            });
+            void run(
+              async () => {
+                const { error } = await authClient().auth.updateUser({
+                  password: data.get('new-password') as string,
+                });
+                if (error) throw error;
+                form.reset();
+                setMessage(c.passwordChanged);
+              },
+              (error) => c[passwordErrorKey(error)],
+            );
           }}
         />
       )}

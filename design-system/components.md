@@ -795,7 +795,12 @@ account page has no data/privacy, export or deletion section. Recovery remains
 available even when the personal-data service cannot initialize. A verified
 recovery link opens the dedicated AccountRecovery variant, with a read-only
 verified email and shared PasswordFields: new password, repeated password,
-8-character guidance and show-password. Mismatches use localized native validity.
+8-character guidance, a reminder to use a different password, and show-password.
+Mismatches use localized native validity. Password updates map reviewed provider
+error codes to localized feedback for an unchanged/weak password, an expired session,
+a connection failure or rate limiting. Other failures retain neutral copy; never
+render raw provider messages. Failed saves keep the form available for correction.
+The three inert Design Lab recovery examples show the unchanged-password alert.
 A successful save replaces the fields with confirmation and an explicit account
 link. The temporary recovery marker is scoped to the verified user, expires after
 one hour, survives reload in this tab, and clears on completion/sign-out. Recovery
