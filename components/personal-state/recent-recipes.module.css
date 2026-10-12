@@ -1,5 +1,7 @@
 .section {
   container-type: inline-size;
+  width: 100%;
+  min-width: 0;
   max-width: var(--layout-max-page);
   margin: 0 auto;
   padding: var(--space-12) var(--layout-gutter-desktop);
