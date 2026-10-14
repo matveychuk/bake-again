@@ -78,14 +78,16 @@ AI API. Check responsive behavior at 390, 900 and 1440 px after interface change
 
 ## Hosting and runtime configuration
 
-### Shared crepes link
+### Shared multilingual links
 
 Use `https://bakeagain.com/recipes/crepes` for the multilingual Instagram bio.
+Use `https://bakeagain.com` for the full recipe catalogue; its `/recipes` alias
+uses the same language negotiation.
 This neutral entry (and its `/cook` variant) redirects to the same recipe in
 the visitor's saved `ba_locale` language, otherwise the first supported browser
 language by `Accept-Language` preference, otherwise Ukrainian. It uses a temporary
 307 redirect with `Cache-Control: private, no-store` and `Vary: Cookie, Accept-Language`.
-Explicit `/uk/`, `/es/` and `/en/` recipe URLs retain their requested language.
+Explicit `/uk/`, `/es/` and `/en/` home and recipe URLs retain their requested language.
 Query parameters are preserved. Browser language is only an initial preference;
 the existing language switcher remains available and saves an explicit choice.
 Other neutral entry points keep their existing behavior.

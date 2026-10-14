@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 
-const origin = new URL(process.env.LANGUAGE_CHECK_URL ?? 'http://localhost:3011');
+const origin = new URL(
+  process.env.LANGUAGE_CHECK_URL ?? 'http://localhost:3011',
+);
 const paths = {
   uk: '/uk/recipes/bezghliutenovi-mlyntsi',
   es: '/es/recipes/crepes-sin-gluten',
@@ -23,25 +25,53 @@ const cases = [
 let checks = 0;
 async function request(path, headers = {}) {
   return fetch(new URL(path, origin), {
-    redirect: 'manual', headers, signal: AbortSignal.timeout(30_000),
+    redirect: 'manual',
+    headers,
+    signal: AbortSignal.timeout(30_000),
   });
 }
-for (const [name, language, cookie, locale] of cases) {
-  const headers = {};
-  if (language) headers['accept-language'] = language;
-  if (cookie) headers.cookie = cookie;
-  const response = await request('/recipes/crepes', headers);
-  assert.equal(response.status, 307, name);
-  assert.equal(new URL(response.headers.get('location'), origin).pathname, paths[locale], name);
-  assert.match(response.headers.get('cache-control') ?? '', /no-store/i, name);
-  const vary = response.headers.get('vary')?.toLowerCase() ?? '';
-  assert(vary.includes('accept-language') && vary.includes('cookie'), `${name}: Vary`);
+for (const entry of ['/recipes/crepes', '/', '/recipes']) {
+  for (const [name, language, cookie, locale] of cases) {
+    const headers = {};
+    if (language) headers['accept-language'] = language;
+    if (cookie) headers.cookie = cookie;
+    const response = await request(entry, headers);
+    const label = `${entry}: ${name}`;
+    assert.equal(response.status, 307, label);
+    assert.equal(
+      new URL(response.headers.get('location'), origin).pathname,
+      entry === '/recipes/crepes' ? paths[locale] : `/${locale}`,
+      label,
+    );
+    assert.match(
+      response.headers.get('cache-control') ?? '',
+      /no-store/i,
+      name,
+    );
+    const vary = response.headers.get('vary')?.toLowerCase() ?? '';
+    assert(
+      vary.includes('accept-language') && vary.includes('cookie'),
+      `${name}: Vary`,
+    );
+    await response.arrayBuffer();
+    checks++;
+  }
+}
+for (const entry of ['/', '/recipes']) {
+  const query = '?utm_source=instagram&collection=breakfast&q=crepes';
+  const response = await request(entry + query, { 'accept-language': 'es' });
+  assert.equal(response.status, 307);
+  const target = new URL(response.headers.get('location'), origin);
+  assert.equal(target.pathname, '/es');
+  assert.equal(target.search, query);
   await response.arrayBuffer();
   checks++;
 }
 for (const suffix of ['', '/cook']) {
   const query = '?utm_source=instagram&mode=scale&scale=1.5';
-  const response = await request(`/recipes/crepes${suffix}${query}`, { 'accept-language': 'es' });
+  const response = await request(`/recipes/crepes${suffix}${query}`, {
+    'accept-language': 'es',
+  });
   assert.equal(response.status, 307);
   const target = new URL(response.headers.get('location'), origin);
   assert.equal(target.pathname, paths.es + suffix);
@@ -59,6 +89,17 @@ for (const [locale, path] of Object.entries(paths)) {
   assert.match(html, new RegExp(`<html[^>]*lang="${locale}"`));
   assert(html.includes('id="ingredients"'), `${locale}: rendered ingredients`);
   assert(html.includes('id="recipe-method"'), `${locale}: rendered method`);
+  checks++;
+}
+for (const locale of Object.keys(paths)) {
+  const response = await request(`/${locale}`, {
+    'accept-language': locale === 'es' ? 'en' : 'es',
+    cookie: `ba_locale=${locale === 'es' ? 'en' : 'es'}`,
+  });
+  assert.equal(response.status, 200, `Explicit ${locale} home must win`);
+  const html = await response.text();
+  assert.match(html, new RegExp(`<html[^>]*lang="${locale}"`));
+  assert(html.includes('id="recipes"'), `${locale}: rendered catalogue`);
   checks++;
 }
 console.log(`PASS: ${checks} language-link HTTP checks at ${origin.origin}`);

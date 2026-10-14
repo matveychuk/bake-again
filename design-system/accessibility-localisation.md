@@ -26,6 +26,8 @@ Approved status label/background contrast:
   language, then Ukrainian. Explicit localized links retain their language and
   the existing switcher keeps the visitor on the same recipe. This entry is a
   temporary, non-cacheable redirect; it adds no language-selection screen.
+- The main `/` entry and `/recipes` catalogue alias use the same automatic
+  language preference; explicit `/uk`, `/es` and `/en` links retain priority.
 - Components must accommodate longer translations without truncating essential text.
 - Use the locale-aware display token for headings. Ukrainian must use Literata rather than
   relying on a browser fallback for Newsreader's unavailable Cyrillic glyphs.

@@ -1,5 +1,15 @@
 # Design system changelog
 
+## 2026-10-14 · Multilingual home link
+
+- Extended saved-language/browser-language/Ukrainian selection to the homepage
+  and neutral catalogue alias, reusing the crepes entry behavior and existing UI.
+- Keep explicit localized home URLs authoritative, preserve catalogue filters,
+  and prevent shared caching of visitor-dependent redirects.
+- Extended the HTTP language-link regression check to home and catalogue entries.
+- Verified 46 HTTP scenarios and UK/ES/EN catalogue layouts at 390/900/1440px
+  without horizontal overflow.
+
 ## 2026-10-14 · Shared multilingual crepes link
 
 - Added browser-language negotiation to the neutral crepes entry after an explicit
