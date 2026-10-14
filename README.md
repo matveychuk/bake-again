@@ -78,6 +78,22 @@ AI API. Check responsive behavior at 390, 900 and 1440 px after interface change
 
 ## Hosting and runtime configuration
 
+### Shared crepes link
+
+Use `https://bakeagain.com/recipes/crepes` for the multilingual Instagram bio.
+This neutral entry (and its `/cook` variant) redirects to the same recipe in
+the visitor's saved `ba_locale` language, otherwise the first supported browser
+language by `Accept-Language` preference, otherwise Ukrainian. It uses a temporary
+307 redirect with `Cache-Control: private, no-store` and `Vary: Cookie, Accept-Language`.
+Explicit `/uk/`, `/es/` and `/en/` recipe URLs retain their requested language.
+Query parameters are preserved. Browser language is only an initial preference;
+the existing language switcher remains available and saves an explicit choice.
+Other neutral entry points keep their existing behavior.
+
+Run `node scripts/check-crepes-language-link.mjs` against a local production
+server on port 3011, or set `LANGUAGE_CHECK_URL=https://bakeagain.com` for live
+verification. The check reads pages only and does not call paid APIs or submit forms.
+
 Social profile links appear only on Ukrainian pages. The existing Umami installation
 records `social_profile_open` with `platform` (`instagram` or `facebook`), `placement`
 (`header`, `follow` or `footer`) and `locale` (`uk`). The recorded page path identifies

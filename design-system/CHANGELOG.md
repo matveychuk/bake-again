@@ -1,5 +1,16 @@
 # Design system changelog
 
+## 2026-10-14 · Shared multilingual crepes link
+
+- Added browser-language negotiation to the neutral crepes entry after an explicit
+  saved preference, with Ukrainian fallback. Explicit localized URLs retain priority.
+- Use a temporary, non-cacheable redirect and preserve recipe configuration/query
+  parameters. Reuse the existing language switcher without changing page layouts.
+- Added an HTTP regression check covering UK/ES/EN, saved choices, fallback, query
+  preservation and rendered localized recipe pages.
+- Verified 17 HTTP scenarios, manual language choice followed by the neutral link,
+  and UK/ES/EN at 390/900/1440px without horizontal overflow.
+
 ## 2026-10-12 · Continuous sticky header background
 
 - Extend the shared header background and lower divider across the viewport,
