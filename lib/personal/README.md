@@ -1,14 +1,26 @@
-# Personal foundation — phase A
+# Personal accounts and synchronization
 
-Status: Supabase Auth/read adapter implemented locally; PostgreSQL migration applied
-to the owner's Supabase project on 2026-10-09 with explicit approval. Hosted schema,
-RLS/grants/history and anonymous Data API denial verified; no site deployment.
-On 2026-10-09 the owner selected Supabase Free for reader
-accounts (Auth) and personal data (Postgres). The application stays disabled without
-explicit runtime configuration. Real reader signup/login/logout, account
-provisioning, browser sessions and cloud writes are not implemented. Google/email
-method configuration and Brevo SMTP remain separate integration work. See the local
-architecture handoff for the exact hosted migration and verification status.
+Current status (2026-10-16): Supabase Auth, owner-scoped sync and reader account UI
+are enabled in production since 2026-10-12. The operational handoff records real
+SMTP delivery, two-account isolation, two-browser sync, owner-confirmed recovery,
+and a hosted backup restored locally. A recurring automated backup is not implied.
+`PERSONAL_SYNC_ENABLED` / `PERSONAL_AUTH_READY` and the database gate still fail closed.
+
+`browser.ts` owns browser sessions and auth callbacks; `sync-engine.ts` owns queued
+writes and conflicts. The `/config` and `/sync` routes implement the current UI.
+The `/record` route remains the read-only foundation described below. Personal-data
+erasure excludes Supabase Auth and newsletter records; those require their separate
+administrative process. Cook progress and timers remain device-local.
+
+The following A/C sections preserve implementation history and migration contracts.
+Statements about unimplemented features or pending rollout refer to those dated
+phases, not the current production state. Read the append-only dated evidence in
+`docs/architecture/round-2-accounts.uk.md` for operational details.
+
+## Historical phase A (2026-10-09)
+
+The initial Supabase Auth/read adapter and PostgreSQL foundation preceded browser
+sessions, provisioning and cloud writes. Its additive migrations remain immutable.
 
 ## Boundaries
 
@@ -162,7 +174,7 @@ The in-memory fixture restore test is not a production backup or a working admin
 export endpoint. Do not collect live personal data until an operational backup /
 export and verified auth path are available.
 
-## Phase C implementation (2026-10-10; local testing activated)
+## Historical phase C implementation (2026-10-10; local testing activated)
 
 The earlier sections describe the deployed A foundation. Phase C now adds a separate
 `20261009220000_personal_sync.sql`, strict owner-scoped transactional RPC, runtime config

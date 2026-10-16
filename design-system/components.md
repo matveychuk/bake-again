@@ -864,3 +864,21 @@ The token-derived newsletter composition stays unchanged.
 Native provider buttons, inputs and text wordmark reuse semantic tokens through the generated CSS in `media/commerce/payhip-test-2026-10-10/styling/`. No new website component or token is introduced. Its local `index.html` is the matching external-provider Design Lab with UK/ES/EN wrapping examples. Store and checkout skins are published and checked at 390/900/1440px. The legacy download page and payment-field iframes remain provider-owned. See the styling README for regeneration, limitations and field-level rollback.
 
 Payhip customer-library variant extends the same generated adaptation with `account.css`; its example lives in the external-provider Design Lab. It does not propagate to the Beta Content Editor download frame. Receipt branding uses a token-colored Newsreader outlined PNG plus native subject/message settings; no custom email HTML template is available in this settings screen.
+
+## Optional recipe video lesson (2026-10-16)
+
+`EditorialInvitation` is the shared quiet strip for newsletter and optional recipe
+video offers: SectionTitle, body, note and shared Button. It inherits the existing
+newsletter spacing/type tokens, wraps at 390/900/1440 and is excluded from printing.
+Newsletter modal and its trigger/focus behaviour remain with NewsletterInvitation.
+
+`RecipeVideoLesson` appears after the method, before recent recipes. Planned lessons
+show preparation text without a price or live payment action; available lessons show
+localized price, actual video language, base-recipe scope and native Payhip link.
+Keep payment/access ownership visible. No badge, autoplay, sticky banner, urgency or
+purchase gate on the free recipe. Invalid, withdrawn and version-mismatched offers
+render nothing. Design Lab `#video-lessons` shows inert planned/available UK/ES/EN
+examples; its sample price is explicitly illustrative.
+
+Account email-request feedback uses semantic `output` with phrasing content; spacing,
+focus return and the existing request states remain intact in the AccountExample.

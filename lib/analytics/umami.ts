@@ -22,6 +22,7 @@ export const analyticsEvents = [
   'assistant_submit',
   'language_change',
   'social_profile_open',
+  'video_lesson_open',
 ] as const;
 export type AnalyticsEvent = (typeof analyticsEvents)[number];
 type SocialClickData = {
@@ -31,6 +32,7 @@ type SocialClickData = {
 };
 type EventData = {
   recipe_id?: string;
+  product_id?: string;
   locale?: string;
   target_locale?: string;
   count?: number;
@@ -143,6 +145,17 @@ export function sanitizeAnalyticsPayload(
     );
     if (!social) return false;
     Object.assign(data, social);
+  }
+  if (payload.name === 'video_lesson_open') {
+    if (
+      !/^\/(?:uk|en|es)\/recipes\/[a-z0-9-]+\/?$/.test(url.pathname) ||
+      !data.recipe_id ||
+      !data.locale ||
+      typeof input?.product_id !== 'string' ||
+      !/^[a-z0-9-]{1,100}$/.test(input.product_id)
+    )
+      return false;
+    data.product_id = input.product_id;
   }
   return {
     website: analyticsConfig.websiteId,

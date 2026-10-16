@@ -85,6 +85,8 @@ import { RecipeUtilityActions } from '@/components/recipe/recipe-utility-actions
 import { recipePublicLink } from '@/content/recipes/recipe-public-link';
 import { RecentRecipes } from '@/components/personal-state/recent-recipes';
 import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
+import { RecipeVideoLesson } from '@/components/recipe/recipe-video-lesson';
+import { videoLessons } from '@/content/commerce/video-lessons';
 
 export const metadata: Metadata = {
   title: 'Design System v1 — Bake Again',
@@ -387,8 +389,8 @@ export default function DesignSystemPage() {
             aria-label="Personal accounts — identity, settings and sign-in"
           >
             <p>
-              Local component examples with fictional identity data. Settings actions
-              are inert; forms do not create accounts or send emails.
+              Local component examples with fictional identity data. Settings
+              actions are inert; forms do not create accounts or send emails.
             </p>
             {(['uk', 'es', 'en'] as const).map((locale) => (
               <AccountExample key={locale} locale={locale} />
@@ -458,15 +460,14 @@ export default function DesignSystemPage() {
                   Ukrainian-only social profiles: outline header links and quiet
                   footer links. Home and recipe endings share an email-only
                   invitation followed by the footer, without adjacent social
-                  links. On mobile,
-                  the social row scrolls away while navigation stays sticky.
-                  The opaque page-colour header band and its lower divider span
-                  the screen, including over lighter recipe sections.
-                  English and Spanish omit social links; the email invitation
-                  is localized.
-                  Shopping list keeps an accessible icon on desktop and its full
-                  name in the mobile menu. The short-page preview keeps its
-                  footer at the bottom of the page without overlaying content.
+                  links. On mobile, the social row scrolls away while navigation
+                  stays sticky. The opaque page-colour header band and its lower
+                  divider span the screen, including over lighter recipe
+                  sections. English and Spanish omit social links; the email
+                  invitation is localized. Shopping list keeps an accessible
+                  icon on desktop and its full name in the mobile menu. The
+                  short-page preview keeps its footer at the bottom of the page
+                  without overlaying content.
                 </span>
               </div>
               {(['uk', 'es', 'en'] as const).map((locale) => (
@@ -870,8 +871,8 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Share, print and return to a recipe</strong>
                 <span>
-                  Resolved configuration links · full-width browser-local history ·
-                  provider-hosted email signup
+                  Resolved configuration links · full-width browser-local
+                  history · provider-hosted email signup
                 </span>
               </div>
               <div className={styles.recipeOverviewExample}>
@@ -1439,6 +1440,34 @@ export default function DesignSystemPage() {
             </div>
           </section>
 
+          <section className={styles.section} id="video-lessons">
+            <h2>Optional recipe video lesson</h2>
+            <p className={styles.guidance}>
+              Shared editorial invitation: planned and available states. Sample
+              price, no active checkout. The video describes the base recipe
+              only.
+            </p>
+            {(['uk', 'es', 'en'] as const).map((locale) => (
+              <div key={locale} lang={locale}>
+                <RecipeVideoLesson
+                  locale={locale}
+                  lesson={videoLessons[0]}
+                  preview
+                />
+                <RecipeVideoLesson
+                  locale={locale}
+                  lesson={{
+                    ...videoLessons[0],
+                    status: 'available',
+                    payhipUrl: 'https://payhip.com/b/designpreview',
+                    priceMinor: 1200,
+                    currency: 'EUR',
+                  }}
+                  preview
+                />
+              </div>
+            ))}
+          </section>
           <section className={styles.section} id="dark-mode">
             <NumberedSectionTitle
               number="07"

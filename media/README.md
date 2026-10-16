@@ -25,3 +25,19 @@ Camera originals, alternate edits, social exports and working files belong in lo
 ignored directories or a separate private archive. Do not commit or deploy them.
 Removing metadata from generated WebP files does not clean metadata from the source
 assets; review source files separately before making the repository public.
+
+## Audit and retired website sources
+
+`npm run media:audit` is read-only and lists source size, referenced count and unused
+website sources. Check recipe masters, scripts, publication packages and histories
+before archiving: no product reference does not mean no editing dependency.
+
+On 2026-10-16, 14 unreferenced sources (33,801,629 bytes) were moved unchanged to
+`media/archive/web-source-2026-10-16/` (ignored by Git). The tracked
+[retirement manifest](web-source/retired-assets.json) records original paths,
+archive paths, SHA-256 and the previous Git commit for recovery. Fifteen other
+inactive sources remain because reference/editing dependencies exist. Camera originals,
+current masters, social versions and publication history were preserved.
+
+This reduces current source contents after commit/push; old Git commits still contain
+previous versions. GitHub does not back up ignored local originals or this archive.

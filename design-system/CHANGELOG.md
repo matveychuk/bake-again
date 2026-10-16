@@ -1,5 +1,20 @@
 # Design system changelog
 
+## 2026-10-16 · Optional recipe video lesson and shared invitation
+
+- Added a recipe-version-bound video catalogue and Payhip product-link validation.
+  Napoleon starts in preparation, with no price, video or active checkout. Free trial
+  products, withdrawn offers and mismatched recipe versions cannot expose a purchase.
+- Extracted the existing newsletter strip into shared `EditorialInvitation`; the
+  video variant reuses SectionTitle, Button and semantic tokens after the method.
+  Available copy names the actual video language, base recipe scope and Payhip handoff.
+- Added inert planned/available examples in UK/ES/EN at `#video-lessons` in Design Lab.
+  Verified all three locales at 390/900/1440 without text overflow, 44px buttons,
+  newsletter Escape/focus return and print/Cook exclusion in the production build.
+- Fixed semantic account feedback and typed form values. Lint/typecheck, 468 tests,
+  78 rendered checks and 46 language-link checks passed; generated media remains
+  144 files / 30.12 MiB. Actual payment and lesson delivery await the finished product.
+
 ## 2026-10-14 · Multilingual home link
 
 - Extended saved-language/browser-language/Ukrainian selection to the homepage

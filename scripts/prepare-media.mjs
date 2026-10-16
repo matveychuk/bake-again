@@ -91,6 +91,32 @@ const sourceFiles = (await walk(sourceRoot)).filter((filename) =>
   sourceExtensions.has(path.extname(filename).toLowerCase()),
 );
 
+// A read-only inventory for future cleanup. Unreferenced website files may still
+// be inputs to a publication or an editing master; this is not a deletion list.
+if (process.argv.includes('--audit')) {
+  const inventory = await Promise.all(
+    sourceFiles.map(async (filename) => ({
+      source: path.relative(projectRoot, filename),
+      publicPath: `/${publishRelativePath(filename)}`,
+      referenced: isReferenced(publishRelativePath(filename), productSource),
+      bytes: (await fs.stat(filename)).size,
+    })),
+  );
+  console.log(
+    JSON.stringify(
+      {
+        sourceCount: inventory.length,
+        sourceBytes: inventory.reduce((sum, asset) => sum + asset.bytes, 0),
+        referencedCount: inventory.filter((asset) => asset.referenced).length,
+        unreferenced: inventory.filter((asset) => !asset.referenced),
+      },
+      null,
+      2,
+    ),
+  );
+  process.exit(0);
+}
+
 for (const root of generatedRoots) {
   await fs.rm(path.join(publicRoot, root), { recursive: true, force: true });
 }

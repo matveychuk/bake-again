@@ -390,3 +390,8 @@
 .gate .accountPage {
   min-height: 0;
 }
+
+.emailStatus {
+  display: grid;
+  gap: var(--space-3);
+}

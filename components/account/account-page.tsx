@@ -91,13 +91,15 @@ export function AccountFields({
             {c.checkEmail}
           </Heading>
         </div>
-        <div className={styles.notice} role="status">
-          <p>{c.requestAccepted}</p>
-          <p className={styles.email}>
+        <output className={`${styles.notice} ${styles.emailStatus}`}>
+          <span>{c.requestAccepted}</span>
+          <span className={styles.email}>
             <strong>{emailRequest.email}</strong>
-          </p>
-          <p>{emailRequest.kind === 'signup' ? c.signupSent : c.resetSent}</p>
-        </div>
+          </span>
+          <span>
+            {emailRequest.kind === 'signup' ? c.signupSent : c.resetSent}
+          </span>
+        </output>
         <p className={styles.finePrint}>{c.emailHelp}</p>
         <div className={styles.actions}>
           <Button onClick={() => returnTo('login')}>{c.backToLogin}</Button>
@@ -573,10 +575,12 @@ export function AccountPage({
           onPassword={(event) => {
             event.preventDefault();
             const data = new FormData(event.currentTarget);
+            const password = data.get('new-password');
+            if (typeof password !== 'string') return;
             void run(
               async () => {
                 const { error } = await authClient().auth.updateUser({
-                  password: String(data.get('new-password')),
+                  password,
                 });
                 if (error) throw error;
                 setRecoverySaved(true);

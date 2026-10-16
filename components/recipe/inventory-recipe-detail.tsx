@@ -66,6 +66,8 @@ import { RecipePrintView } from './recipe-print-view';
 import { RecentRecipes } from '@/components/personal-state/recent-recipes';
 import { getRecipeCatalog } from '@/content/recipes/catalog';
 import { NewsletterSignup } from '@/components/site/newsletter-signup';
+import { getRecipeVideoLesson } from '@/content/commerce/video-lessons';
+import { RecipeVideoLesson } from './recipe-video-lesson';
 
 export function InventoryRecipeDetail({
   recipe,
@@ -196,6 +198,10 @@ export function InventoryRecipeDetail({
       ? recipeStructuredData(recipe.id, locale, configuredStructured)
       : null;
   const document = getRecipeDocument(recipe.id);
+  const videoLesson =
+    !isDraft && document?.recipe.versionId
+      ? getRecipeVideoLesson(recipe.id, document.recipe.versionId)
+      : null;
   const helpConfiguration = configuredStructured
     ? sourceAssistantConfiguration(
         recipe.id,
@@ -509,6 +515,9 @@ export function InventoryRecipeDetail({
               <p>{copy?.publicationNote?.[locale] ?? structured?.gapNote}</p>
             </aside>
           )}
+        {videoLesson && (
+          <RecipeVideoLesson lesson={videoLesson} locale={locale} />
+        )}
         {!isDraft && (
           <RecentRecipes
             locale={locale}
