@@ -2,7 +2,7 @@
 
 [Bake Again](https://bakeagain.com) is a gluten-free recipe website in Ukrainian,
 English and Spanish. It includes recipe search, ingredient scaling, a shopping
-list, saved recipes and step-by-step Cook Mode with timers. The local round-2
+list, saved recipes and step-by-step Cook Mode with timers. The account
 implementation requires an account for personal saves; reading, scaling and
 Cook Mode remain available without signing in. Guest drafts are temporary.
 
@@ -26,18 +26,18 @@ features work without paid API credentials. Never commit `.env.local` or real ke
 
 ## Source layout
 
-| Path | Purpose |
-| --- | --- |
-| `app/` | Localized pages, API routes and the internal Design Lab |
-| `components/` | Components used by the website and Design Lab |
-| `content/` | Recipe content, translations, step help and provenance |
-| `lib/` | Recipe behavior, local persistence, analytics, SEO and server-side AI |
-| `design-system/` | Approved semantic tokens and component rules |
-| `media/web-source/` | Source-quality assets needed to build the website |
-| `public/` | Static favicon and generated delivery media |
-| `db/`, `drizzle/` | Shared assistant quota schema and database migrations |
-| `lib/personal/` | Portable personal-data contracts, Supabase Auth/read adapter, D1 adapter and access tests; reader UI and writes remain disabled |
-| `scripts/`, `evals/`, `.github/` | Build preparation, checks and release workflows |
+| Path                             | Purpose                                                                                |
+| -------------------------------- | -------------------------------------------------------------------------------------- |
+| `app/`                           | Localized pages, API routes and the internal Design Lab                                |
+| `components/`                    | Components used by the website and Design Lab                                          |
+| `content/`                       | Recipe content, translations, step help and provenance                                 |
+| `lib/`                           | Recipe behavior, local persistence, analytics, SEO and server-side AI                  |
+| `design-system/`                 | Approved semantic tokens and component rules                                           |
+| `media/web-source/`              | Source-quality assets needed to build the website                                      |
+| `public/`                        | Static favicon and generated delivery media                                            |
+| `db/`, `drizzle/`                | Shared assistant quota schema and database migrations                                  |
+| `lib/personal/`                  | Personal-data contracts, Supabase Auth, owner-scoped sync, D1 adapter and access tests |
+| `scripts/`, `evals/`, `.github/` | Build preparation, checks and release workflows                                        |
 
 Keep tests and their fixtures with the source. `step-help.review.json` is the
 reviewed-content snapshot used by the step-help tests. The Design Lab at
@@ -64,6 +64,8 @@ npm run test:foundation
 npm run test:personal
 npm run test:personal:d1
 npm run test:analytics
+npm run test:commerce
+npm run test:newsletter
 npm run test:seo
 npm run test:assistant
 npm run eval:assistant
@@ -77,6 +79,24 @@ CI performs this check automatically. Tests and assistant evals do not call the 
 AI API. Check responsive behavior at 390, 900 and 1440 px after interface changes.
 
 ## Hosting and runtime configuration
+
+### Shared multilingual links
+
+Use `https://bakeagain.com/recipes/crepes` for the multilingual Instagram bio.
+Use `https://bakeagain.com` for the full recipe catalogue; its `/recipes` alias
+uses the same language negotiation.
+This neutral entry (and its `/cook` variant) redirects to the same recipe in
+the visitor's saved `ba_locale` language, otherwise the first supported browser
+language by `Accept-Language` preference, otherwise Ukrainian. It uses a temporary
+307 redirect with `Cache-Control: private, no-store` and `Vary: Cookie, Accept-Language`.
+Explicit `/uk/`, `/es/` and `/en/` home and recipe URLs retain their requested language.
+Query parameters are preserved. Browser language is only an initial preference;
+the existing language switcher remains available and saves an explicit choice.
+Other neutral entry points keep their existing behavior.
+
+Run `node scripts/check-crepes-language-link.mjs` against a local production
+server on port 3011, or set `LANGUAGE_CHECK_URL=https://bakeagain.com` for live
+verification. The check reads pages only and does not call paid APIs or submit forms.
 
 Social profile links appear only on Ukrainian pages. The existing Umami installation
 records `social_profile_open` with `platform` (`instagram` or `facebook`), `placement`
@@ -99,15 +119,13 @@ foundation: disabled without runtime configuration, or backed by Supabase when
 `PERSONAL_BACKEND=supabase`, `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` are set.
 The official SDK verifies the reader's bearer token with Auth; database RLS also
 restricts reads to that owner. A publishable key is not a reader credential.
-Phase C sign-in and owner-scoped cloud writes are enabled for local testing with
-the approved Supabase project. SMTP delivery and a signed-in bookmark read across
-tabs are verified. The UI has no guest import or manual sync controls; passwords
-require 8 characters without composition rules. Production Sites has not been
-updated. The pending-action sign-in acceptance check remains separate from the
-completed guest UI and existing-account checks.
-See [personal foundation contracts](lib/personal/README.md) for the portable API,
-migration checks and phase C prerequisites. The detailed local handoff is at
-`docs/architecture/round-2-foundation.uk.md` (intentionally outside Git).
+Reader sign-in, owner-scoped cloud writes and password recovery were enabled in
+production on 2026-10-12. The dated handoff records SMTP delivery, two-account
+isolation, two-browser sync and an actual backup/restore check. The UI has no guest
+import or manual sync controls. Passwords require 8 characters without composition
+rules. Account-data erasure does not delete Supabase Auth or newsletter records.
+See [personal contracts and runtime](lib/personal/README.md) and the local operational
+handoff at `docs/architecture/round-2-accounts.uk.md` (intentionally outside Git).
 
 Configure server-only secrets in the Sites runtime:
 
@@ -131,11 +149,12 @@ the live site). The workflows do not publish automatically or change site access
 Repository cleanup does not remove files or author metadata from old Git commits.
 Review and sanitize history separately before changing repository visibility.
 
-### Phase C: reader accounts (local, disabled)
+## Optional recipe video lessons
 
-A Supabase-backed account/sync implementation is available locally behind
-`PERSONAL_SYNC_ENABLED` and `PERSONAL_AUTH_READY`, with an additional database gate.
-It adds private collections, voluntary import, conflict-aware sync and scoped data
-export/deletion. The new SQL migration has **not** been applied to the hosted project;
-custom SMTP and real reader login are still unverified. See
-[the phase C handoff](docs/architecture/round-2-accounts.uk.md) before activating it.
+[The commerce catalogue](content/commerce/README.md) connects an exact recipe version
+to a Payhip product. The initial Napoleon lesson is `planned`, with no checkout URL
+or price. `/design-system#video-lessons` shows inert UK/ES/EN planned/available examples.
+
+Run `npm run test:commerce` for publication and checkout-link gates, and
+`npm run media:audit` for a read-only website-source inventory. Unreferenced images
+can still be editing dependencies; audit output never deletes them automatically.

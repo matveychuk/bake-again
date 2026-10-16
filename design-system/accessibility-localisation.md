@@ -22,6 +22,12 @@ Approved status label/background contrast:
 - Initial languages: English, Spanish and Ukrainian.
 - Use one stable recipe identity across languages.
 - Persist an explicit language choice.
+- The shared `/recipes/crepes` entry uses the saved language first, then browser
+  language, then Ukrainian. Explicit localized links retain their language and
+  the existing switcher keeps the visitor on the same recipe. This entry is a
+  temporary, non-cacheable redirect; it adds no language-selection screen.
+- The main `/` entry and `/recipes` catalogue alias use the same automatic
+  language preference; explicit `/uk`, `/es` and `/en` links retain priority.
 - Components must accommodate longer translations without truncating essential text.
 - Use the locale-aware display token for headings. Ukrainian must use Literata rather than
   relying on a browser fallback for Newsreader's unavailable Cyrillic glyphs.

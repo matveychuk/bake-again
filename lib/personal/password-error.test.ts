@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { passwordErrorKey } from './password-error.ts';
 
-test('password validation distinguishes unchanged and weak passwords from unrelated 422 errors', () => {
+void test('password validation distinguishes unchanged and weak passwords from unrelated 422 errors', () => {
   assert.equal(
     passwordErrorKey({ code: 'same_password', status: 422 }),
     'passwordUnchanged',
@@ -17,7 +17,7 @@ test('password validation distinguishes unchanged and weak passwords from unrela
   );
 });
 
-test('password feedback separates retryable failures and sessions requiring a new link', () => {
+void test('password feedback separates retryable failures and sessions requiring a new link', () => {
   assert.equal(passwordErrorKey({ status: 429 }), 'rateLimited');
   assert.equal(
     passwordErrorKey({ name: 'AuthRetryableFetchError' }),
@@ -38,7 +38,7 @@ test('password feedback separates retryable failures and sessions requiring a ne
   );
 });
 
-test('unknown failures never return raw messages, passwords, email addresses or URLs', () => {
+void test('unknown failures never return raw messages, passwords, email addresses or URLs', () => {
   for (const error of [
     null,
     undefined,

@@ -171,7 +171,67 @@ void test('social analytics reject unknown dimensions, non-Ukrainian and interna
   }
 });
 
-void test('private account and authentication callback pages are excluded from analytics',()=>{
- for(const locale of ['uk','es','en'])assert.equal(analyticsAllowed('bakeagain.com',`/${locale}/account`),false);
- assert.equal(sanitizeAnalyticsPayload('event',{url:'https://bakeagain.com/uk/account?code=secret-code&recovery=1'}),false);
+void test('private account and authentication callback pages are excluded from analytics', () => {
+  for (const locale of ['uk', 'es', 'en'])
+    assert.equal(
+      analyticsAllowed('bakeagain.com', `/${locale}/account`),
+      false,
+    );
+  assert.equal(
+    sanitizeAnalyticsPayload('event', {
+      url: 'https://bakeagain.com/uk/account?code=secret-code&recovery=1',
+    }),
+    false,
+  );
+});
+
+void test('video lesson clicks collect only product identifiers, never customer or checkout data', () => {
+  const result = sanitizeAnalyticsPayload('event', {
+    url: '/uk/recipes/napoleon?email=secret#private',
+    name: 'video_lesson_open',
+    data: {
+      recipe_id: 'gluten-free-napoleon',
+      product_id: 'napoleon-video',
+      locale: 'uk',
+      email: 'private@example.com',
+      url: 'https://payhip.com/b/private',
+      purchased: true,
+    },
+  });
+  assert.ok(result);
+  assert.deepEqual(result.data, {
+    recipe_id: 'gluten-free-napoleon',
+    product_id: 'napoleon-video',
+    locale: 'uk',
+  });
+  for (const path of [
+    '/uk',
+    '/uk/account',
+    '/design-system',
+    '/uk/recipes/napoleon/cook',
+  ])
+    assert.equal(
+      sanitizeAnalyticsPayload('event', {
+        url: path,
+        name: 'video_lesson_open',
+        data: {
+          recipe_id: 'napoleon',
+          product_id: 'napoleon-video',
+          locale: 'uk',
+        },
+      }),
+      false,
+    );
+  assert.equal(
+    sanitizeAnalyticsPayload('event', {
+      url: '/uk/recipes/napoleon',
+      name: 'video_lesson_open',
+      data: {
+        recipe_id: 'napoleon',
+        product_id: 'private@example.com',
+        locale: 'uk',
+      },
+    }),
+    false,
+  );
 });

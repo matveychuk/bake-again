@@ -51,9 +51,10 @@ export function AccountExample({ locale }: { locale: AppLocale }) {
               event.nativeEvent as SubmitEvent
             ).submitter?.getAttribute('value');
             if (action === 'signup' || action === 'reset') {
+              const email = new FormData(event.currentTarget).get('email');
               setEmailRequest({
                 kind: action,
-                email: String(new FormData(event.currentTarget).get('email')),
+                email: typeof email === 'string' ? email : '',
               });
             }
           }}

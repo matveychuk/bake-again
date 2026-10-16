@@ -150,4 +150,31 @@ for (const [locale, [plum, napoleon, prune, apple]] of Object.entries(paths)) {
     checks++;
   }
 }
+// Initial planned lesson must stay inert on the recipe and absent from cooking/print.
+for (const [locale, [, napoleon]] of Object.entries(paths)) {
+  for (const [suffix, query, expected] of [
+    ['', '', true],
+    ['', '?mode=scale&scale=2', true],
+    ['', '?view=print', false],
+    ['/cook', '', false],
+  ]) {
+    const response = await fetch(
+      new URL(`/${locale}/recipes/${napoleon}${suffix}${query}`, origin),
+    );
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    const visible = html.slice(0, html.indexOf('</main>'));
+    assert.equal(visible.includes('data-video-lesson="planned"'), expected);
+    assert(
+      !/href="https:\/\/payhip\.com/.test(visible),
+      'A planned lesson must never expose checkout',
+    );
+    if (expected)
+      assert(
+        section(visible, 'video-lesson').includes('disabled'),
+        'Preparation action must be disabled',
+      );
+    checks++;
+  }
+}
 console.log(`Passed ${checks} rendered recipe regression checks (UK/EN/ES).`);

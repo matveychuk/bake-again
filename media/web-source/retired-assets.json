@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-16",
+  "reason": "No product, design, script, recipe-working or publication text references. Source-quality bytes retained in ignored local archive.",
+  "gitRecoveryCommit": "4264293786c4b65e722744e520dd13b4ad4e1807",
+  "files": [
+    {
+      "source": "media/web-source/images/recipes/gluten-free-napoleon-card-v3.png",
+      "archive": "media/archive/web-source-2026-10-16/images/recipes/gluten-free-napoleon-card-v3.png",
+      "bytes": 2676400,
+      "sha256": "9d9b3f10c9d79cccfbafeb258902db56ae8818fe695ecbd9961cd3ef040fca6c"
+    },
+    {
+      "source": "media/web-source/images/recipes/gluten-free-napoleon-card-v1.png",
+      "archive": "media/archive/web-source-2026-10-16/images/recipes/gluten-free-napoleon-card-v1.png",
+      "bytes": 2879601,
+      "sha256": "4cc41da0b7fb1e3ff2b8ee14f6a1bddb55424c231fa67cca6aab95b1d44c17f4"
+    },
+    {
+      "source": "media/web-source/social/bake-again-share-v3.png",
+      "archive": "media/archive/web-source-2026-10-16/social/bake-again-share-v3.png",
+      "bytes": 1404535,
+      "sha256": "10b230e95093cd52fcef99c86eb3d69ac5eafacc44cba10aab4f4956479ad936"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/pliable-dough-clumps-example-v1.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/pliable-dough-clumps-example-v1.png",
+      "bytes": 2409624,
+      "sha256": "3042b4ba8dc3325162e9230b5c370619a1c6b23466ebabddf044393486cce660"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/baked-layer-light-golden-v3.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/baked-layer-light-golden-v3.png",
+      "bytes": 2871447,
+      "sha256": "fd87c43fa03a1df675c0ac156932ed391be0a3ffc84359604c9d08c67cb9ac16"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/dough-discs-v3.png",
+      "bytes": 2801871,
+      "sha256": "97803a6e883385fc43ae4c6ee63a232706ab434c56473f63e3912fe1a8da29d6"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/rolled-layer-parchment-v3.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/rolled-layer-parchment-v3.png",
+      "bytes": 2718043,
+      "sha256": "2befed00f1247502fcffbaa4c4cdf86e96ce4792792e2595f18ce536be662727"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/round-six-layer-assembly-v3.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/round-six-layer-assembly-v3.png",
+      "bytes": 2215223,
+      "sha256": "43388f234a82a3a2a1bb2d3cb7419b522a3d0e64792579ecbcafd013e4d3ca6d"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/cold-butter-early-pulse-example-v1.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/cold-butter-early-pulse-example-v1.png",
+      "bytes": 2454348,
+      "sha256": "4a286706d1e608346727c70f07f8aaa2abd3702e4809d69449116a2a59c421a2"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/finished-custard-v3.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/finished-custard-v3.png",
+      "bytes": 2121546,
+      "sha256": "b002814c992542d413827b6298f4fa1d55f1c51b5b81887784fc53ab1097c976"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/cold-butter-ready-example-v1.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/cold-butter-ready-example-v1.png",
+      "bytes": 2313945,
+      "sha256": "a6962b7a293343c4acdac15315a880e5431097522f5af08449653cff43b20df4"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/pour-wet-into-crumb-example-v1.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/pour-wet-into-crumb-example-v1.png",
+      "bytes": 2213520,
+      "sha256": "9463d3d6b364e02a9397c9887875bbd88cc199b8ead67fe7af969bc4834278b7"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/cold-butter-crumb-example-v1.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/cold-butter-crumb-example-v1.png",
+      "bytes": 2466180,
+      "sha256": "a89c2102cc010a8e566d3736450779b80f709d270da5a27adc515dde70f150d6"
+    },
+    {
+      "source": "media/web-source/media/recipes/gluten-free-napoleon/selected/wet-mixture-smooth-example-v1.png",
+      "archive": "media/archive/web-source-2026-10-16/media/recipes/gluten-free-napoleon/selected/wet-mixture-smooth-example-v1.png",
+      "bytes": 2255346,
+      "sha256": "8a540b584b55fe2aa78f836ba176fbd619f035cd09dd8c9950f29c5e237bb680"
+    }
+  ]
+}

@@ -28,7 +28,9 @@
     "media:prepare": "node scripts/prepare-media.mjs",
     "test:release-render": "node scripts/check-release-render.mjs",
     "db:generate": "drizzle-kit generate",
-    "newsletter:prepare": "node scripts/prepare-newsletter-templates.mjs"
+    "newsletter:prepare": "node scripts/prepare-newsletter-templates.mjs",
+    "media:audit": "node scripts/prepare-media.mjs --audit",
+    "test:commerce": "node --experimental-strip-types --test content/commerce/*.test.ts"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

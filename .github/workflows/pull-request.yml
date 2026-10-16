@@ -43,6 +43,12 @@ jobs:
       - name: Analytics privacy tests
         run: npm run test:analytics
 
+      - name: Commerce publication gates
+        run: npm run test:commerce
+
+      - name: Newsletter policy tests
+        run: npm run test:newsletter
+
       - name: Foundation tests
         run: npm run test:foundation
 

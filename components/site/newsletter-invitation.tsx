@@ -6,6 +6,7 @@ import Image from 'next/image';
 import type { AppLocale } from '@/lib/i18n/config';
 import type { NewsletterSignup } from '@/lib/newsletter/config';
 import { Button } from '@/components/ui/button';
+import { EditorialInvitation } from './editorial-invitation';
 import {
   Dialog,
   DialogClose,
@@ -191,20 +192,17 @@ export function NewsletterInvitation({
 
   return (
     <>
-      <section
+      <EditorialInvitation
         ref={sectionRef}
-        className={styles.section}
         lang={locale}
-        aria-labelledby={titleId}
+        titleId={titleId}
+        title={copy.title}
+        description={copy.body}
+        note={!signup ? copy.preview : undefined}
         data-newsletter-invitation
-      >
-        <div className={styles.main}>
-          <div className={styles.copy}>
-            <h2 id={titleId}>{copy.title}</h2>
-            <p>{copy.body}</p>
-            {!signup && <p className={styles.note}>{copy.preview}</p>}
-          </div>
-          <div className={styles.action}>
+        action={
+          <>
+            {' '}
             {signup ? (
               <Button href={signup.url} rel="noreferrer" onClick={handoff}>
                 {copy.action}
@@ -225,9 +223,9 @@ export function NewsletterInvitation({
                 </Button>
               </>
             )}
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
       <Dialog
         open={open}
         onOpenChange={(value) => {

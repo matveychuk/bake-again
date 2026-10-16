@@ -4,6 +4,7 @@ import { getInventoryRecipe } from './content/recipes/inventory';
 
 import { NextRequest, NextResponse } from 'next/server';
 import { defaultLocale, isAppLocale } from '@/lib/i18n/config';
+import { resolveLocaleFromAcceptLanguage } from '@/lib/i18n/resolve-locale';
 import {
   getLocalizedRecipePath,
   getLocaleFromPathname,
@@ -89,14 +90,21 @@ export function proxy(request: NextRequest) {
   }
   if (isUnlocalizedRoute(pathname)) return continueWithLocale(request);
 
-  const cookieLocale = request.cookies.get(localeCookieName)?.value;
-  const locale = isAppLocale(cookieLocale) ? cookieLocale : defaultLocale;
-
   const redirectUrl = request.nextUrl.clone();
-  const legacyRecipeMatch = pathname.match(/^\/recipes\/([^/]+)(\/cook)?$/);
+  const legacyRecipeMatch = pathname.match(/^\/recipes\/([^/]+)(\/cook)?\/?$/);
   const recipeId = legacyRecipeMatch
     ? getRecipeIdFromLegacySlug(legacyRecipeMatch[1])
     : null;
+  // Shared Instagram links negotiate language only at their neutral entries.
+  // Explicit locale URLs above always win; keep other legacy entry behavior.
+  const negotiatesLocale =
+    recipeId === 'crepes' || pathname === '/' || pathname === '/recipes';
+  const cookieLocale = request.cookies.get(localeCookieName)?.value;
+  const locale = isAppLocale(cookieLocale)
+    ? cookieLocale
+    : negotiatesLocale
+      ? resolveLocaleFromAcceptLanguage(request.headers.get('accept-language'))
+      : defaultLocale;
   const localizedRecipePath = recipeId
     ? getLocalizedRecipePath(recipeId, locale, legacyRecipeMatch?.[2] ?? '')
     : null;
@@ -105,7 +113,16 @@ export function proxy(request: NextRequest) {
     (pathname === '/recipes' || pathname === '/'
       ? `/${locale}`
       : `/${locale}${pathname}`);
-  return NextResponse.redirect(redirectUrl, localizedRecipePath ? 308 : 307);
+  const response = NextResponse.redirect(
+    redirectUrl,
+    negotiatesLocale ? 307 : localizedRecipePath ? 308 : 307,
+  );
+  if (negotiatesLocale) {
+    // A visitor-dependent destination must never be stored as a permanent URL.
+    response.headers.set('Cache-Control', 'private, no-store');
+    response.headers.set('Vary', 'Cookie, Accept-Language');
+  }
+  return response;
 }
 
 export const config = {
