@@ -62,7 +62,7 @@ Spaceship; Cloudflare у HTTP-відповіді сам по собі не оз�
 
 1. Cloudflare → Add a domain → `bakeagain.com`. Імпортувати й звірити всі
    поточні DNS-записи, включно з поштою: MX, SPF/DKIM/DMARC та verification.
-   Зберегти чинну ціль apex-домену; не замінювати її випадковою IP-адресою.
+   Зберегти чинну ціль apex-домену та лишити його DNS only, якщо хостинг окремо не налаштував proxy; не замінювати його випадковою IP-адресою.
 2. Cloudflare → DNS → Records → Add record: **A**, Name **www**, IPv4
    **192.0.2.1**, Proxy status **Proxied**, TTL **Auto**. Це службова ціль
    redirect-only hostname з документації Cloudflare, не адреса сайту.
@@ -72,8 +72,9 @@ Spaceship; Cloudflare у HTTP-відповіді сам по собі не оз�
    Status **301**; **Preserve query string: On**. Розмістити до загальніших
    редиректів. Правило охоплює HTTP/HTTPS і всі шляхи, включно з медіа/API.
 4. Cloudflare покаже два призначені саме цьому домену nameserver.
-   Spaceship → Domain Manager → bakeagain.com → Nameservers and DNS →
-   Nameservers → Change → Custom nameservers: вказати саме ці два імені.
+   Spaceship → Advanced DNS → вибрати bakeagain.com → Nameservers →
+   Change → Custom nameservers: вказати саме ці два імені, потім
+   Save nameserver settings.
    Якщо DNSSEC увімкнено, спершу прибрати старий DS у реєстратора, після
    активації Cloudflare увімкнути DNSSEC з його новим DS. Дочекатися Active.
 5. Перевірити Cloudflare SSL/TLS → Edge Certificates → Universal SSL для
@@ -89,6 +90,7 @@ Spaceship; Cloudflare у HTTP-відповіді сам по собі не оз�
 Офіційні інструкції:
 - https://developers.cloudflare.com/fundamentals/manage-domains/redirect-domain/
 - https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/
+- https://www.spaceship.com/en-GB/knowledgebase/connect-domain-custom-nameservers/
 
 ## Перевірка
 
