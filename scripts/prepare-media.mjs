@@ -136,6 +136,42 @@ for (const sourceFilename of sourceFiles) {
   generatedCount += 1;
 }
 
+// Search-only crops are derived from the same approved hero; never enlarge sources.
+const searchImages = JSON.parse(
+  await fs.readFile(
+    path.join(projectRoot, 'content/recipes/search-images.json'),
+    'utf8',
+  ),
+);
+for (const { source, images } of Object.values(searchImages)) {
+  const sourceFilename = sourceFiles.find(
+    (filename) => publishRelativePath(filename) === source.slice(1),
+  );
+  if (!sourceFilename)
+    throw new Error(`Missing source for SEO crops: ${source}`);
+  const metadata = await sharp(sourceFilename).rotate().metadata();
+  const rotated = [5, 6, 7, 8].includes(metadata.orientation);
+  const width = rotated ? metadata.height : metadata.width;
+  const height = rotated ? metadata.width : metadata.height;
+  for (const image of images) {
+    if (width < image.width || height < image.height)
+      throw new Error(`SEO crop would enlarge ${source}: ${image.url}`);
+    const output = path.join(publicRoot, image.url.slice(1));
+    await fs.mkdir(path.dirname(output), { recursive: true });
+    await sharp(sourceFilename)
+      .rotate()
+      .resize(image.width, image.height, {
+        fit: 'cover',
+        position: 'centre',
+        withoutEnlargement: true,
+      })
+      .webp({ quality: webpQuality, effort: 6, smartSubsample: true })
+      .toFile(output);
+    generatedBytes += (await fs.stat(output)).size;
+    generatedCount += 1;
+  }
+}
+
 const literalReferences = [
   ...productSource.matchAll(
     /['"`](\/(?:images|media|social)\/[^'"`$\s)]+)['"`]/g,

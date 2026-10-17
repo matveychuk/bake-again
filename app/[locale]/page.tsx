@@ -1,4 +1,6 @@
 import { pageMetadata } from '@/lib/seo/metadata';
+import { websiteStructuredData } from '@/lib/seo/website';
+import { serializeJsonLd } from '@/lib/seo/recipes';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { HomePage } from '@/app/_components/home/home-page';
@@ -45,10 +47,18 @@ export default async function LocalizedHomePage({
       ? collection
       : null;
   return (
-    <HomePage
-      locale={locale}
-      selectedCollectionId={collectionId}
-      query={cleanRecipeQuery(q)}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(websiteStructuredData(locale)),
+        }}
+      />
+      <HomePage
+        locale={locale}
+        selectedCollectionId={collectionId}
+        query={cleanRecipeQuery(q)}
+      />
+    </>
   );
 }

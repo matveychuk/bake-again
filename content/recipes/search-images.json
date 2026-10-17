@@ -1,0 +1,332 @@
+{
+  "celebration-sponge-cake": {
+    "source": "/media/recipes/celebration-sponge-cake/selected/author-cake-tea-editorial-v2.webp",
+    "images": [
+      {
+        "url": "/images/seo/celebration-sponge-cake-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/celebration-sponge-cake-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "sour-cream": {
+    "source": "/media/recipes/recipe-components/sour-cream-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/sour-cream-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/sour-cream-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "lemon-cream-cheese": {
+    "source": "/media/recipes/recipe-components/lemon-cream-cheese-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/lemon-cream-cheese-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/lemon-cream-cheese-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "chocolate-glaze": {
+    "source": "/media/recipes/recipe-components/chocolate-glaze-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/chocolate-glaze-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/chocolate-glaze-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "gluten-free-napoleon": {
+    "source": "/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-tea-editorial-v2.webp",
+    "images": [
+      {
+        "url": "/images/seo/gluten-free-napoleon-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/gluten-free-napoleon-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "crinkle-cookies": {
+    "source": "/images/recipes/chocolate-crinkle-cookies-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/crinkle-cookies-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/crinkle-cookies-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "plum-cake": {
+    "source": "/images/recipes/plum-cake-author-hero-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/plum-cake-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/plum-cake-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "cottage-cheese-waffles": {
+    "source": "/images/recipes/cottage-cheese-waffles-linen-ivory-plate-v3.webp",
+    "images": [
+      {
+        "url": "/images/seo/cottage-cheese-waffles-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/cottage-cheese-waffles-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "carrot-cake": {
+    "source": "/images/recipes/carrot-cake-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/carrot-cake-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/carrot-cake-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "sponge-cake": {
+    "source": "/images/recipes/sponge-cake-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/sponge-cake-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/sponge-cake-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "crepes": {
+    "source": "/images/crepes.webp",
+    "images": [
+      {
+        "url": "/images/seo/crepes-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/crepes-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "fruit-sponge-roll": {
+    "source": "/images/recipes/fruit-sponge-roll-card-v3.webp",
+    "images": [
+      {
+        "url": "/images/seo/fruit-sponge-roll-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/fruit-sponge-roll-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "banana-bread": {
+    "source": "/images/recipes/banana-bread-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/banana-bread-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/banana-bread-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "lazy-dumplings": {
+    "source": "/images/recipes/lazy-dumplings-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/lazy-dumplings-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/lazy-dumplings-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "prune-cake": {
+    "source": "/images/recipes/prune-cake-tea-editorial-v3.webp",
+    "images": [
+      {
+        "url": "/images/seo/prune-cake-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/prune-cake-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "eclairs": {
+    "source": "/images/recipes/profiteroles-card-v2.webp",
+    "images": [
+      {
+        "url": "/images/seo/eclairs-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/eclairs-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "apple-fritters": {
+    "source": "/images/recipes/apple-fritters-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/apple-fritters-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/apple-fritters-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "banana-fritters": {
+    "source": "/images/recipes/banana-pancakes-card-v3.webp",
+    "images": [
+      {
+        "url": "/images/seo/banana-fritters-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/banana-fritters-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "mascarpone-whipped-cream": {
+    "source": "/images/recipes/mascarpone-whipped-cream-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/mascarpone-whipped-cream-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/mascarpone-whipped-cream-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "vanilla-egg-custard": {
+    "source": "/images/recipes/vanilla-egg-custard-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/vanilla-egg-custard-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/vanilla-egg-custard-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "eggless-vanilla-custard": {
+    "source": "/images/recipes/eggless-vanilla-custard-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/eggless-vanilla-custard-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/eggless-vanilla-custard-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
+  "vanilla-buttercream": {
+    "source": "/images/recipes/vanilla-buttercream-card-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/vanilla-buttercream-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/vanilla-buttercream-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  }
+}

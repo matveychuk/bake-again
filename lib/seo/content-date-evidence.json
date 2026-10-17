@@ -1,0 +1,137 @@
+{
+  "celebration-sponge-cake": {
+    "file": "content/recipes/celebration-sponge-cake.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "sour-cream": {
+    "file": "content/recipes/sour-cream.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "lemon-cream-cheese": {
+    "file": "content/recipes/lemon-cream-cheese.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "chocolate-glaze": {
+    "file": "content/recipes/chocolate-glaze.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "gluten-free-napoleon": {
+    "file": "content/recipes/gluten-free-napoleon.recipe.ts",
+    "date": "2026-10-05",
+    "commit": "3d09a96"
+  },
+  "crinkle-cookies": {
+    "file": "content/recipes/crinkle-cookies.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "apple-charlotte": {
+    "file": "content/recipes/apple-charlotte.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "plum-cake": {
+    "file": "content/recipes/plum-cake.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "cottage-cheese-waffles": {
+    "file": "content/recipes/cottage-cheese-waffles.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "3d13169"
+  },
+  "carrot-cake": {
+    "file": "content/recipes/carrot-cake.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "sponge-cake": {
+    "file": "content/recipes/sponge-cake.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "crepes": {
+    "file": "content/recipes/crepes.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "fruit-sponge-roll": {
+    "file": "content/recipes/fruit-sponge-roll.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "banana-bread": {
+    "file": "content/recipes/banana-bread.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "lazy-dumplings": {
+    "file": "content/recipes/lazy-dumplings.recipe.ts",
+    "date": "2026-10-12",
+    "commit": "6fca152"
+  },
+  "prune-cake": {
+    "file": "content/recipes/prune-cake.recipe.ts",
+    "date": "2026-10-05",
+    "commit": "3d09a96"
+  },
+  "cinnamon-rolls": {
+    "file": "content/recipes/cinnamon-rolls.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "eclairs": {
+    "file": "content/recipes/eclairs.recipe.ts",
+    "date": "2026-10-04",
+    "commit": "dd9f85c"
+  },
+  "easter-bread": {
+    "file": "content/recipes/easter-bread.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "apple-fritters": {
+    "file": "content/recipes/apple-fritters.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "d98e75d"
+  },
+  "banana-fritters": {
+    "file": "content/recipes/banana-fritters.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "apple-banana-fritters": {
+    "file": "content/recipes/apple-banana-fritters.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "apple-meringue-pie": {
+    "file": "content/recipes/apple-meringue-pie.recipe.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "mascarpone-whipped-cream": {
+    "file": "content/recipes/cream-recipes.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "vanilla-egg-custard": {
+    "file": "content/recipes/cream-recipes.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "eggless-vanilla-custard": {
+    "file": "content/recipes/cream-recipes.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  },
+  "vanilla-buttercream": {
+    "file": "content/recipes/cream-recipes.ts",
+    "date": "2026-09-27",
+    "commit": "eed65f7"
+  }
+}

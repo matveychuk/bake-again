@@ -41,6 +41,13 @@ function localizedNotFound(request: NextRequest, locale = defaultLocale) {
 }
 
 export function proxy(request: NextRequest) {
+  if (request.nextUrl.hostname.toLowerCase() === 'www.bakeagain.com') {
+    const url = request.nextUrl.clone();
+    url.protocol = 'https:';
+    url.hostname = 'bakeagain.com';
+    url.port = '';
+    return NextResponse.redirect(url, 301);
+  }
   const local = isLocalDevelopment(
     request.headers.get('host'),
     process.env.NODE_ENV,
@@ -103,7 +110,10 @@ export function proxy(request: NextRequest) {
   const locale = isAppLocale(cookieLocale)
     ? cookieLocale
     : negotiatesLocale
-      ? resolveLocaleFromAcceptLanguage(request.headers.get('accept-language'))
+      ? resolveLocaleFromAcceptLanguage(
+          request.headers.get('accept-language'),
+          'en',
+        )
       : defaultLocale;
   const localizedRecipePath = recipeId
     ? getLocalizedRecipePath(recipeId, locale, legacyRecipeMatch?.[2] ?? '')

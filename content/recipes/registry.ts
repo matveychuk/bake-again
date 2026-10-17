@@ -1,4 +1,5 @@
 import { getStepHelpDefinitions } from './step-help.ts';
+import { recipeSearchMetadata } from './search-metadata.ts';
 import { appleBananaFrittersRecipe } from './apple-banana-fritters.recipe.ts';
 import { appleCharlotteRecipe } from './apple-charlotte.recipe.ts';
 import { appleFrittersRecipe } from './apple-fritters.recipe.ts';
@@ -133,37 +134,56 @@ export type RecipeDocument =
  * The single recipe-content index. Every recipe lives in its own `.recipe.ts`
  * file; this registry is the only place that connects a stable recipe ID to it.
  */
-export const recipeDocuments: readonly RecipeDocument[] = [
-  ...[
-    celebrationSpongeCakeRecipe,
-    sourCreamRecipe,
-    lemonCreamCheeseRecipe,
-    chocolateGlazeRecipe,
-  ].map((recipe) => ({ kind: 'sourceDraft' as const, recipe })),
-  { kind: 'detailed', recipe: glutenFreeNapoleonRecipe },
-  { kind: 'detailed', recipe: crinkleCookiesRecipe },
-  { kind: 'sourceDraft', recipe: appleCharlotteRecipe },
-  { kind: 'sourceDraft', recipe: plumCakeRecipe },
-  { kind: 'sourceDraft', recipe: cottageCheeseWafflesRecipe },
-  { kind: 'sourceDraft', recipe: carrotCakeRecipe },
-  { kind: 'sourceDraft', recipe: spongeCakeRecipe },
-  { kind: 'sourceDraft', recipe: crepesRecipe },
-  { kind: 'sourceDraft', recipe: fruitSpongeRollRecipe },
-  { kind: 'sourceDraft', recipe: bananaBreadRecipe },
-  { kind: 'sourceDraft', recipe: lazyDumplingsRecipe },
-  { kind: 'sourceDraft', recipe: pruneCakeRecipe },
-  { kind: 'sourceDraft', recipe: cinnamonRollsRecipe },
-  { kind: 'sourceDraft', recipe: eclairsRecipe },
-  { kind: 'sourceDraft', recipe: easterBreadRecipe },
-  { kind: 'sourceDraft', recipe: appleFrittersRecipe },
-  { kind: 'sourceDraft', recipe: bananaFrittersRecipe },
-  { kind: 'sourceDraft', recipe: appleBananaFrittersRecipe },
-  { kind: 'sourceDraft', recipe: appleMeringuePieRecipe },
-  { kind: 'sourceDraft', recipe: mascarponeWhippedCreamRecipe },
-  { kind: 'sourceDraft', recipe: vanillaEggCustardRecipe },
-  { kind: 'sourceDraft', recipe: egglessVanillaCustardRecipe },
-  { kind: 'sourceDraft', recipe: vanillaButtercreamRecipe },
-] satisfies readonly RecipeDocument[];
+export const recipeDocuments: readonly RecipeDocument[] = (
+  [
+    ...[
+      celebrationSpongeCakeRecipe,
+      sourCreamRecipe,
+      lemonCreamCheeseRecipe,
+      chocolateGlazeRecipe,
+    ].map((recipe) => ({ kind: 'sourceDraft' as const, recipe })),
+    { kind: 'detailed', recipe: glutenFreeNapoleonRecipe },
+    { kind: 'detailed', recipe: crinkleCookiesRecipe },
+    { kind: 'sourceDraft', recipe: appleCharlotteRecipe },
+    { kind: 'sourceDraft', recipe: plumCakeRecipe },
+    { kind: 'sourceDraft', recipe: cottageCheeseWafflesRecipe },
+    { kind: 'sourceDraft', recipe: carrotCakeRecipe },
+    { kind: 'sourceDraft', recipe: spongeCakeRecipe },
+    { kind: 'sourceDraft', recipe: crepesRecipe },
+    { kind: 'sourceDraft', recipe: fruitSpongeRollRecipe },
+    { kind: 'sourceDraft', recipe: bananaBreadRecipe },
+    { kind: 'sourceDraft', recipe: lazyDumplingsRecipe },
+    { kind: 'sourceDraft', recipe: pruneCakeRecipe },
+    { kind: 'sourceDraft', recipe: cinnamonRollsRecipe },
+    { kind: 'sourceDraft', recipe: eclairsRecipe },
+    { kind: 'sourceDraft', recipe: easterBreadRecipe },
+    { kind: 'sourceDraft', recipe: appleFrittersRecipe },
+    { kind: 'sourceDraft', recipe: bananaFrittersRecipe },
+    { kind: 'sourceDraft', recipe: appleBananaFrittersRecipe },
+    { kind: 'sourceDraft', recipe: appleMeringuePieRecipe },
+    { kind: 'sourceDraft', recipe: mascarponeWhippedCreamRecipe },
+    { kind: 'sourceDraft', recipe: vanillaEggCustardRecipe },
+    { kind: 'sourceDraft', recipe: egglessVanillaCustardRecipe },
+    { kind: 'sourceDraft', recipe: vanillaButtercreamRecipe },
+  ] satisfies readonly RecipeDocument[]
+).map(
+  (document: RecipeDocument): RecipeDocument =>
+    document.kind === 'detailed'
+      ? {
+          kind: 'detailed',
+          recipe: {
+            ...document.recipe,
+            searchMetadata: recipeSearchMetadata[document.recipe.id],
+          },
+        }
+      : {
+          kind: 'sourceDraft',
+          recipe: {
+            ...document.recipe,
+            searchMetadata: recipeSearchMetadata[document.recipe.id],
+          },
+        },
+);
 
 /** Recipes whose stable IDs and localized ingredient data support personal state. */
 export const personalStateRecipes: readonly RecipeDraft[] = recipeDocuments

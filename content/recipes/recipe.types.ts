@@ -368,7 +368,20 @@ export interface ContentGap {
   sourceIds: string[];
 }
 
+/** Search facts shared by every translation of the same recipe. Null means unknown. */
+export interface RecipeSearchMetadata {
+  datePublished: string | null;
+  dateModified: string | null;
+  /** Keep a known date scoped to its confirmed revision when later edits are undated. */
+  dateModifiedVersionId?: string;
+  /** Whole-batch cooking only; never a per-layer/tray time or the midpoint of a range. */
+  cookTimeMinutes: number | null;
+  recipeCuisine: Record<RecipeLocale, string | null>;
+  keywords: Record<RecipeLocale, string[]>;
+}
+
 export interface RecipeDraft {
+  searchMetadata?: RecipeSearchMetadata;
   schemaVersion: 2;
   /** Opt-in concise reading layout after editorial review. */
   presentation?: 'concise';

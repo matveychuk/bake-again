@@ -25,6 +25,9 @@ const literata = Literata({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin),
+  ...(process.env.GOOGLE_SITE_VERIFICATION?.trim() && {
+    verification: { google: process.env.GOOGLE_SITE_VERIFICATION.trim() },
+  }),
   title: 'Bake Again — Перевірена безглютенова випічка',
   description:
     'Безглютенові рецепти з точними кількостями, покроковими інструкціями та зрозумілим статусом перевірки.',
@@ -34,13 +37,15 @@ export const metadata: Metadata = {
     description:
       'Невелика колекція ретельно перевірених безглютенових рецептів.',
     siteName: 'Bake Again',
-    images: [{
-      url: '/share-image-v4.webp',
-      width: 1200,
-      height: 630,
-      type: 'image/webp',
-      alt: 'Наполеон із чашкою та чайником поруч із назвою Bake Again',
-    }],
+    images: [
+      {
+        url: '/share-image-v4.webp',
+        width: 1200,
+        height: 630,
+        type: 'image/webp',
+        alt: 'Наполеон із чашкою та чайником поруч із назвою Bake Again',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

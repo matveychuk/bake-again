@@ -7,6 +7,7 @@ import type {
   RecipeCreamOptions,
   RecipeDifficulty,
   RecipeLocale,
+  RecipeSearchMetadata,
   TranslationState,
   YieldOption,
 } from './recipe.types.ts';
@@ -145,6 +146,7 @@ export type RecipeSourceDraftContent = {
 };
 
 export type RecipeSourceDraft = RecipeSourceDraftContent & {
+  searchMetadata?: RecipeSearchMetadata;
   id: string;
   publicationStatus: 'unpublished' | 'published';
   translationState?: Record<RecipeLocale, TranslationState>;

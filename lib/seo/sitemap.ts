@@ -1,4 +1,7 @@
+import { recipeLastModified } from '../../content/recipes/search-metadata.ts';
 import { recipeDocuments } from '../../content/recipes/registry.ts';
+import { publicPageMetadata } from '../../content/page-metadata.ts';
+import { publishedTechniques } from '../../content/techniques/registry.ts';
 import { supportedLocales } from '../i18n/config.ts';
 import {
   isUiLocalePublishable,
@@ -9,17 +12,32 @@ import { absoluteUrl } from './site.ts';
 
 const xmlEscape = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+function withDefaultLanguage(alternatives: { locale: string; url: string }[]) {
+  const english = alternatives.find(
+    (alternative) => alternative.locale === 'en',
+  );
+  return english
+    ? [...alternatives, { locale: 'x-default', url: english.url }]
+    : alternatives;
+}
+
 export function sitemapEntries() {
-  const staticPages = ['', '/about', '/privacy', '/techniques/soften-butter'];
   const locales = supportedLocales.filter(isUiLocalePublishable);
   return [
-    ...staticPages.flatMap((path) => {
-      const alternatives = locales.map((locale) => ({
-        locale,
-        url: absoluteUrl(`/${locale}${path}`),
-      }));
-      return alternatives.map(({ url }) => ({ url, alternatives }));
-    }),
+    ...[...publicPageMetadata, ...publishedTechniques].flatMap(
+      ({ path, dateModified }) => {
+        const alternatives = locales.map((locale) => ({
+          locale,
+          url: absoluteUrl(`/${locale}${path}`),
+        }));
+        return alternatives.map(({ url }) => ({
+          url,
+          lastmod: dateModified as string | null,
+          alternatives: withDefaultLanguage(alternatives),
+        }));
+      },
+    ),
     ...recipeDocuments.flatMap(({ recipe }) => {
       const alternatives = locales
         .filter((locale) => isRecipeLocalePublishable(recipe, locale))
@@ -27,10 +45,15 @@ export function sitemapEntries() {
           locale,
           url: absoluteUrl(getLocalizedRecipePath(recipe.id, locale)!),
         }));
-      return alternatives.map(({ url }) => ({ url, alternatives }));
+      return alternatives.map(({ url }) => ({
+        url,
+        lastmod: recipeLastModified(recipe),
+        alternatives: withDefaultLanguage(alternatives),
+      }));
     }),
   ];
 }
+
 export function sitemapXml() {
   return (
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
@@ -38,7 +61,7 @@ export function sitemapXml() {
     sitemapEntries()
       .map(
         (entry) =>
-          `<url><loc>${xmlEscape(entry.url)}</loc>${entry.alternatives
+          `<url><loc>${xmlEscape(entry.url)}</loc>${entry.lastmod ? `<lastmod>${xmlEscape(entry.lastmod)}</lastmod>` : ''}${entry.alternatives
             .map(
               (alt) =>
                 `<xhtml:link rel="alternate" hreflang="${alt.locale}" href="${xmlEscape(alt.url)}" />`,

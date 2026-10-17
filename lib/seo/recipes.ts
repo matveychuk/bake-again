@@ -17,7 +17,15 @@ import { isRecipeLocalePublishable } from '../i18n/publication.ts';
 import { formatQuantity } from '../i18n/format.ts';
 import { type AppLocale, supportedLocales } from '../i18n/config.ts';
 import { absoluteUrl } from './site.ts';
-import type { StructuredRecipeContent } from '../../content/recipes/source-recipe.types.ts';
+import type {
+  StructuredIngredient,
+  StructuredRecipeContent,
+} from '../../content/recipes/source-recipe.types.ts';
+import {
+  recipeSearchMetadata,
+  recipeLastModified,
+} from '../../content/recipes/search-metadata.ts';
+import { recipeSearchImages } from '../../content/recipes/search-images.ts';
 
 export function recipeIdForSlug(
   locale: AppLocale,
@@ -71,38 +79,46 @@ export function recipeStructuredData(
     !content.steps.length
   )
     return null;
+  const facts = recipeSearchMetadata[id];
+  const dateModified = recipeLastModified(getRecipeDocument(id)!.recipe);
+  const totalMinutes = content.timing?.totalElapsedMinutes;
+  const activeMinutes = content.timing?.activeMinutes;
   return {
     '@context': 'https://schema.org',
     '@type': 'Recipe',
     '@id': `${absoluteUrl(page.path)}#recipe`,
     url: absoluteUrl(page.path),
     name: page.title,
-    description: page.description,
+    description: page.seoDescription,
     inLanguage: locale,
-    image: [absoluteUrl(page.image)],
+    image: (
+      recipeSearchImages[id]?.images.map((image) => image.url) ?? [page.image]
+    ).map(absoluteUrl),
+    author: {
+      '@type': 'Person',
+      name: locale === 'uk' ? 'Саша' : 'Sasha',
+      url: absoluteUrl(`/${locale}/about`),
+    },
+    publisher: { '@id': absoluteUrl('/#organization') },
+    suitableForDiet: 'https://schema.org/GlutenFreeDiet',
+    ...(facts?.datePublished && { datePublished: facts.datePublished }),
+    ...(dateModified && { dateModified }),
+    ...(facts?.recipeCuisine[locale] && {
+      recipeCuisine: facts.recipeCuisine[locale],
+    }),
+    ...(facts?.keywords[locale]?.length && {
+      keywords: facts.keywords[locale].join(', '),
+    }),
+    ...(activeMinutes != null && { prepTime: isoMinutes(activeMinutes) }),
+    ...(facts?.cookTimeMinutes != null && {
+      cookTime: isoMinutes(facts.cookTimeMinutes),
+    }),
     recipeCategory: page.category,
     ...(content.yield && { recipeYield: content.yield.label }),
-    // Active time includes hands-on cooking, so it must not be mislabelled prepTime.
-    ...(content.timing?.totalElapsedMinutes != null && {
-      totalTime: `PT${content.timing.totalElapsedMinutes}M`,
-    }),
+    ...(totalMinutes != null && { totalTime: isoMinutes(totalMinutes) }),
     recipeIngredient: content.ingredientSections.flatMap((section) =>
       section.ingredients.map((ingredient) =>
-        [
-          formatQuantity(
-            locale,
-            ingredient.quantity.base ?? ingredient.quantity.equivalent ?? null,
-          ),
-          ingredient.name,
-          ingredient.note,
-          ingredient.optional
-            ? { uk: '(необов’язково)', en: '(optional)', es: '(opcional)' }[
-                locale
-              ]
-            : null,
-        ]
-          .filter(Boolean)
-          .join(' '),
+        structuredIngredient(locale, ingredient),
       ),
     ),
     recipeInstructions: content.steps.map((step) => ({
@@ -126,4 +142,38 @@ export function serializeJsonLd(value: unknown): string {
     .replace(/</g, '\\u003c')
     .replace(/\u2028/g, '\\u2028')
     .replace(/\u2029/g, '\\u2029');
+}
+
+export function isoMinutes(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const remainder = minutes % 60;
+  return `PT${hours ? `${hours}H` : ''}${remainder || !hours ? `${remainder}M` : ''}`;
+}
+
+/** Keep unmeasured ingredients readable without repeating the quantity as a note. */
+export function structuredIngredient(
+  locale: AppLocale,
+  ingredient: StructuredIngredient,
+): string {
+  const quantity = ingredient.quantity.base ?? ingredient.quantity.equivalent;
+  const optional = ingredient.optional
+    ? { uk: '(необов’язково)', en: '(optional)', es: '(opcional)' }[locale]
+    : '';
+  if (quantity)
+    return [
+      formatQuantity(locale, quantity),
+      ingredient.name,
+      ingredient.note,
+      optional,
+    ]
+      .filter(Boolean)
+      .join(' ');
+  const note = ingredient.note?.trim();
+  const asNeeded = { uk: 'за потреби', en: 'as needed', es: 'al gusto' }[
+    locale
+  ];
+  const generic =
+    /^(as needed|to taste|add to taste|за потреби|за смаком|al gusto|según sea necesario)[.!]?$/i;
+  const detail = !note || generic.test(note) ? asNeeded : note;
+  return `${ingredient.name}${locale === 'uk' ? ' — ' : ', '}${detail}${optional ? ` ${optional}` : ''}`;
 }
