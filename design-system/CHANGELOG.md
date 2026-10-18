@@ -30,6 +30,7 @@
   and neutral catalogue alias, reusing the crepes entry behavior and existing UI.
 - Keep explicit localized home URLs authoritative, preserve catalogue filters,
   and prevent shared caching of visitor-dependent redirects.
+- Extended the HTTP language-link regression check to home and catalogue entries.
 - Verified 46 HTTP scenarios and UK/ES/EN catalogue layouts at 390/900/1440px
   without horizontal overflow.
 
@@ -39,6 +40,8 @@
   saved preference, with Ukrainian fallback. Explicit localized URLs retain priority.
 - Use a temporary, non-cacheable redirect and preserve recipe configuration/query
   parameters. Reuse the existing language switcher without changing page layouts.
+- Added an HTTP regression check covering UK/ES/EN, saved choices, fallback, query
+  preservation and rendered localized recipe pages.
 - Verified 17 HTTP scenarios, manual language choice followed by the neutral link,
   and UK/ES/EN at 390/900/1440px without horizontal overflow; the existing production
   render suite passed 66 recipe checks.
