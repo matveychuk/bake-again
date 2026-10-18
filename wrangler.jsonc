@@ -1,0 +1,41 @@
+// Cloudflare Workers config for bakeagain.com (own Cloudflare account).
+// Non-secret settings only. Secrets (OPENAI_API_KEY, ASSISTANT_SESSION_SECRET,
+// TURNSTILE_SECRET_KEY) are set in the Cloudflare dashboard, never here.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bake-again",
+  "account_id": "a30f72a0516ba67edcf1e6a5c89a37b6",
+  "main": "vinext/server/fetch-handler",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "binding": "ASSETS" },
+  "observability": { "enabled": true },
+  "d1_databases": [
+    {
+      "binding": "ASSISTANT_QUOTAS",
+      "database_name": "bake-again",
+      "database_id": "4191a28f-a775-4a6b-a09f-f6595bc7dd0e",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "vars": {
+    "ASSISTANT_ALLOWED_HOSTNAME": "bakeagain.com",
+    "ASSISTANT_DAILY_BUDGET_USD": "1",
+    "ASSISTANT_ENABLED": "true",
+    "ASSISTANT_MAX_OUTPUT_TOKENS": "2000",
+    "ASSISTANT_MONTHLY_BUDGET_USD": "10",
+    "ASSISTANT_QUOTA_BINDING": "ASSISTANT_QUOTAS",
+    "NEWSLETTER_ENABLED": "true",
+    "NEWSLETTER_PROVIDER_NAME": "Brevo",
+    "NEWSLETTER_SIGNUP_URL_EN": "https://67fba9aa.sibforms.com/serve/MUIFACoVi4wY2y6Ef5AOKyTnP8n2aHyGfsgGCIqNgxnKvwMtNy6La5IIEN0g7OBm9lpPHsKB0wQKlZ5HDRHLOOs70eRdXUHmCNZcHzF588rtZfsswHdwGWIWOk4-9nbJNBILLmpNp2dYc0QZtMJk4VQJSFDQEzyY_UaFs4JfDcUOSCmRU8SXqMEcjGbv7jiLLlOI3yiD-uMmlDHHmw==",
+    "NEWSLETTER_SIGNUP_URL_ES": "https://67fba9aa.sibforms.com/serve/MUIFAHHSJL7ZuYlEhVmbd74hxPcG39gMgiUHCY1LBRnkeZe6XzUXgs9xG0yRaMHiLviJUUtqBjOdA8tnLWamuiqYMTFJpQD8lsTDAbQGytyXfKjCE8xh80cgu-W1mFcNqWbOLDw15CnrAyew-jh68Bul2aVsnJXO6QoX2qmJaGcanPz46LdrJl0EhHx-OaVyE30qiLne2xmlZUJ0qQ==",
+    "NEWSLETTER_SIGNUP_URL_UK": "https://67fba9aa.sibforms.com/serve/MUIFAGin0tF4IixejaYhaYtLly8nfeWOmqAW7AaG7PVJvfnzYCppFYlVxOTi63qBP1DFdpqxGuh2q3-CDdUa4EuvGj7UPiCeFMfSOIEa2wGb5vK_wJJvt_4IZlPV9Chd9TYLSuYWNihVkTBNKrQXG185EYlu8_9VFGGwgFgOzCq0QdVz6rVuwRZTsQhZshtl27LJqUgrd0UGqVgS5Q==",
+    "OPENAI_MODEL": "gpt-5.4-mini",
+    "PERSONAL_AUTH_READY": "true",
+    "PERSONAL_BACKEND": "supabase",
+    "PERSONAL_SYNC_ENABLED": "true",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_AXRmCW7NlovloX4uQjfz3g_-5PXHr5u",
+    "SUPABASE_URL": "https://mhtjlngdjaiikzciaoss.supabase.co",
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFFVDonQ5jfD0HYX"
+  }
+}
