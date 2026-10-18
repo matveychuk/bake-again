@@ -1,5 +1,14 @@
 # Design system changelog
 
+## 2026-10-18 · Localized newsletter welcome email
+
+- Extended the existing token-derived email composition with UK/ES/EN welcome
+  subject, preheader and heading overrides; retained practical recipe links,
+  privacy and native unsubscribe. Added the matching Email Design Lab examples.
+- All nine 390/900/1440 layouts fit without horizontal overflow; the three mobile
+  screenshots were visually reviewed. Provider delivery verification is recorded
+  separately in the newsletter operations manifest.
+
 ## 2026-10-16 · Optional recipe video lesson and shared invitation
 
 - Added a recipe-version-bound video catalogue and Payhip product-link validation.
@@ -21,7 +30,6 @@
   and neutral catalogue alias, reusing the crepes entry behavior and existing UI.
 - Keep explicit localized home URLs authoritative, preserve catalogue filters,
   and prevent shared caching of visitor-dependent redirects.
-- Extended the HTTP language-link regression check to home and catalogue entries.
 - Verified 46 HTTP scenarios and UK/ES/EN catalogue layouts at 390/900/1440px
   without horizontal overflow.
 
@@ -31,10 +39,21 @@
   saved preference, with Ukrainian fallback. Explicit localized URLs retain priority.
 - Use a temporary, non-cacheable redirect and preserve recipe configuration/query
   parameters. Reuse the existing language switcher without changing page layouts.
-- Added an HTTP regression check covering UK/ES/EN, saved choices, fallback, query
-  preservation and rendered localized recipe pages.
 - Verified 17 HTTP scenarios, manual language choice followed by the neutral link,
-  and UK/ES/EN at 390/900/1440px without horizontal overflow.
+  and UK/ES/EN at 390/900/1440px without horizontal overflow; the existing production
+  render suite passed 66 recipe checks.
+
+## 2026-10-12 · Separate Reel covers and profile-grid review
+
+- Added a documented static cover variant using shared GlutenFreeBadge, existing fonts and semantic colours. Machine layout and static badge configuration are separate from approved video motion.
+- Added IG-011/IG-013 cover examples and a Media Design Lab grid with full 9:16, 3:4 and 4:5 previews. Cover workflow requested by Sasha; exact designs remain for review.
+- Verified readable titles/food/badge in a small three-column preview, responsive review at 390/900/1440px and byte-identical optimized JPEG downloads. Old covers and Reel/Story exports preserved. Actual platform crop and phone availability remain to be verified.
+
+## 2026-10-12 · Recipe PDF documentary photo orientation
+
+- Extended the shared PDF image placement with optional 0/180-degree rotation; camera originals and source images stay unchanged. Updated the schema and documentation.
+- Visual example: lazy-dumplings PDF v2, pages 10–12. All 13 pages inspected at 390px; modified layouts rendered at 900/1440px. Text preserved, no overlaps; rotation compared with previous pages.
+- The existing larger 16pt time header is reused for the author-confirmed 15–20 minute rest; no new global recipe timing.
 
 ## 2026-10-12 · Continuous sticky header background
 
@@ -1264,3 +1283,50 @@ Approved by Sasha: expanded food area, compact copy, soft feathered header-to-ph
   and subsequent sign-in remain required before activating production accounts.
 - Verified UK/ES/EN at 390/900/1440px without overflow; 55 personal-data and
   auth regression tests passed, including password error classification/privacy.
+
+## 2026-10-12 · Approved badge v2 palettes and IG-011 header
+
+- Sasha approved the IG-011 v3 typography/spacing and two reusable background variants: existing Manrope Bold 700 at 44 px with 1.2 px tracking, shared 456 × 104 badge and unchanged motion.
+- Save cream and terracotta configurations plus separate optimized transparent PNG archives. Extend the existing component with drawThemed, preserving draw and legacy v1. Export palette colors from semantic tokens; keep originals and prior exports.
+- Apply the approved IG-011 header to full Reel v7 and Story v2 for review. Update Media Design Lab and documentation; verify 600/360 decoded frames, full playback, overlay alpha/geometry, both animations and 390/900/1440 layouts. Approval does not publish the videos.
+
+
+## 2026-10-14 · Lazy-dumpling series review variants
+
+- Extended existing Reel cover renderer with optional showMascot and version fields; default legacy appearance and names preserved. Reused semantic palette, fonts and GlutenFreeBadge.
+- Added a Media Design Lab example with six Reels/covers, full and cropped previews, standalone Stories, carousel and PDF. Kept opening stamp motion and single compact CTA over moving food.
+- Checked responsive review at 390/900/1440 CSS px, sampled video frames and decoded all 16 videos with audio. Author approval, actual platform crop and phone verification remain pending.
+
+
+## 2026-10-14 · Chocolate cake media series
+
+- Documented optional missing mascot in shared static cover generator; existing mascot configurations retain their appearance.
+- Recorded author-confirmed moving-food CTA in machine defaults and linked the seven-material cake series as a Media Design Lab example.
+- Verified all 12 carousel slides, 3 cover crops/grid, full decoding and browser playback of 5 videos, and responsive review at 390/900/1440px. Imported 20 optimized assets into 7 Mac Photos albums and saved 7 iCloud Notes; phone availability and actual Instagram crop remain unverified.
+
+## 2026-10-15 — Social recipe sequence review variant
+
+- Extended existing social `.batch` into `.recipe-sequence` for complete recipe carousels; inherited semantic colors and prepared fonts.
+- Added mixed-series review example with responsive reuse of the chocolate-series review page, 3:4/4:5 cover checks, captions, alt descriptions and unified calendar.
+- Photo-video variant reveals first title after the approved opening badge completes its travel (1.5 s), avoiding overlap; optional image credit uses semantic colors.
+- Verified 23 slide layouts, 9 full video decodes/playback checks and review widths 390/900/1440. Author approval and actual Instagram crop remain pending.
+
+
+## 2026-10-15 · Full-photo recipe carousel variant
+
+Extended the existing social batch component with recipe-full-photo for IG-024 v2: full-canvas author photography, naturally sized upper text overlay, shared fonts and semantic tokens. All 10 exports and 390/900/1440 review layouts checked. Prior media preserved; author review pending. Example: `media/instagram/mixed-series-v1/working/plum-photo-v2.html`.
+
+
+## 2026-10-15 · Apple carousel full-photo reuse
+
+Applied the existing full-photo recipe variant to IG-025 v2 without new component styles. Replaced stock apples with the author photograph; seven exports and responsive review verified.
+
+
+## 2026-10-15 · Napoleon carousel full-photo reuse
+
+Applied the existing full-photo recipe carousel component to IG-026 v2, preserving all step text and photographs. Six exports and responsive review verified; previous version retained.
+## 2026-10-15 · Мовні варіанти Reel IG-016
+
+- Спільний `GlutenFreeBadge` читає необов’язковий `text`; default український.
+- Cover і рендерер тортів підтримують локальну `badgeConfiguration` без зміни стандартної композиції.
+- [Media Design Lab](../media/instagram/IG-016/language-pilots-v1/review.html): ES/EN відео й обкладинки; наявні шрифти/токени, 390/900/1440, 3:4/4:5, повне відтворення і desktop-завантаження перевірено.

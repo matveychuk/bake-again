@@ -50,6 +50,7 @@ __pycache__/
 
 # Private reference documents, audit output and local creative work.
 # These are not inputs to the application or its automated tests.
+/2026-10-15/
 /docs/
 /.pnpm-store/
 /figma-plugin/

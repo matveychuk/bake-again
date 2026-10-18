@@ -55,6 +55,13 @@ font fallbacks from `tokens.css`, through `npm run newsletter:prepare`. They are
 confirmation messages, not a new product card or a campaign design. Never treat
 the inert Design Lab examples or a reviewed hosted layout as proof of delivery.
 
+Welcome email variant (2026-10-18): the same token-derived campaign composition
+accepts localized welcome subject, preheader and heading overrides from
+`lib/newsletter/welcome-template-copy.json`; practical recipe links, privacy and
+native unsubscribe remain inherited from the newsletter copy. The Email Design
+Lab index includes UK/ES/EN welcome examples. Brevo controls delivery after DOI,
+locale-list routing and single entry; previews alone do not prove those behaviors.
+
 Hosted signup security extension (2026-10-12): UK/ES/EN native Brevo forms
 add Cloudflare Turnstile after the compact consent notice and before the existing
 submit button. Each form has its own Managed widget for `sibforms.com`, without

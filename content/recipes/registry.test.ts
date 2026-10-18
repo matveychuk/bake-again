@@ -981,8 +981,8 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
     value: 5,
     unit: 'tbsp',
   });
-  assert.equal(recipe?.versionId, 'lazy-dumplings-source-v2');
-  assert.match(shaping?.tip ?? '', /в один шар/);
+  assert.equal(recipe?.versionId, 'lazy-dumplings-source-v3');
+  assert.match(shaping?.tip ?? '', /окремо один від одного/);
   assert(!ingredients.some((ingredient) => ingredient.id === 'water'));
   assert.equal(recipe?.presentation, 'concise');
   assert.equal(recipe?.evidence?.status, 'tested');
@@ -990,7 +990,7 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
   assert.equal(recipe?.overview.timing.activeMinutes, 45);
   assert.equal(recipe?.overview.timing.totalElapsedMinutes, null);
   assert.equal(recipe?.overview.yieldLabel, '100 лінивих вареників');
-  assert.match(recipe?.overview.timing.planningNote ?? '', /15–30/);
+  assert.match(recipe?.overview.timing.planningNote ?? '', /15–20/);
   assert(
     recipe?.steps.every(
       (step) =>

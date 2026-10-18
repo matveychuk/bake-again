@@ -1,0 +1,27 @@
+{
+  "width": 456,
+  "height": 104,
+  "fontSize": 44,
+  "endCenterX": 788,
+  "endCenterTop": 156,
+  "startCenterX": 540,
+  "startCenterTop": 960,
+  "startScale": 2.3,
+  "startAngleDegrees": 0,
+  "holdSeconds": 0.65,
+  "travelSeconds": 0.85,
+  "duration": 2,
+  "status": "Approved by Sasha 2026-10-12 after IG-011 header-probe-v3",
+  "paletteSource": "design-system/tokens.css",
+  "font": "Manrope-LabelBold.ttf",
+  "letterSpacing": 1.2,
+  "approved": "2026-10-12",
+  "headerBackground": "terracotta",
+  "headerHeight": 256,
+  "palette": {
+    "stampBackground": "color-action-primary-strong",
+    "stampText": "color-background-page",
+    "badgeBackground": "color-background-page",
+    "badgeText": "color-action-primary-strong"
+  }
+}

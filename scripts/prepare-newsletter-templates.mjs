@@ -35,6 +35,7 @@ for (const [locale, copy] of Object.entries(source.locales)) {
 // Campaign variant of the existing table-based email composition. Tokens are
 // resolved into inline values because email clients do not share the site's CSS.
 const newsletterCopy = JSON.parse(await readFile(new URL('../lib/newsletter/newsletter-template-copy.json', import.meta.url), 'utf8'));
+const welcomeCopy = JSON.parse(await readFile(new URL('../lib/newsletter/welcome-template-copy.json', import.meta.url), 'utf8'));
 const previewLinks = [];
 const authCopy = JSON.parse(await readFile(new URL('../lib/personal/auth-email-copy.json', import.meta.url), 'utf8'));
 const authOutput = new URL('../lib/personal/email-templates/', import.meta.url);
@@ -42,8 +43,9 @@ await mkdir(authOutput, { recursive: true });
 const recoveryCopy = JSON.parse(await readFile(new URL('../lib/personal/recovery-email-copy.json', import.meta.url), 'utf8'));
 const authTemplates = { confirmation: {}, recovery: {} };
 // Auth is a variant of the same email composition, without marketing consent or unsubscribe.
-for (const [locale, copy, authKind] of [
+for (const [locale, copy, authKind, isWelcome] of [
   ...Object.entries(newsletterCopy).map(([locale, copy]) => [locale, copy, null]),
+  ...Object.entries(welcomeCopy).map(([locale, copy]) => [locale, { ...newsletterCopy[locale], ...copy }, null, true]),
   ...Object.entries(authCopy).map(([locale, copy]) => [locale, copy, 'confirmation']),
   ...Object.entries(recoveryCopy).map(([locale, copy]) => [locale, copy, 'recovery']),
 ]) {
@@ -86,11 +88,12 @@ for (const [locale, copy, authKind] of [
     await writeFile(new URL(`${locale}-${authKind}-preview.html`, authOutput), html.replace(authLink, '#email-preview'));
     continue;
   }
-  await writeFile(new URL(`${locale}-newsletter.html`, output), html);
-  previewLinks.push(`<li><a href="${locale}-newsletter.html">${locale.toUpperCase()} — newsletter</a> · <a href="${locale}-double-opt-in.html">DOI</a></li>`);
+  const variant = isWelcome ? 'welcome' : 'newsletter';
+  await writeFile(new URL(`${locale}-${variant}.html`, output), html);
+  previewLinks.push(`<li><a href="${locale}-${variant}.html">${locale.toUpperCase()} — ${variant}</a>${isWelcome ? '' : ` · <a href="${locale}-double-opt-in.html">DOI</a>`}</li>`);
 }
 await writeFile(new URL('index.html', output), `<!doctype html><html lang="uk"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Bake Again — Email Design Lab</title><body style="margin:${pixels('space-8')};background:${token('color-background-page')};color:${token('color-text-primary')};font-family:${emailFont('font-family-body')};line-height:${token('line-height-body')};"><h1 style="font-family:${emailFont('font-family-display-cyrillic')};">Bake Again — Email Design Lab</h1><p>Локальні приклади. Нічого не надсилають. Посилання відписки в прев’ю не активне.</p><ul>${previewLinks.join('')}</ul></body></html>\n`);
-console.log('Prepared 3 DOI and 3 newsletter templates plus the local Email Design Lab; nothing sent.');
+console.log('Prepared 3 DOI, 3 newsletter and 3 welcome templates plus the local Email Design Lab; nothing sent.');
 
 // Metadata selects only fixed, escaped copy. It is never an authorization claim.
 function localized(values) {

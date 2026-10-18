@@ -577,9 +577,9 @@ export const stepHelpCatalog: Record<
     'cook-dumplings': help(
       q(
         'body',
-        'Коли починати відлік останніх хвилин варіння вареників?',
-        'When do I start counting the final minutes for the dumplings?',
-        '¿Cuándo cuento los últimos minutos de cocción de los ñoquis de requesón?',
+        'Коли діставати свіжі й заморожені вареники з води?',
+        'When should I lift fresh and frozen dumplings out of the water?',
+        '¿Cuándo retiro del agua los váreniki frescos y congelados?',
       ),
     ),
   },

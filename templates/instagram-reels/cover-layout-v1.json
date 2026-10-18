@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "status": "Separate cover workflow requested by Sasha 2026-10-12; exact covers for review",
+  "canvas": [
+    1080,
+    1920
+  ],
+  "cropPreviews": {
+    "profile3x4": [
+      0,
+      240,
+      1080,
+      1680
+    ],
+    "feed4x5": [
+      0,
+      285,
+      1080,
+      1635
+    ]
+  },
+  "cropProvenance": "3:4 preview observed in Sasha screenshot; simulations are composition tests, not guaranteed platform crop positions",
+  "headerHeight": 784,
+  "pictureTop": 784,
+  "pictureHeight": 1136,
+  "edgeFeatherPx": 44,
+  "brand": {
+    "x": 64,
+    "top": 392,
+    "fontSize": 40
+  },
+  "eyebrow": {
+    "x": 64,
+    "top": 476,
+    "fontSize": 32
+  },
+  "title": {
+    "x": 64,
+    "top": 528,
+    "width": 952,
+    "fontSize": 96,
+    "leading": 120
+  },
+  "mascot": {
+    "x": 784,
+    "top": 1392,
+    "width": 176
+  },
+  "badgeConfiguration": "templates/instagram-reels/badge-static-cover-v1.json",
+  "fonts": "templates/recipe-pdf/fonts",
+  "colors": "design-system/tokens.css",
+  "headerBackgroundToken": "color-action-primary",
+  "headerTextToken": "color-text-on-accent",
+  "foodMinimumShareOf3x4Preview": 0.6,
+  "imageDelivery": {
+    "format": "JPEG",
+    "quality": 0.88
+  },
+  "reuse": [
+    "GlutenFreeBadge.swift",
+    "Literata-Semibold.ttf",
+    "Manrope-Semibold.ttf",
+    "Manrope-LabelBold.ttf",
+    "Newsreader-Semibold.ttf"
+  ],
+  "unchanged": "Reel and Story video files and animation coordinates"
+}

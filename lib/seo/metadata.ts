@@ -40,12 +40,15 @@ export function pageMetadata({
         absoluteUrl(path.replace(/^\/(uk|en|es)(?=\/|$)/, `/${language}`)),
       ]),
   );
+  if (languages.en) languages['x-default'] = languages.en;
   const shareImage = image ?? defaultShareImage;
-  const images = [{
-    url: absoluteUrl(shareImage),
-    alt: imageAlt ?? (image ? title : defaultShareImageAlt[locale]),
-    ...(!image && { width: 1200, height: 630, type: 'image/webp' }),
-  }];
+  const images = [
+    {
+      url: absoluteUrl(shareImage),
+      alt: imageAlt ?? (image ? title : defaultShareImageAlt[locale]),
+      ...(!image && { width: 1200, height: 630, type: 'image/webp' }),
+    },
+  ];
   return {
     title,
     description,
@@ -87,14 +90,21 @@ export function recipeMetadata(id: string, locale: AppLocale): Metadata {
   if (page.indexable && isUiLocalePublishable(locale))
     metadata.alternates = {
       canonical: absoluteUrl(page.path),
-      languages: Object.fromEntries(
-        page.locales
-          .filter(isUiLocalePublishable)
-          .map((language) => [
-            language,
-            absoluteUrl(getLocalizedRecipePath(id, language)!),
-          ]),
-      ),
+      languages: {
+        ...Object.fromEntries(
+          page.locales
+            .filter(isUiLocalePublishable)
+            .map((language) => [
+              language,
+              absoluteUrl(getLocalizedRecipePath(id, language)!),
+            ]),
+        ),
+        ...(page.locales.includes('en') && {
+          'x-default': absoluteUrl(getLocalizedRecipePath(id, 'en')!),
+        }),
+      },
     };
+  if (metadata.openGraph)
+    metadata.openGraph = { ...metadata.openGraph, type: 'article' };
   return metadata;
 }

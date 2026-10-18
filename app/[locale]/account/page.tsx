@@ -15,7 +15,7 @@ export async function generateMetadata({
   if (!isAppLocale(locale)) return {};
   return {
     title: `${accountCopy[locale].title} — Bake Again`,
-    robots: { index: false, follow: false },
+    robots: { index: false, follow: true },
     referrer: 'no-referrer' as const,
   };
 }

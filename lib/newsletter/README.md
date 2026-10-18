@@ -13,7 +13,75 @@ language has no fallback to another audience. Preview the inert layout in
 
 ## Connect Brevo after external verification
 
-### Current production state, 2026-10-12
+### Automatic welcome after DOI, 2026-10-18
+
+At the owner's request, automation **#1 — Bake Again — Welcome after DOI — UK ES EN**
+is active. It accepts new additions to the confirmed language lists #4 UK, #5 ES,
+and #6 EN. These native DOI forms add contacts to their lists only after confirmation.
+It does not backfill existing subscribers. A single workflow provides one shared
+entry history across languages; **Allow contact re-entry after exit is off**, with
+no restart conditions. Two binary conditions route list #4 to UK, otherwise list
+#5 to ES, otherwise EN within the three-list trigger. The independent native final
+confirmation email stays off to avoid a second welcome sender.
+
+Messages #14 UK, #15 ES and #16 EN use the existing token-derived email composition
+with `welcome-template-copy.json` overrides. All send from
+`Bake Again <hello@bakeagain.com>` with `Reply-To: hello@bakeagain.com` and localized
+recipe/privacy links plus native unsubscribe. Edit these automation messages when
+updating the welcome flow; changing a separate campaign template does not update them.
+
+Three new owned test aliases received only DOI before confirmation. The pre-DOI
+mailbox check at 15:01:35 UTC found zero welcome messages; the workflow also showed
+zero entries. After all three DOI clicks, exactly one welcome per locale arrived
+at 15:02:03 UTC in Gmail Inbox. Received From/Reply-To are the domain addresses;
+SPF, DKIM and DMARC pass, with aligned `bakeagain.com` DKIM/DMARC. Original DOI
+links were replayed and all three forms submitted again; the three fresh DOI
+emails were confirmed to exercise repeated requests. The final Gmail check at
+15:04:45 UTC (at least 60 seconds after the fresh DOI clicks) still found exactly
+one welcome and two DOI emails per address. No second welcome was received;
+the native single-entry setting remains the persistent guard. Final counts are
+recorded in `output/activation/welcome-2026-10-18/results.json`.
+
+The three test aliases remain subscribed. Existing subscribers were not enrolled.
+All nine UK/ES/EN welcome layouts passed 390/900/1440 without horizontal overflow;
+mobile screenshots were visually reviewed. `npm run test:newsletter`: 5/5 PASS.
+Evidence and received-header excerpts are under
+`output/activation/welcome-2026-10-18/`. No website runtime change or deployment is
+needed: Brevo owns this flow. The sections below preserve earlier states.
+
+### Current sender, 2026-10-18
+
+The owner requested `Bake Again <hello@bakeagain.com>` for all newsletter mail,
+with `Reply-To: hello@bakeagain.com`. Brevo shows this sender as Verified, DKIM
+for `bakeagain.com`, and DMARC configured. Both older Gmail senders are retained.
+Sender name, email and Reply-To were saved in campaign Default Settings, all eight
+existing email templates (#1–#7 and #9), and the only unsent campaign draft #13.
+Previously sent campaigns remain historical records.
+
+UK/EN live-site invitations reached the matching hosted forms. Two new owned
+plus aliases received their matching DOI emails in Gmail Inbox. Received headers
+show `From: Bake Again <hello@bakeagain.com>`, `Reply-To: <hello@bakeagain.com>`,
+SPF pass, DKIM pass for `bakeagain.com` and DMARC pass for `bakeagain.com`, without
+`brevosend.com` From rewriting. Both DOI links returned success; native contact
+history shows Subscribed through the matching form and only master #3 plus UK #4
+or EN #6. Replies from both received emails targeted `hello@bakeagain.com` and
+arrived in `bakeagain.recipes@gmail.com` via `efwd.spaceship.net`.
+The two owned test contacts (#5 UK and #6 EN) remain subscribed after this test.
+
+There is no welcome automation in Brevo, and the form's final confirmation email
+remains off. The reserve final-confirmation template #3 and branded introductory
+campaign template #9 have the new identity; this migration does not enable a new
+welcome flow. No marketing campaign or welcome email was sent in this test.
+ES settings were migrated; a new ES delivery test was not requested.
+
+The site does not send newsletter mail. Local `.env`, `.env.local`, `.env.example`,
+application code and production Sites runtime revision 6 contain no newsletter
+sender/Reply-To binding. Only the operations manifest needed an address update;
+no environment mutation or website deployment was required. Existing historical
+delivery records below retain their original addresses. Evidence:
+`output/activation/sender-2026-10-18/`; `npm run test:newsletter`: 5/5 PASS.
+
+### Previous production state, 2026-10-12
 
 The owner authorized three distinct plus aliases for UK/ES/EN subscription,
 confirmation, newsletter delivery and unsubscribe tests. The current compact

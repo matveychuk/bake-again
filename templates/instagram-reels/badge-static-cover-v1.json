@@ -1,0 +1,27 @@
+{
+  "width": 520,
+  "height": 112,
+  "fontSize": 52,
+  "endCenterX": 760,
+  "endCenterTop": 420,
+  "startCenterX": 540,
+  "startCenterTop": 960,
+  "startScale": 2.3,
+  "startAngleDegrees": 0,
+  "holdSeconds": 0.65,
+  "travelSeconds": 0.85,
+  "duration": 2,
+  "status": "Static-cover variant requested by Sasha; exact design for review",
+  "paletteSource": "design-system/tokens.css",
+  "font": "Manrope-LabelBold.ttf",
+  "letterSpacing": 1.2,
+  "approved": null,
+  "headerBackground": "terracotta",
+  "headerHeight": 784,
+  "palette": {
+    "stampBackground": "color-action-primary-strong",
+    "stampText": "color-background-page",
+    "badgeBackground": "color-background-page",
+    "badgeText": "color-action-primary-strong"
+  }
+}

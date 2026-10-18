@@ -2,24 +2,30 @@
   "status": "compact-email-only-enabled-end-to-end-verified",
   "copyVersion": "2026-10-10-v3-compact-notice",
   "provider": "Brevo",
-  "sender": "bakeagain.recipes@gmail.com",
-  "replyTo": "bakeagain.recipes@gmail.com",
+  "sender": "hello@bakeagain.com",
+  "replyTo": "hello@bakeagain.com",
   "senderIdentity": {
     "name": "Bake Again",
-    "email": "bakeagain.recipes@gmail.com",
-    "replyTo": "bakeagain.recipes@gmail.com",
-    "mailboxObservedAt": "2026-10-09",
-    "status": "owner-approved-brevo-verified",
+    "email": "hello@bakeagain.com",
+    "replyTo": "hello@bakeagain.com",
+    "status": "owner-approved-brevo-verified-delivery-verified",
     "verifiedInBrevo": true,
-    "verifiedAt": "2026-10-09",
-    "verificationEmailsSent": 1,
+    "verifiedAt": "2026-10-18",
+    "verificationPerformedBy": "owner before this task; live Verified status checked",
+    "domainAuthenticated": true,
     "templateSenderAndReplyToSaved": [
+      1,
+      2,
+      3,
+      4,
       5,
       6,
-      7
+      7,
+      9
     ],
-    "providerDomainReplacement": "brevosend.com",
-    "domainAuthenticated": false
+    "providerDomainReplacement": null,
+    "mailboxObservedAt": "2026-10-18",
+    "oldSendersRetained": true
   },
   "settings": {
     "confirmation": "double-opt-in",
@@ -50,7 +56,8 @@
     },
     "masterListRetained": true,
     "consentNoticeVariant": "compact-text-with-privacy-link; purpose-and-language-in-intro",
-    "providerDeclarationIllustration": false
+    "providerDeclarationIllustration": false,
+    "automaticWelcome": "single-brevo-workflow-after-confirmed-language-list-entry"
   },
   "languageOptions": [
     {
@@ -475,6 +482,72 @@
       ],
       "personalAuthReady": false,
       "personalSyncEnabled": false
+    },
+    "senderMigration": {
+      "checkedAt": "2026-10-18",
+      "templateIdsUpdated": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9
+      ],
+      "draftCampaignIdsUpdated": [
+        13
+      ],
+      "campaignDefaultsUpdated": true,
+      "sender": "Bake Again <hello@bakeagain.com>",
+      "replyTo": "hello@bakeagain.com",
+      "oldSendersRetained": true,
+      "sentCampaignHistoryPreserved": true,
+      "doiTestedLocales": [
+        "uk",
+        "en"
+      ],
+      "confirmedListIds": {
+        "uk": [
+          3,
+          4
+        ],
+        "en": [
+          3,
+          6
+        ]
+      },
+      "receivedFromRewritten": false,
+      "dkimDomain": "bakeagain.com",
+      "dkim": "pass",
+      "spf": "pass",
+      "dmarc": "pass",
+      "replyDeliveryTestedLocales": [
+        "uk",
+        "en"
+      ],
+      "replyForwardingDestination": "bakeagain.recipes@gmail.com",
+      "welcomeAutomationPresent": false,
+      "finalConfirmationEmailEnabled": false,
+      "welcomeNote": "No active welcome automation; default final-confirmation template #3 and branded introductory campaign template #9 updated, existing sending behavior preserved.",
+      "runtimeRevisionInspected": 6,
+      "senderEnvironmentVariablesFound": false,
+      "environmentChanged": false,
+      "websiteDeploymentRequired": false,
+      "evidence": "output/activation/sender-2026-10-18/results.json",
+      "notes": "Earlier verification records describe the historical Gmail sender; ES sender settings updated without a new ES delivery test.",
+      "testContacts": {
+        "uk": {
+          "id": 5,
+          "role": "owner-plus-alias-uk",
+          "statusAfterTest": "subscribed"
+        },
+        "en": {
+          "id": 6,
+          "role": "owner-plus-alias-en",
+          "statusAfterTest": "subscribed"
+        }
+      }
     }
   },
   "providerRecords": {
@@ -522,8 +595,8 @@
       "status": "inactive",
       "editor": "custom-html",
       "savedAt": "2026-10-09",
-      "sender": "bakeagain.recipes@gmail.com",
-      "replyTo": "bakeagain.recipes@gmail.com",
+      "sender": "hello@bakeagain.com",
+      "replyTo": "hello@bakeagain.com",
       "deliveryTested": false,
       "emailsSent": 0,
       "localVariants": [
@@ -539,7 +612,8 @@
         900,
         1440
       ],
-      "copyStatus": "palette-review-draft"
+      "copyStatus": "palette-review-draft",
+      "senderUpdatedAt": "2026-10-18"
     },
     "signupStyle": {
       "source": "design-system/tokens.css",
@@ -561,6 +635,65 @@
       "uk": "Bake Again — Newsletter — UK",
       "es": "Bake Again — Newsletter — ES",
       "en": "Bake Again — Newsletter — EN"
+    },
+    "welcomeAutomation": {
+      "id": 1,
+      "name": "Bake Again — Welcome after DOI — UK ES EN",
+      "status": "active",
+      "activatedAt": "2026-10-18",
+      "entry": "contact-added-to-confirmed-language-list",
+      "listIds": [
+        4,
+        5,
+        6
+      ],
+      "reentryAfterExit": false,
+      "restartConditions": [],
+      "backfillExistingContacts": false,
+      "routing": {
+        "firstCondition": "member-of-list-4",
+        "yes": "uk",
+        "no": {
+          "condition": "member-of-list-5",
+          "yes": "es",
+          "no": "en"
+        }
+      },
+      "messageIds": {
+        "uk": 14,
+        "es": 15,
+        "en": 16
+      },
+      "sendStepIds": {
+        "uk": 4,
+        "es": 5,
+        "en": 6
+      },
+      "sender": "hello@bakeagain.com",
+      "senderName": "Bake Again",
+      "replyTo": "hello@bakeagain.com",
+      "providerFinalConfirmationEmail": false,
+      "verification": "uk-es-en-delivered-after-doi-once-repeated-signup-tested",
+      "verifiedAt": "2026-10-18T15:04:45Z",
+      "evidence": "output/activation/welcome-2026-10-18/results.json",
+      "receivedWelcomeMessageIds": {
+        "uk": "1a14f88bf488c0e0",
+        "es": "1a14f88bec112abc",
+        "en": "1a14f88bee326272"
+      },
+      "observedWelcomeCountPerTestAddress": {
+        "uk": 1,
+        "es": 1,
+        "en": 1
+      },
+      "repeatChecks": [
+        "original-doi-link-replay",
+        "same-form-resubmission",
+        "fresh-doi-link-click"
+      ],
+      "replyToVerifiedInReceivedHeaders": true,
+      "spfDkimDmarc": "pass",
+      "websiteDeploymentRequired": false
     }
   },
   "revisionHistory": [
@@ -634,8 +767,33 @@
       "TXT _dmarc"
     ],
     "providerResult": "Your domain has been authenticated.",
-    "senderUnchanged": true,
-    "senderDomainNote": "Current approved sender is Gmail; authentication of bakeagain.com does not authenticate gmail.com.",
+    "senderUnchanged": false,
+    "senderDomainNote": "From and Reply-To migrated to hello@bakeagain.com on 2026-10-18; UK/EN received DOI headers show aligned bakeagain.com DKIM and DMARC with no From rewriting.",
     "evidence": "output/activation/brevo-domain-authenticated.png"
-  }
+  },
+  "senderIdentityHistory": [
+    {
+      "supersededAt": "2026-10-18",
+      "sender": "bakeagain.recipes@gmail.com",
+      "replyTo": "bakeagain.recipes@gmail.com",
+      "identity": {
+        "name": "Bake Again",
+        "email": "bakeagain.recipes@gmail.com",
+        "replyTo": "bakeagain.recipes@gmail.com",
+        "mailboxObservedAt": "2026-10-09",
+        "status": "owner-approved-brevo-verified",
+        "verifiedInBrevo": true,
+        "verifiedAt": "2026-10-09",
+        "verificationEmailsSent": 1,
+        "templateSenderAndReplyToSaved": [
+          5,
+          6,
+          7
+        ],
+        "providerDomainReplacement": "brevosend.com",
+        "domainAuthenticated": false
+      },
+      "reason": "Owner requested migration to verified authenticated-domain sender; old senders retained."
+    }
+  ]
 }

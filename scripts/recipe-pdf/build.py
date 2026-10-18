@@ -71,6 +71,8 @@ def validate(data, base):
         if not path.is_file():
             raise ValueError('Не знайдено фото: ' + str(path))
         Image.open(path).verify()
+        if item.get('rotationDegrees', 0) not in [0, 180]:
+            raise ValueError('rotationDegrees має бути 0 або 180; обертання застосовується лише у PDF.')
         crop = item.get('crop', [0, 0, 1, 1])
         if (len(crop) != 4 or not all(isinstance(x, (int, float)) and 0 <= x <= 1 for x in crop)
                 or crop[0] >= crop[2] or crop[1] >= crop[3]):
@@ -98,7 +100,7 @@ class RecipePDF:
         if len(set(names)) != 3:
             raise ValueError('Regular / Semibold / LabelBold повинні мати різні внутрішні імена.')
         self.ingredient_pages = self.plan_ingredients()
-        self.n = 1 + len(self.ingredient_pages) + len(data['steps'])
+        self.n = 1 + len(self.ingredient_pages) + len(data['steps']) + (1 if data.get('closing') else 0)
         self.master = work / (output.stem + '-source.pdf')
         if output == self.master:
             raise ValueError('Майстер і доставка мають бути окремими файлами.')
@@ -173,9 +175,18 @@ class RecipePDF:
         buf = BytesIO()
         bitmap.save(buf, 'JPEG', quality=self.media['masterJpegQuality'], optimize=True)
         buf.seek(0)
-        self.c.drawImage(ImageReader(buf), self.m, self.h-top-height, self.cw, height)
+        self.c.saveState()
+        if item.get('rotationDegrees', 0) == 180:
+            # Rotate the placed photo on the PDF canvas; preserve its original pixels.
+            self.c.translate(self.m+self.cw, self.h-top)
+            self.c.rotate(180)
+            self.c.drawImage(ImageReader(buf), 0, 0, self.cw, height)
+        else:
+            self.c.drawImage(ImageReader(buf), self.m, self.h-top-height, self.cw, height)
+        self.c.restoreState()
         self.boxes.append({'page':self.c.getPageNumber(), 'kind':'image', 'source':str(path), 'alt':item['alt'],
-                           'x':self.m, 'y':top, 'w':self.cw, 'h':height})
+                           'x':self.m, 'y':top, 'w':self.cw, 'h':height,
+                           'rotationDegrees':item.get('rotationDegrees', 0)})
         return top + height
 
     def guidance_markup(self, text, kind):
@@ -305,10 +316,34 @@ class RecipePDF:
                 raise ValueError(f'Зміст кроку {i} виходить у футер.')
             self.c.showPage()
 
+
+    def closing(self):
+        # Optional final page: author's own closing text and up to three links (2026-10-18).
+        data = self.data.get('closing')
+        if not data:
+            return
+        self.base_page('bakeagain.com')
+        end = self.p(markup(data['title']), 88, self.types['coverPrimaryPt'], self.types['coverPrimaryLeadingPt'], 'Display')
+        for para in data.get('paragraphs', []):
+            end = self.p(markup(para), end+16, self.types['bodyPt'], self.types['bodyLeadingPt'])
+        if data.get('image'):
+            links_h = 40*len(data.get('links', []))
+            height = min(self.media['stepMaxHeightPt'], self.bottom-end-24-links_h-8)
+            if height >= self.media['stepMinHeightPt']:
+                end = self.photo(data['image'], end+24, height)
+        for link in data.get('links', []):
+            top = end+16
+            end = self.p(markup(link['label']), top, 16, 24, 'BodyBold', 'color-action-primary-strong')
+            self.c.linkURL(link['url'], (self.m, self.h-end, self.w-self.m, self.h-top), relative=0, thickness=0)
+        if end > self.bottom:
+            raise ValueError('Фінальна сторінка виходить у футер.')
+        self.c.showPage()
+
     def save(self):
         self.cover()
         self.ingredients()
         self.steps()
+        self.closing()
         self.c.save()
         for i, a in enumerate(self.boxes):
             for b in self.boxes[i+1:]:
@@ -328,7 +363,8 @@ class RecipePDF:
         if len(delivery.pages) != self.n or [p.extract_text() for p in master.pages] != [p.extract_text() for p in delivery.pages]:
             raise ValueError('Оптимізація змінила кількість сторінок або текст.')
         uris = [a.get_object().get('/A', {}).get('/URI') for p in delivery.pages for a in p.get('/Annots', [])]
-        if set(uris) != {self.data['recipeUrl']}:
+        allowed = {self.data['recipeUrl']} | {l['url'] for l in (self.data.get('closing') or {}).get('links', [])}
+        if self.data['recipeUrl'] not in uris or not set(uris) <= allowed:
             raise ValueError('Посилання доставки не відповідає recipeUrl.')
         text = '\n\n'.join(p.extract_text() for p in delivery.pages)
         if '\ufffd' in text:

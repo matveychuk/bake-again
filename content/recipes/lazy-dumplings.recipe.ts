@@ -21,7 +21,6 @@ const copy = {
     flourNote: 'Плюс трохи для формування.',
     dusting: 'Для присипання.',
     rest: 'Відпочинок тіста',
-    boil: 'Варіння після спливання',
     planning: 'Додатково {duration} на відпочинок тіста.',
     titles: [
       'Змішайте основу',
@@ -34,15 +33,15 @@ const copy = {
     instructions: [
       'Перемішайте кисломолочний сир, яйця й цукор виделкою або в комбайні насадкою-тістомісом.',
       'З’єднайте борошно з тапіоковим крохмалем і вмішайте в основу. Тісто має залишитися липким — не ущільнюйте його додатковим борошном.',
-      'Нещільно накрийте миску й залиште на 15–30 хвилин.',
+      'Нещільно накрийте миску й залиште на 15–20 хвилин.',
       'Присипте поверхню й тісто борошном. Обережно розкачайте в ковбаску, не вмішуючи борошно всередину.',
       'Наріжте тісто на невеликі шматочки. Обваляйте зрізи в борошні й легко скачайте кожен шматочок між долонями в кульку.',
     ],
     cooking: [
       'Опускайте вареники в киплячу воду невеликими порціями. Обережно проведіть шумівкою по дну, щоб вони не прилипли.',
-      'Коли вода знову закипить і вареники спливуть, зменште нагрів. Варіть при слабкому кипінні ще 1–2 хвилини й дістаньте шумівкою.',
+      'Варіть до спливання на поверхню, потім дістаньте шумівкою. Так само готуйте заморожені вареники: опускайте в окріп без розморожування.',
     ],
-    freezing: 'Для заморожування розкладіть сирі вареники в один шар на таці.',
+    freezing: 'Для заморожування розкладіть сирі вареники окремо один від одного на таці. Коли замерзнуть, перекладіть у zip-пакет і поверніть до морозилки.',
     alts: [
       'Кисломолочний сир, яйця й цукор у мисці комбайна',
       'Борошно й тапіоковий крохмаль у липкому тісті',
@@ -65,7 +64,6 @@ const copy = {
     flourNote: 'Plus a little for shaping.',
     dusting: 'For dusting.',
     rest: 'Dough rest',
-    boil: 'Cooking after floating',
     planning: 'Allow an additional {duration} for the dough to rest.',
     titles: [
       'Mix the base',
@@ -78,16 +76,16 @@ const copy = {
     instructions: [
       'Mix the tvorog, eggs and sugar with a fork or in a food processor fitted with a dough attachment.',
       'Combine the flour and tapioca starch and mix into the base. The dough should stay sticky — do not add extra flour to firm it up.',
-      'Cover the bowl loosely and leave for 15–30 minutes.',
+      'Cover the bowl loosely and leave for 15–20 minutes.',
       'Dust the surface and dough with flour. Gently roll into a log without kneading the dusting flour into the dough.',
       'Cut into small pieces. Coat the cut sides in flour and gently roll each piece between your palms into a ball.',
     ],
     cooking: [
       'Add the dumplings to boiling water in small batches. Gently run a skimmer over the bottom so they do not stick.',
-      'When the water returns to a boil and the dumplings float, reduce the heat. Cook at a gentle boil for another 1–2 minutes, then lift out with a skimmer.',
+      'Cook until the dumplings float to the surface, then lift out with a skimmer. Cook frozen dumplings the same way: add directly to boiling water without thawing.',
     ],
     freezing:
-      'To freeze, arrange the uncooked dumplings in a single layer on a tray.',
+      'To freeze, arrange uncooked dumplings separately on a tray. Once frozen, transfer to a zip bag and return to the freezer.',
     alts: [
       'Tvorog curd cheese, eggs and sugar in a food processor bowl',
       'Flour and tapioca starch in sticky cottage-cheese dough',
@@ -110,7 +108,6 @@ const copy = {
     flourNote: 'Y un poco más para dar forma.',
     dusting: 'Para espolvorear.',
     rest: 'Reposo de la masa',
-    boil: 'Cocción después de que suban',
     planning: 'Añade {duration} de reposo de la masa.',
     titles: [
       'Mezcla la base',
@@ -123,16 +120,16 @@ const copy = {
     instructions: [
       'Mezcla el tvorog, los huevos y el azúcar con un tenedor o en un robot de cocina con accesorio para amasar.',
       'Combina la harina con el almidón de tapioca e incorpóralos a la base. La masa debe quedar pegajosa; no añadas más harina para endurecerla.',
-      'Cubre el bol sin apretar y deja reposar durante 15–30 minutos.',
+      'Cubre el bol sin apretar y deja reposar durante 15–20 minutos.',
       'Enharina la superficie y la masa. Forma un cilindro con cuidado, sin amasar la harina de espolvorear dentro de la masa.',
       'Corta en trozos pequeños. Cubre los cortes con harina y haz rodar suavemente cada trozo entre las palmas para formar una bolita.',
     ],
     cooking: [
       'Añade los váreniki al agua hirviendo en tandas pequeñas. Pasa suavemente una espumadera por el fondo para que no se peguen.',
-      'Cuando el agua vuelva a hervir y los váreniki suban, baja el fuego. Cuécelos a hervor suave durante 1–2 minutos más y retíralos con una espumadera.',
+      'Cuece hasta que los váreniki suban a la superficie y retíralos con una espumadera. Cocina los congelados del mismo modo: directamente en agua hirviendo, sin descongelar.',
     ],
     freezing:
-      'Para congelarlos, coloca los váreniki crudos en una sola capa sobre una bandeja.',
+      'Para congelarlos, coloca los váreniki crudos separados en una bandeja. Una vez congelados, pásalos a una bolsa con cierre y devuélvelos al congelador.',
     alts: [
       'Tvorog, huevos y azúcar en el bol de un robot de cocina',
       'Harina y almidón de tapioca en una masa pegajosa de tvorog',
@@ -216,7 +213,7 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
     },
   ];
   return {
-    versionId: 'lazy-dumplings-source-v2',
+    versionId: 'lazy-dumplings-source-v3',
     completeness: 'readyToReview',
     presentation: 'concise',
     evidence: { status: 'tested', explanation: text.evidence },
@@ -234,14 +231,8 @@ function contentForLocale(locale: RecipeLocale): RecipeSourceDraftContent {
         {
           id: 'dough-rest',
           label: text.rest,
-          duration: { kind: 'range', min: 15, max: 30, unit: 'minute' },
+          duration: { kind: 'range', min: 15, max: 20, unit: 'minute' },
           relatedStepId: 'rest',
-        },
-        {
-          id: 'gentle-boil',
-          label: text.boil,
-          duration: { kind: 'range', min: 1, max: 2, unit: 'minute' },
-          relatedStepId: 'cook-dumplings',
         },
       ],
     },
@@ -301,7 +292,7 @@ export const lazyDumplingsRecipe = {
   source: {
     file: 'docs/reference/lazy-dumplings-author-correction-2026-10-12.uk.md',
     locator:
-      'Author correction 2026-10-12 · 500 g curd, 2 eggs, 100 g flour, 10 g tapioca (1 tbsp), 60 g sugar; prior author-reviewed method retained',
+      'Author correction 2026-10-12 · 500 g curd, 2 eggs, 100 g flour, 10 g tapioca (1 tbsp), 60 g sugar; method confirmed 2026-10-14: Schär Mix B Bread, rest 15–20 minutes, cook fresh/frozen until floating, freeze raw on trays then bag',
   },
   ...contentForLocale('en'),
   translations: { uk: contentForLocale('uk'), es: contentForLocale('es') },

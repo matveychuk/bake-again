@@ -9,6 +9,16 @@ struct GlutenFreeBadge {
   config=try JSONSerialization.jsonObject(with:Data(contentsOf:configuration)) as! [String:Any]
  }
  func number(_ key:String)->CGFloat {CGFloat((config[key] as! NSNumber).doubleValue)}
+ /// Approved v2 palettes share one motion; the terracotta header inverts the entering stamp.
+ func drawThemed(_ c:CGContext, time t:Double, animated:Bool, canvasHeight H:CGFloat, accent:CGColor, cream:CGColor, font:CTFont) {
+  draw(c,time:t,animated:animated,canvasHeight:H,accent:accent,cream:cream,font:font)
+  if config["headerBackground"] as? String == "terracotta" {
+   let headerHeight=number("headerHeight")
+   c.saveGState();c.clip(to:CGRect(x:0,y:H-headerHeight,width:1080,height:headerHeight))
+   draw(c,time:t,animated:animated,canvasHeight:H,accent:cream,cream:accent,font:font)
+   c.restoreGState()
+  }
+ }
 func draw(_ c:CGContext, time t:Double, animated:Bool, canvasHeight H:CGFloat, accent:CGColor, cream:CGColor, font:CTFont) {
  let phase=animated ? max(0,min(1,(t-Double(number("holdSeconds")))/Double(number("travelSeconds")))):1
  let u=CGFloat(phase), eased=u*u*(3-2*u)
@@ -28,7 +38,9 @@ func draw(_ c:CGContext, time t:Double, animated:Bool, canvasHeight H:CGFloat, a
  if let tracking=config["letterSpacing"] as? NSNumber {
   attrs[NSAttributedString.Key(kCTKernAttributeName as String)]=tracking.doubleValue
  }
- let line=CTLineCreateWithAttributedString(NSAttributedString(string:"БЕЗ ГЛЮТЕНУ",attributes:attrs))
+ // Localised variants reuse the same geometry and motion; legacy configs stay Ukrainian.
+ let label=config["text"] as? String ?? "БЕЗ ГЛЮТЕНУ"
+ let line=CTLineCreateWithAttributedString(NSAttributedString(string:label,attributes:attrs))
  let inkBox=CTLineGetBoundsWithOptions(line,[.useGlyphPathBounds])
  precondition(inkBox.width<bw-48 && inkBox.height<bh-24,"Badge text overflow")
  c.textMatrix = .identity;c.textPosition=CGPoint(x:-inkBox.midX,y:-inkBox.midY);CTLineDraw(line,c)

@@ -84,11 +84,23 @@ they are not separate statuses.
 
 ## Instagram continuity
 
+- For every new Instagram/Facebook caption, follow the approved trilingual rule in
+  `docs/instagram/templates.uk.md`: language navigator, primary language first,
+  then concise summaries in the other two languages (UA/ES/EN). Video, cover and
+  CTA use one primary language. Preserve published copy and version caption updates.
+
 - For new Reels and Stories, apply the approved food-first defaults in
   [Instagram templates](docs/instagram/templates.uk.md) and reuse
   [the Reel package](templates/instagram-reels/README.uk.md): compact header,
   soft feathered header-to-image transition on every shot, large fixed badge,
   horizontal opening stamp, and a separate full-screen Story export.
+
+- Prepare a separate static Reel cover following
+  [the cover and profile-grid rules](docs/instagram/templates.uk.md#окрема-обкладинка-reel-і-сітка).
+  Check the full 9:16 image, cropped 3:4 and 4:5 previews, a small three-column grid,
+  and the actual platform crop before publishing. Keep the title, gluten-free badge
+  and food visible; preserve the previous cover. A cover does not require changing
+  the approved video composition.
 
 - Before any Instagram strategy, account setup, post, Reel, Story or advertising task,
   read [the Instagram working document](docs/strategy/instagram.uk.md), its publication

@@ -155,7 +155,7 @@ void test('lazy dumplings Cook Mode uses one cooking step and step ingredients',
   const steps = createSourceCookSteps(content, 'uk');
   assert.equal(steps.length, 6);
   assert.equal(content.evidence?.status, 'tested');
-  assert.deepEqual(steps[2].timerOptionsSeconds, [900, 1800]);
+  assert.deepEqual(steps[2].timerOptionsSeconds, [900, 1200]);
   assert.deepEqual(
     steps[0].ingredients.map((ingredient) => ingredient.id),
     ['cottage-cheese', 'eggs', 'sugar'],
@@ -170,7 +170,7 @@ void test('lazy dumplings Cook Mode uses one cooking step and step ingredients',
     steps[5].ingredients.map((ingredient) => ingredient.id),
     [],
   );
-  assert.deepEqual(steps[5].timerOptionsSeconds, [60, 120]);
+  assert.equal(steps[5].timerOptionsSeconds, undefined);
 });
 
 void test('tested cottage-cheese waffles keep five concise steps, ingredients and timers', () => {

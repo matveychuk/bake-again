@@ -1,0 +1,17 @@
+{
+  "uk": {
+    "subject": "Вітаємо у Bake Again",
+    "preheader": "Підписку підтверджено. Оберіть свій наступний рецепт.",
+    "title": "Дякую за підписку"
+  },
+  "es": {
+    "subject": "Te damos la bienvenida a Bake Again",
+    "preheader": "Suscripción confirmada. Elige tu próxima receta.",
+    "title": "Gracias por suscribirte"
+  },
+  "en": {
+    "subject": "Welcome to Bake Again",
+    "preheader": "Subscription confirmed. Choose your next recipe.",
+    "title": "Thank you for subscribing"
+  }
+}
