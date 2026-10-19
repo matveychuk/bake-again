@@ -107,9 +107,12 @@ clicks retain native navigation. Localhost, preview, internal routes and Do Not 
 remain excluded. Use the event breakdown by placement and platform to compare entry
 points once the change is deployed; local QA must not populate production analytics.
 
-Production uses OpenAI Sites, identified by `.openai/hosting.json`. The build emits
-a Worker-compatible bundle; do not deploy it to a separate Cloudflare Worker.
-Sites provisions the `ASSISTANT_QUOTAS` D1 binding and applies the committed migrations.
+Production is moving from OpenAI Sites to the owner's own Cloudflare account
+(Worker `bake-again`). `wrangler.jsonc` holds the account, the `ASSISTANT_QUOTAS`
+D1 binding (database `bake-again`, migrations in `drizzle/`) and all non-secret
+runtime vars. Cloudflare Workers Builds builds and deploys from GitHub: build
+`npm run build`, deploy `npx wrangler d1 migrations apply ASSISTANT_QUOTAS --remote
+&& npx wrangler deploy`. Secrets are set in the Cloudflare dashboard only.
 
 Round 2 foundation keeps the additive D1 personal migration and the AI quota tables
 unchanged. The owner selected Supabase Free for new reader accounts and personal
@@ -127,7 +130,7 @@ rules. Account-data erasure does not delete Supabase Auth or newsletter records.
 See [personal contracts and runtime](lib/personal/README.md) and the local operational
 handoff at `docs/architecture/round-2-accounts.uk.md` (intentionally outside Git).
 
-Configure server-only secrets in the Sites runtime:
+Configure server-only secrets in the Cloudflare dashboard (Worker settings → Variables and secrets):
 
 - `OPENAI_API_KEY`
 - `TURNSTILE_SECRET_KEY`
