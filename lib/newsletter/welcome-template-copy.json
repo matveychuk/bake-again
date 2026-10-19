@@ -2,7 +2,13 @@
   "uk": {
     "subject": "Вітаємо у Bake Again",
     "preheader": "Підписку підтверджено. Оберіть свій наступний рецепт.",
-    "title": "Дякую за підписку"
+    "title": "Дякую за підписку",
+    "gift": {
+      "title": "Подарунок для нових підписників 🎁",
+      "description": "Шоколадний торт без глютену з вишнями й бананом — покроковий рецепт із грамами.",
+      "action": "Завантажити PDF",
+      "url": "https://bakeagain.com/downloads/Bake-Again-shokoladnyi-tort-z-vyshnyamy.pdf"
+    }
   },
   "es": {
     "subject": "Te damos la bienvenida a Bake Again",

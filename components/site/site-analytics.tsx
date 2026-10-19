@@ -6,6 +6,7 @@ import {
   analyticsConfig,
   flushAnalyticsEvents,
   getSocialClickData,
+  getRecipeDownloadData,
   sanitizeAnalyticsPayload,
   trackEvent,
 } from '@/lib/analytics/umami';
@@ -50,6 +51,12 @@ export function SiteAnalytics() {
       if (event.button > 1 || !(event.target instanceof Element)) return;
       const link = event.target.closest<HTMLAnchorElement>('a[href]');
       if (!link) return;
+      const download = getRecipeDownloadData(
+        link.dataset.recipeDownload,
+        window.location.pathname,
+        link.getAttribute('href') ?? '',
+      );
+      if (download) trackEvent('recipe_pdf_download', download);
       const social = getSocialClickData(
         link.dataset.socialPlatform,
         link.dataset.socialPlacement,

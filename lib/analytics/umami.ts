@@ -23,6 +23,8 @@ export const analyticsEvents = [
   'language_change',
   'social_profile_open',
   'video_lesson_open',
+  'recipe_pdf_download',
+  'lead_magnet_submit',
 ] as const;
 export type AnalyticsEvent = (typeof analyticsEvents)[number];
 type SocialClickData = {
@@ -33,6 +35,8 @@ type SocialClickData = {
 type EventData = {
   recipe_id?: string;
   product_id?: string;
+  file?: 'recipe' | 'junior-card';
+  magnet?: string;
   locale?: string;
   target_locale?: string;
   count?: number;
@@ -54,9 +58,23 @@ declare global {
 }
 
 export function isAnalyticsPath(path: string) {
+  if (/^\/uk\/mlyntsi-recept\/?$/.test(path)) return true;
+  if (/^\/uk\/recept\/shokolad\/?$/.test(path)) return true;
   return /^\/(?:en|es|uk)(?:\/(?:about|privacy|saved|shopping-list)|\/recipes\/[a-z0-9-]+(?:\/cook)?|\/techniques\/[a-z0-9-]+)?\/?$/.test(
     path,
   );
+}
+
+/** Only reviewed delivery links on the crepes service page count as PDF clicks. */
+export function getRecipeDownloadData(file: string | undefined, pathname: string, href: string) {
+  if (!/^\/uk\/mlyntsi-recept\/?$/.test(pathname)) return null;
+  const expected = file === 'recipe'
+    ? '/downloads/Bake-Again-Bezghliutenovi-mlyntsi.pdf'
+    : file === 'junior-card'
+      ? '/downloads/Bake-Again-Mlyntsi-kartka-yunoho-kukharia.pdf'
+      : null;
+  if (!expected || href !== expected) return null;
+  return { recipe_id: 'crepes', file: file as 'recipe' | 'junior-card', locale: 'uk' } as const;
 }
 
 export function analyticsAllowed(
@@ -156,6 +174,22 @@ export function sanitizeAnalyticsPayload(
     )
       return false;
     data.product_id = input.product_id;
+  }
+  if (payload.name === 'lead_magnet_submit') {
+    if (
+      !/^\/uk\/recept\/shokolad\/?$/.test(url.pathname) ||
+      input?.magnet !== 'shokolad'
+    )
+      return false;
+    // This conversion has exactly one public attribute; never include form fields.
+    for (const key of Object.keys(data)) delete data[key as keyof EventData];
+    data.magnet = 'shokolad';
+  }
+  if (payload.name === 'recipe_pdf_download') {
+    if (!/^\/uk\/mlyntsi-recept\/?$/.test(url.pathname) ||
+      (input?.file !== 'recipe' && input?.file !== 'junior-card')) return false;
+    for (const key of Object.keys(data)) delete data[key as keyof EventData];
+    Object.assign(data, { recipe_id: 'crepes', file: input.file, locale: 'uk' });
   }
   return {
     website: analyticsConfig.websiteId,

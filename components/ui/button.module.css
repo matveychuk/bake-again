@@ -40,7 +40,7 @@
   color: var(--color-text-on-accent);
 }
 .primary:hover {
-  background: var(--color-action-primary-strong);
+  background: var(--color-action-primary-hover);
 }
 .outline {
   border-color: var(--color-border-subtle);

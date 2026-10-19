@@ -35,11 +35,17 @@ tested in both themes.
 | Background / panel | `#342822` |
 | Text / primary | `#F7EFE6` |
 | Text / secondary | `#C8B7AC` |
-| Action / primary | `#B85C3F` |
+| Action / primary | `#B65B3E` |
 | Action / strong | `#CF7355` |
 
 Dark mode should feel like espresso, toasted crust and warm evening light, not black UI.
 Keep food photography natural; do not darken images or add a brown overlay globally.
+
+Dark primary was minimally adjusted on 2026-10-19 for 4.54:1 normal-text contrast.
+Primary button hover has its own semantic token: the existing deep terracotta in
+light mode and existing terracotta in dark mode (5.45:1). The brighter dark
+primaryStrong remains for text links and focus (5.09:1 against the page), rather
+than serving as a white-text button background. Light button appearance is unchanged.
 
 ## Typography
 

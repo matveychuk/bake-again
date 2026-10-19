@@ -252,16 +252,20 @@ class RecipePDF:
         pages, page, top, previous = [], [], 184, None
         for item in self.data['ingredients']:
             section = item.get('section', '')
-            height = max(56, 28 + max(self.measure(markup(item['quantity']), 124, 16, 22, 'BodyBold'),
+            height = max(self.data.get('ingredientRowMinPt', 56), 28 + max(self.measure(markup(item['quantity']), 124, 16, 22, 'BodyBold'),
                                        self.measure(markup(item['name']), self.cw-160, 16, 22)))
             new_section = bool(section) and section != previous
             header = self.measure(markup(section), self.cw, 18, 24, 'BodyBold')+12 if section else 0
+            # Optional (2026-10-18): a stronger divider above a section that does not open the page.
+            divider = 10 if (self.data.get('strongSectionDividers') and section and top > 184) else 0
+            header += divider
             if top + (header if new_section else 0) + height > self.bottom:
                 if not page:
                     raise ValueError('Занадто довгий рядок інгредієнтів: ' + item['name'])
                 pages.append(page)
                 page, top = [], 184
                 new_section = bool(section)
+                header -= divider
             if new_section:
                 page.append(('section', section, header))
                 top += header
@@ -284,7 +288,13 @@ class RecipePDF:
             top = 184
             for kind, item, height in entries:
                 if kind == 'section':
-                    self.p(markup(item), top+8, 18, 24, 'BodyBold')
+                    extra = 0
+                    if self.data.get('strongSectionDividers') and top > 184:
+                        extra = 10
+                        self.c.setStrokeColor(self.color('color-action-primary'))
+                        self.c.setLineWidth(1.6)
+                        self.c.line(self.m, self.h-(top+8), self.w-self.m, self.h-(top+8))
+                    self.p(markup(item), top+8+extra, 18, 24, 'BodyBold')
                 else:
                     self.p(markup(item['quantity']), top+16, 16, 22, 'BodyBold', x=self.m+12, width=124)
                     self.p(markup(item['name']), top+16, 16, 22, x=self.m+148, width=self.cw-160)

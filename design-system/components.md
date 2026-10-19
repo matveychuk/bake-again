@@ -889,3 +889,42 @@ examples; its sample price is explicitly illustrative.
 
 Account email-request feedback uses semantic `output` with phrasing content; spacing,
 focus return and the existing request states remain intact in the AccountExample.
+
+### Lead magnet invitation (2026-10-18)
+
+`EditorialInvitation variant="lead-magnet"` extends the existing invitation with an
+optional food image, heading level 1, practical feature list and an inline
+`NewsletterSignup` action. It uses the same semantic typography, spacing and
+square photography; desktop has image/copy columns, compact screens stack them.
+The service page has a wordmark, keyboard skip link and a single signup task.
+`/design-system#lead-magnet` renders the production composition with an inert
+`NewsletterForm preview` (no provider calls or Turnstile).
+
+`NewsletterSignup magnetId="shokolad"` reuses the configured UK Brevo hosted-form
+endpoint and its existing Managed Turnstile site key. The field reuses the account
+email field treatment and shared Button. Brevo retains email validation, DOI,
+list routing and unsubscribe. Native email validation, pending/accepted/error
+states, consumed-token reset and a hosted-form fallback are visible. Conversion
+fires only after an explicit successful Brevo response. Preview never submits.
+The UK widget permits sibforms.com and bakeagain.com; no secret is stored in code.
+
+The UK welcome email supports an optional token-derived gift heading, short recipe
+description and download action after its greeting. The Email Design Lab's UK
+welcome example is the matching reference. ES/EN templates are unchanged.
+
+2026-10-19 dark accessibility correction: shared Button primary hover now uses
+`action.primaryHover`; dark default is minimally adjusted to 4.54:1 against
+text.onAccent and hover reuses the approved terracotta (5.45:1). Strong remains
+suitable for links/focus. Both CSS and portable token maps match; the Design Lab's
+existing action examples and the new light/dark lead magnet examples are references.
+
+### Recipe PDF delivery (2026-10-19)
+
+`RecipeDownloads` composes existing Button, EditorialInvitation and the prepared
+crepes photograph for `/uk/mlyntsi-recept`. Two native download links include file
+purpose, format, page count and size; the next-action strip links to the web recipe.
+The Ukrainian service page uses a focusable heading/skip link and the existing
+footer privacy link. Semantic tokens govern typography, space and colour; the
+food image stacks above the copy at compact widths. Design Lab `#recipe-downloads`
+reuses the production composition. Analytics counts link activations, not completed
+saves or email confirmations. No email token or identity is required by the page.

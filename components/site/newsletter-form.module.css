@@ -1,0 +1,20 @@
+.form {
+  display: grid;
+  gap: var(--space-4);
+  width: 100%;
+  min-width: 0;
+  max-width: var(--layout-assistant-drawer);
+}
+.form p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.small {
+  font-size: var(--font-size-body-small);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+.form a {
+  text-decoration: underline;
+  text-underline-offset: var(--space-1);
+}

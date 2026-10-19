@@ -387,3 +387,25 @@ This supersedes the earlier home-only social row described above.
 Its account-only copy and Supabase confirmation URL are separate from Brevo DOI.
 The existing seven newsletter HTML outputs retain their previous SHA-256 values.
 See `docs/architecture/round-2-accounts.uk.md` for hosted status.
+
+### Chocolate lead magnet — 2026-10-18
+
+`/uk/recept/shokolad` extends NewsletterSignup with an inline form posting directly
+to the existing UK sibforms endpoint (`?isAjax=1`). No newsletter backend or API
+credentials were added. The provider export's EMAIL, locale=es (provider UI locale,
+not audience language), honeypot and Turnstile response fields are preserved. CORS
+OPTIONS from https://bakeagain.com was verified without submitting a contact.
+Cloudflare's existing UK Managed widget now allows sibforms.com + bakeagain.com;
+pre-clearance is off. Localhost deliberately remains outside the production widget.
+
+Success requires HTTP success and Brevo JSON `success: true`, then the form announces
+DOI and sends only `{ magnet: 'shokolad' }` to Umami. Queries are always removed from
+analytics, including src=ig-bot/fb-bot. They remain valid navigation URLs, not tracked
+dimensions. LEAD_MAGNET is omitted: the current native form export has no mapped
+attribute for it; arbitrary hidden fields do not prove contact persistence. Keep
+DOI and audience lists intact rather than adding an unverified mapping.
+
+The UK welcome gift exists in source/templates only until the PDF URL is deployed.
+Do not replace live message #14 with a link returning 404. No ES/EN welcome change.
+See output/activation/lead-magnet-shokolad-2026-10-19/results.json for the exact
+activation and delivery state; previews do not prove receipt or phone opening.

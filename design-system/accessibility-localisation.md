@@ -50,3 +50,7 @@ Approved status label/background contrast:
 - At 200% root text, headings and actions wrap; prevent horizontal scrolling without clipping text.
 - Every standard page starts with a keyboard-visible skip link to its own main heading or recipe content target. The recipe navigation item remains active on recipe pages.
 - Native language labels remain explicit (`Укр`, `English`, `Español`); changing language must not reset the selected recipe configuration.
+
+The dark theme explicitly maps focusRing to its existing primaryStrong colour,
+including nested Design Lab examples. Lead magnet page headings accept a negative
+tab index so the skip link moves keyboard focus into the main content.

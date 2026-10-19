@@ -84,6 +84,10 @@ import styles from './design-system.module.css';
 import { RecipeUtilityActions } from '@/components/recipe/recipe-utility-actions';
 import { recipePublicLink } from '@/content/recipes/recipe-public-link';
 import { RecentRecipes } from '@/components/personal-state/recent-recipes';
+import { NewsletterForm } from '@/components/site/newsletter-form';
+import { getLeadMagnet } from '@/content/lead-magnets';
+import { EditorialInvitation } from '@/components/site/editorial-invitation';
+import { RecipeDownloads } from '@/components/recipe/recipe-downloads';
 import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
 import { RecipeVideoLesson } from '@/components/recipe/recipe-video-lesson';
 import { videoLessons } from '@/content/commerce/video-lessons';
@@ -904,6 +908,70 @@ export default function DesignSystemPage() {
                   );
                 })}
               </div>
+            </div>
+
+            <div
+              className={`${styles.componentBlock} ${styles.navigationBlock}`}
+              id="lead-magnet"
+            >
+              <div className={styles.componentLabel}>
+                <strong>Lead magnet invitation</strong>
+                <span>
+                  UK service page. Existing editorial composition with food
+                  photo and an inert inline Brevo form.
+                </span>
+              </div>
+              <div>
+                {(['light', 'dark'] as const).map((theme) => (
+                  <div
+                    key={theme}
+                    data-theme={theme}
+                    id={`lead-magnet-${theme}`}
+                    lang="uk"
+                  >
+                    <EditorialInvitation
+                      variant="lead-magnet"
+                      headingLevel={1}
+                      titleId={`lead-magnet-preview-${theme}`}
+                      title={getLeadMagnet('uk', 'shokolad')!.title}
+                      description={getLeadMagnet('uk', 'shokolad')!.subtitle}
+                      image={
+                        // oxlint-disable-next-line next/no-img-element -- Prepared author photograph.
+                        <img
+                          src="/images/lead-magnets/shokolad.webp"
+                          alt={getLeadMagnet('uk', 'shokolad')!.imageAlt}
+                          width={1800}
+                          height={2400}
+                        />
+                      }
+                      note={
+                        <ul>
+                          {getLeadMagnet('uk', 'shokolad')!.features.map(
+                            (text) => (
+                              <li key={text}>{text}</li>
+                            ),
+                          )}
+                        </ul>
+                      }
+                      action={
+                        <NewsletterForm
+                          preview
+                          magnetId="shokolad"
+                          note={getLeadMagnet('uk', 'shokolad')!.note}
+                        />
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.componentBlock} id="recipe-downloads">
+              <div className={styles.componentLabel}>
+                <strong>Recipe PDF delivery</strong>
+                <span>Existing food photography, download Buttons and EditorialInvitation. Service page; click counts do not prove a completed download.</span>
+              </div>
+              <div lang="uk"><RecipeDownloads id="crepes-downloads-preview" /></div>
             </div>
 
             <div className={styles.componentBlock} id="concise-recipe">

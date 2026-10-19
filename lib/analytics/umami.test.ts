@@ -9,6 +9,41 @@ import {
   flushAnalyticsEvents,
 } from './umami.ts';
 
+void test('lead magnet conversion permits only its known UK route and public identifier', () => {
+  const payload = {
+    name: 'lead_magnet_submit',
+    data: {
+      magnet: 'shokolad',
+      email: 'private',
+      token: 'private',
+      locale: 'uk',
+    },
+  };
+  const result = sanitizeAnalyticsPayload('event', {
+    ...payload,
+    url: '/uk/recept/shokolad?src=ig-bot&email=private',
+  });
+  assert.ok(result);
+  assert.deepEqual(result.data, { magnet: 'shokolad' });
+  assert.equal(result.url, '/uk/recept/shokolad');
+  assert.equal(JSON.stringify(result).includes('private'), false);
+  for (const url of [
+    '/en/recept/shokolad',
+    '/es/recept/shokolad',
+    '/uk/recept/unknown',
+    '/uk',
+  ])
+    assert.equal(sanitizeAnalyticsPayload('event', { ...payload, url }), false);
+  assert.equal(
+    sanitizeAnalyticsPayload('event', {
+      url: '/uk/recept/shokolad',
+      name: 'lead_magnet_submit',
+      data: { magnet: 'unknown' },
+    }),
+    false,
+  );
+});
+
 void test('only production product routes collect analytics; DNT and internal routes are excluded', () => {
   for (const locale of ['uk', 'en', 'es']) {
     assert.equal(

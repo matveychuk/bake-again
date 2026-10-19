@@ -1333,3 +1333,27 @@ Applied the existing full-photo recipe carousel component to IG-026 v2, preservi
 - Спільний `GlutenFreeBadge` читає необов’язковий `text`; default український.
 - Cover і рендерер тортів підтримують локальну `badgeConfiguration` без зміни стандартної композиції.
 - [Media Design Lab](../media/instagram/IG-016/language-pilots-v1/review.html): ES/EN відео й обкладинки; наявні шрифти/токени, 390/900/1440, 3:4/4:5, повне відтворення і desktop-завантаження перевірено.
+
+## 2026-10-18 — Chocolate lead magnet
+
+- Extended EditorialInvitation with a food-first lead-magnet composition and an
+  inert Design Lab example; added inline NewsletterSignup using the existing UK
+  Brevo form, existing email field styling, Button and shared Turnstile loader.
+- Added the optional UK welcome gift block to the token-based email generator.
+- The new service route is UK-only, noindex/nofollow, absent from sitemap/menu.
+  Production deployment and delivery verification are tracked separately in
+  output/activation/lead-magnet-shokolad-2026-10-19/results.json.
+- Dark focus now explicitly resolves to its existing primary-strong token in CSS
+  and the portable theme map, including nested Design Lab theme examples.
+- Dark primary-button normal-text contrast corrected from 4.45:1 to 4.54:1;
+  introduced action.primaryHover so the existing brighter dark text/focus token
+  is not used as a white-text button background. Dark hover is 5.45:1. The light
+  composition is unchanged. Updated CSS, portable tokens, Button and foundations.
+
+## 2026-10-19 — Crepes PDF delivery
+
+- Added a service-page composition of existing food photography, Button and
+  EditorialInvitation, with two stable PDF links and practical next steps.
+- Added the same composition to Design Lab `#recipe-downloads`; no new tokens.
+- The page is noindex and excluded from sitemap. PDF links request fresh cache
+  validation; Umami records only the two public file IDs.

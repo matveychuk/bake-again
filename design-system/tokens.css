@@ -10,6 +10,7 @@ html[data-palette='selected-mix'] {
   --color-text-on-accent: #fffdf9;
   --color-action-primary: #a64f36;
   --color-action-primary-strong: #853c29;
+  --color-action-primary-hover: var(--color-action-primary-strong);
   --color-action-emphasis: #392721;
   --color-action-emphasis-strong: #735d54;
   --color-text-on-emphasis: #fffdf9;
@@ -117,8 +118,10 @@ html[data-theme='dark'],
   --color-text-primary: #f7efe6;
   --color-text-secondary: #c8b7ac;
   --color-text-on-accent: #fffdf9;
-  --color-action-primary: #b85c3f;
+  --color-action-primary: #b65b3e;
   --color-action-primary-strong: #cf7355;
+  --color-action-primary-hover: #a64f36;
+  --color-focus-ring: var(--color-action-primary-strong);
   --color-action-emphasis: #f7efe6;
   --color-action-emphasis-strong: #c8b7ac;
   --color-text-on-emphasis: #211a17;

@@ -8,6 +8,7 @@ type SectionTitleProps = {
   className?: string;
   eyebrowClassName?: string;
   level?: 1 | 2 | 3;
+  tabIndex?: number;
 };
 
 export function SectionTitle({
@@ -17,12 +18,15 @@ export function SectionTitle({
   className,
   eyebrowClassName,
   level = 2,
+  tabIndex,
 }: SectionTitleProps) {
   const Heading = `h${level}` as const;
   return (
     <div className={className}>
       {eyebrow && <Eyebrow className={eyebrowClassName}>{eyebrow}</Eyebrow>}
-      <Heading id={id}>{children}</Heading>
+      <Heading id={id} tabIndex={tabIndex}>
+        {children}
+      </Heading>
     </div>
   );
 }
