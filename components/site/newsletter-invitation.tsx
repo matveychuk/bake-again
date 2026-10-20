@@ -7,6 +7,7 @@ import type { AppLocale } from '@/lib/i18n/config';
 import type { NewsletterSignup } from '@/lib/newsletter/config';
 import { Button } from '@/components/ui/button';
 import { EditorialInvitation } from './editorial-invitation';
+import { NewsletterForm } from './newsletter-form';
 import {
   Dialog,
   DialogClose,
@@ -30,6 +31,7 @@ const messages = {
     preview: 'Приклад дизайну. Підписка тут недоступна.',
     previewAction: 'Переглянути модалку',
     later: 'Не зараз',
+    done: 'Закрити',
     close: 'Закрити пропозицію підписки',
     image: 'Наполеон із золотистою крихтою поруч із чашкою чаю',
   },
@@ -40,6 +42,7 @@ const messages = {
     preview: 'Design preview. Signup is unavailable here.',
     previewAction: 'Preview invitation dialog',
     later: 'Not now',
+    done: 'Close',
     close: 'Close signup invitation',
     image: 'Napoleon cake with golden crumbs beside a cup of tea',
   },
@@ -50,6 +53,7 @@ const messages = {
     preview: 'Vista previa del diseño. Aquí no puedes suscribirte.',
     previewAction: 'Ver ventana de suscripción',
     later: 'Ahora no',
+    done: 'Cerrar',
     close: 'Cerrar invitación a suscribirme',
     image: 'Tarta Napoleón con migas doradas junto a una taza de té',
   },
@@ -88,6 +92,7 @@ export function NewsletterInvitation({
   const returnFocusRef = useRef<HTMLElement | null>(null);
   const consumed = useRef(false);
   const [open, setOpen] = useState(false);
+  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     if (!autoPrompt || !signup) return;
@@ -204,7 +209,13 @@ export function NewsletterInvitation({
           <>
             {' '}
             {signup ? (
-              <Button href={signup.url} rel="noreferrer" onClick={handoff}>
+              <Button
+                onClick={(event) => {
+                  returnFocusRef.current = event.currentTarget;
+                  handoff();
+                  setOpen(true);
+                }}
+              >
                 {copy.action}
                 <ArrowRight size={16} aria-hidden="true" />
               </Button>
@@ -271,17 +282,19 @@ export function NewsletterInvitation({
               {copy.body}
             </DialogDescription>
             {!signup && <p className={styles.note}>{copy.preview}</p>}
+            {signup && (
+              <div className={styles.dialogForm}>
+                <NewsletterForm
+                  signup={signup}
+                  locale={locale}
+                  onSent={() => setSent(true)}
+                />
+              </div>
+            )}
             <div className={styles.dialogActions}>
-              {signup ? (
-                <Button href={signup.url} rel="noreferrer" onClick={handoff}>
-                  {copy.action}
-                  <ArrowRight size={16} aria-hidden="true" />
-                </Button>
-              ) : (
-                <Button disabled>{copy.action}</Button>
-              )}
+              {!signup && <Button disabled>{copy.action}</Button>}
               <DialogClose render={<Button variant="ghost" />}>
-                {copy.later}
+                {sent ? copy.done : copy.later}
               </DialogClose>
             </div>
           </div>

@@ -76,3 +76,6 @@
     transition: none;
   }
 }
+.dialogForm {
+  margin-top: var(--space-6);
+}

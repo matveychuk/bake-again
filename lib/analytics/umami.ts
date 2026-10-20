@@ -25,6 +25,7 @@ export const analyticsEvents = [
   'video_lesson_open',
   'recipe_pdf_download',
   'lead_magnet_submit',
+  'newsletter_submit',
 ] as const;
 export type AnalyticsEvent = (typeof analyticsEvents)[number];
 type SocialClickData = {
@@ -184,6 +185,12 @@ export function sanitizeAnalyticsPayload(
     // This conversion has exactly one public attribute; never include form fields.
     for (const key of Object.keys(data)) delete data[key as keyof EventData];
     data.magnet = 'shokolad';
+  }
+  if (payload.name === 'newsletter_submit') {
+    // Only the newsletter language; never form fields or the account address.
+    if (!data.locale) return false;
+    for (const key of Object.keys(data)) delete data[key as keyof EventData];
+    data.locale = input!.locale;
   }
   if (payload.name === 'recipe_pdf_download') {
     if (!/^\/uk\/mlyntsi-recept\/?$/.test(url.pathname) ||

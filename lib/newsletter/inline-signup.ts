@@ -1,6 +1,12 @@
-// Public UK widget from the existing Brevo form. Brevo verifies its token.
-// Keep its secret exclusively in Brevo; never reuse the assistant widget.
-export const brevoUkSiteKey = '0x4AAAAAAFUdWW5vxv31mG01';
+import type { AppLocale } from '../i18n/config.ts';
+
+// Public widgets from the existing per-locale Brevo forms. Brevo verifies their
+// tokens. Keep the secrets exclusively in Brevo; never reuse the assistant widget.
+export const brevoSiteKeys: Record<AppLocale, string> = {
+  uk: '0x4AAAAAAFUdWW5vxv31mG01',
+  es: '0x4AAAAAAFUdjMI0MAl0H3Rt',
+  en: '0x4AAAAAAFUdlqXI2S2piUzT',
+};
 
 export function brevoSignupEndpoint(address: string): string | null {
   try {

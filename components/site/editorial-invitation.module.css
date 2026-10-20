@@ -32,16 +32,27 @@
 }
 .leadMagnet {
   border-top: 0;
-  padding-block: var(--space-8) var(--space-12);
+  padding-block: var(--space-6) var(--space-12);
   background: var(--color-background-page);
 }
 .leadMagnet .main {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
   align-items: start;
+  gap: var(--space-4) var(--space-12);
 }
+/* The photo follows the viewport on laptops so the form stays in the first
+   screen; header height matches .site-header. */
 .leadMagnet .image {
   grid-row: span 3;
+  position: sticky;
+  top: calc(var(--space-16) + var(--space-6) + var(--space-6));
+}
+.leadMagnet .image img {
+  aspect-ratio: 3 / 4;
+  max-height: calc(100svh - var(--space-16) - 3 * var(--space-6));
+  min-height: 20rem;
+  object-fit: cover;
 }
 .image img {
   display: block;
@@ -50,8 +61,9 @@
 }
 .leadMagnet .copy h1 {
   font-size: var(--font-size-title-small);
-  line-height: var(--line-height-body);
-  margin-bottom: var(--space-4);
+  /* Matches the site display titles; leaves room for Cyrillic diacritics. */
+  line-height: calc(var(--line-height-tight) * 1.15);
+  margin-bottom: var(--space-3);
   overflow-wrap: anywhere;
 }
 .leadMagnet .copy > p {
@@ -59,13 +71,33 @@
 }
 .leadMagnet ul {
   padding-inline-start: var(--space-6);
-  margin-block: var(--space-4) 0;
+  margin-block: 0;
   display: grid;
-  gap: var(--space-2);
+  gap: var(--space-1);
   font-size: var(--font-size-body);
 }
 .leadMagnet .action {
   width: 100%;
+}
+/* Short laptop screens: keep the email field and button in the first screen. */
+@media (min-width: 901px) and (max-height: 760px) {
+  .leadMagnet {
+    padding-top: var(--space-4);
+  }
+  .leadMagnet .main {
+    row-gap: var(--space-3);
+  }
+  .leadMagnet .copy h1 {
+    font-size: var(--font-size-section-title-mobile);
+    margin-bottom: var(--space-2);
+  }
+  .leadMagnet .copy > p,
+  .leadMagnet ul {
+    font-size: var(--font-size-body);
+  }
+  .leadMagnet ul {
+    gap: 0;
+  }
 }
 @media (max-width: 900px) {
   .leadMagnet .main {
@@ -76,8 +108,11 @@
   }
   .leadMagnet .image {
     grid-row: auto;
+    position: static;
   }
   .leadMagnet .image img {
+    max-height: none;
+    min-height: 0;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     object-position: center;
