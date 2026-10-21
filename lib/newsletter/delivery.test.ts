@@ -106,7 +106,7 @@ test('native DOI API includes suppression before list entry and opaque fragment 
   await api.confirm(email,'https://bakeagain.com/uk/recept-confirmed#token=opaque');
   assert.deepEqual(calls[0].body.attributes,{BA_LEAD_SIGNUP:true});assert.deepEqual(calls[0].body.includeListIds,[3,4]);
   await api.deliver(email,'mlyntsi','request-id');
-  assert.deepEqual(calls[1].body.headers,{IdempotencyKey:'recipe-request-id'});
+  assert.deepEqual(calls[1].body.headers,{idempotencyKey:'request-id'});
 });
 test('request validation, origin, bounded bodies and Turnstile fail closed',async()=>{
   assert.deepEqual(parseRecipeRequest({email:' Reader@Example.com ',magnet:'mlyntsi',token:'token',consent:true}),{email,magnet:'mlyntsi',token:'token'});

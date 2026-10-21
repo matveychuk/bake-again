@@ -21,7 +21,8 @@ export function brevoApi(apiKey: string, doiTemplate: number, fetcher: typeof fe
       // Only fixed diagnostic labels; never record provider prose or contact data.
       const message=typeof detail.message==='string'?detail.message.toLowerCase():'';
       const fields=['template','redirection','doubleoptin','doiurl','attribute','list','email','url','sender'].filter(field=>message.includes(field));
-      console.warn('recipe_email_provider_error',{operation:method==='GET'?'contact':path==='/smtp/email'?'deliver':'confirm',status:response.status,code,fields});
+      const diagnostic=(message.match(/\b(template|id|not|found|active|inactive|enabled|valid|invalid|exist|exists|does|do|is|must|be|should|contain|double|opt|in|doi|link|url|a|an|required|disabled|forbidden|transactional|email)\b/g)??[]).slice(0,30);
+      console.warn('recipe_email_provider_error',{operation:method==='GET'?'contact':path==='/smtp/email'?'deliver':'confirm',status:response.status,code,fields,diagnostic});
       throw new BrevoApiError(response.status);
     }
     return response.status === 204 ? {} : response.json();
@@ -40,7 +41,7 @@ export function brevoApi(apiKey: string, doiTemplate: number, fetcher: typeof fe
       await request('/smtp/email','POST',{
         sender:{name:'Bake Again',email:'hello@bakeagain.com'}, replyTo:{name:'Bake Again',email:'hello@bakeagain.com'},
         to:[{email}], ...recipeEmail(magnet), tags:[`recipe-${magnet}`],
-        headers:{IdempotencyKey:`recipe-${id}`},
+        headers:{idempotencyKey:id},
       });
     },
   };
