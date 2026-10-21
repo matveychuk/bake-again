@@ -1357,3 +1357,13 @@ Applied the existing full-photo recipe carousel component to IG-026 v2, preservi
 - Added the same composition to Design Lab `#recipe-downloads`; no new tokens.
 - The page is noindex and excluded from sitemap. PDF links request fresh cache
   validation; Umami records only the two public file IDs.
+
+
+## 2026-10-21 · Recipe-specific PDF email delivery
+
+- Extended the shared editorial invitation and inline form to chocolate and
+  crepes, with identical consent and feedback for new and existing subscribers.
+- Added a token-derived email variant with the two crepes downloads in one email,
+  API DOI preview and light/dark Design Lab examples for both invitations.
+- Reused the subscribed-page styles for confirmation feedback. Layouts on both
+  recipe forms fit at 390, 900 and 1440 px. Provider delivery is checked separately.

@@ -10,6 +10,11 @@ import {
 } from './umami.ts';
 
 void test('lead magnet conversion permits only its known UK route and public identifier', () => {
+  const crepes = sanitizeAnalyticsPayload('event', {name:'lead_magnet_submit',url:'/uk/recept/mlyntsi#private',data:{magnet:'mlyntsi',email:'private@example.com'}});
+  assert.ok(crepes);
+  assert.deepEqual(crepes.data,{magnet:'mlyntsi'});
+  assert.equal(crepes.url,'/uk/recept/mlyntsi');
+  assert.equal(sanitizeAnalyticsPayload('event',{name:'lead_magnet_submit',url:'/uk/recept/mlyntsi',data:{magnet:'shokolad'}}),false);
   const payload = {
     name: 'lead_magnet_submit',
     data: {

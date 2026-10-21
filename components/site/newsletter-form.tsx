@@ -15,6 +15,7 @@ import {
 } from '@/lib/newsletter/inline-signup';
 import { loadTurnstile, type Turnstile } from '@/lib/security/turnstile-client';
 import { trackEvent } from '@/lib/analytics/umami';
+import type { MagnetId } from '@/lib/newsletter/magnets';
 import fieldStyles from '@/components/account/account.module.css';
 import styles from './newsletter-form.module.css';
 
@@ -122,7 +123,7 @@ const magnetCopy: Partial<Copy> = {
   submit: 'Отримати рецепт',
   doneTitle: 'Перевір пошту',
   doneBody: (email) =>
-    `Ми надіслали лист на ${email}. Натисни в ньому кнопку підтвердження — і за хвилину прийде рецепт.`,
+    `Перевір ${email}. Якщо ти вже маєш активну підписку, шукай лист із запитаними матеріалами. Якщо підписуєшся вперше — спочатку підтвердь email за кнопкою в листі.`,
   doneHint: 'Якщо листа немає, зазирни в «Промоакції» або «Спам».',
   error: 'Не вдалося надіслати запит. Перевір з’єднання й спробуй ще раз.',
 };
@@ -139,11 +140,13 @@ export function NewsletterForm({
   note,
   preview = false,
   previewEmail,
+  recipeSiteKey,
   onSent,
 }: {
   signup?: NewsletterSignup;
   locale?: AppLocale;
-  magnetId?: 'shokolad';
+  magnetId?: MagnetId;
+  recipeSiteKey?: string;
   note?: string;
   preview?: boolean;
   /** Design Lab only: render the signed-in variant without an account. */
@@ -162,7 +165,7 @@ export function NewsletterForm({
   const [attempt, setAttempt] = useState(0);
   const [verificationFailed, setVerificationFailed] = useState(false);
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
-  const endpoint = signup && brevoSignupEndpoint(signup.url);
+  const endpoint = magnetId ? (recipeSiteKey ? '/api/newsletter/recipe' : null) : signup && brevoSignupEndpoint(signup.url);
   const knownEmail = useOther ? null : accountEmail;
   const succeeded = sentTo !== null;
 
@@ -182,7 +185,8 @@ export function NewsletterForm({
         api = await loadTurnstile();
         if (disposed || !challenge.current) return;
         widget = api.render(challenge.current, {
-          sitekey: brevoSiteKeys[locale],
+          sitekey: magnetId ? recipeSiteKey : brevoSiteKeys[locale],
+          ...(magnetId ? {action:'recipe_request'} : {}),
           language: locale,
           size: 'flexible',
           theme: 'auto',
@@ -206,7 +210,7 @@ export function NewsletterForm({
       disposed = true;
       if (widget !== undefined) api?.remove(widget);
     };
-  }, [endpoint, preview, attempt, succeeded, locale]);
+  }, [endpoint, preview, attempt, succeeded, locale, magnetId, recipeSiteKey]);
 
   useEffect(() => {
     if (succeeded) doneHeading.current?.focus();
@@ -230,12 +234,13 @@ export function NewsletterForm({
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
-        body,
+        ...(magnetId ? { headers:{'content-type':'application/json'}, body:JSON.stringify({email,magnet:magnetId,token,consent:true,website:body.get('email_address_check')}) } : {body}),
         signal: AbortSignal.timeout(30_000),
         credentials: 'omit',
         referrerPolicy: 'no-referrer',
       });
-      if (!response.ok || !brevoAccepted(await response.json()))
+      const result = await response.json();
+      if (!response.ok || !(magnetId ? !!result && typeof result==='object' && 'ok' in result && result.ok===true : brevoAccepted(result)))
         throw new Error('Signup unavailable');
       setStatus('idle');
       setSentTo(email);
@@ -282,7 +287,7 @@ export function NewsletterForm({
     <form
       className={styles.form}
       method="post"
-      action={signup?.url}
+      action={magnetId ? '/api/newsletter/recipe' : signup?.url}
       onSubmit={submit}
       lang={locale}
       aria-label={copy.label}
@@ -345,7 +350,7 @@ export function NewsletterForm({
           >
             {copy.verifyRetry}
           </Button>
-          {signup && (
+          {signup && !magnetId && (
             <p>
               <a href={signup.url}>{copy.openProvider}</a>
             </p>
@@ -366,7 +371,7 @@ export function NewsletterForm({
         <noscript>
           <p>
             {copy.noscript}{' '}
-            {signup && <a href={signup.url}>{copy.openProvider}</a>}
+            {signup && !magnetId && <a href={signup.url}>{copy.openProvider}</a>}
           </p>
         </noscript>
       )}

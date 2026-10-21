@@ -922,31 +922,31 @@ export default function DesignSystemPage() {
                 </span>
               </div>
               <div>
-                {(['light', 'dark'] as const).map((theme) => (
+                {(['shokolad', 'mlyntsi'] as const).flatMap((magnet) => (['light', 'dark'] as const).map((theme) => (
                   <div
-                    key={theme}
+                    key={`${magnet}-${theme}`}
                     data-theme={theme}
-                    id={`lead-magnet-${theme}`}
+                    id={`lead-magnet-${magnet}-${theme}`}
                     lang="uk"
                   >
                     <EditorialInvitation
                       variant="lead-magnet"
                       headingLevel={1}
-                      titleId={`lead-magnet-preview-${theme}`}
-                      title={getLeadMagnet('uk', 'shokolad')!.title}
-                      description={getLeadMagnet('uk', 'shokolad')!.subtitle}
+                      titleId={`lead-magnet-preview-${magnet}-${theme}`}
+                      title={getLeadMagnet('uk', magnet)!.title}
+                      description={getLeadMagnet('uk', magnet)!.subtitle}
                       image={
                         // oxlint-disable-next-line next/no-img-element -- Prepared author photograph.
                         <img
-                          src="/images/lead-magnets/shokolad.webp"
-                          alt={getLeadMagnet('uk', 'shokolad')!.imageAlt}
+                          src={getLeadMagnet('uk', magnet)!.image}
+                          alt={getLeadMagnet('uk', magnet)!.imageAlt}
                           width={1800}
                           height={2400}
                         />
                       }
                       note={
                         <ul>
-                          {getLeadMagnet('uk', 'shokolad')!.features.map(
+                          {getLeadMagnet('uk', magnet)!.features.map(
                             (text) => (
                               <li key={text}>{text}</li>
                             ),
@@ -956,13 +956,13 @@ export default function DesignSystemPage() {
                       action={
                         <NewsletterForm
                           preview
-                          magnetId="shokolad"
-                          note={getLeadMagnet('uk', 'shokolad')!.note}
+                          magnetId={magnet}
+                          note={getLeadMagnet('uk', magnet)!.note}
                         />
                       }
                     />
                   </div>
-                ))}
+                )))}
               </div>
             </div>
 

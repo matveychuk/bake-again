@@ -108,3 +108,5 @@ await writeFile(new URL('reset-password.html', authOutput), localized(authTempla
 await writeFile(new URL('reset-password-subject.txt', authOutput), localized(Object.fromEntries(Object.entries(recoveryCopy).map(([locale, copy]) => [locale, copy.subject]))));
 await writeFile(new URL('index.html', authOutput), `<!doctype html><html lang="uk"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bake Again — Auth Email Design Lab</title><body><h1>Службові листи акаунта</h1><p>Локальні приклади. Кнопка не підтверджує акаунт і не надсилає листів.</p><ul>${['uk','es','en'].map(locale => `<li><a href="${locale}-confirmation-preview.html">${locale.toUpperCase()} — підтвердження</a> · <a href="${locale}-recovery-preview.html">відновлення пароля</a></li>`).join('')}</ul></body></html>`);
 console.log('Prepared localized Supabase confirmation/recovery and 6 inert auth previews; nothing sent.');
+
+await import('./prepare-magnet-emails.mjs');

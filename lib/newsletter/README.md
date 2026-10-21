@@ -409,3 +409,39 @@ The UK welcome gift exists in source/templates only until the PDF URL is deploye
 Do not replace live message #14 with a link returning 404. No ES/EN welcome change.
 See output/activation/lead-magnet-shokolad-2026-10-19/results.json for the exact
 activation and delivery state; previews do not prove receipt or phone opening.
+
+
+## Recipe-specific PDF requests, 2026-10-21
+
+This replaces the shared-welcome mechanism only for the two magnet entry pages:
+`/uk/recept/shokolad` and `/uk/recept/mlyntsi`. Generic UK/ES/EN signup and its
+welcome workflow are retained. The latter's existing step #7 now also requires
+`BA_LEAD_SIGNUP` to be not filled; its pre-existing exclusion of list #9 remains.
+The new API DOI sets the Boolean source flag before list entry, so only the
+requested delivery email is sent. The crepes email contains both stable PDF links.
+
+Runtime: Cloudflare Worker `bake-again` (own account, GitHub `main` builds), not the
+older Sites project. Secret `BREVO_API_KEY` is encrypted in the Worker settings.
+Nonsecret settings: `LEAD_MAGNET_ENABLED=true`, `BREVO_MAGNET_DOI_TEMPLATE=20`.
+The API DOI template is active, sender/reply-to `hello@bakeagain.com`; its button
+uses `{{ params.DOIurl }}`. Keep native hosted DOI template #5 unchanged.
+
+Migration `0002_lead_magnet_delivery.sql` creates only the request ledger. Existing
+quota/personal tables are unchanged. The ledger retains email, fixed magnet ID,
+opaque token hash, purpose-separated network digest and timestamps for seven days
+(cleanup on subsequent admitted requests); it never stores API/Turnstile secrets.
+Return tokens expire in 24 hours and are delivered in a URL fragment, consumed by
+a POST and cleared from history. Confirmation requires independently verified,
+active membership in the existing confirmed-language lists #4/#5/#6. Contact
+existence alone is insufficient; blocked/unsubscribed addresses are never restored.
+
+Admission is atomic: per-network 10/hour, per-email 8/day, site 200/day, plus a
+ten-minute request bucket per email/magnet. Delivery uses a durable claim and
+stable Brevo IdempotencyKey. Uncertain SMTP retries stop after 14 minutes, within
+Brevo's 15-minute key TTL; inspect provider logs before retrying such a case.
+No raw email/token/IP is emitted into analytics or error responses. A submission
+event measures an accepted request, never a confirmed subscription or delivery.
+
+Owner authorized API-key creation and encrypted Cloudflare storage in this chat.
+The key is named `Bake Again - Recipe delivery`, expires 2027-10-21 (and after
+90 inactive days under Brevo's policy). No key value belongs in this file.

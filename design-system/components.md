@@ -928,3 +928,22 @@ footer privacy link. Semantic tokens govern typography, space and colour; the
 food image stacks above the copy at compact widths. Design Lab `#recipe-downloads`
 reuses the production composition. Analytics counts link activations, not completed
 saves or email confirmations. No email token or identity is required by the page.
+
+
+### Recipe-specific email delivery (2026-10-21)
+
+The existing lead-magnet invitation and NewsletterForm now accept `shokolad` or
+`mlyntsi`. Both use the same account field, Button, consent notice and food-first
+composition; the Design Lab shows both in light and dark modes. The site checks
+Brevo after its own Turnstile verification. Confirmed active subscribers receive
+the requested email immediately; new readers complete native Brevo DOI first.
+The generic success copy does not disclose whether an address is in the audience.
+No hosted-form fallback is offered for a magnet, since it would lose its identity.
+
+`magnet-copy.json` is the delivery-copy source. The token-derived email variant
+uses one recipe button for chocolate, and two separate PDF buttons in one email
+for crepes plus the junior-cook card. `newsletter:prepare` builds its inert
+previews and the dedicated API DOI template. The original general welcome
+workflow excludes the BA_LEAD_SIGNUP source so it cannot send an extra welcome.
+The return page reuses the subscribed-page layout and consumes an opaque
+fragment token; the server independently checks confirmed Brevo list membership.

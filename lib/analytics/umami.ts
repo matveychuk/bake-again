@@ -60,7 +60,7 @@ declare global {
 
 export function isAnalyticsPath(path: string) {
   if (/^\/uk\/mlyntsi-recept\/?$/.test(path)) return true;
-  if (/^\/uk\/recept\/shokolad\/?$/.test(path)) return true;
+  if (/^\/uk\/recept\/(?:shokolad|mlyntsi)\/?$/.test(path)) return true;
   return /^\/(?:en|es|uk)(?:\/(?:about|privacy|saved|shopping-list)|\/recipes\/[a-z0-9-]+(?:\/cook)?|\/techniques\/[a-z0-9-]+)?\/?$/.test(
     path,
   );
@@ -178,13 +178,14 @@ export function sanitizeAnalyticsPayload(
   }
   if (payload.name === 'lead_magnet_submit') {
     if (
-      !/^\/uk\/recept\/shokolad\/?$/.test(url.pathname) ||
-      input?.magnet !== 'shokolad'
+      !/^\/uk\/recept\/(?:shokolad|mlyntsi)\/?$/.test(url.pathname) ||
+      !['shokolad','mlyntsi'].includes(input?.magnet ?? '') ||
+      url.pathname.replace(/\/$/,'').split('/').at(-1) !== input?.magnet
     )
       return false;
     // This conversion has exactly one public attribute; never include form fields.
     for (const key of Object.keys(data)) delete data[key as keyof EventData];
-    data.magnet = 'shokolad';
+    data.magnet = input!.magnet;
   }
   if (payload.name === 'newsletter_submit') {
     // Only the newsletter language; never form fields or the account address.

@@ -2,6 +2,8 @@ import { newsletterSignupConfig } from '@/lib/newsletter/config';
 import type { AppLocale } from '@/lib/i18n/config';
 import { NewsletterInvitation } from './newsletter-invitation';
 import { NewsletterForm } from './newsletter-form';
+import type { MagnetId } from '@/lib/newsletter/magnets';
+import { deliveryConfigured } from '@/lib/newsletter/delivery-runtime';
 
 export async function NewsletterSignup({
   locale,
@@ -11,7 +13,7 @@ export async function NewsletterSignup({
 }: {
   locale: AppLocale;
   autoPrompt?: boolean;
-  magnetId?: 'shokolad';
+  magnetId?: MagnetId;
   note?: string;
 }) {
   let bindings: Record<string, unknown>;
@@ -23,8 +25,8 @@ export async function NewsletterSignup({
   }
   const signup = newsletterSignupConfig(bindings, locale);
   if (magnetId)
-    return signup && locale === 'uk' ? (
-      <NewsletterForm signup={signup} magnetId={magnetId} note={note} />
+    return signup && locale === 'uk' && deliveryConfigured(bindings) ? (
+      <NewsletterForm signup={signup} magnetId={magnetId} note={note} recipeSiteKey={bindings.TURNSTILE_SITE_KEY as string} />
     ) : (
       <output>Підписка зараз недоступна. Спробуй, будь ласка, пізніше.</output>
     );
