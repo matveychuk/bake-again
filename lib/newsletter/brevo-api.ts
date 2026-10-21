@@ -15,7 +15,12 @@ export function brevoApi(apiKey: string, doiTemplate: number, fetcher: typeof fe
       ...(body ? { body: JSON.stringify(body) } : {}), signal: AbortSignal.timeout(15_000),
     });
     if (response.status === 404 && method === 'GET') return null;
-    if (!response.ok) throw new BrevoApiError(response.status);
+    if (!response.ok) {
+      const detail=await response.json().catch(()=>({})) as {code?:unknown};
+      const code=typeof detail.code==='string' && /^[a-z_]{1,48}$/.test(detail.code) ? detail.code : 'unknown';
+      console.warn('recipe_email_provider_error',{operation:method==='GET'?'contact':path==='/smtp/email'?'deliver':'confirm',status:response.status,code});
+      throw new BrevoApiError(response.status);
+    }
     return response.status === 204 ? {} : response.json();
   }
   return {
