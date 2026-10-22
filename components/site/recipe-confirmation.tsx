@@ -9,7 +9,7 @@ export function RecipeConfirmation() {
   const token = useRef<string | null>(null);
   const started = useRef(false);
   const [magnet,setMagnet]=useState<MagnetId | null>(null);
-  const [state,setState]=useState<'loading'|'done'|'error'|'expired'>('loading');
+  const [state,setState]=useState<'loading'|'done'|'error'|'expired'|'missing'>('loading');
   async function confirm() {
     if(!token.current) {setState('expired');return;}
     setState('loading');
@@ -21,6 +21,9 @@ export function RecipeConfirmation() {
       const body=await response.json();
       if(response.status===410 || response.status===400) {setState('expired');return;}
       if(!response.ok || !body || typeof body!=='object' || !('ok' in body) || body.ok!==true || !('magnet' in body) || !isMagnetId(body.magnet)) throw new Error('Unavailable');
+      // Retain only the non-personal outcome, so refreshing the cleaned return
+      // URL can show the completed delivery without retaining its secret token.
+      try {sessionStorage.setItem('ba_recipe_delivery_result',JSON.stringify({magnet:body.magnet,until:Date.now()+86400000}));} catch {}
       setMagnet(body.magnet);setState('done');
     } catch {setState('error');}
   }
@@ -28,6 +31,13 @@ export function RecipeConfirmation() {
     if(started.current) return;
     started.current=true;
     token.current=new URLSearchParams(window.location.hash.slice(1)).get('token');
+    if(!token.current) {
+      try {
+        const saved=JSON.parse(sessionStorage.getItem('ba_recipe_delivery_result')??'null');
+        if(saved && isMagnetId(saved.magnet) && saved.until>Date.now()) {setMagnet(saved.magnet);setState('done');return;}
+      } catch {}
+      setState('missing');return;
+    }
     // Native Brevo DOI has finished. Remove its opaque return token before
     // rendering links; it never enters query strings, analytics or referrers.
     window.history.replaceState(window.history.state,'',window.location.pathname);
@@ -36,10 +46,11 @@ export function RecipeConfirmation() {
   return <section className={styles.hero} aria-labelledby="recipe-confirmed-title" aria-live="polite" aria-busy={state==='loading'}>
     {state==='done' ? <CircleCheck size={32} aria-hidden="true" className={styles.icon}/> : <MailCheck size={32} aria-hidden="true" className={styles.icon}/>}
     <div>
-      <h1 id="recipe-confirmed-title">{state==='done'?'Підписку підтверджено':state==='loading'?'Готуємо твій лист':state==='expired'?'Посилання вже не діє':'Не вдалося завершити видачу'}</h1>
+      <h1 id="recipe-confirmed-title">{state==='done'?'Підписку підтверджено':state==='loading'?'Готуємо твій лист':state==='missing'?'Перевір пошту':state==='expired'?'Посилання вже не діє':'Не вдалося завершити видачу'}</h1>
       {state==='done' && <><p>{magnet==='mlyntsi'?'Рецепт млинців і картку юного кухаря надіслано одним листом.':'Лист із PDF-рецептом шоколадного торта надіслано.'}</p><p>Якщо листа немає, перевір «Промоакції» або «Спам».</p></>}
       {state==='loading' && <p>Перевіряємо підтвердження email і надсилаємо запитані матеріали.</p>}
       {state==='expired' && <p>Повернися до сторінки рецепта й залиш email ще раз.</p>}
+      {state==='missing' && <p>Якщо ти щойно підтвердила чи підтвердив підписку, шукай лист із рецептом у пошті. Якщо листа немає, повернися до сторінки рецепта й залиш email ще раз.</p>}
       {state==='error' && <><p>Підтвердження могло вже зберегтися. Повтори перевірку — другого листа після успішної видачі не буде.</p><Button type="button" onClick={()=>void confirm()}>Повторити перевірку</Button></>}
       <p><a href={magnet ? magnetDelivery[magnet].page : '/uk'}>{magnet?'До сторінки рецепта':'До рецептів Bake Again'}</a></p>
     </div>

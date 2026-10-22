@@ -424,7 +424,9 @@ Runtime: Cloudflare Worker `bake-again` (own account, GitHub `main` builds), not
 older Sites project. Secret `BREVO_API_KEY` is encrypted in the Worker settings.
 Nonsecret settings: `LEAD_MAGNET_ENABLED=true`, `BREVO_MAGNET_DOI_TEMPLATE=20`.
 The API DOI template is active, sender/reply-to `hello@bakeagain.com`; its button
-uses `{{ params.DOIurl }}`. Keep native hosted DOI template #5 unchanged.
+uses `{{params.DOIurl}}` and MUST have the advanced Tag `optin` for API DOI.
+Without that tag the API returns 400: no active DOI template exists, even when
+the UI shows the template as active. Keep native hosted DOI template #5 unchanged.
 
 Migration `0002_lead_magnet_delivery.sql` creates only the request ledger. Existing
 quota/personal tables are unchanged. The ledger retains email, fixed magnet ID,
