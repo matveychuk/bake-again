@@ -436,11 +436,15 @@ Return tokens expire in 24 hours and are delivered in a URL fragment, consumed b
 a POST and cleared from history. Confirmation requires independently verified,
 active membership in the existing confirmed-language lists #4/#5/#6. Contact
 existence alone is insufficient; blocked/unsubscribed addresses are never restored.
+The browser retains only the completed magnet ID and its 24-hour expiry in
+sessionStorage, allowing a refreshed cleaned URL to show the completed result.
+Neither the email nor the return token is retained there.
 
 Admission is atomic: per-network 10/hour, per-email 8/day, site 200/day, plus a
 ten-minute request bucket per email/magnet. Delivery uses a durable claim and
-stable Brevo IdempotencyKey. Uncertain SMTP retries stop after 14 minutes, within
-Brevo's 15-minute key TTL; inspect provider logs before retrying such a case.
+stable UUID in Brevo's `headers.idempotencyKey`. Uncertain SMTP retries stop
+after 14 minutes, conservatively within the provider's idempotency window;
+inspect provider logs before retrying such a case.
 No raw email/token/IP is emitted into analytics or error responses. A submission
 event measures an accepted request, never a confirmed subscription or delivery.
 

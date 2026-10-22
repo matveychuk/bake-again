@@ -1367,3 +1367,12 @@ Applied the existing full-photo recipe carousel component to IG-026 v2, preservi
   API DOI preview and light/dark Design Lab examples for both invitations.
 - Reused the subscribed-page styles for confirmation feedback. Layouts on both
   recipe forms fit at 390, 900 and 1440 px. Provider delivery is checked separately.
+
+## 2026-10-22 · Confirmation return feedback
+
+- Reuse the existing subscribed-page feedback for a missing return token and a
+  refreshed completed return. Keep only a non-personal, expiring delivery result
+  in session storage; refreshing a completed page does not report an expired link.
+- Recipe-specific delivery verified in real email: native DOI then one crepes
+  email with both PDFs, immediate requests for confirmed subscribers, and no
+  duplicate email after replaying the DOI link.
