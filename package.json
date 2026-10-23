@@ -8,7 +8,7 @@
   "scripts": {
     "predev": "npm run media:prepare",
     "dev": "vinext dev",
-    "prebuild": "npm run media:prepare",
+    "prebuild": "npm run media:prepare && npm run lead-magnets:prepare",
     "build": "vinext build",
     "start": "wrangler dev --config dist/server/wrangler.json",
     "lint": "oxlint",
@@ -28,7 +28,8 @@
     "media:prepare": "node scripts/prepare-media.mjs",
     "test:release-render": "node scripts/check-release-render.mjs",
     "db:generate": "drizzle-kit generate",
-    "newsletter:prepare": "node scripts/prepare-newsletter-templates.mjs",
+    "newsletter:prepare": "node --experimental-strip-types scripts/prepare-newsletter-templates.mjs",
+    "lead-magnets:prepare": "node --experimental-strip-types scripts/prepare-lead-magnets.mjs && node --experimental-strip-types scripts/prepare-magnet-emails.mjs",
     "media:audit": "node scripts/prepare-media.mjs --audit",
     "test:commerce": "node --experimental-strip-types --test content/commerce/*.test.ts",
     "test:seo-render": "node scripts/check-seo-render.mjs"

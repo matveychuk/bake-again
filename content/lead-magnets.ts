@@ -1,34 +1,27 @@
-export const leadMagnets = [
-  {
-    magnetId: 'shokolad',
-    title: 'Шоколадний торт без глютену з вишнями й бананом',
-    subtitle: 'Покроковий PDF-рецепт із грамами — на твою пошту',
-    features: [
-      'Корж на Schär Mix B, крем і глазур — точні грами',
-      '11 кроків із фото: від тіста до гірки зі шматочків',
-      'План на два дні: як спекти торт до свята без поспіху',
-    ],
-    image: '/images/lead-magnets/shokolad.webp',
-    imageAlt: 'Шматок шоколадного торта з вишнями, бананом і кремом на тарілці',
-    note: 'Новим підписникам — після підтвердження email, чинним — одразу на пошту. Якщо листа немає — перевір «Промоакції» або «Спам».',
-  },
-  {
-    magnetId: 'mlyntsi',
-    title: 'Млинці без глютену й картка юного кухаря',
-    subtitle: 'Два PDF одним листом — для спільного готування',
-    features: [
-      'Повний рецепт млинців: інгредієнти, кроки й практичні підказки',
-      'Картка юного кухаря з короткими кроками та фото',
-      'Рецепт для телефона, картка — для друку на A4',
-    ],
-    image: '/images/crepes.webp',
-    imageAlt: 'Тонкі безглютенові млинці на тарілці',
-    note: 'Новим підписникам — після підтвердження email, чинним — одразу на пошту. Обидва PDF прийдуть одним листом. Якщо листа немає — перевір «Промоакції» або «Спам».',
-  },
-] as const;
+import source from './lead-magnets.json' with { type: 'json' };
+import { validateLeadMagnetRegistry } from './lead-magnets.validation.ts';
+
+validateLeadMagnetRegistry(source);
+export const leadMagnetRegistry = source;
+export type LeadMagnetId = keyof typeof source;
+export const leadMagnetIds = Object.keys(source) as LeadMagnetId[];
+export const leadMagnetPath = (id: LeadMagnetId) => `/uk/recept/${id}`;
+export const isLeadMagnetId = (value: unknown): value is LeadMagnetId =>
+  typeof value === 'string' && Object.hasOwn(leadMagnetRegistry, value);
+export const leadMagnets = leadMagnetIds.map((magnetId) => ({
+  magnetId,
+  ...leadMagnetRegistry[magnetId].page,
+}));
 
 export function getLeadMagnet(locale: string, id: string) {
   return locale === 'uk'
     ? leadMagnets.find((magnet) => magnet.magnetId === id)
     : undefined;
+}
+
+export function getLeadMagnetBot(id: LeadMagnetId, channel: 'ig' | 'fb') {
+  return {
+    ...leadMagnetRegistry[id].bot,
+    url: `https://bakeagain.com${leadMagnetPath(id)}?src=${channel}-bot`,
+  };
 }

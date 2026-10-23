@@ -413,6 +413,15 @@ activation and delivery state; previews do not prove receipt or phone opening.
 
 ## Recipe-specific PDF requests, 2026-10-21
 
+**2026-10-23 — single product registry:** `content/lead-magnets.json` now owns
+page, email, confirmation-result and bot copy. Routes, accepted IDs, analytics,
+Design Lab and previews derive from it. `npm run lead-magnets:prepare` validates
+assets and emits local IG/FB handoffs; it never sends or activates anything.
+Migration `0003` preserves the request ledger while replacing the two-ID CHECK
+with a structural constraint. Later products need one registry entry and their
+assets, without per-product migrations or provider workflows.
+See [adding a lead magnet](lead-magnets.uk.md).
+
 This replaces the shared-welcome mechanism only for the two magnet entry pages:
 `/uk/recept/shokolad` and `/uk/recept/mlyntsi`. Generic UK/ES/EN signup and its
 welcome workflow are retained. The latter's existing step #7 now also requires

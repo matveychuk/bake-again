@@ -1,4 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises';
+import { leadMagnetRegistry, leadMagnetIds } from '../content/lead-magnets.ts';
 const root = new URL('../', import.meta.url);
 const css = await readFile(new URL('design-system/tokens.css', root), 'utf8');
 const forms = JSON.parse(await readFile(new URL('lib/newsletter/brevo-forms.json', root), 'utf8'));
@@ -14,10 +15,11 @@ const shell = `<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta 
 await writeFile(new URL('lib/newsletter/magnet-email.generated.ts', root), `// Generated from design-system/tokens.css. Run npm run newsletter:prepare.\nexport const magnetEmailShell = ${JSON.stringify(shell)};\nexport const magnetButtonStyle = ${JSON.stringify(buttonStyle)};\nexport const magnetUnsubscribeUrl = ${JSON.stringify(forms.settings.unsubscribeUrls.uk)};\n`);
 const doi = shell.replaceAll('[[title]]','Підтвердь підписку').replace('[[intro]]','Один крок — і надішлемо запитаний рецепт на цю пошту.').replace('[[buttons]]',`<p><a href="{{params.DOIurl}}" style="${buttonStyle}">Підтвердити й отримати рецепт</a></p>`).replace('[[footer]]','Натискаючи кнопку, ти погоджуєшся отримувати рецепти й матеріали Bake Again українською. Відписатися можна будь-коли. Якщо ти не залишала чи не залишав запит, просто не підтверджуй його.').replace('[[unsubscribe]]','');
 await writeFile(new URL('lib/newsletter/templates/uk-magnet-double-opt-in.html',root),doi);
-const copies = JSON.parse(await readFile(new URL('lib/newsletter/magnet-copy.json',root),'utf8'));
-for (const [id, copy] of Object.entries(copies)) {
-  const buttons=copy.links.map(link=>`<p><a href="https://bakeagain.com${link.href}" style="${buttonStyle}">${link.title}</a></p>`).join('');
-  const html=shell.replaceAll('[[title]]',copy.title).replace('[[intro]]',copy.intro).replace('[[buttons]]',buttons)
+const escape = text => text.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+for (const id of leadMagnetIds) {
+  const copy = leadMagnetRegistry[id].email;
+  const buttons=copy.links.map(link=>`<p><a href="https://bakeagain.com${link.href}" style="${buttonStyle}">${escape(link.title)}</a></p>`).join('');
+  const html=shell.replaceAll('[[title]]',escape(copy.title)).replace('[[intro]]',escape(copy.intro)).replace('[[buttons]]',buttons)
     .replace('[[footer]]','Ти отримуєш цей лист, бо попросила чи попросив цей матеріал на сайті Bake Again. Нові рецепти надсилатимемо в межах твоєї підтвердженої підписки.')
     .replace('[[unsubscribe]]',` · <a href="${forms.settings.unsubscribeUrls.uk}" style="color:inherit;">Відписатися</a>`);
   await writeFile(new URL(`lib/newsletter/templates/uk-magnet-${id}.html`,root),html);
@@ -25,6 +27,6 @@ for (const [id, copy] of Object.entries(copies)) {
 const indexPath=new URL('lib/newsletter/templates/index.html',root);
 let index=await readFile(indexPath,'utf8');
 index=index.replace(/<section id="magnet-emails">[\s\S]*?<\/section>/,'');
-index=index.replace('</body>',`<section id="magnet-emails"><h2>Окрема видача рецептів</h2><ul><li><a href="uk-magnet-shokolad.html">Шоколадний торт</a></li><li><a href="uk-magnet-mlyntsi.html">Млинці й картка юного кухаря</a></li><li><a href="uk-magnet-double-opt-in.html">Підтвердження для API Brevo</a></li></ul></section></body>`);
+index=index.replace('</body>',`<section id="magnet-emails"><h2>Окрема видача рецептів</h2><ul>${leadMagnetIds.map(id=>`<li><a href="uk-magnet-${id}.html">${escape(leadMagnetRegistry[id].page.title)}</a></li>`).join('')}<li><a href="uk-magnet-double-opt-in.html">Підтвердження для API Brevo</a></li></ul></section></body>`);
 await writeFile(indexPath,index);
 console.log('Prepared recipe-delivery email shell and API DOI template. Nothing sent.');

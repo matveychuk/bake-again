@@ -1,3 +1,9 @@
+import { isLeadMagnetId, leadMagnetPath } from '../../content/lead-magnets.ts';
+
+const isMagnetPath = (path: string) => {
+  const id = path.replace(/\/$/, '').split('/').at(-1);
+  return isLeadMagnetId(id) && path.replace(/\/$/, '') === leadMagnetPath(id);
+};
 // Public installation identifiers, not credentials. Keep localhost/preview traffic out.
 export const analyticsConfig = {
   websiteId: '1b499007-bdab-4322-9b5e-b5173f5649f6',
@@ -60,7 +66,7 @@ declare global {
 
 export function isAnalyticsPath(path: string) {
   if (/^\/uk\/mlyntsi-recept\/?$/.test(path)) return true;
-  if (/^\/uk\/recept\/(?:shokolad|mlyntsi)\/?$/.test(path)) return true;
+  if (isMagnetPath(path)) return true;
   return /^\/(?:en|es|uk)(?:\/(?:about|privacy|saved|shopping-list)|\/recipes\/[a-z0-9-]+(?:\/cook)?|\/techniques\/[a-z0-9-]+)?\/?$/.test(
     path,
   );
@@ -178,8 +184,8 @@ export function sanitizeAnalyticsPayload(
   }
   if (payload.name === 'lead_magnet_submit') {
     if (
-      !/^\/uk\/recept\/(?:shokolad|mlyntsi)\/?$/.test(url.pathname) ||
-      !['shokolad','mlyntsi'].includes(input?.magnet ?? '') ||
+      !isMagnetPath(url.pathname) ||
+      !isLeadMagnetId(input?.magnet) ||
       url.pathname.replace(/\/$/,'').split('/').at(-1) !== input?.magnet
     )
       return false;

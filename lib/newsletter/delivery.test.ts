@@ -11,6 +11,7 @@ import { deliveryConfigured, readRecipeBody, requireRecipeOrigin, verifyRecipeCh
 function fixture() {
   const db=new DatabaseSync(':memory:');
   db.exec(readFileSync(new URL('../../drizzle/0002_lead_magnet_delivery.sql',import.meta.url),'utf8'));
+  db.exec(readFileSync(new URL('../../drizzle/0003_lead_magnet_registry.sql',import.meta.url),'utf8'));
   const adapter:DeliveryDatabase={prepare(sql){let args:(string|number|null)[]=[];return {
     bind(...values){args=values;return this;},
     async first<T>(){return (db.prepare(sql).get(Object.fromEntries(args.map((v,i)=>[`?${i+1}`,v])))??null) as T|null;},

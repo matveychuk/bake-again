@@ -1,8 +1,10 @@
-import copy from './magnet-copy.json' with { type: 'json' };
-export const magnetIds = ['shokolad', 'mlyntsi'] as const;
-export type MagnetId = (typeof magnetIds)[number];
-export const isMagnetId = (value: unknown): value is MagnetId =>
-  typeof value === 'string' && magnetIds.includes(value as MagnetId);
+import { leadMagnetIds, leadMagnetPath, leadMagnetRegistry, isLeadMagnetId, type LeadMagnetId } from '../../content/lead-magnets.ts';
+export const magnetIds = leadMagnetIds;
+export type MagnetId = LeadMagnetId;
+export const isMagnetId = isLeadMagnetId;
 
 /** Public copy and fixed delivery destinations, never supplied by a visitor. */
-export const magnetDelivery = copy;
+export const magnetDelivery = Object.fromEntries(magnetIds.map(id => [id, {
+  ...leadMagnetRegistry[id].email,
+  page: leadMagnetPath(id),
+}])) as { [Id in MagnetId]: (typeof leadMagnetRegistry)[Id]['email'] & { page: string } };

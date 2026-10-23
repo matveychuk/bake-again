@@ -940,10 +940,19 @@ the requested email immediately; new readers complete native Brevo DOI first.
 The generic success copy does not disclose whether an address is in the audience.
 No hosted-form fallback is offered for a magnet, since it would lose its identity.
 
-`magnet-copy.json` is the delivery-copy source. The token-derived email variant
+`content/lead-magnets.json` is the shared page/delivery/bot-copy source. The token-derived email variant
 uses one recipe button for chocolate, and two separate PDF buttons in one email
 for crepes plus the junior-cook card. `newsletter:prepare` builds its inert
 previews and the dedicated API DOI template. The original general welcome
 workflow excludes the BA_LEAD_SIGNUP source so it cannot send an extra welcome.
 The return page reuses the subscribed-page layout and consumes an opaque
 fragment token; the server independently checks confirmed Brevo list membership.
+
+### Lead-magnet registry (2026-10-23)
+
+Every registered magnet automatically appears in the light/dark Design Lab.
+Page, delivery confirmation and email copy derive from the same product record;
+the existing composition and semantic tokens are unchanged. New products reuse
+the form and email variant rather than creating parallel components. The build
+validates required copy, public asset destinations and asset presence, and
+generates channel-specific bot handoffs. See `lib/newsletter/lead-magnets.uk.md`.

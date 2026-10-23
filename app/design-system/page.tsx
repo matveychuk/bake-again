@@ -85,7 +85,7 @@ import { RecipeUtilityActions } from '@/components/recipe/recipe-utility-actions
 import { recipePublicLink } from '@/content/recipes/recipe-public-link';
 import { RecentRecipes } from '@/components/personal-state/recent-recipes';
 import { NewsletterForm } from '@/components/site/newsletter-form';
-import { getLeadMagnet } from '@/content/lead-magnets';
+import { getLeadMagnet, leadMagnetIds } from '@/content/lead-magnets';
 import { EditorialInvitation } from '@/components/site/editorial-invitation';
 import { RecipeDownloads } from '@/components/recipe/recipe-downloads';
 import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
@@ -922,7 +922,7 @@ export default function DesignSystemPage() {
                 </span>
               </div>
               <div>
-                {(['shokolad', 'mlyntsi'] as const).flatMap((magnet) => (['light', 'dark'] as const).map((theme) => (
+                {leadMagnetIds.flatMap((magnet) => (['light', 'dark'] as const).map((theme) => (
                   <div
                     key={`${magnet}-${theme}`}
                     data-theme={theme}

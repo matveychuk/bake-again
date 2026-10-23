@@ -1,0 +1,6 @@
+interface:
+  display_name: "Bake Again — видача лід-магнітів"
+  short_description: "Flow SendPulse, підтвердження Brevo й видача матеріалів"
+  default_prompt: "Використай $bake-again-lead-magnets, щоб налаштувати видачу нового матеріалу Bake Again за ключовим словом: новим після підтвердження, чинним підписникам одразу."
+policy:
+  allow_implicit_invocation: true

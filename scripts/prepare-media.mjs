@@ -36,7 +36,7 @@ async function readProductSource() {
     )
   )
     .flat()
-    .filter((filename) => codeExtensions.has(path.extname(filename)));
+    .filter((filename) => codeExtensions.has(path.extname(filename)) || filename === path.join(projectRoot, 'content/lead-magnets.json'));
   return (
     await Promise.all(files.map((filename) => fs.readFile(filename, 'utf8')))
   ).join('\n');

@@ -1,5 +1,12 @@
 # Design system changelog
 
+## 2026-10-23 — Shared lead-magnet content
+
+- Page, confirmation-result, email and bot copy now share one validated product
+  registry. The Design Lab and email previews follow all registered products.
+- Existing typography, tokens, layouts and recipe delivery wording are retained;
+  new products reuse the existing invitation and form.
+
 ## 2026-10-18 · Localized newsletter welcome email
 
 - Extended the existing token-derived email composition with UK/ES/EN welcome

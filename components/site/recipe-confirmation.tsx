@@ -47,7 +47,7 @@ export function RecipeConfirmation() {
     {state==='done' ? <CircleCheck size={32} aria-hidden="true" className={styles.icon}/> : <MailCheck size={32} aria-hidden="true" className={styles.icon}/>}
     <div>
       <h1 id="recipe-confirmed-title">{state==='done'?'Підписку підтверджено':state==='loading'?'Готуємо твій лист':state==='missing'?'Перевір пошту':state==='expired'?'Посилання вже не діє':'Не вдалося завершити видачу'}</h1>
-      {state==='done' && <><p>{magnet==='mlyntsi'?'Рецепт млинців і картку юного кухаря надіслано одним листом.':'Лист із PDF-рецептом шоколадного торта надіслано.'}</p><p>Якщо листа немає, перевір «Промоакції» або «Спам».</p></>}
+      {state==='done' && magnet && <><p>{magnetDelivery[magnet].delivered}</p><p>Якщо листа немає, перевір «Промоакції» або «Спам».</p></>}
       {state==='loading' && <p>Перевіряємо підтвердження email і надсилаємо запитані матеріали.</p>}
       {state==='expired' && <p>Повернися до сторінки рецепта й залиш email ще раз.</p>}
       {state==='missing' && <p>Якщо ти щойно підтвердила чи підтвердив підписку, шукай лист із рецептом у пошті. Якщо листа немає, повернися до сторінки рецепта й залиш email ще раз.</p>}
