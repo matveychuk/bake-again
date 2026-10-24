@@ -926,7 +926,10 @@ purpose, format, page count and size; the next-action strip links to the web rec
 The Ukrainian service page uses a focusable heading/skip link and the existing
 footer privacy link. Semantic tokens govern typography, space and colour; the
 food image stacks above the copy at compact widths. Design Lab `#recipe-downloads`
-reuses the production composition. Analytics counts link activations, not completed
+reuses the production composition. Since 2026-10-24, the crepes recipe, catalogue,
+lead magnet and downloads share the author’s stack photograph from 2026-10-20,
+preserving the full portrait source for responsive hero and 4:3 card crops. Previous image
+sources remain preserved. Analytics counts link activations, not completed
 saves or email confirmations. No email token or identity is required by the page.
 
 

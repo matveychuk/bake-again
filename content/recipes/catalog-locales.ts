@@ -468,9 +468,9 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Тонкі млинці на молоці.',
     },
     alt: previewAlt(
-      'Thin gluten-free crepes folded on a plate',
-      'Crepes finos sin gluten doblados en un plato',
-      'Тонкі безглютенові млинці, складені на тарілці',
+      'A tall stack of golden gluten-free crepes on a plate',
+      'Una pila alta de crepes dorados sin gluten en un plato',
+      'Велика стопка золотавих безглютенових млинців на тарілці',
     ),
   },
   'gluten-free-napoleon': {

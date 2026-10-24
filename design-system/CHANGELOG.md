@@ -1383,3 +1383,11 @@ Applied the existing full-photo recipe carousel component to IG-026 v2, preservi
 - Recipe-specific delivery verified in real email: native DOI then one crepes
   email with both PDFs, immediate requests for confirmed subscribers, and no
   duplicate email after replaying the DOI link.
+
+## 2026-10-24 · Author photograph for crepes
+
+- Replaced the generated crepes preview with Sasha’s 20 October stack photograph in
+  the catalogue, recipe, lead magnet, download page and generated search images.
+- Preserved the previous source and all seven new camera originals; only orientation
+  is normalized; responsive crops use the existing components. Existing components and Design Lab delivery examples
+  use the same image. Recipe facts and evidence status are unchanged.

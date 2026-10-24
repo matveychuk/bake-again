@@ -26,7 +26,7 @@ export function RecipeDownloads({ id = 'crepes-downloads' }: { id?: string }) {
           <p className={styles.note}>Якщо PDF відкриється у браузері, скористайся кнопкою збереження або «Поділитися» → «Зберегти у Файли».</p>
         </div>
         {/* oxlint-disable-next-line next/no-img-element -- Existing prepared recipe photograph. */}
-        <img className={styles.image} src="/images/crepes.webp" alt="Тонкі золотаві млинці, складені на тарілці" width={1200} height={900} fetchPriority="high" />
+        <img className={styles.image} src="/images/recipes/crepes-stack-2026-10-20-v1.webp" alt="Велика стопка золотавих безглютенових млинців на тарілці" width={1800} height={2400} fetchPriority="high" />
       </section>
       <EditorialInvitation
         titleId={`${id}-next`}

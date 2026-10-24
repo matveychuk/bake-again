@@ -459,9 +459,9 @@ export const recipeInventory: InventoryRecipe[] = [
     scalingAnchorIngredientId: 'eggs',
     launchPriority: 'High',
     heroCandidate: 'Yes',
-    image: '/images/crepes.webp',
-    imageKind: 'generated-preview',
-    imageAlt: 'A stack of thin golden gluten-free breakfast crepes',
+    image: '/images/recipes/crepes-stack-2026-10-20-v1.webp',
+    imageKind: 'author-photo',
+    imageAlt: 'A tall stack of golden gluten-free crepes on a plate',
     summary:
       'Thin everyday crepes for three, finished with hot water after resting.',
     source: 'Handwritten notebook page, IMG_1275.jpeg',
