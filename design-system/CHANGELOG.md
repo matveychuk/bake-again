@@ -1,5 +1,22 @@
 # Design system changelog
 
+## 2026-10-31 · Product banner (Napoleon lesson, variant B)
+
+- Added `EditorialInvitation variant="product-banner"` and an optional `eyebrow`
+  for the current product at the top of Ukrainian recipe pages. It is dark on all
+  screens via the existing `data-theme="dark"` tokens, with a lazy, reduced-motion
+  aware food loop and a click-only signup dialog.
+- Added the Design Lab example `#product-banner` and the single product config.
+- Review fixes: plate-cropped 360×450 loop and WebP poster, Literata 450 title on
+  one desktop line (23px phone), 24/16px gap before the recipe, tighter desktop row
+  and a compact phone layout with the label on its own line.
+- Optional italic `titleAccent` («Не цього року.») that stays on one line.
+- New semantic token `color.text.accent` for display accents: light #A64F36
+  (5.14:1 on page), dark #E8977A (6.21:1 on panel, 7.46:1 on page). The banner
+  accent uses it and the description moves to `text.primary`, so the phone title
+  returns to 23px.
+- EN/ES copy; the banner now appears on all recipe-page locales.
+
 ## 2026-10-30 · Available ingredient input
 
 - The shared recipe adjuster now keeps the amount field focused while users clear and

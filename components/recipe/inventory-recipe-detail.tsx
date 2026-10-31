@@ -66,6 +66,7 @@ import { RecipePrintView } from './recipe-print-view';
 import { RecentRecipes } from '@/components/personal-state/recent-recipes';
 import { getRecipeCatalog } from '@/content/recipes/catalog';
 import { NewsletterSignup } from '@/components/site/newsletter-signup';
+import { ProductBanner } from '@/components/site/product-banner';
 import { getRecipeVideoLesson } from '@/content/commerce/video-lessons';
 import { RecipeVideoLesson } from './recipe-video-lesson';
 
@@ -258,6 +259,7 @@ export function InventoryRecipeDetail({
           />
         )}
         <SiteHeader locale={locale} pathname={pathname} />
+        {!isDraft && <ProductBanner recipeId={recipe.id} locale={locale} />}
         <section className={styles.hero} id="recipe-content" tabIndex={-1}>
           <div className={styles.heroImage}>
             <Image

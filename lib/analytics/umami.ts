@@ -32,6 +32,7 @@ export const analyticsEvents = [
   'recipe_pdf_download',
   'lead_magnet_submit',
   'newsletter_submit',
+  'product_banner_click',
 ] as const;
 export type AnalyticsEvent = (typeof analyticsEvents)[number];
 type SocialClickData = {
