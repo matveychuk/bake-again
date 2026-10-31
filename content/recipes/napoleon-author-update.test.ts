@@ -60,7 +60,7 @@ for (const locale of ['uk', 'en', 'es'] as const) {
             media.src.includes('author-custard-2026-10-04'),
         ),
     );
-    assert.equal(recipe.heroMediaId, 'napoleon-author-hero-v1');
+    assert.equal(recipe.heroMediaId, 'napoleon-author-hero-preview-2359-v1');
     for (const factor of [0.5, 1, 2]) {
       const adjusted = applySourceRecipeConfiguration(
         source,
@@ -106,7 +106,7 @@ for (const locale of ['uk', 'en', 'es'] as const) {
     }
   });
 
-  void test(`author Napoleon keeps two flour portions, photographs and oven settings consistent (${locale})`, () => {
+  void test(`author Napoleon v5 keeps unleavened dough, photographs and Cook Mode consistent (${locale})`, () => {
     const source = getRecipeContent(recipe.id, locale)!;
     assert.equal(source.evidence?.status, 'tested');
     assert.equal(recipe.geometry.default.diameterCm, 24);
@@ -114,6 +114,13 @@ for (const locale of ['uk', 'en', 'es'] as const) {
       recipe.steps.find((s) => s.id === 'bake-layer')?.temperature?.value,
       200,
     );
+    assert.equal(recipe.steps.find((s) => s.id === 'bake-layer')?.temperature?.ovenMode, 'fan');
+    assert.equal(recipe.versionId, 'gluten-free-napoleon-v5');
+    assert.equal(recipe.geometry.default.layerCount, 7);
+    assert.equal(recipe.yield.default.amount, 2);
+    assert(!recipe.ingredientSections[0].lines.some((line) =>
+      ['baking-soda', 'citric-acid', 'flour-leavener'].includes(line.id),
+    ));
     assert.deepEqual(
       source.steps.slice(0, 7).map((s) => s.id),
       [
@@ -127,13 +134,13 @@ for (const locale of ['uk', 'en', 'es'] as const) {
       ],
     );
     const photos = source.steps.slice(0, 7).flatMap((s) => s.media ?? []);
-    assert.equal(photos.length, 9);
+    assert.equal(photos.length, 6);
     assert(
       photos.every(
         (p) => p.fit === 'cover' && p.src.endsWith('.webp') && p.alt,
       ),
     );
-    for (const factor of [1, 2]) {
+    for (const factor of [0.5, 1, 1.5, 2]) {
       const configured = applySourceRecipeConfiguration(
         source,
         factor === 1
@@ -142,40 +149,26 @@ for (const locale of ['uk', 'en', 'es'] as const) {
         locale,
       );
       const steps = createSourceCookSteps(configured, locale);
-      const portion = formatQuantity(locale, {
+      const wholeFlour = formatQuantity(locale, {
         kind: 'exact',
-        value: 250 * factor,
+        value: 500 * factor,
         unit: 'g',
       });
-      for (const id of ['cut-in-butter', 'combine-dough']) {
-        const step = steps.find((s) => s.stepIds.includes(id))!;
-        assert.equal(
-          step.ingredients.find((i) => i.id === 'schar-mix-b')?.primary,
-          portion,
-        );
-        assert(
-          configured.steps.find((s) => s.id === id)!.body.includes(portion),
-        );
-      }
+      const crumb = steps.find((s) => s.stepIds.includes('cut-in-butter'))!;
+      assert.equal(crumb.ingredients.find((i) => i.id === 'schar-mix-b')?.primary, wholeFlour);
+      assert(configured.steps.find((s) => s.id === 'cut-in-butter')!.body.includes(wholeFlour));
+      assert(!steps.find((s) => s.stepIds.includes('combine-dough'))?.ingredients.some((i) => i.id === 'schar-mix-b'));
       assert.equal(
         createSourceCookIngredients(configured, locale).find(
           (i) => i.id === 'schar-mix-b',
         )?.primary,
-        formatQuantity(locale, {
-          kind: 'exact',
-          value: 500 * factor,
-          unit: 'g',
-        }),
+        wholeFlour,
       );
-      assert.deepEqual(
-        steps.find((s) => s.stepIds.includes('mix-wet-dough'))
-          ?.timerOptionsSeconds,
-        [120, 180],
-      );
+      assert(!steps.find((s) => s.stepIds.includes('mix-wet-dough'))?.timerOptionsSeconds?.length);
       assert.deepEqual(
         steps.find((s) => s.stepIds.includes('divide-and-chill'))
           ?.timerOptionsSeconds,
-        [3600, 7200],
+        [900, 86400],
       );
       assert.match(
         configured.steps.find((s) => s.id === 'bake-layer')!.body,

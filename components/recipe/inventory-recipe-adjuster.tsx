@@ -3,7 +3,14 @@
 import { Button } from '@/components/ui/button';
 
 import { trackEvent } from '@/lib/analytics/umami';
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Calculator, ChevronDown, Lightbulb, ShoppingBag } from 'lucide-react';
 import { SectionTitle } from '@/components/foundations/section-title';
@@ -40,6 +47,30 @@ const baseConfiguration: SourceRecipeConfiguration = {
   mode: 'scale',
   scaleFactor: 1,
 };
+
+let focusAfterConfigurationUpdate: {
+  pathname: string;
+  target: HTMLElement;
+  hrefPath?: string;
+  label: string;
+  createdAt: number;
+} | null = null;
+
+function rememberFocusAfterConfigurationUpdate(
+  target: HTMLElement,
+  pathname: string,
+) {
+  focusAfterConfigurationUpdate = {
+    pathname,
+    target,
+    hrefPath:
+      target instanceof HTMLAnchorElement
+        ? new URL(target.href).pathname
+        : undefined,
+    label: target.textContent?.trim() ?? '',
+    createdAt: Date.now(),
+  };
+}
 
 export function InventoryRecipeAdjuster({
   recipe,
@@ -91,6 +122,7 @@ export function InventoryRecipeAdjuster({
       ? String(configuration.availableAmount)
       : String(anchor?.amount.minimum ?? ''),
   );
+  const [appliedAvailable, setAppliedAvailable] = useState(available);
   const scalingBounds = sourceRecipeScalingBounds(
     personalRecipe,
     scalingAnchorIngredientId,
@@ -105,7 +137,7 @@ export function InventoryRecipeAdjuster({
         : updateSourceRecipeConfigurationParams(searchParams, {
             mode: 'ingredient',
             ingredientId: anchor?.ingredient.id ?? '',
-            availableAmount: available,
+            availableAmount: appliedAvailable,
             unit: anchor?.amount.unit ?? 'g',
           });
     return parseSourceRecipeConfiguration(
@@ -116,7 +148,7 @@ export function InventoryRecipeAdjuster({
     );
   }, [
     anchor,
-    available,
+    appliedAvailable,
     mode,
     recipe,
     scale,
@@ -124,15 +156,43 @@ export function InventoryRecipeAdjuster({
     scalingBounds,
     searchParams,
   ]);
+  const enteredConfiguration = useMemo(
+    () =>
+      mode === 'ingredient'
+        ? parseSourceRecipeConfiguration(
+            updateSourceRecipeConfigurationParams(searchParams, {
+              mode: 'ingredient',
+              ingredientId: anchor?.ingredient.id ?? '',
+              availableAmount: available,
+              unit: anchor?.amount.unit ?? 'g',
+            }),
+            recipe,
+            scalingAnchorIngredientId,
+            scalingBounds,
+          )
+        : draftConfiguration,
+    [
+      anchor,
+      available,
+      draftConfiguration,
+      mode,
+      recipe,
+      scalingAnchorIngredientId,
+      scalingBounds,
+      searchParams,
+    ],
+  );
+  const pendingAmount = mode === 'ingredient' && available !== appliedAvailable;
+  const invalidAmount = enteredConfiguration.kind === 'invalid';
+  const calculationUnavailable = pendingAmount || invalidAmount;
   const scaleFactor =
-    draftConfiguration.kind === 'invalid'
+    calculationUnavailable || draftConfiguration.kind === 'invalid'
       ? null
       : draftConfiguration.scaleFactor;
   const isAdjustable = Boolean(recipe && anchor);
   const messages = getUiMessages(locale);
   const concise = recipe?.presentation === 'concise';
   const readerCopy = recipeReaderCopy[locale];
-  const invalidAmount = draftConfiguration.kind === 'invalid';
   const adjusted = scaleFactor !== null && Math.abs(scaleFactor - 1) > 0.000001;
   const fractionalEggs = ingredients.some((ingredient) => {
     const amount = ingredient.quantity.base;
@@ -151,6 +211,40 @@ export function InventoryRecipeAdjuster({
     Math.round((scaleFactor ?? 1) * 100) / 100,
   );
 
+  useEffect(() => {
+    const pending = focusAfterConfigurationUpdate;
+    if (!pending || pending.pathname !== pathname) return;
+    focusAfterConfigurationUpdate = null;
+    const frame = window.requestAnimationFrame(() => {
+      if (Date.now() - pending.createdAt > 5000) return;
+      if (document.activeElement !== document.body) return;
+      const matchingLink = pending.hrefPath
+        ? Array.from(
+            document.querySelectorAll<HTMLAnchorElement>('a[href]'),
+          ).find(
+            (link) =>
+              new URL(link.href).pathname === pending.hrefPath &&
+              link.textContent?.trim() === pending.label,
+          )
+        : null;
+      const matchingButton =
+        pending.target instanceof HTMLButtonElement
+          ? Array.from(
+              document.querySelectorAll<HTMLButtonElement>('button'),
+            ).find(
+              (button) =>
+                button.textContent?.trim() === pending.label &&
+                button.getClientRects().length > 0,
+            )
+          : null;
+      (pending.target.isConnected
+        ? pending.target
+        : (matchingLink ?? matchingButton)
+      )?.focus();
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [configuration, pathname]);
+
   function replaceConfiguration(params: URLSearchParams) {
     if (!syncConfigurationToUrl) return;
     const query = params.toString();
@@ -160,6 +254,38 @@ export function InventoryRecipeAdjuster({
       scroll: false,
     });
   }
+
+  const replaceAvailableUrl = useCallback(
+    (amount: string) => {
+      if (!syncConfigurationToUrl || !anchor) return;
+      const params = updateSourceRecipeConfigurationParams(
+        window.location.search,
+        {
+          mode: 'ingredient',
+          ingredientId: anchor.ingredient.id,
+          availableAmount: amount,
+          unit: anchor.amount.unit,
+        },
+      );
+      const query = params.toString();
+      if (query === window.location.search.slice(1)) return;
+      window.history.replaceState(
+        window.history.state,
+        '',
+        `${pathname}?${query}${window.location.hash}`,
+      );
+    },
+    [anchor, pathname, syncConfigurationToUrl],
+  );
+
+  useEffect(() => {
+    if (!pendingAmount) return;
+    const timeout = window.setTimeout(() => {
+      setAppliedAvailable(available);
+      replaceAvailableUrl(available);
+    }, 500);
+    return () => window.clearTimeout(timeout);
+  }, [available, pendingAmount, replaceAvailableUrl]);
 
   useEffect(() => {
     if (!syncConfigurationToUrl) return;
@@ -175,6 +301,7 @@ export function InventoryRecipeAdjuster({
         setScale(restored.scaleFactor);
       } else {
         setAvailable(String(restored.availableAmount));
+        setAppliedAvailable(String(restored.availableAmount));
       }
     }
     window.addEventListener('popstate', restoreConfiguration);
@@ -203,12 +330,13 @@ export function InventoryRecipeAdjuster({
     );
   }
 
-  function useAvailableIngredient() {
+  function selectAvailableIngredient() {
     if (!anchor) return;
     const nextAvailable =
       mode === 'ingredient' ? available : String(anchor.amount.minimum);
     setMode('ingredient');
     setAvailable(nextAvailable);
+    setAppliedAvailable(nextAvailable);
     replaceConfiguration(
       updateSourceRecipeConfigurationParams(searchParams, {
         mode: 'ingredient',
@@ -233,8 +361,12 @@ export function InventoryRecipeAdjuster({
                   draftConfiguration,
                 )}
                 context={`${sourceShoppingRecipe?.title ?? personalRecipe?.title[locale] ?? ''} · ${formattedScaleFactor}×`}
-                disabled={invalidAmount}
-                disabledReason={scaling.positiveAmount}
+                disabled={calculationUnavailable}
+                disabledReason={
+                  pendingAmount
+                    ? scaling.updatingAmount
+                    : scaling.positiveAmount
+                }
                 locale={locale}
                 recipe={personalRecipe ?? sourceShoppingRecipe!}
                 scaleFactor={scaleFactor ?? 1}
@@ -313,14 +445,26 @@ export function InventoryRecipeAdjuster({
               <button
                 type="button"
                 aria-pressed={mode === 'scale'}
-                onClick={() => selectScale(scale)}
+                onClick={(event) => {
+                  rememberFocusAfterConfigurationUpdate(
+                    event.currentTarget,
+                    pathname,
+                  );
+                  selectScale(scale);
+                }}
               >
                 {scaling.scaleRecipe}
               </button>
               <button
                 type="button"
                 aria-pressed={mode === 'ingredient'}
-                onClick={useAvailableIngredient}
+                onClick={(event) => {
+                  rememberFocusAfterConfigurationUpdate(
+                    event.currentTarget,
+                    pathname,
+                  );
+                  selectAvailableIngredient();
+                }}
               >
                 {scaling.useWhatIHave}
               </button>
@@ -334,7 +478,13 @@ export function InventoryRecipeAdjuster({
                       type="button"
                       aria-pressed={scale === factor}
                       key={factor}
-                      onClick={() => selectScale(factor)}
+                      onClick={(event) => {
+                        rememberFocusAfterConfigurationUpdate(
+                          event.currentTarget,
+                          pathname,
+                        );
+                        selectScale(factor);
+                      }}
                     >
                       {formatNumber(locale, factor)}×
                     </button>
@@ -361,7 +511,30 @@ export function InventoryRecipeAdjuster({
                     }
                     aria-invalid={invalidAmount || undefined}
                     value={available}
-                    onBlur={() => {
+                    onBlur={(event) => {
+                      if (pendingAmount) {
+                        setAppliedAvailable(available);
+                        replaceAvailableUrl(available);
+                      }
+                      if (syncConfigurationToUrl && availableChanged.current) {
+                        const target = event.relatedTarget;
+                        if (target instanceof HTMLElement) {
+                          rememberFocusAfterConfigurationUpdate(
+                            target,
+                            pathname,
+                          );
+                        }
+                        const switchingMode =
+                          target instanceof HTMLButtonElement &&
+                          target.parentElement?.classList.contains(
+                            styles.modeTabs,
+                          );
+                        if (!switchingMode)
+                          router.replace(
+                            `${pathname}${window.location.search}${window.location.hash}`,
+                            { scroll: false },
+                          );
+                      }
                       if (availableChanged.current && !invalidAmount)
                         trackEvent('recipe_ingredient_scale', {
                           recipe_id:
@@ -374,14 +547,6 @@ export function InventoryRecipeAdjuster({
                       availableChanged.current = true;
                       const nextAvailable = event.target.value;
                       setAvailable(nextAvailable);
-                      replaceConfiguration(
-                        updateSourceRecipeConfigurationParams(searchParams, {
-                          mode: 'ingredient',
-                          ingredientId: anchor.ingredient.id,
-                          availableAmount: nextAvailable,
-                          unit: anchor.amount.unit,
-                        }),
-                      );
                     }}
                   />
                   <span>
@@ -398,8 +563,8 @@ export function InventoryRecipeAdjuster({
                     id={availableErrorId}
                     role="alert"
                   >
-                    {draftConfiguration.kind === 'invalid' &&
-                    draftConfiguration.reason === 'unsupported'
+                    {enteredConfiguration.kind === 'invalid' &&
+                    enteredConfiguration.reason === 'unsupported'
                       ? scaling.supportedAmount
                       : scaling.positiveAmount}
                   </p>
@@ -440,7 +605,7 @@ export function InventoryRecipeAdjuster({
           </div>
         )}
       </aside>
-      <div className={styles.content}>
+      <div className={styles.content} aria-busy={pendingAmount}>
         {recipe ? (
           <>
             <RecipeIngredientChecklist
@@ -448,7 +613,7 @@ export function InventoryRecipeAdjuster({
               hideSingleSectionTitle={concise}
               sections={recipe.ingredientSections}
               amountFor={(ingredient) => ({
-                primary: invalidAmount
+                primary: calculationUnavailable
                   ? '—'
                   : ingredient.quantity.base ||
                       ingredient.quantity.equivalent ||
@@ -466,7 +631,7 @@ export function InventoryRecipeAdjuster({
                       )
                     : undefined,
                 secondary:
-                  !invalidAmount &&
+                  !calculationUnavailable &&
                   ingredient.quantity.equivalent &&
                   ingredient.quantity.base
                     ? formatQuantity(

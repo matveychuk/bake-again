@@ -9,7 +9,7 @@ export const napoleon28cmHalfBatch = calculateRecipeConfiguration(
 
 export const napoleon24cmFrom200gFlour = calculateRecipeConfiguration(
   glutenFreeNapoleonRecipe,
-  'round-24cm-6-layers-each',
+  'round-24cm-7-layers-each',
   {
     mode: 'useWhatIHave',
     anchorIngredientLineId: 'schar-mix-b',

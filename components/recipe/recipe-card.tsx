@@ -56,9 +56,14 @@ export function RecipeCard({
       />
       <div className="recipe-image">
         <Image
-          src={recipe.image}
-          alt={recipe.alt}
+          src={recipe.cardImage ?? recipe.image}
+          alt={recipe.cardAlt ?? recipe.alt}
           fill
+          style={
+            recipe.cardImagePosition === 'left-quarter'
+              ? { objectPosition: '25% center' }
+              : undefined
+          }
           sizes={
             variant === 'compact'
               ? '120px'

@@ -22,7 +22,7 @@ export const videoLessons: readonly VideoLesson[] = [
   {
     id: 'napoleon-video',
     recipeId: 'gluten-free-napoleon',
-    recipeVersionId: 'gluten-free-napoleon-v4',
+    recipeVersionId: 'gluten-free-napoleon-v5',
     language: 'uk',
     status: 'planned',
   },

@@ -28,8 +28,7 @@
 .concise .result p {
   margin: var(--space-2) 0 0;
 }
-.concise button:focus-visible,
-.concise input:focus-visible {
+.concise button:focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: var(--space-1);
 }
@@ -130,6 +129,10 @@
   grid-template-columns: 1fr auto;
   border: 1px solid var(--color-border-subtle);
   background: var(--color-background-page);
+}
+.amountInput:focus-within {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
 }
 .amountInput input {
   min-width: 0;

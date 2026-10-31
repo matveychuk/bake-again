@@ -175,6 +175,7 @@ type UiMessages = {
     calculated: string;
     calculatedResult: (factor: string) => string;
     positiveAmount: string;
+    updatingAmount: string;
     supportedAmount: string;
     unsupportedTitle: string;
     unsupportedGeometry: string;
@@ -449,6 +450,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculatedResult: (factor) =>
         `${factor}× the recorded base. Check eggs and other whole items manually when the result is fractional.`,
       positiveAmount: 'Enter an amount greater than 0.',
+      updatingAmount: 'Updating ingredient amounts…',
       unsupportedTitle: 'This recipe configuration is not supported.',
       unsupportedGeometry:
         'This pan size has not been resolved for this recipe. Open the base recipe to choose supported quantities.',
@@ -758,6 +760,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculatedResult: (factor) =>
         `${factor}× de la receta base registrada. Revisa manualmente los huevos y otras unidades enteras si el resultado contiene fracciones.`,
       positiveAmount: 'Introduce una cantidad mayor que 0.',
+      updatingAmount: 'Actualizando las cantidades…',
       unsupportedTitle: 'Esta configuración de la receta no está disponible.',
       unsupportedGeometry:
         'Este tamaño de molde no está resuelto para esta receta. Abre la receta base para elegir cantidades admitidas.',
@@ -1081,6 +1084,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculatedResult: (factor) =>
         `${factor}× від записаної бази. Якщо виходить дробова кількість яєць або інших цілих одиниць, перевірте її вручну.`,
       positiveAmount: 'Введіть кількість більшу за 0.',
+      updatingAmount: 'Оновлюємо кількості інгредієнтів…',
       unsupportedTitle: 'Ця конфігурація рецепта не підтримується.',
       unsupportedGeometry:
         'Цей розмір форми ще не узгоджено для рецепта. Відкрийте базовий рецепт, щоб обрати підтримувані кількості.',

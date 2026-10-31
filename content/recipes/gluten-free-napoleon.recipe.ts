@@ -1,10 +1,10 @@
 import type { RecipeDraft } from './recipe.types.ts';
-import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
+import { quantityFromGrams } from './spoon-weights.ts';
 
 export const glutenFreeNapoleonRecipe = {
   schemaVersion: 2,
   id: 'gluten-free-napoleon',
-  versionId: 'gluten-free-napoleon-v4',
+  versionId: 'gluten-free-napoleon-v5',
   publicationStatus: 'published',
   translationState: {
     uk: 'reviewed',
@@ -22,17 +22,17 @@ export const glutenFreeNapoleonRecipe = {
     es: 'Tarta Napoleón sin gluten',
   },
   summary: {
-    uk: 'Торти по 6 тонких коржів діаметром 24 см із заварним кремом; горіхи — за бажанням.',
-    en: 'Cakes with six thin 24 cm layers each and custard; nuts are optional.',
-    es: 'Tartas de seis capas finas de 24 cm con crema pastelera; los frutos secos son opcionales.',
+    uk: 'Два торти по 7 тонких коржів діаметром 24 см із заварним кремом; горіхи — за бажанням.',
+    en: 'Two cakes with seven thin 24 cm layers each and custard; nuts are optional.',
+    es: 'Dos tartas de siete capas finas de 24 cm con crema pastelera; los frutos secos son opcionales.',
   },
   categoryIds: ['celebration', 'layer-cake'],
   situationIds: ['celebration'],
   difficulty: 'medium',
   baseProvenance: {
     state: 'tested',
-    sourceIds: ['author-bake-2026-10-04', 'author-custard-2026-10-04'],
-    note: 'Author baked and photographed the 24 cm sour-cream dough at 200°C and confirmed the new 2 l milk, 6 egg custard and two six-layer cakes, one plain and one with nuts. Earlier versions’ repeated-bake history does not apply to this version.',
+    sourceIds: ['author-bake-2026-10-26', 'author-custard-2026-10-04', 'author-update-2026-10-28'],
+    note: 'Author tested the unleavened dough in half and one-third batches on 2026-10-25/26, then supplied the final full-batch method and yield on 2026-10-28. Custard evidence is unchanged; scaled adaptations do not inherit this status.',
   },
   timing: {
     activeMinutes: 60,
@@ -46,21 +46,6 @@ export const glutenFreeNapoleonRecipe = {
     },
     phases: [
       {
-        id: 'activate-leavener',
-        label: {
-          uk: 'Відпочинок сметанної суміші',
-          en: 'Sour cream mixture rest',
-          es: 'Reposo de la mezcla de crema agria',
-        },
-        duration: {
-          kind: 'range',
-          min: 2,
-          max: 3,
-          unit: 'minute',
-        },
-        relatedStepId: 'mix-wet-dough',
-      },
-      {
         id: 'chill-dough',
         label: {
           uk: 'Охолодження тіста',
@@ -69,9 +54,9 @@ export const glutenFreeNapoleonRecipe = {
         },
         duration: {
           kind: 'range',
-          min: 1,
-          max: 2,
-          unit: 'hour',
+          min: 15,
+          max: 1440,
+          unit: 'minute',
         },
         relatedStepId: 'divide-and-chill',
       },
@@ -84,8 +69,8 @@ export const glutenFreeNapoleonRecipe = {
         },
         duration: {
           kind: 'range',
-          min: 7,
-          max: 10,
+          min: 5,
+          max: 7,
           unit: 'minute',
         },
         relatedStepId: 'bake-layer',
@@ -121,7 +106,7 @@ export const glutenFreeNapoleonRecipe = {
   },
   yield: {
     default: {
-      id: 'two-six-layer-cakes',
+      id: 'two-seven-layer-cakes',
       label: {
         uk: '2 торти',
         en: '2 cakes',
@@ -130,13 +115,13 @@ export const glutenFreeNapoleonRecipe = {
       amount: 2,
       unit: 'cake',
       details: {
-        uk: 'Усього 12 коржів; кожен торт має 6 коржів діаметром 24 см',
-        en: '12 layers in total; each cake has six 24 cm layers',
-        es: '12 capas en total; cada tarta tiene seis capas de 24 cm',
+        uk: 'Усього 14 коржів; кожен торт має 7 коржів діаметром 24 см',
+        en: '14 layers in total; each cake has seven 24 cm layers',
+        es: '14 capas en total; cada tarta tiene siete capas de 24 cm',
       },
       provenance: {
         state: 'tested',
-        sourceIds: ['author-bake-2026-10-04'],
+        sourceIds: ['author-update-2026-10-28'],
       },
       availability: 'default',
     },
@@ -144,21 +129,21 @@ export const glutenFreeNapoleonRecipe = {
   },
   geometry: {
     default: {
-      id: 'round-24cm-6-layers-each',
+      id: 'round-24cm-7-layers-each',
       label: {
-        uk: 'Для кожного торта 6 круглих коржів діаметром 24 см',
-        en: 'Six 24 cm round layers for each cake',
-        es: 'Seis capas redondas de 24 cm para cada tarta',
+        uk: 'Для кожного торта 7 круглих коржів діаметром 24 см',
+        en: 'Seven 24 cm round layers for each cake',
+        es: 'Siete capas redondas de 24 cm para cada tarta',
       },
       kind: 'roundTemplate',
       application: 'roll-and-trim',
       shape: 'round',
       diameterCm: 24,
-      layerCount: 6,
+      layerCount: 7,
       material: null,
       provenance: {
         state: 'tested',
-        sourceIds: ['author-bake-2026-10-04'],
+        sourceIds: ['author-update-2026-10-28'],
       },
       availability: 'default',
     },
@@ -178,8 +163,8 @@ export const glutenFreeNapoleonRecipe = {
         material: null,
         provenance: {
           state: 'calculated',
-          sourceIds: ['author-bake-2026-10-04'],
-          note: 'Area-based adaptation of the 24 cm October 2026 base. This exact dough at 28 cm has not been bake-tested.',
+          sourceIds: ['author-bake-2026-10-26', 'author-update-2026-10-28'],
+          note: 'Area-based adaptation of the current 24 cm unleavened base. This exact dough at 28 cm has not been bake-tested.',
         },
         availability: 'previewOnly',
         blockingGapIds: ['validate-28cm-form'],
@@ -189,8 +174,8 @@ export const glutenFreeNapoleonRecipe = {
   configuration: {
     base: {
       status: 'Tested',
-      geometryId: 'round-24cm-6-layers-each',
-      yieldId: 'two-six-layer-cakes',
+      geometryId: 'round-24cm-7-layers-each',
+      yieldId: 'two-seven-layer-cakes',
       batchScale: 1,
     },
     geometryAdjustment: {
@@ -275,8 +260,8 @@ export const glutenFreeNapoleonRecipe = {
     additionalStarchLineIds: [],
     provenance: {
       state: 'tested',
-      sourceIds: ['author-bake-2026-10-04'],
-      note: 'Existing Schär Mix B identity retained for the author-approved replacement method; no separate dough starches in this version.',
+      sourceIds: ['author-bake-2026-10-26', 'author-update-2026-10-28'],
+      note: 'Schär Mix B Bread is the author-tested flour mix for the unleavened dough; all 500 g goes into the butter crumb.',
     },
     testedAlternativeMixes: [],
     knownUnsupportedMixes: [],
@@ -286,18 +271,18 @@ export const glutenFreeNapoleonRecipe = {
       id: 'plan-parchment',
       relatedStepId: 'roll-layer',
       text: {
-        uk: 'Підготуйте пергамент для всіх коржів і тарілку або кришку діаметром 24 см. Перед випіканням розігрійте духовку до 200°C.',
-        en: 'Prepare baking parchment for all the layers and a 24 cm plate or lid. Preheat the oven to 200°C before baking.',
-        es: 'Prepara papel de horno para todas las capas y un plato o una tapa de 24 cm. Precalienta el horno a 200°C antes de hornear.',
+        uk: 'Підготуй пергамент для всіх коржів і тарілку або кришку діаметром 24 см. Перед випіканням розігрій духовку до 200°C з конвекцією.',
+        en: 'Prepare baking parchment for all the layers and a 24 cm plate or lid. Preheat the oven to 200°C with the fan on before baking.',
+        es: 'Prepara papel de horno para todas las capas y un plato o una tapa de 24 cm. Precalienta el horno a 200°C con ventilador antes de hornear.',
       },
     },
     {
       id: 'plan-chilling-and-maturation',
       relatedStepId: 'refrigerate-cake',
       text: {
-        uk: 'Плануйте приготування за день: тісто охолоджується 1–2 години, а зібраний торт відпочиває 1 годину при кімнатній температурі та 12–24 години в холодильнику.',
-        en: 'Plan a day ahead: chill the dough for 1–2 hours, then let the assembled cake rest for 1 hour at room temperature and 12–24 hours in the refrigerator.',
-        es: 'Planifica con un día de antelación: la masa necesita 1–2 horas en la nevera y la tarta montada reposa 1 hora a temperatura ambiente y 12–24 horas en la nevera.',
+        uk: 'Плануй приготування за день: тісто охолоджується 15–30 хвилин або до 24 годин, а зібраний торт відпочиває 1 годину при кімнатній температурі та 12–24 години в холодильнику.',
+        en: 'Plan a day ahead: chill the dough for 15–30 minutes or up to 24 hours, then let the assembled cake rest for 1 hour at room temperature and 12–24 hours in the refrigerator.',
+        es: 'Planifica con un día de antelación: enfría la masa 15–30 minutos o hasta 24 horas; la tarta montada reposa 1 hora a temperatura ambiente y 12–24 horas en la nevera.',
       },
     },
   ],
@@ -311,7 +296,7 @@ export const glutenFreeNapoleonRecipe = {
       },
       provenance: {
         state: 'tested',
-        sourceIds: ['author-bake-2026-10-04'],
+        sourceIds: ['author-bake-2026-10-26', 'author-update-2026-10-28'],
       },
       lines: [
         {
@@ -432,71 +417,6 @@ export const glutenFreeNapoleonRecipe = {
           },
           scaling: {
             kind: 'fixed',
-          },
-        },
-        {
-          id: 'baking-soda',
-          options: [
-            {
-              ingredientId: 'baking-soda',
-              name: {
-                uk: 'харчова сода',
-                en: 'baking soda',
-                es: 'bicarbonato sódico',
-              },
-            },
-          ],
-          quantity: quantityFromSpoons('baking-soda', 1, 'tsp'),
-        },
-        {
-          id: 'citric-acid',
-          options: [
-            {
-              ingredientId: 'citric-acid',
-              name: {
-                uk: 'лимонна кислота',
-                en: 'citric acid',
-                es: 'ácido cítrico',
-              },
-            },
-          ],
-          quantity: {
-            base: {
-              kind: 'exact',
-              value: 1,
-              unit: 'tsp',
-            },
-            shopping: {
-              mode: 'base',
-            },
-          },
-        },
-        {
-          id: 'flour-leavener',
-          options: [
-            {
-              ingredientId: 'schar-mix-b-bread',
-              name: {
-                uk: 'борошно для розпушувальної суміші',
-                en: 'flour for the leavening mixture',
-                es: 'harina para la mezcla de bicarbonato y ácido cítrico',
-              },
-            },
-          ],
-          quantity: {
-            base: {
-              kind: 'exact',
-              value: 2,
-              unit: 'tsp',
-            },
-            shopping: {
-              mode: 'base',
-            },
-          },
-          provenance: {
-            state: 'tested',
-            sourceIds: ['author-bake-2026-10-04'],
-            note: 'Author-specified teaspoons; no teaspoon-to-gram conversion is established for this flour mix.',
           },
         },
         {
@@ -774,9 +694,9 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Migas de mantequilla y harina',
       },
       instruction: {
-        uk: 'Наріжте 250 г холодного масла кубиками й додайте до 250 г борошна в чаші комбайна. Подрібніть короткими імпульсами.',
-        en: 'Cut 250 g cold butter into cubes and add it to 250 g flour in a food processor. Pulse briefly.',
-        es: 'Corta 250 g de mantequilla fría en dados y ponla con 250 g de harina en el robot de cocina. Tritura con pulsaciones cortas.',
+        uk: 'Наріж 250 г холодного масла кубиками й додай до всього борошна (500 г) у чаші комбайна. Подрібни короткими імпульсами.',
+        en: 'Cut 250 g cold butter into cubes and add it to all 500 g of flour in a food processor. Pulse briefly.',
+        es: 'Corta 250 g de mantequilla fría en dados y ponla con toda la harina (500 g) en el robot de cocina. Tritura con pulsaciones cortas.',
       },
       quantityMentions: [
         {
@@ -788,6 +708,18 @@ export const glutenFreeNapoleonRecipe = {
           quantity: {
             kind: 'exact',
             value: 250,
+            unit: 'g',
+          },
+        },
+        {
+          text: {
+            uk: '500 г',
+            en: '500 g',
+            es: '500 g',
+          },
+          quantity: {
+            kind: 'exact',
+            value: 500,
             unit: 'g',
           },
         },
@@ -806,9 +738,6 @@ export const glutenFreeNapoleonRecipe = {
           },
         },
       ],
-      ingredientFractions: {
-        'schar-mix-b': 0.5,
-      },
     },
     {
       id: 'mix-wet-dough',
@@ -818,50 +747,11 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Mezcla de crema agria',
       },
       instruction: {
-        uk: 'В іншій мисці змішайте сметану, яйця й дрібку солі. Окремо перемішайте соду, лимонну кислоту та 2 ч. л. борошна, додайте до сметанної суміші й залиште на 2–3 хвилини.',
-        en: 'In a separate bowl, mix the sour cream, eggs and a pinch of salt. Combine the baking soda, citric acid and 2 tsp flour, stir into the sour cream mixture and leave for 2–3 minutes.',
-        es: 'En otro bol, mezcla la crema agria, los huevos y una pizca de sal. Mezcla aparte el bicarbonato, el ácido cítrico y 2 cucharaditas de harina, incorpóralos al bol y deja reposar 2–3 minutos.',
+        uk: 'В іншій мисці змішай сметану, яйця й дрібку солі до однорідності.',
+        en: 'In a separate bowl, mix the sour cream, eggs and a pinch of salt until smooth.',
+        es: 'En otro bol, mezcla la crema agria, los huevos y una pizca de sal hasta que quede homogéneo.',
       },
-      quantityMentions: [
-        {
-          text: {
-            uk: '2 ч. л.',
-            en: '2 tsp',
-            es: '2 cucharaditas',
-          },
-          quantity: {
-            kind: 'exact',
-            value: 2,
-            unit: 'tsp',
-          },
-        },
-      ],
-      ingredientLineIds: [
-        'cultured-dairy-dough',
-        'eggs-dough',
-        'salt-dough',
-        'baking-soda',
-        'citric-acid',
-        'flour-leavener',
-      ],
-      duration: {
-        kind: 'range',
-        min: 2,
-        max: 3,
-        unit: 'minute',
-      },
-      mediaIds: ['napoleon-author-wet-v1'],
-      guidance: [
-        {
-          id: 'bubbly-mixture',
-          kind: 'checkpoint',
-          text: {
-            uk: 'На поверхні з’являються бульбашки, а суміш трохи піднімається — час додавати борошно.',
-            en: 'Bubbles appear on the surface and the mixture rises slightly: it is ready for the flour.',
-            es: 'Cuando aparezcan burbujas y la mezcla suba un poco, ya puedes añadir la harina.',
-          },
-        },
-      ],
+      ingredientLineIds: ['cultured-dairy-dough', 'eggs-dough', 'salt-dough'],
     },
     {
       id: 'combine-dough',
@@ -871,41 +761,24 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Amasado breve',
       },
       instruction: {
-        uk: 'Додайте до сметанної основи 250 г борошна й перемішайте. Потім додайте масляну крихту з першого кроку та з’єднайте в тісто. У комбайні це займає приблизно пару хвилин.',
-        en: 'Stir 250 g flour into the sour cream mixture, then add the butter and flour crumb from the first step. Mix just until the dough comes together; a couple of minutes in a mixer.',
-        es: 'Añade 250 g de harina a la mezcla de crema agria y remueve. Incorpora las migas de mantequilla del primer paso y mezcla solo hasta unir la masa; en una amasadora bastan unos dos minutos.',
+        uk: 'Влий сметанну основу до масляної крихти й коротко з’єднай у тісто.',
+        en: 'Pour the sour cream mixture into the butter crumb and mix briefly until the dough comes together.',
+        es: 'Vierte la mezcla de crema agria sobre las migas de mantequilla y mezcla brevemente hasta unir la masa.',
       },
-      quantityMentions: [
-        {
-          text: {
-            uk: '250 г',
-            en: '250 g',
-            es: '250 g',
-          },
-          quantity: {
-            kind: 'exact',
-            value: 250,
-            unit: 'g',
-          },
-        },
-      ],
-      ingredientLineIds: ['schar-mix-b'],
+      ingredientLineIds: [],
       equipmentIds: ['food-processor'],
-      mediaIds: ['napoleon-author-combine-v1', 'napoleon-author-dough-v1'],
+      mediaIds: ['napoleon-author-dough-v1'],
       guidance: [
         {
           id: 'stop-mixing',
           kind: 'checkpoint',
           text: {
-            uk: 'Щойно тісто зібралося в єдину масу, зупиніться.',
+            uk: 'Щойно тісто зібралося в єдину масу, зупинись.',
             en: 'Stop as soon as the dough holds together.',
             es: 'Para en cuanto la masa quede unida.',
           },
         },
       ],
-      ingredientFractions: {
-        'schar-mix-b': 0.5,
-      },
     },
     {
       id: 'divide-and-chill',
@@ -915,41 +788,40 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Porciones y reposo',
       },
       instruction: {
-        uk: 'Зберіть тісто в кулю, сформуйте кілька ковбасок і наріжте на 12 частин. Умочіть зрізи в борошно, накрийте й поставте в холодильник на 1–2 години.',
-        en: 'Gather the dough into a ball, shape it into a few logs and cut into 12 portions. Dip the cut sides in flour, cover and refrigerate for 1–2 hours.',
-        es: 'Forma una bola con la masa, divídela en varios cilindros y córtalos en 12 porciones. Pasa las caras cortadas por harina, tapa y guarda en la nevera durante 1–2 horas.',
+        uk: 'Поділи тісто на 14 частин, накрий плівкою й постав у холодильник на 15–30 хвилин. Можна залишити до 24 годин — результат однаковий, тож тісто зручно замісити звечора.',
+        en: 'Divide the dough into 14 portions, cover with film and refrigerate for 15–30 minutes. You can leave it for up to 24 hours with the same result, so making it the evening before works well.',
+        es: 'Divide la masa en 14 porciones, cúbrela con film y refrigera durante 15–30 minutos. Puedes dejarla hasta 24 horas con el mismo resultado, así que es práctico prepararla la noche anterior.',
       },
       quantityMentions: [
         {
           text: {
-            uk: '12',
-            en: '12',
-            es: '12',
+            uk: '14',
+            en: '14',
+            es: '14',
           },
           quantity: {
             kind: 'exact',
-            value: 12,
+            value: 14,
             unit: 'piece',
           },
           numberOnly: true,
         },
       ],
-      ingredientLineIds: ['flour-dusting'],
+      ingredientLineIds: [],
       duration: {
         kind: 'range',
-        min: 1,
-        max: 2,
-        unit: 'hour',
+        min: 15,
+        max: 1440,
+        unit: 'minute',
       },
-      mediaIds: ['napoleon-author-portions-v1'],
       guidance: [
         {
           id: 'temper-firm-dough',
           kind: 'practicalTip',
           text: {
-            uk: 'Якщо після тривалого охолодження тісто дуже тверде, дайте йому 5–10 хвилин при кімнатній температурі.',
-            en: 'If the dough is very firm after a longer chill, let it soften at room temperature for 5–10 minutes.',
-            es: 'Si la masa está muy dura tras un reposo más largo, déjala 5–10 minutos a temperatura ambiente.',
+            uk: 'Якщо після тривалого охолодження тісто дуже тверде, почекай 10–15 хвилин перед розкачуванням.',
+            en: 'If the dough is very firm after a longer chill, wait 10–15 minutes before rolling it out.',
+            es: 'Si la masa está muy dura tras un reposo largo, espera 10–15 minutos antes de estirarla.',
           },
         },
       ],
@@ -962,9 +834,9 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Dos pliegues',
       },
       instruction: {
-        uk: 'На пергаменті трохи розкачайте одну порцію й складіть краї до середини, щоб вийшов квадрат. Ще раз розкачайте та складіть так само. Потім розкачайте тонко до потрібної форми.',
-        en: 'On baking parchment, roll one portion out a little, then fold the edges in to make a square. Roll and fold once more, then roll out thinly to the shape you need.',
-        es: 'Sobre papel de horno, estira un poco una porción y dobla los bordes hacia dentro para formar un cuadrado. Vuelve a estirar y a plegar de la misma manera. Después, estira una lámina fina con la forma deseada.',
+        uk: 'На пергаменті трохи розкачай одну порцію й склади краї до середини конвертиком. Ще раз розкачай і склади так само. Потім розкачай тонко.',
+        en: 'On baking parchment, roll one portion out a little and fold the edges in like an envelope. Roll and fold once more, then roll it out thinly.',
+        es: 'Sobre papel de horno, estira un poco una porción y dobla los bordes hacia dentro como un sobre. Vuelve a estirar y plegar; después, estírala fina.',
       },
       ingredientLineIds: ['flour-dusting'],
       equipmentIds: ['parchment'],
@@ -977,7 +849,7 @@ export const glutenFreeNapoleonRecipe = {
           id: 'rolling-pin-parchment',
           kind: 'practicalTip',
           text: {
-            uk: 'Металеву качалку достатньо припорошити борошном. Для дерев’яної накрийте тісто другим листом пергаменту й розкачуйте через нього, щоб не прилипало.',
+            uk: 'Металеву качалку достатньо припорошити борошном. Для дерев’яної накрий тісто другим листом пергаменту й розкачуй через нього, щоб не прилипало.',
             en: 'Lightly flour a metal rolling pin. With a wooden one, cover the dough with a second sheet of parchment and roll through it to prevent sticking.',
             es: 'Si el rodillo es metálico, basta con enharinarlo ligeramente. Si es de madera, cubre la masa con otra hoja de papel de horno y estira por encima para que no se pegue.',
           },
@@ -992,9 +864,9 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Recorta el disco',
       },
       instruction: {
-        uk: 'Зніміть верхній пергамент, якщо використовували, і наколіть тісто виделкою. Прикладіть тарілку або кришку діаметром 24 см та обріжте по контуру. Залиште обрізки поруч на тому самому пергаменті — після випікання вони підуть на крихту.',
-        en: 'Remove the top sheet of parchment, if used, and prick the dough with a fork. Use a 24 cm plate or lid as a guide and cut around it. Leave the trimmings beside the round on the same parchment: once baked, they will make the crumb topping.',
-        es: 'Retira el papel de arriba, si lo has usado, y pincha la masa con un tenedor. Coloca un plato o una tapa de 24 cm encima y recorta el contorno. Deja los recortes al lado, sobre el mismo papel: una vez horneados, servirán para cubrir la tarta con migas.',
+        uk: 'Зніми верхній пергамент, якщо використовувався. Приклади тарілку або кришку діаметром 24 см, виріж коло й наколи його виделкою. Залиш обрізки поруч на тому самому пергаменті — після випікання вони підуть на крихту.',
+        en: 'Remove the top sheet of parchment, if used. Use a 24 cm plate or lid as a guide, cut out the round and prick it with a fork. Leave the trimmings beside it on the same parchment for the crumb topping.',
+        es: 'Retira el papel de arriba, si lo has usado. Recorta un círculo con un plato o una tapa de 24 cm y pínchalo con un tenedor. Deja los recortes al lado sobre el mismo papel para cubrir la tarta con migas.',
       },
       ingredientLineIds: [],
       equipmentIds: ['parchment', 'fork', '24cm-template'],
@@ -1008,21 +880,21 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Hasta que se dore',
       },
       instruction: {
-        uk: 'Перенесіть корж із пергаментом на деко й випікайте разом з обрізками при 200°C приблизно 7–10 хвилин. Готовий корж обережно зсуньте з пергаменту на тарілку.',
-        en: 'Transfer the pastry on its parchment to a baking tray and bake with the trimmings at 200°C for about 7–10 minutes. Gently slide the baked layer off the parchment onto a plate.',
-        es: 'Pasa la masa con su papel a una bandeja y hornea con los recortes a 200°C durante unos 7–10 minutos. Desliza con cuidado el disco horneado del papel a un plato.',
+        uk: 'Перенеси корж із пергаментом на деко й випікай разом з обрізками при 200°C з конвекцією 5–7 хвилин, до золотистого кольору. Бульбашки на коржі — це нормально. Без конвекції теж працює, але може знадобитися трохи більше часу. Готовий корж обережно зсунь із пергаменту на тарілку.',
+        en: 'Transfer the pastry on its parchment to a baking tray and bake with the trimmings at 200°C with the fan on for 5–7 minutes, until golden. Blisters on the layer are normal. A conventional oven also works but may take a little longer. Gently slide the baked layer off the parchment onto a plate.',
+        es: 'Pasa la masa con su papel a una bandeja y hornéala con los recortes a 200°C con ventilador durante 5–7 minutos, hasta que esté dorada. Es normal que aparezcan burbujas en el disco. Sin ventilador también funciona, pero puede tardar un poco más. Desliza con cuidado el disco horneado del papel a un plato.',
       },
       ingredientLineIds: [],
       duration: {
         kind: 'range',
-        min: 7,
-        max: 10,
+        min: 5,
+        max: 7,
         unit: 'minute',
       },
       temperature: {
         value: 200,
         unit: 'C',
-        ovenMode: 'conventional',
+        ovenMode: 'fan',
       },
       equipmentIds: ['parchment'],
       mediaIds: ['napoleon-author-baked-v1'],
@@ -1031,7 +903,7 @@ export const glutenFreeNapoleonRecipe = {
           id: 'golden-layer',
           kind: 'checkpoint',
           text: {
-            uk: 'Орієнтуйтеся на золотистий колір, а не лише на час.',
+            uk: 'Орієнтуйся на золотистий колір, а не лише на час.',
             en: 'Use the golden colour as your guide, as well as the baking time.',
             es: 'Guíate por el color dorado, además del tiempo de horneado.',
           },
@@ -1040,7 +912,7 @@ export const glutenFreeNapoleonRecipe = {
           id: 'slide-fragile-layer',
           kind: 'practicalTip',
           text: {
-            uk: 'Не піднімайте корж руками: він крихкий і може зламатися.',
+            uk: 'Не піднімай гарячий корж руками: він може зламатися.',
             en: 'Avoid lifting the layer with your hands: it is fragile and can break.',
             es: 'Evita levantar el disco con las manos: es frágil y puede romperse.',
           },
@@ -1055,7 +927,7 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Leche para la crema',
       },
       instruction: {
-        uk: 'Налийте все молоко (2000 мл) у велику каструлю й доведіть до кипіння.',
+        uk: 'Налий усе молоко (2000 мл) у велику каструлю й доведи до кипіння.',
         en: 'Pour all the milk (2000 ml) into a large saucepan and bring to a boil.',
         es: 'Vierte toda la leche (2000 ml) en una cacerola grande y llévala a ebullición.',
       },
@@ -1085,7 +957,7 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Mezcla de huevo',
       },
       instruction: {
-        uk: 'У великій мисці з’єднайте цукор, борошно, крохмаль, ванільний цукор і яйця для крему — 6 шт. Збийте вінчиком до однорідності.',
+        uk: 'У великій мисці з’єднай цукор, борошно, крохмаль, ванільний цукор і яйця для крему — 6 шт. Збий вінчиком до однорідності.',
         en: 'In a large bowl, combine the sugar, flour, starch, vanilla sugar and custard eggs — 6 pcs. Whisk until smooth.',
         es: 'En un bol grande, mezcla el azúcar, la harina, el almidón, el azúcar vainillado y los huevos para la crema: 6 uds. Bate con varillas hasta obtener una mezcla homogénea.',
       },
@@ -1121,7 +993,7 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Templado de los huevos',
       },
       instruction: {
-        uk: 'Відберіть із каструлі гаряче молоко для темперування — приблизно 2 склянки. Вливайте його в яєчну суміш тонкою цівкою, постійно перемішуючи вінчиком, до однорідності.',
+        uk: 'Відбери з каструлі гаряче молоко для темперування — приблизно 2 склянки. Вливай його в яєчну суміш тонкою цівкою, постійно перемішуючи вінчиком, до однорідності.',
         en: 'Take about 2 cups of hot milk from the saucepan. Pour it into the egg mixture in a thin stream, whisking continuously until smooth.',
         es: 'Retira unas 2 tazas de leche caliente de la cacerola. Viértela en un hilo fino sobre la mezcla de huevo, batiendo continuamente hasta integrar.',
       },
@@ -1151,7 +1023,7 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Espesado de la crema',
       },
       instruction: {
-        uk: 'Влийте яєчну суміш у гаряче молоко, постійно помішуючи. Прогрівайте, проводячи вінчиком або лопаткою по всьому дну й піднімаючи густішу масу, щоб вона не прилипала й не підгоряла.',
+        uk: 'Влий яєчну суміш у гаряче молоко, постійно помішуючи. Прогрівай, проводячи вінчиком або лопаткою по всьому дну й піднімаючи густішу масу, щоб вона не прилипала й не підгоряла.',
         en: 'Pour the egg mixture into the hot milk, stirring continuously. Heat while sweeping the whisk or spatula across the entire bottom and lifting the thickening mixture to prevent sticking or scorching.',
         es: 'Vierte la mezcla de huevo en la leche caliente sin dejar de remover. Calienta pasando las varillas o una espátula por todo el fondo y levantando la mezcla que espesa para que no se pegue ni se queme.',
       },
@@ -1163,7 +1035,7 @@ export const glutenFreeNapoleonRecipe = {
           id: 'first-bubbles',
           kind: 'checkpoint',
           text: {
-            uk: 'Щойно крем загусне й з’являться перші бульбашки, вимкніть вогонь.',
+            uk: 'Щойно крем загусне й з’являться перші бульбашки, вимкни вогонь.',
             en: 'Turn off the heat as soon as the custard thickens and the first bubbles appear.',
             es: 'Apaga el fuego en cuanto la crema espese y aparezcan las primeras burbujas.',
           },
@@ -1178,7 +1050,7 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Acabado con mantequilla',
       },
       instruction: {
-        uk: 'Додайте масло й перемішуйте, доки воно повністю розтане та з’єднається з кремом.',
+        uk: 'Додай масло й перемішуй, доки воно повністю розтане та з’єднається з кремом.',
         en: 'Add the butter and stir until it has completely melted into the custard.',
         es: 'Añade la mantequilla y remueve hasta que se funda por completo y se integre en la crema.',
       },
@@ -1193,7 +1065,7 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Frutos secos opcionales',
       },
       instruction: {
-        uk: 'Поки готується крем, подрібніть сирі або підсушені волоські горіхи чи пекан до невеликих шматочків.',
+        uk: 'Поки готується крем, подрібни сирі або підсушені волоські горіхи чи пекан до невеликих шматочків.',
         en: 'While the custard is cooking, chop raw or toasted walnuts or pecans into small pieces.',
         es: 'Mientras se prepara la crema, pica nueces o pecanas, crudas o tostadas, en trozos pequeños.',
       },
@@ -1207,9 +1079,9 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Capas y acabado',
       },
       instruction: {
-        uk: 'На кожен торт використайте 6 коржів, перемазуючи кожен теплим кремом. За бажанням додавайте горіхи в кожен прошарок або через один. Зверху посипте крихтою зі спечених обрізків.',
-        en: 'Use six pastry layers for each cake, spreading warm custard over each one. If using nuts, add them to every layer or alternate layers. Top with crumbs from the baked trimmings.',
-        es: 'Usa seis discos por tarta y reparte crema templada sobre cada uno. Si usas frutos secos, añádelos en cada capa o en capas alternas. Cubre con migas de los recortes horneados.',
+        uk: 'На кожен торт використай 7 коржів, перемазуючи кожен теплим кремом. За бажанням додай горіхи в кожен прошарок або через один. Зверху посип крихтою зі спечених обрізків.',
+        en: 'Use seven pastry layers for each cake, spreading warm custard over each one. If using nuts, add them to every layer or alternate layers. Top with crumbs from the baked trimmings.',
+        es: 'Usa siete discos por tarta y reparte crema templada sobre cada uno. Si usas frutos secos, añádelos en cada capa o en capas alternas. Cubre con migas de los recortes horneados.',
       },
       ingredientLineIds: ['walnuts'],
       mediaIds: [
@@ -1221,9 +1093,9 @@ export const glutenFreeNapoleonRecipe = {
           id: 'family-cakes',
           kind: 'practicalTip',
           text: {
-            uk: 'Мій син не дуже любить горіхи, тому з цієї порції я роблю два торти по шість коржів: один лише з кремом, другий — із горішками. Так смакує всім.',
-            en: 'My son is not keen on nuts, so I make two six-layer cakes from this batch: one with custard only and one with nuts. That way, everyone enjoys it.',
-            es: 'A mi hijo no le gustan mucho los frutos secos, así que con esta cantidad preparo dos tartas de seis capas: una solo con crema y otra con nueces. Así hay para todos los gustos.',
+            uk: 'З цієї порції можна скласти два торти по сім коржів: один лише з кремом, другий — із горіхами.',
+            en: 'This batch makes two seven-layer cakes: one with custard only and one with nuts.',
+            es: 'Con esta cantidad puedes montar dos tartas de siete capas: una solo con crema y otra con nueces.',
           },
         },
       ],
@@ -1236,7 +1108,7 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Reposo breve',
       },
       instruction: {
-        uk: 'Залиште торти приблизно на 1 годину при кімнатній температурі, щоб вони трохи стабілізувалися.',
+        uk: 'Залиш торти приблизно на 1 годину при кімнатній температурі, щоб вони трохи стабілізувалися.',
         en: 'Leave the cakes at room temperature for about 1 hour to let them settle a little.',
         es: 'Deja las tartas a temperatura ambiente aproximadamente 1 hora para que se asienten un poco.',
       },
@@ -1256,7 +1128,7 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Una noche en la nevera',
       },
       instruction: {
-        uk: 'Охолоджуйте 12–24 години: за цей час коржі просочаться кремом. Найкраще подавати наступного дня.',
+        uk: 'Охолоджуй 12–24 години: за цей час коржі просочаться кремом. Найкраще подавати наступного дня.',
         en: 'Chill for 12–24 hours so the pastry layers absorb the custard. Serve the next day for the best flavour.',
         es: 'Refrigera durante 12–24 horas para que las capas absorban la crema. Sírvela al día siguiente para disfrutarla en su mejor momento.',
       },
@@ -1271,9 +1143,9 @@ export const glutenFreeNapoleonRecipe = {
   ],
   storage: null,
   makeAhead: {
-    uk: 'Тісто можна охолоджувати всю ніч. Після складання торт дозріває в холодильнику 12–24 години; найкращий смак — наступного дня.',
-    en: 'The dough may be chilled overnight. After assembly, refrigerate the cake for 12–24 hours; it tastes best the next day.',
-    es: 'La masa puede refrigerarse toda la noche. Después del montaje, deja la tarta 12–24 horas en la nevera; está mejor al día siguiente.',
+    uk: 'Тісто можна замісити звечора: після 15–30 хвилин і до 24 годин у холодильнику результат однаковий. Після складання торт дозріває в холодильнику 12–24 години; найкращий смак — наступного дня.',
+    en: 'You can make the dough the evening before: chilling for 15–30 minutes or up to 24 hours gives the same result. After assembly, refrigerate the cake for 12–24 hours; it tastes best the next day.',
+    es: 'Puedes preparar la masa la noche anterior: entre 15–30 minutos y hasta 24 horas en la nevera, el resultado es el mismo. Después del montaje, deja la tarta 12–24 horas en la nevera; está mejor al día siguiente.',
   },
   variations: [
     {
@@ -1354,7 +1226,7 @@ export const glutenFreeNapoleonRecipe = {
       availability: 'hiddenUntilConfirmed',
     },
   ],
-  heroMediaId: 'napoleon-author-hero-v1',
+  heroMediaId: 'napoleon-author-hero-preview-2359-v1',
   media: [
     {
       id: 'napoleon-author-crumb-v1',
@@ -1468,11 +1340,23 @@ export const glutenFreeNapoleonRecipe = {
       id: 'napoleon-author-hero-v1',
       type: 'image',
       path: '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-tea-editorial-v2.webp',
-      usage: ['hero', 'gallery', 'step'],
+      usage: ['gallery', 'step'],
       alt: {
         uk: 'Наполеон із заварним кремом, вкритий золотистою крихтою',
         en: 'Napoleon cake with custard and a golden crumb coating',
         es: 'Tarta Napoleón con crema pastelera y cobertura de migas doradas',
+      },
+      fit: 'cover',
+    },
+    {
+      id: 'napoleon-author-hero-preview-2359-v1',
+      type: 'image',
+      path: '/media/recipes/gluten-free-napoleon/hero-img-2359-crop-v1.webp',
+      usage: ['hero'],
+      alt: {
+        uk: 'Розрізаний Наполеон на тарілці на тлі бордових квітів',
+        en: 'Cut Napoleon cake on a plate in front of red flowers',
+        es: 'Tarta Napoleón cortada en un plato ante flores rojas',
       },
       fit: 'cover',
     },
@@ -1589,6 +1473,17 @@ export const glutenFreeNapoleonRecipe = {
       note: 'Dough originals and background-edit prompts are retained under media/recipes/gluten-free-napoleon/original/2026-10-04 and working/2026-10-04.',
     },
     {
+      id: 'author-bake-2026-10-26',
+      file: 'docs/codex/codex-napoleon-recipe-v5.uk.md',
+      locator: 'Author side-by-side dough test, 2026-10-25/26',
+      note: 'Unleavened dough tested in half and one-third batches. All flour was cut into the butter crumb; layers were flaky and strong.',
+    },
+    {
+      id: 'author-update-2026-10-28',
+      file: 'Current Codex conversation, 2026-10-28',
+      locator: 'Final author dough formula, 14 portions, 15–30 minutes to 24 hours chilling, and 200°C fan bake for 5–7 minutes.',
+    },
+    {
       id: 'author-custard-2026-10-04',
       file: 'Current Codex conversation, 2026-10-04',
       locator:
@@ -1604,7 +1499,7 @@ export const glutenFreeNapoleonRecipe = {
       question:
         'Bake-test the 28 cm adaptation of the current 24 cm dough before enabling Cook Mode.',
       publicationBlocking: false,
-      sourceIds: ['author-bake-2026-10-04'],
+      sourceIds: ['author-bake-2026-10-26', 'author-update-2026-10-28'],
     },
     {
       id: 'review-translations',

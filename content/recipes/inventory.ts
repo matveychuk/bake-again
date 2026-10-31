@@ -29,6 +29,11 @@ export type InventoryRecipe = {
   launchPriority: string;
   heroCandidate: 'Yes' | 'Possible' | 'No';
   image: string;
+  /** Optional image used by RecipeCard; image remains the recipe/home hero. */
+  cardImage?: string;
+  cardImageAlt?: LocalizedText;
+  /** Shift a card crop toward the left edge while keeping the subject near center. */
+  cardImagePosition?: 'left-quarter';
   imageKind: 'generated-preview' | 'author-photo' | 'edited-author-photo';
   imageAlt: string;
   summary: string;
@@ -133,6 +138,12 @@ export const recipeInventory: InventoryRecipe[] = [
     launchPriority: 'Medium',
     heroCandidate: 'No',
     image: '/images/recipes/lazy-dumplings-card-v1.webp',
+    cardImage: '/images/recipes/lazy-dumplings-real-plate-linen-v1.webp',
+    cardImageAlt: {
+      uk: 'Справжні ліниві вареники на бежевій тарілці та лляній серветці',
+      en: 'Real lazy cottage-cheese dumplings on a beige plate and linen napkin',
+      es: 'Ñoquis de queso reales en un plato beige sobre una servilleta de lino',
+    },
     imageKind: 'generated-preview',
     imageAlt:
       'Ukrainian lazy cottage-cheese dumplings with sour cream and butter',
@@ -460,6 +471,12 @@ export const recipeInventory: InventoryRecipe[] = [
     launchPriority: 'High',
     heroCandidate: 'Yes',
     image: '/images/recipes/crepes-stack-2026-10-20-v1.webp',
+    cardImage: '/images/recipes/crepes-stack-lace-linen-v1.webp',
+    cardImageAlt: {
+      uk: 'Стопка золотавих млинців на тарілці та лляній серветці з мереживом',
+      en: 'Stack of golden crepes on a plate and lace-edged linen napkin',
+      es: 'Pila de crepes doradas en un plato sobre una servilleta de lino con encaje',
+    },
     imageKind: 'author-photo',
     imageAlt: 'A tall stack of golden gluten-free crepes on a plate',
     summary:
@@ -510,9 +527,17 @@ export const recipeInventory: InventoryRecipe[] = [
     launchPriority: 'High',
     heroCandidate: 'Yes',
     image:
-      '/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-tea-editorial-v2.webp',
+      '/media/recipes/gluten-free-napoleon/hero-img-2359-crop-v1.webp',
+    cardImage:
+      '/media/recipes/gluten-free-napoleon/card-img-2341-linen-v5.webp',
+    cardImagePosition: 'left-quarter',
+    cardImageAlt: {
+      uk: 'Цілий Наполеон із золотистою крихтою на тарілці та світлій серветці',
+      en: 'Whole Napoleon cake with golden crumbs on a plate and light napkin',
+      es: 'Tarta Napoleón entera con migas doradas sobre un plato y una servilleta clara',
+    },
     imageKind: 'edited-author-photo',
-    imageAlt: 'Napoleon cake with custard and a golden crumb coating',
+    imageAlt: 'Cut Napoleon cake held in sunlight in front of red flowers',
     summary:
       'A many-layered gluten-free celebration cake with warm custard and a long overnight rest.',
     source:

@@ -23,9 +23,9 @@ for (const [locale, copy] of Object.entries(source.locales)) {
 <p style="margin:0 0 ${pixels('space-6')};font-weight:bold;">Bake Again</p>
 <h1 style="margin:0 0 ${pixels('space-4')};font-family:${emailFont('font-family-display')};font-size:${pixels('font-size-drawer-title')};">${escape(copy.confirmation.title)}</h1>
 <p>${escape(copy.confirmation.body)}</p>
+<p style="margin:${pixels('space-4')} 0;"><a href="{{ doubleoptin }}" style="display:inline-block;padding:${pixels('space-3')} ${pixels('space-4')};background:${token('color-action-primary')};color:${token('color-text-on-accent')};font-weight:bold;text-decoration:none;border-radius:${pixels('radius-control')};">${escape(copy.confirmation.action)}</a></p>
 <p>${escape(copy.confirmation.consent ?? copy.signup.consent)}</p>
 <p><a href="${copy.privacyUrl}" style="color:${token('color-action-primary-strong')};">${escape(copy.signup.privacyLabel)}</a></p>
-<p style="margin:${pixels('space-6')} 0;"><a href="{{ doubleoptin }}" style="display:inline-block;padding:${pixels('space-3')} ${pixels('space-4')};background:${token('color-action-primary')};color:${token('color-text-on-accent')};font-weight:bold;text-decoration:none;border-radius:${pixels('radius-control')};">${escape(copy.confirmation.action)}</a></p>
 </td></tr></table>
 </td></tr></table>
 </body></html>

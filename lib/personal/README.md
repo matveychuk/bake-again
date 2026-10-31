@@ -6,6 +6,30 @@ SMTP delivery, two-account isolation, two-browser sync, owner-confirmed recovery
 and a hosted backup restored locally. A recurring automated backup is not implied.
 `PERSONAL_SYNC_ENABLED` / `PERSONAL_AUTH_READY` and the database gate still fail closed.
 
+## Free project activity check (2026-10-31)
+
+The hosted project was Healthy on 2026-10-31. Migration
+`20261031190000_project_keepalive.sql` adds a data-free, read-only SQL function
+callable with the publishable key as `anon`. It returns only `true`; it does not
+grant access to reader tables. The migration was applied through Supabase SQL
+Editor and recorded in `supabase_migrations.schema_migrations`. Three live API
+calls returned success after application.
+
+The active Codex heartbeat `Supabase Bake Again — активність бази` runs daily at
+20:00 Europe/Madrid from this local workspace. It invokes:
+
+```sh
+node --env-file=.env.local scripts/check-supabase-activity.mjs
+```
+
+It makes three successful database queries and reports failures only. No secret
+key is needed, and the publishable key stays in ignored `.env.local`. This local
+routine depends on the Codex host being available; it is not a server-side uptime
+guarantee. Supabase says Free projects with too little database activity over a
+week may pause, and a few queries per day are usually enough but not guaranteed.
+The project owner still receives Supabase's warning and pause emails. For an
+availability guarantee, move the project to a paid plan.
+
 `browser.ts` owns browser sessions and auth callbacks; `sync-engine.ts` owns queued
 writes and conflicts. The `/config` and `/sync` routes implement the current UI.
 The `/record` route remains the read-only foundation described below. Personal-data

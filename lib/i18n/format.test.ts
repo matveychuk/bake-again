@@ -39,6 +39,10 @@ void test('formats ranges and minimum durations without English-only grammar', (
     formatDuration('uk', { kind: 'minimum', min: 2, unit: 'hour' }),
     'Щонайменше 2 год',
   );
+  assert.equal(
+    formatDuration('uk', { kind: 'range', min: 15, max: 1440, unit: 'minute' }),
+    '15 хв–24 год',
+  );
 });
 
 void test('formats compound elapsed times in hours and minutes', () => {

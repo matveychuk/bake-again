@@ -1,0 +1,6 @@
+interface:
+  display_name: "Bake Again — контент-помічник"
+  short_description: "Український контент, рецепти й цифрові продукти"
+  default_prompt: "Використай $bake-again-content, щоб підготувати контент Bake Again з урахуванням наших правил, наявних рецептів і мети продажу цифрових продуктів."
+policy:
+  allow_implicit_invocation: true

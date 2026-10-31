@@ -51,7 +51,7 @@ for (const [locale, [plum, napoleon, prune, apple]] of Object.entries(paths)) {
         slug: napoleon,
         expected: [
           `${6 * scale} ${{ uk: 'шт.', en: 'pcs', es: 'uds.' }[locale]}`,
-          String(12 * scale),
+          String(14 * scale),
           `${formatted(2000 * scale)} ${locale === 'uk' ? 'мл' : 'ml'}`,
         ],
       },

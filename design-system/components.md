@@ -54,6 +54,11 @@ email previews in `lib/newsletter/templates/` derive colours, spacing and email-
 font fallbacks from `tokens.css`, through `npm run newsletter:prepare`. They are
 confirmation messages, not a new product card or a campaign design. Never treat
 the inert Design Lab examples or a reviewed hosted layout as proof of delivery.
+The DOI confirmation variant puts its confirmation button directly after the
+heading and one-sentence purpose; consent, ignored-request guidance and privacy
+follow below. The UK copy is shortened for the chocolate recipe funnel. The
+matching active Brevo UK template #5 was updated and its narrow preview reviewed
+on 2026-10-20; a new delivered email still needs a phone check.
 
 Welcome email variant (2026-10-18): the same token-derived campaign composition
 accepts localized welcome subject, preheader and heading overrides from
@@ -354,6 +359,11 @@ list · n` link and show an announced confirmation with View list and Undo. If s
   Ukrainian. Keep control labels, ingredient names, quantities, notes and shopping labels
   in the active locale. The supported numeric anchor is recipe-specific; recipes without
   one show the localized locked state instead of hiding the control.
+- In "Use what I have", keep the quantity field mounted and focused while typing. Validate
+  the entered number locally, apply the ingredient calculation and URL after a short
+  pause, and refresh the server-rendered recipe after editing ends. While a new amount
+  is pending, hide stale quantities and disable quantity-dependent actions. The shared
+  control in the UK/EN/ES concise recipe Design Lab demonstrates this behavior.
 - Store ingredient quantities in `quantity.base`, with an optional explicit
   `quantity.equivalent`. Only `base` is used for shopping and aggregation; the
   equivalent is a scaled cooking aid and never enters the shopping list. Use
@@ -464,6 +474,19 @@ variation.
 - The matching responsive reference is `/design-system/napoleon-five-steps`; the legacy
   URL now renders the complete Ukrainian Napoleon through the shared recipe-detail
   composition and production styles.
+- The Napoleon homepage and recipe hero currently use a review crop of the author’s
+  `IMG_2359.HEIC`. It is framed with the existing cover treatment, with no retouching;
+  the same image appears in the live recipe Design Lab example.
+- `RecipeCard` accepts an optional catalogue-specific image and localized alt text from
+  the recipe inventory. Napoleon uses an edited `IMG_2341.HEIC` with extended linen
+  background and a larger cake in listing cards while its homepage and recipe hero
+  keep `IMG_2359.HEIC`. The existing RecipeCard Design Lab example reflects the
+  catalogue image automatically. The optional `left-quarter` image-position variant
+  exposes a small portion of the mandarin bowl at the left edge of Napoleon cards
+  while keeping the cake near the center at desktop card proportions.
+- The crepe and lazy-dumpling listing cards may use separate edited author photos
+  through the same `cardImage` option. Their warm beige linen and visible hemstitch
+  are coordinated with the crinkle-cookie card. Detail-page images remain independent.
 - `components/recipe/step-media-sequence.tsx` is the only product renderer for ordered
   step photography. Recipe detail uses the `recipe` variant and Cook Mode uses the `cook`
   variant; route-specific copies are not allowed. Multi-image sequences expose a labelled,
@@ -474,8 +497,9 @@ variation.
 - A canonical step may specify `ingredientFractions` for an ingredient split between
   stages. Cook Mode applies that fraction to the current batch amount and its spoon
   equivalent; the recipe list and shopping list retain the complete batch amount.
-  Napoleon's first and third steps each use half of the main flour amount. The live
-  Napoleon Design Lab reference shows the same instructions and source quantities.
+  Napoleon v5 uses the full 500 g Schär Mix B in the first butter-crumb step; the
+  sour-cream mixture and short mix add no more flour. The live Napoleon Design Lab
+  reference shows the same instructions and source quantities.
 
 - `RecipeIngredientList` owns the read-only name, amount, equivalent and note layout used
   by recipe detail, per-step Cook quantities and the Cook ingredients drawer.

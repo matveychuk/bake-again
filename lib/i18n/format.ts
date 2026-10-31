@@ -120,6 +120,14 @@ export function formatDuration(locale: AppLocale, duration: Duration): string {
   const label = (value: number) =>
     durationLabels[locale][duration.unit][pluralForm(locale, value)];
   if (duration.kind === 'range') {
+    if (
+      duration.unit === 'minute' &&
+      duration.min < 60 &&
+      duration.max >= 60 &&
+      duration.max % 60 === 0
+    ) {
+      return `${formatDuration(locale, { kind: 'exact', value: duration.min, unit: 'minute' })}–${formatDuration(locale, { kind: 'exact', value: duration.max / 60, unit: 'hour' })}`;
+    }
     return `${formatNumber(locale, duration.min)}–${formatNumber(locale, duration.max)} ${label(duration.max)}`;
   }
   if (duration.kind === 'minimum') {

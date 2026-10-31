@@ -32,6 +32,29 @@ void test('uses localized recipe titles and preserves the stable recipe identity
   assert.equal(ukrainianNapoleon?.id, spanishNapoleon?.id);
 });
 
+void test('keeps Napoleon listing photography separate from its hero', () => {
+  const napoleon = getRecipeCatalog('uk').find(
+    (recipe) => recipe.id === 'gluten-free-napoleon',
+  );
+  assert(napoleon);
+  assert(napoleon.image.includes('hero-img-2359-crop-v1.webp'));
+  assert(napoleon.cardImage?.includes('card-img-2341-linen-v5.webp'));
+  assert.equal(napoleon.cardImagePosition, 'left-quarter');
+  assert(napoleon.cardAlt?.includes('Цілий Наполеон'));
+});
+
+void test('uses the author food photos on linen in crepe and dumpling cards', () => {
+  const catalog = getRecipeCatalog('uk');
+  const crepes = catalog.find((recipe) => recipe.id === 'crepes');
+  const dumplings = catalog.find((recipe) => recipe.id === 'lazy-dumplings');
+  assert(crepes);
+  assert(dumplings);
+  assert(crepes.cardImage?.includes('crepes-stack-lace-linen-v1.webp'));
+  assert(crepes.image.includes('crepes-stack-2026-10-20-v1.webp'));
+  assert(dumplings.cardImage?.includes('lazy-dumplings-real-plate-linen-v1.webp'));
+  assert(dumplings.image.includes('lazy-dumplings-card-v1.webp'));
+});
+
 void test('assigns every recipe to a localized reader-facing collection', () => {
   for (const locale of ['en', 'es', 'uk'] as const) {
     const catalogue = getRecipeCatalog(locale, 'all');

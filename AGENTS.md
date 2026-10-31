@@ -84,10 +84,15 @@ they are not separate statuses.
 
 ## Instagram continuity
 
-- For every new Instagram/Facebook caption, follow the approved trilingual rule in
-  `docs/instagram/templates.uk.md`: language navigator, primary language first,
-  then concise summaries in the other two languages (UA/ES/EN). Video, cover and
-  CTA use one primary language. Preserve published copy and version caption updates.
+- Use the `bake-again-content` skill for Bake Again content and digital-product
+  work. Its maintained source is `skills/bake-again-content/SKILL.md`.
+- Sasha changed the language rule on 2026-10-21: create new Bake Again content
+  in Ukrainian, including Instagram/Facebook captions, video, covers and CTA.
+  Omit language navigators and automatic Spanish/English summaries. Translate
+  only when explicitly requested. Follow the current rule in
+  `docs/instagram/templates.uk.md`; it supersedes the 2026-10-15 trilingual rule.
+  Preserve published copy and version updates to existing drafts. This does not
+  authorize changing published/scheduled posts or removing website translations.
 
 - For new Reels and Stories, apply the approved food-first defaults in
   [Instagram templates](docs/instagram/templates.uk.md) and reuse

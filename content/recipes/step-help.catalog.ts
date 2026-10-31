@@ -96,14 +96,7 @@ export const stepHelpCatalog: Record<
         '¿Hasta qué punto debo picar la mantequilla para las capas?',
       ),
     ),
-    'mix-wet-dough': help(
-      q(
-        'checkpoint',
-        'Коли додавати борошно до сметанної суміші?',
-        'When should I add flour to the sour cream mixture?',
-        '¿Cuándo añado la harina a la mezcla de crema agria?',
-      ),
-    ),
+    'mix-wet-dough': skip('Сметану, яйця й сіль достатньо змішати до однорідності; борошно вже в масляній крихті.'),
     'combine-dough': help(
       q(
         'checkpoint',
@@ -181,7 +174,7 @@ export const stepHelpCatalog: Record<
         'Теплим чи холодним кремом перемазувати коржі?',
         'Should I spread warm or cold custard between the layers?',
         '¿Debo rellenar las capas con la crema templada o fría?',
-        'Для складання «Наполеона» використовуйте теплий крем. Наносьте його на кожен корж; за бажанням додавайте горіхи в кожен прошарок або через один.',
+        'Для складання «Наполеона» використовуй теплий крем. Нанось його на кожен корж; за бажанням додавай горіхи в кожен прошарок або через один.',
         'Use warm custard to assemble the Napoleon. Spread it on every layer, adding optional nuts to every layer or alternate layers.',
         'Monta la tarta Napoleón con la crema templada. Extiéndela en cada capa y, si lo deseas, añade frutos secos en cada capa o en capas alternas.',
       ),

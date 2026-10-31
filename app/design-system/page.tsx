@@ -524,6 +524,7 @@ export default function DesignSystemPage() {
               <div className="recipe-grid recipe-grid--catalog-preview">
                 {(
                   [
+                    { locale: 'uk', id: 'crepes' },
                     { locale: 'uk', id: 'gluten-free-napoleon' },
                     { locale: 'uk', id: 'fruit-sponge-roll' },
                     { locale: 'uk', id: 'crinkle-cookies' },
@@ -979,7 +980,7 @@ export default function DesignSystemPage() {
                 <strong>Concise recipe</strong>
                 <span>
                   Edited copy · mobile ingredients-first adjustment · badge-only
-                  evidence
+                  evidence · delayed available-ingredient calculation
                 </span>
               </div>
               {(['uk', 'en', 'es'] as const).map((locale) => {

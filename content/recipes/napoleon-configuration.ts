@@ -10,7 +10,7 @@ import type {
   QuantityAdjustmentSelection,
 } from './recipe.types.ts';
 
-export const NAPOLEON_BASE_GEOMETRY_ID = 'round-24cm-6-layers-each';
+export const NAPOLEON_BASE_GEOMETRY_ID = 'round-24cm-7-layers-each';
 export const NAPOLEON_PREVIEW_GEOMETRY_ID = 'round-28cm-preview';
 
 export type NapoleonConfigurationSelection = {

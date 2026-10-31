@@ -485,14 +485,14 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> = {
       uk: 'Святковий торт',
     },
     summary: {
-      en: 'Cakes with six thin 24 cm layers each and custard; nuts are optional.',
-      es: 'Tartas de seis capas finas de 24 cm con crema pastelera; los frutos secos son opcionales.',
-      uk: 'Торти по шість тонких коржів 24 см із заварним кремом; горіхи — за бажанням.',
+      en: 'Two cakes with seven thin 24 cm layers each and custard; nuts are optional.',
+      es: 'Dos tartas de siete capas finas de 24 cm con crema pastelera; los frutos secos son opcionales.',
+      uk: 'Два торти по сім тонких коржів 24 см із заварним кремом; горіхи — за бажанням.',
     },
     alt: previewAlt(
-      'Napoleon cake with custard and a golden crumb coating',
-      'Tarta Napoleón con crema pastelera y cobertura de migas doradas',
-      'Наполеон із заварним кремом, вкритий золотистою крихтою',
+      'Cut Napoleon cake on a plate in front of red flowers',
+      'Tarta Napoleón cortada en un plato ante flores rojas',
+      'Розрізаний Наполеон на тарілці на тлі бордових квітів',
     ),
   },
   'cinnamon-rolls': {

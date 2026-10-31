@@ -25,6 +25,9 @@ export type RecipeCatalogEntry = {
   flour: string;
   image: string;
   alt: string;
+  cardImage?: string;
+  cardAlt?: string;
+  cardImagePosition?: 'left-quarter';
   href: string;
   publicationStatus: PublicationStatus;
   imageKind: 'generated-preview' | 'author-photo' | 'edited-author-photo';
@@ -71,8 +74,11 @@ export function getRecipeCatalog(
           : null,
         flour: overview?.flour.replace(' Bread', '') ?? '',
         image: recipe.image,
+        cardImage: recipe.cardImage,
         imageKind: recipe.imageKind,
         alt: copy?.alt[locale] ?? recipe.imageAlt,
+        cardAlt: recipe.cardImageAlt?.[locale],
+        cardImagePosition: recipe.cardImagePosition,
         href: getLocalizedRecipePath(recipe.id, locale)!,
         publicationStatus,
         collections: recipe.collectionIds.map((id) => ({

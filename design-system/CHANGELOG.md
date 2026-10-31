@@ -1,11 +1,39 @@
 # Design system changelog
 
+## 2026-10-30 · Available ingredient input
+
+- The shared recipe adjuster now keeps the amount field focused while users clear and
+  type a quantity. It validates locally, applies the calculation and URL after a
+  500 ms pause, and refreshes the full recipe when editing ends. Pending quantities
+  and quantity-dependent actions are unavailable until the new amount is applied.
+- Updated the UK/EN/ES Design Lab example and shared control contract.
+- The amount field's shared wrapper now shows a semantic-token focus ring when
+  keyboard or pointer focus is inside it.
+
+## 2026-10-28 · Napoleon v5 recipe review
+
+- Updated the shared Napoleon recipe and Design Lab reference to the author’s
+  unleavened dough: all 500 g Mix B in the butter crumb, 14 portions for two
+  seven-layer 24 cm cakes, 15–30 minutes to 24 hours chilling, and a 200°C fan
+  bake for 5–7 minutes. The Cook Mode uses the same source data.
+- Kept the previous photo files, but removed the old wet-mixture, combine-order,
+  and 12-portion images from the corresponding steps pending photo review.
+
 ## 2026-10-23 — Shared lead-magnet content
 
 - Page, confirmation-result, email and bot copy now share one validated product
   registry. The Design Lab and email previews follow all registered products.
 - Existing typography, tokens, layouts and recipe delivery wording are retained;
   new products reuse the existing invitation and form.
+
+## 2026-10-20 · Shorter newsletter confirmation email preview
+
+- Moved the DOI button above the supporting copy in the existing token-derived
+  UK/ES/EN email templates. Shortened the UK introduction and kept explicit
+  consent, ignored-request guidance and privacy directly below the button.
+- Regenerated the Email Design Lab previews and updated active Brevo UK DOI
+  template #5. Its narrow Brevo preview places the button before the supporting
+  text; a new delivered email and phone opening remain to be checked.
 
 ## 2026-10-18 · Localized newsletter welcome email
 
@@ -1391,3 +1419,49 @@ Applied the existing full-photo recipe carousel component to IG-026 v2, preservi
 - Preserved the previous source and all seven new camera originals; only orientation
   is normalized; responsive crops use the existing components. Existing components and Design Lab delivery examples
   use the same image. Recipe facts and evidence status are unchanged.
+## 2026-10-31 · Napoleon hero photo review
+
+- Added a crop from the author’s `IMG_2359.HEIC` as the first local-preview candidate
+  for the homepage and Napoleon recipe hero. The crop keeps the cake and cut layers
+  prominent without retouching the background. Existing image components and the
+  recipe Design Lab example use the new asset; publication remains pending review.
+
+## 2026-10-31 · Napoleon listing card photo review
+
+- Kept `IMG_2359.HEIC` as the selected homepage and recipe hero. Added a separate crop
+  from `IMG_2341.HEIC` for Napoleon listing cards, using the existing RecipeCard
+  composition and responsive image treatment. No background extension or retouching;
+  the Design Lab card example uses the same catalogue data. Publication remains pending.
+
+## 2026-10-31 · Napoleon card linen edit
+
+- Enlarged the Napoleon cake within the listing card image and extended the existing
+  linen napkin into the full background. Preserved the mandarin bowl at left. The
+  final local composition centers the cake and leaves only a partial glimpse of
+  the mandarin bowl at the left edge. The documented RecipeCard focal-position variant
+  retains that glimpse when desktop cards crop the photo. Earlier edits, the unedited crop and camera
+  original remain available; the homepage and recipe hero still use `IMG_2359.HEIC`.
+  The card edit is for local review.
+
+## 2026-10-31 · Coordinated recipe-card photography review
+
+- Enlarged the Napoleon cake in its listing card to match the scale of neighbouring
+  food plates and warmed the linen tone. Added a card-specific edit of the author's
+  real lazy-dumpling plate on beige hemstitched linen and a separate crepe-stack edit
+  on the same textile. Recipe-detail photography stays as before; Design Lab now
+  shows all three card treatments together. These are local review assets.
+
+## 2026-10-31 — Community contract before UI implementation
+
+- Added `community.uk.md` for the planned guest review form, exact-version rating,
+  independent photo moderation and post-publication NewsletterInvitation variant.
+- This is a documented extension contract; no new visual components, production UI
+  or Design Lab examples have been introduced. Responsive and keyboard verification
+  belongs to the next UI implementation stage.
+
+
+## 2026-10-31 — Guest photo interaction clarified
+
+- Sasha removed the separate photo publication consent step. The community form
+  contract now calls for immediate local preview after file selection, removal
+  and clear upload state. The review/photo UI and Design Lab example are still pending.
