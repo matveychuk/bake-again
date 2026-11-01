@@ -90,6 +90,7 @@ import {
   getLeadMagnet,
   getRecipeInvitation,
   leadMagnetIds,
+  pdfInvitationEyebrow,
 } from '@/content/lead-magnets';
 import { EditorialInvitation } from '@/components/site/editorial-invitation';
 import { RecipeDownloads } from '@/components/recipe/recipe-downloads';
@@ -1019,6 +1020,7 @@ export default function DesignSystemPage() {
                       <EditorialInvitation
                         variant="lead-magnet"
                         headingLevel={1}
+                        eyebrow={pdfInvitationEyebrow.uk}
                         titleId={`lead-magnet-preview-${magnet}-${theme}`}
                         title={getLeadMagnet('uk', magnet)!.title}
                         description={getLeadMagnet('uk', magnet)!.subtitle}
@@ -1040,13 +1042,7 @@ export default function DesignSystemPage() {
                             )}
                           </ul>
                         }
-                        action={
-                          <NewsletterForm
-                            preview
-                            magnetId={magnet}
-                            note={getLeadMagnet('uk', magnet)!.note}
-                          />
-                        }
+                        action={<NewsletterForm preview magnetId={magnet} />}
                       />
                     </div>
                   )),
@@ -1069,6 +1065,7 @@ export default function DesignSystemPage() {
                   <EditorialInvitation
                     variant="recipe-step"
                     headingLevel={3}
+                    eyebrow={pdfInvitationEyebrow.uk}
                     titleId={`recipe-step-card-${theme}`}
                     title={getRecipeInvitation('crepes', 'uk')!.title}
                     description={

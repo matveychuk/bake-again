@@ -153,9 +153,6 @@ export function ProductBannerInvitation({
           lang={banner.locale}
         >
           <div className={styles.dialogHeader}>
-            <span className={styles.signature}>
-              Bake Again<span>.</span>
-            </span>
             <DialogClose
               render={
                 <Button
@@ -170,7 +167,7 @@ export function ProductBannerInvitation({
             </DialogClose>
           </div>
           <div className={styles.dialogBody}>
-            <p className={styles.note}>{banner.eyebrow}</p>
+            <p className={styles.eyebrow}>{banner.eyebrow}</p>
             <DialogTitle className={styles.title}>
               {banner.dialog.title}
             </DialogTitle>
@@ -182,7 +179,11 @@ export function ProductBannerInvitation({
                 <NewsletterForm
                   signup={signup}
                   locale={banner.locale}
-                  note={banner.dialog.note}
+                  scenario="lesson"
+                  onClose={() => {
+                    setOpen(false);
+                    setClosedAfterSignup(true);
+                  }}
                   onSent={() => {
                     setSent(true);
                     try {
@@ -196,14 +197,9 @@ export function ProductBannerInvitation({
                 <NewsletterForm
                   preview
                   locale={banner.locale}
-                  note={banner.dialog.note}
+                  scenario="lesson"
                 />
               )}
-            </div>
-            <div className={styles.dialogActions}>
-              <DialogClose render={<Button variant="ghost" />}>
-                {sent ? banner.close : banner.later}
-              </DialogClose>
             </div>
           </div>
         </DialogContent>

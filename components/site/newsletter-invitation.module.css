@@ -24,23 +24,51 @@
 }
 .dialogHeader {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-2) var(--space-4) var(--space-2) var(--space-6);
+  justify-content: flex-end;
+  padding: var(--space-2) var(--space-2) 0;
 }
-.signature {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-drawer-title);
-  font-weight: 700;
-}
-.signature span {
-  color: var(--color-action-primary);
+.media {
+  position: relative;
 }
 .photo {
+  display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 7;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
+  object-position: center 60%;
+}
+/* 40 px light disc over the photo inside a 44 px touch target. */
+.closeOnPhoto {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+}
+.closeOnPhoto::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: var(--color-background-surface);
+  box-shadow: var(--shadow-raised);
+  z-index: -1;
+}
+.closeOnPhoto {
+  isolation: isolate;
+  color: var(--color-text-primary);
+}
+.closeOnPhoto:hover::before {
+  background: var(--color-background-panel-subtle);
+}
+.eyebrow {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-body-small);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
 }
 .dialogBody {
   padding: var(--space-6);
@@ -53,16 +81,7 @@
   font-weight: 500;
   overflow-wrap: anywhere;
 }
-.dialogActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-6);
-}
 @media (max-width: 620px) {
-  .dialogActions > * {
-    width: 100%;
-  }
   .dialogBody {
     padding: var(--space-4);
   }
@@ -77,5 +96,5 @@
   }
 }
 .dialogForm {
-  margin-top: var(--space-6);
+  margin-top: var(--space-4);
 }

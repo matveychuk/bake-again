@@ -5,6 +5,12 @@ validateLeadMagnetRegistry(source);
 export const leadMagnetRegistry = source;
 export type LeadMagnetId = keyof typeof source;
 export const leadMagnetIds = Object.keys(source) as LeadMagnetId[];
+/** Label above every PDF-bonus title; ES/EN wait for PDFs in those languages. */
+export const pdfInvitationEyebrow = {
+  uk: 'Безкоштовно · PDF',
+  es: 'Gratis · PDF',
+  en: 'Free · PDF',
+} as const;
 export const leadMagnetPath = (id: LeadMagnetId) => `/uk/recept/${id}`;
 export const isLeadMagnetId = (value: unknown): value is LeadMagnetId =>
   typeof value === 'string' && Object.hasOwn(leadMagnetRegistry, value);
