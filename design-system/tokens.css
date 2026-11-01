@@ -8,6 +8,8 @@ html[data-palette='selected-mix'] {
   --color-text-primary: #392721;
   --color-text-secondary: #735d54;
   --color-text-on-accent: #fffdf9;
+  /* Display accents in body copy, e.g. italic title punchlines. */
+  --color-text-accent: #a64f36;
   --color-action-primary: #a64f36;
   --color-action-primary-strong: #853c29;
   --color-action-primary-hover: var(--color-action-primary-strong);
@@ -118,6 +120,7 @@ html[data-theme='dark'],
   --color-text-primary: #f7efe6;
   --color-text-secondary: #c8b7ac;
   --color-text-on-accent: #fffdf9;
+  --color-text-accent: #e8977a;
   --color-action-primary: #b65b3e;
   --color-action-primary-strong: #cf7355;
   --color-action-primary-hover: #a64f36;

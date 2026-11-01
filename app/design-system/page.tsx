@@ -94,6 +94,8 @@ import {
 import { EditorialInvitation } from '@/components/site/editorial-invitation';
 import { RecipeDownloads } from '@/components/recipe/recipe-downloads';
 import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
+import { ProductBannerInvitation } from '@/components/site/product-banner-invitation';
+import { resolveProductBanner } from '@/content/commerce/product-banner';
 import { RecipeVideoLesson } from '@/components/recipe/recipe-video-lesson';
 import { videoLessons } from '@/content/commerce/video-lessons';
 
@@ -968,6 +970,29 @@ export default function DesignSystemPage() {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+
+            <div className={styles.componentBlock} id="product-banner">
+              <div className={styles.componentLabel}>
+                <strong>Product banner</strong>
+                <span>
+                  UK/EN/ES recipe pages, above the hero. Dark on every screen:
+                  food loop, label, hook and one action that opens an inert
+                  signup dialog here.
+                </span>
+              </div>
+              <div>
+                {(['uk', 'en', 'es'] as const).flatMap((bannerLocale) =>
+                  ['design-system', 'gluten-free-napoleon'].map((recipeId) => (
+                    <ProductBannerInvitation
+                      key={`${bannerLocale}-${recipeId}`}
+                      banner={resolveProductBanner(recipeId, bannerLocale)}
+                      recipeId="design-system"
+                      signup={null}
+                    />
+                  )),
+                )}
               </div>
             </div>
 

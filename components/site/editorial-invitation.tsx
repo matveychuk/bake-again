@@ -4,16 +4,18 @@ import styles from './editorial-invitation.module.css';
 
 type Props = Omit<ComponentPropsWithRef<'section'>, 'title' | 'children'> & {
   titleId: string;
-  title: string;
+  title: ReactNode;
   description: string;
   note?: ReactNode;
   action: ReactNode;
-  variant?: 'default' | 'lead-magnet' | 'recipe-step';
+  variant?: 'default' | 'lead-magnet' | 'recipe-step' | 'product-banner';
+  /** Short product label above the title, e.g. format and launch month. */
+  eyebrow?: string;
   headingLevel?: 1 | 2 | 3;
   image?: ReactNode;
 };
 
-/** Shared quiet invitation after the recipe: newsletter or an optional video lesson. */
+/** Shared quiet invitation: newsletter, video lesson, lead magnet or the current product banner. */
 export function EditorialInvitation({
   titleId,
   title,
@@ -23,6 +25,7 @@ export function EditorialInvitation({
   variant = 'default',
   headingLevel = 2,
   image,
+  eyebrow,
   className,
   ...props
 }: Props) {
@@ -33,6 +36,7 @@ export function EditorialInvitation({
         styles.section,
         variant === 'lead-magnet' && styles.leadMagnet,
         variant === 'recipe-step' && styles.recipeStep,
+        variant === 'product-banner' && styles.productBanner,
         className,
       ]
         .filter(Boolean)
@@ -42,6 +46,7 @@ export function EditorialInvitation({
       <div className={styles.main}>
         {image && <div className={styles.image}>{image}</div>}
         <div className={styles.copy}>
+          {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
           <SectionTitle
             id={titleId}
             level={headingLevel}
