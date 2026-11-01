@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { getRecipeContent } from './registry.ts';
 import {
-  applySourceRecipeConfiguration,
-  parseSourceRecipeConfiguration,
-} from './source-recipe-configuration.ts';
-import { createSourceCookSteps } from './cook-mode-adapter.ts';
+  applyRecipeContentConfiguration,
+  parseRecipeContentConfiguration,
+} from './recipe-content-configuration.ts';
+import { createRecipeCookSteps } from './cook-mode-adapter.ts';
 import { composeRecipeWithCream } from './cream-composition.ts';
 import {
   findShoppingIngredient,
@@ -86,7 +86,7 @@ for (const locale of ['uk', 'en', 'es'] as const) {
       }[locale],
     );
     for (const factor of [0.5, 1.5, 2]) {
-      const adjusted = applySourceRecipeConfiguration(
+      const adjusted = applyRecipeContentConfiguration(
         fritters,
         { kind: 'adjusted', scaleFactor: factor },
         locale,
@@ -109,9 +109,9 @@ for (const locale of ['uk', 'en', 'es'] as const) {
   void test(`D01: prose and Cook Mode match scaled butter and allocated sugar (${locale})`, () => {
     const base = getRecipeContent('plum-cake', locale)!;
     for (const factor of [0.5, 1.5, 2]) {
-      const configured = applySourceRecipeConfiguration(
+      const configured = applyRecipeContentConfiguration(
         base,
-        parseSourceRecipeConfiguration(`mode=scale&scale=${factor}`, base),
+        parseRecipeContentConfiguration(`mode=scale&scale=${factor}`, base),
         locale,
       );
       const butter = configured.ingredientSections[0].ingredients.find(
@@ -131,7 +131,7 @@ for (const locale of ['uk', 'en', 'es'] as const) {
           .body.includes(sugar),
       );
       assert(
-        JSON.stringify(createSourceCookSteps(configured, locale)).includes(
+        JSON.stringify(createRecipeCookSteps(configured, locale)).includes(
           body,
         ),
       );
@@ -142,7 +142,7 @@ for (const locale of ['uk', 'en', 'es'] as const) {
       assert.deepEqual(configured.timing, base.timing);
     }
     assert.strictEqual(
-      applySourceRecipeConfiguration(
+      applyRecipeContentConfiguration(
         base,
         { kind: 'base', mode: 'scale', scaleFactor: 1 },
         locale,
@@ -159,7 +159,7 @@ for (const locale of ['uk', 'en', 'es'] as const) {
         assert.equal(composed.evidence?.status, 'suggested');
         assert.equal(host.evidence?.status, 'tested');
         assert.equal(
-          applySourceRecipeConfiguration(
+          applyRecipeContentConfiguration(
             composed,
             { kind: 'adjusted', mode: 'scale', scaleFactor: 2 },
             locale,
@@ -206,7 +206,7 @@ for (const locale of ['uk', 'en', 'es'] as const) {
 void test('Napoleon milk allocation and disc count scale, while base facts stay intact', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
     const base = getRecipeContent('gluten-free-napoleon', locale)!;
-    const doubled = applySourceRecipeConfiguration(
+    const doubled = applyRecipeContentConfiguration(
       base,
       { kind: 'adjusted', mode: 'scale', scaleFactor: 2 },
       locale,
@@ -238,7 +238,7 @@ void test('Napoleon custard eggs agree with ingredients and Cook Mode at every s
   for (const locale of ['uk', 'en', 'es'] as const) {
     const base = getRecipeContent('gluten-free-napoleon', locale)!;
     for (const scaleFactor of [0.5, 1.5, 2] as const) {
-      const recipe = applySourceRecipeConfiguration(
+      const recipe = applyRecipeContentConfiguration(
         base,
         { kind: 'adjusted', mode: 'scale', scaleFactor },
         locale,
@@ -253,7 +253,7 @@ void test('Napoleon custard eggs agree with ingredients and Cook Mode at every s
           .body.includes(expected),
       );
       assert(
-        JSON.stringify(createSourceCookSteps(recipe, locale)).includes(
+        JSON.stringify(createRecipeCookSteps(recipe, locale)).includes(
           expected,
         ),
       );

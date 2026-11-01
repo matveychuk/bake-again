@@ -1,23 +1,23 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  createSourceCookIngredients,
-  createSourceCookIngredientSections,
-  createSourceCookSteps,
-  isSourceCookModeAvailable,
+  createRecipeCookIngredients,
+  createRecipeCookIngredientSections,
+  createRecipeCookSteps,
+  isRecipeCookModeAvailable,
 } from './cook-mode-adapter.ts';
 import { getRecipeContent } from './registry.ts';
 import {
-  applySourceRecipeConfiguration,
-  parseSourceRecipeConfiguration,
-  sourceAssistantConfiguration,
-} from './source-recipe-configuration.ts';
+  applyRecipeContentConfiguration,
+  parseRecipeContentConfiguration,
+  recipeAssistantConfiguration,
+} from './recipe-content-configuration.ts';
 
 void test('banana bread is cookable with five steps and the confirmed baking timer', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
     const content = getRecipeContent('banana-bread', locale)!;
-    assert.equal(isSourceCookModeAvailable(content), true);
-    const steps = createSourceCookSteps(content, locale);
+    assert.equal(isRecipeCookModeAvailable(content), true);
+    const steps = createRecipeCookSteps(content, locale);
     assert.equal(steps.length, 5);
     assert.deepEqual(
       steps[0].ingredients.map((item) => item.id),
@@ -35,7 +35,7 @@ void test('banana bread is cookable with five steps and the confirmed baking tim
 void test('concise detailed cookies preserve chilling/baking timers and omit removed ingredients', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
     const content = getRecipeContent('crinkle-cookies', locale)!;
-    const steps = createSourceCookSteps(content, locale);
+    const steps = createRecipeCookSteps(content, locale);
     assert.equal(steps.length, 7);
     assert.deepEqual(
       steps[0].ingredients.map((item) => item.id),
@@ -45,7 +45,10 @@ void test('concise detailed cookies preserve chilling/baking timers and omit rem
       steps[1].ingredients.map((item) => item.id),
       ['cocoa', 'flour', 'baking-powder'],
     );
-    assert.deepEqual(steps[2].timerOptionsSeconds, [10800, 14400]);
+    // The recorded optional 24-hour hold now has its own labelled timer option.
+    // Existing 3/4-hour choices remain first, so a persisted timer is not reset.
+    assert.deepEqual(steps[2].timerOptionsSeconds, [10800, 14400, 86400]);
+    assert.ok(steps[2].timerOptionLabels?.[86400]);
     assert.deepEqual(steps[5].timerOptionsSeconds, [480, 600]);
     assert(
       steps
@@ -58,7 +61,7 @@ void test('concise detailed cookies preserve chilling/baking timers and omit rem
 void test('carrot cake preserves aligned localized steps, ingredients and the baking timer', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
     const content = getRecipeContent('carrot-cake', locale)!;
-    const steps = createSourceCookSteps(content, locale);
+    const steps = createRecipeCookSteps(content, locale);
     assert.equal(content.evidence?.status, 'tested');
     assert.equal(steps.length, 6);
     assert.deepEqual(steps[0].stepIds, ['prepare-add-ins']);
@@ -92,7 +95,7 @@ void test('crepes Cook Mode preserves Ukrainian step copy and media from the rec
   const content = getRecipeContent('crepes', 'uk');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'uk');
+  const steps = createRecipeCookSteps(content, 'uk');
   assert.equal(steps.length, 4);
   assert.equal(steps[0].title, 'Збийте густу основу');
   assert.equal(content.evidence?.status, 'tested');
@@ -109,7 +112,7 @@ void test('crepes Cook Mode resolves Spanish content through the same adapter', 
   const content = getRecipeContent('crepes', 'es');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'es');
+  const steps = createRecipeCookSteps(content, 'es');
   assert.equal(steps[0].title, 'Bate una base espesa');
   assert.equal(steps[0].media?.[0].id, 'batter-smooth-base');
   assert.equal(steps[3].media?.[2].title, 'Después de darle la vuelta');
@@ -117,16 +120,16 @@ void test('crepes Cook Mode resolves Spanish content through the same adapter', 
 
 void test('crepes Cook Mode uses the same 2x quantities and calculated configuration', () => {
   const base = getRecipeContent('crepes', 'en')!;
-  const configuration = parseSourceRecipeConfiguration(
+  const configuration = parseRecipeContentConfiguration(
     '?mode=scale&scale=2',
     base,
     'flour',
   );
-  const configured = applySourceRecipeConfiguration(base, configuration, 'en');
-  const allIngredients = createSourceCookIngredients(configured, 'en');
-  const steps = createSourceCookSteps(configured, 'en');
+  const configured = applyRecipeContentConfiguration(base, configuration, 'en');
+  const allIngredients = createRecipeCookIngredients(configured, 'en');
+  const steps = createRecipeCookSteps(configured, 'en');
   assert.deepEqual(
-    sourceAssistantConfiguration('crepes', configured, configuration),
+    recipeAssistantConfiguration('crepes', configured, configuration),
     {
       kind: 'adjusted',
       geometryId: 'round-pan-28-cm',
@@ -152,7 +155,7 @@ void test('lazy dumplings Cook Mode uses one cooking step and step ingredients',
   const content = getRecipeContent('lazy-dumplings', 'uk');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'uk');
+  const steps = createRecipeCookSteps(content, 'uk');
   assert.equal(steps.length, 6);
   assert.equal(content.evidence?.status, 'tested');
   assert.deepEqual(steps[2].timerOptionsSeconds, [900, 1200]);
@@ -177,7 +180,7 @@ void test('tested cottage-cheese waffles keep five concise steps, ingredients an
   const content = getRecipeContent('cottage-cheese-waffles', 'uk');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'uk');
+  const steps = createRecipeCookSteps(content, 'uk');
   assert.equal(steps.length, 5);
   assert.equal(content.evidence?.status, 'tested');
   assert.equal(steps[0].title, 'Збийте основу');
@@ -223,7 +226,7 @@ void test('fruit sponge roll Cook Mode keeps Ukrainian guidance and step ingredi
   const content = getRecipeContent('fruit-sponge-roll', 'uk');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'uk');
+  const steps = createRecipeCookSteps(content, 'uk');
   assert.equal(steps.length, 7);
   assert.deepEqual(
     steps[0].ingredients.map((ingredient) => ingredient.id),
@@ -253,7 +256,7 @@ void test('sponge cake Cook Mode separates sugar for whites and yolks', () => {
   const content = getRecipeContent('sponge-cake', 'uk');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'uk');
+  const steps = createRecipeCookSteps(content, 'uk');
   assert.equal(steps.length, 5);
   assert.deepEqual(
     steps[0].ingredients.map((ingredient) => ingredient.id),
@@ -279,7 +282,7 @@ void test('banana pancakes Cook Mode keeps Mix B ingredients, cues and photograp
   const content = getRecipeContent('banana-fritters', 'uk');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'uk');
+  const steps = createRecipeCookSteps(content, 'uk');
   assert.equal(steps.length, 4);
   assert.deepEqual(
     steps[0].ingredients.map((ingredient) => ingredient.id),
@@ -306,7 +309,7 @@ void test('apple-banana Cook Mode uses banana instead of added sweetener', () =>
   const content = getRecipeContent('apple-banana-fritters', 'uk');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'uk');
+  const steps = createRecipeCookSteps(content, 'uk');
   assert.equal(steps.length, 7);
   assert.deepEqual(
     steps[0].ingredients.map((ingredient) => ingredient.id),
@@ -328,7 +331,7 @@ void test('eclairs Cook Mode keeps the four Ukrainian checkpoint photos', () => 
   const content = getRecipeContent('eclairs', 'uk');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'uk');
+  const steps = createRecipeCookSteps(content, 'uk');
   assert.equal(steps.length, 8);
   assert.equal(steps[2].media?.[0]?.id, 'eclairs-cooked-panade-v1');
   assert.equal(steps[3].media?.[0]?.id, 'eclairs-heavy-ribbon-v2');
@@ -339,12 +342,12 @@ void test('eclairs Cook Mode keeps the four Ukrainian checkpoint photos', () => 
 void test('both profiterole oven phases are available without scaling their duration', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
     const content = getRecipeContent('eclairs', locale)!;
-    const configured = applySourceRecipeConfiguration(
+    const configured = applyRecipeContentConfiguration(
       content,
       { kind: 'adjusted', scaleFactor: 2 },
       locale,
     );
-    const bake = createSourceCookSteps(configured, locale).find((step) =>
+    const bake = createRecipeCookSteps(configured, locale).find((step) =>
       step.stepIds.includes('bake'),
     )!;
     assert.deepEqual(bake.timerOptionsSeconds, [600, 900]);
@@ -356,19 +359,19 @@ void test('both profiterole oven phases are available without scaling their dura
 
 void test('Cook drawer groups retain every scaled ingredient and localized section title', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
-    const content = applySourceRecipeConfiguration(
+    const content = applyRecipeContentConfiguration(
       getRecipeContent('gluten-free-napoleon', locale)!,
       { kind: 'adjusted', scaleFactor: 2 },
       locale,
     );
-    const sections = createSourceCookIngredientSections(content, locale);
+    const sections = createRecipeCookIngredientSections(content, locale);
     assert.deepEqual(
       sections.map(({ title }) => title),
       content.ingredientSections.map(({ title }) => title),
     );
     assert.deepEqual(
       sections.flatMap(({ items }) => items),
-      createSourceCookIngredients(content, locale),
+      createRecipeCookIngredients(content, locale),
     );
     assert.ok(sections.length > 1);
   }
@@ -378,7 +381,7 @@ void test('cinnamon-roll Cook Mode keeps baking and finishing as separate steps'
   const content = getRecipeContent('cinnamon-rolls', 'uk');
   assert.ok(content);
 
-  const steps = createSourceCookSteps(content, 'uk');
+  const steps = createRecipeCookSteps(content, 'uk');
   assert.equal(steps.length, 9);
   assert.match(steps[0].checkpoint ?? '', /бульбашки|піна/i);
   assert.equal(steps[0].media?.[0]?.id, 'cinnamon-rolls-activated-yeast-v1');
@@ -399,8 +402,8 @@ void test('keeps the author prune-cake revision, spoon weights and baking timers
   for (const locale of ['uk', 'en', 'es'] as const) {
     const content = getRecipeContent('prune-cake', locale)!;
     assert.equal(content.versionId, 'prune-cake-24cm-v2');
-    assert.equal(isSourceCookModeAvailable(content), true);
-    const steps = createSourceCookSteps(content, locale);
+    assert.equal(isRecipeCookModeAvailable(content), true);
+    const steps = createRecipeCookSteps(content, locale);
     assert.equal(steps.length, 11);
     assert.deepEqual(steps[0].stepIds, ['prepare-pan']);
     assert.deepEqual(
@@ -418,9 +421,9 @@ void test('keeps the author prune-cake revision, spoon weights and baking timers
         .find((step) => step.stepIds.includes('make-cream'))
         ?.ingredients.some((item) => item.id === 'cream-lemon-juice'),
     );
-    const doubled = applySourceRecipeConfiguration(
+    const doubled = applyRecipeContentConfiguration(
       content,
-      parseSourceRecipeConfiguration('mode=scale&scale=2', content),
+      parseRecipeContentConfiguration('mode=scale&scale=2', content),
       locale,
     )!;
     const ingredients = doubled.ingredientSections.flatMap(

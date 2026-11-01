@@ -14,12 +14,15 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer';
 import { BakeCheckbox } from '@/components/ui/bake-checkbox';
-import type { RecipeDraft } from '@/content/recipes/recipe.types';
-import type { StructuredIngredientSection } from '@/content/recipes/source-recipe.types';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import { formatQuantity } from '@/lib/i18n/format';
-import { scaleStructuredQuantity } from '@/content/recipes/inventory-calculation';
+import {
+  buildShoppingRecipe,
+  type ShoppingRecipe,
+  type ShoppingRecipeProjection,
+} from '@/content/recipes/shopping-projection';
+export type { ShoppingRecipeProjection } from '@/content/recipes/shopping-projection';
 import { localeShoppingListPath } from '@/lib/i18n/routes';
 import {
   addShoppingIngredients,
@@ -29,109 +32,6 @@ import {
   type ShoppingV1,
 } from '@/lib/persistence/shopping';
 import styles from './add-recipe-ingredients-control.module.css';
-
-export type SourceShoppingRecipe = {
-  id: string;
-  versionId: string;
-  title: string;
-  ingredientSections: StructuredIngredientSection[];
-};
-
-type ShoppingLine = {
-  id: string;
-  options: Array<{ ingredientId: string; name: string }>;
-  quantity: {
-    base: import('@/content/recipes/recipe.types').Quantity | null;
-    shopping: {
-      mode: 'base' | 'nameOnly';
-      increment?: number;
-      rounding?: 'up';
-      defaultSelected?: boolean;
-    };
-  };
-  choose?: 1;
-  notes: string[];
-};
-type ShoppingRecipe = {
-  id: string;
-  versionId: string;
-  title: string;
-  configurationKey: string;
-  ingredientSections: Array<{
-    id: string;
-    title: string;
-    lines: ShoppingLine[];
-  }>;
-};
-
-function normalizeRecipe(
-  recipe: RecipeDraft | SourceShoppingRecipe,
-  locale: AppLocale,
-  scaleFactor: number,
-  configurationKey: string,
-): ShoppingRecipe {
-  if ('schemaVersion' in recipe)
-    return {
-      id: recipe.id,
-      versionId: recipe.versionId,
-      title: recipe.title[locale],
-      configurationKey,
-      ingredientSections: recipe.ingredientSections.map((section) => ({
-        id: section.id,
-        title: section.title[locale],
-        lines: section.lines.map((line) => ({
-          id: line.id,
-          options: line.options.map((option) => ({
-            ingredientId: option.ingredientId,
-            name: option.name[locale],
-          })),
-          quantity: {
-            ...line.quantity,
-            base: scaleStructuredQuantity(
-              line.quantity.base,
-              line.scaling?.kind === 'fixed' ? 1 : scaleFactor,
-            ),
-            equivalent: scaleStructuredQuantity(
-              line.quantity.equivalent ?? null,
-              line.scaling?.kind === 'fixed' ? 1 : scaleFactor,
-            ),
-          },
-          choose: line.choose,
-          notes: [line.condition?.[locale], line.qualifier?.[locale]].filter(
-            (note): note is string => Boolean(note),
-          ),
-        })),
-      })),
-    };
-  return {
-    id: recipe.id,
-    versionId: recipe.versionId,
-    title: recipe.title,
-    configurationKey,
-    ingredientSections: recipe.ingredientSections.map((section) => ({
-      id: section.id,
-      title: section.title,
-      lines: section.ingredients.map((ingredient) => ({
-        id: ingredient.id,
-        options: [{ ingredientId: ingredient.id, name: ingredient.name }],
-        quantity: {
-          ...ingredient.quantity,
-          base: scaleStructuredQuantity(
-            ingredient.quantity.base,
-            ingredient.scaling === 'fixed' ? 1 : scaleFactor,
-          ),
-          equivalent: scaleStructuredQuantity(
-            ingredient.quantity.equivalent ?? null,
-            ingredient.scaling === 'fixed' ? 1 : scaleFactor,
-          ),
-        },
-        notes: [ingredient.note].filter((note): note is string =>
-          Boolean(note),
-        ),
-      })),
-    })),
-  };
-}
 
 function recipeLineIdsInShoppingList(
   state: ShoppingV1,
@@ -190,7 +90,7 @@ export function AddRecipeIngredientsControl({
   scaleFactor = 1,
   configurationKey = 'base',
 }: {
-  recipe: RecipeDraft | SourceShoppingRecipe;
+  recipe: ShoppingRecipeProjection;
   locale: AppLocale;
   className?: string;
   context?: string;
@@ -201,8 +101,8 @@ export function AddRecipeIngredientsControl({
 }) {
   const messages = getUiMessages(locale).personal;
   const shoppingRecipe = useMemo(
-    () => normalizeRecipe(recipe, locale, scaleFactor, configurationKey),
-    [configurationKey, locale, recipe, scaleFactor],
+    () => buildShoppingRecipe(recipe, scaleFactor, configurationKey),
+    [configurationKey, recipe, scaleFactor],
   );
   const lines = useMemo(
     () =>

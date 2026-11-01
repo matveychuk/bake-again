@@ -23,7 +23,7 @@
   max-width: var(--layout-cook-reading);
   min-width: 0;
 }
-.copy :is(h1, h2) {
+.copy :is(h1, h2, h3) {
   font-family: var(--font-family-display);
   font-size: var(--font-size-drawer-title);
   font-weight: 500;
@@ -163,4 +163,20 @@
   .section {
     display: none;
   }
+}
+
+/* Inline recipe invitation: same editorial type, a full-width quiet form. */
+.recipeStep {
+  width: 100%;
+  margin-block: var(--space-8);
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.recipeStep .main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+.recipeStep .action {
+  width: 100%;
 }

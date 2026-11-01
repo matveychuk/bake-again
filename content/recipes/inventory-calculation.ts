@@ -1,4 +1,4 @@
-import type { StructuredIngredient } from './source-recipe.types';
+import type { StructuredIngredient } from './localized-recipe.types';
 import type { Quantity } from './recipe.types';
 
 export type ParsedInventoryAmount = {

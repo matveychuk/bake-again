@@ -10,11 +10,13 @@ export async function NewsletterSignup({
   autoPrompt = false,
   magnetId,
   note,
+  placement = 'landing',
 }: {
   locale: AppLocale;
   autoPrompt?: boolean;
   magnetId?: MagnetId;
   note?: string;
+  placement?: import('@/lib/newsletter/single-opt-in').SubscriptionPlacement;
 }) {
   let bindings: Record<string, unknown>;
   try {
@@ -24,9 +26,21 @@ export async function NewsletterSignup({
     bindings = typeof process !== 'undefined' ? process.env : {};
   }
   const signup = newsletterSignupConfig(bindings, locale);
+  // An inert development preview never contacts Brevo or claims delivery.
+  const localPreview =
+    process.env.NODE_ENV === 'development' && !deliveryConfigured(bindings);
   if (magnetId)
-    return signup && locale === 'uk' && deliveryConfigured(bindings) ? (
-      <NewsletterForm signup={signup} magnetId={magnetId} note={note} recipeSiteKey={bindings.TURNSTILE_SITE_KEY as string} />
+    return signup &&
+      locale === 'uk' &&
+      (deliveryConfigured(bindings) || localPreview) ? (
+      <NewsletterForm
+        preview={localPreview}
+        placement={placement}
+        signup={signup}
+        magnetId={magnetId}
+        note={note}
+        recipeSiteKey={bindings.TURNSTILE_SITE_KEY as string}
+      />
     ) : (
       <output>Підписка зараз недоступна. Спробуй, будь ласка, пізніше.</output>
     );

@@ -1,6 +1,6 @@
 import type { AppLocale } from '../lib/i18n/config.ts';
 
-/** Landing page after the Brevo double opt-in link (form redirect URL). */
+/** Service page for hosted Brevo redirects and legacy confirmation links. */
 export const newsletterConfirmedContent: Record<
   AppLocale,
   {
@@ -13,24 +13,23 @@ export const newsletterConfirmedContent: Record<
   }
 > = {
   uk: {
-    metaTitle: 'Підписку підтверджено — Bake Again',
-    title: 'Підписку підтверджено',
-    body: 'Дякуємо! Вітальний лист уже в дорозі — зазвичай він приходить протягом хвилини.',
-    gift: 'У ньому — подарунок для нових підписників: PDF-рецепт шоколадного торта з вишнями й бананом.',
+    metaTitle: 'Дякуємо за підписку — Bake Again',
+    title: 'Дякуємо за підписку',
+    body: 'Підтверджувати email окремим листом не потрібно. Якщо ти щойно залишила чи залишив запит на матеріал, шукай його в пошті за кілька хвилин.',
     recipesTitle: 'Що спекти наступного разу',
     allRecipes: 'Усі рецепти',
   },
   es: {
-    metaTitle: 'Suscripción confirmada — Bake Again',
-    title: 'Suscripción confirmada',
-    body: '¡Gracias! El correo de bienvenida ya va de camino; suele llegar en un minuto.',
+    metaTitle: 'Gracias por suscribirte — Bake Again',
+    title: 'Gracias por suscribirte',
+    body: 'No necesitas confirmar el correo. Si acabas de solicitar un material, búscalo en tu bandeja de entrada en unos minutos.',
     recipesTitle: 'Qué hornear la próxima vez',
     allRecipes: 'Todas las recetas',
   },
   en: {
-    metaTitle: 'Subscription confirmed — Bake Again',
-    title: 'Subscription confirmed',
-    body: 'Thank you! Your welcome email is on its way and usually arrives within a minute.',
+    metaTitle: 'Thank you for subscribing — Bake Again',
+    title: 'Thank you for subscribing',
+    body: 'No confirmation email is needed. If you just requested a resource, look for it in your inbox in a few minutes.',
     recipesTitle: 'What to bake next',
     allRecipes: 'All recipes',
   },

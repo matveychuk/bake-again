@@ -143,3 +143,21 @@ they are not separate statuses.
 - Keep passwords, recovery codes, access tokens and private audience data out of
   these documents. Recipe facts and adaptation evidence come from canonical recipe
   files; source media and social exports stay outside `public/`.
+
+## Strategy and specs from the Claude project (`docs/claude/`)
+
+- `docs/claude/` mirrors the documents of Sasha's claude.ai project "BakeAgain
+  monetization" (same file names as `claude/…` there). Claude chats linked to this
+  computer write each document both to the project and here; do not edit these
+  files yourself — ask Sasha to change them in the Claude project.
+- The main context is [`docs/claude/bake-again-context.md`](docs/claude/bake-again-context.md).
+  If it conflicts with older documents (e.g. `docs/strategy/monetization-context.uk.md`
+  or the 17.10 context in Downloads), the newer decision in `docs/claude/` wins.
+- Current tasks: [`recipe-page-funnel-plan.md`](docs/claude/recipe-page-funnel-plan.md)
+  (section 4 — site), [`codex-napoleon-banner-spec.md`](docs/claude/codex-napoleon-banner-spec.md),
+  [`claude-code-napoleon-banner-fixes.md`](docs/claude/claude-code-napoleon-banner-fixes.md),
+  [`brevo-single-optin-setup.md`](docs/claude/brevo-single-optin-setup.md),
+  [`napoleon-lesson-production.md`](docs/claude/napoleon-lesson-production.md).
+- Specs already delivered earlier stay where they are (`docs/codex/`, repository root);
+  `docs/codex/codex-napoleon-recipe-v5.uk.md` with Sasha's 28.10 clarification is the
+  current version of that spec.

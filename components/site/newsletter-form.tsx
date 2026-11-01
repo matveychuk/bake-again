@@ -2,7 +2,7 @@
 
 /* oxlint-disable next/no-html-link-for-pages -- Native links follow the existing vinext compatibility contract. */
 
-import { useEffect, useRef, useState, type SubmitEvent } from 'react';
+import { useEffect, useId, useRef, useState, type SubmitEvent } from 'react';
 import { MailCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAccount } from '@/components/account/account-provider';
@@ -15,6 +15,7 @@ import {
 } from '@/lib/newsletter/inline-signup';
 import { loadTurnstile, type Turnstile } from '@/lib/security/turnstile-client';
 import { trackEvent } from '@/lib/analytics/umami';
+import { getRecipeInvitation } from '@/content/lead-magnets';
 import type { MagnetId } from '@/lib/newsletter/magnets';
 import fieldStyles from '@/components/account/account.module.css';
 import styles from './newsletter-form.module.css';
@@ -51,13 +52,14 @@ const messages: Record<AppLocale, Copy> = {
     privacy: 'Приватність',
     submit: 'Підписатися',
     sending: 'Надсилаємо…',
-    doneTitle: 'Перевірте пошту',
+    doneTitle: 'Запит прийнято',
     doneBody: (email) =>
-      `Ми надіслали лист на ${email}. Натисніть у ньому кнопку підтвердження — без цього розсилка не почнеться.`,
+      `Запит для ${email} прийнято. Нові рецепти надходитимуть на цю адресу. Підтверджувати email окремим листом не потрібно.`,
     doneHint:
       'Якщо листа немає за кілька хвилин, зазирніть у «Промоакції» або «Спам».',
     restart: 'Ввести іншу адресу',
-    error: 'Не вдалося надіслати запит. Перевірте з’єднання й спробуйте ще раз.',
+    error:
+      'Не вдалося надіслати запит. Перевірте з’єднання й спробуйте ще раз.',
     verifyFailed: 'Не вдалося завершити перевірку.',
     verifyRetry: 'Повторити перевірку',
     openProvider: 'Відкрити форму Brevo',
@@ -76,9 +78,8 @@ const messages: Record<AppLocale, Copy> = {
     sending: 'Enviando…',
     doneTitle: 'Revisa tu correo',
     doneBody: (email) =>
-      `Hemos enviado un correo a ${email}. Pulsa el botón de confirmación: sin ese paso la suscripción no se activa.`,
-    doneHint:
-      'Si no llega en unos minutos, mira en «Promociones» o «Spam».',
+      `Solicitud recibida para ${email}. Recibirás las nuevas recetas en esta dirección; no necesitas confirmar el correo.`,
+    doneHint: 'Si no llega en unos minutos, mira en «Promociones» o «Spam».',
     restart: 'Usar otra dirección',
     error:
       'No se ha podido enviar la solicitud. Revisa la conexión e inténtalo de nuevo.',
@@ -100,7 +101,7 @@ const messages: Record<AppLocale, Copy> = {
     sending: 'Sending…',
     doneTitle: 'Check your inbox',
     doneBody: (email) =>
-      `We sent an email to ${email}. Click its confirmation button — your subscription only starts after that.`,
+      `Request received for ${email}. New recipes will arrive at this address; no confirmation email is needed.`,
     doneHint:
       'If it hasn’t arrived in a few minutes, check Promotions or Spam.',
     restart: 'Use another address',
@@ -116,22 +117,22 @@ const messages: Record<AppLocale, Copy> = {
 
 // The UK lead magnet keeps its informal voice and promises the PDF.
 const magnetCopy: Partial<Copy> = {
-  label: 'Отримати PDF-рецепт на пошту',
-  sendTo: 'Надішлемо рецепт на',
+  label: 'Отримати матеріал на пошту',
+  sendTo: 'Адреса для листа',
   consent:
     'Підписуючись, ти погоджуєшся отримувати рецепти й матеріали Bake Again українською. Відписатися можна будь-коли. Дані обробляє Brevo.',
   submit: 'Отримати рецепт',
-  doneTitle: 'Перевір пошту',
+  doneTitle: 'Запит прийнято',
   doneBody: (email) =>
-    `Перевір ${email}. Якщо ти вже маєш активну підписку, шукай лист із запитаними матеріалами. Якщо підписуєшся вперше — спочатку підтвердь email за кнопкою в листі.`,
+    `Запит для ${email} прийнято. Шукай матеріал у пошті за кілька хвилин. Підтверджувати email окремим листом не потрібно.`,
   doneHint: 'Якщо листа немає, зазирни в «Промоакції» або «Спам».',
   error: 'Не вдалося надіслати запит. Перевір з’єднання й спробуй ще раз.',
 };
 
 /**
- * Inline variant of the hosted per-locale Brevo forms: provider-owned DOI and
+ * Inline variant of the hosted per-locale Brevo forms: provider-owned automation and
  * audience lists. A signed-in reader subscribes their account address in one
- * click; the provider still confirms it by email.
+ * click; the provider owns automation delivery, without DOI.
  */
 export function NewsletterForm({
   signup,
@@ -141,21 +142,32 @@ export function NewsletterForm({
   preview = false,
   previewEmail,
   recipeSiteKey,
+  placement = 'landing',
   onSent,
 }: {
   signup?: NewsletterSignup;
   locale?: AppLocale;
   magnetId?: MagnetId;
   recipeSiteKey?: string;
+  placement?: import('@/lib/newsletter/single-opt-in').SubscriptionPlacement;
   note?: string;
   preview?: boolean;
   /** Design Lab only: render the signed-in variant without an account. */
   previewEmail?: string;
   onSent?: () => void;
 }) {
-  const copy = { ...messages[locale], ...(magnetId ? magnetCopy : {}) };
+  const formId = useId();
+  const invitation = getRecipeInvitation('crepes', locale);
+  const copy = {
+    ...messages[locale],
+    ...(magnetId ? magnetCopy : {}),
+    ...(invitation && magnetId === invitation.magnetId
+      ? { label: invitation.title, submit: invitation.submit }
+      : {}),
+  };
   const account = useAccount();
-  const accountEmail = previewEmail ?? (account.identity ? account.email : null);
+  const accountEmail =
+    previewEmail ?? (account.identity ? account.email : null);
   const challenge = useRef<HTMLDivElement>(null);
   const doneHeading = useRef<HTMLHeadingElement>(null);
   const busy = useRef(false);
@@ -165,7 +177,11 @@ export function NewsletterForm({
   const [attempt, setAttempt] = useState(0);
   const [verificationFailed, setVerificationFailed] = useState(false);
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
-  const endpoint = magnetId ? (recipeSiteKey ? '/api/newsletter/recipe' : null) : signup && brevoSignupEndpoint(signup.url);
+  const endpoint = magnetId
+    ? recipeSiteKey
+      ? '/api/newsletter/recipe'
+      : null
+    : signup && brevoSignupEndpoint(signup.url);
   const knownEmail = useOther ? null : accountEmail;
   const succeeded = sentTo !== null;
 
@@ -186,7 +202,7 @@ export function NewsletterForm({
         if (disposed || !challenge.current) return;
         widget = api.render(challenge.current, {
           sitekey: magnetId ? recipeSiteKey : brevoSiteKeys[locale],
-          ...(magnetId ? {action:'recipe_request'} : {}),
+          ...(magnetId ? { action: 'recipe_request' } : {}),
           language: locale,
           size: 'flexible',
           theme: 'auto',
@@ -212,6 +228,11 @@ export function NewsletterForm({
     };
   }, [endpoint, preview, attempt, succeeded, locale, magnetId, recipeSiteKey]);
 
+  const emailField = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (useOther) emailField.current?.focus();
+  }, [useOther]);
+
   useEffect(() => {
     if (succeeded) doneHeading.current?.focus();
   }, [succeeded]);
@@ -222,7 +243,9 @@ export function NewsletterForm({
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
     const body = new FormData(form);
-    const email = String(body.get('EMAIL') ?? '').trim();
+    const submittedEmail = body.get('EMAIL');
+    const email =
+      typeof submittedEmail === 'string' ? submittedEmail.trim() : '';
     if (!email) return;
     body.set('EMAIL', email);
     body.set('g-recaptcha-response', token);
@@ -234,13 +257,33 @@ export function NewsletterForm({
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
-        ...(magnetId ? { headers:{'content-type':'application/json'}, body:JSON.stringify({email,magnet:magnetId,token,consent:true,website:body.get('email_address_check')}) } : {body}),
+        ...(magnetId
+          ? {
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({
+                email,
+                magnet: magnetId,
+                placement,
+                token,
+                consent: true,
+                website: body.get('email_address_check'),
+              }),
+            }
+          : { body }),
         signal: AbortSignal.timeout(30_000),
         credentials: 'omit',
         referrerPolicy: 'no-referrer',
       });
       const result = await response.json();
-      if (!response.ok || !(magnetId ? !!result && typeof result==='object' && 'ok' in result && result.ok===true : brevoAccepted(result)))
+      if (
+        !response.ok ||
+        !(magnetId
+          ? !!result &&
+            typeof result === 'object' &&
+            'ok' in result &&
+            result.ok === true
+          : brevoAccepted(result))
+      )
         throw new Error('Signup unavailable');
       setStatus('idle');
       setSentTo(email);
@@ -258,14 +301,19 @@ export function NewsletterForm({
     }
   }
 
+  const DoneHeading = placement === 'recipe' ? 'h4' : 'h2';
   if (succeeded)
     return (
       <div className={styles.done} lang={locale}>
         <MailCheck size={24} aria-hidden="true" className={styles.doneIcon} />
         <div>
-          <h2 ref={doneHeading} tabIndex={-1} className={styles.doneTitle}>
+          <DoneHeading
+            ref={doneHeading}
+            tabIndex={-1}
+            className={styles.doneTitle}
+          >
             {copy.doneTitle}
-          </h2>
+          </DoneHeading>
           <p>{copy.doneBody(sentTo)}</p>
           <p className={styles.small}>{copy.doneHint}</p>
           <Button
@@ -282,7 +330,7 @@ export function NewsletterForm({
       </div>
     );
 
-  const consentId = `newsletter-consent-${locale}${magnetId ? `-${magnetId}` : ''}`;
+  const consentId = `newsletter-consent-${formId}`;
   return (
     <form
       className={styles.form}
@@ -317,7 +365,7 @@ export function NewsletterForm({
             required
             maxLength={254}
             disabled={status === 'sending'}
-            autoFocus={useOther}
+            ref={emailField}
             aria-describedby={consentId}
           />
         </label>
@@ -371,7 +419,9 @@ export function NewsletterForm({
         <noscript>
           <p>
             {copy.noscript}{' '}
-            {signup && !magnetId && <a href={signup.url}>{copy.openProvider}</a>}
+            {signup && !magnetId && (
+              <a href={signup.url}>{copy.openProvider}</a>
+            )}
           </p>
         </noscript>
       )}

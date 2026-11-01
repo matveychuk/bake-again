@@ -107,27 +107,22 @@ void test('step scope requires real, unique canonical steps; titles and ordinals
   );
 });
 
-void test('every sourceDraft is explicitly unavailable, even when its source method is complete', () => {
-  const drafts = recipeDocuments.filter(
-    (document) => document.kind === 'sourceDraft',
-  );
-  assert.ok(drafts.length > 0);
-  for (const document of drafts)
-    unavailable(
-      { ...base, recipeId: document.recipe.id },
-      'SOURCE_DRAFT_UNAVAILABLE',
-    );
-  const result = buildTrustedRecipeContext({
-    ...base,
-    recipeId: drafts[0].recipe.id,
-    locale: 'uk',
-  });
-  assert.ok(!result.available && result.message.includes('чернетку'));
+void test('every canonical recipe is available to trusted local context without a model-kind gate', () => {
+  for (const { recipe } of recipeDocuments) {
+    const result = buildTrustedRecipeContext({
+      ...base,
+      recipeId: recipe.id,
+      locale: 'uk',
+    });
+    assert.ok(result.available, recipe.id);
+    if (result.available)
+      assert.equal(result.context.recipeVersionId, recipe.versionId);
+  }
 });
 
 void test('published detailed recipes preserve locale review state', () => {
   for (const document of recipeDocuments) {
-    if (document.kind !== 'detailed') continue;
+    if (document.recipe.publicationStatus !== 'published') continue;
     const result = context({ recipeId: document.recipe.id });
     assert.equal(result.recipe.title, document.recipe.title.en);
     assert.equal(result.recipeVersionId, document.recipe.versionId);
@@ -139,7 +134,7 @@ void test('published detailed recipes preserve locale review state', () => {
 void test('all three locales use canonical copy with shared facts and provenance', () => {
   const english = context();
   const document = getRecipeDocument(base.recipeId);
-  assert.ok(document?.kind === 'detailed');
+  assert.ok(document);
   for (const locale of ['en', 'es', 'uk'] as const) {
     const result = context({ locale });
     assert.equal(result.recipe.title, document.recipe.title[locale]);
@@ -186,7 +181,7 @@ void test('step context uses the confirmed sour-cream method without the resolve
     locale: 'uk',
   });
   const document = getRecipeDocument(base.recipeId);
-  assert.ok(document?.kind === 'detailed');
+  assert.ok(document);
   const step = document.recipe.steps.find(
     (item) => item.id === 'mix-wet-dough',
   );
@@ -211,7 +206,7 @@ void test('checkpoints and practical tips preserve canonical types, IDs and lang
   for (const stepId of ['cut-in-butter', 'roll-layer']) {
     const result = context({ scope: 'step', stepId, locale: 'es' });
     const document = getRecipeDocument(base.recipeId);
-    assert.ok(document?.kind === 'detailed');
+    assert.ok(document);
     const step = document.recipe.steps.find((item) => item.id === stepId);
     assert.ok(step);
     assert.deepEqual(
@@ -246,8 +241,7 @@ void test('verified custard and narrower dairy guidance preserve their own prove
 
 void test('unknowns stay null and gaps omit private editorial questions and source paths', () => {
   const document = getRecipeDocument(base.recipeId)!;
-  assert.equal(document.kind, 'detailed');
-  if (document.kind !== 'detailed') throw new Error('Expected detailed recipe');
+  assert.ok(document);
   const recordedTime = document.recipe.timing.totalElapsedMinutes;
   let result: TrustedRecipeContext;
   try {
@@ -287,8 +281,8 @@ void test('unknowns stay null and gaps omit private editorial questions and sour
 
 void test('geometry alternatives and variations have their own status, never base inheritance', () => {
   const result = context();
-  assert.equal(result.geometry.base.value.kind, 'roundTemplate');
-  assert.equal(result.geometry.base.value.application, 'roll-and-trim');
+  assert.equal(result.geometry.base!.value.kind, 'roundTemplate');
+  assert.equal(result.geometry.base!.value.application, 'roll-and-trim');
   assert.equal(result.yield.base.value.amount, 2);
   const preview = result.geometry.alternatives.find(
     (item) => item.value.id === 'round-28cm-preview',
@@ -298,7 +292,7 @@ void test('geometry alternatives and variations have their own status, never bas
   assert.equal(preview?.value.availability, 'previewOnly');
   assert.ok(preview?.evidence.gapIds.includes('validate-28cm-form'));
   const document = getRecipeDocument(base.recipeId);
-  assert.ok(document?.kind === 'detailed');
+  assert.ok(document);
   for (const variation of result.variations) {
     const source: RecipeVariation = document.recipe.variations.find(
       (item) => item.id === variation.value.id,
@@ -317,7 +311,7 @@ void test('adjusted quantities are recomputed without inheriting Tested', () => 
   } as const;
   const result = context({ configuration });
   const document = getRecipeDocument(base.recipeId);
-  assert.ok(document?.kind === 'detailed');
+  assert.ok(document);
   const calculated = calculateRecipeConfiguration(
     document.recipe,
     configuration.geometryId,
@@ -357,7 +351,7 @@ void test('adjusted quantities are recomputed without inheriting Tested', () => 
 void test('a 1× adjusted selection and adjusted step guidance never become Tested', () => {
   const configuration = {
     kind: 'adjusted',
-    geometryId: 'round-24cm-6-layers-each',
+    geometryId: 'round-24cm-7-layers-each',
     quantityAdjustment: { mode: 'batchScale', factor: 1 },
   } as const;
   const result = context({
@@ -382,7 +376,7 @@ void test('use-what-I-have quantities come from the canonical calculator', () =>
   const result = context({
     configuration: {
       kind: 'adjusted',
-      geometryId: 'round-24cm-6-layers-each',
+      geometryId: 'round-24cm-7-layers-each',
       quantityAdjustment: {
         mode: 'useWhatIHave',
         anchorIngredientLineId: 'schar-mix-b',
@@ -405,7 +399,7 @@ void test('use-what-I-have quantities come from the canonical calculator', () =>
 void test('rejects forged, unsupported, non-finite and overflowing configurations', () => {
   const adjusted = {
     kind: 'adjusted',
-    geometryId: 'round-24cm-6-layers-each',
+    geometryId: 'round-24cm-7-layers-each',
     quantityAdjustment: { mode: 'batchScale', factor: 2 },
   };
   for (const configuration of [
@@ -464,11 +458,11 @@ void test('output and selection are detached; mutations never alter canonical re
   const before = JSON.stringify(recipeDocuments);
   const first = context();
   first.ingredients[0].options[0].name = 'changed';
-  first.geometry.base.value.diameterCm = 999;
+  first.geometry.base!.value.diameterCm = 999;
   first.flour?.additionalStarchLineIds.push('changed');
   const amount = first.ingredients[0].amount.value;
   if (amount?.kind === 'exact') amount.value = 999;
   assert.equal(JSON.stringify(recipeDocuments), before);
   assert.notEqual(context().ingredients[0].options[0].name, 'changed');
-  assert.equal(context().geometry.base.value.diameterCm, 24);
+  assert.equal(context().geometry.base!.value.diameterCm, 24);
 });

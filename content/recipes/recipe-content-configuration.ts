@@ -1,3 +1,4 @@
+import { calculateProjectedIngredient } from './projected-quantity.ts';
 import type { AssistantConfiguration } from '../../lib/assistant/contracts.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
 import { formatNumber, formatQuantity } from '../../lib/i18n/format.ts';
@@ -6,15 +7,15 @@ import {
   findScalingAnchor,
   scaleStructuredQuantity,
 } from './inventory-calculation.ts';
-import type { BatchScaleFactor, RecipeDraft, Unit } from './recipe.types.ts';
+import type { BatchScaleFactor, Recipe, Unit } from './recipe.types.ts';
 import type {
   StructuredRecipeContent,
   StructuredRecipeYield,
-} from './source-recipe.types.ts';
+} from './localized-recipe.types.ts';
 
-export const sourceBatchScaleFactors = [0.5, 1, 1.5, 2] as const;
+export const recipeBatchScaleFactors = [0.5, 1, 1.5, 2] as const;
 
-export type SourceRecipeConfiguration =
+export type RecipeContentConfiguration =
   | { kind: 'base'; mode: 'scale'; scaleFactor: 1 }
   | {
       kind: 'base';
@@ -46,15 +47,15 @@ export type SourceRecipeConfiguration =
       reason: 'positive' | 'unsupported';
     };
 
-export type SourceRecipeScalingBounds = {
+export type RecipeScalingBounds = {
   minimum?: number;
   maximum?: number;
 };
 
-export function sourceRecipeScalingBounds(
-  recipe: RecipeDraft | null | undefined,
+export function recipeScalingBounds(
+  recipe: Recipe | null | undefined,
   ingredientId: string | undefined,
-): SourceRecipeScalingBounds | undefined {
+): RecipeScalingBounds | undefined {
   const anchor =
     recipe?.configuration.quantityAdjustment.useWhatIHave?.scalingAnchors.find(
       (candidate) => candidate.ingredientLineId === ingredientId,
@@ -70,12 +71,12 @@ function isUnit(value: string): value is Unit {
   );
 }
 
-export function parseSourceRecipeConfiguration(
+export function parseRecipeContentConfiguration(
   search: URLSearchParams | string,
   content: StructuredRecipeContent | null | undefined,
   scalingAnchorIngredientId?: string,
-  bounds?: SourceRecipeScalingBounds,
-): SourceRecipeConfiguration {
+  bounds?: RecipeScalingBounds,
+): RecipeContentConfiguration {
   const params =
     typeof search === 'string' ? new URLSearchParams(search) : search;
   const ingredients =
@@ -126,7 +127,7 @@ export function parseSourceRecipeConfiguration(
   const factor = Number(params.get('scale'));
   if (
     params.get('mode') === 'scale' &&
-    sourceBatchScaleFactors.includes(factor as BatchScaleFactor) &&
+    recipeBatchScaleFactors.includes(factor as BatchScaleFactor) &&
     factor !== 1
   ) {
     return {
@@ -139,7 +140,7 @@ export function parseSourceRecipeConfiguration(
   return { kind: 'base', mode: 'scale', scaleFactor: 1 };
 }
 
-export function updateSourceRecipeConfigurationParams(
+export function updateRecipeContentConfigurationParams(
   current: URLSearchParams | string,
   configuration:
     | { mode: 'scale'; scaleFactor: BatchScaleFactor }
@@ -197,16 +198,42 @@ function scaledYield(
 }
 
 /** Scale explicitly annotated amounts in prose, preserving times and temperatures. */
-export function applySourceRecipeConfiguration(
+export function applyRecipeContentConfiguration(
   content: StructuredRecipeContent,
   configuration:
-    | SourceRecipeConfiguration
+    | RecipeContentConfiguration
     | { kind: 'adjusted'; scaleFactor: number },
   locale: AppLocale,
 ): StructuredRecipeContent {
   if (configuration.kind !== 'adjusted') return content;
   const factor = configuration.scaleFactor;
   const recipeYield = scaledYield(content.yield, factor, locale);
+  const configurationWarnings: import('./recipe.types.ts').ConfigurationWarning[] =
+    [];
+  const ingredientSections = content.ingredientSections.map((section) => ({
+    ...section,
+    ingredients: section.ingredients.map((ingredient) => {
+      const result = calculateProjectedIngredient(ingredient, factor);
+      if (result.requiresResolution)
+        configurationWarnings.push({
+          code:
+            result.rule === 'discrete'
+              ? 'fractional-discrete-ingredient'
+              : 'manual-scaling-required',
+          severity: 'blocking',
+          ingredientLineId: ingredient.id,
+          message: getUiMessages(locale).cook.unsupportedConfiguration,
+        });
+      return {
+        ...ingredient,
+        quantity: {
+          ...ingredient.quantity,
+          base: result.base,
+          equivalent: result.equivalent,
+        },
+      };
+    }),
+  }));
   return {
     ...content,
     evidence: {
@@ -242,28 +269,13 @@ export function applySourceRecipeConfiguration(
       ...content.overview,
       yieldLabel: recipeYield?.label ?? content.overview.yieldLabel,
     },
-    ingredientSections: content.ingredientSections.map((section) => ({
-      ...section,
-      ingredients: section.ingredients.map((ingredient) => ({
-        ...ingredient,
-        quantity: {
-          ...ingredient.quantity,
-          base: scaleStructuredQuantity(
-            ingredient.quantity.base,
-            ingredient.scaling === 'fixed' ? 1 : factor,
-          ),
-          equivalent: scaleStructuredQuantity(
-            ingredient.quantity.equivalent ?? null,
-            ingredient.scaling === 'fixed' ? 1 : factor,
-          ),
-        },
-      })),
-    })),
+    ingredientSections,
+    configurationWarnings,
   };
 }
 
-export function sourceRecipeConfigurationKey(
-  configuration: SourceRecipeConfiguration,
+export function recipeContentConfigurationKey(
+  configuration: RecipeContentConfiguration,
 ) {
   if (configuration.kind === 'base') return 'base';
   if (configuration.kind === 'invalid') return 'invalid';
@@ -272,10 +284,10 @@ export function sourceRecipeConfigurationKey(
     : `ingredient:${configuration.ingredientId}:${configuration.availableAmount}:${configuration.unit}`;
 }
 
-export function sourceAssistantConfiguration(
+export function recipeAssistantConfiguration(
   recipeId: string,
   content: StructuredRecipeContent,
-  configuration: SourceRecipeConfiguration,
+  configuration: RecipeContentConfiguration,
 ): AssistantConfiguration | undefined {
   if (configuration.kind === 'invalid') return undefined;
   if (configuration.kind === 'base') return { kind: 'base' };

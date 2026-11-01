@@ -10,14 +10,17 @@ import type {
   StructuredIngredient,
   StructuredRecipeContent,
   StructuredRecipeStep,
-} from './source-recipe.types.ts';
+} from './localized-recipe.types.ts';
 
-export function isSourceCookModeAvailable(
+export function isRecipeCookModeAvailable(
   structured: StructuredRecipeContent | null | undefined,
 ): boolean {
   return Boolean(
     structured &&
     structured.completeness !== 'incompleteSource' &&
+    !structured.configurationWarnings?.some(
+      (warning) => warning.severity === 'blocking',
+    ) &&
     structured.steps.length > 0,
   );
 }
@@ -107,7 +110,7 @@ function cookIngredient(
   };
 }
 
-export function createSourceCookIngredients(
+export function createRecipeCookIngredients(
   structured: StructuredRecipeContent,
   locale: AppLocale,
 ): CookIngredient[] {
@@ -120,7 +123,7 @@ export function createSourceCookIngredients(
   );
 }
 
-export function createSourceCookIngredientSections(
+export function createRecipeCookIngredientSections(
   structured: StructuredRecipeContent,
   locale: AppLocale,
 ) {
@@ -137,7 +140,7 @@ export function createSourceCookIngredientSections(
  * Build Cook Mode screens from canonical steps. Consecutive steps may share a
  * `cookGroup`; this changes presentation only and preserves their source IDs.
  */
-export function createSourceCookSteps(
+export function createRecipeCookSteps(
   structured: StructuredRecipeContent,
   locale: AppLocale,
 ): CookStep[] {

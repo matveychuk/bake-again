@@ -7,8 +7,6 @@ import type {
   RecipeCreamOptions,
   RecipeDifficulty,
   RecipeLocale,
-  RecipeSearchMetadata,
-  TranslationState,
   YieldOption,
 } from './recipe.types.ts';
 
@@ -24,12 +22,13 @@ export type StructuredRecipeOverview = {
 };
 
 export type StructuredRecipeYield = {
+  approximate?: boolean;
   id: string;
   label: string;
   count:
     | { kind: 'exact'; value: number }
     | { kind: 'range'; min: number; max: number };
-  unit: YieldOption['unit'] | 'crepe' | 'dumpling' | 'g';
+  unit: NonNullable<YieldOption['unit']>;
 };
 
 export type StructuredRecipeGeometry = {
@@ -59,6 +58,9 @@ export type StructuredRecipeTiming = {
 export type StructuredIngredient = {
   id: string;
   name: string;
+  options?: Array<{ ingredientId: string; name: string }>;
+  choose?: 1;
+  scalingRule?: import('./recipe.types.ts').IngredientScalingRule;
   /** Canonical data, never a localized numeric string. */
   quantity: IngredientQuantity;
   note?: string;
@@ -108,22 +110,21 @@ export type StructuredRecipeStep = {
     fit?: 'cover' | 'contain';
     alt: string;
     title?: string;
+    poster?: string;
+    transcript?: string;
     caption?: string;
   }>;
 };
 
-/**
- * Source-backed draft used while a recipe is being migrated to the complete
- * multilingual RecipeDraft model. Reader-facing facts come only from the cited
- * archive; unresolved details remain explicit.
- */
-export type RecipeSourceDraftContent = {
+/** Localized output of Recipe; never an independently authored recipe. */
+export type LocalizedRecipeContent = {
   /** Explicit revision for changed bake configurations; keeps saved sessions separate. */
   versionId?: string;
   /** Opt-in edited reading layout; independent of publication and evidence. */
   presentation?: 'concise';
   /** Optional editorial image overlay; image provenance remains in catalogue metadata. */
   showImageNote?: boolean;
+  configurationWarnings?: import('./recipe.types.ts').ConfigurationWarning[];
   completeness: 'readyToReview' | 'incompleteSource';
   /** Reader-facing skill level for this exact recipe. */
   difficulty?: RecipeDifficulty;
@@ -145,20 +146,12 @@ export type RecipeSourceDraftContent = {
   gapNote?: string;
 };
 
-export type RecipeSourceDraft = RecipeSourceDraftContent & {
-  searchMetadata?: RecipeSearchMetadata;
-  id: string;
-  publicationStatus: 'unpublished' | 'published';
-  translationState?: Record<RecipeLocale, TranslationState>;
-  source?: { file: string; locator: string };
-  /** Reviewed reader-facing translations; source facts are never inferred here. */
-  translations?: Partial<Record<'es' | 'uk', RecipeSourceDraftContent>>;
-};
-
 /**
  * The reader-facing recipe shape. Every recipe, regardless of source maturity,
  * receives the same compact overview before it reaches product UI.
  */
-export type StructuredRecipeContent = RecipeSourceDraftContent & {
+export type StructuredRecipeContent = LocalizedRecipeContent & {
+  recipeId?: string;
+  locale?: RecipeLocale;
   overview: StructuredRecipeOverview;
 };

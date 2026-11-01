@@ -20,7 +20,7 @@ import { absoluteUrl } from './site.ts';
 import type {
   StructuredIngredient,
   StructuredRecipeContent,
-} from '../../content/recipes/source-recipe.types.ts';
+} from '../../content/recipes/localized-recipe.types.ts';
 import {
   recipeSearchMetadata,
   recipeLastModified,

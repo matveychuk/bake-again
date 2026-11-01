@@ -8,8 +8,8 @@ type Props = Omit<ComponentPropsWithRef<'section'>, 'title' | 'children'> & {
   description: string;
   note?: ReactNode;
   action: ReactNode;
-  variant?: 'default' | 'lead-magnet';
-  headingLevel?: 1 | 2;
+  variant?: 'default' | 'lead-magnet' | 'recipe-step';
+  headingLevel?: 1 | 2 | 3;
   image?: ReactNode;
 };
 
@@ -32,6 +32,7 @@ export function EditorialInvitation({
       className={[
         styles.section,
         variant === 'lead-magnet' && styles.leadMagnet,
+        variant === 'recipe-step' && styles.recipeStep,
         className,
       ]
         .filter(Boolean)

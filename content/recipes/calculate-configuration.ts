@@ -6,8 +6,8 @@ import type {
   IngredientScalingRule,
   Quantity,
   QuantityAdjustmentSelection,
-  RecipeDraft,
-} from './recipe.types';
+  Recipe,
+} from './recipe.types.ts';
 
 const nearlyEqual = (left: number, right: number) =>
   Math.abs(left - right) < 1e-9;
@@ -42,7 +42,7 @@ const geometryArea = (geometry: GeometryOption) => {
   return null;
 };
 
-const scaleQuantity = (
+export const scaleQuantity = (
   amount: Quantity | null,
   rule: IngredientScalingRule,
   factor: number,
@@ -114,34 +114,38 @@ const scaleQuantity = (
 };
 
 export function calculateRecipeConfiguration(
-  recipe: RecipeDraft,
+  recipe: Recipe,
   geometryId: string,
   quantityAdjustment: QuantityAdjustmentSelection,
 ): CalculatedRecipeConfiguration {
-  const geometries = [recipe.geometry.default, ...recipe.geometry.alternatives];
-  const geometry = geometries.find(({ id }) => id === geometryId);
-  if (!geometry) throw new Error(`Unknown geometry: ${geometryId}`);
-
-  const warnings: ConfigurationWarning[] = [];
   const baseGeometry = recipe.geometry.default;
+  const geometry = [baseGeometry, ...recipe.geometry.alternatives].find(
+    (item) => item?.id === geometryId,
+  );
+  if (!geometry && geometryId !== recipe.configuration.base.geometryId)
+    throw new Error(`Unknown geometry: ${geometryId}`);
+  const warnings: ConfigurationWarning[] = [];
   let geometryScaleFactor = 1;
-  if (geometry.id !== baseGeometry.id) {
+  if (geometryId !== recipe.configuration.base.geometryId) {
     const support = recipe.configuration.geometryAdjustment;
-    if (!support?.optionIds.includes(geometry.id)) {
-      throw new Error(`Geometry adjustment is not supported: ${geometry.id}`);
+    if (
+      !geometry ||
+      !baseGeometry ||
+      !support?.optionIds.includes(geometryId)
+    ) {
+      throw new Error(`Geometry adjustment is not supported: ${geometryId}`);
     }
     const baseArea = geometryArea(baseGeometry);
     const selectedArea = geometryArea(geometry);
-    if (support.quantityBasis === 'area' && baseArea && selectedArea) {
-      geometryScaleFactor = selectedArea / baseArea;
-    }
-    if (support.timingPolicy === 'unverifiedWhenChanged') {
+    if (!baseArea || !selectedArea)
+      throw new Error('Geometry dimensions are unknown');
+    geometryScaleFactor = selectedArea / baseArea;
+    if (support.timingPolicy === 'unverifiedWhenChanged')
       warnings.push({
         code: 'unverified-timing',
         severity: 'blocking',
         message: 'Timing for the selected geometry has not been tested.',
       });
-    }
   }
 
   const lines = recipe.ingredientSections.flatMap(({ lines }) => lines);
@@ -175,6 +179,7 @@ export function calculateRecipeConfiguration(
       throw new Error('Invalid Use what I have anchor or unit');
     }
     if (
+      !Number.isFinite(availableValue) ||
       availableValue <= 0 ||
       (anchor.minimum !== undefined && availableValue < anchor.minimum) ||
       (anchor.maximum !== undefined && availableValue > anchor.maximum)
@@ -188,7 +193,11 @@ export function calculateRecipeConfiguration(
   const ingredientAmounts: CalculatedIngredientAmount[] = lines.map((line) => {
     const rule = line.scaling ?? recipe.configuration.ingredientScaling.default;
     const scaled = scaleQuantity(line.quantity.base, rule, totalScaleFactor);
-    const scaledEquivalent = scaleQuantity(line.quantity.equivalent ?? null, rule, totalScaleFactor);
+    const scaledEquivalent = scaleQuantity(
+      line.quantity.equivalent ?? null,
+      rule,
+      totalScaleFactor,
+    );
     if (scaled.requiresResolution) {
       warnings.push({
         code:
@@ -215,8 +224,10 @@ export function calculateRecipeConfiguration(
   return {
     recipeId: recipe.id,
     recipeVersionId: recipe.versionId,
-    status: 'Calculated',
-    provenance: 'Calculated',
+    status:
+      recipe.baseProvenance.state === 'suggested' ? 'Suggested' : 'Calculated',
+    provenance:
+      recipe.baseProvenance.state === 'suggested' ? 'Suggested' : 'Calculated',
     geometryId,
     quantityAdjustment,
     geometryScaleFactor,

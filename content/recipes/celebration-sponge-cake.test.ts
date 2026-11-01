@@ -2,9 +2,11 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { getRecipeContent, getRecipeDocument } from './registry.ts';
 import { recipePart } from './recipe-part.ts';
-import { sourCreamContent } from './sour-cream.recipe.ts';
-import { chocolateGlazeContent } from './chocolate-glaze.recipe.ts';
-import { createSourceCookSteps } from './cook-mode-adapter.ts';
+const sourCreamContent = (locale: 'en' | 'uk' | 'es') =>
+  getRecipeContent('sour-cream', locale)!;
+const chocolateGlazeContent = (locale: 'en' | 'uk' | 'es') =>
+  getRecipeContent('chocolate-glaze', locale)!;
+import { createRecipeCookSteps } from './cook-mode-adapter.ts';
 import {
   getComponentPageRecipe,
   reusableComponentRecipeIds,
@@ -107,7 +109,7 @@ void test('author eight-egg formula is distinct from a scaled five-egg sponge in
         ?.technique?.condition,
       'room-temperature-butter',
     );
-    const cookSteps = createSourceCookSteps(cake, locale);
+    const cookSteps = createRecipeCookSteps(cake, locale);
     assert.deepEqual(
       cookSteps.find((step) => step.stepIds.includes('sponge-bake'))
         ?.timerOptionsSeconds,

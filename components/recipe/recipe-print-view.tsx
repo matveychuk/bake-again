@@ -1,4 +1,4 @@
-import type { StructuredRecipeContent } from '@/content/recipes/source-recipe.types';
+import type { StructuredRecipeContent } from '@/content/recipes/localized-recipe.types';
 import { recipeUtilityCopy } from '@/content/recipes/utility-copy';
 import { recipeReaderCopy } from '@/content/recipes/reader-copy';
 import type { AppLocale } from '@/lib/i18n/config';

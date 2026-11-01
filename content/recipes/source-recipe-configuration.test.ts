@@ -2,14 +2,14 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { getRecipeContent } from './registry.ts';
 import {
-  applySourceRecipeConfiguration,
-  parseSourceRecipeConfiguration,
-  sourceAssistantConfiguration,
-  updateSourceRecipeConfigurationParams,
-} from './source-recipe-configuration.ts';
+  applyRecipeContentConfiguration,
+  parseRecipeContentConfiguration,
+  recipeAssistantConfiguration,
+  updateRecipeContentConfigurationParams,
+} from './recipe-content-configuration.ts';
 
 void test('round-trips a scale while preserving unrelated configuration', () => {
-  const params = updateSourceRecipeConfigurationParams(
+  const params = updateRecipeContentConfigurationParams(
     'cream=vanilla-egg-custard',
     { mode: 'scale', scaleFactor: 2 },
   );
@@ -17,7 +17,7 @@ void test('round-trips a scale while preserving unrelated configuration', () => 
   assert.equal(params.get('mode'), 'scale');
   assert.equal(params.get('scale'), '2');
   const content = getRecipeContent('crepes', 'en')!;
-  assert.deepEqual(parseSourceRecipeConfiguration(params, content, 'flour'), {
+  assert.deepEqual(parseRecipeContentConfiguration(params, content, 'flour'), {
     kind: 'adjusted',
     mode: 'scale',
     scaleFactor: 2,
@@ -25,13 +25,13 @@ void test('round-trips a scale while preserving unrelated configuration', () => 
 });
 
 void test('treats 1x as the tested base and removes scaling parameters', () => {
-  const params = updateSourceRecipeConfigurationParams(
+  const params = updateRecipeContentConfigurationParams(
     'cream=vanilla-egg-custard&mode=scale&scale=2',
     { mode: 'scale', scaleFactor: 1 },
   );
   assert.equal(params.toString(), 'cream=vanilla-egg-custard');
   assert.equal(
-    parseSourceRecipeConfiguration(
+    parseRecipeContentConfiguration(
       params,
       getRecipeContent('eclairs', 'en'),
       'eggs',
@@ -43,7 +43,7 @@ void test('treats 1x as the tested base and removes scaling parameters', () => {
 void test('an available amount equal to the recorded anchor remains the tested base', () => {
   const content = getRecipeContent('crepes', 'en')!;
   assert.deepEqual(
-    parseSourceRecipeConfiguration(
+    parseRecipeContentConfiguration(
       'mode=ingredient&ingredient=eggs&amount=5&unit=piece',
       content,
       'eggs',
@@ -61,12 +61,12 @@ void test('an available amount equal to the recorded anchor remains the tested b
 
 void test('scales crepe ingredients and yield, while retaining fixed salt', () => {
   const base = getRecipeContent('crepes', 'en')!;
-  const configuration = parseSourceRecipeConfiguration(
+  const configuration = parseRecipeContentConfiguration(
     'mode=scale&scale=2',
     base,
     'flour',
   );
-  const configured = applySourceRecipeConfiguration(base, configuration, 'en');
+  const configured = applyRecipeContentConfiguration(base, configuration, 'en');
   const ingredients = configured.ingredientSections.flatMap(
     (section) => section.ingredients,
   );
@@ -95,7 +95,7 @@ void test('scales crepe ingredients and yield, while retaining fixed salt', () =
   assert.equal(configured.evidence?.status, 'calculated');
   assert.equal(configured.overview.timing.activeMinutes, 40);
   assert.deepEqual(
-    sourceAssistantConfiguration('crepes', configured, configuration),
+    recipeAssistantConfiguration('crepes', configured, configuration),
     {
       kind: 'adjusted',
       geometryId: 'round-pan-28-cm',
@@ -108,7 +108,7 @@ void test('keeps zero and negative available amounts invalid instead of falling 
   const content = getRecipeContent('crepes', 'uk')!;
   for (const amount of ['0', '-2', '']) {
     assert.equal(
-      parseSourceRecipeConfiguration(
+      parseRecipeContentConfiguration(
         `mode=ingredient&ingredient=flour&amount=${amount}&unit=g`,
         content,
         'flour',
@@ -120,7 +120,7 @@ void test('keeps zero and negative available amounts invalid instead of falling 
 
 void test('keeps a positive amount outside a recipe constraint invalid', () => {
   const content = getRecipeContent('gluten-free-napoleon', 'en')!;
-  const configuration = parseSourceRecipeConfiguration(
+  const configuration = parseRecipeContentConfiguration(
     'mode=ingredient&ingredient=schar-mix-b&amount=50&unit=g',
     content,
     'schar-mix-b',

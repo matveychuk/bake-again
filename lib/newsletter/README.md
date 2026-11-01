@@ -1,5 +1,56 @@
 # Newsletter connection
 
+## Brevo single opt-in activated — 2026-11-01
+
+At the owner's explicit request, new workflows #3 (UK/ES/EN welcome), #4 (junior
+cook card) and #5 (chocolate PDF) are **active**; legacy workflows #1 and #2 are
+**paused**. Approved messages are #24 UK / #25 ES / #26 EN, #22 card and #23
+chocolate. Sender and explicit Reply-To: `hello@bakeagain.com`, name `Bake Again`.
+Re-entry is off. Welcome waits 10 minutes and exits for membership in bonus list
+#9 or #11, otherwise routes #4 UK, then #5 ES, then EN. Bonuses wait 2 minutes.
+
+Lists: master #3, UK #4, ES #5, EN #6; Napoleon waitlist #10; card #9 (reused),
+chocolate #11. `SOURCE`, `SIGNUP_PAGE`, `SIGNUP_POSITION` are Text. Segment #1
+selects list #3 with no tracked email opens in the last 90 days; it does not delete.
+All four hosted signup forms now use **No confirmation email**, have no DOI
+template selected, and show single opt-in success copy. Form descriptions no
+longer require confirmation. The old crepes form now promises the card only.
+
+Five saved Brevo previews were checked against approved copy, including sender,
+native unsubscribe and the absence of confirmation wording. The existing token-derived
+newsletter composition was reused. All five HTML layouts passed 390/900/1440
+without overflow; mobile renders were visually inspected. Both public PDF URLs
+returned HTTP 200/application-pdf: card 253,284 bytes; chocolate 962,091 bytes.
+No inbox delivery, phone opening, unsubscribe action or new-site end-to-end test
+is claimed by these checks.
+
+**Local website implementation — 2026-11-01.** Recipe requests now create/update
+one contact with master + Ukrainian + requested bonus list IDs in a single POST.
+The API does not start DOI or send `/smtp/email`. Existing global/list suppressions
+are checked first and never reset. Only Brevo automation delivers the material.
+The existing D1 ledger, quotas and duplicate protection remain; its historical
+`sent` status means provider handoff, not inbox delivery. Legacy return tokens
+remain recoverable through list entry, without a second email sender.
+
+The crepes recipe has one optional Ukrainian subscription after canonical step
+`add-milk` (step two). It promises only the existing junior-cook card. Placement
+copy is owned by `content/lead-magnets.json`; fixed provider attributes are generated
+by `single-opt-in.ts`. Print and Cook mode omit the invitation. Design Lab has
+light/dark inert examples at `#recipe-step-subscription`.
+
+Development without a Brevo key renders the same form in explicitly labelled inert
+preview mode. It cannot send mail. A real local test needs an owned test address,
+a locally supplied existing API key, D1 migrations, `NEWSLETTER_LOCAL_TEST=true`
+and Cloudflare's documented dummy site/secret keys. Dummy keys are accepted only
+for loopback URLs; public requests still require the production hostname/action.
+Do not commit secrets or infer receipt from HTTP success. Production rollout and
+live inbox testing remain separate; historical DOI instructions below are superseded.
+
+Operations record: `providerRecords.singleOptin` in `brevo-forms.json`.
+Audit and approved copy: `docs/codex/brevo-single-optin-*-2026-11-01.uk.md`.
+Generator, five HTML sources, local Design Lab and verification evidence:
+`output/activation/single-optin-2026-11-01/`. Earlier sections are history.
+
 The owner selected Brevo Free for the newsletter on 2026-10-09. The site supports
 a provider-hosted signup form; the production invitation was enabled on
 2026-10-12 after owned-address delivery and unsubscribe tests. This layer does not collect email

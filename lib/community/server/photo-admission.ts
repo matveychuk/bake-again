@@ -1,6 +1,15 @@
 /** Server-side upload admission. Never return Storage URLs or service credentials. */
 export const PHOTO_ADMISSION_TTL_SECONDS = 120;
-export const COMMUNITY_PHOTO_MAX_BYTES = 2 * 1024 * 1024;
+import {
+  COMMUNITY_PHOTO_MAX_BYTES,
+  validPhotoMime,
+  type PhotoMime,
+} from '../photo-constraints.ts';
+export {
+  COMMUNITY_PHOTO_MAX_BYTES,
+  validPhotoMime,
+  type PhotoMime,
+} from '../photo-constraints.ts';
 export const COMMUNITY_PHOTO_BUCKET = 'community-photo-probe';
 const photoUuid =
   /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
@@ -9,9 +18,6 @@ export const validPhotoId = (value: unknown): value is string =>
   typeof value === 'string' && photoUuid.test(value);
 export const validPhotoSecret = (value: unknown): value is string =>
   typeof value === 'string' && photoHex.test(value);
-export type PhotoMime = 'image/jpeg' | 'image/png' | 'image/webp';
-export const validPhotoMime = (value: unknown): value is PhotoMime =>
-  value === 'image/jpeg' || value === 'image/png' || value === 'image/webp';
 export class PhotoAdmissionError extends Error {
   readonly status: number;
   constructor(code: string, status: number) {

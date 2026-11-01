@@ -1,8 +1,8 @@
-import type { RecipeSourceDraftContent } from './source-recipe.types.ts';
+import type { LocalizedRecipeContent } from './localized-recipe.types.ts';
 
 /** Reuse ingredients, steps and timers without inheriting a component's evidence. */
 export function recipePart(
-  content: RecipeSourceDraftContent,
+  content: LocalizedRecipeContent,
   instanceId: string,
 ) {
   const id = (value: string) => `${instanceId}-${value}`;

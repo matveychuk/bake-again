@@ -1,7 +1,5 @@
 import { calculateRecipeConfiguration } from '../../../content/recipes/calculate-configuration.ts';
-import {
-  type RecipeDocument,
-} from '../../../content/recipes/registry.ts';
+import { type RecipeDocument } from '../../../content/recipes/registry.ts';
 import {
   isRecipeLocalePublishable,
   isUiLocalePublishable,
@@ -38,7 +36,7 @@ import {
   type AssistantTelemetry,
   type AssistantTokenUsage,
 } from './telemetry.ts';
-import { getAssistantRecipeDocument } from './source-recipe.ts';
+import { getAssistantRecipeDocument } from './recipe-resolution.ts';
 
 const messages = {
   insufficient: {
@@ -72,10 +70,13 @@ export interface AssistantService {
 interface AssistantServiceDependencies {
   config: AssistantRuntimeConfig;
   provider: AssistantProvider;
-  resolveRecipe?: (recipeId: string, recipeVersionId?: string) => RecipeDocument | null;
+  resolveRecipe?: (
+    recipeId: string,
+    recipeVersionId?: string,
+  ) => RecipeDocument | null;
   isRecipeEnabled?: (recipeId: string) => boolean;
   isRecipeLocaleAllowed?: (
-    recipe: Extract<RecipeDocument, { kind: 'detailed' }>['recipe'],
+    recipe: RecipeDocument['recipe'],
     locale: AppLocale,
   ) => boolean;
   isUiLocaleAllowed?: (locale: AppLocale) => boolean;
@@ -122,21 +123,42 @@ function assembleBlocks(
   projection: AssistantContextProjection,
   locale: AppLocale,
 ): AssistantBlock[] {
-  const selectedEvidence = new Set(answer.blocks.flatMap(block =>
-    block.kind === 'evidence' ? [block.evidenceId] : []));
-  const blocks = answer.blocks.filter(block => {
+  const selectedEvidence = new Set(
+    answer.blocks.flatMap((block) =>
+      block.kind === 'evidence' ? [block.evidenceId] : [],
+    ),
+  );
+  const blocks = answer.blocks.filter((block) => {
     // A model may select the correct source and then repeat its quantity in prose.
     // Keep the verbatim source block, never display that generated numeric prose.
     // Recover only when all cited facts are already selected and every number
     // exists in those exact facts; unrelated policy failures still reject below.
-    if (block.kind !== 'explanation' || answer.actionId !== null ||
-        block.evidenceIds.length === 0 ||
-        !block.evidenceIds.every(id => selectedEvidence.has(id) && projection.evidence.has(id))) return true;
+    if (
+      block.kind !== 'explanation' ||
+      answer.actionId !== null ||
+      block.evidenceIds.length === 0 ||
+      !block.evidenceIds.every(
+        (id) => selectedEvidence.has(id) && projection.evidence.has(id),
+      )
+    )
+      return true;
     const numbers = block.text.match(/\p{N}+(?:[.,]\p{N}+)?/gu) ?? [];
-    if (numbers.length === 0 || !validateAssistantProse(block.text.replace(/\p{N}+(?:[.,]\p{N}+)?/gu, ''), locale)) return true;
-    const sourceNumbers = new Set(block.evidenceIds.flatMap(id =>
-      projection.evidence.get(id)!.text.match(/\p{N}+(?:[.,]\p{N}+)?/gu) ?? []));
-    return !numbers.every(number => sourceNumbers.has(number));
+    if (
+      numbers.length === 0 ||
+      !validateAssistantProse(
+        block.text.replace(/\p{N}+(?:[.,]\p{N}+)?/gu, ''),
+        locale,
+      )
+    )
+      return true;
+    const sourceNumbers = new Set(
+      block.evidenceIds.flatMap(
+        (id) =>
+          projection.evidence.get(id)!.text.match(/\p{N}+(?:[.,]\p{N}+)?/gu) ??
+          [],
+      ),
+    );
+    return !numbers.every((number) => sourceNumbers.has(number));
   });
   return blocks.map((block): AssistantBlock => {
     if (block.kind === 'evidence') {
@@ -222,12 +244,11 @@ export function createAssistantService({
       try {
         if (!config.enabled)
           throw new AssistantServiceError('ASSISTANT_DISABLED', 503);
-        const document = resolveRecipe(request.recipeId, request.recipeVersionId);
-        if (
-          !document ||
-          document.kind !== 'detailed' ||
-          !isRecipeEnabled(request.recipeId)
-        ) {
+        const document = resolveRecipe(
+          request.recipeId,
+          request.recipeVersionId,
+        );
+        if (!document || !isRecipeEnabled(request.recipeId)) {
           throw new AssistantServiceError('RECIPE_UNAVAILABLE', 404);
         }
         const recipe = document.recipe;

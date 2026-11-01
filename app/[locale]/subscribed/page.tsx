@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-/** Brevo redirects here after the double opt-in link. Service page: not in sitemap. */
+/** Brevo hosted-form and legacy-link redirect. Service page: not in sitemap. */
 export default async function NewsletterConfirmedPage({ params }: Props) {
   const { locale } = await params;
   if (!isAppLocale(locale)) notFound();
@@ -60,7 +60,8 @@ export default async function NewsletterConfirmedPage({ params }: Props) {
                 recipe={{
                   ...recipe,
                   locale,
-                  href: getLocalizedRecipePath(recipe.id, locale) ?? recipe.href,
+                  href:
+                    getLocalizedRecipePath(recipe.id, locale) ?? recipe.href,
                 }}
                 key={recipe.id}
               />

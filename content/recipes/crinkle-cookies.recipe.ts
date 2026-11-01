@@ -1,8 +1,7 @@
-import type { RecipeDraft } from './recipe.types.ts';
-import { quantityFromGrams, quantityFromSpoons } from './spoon-weights.ts';
+import type { Recipe } from './recipe.types.ts';
 
 export const crinkleCookiesRecipe = {
-  schemaVersion: 2,
+  schemaVersion: 3,
   id: 'crinkle-cookies',
   versionId: 'crinkle-cookies-v2',
   presentation: 'concise',
@@ -18,9 +17,9 @@ export const crinkleCookiesRecipe = {
     es: 'galletas-marmoladas-craqueladas',
   },
   title: {
-    uk: 'Мармурове печиво «Тріщинки»',
-    en: 'Marbled Crinkle Cookies',
-    es: 'Galletas marmoladas craqueladas',
+    en: 'Gluten-free marbled crinkle cookies',
+    es: 'Galletas marmoladas craqueladas sin gluten',
+    uk: 'Безглютенове мармурове печиво «Тріщинки»',
   },
   summary: {
     uk: 'Шоколадне печиво з ніжною серединою й цукровими тріщинками.',
@@ -37,7 +36,6 @@ export const crinkleCookiesRecipe = {
   },
   timing: {
     activeMinutes: 30,
-    // Full elapsed time also includes cooling and depends on the number of trays.
     totalElapsedMinutes: null,
     planningNote: {
       phaseId: 'chill',
@@ -51,8 +49,17 @@ export const crinkleCookiesRecipe = {
       {
         id: 'chill',
         relatedStepId: 'chill-dough',
-        label: { uk: 'Охолодження', en: 'Chilling', es: 'Refrigeración' },
-        duration: { kind: 'range', min: 3, max: 4, unit: 'hour' },
+        label: {
+          uk: 'Охолодження',
+          en: 'Chilling',
+          es: 'Refrigeración',
+        },
+        duration: {
+          kind: 'range',
+          min: 3,
+          max: 4,
+          unit: 'hour',
+        },
       },
       {
         id: 'maximum-hold',
@@ -61,13 +68,27 @@ export const crinkleCookiesRecipe = {
           en: 'Maximum refrigerated hold',
           es: 'Tiempo máximo en refrigeración',
         },
-        duration: { kind: 'exact', value: 24, unit: 'hour' },
+        duration: {
+          kind: 'exact',
+          value: 24,
+          unit: 'hour',
+        },
+        relatedStepId: 'chill-dough',
       },
       {
         id: 'bake',
         relatedStepId: 'bake-cookies',
-        label: { uk: 'Випікання', en: 'Baking', es: 'Horneado' },
-        duration: { kind: 'range', min: 8, max: 10, unit: 'minute' },
+        label: {
+          uk: 'Випікання',
+          en: 'Baking',
+          es: 'Horneado',
+        },
+        duration: {
+          kind: 'range',
+          min: 8,
+          max: 10,
+          unit: 'minute',
+        },
       },
     ],
   },
@@ -79,13 +100,16 @@ export const crinkleCookiesRecipe = {
         en: '20 cookies',
         es: '20 galletas',
       },
-      amount: 20,
       unit: 'cookie',
       provenance: {
         state: 'repeatedlyVerified',
         sourceIds: ['author-update'],
       },
       availability: 'default',
+      count: {
+        kind: 'exact',
+        value: 20,
+      },
     },
     alternatives: [],
   },
@@ -110,27 +134,37 @@ export const crinkleCookiesRecipe = {
       availability: 'default',
     },
     alternatives: [],
+    state: 'known',
   },
   configuration: {
     base: {
-      status: 'Tested',
       geometryId: 'parchment-lined-baking-sheet',
       yieldId: 'default-batch',
       batchScale: 1,
     },
     geometryAdjustment: null,
     quantityAdjustment: {
-      batchScale: { allowed: [0.5, 1, 1.5, 2] },
+      batchScale: {
+        allowed: [0.5, 1, 1.5, 2],
+      },
       useWhatIHave: null,
     },
     ingredientScaling: {
-      default: { kind: 'linear', precision: 0.1, rounding: 'nearest' },
+      default: {
+        kind: 'linear',
+        precision: 0.1,
+        rounding: 'nearest',
+      },
     },
   },
   equipment: [
     {
       id: 'baking-sheet',
-      name: { uk: 'деко', en: 'baking sheet', es: 'bandeja de horno' },
+      name: {
+        uk: 'деко',
+        en: 'baking sheet',
+        es: 'bandeja de horno',
+      },
     },
     {
       id: 'parchment',
@@ -142,7 +176,11 @@ export const crinkleCookiesRecipe = {
     },
     {
       id: 'electric-mixer',
-      name: { uk: 'міксер', en: 'electric mixer', es: 'batidora eléctrica' },
+      name: {
+        uk: 'міксер',
+        en: 'electric mixer',
+        es: 'batidora eléctrica',
+      },
     },
   ],
   flourConfiguration: {
@@ -155,12 +193,17 @@ export const crinkleCookiesRecipe = {
     },
     testedAlternativeMixes: [],
     knownUnsupportedMixes: [],
+    basis: 'commercialMix',
   },
   beforeStart: [],
   ingredientSections: [
     {
       id: 'cookies',
-      title: { uk: 'Печиво', en: 'Cookies', es: 'Galletas' },
+      title: {
+        uk: 'Печиво',
+        en: 'Cookies',
+        es: 'Galletas',
+      },
       lines: [
         {
           id: 'butter',
@@ -175,8 +218,14 @@ export const crinkleCookiesRecipe = {
             },
           ],
           quantity: {
-            base: { kind: 'exact', value: 60, unit: 'g' },
-            shopping: { mode: 'base' },
+            base: {
+              kind: 'exact',
+              value: 60,
+              unit: 'g',
+            },
+            shopping: {
+              mode: 'base',
+            },
           },
           preparation: {
             uk: 'м’яке',
@@ -189,36 +238,78 @@ export const crinkleCookiesRecipe = {
           options: [
             {
               ingredientId: 'whole-egg',
-              name: { uk: 'яйця', en: 'eggs', es: 'huevos' },
+              name: {
+                uk: 'яйця',
+                en: 'eggs',
+                es: 'huevos',
+              },
             },
           ],
           quantity: {
-            base: { kind: 'exact', value: 2, unit: 'piece' },
-            shopping: { mode: 'base' },
+            base: {
+              kind: 'exact',
+              value: 2,
+              unit: 'piece',
+            },
+            shopping: {
+              mode: 'base',
+            },
           },
-          scaling: { kind: 'discrete', increment: 1, rounding: 'manual' },
+          scaling: {
+            kind: 'discrete',
+            increment: 1,
+            rounding: 'manual',
+          },
         },
         {
           id: 'sugar',
           options: [
             {
               ingredientId: 'granulated-sugar',
-              name: { uk: 'цукор', en: 'sugar', es: 'azúcar' },
+              name: {
+                uk: 'цукор',
+                en: 'sugar',
+                es: 'azúcar',
+              },
             },
           ],
-          quantity: quantityFromGrams('granulated-sugar', 200),
+          quantity: {
+            base: {
+              kind: 'exact',
+              value: 200,
+              unit: 'g',
+            },
+            equivalent: {
+              kind: 'exact',
+              value: 10,
+              unit: 'tbsp',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
         },
         {
           id: 'cocoa',
           options: [
             {
               ingredientId: 'cocoa-powder',
-              name: { uk: 'какао', en: 'cocoa powder', es: 'cacao en polvo' },
+              name: {
+                uk: 'какао',
+                en: 'cocoa powder',
+                es: 'cacao en polvo',
+              },
             },
           ],
           quantity: {
-            base: { kind: 'exact', value: 60, unit: 'g' },
-            shopping: { mode: 'base' },
+            base: {
+              kind: 'exact',
+              value: 60,
+              unit: 'g',
+            },
+            shopping: {
+              mode: 'base',
+            },
           },
         },
         {
@@ -233,7 +324,21 @@ export const crinkleCookiesRecipe = {
               },
             },
           ],
-          quantity: quantityFromGrams('schar-mix-b', 120),
+          quantity: {
+            base: {
+              kind: 'exact',
+              value: 120,
+              unit: 'g',
+            },
+            equivalent: {
+              kind: 'exact',
+              value: 6,
+              unit: 'tbsp',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
         },
         {
           id: 'baking-powder',
@@ -247,7 +352,21 @@ export const crinkleCookiesRecipe = {
               },
             },
           ],
-          quantity: quantityFromSpoons('baking-powder', 1, 'tsp'),
+          quantity: {
+            base: {
+              kind: 'exact',
+              value: 5,
+              unit: 'g',
+            },
+            equivalent: {
+              kind: 'exact',
+              value: 1,
+              unit: 'tsp',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
         },
         {
           id: 'powdered-sugar',
@@ -261,7 +380,21 @@ export const crinkleCookiesRecipe = {
               },
             },
           ],
-          quantity: quantityFromGrams('powdered-sugar', 100),
+          quantity: {
+            base: {
+              kind: 'exact',
+              value: 100,
+              unit: 'g',
+            },
+            equivalent: {
+              kind: 'exact',
+              value: 14.1593,
+              unit: 'tbsp',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
           qualifier: {
             uk: 'для обкачування',
             en: 'for coating',
@@ -274,8 +407,14 @@ export const crinkleCookiesRecipe = {
   steps: [
     {
       id: 'beat-wet',
-      technique: { id: 'soften-butter' },
-      title: { uk: 'Збийте основу', en: 'Beat the base', es: 'Bate la base' },
+      technique: {
+        id: 'soften-butter',
+      },
+      title: {
+        uk: 'Збийте основу',
+        en: 'Beat the base',
+        es: 'Bate la base',
+      },
       instruction: {
         uk: 'Збийте яйця, цукор і м’яке масло міксером до світлої маси без шматочків масла.',
         en: 'Beat the eggs, sugar and softened butter with a mixer until pale, with no pieces of butter remaining.',
@@ -314,7 +453,7 @@ export const crinkleCookiesRecipe = {
         es: 'Cubre y refrigera durante 3–4 horas. Puedes dejarla en la nevera hasta 24 horas.',
       },
       ingredientLineIds: [],
-      duration: { kind: 'range', min: 3, max: 4, unit: 'hour' },
+      durationPhaseId: 'chill',
     },
     {
       id: 'preheat-oven',
@@ -329,7 +468,11 @@ export const crinkleCookiesRecipe = {
         es: 'Deja la masa en la nevera mientras precalientas el horno a 180°C con calor arriba y abajo. Forra una bandeja con papel y pon el azúcar glas en un bol.',
       },
       ingredientLineIds: ['powdered-sugar'],
-      temperature: { value: 180, unit: 'C', ovenMode: 'conventional' },
+      temperature: {
+        value: 180,
+        unit: 'C',
+        ovenMode: 'conventional',
+      },
       equipmentIds: ['baking-sheet', 'parchment'],
     },
     {
@@ -375,10 +518,14 @@ export const crinkleCookiesRecipe = {
         es: 'Hornea a 180°C durante 8–10 minutos. Las galletas deben subir y agrietarse, con las grietas aún húmedas a la vista. No esperes a que se sequen: se afirmarán al enfriarse.',
       },
       ingredientLineIds: [],
-      duration: { kind: 'range', min: 8, max: 10, unit: 'minute' },
-      temperature: { value: 180, unit: 'C', ovenMode: 'conventional' },
+      temperature: {
+        value: 180,
+        unit: 'C',
+        ovenMode: 'conventional',
+      },
       equipmentIds: ['baking-sheet'],
       mediaIds: ['crinkle-moist-cracks-v1'],
+      durationPhaseId: 'bake',
     },
     {
       id: 'cool-cookies',
@@ -434,17 +581,31 @@ export const crinkleCookiesRecipe = {
             options: [
               {
                 ingredientId: 'walnut',
-                name: { uk: 'волоський горіх', en: 'walnut', es: 'nuez' },
+                name: {
+                  uk: 'волоський горіх',
+                  en: 'walnut',
+                  es: 'nuez',
+                },
               },
               {
                 ingredientId: 'pecan',
-                name: { uk: 'горіх пекан', en: 'pecan', es: 'nuez pecana' },
+                name: {
+                  uk: 'горіх пекан',
+                  en: 'pecan',
+                  es: 'nuez pecana',
+                },
               },
             ],
             choose: 1,
             quantity: {
-              base: { kind: 'exact', value: 20, unit: 'piece' },
-              shopping: { mode: 'base' },
+              base: {
+                kind: 'exact',
+                value: 20,
+                unit: 'piece',
+              },
+              shopping: {
+                mode: 'base',
+              },
             },
             qualifier: {
               uk: 'по одному шматочку в кожну з 20 кульок',
@@ -482,6 +643,11 @@ export const crinkleCookiesRecipe = {
         uk: 'Шоколадне печиво тріщинки в цукровій пудрі на керамічній тарілці',
         en: 'Chocolate crinkle cookies dusted with icing sugar on a ceramic plate',
         es: 'Galletas craqueladas de chocolate con azúcar glas sobre un plato de cerámica',
+      },
+      heroAlt: {
+        en: 'Chocolate crinkle cookies with a cracked surface',
+        es: 'Galletas de chocolate craqueladas',
+        uk: 'Шоколадне печиво з тріщинками',
       },
     },
     {
@@ -576,4 +742,91 @@ export const crinkleCookiesRecipe = {
     },
   ],
   contentGaps: [],
-} satisfies RecipeDraft;
+  searchMetadata: {
+    datePublished: null,
+    dateModified: '2026-09-27',
+    cookTimeMinutes: null,
+    recipeCuisine: {
+      uk: null,
+      en: null,
+      es: null,
+    },
+    keywords: {
+      uk: ['Безглютенове мармурове печиво «Тріщинки»'],
+      en: ['Gluten-free marbled crinkle cookies'],
+      es: ['Galletas marmoladas craqueladas sin gluten'],
+    },
+  },
+  evidenceExplanation: {
+    en: 'This exact version was baked successfully.',
+    es: 'Esta versión exacta se ha horneado correctamente.',
+    uk: 'Цю версію успішно приготували.',
+  },
+  discovery: {
+    cardTitle: {
+      en: 'Marbled Cookies',
+      es: 'Galletas marmoladas',
+      uk: 'Мармурове печиво',
+    },
+    category: {
+      en: 'Cookies',
+      es: 'Galletas',
+      uk: 'Печиво',
+    },
+    flourSummary: {
+      en: 'Schär Mix B Bread',
+      es: 'Schär Mix B Bread',
+      uk: 'Schär Mix B Bread',
+    },
+    collectionIds: ['everyday', 'batter-on-hand'],
+    catalogue: true,
+    imageKind: 'generated-preview',
+    sourceTitle: 'Мармурове печиво «Тріщинки»',
+    launchPriority: 'High',
+    heroCandidate: 'Yes',
+    source: 'Full recipe pasted in the inventory conversation',
+    archiveSections: [
+      {
+        title: 'Ingredients · original notes',
+        content:
+          'Вершкове масло — 60 г\nЯйця — 2 шт.\nЦукор — 200 г\nКакао — 60 г\nБорошно — 120 г\nРозпушувач — 1 ч. л.\nЦедра 1 апельсина\nЦукрова пудра для обкачування',
+      },
+      {
+        title: 'Method · original notes',
+        content:
+          'Збити яйця з цукром та вершковим маслом до побіління. Окремо змішати какао, борошно та розпушувач. Додати сухі інгредієнти до вологих і збити до повного поєднання. Накрити тісто й поставити в холодильник на 3–4 години; можна залишити до 24 годин.\n\nРозігріти духовку до 180°C. Скатати кульки розміром з волоський горіх, ретельно обкачати в цукровій пудрі й викласти далеко одна від одної. Пекти 8–10 хв. Тріщинки повинні здаватися вологими. Повністю остудити.',
+      },
+    ],
+    needsBeforePublishing:
+      'Record active time; confirm the walnut variation; approve or replace the generated photo.',
+    shortTitle: {
+      uk: 'Мармурове печиво «Тріщинки»',
+      en: 'Marbled Crinkle Cookies',
+      es: 'Galletas marmoladas craqueladas',
+    },
+  },
+  translationReview: {
+    date: '2026-11-01',
+    reviewer: 'implementation',
+    scope:
+      'ID-aligned transfer and semantic comparison of existing UK/EN/ES recipe text; not separate author approval',
+  },
+  seo: {
+    uk: {
+      title: 'Безглютенове мармурове печиво «Тріщинки»',
+      description:
+        'Безглютенове шоколадне печиво «Тріщинки» з ніжною серединою та цукровою скоринкою. Інгредієнти й покрокове приготування.',
+    },
+    en: {
+      title: 'Gluten-free marbled crinkle cookies',
+      description:
+        'Gluten-free chocolate crinkle cookies with tender centres and a cracked sugar coating. Ingredient quantities and step-by-step baking instructions.',
+    },
+    es: {
+      title: 'Galletas marmoladas craqueladas sin gluten',
+      description:
+        'Galletas de chocolate craqueladas sin gluten, tiernas por dentro y cubiertas de azúcar. Ingredientes y elaboración paso a paso.',
+    },
+  },
+  routeSlug: 'crinkle-cookies',
+} satisfies Recipe;

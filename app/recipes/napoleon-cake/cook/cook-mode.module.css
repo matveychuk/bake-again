@@ -84,8 +84,11 @@
 }
 
 .headerTools {
+  min-width: 0;
+  max-width: 100%;
   justify-self: end;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
 }
@@ -96,6 +99,7 @@
 
 .headerTools p,
 .header > p {
+  flex: 1 1 auto;
   margin: 0;
   min-width: 0;
   color: var(--color-text-secondary);
@@ -557,7 +561,10 @@
   cursor: pointer;
   font-size: var(--font-size-body-small);
   font-weight: 800;
-  white-space: nowrap;
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+  justify-content: flex-start;
 }
 
 .stepActions {
