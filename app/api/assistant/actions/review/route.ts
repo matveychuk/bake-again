@@ -26,9 +26,9 @@ async function productionAccess(proposal: ActionProposal) {
   if (!config.enabled) return false;
   const document = getRecipeDocument(proposal.context.recipeId);
   return (
-    document?.kind === 'detailed' &&
+    Boolean(document) &&
     isUiLocalePublishable(proposal.context.locale) &&
-    isRecipeLocalePublishable(document.recipe, proposal.context.locale)
+    isRecipeLocalePublishable(document!.recipe, proposal.context.locale)
   );
 }
 

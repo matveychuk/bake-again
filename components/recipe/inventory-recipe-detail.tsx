@@ -1,3 +1,5 @@
+import { getRecipeInvitation } from '@/content/lead-magnets';
+import { EditorialInvitation } from '@/components/site/editorial-invitation';
 import { AssistantProvider, AssistantTrigger } from '@/components/assistant';
 import { stepHelpMessages } from '@/components/assistant/step-help.messages';
 import { assistantMessages } from '@/components/assistant/assistant.messages';
@@ -27,7 +29,7 @@ import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
 import type { InventoryRecipe } from '@/content/recipes/inventory';
-import type { RecipeDraft } from '@/content/recipes/recipe.types';
+import type { Recipe } from '@/content/recipes/recipe.types';
 import {
   getRecipeContent,
   getRecipeDocument,
@@ -46,11 +48,11 @@ import { getUiMessages } from '@/lib/i18n/messages';
 import { defaultLocale, type AppLocale } from '@/lib/i18n/config';
 import { getRecipePublicationStatus } from '@/content/recipes/publication';
 import {
-  sourceAssistantConfiguration,
-  applySourceRecipeConfiguration,
-  parseSourceRecipeConfiguration,
-  sourceRecipeScalingBounds,
-} from '@/content/recipes/source-recipe-configuration';
+  recipeAssistantConfiguration,
+  applyRecipeContentConfiguration,
+  parseRecipeContentConfiguration,
+  recipeScalingBounds,
+} from '@/content/recipes/recipe-content-configuration';
 import {
   getLocalizedRecipePath,
   localeDraftsPath,
@@ -80,7 +82,7 @@ export function InventoryRecipeDetail({
   configurationSearch = '',
 }: {
   recipe: InventoryRecipe;
-  personalRecipe?: RecipeDraft | null;
+  personalRecipe?: Recipe | null;
   locale?: AppLocale;
   pathname?: string;
   selectedCreamRecipeId?: string | null;
@@ -128,16 +130,17 @@ export function InventoryRecipeDetail({
       </main>
     );
   }
-  const configuration = parseSourceRecipeConfiguration(
+  const configuration = parseRecipeContentConfiguration(
     configurationSearch,
     structured,
     recipe.scalingAnchorIngredientId,
-    sourceRecipeScalingBounds(personalRecipe, recipe.scalingAnchorIngredientId),
+    recipeScalingBounds(personalRecipe, recipe.scalingAnchorIngredientId),
   );
   const configuredStructured = structured
-    ? applySourceRecipeConfiguration(structured, configuration, locale)
+    ? applyRecipeContentConfiguration(structured, configuration, locale)
     : null;
   const methodSteps = configuredStructured?.steps ?? [];
+  const invitation = getRecipeInvitation(recipe.id, locale);
   const concise = structured?.presentation === 'concise';
   const techniques = [
     ...new Map(
@@ -204,14 +207,13 @@ export function InventoryRecipeDetail({
       ? getRecipeVideoLesson(recipe.id, document.recipe.versionId)
       : null;
   const helpConfiguration = configuredStructured
-    ? sourceAssistantConfiguration(
+    ? recipeAssistantConfiguration(
         recipe.id,
         configuredStructured,
         configuration,
       )
     : undefined;
-  const helpVersion =
-    document?.kind === 'detailed' ? document.recipe.versionId : sourceVersionId;
+  const helpVersion = sourceVersionId;
   const publicLink = !isDraft
     ? recipePublicLink(recipe.id, locale, configuration, selectedCreamRecipeId)
     : null;
@@ -395,7 +397,7 @@ export function InventoryRecipeDetail({
             locale={locale}
             personalRecipe={personalRecipe}
             scalingAnchorIngredientId={recipe.scalingAnchorIngredientId}
-            sourceShoppingRecipe={
+            shoppingRecipe={
               structured
                 ? {
                     id: recipe.id,
@@ -497,6 +499,24 @@ export function InventoryRecipeDetail({
                       items={step.media}
                       ariaLabel={messages.stepVisualSequence}
                       className={styles.stepMedia}
+                    />
+                  )}
+                  {invitation?.afterStepId === step.id && (
+                    <EditorialInvitation
+                      lang="uk"
+                      data-recipe-subscription={invitation.magnetId}
+                      variant="recipe-step"
+                      headingLevel={3}
+                      titleId="recipe-junior-card-title"
+                      title={invitation.title}
+                      description={invitation.description}
+                      action={
+                        <NewsletterSignup
+                          locale="uk"
+                          magnetId={invitation.magnetId}
+                          placement="recipe"
+                        />
+                      }
                     />
                   )}
                 </li>

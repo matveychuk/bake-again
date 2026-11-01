@@ -105,7 +105,9 @@ export interface IngredientSection {
 }
 
 export interface FlourConfiguration {
-  commercialMixLineId: string;
+  basis?: 'commercialMix' | 'customBlend';
+  commercialMixLineId: string | null;
+  flourLineIds?: string[];
   additionalStarchLineIds: string[];
   xanthanLineId?: string;
   provenance: Provenance;
@@ -122,10 +124,23 @@ export interface FlourAlternative {
 }
 
 export interface YieldOption {
+  approximate?: boolean;
   id: string;
   label: LocalizedText;
-  amount: number | null;
-  unit: 'cookie' | 'cake' | 'serving' | 'batch';
+  count:
+    | { kind: 'exact'; value: number }
+    | { kind: 'range'; min: number; max: number }
+    | { kind: 'unknown' };
+  unit:
+    | 'cookie'
+    | 'cake'
+    | 'serving'
+    | 'batch'
+    | 'crepe'
+    | 'dumpling'
+    | 'g'
+    | 'kg'
+    | null;
   details?: LocalizedText;
   provenance: Provenance;
   availability: Availability;
@@ -192,7 +207,6 @@ export interface ScalingAnchor {
 export interface RecipeConfigurationModel {
   /** References the recipe's verified values; it never contains copied quantities. */
   base: {
-    status: 'Tested';
     geometryId: string;
     yieldId: string;
     batchScale: 1;
@@ -241,12 +255,12 @@ export interface CalculatedIngredientAmount {
   requiresResolution: boolean;
 }
 
-/** User/runtime data. It must not be written into a RecipeDraft. */
+/** User/runtime data. It must not be written into a Recipe. */
 export interface CalculatedRecipeConfiguration {
   recipeId: string;
   recipeVersionId: string;
-  status: 'Calculated';
-  provenance: 'Calculated';
+  status: 'Calculated' | 'Suggested';
+  provenance: 'Calculated' | 'Suggested';
   geometryId: string;
   quantityAdjustment: QuantityAdjustmentSelection;
   geometryScaleFactor: number;
@@ -257,11 +271,13 @@ export interface CalculatedRecipeConfiguration {
   cookMode: { eligible: boolean };
 }
 
-export interface Temperature {
-  value: number;
+export type Temperature = (
+  | { value: number; range?: never }
+  | { value?: never; range: { min: number; max: number } }
+) & {
   unit: 'C';
   ovenMode: 'conventional' | 'fan' | null;
-}
+};
 
 export interface StepGuidance {
   id: string;
@@ -271,6 +287,7 @@ export interface StepGuidance {
 }
 
 export interface RecipeStep {
+  helpReference?: { recipeId: string; stepId: string };
   technique?: import('../techniques/types.ts').TechniqueReference;
   id: string;
   /** A concise action title may be added one reviewed locale at a time. */
@@ -281,10 +298,25 @@ export interface RecipeStep {
     quantity: Quantity;
     numberOnly?: boolean;
   }>;
+  /** Original editorial metadata, retained independently of structured timers. */
+  displayMeta?: LocalizedText;
+  cook?: {
+    group?: string;
+    requiresCream?: boolean;
+    title?: LocalizedText;
+    instructions?: Array<{ id: string; text: LocalizedText }>;
+    ingredients?: Array<{
+      ingredientId: string;
+      quantity?: 'full' | 'omit';
+      note?: LocalizedText;
+    }>;
+  };
   ingredientLineIds: string[];
   /** Fraction of an ingredient's batch amount used in this step (default: all). */
   ingredientFractions?: Record<string, number>;
   duration?: Duration;
+  durationPhaseId?: string;
+  temperatureStages?: Array<{ phaseId: string; temperature: Temperature }>;
   temperature?: Temperature;
   equipmentIds?: string[];
   guidance?: StepGuidance[];
@@ -344,8 +376,10 @@ export interface RecipeMedia {
   /** Preserve the whole frame when process details must not be cropped. */
   fit?: 'cover' | 'contain';
   posterPath?: string;
-  usage: Array<'hero' | 'step' | 'gallery' | 'social'>;
+  usage: Array<'hero' | 'card' | 'step' | 'gallery' | 'social'>;
   alt: LocalizedText;
+  heroAlt?: LocalizedText;
+  title?: LocalizedText;
   caption?: LocalizedText;
   transcript?: LocalizedText;
 }
@@ -364,7 +398,9 @@ export interface ContentGap {
     | 'storage';
   field: string;
   question: string;
+  text?: LocalizedText;
   publicationBlocking: boolean;
+  readerVisible?: boolean;
   sourceIds: string[];
 }
 
@@ -380,15 +416,20 @@ export interface RecipeSearchMetadata {
   keywords: Record<RecipeLocale, string[]>;
 }
 
-export interface RecipeDraft {
+export interface Recipe {
   searchMetadata?: RecipeSearchMetadata;
-  schemaVersion: 2;
+  seo?: Partial<Record<RecipeLocale, { title?: string; description?: string }>>;
+  creamOption?: Record<RecipeLocale, { title: string; description: string }>;
+  schemaVersion: 3;
+  showImageNote?: boolean;
   /** Opt-in concise reading layout after editorial review. */
   presentation?: 'concise';
   id: string;
   versionId: string;
   publicationStatus: PublicationStatus;
   translationState: Record<RecipeLocale, TranslationState>;
+  /** Stable neutral route/legacy slug, independent of localized slug roles. */
+  routeSlug: string;
   slug: LocalizedText;
   title: LocalizedText;
   summary: LocalizedText;
@@ -396,6 +437,30 @@ export interface RecipeDraft {
   situationIds: string[];
   difficulty: RecipeDifficulty | null;
   baseProvenance: Provenance;
+  evidenceExplanation: LocalizedText;
+  translationReview: {
+    date: string;
+    reviewer: 'implementation';
+    scope: string;
+  };
+  discovery: {
+    cardTitle: LocalizedText;
+    shortTitle?: LocalizedText;
+    category: LocalizedText;
+    flourSummary: LocalizedText | null;
+    collectionIds: import('./collections.ts').RecipeCollectionId[];
+    catalogue: boolean;
+    imageKind: 'generated-preview' | 'author-photo' | 'edited-author-photo';
+    cardImagePosition?: 'left-quarter';
+    publicationNote?: LocalizedText;
+    sourceTitle: string;
+    launchPriority: string;
+    heroCandidate: 'Yes' | 'Possible' | 'No';
+    source: string;
+    archiveSections: Array<{ title: string; content: string }>;
+    needsBeforePublishing: string;
+  };
+  cardMediaId?: string;
   timing: {
     activeMinutes: number | null;
     totalElapsedMinutes: number | null;
@@ -413,12 +478,13 @@ export interface RecipeDraft {
     alternatives: YieldOption[];
   };
   geometry: {
-    default: GeometryOption;
+    state: 'known' | 'unknown' | 'notApplicable';
+    default: GeometryOption | null;
     alternatives: GeometryOption[];
   };
   configuration: RecipeConfigurationModel;
   equipment: Array<{ id: string; name: LocalizedText }>;
-  flourConfiguration: FlourConfiguration;
+  flourConfiguration: FlourConfiguration | null;
   beforeStart: BeforeStartItem[];
   ingredientSections: IngredientSection[];
   steps: RecipeStep[];

@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { recipePublicLink } from './recipe-public-link.ts';
-import { parseSourceRecipeConfiguration } from './source-recipe-configuration.ts';
+import { parseRecipeContentConfiguration } from './recipe-content-configuration.ts';
 
 void test('shared recipe URLs retain locale and scale without caller queries or fragments', () => {
-  const configuration = parseSourceRecipeConfiguration(
+  const configuration = parseRecipeContentConfiguration(
     'mode=scale&scale=2&from=private&email=secret@example.com&view=print',
     null,
   );

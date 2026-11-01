@@ -81,7 +81,7 @@ the closing copy. Design Lab uses the production `AboutRecipeStatuses` component
 ## Publication and local drafts
 
 - Each recipe source owns `publicationStatus`: `published` or `unpublished` (`archived`
-  remains a non-visible lifecycle state for detailed records).
+  remains a non-visible lifecycle state).
 - The public catalogue, search and featured link show published records only.
 - Unpublished records appear in the local Drafts catalogue and remain accessible by
   recipe and Cook Mode links only in development on loopback hosts.
@@ -249,3 +249,27 @@ Place the labelled sign-out icon at the right of the account heading. Do not sho
 data/privacy, export or bulk-deletion section.
 Guest sign-in modes have their own headings; initialization is a neutral loading state,
 not proof that someone is signed out. Personal pages omit header social promotion.
+
+## Canonical recipe projections (2026-11-01)
+
+All recipes, including unpublished records, creams and glazes, use `Recipe` schema 3.
+Publication, translation review, editorial gaps and exact-version evidence remain
+independent. Detail, Cook, print, shopping, catalogue, SEO and assistant project the
+same canonical quantities and stable identities. Known absent geometry is explicitly
+not applicable; unknown geometry/yield stays unknown rather than gaining a default.
+
+Select and compose a cream before localizing. A supported pairing remains Suggested
+unless its exact version has separate evidence. Shared ingredient scaling rules retain
+fixed amounts and block unresolved discrete/manual quantities. Timers retain their
+phase and step identities; phases recorded only in prose are now structured without
+changing active/elapsed totals. `/design-system#canonical-recipes` demonstrates the
+three evidence states, an unpublished record and a cream without flour or a baking form.
+
+
+## Optional material within recipe steps · 2026-11-01
+
+A registry-owned invitation may follow a stable canonical step without changing
+instruction numbering or structured recipe data. Crepes offers the existing
+junior-cook card after step two in Ukrainian. Reuse EditorialInvitation's
+`recipe-step` variant and NewsletterForm; keep the next cooking step visible in
+normal flow, with no modal or gate. Do not add it to print or Cook mode.

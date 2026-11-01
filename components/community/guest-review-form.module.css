@@ -1,0 +1,217 @@
+.form {
+  display: grid;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: var(--layout-cook-reading);
+  min-width: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+.form:lang(uk) {
+  --font-family-display: var(--font-family-display-cyrillic);
+}
+.form :is(p, h3) {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.heading {
+  display: grid;
+  gap: var(--space-2);
+}
+.form .heading h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-section-title-mobile);
+  line-height: var(--line-height-body);
+  font-weight: 500;
+}
+.form .heading .recipe {
+  color: var(--color-action-primary-strong);
+  font-size: var(--font-size-body-small);
+}
+.controls {
+  display: grid;
+  gap: var(--space-6);
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.choice {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.choice legend {
+  max-width: 100%;
+  padding: 0;
+  margin-bottom: var(--space-2);
+  overflow-wrap: anywhere;
+}
+.hint {
+  font-size: var(--font-size-body-small);
+  color: var(--color-text-secondary);
+}
+.form .demo {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-background-panel-subtle);
+  font-size: var(--font-size-body-small);
+}
+.options,
+.ratingRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+}
+.options label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  cursor: pointer;
+}
+.options input {
+  accent-color: var(--color-action-primary);
+  width: var(--space-4);
+  height: var(--space-4);
+  flex-shrink: 0;
+}
+.stars {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+  max-width: 100%;
+}
+.star {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-2);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  background: var(--color-background-surface);
+}
+.star input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.star:has(input:checked) {
+  border-color: var(--color-action-primary-strong);
+  background: var(--color-background-panel-subtle);
+  font-weight: 700;
+}
+.star:has(input:checked) svg {
+  fill: var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+.star:focus-within {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+.identity {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--space-4);
+}
+.form label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.form textarea {
+  resize: vertical;
+  min-height: calc(var(--space-24) + var(--space-16));
+}
+.form :is(input, textarea):focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+.form [aria-invalid='true'] {
+  border-color: var(--color-action-primary-strong);
+}
+.choice > button {
+  justify-self: start;
+}
+.photos {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, calc(var(--space-24) * 2)), 1fr)
+  );
+  gap: var(--space-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.photo {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+}
+.photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: var(--color-background-panel-subtle);
+}
+.photo button {
+  justify-self: start;
+}
+.filename {
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-body-small);
+}
+.error {
+  color: var(--color-action-primary-strong);
+  font-size: var(--font-size-body-small);
+  overflow-wrap: anywhere;
+}
+.error:empty,
+.emptyNotice {
+  display: none;
+}
+.notice {
+  display: flex;
+  align-items: start;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-background-panel-subtle);
+  border-left: 2px solid var(--color-action-primary);
+}
+.notice svg {
+  flex-shrink: 0;
+}
+.notice:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+.form > button {
+  justify-self: start;
+}
+@media (max-width: 620px) {
+  .identity {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .form > button {
+    width: 100%;
+  }
+}
+@media print {
+  .form {
+    display: none;
+  }
+}

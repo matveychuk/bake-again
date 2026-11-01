@@ -9,10 +9,10 @@ import type { CookModeDefinition } from '@/components/cook-mode/cook-mode.types'
 import type { AppLocale } from '@/lib/i18n/config';
 import { recipeDetailTitles } from './catalog-locales';
 import {
-  createSourceCookIngredients,
-  createSourceCookIngredientSections,
-  createSourceCookSteps,
-  isSourceCookModeAvailable,
+  createRecipeCookIngredients,
+  createRecipeCookIngredientSections,
+  createRecipeCookSteps,
+  isRecipeCookModeAvailable,
 } from './cook-mode-adapter';
 import { glutenFreeNapoleonRecipe } from './gluten-free-napoleon.recipe';
 import { recipeInventory } from './inventory';
@@ -25,11 +25,11 @@ import {
 } from './cream-composition';
 import { getUiMessages } from '../../lib/i18n/messages';
 import {
-  applySourceRecipeConfiguration,
-  parseSourceRecipeConfiguration,
-  sourceAssistantConfiguration,
-  sourceRecipeScalingBounds,
-} from './source-recipe-configuration';
+  applyRecipeContentConfiguration,
+  parseRecipeContentConfiguration,
+  recipeAssistantConfiguration,
+  recipeScalingBounds,
+} from './recipe-content-configuration';
 
 const napoleonCookMode: Omit<CookModeDefinition, 'getState'> = {
   recipeId: glutenFreeNapoleonRecipe.id,
@@ -61,8 +61,8 @@ function createInventoryCookMode(
     assistant: { recipeId: recipe.id, recipeVersionId: baseVersionId },
     detailHref: `/recipes/${recipe.slug}`,
     totalSteps:
-      baseForCookMode && isSourceCookModeAvailable(baseForCookMode)
-        ? createSourceCookSteps(baseForCookMode, locale).length
+      baseForCookMode && isRecipeCookModeAvailable(baseForCookMode)
+        ? createRecipeCookSteps(baseForCookMode, locale).length
         : 0,
     getState: (locationSearch) => {
       const queryIssue = recipeConfigurationQueryIssue(
@@ -97,17 +97,17 @@ function createInventoryCookMode(
             locale,
           )
         : null;
-      const configuration = parseSourceRecipeConfiguration(
+      const configuration = parseRecipeContentConfiguration(
         locationSearch,
         composed,
         recipe.scalingAnchorIngredientId,
-        sourceRecipeScalingBounds(
-          document?.kind === 'detailed' ? document.recipe : null,
+        recipeScalingBounds(
+          document?.recipe ?? null,
           recipe.scalingAnchorIngredientId,
         ),
       );
       const configured = composed
-        ? applySourceRecipeConfiguration(composed, configuration, locale)
+        ? applyRecipeContentConfiguration(composed, configuration, locale)
         : null;
       const needsCreamSelection = Boolean(
         structured?.creamOptions && !selectedCreamRecipeId,
@@ -115,7 +115,7 @@ function createInventoryCookMode(
       const isAvailable =
         configuration.kind !== 'invalid' &&
         !needsCreamSelection &&
-        isSourceCookModeAvailable(configured);
+        isRecipeCookModeAvailable(configured);
       const unavailableReason =
         configuration.kind === 'invalid'
           ? configuration.reason === 'unsupported'
@@ -137,18 +137,18 @@ function createInventoryCookMode(
         unavailableReason,
         steps:
           configured && isAvailable
-            ? createSourceCookSteps(configured, locale)
+            ? createRecipeCookSteps(configured, locale)
             : [],
         allIngredients:
           configured && configuration.kind !== 'invalid'
-            ? createSourceCookIngredients(configured, locale)
+            ? createRecipeCookIngredients(configured, locale)
             : [],
         ingredientSections:
           configured && configuration.kind !== 'invalid'
-            ? createSourceCookIngredientSections(configured, locale)
+            ? createRecipeCookIngredientSections(configured, locale)
             : [],
         assistantConfiguration: configured
-          ? sourceAssistantConfiguration(recipe.id, configured, configuration)
+          ? recipeAssistantConfiguration(recipe.id, configured, configuration)
           : undefined,
       };
     },
@@ -215,16 +215,17 @@ export function getCookModeDefinition(
                   ...ingredient,
                   name,
                   // Reader notes can repeat an alternative already included above.
-                  note: ingredient.note
-                    ?.split(' · ')
-                    .filter((note) => !name.includes(note))
-                    .join(' · ') || undefined,
+                  note:
+                    ingredient.note
+                      ?.split(' · ')
+                      .filter((note) => !name.includes(note))
+                      .join(' · ') || undefined,
                 };
               }),
             }),
           ),
         };
-        const configured = applySourceRecipeConfiguration(
+        const configured = applyRecipeContentConfiguration(
           source,
           state.isAdjusted
             ? {
@@ -247,9 +248,12 @@ export function getCookModeDefinition(
         return {
           ...state,
           evidence: configured.evidence,
-          steps: createSourceCookSteps(grouped, locale),
-          allIngredients: createSourceCookIngredients(configured, locale),
-          ingredientSections: createSourceCookIngredientSections(configured, locale),
+          steps: createRecipeCookSteps(grouped, locale),
+          allIngredients: createRecipeCookIngredients(configured, locale),
+          ingredientSections: createRecipeCookIngredientSections(
+            configured,
+            locale,
+          ),
         };
       },
     };

@@ -1,5 +1,13 @@
 'use client';
 
+import { getRecipeContent } from '@/content/recipes/registry';
+import { applyRecipeContentConfiguration } from '@/content/recipes/recipe-content-configuration';
+import {
+  createRecipeCookIngredients,
+  createRecipeCookIngredientSections,
+  createRecipeCookSteps,
+} from '@/content/recipes/cook-mode-adapter';
+
 import { useEffect, useState } from 'react';
 import { CookTimer } from '@/app/recipes/napoleon-cake/cook/cook-timer';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -20,42 +28,20 @@ import { CookWakeLock } from '@/app/recipes/napoleon-cake/cook/cook-wake-lock';
 import type { CookStep } from './cook-mode.types';
 import styles from '@/app/recipes/napoleon-cake/cook/cook-mode.module.css';
 
-const exampleIngredients = [
-  { id: 'eggs', name: 'Eggs', primary: '10' },
-  {
-    id: 'flour',
-    name: 'Schär Mix B Bread flour',
-    primary: '280 g',
-    secondary: '12 tbsp',
-  },
-];
-
-const exampleSteps: CookStep[] = [
-  {
-    stepIds: ['mix-dry-dough'],
-    number: '01',
-    meta: '',
-    title: 'Mix the dry ingredients',
-    instructions: [],
-    ingredients: [],
-  },
-  {
-    stepIds: ['cut-in-butter'],
-    number: '02',
-    meta: '',
-    title: 'Cut in the cold butter',
-    instructions: [],
-    ingredients: [],
-  },
-  {
-    stepIds: ['mix-wet-dough'],
-    number: '03',
-    meta: '',
-    title: 'Mix the wet ingredients',
-    instructions: [],
-    ingredients: [],
-  },
-];
+const exampleContent = applyRecipeContentConfiguration(
+  getRecipeContent('crepes', 'en')!,
+  { kind: 'adjusted', mode: 'scale', scaleFactor: 2 },
+  'en',
+);
+const allExampleIngredients = createRecipeCookIngredients(exampleContent, 'en');
+const exampleIngredients = allExampleIngredients.filter((ingredient) =>
+  ['eggs', 'flour'].includes(ingredient.id),
+);
+const exampleSections = createRecipeCookIngredientSections(
+  exampleContent,
+  'en',
+);
+const exampleSteps = createRecipeCookSteps(exampleContent, 'en');
 
 /** Uses the production drawer treatment for responsive and keyboard review. */
 export function CookToolsExample({ className }: { className?: string }) {
@@ -79,15 +65,8 @@ export function CookToolsExample({ className }: { className?: string }) {
           </DrawerHeader>
           <div className={styles.ingredientsDrawerBody}>
             <RecipeIngredientList
-              items={exampleIngredients}
-              sections={[
-                { id: 'batter', title: 'Batter', items: exampleIngredients },
-                {
-                  id: 'finish',
-                  title: 'For the pan',
-                  items: [{ id: 'oil', name: 'Oil', note: 'For greasing.' }],
-                },
-              ]}
+              items={allExampleIngredients}
+              sections={exampleSections}
             />
           </div>
         </DrawerContent>

@@ -3,10 +3,10 @@ import test from 'node:test';
 import type { IngredientLine } from './recipe.types.ts';
 import { glutenFreeNapoleonRecipe as recipe } from './gluten-free-napoleon.recipe.ts';
 import { getRecipeContent } from './registry.ts';
-import { applySourceRecipeConfiguration } from './source-recipe-configuration.ts';
+import { applyRecipeContentConfiguration } from './recipe-content-configuration.ts';
 import {
-  createSourceCookIngredients,
-  createSourceCookSteps,
+  createRecipeCookIngredients,
+  createRecipeCookSteps,
 } from './cook-mode-adapter.ts';
 import { formatQuantity } from '../../lib/i18n/format.ts';
 
@@ -62,12 +62,12 @@ for (const locale of ['uk', 'en', 'es'] as const) {
     );
     assert.equal(recipe.heroMediaId, 'napoleon-author-hero-preview-2359-v1');
     for (const factor of [0.5, 1, 2]) {
-      const adjusted = applySourceRecipeConfiguration(
+      const adjusted = applyRecipeContentConfiguration(
         source,
         { kind: 'adjusted', scaleFactor: factor },
         locale,
       );
-      const steps = createSourceCookSteps(adjusted, locale);
+      const steps = createRecipeCookSteps(adjusted, locale);
       const base = steps.find((step) =>
         step.stepIds.includes('mix-custard-base'),
       )!;
@@ -114,13 +114,18 @@ for (const locale of ['uk', 'en', 'es'] as const) {
       recipe.steps.find((s) => s.id === 'bake-layer')?.temperature?.value,
       200,
     );
-    assert.equal(recipe.steps.find((s) => s.id === 'bake-layer')?.temperature?.ovenMode, 'fan');
+    assert.equal(
+      recipe.steps.find((s) => s.id === 'bake-layer')?.temperature?.ovenMode,
+      'fan',
+    );
     assert.equal(recipe.versionId, 'gluten-free-napoleon-v5');
     assert.equal(recipe.geometry.default.layerCount, 7);
-    assert.equal(recipe.yield.default.amount, 2);
-    assert(!recipe.ingredientSections[0].lines.some((line) =>
-      ['baking-soda', 'citric-acid', 'flour-leavener'].includes(line.id),
-    ));
+    assert.deepEqual(recipe.yield.default.count, { kind: 'exact', value: 2 });
+    assert(
+      !recipe.ingredientSections[0].lines.some((line) =>
+        ['baking-soda', 'citric-acid', 'flour-leavener'].includes(line.id),
+      ),
+    );
     assert.deepEqual(
       source.steps.slice(0, 7).map((s) => s.id),
       [
@@ -141,30 +146,44 @@ for (const locale of ['uk', 'en', 'es'] as const) {
       ),
     );
     for (const factor of [0.5, 1, 1.5, 2]) {
-      const configured = applySourceRecipeConfiguration(
+      const configured = applyRecipeContentConfiguration(
         source,
         factor === 1
           ? { kind: 'base', mode: 'scale', scaleFactor: 1 }
           : { kind: 'adjusted', scaleFactor: factor },
         locale,
       );
-      const steps = createSourceCookSteps(configured, locale);
+      const steps = createRecipeCookSteps(configured, locale);
       const wholeFlour = formatQuantity(locale, {
         kind: 'exact',
         value: 500 * factor,
         unit: 'g',
       });
       const crumb = steps.find((s) => s.stepIds.includes('cut-in-butter'))!;
-      assert.equal(crumb.ingredients.find((i) => i.id === 'schar-mix-b')?.primary, wholeFlour);
-      assert(configured.steps.find((s) => s.id === 'cut-in-butter')!.body.includes(wholeFlour));
-      assert(!steps.find((s) => s.stepIds.includes('combine-dough'))?.ingredients.some((i) => i.id === 'schar-mix-b'));
       assert.equal(
-        createSourceCookIngredients(configured, locale).find(
+        crumb.ingredients.find((i) => i.id === 'schar-mix-b')?.primary,
+        wholeFlour,
+      );
+      assert(
+        configured.steps
+          .find((s) => s.id === 'cut-in-butter')!
+          .body.includes(wholeFlour),
+      );
+      assert(
+        !steps
+          .find((s) => s.stepIds.includes('combine-dough'))
+          ?.ingredients.some((i) => i.id === 'schar-mix-b'),
+      );
+      assert.equal(
+        createRecipeCookIngredients(configured, locale).find(
           (i) => i.id === 'schar-mix-b',
         )?.primary,
         wholeFlour,
       );
-      assert(!steps.find((s) => s.stepIds.includes('mix-wet-dough'))?.timerOptionsSeconds?.length);
+      assert(
+        !steps.find((s) => s.stepIds.includes('mix-wet-dough'))
+          ?.timerOptionsSeconds?.length,
+      );
       assert.deepEqual(
         steps.find((s) => s.stepIds.includes('divide-and-chill'))
           ?.timerOptionsSeconds,

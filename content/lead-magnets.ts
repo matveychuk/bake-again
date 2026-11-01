@@ -25,3 +25,14 @@ export function getLeadMagnetBot(id: LeadMagnetId, channel: 'ig' | 'fb') {
     url: `https://bakeagain.com${leadMagnetPath(id)}?src=${channel}-bot`,
   };
 }
+
+export function getRecipeInvitation(recipeId: string, locale: string) {
+  if (locale !== 'uk') return null;
+  for (const magnetId of leadMagnetIds) {
+    const product: import('./lead-magnets.validation.ts').LeadMagnetDefinition =
+      leadMagnetRegistry[magnetId];
+    if (product.recipeInvitation?.recipeId === recipeId)
+      return { magnetId, ...product.recipeInvitation };
+  }
+  return null;
+}

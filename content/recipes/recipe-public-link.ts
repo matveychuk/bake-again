@@ -1,13 +1,13 @@
 import type { AppLocale } from '../../lib/i18n/config.ts';
 import { getLocalizedRecipePath } from '../../lib/i18n/routes.ts';
 import { siteOrigin } from '../../lib/seo/site.ts';
-import type { SourceRecipeConfiguration } from './source-recipe-configuration.ts';
+import type { RecipeContentConfiguration } from './recipe-content-configuration.ts';
 
 /** Accept resolved recipe state, never the browser's arbitrary query or fragment. */
 export function recipePublicLink(
   recipeId: string,
   locale: AppLocale,
-  configuration: SourceRecipeConfiguration,
+  configuration: RecipeContentConfiguration,
   selectedCreamId?: string | null,
 ) {
   const path = getLocalizedRecipePath(recipeId, locale);

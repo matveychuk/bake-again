@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { glutenFreeNapoleonRecipe } from '../../../content/recipes/gluten-free-napoleon.recipe.ts';
-import type { RecipeDraft } from '../../../content/recipes/recipe.types.ts';
+import type { Recipe } from '../../../content/recipes/recipe.types.ts';
 import type { AssistantRequestV1 } from '../contracts.ts';
 import type { AssistantRuntimeConfig } from './env.ts';
 import { AssistantServiceError } from './errors.ts';
@@ -18,7 +18,7 @@ const config: AssistantRuntimeConfig = {
   maxOutputTokens: 2000,
 };
 
-const readyRecipe = structuredClone(glutenFreeNapoleonRecipe) as RecipeDraft;
+const readyRecipe = structuredClone(glutenFreeNapoleonRecipe) as Recipe;
 readyRecipe.publicationStatus = 'published';
 readyRecipe.translationState.en = 'reviewed';
 
@@ -99,7 +99,7 @@ function service(provider: AssistantProvider) {
   return createAssistantService({
     config,
     provider,
-    resolveRecipe: () => ({ kind: 'detailed', recipe: readyRecipe }),
+    resolveRecipe: () => ({ recipe: readyRecipe }),
     isRecipeEnabled: () => true,
     isRecipeLocaleAllowed: () => true,
     isUiLocaleAllowed: () => true,
@@ -231,7 +231,7 @@ void test('records allowlisted content-free telemetry with model, latency, usage
         };
       },
     },
-    resolveRecipe: () => ({ kind: 'detailed', recipe: readyRecipe }),
+    resolveRecipe: () => ({ recipe: readyRecipe }),
     isRecipeEnabled: () => true,
     isRecipeLocaleAllowed: () => true,
     isUiLocaleAllowed: () => true,

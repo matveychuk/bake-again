@@ -1,7 +1,7 @@
 import type {
   StructuredIngredient,
   StructuredIngredientSection,
-} from '@/content/recipes/source-recipe.types';
+} from '@/content/recipes/localized-recipe.types';
 import { formatQuantity } from '@/lib/i18n/format';
 import type { AppLocale } from '@/lib/i18n/config';
 import { RecipeIngredientList } from './recipe-ingredient-list';

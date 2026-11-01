@@ -1,0 +1,38 @@
+.example {
+  display: grid;
+  gap: var(--space-8);
+  min-width: 0;
+}
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  min-width: 0;
+  padding: var(--space-4);
+  margin: 0;
+  border: 1px solid var(--color-border-subtle);
+}
+.settings legend {
+  padding-inline: var(--space-2);
+  font-size: var(--font-size-body-small);
+}
+.settings label {
+  min-width: 0;
+  flex: 1;
+  flex-basis: calc(var(--space-24) * 2);
+}
+.settings select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: var(--space-2);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+  font: inherit;
+}
+.settings select:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}

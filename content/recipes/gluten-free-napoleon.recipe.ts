@@ -1,8 +1,7 @@
-import type { RecipeDraft } from './recipe.types.ts';
-import { quantityFromGrams } from './spoon-weights.ts';
+import type { Recipe } from './recipe.types.ts';
 
 export const glutenFreeNapoleonRecipe = {
-  schemaVersion: 2,
+  schemaVersion: 3,
   id: 'gluten-free-napoleon',
   versionId: 'gluten-free-napoleon-v5',
   publicationStatus: 'published',
@@ -17,9 +16,9 @@ export const glutenFreeNapoleonRecipe = {
     es: 'tarta-napoleon-sin-gluten',
   },
   title: {
-    uk: 'Безглютеновий Наполеон',
     en: 'Gluten-Free Napoleon Cake',
     es: 'Tarta Napoleón sin gluten',
+    uk: 'Безглютеновий Наполеон',
   },
   summary: {
     uk: 'Два торти по 7 тонких коржів діаметром 24 см із заварним кремом; горіхи — за бажанням.',
@@ -31,7 +30,11 @@ export const glutenFreeNapoleonRecipe = {
   difficulty: 'medium',
   baseProvenance: {
     state: 'tested',
-    sourceIds: ['author-bake-2026-10-26', 'author-custard-2026-10-04', 'author-update-2026-10-28'],
+    sourceIds: [
+      'author-bake-2026-10-26',
+      'author-custard-2026-10-04',
+      'author-update-2026-10-28',
+    ],
     note: 'Author tested the unleavened dough in half and one-third batches on 2026-10-25/26, then supplied the final full-batch method and yield on 2026-10-28. Custard evidence is unchanged; scaled adaptations do not inherit this status.',
   },
   timing: {
@@ -87,6 +90,7 @@ export const glutenFreeNapoleonRecipe = {
           value: 1,
           unit: 'hour',
         },
+        relatedStepId: 'rest-assembled-cake',
       },
       {
         id: 'refrigerated-maturation',
@@ -101,6 +105,7 @@ export const glutenFreeNapoleonRecipe = {
           max: 24,
           unit: 'hour',
         },
+        relatedStepId: 'refrigerate-cake',
       },
     ],
   },
@@ -112,7 +117,6 @@ export const glutenFreeNapoleonRecipe = {
         en: '2 cakes',
         es: '2 tartas',
       },
-      amount: 2,
       unit: 'cake',
       details: {
         uk: 'Усього 14 коржів; кожен торт має 7 коржів діаметром 24 см',
@@ -124,6 +128,10 @@ export const glutenFreeNapoleonRecipe = {
         sourceIds: ['author-update-2026-10-28'],
       },
       availability: 'default',
+      count: {
+        kind: 'exact',
+        value: 2,
+      },
     },
     alternatives: [],
   },
@@ -170,10 +178,10 @@ export const glutenFreeNapoleonRecipe = {
         blockingGapIds: ['validate-28cm-form'],
       },
     ],
+    state: 'known',
   },
   configuration: {
     base: {
-      status: 'Tested',
       geometryId: 'round-24cm-7-layers-each',
       yieldId: 'two-seven-layer-cakes',
       batchScale: 1,
@@ -265,6 +273,7 @@ export const glutenFreeNapoleonRecipe = {
     },
     testedAlternativeMixes: [],
     knownUnsupportedMixes: [],
+    basis: 'commercialMix',
   },
   beforeStart: [
     {
@@ -311,7 +320,21 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          quantity: quantityFromGrams('schar-mix-b', 500),
+          quantity: {
+            base: {
+              kind: 'exact',
+              value: 500,
+              unit: 'g',
+            },
+            equivalent: {
+              kind: 'exact',
+              value: 25,
+              unit: 'tbsp',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
         },
         {
           id: 'butter-dough',
@@ -524,7 +547,21 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          quantity: quantityFromGrams('granulated-sugar', 400),
+          quantity: {
+            base: {
+              kind: 'exact',
+              value: 400,
+              unit: 'g',
+            },
+            equivalent: {
+              kind: 'exact',
+              value: 20,
+              unit: 'tbsp',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
         },
         {
           id: 'flour-custard',
@@ -538,7 +575,21 @@ export const glutenFreeNapoleonRecipe = {
               },
             },
           ],
-          quantity: quantityFromGrams('schar-mix-b', 40),
+          quantity: {
+            base: {
+              kind: 'exact',
+              value: 40,
+              unit: 'g',
+            },
+            equivalent: {
+              kind: 'exact',
+              value: 2,
+              unit: 'tbsp',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
         },
         {
           id: 'starch-custard',
@@ -645,7 +696,11 @@ export const glutenFreeNapoleonRecipe = {
       lines: [
         {
           id: 'walnuts',
-          qualifier: { uk: 'або пекан', en: 'or pecans', es: 'o pecanas' },
+          qualifier: {
+            uk: 'або пекан',
+            en: 'or pecans',
+            es: 'o pecanas',
+          },
           options: [
             {
               ingredientId: 'walnut',
@@ -808,12 +863,6 @@ export const glutenFreeNapoleonRecipe = {
         },
       ],
       ingredientLineIds: [],
-      duration: {
-        kind: 'range',
-        min: 15,
-        max: 1440,
-        unit: 'minute',
-      },
       guidance: [
         {
           id: 'temper-firm-dough',
@@ -825,6 +874,12 @@ export const glutenFreeNapoleonRecipe = {
           },
         },
       ],
+      displayMeta: {
+        en: '15 min–24 hours',
+        es: '15 min–24 h',
+        uk: '15 хв–24 год',
+      },
+      durationPhaseId: 'chill-dough',
     },
     {
       id: 'roll-layer',
@@ -885,12 +940,6 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Pasa la masa con su papel a una bandeja y hornéala con los recortes a 200°C con ventilador durante 5–7 minutos, hasta que esté dorada. Es normal que aparezcan burbujas en el disco. Sin ventilador también funciona, pero puede tardar un poco más. Desliza con cuidado el disco horneado del papel a un plato.',
       },
       ingredientLineIds: [],
-      duration: {
-        kind: 'range',
-        min: 5,
-        max: 7,
-        unit: 'minute',
-      },
       temperature: {
         value: 200,
         unit: 'C',
@@ -918,6 +967,12 @@ export const glutenFreeNapoleonRecipe = {
           },
         },
       ],
+      displayMeta: {
+        en: '5–7 min · 200°C',
+        es: '5–7 min · 200°C',
+        uk: '5–7 хв · 200°C',
+      },
+      durationPhaseId: 'bake-one-layer',
     },
     {
       id: 'heat-milk',
@@ -1113,12 +1168,13 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Deja las tartas a temperatura ambiente aproximadamente 1 hora para que se asienten un poco.',
       },
       ingredientLineIds: [],
-      duration: {
-        kind: 'exact',
-        value: 1,
-        unit: 'hour',
-      },
       mediaIds: ['napoleon-author-hero-v1'],
+      displayMeta: {
+        en: '1 hour',
+        es: '1 h',
+        uk: '1 год',
+      },
+      durationPhaseId: 'room-temperature-rest',
     },
     {
       id: 'refrigerate-cake',
@@ -1133,12 +1189,12 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Refrigera durante 12–24 horas para que las capas absorban la crema. Sírvela al día siguiente para disfrutarla en su mejor momento.',
       },
       ingredientLineIds: [],
-      duration: {
-        kind: 'range',
-        min: 12,
-        max: 24,
-        unit: 'hour',
+      displayMeta: {
+        en: '12–24 hours',
+        es: '12–24 h',
+        uk: '12–24 год',
       },
+      durationPhaseId: 'refrigerated-maturation',
     },
   ],
   storage: null,
@@ -1359,6 +1415,11 @@ export const glutenFreeNapoleonRecipe = {
         es: 'Tarta Napoleón cortada en un plato ante flores rojas',
       },
       fit: 'cover',
+      heroAlt: {
+        en: 'Cut Napoleon cake on a plate in front of red flowers',
+        es: 'Tarta Napoleón cortada en un plato ante flores rojas',
+        uk: 'Розрізаний Наполеон на тарілці на тлі бордових квітів',
+      },
     },
     {
       id: 'napoleon-author-milk-v1',
@@ -1432,6 +1493,17 @@ export const glutenFreeNapoleonRecipe = {
       },
       fit: 'cover',
     },
+    {
+      id: 'gluten-free-napoleon-card',
+      type: 'image',
+      path: '/media/recipes/gluten-free-napoleon/card-img-2341-linen-v5.webp',
+      usage: ['card'],
+      alt: {
+        uk: 'Цілий Наполеон із золотистою крихтою на тарілці та світлій серветці',
+        en: 'Whole Napoleon cake with golden crumbs on a plate and light napkin',
+        es: 'Tarta Napoleón entera con migas doradas sobre un plato y una servilleta clara',
+      },
+    },
   ],
   relatedRecipeIds: [],
   sources: [
@@ -1481,7 +1553,8 @@ export const glutenFreeNapoleonRecipe = {
     {
       id: 'author-update-2026-10-28',
       file: 'Current Codex conversation, 2026-10-28',
-      locator: 'Final author dough formula, 14 portions, 15–30 minutes to 24 hours chilling, and 200°C fan bake for 5–7 minutes.',
+      locator:
+        'Final author dough formula, 14 portions, 15–30 minutes to 24 hours chilling, and 200°C fan bake for 5–7 minutes.',
     },
     {
       id: 'author-custard-2026-10-04',
@@ -1500,6 +1573,11 @@ export const glutenFreeNapoleonRecipe = {
         'Bake-test the 28 cm adaptation of the current 24 cm dough before enabling Cook Mode.',
       publicationBlocking: false,
       sourceIds: ['author-bake-2026-10-26', 'author-update-2026-10-28'],
+      text: {
+        en: 'Bake-test the 28 cm adaptation of the current 24 cm dough before enabling Cook Mode.',
+        uk: 'Випробувати адаптацію поточного тіста з 24 см на 28 см перед увімкненням покрокового режиму.',
+        es: 'Probar la adaptación de la masa actual de 24 cm a 28 cm antes de activar el modo de cocina.',
+      },
     },
     {
       id: 'review-translations',
@@ -1508,6 +1586,11 @@ export const glutenFreeNapoleonRecipe = {
       question: 'Human-review the EN and ES recipe wording and SEO slugs.',
       publicationBlocking: false,
       sourceIds: ['archive-recipe'],
+      text: {
+        en: 'Human-review the EN and ES recipe wording and SEO slugs.',
+        uk: 'Провести авторську перевірку англійського й іспанського текстів рецепта та SEO-адрес.',
+        es: 'Revisar con la autora el texto inglés y español de la receta y las direcciones SEO.',
+      },
     },
     {
       id: 'record-storage',
@@ -1517,6 +1600,98 @@ export const glutenFreeNapoleonRecipe = {
         'Record storage instructions beyond the 12–24 hour maturation period.',
       publicationBlocking: false,
       sourceIds: ['archive-recipe'],
+      text: {
+        en: 'Record storage instructions beyond the 12–24 hour maturation period.',
+        uk: 'Записати умови зберігання після 12–24 годин просочування.',
+        es: 'Registrar las instrucciones de conservación después de las 12–24 horas de reposo.',
+      },
     },
   ],
-} satisfies RecipeDraft;
+  searchMetadata: {
+    datePublished: null,
+    dateModified: '2026-10-05',
+    cookTimeMinutes: null,
+    recipeCuisine: {
+      uk: 'Українська кухня',
+      en: 'Ukrainian',
+      es: 'Ucraniana',
+    },
+    keywords: {
+      uk: [
+        'наполеон без глютену',
+        'безглютеновий торт наполеон',
+        'Schär Mix B',
+        'торт без глютену',
+      ],
+      en: [
+        'gluten-free Napoleon cake',
+        'Schär Mix B',
+        'gluten-free layer cake',
+      ],
+      es: ['tarta Napoleón sin gluten', 'Schär Mix B', 'tarta sin gluten'],
+    },
+  },
+  evidenceExplanation: {
+    en: 'This exact version was baked successfully.',
+    es: 'Esta versión exacta se ha horneado correctamente.',
+    uk: 'Цю версію успішно приготували.',
+  },
+  discovery: {
+    cardTitle: {
+      en: 'Napoleon Cake',
+      es: 'Tarta Napoleón',
+      uk: 'Наполеон',
+    },
+    category: {
+      en: 'Celebration cake',
+      es: 'Tarta de celebración',
+      uk: 'Святковий торт',
+    },
+    flourSummary: {
+      en: 'Schär Mix B',
+      es: 'Schär Mix B',
+      uk: 'Schär Mix B',
+    },
+    collectionIds: ['celebration'],
+    catalogue: true,
+    imageKind: 'edited-author-photo',
+    cardImagePosition: 'left-quarter',
+    sourceTitle: 'Безглютеновий Наполеон',
+    launchPriority: 'High',
+    heroCandidate: 'Yes',
+    source:
+      'Detailed recipe card transferred from a separate ChatGPT conversation',
+    archiveSections: [],
+    needsBeforePublishing: '',
+    shortTitle: {
+      uk: 'Безглютеновий Наполеон',
+      en: 'Gluten-Free Napoleon Cake',
+      es: 'Tarta Napoleón sin gluten',
+    },
+  },
+  cardMediaId: 'gluten-free-napoleon-card',
+  translationReview: {
+    date: '2026-11-01',
+    reviewer: 'implementation',
+    scope:
+      'ID-aligned transfer and semantic comparison of existing UK/EN/ES recipe text; not separate author approval',
+  },
+  seo: {
+    uk: {
+      title: 'Безглютеновий Наполеон',
+      description:
+        'Безглютеновий Наполеон із тонких коржів і заварного крему, з горіхами за бажанням. Рецепт на два торти діаметром 24 см, по сім коржів у кожному.',
+    },
+    en: {
+      title: 'Gluten-Free Napoleon Cake',
+      description:
+        'Gluten-free Napoleon cake with thin pastry layers, custard and optional nuts. Makes two 24 cm cakes with seven layers each; follow the method step by step.',
+    },
+    es: {
+      title: 'Tarta Napoleón sin gluten',
+      description:
+        'Tarta Napoleón sin gluten con capas finas, crema pastelera y frutos secos opcionales. Receta para dos tartas de 24 cm, con siete capas cada una.',
+    },
+  },
+  routeSlug: 'napoleon-cake',
+} satisfies Recipe;

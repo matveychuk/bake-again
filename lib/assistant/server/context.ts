@@ -5,7 +5,7 @@ import type {
   ContentGap,
   IngredientLine,
   IngredientSection,
-  RecipeDraft,
+  Recipe,
   RecipeLocale,
 } from '../../../content/recipes/recipe.types.ts';
 import { isAppLocale } from '../../i18n/config.ts';
@@ -70,10 +70,7 @@ function unavailable(
   return {
     available: false,
     code,
-    message:
-      code === 'SOURCE_DRAFT_UNAVAILABLE'
-        ? localized[locale].draft
-        : localized[locale].invalid,
+    message: localized[locale].invalid,
   };
 }
 
@@ -238,7 +235,7 @@ function gapsForLine(gaps: ContentGap[], sectionId: string, lineId: string) {
     .map(({ id }) => id);
 }
 
-function safeGaps(recipe: RecipeDraft, locale: RecipeLocale) {
+function safeGaps(recipe: Recipe, locale: RecipeLocale) {
   return recipe.contentGaps
     .filter(({ area }) => area !== 'image' && area !== 'translation')
     .map(({ id, field, area, publicationBlocking }) => ({
@@ -263,7 +260,7 @@ function fact<T>(
 }
 
 function lineEvidence(
-  recipe: RecipeDraft,
+  recipe: Recipe,
   section: IngredientSection,
   line: IngredientLine,
   sourceIds: Set<string>,
@@ -282,7 +279,7 @@ function lineEvidence(
 }
 
 function projectIngredient(
-  recipe: RecipeDraft,
+  recipe: Recipe,
   section: IngredientSection,
   line: IngredientLine,
   locale: RecipeLocale,
@@ -322,8 +319,8 @@ function projectIngredient(
 }
 
 function geometryFact(
-  recipe: RecipeDraft,
-  geometry: RecipeDraft['geometry']['default'],
+  recipe: Recipe,
+  geometry: NonNullable<Recipe['geometry']['default']>,
   locale: RecipeLocale,
   sourceIds: Set<string>,
 ) {
@@ -355,7 +352,7 @@ function geometryFact(
 }
 
 function yieldFact(
-  item: RecipeDraft['yield']['default'],
+  item: Recipe['yield']['default'],
   locale: RecipeLocale,
   sourceIds: Set<string>,
 ) {
@@ -364,7 +361,9 @@ function yieldFact(
     {
       id: item.id,
       label: item.label[locale],
-      amount: item.amount,
+      amount: item.count.kind === 'exact' ? item.count.value : null,
+      count: item.count,
+      approximate: item.approximate === true,
       unit: item.unit,
       details: item.details?.[locale] ?? null,
       availability: item.availability,
@@ -378,8 +377,8 @@ function yieldFact(
 }
 
 function projectStep(
-  recipe: RecipeDraft,
-  step: RecipeDraft['steps'][number],
+  recipe: Recipe,
+  step: Recipe['steps'][number],
   locale: RecipeLocale,
   sourceIds: Set<string>,
   gaps: ContentGap[],
@@ -412,7 +411,16 @@ function projectStep(
       instructionEvidence,
     ),
     ingredientLineIds: [...step.ingredientLineIds],
-    duration: step.duration ? structuredClone(step.duration) : null,
+    duration: step.duration
+      ? structuredClone(step.duration)
+      : structuredClone(
+          recipe.timing.phases.find(
+            (phase) => phase.id === step.durationPhaseId,
+          )?.duration ?? null,
+        ),
+    temperatureStages: step.temperatureStages
+      ? structuredClone(step.temperatureStages)
+      : [],
     temperature: step.temperature ? structuredClone(step.temperature) : null,
     equipment: (step.equipmentIds ?? []).map((id) => ({
       id,
@@ -434,15 +442,17 @@ function projectStep(
   };
 }
 
-export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeDraft): ContextResult {
+export function buildTrustedRecipeContext(
+  value: unknown,
+  serverRecipe?: Recipe,
+): ContextResult {
   const parsed = parseInput(value);
   if (typeof parsed === 'string') return unavailable(parsed);
-  const document = serverRecipe?.id === parsed.recipeId
-    ? { kind: 'detailed' as const, recipe: serverRecipe }
-    : getRecipeDocument(parsed.recipeId);
+  const document =
+    serverRecipe?.id === parsed.recipeId
+      ? { recipe: serverRecipe }
+      : getRecipeDocument(parsed.recipeId);
   if (!document) return unavailable('RECIPE_NOT_FOUND', parsed.locale);
-  if (document.kind === 'sourceDraft')
-    return unavailable('SOURCE_DRAFT_UNAVAILABLE', parsed.locale);
   const recipe = document.recipe;
   if (recipe.publicationStatus === 'archived')
     return unavailable('RECIPE_ARCHIVED', parsed.locale);
@@ -480,13 +490,17 @@ export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeD
   const stepIngredientIds = new Set(
     selectedSteps.flatMap(({ ingredientLineIds }) => ingredientLineIds),
   );
-  const flourIds = new Set([
-    recipe.flourConfiguration.commercialMixLineId,
-    ...recipe.flourConfiguration.additionalStarchLineIds,
-    ...(recipe.flourConfiguration.xanthanLineId
-      ? [recipe.flourConfiguration.xanthanLineId]
-      : []),
-  ]);
+  const flour = recipe.flourConfiguration;
+  const flourIds = new Set(
+    flour
+      ? [
+          ...(flour.commercialMixLineId ? [flour.commercialMixLineId] : []),
+          ...(flour.flourLineIds ?? []),
+          ...flour.additionalStarchLineIds,
+          ...(flour.xanthanLineId ? [flour.xanthanLineId] : []),
+        ]
+      : [],
+  );
   const includedIngredientIds =
     parsed.scope === 'recipe'
       ? null
@@ -552,7 +566,15 @@ export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeD
     },
     configuration: {
       selection: structuredClone(configuration),
-      status: calculated ? 'Calculated' : 'Tested',
+      status:
+        recipe.baseProvenance.state === 'suggested'
+          ? 'Suggested'
+          : calculated
+            ? 'Calculated'
+            : resolveContextEvidence({
+                provenance: recipe.baseProvenance,
+                sourceIds,
+              }).status,
       totalScaleFactor: calculated?.totalScaleFactor ?? 1,
       warnings:
         calculated?.warnings.map(({ code, severity, ingredientLineId }) => ({
@@ -563,20 +585,19 @@ export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeD
       cookModeEligible: calculated?.cookMode.eligible ?? true,
     },
     ingredients,
-    flour: includeFlour
-      ? {
-          basis: 'canonical-base',
-          commercialMixLineId: recipe.flourConfiguration.commercialMixLineId,
-          additionalStarchLineIds: [
-            ...recipe.flourConfiguration.additionalStarchLineIds,
-          ],
-          xanthanLineId: recipe.flourConfiguration.xanthanLineId ?? null,
-          evidence: resolveContextEvidence({
-            provenance: recipe.flourConfiguration.provenance,
-            sourceIds,
-          }),
-          testedAlternatives:
-            recipe.flourConfiguration.testedAlternativeMixes.map((item) =>
+    flour:
+      includeFlour && flour
+        ? {
+            basis: 'canonical-base',
+            flourLineIds: flour.flourLineIds ?? [],
+            commercialMixLineId: flour.commercialMixLineId,
+            additionalStarchLineIds: [...flour.additionalStarchLineIds],
+            xanthanLineId: flour.xanthanLineId ?? null,
+            evidence: resolveContextEvidence({
+              provenance: flour.provenance,
+              sourceIds,
+            }),
+            testedAlternatives: flour.testedAlternativeMixes.map((item) =>
               fact(
                 `flour.alternative.${item.commercialMixId}`,
                 {
@@ -592,8 +613,7 @@ export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeD
                 }),
               ),
             ),
-          knownUnsupportedMixes:
-            recipe.flourConfiguration.knownUnsupportedMixes.map((item) =>
+            knownUnsupportedMixes: flour.knownUnsupportedMixes.map((item) =>
               fact(
                 `flour.unsupported.${item.commercialMixId}`,
                 {
@@ -609,8 +629,8 @@ export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeD
                 }),
               ),
             ),
-        }
-      : null,
+          }
+        : null,
     timing:
       parsed.scope === 'recipe'
         ? {
@@ -651,19 +671,21 @@ export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeD
       ),
     },
     geometry: {
-      base: geometryFact(
-        recipe,
-        recipe.geometry.default,
-        parsed.locale,
-        sourceIds,
-      ),
+      base: recipe.geometry.default
+        ? geometryFact(
+            recipe,
+            recipe.geometry.default,
+            parsed.locale,
+            sourceIds,
+          )
+        : null,
       alternatives: recipe.geometry.alternatives.map((item) =>
         geometryFact(recipe, item, parsed.locale, sourceIds),
       ),
       selectedId:
         configuration.kind === 'adjusted'
           ? configuration.geometryId
-          : recipe.geometry.default.id,
+          : recipe.configuration.base.geometryId,
     },
     steps:
       parsed.scope === 'step' || parsed.scope === 'recipe'
@@ -671,7 +693,12 @@ export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeD
             projectStep(
               recipe,
               parsed.scope === 'recipe'
-                ? { ...step, guidance: step.guidance?.filter(item => !item.id.startsWith('prepared-help-')) }
+                ? {
+                    ...step,
+                    guidance: step.guidance?.filter(
+                      (item) => !item.id.startsWith('prepared-help-'),
+                    ),
+                  }
                 : step,
               parsed.locale,
               sourceIds,
@@ -761,8 +788,7 @@ export function buildTrustedRecipeContext(value: unknown, serverRecipe?: RecipeD
       ...(parsed.scope === 'recipe' && recipe.storage === null
         ? [{ field: 'storage', reason: 'not-recorded' as const }]
         : []),
-      ...(includeFlour &&
-      recipe.flourConfiguration.testedAlternativeMixes.length === 0
+      ...(includeFlour && flour?.testedAlternativeMixes.length === 0
         ? [
             {
               field: 'flour.testedAlternatives',
@@ -813,20 +839,23 @@ function evidenceQualification(
 }
 
 export function buildAssistantContext(
-  recipe: RecipeDraft,
+  recipe: Recipe,
   request: AssistantRequestV1,
   _calculated: CalculatedRecipeConfiguration | null,
   instructionText: string,
 ): AssistantContextProjection | null {
-  const result = buildTrustedRecipeContext({
-    recipeId: recipe.id,
-    locale: request.locale,
-    scope: request.scope.kind,
-    ...(request.scope.kind === 'step'
-      ? { stepIds: request.scope.stepIds }
-      : {}),
-    configuration: request.configuration,
-  }, recipe);
+  const result = buildTrustedRecipeContext(
+    {
+      recipeId: recipe.id,
+      locale: request.locale,
+      scope: request.scope.kind,
+      ...(request.scope.kind === 'step'
+        ? { stepIds: request.scope.stepIds }
+        : {}),
+      configuration: request.configuration,
+    },
+    recipe,
+  );
   if (!result.available) return null;
   const evidence = new Map<string, ContextEvidenceBlock>();
   let sequence = 0;
@@ -864,7 +893,7 @@ export function buildAssistantContext(
     result.context.yield.base.evidence,
   );
   const selectedGeometry = [
-    result.context.geometry.base,
+    ...(result.context.geometry.base ? [result.context.geometry.base] : []),
     ...result.context.geometry.alternatives,
   ].find(({ value }) => value.id === result.context.geometry.selectedId);
   if (selectedGeometry)
@@ -891,7 +920,14 @@ export function buildAssistantContext(
   }
   const estimatedInputTokens = Math.ceil(
     new TextEncoder().encode(
-      instructionText + JSON.stringify(assistantEnvelope(request, { context: result.context, evidence, estimatedInputTokens: 0 })),
+      instructionText +
+        JSON.stringify(
+          assistantEnvelope(request, {
+            context: result.context,
+            evidence,
+            estimatedInputTokens: 0,
+          }),
+        ),
     ).length / 2,
   );
   if (estimatedInputTokens > inputTokenLimit) return null;

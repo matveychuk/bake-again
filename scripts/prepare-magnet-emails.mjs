@@ -20,13 +20,13 @@ for (const id of leadMagnetIds) {
   const copy = leadMagnetRegistry[id].email;
   const buttons=copy.links.map(link=>`<p><a href="https://bakeagain.com${link.href}" style="${buttonStyle}">${escape(link.title)}</a></p>`).join('');
   const html=shell.replaceAll('[[title]]',escape(copy.title)).replace('[[intro]]',escape(copy.intro)).replace('[[buttons]]',buttons)
-    .replace('[[footer]]','Ти отримуєш цей лист, бо попросила чи попросив цей матеріал на сайті Bake Again. Нові рецепти надсилатимемо в межах твоєї підтвердженої підписки.')
+    .replace('[[footer]]','Ти отримуєш цей лист, бо попросила чи попросив цей матеріал на сайті Bake Again. Нові рецепти надсилатимемо на цю адресу. Відписатися можна будь-коли.')
     .replace('[[unsubscribe]]',` · <a href="${forms.settings.unsubscribeUrls.uk}" style="color:inherit;">Відписатися</a>`);
   await writeFile(new URL(`lib/newsletter/templates/uk-magnet-${id}.html`,root),html);
 }
 const indexPath=new URL('lib/newsletter/templates/index.html',root);
 let index=await readFile(indexPath,'utf8');
 index=index.replace(/<section id="magnet-emails">[\s\S]*?<\/section>/,'');
-index=index.replace('</body>',`<section id="magnet-emails"><h2>Окрема видача рецептів</h2><ul>${leadMagnetIds.map(id=>`<li><a href="uk-magnet-${id}.html">${escape(leadMagnetRegistry[id].page.title)}</a></li>`).join('')}<li><a href="uk-magnet-double-opt-in.html">Підтвердження для API Brevo</a></li></ul></section></body>`);
+index=index.replace('</body>',`<section id="magnet-emails"><h2>Окрема видача рецептів</h2><ul>${leadMagnetIds.map(id=>`<li><a href="uk-magnet-${id}.html">${escape(leadMagnetRegistry[id].page.title)}</a></li>`).join('')}<li><a href="uk-magnet-double-opt-in.html">Архівний шаблон DOI (не використовується)</a></li></ul></section></body>`);
 await writeFile(indexPath,index);
-console.log('Prepared recipe-delivery email shell and API DOI template. Nothing sent.');
+console.log('Prepared recipe email previews and retained legacy DOI template (inactive). Nothing sent.');

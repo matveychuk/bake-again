@@ -1,6 +1,6 @@
 import { getRecipeDocument } from '../../content/recipes/registry.ts';
 import { calculateRecipeConfiguration } from '../../content/recipes/calculate-configuration.ts';
-import type { RecipeDraft } from '../../content/recipes/recipe.types.ts';
+import type { Recipe } from '../../content/recipes/recipe.types.ts';
 import { parseAssistantRequest } from './schemas.ts';
 import type { AssistantRequestV1 } from './contracts.ts';
 import { resolveContextEvidence } from './provenance.ts';
@@ -48,7 +48,6 @@ function resolveContext(value: unknown) {
   const document = getRecipeDocument(request.recipeId);
   if (
     !document ||
-    document.kind !== 'detailed' ||
     request.recipeId !== 'gluten-free-napoleon' ||
     document.recipe.publicationStatus === 'archived'
   )
@@ -69,7 +68,7 @@ function resolveContext(value: unknown) {
     calculated = calculateRecipeConfiguration(
       recipe,
       configuration.kind === 'base'
-        ? recipe.geometry.default.id
+        ? recipe.configuration.base.geometryId
         : configuration.geometryId,
       configuration.kind === 'base'
         ? { mode: 'batchScale', factor: 1 }
@@ -92,7 +91,8 @@ function resolveContext(value: unknown) {
   const geometry = [
     recipe.geometry.default,
     ...recipe.geometry.alternatives,
-  ].find(({ id }) => id === calculated.geometryId)!;
+  ].find((item) => item?.id === calculated.geometryId);
+  if (!geometry) throw new ActionValidationError('UNAVAILABLE_CONFIGURATION');
   if (geometry.availability === 'hiddenUntilConfirmed')
     throw new ActionValidationError('UNAVAILABLE_CONFIGURATION');
   const sourceIds = new Set(recipe.sources.map(({ id }) => id));
@@ -111,10 +111,13 @@ function resolveContext(value: unknown) {
   };
 }
 
-function scopedIds(recipe: RecipeDraft, context: ActionContext) {
-  if (context.scope.kind === 'flour')
+function scopedIds(recipe: Recipe, context: ActionContext) {
+  if (context.scope.kind === 'flour' && recipe.flourConfiguration)
     return [
-      recipe.flourConfiguration.commercialMixLineId,
+      ...(recipe.flourConfiguration.commercialMixLineId
+        ? [recipe.flourConfiguration.commercialMixLineId]
+        : []),
+      ...(recipe.flourConfiguration.flourLineIds ?? []),
       ...recipe.flourConfiguration.additionalStarchLineIds,
       ...(recipe.flourConfiguration.xanthanLineId
         ? [recipe.flourConfiguration.xanthanLineId]

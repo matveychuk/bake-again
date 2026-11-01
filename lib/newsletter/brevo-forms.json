@@ -570,9 +570,9 @@
     },
     "confirmationTemplatesActive": true,
     "currentFormTemplate": {
-      "uk": 5,
-      "es": 6,
-      "en": 7
+      "uk": null,
+      "es": null,
+      "en": null
     },
     "testCampaign": {
       "id": 8,
@@ -639,7 +639,7 @@
     "welcomeAutomation": {
       "id": 1,
       "name": "Bake Again — Welcome after DOI — UK ES EN",
-      "status": "active",
+      "status": "paused",
       "activatedAt": "2026-10-18",
       "entry": "contact-added-to-confirmed-language-list",
       "listIds": [
@@ -693,7 +693,104 @@
       ],
       "replyToVerifiedInReceivedHeaders": true,
       "spfDkimDmarc": "pass",
-      "websiteDeploymentRequired": false
+      "websiteDeploymentRequired": false,
+      "pausedAt": "2026-11-01",
+      "pauseReason": "Replaced by single opt-in automation #3 at explicit owner request on 2026-11-01."
+    },
+    "formConfirmationMode": "no-confirmation-email",
+    "singleOptin": {
+      "activatedAt": "2026-11-01",
+      "ownerAuthorizedImmediateActivation": true,
+      "masterListId": 3,
+      "localeListIds": {
+        "uk": 4,
+        "es": 5,
+        "en": 6
+      },
+      "napoleonWaitlistId": 10,
+      "bonusListIds": {
+        "mlyntsi": 9,
+        "shokolad": 11
+      },
+      "attributes": {
+        "SOURCE": "Text",
+        "SIGNUP_PAGE": "Text",
+        "SIGNUP_POSITION": "Text"
+      },
+      "welcome": {
+        "automationId": 3,
+        "status": "active",
+        "waitMinutes": 10,
+        "skipIfMemberOfAnyList": [
+          9,
+          11
+        ],
+        "localePriority": [
+          "uk",
+          "es",
+          "en"
+        ],
+        "messageIds": {
+          "uk": 24,
+          "es": 25,
+          "en": 26
+        },
+        "stepIds": {
+          "uk": 6,
+          "es": 7,
+          "en": 8
+        },
+        "reentryAfterExit": false
+      },
+      "bonuses": {
+        "mlyntsi": {
+          "automationId": 4,
+          "messageId": 22,
+          "stepId": 3,
+          "listId": 9,
+          "waitMinutes": 2,
+          "reentryAfterExit": false,
+          "status": "active"
+        },
+        "shokolad": {
+          "automationId": 5,
+          "messageId": 23,
+          "stepId": 3,
+          "listId": 11,
+          "waitMinutes": 2,
+          "reentryAfterExit": false,
+          "status": "active"
+        }
+      },
+      "pausedLegacyAutomationIds": [
+        1,
+        2
+      ],
+      "cleanupSegmentId": 1,
+      "sender": "hello@bakeagain.com",
+      "senderName": "Bake Again",
+      "replyTo": "hello@bakeagain.com",
+      "formsNoConfirmation": [
+        "6ac93c3313ad4c2e1f4a24a8",
+        "6ac93dd60accffc5587b6b2d",
+        "6ac93f29570287996ef46a20",
+        "6ad6665850e763c25e673bd2"
+      ],
+      "reviewWidths": [
+        390,
+        900,
+        1440
+      ],
+      "reviewedMessages": [
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "deliveryFromNewSiteVerified": false,
+      "phonePdfOpeningVerified": false,
+      "websiteNote": "Brevo is activated. This task did not deploy the website. Release must replace API DOI and backend /smtp/email bonus delivery with list entry."
     }
   },
   "revisionHistory": [

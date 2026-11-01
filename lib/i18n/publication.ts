@@ -1,5 +1,5 @@
 import type {
-  RecipeDraft,
+  Recipe,
   TranslationState,
 } from '../../content/recipes/recipe.types.ts';
 import type { AppLocale } from './config.ts';
@@ -17,8 +17,8 @@ export function isUiLocalePublishable(locale: AppLocale): boolean {
 
 export function isRecipeLocalePublishable(
   recipe: {
-    publicationStatus: RecipeDraft['publicationStatus'];
-    translationState?: RecipeDraft['translationState'];
+    publicationStatus: Recipe['publicationStatus'];
+    translationState?: Recipe['translationState'];
   },
   locale: AppLocale,
 ): boolean {
@@ -29,8 +29,8 @@ export function isRecipeLocalePublishable(
 }
 
 export function getPublishableRecipeLocales(recipe: {
-  publicationStatus: RecipeDraft['publicationStatus'];
-  translationState?: RecipeDraft['translationState'];
+  publicationStatus: Recipe['publicationStatus'];
+  translationState?: Recipe['translationState'];
 }): AppLocale[] {
   return (Object.keys(recipe.translationState ?? {}) as AppLocale[]).filter(
     (locale) => isRecipeLocalePublishable(recipe, locale),

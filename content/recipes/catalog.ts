@@ -12,7 +12,7 @@ import {
   type RecipeCollectionId,
 } from './collections.ts';
 import type { PublicationStatus } from './recipe.types.ts';
-import type { StructuredRecipeOverview } from './source-recipe.types.ts';
+import type { StructuredRecipeOverview } from './localized-recipe.types.ts';
 
 export type CatalogScope = 'published' | 'unpublished' | 'all';
 export type RecipeCatalogEntry = {

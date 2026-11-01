@@ -8,10 +8,10 @@ type Props = Omit<ComponentPropsWithRef<'section'>, 'title' | 'children'> & {
   description: string;
   note?: ReactNode;
   action: ReactNode;
-  variant?: 'default' | 'lead-magnet' | 'product-banner';
+  variant?: 'default' | 'lead-magnet' | 'recipe-step' | 'product-banner';
   /** Short product label above the title, e.g. format and launch month. */
   eyebrow?: string;
-  headingLevel?: 1 | 2;
+  headingLevel?: 1 | 2 | 3;
   image?: ReactNode;
 };
 
@@ -35,6 +35,7 @@ export function EditorialInvitation({
       className={[
         styles.section,
         variant === 'lead-magnet' && styles.leadMagnet,
+        variant === 'recipe-step' && styles.recipeStep,
         variant === 'product-banner' && styles.productBanner,
         className,
       ]

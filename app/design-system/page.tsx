@@ -1,3 +1,4 @@
+import { GuestReviewExample } from '@/components/community/guest-review-example';
 import { AccountExample } from '@/components/account/account-example';
 import {
   AboutFamilyPhotos,
@@ -47,7 +48,7 @@ import {
   CookToolsExample,
   CookTimerExample,
 } from '@/components/cook-mode/cook-tools-example';
-import { createSourceCookSteps } from '@/content/recipes/cook-mode-adapter';
+import { createRecipeCookSteps } from '@/content/recipes/cook-mode-adapter';
 import { RecipeIngredientHeading } from '@/components/recipe/recipe-ingredient-heading';
 import shoppingControlStyles from '@/components/recipe/add-recipe-ingredients-control.module.css';
 import { TechniqueHelp } from '@/components/techniques/technique-help';
@@ -70,7 +71,7 @@ import {
   getRecipeContent,
   getRecipeDocument,
 } from '@/content/recipes/registry';
-import { applySourceRecipeConfiguration } from '@/content/recipes/source-recipe-configuration';
+import { applyRecipeContentConfiguration } from '@/content/recipes/recipe-content-configuration';
 import { resolveNapoleonCookConfiguration } from '@/content/recipes/napoleon-configuration';
 import { composeRecipeWithCream } from '@/content/recipes/cream-composition';
 import { LanguageSwitcher } from '@/components/site/language-switcher';
@@ -85,7 +86,11 @@ import { RecipeUtilityActions } from '@/components/recipe/recipe-utility-actions
 import { recipePublicLink } from '@/content/recipes/recipe-public-link';
 import { RecentRecipes } from '@/components/personal-state/recent-recipes';
 import { NewsletterForm } from '@/components/site/newsletter-form';
-import { getLeadMagnet, leadMagnetIds } from '@/content/lead-magnets';
+import {
+  getLeadMagnet,
+  getRecipeInvitation,
+  leadMagnetIds,
+} from '@/content/lead-magnets';
 import { EditorialInvitation } from '@/components/site/editorial-invitation';
 import { RecipeDownloads } from '@/components/recipe/recipe-downloads';
 import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
@@ -216,6 +221,7 @@ export default function DesignSystemPage() {
             <a href="#type">03 · Typography</a>
             <a href="#space">04 · Space & shape</a>
             <a href="#components">05 · Components</a>
+            <a href="#guest-reviews">Гостьовий відгук</a>
             <a href="#evidence">06 · Evidence</a>
             <a href="#dark-mode">07 · Dark mode</a>
           </nav>
@@ -401,6 +407,19 @@ export default function DesignSystemPage() {
             {(['uk', 'es', 'en'] as const).map((locale) => (
               <AccountExample key={locale} locale={locale} />
             ))}
+          </section>
+          <section
+            className={styles.section}
+            id="guest-reviews"
+            aria-label="Гостьова форма відгуку"
+          >
+            <h2>Відгук без акаунта</h2>
+            <p>
+              Обов’язковий приватний email, необов’язкова оцінка й миттєве
+              прев’ю до трьох фото. Без окремої згоди на фото. Це інтерактивний
+              приклад без публікації.
+            </p>
+            <GuestReviewExample />
           </section>
           <section className={styles.section} id="components">
             <NumberedSectionTitle
@@ -671,17 +690,17 @@ export default function DesignSystemPage() {
               </div>
               <div className={styles.recipeOverviewExample}>
                 {(['uk', 'en', 'es'] as const).map((locale) => {
-                  const plum = applySourceRecipeConfiguration(
+                  const plum = applyRecipeContentConfiguration(
                     getRecipeContent('plum-cake', locale)!,
                     { kind: 'adjusted', scaleFactor: 2 },
                     locale,
                   );
-                  const napoleon = applySourceRecipeConfiguration(
+                  const napoleon = applyRecipeContentConfiguration(
                     getRecipeContent('gluten-free-napoleon', locale)!,
                     { kind: 'adjusted', scaleFactor: 2 },
                     locale,
                   );
-                  const fritters = applySourceRecipeConfiguration(
+                  const fritters = applyRecipeContentConfiguration(
                     getRecipeContent('apple-fritters', locale)!,
                     { kind: 'adjusted', scaleFactor: 2 },
                     locale,
@@ -754,6 +773,45 @@ export default function DesignSystemPage() {
                   );
                 })}
               </div>
+            </div>
+
+            <div className={styles.componentBlock} id="canonical-recipes">
+              <div className={styles.componentLabel}>
+                <strong>Canonical Recipe · publication and evidence</strong>
+                <span>
+                  Shared overview · Tested / Calculated / Suggested · unknown
+                  yield · no baking form
+                </span>
+              </div>
+              {(['uk', 'en', 'es'] as const).map((locale) => (
+                <div key={locale} lang={locale}>
+                  {(
+                    [
+                      'crepes',
+                      'sour-cream',
+                      'lemon-cream-cheese',
+                      'apple-banana-fritters',
+                    ] as const
+                  ).map((id) => {
+                    const recipe = getRecipeDocument(id)!.recipe;
+                    return (
+                      <div key={id}>
+                        <h3>{recipe.title[locale]}</h3>
+                        <RecipeOverview
+                          locale={locale}
+                          content={getRecipeContent(id, locale)!}
+                          showWorkingRecord={
+                            recipe.publicationStatus === 'unpublished'
+                          }
+                        />
+                        <a href={getLocalizedRecipePath(id, locale, '/cook')!}>
+                          Cook · {recipe.title[locale]}
+                        </a>
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
             </div>
 
             <div className={styles.componentBlock} id="release-states">
@@ -848,7 +906,9 @@ export default function DesignSystemPage() {
                         {getUiMessages(locale).recipe.ingredients}
                       </h3>
                       <p className={styles.eyebrow}>
-                        {getUiMessages(locale).recipe.method(19)}
+                        {getUiMessages(locale).recipe.method(
+                          getRecipeContent('plum-cake', locale)!.steps.length,
+                        )}
                       </p>
                       <h3 id={`reading-method-${locale}`} tabIndex={-1}>
                         {recipeReaderCopy[locale].method}
@@ -948,56 +1008,96 @@ export default function DesignSystemPage() {
                 </span>
               </div>
               <div>
-                {leadMagnetIds.flatMap((magnet) => (['light', 'dark'] as const).map((theme) => (
-                  <div
-                    key={`${magnet}-${theme}`}
-                    data-theme={theme}
-                    id={`lead-magnet-${magnet}-${theme}`}
-                    lang="uk"
-                  >
-                    <EditorialInvitation
-                      variant="lead-magnet"
-                      headingLevel={1}
-                      titleId={`lead-magnet-preview-${magnet}-${theme}`}
-                      title={getLeadMagnet('uk', magnet)!.title}
-                      description={getLeadMagnet('uk', magnet)!.subtitle}
-                      image={
-                        // oxlint-disable-next-line next/no-img-element -- Prepared author photograph.
-                        <img
-                          src={getLeadMagnet('uk', magnet)!.image}
-                          alt={getLeadMagnet('uk', magnet)!.imageAlt}
-                          width={1800}
-                          height={2400}
-                        />
-                      }
-                      note={
-                        <ul>
-                          {getLeadMagnet('uk', magnet)!.features.map(
-                            (text) => (
-                              <li key={text}>{text}</li>
-                            ),
-                          )}
-                        </ul>
-                      }
-                      action={
-                        <NewsletterForm
-                          preview
-                          magnetId={magnet}
-                          note={getLeadMagnet('uk', magnet)!.note}
-                        />
-                      }
-                    />
-                  </div>
-                )))}
+                {leadMagnetIds.flatMap((magnet) =>
+                  (['light', 'dark'] as const).map((theme) => (
+                    <div
+                      key={`${magnet}-${theme}`}
+                      data-theme={theme}
+                      id={`lead-magnet-${magnet}-${theme}`}
+                      lang="uk"
+                    >
+                      <EditorialInvitation
+                        variant="lead-magnet"
+                        headingLevel={1}
+                        titleId={`lead-magnet-preview-${magnet}-${theme}`}
+                        title={getLeadMagnet('uk', magnet)!.title}
+                        description={getLeadMagnet('uk', magnet)!.subtitle}
+                        image={
+                          // oxlint-disable-next-line next/no-img-element -- Prepared author photograph.
+                          <img
+                            src={getLeadMagnet('uk', magnet)!.image}
+                            alt={getLeadMagnet('uk', magnet)!.imageAlt}
+                            width={1800}
+                            height={2400}
+                          />
+                        }
+                        note={
+                          <ul>
+                            {getLeadMagnet('uk', magnet)!.features.map(
+                              (text) => (
+                                <li key={text}>{text}</li>
+                              ),
+                            )}
+                          </ul>
+                        }
+                        action={
+                          <NewsletterForm
+                            preview
+                            magnetId={magnet}
+                            note={getLeadMagnet('uk', magnet)!.note}
+                          />
+                        }
+                      />
+                    </div>
+                  )),
+                )}
               </div>
+            </div>
+
+            <div
+              className={styles.componentBlock}
+              id="recipe-step-subscription"
+            >
+              <div className={styles.componentLabel}>
+                <strong>Subscription after a recipe step</strong>
+                <span>
+                  Junior-cook card after step two; inert preview, no email.
+                </span>
+              </div>
+              {(['light', 'dark'] as const).map((theme) => (
+                <div key={theme} data-theme={theme} lang="uk">
+                  <EditorialInvitation
+                    variant="recipe-step"
+                    headingLevel={3}
+                    titleId={`recipe-step-card-${theme}`}
+                    title={getRecipeInvitation('crepes', 'uk')!.title}
+                    description={
+                      getRecipeInvitation('crepes', 'uk')!.description
+                    }
+                    action={
+                      <NewsletterForm
+                        preview
+                        magnetId="mlyntsi"
+                        placement="recipe"
+                      />
+                    }
+                  />
+                </div>
+              ))}
             </div>
 
             <div className={styles.componentBlock} id="recipe-downloads">
               <div className={styles.componentLabel}>
                 <strong>Recipe PDF delivery</strong>
-                <span>Existing food photography, download Buttons and EditorialInvitation. Service page; click counts do not prove a completed download.</span>
+                <span>
+                  Existing food photography, download Buttons and
+                  EditorialInvitation. Service page; click counts do not prove a
+                  completed download.
+                </span>
               </div>
-              <div lang="uk"><RecipeDownloads id="crepes-downloads-preview" /></div>
+              <div lang="uk">
+                <RecipeDownloads id="crepes-downloads-preview" />
+              </div>
             </div>
 
             <div className={styles.componentBlock} id="concise-recipe">
@@ -1224,20 +1324,30 @@ export default function DesignSystemPage() {
                       <button type="button">Select all</button>
                       <button type="button">Clear all selections</button>
                     </nav>
-                    <div className={styles.shoppingReviewLine}>
-                      <BakeCheckbox
-                        aria-label="Add Schär Mix B Bread flour mix to the shopping list"
-                        defaultChecked
-                      />{' '}
-                      <span>450 g · Schär Mix B Bread flour mix</span>
-                    </div>
-                    <div className={styles.shoppingReviewLine}>
-                      <BakeCheckbox
-                        aria-label="Add tapioca starch to the shopping list"
-                        defaultChecked
-                      />{' '}
-                      <span>80 g · Tapioca starch</span>
-                    </div>
+                    {getRecipeContent('gluten-free-napoleon', 'en')!
+                      .ingredientSections.flatMap(
+                        (section) => section.ingredients,
+                      )
+                      .filter((ingredient) =>
+                        ['schar-mix-b', 'starch-custard'].includes(
+                          ingredient.id,
+                        ),
+                      )
+                      .map((ingredient) => (
+                        <div
+                          className={styles.shoppingReviewLine}
+                          key={ingredient.id}
+                        >
+                          <BakeCheckbox
+                            aria-label={`Add ${ingredient.name} to the shopping list`}
+                            defaultChecked
+                          />
+                          <span>
+                            {formatQuantity('en', ingredient.quantity.base)} ·{' '}
+                            {ingredient.name}
+                          </span>
+                        </div>
+                      ))}
                     <footer>
                       <Button variant="default" type="button">
                         Add to list (2)
@@ -1275,27 +1385,14 @@ export default function DesignSystemPage() {
                   }
                 />
                 <RecipeIngredientChecklist
-                  sections={[
-                    {
-                      id: 'dual-measure-example',
-                      title: 'Crepe batter',
-                      ingredients: [
-                        {
-                          id: 'flour-example',
-                          name: 'Schär Mix B Bread flour',
-                          quantity: {
-                            base: { kind: 'exact', value: 140, unit: 'g' },
-                            equivalent: {
-                              kind: 'exact',
-                              value: 6,
-                              unit: 'tbsp',
-                            },
-                            shopping: { mode: 'base' },
-                          },
-                        },
-                      ],
-                    },
-                  ]}
+                  sections={getRecipeContent('crepes', 'en')!
+                    .ingredientSections.map((section) => ({
+                      ...section,
+                      ingredients: section.ingredients.filter(
+                        (ingredient) => ingredient.id === 'flour',
+                      ),
+                    }))
+                    .filter((section) => section.ingredients.length > 0)}
                 />
               </div>
             </div>
@@ -1314,7 +1411,7 @@ export default function DesignSystemPage() {
                 <div key={locale} lang={locale}>
                   <CookTimerExample
                     locale={locale}
-                    step={createSourceCookSteps(
+                    step={createRecipeCookSteps(
                       getRecipeContent('eclairs', locale)!,
                       locale,
                     ).find((step) => step.stepIds.includes('bake'))!}
@@ -1529,7 +1626,14 @@ export default function DesignSystemPage() {
               <Check aria-hidden="true" size={20} />
               <div>
                 <strong>Tested configuration</strong>
-                <p>Schär Mix B · 24 cm round form · 12 layers</p>
+                <p>
+                  {
+                    getRecipeContent('gluten-free-napoleon', 'en')!.overview
+                      .flour
+                  }
+                  {' · '}
+                  {glutenFreeNapoleonRecipe.geometry.default.label.en}
+                </p>
               </div>
             </div>
           </section>

@@ -4,6 +4,7 @@ import ts from 'typescript';
 const root = new URL('../../', import.meta.url);
 const files = [
   'scripts/community/wasm-photo.mjs',
+  'lib/community/photo-constraints.ts',
   'lib/community/server/photo-admission.ts',
   'lib/community/server/photo-upload.ts',
   'lib/community/server/photo-storage.ts',
@@ -28,6 +29,10 @@ for (const file of files) {
       if (path === 'npm:@imagemagick/magick-wasm@0.0.45') return statement;
       throw new Error(`Unexpected probe import: ${path}`);
     },
+  );
+  source = source.replace(
+    /^export\s*\{[^}]*\}\s*from\s*['"][^'"]+['"];?\s*$/gm,
+    '',
   );
   source = source.replace(/^export (?!default)/gm, '');
   // Transpile of type-only modules may emit an empty ESM marker.

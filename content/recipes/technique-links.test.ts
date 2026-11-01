@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { getRecipeContent } from './registry.ts';
 import { composeRecipeWithCream } from './cream-composition.ts';
-import { createSourceCookSteps } from './cook-mode-adapter.ts';
+import { createRecipeCookSteps } from './cook-mode-adapter.ts';
 import { getLocaleSwitchPath } from '../../lib/i18n/routes.ts';
 
 const recipes = [
@@ -22,7 +22,7 @@ void test('butter technique references reach all locales and Cook Mode at the re
       assert.ok(step, `${id}/${locale}`);
       assert.equal(step.technique?.id, 'soften-butter');
       assert.ok(
-        createSourceCookSteps(content, locale).some(
+        createRecipeCookSteps(content, locale).some(
           (cook) =>
             cook.stepIds.includes(step.id) &&
             cook.technique?.id === 'soften-butter',
@@ -62,7 +62,7 @@ void test('selected cream carries technique help without suggesting it for other
       creamId === 'vanilla-buttercream',
     );
     assert.equal(
-      createSourceCookSteps(composed, 'uk').some((s) => s.technique),
+      createRecipeCookSteps(composed, 'uk').some((s) => s.technique),
       creamId === 'vanilla-buttercream',
     );
   }

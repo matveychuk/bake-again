@@ -1,4 +1,4 @@
-import type { StructuredRecipeContent } from '@/content/recipes/source-recipe.types';
+import type { StructuredRecipeContent } from '@/content/recipes/localized-recipe.types';
 import type { AppLocale } from '@/lib/i18n/config';
 import { formatElapsedMinutes } from '@/lib/i18n/format';
 import { getUiMessages } from '@/lib/i18n/messages';
@@ -15,7 +15,7 @@ function minutesLabel(locale: AppLocale, minutes: number | null | undefined) {
 export function RecipeOverview({
   content,
   locale,
-  showFlour = true,
+  showFlour = Boolean(content?.overview.flour),
   showWorkingRecord = true,
   expandEvidence = false,
 }: {

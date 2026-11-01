@@ -103,6 +103,17 @@ at 390/900/1440px; this revision has not been submitted or delivered.
 
 ### Newsletter email variant (2026-10-09)
 
+Single opt-in automation variant (2026-11-01): the approved UK welcome, junior-cook
+card and chocolate bonus reuse this exact token-derived table composition;
+EN/ES retain their welcome content with confirmation wording removed. The
+operations generator in `output/activation/single-optin-2026-11-01/prepare-emails.py`
+extends the existing generated HTML, preserving its semantic-token values and
+email-safe fonts. Its adjacent `index.html` is the matching local Email Design Lab.
+The five messages passed 390/900/1440 wrapping checks; mobile renders were
+visually reviewed. Native unsubscribe remains in every footer. PDF CTAs use
+absolute HTTPS URLs and open a new tab. See `lib/newsletter/README.md` for live
+Brevo IDs and the separate website-release dependency.
+
 The campaign variant extends the existing table-based email composition in
 `scripts/prepare-newsletter-templates.mjs`. It resolves the same semantic page,
 surface, subtle-panel, text and action tokens into inline HTML values and `bgcolor`
@@ -784,8 +795,8 @@ examples retain these handlers, but analytics never loads on the Design Lab rout
   recipe, in Recipe Detail and Cook Mode. Its next request includes the selected
   prepared question and answer. Cook Mode places the typed-question entry beside the
   current step, including simple steps without prepared help; its header stays focused
-  on navigation, recipe identity and evidence. Source records use a server-only projection of
-  recorded facts; missing details, publication, scaling and composition evidence remain explicit.
+  on navigation, recipe identity and evidence. All records use a server-only projection of
+  the canonical Recipe; missing details, publication, scaling and composition evidence remain explicit.
 - `/design-system#step-questions` demonstrates the production drawer and composer in
   UK/EN/ES. Opening a prepared answer makes no API request. All text wraps at
   390/900/1440px and 200% text enlargement.
@@ -1015,3 +1026,31 @@ the existing composition and semantic tokens are unchanged. New products reuse
 the form and email variant rather than creating parallel components. The build
 validates required copy, public asset destinations and asset presence, and
 generates channel-specific bot handoffs. See `lib/newsletter/lead-magnets.uk.md`.
+
+## Canonical recipe overview (2026-11-01)
+
+`RecipeOverview`, `RecipeIngredientChecklist`, `RecipeStepContent` and the existing
+Cook/print compositions consume localized projections of one schema-3 `Recipe`.
+`RecipeOverview` derives evidence from the exact version, including Calculated creams
+and Suggested unpublished adaptations. Empty flour does not add a flour row to creams;
+unknown yield does not gain an invented count. Existing labels/icons and semantic tokens
+are unchanged. Design Lab `#canonical-recipes` uses real records in UK/EN/ES. Shopping
+receives the same composed projection and preserves canonical ingredient options and IDs.
+
+The Cook header lets its title and evidence wrap onto separate lines rather than
+compressing a translated title beside a non-shrinking badge. Step-question controls
+wrap their text and retain visible focus at 200% text. The production Cook links from
+the canonical Recipe fixtures cover the same component at 390/900/1440px.
+
+
+### Subscription within a recipe (2026-11-01)
+
+`EditorialInvitation variant="recipe-step"` reuses the quiet invitation in a recipe
+column, with token-based padding and a stacked action. The junior-cook card is an
+optional subscription after crepes step two, not an instruction or extra recipe
+step. It promises the card only, with labelled email, explicit consent/privacy,
+unique descriptions for multiple forms, and keyboard focus on the success heading.
+Print and Cook mode exclude it. `/design-system#recipe-step-subscription` shows
+light/dark inert examples; development without credentials labels its inert form.
+Recipe requests use single opt-in and provider automation. Historical DOI/SMTP
+contracts above are superseded by `lib/newsletter/README.md`'s current section.

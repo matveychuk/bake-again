@@ -8,7 +8,7 @@ import type {
   Quantity,
   QuantityAdjustmentSelection,
   RecipeLocale,
-  RecipeDraft,
+  Recipe,
   Temperature,
 } from '../../../content/recipes/recipe.types.ts';
 import type { ContextEvidence } from './provenance.ts';
@@ -69,7 +69,9 @@ export type ContextYield = ContextFact<{
   id: string;
   label: string;
   amount: number | null;
-  unit: 'cookie' | 'cake' | 'serving' | 'batch';
+  unit: Recipe['yield']['default']['unit'];
+  count: Recipe['yield']['default']['count'];
+  approximate: boolean;
   details: string | null;
   availability: Availability;
 }>;
@@ -80,6 +82,7 @@ export type ContextStep = {
   ingredientLineIds: string[];
   duration: Duration | null;
   temperature: Temperature | null;
+  temperatureStages: Array<{ phaseId: string; temperature: Temperature }>;
   equipment: Array<{ id: string; name: string }>;
   guidance: Array<
     ContextFact<{
@@ -98,8 +101,8 @@ export type TrustedRecipeContext = {
   locale: RecipeLocale;
   scope: ContextInput['scope'];
   publication: {
-    status: RecipeDraft['publicationStatus'];
-    translation: RecipeDraft['translationState'][RecipeLocale];
+    status: Recipe['publicationStatus'];
+    translation: Recipe['translationState'][RecipeLocale];
     recipeLocalePublishable: boolean;
     uiLocalePublishable: boolean;
   };
@@ -122,7 +125,8 @@ export type TrustedRecipeContext = {
   ingredients: ContextIngredient[];
   flour: null | {
     basis: 'canonical-base';
-    commercialMixLineId: string;
+    commercialMixLineId: string | null;
+    flourLineIds: string[];
     additionalStarchLineIds: string[];
     xanthanLineId: string | null;
     evidence: ContextEvidence;
@@ -156,7 +160,7 @@ export type TrustedRecipeContext = {
     alternatives: ContextYield[];
   };
   geometry: {
-    base: ContextGeometry;
+    base: ContextGeometry | null;
     alternatives: ContextGeometry[];
     selectedId: string;
   };
@@ -201,7 +205,6 @@ export type ContextUnavailableCode =
   | 'INVALID_STEP_ID'
   | 'STEP_NOT_FOUND'
   | 'RECIPE_NOT_FOUND'
-  | 'SOURCE_DRAFT_UNAVAILABLE'
   | 'RECIPE_ARCHIVED'
   | 'INVALID_CONFIGURATION'
   | 'CONTEXT_TOO_LARGE';

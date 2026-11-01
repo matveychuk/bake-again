@@ -1,9 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { recipeDocuments, getRecipeContent } from './registry.ts';
-import { localizeRecipeContent } from './localize-content.ts';
+import { validateRecipe } from './validate.ts';
 import { bananaFrittersRecipe } from './banana-fritters.recipe.ts';
-import { banana_frittersEs } from './translations/banana-fritters.es.ts';
 
 void test('all recipe locales preserve canonical quantities, provenance and step identities', () => {
   for (const { recipe } of recipeDocuments) {
@@ -35,14 +34,11 @@ void test('all recipe locales preserve canonical quantities, provenance and step
   }
 });
 
-void test('new untranslated reader fields fail loudly instead of leaking Ukrainian into Spanish', () => {
-  const source = bananaFrittersRecipe.translations.uk;
+void test('new untranslated reader fields fail validation instead of leaking another language', () => {
+  const recipe = structuredClone(bananaFrittersRecipe);
+  recipe.steps[0].instruction.es = '';
   assert.throws(
-    () =>
-      localizeRecipeContent(
-        { ...source, gapNote: 'A newly added note' },
-        banana_frittersEs,
-      ),
-    /gapNote/,
+    () => validateRecipe(recipe),
+    /missing es text at steps.0.instruction/,
   );
 });

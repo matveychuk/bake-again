@@ -1,7 +1,7 @@
 import { glutenFreeNapoleonRecipe } from '@/content/recipes/gluten-free-napoleon.recipe';
 import { getRecipeContent } from '@/content/recipes/registry';
-import { applySourceRecipeConfiguration } from '@/content/recipes/source-recipe-configuration';
-import { createSourceCookSteps } from '@/content/recipes/cook-mode-adapter';
+import { applyRecipeContentConfiguration } from '@/content/recipes/recipe-content-configuration';
+import { createRecipeCookSteps } from '@/content/recipes/cook-mode-adapter';
 import type { CalculatedRecipeConfiguration } from '@/content/recipes/recipe.types';
 import type { CookStep } from '@/components/cook-mode/cook-mode.types';
 
@@ -26,14 +26,14 @@ export function createCookSteps(
   configuration: CalculatedRecipeConfiguration,
 ): CookStep[] {
   const source = getRecipeContent(glutenFreeNapoleonRecipe.id, 'en')!;
-  const configured = applySourceRecipeConfiguration(
+  const configured = applyRecipeContentConfiguration(
     source,
     Math.abs(configuration.totalScaleFactor - 1) > 0.000001
       ? { kind: 'adjusted', scaleFactor: configuration.totalScaleFactor }
       : { kind: 'base', mode: 'scale', scaleFactor: 1 },
     'en',
   );
-  return createSourceCookSteps(
+  return createRecipeCookSteps(
     {
       ...configured,
       steps: configured.steps.map((step) => ({

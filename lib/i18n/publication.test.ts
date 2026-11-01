@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { crinkleCookiesRecipe } from '../../content/recipes/crinkle-cookies.recipe.ts';
-import type { RecipeDraft } from '../../content/recipes/recipe.types.ts';
+import type { Recipe } from '../../content/recipes/recipe.types.ts';
 import {
   getPreviewRobots,
   getPublishableRecipeLocales,
@@ -18,15 +18,15 @@ void test('only reviewed UI locales are publishable', () => {
 void test('reviewed recipe translations are public language equivalents', () => {
   assert.equal(isRecipeLocalePublishable(crinkleCookiesRecipe, 'en'), true);
   assert.equal(isRecipeLocalePublishable(crinkleCookiesRecipe, 'uk'), true);
-  assert.deepEqual(new Set(getPublishableRecipeLocales(crinkleCookiesRecipe)), new Set(['uk', 'en', 'es']));
+  assert.deepEqual(
+    new Set(getPublishableRecipeLocales(crinkleCookiesRecipe)),
+    new Set(['uk', 'en', 'es']),
+  );
   assert.deepEqual(getPreviewRobots(false), { index: false, follow: false });
 });
 
 void test('a published recipe requires a reviewed locale before publication', () => {
-  const readyRecipe: Pick<
-    RecipeDraft,
-    'publicationStatus' | 'translationState'
-  > = {
+  const readyRecipe: Pick<Recipe, 'publicationStatus' | 'translationState'> = {
     publicationStatus: 'published',
     translationState: {
       en: 'reviewed',

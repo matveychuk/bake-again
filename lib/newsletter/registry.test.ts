@@ -12,31 +12,142 @@ import { validateLeadMagnetRegistry } from '../../content/lead-magnets.validatio
 
 void test('registry migration preserves pending/sent identities, timestamps, uniqueness and indexes', () => {
   const db = new DatabaseSync(':memory:');
-  db.exec(readFileSync(new URL('../../drizzle/0002_lead_magnet_delivery.sql', import.meta.url), 'utf8'));
-  const insert = db.prepare('INSERT INTO lead_magnet_requests VALUES (?,?,?,?,?,?,?,?,?,?,?,?)');
-  for (const [i, status] of ['pending','awaiting_confirmation','delivering','sent','failed'].entries()) {
-    insert.run(`id${i}`, `hash${i}`, `dedupe${i}`, 'reader@example.com', i % 2 ? 'shokolad' : 'mlyntsi', 'network', 100, 200, status, i ? 110 : null, i ? 120 : null, status === 'sent' ? 130 : null);
+  db.exec(
+    readFileSync(
+      new URL('../../drizzle/0002_lead_magnet_delivery.sql', import.meta.url),
+      'utf8',
+    ),
+  );
+  const insert = db.prepare(
+    'INSERT INTO lead_magnet_requests VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+  );
+  for (const [i, status] of [
+    'pending',
+    'awaiting_confirmation',
+    'delivering',
+    'sent',
+    'failed',
+  ].entries()) {
+    insert.run(
+      `id${i}`,
+      `hash${i}`,
+      `dedupe${i}`,
+      'reader@example.com',
+      i % 2 ? 'shokolad' : 'mlyntsi',
+      'network',
+      100,
+      200,
+      status,
+      i ? 110 : null,
+      i ? 120 : null,
+      status === 'sent' ? 130 : null,
+    );
   }
-  const before = db.prepare('SELECT * FROM lead_magnet_requests ORDER BY id').all();
+  const before = db
+    .prepare('SELECT * FROM lead_magnet_requests ORDER BY id')
+    .all();
   db.exec('BEGIN');
-  db.exec(readFileSync(new URL('../../drizzle/0003_lead_magnet_registry.sql', import.meta.url), 'utf8'));
+  db.exec(
+    readFileSync(
+      new URL('../../drizzle/0003_lead_magnet_registry.sql', import.meta.url),
+      'utf8',
+    ),
+  );
   db.exec('COMMIT');
-  assert.deepEqual(db.prepare('SELECT * FROM lead_magnet_requests ORDER BY id').all(), before);
-  assert.equal(db.prepare("SELECT count(*) AS n FROM sqlite_master WHERE type='index' AND name IN ('lead_magnet_network_created','lead_magnet_email_created')").get()!.n, 2);
-  const after = db.prepare('INSERT INTO lead_magnet_requests VALUES (?,?,?,?,?,?,?,?,?,?,?,?)');
-  after.run('future', 'future-hash', 'future-key', 'reader@example.com', 'new-product', 'network', 100, 200, 'pending', null, null, null);
-  assert.throws(() => after.run('duplicate', 'future-hash', 'another-key', 'reader@example.com', 'new-product', 'network', 100, 200, 'pending', null, null, null));
-  assert.throws(() => after.run('bad', 'bad-hash', 'bad-key', 'reader@example.com', '../private', 'network', 100, 200, 'pending', null, null, null));
-  assert.throws(() => after.run('bad-status', 'status-hash', 'status-key', 'reader@example.com', 'new-product', 'network', 100, 200, 'unknown', null, null, null));
+  assert.deepEqual(
+    db.prepare('SELECT * FROM lead_magnet_requests ORDER BY id').all(),
+    before,
+  );
+  assert.equal(
+    db
+      .prepare(
+        "SELECT count(*) AS n FROM sqlite_master WHERE type='index' AND name IN ('lead_magnet_network_created','lead_magnet_email_created')",
+      )
+      .get()!.n,
+    2,
+  );
+  const after = db.prepare(
+    'INSERT INTO lead_magnet_requests VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+  );
+  after.run(
+    'future',
+    'future-hash',
+    'future-key',
+    'reader@example.com',
+    'new-product',
+    'network',
+    100,
+    200,
+    'pending',
+    null,
+    null,
+    null,
+  );
+  assert.throws(() =>
+    after.run(
+      'duplicate',
+      'future-hash',
+      'another-key',
+      'reader@example.com',
+      'new-product',
+      'network',
+      100,
+      200,
+      'pending',
+      null,
+      null,
+      null,
+    ),
+  );
+  assert.throws(() =>
+    after.run(
+      'bad',
+      'bad-hash',
+      'bad-key',
+      'reader@example.com',
+      '../private',
+      'network',
+      100,
+      200,
+      'pending',
+      null,
+      null,
+      null,
+    ),
+  );
+  assert.throws(() =>
+    after.run(
+      'bad-status',
+      'status-hash',
+      'status-key',
+      'reader@example.com',
+      'new-product',
+      'network',
+      100,
+      200,
+      'unknown',
+      null,
+      null,
+      null,
+    ),
+  );
   db.close();
 });
 
 void test('registry rejects unsafe destinations, missing outcome copy and duplicate keywords', () => {
   for (const mutate of [
-    (p: typeof leadMagnetRegistry) => { p.shokolad.email.links[0].href = 'https://outside.example/file.pdf'; },
-    (p: typeof leadMagnetRegistry) => { p.shokolad.email.links[0].href = '/downloads/../private'; },
-    (p: typeof leadMagnetRegistry) => { p.shokolad.email.delivered = ''; },
-    (p: typeof leadMagnetRegistry) => { p.mlyntsi.bot.keyword = p.shokolad.bot.keyword.toUpperCase(); },
+    (p: typeof leadMagnetRegistry) => {
+      p.shokolad.email.links[0].href = 'https://outside.example/file.pdf';
+    },
+    (p: typeof leadMagnetRegistry) => {
+      p.shokolad.email.links[0].href = '/downloads/../private';
+    },
+    (p: typeof leadMagnetRegistry) => {
+      p.shokolad.email.delivered = '';
+    },
+    (p: typeof leadMagnetRegistry) => {
+      p.mlyntsi.bot.keyword = p.shokolad.bot.keyword.toUpperCase();
+    },
   ]) {
     const registry = structuredClone(leadMagnetRegistry);
     mutate(registry);
@@ -44,28 +155,60 @@ void test('registry rejects unsafe destinations, missing outcome copy and duplic
   }
 });
 
-void test('one additional JSON record reaches page, API validation, email, confirmation copy, bot links and analytics', async () => {
+void test('one product record plus reviewed provider mapping reaches all registry consumers', async () => {
   // Run real consumers in an isolated module graph. No test product touches the
   // deployed registry, no mocks of derived ID lists, no provider requests.
   const root = await mkdtemp(join(tmpdir(), 'bake-again-registry-'));
   try {
-    for (const dir of ['content', 'lib/newsletter', 'lib/analytics']) await mkdir(join(root, dir), { recursive: true });
+    for (const dir of ['content', 'lib/newsletter', 'lib/analytics'])
+      await mkdir(join(root, dir), { recursive: true });
     const files = [
-      'content/lead-magnets.ts', 'content/lead-magnets.validation.ts',
-      ...['magnets.ts','magnet-email.ts','magnet-email.generated.ts','delivery-service.ts','delivery-store.ts','brevo-api.ts'].map(name => `lib/newsletter/${name}`),
+      'content/lead-magnets.ts',
+      'content/lead-magnets.validation.ts',
+      ...[
+        'magnets.ts',
+        'magnet-email.ts',
+        'magnet-email.generated.ts',
+        'delivery-service.ts',
+        'delivery-store.ts',
+        'brevo-api.ts',
+        'single-opt-in.ts',
+        'brevo-forms.json',
+      ].map((name) => `lib/newsletter/${name}`),
       'lib/analytics/umami.ts',
     ];
-    for (const file of files) await cp(new URL(`../../${file}`, import.meta.url), join(root, file));
-    const source = JSON.parse(await readFile(new URL('../../content/lead-magnets.json', import.meta.url), 'utf8'));
+    for (const file of files)
+      await cp(new URL(`../../${file}`, import.meta.url), join(root, file));
+    const source = JSON.parse(
+      await readFile(
+        new URL('../../content/lead-magnets.json', import.meta.url),
+        'utf8',
+      ),
+    );
     source['registry-probe'] = structuredClone(source.shokolad);
     source['registry-probe'].bot.keyword = 'перевірка';
     source['registry-probe'].email.subject = 'Isolated new product';
     source['registry-probe'].email.delivered = 'New product delivered';
-    source['registry-probe'].email.links = [{ title: 'New material', href: '/downloads/probe.pdf' }];
-    await writeFile(join(root, 'content/lead-magnets.json'), JSON.stringify(source));
+    source['registry-probe'].email.links = [
+      { title: 'New material', href: '/downloads/probe.pdf' },
+    ];
+    await writeFile(
+      join(root, 'content/lead-magnets.json'),
+      JSON.stringify(source),
+    );
+    const providerPath = join(root, 'lib/newsletter/brevo-forms.json');
+    const provider = JSON.parse(await readFile(providerPath, 'utf8'));
+    provider.providerRecords.singleOptin.bonusListIds['registry-probe'] = 99;
+    await writeFile(providerPath, JSON.stringify(provider));
     await writeFile(join(root, 'package.json'), '{"type":"module"}');
     const base = pathToFileURL(`${root}/`).href;
-    execFileSync(process.execPath, ['--experimental-strip-types', '--input-type=module', '-e', `
+    execFileSync(
+      process.execPath,
+      [
+        '--experimental-strip-types',
+        '--input-type=module',
+        '-e',
+        `
       import assert from 'node:assert/strict';
       const content = await import(${JSON.stringify(`${base}content/lead-magnets.ts`)});
       const {magnetDelivery} = await import(${JSON.stringify(`${base}lib/newsletter/magnets.ts`)});
@@ -83,6 +226,11 @@ void test('one additional JSON record reaches page, API validation, email, confi
       assert.deepEqual(data.data,{magnet:'registry-probe'});
       assert.equal(data.url,'/uk/recept/registry-probe');
       assert.equal(sanitizeAnalyticsPayload('event',{name:'lead_magnet_submit',url:'/uk/recept/unknown',data:{magnet:'unknown'}}),false);
-    `], { stdio: 'pipe' });
-  } finally { await rm(root, { recursive: true, force: true }); }
+    `,
+      ],
+      { stdio: 'pipe' },
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
 });

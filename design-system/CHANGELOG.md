@@ -1,5 +1,23 @@
 # Design system changelog
 
+## 2026-11-01 — Junior-cook card within crepes
+
+- Extended EditorialInvitation with the token-based recipe-step variant after step two.
+- Reused the inline subscription form, card-only copy and explicit consent.
+- Added light/dark Design Lab examples and unique consent IDs for repeated forms.
+- Recipe requests now hand off to single opt-in list entry; Brevo automation owns email delivery.
+- Local layout checks and provider/inbox testing are recorded separately in the newsletter handoff.
+
+## 2026-11-01 — Single opt-in automation email variant
+
+- Reused the existing token-derived newsletter composition for five approved
+  Brevo messages: UK/EN/ES welcome, junior-cook card and chocolate PDF.
+- Kept native unsubscribe and localized privacy links; PDF buttons open a new tab.
+- Local Email Design Lab and generated HTML are in the dated activation package.
+  All 15 checks at 390/900/1440 passed without overflow; mobile renders inspected.
+- Brevo #3–5 active, #1–2 paused at the owner's request; website rollout and
+  inbox/phone end-to-end verification are separate from layout validation.
+
 ## 2026-10-31 · Product banner (Napoleon lesson, variant B)
 
 - Added `EditorialInvitation variant="product-banner"` and an optional `eyebrow`
@@ -1482,3 +1500,17 @@ Applied the existing full-photo recipe carousel component to IG-026 v2, preservi
 - Sasha removed the separate photo publication consent step. The community form
   contract now calls for immediate local preview after file selection, removal
   and clear upload state. The review/photo UI and Design Lab example are still pending.
+
+## 2026-11-01 — Canonical Recipe schema 3
+
+- All 27 recipes, including 5 unpublished records and reusable creams/glaze, share one
+  canonical contract. Localized projections replace the detailed/source authoring split.
+- Existing overview, ingredient, Cook, print and shopping components share quantities,
+  composition and scaling rules. Evidence is version-specific, never hardcoded Tested.
+- Explicit unknown/not-applicable geometry and unknown yield; no invented baking facts.
+- Design Lab `#canonical-recipes` covers UK/EN/ES status and unknown states using existing
+  components and semantic tokens. No new visual tokens or media were introduced.
+
+- At 200% text and 390px, the shared Cook header wraps recipe identity and evidence
+  independently; the question button wraps long EN/ES labels. This fixes a squashed
+  title and horizontal overflow found during the canonical-model visual review.
