@@ -100,6 +100,8 @@ export function NewsletterInvitation({
     open: boolean;
     onOpenChange: (open: boolean) => void;
     returnFocus: RefObject<HTMLElement | null>;
+    /** Prefills the signup with the review's email; still editable. */
+    email?: string;
   };
 }) {
   const copy = messages[locale];
@@ -320,6 +322,7 @@ export function NewsletterInvitation({
                 <NewsletterForm
                   signup={signup}
                   locale={locale}
+                  defaultEmail={afterReview?.email}
                   onClose={() => {
                     if (afterReview) {
                       afterReview.onOpenChange(false);
@@ -330,7 +333,11 @@ export function NewsletterInvitation({
                   }}
                 />
               ) : (
-                <NewsletterForm preview locale={locale} />
+                <NewsletterForm
+                  preview
+                  locale={locale}
+                  defaultEmail={afterReview?.email}
+                />
               )}
             </div>
           </div>

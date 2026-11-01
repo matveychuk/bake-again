@@ -112,9 +112,30 @@
   align-items: start;
   gap: var(--space-4);
 }
-.identity .submit {
+.submitCell {
   grid-column: 1 / -1;
-  justify-self: start;
+  display: grid;
+  justify-items: start;
+}
+.titleRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+}
+.ratingField {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 /* Full section width; the compact grid starts once the form itself is wide. */
 .wide {
@@ -123,27 +144,39 @@
 }
 @container (min-width: 56rem) {
   .wide .controls {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-areas:
-      'text rating'
       'text photos'
       'identity identity';
     gap: var(--space-6) var(--space-8);
-  }
-  .wide .ratingField {
-    grid-area: rating;
   }
   .wide .photoField {
     grid-area: photos;
   }
   .wide .textField {
     grid-area: text;
-    grid-template-rows: auto 1fr;
   }
-  .wide .textField textarea {
-    height: 100%;
+  /* Label, input, hint and error share rows, so the button lines up with inputs. */
+  .wide .identity {
+    grid-area: identity;
+    grid-template-columns: minmax(0, 18rem) minmax(0, 18rem) auto;
+    grid-template-rows: repeat(4, auto);
+    justify-content: start;
+    gap: var(--space-2) var(--space-4);
   }
-  /* Up to three small previews side by side in the narrow column. */
+  .wide .identity > * {
+    grid-column: auto;
+    grid-row: span 4;
+    display: grid;
+    grid-template-rows: subgrid;
+    gap: 0;
+  }
+  .wide .submitCell .submit {
+    grid-row: 2;
+    align-self: stretch;
+    height: auto;
+  }
+  /* Up to three small previews side by side. */
   .wide .photos {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-3);
@@ -158,15 +191,6 @@
   }
   .wide .photo button {
     padding-inline: 0;
-  }
-  .wide .identity {
-    grid-area: identity;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
-  }
-  /* Aligns the button with the inputs, below their one-line labels. */
-  .wide .identity .submit {
-    grid-column: auto;
-    margin-top: calc(var(--line-height-body) * 1em + var(--space-2));
   }
 }
 .challenge:empty {
@@ -255,8 +279,8 @@
   .identity {
     grid-template-columns: minmax(0, 1fr);
   }
-  .identity .submit {
-    width: 100%;
+  .submitCell {
+    justify-items: stretch;
   }
 }
 @media print {

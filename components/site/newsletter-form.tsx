@@ -155,6 +155,7 @@ export function NewsletterForm({
   placement = 'landing',
   onSent,
   onClose,
+  defaultEmail,
 }: {
   signup?: NewsletterSignup;
   locale?: AppLocale;
@@ -169,6 +170,8 @@ export function NewsletterForm({
   onSent?: () => void;
   /** Dialogs only: shows a Close button after a successful signup. */
   onClose?: () => void;
+  /** Editable prefill, e.g. the address just entered in a review. */
+  defaultEmail?: string;
 }) {
   const formId = useId();
   const kind: NewsletterScenario = magnetId ? 'pdf' : scenario;
@@ -380,6 +383,7 @@ export function NewsletterForm({
             type="email"
             autoComplete="email"
             placeholder={copy.placeholder}
+            defaultValue={defaultEmail}
             required
             maxLength={254}
             disabled={status === 'sending'}

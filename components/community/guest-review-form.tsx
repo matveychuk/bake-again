@@ -103,6 +103,7 @@ export function GuestReviewForm({
   const [token, setToken] = useState<string | null>(null);
   const [challengeFailed, setChallengeFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const [publishedEmail, setPublishedEmail] = useState('');
   useEffect(() => {
     const active = urls.current;
     return () => {
@@ -291,6 +292,7 @@ export function GuestReviewForm({
       setState(result.status);
       setPhotosAccepted(photos.length === 0 || result.photosAccepted);
       if (result.status === 'published') {
+        setPublishedEmail(email);
         onPublished?.();
         setInvitationOpen(true);
       }
@@ -328,45 +330,49 @@ export function GuestReviewForm({
         data-guest-review-form={locale}
       >
         <header className={styles.heading}>
-          <h3 id={`${id}-title`}>{copy.title}</h3>
+          <div className={styles.titleRow}>
+            <h3 id={`${id}-title`}>{copy.title}</h3>
+            <fieldset
+              className={styles.ratingField}
+              disabled={busy || complete}
+            >
+              <legend className={styles.visuallyHidden}>
+                {copy.rating} ({copy.optional})
+              </legend>
+              <div className={styles.ratingRow}>
+                <div className={styles.stars}>
+                  {[1, 2, 3, 4, 5].map((value) => (
+                    <label key={value} className={styles.star}>
+                      <input
+                        type="radio"
+                        name="rating"
+                        value={value}
+                        checked={rating === value}
+                        onChange={() => setRating(value)}
+                        aria-label={`${value} ${copy.ofFive}`}
+                      />
+                      <span>{value}</span>
+                      <Star aria-hidden="true" size={16} />
+                    </label>
+                  ))}
+                </div>
+                {rating !== null && (
+                  <Button
+                    type="button"
+                    variant="link"
+                    onClick={() => setRating(null)}
+                  >
+                    {copy.clear}
+                  </Button>
+                )}
+              </div>
+            </fieldset>
+          </div>
           {recipeTitle && <p className={styles.recipe}>{recipeTitle}</p>}
           <p>{copy.intro}</p>
         </header>
         {demo && <p className={styles.demo}>{copy.demo}</p>}
         <fieldset className={styles.controls} disabled={busy || complete}>
-          <fieldset className={`${styles.choice} ${styles.ratingField}`}>
-            <legend>
-              {copy.rating}{' '}
-              <span className={styles.hint}>({copy.optional})</span>
-            </legend>
-            <div className={styles.ratingRow}>
-              <div className={styles.stars}>
-                {[1, 2, 3, 4, 5].map((value) => (
-                  <label key={value} className={styles.star}>
-                    <input
-                      type="radio"
-                      name="rating"
-                      value={value}
-                      checked={rating === value}
-                      onChange={() => setRating(value)}
-                      aria-label={`${value} ${copy.ofFive}`}
-                    />
-                    <span>{value}</span>
-                    <Star aria-hidden="true" size={16} />
-                  </label>
-                ))}
-              </div>
-              {rating !== null && (
-                <Button
-                  type="button"
-                  variant="link"
-                  onClick={() => setRating(null)}
-                >
-                  {copy.clear}
-                </Button>
-              )}
-            </div>
-          </fieldset>
           <fieldset
             className={`${styles.choice} ${styles.photoField}`}
             aria-describedby={`${id}-photo-hint`}
@@ -442,7 +448,10 @@ export function GuestReviewForm({
             </output>
           </fieldset>
           <div className={`${fields.field} ${styles.textField}`}>
-            <label htmlFor={`${id}-text`}>{copy.text}</label>
+            {/* The intro already asks this; keep the name for screen readers. */}
+            <label htmlFor={`${id}-text`} className={styles.visuallyHidden}>
+              {copy.text}
+            </label>
             <textarea
               id={`${id}-text`}
               name="text"
@@ -505,22 +514,24 @@ export function GuestReviewForm({
               )}
             </div>
             {!complete && (
-              <Button
-                type="submit"
-                className={styles.submit}
-                disabled={
-                  !submitReview ||
-                  busy ||
-                  preparing ||
-                  (!!challengeSiteKey && !token)
-                }
-              >
-                {busy
-                  ? copy.sending
-                  : state === 'error'
-                    ? copy.tryAgain
-                    : copy.submit}
-              </Button>
+              <div className={styles.submitCell}>
+                <Button
+                  type="submit"
+                  className={styles.submit}
+                  disabled={
+                    !submitReview ||
+                    busy ||
+                    preparing ||
+                    (!!challengeSiteKey && !token)
+                  }
+                >
+                  {busy
+                    ? copy.sending
+                    : state === 'error'
+                      ? copy.tryAgain
+                      : copy.submit}
+                </Button>
+              </div>
             )}
           </div>
         </fieldset>
@@ -550,6 +561,7 @@ export function GuestReviewForm({
           open: invitationOpen,
           onOpenChange: setInvitationOpen,
           returnFocus: noticeRef,
+          email: publishedEmail,
         }}
       />
     </>
