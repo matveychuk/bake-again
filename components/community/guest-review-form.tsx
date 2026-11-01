@@ -112,15 +112,16 @@ export function GuestReviewForm({
     };
   }, []);
   const busy = state === 'sending';
-  const complete = state === 'published' || state === 'pending';
+  // The last result stays visible while the cleared form takes the next review.
+  const done = state === 'published' || state === 'pending';
   const preparing = photos.some((photo) => !photo.prepared && !photo.error);
   useEffect(() => {
-    if (complete && !invitationOpen) noticeRef.current?.focus();
-  }, [complete, invitationOpen]);
+    if (done && !invitationOpen) noticeRef.current?.focus();
+  }, [done, invitationOpen]);
 
   // A Turnstile token is single-use: every attempt renders a fresh widget.
   useEffect(() => {
-    if (!challengeSiteKey || !submitReview || complete) return;
+    if (!challengeSiteKey || !submitReview) return;
     let disposed = false;
     let widget: string | undefined;
     let api: Turnstile | undefined;
@@ -159,7 +160,7 @@ export function GuestReviewForm({
       disposed = true;
       if (widget !== undefined) api?.remove(widget);
     };
-  }, [challengeSiteKey, submitReview, complete, attempt, locale]);
+  }, [challengeSiteKey, submitReview, attempt, locale]);
 
   function addPhotos(event: ChangeEvent<HTMLInputElement>) {
     const files = Array.from(event.currentTarget.files ?? []);
@@ -228,7 +229,7 @@ export function GuestReviewForm({
   }
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (inFlight.current || complete || !submitReview) return;
+    if (inFlight.current || !submitReview) return;
     const form = event.currentTarget;
     const values = new FormData(form);
     const read = (key: string) => {
@@ -291,6 +292,15 @@ export function GuestReviewForm({
         throw new Error('INCOMPLETE_SUBMISSION');
       setState(result.status);
       setPhotosAccepted(photos.length === 0 || result.photosAccepted);
+      form.reset();
+      setRating(null);
+      for (const photo of photos) if (photo.url) URL.revokeObjectURL(photo.url);
+      urls.current.clear();
+      setPhotos([]);
+      setPhotoError('');
+      operation.current = null;
+      setToken(null);
+      setAttempt((value) => value + 1);
       if (result.status === 'published') {
         setPublishedEmail(email);
         onPublished?.();
@@ -332,10 +342,7 @@ export function GuestReviewForm({
         <header className={styles.heading}>
           <div className={styles.titleRow}>
             <h3 id={`${id}-title`}>{copy.title}</h3>
-            <fieldset
-              className={styles.ratingField}
-              disabled={busy || complete}
-            >
+            <fieldset className={styles.ratingField} disabled={busy}>
               <legend className={styles.visuallyHidden}>
                 {copy.rating} ({copy.optional})
               </legend>
@@ -372,7 +379,7 @@ export function GuestReviewForm({
           <p>{copy.intro}</p>
         </header>
         {demo && <p className={styles.demo}>{copy.demo}</p>}
-        <fieldset className={styles.controls} disabled={busy || complete}>
+        <fieldset className={styles.controls} disabled={busy}>
           <fieldset
             className={`${styles.choice} ${styles.photoField}`}
             aria-describedby={`${id}-photo-hint`}
@@ -421,24 +428,18 @@ export function GuestReviewForm({
                       {photo.error ||
                         (busy
                           ? copy.sending
-                          : complete
-                            ? photosAccepted
-                              ? copy.photoPublished
-                              : copy.photoFailed
-                            : photo.prepared
-                              ? copy.ready
-                              : copy.preparing)}
+                          : photo.prepared
+                            ? copy.ready
+                            : copy.preparing)}
                     </span>
-                    {!complete && (
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        aria-label={`${copy.removePhoto} ${index + 1}`}
-                        onClick={() => removePhoto(photo)}
-                      >
-                        {copy.removePhoto}
-                      </Button>
-                    )}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      aria-label={`${copy.removePhoto} ${index + 1}`}
+                      onClick={() => removePhoto(photo)}
+                    >
+                      {copy.removePhoto}
+                    </Button>
                   </li>
                 ))}
               </ul>
@@ -513,32 +514,30 @@ export function GuestReviewForm({
                 </span>
               )}
             </div>
-            {!complete && (
-              <div className={styles.submitCell}>
-                <Button
-                  type="submit"
-                  className={styles.submit}
-                  disabled={
-                    !submitReview ||
-                    busy ||
-                    preparing ||
-                    (!!challengeSiteKey && !token)
-                  }
-                >
-                  {busy
-                    ? copy.sending
-                    : state === 'error'
-                      ? copy.tryAgain
-                      : copy.submit}
-                </Button>
-              </div>
-            )}
+            <div className={styles.submitCell}>
+              <Button
+                type="submit"
+                className={styles.submit}
+                disabled={
+                  !submitReview ||
+                  busy ||
+                  preparing ||
+                  (!!challengeSiteKey && !token)
+                }
+              >
+                {busy
+                  ? copy.sending
+                  : state === 'error'
+                    ? copy.tryAgain
+                    : copy.submit}
+              </Button>
+            </div>
           </div>
         </fieldset>
-        {challengeSiteKey && submitReview && !complete && (
+        {challengeSiteKey && submitReview && (
           <div ref={challenge} className={styles.challenge} />
         )}
-        {challengeFailed && !complete && (
+        {challengeFailed && (
           <p className={styles.error} role="alert">
             {copy.challengeFailed}
           </p>
@@ -549,7 +548,7 @@ export function GuestReviewForm({
           className={notice ? styles.notice : styles.emptyNotice}
           role={state === 'error' ? 'alert' : 'status'}
         >
-          {complete && <Check aria-hidden="true" size={20} />}
+          {done && <Check aria-hidden="true" size={20} />}
           {notice}
         </p>
         {!submitReview && <p className={styles.hint}>{copy.unavailable}</p>}

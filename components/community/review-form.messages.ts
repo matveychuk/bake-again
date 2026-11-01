@@ -38,8 +38,6 @@ export const reviewFormMessages = {
     publishedWithoutPhotos:
       'Дякую! Відгук опубліковано, але фото не вдалося завантажити.',
     pending: 'Дякую! Відгук отримано.',
-    photoPublished: 'Фото опубліковано.',
-    photoFailed: 'Фото не завантажено.',
     tryAgain: 'Спробувати ще раз',
     unavailable: 'Надсилання відгуків поки недоступне.',
     demo: 'Приклад у Design Lab. Дані не надсилаються й не зберігаються.',
@@ -84,8 +82,6 @@ export const reviewFormMessages = {
     publishedWithoutPhotos:
       '¡Gracias! Tu reseña se ha publicado, pero no se pudieron subir las fotos.',
     pending: '¡Gracias! Hemos recibido tu reseña.',
-    photoPublished: 'Foto publicada.',
-    photoFailed: 'Foto no subida.',
     tryAgain: 'Volver a intentarlo',
     unavailable: 'Todavía no se pueden enviar reseñas.',
     demo: 'Ejemplo de Design Lab. Los datos no se envían ni se guardan.',
@@ -132,8 +128,6 @@ export const reviewFormMessages = {
     publishedWithoutPhotos:
       'Thank you! Your review has been published, but the photos could not be uploaded.',
     pending: 'Thank you! Your review has been received.',
-    photoPublished: 'Photo published.',
-    photoFailed: 'Photo not uploaded.',
     tryAgain: 'Try again',
     unavailable: 'Review submission is not available yet.',
     demo: 'Design Lab example. Data is not sent or saved.',
