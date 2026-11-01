@@ -20,19 +20,24 @@ import type { MagnetId } from '@/lib/newsletter/magnets';
 import fieldStyles from '@/components/account/account.module.css';
 import styles from './newsletter-form.module.css';
 
+/** Which promise the form makes; a magnet always means the PDF scenario. */
+export type NewsletterScenario = 'recipes' | 'lesson' | 'pdf';
+
 type Copy = {
-  label: string;
+  label: Record<NewsletterScenario, string>;
   email: string;
+  placeholder: string;
   sendTo: string;
   otherEmail: string;
-  consent: string;
+  footnote: string;
   privacy: string;
-  submit: string;
+  submit: Record<NewsletterScenario, string>;
   sending: string;
   doneTitle: string;
-  doneBody: (email: string) => string;
+  doneBody: string;
+  donePdf: (email: string) => string;
   doneHint: string;
-  restart: string;
+  close: string;
   error: string;
   verifyFailed: string;
   verifyRetry: string;
@@ -43,90 +48,95 @@ type Copy = {
 
 const messages: Record<AppLocale, Copy> = {
   uk: {
-    label: 'Підписатися на нові рецепти',
-    email: 'Електронна пошта',
-    sendTo: 'Надішлемо лист на',
+    label: {
+      recipes: 'Підписка на нові рецепти',
+      lesson: 'Список очікування відеоуроку',
+      pdf: 'PDF на пошту',
+    },
+    email: 'Email',
+    placeholder: 'Твій email',
+    sendTo: 'Надішлю на',
     otherEmail: 'Інша адреса',
-    consent:
-      'Підписуючись, ви погоджуєтеся отримувати рецепти й матеріали Bake Again українською. Відписатися можна будь-коли. Дані обробляє Brevo.',
+    footnote: 'Без спаму. Відписатися — одним кліком.',
     privacy: 'Приватність',
-    submit: 'Підписатися',
-    sending: 'Надсилаємо…',
-    doneTitle: 'Запит прийнято',
-    doneBody: (email) =>
-      `Запит для ${email} прийнято. Нові рецепти надходитимуть на цю адресу. Підтверджувати email окремим листом не потрібно.`,
-    doneHint:
-      'Якщо листа немає за кілька хвилин, зазирніть у «Промоакції» або «Спам».',
-    restart: 'Ввести іншу адресу',
-    error:
-      'Не вдалося надіслати запит. Перевірте з’єднання й спробуйте ще раз.',
-    verifyFailed: 'Не вдалося завершити перевірку.',
-    verifyRetry: 'Повторити перевірку',
+    submit: {
+      recipes: 'Хочу рецепти',
+      lesson: 'Хочу урок',
+      pdf: 'Надіслати PDF',
+    },
+    sending: 'Надсилаю…',
+    doneTitle: 'Дякую!',
+    doneBody: 'Перший лист уже в дорозі.',
+    donePdf: (email) => `PDF уже летить на ${email}.`,
+    doneHint: 'Немає за кілька хвилин — глянь у «Спам» або «Промоакції».',
+    close: 'Закрити',
+    error: 'Не вийшло надіслати. Спробуй ще раз.',
+    verifyFailed: 'Не вийшло перевірити, що ти не робот.',
+    verifyRetry: 'Спробувати ще раз',
     openProvider: 'Відкрити форму Brevo',
     noscript: 'Для цієї форми потрібен JavaScript.',
     preview: 'Перегляд форми — без надсилання й перевірки Turnstile.',
   },
   es: {
-    label: 'Suscribirme a nuevas recetas',
+    label: {
+      recipes: 'Suscripción a nuevas recetas',
+      lesson: 'Lista de espera de la videoclase',
+      pdf: 'PDF por correo',
+    },
     email: 'Correo electrónico',
-    sendTo: 'Enviaremos el correo a',
+    placeholder: 'Tu correo',
+    sendTo: 'Te lo envío a',
     otherEmail: 'Otra dirección',
-    consent:
-      'Al suscribirte, aceptas recibir recetas y recursos de Bake Again en español. Puedes darte de baja en cualquier momento. Brevo trata tus datos.',
+    footnote: 'Sin spam. Te das de baja con un clic.',
     privacy: 'Privacidad',
-    submit: 'Suscribirme',
+    submit: {
+      recipes: 'Quiero recetas',
+      lesson: 'Avísame',
+      pdf: 'Enviarme el PDF',
+    },
     sending: 'Enviando…',
-    doneTitle: 'Revisa tu correo',
-    doneBody: (email) =>
-      `Solicitud recibida para ${email}. Recibirás las nuevas recetas en esta dirección; no necesitas confirmar el correo.`,
-    doneHint: 'Si no llega en unos minutos, mira en «Promociones» o «Spam».',
-    restart: 'Usar otra dirección',
-    error:
-      'No se ha podido enviar la solicitud. Revisa la conexión e inténtalo de nuevo.',
-    verifyFailed: 'No se ha podido completar la verificación.',
-    verifyRetry: 'Repetir la verificación',
+    doneTitle: '¡Gracias!',
+    doneBody: 'El primer correo ya va de camino.',
+    donePdf: (email) => `El PDF va de camino a ${email}.`,
+    doneHint: '¿No llega en unos minutos? Mira en «Spam» o «Promociones».',
+    close: 'Cerrar',
+    error: 'No se ha podido enviar. Inténtalo de nuevo.',
+    verifyFailed: 'No se ha podido comprobar que no eres un robot.',
+    verifyRetry: 'Reintentar',
     openProvider: 'Abrir el formulario de Brevo',
     noscript: 'Este formulario necesita JavaScript.',
     preview: 'Vista previa: sin envío ni verificación Turnstile.',
   },
   en: {
-    label: 'Subscribe to new recipes',
+    label: {
+      recipes: 'Subscribe to new recipes',
+      lesson: 'Video lesson waiting list',
+      pdf: 'PDF by email',
+    },
     email: 'Email address',
-    sendTo: 'We’ll send the email to',
+    placeholder: 'Your email',
+    sendTo: 'I’ll send it to',
     otherEmail: 'Use another address',
-    consent:
-      'By subscribing, you agree to receive Bake Again recipes and resources in English. Unsubscribe at any time. Brevo processes your data.',
+    footnote: 'No spam. Unsubscribe in one click.',
     privacy: 'Privacy',
-    submit: 'Subscribe',
+    submit: {
+      recipes: 'Send me recipes',
+      lesson: 'Notify me',
+      pdf: 'Send me the PDF',
+    },
     sending: 'Sending…',
-    doneTitle: 'Check your inbox',
-    doneBody: (email) =>
-      `Request received for ${email}. New recipes will arrive at this address; no confirmation email is needed.`,
-    doneHint:
-      'If it hasn’t arrived in a few minutes, check Promotions or Spam.',
-    restart: 'Use another address',
-    error:
-      'The request could not be sent. Check your connection and try again.',
-    verifyFailed: 'The check could not be completed.',
-    verifyRetry: 'Retry the check',
+    doneTitle: 'Thanks!',
+    doneBody: 'Your first email is on its way.',
+    donePdf: (email) => `The PDF is on its way to ${email}.`,
+    doneHint: 'Not there in a few minutes? Check Spam or Promotions.',
+    close: 'Close',
+    error: 'Couldn’t send. Please try again.',
+    verifyFailed: 'We couldn’t check you’re not a robot.',
+    verifyRetry: 'Try again',
     openProvider: 'Open the Brevo form',
     noscript: 'This form needs JavaScript.',
     preview: 'Form preview: no submission or Turnstile check.',
   },
-};
-
-// The UK lead magnet keeps its informal voice and promises the PDF.
-const magnetCopy: Partial<Copy> = {
-  label: 'Отримати матеріал на пошту',
-  sendTo: 'Адреса для листа',
-  consent:
-    'Підписуючись, ти погоджуєшся отримувати рецепти й матеріали Bake Again українською. Відписатися можна будь-коли. Дані обробляє Brevo.',
-  submit: 'Отримати рецепт',
-  doneTitle: 'Запит прийнято',
-  doneBody: (email) =>
-    `Запит для ${email} прийнято. Шукай матеріал у пошті за кілька хвилин. Підтверджувати email окремим листом не потрібно.`,
-  doneHint: 'Якщо листа немає, зазирни в «Промоакції» або «Спам».',
-  error: 'Не вдалося надіслати запит. Перевір з’єднання й спробуй ще раз.',
 };
 
 /**
@@ -138,33 +148,36 @@ export function NewsletterForm({
   signup,
   locale = 'uk',
   magnetId,
-  note,
+  scenario = 'recipes',
   preview = false,
   previewEmail,
   recipeSiteKey,
   placement = 'landing',
   onSent,
+  onClose,
 }: {
   signup?: NewsletterSignup;
   locale?: AppLocale;
   magnetId?: MagnetId;
+  /** Ignored with a magnet, which always promises its PDF. */
+  scenario?: Exclude<NewsletterScenario, 'pdf'>;
   recipeSiteKey?: string;
   placement?: import('@/lib/newsletter/single-opt-in').SubscriptionPlacement;
-  note?: string;
   preview?: boolean;
   /** Design Lab only: render the signed-in variant without an account. */
   previewEmail?: string;
   onSent?: () => void;
+  /** Dialogs only: shows a Close button after a successful signup. */
+  onClose?: () => void;
 }) {
   const formId = useId();
+  const kind: NewsletterScenario = magnetId ? 'pdf' : scenario;
+  const copy = messages[locale];
   const invitation = getRecipeInvitation('crepes', locale);
-  const copy = {
-    ...messages[locale],
-    ...(magnetId ? magnetCopy : {}),
-    ...(invitation && magnetId === invitation.magnetId
-      ? { label: invitation.title, submit: invitation.submit }
-      : {}),
-  };
+  const submitLabel =
+    invitation && magnetId === invitation.magnetId
+      ? invitation.submit
+      : copy.submit[kind];
   const account = useAccount();
   const accountEmail =
     previewEmail ?? (account.identity ? account.email : null);
@@ -190,6 +203,10 @@ export function NewsletterForm({
     let disposed = false;
     let widget: string | undefined;
     let api: Turnstile | undefined;
+    const expire = () => {
+      if (!disposed) setToken(null);
+    };
+    // Shown only when the check really failed, not when a token expired.
     const invalidate = () => {
       if (!disposed) {
         setToken(null);
@@ -214,7 +231,7 @@ export function NewsletterForm({
               setVerificationFailed(false);
             }
           },
-          'expired-callback': invalidate,
+          'expired-callback': expire,
           'error-callback': invalidate,
           'timeout-callback': invalidate,
         });
@@ -314,23 +331,18 @@ export function NewsletterForm({
           >
             {copy.doneTitle}
           </DoneHeading>
-          <p>{copy.doneBody(sentTo)}</p>
+          <p>{kind === 'pdf' ? copy.donePdf(sentTo) : copy.doneBody}</p>
           <p className={styles.small}>{copy.doneHint}</p>
-          <Button
-            variant="link"
-            type="button"
-            onClick={() => {
-              setSentTo(null);
-              setUseOther(true);
-            }}
-          >
-            {copy.restart}
-          </Button>
+          {onClose && (
+            <Button variant="outline" type="button" onClick={onClose}>
+              {copy.close}
+            </Button>
+          )}
         </div>
       </div>
     );
 
-  const consentId = `newsletter-consent-${formId}`;
+  const footnoteId = `newsletter-footnote-${formId}`;
   return (
     <form
       className={styles.form}
@@ -338,7 +350,11 @@ export function NewsletterForm({
       action={magnetId ? '/api/newsletter/recipe' : signup?.url}
       onSubmit={submit}
       lang={locale}
-      aria-label={copy.label}
+      aria-label={
+        invitation && magnetId === invitation.magnetId
+          ? invitation.title
+          : copy.label[kind]
+      }
       aria-busy={status === 'sending'}
     >
       {knownEmail ? (
@@ -347,6 +363,7 @@ export function NewsletterForm({
           <p>
             {copy.sendTo} <strong>{knownEmail}</strong>
           </p>
+          <span aria-hidden="true">·</span>
           <Button
             variant="link"
             type="button"
@@ -357,16 +374,17 @@ export function NewsletterForm({
         </div>
       ) : (
         <label className={fieldStyles.field}>
-          {copy.email}
+          <span className="sr-only">{copy.email}</span>
           <input
             name="EMAIL"
             type="email"
             autoComplete="email"
+            placeholder={copy.placeholder}
             required
             maxLength={254}
             disabled={status === 'sending'}
             ref={emailField}
-            aria-describedby={consentId}
+            aria-describedby={footnoteId}
           />
         </label>
       )}
@@ -379,13 +397,10 @@ export function NewsletterForm({
         className="sr-only"
         autoComplete="off"
       />
-      <p id={consentId} className={styles.small}>
-        {copy.consent} <a href={`/${locale}/privacy`}>{copy.privacy}</a>.
-      </p>
-      {!preview && <div ref={challenge} />}
+      {!preview && <div ref={challenge} className={styles.challenge} />}
       {preview && <p className={styles.small}>{copy.preview}</p>}
       {verificationFailed && (
-        <div>
+        <div className={styles.verify} role="alert">
           <p>{copy.verifyFailed}</p>
           <Button
             variant="outline"
@@ -398,23 +413,20 @@ export function NewsletterForm({
           >
             {copy.verifyRetry}
           </Button>
-          {signup && !magnetId && (
-            <p>
-              <a href={signup.url}>{copy.openProvider}</a>
-            </p>
-          )}
         </div>
       )}
       <Button
         type="submit"
         disabled={preview || !token || status === 'sending' || !endpoint}
       >
-        {status === 'sending' ? copy.sending : copy.submit}
+        {status === 'sending' ? copy.sending : submitLabel}
       </Button>
       <output aria-live="polite">
         {status === 'error' && <p>{copy.error}</p>}
       </output>
-      {note && <p className={styles.small}>{note}</p>}
+      <p id={footnoteId} className={`${styles.small} ${styles.footnote}`}>
+        {copy.footnote} <a href={`/${locale}/privacy`}>{copy.privacy}</a>
+      </p>
       {!preview && (
         <noscript>
           <p>

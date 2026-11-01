@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getLeadMagnet } from '@/content/lead-magnets';
+import { getLeadMagnet, pdfInvitationEyebrow } from '@/content/lead-magnets';
 import { EditorialInvitation } from '@/components/site/editorial-invitation';
 import { NewsletterSignup } from '@/components/site/newsletter-signup';
 import { Wordmark } from '@/components/site/wordmark';
@@ -41,6 +41,7 @@ export default async function LeadMagnetPage({ params }: Props) {
         <EditorialInvitation
           variant="lead-magnet"
           headingLevel={1}
+          eyebrow={pdfInvitationEyebrow.uk}
           titleId="lead-magnet-title"
           title={content.title}
           description={content.subtitle}
@@ -61,13 +62,7 @@ export default async function LeadMagnetPage({ params }: Props) {
               ))}
             </ul>
           }
-          action={
-            <NewsletterSignup
-              locale="uk"
-              magnetId={content.magnetId}
-              note={content.note}
-            />
-          }
+          action={<NewsletterSignup locale="uk" magnetId={content.magnetId} />}
         />
       </main>
     </div>

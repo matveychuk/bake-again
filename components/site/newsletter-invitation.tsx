@@ -2,7 +2,6 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import { ArrowRight, X } from 'lucide-react';
-import Image from 'next/image';
 import type { AppLocale } from '@/lib/i18n/config';
 import type { NewsletterSignup } from '@/lib/newsletter/config';
 import { Button } from '@/components/ui/button';
@@ -23,39 +22,43 @@ import {
 } from '@/lib/newsletter/prompt-policy';
 import styles from './newsletter-invitation.module.css';
 
+const photo = {
+  small:
+    '/media/recipes/gluten-free-napoleon/subscribe-popup-2026-11-01/subscribe-popup-napoleon-960.webp',
+  large:
+    '/media/recipes/gluten-free-napoleon/subscribe-popup-2026-11-01/subscribe-popup-napoleon-1600.webp',
+};
+
 const messages = {
   uk: {
-    title: 'Наступний рецепт — вам на пошту',
-    body: 'Нові рецепти без глютену й практичні підказки для домашньої випічки від Bake Again.',
-    action: 'Отримувати рецепти',
+    title: 'Новий рецепт — тобі на пошту',
+    body: 'Перевірені рецепти без глютену — щойно додам новий.',
+    action: 'Хочу рецепти',
     preview: 'Приклад дизайну. Підписка тут недоступна.',
     previewAction: 'Переглянути модалку',
-    later: 'Не зараз',
-    done: 'Закрити',
-    close: 'Закрити пропозицію підписки',
-    image: 'Наполеон із золотистою крихтою поруч із чашкою чаю',
+    close: 'Закрити',
+    image:
+      'Шматочок безглютенового Наполеона на тарілці, позаду бордові хризантеми',
   },
   en: {
     title: 'Your next recipe, by email',
-    body: 'New gluten-free recipes and practical tips for baking at home, from Bake Again.',
-    action: 'Get new recipes',
+    body: 'Tested gluten-free recipes, as soon as I post a new one.',
+    action: 'Send me recipes',
     preview: 'Design preview. Signup is unavailable here.',
     previewAction: 'Preview invitation dialog',
-    later: 'Not now',
-    done: 'Close',
-    close: 'Close signup invitation',
-    image: 'Napoleon cake with golden crumbs beside a cup of tea',
+    close: 'Close',
+    image:
+      'A slice of gluten-free Napoleon cake on a plate, with burgundy chrysanthemums behind',
   },
   es: {
     title: 'Tu próxima receta, por correo',
-    body: 'Nuevas recetas sin gluten y consejos prácticos para hornear en casa, de Bake Again.',
-    action: 'Recibir recetas',
+    body: 'Recetas sin gluten probadas, en cuanto publique una nueva.',
+    action: 'Quiero recetas',
     preview: 'Vista previa del diseño. Aquí no puedes suscribirte.',
     previewAction: 'Ver ventana de suscripción',
-    later: 'Ahora no',
-    done: 'Cerrar',
-    close: 'Cerrar invitación a suscribirme',
-    image: 'Tarta Napoleón con migas doradas junto a una taza de té',
+    close: 'Cerrar',
+    image:
+      'Porción de tarta milhojas sin gluten en un plato, con crisantemos granates detrás',
   },
 };
 
@@ -92,7 +95,6 @@ export function NewsletterInvitation({
   const returnFocusRef = useRef<HTMLElement | null>(null);
   const consumed = useRef(false);
   const [open, setOpen] = useState(false);
-  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     if (!autoPrompt || !signup) return;
@@ -251,16 +253,24 @@ export function NewsletterInvitation({
           finalFocus={signup ? returnFocusRef : previewRef}
           lang={locale}
         >
-          <div className={styles.dialogHeader}>
-            <span className={styles.signature}>
-              Bake Again<span>.</span>
-            </span>
+          <div className={styles.media}>
+            {/* oxlint-disable-next-line next/no-img-element -- Prepared author photograph with srcset. */}
+            <img
+              className={styles.photo}
+              src={photo.small}
+              srcSet={`${photo.small} 960w, ${photo.large} 1600w`}
+              sizes="(max-width: 620px) calc(100vw - 32px), 480px"
+              width={960}
+              height={640}
+              alt={copy.image}
+            />
             <DialogClose
               render={
                 <Button
                   ref={closeRef}
                   variant="ghost"
                   size="icon"
+                  className={styles.closeOnPhoto}
                   aria-label={copy.close}
                 />
               }
@@ -268,34 +278,25 @@ export function NewsletterInvitation({
               <X size={20} aria-hidden="true" />
             </DialogClose>
           </div>
-          <Image
-            className={styles.photo}
-            src="/media/recipes/gluten-free-napoleon/author-custard-2026-10-04/hero-tea-editorial-v2.webp"
-            width={720}
-            height={400}
-            sizes="(max-width: 620px) 90vw, 480px"
-            alt={copy.image}
-          />
           <div className={styles.dialogBody}>
             <DialogTitle className={styles.title}>{copy.title}</DialogTitle>
             <DialogDescription className={styles.description}>
               {copy.body}
             </DialogDescription>
             {!signup && <p className={styles.note}>{copy.preview}</p>}
-            {signup && (
-              <div className={styles.dialogForm}>
+            <div className={styles.dialogForm}>
+              {signup ? (
                 <NewsletterForm
                   signup={signup}
                   locale={locale}
-                  onSent={() => setSent(true)}
+                  onClose={() => {
+                    rememberInvitation();
+                    setOpen(false);
+                  }}
                 />
-              </div>
-            )}
-            <div className={styles.dialogActions}>
-              {!signup && <Button disabled>{copy.action}</Button>}
-              <DialogClose render={<Button variant="ghost" />}>
-                {sent ? copy.done : copy.later}
-              </DialogClose>
+              ) : (
+                <NewsletterForm preview locale={locale} />
+              )}
             </div>
           </div>
         </DialogContent>

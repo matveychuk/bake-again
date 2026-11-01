@@ -1,4 +1,7 @@
-import { getRecipeInvitation } from '@/content/lead-magnets';
+import {
+  getRecipeInvitation,
+  pdfInvitationEyebrow,
+} from '@/content/lead-magnets';
 import { EditorialInvitation } from '@/components/site/editorial-invitation';
 import { AssistantProvider, AssistantTrigger } from '@/components/assistant';
 import { stepHelpMessages } from '@/components/assistant/step-help.messages';
@@ -507,6 +510,7 @@ export function InventoryRecipeDetail({
                       data-recipe-subscription={invitation.magnetId}
                       variant="recipe-step"
                       headingLevel={3}
+                      eyebrow={pdfInvitationEyebrow.uk}
                       titleId="recipe-junior-card-title"
                       title={invitation.title}
                       description={invitation.description}

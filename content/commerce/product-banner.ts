@@ -11,9 +11,8 @@ type BannerCopy = HookCopy & {
   eyebrow: string;
   action: string;
   videoLabel: string;
-  dialog: { title: string; description: string; note: string };
+  dialog: { title: string; description: string };
   close: string;
-  later: string;
 };
 
 /** The resolved banner for one page: copy in the page locale plus media. */
@@ -51,11 +50,9 @@ export const productBanner = {
       dialog: {
         title: 'Наполеон без глютену',
         description:
-          'Залиш email — і раніше за всіх отримаєш лист про запуск уроку. А поки надсилатиму один перевірений рецепт без глютену раз на 1–2 тижні.',
-        note: 'Це підписка на розсилку Bake Again. Відписатися можна будь-коли одним кліком у листі.',
+          'Напишу, щойно урок вийде, а поки надсилатиму перевірені рецепти без глютену.',
       },
       close: 'Закрити',
-      later: 'Не зараз',
     },
     en: {
       eyebrow: 'Video lesson · December',
@@ -67,13 +64,11 @@ export const productBanner = {
       videoLabel:
         'A fork breaks off a piece of gluten-free Napoleon cake, showing the layers',
       dialog: {
-        title: 'Gluten-Free Napoleon Cake',
+        title: 'Gluten-free Napoleon cake',
         description:
-          'Leave your email and be the first to hear when the lesson launches. Until then, I’ll send you one tested gluten-free recipe every 1–2 weeks.',
-        note: 'This is a subscription to the Bake Again newsletter. You can unsubscribe at any time with one click in any email.',
+          'I’ll email you when the lesson is out — and send tested gluten-free recipes in the meantime.',
       },
       close: 'Close',
-      later: 'Not now',
     },
     es: {
       eyebrow: 'Videoclase · diciembre',
@@ -87,11 +82,9 @@ export const productBanner = {
       dialog: {
         title: 'Tarta milhojas sin gluten',
         description:
-          'Deja tu correo y serás de los primeros en saber cuándo sale la clase. Mientras tanto, te enviaré una receta sin gluten probada cada 1–2 semanas.',
-        note: 'Es una suscripción al boletín de Bake Again. Puedes darte de baja cuando quieras con un clic en cualquier correo.',
+          'Te aviso en cuanto salga la clase y, mientras tanto, te envío recetas sin gluten probadas.',
       },
       close: 'Cerrar',
-      later: 'Ahora no',
     },
   } satisfies Record<AppLocale, BannerCopy>,
   /**

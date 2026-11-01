@@ -9,13 +9,11 @@ export async function NewsletterSignup({
   locale,
   autoPrompt = false,
   magnetId,
-  note,
   placement = 'landing',
 }: {
   locale: AppLocale;
   autoPrompt?: boolean;
   magnetId?: MagnetId;
-  note?: string;
   placement?: import('@/lib/newsletter/single-opt-in').SubscriptionPlacement;
 }) {
   let bindings: Record<string, unknown>;
@@ -38,7 +36,6 @@ export async function NewsletterSignup({
         placement={placement}
         signup={signup}
         magnetId={magnetId}
-        note={note}
         recipeSiteKey={bindings.TURNSTILE_SITE_KEY as string}
       />
     ) : (

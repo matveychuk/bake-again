@@ -1,5 +1,17 @@
 # Design system changelog
 
+## 2026-11-01 — Short subscription dialogs (uk / es / en)
+
+- One structure for the general, lesson and PDF forms: ✕, photo (general only),
+  eyebrow (lesson/PDF), title, one sentence, placeholder-only email field with a
+  visually hidden label, full-width button and a single no-spam + privacy line.
+- Removed the dialog wordmark, visible field label, consent paragraph, «Not now»
+  and the Brevo form link; NewsletterForm gained `scenario` and `onClose`.
+- General dialog photo is a 3:2 Napoleon slice with srcset 960/1600 and the ✕ on
+  a 40 px light disc inside a 44 px target. UK copy uses «ти» in the first person.
+- The verification error appears only on a real Turnstile failure, not on expiry.
+- Checked at 390, 900 and 1440; the general dialog fits 390×812 without scrolling.
+
 ## 2026-11-01 — Junior-cook card within crepes
 
 - Extended EditorialInvitation with the token-based recipe-step variant after step two.

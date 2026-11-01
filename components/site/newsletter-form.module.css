@@ -1,6 +1,5 @@
 .form {
   display: grid;
-  gap: var(--space-4);
   width: 100%;
   min-width: 0;
   max-width: var(--layout-assistant-drawer);
@@ -60,4 +59,26 @@
 .doneTitle:focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: var(--space-1);
+}
+.verify {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+.form input::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 1;
+}
+/* Empty status slots (invisible Turnstile, no error) must not add spacing. */
+.form > * + * {
+  margin-top: var(--space-4);
+}
+.form > :is(.challenge, output, noscript, input) {
+  margin-top: 0;
+}
+.form output > p {
+  margin-top: var(--space-4);
+}
+.form > .footnote {
+  margin-top: var(--space-3);
 }
