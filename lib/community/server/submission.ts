@@ -32,8 +32,6 @@ export async function prepareGuestSubmission(
     !scope.configuration
   )
     throw new CommunityInputError('recipeId');
-  if (input.rating !== null && !scope.isBase)
-    throw new CommunityInputError('rating');
   if (
     context.fingerprintSecret.length < 32 ||
     !/^[a-f0-9]{64}$/.test(context.browserId)
@@ -80,8 +78,8 @@ export async function prepareGuestSubmission(
     configuration: scope.configuration,
     display_name: input.name,
     body: input.text,
-    kind: input.kind,
-    experience: input.experience,
+    kind: null,
+    experience: null,
     rating: input.rating,
     state: context.moderation,
   };

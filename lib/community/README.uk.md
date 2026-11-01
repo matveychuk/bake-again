@@ -1,4 +1,42 @@
-# Відгуки без акаунта — початок реалізації
+# Відгуки без акаунта
+
+## Публічні відгуки під рецептами — 01.11.2026
+
+Рішення Саші: ім’я та email у формі лишаються (серверний контракт не
+переробляємо), відгуки й фото **публікуються одразу без модерації**, небажане
+Саша видаляє вручну. Список — без пагінації (до 200 найновіших).
+[UI-контракт](../../design-system/community.uk.md).
+
+- Контракт: прибрано `kind/experience/cooked`; оцінка 1–5 необов’язкова.
+  Сервер сам бере `recipeId/version` з канонічного рецепта, `configuration = base`.
+- [Міграція](../../supabase/migrations/20261101190000_community_reviews_public.sql):
+  `kind/experience` nullable, повторна оцінка з того самого email більше не йде
+  в `pending`, нові service-only RPC `community_recipe_reviews` (лише публічні поля
+  і id збережених фото) та `community_public_photo` (тільки опублікований внесок).
+- `server/runtime.ts` + маршрути `app/api/community/reviews` (GET список,
+  POST відгук) і `app/api/community/photos` (POST завантаження за 120-секундним
+  дозволом, GET віддача фото). Same-origin, тіло ≤ 16 KiB, Turnstile
+  `community_review`, ліміт 10/24 год на HMAC мережевої адреси, перевірка
+  сигнатури файлу. Фото перекодовує браузер (`lib/community/client.ts`).
+- Секція вмикається, лише коли задані всі змінні нижче; без них сторінки
+  рецептів виглядають як раніше.
+
+### Що потрібно для запуску (робить Саша)
+
+1. Supabase → SQL Editor: виконати файл, який створює
+   `node scripts/community/reviews-public-migration.mjs`
+   (`tmp/community-reviews/apply-reviews-public.sql`, міграція + запис версії).
+2. Cloudflare → Worker `bake-again` → Settings → Variables and Secrets:
+   `COMMUNITY_SUPABASE_SECRET_KEY` (secret key Supabase, тип Secret),
+   `COMMUNITY_FINGERPRINT_SECRET` (випадкові ≥ 32 символи, Secret).
+   `COMMUNITY_ENABLED=true`, `SUPABASE_URL` і `TURNSTILE_SITE_KEY` задані у
+   `wrangler.jsonc`; `TURNSTILE_SECRET_KEY` уже є серед секретів.
+3. Приватний bucket `community-photo-probe` має існувати (створений 31.10).
+
+Перевірено локально: `test:community` 26/26 (PGlite: міграції, приватність
+списку, фото лише опублікованих внесків; API з підробленими Supabase/Turnstile),
+typecheck, lint, 390/900/1440, uk/es, Design Lab. Справжній запис у hosted
+Supabase і завантаження фото з телефона **ще не перевірені** — після кроків 1–2.
 
 ## Актуальний стан: короткий дозвіл додано 31.10.2026
 

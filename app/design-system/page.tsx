@@ -1,3 +1,4 @@
+import { RecipeReviewsExample } from '@/components/community/recipe-reviews-example';
 import { GuestReviewExample } from '@/components/community/guest-review-example';
 import { AccountExample } from '@/components/account/account-example';
 import {
@@ -416,11 +417,18 @@ export default function DesignSystemPage() {
           >
             <h2>Відгук без акаунта</h2>
             <p>
-              Обов’язковий приватний email, необов’язкова оцінка й миттєве
-              прев’ю до трьох фото. Без окремої згоди на фото. Це інтерактивний
-              приклад без публікації.
+              Оцінка, фото, текст, ім’я та приватний email — без акаунта. Відгук
+              публікується одразу, без модерації. Після публікації — окрема
+              пропозиція отримувати нові рецепти. Це інтерактивний приклад:
+              відгуки й підписки не надсилаються.
             </p>
             <GuestReviewExample />
+            <h3>Відгуки під рецептом</h3>
+            <p>
+              Список опублікованих відгуків (новіші зверху, без пагінації),
+              середня оцінка й форма. Читачі та тексти вигадані.
+            </p>
+            <RecipeReviewsExample />
           </section>
           <section className={styles.section} id="components">
             <NumberedSectionTitle

@@ -1054,3 +1054,20 @@ Print and Cook mode exclude it. `/design-system#recipe-step-subscription` shows
 light/dark inert examples; development without credentials labels its inert form.
 Recipe requests use single opt-in and provider automation. Historical DOI/SMTP
 contracts above are superseded by `lib/newsletter/README.md`'s current section.
+
+## Guest review and after-review invitation (2026-11-01)
+
+`RecipeReviews` (server) renders `RecipeReviewsSection` on published recipe pages
+only when the community runtime is configured. The section lists published
+reviews (name, date, stars with screen-reader text, text, thumbnails) and holds
+`GuestReviewForm`; `preview` fixtures power the Design Lab example.
+
+`GuestReviewForm` contains optional rating, optional photos (browser re-encoded),
+required text, public name and private email. With `challengeSiteKey` it renders
+Turnstile (`community_review`); the injected adapter performs the network work.
+
+`NewsletterInvitation.afterReview` is a controlled variant opened after a
+published review: no inline invitation, publication title and subscription
+question. With `signup` it shows the real NewsletterForm; without it, the
+preview form. Focus returns to the published status.
+See [community contract](community.uk.md).

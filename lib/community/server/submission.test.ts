@@ -10,16 +10,12 @@ export const guest = {
   name: 'Олена',
   email: 'Olena+home@example.com',
   text: 'Млинці вдалися, дякую!',
-  kind: 'result',
-  experience: 'as-written',
-  cooked: true,
   rating: 4,
 };
 export const scope = {
   recipeId: 'crepes',
   version: 'test-v1',
   configuration: 'base',
-  isBase: true,
 };
 export const context = {
   fingerprintSecret: 'synthetic-test-key-'.repeat(3),
@@ -35,9 +31,8 @@ void test('guest validation requires private email and rejects browser authority
     { rating: 0 },
     { rating: 5.5 },
     { rating: '5' },
-    { cooked: false },
-    { experience: 'changed' },
     { kind: 'question' },
+    { experience: 'changed' },
     { name: 'я' },
     { text: 'я'.repeat(2001) },
     { state: 'published' },
@@ -49,20 +44,9 @@ void test('guest validation requires private email and rejects browser authority
       () => parseGuestContribution({ ...guest, ...patch }),
       /INVALID_CONTRIBUTION/,
     );
-  assert.equal(
-    parseGuestContribution({
-      ...guest,
-      kind: 'question',
-      cooked: false,
-      rating: null,
-    }).rating,
-    null,
-  );
-  assert.equal(
-    parseGuestContribution({ ...guest, experience: 'changed', rating: null })
-      .rating,
-    null,
-  );
+  assert.equal(parseGuestContribution({ ...guest, rating: null }).rating, null);
+  const { rating: _rating, ...unrated } = guest;
+  assert.equal(parseGuestContribution(unrated).rating, null);
 });
 void test('server binds exact scope, hashes capabilities, preserves +suffix and does not create identity', async () => {
   const command = await prepareGuestSubmission(guest, scope, context);
@@ -106,9 +90,6 @@ void test('server binds exact scope, hashes capabilities, preserves +suffix and 
       )
     ).owner_hash,
     command.owner_hash,
-  );
-  await assert.rejects(
-    prepareGuestSubmission(guest, { ...scope, isBase: false }, context),
   );
   await assert.rejects(
     prepareGuestSubmission(guest, { ...scope, recipeId: 'cake' }, context),

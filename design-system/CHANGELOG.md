@@ -1,5 +1,12 @@
 # Design system changelog
 
+## 2026-11-01 — Recipe reviews section
+
+- Every published recipe page gets `#reviews`: average rating, published reviews (newest first, no pagination) and the guest form. Hidden until the community runtime is configured.
+- `GuestReviewForm` keeps rating, up to 3 photos and text, and restores public name + private email (Sasha's decision). Photos are re-encoded in the browser; the hint lists formats only.
+- Reviews publish without moderation. After publication `NewsletterInvitation.afterReview` opens with the real newsletter form on the site and the preview form in Design Lab.
+- Design Lab: form scenarios plus a recipe reviews section with fictional readers.
+
 ## 2026-11-01 — Short subscription dialogs (uk / es / en)
 
 - One structure for the general, lesson and PDF forms: ✕, photo (general only),

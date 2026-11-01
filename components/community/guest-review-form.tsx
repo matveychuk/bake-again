@@ -11,22 +11,32 @@ import {
 import { Check, ImagePlus, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { AppLocale } from '@/lib/i18n/config';
+import type { NewsletterSignup } from '@/lib/newsletter/config';
+import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
+import { validPhotoMime } from '@/lib/community/photo-constraints';
 import {
-  parseGuestContribution,
-  CommunityInputError,
-  type GuestContribution,
-} from '@/lib/community/contracts';
-import {
-  COMMUNITY_PHOTO_MAX_BYTES,
-  validPhotoMime,
-} from '@/lib/community/photo-constraints';
+  preparePhoto,
+  randomSecret,
+  type PreparedPhoto,
+} from '@/lib/community/client';
+import { loadTurnstile, type Turnstile } from '@/lib/security/turnstile-client';
 import fields from '@/components/account/account.module.css';
 import { reviewFormMessages } from './review-form.messages';
 import styles from './guest-review-form.module.css';
 
 export interface GuestReviewDraft {
-  contribution: GuestContribution;
-  photos: { id: string; file: File }[];
+  contribution: {
+    recipeId: string;
+    name: string;
+    email: string;
+    text: string;
+    rating: number | null;
+    operationId: string;
+    authorToken: string;
+  };
+  photos: { id: string; uploadToken: string; photo: PreparedPhoto }[];
+  /** Turnstile token; empty in the Design Lab simulation. */
+  token: string;
 }
 export interface GuestReviewResult {
   status: 'published' | 'pending';
@@ -34,37 +44,42 @@ export interface GuestReviewResult {
 }
 interface PreviewPhoto {
   id: string;
-  file: File;
-  url: string;
-  state: 'decoding' | 'ready';
+  uploadToken: string;
+  name: string;
+  url?: string;
+  prepared?: PreparedPhoto;
   error?: string;
 }
 
-/** No account, provider SDK, persistence or network call inside this component.
- * A production adapter must preserve capabilities and perform admission/upload.
- * Design Lab injects an explicitly labelled local simulation of that adapter.
+/** The adapter performs the network work; Design Lab injects a simulation.
+ * With challengeSiteKey the form renders Turnstile and passes its token on.
  */
 export function GuestReviewForm({
   locale = 'uk',
   recipeId,
   recipeTitle,
-  baseConfiguration = true,
   submitReview,
+  challengeSiteKey,
+  signup,
+  onPublished,
   demo = false,
 }: {
   locale?: AppLocale;
   recipeId: string;
   recipeTitle?: string;
-  baseConfiguration?: boolean;
   submitReview?: (draft: GuestReviewDraft) => Promise<GuestReviewResult>;
+  challengeSiteKey?: string;
+  /** Real newsletter destination for the after-review invitation. */
+  signup?: NewsletterSignup;
+  onPublished?: () => void;
   demo?: boolean;
 }) {
   const copy = reviewFormMessages[locale];
   const id = useId();
-  const formRef = useRef<HTMLFormElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const addRef = useRef<HTMLButtonElement>(null);
   const noticeRef = useRef<HTMLParagraphElement>(null);
+  const challenge = useRef<HTMLDivElement>(null);
   const urls = useRef(new Set<string>());
   const inFlight = useRef(false);
   const operation = useRef<{
@@ -72,10 +87,7 @@ export function GuestReviewForm({
     operationId: string;
     authorToken: string;
   } | null>(null);
-  const [kind, setKind] = useState<'result' | 'question'>('result');
-  const [experience, setExperience] = useState<'as-written' | 'changed'>(
-    'as-written',
-  );
+  const [invitationOpen, setInvitationOpen] = useState(false);
   const [rating, setRating] = useState<number | null>(null);
   const [photos, setPhotos] = useState<PreviewPhoto[]>([]);
   const [photoError, setPhotoError] = useState('');
@@ -83,7 +95,11 @@ export function GuestReviewForm({
   const [state, setState] = useState<
     'editing' | 'sending' | 'error' | 'published' | 'pending'
   >('editing');
-  const [photosAccepted, setPhotosAccepted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [photosAccepted, setPhotosAccepted] = useState(true);
+  const [token, setToken] = useState<string | null>(null);
+  const [challengeFailed, setChallengeFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     const active = urls.current;
     return () => {
@@ -93,16 +109,58 @@ export function GuestReviewForm({
   }, []);
   const busy = state === 'sending';
   const complete = state === 'published' || state === 'pending';
+  const preparing = photos.some((photo) => !photo.prepared && !photo.error);
   useEffect(() => {
-    if (complete) noticeRef.current?.focus();
-  }, [complete]);
-  const canRate =
-    kind === 'result' && experience === 'as-written' && baseConfiguration;
+    if (complete && !invitationOpen) noticeRef.current?.focus();
+  }, [complete, invitationOpen]);
+
+  // A Turnstile token is single-use: every attempt renders a fresh widget.
+  useEffect(() => {
+    if (!challengeSiteKey || !submitReview || complete) return;
+    let disposed = false;
+    let widget: string | undefined;
+    let api: Turnstile | undefined;
+    const invalidate = () => {
+      if (!disposed) {
+        setToken(null);
+        setChallengeFailed(true);
+      }
+    };
+    void (async () => {
+      try {
+        api = await loadTurnstile();
+        if (disposed || !challenge.current) return;
+        widget = api.render(challenge.current, {
+          sitekey: challengeSiteKey,
+          action: 'community_review',
+          language: locale,
+          size: 'flexible',
+          theme: 'auto',
+          appearance: 'interaction-only',
+          callback: (value: string) => {
+            if (!disposed) {
+              setToken(value);
+              setChallengeFailed(false);
+            }
+          },
+          'expired-callback': () => !disposed && setToken(null),
+          'error-callback': invalidate,
+          'timeout-callback': invalidate,
+        });
+      } catch {
+        invalidate();
+      }
+    })();
+    return () => {
+      disposed = true;
+      if (widget !== undefined) api?.remove(widget);
+    };
+  }, [challengeSiteKey, submitReview, complete, attempt, locale]);
 
   function addPhotos(event: ChangeEvent<HTMLInputElement>) {
     const files = Array.from(event.currentTarget.files ?? []);
     event.currentTarget.value = '';
-    const added: PreviewPhoto[] = [];
+    const added: { photo: PreviewPhoto; file: File }[] = [];
     let problem = '';
     for (const file of files) {
       if (photos.length + added.length >= 3) {
@@ -113,29 +171,45 @@ export function GuestReviewForm({
         problem = copy.photoFormat;
         continue;
       }
-      if (!file.size || file.size > COMMUNITY_PHOTO_MAX_BYTES) {
-        problem = copy.photoSize;
-        continue;
-      }
-      const url = URL.createObjectURL(file);
-      urls.current.add(url);
-      added.push({ id: crypto.randomUUID(), file, url, state: 'decoding' });
+      added.push({
+        file,
+        photo: {
+          id: crypto.randomUUID(),
+          uploadToken: randomSecret(),
+          name: file.name,
+        },
+      });
     }
-    setPhotos((previous) => [...previous, ...added]);
+    setPhotos((previous) => [...previous, ...added.map(({ photo }) => photo)]);
     setPhotoError(problem);
+    for (const { file, photo } of added)
+      void preparePhoto(file).then(
+        (prepared) => {
+          const url = URL.createObjectURL(prepared.blob);
+          urls.current.add(url);
+          updatePhoto(photo.id, { prepared, url });
+        },
+        (error: unknown) =>
+          updatePhoto(photo.id, {
+            error:
+              error instanceof Error && error.message === 'PHOTO_SIZE'
+                ? copy.photoSize
+                : copy.photoDecode,
+          }),
+      );
   }
-  function photoDecoded(photoId: string, problem?: string) {
+  function updatePhoto(photoId: string, patch: Partial<PreviewPhoto>) {
     setPhotos((previous) =>
       previous.map((photo) =>
-        photo.id === photoId
-          ? { ...photo, state: 'ready', error: problem }
-          : photo,
+        photo.id === photoId ? { ...photo, ...patch } : photo,
       ),
     );
   }
   function removePhoto(photo: PreviewPhoto) {
-    URL.revokeObjectURL(photo.url);
-    urls.current.delete(photo.url);
+    if (photo.url) {
+      URL.revokeObjectURL(photo.url);
+      urls.current.delete(photo.url);
+    }
     setPhotos((previous) => previous.filter((item) => item.id !== photo.id));
     setPhotoError('');
     addRef.current?.focus();
@@ -160,18 +234,14 @@ export function GuestReviewForm({
     const name = read('name');
     const email = read('email');
     const text = read('text');
+    // Same order as the fields, so focus lands on the first invalid one.
     const invalid: Record<string, string> = {};
-    if (Array.from(name).length < 2 || Array.from(name).length > 60)
-      invalid.name = copy.requiredName;
-    const emailInput = form.elements.namedItem('email') as HTMLInputElement;
-    if (
-      !email ||
-      !emailInput.validity.valid ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(email)
-    )
-      invalid.email = copy.requiredEmail;
     if (!text || Array.from(text).length > 2000)
       invalid.text = copy.requiredText;
+    if (Array.from(name).length < 2 || Array.from(name).length > 60)
+      invalid.name = copy.requiredName;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(email))
+      invalid.email = copy.requiredEmail;
     setErrors(invalid);
     if (Object.keys(invalid).length) {
       (
@@ -184,139 +254,83 @@ export function GuestReviewForm({
       addRef.current?.focus();
       return;
     }
-    if (photos.some((photo) => photo.state === 'decoding')) return;
-    const payload = {
-      recipeId,
-      name,
-      email,
-      text,
-      kind,
-      experience,
-      rating: canRate ? rating : null,
-      cooked: canRate && rating !== null,
-    };
+    if (preparing || (challengeSiteKey && !token)) return;
+    const payload = { recipeId, name, email, text, rating };
     const fingerprint = JSON.stringify([
       payload,
       photos.map((photo) => photo.id),
     ]);
-    if (!operation.current || operation.current.fingerprint !== fingerprint) {
-      const authorToken = Array.from(
-        crypto.getRandomValues(new Uint8Array(32)),
-        (byte) => byte.toString(16).padStart(2, '0'),
-      ).join('');
+    // Same content keeps the same operation, so a lost response is replayed.
+    if (!operation.current || operation.current.fingerprint !== fingerprint)
       operation.current = {
         fingerprint,
         operationId: crypto.randomUUID(),
-        authorToken,
+        authorToken: randomSecret(),
       };
-    }
     try {
-      const contribution = parseGuestContribution({
-        ...payload,
-        operationId: operation.current.operationId,
-        authorToken: operation.current.authorToken,
-      });
       inFlight.current = true;
       setState('sending');
       const result = await submitReview({
-        contribution,
-        photos: photos.map(({ id, file }) => ({ id, file })),
+        contribution: {
+          ...payload,
+          operationId: operation.current.operationId,
+          authorToken: operation.current.authorToken,
+        },
+        photos: photos.map(({ id: photoId, uploadToken, prepared }) => ({
+          id: photoId,
+          uploadToken,
+          photo: prepared!,
+        })),
+        token: token ?? '',
       });
-      if (
-        !['published', 'pending'].includes(result.status) ||
-        (photos.length > 0 && !result.photosAccepted)
-      )
+      if (!['published', 'pending'].includes(result.status))
         throw new Error('INCOMPLETE_SUBMISSION');
       setState(result.status);
-      setPhotosAccepted(result.photosAccepted);
-    } catch (error) {
-      if (
-        error instanceof CommunityInputError &&
-        ['name', 'email', 'text'].includes(error.field)
-      ) {
-        setErrors({
-          [error.field]:
-            error.field === 'name'
-              ? copy.requiredName
-              : error.field === 'email'
-                ? copy.requiredEmail
-                : copy.requiredText,
-        });
-        (form.elements.namedItem(error.field) as HTMLElement)?.focus();
+      setPhotosAccepted(photos.length === 0 || result.photosAccepted);
+      if (result.status === 'published') {
+        onPublished?.();
+        setInvitationOpen(true);
       }
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error && error.message === 'RATE_LIMITED'
+          ? copy.rateLimited
+          : copy.failed,
+      );
       setState('error');
+      setToken(null);
+      setAttempt((value) => value + 1);
     } finally {
       inFlight.current = false;
     }
   }
   const notice =
     state === 'published'
-      ? copy.published
+      ? photosAccepted
+        ? copy.published
+        : copy.publishedWithoutPhotos
       : state === 'pending'
         ? copy.pending
         : state === 'error'
-          ? copy.failed
+          ? errorMessage
           : '';
   return (
-    <form
-      ref={formRef}
-      className={styles.form}
-      lang={locale}
-      onSubmit={submit}
-      noValidate
-      aria-labelledby={`${id}-title`}
-      data-guest-review-form={locale}
-    >
-      <header className={styles.heading}>
-        <h3 id={`${id}-title`}>{copy.title}</h3>
-        {recipeTitle && <p className={styles.recipe}>{recipeTitle}</p>}
-        <p>{copy.intro}</p>
-      </header>
-      {demo && <p className={styles.demo}>{copy.demo}</p>}
-      <fieldset className={styles.controls} disabled={busy || complete}>
-        <fieldset className={styles.choice}>
-          <legend>{copy.kind}</legend>
-          <div className={styles.options}>
-            {(['result', 'question'] as const).map((value) => (
-              <label key={value}>
-                <input
-                  type="radio"
-                  name="kind"
-                  value={value}
-                  checked={kind === value}
-                  onChange={() => {
-                    setKind(value);
-                    setRating(null);
-                  }}
-                />
-                {copy[value]}
-              </label>
-            ))}
-          </div>
-        </fieldset>
-        {kind === 'result' && (
-          <fieldset className={styles.choice}>
-            <legend>{copy.experience}</legend>
-            <div className={styles.options}>
-              {(['as-written', 'changed'] as const).map((value) => (
-                <label key={value}>
-                  <input
-                    type="radio"
-                    name="experience"
-                    value={value}
-                    checked={experience === value}
-                    onChange={() => {
-                      setExperience(value);
-                      setRating(null);
-                    }}
-                  />
-                  {value === 'as-written' ? copy.original : copy.changed}
-                </label>
-              ))}
-            </div>
-          </fieldset>
-        )}
-        {canRate && (
+    <>
+      <form
+        className={styles.form}
+        lang={locale}
+        onSubmit={submit}
+        noValidate
+        aria-labelledby={`${id}-title`}
+        data-guest-review-form={locale}
+      >
+        <header className={styles.heading}>
+          <h3 id={`${id}-title`}>{copy.title}</h3>
+          {recipeTitle && <p className={styles.recipe}>{recipeTitle}</p>}
+          <p>{copy.intro}</p>
+        </header>
+        {demo && <p className={styles.demo}>{copy.demo}</p>}
+        <fieldset className={styles.controls} disabled={busy || complete}>
           <fieldset className={styles.choice}>
             <legend>
               {copy.rating}{' '}
@@ -350,177 +364,190 @@ export function GuestReviewForm({
               )}
             </div>
           </fieldset>
-        )}
-        {kind === 'result' && !canRate && (
-          <p className={styles.hint}>{copy.changedHint}</p>
-        )}
-        <div className={fields.field}>
-          <label htmlFor={`${id}-text`}>{copy.text}</label>
-          <textarea
-            id={`${id}-text`}
-            name="text"
-            onChange={() => clearFieldError('text')}
-            rows={5}
-            maxLength={2000}
-            required
-            aria-invalid={!!errors.text}
-            aria-describedby={`${id}-text-hint${errors.text ? ` ${id}-text-error` : ''}`}
-          />
-          <span id={`${id}-text-hint`} className={styles.hint}>
-            {copy.textHint}
-          </span>
-          {errors.text && (
-            <span id={`${id}-text-error`} className={styles.error}>
-              {errors.text}
-            </span>
-          )}
-        </div>
-        <div className={styles.identity}>
-          <div className={fields.field}>
-            <label htmlFor={`${id}-name`}>{copy.name}</label>
-            <input
-              id={`${id}-name`}
-              name="name"
-              onChange={() => clearFieldError('name')}
-              autoComplete="name"
-              maxLength={60}
-              required
-              aria-invalid={!!errors.name}
-              aria-describedby={errors.name ? `${id}-name-error` : undefined}
-            />
-            {errors.name && (
-              <span id={`${id}-name-error`} className={styles.error}>
-                {errors.name}
-              </span>
-            )}
-          </div>
-          <div className={fields.field}>
-            <label htmlFor={`${id}-email`}>{copy.email}</label>
-            <input
-              id={`${id}-email`}
-              type="email"
-              name="email"
-              onChange={() => clearFieldError('email')}
-              autoComplete="email"
-              inputMode="email"
-              maxLength={254}
-              required
-              aria-invalid={!!errors.email}
-              aria-describedby={`${id}-email-hint${errors.email ? ` ${id}-email-error` : ''}`}
-            />
-            <span id={`${id}-email-hint`} className={styles.hint}>
-              {copy.emailHint}
-            </span>
-            {errors.email && (
-              <span id={`${id}-email-error`} className={styles.error}>
-                {errors.email}
-              </span>
-            )}
-          </div>
-        </div>
-        <fieldset
-          className={styles.choice}
-          aria-describedby={`${id}-photo-hint`}
-        >
-          <legend>
-            {copy.photos} <span className={styles.hint}>({copy.optional})</span>
-          </legend>
-          <p id={`${id}-photo-hint`} className={styles.hint}>
-            {copy.photoHint}
-          </p>
-          <input
-            ref={fileRef}
-            type="file"
-            accept="image/jpeg,image/png,image/webp"
-            multiple
-            hidden
-            onChange={addPhotos}
-            aria-label={copy.addPhotos}
-          />
-          <Button
-            ref={addRef}
-            type="button"
-            variant="outline"
-            disabled={photos.length >= 3}
-            onClick={() => fileRef.current?.click()}
+          <fieldset
+            className={styles.choice}
             aria-describedby={`${id}-photo-hint`}
           >
-            <ImagePlus aria-hidden="true" />
-            {copy.addPhotos}
-          </Button>
-          {photos.length > 0 && (
-            <ul className={styles.photos}>
-              {photos.map((photo, index) => (
-                <li key={photo.id} className={styles.photo}>
-                  <img
-                    src={photo.url}
-                    alt={`${copy.preview} ${index + 1}`}
-                    onLoad={(event) => {
-                      const image = event.currentTarget;
-                      photoDecoded(
-                        photo.id,
-                        image.naturalWidth * image.naturalHeight > 4_000_000
-                          ? copy.photoPixels
-                          : undefined,
-                      );
-                    }}
-                    onError={() => photoDecoded(photo.id, copy.photoDecode)}
-                  />
-                  <span className={styles.filename}>{photo.file.name}</span>
-                  <span className={photo.error ? styles.error : styles.hint}>
-                    {photo.error ||
-                      (busy
-                        ? copy.sending
-                        : complete && photosAccepted
-                          ? copy.photoPending
-                          : photo.state === 'decoding'
-                            ? copy.preparing
-                            : copy.ready)}
-                  </span>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    aria-label={`${copy.removePhoto} ${index + 1}`}
-                    onClick={() => removePhoto(photo)}
-                  >
-                    {copy.removePhoto}
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          )}
-          <output className={styles.error} aria-live="polite">
-            {photoError}
-          </output>
+            <legend>
+              {copy.photos}{' '}
+              <span className={styles.hint}>({copy.photoCount})</span>
+            </legend>
+            <p id={`${id}-photo-hint`} className={styles.hint}>
+              {copy.photoHint}
+            </p>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              multiple
+              hidden
+              onChange={addPhotos}
+              aria-label={copy.addPhotos}
+            />
+            <Button
+              ref={addRef}
+              type="button"
+              variant="outline"
+              disabled={photos.length >= 3}
+              onClick={() => fileRef.current?.click()}
+              aria-describedby={`${id}-photo-hint`}
+            >
+              <ImagePlus aria-hidden="true" />
+              {copy.addPhotos}
+            </Button>
+            {photos.length > 0 && (
+              <ul className={styles.photos}>
+                {photos.map((photo, index) => (
+                  <li key={photo.id} className={styles.photo}>
+                    {photo.url ? (
+                      <img
+                        src={photo.url}
+                        alt={`${copy.preview} ${index + 1}`}
+                      />
+                    ) : (
+                      <span className={styles.photoPlaceholder} />
+                    )}
+                    <span className={styles.filename}>{photo.name}</span>
+                    <span className={photo.error ? styles.error : styles.hint}>
+                      {photo.error ||
+                        (busy
+                          ? copy.sending
+                          : complete
+                            ? photosAccepted
+                              ? copy.photoPublished
+                              : copy.photoFailed
+                            : photo.prepared
+                              ? copy.ready
+                              : copy.preparing)}
+                    </span>
+                    {!complete && (
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        aria-label={`${copy.removePhoto} ${index + 1}`}
+                        onClick={() => removePhoto(photo)}
+                      >
+                        {copy.removePhoto}
+                      </Button>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <output className={styles.error} aria-live="polite">
+              {photoError}
+            </output>
+          </fieldset>
+          <div className={fields.field}>
+            <label htmlFor={`${id}-text`}>{copy.text}</label>
+            <textarea
+              id={`${id}-text`}
+              name="text"
+              onChange={() => clearFieldError('text')}
+              rows={5}
+              maxLength={2000}
+              required
+              aria-invalid={!!errors.text}
+              aria-describedby={errors.text ? `${id}-text-error` : undefined}
+            />
+            {errors.text && (
+              <span id={`${id}-text-error`} className={styles.error}>
+                {errors.text}
+              </span>
+            )}
+          </div>
+          <div className={styles.identity}>
+            <div className={fields.field}>
+              <label htmlFor={`${id}-name`}>{copy.name}</label>
+              <input
+                id={`${id}-name`}
+                name="name"
+                onChange={() => clearFieldError('name')}
+                autoComplete="name"
+                maxLength={60}
+                required
+                aria-invalid={!!errors.name}
+                aria-describedby={`${id}-name-hint${errors.name ? ` ${id}-name-error` : ''}`}
+              />
+              <span id={`${id}-name-hint`} className={styles.hint}>
+                {copy.nameHint}
+              </span>
+              {errors.name && (
+                <span id={`${id}-name-error`} className={styles.error}>
+                  {errors.name}
+                </span>
+              )}
+            </div>
+            <div className={fields.field}>
+              <label htmlFor={`${id}-email`}>{copy.email}</label>
+              <input
+                id={`${id}-email`}
+                type="email"
+                name="email"
+                onChange={() => clearFieldError('email')}
+                autoComplete="email"
+                inputMode="email"
+                maxLength={254}
+                required
+                aria-invalid={!!errors.email}
+                aria-describedby={`${id}-email-hint${errors.email ? ` ${id}-email-error` : ''}`}
+              />
+              <span id={`${id}-email-hint`} className={styles.hint}>
+                {copy.emailHint}
+              </span>
+              {errors.email && (
+                <span id={`${id}-email-error`} className={styles.error}>
+                  {errors.email}
+                </span>
+              )}
+            </div>
+          </div>
         </fieldset>
-      </fieldset>
-      <p className={styles.hint}>{copy.privacy}</p>
-      <p
-        ref={noticeRef}
-        tabIndex={-1}
-        className={notice ? styles.notice : styles.emptyNotice}
-        role={state === 'error' ? 'alert' : 'status'}
-      >
-        {complete && <Check aria-hidden="true" size={20} />}
-        {notice}
-      </p>
-      {!complete && (
-        <Button
-          type="submit"
-          disabled={
-            !submitReview ||
-            busy ||
-            photos.some((photo) => photo.state === 'decoding')
-          }
+        {challengeSiteKey && submitReview && !complete && (
+          <div ref={challenge} className={styles.challenge} />
+        )}
+        {challengeFailed && !complete && (
+          <p className={styles.error} role="alert">
+            {copy.challengeFailed}
+          </p>
+        )}
+        <p
+          ref={noticeRef}
+          tabIndex={-1}
+          className={notice ? styles.notice : styles.emptyNotice}
+          role={state === 'error' ? 'alert' : 'status'}
         >
-          {busy
-            ? copy.sending
-            : state === 'error'
-              ? copy.tryAgain
-              : copy.submit}
-        </Button>
-      )}
-      {!submitReview && <p className={styles.hint}>{copy.unavailable}</p>}
-    </form>
+          {complete && <Check aria-hidden="true" size={20} />}
+          {notice}
+        </p>
+        {!complete && (
+          <Button
+            type="submit"
+            disabled={
+              !submitReview ||
+              busy ||
+              preparing ||
+              (!!challengeSiteKey && !token)
+            }
+          >
+            {busy
+              ? copy.sending
+              : state === 'error'
+                ? copy.tryAgain
+                : copy.submit}
+          </Button>
+        )}
+        {!submitReview && <p className={styles.hint}>{copy.unavailable}</p>}
+      </form>
+      <NewsletterInvitation
+        locale={locale}
+        signup={signup}
+        afterReview={{
+          open: invitationOpen,
+          onOpenChange: setInvitationOpen,
+          returnFocus: noticeRef,
+        }}
+      />
+    </>
   );
 }

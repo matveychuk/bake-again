@@ -19,6 +19,7 @@ export async function photoDatabase() {
   for (const name of [
     '20261031210000_community_probe.sql',
     '20261031223000_community_photo_admissions.sql',
+    '20261101190000_community_reviews_public.sql',
   ])
     await db.exec(
       readFileSync(

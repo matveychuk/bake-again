@@ -71,6 +71,7 @@ import { RecipePrintView } from './recipe-print-view';
 import { RecentRecipes } from '@/components/personal-state/recent-recipes';
 import { getRecipeCatalog } from '@/content/recipes/catalog';
 import { NewsletterSignup } from '@/components/site/newsletter-signup';
+import { RecipeReviews } from '@/components/community/recipe-reviews';
 import { ProductBanner } from '@/components/site/product-banner';
 import { getRecipeVideoLesson } from '@/content/commerce/video-lessons';
 import { RecipeVideoLesson } from './recipe-video-lesson';
@@ -543,6 +544,9 @@ export function InventoryRecipeDetail({
           )}
         {videoLesson && (
           <RecipeVideoLesson lesson={videoLesson} locale={locale} />
+        )}
+        {!isDraft && !isStandaloneComponent && (
+          <RecipeReviews recipeId={recipe.id} locale={locale} />
         )}
         {!isDraft && (
           <RecentRecipes

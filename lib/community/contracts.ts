@@ -8,9 +8,8 @@ export type ContributionStatus =
 export interface RecipeReviewScope {
   recipeId: string;
   version: string;
-  configuration: string;
   /** Resolved from the canonical recipe on the server, never from request claims. */
-  isBase: boolean;
+  configuration: string;
 }
 export interface GuestContribution {
   operationId: string;
@@ -20,22 +19,18 @@ export interface GuestContribution {
   name: string;
   email: string;
   text: string;
-  kind: 'question' | 'result';
-  experience: 'as-written' | 'changed';
-  cooked: boolean;
+  /** Optional 1–5; not proof that the reader cooked the base version. */
   rating: number | null;
 }
+/** Fields returned by community_recipe_reviews; never email or hashes. */
 export interface PublicContribution {
   id: string;
-  recipeId: string;
-  version: string;
-  configuration: string;
   name: string;
   text: string;
-  kind: 'question' | 'result';
-  experience: 'as-written' | 'changed';
   rating: number | null;
   createdAt: string;
+  /** Stored photo ids, served by /api/community/photos?id=. */
+  photos: string[];
 }
 
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -46,9 +41,6 @@ const fields = new Set([
   'name',
   'email',
   'text',
-  'kind',
-  'experience',
-  'cooked',
   'rating',
 ]);
 export class CommunityInputError extends Error {
@@ -102,23 +94,13 @@ export function parseGuestContribution(value: unknown): GuestContribution {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(email))
     throw new CommunityInputError('email');
   const text = bounded(input.text, 'text', 1, 2000);
-  const { kind, experience, cooked, rating } = input;
-  if (kind !== 'question' && kind !== 'result')
-    throw new CommunityInputError('kind');
-  if (experience !== 'as-written' && experience !== 'changed')
-    throw new CommunityInputError('experience');
-  if (typeof cooked !== 'boolean') throw new CommunityInputError('cooked');
+  const rating = input.rating ?? null;
   if (
     rating !== null &&
     (!Number.isInteger(rating) ||
       typeof rating !== 'number' ||
       rating < 1 ||
       rating > 5)
-  )
-    throw new CommunityInputError('rating');
-  if (
-    rating !== null &&
-    (kind !== 'result' || !cooked || experience !== 'as-written')
   )
     throw new CommunityInputError('rating');
   return {
@@ -128,9 +110,6 @@ export function parseGuestContribution(value: unknown): GuestContribution {
     name,
     email,
     text,
-    kind,
-    experience,
-    cooked,
     rating,
   };
 }

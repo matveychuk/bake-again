@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState, type RefObject } from 'react';
 import { ArrowRight, X } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
 import type { NewsletterSignup } from '@/lib/newsletter/config';
@@ -39,6 +39,8 @@ const messages = {
     close: 'Закрити',
     image:
       'Шматочок безглютенового Наполеона на тарілці, позаду бордові хризантеми',
+    reviewTitle: 'Відгук опубліковано',
+    reviewBody: 'Дякую! Хочеш отримувати нові безглютенові рецепти на пошту?',
   },
   en: {
     title: 'Your next recipe, by email',
@@ -49,6 +51,9 @@ const messages = {
     close: 'Close',
     image:
       'A slice of gluten-free Napoleon cake on a plate, with burgundy chrysanthemums behind',
+    reviewTitle: 'Your review is published',
+    reviewBody:
+      'Thank you! Would you like to receive new gluten-free recipes by email?',
   },
   es: {
     title: 'Tu próxima receta, por correo',
@@ -59,6 +64,9 @@ const messages = {
     close: 'Cerrar',
     image:
       'Porción de tarta milhojas sin gluten en un plato, con crisantemos granates detrás',
+    reviewTitle: 'Tu reseña está publicada',
+    reviewBody:
+      '¡Gracias! ¿Quieres recibir nuevas recetas sin gluten por correo?',
   },
 };
 
@@ -82,10 +90,17 @@ export function NewsletterInvitation({
   locale,
   signup,
   autoPrompt = false,
+  afterReview,
 }: {
   locale: AppLocale;
   signup?: NewsletterSignup;
   autoPrompt?: boolean;
+  /** Local Design Lab variant; reuses the newsletter form without sending. */
+  afterReview?: {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    returnFocus: RefObject<HTMLElement | null>;
+  };
 }) {
   const copy = messages[locale];
   const titleId = useId();
@@ -199,49 +214,55 @@ export function NewsletterInvitation({
 
   return (
     <>
-      <EditorialInvitation
-        ref={sectionRef}
-        lang={locale}
-        titleId={titleId}
-        title={copy.title}
-        description={copy.body}
-        note={!signup ? copy.preview : undefined}
-        data-newsletter-invitation
-        action={
-          <>
-            {' '}
-            {signup ? (
-              <Button
-                onClick={(event) => {
-                  returnFocusRef.current = event.currentTarget;
-                  handoff();
-                  setOpen(true);
-                }}
-              >
-                {copy.action}
-                <ArrowRight size={16} aria-hidden="true" />
-              </Button>
-            ) : (
-              <>
-                <Button disabled>
+      {!afterReview && (
+        <EditorialInvitation
+          ref={sectionRef}
+          lang={locale}
+          titleId={titleId}
+          title={copy.title}
+          description={copy.body}
+          note={!signup ? copy.preview : undefined}
+          data-newsletter-invitation
+          action={
+            <>
+              {' '}
+              {signup ? (
+                <Button
+                  onClick={(event) => {
+                    returnFocusRef.current = event.currentTarget;
+                    handoff();
+                    setOpen(true);
+                  }}
+                >
                   {copy.action}
                   <ArrowRight size={16} aria-hidden="true" />
                 </Button>
-                <Button
-                  ref={previewRef}
-                  variant="link"
-                  onClick={() => setOpen(true)}
-                >
-                  {copy.previewAction}
-                </Button>
-              </>
-            )}
-          </>
-        }
-      />
+              ) : (
+                <>
+                  <Button disabled>
+                    {copy.action}
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </Button>
+                  <Button
+                    ref={previewRef}
+                    variant="link"
+                    onClick={() => setOpen(true)}
+                  >
+                    {copy.previewAction}
+                  </Button>
+                </>
+              )}
+            </>
+          }
+        />
+      )}
       <Dialog
-        open={open}
+        open={afterReview ? afterReview.open : open}
         onOpenChange={(value) => {
+          if (afterReview) {
+            afterReview.onOpenChange(value);
+            return;
+          }
           if (!value && signup) rememberInvitation();
           setOpen(value);
         }}
@@ -250,7 +271,13 @@ export function NewsletterInvitation({
           className={styles.dialog}
           showCloseButton={false}
           initialFocus={closeRef}
-          finalFocus={signup ? returnFocusRef : previewRef}
+          finalFocus={
+            afterReview
+              ? afterReview.returnFocus
+              : signup
+                ? returnFocusRef
+                : previewRef
+          }
           lang={locale}
         >
           <div className={styles.media}>
@@ -279,17 +306,25 @@ export function NewsletterInvitation({
             </DialogClose>
           </div>
           <div className={styles.dialogBody}>
-            <DialogTitle className={styles.title}>{copy.title}</DialogTitle>
+            <DialogTitle className={styles.title}>
+              {afterReview ? copy.reviewTitle : copy.title}
+            </DialogTitle>
             <DialogDescription className={styles.description}>
-              {copy.body}
+              {afterReview ? copy.reviewBody : copy.body}
             </DialogDescription>
-            {!signup && <p className={styles.note}>{copy.preview}</p>}
+            {!signup && !afterReview && (
+              <p className={styles.note}>{copy.preview}</p>
+            )}
             <div className={styles.dialogForm}>
               {signup ? (
                 <NewsletterForm
                   signup={signup}
                   locale={locale}
                   onClose={() => {
+                    if (afterReview) {
+                      afterReview.onOpenChange(false);
+                      return;
+                    }
                     rememberInvitation();
                     setOpen(false);
                   }}
