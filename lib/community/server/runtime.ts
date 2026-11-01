@@ -40,7 +40,23 @@ export async function communityBindings(): Promise<Record<string, unknown>> {
     return typeof process !== 'undefined' ? process.env : {};
   }
 }
-const text = (value: unknown) => (typeof value === 'string' ? value : '');
+// Dashboard-pasted secrets often carry a trailing newline or space.
+const text = (value: unknown) =>
+  typeof value === 'string' ? value.trim() : '';
+/** Names the malformed setting without revealing its value. */
+export function communityConfigProblem(config: CommunityConfig) {
+  if (!/^https:\/\/[a-z0-9]{20}\.supabase\.co$/.test(config.url))
+    return 'SUPABASE_URL';
+  if (
+    !/^(?:sb_secret_[A-Za-z0-9_-]{20,200}|[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+)$/.test(
+      config.serviceKey,
+    )
+  )
+    return config.serviceKey.startsWith('sb_publishable_')
+      ? 'COMMUNITY_SUPABASE_SECRET_KEY_IS_PUBLISHABLE'
+      : 'COMMUNITY_SUPABASE_SECRET_KEY_FORMAT';
+  return null;
+}
 export function communityConfig(
   bindings: Record<string, unknown>,
 ): CommunityConfig | null {

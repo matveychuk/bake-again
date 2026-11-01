@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   communityConfig,
+  communityConfigProblem,
   createCommunityHandlers,
   inspectPhoto,
 } from './runtime.ts';
@@ -221,5 +222,28 @@ void test('photo signature must match the declared type', () => {
   );
   assert.throws(() =>
     inspectPhoto(new Uint8Array([0xff, 0xd8, 0xff]), 'image/webp'),
+  );
+});
+
+void test('pasted secrets are trimmed and a malformed key is named, not revealed', () => {
+  const pasted = communityConfig({
+    ...bindings,
+    COMMUNITY_SUPABASE_SECRET_KEY: ` ${bindings.COMMUNITY_SUPABASE_SECRET_KEY}\n`,
+  })!;
+  assert.equal(communityConfigProblem(pasted), null);
+  assert.equal(
+    communityConfigProblem(
+      communityConfig({
+        ...bindings,
+        COMMUNITY_SUPABASE_SECRET_KEY: 'sb_publishable_' + 'x'.repeat(30),
+      })!,
+    ),
+    'COMMUNITY_SUPABASE_SECRET_KEY_IS_PUBLISHABLE',
+  );
+  assert.equal(
+    communityConfigProblem(
+      communityConfig({ ...bindings, COMMUNITY_SUPABASE_SECRET_KEY: 'oops' })!,
+    ),
+    'COMMUNITY_SUPABASE_SECRET_KEY_FORMAT',
   );
 });
