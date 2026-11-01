@@ -63,6 +63,7 @@ export function GuestReviewForm({
   signup,
   onPublished,
   demo = false,
+  layout = 'stacked',
 }: {
   locale?: AppLocale;
   recipeId: string;
@@ -73,6 +74,8 @@ export function GuestReviewForm({
   signup?: NewsletterSignup;
   onPublished?: () => void;
   demo?: boolean;
+  /** `wide`: full section width, compact three-row grid on large containers. */
+  layout?: 'stacked' | 'wide';
 }) {
   const copy = reviewFormMessages[locale];
   const id = useId();
@@ -317,7 +320,7 @@ export function GuestReviewForm({
   return (
     <>
       <form
-        className={styles.form}
+        className={`${styles.form}${layout === 'wide' ? ` ${styles.wide}` : ''}`}
         lang={locale}
         onSubmit={submit}
         noValidate
@@ -331,7 +334,7 @@ export function GuestReviewForm({
         </header>
         {demo && <p className={styles.demo}>{copy.demo}</p>}
         <fieldset className={styles.controls} disabled={busy || complete}>
-          <fieldset className={styles.choice}>
+          <fieldset className={`${styles.choice} ${styles.ratingField}`}>
             <legend>
               {copy.rating}{' '}
               <span className={styles.hint}>({copy.optional})</span>
@@ -365,7 +368,7 @@ export function GuestReviewForm({
             </div>
           </fieldset>
           <fieldset
-            className={styles.choice}
+            className={`${styles.choice} ${styles.photoField}`}
             aria-describedby={`${id}-photo-hint`}
           >
             <legend>
@@ -438,7 +441,7 @@ export function GuestReviewForm({
               {photoError}
             </output>
           </fieldset>
-          <div className={fields.field}>
+          <div className={`${fields.field} ${styles.textField}`}>
             <label htmlFor={`${id}-text`}>{copy.text}</label>
             <textarea
               id={`${id}-text`}
@@ -501,6 +504,24 @@ export function GuestReviewForm({
                 </span>
               )}
             </div>
+            {!complete && (
+              <Button
+                type="submit"
+                className={styles.submit}
+                disabled={
+                  !submitReview ||
+                  busy ||
+                  preparing ||
+                  (!!challengeSiteKey && !token)
+                }
+              >
+                {busy
+                  ? copy.sending
+                  : state === 'error'
+                    ? copy.tryAgain
+                    : copy.submit}
+              </Button>
+            )}
           </div>
         </fieldset>
         {challengeSiteKey && submitReview && !complete && (
@@ -520,23 +541,6 @@ export function GuestReviewForm({
           {complete && <Check aria-hidden="true" size={20} />}
           {notice}
         </p>
-        {!complete && (
-          <Button
-            type="submit"
-            disabled={
-              !submitReview ||
-              busy ||
-              preparing ||
-              (!!challengeSiteKey && !token)
-            }
-          >
-            {busy
-              ? copy.sending
-              : state === 'error'
-                ? copy.tryAgain
-                : copy.submit}
-          </Button>
-        )}
         {!submitReview && <p className={styles.hint}>{copy.unavailable}</p>}
       </form>
       <NewsletterInvitation

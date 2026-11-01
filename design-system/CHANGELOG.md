@@ -6,6 +6,7 @@
 - `GuestReviewForm` keeps rating, up to 3 photos and text, and restores public name + private email (Sasha's decision). Photos are re-encoded in the browser; the hint lists formats only.
 - Reviews publish without moderation. After publication `NewsletterInvitation.afterReview` opens with the real newsletter form on the site and the preview form in Design Lab.
 - Design Lab: form scenarios plus a recipe reviews section with fictional readers.
+- Wide screens: list on top (two columns), full-width compact form (`layout="wide"`): text | rating + photos, then name | email | submit in one row.
 
 ## 2026-11-01 — Short subscription dialogs (uk / es / en)
 

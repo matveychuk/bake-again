@@ -203,6 +203,7 @@ export function RecipeReviewsSection({
             recipeId={recipeId}
             challengeSiteKey={challengeSiteKey}
             signup={signup}
+            layout="wide"
             demo={!!preview}
             submitReview={
               preview

@@ -112,6 +112,63 @@
   align-items: start;
   gap: var(--space-4);
 }
+.identity .submit {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+/* Full section width; the compact grid starts once the form itself is wide. */
+.wide {
+  max-width: none;
+  container-type: inline-size;
+}
+@container (min-width: 56rem) {
+  .wide .controls {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-areas:
+      'text rating'
+      'text photos'
+      'identity identity';
+    gap: var(--space-6) var(--space-8);
+  }
+  .wide .ratingField {
+    grid-area: rating;
+  }
+  .wide .photoField {
+    grid-area: photos;
+  }
+  .wide .textField {
+    grid-area: text;
+    grid-template-rows: auto 1fr;
+  }
+  .wide .textField textarea {
+    height: 100%;
+  }
+  /* Up to three small previews side by side in the narrow column. */
+  .wide .photos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+  .wide .photo img,
+  .wide .photoPlaceholder {
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+  .wide .photo .filename {
+    display: none;
+  }
+  .wide .photo button {
+    padding-inline: 0;
+  }
+  .wide .identity {
+    grid-area: identity;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  }
+  /* Aligns the button with the inputs, below their one-line labels. */
+  .wide .identity .submit {
+    grid-column: auto;
+    margin-top: calc(var(--line-height-body) * 1em + var(--space-2));
+  }
+}
 .challenge:empty {
   display: none;
 }
@@ -194,14 +251,11 @@
   outline: 3px solid var(--color-focus-ring);
   outline-offset: var(--space-1);
 }
-.form > button {
-  justify-self: start;
-}
 @media (max-width: 620px) {
   .identity {
     grid-template-columns: minmax(0, 1fr);
   }
-  .form > button {
+  .identity .submit {
     width: 100%;
   }
 }
