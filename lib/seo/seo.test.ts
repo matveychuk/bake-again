@@ -339,3 +339,18 @@ void test('home graph identifies the website and publisher without SearchAction'
     assert.ok(!JSON.stringify(graph).includes('SearchAction'));
   }
 });
+
+void test('photo-pending apple cookie draft has safe metadata and stays out of public discovery', () => {
+  const id = 'apple-cottage-cheese-cookies';
+  const page = recipePresentation(id, 'uk')!;
+  assert.equal(page.indexable, false);
+  assert.equal(page.image, '');
+  const metadata = recipeMetadata(id, 'uk');
+  assert.deepEqual(metadata.robots, { index: false, follow: false });
+  assert.equal(metadata.title, 'Яблучно-творожне печиво — Bake Again');
+  assert.equal(
+    recipeStructuredData(id, 'uk', getRecipeContent(id, 'uk')!),
+    null,
+  );
+  assert(!sitemapXml().includes('yabluchno-tvorozhne-pechyvo'));
+});

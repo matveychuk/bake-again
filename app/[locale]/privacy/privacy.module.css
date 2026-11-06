@@ -33,3 +33,6 @@
 .page section {
   margin-top: var(--space-8);
 }
+.page code {
+  font: inherit;
+}

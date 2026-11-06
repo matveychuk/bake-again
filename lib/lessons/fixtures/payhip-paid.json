@@ -1,0 +1,16 @@
+{
+  "id": "lesson-fixture-transaction",
+  "email": " Customer@Example.com ",
+  "currency": "EUR",
+  "price": 1900,
+  "items": [
+    {
+      "product_id": "lesson-product",
+      "product_key": "lessonKey",
+      "quantity": "1"
+    }
+  ],
+  "type": "paid",
+  "date": 1793746800,
+  "signature": "replaced-by-test-with-sha256-of-fixture-key"
+}

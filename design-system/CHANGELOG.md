@@ -1,5 +1,10 @@
 # Design system changelog
 
+## 2026-11-03 — Draft recipes awaiting photography
+
+- Recipe inventory and catalogue accept recipes with no hero media. Existing card/detail components omit the absent image rather than loading an empty URL.
+- Added the apple cottage-cheese cookie draft to Design Lab. The draft keeps its full title without a gluten-free claim while the flour remains unknown.
+
 ## 2026-11-01 — Recipe reviews section
 
 - Every published recipe page gets `#reviews`: average rating, published reviews (newest first, no pagination) and the guest form. Hidden until the community runtime is configured.
@@ -1535,3 +1540,49 @@ Applied the existing full-photo recipe carousel component to IG-026 v2, preservi
 - At 200% text and 390px, the shared Cook header wraps recipe identity and evidence
   independently; the question button wraps long EN/ES labels. This fixes a squashed
   title and horizontal overflow found during the canonical-model visual review.
+
+## 2026-11-04 — Recipe lesson links and free-step preview
+
+- Added exact-version and language-gated lesson step links to recipe and Cook Mode;
+  native anchors, decorative thumbnails, visible focus and print exclusion.
+- Added the disabled-by-default free lesson section, orientation-aware native player,
+  optional captions and matching gated Recipe VideoObject; Design Lab includes its
+  awaiting-media state. Added invariant chocolate/warm-white lesson surface tokens.
+
+
+## 2026-11-04 · Site-hosted Napoleon lesson
+
+- Added the lesson player variant and Design Lab example with paired orientation
+  sources, numbered steps, explicit locks/checks, optional local resume and native
+  keyboard controls, using existing semantic tokens.
+- Added Ukrainian description/login/access page compositions; sale stays planned
+  pending actual media/provider/phone verification. No new evidence status.
+
+### 2026-11-05 — Lesson purchase arrival
+- Added automatic purchase arrival status and recovery using existing controls.
+- Purchase CTAs use the shared site checkout route. Price copy includes VAT.
+
+
+## Lesson arrival · 2026-11-06
+
+Waiting uses “Відкриваємо твій урок. Це може зайняти кілька секунд”. After a verified claim and reload, a polite status confirms “Урок відкрито — можна дивитися”. The success marker alone never grants access. Purchase email uses a named HTML access link with a plain-text fallback. Anonymous account initialization preserves independent purchase access.
+
+
+## Послідовне відтворення · 2026-11-06
+
+LessonPlayer defaults to continuous playback for paid access. The existing aria-pressed toggle explicitly labels on/off; toggling changes only automatic advance, leaving native playback/pause controls independent. The final step stops without looping. Preview remains inert.
+
+## Meta consent panel · 2026-11-06
+
+- Added the shared nonmodal cookie panel with equal outline actions, native privacy
+  link, visible focus and localized footer settings; reused semantic tokens and Button.
+- Added uk/en/es Design Lab examples and local fixed-panel review fixtures.
+- Added consent-aware Meta events with no checkout/purchase emission; preserved Umami.
+- Recorded Sasha’s €9 lesson price in the catalog without activating its planned offer.
+
+### Neutral cookie copy · 2026-11-07
+
+Sasha requested neutral banner wording: advertising measurement and personalised
+ads based on visited pages, without the original Bake Again retargeting phrasing.
+Updated uk/en/es together; consent version 2 requests a fresh choice. Privacy copy
+remains as specified.

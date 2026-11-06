@@ -1,0 +1,67 @@
+.stepLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body);
+  overflow-wrap: anywhere;
+}
+.stepLink img {
+  flex: none;
+  width: var(--space-16);
+  height: var(--space-12);
+  object-fit: cover;
+}
+.stepLink:focus-visible,
+.freeStep a:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+.freeStep {
+  padding: var(--space-6);
+  margin-block: var(--space-6);
+  background: var(--color-lesson-background);
+  color: var(--color-lesson-text);
+  overflow-wrap: anywhere;
+}
+.freeStep h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-drawer-title);
+  margin: 0 0 var(--space-4);
+}
+.freeStep:lang(uk) {
+  --font-family-display: var(--font-family-display-cyrillic);
+}
+.freeStep p {
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body);
+  margin-block: var(--space-4);
+}
+.freeStep a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: var(--space-1);
+}
+.freeStep a:focus-visible {
+  outline-color: var(--color-lesson-text);
+}
+.player {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: var(--color-lesson-background);
+}
+.player[data-orientation='vertical'] {
+  aspect-ratio: 9 / 16;
+  max-height: 80dvh;
+  object-fit: contain;
+}
+@media print {
+  .stepLink,
+  .freeStep {
+    display: none;
+  }
+}

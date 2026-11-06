@@ -12,6 +12,7 @@ const available: VideoLesson = {
   ...videoLessons[0],
   status: 'available',
   payhipUrl: 'https://payhip.com/b/lesson123',
+  deliveryUrl: '/uk/urok/napoleon',
   priceMinor: 1200,
   currency: 'EUR',
 };

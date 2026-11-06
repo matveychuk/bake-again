@@ -2,6 +2,11 @@ import type { AppLocale } from './config.ts';
 
 /** Public URL names only. Recipe IDs, versions and browser-storage identities stay stable. */
 export const recipeSlugs: Record<string, Record<AppLocale, string>> = {
+  'apple-cottage-cheese-cookies': {
+    uk: 'yabluchno-tvorozhne-pechyvo',
+    en: 'apple-cottage-cheese-cookies',
+    es: 'apple-cottage-cheese-cookies',
+  },
   'celebration-sponge-cake': {
     uk: 'bezghliutenovyi-sviatkovyi-tort',
     en: 'gluten-free-celebration-cake',

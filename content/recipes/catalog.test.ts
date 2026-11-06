@@ -51,7 +51,9 @@ void test('uses the author food photos on linen in crepe and dumpling cards', ()
   assert(dumplings);
   assert(crepes.cardImage?.includes('crepes-stack-lace-linen-v1.webp'));
   assert(crepes.image.includes('crepes-stack-2026-10-20-v1.webp'));
-  assert(dumplings.cardImage?.includes('lazy-dumplings-real-plate-linen-v1.webp'));
+  assert(
+    dumplings.cardImage?.includes('lazy-dumplings-real-plate-linen-v1.webp'),
+  );
   assert(dumplings.image.includes('lazy-dumplings-card-v1.webp'));
 });
 
@@ -86,6 +88,7 @@ void test('keeps the reviewed cottage-cheese and batter-on-hand collections prec
   assert.deepEqual(recipeIdsFor('cottage-cheese'), [
     'lazy-dumplings',
     'cottage-cheese-waffles',
+    'apple-cottage-cheese-cookies',
   ]);
   assert.deepEqual(recipeIdsFor('batter-on-hand'), [
     'cottage-cheese-waffles',
@@ -176,6 +179,11 @@ void test('keeps catalogue names concise and makes gluten-free explicit on recip
   for (const recipe of recipeInventory) {
     const detailTitle = recipeDetailTitles[recipe.id];
     assert(detailTitle, `${recipe.id}: missing localized detail title`);
+    if (recipe.id === 'apple-cottage-cheese-cookies') {
+      assert.equal(detailTitle.uk, 'Яблучно-творожне печиво');
+      assert.doesNotMatch(detailTitle.uk, /безглютен/i);
+      continue;
+    }
     assert.match(detailTitle.en, /gluten-free/i);
     assert.match(detailTitle.es, /sin gluten/i);
     assert.match(detailTitle.uk, /безглютен/i);

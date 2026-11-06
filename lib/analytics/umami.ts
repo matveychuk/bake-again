@@ -29,6 +29,12 @@ export const analyticsEvents = [
   'language_change',
   'social_profile_open',
   'video_lesson_open',
+  'lesson_page_view', 'lesson_buy_click', 'lesson_login_request', 'lesson_login_success',
+  'lesson_step_play', 'lesson_step_complete', 'lesson_orientation_switch',
+  'lesson_step_link_click',
+  'lesson_free_step_play',
+  'lesson_free_step_complete',
+  'lesson_open_from_free_step',
   'recipe_pdf_download',
   'lead_magnet_submit',
   'newsletter_submit',
@@ -41,6 +47,11 @@ type SocialClickData = {
   locale: 'uk';
 };
 type EventData = {
+  state?: 'description' | 'login' | 'lesson';
+  stepId?: string;
+  orientation?: 'wide' | 'vertical';
+  recipeId?: string;
+  lessonStepId?: string;
   recipe_id?: string;
   product_id?: string;
   file?: 'recipe' | 'junior-card';
@@ -68,6 +79,7 @@ declare global {
 export function isAnalyticsPath(path: string) {
   if (/^\/uk\/mlyntsi-recept\/?$/.test(path)) return true;
   if (isMagnetPath(path)) return true;
+  if (path === '/uk/urok/napoleon') return true;
   return /^\/(?:en|es|uk)(?:\/(?:about|privacy|saved|shopping-list)|\/recipes\/[a-z0-9-]+(?:\/cook)?|\/techniques\/[a-z0-9-]+)?\/?$/.test(
     path,
   );
@@ -162,6 +174,27 @@ export function sanitizeAnalyticsPayload(
       )
         data[key] = value;
     }
+  }
+  if (typeof payload.name === 'string' && ['lesson_step_link_click', 'lesson_free_step_play', 'lesson_free_step_complete', 'lesson_open_from_free_step'].includes(payload.name)) {
+    if (!/^\/uk\/recipes\/bezghliutenovyi-napoleon(?:\/cook)?\/?$/.test(url.pathname) || input?.recipeId !== 'gluten-free-napoleon' ||
+      !/^s(?:03-short-mix|05-rolling|07-baking|08-baked-layers|09-custard|11-layering)$/.test(input?.lessonStepId ?? '')) return false;
+    for (const key of Object.keys(data)) delete data[key as keyof EventData];
+    data.recipeId = input.recipeId;
+    data.lessonStepId = input.lessonStepId;
+    if (payload.name === 'lesson_step_link_click' || payload.name === 'lesson_open_from_free_step') {
+      if (input.locale !== 'uk') return false;
+      data.locale = input.locale;
+    } else {
+      if (input.orientation !== 'wide' && input.orientation !== 'vertical') return false;
+      data.orientation = input.orientation;
+    }
+  }
+  if (typeof payload.name === 'string' && payload.name.startsWith('lesson_') && !['lesson_step_link_click', 'lesson_free_step_play', 'lesson_free_step_complete', 'lesson_open_from_free_step'].includes(payload.name)) {
+    if (url.pathname !== '/uk/urok/napoleon') return false;
+    for (const key of Object.keys(data)) delete data[key as keyof EventData];
+    if (payload.name === 'lesson_page_view' && ['description','login','lesson'].includes(input?.state ?? '')) data.state = input!.state;
+    if (['lesson_step_play','lesson_step_complete'].includes(payload.name) && /^s(0[1-9]|1[0-3])-[a-z-]+$/.test(input?.stepId ?? '')) data.stepId = input!.stepId;
+    if (payload.name === 'lesson_step_play' && ['wide','vertical'].includes(input?.orientation ?? '')) data.orientation = input!.orientation;
   }
   if (payload.name === 'social_profile_open') {
     const social = getSocialClickData(

@@ -351,7 +351,7 @@ void test('adjusted quantities are recomputed without inheriting Tested', () => 
 void test('a 1× adjusted selection and adjusted step guidance never become Tested', () => {
   const configuration = {
     kind: 'adjusted',
-    geometryId: 'round-24cm-7-layers-each',
+    geometryId: 'round-24cm-8-layers-each',
     quantityAdjustment: { mode: 'batchScale', factor: 1 },
   } as const;
   const result = context({
@@ -376,7 +376,7 @@ void test('use-what-I-have quantities come from the canonical calculator', () =>
   const result = context({
     configuration: {
       kind: 'adjusted',
-      geometryId: 'round-24cm-7-layers-each',
+      geometryId: 'round-24cm-8-layers-each',
       quantityAdjustment: {
         mode: 'useWhatIHave',
         anchorIngredientLineId: 'schar-mix-b',
@@ -399,7 +399,7 @@ void test('use-what-I-have quantities come from the canonical calculator', () =>
 void test('rejects forged, unsupported, non-finite and overflowing configurations', () => {
   const adjusted = {
     kind: 'adjusted',
-    geometryId: 'round-24cm-7-layers-each',
+    geometryId: 'round-24cm-8-layers-each',
     quantityAdjustment: { mode: 'batchScale', factor: 2 },
   };
   for (const configuration of [

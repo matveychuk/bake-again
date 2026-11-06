@@ -38,8 +38,9 @@ export function buildShoppingRecipe(
   recipe: ShoppingRecipeProjection,
   scaleFactor: number,
   configurationKey: string,
+  locale: import("../../lib/i18n/config.ts").AppLocale = "uk",
 ): ShoppingRecipe {
-  return {
+  const result: ShoppingRecipe = {
     id: recipe.id,
     versionId: recipe.versionId,
     title: recipe.title,
@@ -55,6 +56,7 @@ export function buildShoppingRecipe(
         choose: ingredient.choose,
         quantity: {
           ...ingredient.quantity,
+          shopping: {...ingredient.quantity.shopping, ...(ingredient.optional ? {defaultSelected: false} : {})},
           base: calculateProjectedIngredient(ingredient, scaleFactor).base,
           equivalent: calculateProjectedIngredient(ingredient, scaleFactor)
             .equivalent,
@@ -65,4 +67,11 @@ export function buildShoppingRecipe(
       })),
     })),
   };
+  const optionalIds = new Set(recipe.ingredientSections.flatMap(section => section.ingredients.filter(i => i.optional).map(i => i.id)));
+  const optional = result.ingredientSections.flatMap(section => section.lines.filter(line => optionalIds.has(line.id)));
+  if (optional.length) {
+    result.ingredientSections = result.ingredientSections.map(section => ({...section,lines:section.lines.filter(line => !optionalIds.has(line.id))})).filter(section => section.lines.length);
+    result.ingredientSections.push({id:'optional',title:{uk:'За бажанням',en:'Optional',es:'Opcional'}[locale],lines:optional});
+  }
+  return result;
 }

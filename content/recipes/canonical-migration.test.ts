@@ -37,12 +37,24 @@ const baseline = JSON.parse(
 ) as Baseline[];
 
 void test('all canonical records preserve the independent pre-migration identities and localized cooking content', () => {
+  const baselineIds = new Set(baseline.map((b) => b.document.recipe.id));
+  const migratedRecipes = recipes.filter((recipe) =>
+    baselineIds.has(recipe.id),
+  );
   assert.deepEqual(
-    recipes.map((r) => r.id),
+    migratedRecipes.map((r) => r.id),
     baseline.map((b) => b.document.recipe.id),
   );
-  for (const recipe of recipes) {
+  for (const recipe of migratedRecipes) {
     const original = baseline.find((b) => b.document.recipe.id === recipe.id)!;
+    // Explicit post-migration author revision is covered by napoleon-author-update.test.ts
+    // and napoleon-v6.test.ts; the immutable v5 baseline remains historical evidence.
+    if (recipe.id === 'gluten-free-napoleon' && recipe.versionId === 'gluten-free-napoleon-v6') {
+      assert.equal(recipe.routeSlug, original.routeSlug);
+      assert.deepEqual(recipe.slug, {uk: 'bezghliutenovyi-napoleon', en: 'gluten-free-napoleon-cake', es: 'tarta-napoleon-sin-gluten'});
+      validateRecipe(recipe, new Set(recipes.map(r => r.id)));
+      continue;
+    }
     assert.equal(recipe.routeSlug, original.routeSlug);
     const routeSlug = getLegacySlugForRecipeId(recipe.id) ?? recipe.id;
     assert.equal(

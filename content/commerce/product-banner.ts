@@ -1,3 +1,4 @@
+import { videoLessons, canBuyVideoLesson } from './video-lessons.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
 
 type HookCopy = {
@@ -18,6 +19,7 @@ type BannerCopy = HookCopy & {
 /** The resolved banner for one page: copy in the page locale plus media. */
 export type ProductBanner = Omit<BannerCopy, 'videoLabel'> & {
   id: string;
+  deliveryUrl?: '/uk/urok/napoleon';
   locale: AppLocale;
   video: { mp4: string; poster: string; label: string };
 };
@@ -121,6 +123,8 @@ export function resolveProductBanner(
   recipeId: string,
   locale: AppLocale,
 ): ProductBanner {
+  const offer = videoLessons.find(l => l.id === 'napoleon-video');
+  const deliveryUrl = offer && canBuyVideoLesson(offer) ? offer.deliveryUrl : undefined;
   const { videoLabel, ...copy } = productBanner.copy[locale];
   const override: HookCopy | undefined =
     productBanner.overrides[recipeId as keyof typeof productBanner.overrides]?.[
@@ -129,6 +133,7 @@ export function resolveProductBanner(
   return {
     ...copy,
     ...(override && { titleAccent: undefined, ...override }),
+    ...(deliveryUrl ? { deliveryUrl } : {}),
     id: productBanner.id,
     locale,
     video: { ...productBanner.video, label: videoLabel },

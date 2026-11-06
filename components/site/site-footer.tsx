@@ -7,6 +7,7 @@ import { privacyContent } from '@/content/privacy';
 import { canViewDrafts } from '@/lib/runtime/local-development.server';
 import styles from './site-footer.module.css';
 import { SocialLinks } from './social-links';
+import { CookieSettings } from './cookie-consent';
 
 export async function SiteFooter({
   locale = defaultLocale,
@@ -31,6 +32,7 @@ export async function SiteFooter({
       >
         <a href={`/${locale}/about`}>{messages.navigation.about}</a>
         <a href={`/${locale}/privacy`}>{privacyContent[locale].title}</a>
+        <CookieSettings locale={locale} />
         {local && <a href="/design-system">Design Lab</a>}
       </nav>
     </footer>

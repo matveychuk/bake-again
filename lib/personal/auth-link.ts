@@ -6,16 +6,25 @@ export type AuthLink =
   | { kind: 'code'; code: string; recovery: boolean }
   | { kind: 'token'; tokenHash: string; type: 'email' | 'recovery' };
 
-// Only the account callback may consume an email credential. Never trust an
+// Only reviewed account and lesson callbacks may consume an email credential. Never trust an
 // email/identity supplied in the URL; the verified session supplies both.
 export function readAuthLink(url: URL): AuthLink {
-  if (!/^\/(uk|es|en)\/account$/.test(url.pathname)) return { kind: 'none' };
+  if (
+    !/^\/(uk|es|en)\/account$/.test(url.pathname) &&
+    url.pathname !== '/uk/urok/napoleon'
+  )
+    return { kind: 'none' };
   const hash = new URLSearchParams(url.hash.slice(1));
   if (url.searchParams.has('error') || hash.has('error'))
     return { kind: 'invalid' };
   const tokenHash =
     hash.get('token_hash') ?? url.searchParams.get('token_hash');
   const type = hash.get('type') ?? url.searchParams.get('type');
+  if (
+    url.pathname === '/uk/urok/napoleon' &&
+    (type === 'recovery' || url.searchParams.has('recovery'))
+  )
+    return { kind: 'invalid' };
   if (tokenHash !== null) {
     return tokenHash && (type === 'email' || type === 'recovery')
       ? { kind: 'token', tokenHash, type }

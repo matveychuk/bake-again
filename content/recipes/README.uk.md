@@ -1,6 +1,6 @@
 # Канонічний Recipe
 
-Локальна реалізація 31.10–01.11.2026. Усі 27 записів використовують `Recipe`
+Локальна реалізація 31.10–01.11.2026. Усі 28 записів використовують `Recipe`
 зі `schemaVersion: 3` у `recipe.types.ts`. Рецепт, чернетка, крем і глазур мають
 однаковий контракт. Формат даних не є версією випікання. `routeSlug` зберігає нейтральний
 legacy route (наприклад napoleon-cake), незалежно від локалізованих slug.
@@ -60,6 +60,10 @@ Detail, print, Cook, shopping, SEO та assistant читають ці дані. 
    `discovery.catalogue: true`; inventoryOrder визначає лише порядок, а не включення; curated order,
    search synonyms та URL aliases залишаються окремими конфігами за recipeId.
 3. Використайте існуючі media assets або штатний `media/web-source` pipeline.
+   Для чернетки без власних фото лишіть `heroMediaId: null` та `media: []`;
+   картка й detail не підставляють чуже фото. Нові українські чернетки можуть
+   тимчасово зберігати український оригінал в EN/ES полях зі станом
+   `sourceDraft`, доки переклад не замовлено.
 4. Запустіть `validate:recipes`, профільні тести, typecheck/build та перевірте
    локальний detail/Cook/print у трьох мовах і на 390/900/1440 px.
 

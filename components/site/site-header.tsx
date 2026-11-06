@@ -30,11 +30,14 @@ export async function SiteHeader({
   const showDrafts = await canViewDrafts();
   const resolvedHomeHref = homeHref ?? localeHomePath(locale);
   const personalPage =
+    pathname === '/uk/urok/napoleon' ||
     pathname === `/${locale}/account` ||
     pathname === localeSavedPath(locale) ||
     pathname === localeShoppingListPath(locale);
   const skipTarget =
-    pathname === `/${locale}/account`
+    pathname === '/uk/urok/napoleon'
+      ? 'lesson-title'
+      : pathname === `/${locale}/account`
       ? 'account-title'
       : pathname === localeSavedPath(locale)
         ? 'saved-title'
@@ -113,7 +116,7 @@ export async function SiteHeader({
           </summary>
           <nav aria-label={messages.a11y.primaryNavigation}>
             {navigationLinks}
-            <div className="mobile-language">
+            <div className="mobile-language" hidden={pathname === '/uk/urok/napoleon'}>
               <LanguageSwitcher
                 locale={locale}
                 pathname={pathname ?? resolvedHomeHref}
@@ -132,7 +135,7 @@ export async function SiteHeader({
 
         <div className="site-header-tools">
           {!personalPage && <SocialLinks locale={locale} variant="header" />}
-          <div className="header-language">
+          <div className="header-language" hidden={pathname === '/uk/urok/napoleon'}>
             <LanguageSwitcher
               locale={locale}
               pathname={pathname ?? resolvedHomeHref}

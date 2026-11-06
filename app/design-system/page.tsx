@@ -1,3 +1,5 @@
+import { CookieConsentPanel } from '@/components/site/cookie-consent';
+import { RecipeFreeLessonStep } from '@/components/recipe/recipe-free-lesson-step';
 import { RecipeReviewsExample } from '@/components/community/recipe-reviews-example';
 import { GuestReviewExample } from '@/components/community/guest-review-example';
 import { AccountExample } from '@/components/account/account-example';
@@ -98,6 +100,8 @@ import { RecipeDownloads } from '@/components/recipe/recipe-downloads';
 import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
 import { ProductBannerInvitation } from '@/components/site/product-banner-invitation';
 import { resolveProductBanner } from '@/content/commerce/product-banner';
+import { LessonPlayer } from '@/components/lessons/lesson-player';
+import { lessonStepSummaries } from '@/content/commerce/lessons/napoleon';
 import { RecipeVideoLesson } from '@/components/recipe/recipe-video-lesson';
 import { videoLessons } from '@/content/commerce/video-lessons';
 
@@ -265,6 +269,11 @@ export default function DesignSystemPage() {
             </div>
           </section>
 
+          <section className={styles.section} id="cookie-consent">
+            <h2>Cookie consent</h2>
+            <p>Nonmodal panel; equal outline actions. These previews never load Meta or store a choice.</p>
+            {(['uk', 'en', 'es'] as const).map((locale) => <CookieConsentPanel key={locale} locale={locale} preview />)}
+          </section>
           <section className={styles.section} id="colour">
             <NumberedSectionTitle
               number="02"
@@ -560,6 +569,7 @@ export default function DesignSystemPage() {
                     { locale: 'uk', id: 'crinkle-cookies' },
                     { locale: 'uk', id: 'banana-fritters' },
                     { locale: 'uk', id: 'easter-bread' },
+                    { locale: 'uk', id: 'apple-cottage-cheese-cookies' },
                     { locale: 'uk', id: 'plum-cake' },
                     { locale: 'uk', id: 'cottage-cheese-waffles' },
                     { locale: 'uk', id: 'carrot-cake' },
@@ -579,7 +589,10 @@ export default function DesignSystemPage() {
                         ...recipe,
                         locale,
                         publicationStatus:
-                          locale === 'uk' ? 'published' : 'unpublished',
+                          locale === 'uk' &&
+                          id !== 'apple-cottage-cheese-cookies'
+                            ? 'published'
+                            : 'unpublished',
                         href: getLocalizedRecipePath(recipe.id, locale)!,
                       }}
                     />
@@ -1644,7 +1657,13 @@ export default function DesignSystemPage() {
           </section>
 
           <section className={styles.section} id="video-lessons">
-            <h2>Optional recipe video lesson</h2>
+            <output>Відкриваємо твій урок. Це може зайняти кілька секунд</output>
+            <output>Урок відкрито — можна дивитися</output>
+            <h2>Відеоурок · список кроків і плеєр (приклад)</h2>
+            <LessonPlayer steps={lessonStepSummaries()} access preview />
+            <p>Після завершення відео наступний крок запускається автоматично. «Дивитися підряд» увімкнено за замовчуванням.</p>
+<h2>Optional recipe video lesson</h2>
+            <RecipeFreeLessonStep recipeId="gluten-free-napoleon" locale="uk" preview />
             <p className={styles.guidance}>
               Shared editorial invitation: planned and available states. Sample
               price, no active checkout. The video describes the base recipe
@@ -1662,6 +1681,7 @@ export default function DesignSystemPage() {
                   lesson={{
                     ...videoLessons[0],
                     status: 'available',
+                    deliveryUrl: '/uk/urok/napoleon',
                     payhipUrl: 'https://payhip.com/b/designpreview',
                     priceMinor: 1200,
                     currency: 'EUR',

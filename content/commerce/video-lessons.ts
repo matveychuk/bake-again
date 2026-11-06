@@ -8,9 +8,10 @@ type LessonIdentity = {
 };
 export type VideoLesson = LessonIdentity &
   (
-    | { status: 'planned' | 'withdrawn' }
+    | { status: 'planned' | 'withdrawn'; priceMinor?: number; currency?: 'EUR' | 'USD' | 'GBP' | 'UAH' }
     | {
         status: 'available';
+        deliveryUrl: '/uk/urok/napoleon';
         payhipUrl: string;
         priceMinor: number;
         currency: 'EUR' | 'USD' | 'GBP' | 'UAH';
@@ -22,9 +23,11 @@ export const videoLessons: readonly VideoLesson[] = [
   {
     id: 'napoleon-video',
     recipeId: 'gluten-free-napoleon',
-    recipeVersionId: 'gluten-free-napoleon-v5',
+    recipeVersionId: 'gluten-free-napoleon-v6',
     language: 'uk',
     status: 'planned',
+    priceMinor: 900,
+    currency: 'EUR',
   },
 ];
 
@@ -43,6 +46,7 @@ export function canBuyVideoLesson(
 ): lesson is Extract<VideoLesson, { status: 'available' }> {
   return (
     lesson.status === 'available' &&
+    lesson.deliveryUrl === '/uk/urok/napoleon' &&
     isPayhipLessonUrl(lesson.payhipUrl) &&
     Number.isSafeInteger(lesson.priceMinor) &&
     lesson.priceMinor > 0 &&

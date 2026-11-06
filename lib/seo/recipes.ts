@@ -1,3 +1,4 @@
+import { getFreeLessonPreview, freeLessonCopy } from '../../content/commerce/free-lesson-preview.ts';
 import { getRecipeDocument } from '../../content/recipes/registry.ts';
 import {
   getInventoryRecipe,
@@ -79,6 +80,7 @@ export function recipeStructuredData(
     !content.steps.length
   )
     return null;
+  const freeVideo = getFreeLessonPreview(id, locale);
   const facts = recipeSearchMetadata[id];
   const dateModified = recipeLastModified(getRecipeDocument(id)!.recipe);
   const totalMinutes = content.timing?.totalElapsedMinutes;
@@ -86,6 +88,7 @@ export function recipeStructuredData(
   return {
     '@context': 'https://schema.org',
     '@type': 'Recipe',
+    ...(freeVideo && {video: { '@type': 'VideoObject', name: freeLessonCopy[locale].title, description: freeLessonCopy[locale].caption, thumbnailUrl: absoluteUrl(freeVideo.poster), contentUrl: absoluteUrl(freeVideo.wide), uploadDate: freeVideo.uploadDate, duration: `PT${freeVideo.durationSec}S` }}),
     '@id': `${absoluteUrl(page.path)}#recipe`,
     url: absoluteUrl(page.path),
     name: page.title,

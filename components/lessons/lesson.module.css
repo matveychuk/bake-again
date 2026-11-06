@@ -1,0 +1,189 @@
+.page {
+  width: min(100%, var(--layout-max-content));
+  margin-inline: auto;
+  padding: var(--space-8) var(--layout-gutter-mobile) var(--space-16);
+  overflow-wrap: anywhere;
+}
+.header,
+.actions,
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+.header {
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+.title {
+  font-family: var(--font-family-display-cyrillic);
+  font-size: var(--font-size-story-title);
+  font-weight: 400;
+  line-height: 1.15;
+  max-width: var(--layout-cook-reading);
+}
+.lead {
+  font-size: var(--font-size-body-large);
+  max-width: var(--layout-cook-reading);
+  margin-block: var(--space-6);
+}
+.facts {
+  list-style: none;
+  padding: 0;
+  margin-block: var(--space-6) var(--space-8);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-small);
+}
+.facts li {
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-background-panel-subtle);
+}
+.workspace {
+  display: grid;
+  gap: var(--space-8);
+  align-items: start;
+  margin-block: var(--space-8);
+}
+.workspace > *,
+.view {
+  min-width: 0;
+}
+.video {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: var(--color-action-emphasis);
+}
+.frame {
+  background: var(--color-action-emphasis);
+  color: var(--color-text-on-emphasis);
+  padding: var(--space-3);
+}
+.frame h2 {
+  font-size: var(--font-size-body-large);
+  margin-block: var(--space-4);
+}
+.placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+.steps {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-4);
+}
+.step {
+  border-bottom: 1px solid var(--color-border-subtle);
+  scroll-margin-top: var(--space-8);
+}
+.step:target {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+.step button,
+.locked {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: left;
+  padding: var(--space-3) var(--space-2);
+  min-height: var(--space-12);
+  color: inherit;
+}
+.step button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+.step button[aria-current='step'] {
+  background: var(--color-background-panel);
+  font-weight: 700;
+}
+.step button:focus-visible,
+.page a:focus-visible,
+.page input:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+.stepTitle {
+  flex: 1;
+  min-width: 0;
+}
+.meta {
+  font-size: var(--font-size-body-small);
+  color: var(--color-text-secondary);
+}
+.purchase,
+.login {
+  padding-block: var(--space-8);
+  border-top: 1px solid var(--color-border-subtle);
+  max-width: var(--layout-cook-reading);
+}
+.purchase h2,
+.login h2,
+.stepsTitle {
+  font-family: var(--font-family-display-cyrillic);
+  font-size: var(--font-size-drawer-title);
+  font-weight: 400;
+}
+.purchase p,
+.login p {
+  margin-block: var(--space-4);
+}
+.form {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--layout-assistant-drawer);
+}
+.form input {
+  padding: var(--space-3);
+  min-height: var(--space-12);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+  font: inherit;
+  width: 100%;
+}
+.notice {
+  padding: var(--space-4);
+  background: var(--color-background-panel-subtle);
+  margin-block: var(--space-4);
+}
+.faq {
+  max-width: var(--layout-cook-reading);
+  margin-top: var(--space-8);
+}
+.faq details {
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-block: var(--space-4);
+}
+.faq summary {
+  cursor: pointer;
+  min-height: var(--space-8);
+  font-weight: 600;
+}
+@media (min-width: 900px) {
+  .page {
+    padding-inline: var(--layout-gutter-desktop);
+  }
+  .workspace {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  }
+}
+@media (orientation: portrait) and (max-width: 699px) {
+  .video,
+  .placeholder {
+    aspect-ratio: 9 / 16;
+  }
+}

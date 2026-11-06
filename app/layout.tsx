@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Literata, Manrope, Newsreader } from 'next/font/google';
 import { headers } from 'next/headers';
 import { SiteAnalytics } from '@/components/site/site-analytics';
+import { CookieConsent } from '@/components/site/cookie-consent';
+import { metaConfig } from '@/lib/analytics/meta-policy';
+import { getPersonalBindings } from '@/lib/personal/server/runtime';
 import { defaultLocale, isAppLocale, localeMetadata } from '@/lib/i18n/config';
 import { siteOrigin } from '@/lib/seo/site';
 import './globals.css';
@@ -23,7 +26,7 @@ const literata = Literata({
   style: ['normal', 'italic'],
 });
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   metadataBase: new URL(siteOrigin),
   ...(process.env.GOOGLE_SITE_VERIFICATION?.trim() && {
     verification: { google: process.env.GOOGLE_SITE_VERIFICATION.trim() },
@@ -57,6 +60,17 @@ export const metadata: Metadata = {
   },
 };
 
+export async function generateMetadata(): Promise<Metadata> {
+  const bindings = await getPersonalBindings();
+  const { domainVerification: verification } = metaConfig(bindings);
+  return {
+    ...baseMetadata,
+    ...(verification
+      ? { other: { 'facebook-domain-verification': verification } }
+      : {}),
+  };
+}
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -65,6 +79,8 @@ export default async function RootLayout({
   const requestHeaders = await headers();
   const requestLocale = requestHeaders.get('x-bake-again-locale');
   const locale = isAppLocale(requestLocale) ? requestLocale : defaultLocale;
+  const bindings = await getPersonalBindings();
+  const { pixelId } = metaConfig(bindings);
 
   return (
     <html
@@ -73,6 +89,7 @@ export default async function RootLayout({
     >
       <body>
         <SiteAnalytics />
+        <CookieConsent pixelId={pixelId} />
         {children}
         {process.env.NODE_ENV === 'development' && (
           <script

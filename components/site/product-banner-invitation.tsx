@@ -103,7 +103,7 @@ export function ProductBannerInvitation({
     () => false,
   );
 
-  if ((subscribed && !open) || closedAfterSignup) return null;
+  if (!banner.deliveryUrl && ((subscribed && !open) || closedAfterSignup)) return null;
 
   return (
     <div data-theme="dark" data-product-banner={banner.id}>
@@ -124,7 +124,7 @@ export function ProductBannerInvitation({
         description={banner.description}
         image={<BannerLoop video={banner.video} />}
         action={
-          <Button
+          banner.deliveryUrl ? <Button href={banner.deliveryUrl} onClick={() => trackEvent('product_banner_click', { recipe_id: recipeId, locale: banner.locale })}>{banner.action}</Button> : <Button
             ref={actionRef}
             onClick={() => {
               trackEvent('product_banner_click', {

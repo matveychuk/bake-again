@@ -117,9 +117,9 @@ void test('selects the requested locale for a detailed recipe', () => {
   assert.match(recipe?.beforeStart?.[0] ?? '', /пергамент.*всіх коржів/i);
   assert.equal(recipe?.evidence?.status, 'tested');
   assert.equal(recipe?.steps.length, 16);
-  assert.equal(recipe?.steps[0]?.title, 'Масляна крихта');
+  assert.equal(recipe?.steps[0]?.title, 'Сметанна основа');
   assert.equal(recipe?.steps[0]?.meta, undefined);
-  assert.equal(recipe?.steps.at(-1)?.title, 'Ніч у холодильнику');
+  assert.equal(recipe?.steps.at(-1)?.title, 'Холодильник: 4–5 годин або ніч');
   assert.deepEqual(amount('schar-mix-b'), {
     kind: 'exact',
     value: 500,

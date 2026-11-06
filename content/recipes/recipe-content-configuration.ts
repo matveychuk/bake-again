@@ -250,18 +250,11 @@ export function applyRecipeContentConfiguration(
     },
     steps: content.steps.map((step) => ({
       ...step,
-      body: (step.quantityMentions ?? []).reduce(
-        (body, mention) =>
-          body.replaceAll(
-            mention.text,
-            mention.numberOnly && mention.quantity.kind === 'exact'
-              ? formatNumber(locale, mention.quantity.value * factor)
-              : formatQuantity(
-                  locale,
-                  scaleStructuredQuantity(mention.quantity, factor),
-                ),
-          ),
+      body: scaleStepProse(
         step.body,
+        step.quantityMentions ?? [],
+        factor,
+        locale,
       ),
     })),
     yield: recipeYield,
@@ -269,7 +262,7 @@ export function applyRecipeContentConfiguration(
       ...content.overview,
       yieldLabel: recipeYield?.label ?? content.overview.yieldLabel,
     },
-    ingredientSections,
+    ingredientSections: ingredientSections.map(section => ({...section,ingredients:section.ingredients.map(ingredient => ({...ingredient,note: ingredient.note ? scaleStepProse(ingredient.note,ingredient.noteQuantityMentions ?? [],factor,locale) : undefined}))})),
     configurationWarnings,
   };
 }
@@ -306,4 +299,33 @@ export function recipeAssistantConfiguration(
             },
           },
   };
+}
+
+/** Substitute original mentions once, so 16 → 8 cannot then become 4. */
+export function scaleStepProse(
+  body: string,
+  mentions: NonNullable<
+    import('./localized-recipe.types.ts').StructuredRecipeStep['quantityMentions']
+  >,
+  factor: number,
+  locale: AppLocale,
+) {
+  const replacements = new Map(
+    mentions.map((mention) => [
+      mention.text,
+      mention.numberOnly && mention.quantity.kind === 'exact'
+        ? formatNumber(locale, mention.quantity.value * factor)
+        : formatQuantity(
+            locale,
+            scaleStructuredQuantity(mention.quantity, factor),
+          ),
+    ]),
+  );
+  if (!replacements.size) return body;
+  const escaped = [...replacements.keys()]
+    .sort((a, b) => b.length - a.length)
+    .map((text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  return body.replace(new RegExp(escaped.join('|'), 'g'), (match) =>
+    replacements.get(match)!,
+  );
 }

@@ -56,6 +56,7 @@ export type StructuredRecipeTiming = {
 };
 
 export type StructuredIngredient = {
+  noteQuantityMentions?: StructuredRecipeStep["quantityMentions"];
   id: string;
   name: string;
   options?: Array<{ ingredientId: string; name: string }>;
@@ -76,6 +77,8 @@ export type StructuredIngredientSection = {
 };
 
 export type StructuredRecipeStep = {
+  lessonLink?: { lessonId: string; lessonStepId: string };
+  lessonLinkText?: string;
   help?: import('./step-help.ts').StepHelpDefinition[];
   technique?: import('../techniques/types.ts').TechniqueReference;
   id: string;

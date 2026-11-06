@@ -42,6 +42,29 @@ export const stepHelpCatalog: Record<
   string,
   Record<string, StepHelpDecision>
 > = {
+  'apple-cottage-cheese-cookies': {
+    prepare: skip(
+      'Неперевірена чернетка: дія описана в кроці; додаткової перевіреної підказки ще немає.',
+    ),
+    'melt-butter': skip(
+      'Неперевірена чернетка: дія описана в кроці; додаткової перевіреної підказки ще немає.',
+    ),
+    'mix-dough': skip(
+      'Неперевірена чернетка: дія описана в кроці; додаткової перевіреної підказки ще немає.',
+    ),
+    'add-apples': skip(
+      'Неперевірена чернетка: дія описана в кроці; додаткової перевіреної підказки ще немає.',
+    ),
+    coat: skip(
+      'Неперевірена чернетка: дія описана в кроці; додаткової перевіреної підказки ще немає.',
+    ),
+    arrange: skip(
+      'Неперевірена чернетка: дія описана в кроці; додаткової перевіреної підказки ще немає.',
+    ),
+    bake: skip(
+      'Неперевірена чернетка: дія описана в кроці; додаткової перевіреної підказки ще немає.',
+    ),
+  },
   'sour-cream': {
     mix: help(
       q(
@@ -96,7 +119,9 @@ export const stepHelpCatalog: Record<
         '¿Hasta qué punto debo picar la mantequilla para las capas?',
       ),
     ),
-    'mix-wet-dough': skip('Сметану, яйця й сіль достатньо змішати до однорідності; борошно вже в масляній крихті.'),
+    'mix-wet-dough': skip(
+      'Яйця зі сметаною або йогуртом збивають до однорідності; сіль додають у короткий заміс.',
+    ),
     'combine-dough': help(
       q(
         'checkpoint',
@@ -105,15 +130,16 @@ export const stepHelpCatalog: Record<
         '¿Cuándo debo dejar de mezclar la masa?',
       ),
     ),
-    'divide-and-chill': help(
+    'divide-and-chill': skip(
+      'Поділ і тривалість охолодження описані; порада про тверде тісто перенесена до розкачування.',
+    ),
+    'roll-layer': help(
       q(
         'tip',
         'Що робити, якщо охолоджене тісто надто тверде?',
         'What if the chilled dough is too firm?',
         '¿Qué hago si la masa fría está demasiado dura?',
       ),
-    ),
-    'roll-layer': help(
       q(
         'tip',
         'Коли потрібен другий лист пергаменту?',
@@ -167,16 +193,15 @@ export const stepHelpCatalog: Record<
     'finish-custard': skip(
       'Додавання масла після зняття з вогню вже прямо описане.',
     ),
-    'prepare-nuts': skip('Горіхи необов’язкові; вибір і подрібнення вже описані.'),
+    'prepare-nuts': skip(
+      'Обрізки потрібні на крихту, горіхи необов’язкові; обсмажування й подрібнення описані.',
+    ),
     'assemble-cake': help(
-      text(
+      q(
         'body',
-        'Теплим чи холодним кремом перемазувати коржі?',
-        'Should I spread warm or cold custard between the layers?',
-        '¿Debo rellenar las capas con la crema templada o fría?',
-        'Для складання «Наполеона» використовуй теплий крем. Нанось його на кожен корж; за бажанням додавай горіхи в кожен прошарок або через один.',
-        'Use warm custard to assemble the Napoleon. Spread it on every layer, adding optional nuts to every layer or alternate layers.',
-        'Monta la tarta Napoleón con la crema templada. Extiéndela en cada capa y, si lo deseas, añade frutos secos en cada capa o en capas alternas.',
+        'Як розподілити крем і прикрасити торт?',
+        'How do I spread the custard and decorate the cake?',
+        '¿Cómo reparto la crema y decoro la tarta?',
       ),
     ),
     'rest-assembled-cake': skip('Тривалість і місце витримки вже зазначені.'),

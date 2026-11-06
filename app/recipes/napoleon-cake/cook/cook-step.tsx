@@ -1,3 +1,4 @@
+import { RecipeLessonLink } from '@/components/recipe/recipe-lesson-link';
 import { List, ListChecks } from 'lucide-react';
 import { AssistantTrigger } from '@/components/assistant';
 import { assistantMessages } from '@/components/assistant/assistant.messages';
@@ -86,6 +87,8 @@ export function CookStep({
             ))}
           </ol>
         )}
+
+        {step.lessonLinks?.map(link => <RecipeLessonLink key={link.lessonStepId} link={link} locale={locale} cook />)}
 
         {step.ingredients.length > 0 && (
           <section

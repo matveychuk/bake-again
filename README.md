@@ -21,6 +21,10 @@ cp .env.example .env.local
 npm run dev
 ```
 
+For a stable review session without automatic reloads, run
+`BAKE_AGAIN_STABLE_PREVIEW=true npm run dev -- --port 3014`. This disables file
+watching and HMR; restart the server after source changes before refreshing the page.
+
 The assistant is disabled by default. Recipes, prepared answers and local personal
 features work without paid API credentials. Never commit `.env.local` or real keys.
 
@@ -113,6 +117,20 @@ D1 binding (database `bake-again`, migrations in `drizzle/`) and all non-secret
 runtime vars. Cloudflare Workers Builds builds and deploys from GitHub: build
 `npm run build`, deploy `npx wrangler d1 migrations apply ASSISTANT_QUOTAS --remote
 && npx wrangler deploy`. Secrets are set in the Cloudflare dashboard only.
+
+The Worker entry handles `/favicon.ico` and localized favicon URLs with one
+308 redirect to the existing `/favicon.svg`. Missing static files go directly
+to the ASSETS binding; PHP, environment-file and repository probes receive a
+plain 404 before locale middleware or React rendering. `/api/`, `/_next/`,
+Server Actions, RSC, robots and sitemap requests retain application routing.
+Prepared website WebP images are served directly (`images.unoptimized`), avoiding
+redundant `/_next/image` processing. No shared HTML cache or paid-plan change is
+introduced; personalized lesson/account responses keep their existing policy.
+Run `node --experimental-strip-types --test lib/runtime/request-fast-path.test.ts`
+and `node scripts/check-request-fast-path.mjs` against a local production Worker
+(`FAST_PATH_CHECK_URL`, default `http://localhost:3012`). These checks confirm
+routing and rendered image URLs, not production CPU savings; verify those in
+Cloudflare metrics after deployment. Do not deploy unrelated working changes.
 
 Round 2 foundation keeps the additive D1 personal migration and the AI quota tables
 unchanged. The owner selected Supabase Free for new reader accounts and personal

@@ -32,6 +32,9 @@
   font-weight: 700;
   letter-spacing: 0.03em;
 }
+.heroCopy:only-child {
+  grid-column: 1 / -1;
+}
 .heroCopy {
   padding: var(--space-8) clamp(var(--space-8), 3.7vw, var(--space-16));
   display: flex;

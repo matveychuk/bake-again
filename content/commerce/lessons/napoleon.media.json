@@ -1,0 +1,197 @@
+{
+  "s01-sour-cream-base": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "2a82da855596218025ccfd003ebd46ac",
+        "durationSec": 27.5
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "8659941e716e716ceb5bb120eabbb377",
+        "durationSec": 27.53
+      }
+    },
+    "status": "draft"
+  },
+  "s02-butter-crumb": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "a27d841c43c4883fed2e187055bb97e1",
+        "durationSec": 40.3
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "1ff378d428eca071470562e844978ef6",
+        "durationSec": 40.4
+      }
+    },
+    "status": "draft"
+  },
+  "s03-short-mix": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "44061074d7833279f4fa2fc7eed8ef3b",
+        "durationSec": 46.57
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "703f0e5f2385eb556cac9cd5b135b678",
+        "durationSec": 46.57
+      }
+    },
+    "status": "draft"
+  },
+  "s04-divide": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "943ee9c04caf7b7ce67eb15bf52ad2fd",
+        "durationSec": 41.27
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "4f1c9abeba0f836dfd69da72f26ace2a",
+        "durationSec": 41.3
+      }
+    },
+    "status": "draft"
+  },
+  "s05-rolling": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "88a7cadb9d8fa759f1d84aaa2a8335e9",
+        "durationSec": 25.7
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "efc3efa46f14e5462f0d0dfa7ab84422",
+        "durationSec": 25.7
+      }
+    },
+    "status": "draft"
+  },
+  "s06-shape": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "8b0b2738cb1f35bee24e2f806f0b06f5",
+        "durationSec": 16.83
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "6d3050c1ae44ffe764ececfbd61e6afb",
+        "durationSec": 16.83
+      }
+    },
+    "status": "draft"
+  },
+  "s07-baking": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "caead939bd6b7dcac904bf4280b96e75",
+        "durationSec": 29
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "634d2e4da525c996eff8d2b5bf18c97e",
+        "durationSec": 29
+      }
+    },
+    "status": "draft"
+  },
+  "s08-baked-layers": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "a1e0325cb514a49b83d8329b5c20d686",
+        "durationSec": 23.7
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "45215960b8b97119eb1554f2004be911",
+        "durationSec": 23.67
+      }
+    },
+    "status": "draft"
+  },
+  "s09-custard": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "e669467ccc37a3adbd99596e84db3bff",
+        "durationSec": 53.6
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "70bdbdeff2b97b6b9e53a1016b8318a9",
+        "durationSec": 53.6
+      }
+    },
+    "status": "draft"
+  },
+  "s10-nuts-crumb": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "0a831492458824c6d0f1fb08871b7d11",
+        "durationSec": 46.1
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "ca324594f2d2a7ce8156b99a782739b0",
+        "durationSec": 46.1
+      }
+    },
+    "status": "draft"
+  },
+  "s11-layering": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "b6c3b2e5b77def8e2461f74a1de83b15",
+        "durationSec": 37.47
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "2398aac299c54d337b32bd2ccc0d07c9",
+        "durationSec": 37.47
+      }
+    },
+    "status": "draft"
+  },
+  "s12-decorating": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "fe55d955d8dd0beb46b9cda12feb619f",
+        "durationSec": 33.83
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "bb053992d1fa10e337f03947b09659d3",
+        "durationSec": 33.83
+      }
+    },
+    "status": "draft"
+  },
+  "s13-finished-cake": {
+    "uk": {
+      "wide": {
+        "provider": "cloudflare-stream",
+        "uid": "0fbaa957937bc925079549f7cad182d7",
+        "durationSec": 38.57
+      },
+      "vertical": {
+        "provider": "cloudflare-stream",
+        "uid": "05d4187803099cf2b5a71eb32c90c2b7",
+        "durationSec": 38.57
+      }
+    },
+    "status": "draft"
+  }
+}

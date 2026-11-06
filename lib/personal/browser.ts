@@ -223,6 +223,22 @@ async function establish(identity: string | null, email: string | null = null) {
     }
   }
 }
+async function bridgeLessonSession(token: string | undefined) {
+  // Server independently verifies the token. Failure never blocks personal sync.
+  try {
+    await fetch('/api/lessons/session', {
+      method: token ? 'POST' : 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        ...(token ? { authorization: `Bearer ${token}` } : {}),
+      },
+      cache: 'no-store',
+      signal: AbortSignal.timeout(8000),
+    });
+  } catch {
+    /* Lesson bridge retries on the next Auth event or visit. */
+  }
+}
 export async function startAccount() {
   if (starting) return starting;
   starting = (async () => {
@@ -286,6 +302,7 @@ export async function startAccount() {
         }
         // Never await another Auth operation inside the SDK callback's lock.
         setTimeout(() => {
+          void bridgeLessonSession(session?.access_token);
           void establish(session?.user.id ?? null, session?.user.email ?? null);
         }, 0);
       });
@@ -312,11 +329,23 @@ export async function startAccount() {
           data.session?.user.id,
         ),
       };
+      if (callbackUrl.pathname === '/uk/urok/napoleon')
+        await bridgeLessonSession(data.session?.access_token);
+      else void bridgeLessonSession(data.session?.access_token);
       await establish(
         data.session?.user.id ?? null,
         data.session?.user.email ?? null,
       );
       initializing = false;
+      if (verified && callbackUrl.pathname === '/uk/urok/napoleon') {
+        try {
+          sessionStorage.setItem('ba:lesson-login-success', '1');
+        } catch {
+          /* Optional analytics. */
+        }
+        location.replace('/uk/urok/napoleon');
+        return;
+      }
       window.addEventListener('focus', () => {
         if (state.engine && !state.engine.pendingCount)
           void state.engine.refresh().catch(() => {
@@ -372,6 +401,7 @@ export async function signOut() {
   clearCache();
   setAccountStorage(shield);
   localStorage.setItem('bake-again:account-logout', crypto.randomUUID());
+  await bridgeLessonSession(undefined);
   const { error } = client
     ? await client.auth.signOut({ scope: 'local' })
     : { error: null };

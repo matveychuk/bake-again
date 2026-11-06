@@ -24,8 +24,7 @@ const copy = {
     languages: { uk: 'українська', en: 'англійська', es: 'іспанська' },
     soon: 'У підготовці',
     buy: 'Купити відеоурок',
-    delivery:
-      'Оплата й доступ до уроку — на Payhip. Обліковий запис Bake Again не потрібен.',
+    delivery: 'Ціна включає ПДВ. Після оплати урок відкриється на Bake Again.',
     preview: 'Приклад дизайну. Купівля недоступна.',
   },
   en: {
@@ -41,7 +40,7 @@ const copy = {
     soon: 'In preparation',
     buy: 'Buy video lesson',
     delivery:
-      'Payment and lesson access are on Payhip. No Bake Again account is required.',
+      'Pay through Payhip. Watch on Bake Again using your purchase email.',
     preview: 'Design preview. Purchasing is unavailable.',
   },
   es: {
@@ -57,7 +56,7 @@ const copy = {
     soon: 'En preparación',
     buy: 'Comprar videoclase',
     delivery:
-      'El pago y el acceso a la clase se gestionan en Payhip. No necesitas una cuenta de Bake Again.',
+      'Paga en Payhip. Mira la clase en Bake Again con el correo de tu compra.',
     preview: 'Vista previa del diseño. La compra no está disponible.',
   },
 };
@@ -119,7 +118,7 @@ export function RecipeVideoLesson({
               <Button disabled>{action}</Button>
             ) : (
               <Button
-                href={lesson.payhipUrl}
+                href="/uk/urok/napoleon/kupyty"
                 rel="noreferrer"
                 onClick={track}
                 onAuxClick={(event) => {

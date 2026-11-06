@@ -24,6 +24,9 @@ const serverState: AccountState = {
   recovery: false,
 };
 const serverSnapshot = () => serverState;
+const subscribeHydration = () => () => {};
+const clientHydrated = () => true;
+const serverHydrated = () => false;
 export function useAccount() {
   const state = useSyncExternalStore(
     subscribeAccount,
@@ -37,6 +40,11 @@ export function useAccount() {
 }
 export function AccountProvider({ children }: { children: ReactNode }) {
   const state = useAccount();
+  const hydrated = useSyncExternalStore(
+    subscribeHydration,
+    clientHydrated,
+    serverHydrated,
+  );
   const [booted, setBooted] = useState(false);
   if (state.ready && !booted) setBooted(true);
   return (
@@ -44,8 +52,8 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       <div
         className="site-app-shell"
         key={`${state.viewEpoch}:${booted}`}
-        aria-busy={!state.ready}
-        inert={!state.ready || undefined}
+        aria-busy={hydrated && !state.ready}
+        inert={(hydrated && !state.ready) || undefined}
       >
         {children}
       </div>

@@ -55,9 +55,10 @@ export const catalogLocaleCopy: Record<string, CatalogLocaleCopy> =
         category: recipe.discovery.category,
         summary: recipe.summary,
         alt:
-          recipe.media.find((item) => item.id === recipe.heroMediaId)!
-            .heroAlt ??
-          recipe.media.find((item) => item.id === recipe.heroMediaId)!.alt,
+          recipe.media.find((item) => item.id === recipe.heroMediaId)
+            ?.heroAlt ??
+          recipe.media.find((item) => item.id === recipe.heroMediaId)?.alt ??
+          recipe.summary,
         publicationNote: recipe.discovery.publicationNote,
       },
     ]),

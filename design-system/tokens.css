@@ -13,6 +13,8 @@ html[data-palette='selected-mix'] {
   --color-action-primary: #a64f36;
   --color-action-primary-strong: #853c29;
   --color-action-primary-hover: var(--color-action-primary-strong);
+  --color-lesson-background: #392721;
+  --color-lesson-text: #fffdf9;
   --color-action-emphasis: #392721;
   --color-action-emphasis-strong: #735d54;
   --color-text-on-emphasis: #fffdf9;

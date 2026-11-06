@@ -4,8 +4,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "bake-again",
+  "keep_vars": true,
   "account_id": "a30f72a0516ba67edcf1e6a5c89a37b6",
-  "main": "vinext/server/fetch-handler",
+  "main": "./worker.ts",
+  "triggers": { "crons": ["*/5 * * * *"] },
   "compatibility_date": "2026-05-15",
   "compatibility_flags": ["nodejs_compat"],
   "assets": { "binding": "ASSETS" },
@@ -19,6 +21,8 @@
     }
   ],
   "vars": {
+    "META_PIXEL_ID": "477724239421268",
+    "META_DOMAIN_VERIFICATION": "",
     "ASSISTANT_ALLOWED_HOSTNAME": "bakeagain.com",
     "ASSISTANT_DAILY_BUDGET_USD": "1",
     "ASSISTANT_ENABLED": "true",

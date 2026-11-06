@@ -93,18 +93,26 @@ void test('every recipe has unique localized canonical slugs and old aliases ret
   const { recipeDocuments } = await import('../../content/recipes/registry.ts');
   const { recipeSlugs } = await import('./recipe-slugs.ts');
   const { getRecipeIdFromLocalizedSlug } = await import('./routes.ts');
-  assert.deepEqual(Object.keys(recipeSlugs).sort(), recipeDocuments.map(d => d.recipe.id).sort());
+  assert.deepEqual(
+    Object.keys(recipeSlugs).sort(),
+    recipeDocuments.map((d) => d.recipe.id).sort(),
+  );
   for (const locale of ['uk', 'en', 'es'] as const) {
-    const slugs = Object.values(recipeSlugs).map(v => v[locale]);
-    assert.equal(new Set(slugs).size, 27);
+    const slugs = Object.values(recipeSlugs).map((v) => v[locale]);
+    assert.equal(new Set(slugs).size, recipeDocuments.length);
     for (const { recipe } of recipeDocuments) {
       const slug = recipeSlugs[recipe.id][locale];
       assert.match(slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
       assert.equal(getRecipeIdFromLocalizedSlug(locale, slug), recipe.id);
       assert.equal(getRecipeIdFromLocalizedSlug(locale, recipe.id), recipe.id);
       for (const target of ['uk', 'en', 'es'] as const)
-        assert.equal(getLocaleSwitchPath(`/${locale}/recipes/${slug}/cook?mode=scale&scale=2#step`, target),
-          `${getLocalizedRecipePath(recipe.id, target, '/cook')}?mode=scale&scale=2#step`);
+        assert.equal(
+          getLocaleSwitchPath(
+            `/${locale}/recipes/${slug}/cook?mode=scale&scale=2#step`,
+            target,
+          ),
+          `${getLocalizedRecipePath(recipe.id, target, '/cook')}?mode=scale&scale=2#step`,
+        );
     }
   }
 });

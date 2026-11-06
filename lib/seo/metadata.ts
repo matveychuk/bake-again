@@ -84,8 +84,8 @@ export function recipeMetadata(id: string, locale: AppLocale): Metadata {
     locale,
     locales: page.locales,
     indexable: page.indexable,
-    image: page.image,
-    imageAlt: page.alt,
+    image: page.image || undefined,
+    imageAlt: page.image ? page.alt : undefined,
   });
   if (page.indexable && isUiLocalePublishable(locale))
     metadata.alternates = {

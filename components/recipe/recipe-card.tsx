@@ -54,23 +54,25 @@ export function RecipeCard({
         href={recipe.href}
         aria-label={recipe.title}
       />
-      <div className="recipe-image">
-        <Image
-          src={recipe.cardImage ?? recipe.image}
-          alt={recipe.cardAlt ?? recipe.alt}
-          fill
-          style={
-            recipe.cardImagePosition === 'left-quarter'
-              ? { objectPosition: '25% center' }
-              : undefined
-          }
-          sizes={
-            variant === 'compact'
-              ? '120px'
-              : '(min-width: 901px) 33vw, (min-width: 621px) 50vw, 100vw'
-          }
-        />
-      </div>
+      {(recipe.cardImage || recipe.image) && (
+        <div className="recipe-image">
+          <Image
+            src={recipe.cardImage ?? recipe.image}
+            alt={recipe.cardAlt ?? recipe.alt}
+            fill
+            style={
+              recipe.cardImagePosition === 'left-quarter'
+                ? { objectPosition: '25% center' }
+                : undefined
+            }
+            sizes={
+              variant === 'compact'
+                ? '120px'
+                : '(min-width: 901px) 33vw, (min-width: 621px) 50vw, 100vw'
+            }
+          />
+        </div>
+      )}
       <div className="recipe-card-header">
         <Heading>
           <a href={recipe.href} className="recipe-card-meta-link" tabIndex={-1}>

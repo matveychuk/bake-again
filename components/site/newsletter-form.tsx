@@ -1,4 +1,5 @@
 'use client';
+import { trackMetaLead } from '@/lib/analytics/meta';
 
 /* oxlint-disable next/no-html-link-for-pages -- Native links follow the existing vinext compatibility contract. */
 
@@ -312,6 +313,7 @@ export function NewsletterForm({
         magnetId ? 'lead_magnet_submit' : 'newsletter_submit',
         magnetId ? { magnet: magnetId } : { locale },
       );
+      trackMetaLead({ magnetId, scenario, placement });
     } catch {
       setStatus('error');
       setAttempt((value) => value + 1);

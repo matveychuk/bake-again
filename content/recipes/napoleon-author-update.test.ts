@@ -106,7 +106,7 @@ for (const locale of ['uk', 'en', 'es'] as const) {
     }
   });
 
-  void test(`author Napoleon v5 keeps unleavened dough, photographs and Cook Mode consistent (${locale})`, () => {
+  void test(`author Napoleon v6 keeps unleavened dough, photographs and Cook Mode consistent (${locale})`, () => {
     const source = getRecipeContent(recipe.id, locale)!;
     assert.equal(source.evidence?.status, 'tested');
     assert.equal(recipe.geometry.default.diameterCm, 24);
@@ -116,10 +116,10 @@ for (const locale of ['uk', 'en', 'es'] as const) {
     );
     assert.equal(
       recipe.steps.find((s) => s.id === 'bake-layer')?.temperature?.ovenMode,
-      'fan',
+      'conventional',
     );
-    assert.equal(recipe.versionId, 'gluten-free-napoleon-v5');
-    assert.equal(recipe.geometry.default.layerCount, 7);
+    assert.equal(recipe.versionId, 'gluten-free-napoleon-v6');
+    assert.equal(recipe.geometry.default.layerCount, 8);
     assert.deepEqual(recipe.yield.default.count, { kind: 'exact', value: 2 });
     assert(
       !recipe.ingredientSections[0].lines.some((line) =>
@@ -129,8 +129,8 @@ for (const locale of ['uk', 'en', 'es'] as const) {
     assert.deepEqual(
       source.steps.slice(0, 7).map((s) => s.id),
       [
-        'cut-in-butter',
         'mix-wet-dough',
+        'cut-in-butter',
         'combine-dough',
         'divide-and-chill',
         'roll-layer',
@@ -139,10 +139,14 @@ for (const locale of ['uk', 'en', 'es'] as const) {
       ],
     );
     const photos = source.steps.slice(0, 7).flatMap((s) => s.media ?? []);
-    assert.equal(photos.length, 6);
+    assert.equal(photos.length, 10);
     assert(
       photos.every(
-        (p) => p.fit === 'cover' && p.src.endsWith('.webp') && p.alt,
+        (p) =>
+          (p.fit === 'cover' ||
+            (p.id === 'napoleon-lesson-two-trays-v1' && p.fit === 'contain')) &&
+          p.src.endsWith('.webp') &&
+          p.alt,
       ),
     );
     for (const factor of [0.5, 1, 1.5, 2]) {
@@ -187,11 +191,11 @@ for (const locale of ['uk', 'en', 'es'] as const) {
       assert.deepEqual(
         steps.find((s) => s.stepIds.includes('divide-and-chill'))
           ?.timerOptionsSeconds,
-        [900, 86400],
+        [1800, 86400],
       );
       assert.match(
         configured.steps.find((s) => s.id === 'bake-layer')!.body,
-        /200°C/,
+        /200 °C/,
       );
       assert.equal(
         configured.evidence?.status,

@@ -84,6 +84,7 @@ export interface IngredientOption {
 }
 
 export interface IngredientLine {
+  noteQuantityMentions?: RecipeStep["quantityMentions"];
   id: string;
   options: [IngredientOption, ...IngredientOption[]];
   choose?: 1;
@@ -287,6 +288,8 @@ export interface StepGuidance {
 }
 
 export interface RecipeStep {
+  lessonLink?: { lessonId: string; lessonStepId: string };
+  lessonLinkText?: LocalizedText;
   helpReference?: { recipeId: string; stepId: string };
   technique?: import('../techniques/types.ts').TechniqueReference;
   id: string;
@@ -462,6 +465,7 @@ export interface Recipe {
   };
   cardMediaId?: string;
   timing: {
+    provenance?: Provenance;
     activeMinutes: number | null;
     totalElapsedMinutes: number | null;
     /** Optional planning copy; {duration} is resolved from the referenced phase. */

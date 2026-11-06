@@ -2,12 +2,21 @@ import type { AppLocale } from '@/lib/i18n/config';
 
 export const privacyContent: Record<
   AppLocale,
-  { title: string; intro: string; sections: { title: string; body: string }[] }
+  { title: string; intro: string; sections: { id?: string; title: string; body: string }[] }
 > = {
   uk: {
     title: 'Приватність і ваші збереження',
     intro: 'Як Bake Again зберігає ваші рецепти, покупки та нотатки.',
     sections: [
+      {
+        id: 'meta-cookies',
+        title: "Реклама й cookies Meta.",
+        body: "Якщо в банері cookies натиснути «Прийняти», сайт завантажує Meta Pixel від Meta Platforms Ireland Ltd. Він передає Meta, які сторінки відкрито, перегляд рецепта чи уроку, успішну підписку (без email) і натискання «Купити урок». Meta ставить cookies `_fbp` і `_fbc` та отримує IP-адресу й дані браузера. Це потрібно, щоб вимірювати рекламу Bake Again і показувати її тим, хто вже був на сайті. Без згоди піксель не завантажується, а з увімкненим Do Not Track банер не показується. Змінити рішення можна будь-коли за посиланням «Налаштування cookies» унизу сторінки. Сторінка оплати Payhip використовує той самий піксель, щоб рахувати покупки.",
+      },
+      {
+        title: 'Доступ до відеоуроків',
+        body: 'Для доступу до уроку отримую від Payhip email покупки та ідентифікатор транзакції. Supabase зберігає доступ, а необхідна cookie сесії забезпечує вхід. Відео зберігаються у Cloudflare Stream; для відтворення видаються тимчасові підписані посилання. Лист про відкриття уроку надсилає Brevo. Технічний список покупців допомагає виключати пропозиції повторної купівлі й не є згодою на розсилку. Дані доступу зберігаються, поки є доступ до уроку, та протягом строків обліку autónomo. Прогрес перегляду зберігається лише у цьому браузері.',
+      },
       {
         title: 'Ваш акаунт і пристрій',
         body: 'Збережені рецепти, покупки, приватні нотатки, записи випікання та колекції доступні після входу й зберігаються в Supabase. Гостьові персональні збереження та перенесення з браузера не використовуються. Під час входу браузер зберігає сесію й тимчасовий кеш акаунта для надійного надсилання змін. Чернетка нотатки без входу залишається лише у відкритій сторінці. Прогрес приготування та таймери не синхронізуються. Вибір мови зберігається на пристрої. Нотатка не публікується як відгук і не змінює статус рецепта.',
@@ -39,6 +48,15 @@ export const privacyContent: Record<
     intro: 'How Bake Again stores your recipes, shopping and notes.',
     sections: [
       {
+        id: 'meta-cookies',
+        title: "Advertising and Meta cookies.",
+        body: "If you choose \"Accept\" in the cookie banner, the site loads the Meta Pixel from Meta Platforms Ireland Ltd. It tells Meta which pages were opened, recipe or lesson views, successful sign-ups (without your email) and clicks on \"Buy the lesson\". Meta sets the `_fbp` and `_fbc` cookies and receives your IP address and browser data. This lets me measure Bake Again ads and show them to people who have already visited the site. Without consent the pixel does not load, and with Do Not Track enabled the banner is not shown. You can change your choice at any time via \"Cookie settings\" at the bottom of the page. The Payhip checkout uses the same pixel to count purchases.",
+      },
+      {
+        title: 'Video lesson access',
+        body: 'For lesson access, Payhip supplies the purchase email and transaction ID. Supabase stores access and a necessary session cookie supports sign-in. Cloudflare Stream hosts the videos, served using temporary signed playback links. Brevo sends the lesson access email. A technical buyer list excludes repeat purchase offers and does not constitute marketing consent. Access data is retained while lesson access remains active and for applicable autónomo accounting retention periods. Viewing progress stays in this browser.',
+      },
+      {
         title: 'Your account and device',
         body: 'Saved recipes, shopping, private notes, bake records and collections require sign-in and are stored in Supabase. Guest personal storage and browser imports are not used. The browser stores the sign-in session and a temporary account cache for reliable delivery of changes. A note drafted before signing in stays only on the open page. Cooking progress and timers do not sync. Language preferences stay on your device. Your note is not published as a review and does not change the recipe’s testing status.',
       },
@@ -68,6 +86,15 @@ export const privacyContent: Record<
     title: 'Privacidad y tus datos guardados',
     intro: 'Cómo guarda Bake Again tus recetas, compras y notas.',
     sections: [
+      {
+        id: 'meta-cookies',
+        title: "Publicidad y cookies de Meta.",
+        body: "Si eliges «Aceptar» en el aviso de cookies, el sitio carga el píxel de Meta de Meta Platforms Ireland Ltd. Este informa a Meta de las páginas abiertas, las visitas a recetas o a la clase, las suscripciones completadas (sin tu correo) y los clics en «Comprar la clase». Meta instala las cookies `_fbp` y `_fbc` y recibe tu dirección IP y datos del navegador. Así puedo medir los anuncios de Bake Again y mostrarlos a quienes ya han visitado el sitio. Sin consentimiento el píxel no se carga, y con Do Not Track activado el aviso no se muestra. Puedes cambiar tu elección en cualquier momento en «Configuración de cookies», al pie de la página. La página de pago de Payhip usa el mismo píxel para contar las compras.",
+      },
+      {
+        title: 'Acceso a videoclases',
+        body: 'Para dar acceso, Payhip facilita el correo de compra y el identificador de la transacción. Supabase guarda el acceso y una cookie de sesión necesaria permite iniciar sesión. Los vídeos están en Cloudflare Stream y se reproducen con enlaces firmados temporales. Brevo envía el correo de acceso. Una lista técnica de compradores excluye ofertas de recompra y no supone consentimiento de marketing. Los datos se conservan mientras exista acceso y durante los plazos contables aplicables como autónomo. El progreso queda solo en este navegador.',
+      },
       {
         title: 'Tu cuenta y dispositivo',
         body: 'Las recetas guardadas, compras, notas privadas, registros de horneado y colecciones requieren iniciar sesión y se guardan en Supabase. No se usan guardados personales de invitado ni importaciones del navegador. El navegador conserva la sesión y una caché temporal de la cuenta para enviar los cambios de forma fiable. Una nota redactada sin iniciar sesión permanece solo en la página abierta. El progreso y los temporizadores no se sincronizan. El idioma se recuerda en el dispositivo. Tu nota no se publica como reseña ni cambia el estado de prueba de la receta.',

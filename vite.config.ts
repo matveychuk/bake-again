@@ -4,6 +4,9 @@ import { defineConfig } from 'vite';
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === 'seatbelt';
+// Review mode avoids vinext's accumulating request scopes during repeated HMR.
+// Restart the preview after source changes when this mode is enabled.
+const isStablePreview = process.env.BAKE_AGAIN_STABLE_PREVIEW === 'true';
 
 export default defineConfig(async () => {
   // Keep Wrangler and Miniflare state project-local. These are non-secret tool
@@ -17,9 +20,11 @@ export default defineConfig(async () => {
 
   return {
     css: { postcss: { plugins: [tailwindcss()] } },
-    server: isCodexSeatbeltSandbox
-      ? { watch: { useFsEvents: false, usePolling: true } }
-      : undefined,
+    server: isStablePreview
+      ? { watch: null, hmr: false }
+      : isCodexSeatbeltSandbox
+        ? { watch: { useFsEvents: false, usePolling: true } }
+        : undefined,
     plugins: [
       vinext(),
       cloudflare({

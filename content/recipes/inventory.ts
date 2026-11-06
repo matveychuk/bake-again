@@ -72,8 +72,8 @@ export function recipeInventoryView(recipe: Recipe): InventoryRecipe {
     scalingAnchorIngredientId:
       recipe.configuration.quantityAdjustment.useWhatIHave?.scalingAnchors[0]
         ?.ingredientLineId,
-    image: hero.path,
-    imageAlt: hero.alt.en,
+    image: hero?.path ?? '',
+    imageAlt: hero?.alt.en ?? recipe.summary.en,
     imageKind: d.imageKind,
     cardImage: card?.path,
     cardImageAlt: card?.alt,

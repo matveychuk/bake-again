@@ -29,7 +29,13 @@ function isUnlocalizedRoute(pathname: string) {
 function continueWithLocale(request: NextRequest, locale = defaultLocale) {
   const headers = new Headers(request.headers);
   headers.set(requestLocaleHeader, locale);
-  return NextResponse.next({ request: { headers } });
+  const response = NextResponse.next({ request: { headers } });
+  if (request.nextUrl.pathname === '/uk/urok/napoleon') {
+    // The same product URL can contain a verified reader's purchase state.
+    response.headers.set('Cache-Control', 'private, no-store, max-age=0');
+    response.headers.append('Vary', 'Cookie');
+  }
+  return response;
 }
 
 function localizedNotFound(request: NextRequest, locale = defaultLocale) {

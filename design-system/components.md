@@ -219,6 +219,8 @@ an authorized delivery check. Do not claim browser preview proves email delivery
 
 ## Recipe card
 
+- Photo-pending drafts use the same card with the image region omitted when no media exists. Never substitute another recipe or generated food photo. The draft note explains pending photography. Recipe detail also omits the image; Design Lab includes the apple cottage-cheese cookie draft.
+
 - Catalogue layout uses equal cards: one column on mobile, two on tablet and three on desktop. A featured span is reserved for explicitly curated placement.
 - Full cards share five content tracks within each catalogue row: photo, title/Save,
   planning facts, flour, and footer. Use CSS subgrid at tablet/desktop widths so actual
@@ -1071,3 +1073,91 @@ published review: no inline invitation, publication title and subscription
 question. With `signup` it shows the real NewsletterForm; without it, the
 preview form. Focus returns to the published status.
 See [community contract](community.uk.md).
+
+### Recipe lesson support (2026-11-04)
+
+`RecipeLessonLink` extends the shared method-step reading order: one quiet native link
+with the step's first image as a decorative 64 × 48 thumbnail. It is gated by exact
+recipe version, available lesson status and lesson language. Cook Mode opens a new tab;
+print omits the link. The stable lesson step ID comes from the shared Napoleon manifest.
+
+`RecipeFreeLessonStep` adds an optional dark lesson section after baking, using the
+`color.lesson.background/text` tokens in both themes. Its native player has controls,
+playsInline, metadata preload and no autoplay; portrait widths below 700 px select the
+vertical source and preserve current time and playback intent when orientation changes.
+Captions are optional author-provided VTT. The public block and VideoObject require both
+an enabled manifest flag and complete public media. Design Lab shows the disabled state
+until actual media arrives; `NAPOLEON_FREE_STEP_PREVIEW=true` enables draft review on a
+preview build only. Never set this variable on production.
+
+
+## Lesson player · 2026-11-04
+
+`LessonPlayer` extends the recipe video pattern with a native accessible video,
+shared Buttons and numbered step navigation. It uses existing semantic tokens,
+Literata/Manrope, a food poster and a quiet wrapping list. Phone portrait (below
+700px) uses 9:16; other screens use 16:9; from 900px the list is beside the player.
+Source swaps preserve current time/paused state. Current uses `aria-current=step`,
+completion uses a check icon with text, and paid locks keep their icon/label.
+Caption tracks appear when provided. Keyboard on the video: Space, arrows ±5s,
+N/P steps. Browser-only optional resume never grants access. Design Lab
+`#video-lessons` runs the same component's inert `preview` variant, with prepared
+food media, no playback request, persistence or lesson analytics.
+`LessonLogin` reuses Button, labelled native email and existing Turnstile loader.
+
+The existing shopping selection drawer now groups canonically optional ingredients
+under a localized “Optional” section and leaves them unselected by default. IDs,
+quantities and source attribution remain intact. Ingredient notes may declare numeric
+mentions, using the same single-pass scaling as step prose (for example 2 vanilla
+sachets becomes 1/3/4 at ×0.5/×1.5/×2).
+
+The shared AccountProvider marks its shell inert/busy only after hydration, while
+Auth is initializing. Server HTML remains readable and native links/disclosures work
+without JavaScript; server authorization still gates every private lesson request.
+
+## Purchase arrival · 2026-11-05
+
+`LessonArrival` extends the lesson access section with a polite live status, existing
+Button and recovery link. Checkout return polls for a verified purchase; a timeout
+never suggests paying again. Email links grant only the purchased lesson, not an
+account session. Existing email login remains a recovery path.
+
+
+## Lesson arrival · 2026-11-06
+
+Waiting uses “Відкриваємо твій урок. Це може зайняти кілька секунд”. After a verified claim and reload, a polite status confirms “Урок відкрито — можна дивитися”. The success marker alone never grants access. Purchase email uses a named HTML access link with a plain-text fallback. Anonymous account initialization preserves independent purchase access.
+
+
+## Послідовне відтворення · 2026-11-06
+
+LessonPlayer defaults to continuous playback for paid access. The existing aria-pressed toggle explicitly labels on/off; toggling changes only automatic advance, leaving native playback/pause controls independent. The final step stops without looping. Preview remains inert.
+
+## Meta cookie consent · 2026-11-06
+
+`CookieConsentPanel` extends the existing outline Button: two equal grid columns,
+identical variants and at least 44px targets. Its semantic surface/body/spacing/focus
+values come from `tokens.css`; it introduces no palette or font. The panel is a
+fixed, labelled, nonmodal region, with no backdrop, close control or Escape action.
+At phone widths the copy sits above the actions. If the lower panel would cover a
+visible Cook entry or lesson player/control, it docks at the top; the page remains
+scrollable. Print hides both panel and settings control.
+
+`CookieConsent` owns the production-only integration and `CookieSettings` reopens
+it from the footer, focusing the first action and returning focus on a decision.
+Unresolved consent suppresses other fixed lesson offers via
+`html[data-cookie-banner-open='true'] [data-lesson-sticky]`. Existing inline product
+invitations stay in the document flow. Cook, print, subscribed and recept-confirmed
+pages omit the panel. Do Not Track and an empty Pixel ID disable it entirely.
+
+`/design-system#cookie-consent` shows inert uk/en/es panels;
+`/design-system/cookies/{uk|en|es}` is a local-only fixed-panel visual fixture on
+the home layout. Neither fixture enables tracking or changes consent.
+The exact approved copy lives in `content/cookies.ts` and `content/privacy.ts`.
+See `lib/analytics/README.md` for event/data boundaries and release checks.
+
+### Neutral cookie copy · 2026-11-07
+
+Sasha requested neutral banner wording: advertising measurement and personalised
+ads based on visited pages, without the original Bake Again retargeting phrasing.
+Updated uk/en/es together; consent version 2 requests a fresh choice. Privacy copy
+remains as specified.

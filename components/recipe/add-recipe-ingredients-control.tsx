@@ -101,8 +101,8 @@ export function AddRecipeIngredientsControl({
 }) {
   const messages = getUiMessages(locale).personal;
   const shoppingRecipe = useMemo(
-    () => buildShoppingRecipe(recipe, scaleFactor, configurationKey),
-    [configurationKey, recipe, scaleFactor],
+    () => buildShoppingRecipe(recipe, scaleFactor, configurationKey, locale),
+    [configurationKey, recipe, scaleFactor, locale],
   );
   const lines = useMemo(
     () =>

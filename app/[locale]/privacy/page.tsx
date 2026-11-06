@@ -31,9 +31,19 @@ export default async function PrivacyPage({ params }: Props) {
         </h1>
         <p>{content.intro}</p>
         {content.sections.map((section) => (
-          <section key={section.title}>
+          <section key={section.title} id={section.id}>
             <h2>{section.title}</h2>
-            <p>{section.body}</p>
+            <p>
+              {section.body
+                .split(/(`[^`]+`)/g)
+                .map((part, index) =>
+                  part.startsWith('`') ? (
+                    <code key={index}>{part.slice(1, -1)}</code>
+                  ) : (
+                    part
+                  ),
+                )}
+            </p>
           </section>
         ))}
       </article>

@@ -1,3 +1,4 @@
+import { recipeLessonLink } from '../commerce/recipe-lesson-links.ts';
 import { resolveStepHelp } from './step-help.ts';
 import type {
   CookIngredient,
@@ -175,6 +176,7 @@ export function createRecipeCookSteps(
     );
 
     return {
+      lessonLinks: steps.flatMap(step => { const link = recipeLessonLink(structured.recipeId ?? '', structured.versionId ?? '', locale, step); return link ? [link] : []; }),
       preparedAnswers: steps.flatMap(resolveStepHelp),
       stepIds: stepIds as [string, ...string[]],
       technique: steps.find((step) => step.technique)?.technique,

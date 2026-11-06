@@ -1,3 +1,4 @@
+import { appleCottageCheeseCookiesRecipe } from './apple-cottage-cheese-cookies.recipe.ts';
 import { getStepHelpDefinitions } from './step-help.ts';
 import { appleBananaFrittersRecipe } from './apple-banana-fritters.recipe.ts';
 import { appleCharlotteRecipe } from './apple-charlotte.recipe.ts';
@@ -65,6 +66,7 @@ export const recipes: readonly Recipe[] = [
   vanillaEggCustardRecipe,
   egglessVanillaCustardRecipe,
   vanillaButtercreamRecipe,
+  appleCottageCheeseCookiesRecipe,
 ];
 
 export function getRecipe(recipeId: string): Recipe | null {
@@ -186,6 +188,7 @@ export function projectRecipeContent(
         choose: line.choose,
         quantity: line.quantity,
         optional: line.optional,
+        noteQuantityMentions: line.noteQuantityMentions?.map(m => ({...m,text:m.text[locale]})),
         scaling: line.scaling?.kind === 'fixed' ? 'fixed' : undefined,
         scalingRule:
           line.scaling ?? recipe.configuration.ingredientScaling.default,
@@ -200,6 +203,8 @@ export function projectRecipeContent(
       })),
     })),
     steps: recipe.steps.map((step) => ({
+      lessonLink: step.lessonLink,
+      lessonLinkText: step.lessonLinkText?.[locale],
       technique: step.technique,
       id: step.id,
       title: step.title?.[locale] ?? step.instruction[locale],

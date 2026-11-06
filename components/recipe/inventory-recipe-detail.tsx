@@ -1,3 +1,6 @@
+import { recipeLessonLink } from '@/content/commerce/recipe-lesson-links';
+import { RecipeLessonLink } from './recipe-lesson-link';
+import { RecipeFreeLessonStep } from './recipe-free-lesson-step';
 import {
   getRecipeInvitation,
   pdfInvitationEyebrow,
@@ -118,7 +121,7 @@ export function InventoryRecipeDetail({
     const cleanSearch = baseRecipeConfigurationSearch(configurationSearch);
     const baseHref = `${pathname ?? `/recipes/${recipe.slug}`}${cleanSearch ? `?${cleanSearch}` : ''}#ingredients`;
     return (
-      <main className={styles.page}>
+      <main className={styles.page} data-meta-recipe-id={!isDraft ? recipe.id : undefined}>
         <SiteHeader locale={locale} pathname={pathname} />
         <RecipeConfigurationUnavailable
           locale={locale}
@@ -267,15 +270,17 @@ export function InventoryRecipeDetail({
         <SiteHeader locale={locale} pathname={pathname} />
         {!isDraft && <ProductBanner recipeId={recipe.id} locale={locale} />}
         <section className={styles.hero} id="recipe-content" tabIndex={-1}>
-          <div className={styles.heroImage}>
-            <Image
-              src={recipe.image}
-              alt={copy?.alt[locale] ?? recipe.imageAlt}
-              fill
-              priority
-              sizes="(min-width: 900px) 48vw, 100vw"
-            />
-          </div>
+          {recipe.image && (
+            <div className={styles.heroImage}>
+              <Image
+                src={recipe.image}
+                alt={copy?.alt[locale] ?? recipe.imageAlt}
+                fill
+                priority
+                sizes="(min-width: 900px) 48vw, 100vw"
+              />
+            </div>
+          )}
           <div className={styles.heroCopy}>
             <div className={styles.heroTopline}>
               <div className={styles.heroBack}>
@@ -304,7 +309,9 @@ export function InventoryRecipeDetail({
             <RecipeDetailTitle
               locale={locale}
               title={detailTitle}
-              plain={isStandaloneComponent}
+              plain={
+                isStandaloneComponent || !personalRecipe?.flourConfiguration
+              }
             />
             <p className={styles.summary}>
               {copy?.summary[locale] ?? recipe.summary}
@@ -497,6 +504,7 @@ export function InventoryRecipeDetail({
                     title={step.title}
                   >
                     <p>{step.body}</p>
+                    {(() => { const link = recipeLessonLink(recipe.id, document?.recipe.versionId ?? "", locale, step); return link ? <RecipeLessonLink link={link} locale={locale} /> : null; })()}
                   </RecipeStepContent>
                   {step.media && (
                     <StepMediaSequence
@@ -505,6 +513,7 @@ export function InventoryRecipeDetail({
                       className={styles.stepMedia}
                     />
                   )}
+                  {step.id === "bake-layer" && <RecipeFreeLessonStep recipeId={recipe.id} locale={locale} preview={process.env.NAPOLEON_FREE_STEP_PREVIEW === "true"} />}
                   {invitation?.afterStepId === step.id && (
                     <EditorialInvitation
                       lang="uk"
