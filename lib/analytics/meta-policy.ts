@@ -186,9 +186,10 @@ export function metaBuyEvent(
 }
 
 export function hideConsentBanner(pathname: string, search: string) {
+  const params = new URLSearchParams(search);
   return (
     /\/(?:cook|print|thanks|thank-you|diakuiu|gracias|subscribed|recept-confirmed)(?:\/|$)/.test(
       pathname,
-    ) || new URLSearchParams(search).has('print')
+    ) || params.has('print') || params.get('view') === 'print'
   );
 }

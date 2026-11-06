@@ -226,6 +226,7 @@ void test('banner exceptions, cookie deletion and approved copy', () => {
   ])
     assert.equal(hideConsentBanner(path, ''), true);
   assert.equal(hideConsentBanner('/uk/recipes/crepes', '?print=1'), true);
+  assert.equal(hideConsentBanner('/uk/recipes/crepes', '?view=print'), true);
   assert.equal(hideConsentBanner('/uk/urok/napoleon', ''), false);
   const deletions = metaCookieDeletions('bakeagain.com', '/uk/urok/napoleon');
   for (const name of ['_fbp', '_fbc']) {

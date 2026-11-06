@@ -121,7 +121,7 @@ export function InventoryRecipeDetail({
     const cleanSearch = baseRecipeConfigurationSearch(configurationSearch);
     const baseHref = `${pathname ?? `/recipes/${recipe.slug}`}${cleanSearch ? `?${cleanSearch}` : ''}#ingredients`;
     return (
-      <main className={styles.page} data-meta-recipe-id={!isDraft ? recipe.id : undefined}>
+      <main className={styles.page}>
         <SiteHeader locale={locale} pathname={pathname} />
         <RecipeConfigurationUnavailable
           locale={locale}
@@ -258,7 +258,7 @@ export function InventoryRecipeDetail({
       surface="recipe-detail"
       liveEnabled={Boolean(helpConfiguration)}
     >
-      <main className={styles.page}>
+      <main className={styles.page} data-meta-recipe-id={!isDraft ? recipe.id : undefined}>
         {structuredData && (
           <script
             type="application/ld+json"
