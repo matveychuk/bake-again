@@ -78,13 +78,10 @@ void test('welcome outbox: once per transaction, separate buyers list, safe retr
     updateEnabled: true,
   });
   assert.deepEqual(messages[0].headers, { idempotencyKey: row.id });
+  assert.equal(messages[0].htmlContent, undefined);
   assert.match(
-    String(messages[0].htmlContent),
-    /<a href="https:\/\/bakeagain\.com\/uk\/urok\/napoleon#lesson_access=purchase\./,
-  );
-  assert.match(
-    String(messages[0].htmlContent),
-    /Наполеон без глютену — відкрити урок<\/a>/,
+    String(messages[0].textContent),
+    /^https:\/\/bakeagain\.com\/uk\/urok\/napoleon#lesson_access=purchase\.[\w.-]+$/m,
   );
   row.welcome_sent_at = null;
   row.welcome_attempted_at = null;
@@ -156,7 +153,7 @@ void test('entitlement checks use verified user email and RLS token; backend fai
   await assert.rejects(hasLessonAccess(reader));
 });
 
-void test('explicit resend sends current HTML only to verified paid buyer and leaves outbox untouched', async (t) => {
+void test('explicit resend sends direct access only to a verified paid buyer and leaves the outbox untouched', async (t) => {
   const { resendLessonWelcome } = await import('./welcome.ts');
   const original = globalThis.fetch;
   t.after(() => {
@@ -172,7 +169,8 @@ void test('explicit resend sends current HTML only to verified paid buyer and le
       const body = JSON.parse(typeof init?.body === 'string' ? init.body : '');
       assert.deepEqual(body.to, [{ email: 'customer@example.com' }]);
       assert.equal(body.headers.idempotencyKey, resendId);
-      assert.match(body.htmlContent, /lesson_access=purchase\./);
+      assert.equal(body.htmlContent, undefined);
+      assert.match(body.textContent, /^https:\/\/bakeagain\.com\/uk\/urok\/napoleon#lesson_access=purchase\.[\w.-]+$/m);
       sent++;
       return Response.json({ messageId: 'fixture-resend' });
     }
