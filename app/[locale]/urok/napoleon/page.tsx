@@ -73,6 +73,10 @@ export default async function LessonRoute({
   }
   const offer = videoLessons.find((l) => l.id === napoleonLesson.lessonId);
   const available = offer && canBuyVideoLesson(offer) ? offer : null;
+  const steps = lessonStepSummaries();
+  const durationMinutes = Math.round(
+    steps.reduce((seconds, step) => seconds + step.durationSec, 0) / 60,
+  );
   const state = access ? 'lesson' : login ? 'login' : 'description';
   return (
     <main>
@@ -91,7 +95,7 @@ export default async function LessonRoute({
           <>
             <p className={styles.lead}>{lead}</p>
             <ul className={styles.facts}>
-              <li>13 кроків · ~8 хв відео</li>
+              <li>{steps.length} кроків · ~{durationMinutes} хв відео</li>
               <li>Телефон, планшет, ноутбук</li>
               <li>Рецепт на Schär Mix B</li>
               <li>Доступ без обмеження в часі</li>
@@ -112,7 +116,7 @@ export default async function LessonRoute({
             допоможу.
           </p>
         )}
-        <LessonPlayer steps={lessonStepSummaries()} access={access} />
+        <LessonPlayer steps={steps} access={access} />
         {!access && (
           <>
             <section

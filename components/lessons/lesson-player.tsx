@@ -469,7 +469,9 @@ export function LessonPlayer({
                     {s.title}
                     {s.free && !access && <small> · безкоштовно</small>}
                   </span>
-                  <span className={styles.meta}>{stamp(s.durationSec)}</span>
+                  <span className={styles.meta}>
+                    {stamp(Math.round(s.durationSec))}
+                  </span>
                   {watched.includes(s.stepId) && (
                     <span className={styles.meta}>
                       <Check size={16} aria-hidden="true" /> Переглянуто
@@ -480,7 +482,9 @@ export function LessonPlayer({
                 <div className={styles.locked}>
                   <span>{s.n}</span>
                   <span className={styles.stepTitle}>{s.title}</span>
-                  <span className={styles.meta}>{stamp(s.durationSec)}</span>
+                  <span className={styles.meta}>
+                    {stamp(Math.round(s.durationSec))}
+                  </span>
                   <LockKeyhole size={16} aria-label="Потрібен доступ" />
                 </div>
               )}

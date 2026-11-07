@@ -60,6 +60,6 @@ export async function videoPlayback(
   return {
     hls: `${base}/manifest/video.m3u8`,
     dash: `${base}/manifest/video.mpd`,
-    thumbnail: `${base}/thumbnails/thumbnail.jpg`,
+    thumbnail: video.posterPath ?? `${base}/thumbnails/thumbnail.jpg`,
   };
 }

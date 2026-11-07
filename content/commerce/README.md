@@ -141,8 +141,10 @@ waits for encoding, validates paired durations, then atomically writes the media
 only recorded obsolete UIDs can be deleted, never arbitrary account videos. A failed
 upload/validation preserves the current manifest, but may leave new unreferenced UIDs
 in Stream: inspect the printed UIDs before cleanup. Prune never deletes local sources.
-Posters stored locally must follow `media/web-source/` → `npm run media:prepare` →
-WebP; default player posters use Stream thumbnails. No source files enter deployment.
+For supplied posters, copy the JPEG masters into `media/web-source/` and set each
+orientation's `posterPath` in `napoleon.media.json` to the matching generated WebP URL.
+Run `npm run media:prepare` to generate and validate the posters. The player uses a
+Stream thumbnail when the manifest has no custom poster. No source files enter deployment.
 
 Manual access (no email is sent, email omitted from command output):
 

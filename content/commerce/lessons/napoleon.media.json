@@ -3,195 +3,221 @@
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "2a82da855596218025ccfd003ebd46ac",
-        "durationSec": 27.5
+        "uid": "4e07a1f8397301d04adca3b1ef7b8911",
+        "durationSec": 35.27,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s01-sour-cream-base-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "8659941e716e716ceb5bb120eabbb377",
-        "durationSec": 27.53
+        "uid": "8e65a1052927f80d8f49c4aa5a92e83e",
+        "durationSec": 35.23,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s01-sour-cream-base-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s02-butter-crumb": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "a27d841c43c4883fed2e187055bb97e1",
-        "durationSec": 40.3
+        "uid": "8f3797ab3230db1ffdf6e1fc45c4e497",
+        "durationSec": 96.87,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s02-butter-crumb-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "1ff378d428eca071470562e844978ef6",
-        "durationSec": 40.4
+        "uid": "6d568da9b087422182d2f3a5eb532745",
+        "durationSec": 96.87,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s02-butter-crumb-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s03-short-mix": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "44061074d7833279f4fa2fc7eed8ef3b",
-        "durationSec": 46.57
+        "uid": "2dce101c266764cdbbaa9748478a2beb",
+        "durationSec": 47.1,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s03-short-mix-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "703f0e5f2385eb556cac9cd5b135b678",
-        "durationSec": 46.57
+        "uid": "7b171a8656acb71818b3ffef22a46914",
+        "durationSec": 47.1,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s03-short-mix-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s04-divide": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "943ee9c04caf7b7ce67eb15bf52ad2fd",
-        "durationSec": 41.27
+        "uid": "491e109c7cb41ca1e7b0fb2b58efc7d0",
+        "durationSec": 108.13,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s04-divide-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "4f1c9abeba0f836dfd69da72f26ace2a",
-        "durationSec": 41.3
+        "uid": "c130deb0acc62f5c0290262ae1e463f9",
+        "durationSec": 108.1,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s04-divide-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s05-rolling": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "88a7cadb9d8fa759f1d84aaa2a8335e9",
-        "durationSec": 25.7
+        "uid": "0d5df72fd1b2c2bcb160c0b2182cbe87",
+        "durationSec": 89.97,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s05-rolling-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "efc3efa46f14e5462f0d0dfa7ab84422",
-        "durationSec": 25.7
+        "uid": "fe4559c1ca67eb1ecb0c558e279aa189",
+        "durationSec": 89.97,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s05-rolling-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s06-shape": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "8b0b2738cb1f35bee24e2f806f0b06f5",
-        "durationSec": 16.83
+        "uid": "8e720bf5cbaa671650b281a0aa467e50",
+        "durationSec": 27.8,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s06-shape-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "6d3050c1ae44ffe764ececfbd61e6afb",
-        "durationSec": 16.83
+        "uid": "383a8759955c8825ae3e4e18c436eb47",
+        "durationSec": 27.73,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s06-shape-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s07-baking": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "caead939bd6b7dcac904bf4280b96e75",
-        "durationSec": 29
+        "uid": "e7856cadcb9e1b308866551dd78ad417",
+        "durationSec": 85.87,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s07-baking-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "634d2e4da525c996eff8d2b5bf18c97e",
-        "durationSec": 29
+        "uid": "889127cd37e31bf0e56642016fb07b81",
+        "durationSec": 85.87,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s07-baking-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s08-baked-layers": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "a1e0325cb514a49b83d8329b5c20d686",
-        "durationSec": 23.7
+        "uid": "57b7c60a7a1eecff3c549a3646711553",
+        "durationSec": 38.97,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s08-baked-layers-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "45215960b8b97119eb1554f2004be911",
-        "durationSec": 23.67
+        "uid": "7d9d48d7331ba39db656752bed8581c7",
+        "durationSec": 38.93,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s08-baked-layers-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s09-custard": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "e669467ccc37a3adbd99596e84db3bff",
-        "durationSec": 53.6
+        "uid": "a5f8d7431477dcfc7e2d4b4f2e16b407",
+        "durationSec": 212.13,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s09-custard-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "70bdbdeff2b97b6b9e53a1016b8318a9",
-        "durationSec": 53.6
+        "uid": "706ab7142702df9ee923ccfceffb1ae3",
+        "durationSec": 212.13,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s09-custard-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s10-nuts-crumb": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "0a831492458824c6d0f1fb08871b7d11",
-        "durationSec": 46.1
+        "uid": "37efe60835f59531c7b0b1d2a15f1c2d",
+        "durationSec": 117.73,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s10-nuts-crumb-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "ca324594f2d2a7ce8156b99a782739b0",
-        "durationSec": 46.1
+        "uid": "498c6ddd16faf954f892be50aeecc0a3",
+        "durationSec": 117.73,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s10-nuts-crumb-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s11-layering": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "b6c3b2e5b77def8e2461f74a1de83b15",
-        "durationSec": 37.47
+        "uid": "71672d184d28ddc87f9297509c947d60",
+        "durationSec": 102.3,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s11-layering-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "2398aac299c54d337b32bd2ccc0d07c9",
-        "durationSec": 37.47
+        "uid": "2c401ab8bc5fe9bc7be428186701adeb",
+        "durationSec": 102.3,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s11-layering-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s12-decorating": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "fe55d955d8dd0beb46b9cda12feb619f",
-        "durationSec": 33.83
+        "uid": "a8703c582b32535af72294e5be57e451",
+        "durationSec": 80.1,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s12-decorating-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "bb053992d1fa10e337f03947b09659d3",
-        "durationSec": 33.83
+        "uid": "221eff7da8975f829fde901e5bb8d001",
+        "durationSec": 80.1,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s12-decorating-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   },
   "s13-finished-cake": {
     "uk": {
       "wide": {
         "provider": "cloudflare-stream",
-        "uid": "0fbaa957937bc925079549f7cad182d7",
-        "durationSec": 38.57
+        "uid": "1fbe75f7d29a99c71063a051ab42cc9d",
+        "durationSec": 44.8,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s13-finished-cake-wide.webp"
       },
       "vertical": {
         "provider": "cloudflare-stream",
-        "uid": "05d4187803099cf2b5a71eb32c90c2b7",
-        "durationSec": 38.57
+        "uid": "8009f10d7b08a3f85fec6fded4a40061",
+        "durationSec": 44.8,
+        "posterPath": "/media/recipes/gluten-free-napoleon/lesson-uk-final-2026-11-07/napoleon-uk-s13-finished-cake-vertical.webp"
       }
     },
-    "status": "draft"
+    "status": "final"
   }
 }

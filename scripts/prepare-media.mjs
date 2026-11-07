@@ -11,6 +11,10 @@ const sourceRoot = path.join(projectRoot, 'media/web-source');
 const publicRoot = path.join(projectRoot, 'public');
 const generatedRoots = ['images', 'media', 'social'];
 const codeRoots = ['app', 'components', 'content', 'lib'];
+const mediaManifests = new Set([
+  path.join(projectRoot, 'content/lead-magnets.json'),
+  path.join(projectRoot, 'content/commerce/lessons/napoleon.media.json'),
+]);
 const rasterExtensions = new Set(['.png', '.jpg', '.jpeg']);
 const sourceExtensions = new Set([...rasterExtensions, '.mp4']);
 const codeExtensions = new Set(['.ts', '.tsx', '.css']);
@@ -36,7 +40,7 @@ async function readProductSource() {
     )
   )
     .flat()
-    .filter((filename) => codeExtensions.has(path.extname(filename)) || filename === path.join(projectRoot, 'content/lead-magnets.json'));
+    .filter((filename) => codeExtensions.has(path.extname(filename)) || mediaManifests.has(filename));
   return (
     await Promise.all(files.map((filename) => fs.readFile(filename, 'utf8')))
   ).join('\n');
