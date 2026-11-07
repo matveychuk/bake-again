@@ -18,14 +18,18 @@ export type VideoLesson = LessonIdentity &
       }
   );
 
-/** No real product is on sale yet. Activate only after the delivery review in README.md. */
+export const napoleonCheckoutPath = '/uk/urok/napoleon/kupyty';
+
+/** Lesson offers are tied to the exact recipe version demonstrated in the video. */
 export const videoLessons: readonly VideoLesson[] = [
   {
     id: 'napoleon-video',
     recipeId: 'gluten-free-napoleon',
     recipeVersionId: 'gluten-free-napoleon-v6',
     language: 'uk',
-    status: 'planned',
+    status: 'available',
+    deliveryUrl: '/uk/urok/napoleon',
+    payhipUrl: 'https://payhip.com/b/VhLl8',
     priceMinor: 900,
     currency: 'EUR',
   },
@@ -52,6 +56,18 @@ export function canBuyVideoLesson(
     lesson.priceMinor > 0 &&
     ['EUR', 'USD', 'GBP', 'UAH'].includes(lesson.currency)
   );
+}
+
+export function formatVideoLessonPrice(
+  lesson: Extract<VideoLesson, { status: 'available' }>,
+  locale: AppLocale,
+) {
+  return new Intl.NumberFormat(locale === 'uk' ? 'en-IE' : locale, {
+    style: 'currency',
+    currency: lesson.currency,
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 0,
+  }).format(lesson.priceMinor / 100);
 }
 
 export function getRecipeVideoLesson(

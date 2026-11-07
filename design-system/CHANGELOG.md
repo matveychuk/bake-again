@@ -1550,6 +1550,15 @@ Applied the existing full-photo recipe carousel component to IG-026 v2, preservi
   awaiting-media state. Added invariant chocolate/warm-white lesson surface tokens.
 
 
+## 2026-11-07 · Napoleon lesson sale banner
+
+- Reused the dark editorial banner with three actions for checkout, lesson details
+  and the free eighth step. The purchase action has visual priority and fills
+  its row on phones.
+- The banner and lesson overview use the video manifest's full duration. The
+  free-step link opens with the player in view. Design Lab shows the sales layout
+  in UK, EN and ES.
+
 ## 2026-11-04 · Site-hosted Napoleon lesson
 
 - Added the lesson player variant and Design Lab example with paired orientation

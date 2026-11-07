@@ -1,35 +1,43 @@
-import { videoLessons, canBuyVideoLesson } from './video-lessons.ts';
+import { napoleonLesson, napoleonLessonDuration } from './lessons/napoleon.ts';
+import {
+  videoLessons,
+  canBuyVideoLesson,
+  formatVideoLessonPrice,
+  napoleonCheckoutPath,
+} from './video-lessons.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
 
-type HookCopy = {
-  title: string;
-  /** Italic punchline after the title, kept on one line like recipe titles. */
-  titleAccent?: string;
-  description: string;
-};
-
-type BannerCopy = HookCopy & {
+type BannerCopy = {
   eyebrow: string;
-  action: string;
+  title: string;
+  description: string;
+  recipeDescription: string;
+  stepsLabel: string;
+  vatLabel: string;
+  buy: string;
+  details: string;
+  preview: string;
   videoLabel: string;
-  dialog: { title: string; description: string };
-  close: string;
 };
 
-/** The resolved banner for one page: copy in the page locale plus media. */
-export type ProductBanner = Omit<BannerCopy, 'videoLabel'> & {
+export type ProductBanner = Pick<
+  BannerCopy,
+  'eyebrow' | 'title' | 'description'
+> & {
   id: string;
-  deliveryUrl?: '/uk/urok/napoleon';
   locale: AppLocale;
+  facts: string;
+  actions: {
+    buy: { label: string; href: string };
+    details: { label: string; href: string };
+    preview: { label: string; href: string };
+  };
   video: { mp4: string; poster: string; label: string };
 };
 
 const media = '/media/recipes/gluten-free-napoleon/lesson-banner-2026-10-31';
 
-/**
- * The single current product promoted at the top of recipe pages.
- * Changing the promoted product means editing this record only.
- */
+/** The single current product promoted at the top of recipe pages. */
 export const productBanner = {
   id: 'napoleon-lesson',
   active: true,
@@ -41,102 +49,82 @@ export const productBanner = {
   },
   copy: {
     uk: {
-      eyebrow: 'Відеоурок · грудень',
-      title: 'Новорічний стіл без Наполеона?',
-      titleAccent: 'Не цього року.',
+      eyebrow: 'Відеоурок українською',
+      title: 'Наполеон без глютену',
       description:
-        'Покажу все у відеоуроці «Наполеон без глютену» — встигнеш до Нового року. Залиш email — і раніше за всіх отримаєш лист про запуск.',
-      action: 'Хочу урок',
+        'Від тіста до першого шматка. Покажу, як розкачати тонкі коржі й зварити заварний крем.',
+      recipeDescription:
+        'Покажу, яким має бути тісто на дотик і як розкачати тонкий корж, щоб він не порвався.',
+      stepsLabel: 'кроків',
+      vatLabel: 'з ПДВ',
+      buy: 'Купити урок',
+      details: 'Детальніше',
+      preview: 'Безплатний фрагмент',
       videoLabel:
         'Виделка відламує шматочок безглютенового Наполеона, видно шари',
-      dialog: {
-        title: 'Наполеон без глютену',
-        description:
-          'Напишу, щойно урок вийде, а поки надсилатиму перевірені рецепти без глютену.',
-      },
-      close: 'Закрити',
     },
     en: {
-      eyebrow: 'Video lesson · December',
-      title: 'New Year’s without a Napoleon cake?',
-      titleAccent: 'Not this year.',
+      eyebrow: 'Video lesson in Ukrainian',
+      title: 'Gluten-free Napoleon cake',
       description:
-        'I’ll show you everything in my video lesson “Gluten-Free Napoleon Cake” — in time for New Year’s. Leave your email and be the first to hear when it launches.',
-      action: 'I want the lesson',
+        'From dough to the first slice. See how to roll thin layers and make the custard.',
+      recipeDescription:
+        'See how the dough should feel and how to roll each thin layer without tearing it.',
+      stepsLabel: 'steps',
+      vatLabel: 'incl. VAT',
+      buy: 'Buy the lesson',
+      details: 'Lesson details',
+      preview: 'Watch a free step',
       videoLabel:
         'A fork breaks off a piece of gluten-free Napoleon cake, showing the layers',
-      dialog: {
-        title: 'Gluten-free Napoleon cake',
-        description:
-          'I’ll email you when the lesson is out — and send tested gluten-free recipes in the meantime.',
-      },
-      close: 'Close',
     },
     es: {
-      eyebrow: 'Videoclase · diciembre',
-      title: '¿Nochevieja sin tarta milhojas?',
-      titleAccent: 'Este año no.',
+      eyebrow: 'Videoclase en ucraniano',
+      title: 'Tarta milhojas sin gluten',
       description:
-        'Te lo enseño todo en mi videoclase «Tarta milhojas sin gluten», a tiempo para Nochevieja. Deja tu correo y serás de los primeros en saber cuándo sale.',
-      action: 'Quiero la clase',
+        'De la masa al primer bocado. Aprende a estirar las capas finas y a preparar la crema pastelera.',
+      recipeDescription:
+        'Mira qué textura debe tener la masa y cómo estirar cada capa fina sin que se rompa.',
+      stepsLabel: 'pasos',
+      vatLabel: 'IVA incluido',
+      buy: 'Comprar la clase',
+      details: 'Más detalles',
+      preview: 'Ver un paso gratis',
       videoLabel:
         'Un tenedor corta un trozo de tarta milhojas sin gluten y se ven las capas',
-      dialog: {
-        title: 'Tarta milhojas sin gluten',
-        description:
-          'Te aviso en cuanto salga la clase y, mientras tanto, te envío recetas sin gluten probadas.',
-      },
-      close: 'Cerrar',
     },
   } satisfies Record<AppLocale, BannerCopy>,
-  /**
-   * Recipe-specific hooks; the recipe the lesson teaches gets its own.
-   * ES calls the cake «tarta milhojas» here; the recipe page keeps its own name
-   * until the author renames it there.
-   */
-  overrides: {
-    'gluten-free-napoleon': {
-      uk: {
-        title:
-          'Рецепт — нижче. А у відеоуроці я покажу те, що не передаси словами',
-        description:
-          'Яким тісто має бути на дотик і як розкачати корж, щоб він не зламався. Залиш email — і раніше за всіх отримаєш лист про запуск.',
-      },
-      en: {
-        title:
-          'The recipe is below. In the video lesson I’ll show you what words can’t',
-        description:
-          'How the dough should feel and how to roll out each layer without it breaking. Leave your email and be the first to hear when it launches.',
-      },
-      es: {
-        title:
-          'La receta está abajo. En la videoclase te enseño lo que no se explica con palabras',
-        description:
-          'Qué textura debe tener la masa y cómo estirar cada capa sin que se rompa. Deja tu correo y serás de los primeros en saber cuándo sale.',
-      },
-    },
-  } satisfies Record<string, Record<AppLocale, HookCopy>>,
 };
 
-/** Copy for one recipe page, without the date check (Design Lab uses this). */
+/** Resolve the available offer without the date check for Design Lab. */
 export function resolveProductBanner(
   recipeId: string,
   locale: AppLocale,
-): ProductBanner {
-  const offer = videoLessons.find(l => l.id === 'napoleon-video');
-  const deliveryUrl = offer && canBuyVideoLesson(offer) ? offer.deliveryUrl : undefined;
-  const { videoLabel, ...copy } = productBanner.copy[locale];
-  const override: HookCopy | undefined =
-    productBanner.overrides[recipeId as keyof typeof productBanner.overrides]?.[
-      locale
-    ];
+): ProductBanner | null {
+  const offer = videoLessons.find(
+    (lesson) => lesson.id === napoleonLesson.lessonId,
+  );
+  if (!offer || !canBuyVideoLesson(offer)) return null;
+
+  const copy = productBanner.copy[locale];
+  const price = formatVideoLessonPrice(offer, locale);
   return {
-    ...copy,
-    ...(override && { titleAccent: undefined, ...override }),
-    ...(deliveryUrl ? { deliveryUrl } : {}),
     id: productBanner.id,
     locale,
-    video: { ...productBanner.video, label: videoLabel },
+    eyebrow: copy.eyebrow,
+    title: copy.title,
+    description:
+      recipeId === offer.recipeId ? copy.recipeDescription : copy.description,
+    facts: `${napoleonLesson.steps.length} ${copy.stepsLabel} · ${napoleonLessonDuration} · ${price} ${copy.vatLabel}`,
+    actions: {
+      buy: { label: copy.buy, href: napoleonCheckoutPath },
+      details: { label: copy.details, href: offer.deliveryUrl },
+      preview: {
+        label: copy.preview,
+        href: `${offer.deliveryUrl}#${napoleonLesson.freePreview.stepId}`,
+      },
+    },
+    video: { ...productBanner.video, label: copy.videoLabel },
   };
 }
 

@@ -1,42 +1,10 @@
 'use client';
 
-import {
-  useEffect,
-  useId,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from 'react';
-import { X } from 'lucide-react';
-import type { NewsletterSignup } from '@/lib/newsletter/config';
+import { useEffect, useId, useRef, useState } from 'react';
 import type { ProductBanner } from '@/content/commerce/product-banner';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-} from '@/components/ui/dialog';
 import { trackEvent } from '@/lib/analytics/umami';
 import { EditorialInvitation } from './editorial-invitation';
-import { NewsletterForm } from './newsletter-form';
-import styles from './newsletter-invitation.module.css';
-
-const SUBSCRIBED_KEY = 'ba_subscribed';
-
-function readSubscribed() {
-  try {
-    return window.localStorage.getItem(SUBSCRIBED_KEY) === '1';
-  } catch {
-    /* Without storage the banner simply stays visible. */
-    return false;
-  }
-}
-const subscribe = (change: () => void) => {
-  window.addEventListener('storage', change);
-  return () => window.removeEventListener('storage', change);
-};
 
 /** Plays the short food loop only when visible and motion is welcome. */
 function BannerLoop({ video }: { video: ProductBanner['video'] }) {
@@ -81,29 +49,18 @@ function BannerLoop({ video }: { video: ProductBanner['video'] }) {
   );
 }
 
-/** Recipe-page banner for the current product; signup opens only on click. */
+/** Recipe-page banner with direct checkout and two ways to preview the lesson. */
 export function ProductBannerInvitation({
   banner,
   recipeId,
-  signup,
+  preview = false,
 }: {
   banner: ProductBanner;
   recipeId: string;
-  signup: NewsletterSignup | null;
+  preview?: boolean;
 }) {
   const titleId = useId();
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const actionRef = useRef<HTMLButtonElement>(null);
-  const [open, setOpen] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [closedAfterSignup, setClosedAfterSignup] = useState(false);
-  const subscribed = useSyncExternalStore(
-    subscribe,
-    readSubscribed,
-    () => false,
-  );
-
-  if (!banner.deliveryUrl && ((subscribed && !open) || closedAfterSignup)) return null;
+  const { buy, details, preview: freeStep } = banner.actions;
 
   return (
     <div data-theme="dark" data-product-banner={banner.id}>
@@ -112,98 +69,37 @@ export function ProductBannerInvitation({
         lang={banner.locale}
         titleId={titleId}
         eyebrow={banner.eyebrow}
-        title={
-          banner.titleAccent ? (
-            <>
-              {banner.title} <em>{banner.titleAccent}</em>
-            </>
-          ) : (
-            banner.title
-          )
-        }
+        title={banner.title}
         description={banner.description}
+        note={banner.facts}
         image={<BannerLoop video={banner.video} />}
         action={
-          banner.deliveryUrl ? <Button href={banner.deliveryUrl} onClick={() => trackEvent('product_banner_click', { recipe_id: recipeId, locale: banner.locale })}>{banner.action}</Button> : <Button
-            ref={actionRef}
-            onClick={() => {
-              trackEvent('product_banner_click', {
-                recipe_id: recipeId,
-                locale: banner.locale,
-              });
-              setOpen(true);
-            }}
-          >
-            {banner.action}
-          </Button>
+          <>
+            {preview ? (
+              <Button disabled>{buy.label}</Button>
+            ) : (
+              <Button
+                href={buy.href}
+                rel="noreferrer"
+                onClick={() =>
+                  trackEvent('product_banner_click', {
+                    recipe_id: recipeId,
+                    locale: banner.locale,
+                  })
+                }
+              >
+                {buy.label}
+              </Button>
+            )}
+            <Button href={details.href} variant="outline">
+              {details.label}
+            </Button>
+            <Button href={freeStep.href} variant="outline">
+              {freeStep.label}
+            </Button>
+          </>
         }
       />
-      <Dialog
-        open={open}
-        onOpenChange={(value) => {
-          setOpen(value);
-          if (!value && sent) setClosedAfterSignup(true);
-        }}
-      >
-        <DialogContent
-          className={styles.dialog}
-          showCloseButton={false}
-          initialFocus={closeRef}
-          finalFocus={actionRef}
-          lang={banner.locale}
-        >
-          <div className={styles.dialogHeader}>
-            <DialogClose
-              render={
-                <Button
-                  ref={closeRef}
-                  variant="ghost"
-                  size="icon"
-                  aria-label={banner.close}
-                />
-              }
-            >
-              <X size={20} aria-hidden="true" />
-            </DialogClose>
-          </div>
-          <div className={styles.dialogBody}>
-            <p className={styles.eyebrow}>{banner.eyebrow}</p>
-            <DialogTitle className={styles.title}>
-              {banner.dialog.title}
-            </DialogTitle>
-            <DialogDescription className={styles.description}>
-              {banner.dialog.description}
-            </DialogDescription>
-            <div className={styles.dialogForm}>
-              {signup ? (
-                <NewsletterForm
-                  signup={signup}
-                  locale={banner.locale}
-                  scenario="lesson"
-                  onClose={() => {
-                    setOpen(false);
-                    setClosedAfterSignup(true);
-                  }}
-                  onSent={() => {
-                    setSent(true);
-                    try {
-                      window.localStorage.setItem(SUBSCRIBED_KEY, '1');
-                    } catch {
-                      /* The banner returns on the next visit; signup still succeeded. */
-                    }
-                  }}
-                />
-              ) : (
-                <NewsletterForm
-                  preview
-                  locale={banner.locale}
-                  scenario="lesson"
-                />
-              )}
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

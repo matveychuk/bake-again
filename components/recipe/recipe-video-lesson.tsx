@@ -5,6 +5,8 @@ import { ArrowUpRight } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
 import {
   canBuyVideoLesson,
+  formatVideoLessonPrice,
+  napoleonCheckoutPath,
   type VideoLesson,
 } from '@/content/commerce/video-lessons';
 import { EditorialInvitation } from '@/components/site/editorial-invitation';
@@ -78,12 +80,7 @@ export function RecipeVideoLesson({
   )
     return null;
   const available = canBuyVideoLesson(lesson);
-  const price = available
-    ? new Intl.NumberFormat(locale, {
-        style: 'currency',
-        currency: lesson.currency,
-      }).format(lesson.priceMinor / 100)
-    : '';
+  const price = available ? formatVideoLessonPrice(lesson, locale) : '';
   const action = (
     <>
       {c.buy} · {price}
@@ -118,7 +115,7 @@ export function RecipeVideoLesson({
               <Button disabled>{action}</Button>
             ) : (
               <Button
-                href="/uk/urok/napoleon/kupyty"
+                href={napoleonCheckoutPath}
                 rel="noreferrer"
                 onClick={track}
                 onAuxClick={(event) => {

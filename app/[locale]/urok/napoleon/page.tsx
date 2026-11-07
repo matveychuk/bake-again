@@ -14,11 +14,14 @@ import {
 } from '@/components/lessons/lesson-access';
 import {
   napoleonLesson,
+  napoleonLessonDuration,
   lessonStepSummaries,
 } from '@/content/commerce/lessons/napoleon';
 import {
   videoLessons,
   canBuyVideoLesson,
+  formatVideoLessonPrice,
+  napoleonCheckoutPath,
 } from '@/content/commerce/video-lessons';
 import {
   lessonBindings,
@@ -74,9 +77,6 @@ export default async function LessonRoute({
   const offer = videoLessons.find((l) => l.id === napoleonLesson.lessonId);
   const available = offer && canBuyVideoLesson(offer) ? offer : null;
   const steps = lessonStepSummaries();
-  const durationMinutes = Math.round(
-    steps.reduce((seconds, step) => seconds + step.durationSec, 0) / 60,
-  );
   const state = access ? 'lesson' : login ? 'login' : 'description';
   return (
     <main>
@@ -95,7 +95,7 @@ export default async function LessonRoute({
           <>
             <p className={styles.lead}>{lead}</p>
             <ul className={styles.facts}>
-              <li>{steps.length} кроків · ~{durationMinutes} хв відео</li>
+              <li>Українською · {steps.length} кроків · {napoleonLessonDuration}</li>
               <li>Телефон, планшет, ноутбук</li>
               <li>Рецепт на Schär Mix B</li>
               <li>Доступ без обмеження в часі</li>
@@ -127,11 +127,8 @@ export default async function LessonRoute({
               {available ? (
                 <>
                   <LessonBuy
-                    href="/uk/urok/napoleon/kupyty"
-                    price={new Intl.NumberFormat('uk', {
-                      style: 'currency',
-                      currency: available.currency,
-                    }).format(available.priceMinor / 100)}
+                    href={napoleonCheckoutPath}
+                    price={formatVideoLessonPrice(available, 'uk')}
                   />
                   <p>
                     Ціна включає ПДВ. Після оплати урок відкриється тут.

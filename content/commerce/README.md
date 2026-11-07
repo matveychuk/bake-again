@@ -1,11 +1,11 @@
 # Video lessons · site access (04.11.2026)
 
 `video-lessons.ts` controls the sales offer and exact recipe version. The Napoleon
-lesson stays **planned**: no invented price, checkout, video UID or completed purchase.
-`available` requires a paid Payhip URL, integer price, currency, language and
-`deliveryUrl: '/uk/urok/napoleon'`. Recipe links and the banner navigate to the lesson
-page; only that page links to checkout. `withdrawn` hides the offer and preserves
-access already purchased. Sales banner copy needs Sasha's review before activation.
+lesson is **available** at €9 including VAT, with 13 Ukrainian steps and 18:07 of
+video. The banner and lesson page use `/uk/urok/napoleon/kupyty` to start the
+same-browser purchase flow for Payhip product `VhLl8`. The banner also links to
+the lesson overview and the free step 8, «Готові коржі». `withdrawn` hides the
+offer and preserves access already purchased.
 
 ## Access and video contract
 
@@ -174,9 +174,15 @@ JavaScript disabled, real iPhone Safari, Android Chrome and macOS Safari/Chrome.
 A zero-price refund may require a separately authorized minimal paid test. No payment,
 refund, remote deployment or phone check is claimed by local tests.
 
-Only after the above and Sasha's price/banner-copy confirmation: set `available`, real
-`payhipUrl`, `priceMinor`, EUR, uk and deliveryUrl; make Payhip visible and publish the
-reviewed changes. Privacy retention wording in uk/en/es is prepared for Sasha's review.
+Before publishing a sales offer, confirm the checkout total and description, then
+set `available`, real `payhipUrl`, `priceMinor`, currency, language and delivery URL.
+The direct checkout for `VhLl8` is available with Payhip visibility set to Unlisted.
+Keep the product's post-payment return and Bake Again purchase email configured.
+
+On 07.11.2026 the Payhip product price and description were updated for the finished
+lesson. The checkout showed €9 with EU VAT included. A separate one-use coupon
+for this product showed €0.50 due after an €8.50 discount. Checkout verification
+stopped before payment.
 
 References checked 04.11.2026: [Payhip webhooks](https://help.payhip.com/article/115-webhooks),
 [Stream security](https://developers.cloudflare.com/stream/viewing-videos/securing-your-stream/),
@@ -185,8 +191,8 @@ References checked 04.11.2026: [Payhip webhooks](https://help.payhip.com/article
 
 ### Napoleon recipe v6 integration (2026-11-04)
 
-The recipe pins `gluten-free-napoleon-v6`; the catalogue remains `planned`. Five
-method-step references use stable IDs from `lessons/napoleon.ts`, appearing only for
+The recipe pins `gluten-free-napoleon-v6`. Five method-step references use stable
+IDs from `lessons/napoleon.ts`, appearing only for
 an available lesson in its own language. `freePreview.enabled` remains false and
 `freePreview.videos` remains empty until real public wide/vertical media, poster and
 upload date arrive. Add the optional `captionsVtt` after author narration. Preview

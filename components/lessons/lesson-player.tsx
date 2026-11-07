@@ -58,6 +58,7 @@ export function LessonPlayer({
   const [continuous, setContinuous] = useState(access);
   const [resume, setResume] = useState<Progress | null>(null);
   const [watched, setWatched] = useState<string[]>([]);
+  const frame = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const cache = useRef(new Map<string, Playback>());
   const pendingSeek = useRef({ time: 0, play: false });
@@ -103,7 +104,9 @@ export function LessonPlayer({
     media.addEventListener('change', change);
     const hashChange = () => {
       const i = steps.findIndex((s) => `#${s.stepId}` === location.hash);
-      if (i >= 0) open(i);
+      if (i < 0) return;
+      open(i);
+      if (steps[i].free) frame.current?.scrollIntoView({ block: 'start' });
     };
     hashChange();
     window.addEventListener('hashchange', hashChange);
@@ -301,7 +304,7 @@ export function LessonPlayer({
             </Button>
           </div>
         )}
-        <div className={styles.frame}>
+        <div className={styles.frame} ref={frame}>
           {preview || (!playback && error) ? (
             <img
               className={styles.placeholder}

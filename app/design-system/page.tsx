@@ -1000,20 +1000,23 @@ export default function DesignSystemPage() {
                 <strong>Product banner</strong>
                 <span>
                   UK/EN/ES recipe pages, above the hero. Dark on every screen:
-                  food loop, label, hook and one action that opens an inert
-                  signup dialog here.
+                  food loop, lesson facts and three actions. Checkout is
+                  disabled in this example.
                 </span>
               </div>
               <div>
                 {(['uk', 'en', 'es'] as const).flatMap((bannerLocale) =>
-                  ['design-system', 'gluten-free-napoleon'].map((recipeId) => (
-                    <ProductBannerInvitation
-                      key={`${bannerLocale}-${recipeId}`}
-                      banner={resolveProductBanner(recipeId, bannerLocale)}
-                      recipeId="design-system"
-                      signup={null}
-                    />
-                  )),
+                  ['design-system', 'gluten-free-napoleon'].map((recipeId) => {
+                    const banner = resolveProductBanner(recipeId, bannerLocale);
+                    return banner && (
+                      <ProductBannerInvitation
+                        key={`${bannerLocale}-${recipeId}`}
+                        banner={banner}
+                        recipeId="design-system"
+                        preview
+                      />
+                    );
+                  }),
                 )}
               </div>
             </div>

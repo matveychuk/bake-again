@@ -191,15 +191,18 @@
   border-radius: var(--radius-control);
   background: var(--color-background-panel);
 }
-/* Loop, copy and action read as one row; the action sits centred at the end. */
+/* The food loop spans the copy and the purchase actions. */
 .productBanner .main {
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: var(--space-6);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  row-gap: var(--space-3);
 }
 .productBanner .image {
-  flex: 0 0 auto;
+  grid-row: span 2;
   width: 10rem;
+}
+.productBanner .copy {
+  align-self: end;
 }
 .productBanner .image :is(video, img) {
   display: block;
@@ -209,10 +212,6 @@
   object-fit: cover;
   border-radius: var(--radius-control);
   background: var(--color-background-panel-subtle);
-}
-.productBanner .copy {
-  flex: 1 1 auto;
-  max-width: none;
 }
 .copy .eyebrow {
   margin: 0 0 var(--space-2);
@@ -230,29 +229,22 @@
   margin-bottom: var(--space-3);
   overflow-wrap: break-word;
 }
-.productBanner .copy :is(h1, h2) em {
-  /* Echoes the recipe-title accent in the bright accent text colour. */
-  font-weight: 360;
-  color: var(--color-text-accent);
-  white-space: nowrap;
-}
 .productBanner .copy > p:not(.eyebrow) {
   max-width: var(--layout-cook-reading);
   color: var(--color-text-primary);
 }
 .productBanner .action {
-  flex: 0 0 auto;
-  margin-inline-start: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: start;
 }
 /* Light emphasis action on the dark banner, as approved in variant B. */
-.productBanner .action [data-slot='button'] {
-  min-height: 48px;
+.productBanner .action [data-slot='button']:first-child:not(:disabled) {
   padding-inline: var(--space-6);
-  font-size: var(--font-size-body);
   background: var(--color-action-emphasis);
   color: var(--color-text-on-emphasis);
 }
-.productBanner .action [data-slot='button']:hover {
+.productBanner .action [data-slot='button']:first-child:not(:disabled):hover {
   background: var(--color-action-emphasis-strong);
 }
 @media (min-width: 621px) and (max-width: 900px) {
@@ -264,8 +256,7 @@
   }
 }
 @media (max-width: 620px) {
-  /* Phone: label on its own line, loop opposite the title, story and action
-     below; compact enough to keep the recipe title in the first screen. */
+  /* Phone: label above the loop and title, then copy and purchase actions. */
   .productBanner {
     margin-bottom: var(--space-4);
     padding: var(--space-3) var(--space-4);
@@ -296,20 +287,19 @@
     /* Approved phone size for the banner hook. */
     font-size: 1.4375rem;
   }
-  .productBanner .copy > p:not(.eyebrow) {
+  .productBanner .copy > p:not(.eyebrow),
+  .productBanner .copy > .note {
     grid-column: 1 / -1;
     font-size: var(--font-size-body-small);
-    line-height: 1.4;
-  }
-  .productBanner .action {
-    grid-column: 1 / -1;
     margin: 0;
   }
-  .productBanner .action,
-  .productBanner .action > * {
-    width: 100%;
+  .productBanner .action {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: stretch;
+    grid-column: 1 / -1;
   }
-  .productBanner .action [data-slot='button'] {
-    min-height: 44px;
+  .productBanner .action [data-slot='button']:first-child {
+    grid-column: 1 / -1;
   }
 }

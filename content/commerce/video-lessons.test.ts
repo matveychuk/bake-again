@@ -17,14 +17,12 @@ const available: VideoLesson = {
   currency: 'EUR',
 };
 
-void test('initial catalogue has no payable offer and pins a real exact recipe version', () => {
+void test('catalogue pins a real recipe version and offers Napoleon at the launch price', () => {
   assert.equal(
     new Set(videoLessons.map((lesson) => lesson.recipeId)).size,
     videoLessons.length,
   );
   for (const lesson of videoLessons) {
-    assert.equal(lesson.status, 'planned');
-    assert.equal(canBuyVideoLesson(lesson), false);
     assert.equal(
       getRecipeDocument(lesson.recipeId)?.recipe.versionId,
       lesson.recipeVersionId,
@@ -33,8 +31,15 @@ void test('initial catalogue has no payable offer and pins a real exact recipe v
       getRecipeVideoLesson(lesson.recipeId, lesson.recipeVersionId),
       lesson,
     );
-    assert.equal('payhipUrl' in lesson, false);
   }
+  const napoleon = videoLessons.find(
+    (lesson) => lesson.id === 'napoleon-video',
+  );
+  assert.ok(napoleon && canBuyVideoLesson(napoleon));
+  assert.equal(napoleon.payhipUrl, 'https://payhip.com/b/VhLl8');
+  assert.equal(napoleon.priceMinor, 900);
+  assert.equal(napoleon.currency, 'EUR');
+  assert.equal(napoleon.language, 'uk');
 });
 void test('withdrawn, missing and mismatched recipe versions cannot offer a lesson', () => {
   assert.equal(

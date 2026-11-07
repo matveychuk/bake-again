@@ -955,37 +955,35 @@ text.onAccent and hover reuses the approved terracotta (5.45:1). Strong remains
 suitable for links/focus. Both CSS and portable token maps match; the Design Lab's
 existing action examples and the new light/dark lead magnet examples are references.
 
-### Product banner (2026-10-31)
+### Product banner (updated 2026-11-07)
 
 `EditorialInvitation variant="product-banner"` promotes the one current product at
 the top of UK/EN/ES recipe pages, between the site header and the recipe hero.
 Approved variant B: dark on every screen through a `data-theme="dark"` wrapper, so
 it uses the existing dark semantic tokens (panel surface, primary/secondary text,
 emphasis action) and no new colours. The optional `eyebrow` prop adds the short
-format/launch label above the title.
+format and video language above the title.
 
 - Food first: a 4:5 muted loop cropped to the plate (360×450 MP4, ≤250 KB; WebP
   poster, `aria-label`) loads only when visible; `prefers-reduced-motion` keeps the
   poster.
-- Title: Literata 450, never bold; one line on wide screens (26–32px clamp), 23px
-  on phones. An optional `titleAccent` punchline echoes the recipe-title accent:
-  italic 360 in `text.accent` (6.21:1 on the dark panel) and `nowrap`, so on
-  tablets and phones it moves to the next line as a whole.
-- The description uses `text.primary` (12.52:1); only the eyebrow stays secondary.
+- Title: display type at weight 450 (26–32px clamp, 23px on phones).
+- The description uses `text.primary` (12.52:1). The label and facts use
+  `text.secondary` and show the language, step count, duration and VAT-inclusive price.
 - Spacing after the banner: 24px desktop, 16px phone; nothing added above it.
-- ≤620px: label on its own line, loop opposite the title, story and full-width
-  action below; about a third of a 375×812 screen so the recipe title stays visible.
-  621px and wider: loop, copy and a vertically centred action in one row (24px gap).
-- The action opens the existing newsletter dialog only on click; nothing appears
-  automatically. After a successful signup `ba_subscribed=1` hides the banner.
-- Copy, dates, media and per-recipe overrides live in
-  `content/commerce/product-banner.ts`; the Napoleon page has its own hook.
+- ≤620px: label on its own line, loop opposite the title, then copy, a full-width
+  purchase action and two outline links. Wider layouts keep the loop beside the
+  copy and wrap the actions beneath the copy.
+- Purchase uses the shared same-tab checkout route. The outline links open the
+  lesson overview and the free step in the lesson player.
+- Copy, dates and media live in `content/commerce/product-banner.ts`.
+  The promoted recipe has its own description. The sale offer controls visibility.
 - Copy is per locale (ES names the cake «tarta milhojas» in the banner only).
   Not shown on drafts, print view or Cook Mode. Analytics:
   `product_banner_click` with recipe id and locale only.
 
-`/design-system#product-banner` shows the general and Napoleon variants with an
-inert preview form.
+`/design-system#product-banner` shows both descriptions in all three languages
+with checkout disabled.
 
 ### Recipe PDF delivery (2026-10-19)
 

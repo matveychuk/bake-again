@@ -160,6 +160,12 @@ export const napoleonLesson = {
 };
 
 export const validStreamUid = (uid: string) => /^[a-f0-9]{32}$/.test(uid);
+
+const duration = Math.round(
+  napoleonLesson.steps.reduce((total, step) => total + step.videos.uk!.wide.durationSec, 0),
+);
+export const napoleonLessonDuration = `${Math.floor(duration / 60)}:${String(duration % 60).padStart(2, '0')}`;
+
 /** Public projection deliberately excludes every private video identifier. */
 export function lessonStepSummaries() {
   return napoleonLesson.steps.map((s) => ({
