@@ -7,6 +7,7 @@
 - Place the author line under the player and move the email sign-in link below
   the FAQ. Use the supplied wide and vertical posters for step 8.
 - Explain the five techniques covered in the full lesson below the free video.
+- Show those five techniques on the end card as well.
 
 ## 2026-11-08 — Lesson ingredients and step markers
 

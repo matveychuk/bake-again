@@ -39,7 +39,7 @@ export const glutenFreeNapoleonRecipe = {
     note: "Author tested the unleavened dough in half and one-third batches on 2026-10-25/26, then supplied the final full-batch method and yield on 2026-10-28. Custard evidence is unchanged; scaled adaptations do not inherit this status. v6 aligned with the author's video lesson (full batch, 2026-11-02/03).",
   },
   timing: {
-    activeMinutes: 60,
+    activeMinutes: 120,
     totalElapsedMinutes: null,
     planningNote: {
       text: {

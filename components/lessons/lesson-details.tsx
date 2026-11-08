@@ -8,6 +8,7 @@ import {
 } from '@/content/commerce/lessons/napoleon';
 import type { Recipe } from '@/content/recipes/recipe.types';
 import { projectRecipeContent } from '@/content/recipes/registry';
+import { LessonHighlights } from './lesson-highlights';
 import styles from './lesson.module.css';
 
 const ingredientsId = 'lesson-ingredients';
@@ -37,15 +38,7 @@ export function LessonPreviewDetails() {
         {stepCount} коротких кроків — від тіста до першого шматка. Покажу, що
         впливає на результат і чого не передасть текст рецепта.
       </p>
-      <ul className={styles.highlights}>
-        <li>Як зробити масляну крихту, з якої виходять шаруваті коржі.</li>
-        <li>Яким тісто має бути на дотик.</li>
-        <li>Як розкачати тонкий корж, щоб він не рвався.</li>
-        <li>Як отримати в коржі повітряні порожнинки й хрумкість.</li>
-        <li>
-          Як зварити заварний крем, щоб він не пригорів і не пішов грудками.
-        </li>
-      </ul>
+      <LessonHighlights />
       <ul className={styles.facts}>
         <li>
           Українською · {stepCount} кроків · {napoleonLessonDuration}
@@ -77,7 +70,7 @@ export function LessonPurchase({ action }: { action: ReactNode }) {
       </div>
       <p>
         {action
-          ? 'Ціна включає ПДВ. Після оплати урок відкриється тут. Посилання на урок прийде на email, з яким купиш.'
+          ? 'Після оплати урок відкриється тут. Посилання на урок прийде на email, який вкажеш під час оплати.'
           : 'Ціну й купівлю відкрию після перевірки уроку.'}
       </p>
     </section>

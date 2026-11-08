@@ -14,6 +14,7 @@ import type Hls from 'hls.js';
 import { LockKeyhole, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { StepMarker } from '@/components/ui/step-marker';
+import { LessonHighlights } from './lesson-highlights';
 import { trackEvent } from '@/lib/analytics/umami';
 import styles from './lesson.module.css';
 export type StepSummary = {
@@ -495,9 +496,9 @@ export function LessonPlayer({
                   <strong>
                     Це крок {step.n} з {steps.length}.
                   </strong>{' '}
-                  Як має виглядати тісто, як розкачати тонкий корж і зварити
-                  крем — у повному уроці.
+                  У повному уроці покажу:
                 </output>
+                <LessonHighlights />
                 <div className={styles.actions}>
                   {purchaseAction}
                   <Button

@@ -1118,7 +1118,8 @@ catalogue and uses the same checkout route and analytics.
 
 After playback starts, a fixed purchase bar sits above the device safe area.
 The cookie panel takes precedence when open. At the end of the free video, a
-card inside the player offers checkout and replay. The guest FAQ precedes a
+card inside the player lists the same five techniques as the lesson overview and
+offers checkout and replay. The guest FAQ precedes a
 quiet email sign-in link, which opens the existing recovery form. These
 purchase prompts belong to the guest layout. Design Lab shows the end card and
 bar with disabled checkout controls.
