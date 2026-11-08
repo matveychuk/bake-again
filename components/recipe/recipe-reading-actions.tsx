@@ -15,7 +15,7 @@ export function RecipeSectionNavigation({
 }: {
   locale: AppLocale;
   ingredientsHref?: string;
-  methodHref?: string;
+  methodHref?: string | null;
 }) {
   const copy = recipeReaderCopy[locale];
   return (
@@ -24,10 +24,12 @@ export function RecipeSectionNavigation({
         <span>{copy.toIngredients}</span>
         <ArrowDown size={16} aria-hidden="true" />
       </a>
-      <a href={methodHref}>
-        <span>{copy.toSteps}</span>
-        <ArrowDown size={16} aria-hidden="true" />
-      </a>
+      {methodHref && (
+        <a href={methodHref}>
+          <span>{copy.toSteps}</span>
+          <ArrowDown size={16} aria-hidden="true" />
+        </a>
+      )}
     </nav>
   );
 }

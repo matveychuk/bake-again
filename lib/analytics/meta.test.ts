@@ -18,10 +18,7 @@ import {
   hideConsentBanner,
   lessonPrice,
 } from './meta-policy.ts';
-import {
-  videoLessons,
-  type VideoLesson,
-} from '../../content/commerce/video-lessons.ts';
+import type { VideoLesson } from '../../content/commerce/video-lessons.ts';
 import { recipeSlugs } from '../i18n/recipe-slugs.ts';
 import { cookieCopy } from '../../content/cookies.ts';
 
@@ -174,7 +171,21 @@ void test('lesson price comes from catalog, including Sasha’s approved €9 wh
   assert.equal(metaContentEvent('/uk/urok/napoleon', 'login', [offer]), null);
   assert.equal(metaContentEvent('/uk/urok/napoleon', 'lesson', [offer]), null);
   assert.equal(metaContentEvent('/uk/urok/napoleon', 'description', []), null);
-  assert.equal(metaBuyEvent(videoLessons), null); // Price approval does not activate sales.
+  const planned: VideoLesson = {
+    id: offer.id,
+    recipeId: offer.recipeId,
+    recipeVersionId: offer.recipeVersionId,
+    language: offer.language,
+    status: 'planned',
+    priceMinor: 900,
+    currency: 'EUR',
+  };
+  assert.equal(metaBuyEvent([planned]), null); // A listed price alone does not activate sales.
+  assert.deepEqual(metaBuyEvent(), {
+    method: 'trackCustom',
+    name: 'LessonBuyClick',
+    data: { value: 9, currency: 'EUR' },
+  });
   assert.deepEqual(metaBuyEvent([offer]), {
     method: 'trackCustom',
     name: 'LessonBuyClick',

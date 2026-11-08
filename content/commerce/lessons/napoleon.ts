@@ -175,5 +175,9 @@ export function lessonStepSummaries() {
     durationSec: s.videos.uk!.wide.durationSec,
     free: !!s.free,
     status: s.status,
+    posters: s.free ? {
+      wide: s.videos.uk?.wide.posterPath,
+      vertical: s.videos.uk?.vertical.posterPath,
+    } : undefined,
   }));
 }

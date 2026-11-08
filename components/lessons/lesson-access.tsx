@@ -80,14 +80,26 @@ export function LessonSession({ serverEmail }: { serverEmail: string | null }) {
     </>
   );
 }
-export function LessonBuy({ href, price }: { href: string; price: string }) {
+export function LessonBuy({
+  href,
+  price,
+  compact = false,
+}: {
+  href: string;
+  price: string;
+  compact?: boolean;
+}) {
   return (
     <Button
       href={href}
       rel="noreferrer"
-      onClick={() => { trackEvent('lesson_buy_click'); trackMetaBuy(); }}
+      aria-label={compact ? `Купити урок — ${price}` : undefined}
+      onClick={() => {
+        trackEvent('lesson_buy_click');
+        trackMetaBuy();
+      }}
     >
-      Купити урок · {price}
+      {compact ? 'Купити' : `Купити урок — ${price}`}
     </Button>
   );
 }

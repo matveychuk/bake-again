@@ -1,5 +1,36 @@
 # Design system changelog
 
+## 2026-11-08 — Free lesson preview
+
+- Lead with the free video and show the catalogue price on the purchase actions.
+- Add the in-player end card, replay and the purchase bar after playback starts.
+- Place the author line under the player and move the email sign-in link below
+  the FAQ. Use the supplied wide and vertical posters for step 8.
+- Explain the five techniques covered in the full lesson below the free video.
+
+## 2026-11-08 — Lesson ingredients and step markers
+
+- Show lesson ingredients and the recipe-style jump link only with full access.
+- Share Cook Mode's numbered circles with the lesson list. A completed step shows
+  a check in the same circle and retains its completion label for screen readers.
+
+## 2026-11-07 — Lesson actions and ingredient list
+
+- Added an inline purchase action at the top of the Napoleon lesson and aligned
+  the lower purchase and email sign-in actions with their headings when space
+  allows. Explanations sit below, and the recipe return link is removed.
+- Reused the recipe ingredient checklist for the version shown in the lesson.
+  The lesson and Design Lab show the grouped base quantities and optional items.
+
+## 2026-11-08 — Cookie banner wording and actions
+
+- Updated the shared uk/en/es cookie banner with the “By clicking Accept” wording
+  and explicit device storage, retaining the actual Meta advertising purposes.
+- Both actions use the same terracotta primary Button to keep acceptance and
+  refusal equally visible. Accept appears first.
+- Design Lab uses the same copy. Consent scope and privacy details
+  are unchanged; existing version-2 choices remain valid.
+
 ## 2026-11-03 — Draft recipes awaiting photography
 
 - Recipe inventory and catalogue accept recipes with no hero media. Existing card/detail components omit the absent image rather than loading an empty URL.
@@ -1595,3 +1626,9 @@ Sasha requested neutral banner wording: advertising measurement and personalised
 ads based on visited pages, without the original Bake Again retargeting phrasing.
 Updated uk/en/es together; consent version 2 requests a fresh choice. Privacy copy
 remains as specified.
+
+## 2026-11-07 · Napoleon lesson media
+
+- The lesson player selects a prepared poster for the active orientation, with the
+  Stream thumbnail as fallback. The lesson summary and step list use durations from
+  the media manifest.

@@ -2,10 +2,18 @@
 /* oxlint-disable next/no-img-element -- source image is prepared WebP through media:prepare */
 /* oxlint-disable jsx-a11y/media-has-caption -- silent draft clips; captions track is rendered when narration captions exist in manifest */
 /* oxlint-disable react/react-compiler -- synchronizes media query, local progress and asynchronous playback sources with external browser state */
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react';
 import type Hls from 'hls.js';
-import { Check, LockKeyhole } from 'lucide-react';
+import { LockKeyhole, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { StepMarker } from '@/components/ui/step-marker';
 import { trackEvent } from '@/lib/analytics/umami';
 import styles from './lesson.module.css';
 export type StepSummary = {
@@ -15,6 +23,7 @@ export type StepSummary = {
   durationSec: number;
   free: boolean;
   status: 'draft' | 'final';
+  posters?: { wide?: string; vertical?: string };
 };
 type Source = { hls: string; dash: string; thumbnail: string };
 type Playback = {
@@ -28,6 +37,8 @@ const key = 'ba:lesson:napoleon:progress:v1';
 const stamp = (s: number) =>
   `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 const portraitQuery = '(orientation: portrait) and (max-width: 699px)';
+const fallbackPoster =
+  '/media/recipes/gluten-free-napoleon/lesson-banner-2026-10-31/napoleon-banner-poster-crop-360x450.webp';
 async function enterFullscreen(video: HTMLVideoElement | null) {
   if (!video) return;
   try {
@@ -45,10 +56,20 @@ export function LessonPlayer({
   steps,
   access,
   preview = false,
+  previewWatchedStepId,
+  previewFinished = false,
+  purchaseAction,
+  purchaseBar,
+  afterVideo,
 }: {
   steps: StepSummary[];
   access: boolean;
   preview?: boolean;
+  previewWatchedStepId?: string;
+  previewFinished?: boolean;
+  purchaseAction?: ReactNode;
+  purchaseBar?: ReactNode;
+  afterVideo?: ReactNode;
 }) {
   const free = steps.find((s) => s.free)!;
   const [index, setIndex] = useState(access ? 0 : steps.indexOf(free));
@@ -58,14 +79,26 @@ export function LessonPlayer({
   const [continuous, setContinuous] = useState(access);
   const [resume, setResume] = useState<Progress | null>(null);
   const [watched, setWatched] = useState<string[]>([]);
+  const [started, setStarted] = useState(false);
+  const [finished, setFinished] = useState(false);
   const frame = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
+  const posterButton = useRef<HTMLButtonElement>(null);
   const cache = useRef(new Map<string, Playback>());
   const pendingSeek = useRef({ time: 0, play: false });
   const activeId = useRef('');
   const completed = useRef(new Set<string>());
   const retryCount = useRef(0);
   const step = steps[index];
+  const poster =
+    step.posters?.[orientation] ?? playback?.[orientation].thumbnail;
+  const introPoster =
+    !access && !preview && !started && !error ? step.posters?.wide : undefined;
+  const previewStepsId = useId();
+  const stepsId = preview ? previewStepsId : 'lesson-steps';
+  const showFreeOffer = !access && step.free && Boolean(purchaseAction);
+  const showEndScreen =
+    showFreeOffer && (finished || (preview && previewFinished));
   const open = useCallback(
     (i: number, autoplay = false, time = 0) => {
       if (i < 0 || i >= steps.length || (!access && !steps[i].free)) return;
@@ -74,6 +107,7 @@ export function LessonPlayer({
       retryCount.current = 0;
       setIndex(i);
       setError('');
+      setFinished(false);
       if (!preview) history.replaceState(null, '', `#${steps[i].stepId}`);
       // Explicit repeat of the current step still seeks correctly.
       if (video.current && activeId.current === steps[i].stepId) {
@@ -277,7 +311,7 @@ export function LessonPlayer({
       }
   }
   return (
-    <div className={styles.workspace}>
+    <div className={styles.workspace} data-free-preview={!access || undefined}>
       <div className={styles.view}>
         {resume && (
           <div className={styles.notice}>
@@ -305,88 +339,184 @@ export function LessonPlayer({
           </div>
         )}
         <div className={styles.frame} ref={frame}>
-          {preview || (!playback && error) ? (
-            <img
-              className={styles.placeholder}
-              src="/media/recipes/gluten-free-napoleon/lesson-banner-2026-10-31/napoleon-banner-poster-crop-360x450.webp"
-              alt="Шаруватий Наполеон без глютену, шматочок на виделці"
-            />
-          ) : (
-            <video
-              className={styles.video}
-              ref={video}
-              controls
-              playsInline
-              preload="metadata"
-              aria-label={`${step.n}. ${step.title}`}
-              poster={
-                playback?.[orientation].thumbnail ??
-                '/media/recipes/gluten-free-napoleon/lesson-banner-2026-10-31/napoleon-banner-poster-crop-360x450.webp'
-              }
-              onPlay={() =>
-                trackEvent('lesson_step_play', {
-                  stepId: step.stepId,
-                  orientation,
-                })
-              }
-              onTimeUpdate={saveProgress}
-              onPause={saveProgress}
-              onError={() => {
-                if (playback && retryCount.current++ < 1) {
-                  pendingSeek.current = {
-                    time: video.current?.currentTime ?? 0,
-                    play: !video.current?.paused,
-                  };
-                  void fetchPlayback(step.stepId, true)
-                    .then(setPlayback)
-                    .catch(() =>
-                      setError('Не вдалося відтворити відео. Спробуй ще раз.'),
+          <div className={styles.videoStage} data-lesson-controls>
+            {preview || (!playback && error) ? (
+              <img
+                className={styles.placeholder}
+                src={poster ?? fallbackPoster}
+                alt={
+                  poster && step.free
+                    ? 'Готові шаруваті коржі Наполеона на тарілці'
+                    : 'Шаруватий Наполеон без глютену, шматочок на виделці'
+                }
+              />
+            ) : (
+              <video
+                className={styles.video}
+                ref={video}
+                controls={!showEndScreen && !introPoster}
+                playsInline
+                preload="metadata"
+                aria-label={`${step.n}. ${step.title}`}
+                aria-hidden={introPoster ? true : undefined}
+                poster={poster ?? fallbackPoster}
+                onPlay={() => {
+                  if (showFreeOffer) setFinished(false);
+                  trackEvent('lesson_step_play', {
+                    stepId: step.stepId,
+                    orientation,
+                  });
+                }}
+                onPlaying={() => {
+                  if (access || !step.free) return;
+                  setStarted(true);
+                  if (document.activeElement === posterButton.current) {
+                    requestAnimationFrame(() =>
+                      video.current?.focus({ preventScroll: true }),
                     );
-                } else if (playback)
-                  setError('Не вдалося відтворити відео. Спробуй ще раз.');
-              }}
-              onEnded={() => {
-                saveProgress();
-                if (continuous && access && index < steps.length - 1)
-                  open(index + 1, true);
-              }}
-              onKeyDown={(event) => {
-                if (event.altKey || event.ctrlKey || event.metaKey) return;
-                const v = event.currentTarget;
-                if (event.key === ' ') {
-                  event.preventDefault();
-                  if (v.paused) void v.play().catch(() => undefined);
-                  else v.pause();
-                }
-                if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-                  event.preventDefault();
-                  v.currentTime = Math.max(
-                    0,
-                    Math.min(
-                      v.duration || 0,
-                      v.currentTime + (event.key === 'ArrowRight' ? 5 : -5),
-                    ),
-                  );
-                }
-                if (['n', 'N', 'p', 'P'].includes(event.key)) {
-                  event.preventDefault();
-                  open(index + (event.key.toLowerCase() === 'n' ? 1 : -1));
-                }
-              }}
-            >
-              {playback?.captionsVtt && (
-                <track
-                  key={playback.captionsVtt}
-                  kind="captions"
-                  srcLang="uk"
-                  label="Українські"
-                  src={playback.captionsVtt}
-                  default
-                />
-              )}
-            </video>
-          )}
-          <h2>
+                  }
+                }}
+                onTimeUpdate={saveProgress}
+                onPause={saveProgress}
+                onError={() => {
+                  if (playback && retryCount.current++ < 1) {
+                    pendingSeek.current = {
+                      time: video.current?.currentTime ?? 0,
+                      play: !video.current?.paused,
+                    };
+                    void fetchPlayback(step.stepId, true)
+                      .then(setPlayback)
+                      .catch(() =>
+                        setError(
+                          'Не вдалося відтворити відео. Спробуй ще раз.',
+                        ),
+                      );
+                  } else if (playback)
+                    setError('Не вдалося відтворити відео. Спробуй ще раз.');
+                }}
+                onEnded={() => {
+                  saveProgress();
+                  if (showFreeOffer) {
+                    setFinished(true);
+                    const element = video.current as
+                      | (HTMLVideoElement & {
+                          webkitDisplayingFullscreen?: boolean;
+                          webkitExitFullscreen?: () => void;
+                        })
+                      | null;
+                    if (document.fullscreenElement === element && element) {
+                      void document.exitFullscreen().catch(() => undefined);
+                    } else if (element?.webkitDisplayingFullscreen) {
+                      element.webkitExitFullscreen?.();
+                    }
+                  }
+                  if (continuous && access && index < steps.length - 1)
+                    open(index + 1, true);
+                }}
+                onKeyDown={(event) => {
+                  if (event.altKey || event.ctrlKey || event.metaKey) return;
+                  const v = event.currentTarget;
+                  if (event.key === ' ') {
+                    event.preventDefault();
+                    if (v.paused) void v.play().catch(() => undefined);
+                    else v.pause();
+                  }
+                  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    v.currentTime = Math.max(
+                      0,
+                      Math.min(
+                        v.duration || 0,
+                        v.currentTime + (event.key === 'ArrowRight' ? 5 : -5),
+                      ),
+                    );
+                  }
+                  if (['n', 'N', 'p', 'P'].includes(event.key)) {
+                    event.preventDefault();
+                    open(index + (event.key.toLowerCase() === 'n' ? 1 : -1));
+                  }
+                }}
+              >
+                {playback?.captionsVtt && (
+                  <track
+                    key={playback.captionsVtt}
+                    kind="captions"
+                    srcLang="uk"
+                    label="Українські"
+                    src={playback.captionsVtt}
+                    default
+                  />
+                )}
+              </video>
+            )}
+            {introPoster && (
+              <button
+                ref={posterButton}
+                type="button"
+                className={styles.playPreview}
+                aria-label={`Відтворити крок ${step.n}. ${step.title}`}
+                onClick={() => {
+                  const element = video.current;
+                  if (!element) return;
+                  pendingSeek.current = { time: 0, play: true };
+                  void element.play().catch((reason: unknown) => {
+                    if (
+                      !element.currentSrc ||
+                      (reason instanceof DOMException &&
+                        reason.name === 'AbortError')
+                    )
+                      return;
+                    pendingSeek.current.play = false;
+                    setError('Не вдалося відтворити відео. Спробуй ще раз.');
+                  });
+                }}
+              >
+                <picture>
+                  {step.posters?.vertical && (
+                    <source
+                      media={portraitQuery}
+                      srcSet={step.posters.vertical}
+                    />
+                  )}
+                  <img
+                    className={styles.placeholder}
+                    src={introPoster}
+                    alt="Готові шаруваті коржі Наполеона на тарілці"
+                  />
+                </picture>
+                <span className={styles.playIcon}>
+                  <Play size={24} fill="currentColor" aria-hidden="true" />
+                </span>
+              </button>
+            )}
+            {showEndScreen && (
+              <div className={styles.endScreen}>
+                <output className={styles.endMessage}>
+                  <strong>
+                    Це крок {step.n} з {steps.length}.
+                  </strong>{' '}
+                  Як має виглядати тісто, як розкачати тонкий корж і зварити
+                  крем — у повному уроці.
+                </output>
+                <div className={styles.actions}>
+                  {purchaseAction}
+                  <Button
+                    variant="secondary"
+                    disabled={preview}
+                    onClick={() => {
+                      const element = video.current;
+                      if (!element) return;
+                      element.currentTime = 0;
+                      void element.play().catch(() => setFinished(false));
+                    }}
+                  >
+                    Дивитися ще раз
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+          <h2 className={access ? undefined : 'sr-only'}>
             {step.n}. {step.title}
           </h2>
           {step.status === 'draft' && access && (
@@ -401,6 +531,10 @@ export function LessonPlayer({
             </Button>
           </div>
         )}
+        {showFreeOffer && (
+          <div className={styles.previewPurchase}>{purchaseAction}</div>
+        )}
+        {!access && afterVideo}
         {access && (
           <div className={styles.controls} data-lesson-controls>
             <Button
@@ -430,7 +564,9 @@ export function LessonPlayer({
                 setContinuous(!continuous);
               }}
             >
-              {continuous ? 'Дивитися підряд: увімкнено' : 'Дивитися підряд: вимкнено'}
+              {continuous
+                ? 'Дивитися підряд: увімкнено'
+                : 'Дивитися підряд: вимкнено'}
             </Button>
           </div>
         )}
@@ -438,63 +574,68 @@ export function LessonPlayer({
           <p>Для перегляду увімкни JavaScript.</p>
         </noscript>
       </div>
-      <section
-        aria-labelledby={preview ? 'lesson-preview-steps' : 'lesson-steps'}
-      >
-        <h2
-          className={styles.stepsTitle}
-          id={preview ? 'lesson-preview-steps' : 'lesson-steps'}
-        >
+      <section aria-labelledby={stepsId}>
+        <h2 className={styles.stepsTitle} id={stepsId}>
           Що в уроці
         </h2>
         <ol className={styles.steps} data-lesson-controls>
-          {steps.map((s, i) => (
-            <li
-              className={styles.step}
-              id={preview ? undefined : s.stepId}
-              key={s.stepId}
-            >
-              {access || s.free ? (
-                <button
-                  type="button"
-                  aria-current={i === index ? 'step' : undefined}
-                  onClick={() => {
-                    open(i);
-                    if (!access)
-                      video.current?.scrollIntoView({
-                        block: 'center',
-                        behavior: 'smooth',
-                      });
-                  }}
-                >
-                  <span>{s.n}</span>
-                  <span className={styles.stepTitle}>
-                    {s.title}
-                    {s.free && !access && <small> · безкоштовно</small>}
-                  </span>
-                  <span className={styles.meta}>
-                    {stamp(Math.round(s.durationSec))}
-                  </span>
-                  {watched.includes(s.stepId) && (
-                    <span className={styles.meta}>
-                      <Check size={16} aria-hidden="true" /> Переглянуто
-                    </span>
-                  )}
-                </button>
-              ) : (
-                <div className={styles.locked}>
-                  <span>{s.n}</span>
-                  <span className={styles.stepTitle}>{s.title}</span>
-                  <span className={styles.meta}>
-                    {stamp(Math.round(s.durationSec))}
-                  </span>
-                  <LockKeyhole size={16} aria-label="Потрібен доступ" />
-                </div>
-              )}
-            </li>
-          ))}
+          {steps.map((s, i) => {
+            const current = i === index;
+            const isWatched = preview
+              ? previewWatchedStepId === s.stepId
+              : watched.includes(s.stepId);
+            const row = (
+              <>
+                <StepMarker
+                  number={s.n}
+                  current={current}
+                  completed={isWatched}
+                  completedLabel="Переглянуто"
+                />
+                <span className={styles.stepTitle}>
+                  {s.title}
+                  {s.free && !access && <small> · безкоштовно</small>}
+                </span>
+                <span className={styles.meta}>
+                  {stamp(Math.round(s.durationSec))}
+                </span>
+              </>
+            );
+            return (
+              <li
+                className={styles.step}
+                id={preview ? undefined : s.stepId}
+                key={s.stepId}
+              >
+                {access || s.free ? (
+                  <button
+                    type="button"
+                    aria-current={current ? 'step' : undefined}
+                    onClick={() => {
+                      open(i);
+                      if (!access)
+                        video.current?.scrollIntoView({
+                          block: 'center',
+                          behavior: 'smooth',
+                        });
+                    }}
+                  >
+                    {row}
+                  </button>
+                ) : (
+                  <div className={styles.locked}>
+                    {row}
+                    <LockKeyhole size={16} aria-label="Потрібен доступ" />
+                  </div>
+                )}
+              </li>
+            );
+          })}
         </ol>
       </section>
+      {showFreeOffer &&
+        (started || (preview && previewFinished)) &&
+        purchaseBar}
     </div>
   );
 }

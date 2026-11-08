@@ -48,10 +48,10 @@ export function CookieConsentPanel({
         <a href={`/${locale}/privacy#meta-cookies`}>{copy.details}</a>
       </p>
       <div className={styles.actions}>
-        <Button variant="outline" onClick={onAccept}>
+        <Button onClick={onAccept}>
           {copy.accept}
         </Button>
-        <Button variant="outline" onClick={onDecline}>
+        <Button onClick={onDecline}>
           {copy.decline}
         </Button>
       </div>

@@ -54,8 +54,8 @@ route; unsafe navigation or withdrawal discards it.
 - Never InitiateCheckout or Purchase; Payhip owns both with the same Pixel ID.
 
 No email, form values, search text, notes or checkout URLs enter event parameters.
-Price is €9 per Sasha's explicit correction; status remains planned until sales
-activation is separately authorized/completed. No currency/price is hardcoded in events.
+The live Napoleon offer is €9. The catalog controls sale availability, currency
+and price, and a listed price alone never enables a buy event.
 
 ## Verification
 
@@ -79,3 +79,12 @@ Bake Again retargeting phrasing. The privacy section remains verbatim from the s
 Consent version is 2 so version-1 decisions are requested again. This is a wording
 change, not a change to SDK gating or events. Reference: AEPD Guía de cookies,
 first-layer information: https://www.aepd.es/guias/guia-cookies.pdf.
+
+### Action-led wording · 2026-11-08
+
+At Sasha's request, the banner now follows the supplied “By clicking Accept”
+pattern and explicitly describes storage on the device. The actual purposes
+(advertising measurement and personalised ads based on visited pages) remain
+visible in uk/en/es. Navigation and cookieless Umami analytics do not depend on
+this choice, so the banner does not attribute them to Meta cookies. Consent
+version remains 2 because this changes the wording, not the consent scope.

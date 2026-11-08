@@ -1,7 +1,7 @@
 export const cookieCopy = {
   uk: {
     label: 'Згода на cookies',
-    text: 'За твоєю згодою використовую cookies Meta для вимірювання ефективності реклами та показу персоналізованих оголошень на основі переглянутих сторінок.',
+    text: 'Натискаючи «Прийняти», ти погоджуєшся на збереження cookies Meta на твоєму пристрої для вимірювання ефективності реклами та показу персоналізованих оголошень на основі переглянутих сторінок.',
     accept: 'Прийняти',
     decline: 'Відхилити',
     details: 'Детальніше',
@@ -9,7 +9,7 @@ export const cookieCopy = {
   },
   en: {
     label: 'Cookie consent',
-    text: 'With your consent, I use Meta cookies to measure ad performance and show personalised ads based on the pages you visit.',
+    text: 'By clicking “Accept”, you agree to the storing of Meta cookies on your device to measure ad performance and show personalised ads based on the pages you visit.',
     accept: 'Accept',
     decline: 'Decline',
     details: 'Learn more',
@@ -17,7 +17,7 @@ export const cookieCopy = {
   },
   es: {
     label: 'Consentimiento de cookies',
-    text: 'Con tu consentimiento, uso cookies de Meta para medir la eficacia de la publicidad y mostrar anuncios personalizados según las páginas que visitas.',
+    text: 'Al hacer clic en «Aceptar», aceptas que se guarden cookies de Meta en tu dispositivo para medir la eficacia de la publicidad y mostrar anuncios personalizados según las páginas que visitas.',
     accept: 'Aceptar',
     decline: 'Rechazar',
     details: 'Más información',

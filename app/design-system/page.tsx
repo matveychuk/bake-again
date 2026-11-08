@@ -101,6 +101,14 @@ import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
 import { ProductBannerInvitation } from '@/components/site/product-banner-invitation';
 import { resolveProductBanner } from '@/content/commerce/product-banner';
 import { LessonPlayer } from '@/components/lessons/lesson-player';
+import {
+  LessonIngredients,
+  LessonIngredientsNavigation,
+  LessonPreviewDetails,
+  LessonPurchase,
+  LessonPurchaseBar,
+  LessonSignIn,
+} from '@/components/lessons/lesson-details';
 import { lessonStepSummaries } from '@/content/commerce/lessons/napoleon';
 import { RecipeVideoLesson } from '@/components/recipe/recipe-video-lesson';
 import { videoLessons } from '@/content/commerce/video-lessons';
@@ -271,7 +279,10 @@ export default function DesignSystemPage() {
 
           <section className={styles.section} id="cookie-consent">
             <h2>Cookie consent</h2>
-            <p>Nonmodal panel; equal outline actions. These previews never load Meta or store a choice.</p>
+            <p>
+              Nonmodal panel with equal terracotta Accept and Decline buttons. These
+              previews never load Meta or store a choice.
+            </p>
             {(['uk', 'en', 'es'] as const).map((locale) => <CookieConsentPanel key={locale} locale={locale} preview />)}
           </section>
           <section className={styles.section} id="colour">
@@ -1662,10 +1673,32 @@ export default function DesignSystemPage() {
           <section className={styles.section} id="video-lessons">
             <output>Відкриваємо твій урок. Це може зайняти кілька секунд</output>
             <output>Урок відкрито — можна дивитися</output>
-            <h2>Відеоурок · список кроків і плеєр (приклад)</h2>
-            <LessonPlayer steps={lessonStepSummaries()} access preview />
-            <p>Після завершення відео наступний крок запускається автоматично. «Дивитися підряд» увімкнено за замовчуванням.</p>
-<h2>Optional recipe video lesson</h2>
+            <div lang="uk">
+              <h2>Відеоурок · приклад повного доступу</h2>
+              <LessonIngredientsNavigation />
+              <LessonPlayer
+                steps={lessonStepSummaries()}
+                access
+                preview
+                previewWatchedStepId="s01-sour-cream-base"
+              />
+              <p>Після завершення відео наступний крок запускається автоматично. «Дивитися підряд» увімкнено за замовчуванням.</p>
+              <LessonIngredients recipe={glutenFreeNapoleonRecipe} />
+              <h2>Відеоурок · після безкоштовного кроку</h2>
+              <p>Подивись крок 8 безкоштовно · решта 12 — €9</p>
+              <LessonPlayer
+                steps={lessonStepSummaries()}
+                access={false}
+                preview
+                previewFinished
+                purchaseAction={<Button disabled>Купити урок — €9</Button>}
+                purchaseBar={<LessonPurchaseBar preview price="€9" action={<Button disabled>Купити</Button>} />}
+                afterVideo={<LessonPreviewDetails />}
+              />
+              <LessonPurchase action={<Button disabled>Купити урок — €9</Button>} />
+              <LessonSignIn preview />
+            </div>
+            <h2>Optional recipe video lesson</h2>
             <RecipeFreeLessonStep recipeId="gluten-free-napoleon" locale="uk" preview />
             <p className={styles.guidance}>
               Shared editorial invitation: planned and available states. Sample

@@ -4,11 +4,13 @@ import type {
 } from '@/content/recipes/localized-recipe.types';
 import { formatQuantity } from '@/lib/i18n/format';
 import type { AppLocale } from '@/lib/i18n/config';
+import { cn } from '@/lib/utils';
 import { RecipeIngredientList } from './recipe-ingredient-list';
 import styles from './recipe-ingredient-checklist.module.css';
 
 export function RecipeIngredientChecklist({
   sections,
+  className,
   locale = 'en',
   hideSingleSectionTitle = false,
   amountFor = (ingredient) => {
@@ -27,6 +29,7 @@ export function RecipeIngredientChecklist({
   },
 }: {
   sections: StructuredIngredientSection[];
+  className?: string;
   locale?: AppLocale;
   hideSingleSectionTitle?: boolean;
   amountFor?: (ingredient: StructuredIngredient) => {
@@ -35,7 +38,7 @@ export function RecipeIngredientChecklist({
   };
 }) {
   return (
-    <div className={styles.ingredientSections}>
+    <div className={cn(styles.ingredientSections, className)}>
       {sections.map((section) => (
         <section className={styles.ingredientSection} key={section.id}>
           {(!hideSingleSectionTitle || sections.length > 1) && (

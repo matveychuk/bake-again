@@ -251,34 +251,9 @@
   text-align: left;
 }
 
-.rail li button > span,
-.drawerProgress li button > span {
-  width: 25px;
-  height: 25px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-round);
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-label);
-}
-
-.progressStepNumber {
-  display: block;
-  line-height: 1;
-  transform: translateY(1px);
-}
-
 .rail li .activeStep,
 .drawerProgress li .activeStep {
   color: var(--color-text-primary);
-}
-
-.rail li .activeStep > span,
-.drawerProgress li .activeStep > span {
-  border-color: var(--color-action-primary);
-  background: var(--color-action-primary);
-  color: var(--color-text-on-accent);
 }
 
 .rail li .completedStep,
@@ -286,13 +261,6 @@
   box-shadow: inset 3px 0 0 var(--color-status-tested-text);
   color: var(--color-text-primary);
   font-weight: 750;
-}
-
-.rail li .completedStep > span,
-.drawerProgress li .completedStep > span {
-  border-color: var(--color-status-tested-text);
-  background: var(--color-background-surface);
-  color: var(--color-status-tested-text);
 }
 
 .ingredientsAction {

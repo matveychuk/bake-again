@@ -1,4 +1,5 @@
-import { Check, ListChecks } from 'lucide-react';
+import { ListChecks } from 'lucide-react';
+import { StepMarker } from '@/components/ui/step-marker';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
 import type { CookStep } from './cook-mode.data';
@@ -47,15 +48,11 @@ export function CookProgress({
                 onClick={() => onSelect(index)}
                 aria-current={index === activeIndex ? 'step' : undefined}
               >
-                <span>
-                  {isDone ? (
-                    <Check aria-hidden="true" size={13} />
-                  ) : (
-                    <span className={styles.progressStepNumber}>
-                      {step.number}
-                    </span>
-                  )}
-                </span>
+                <StepMarker
+                  number={step.number}
+                  current={index === activeIndex}
+                  completed={isDone}
+                />
                 {step.title}
               </button>
             </li>

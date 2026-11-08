@@ -1096,12 +1096,40 @@ shared Buttons and numbered step navigation. It uses existing semantic tokens,
 Literata/Manrope, a food poster and a quiet wrapping list. Phone portrait (below
 700px) uses 9:16; other screens use 16:9; from 900px the list is beside the player.
 Source swaps preserve current time/paused state. Current uses `aria-current=step`,
-completion uses a check icon with text, and paid locks keep their icon/label.
+and paid locks keep their icon and accessible label. The list shares `StepMarker`
+with the Cook Mode rail and drawer. Its circle shows the step number until
+completion, when a check replaces the number in the same space. The lesson keeps
+the number and “Переглянуто” in the accessible name of the completed step.
+The active orientation uses its prepared WebP poster when the lesson manifest
+provides one. The Stream thumbnail is the fallback. Step durations display the
+manifest values rounded to the nearest second.
 Caption tracks appear when provided. Keyboard on the video: Space, arrows ±5s,
 N/P steps. Browser-only optional resume never grants access. Design Lab
 `#video-lessons` runs the same component's inert `preview` variant, with prepared
 food media, no playback request, persistence or lesson analytics.
 `LessonLogin` reuses Button, labelled native email and existing Turnstile loader.
+
+The public lesson starts with a compact title, a line identifying the free step
+and full price, then the video. The free step uses the approved poster for the
+active orientation as a labelled play button until playback starts. A purchase button appears immediately
+below the video and again in the purchase section. The author line, lead and
+facts follow the first button. Every purchase button reads its price from the
+catalogue and uses the same checkout route and analytics.
+
+After playback starts, a fixed purchase bar sits above the device safe area.
+The cookie panel takes precedence when open. At the end of the free video, a
+card inside the player offers checkout and replay. The guest FAQ precedes a
+quiet email sign-in link, which opens the existing recovery form. These
+purchase prompts belong to the guest layout. Design Lab shows the end card and
+bar with disabled checkout controls.
+
+`LessonIngredients` uses the read-only `RecipeIngredientChecklist` with the
+canonical quantities, optional labels and groups for the exact recipe version
+linked to the lesson. The server renders it below the player only with full lesson
+access. The heading area uses the ingredients-only variant of
+`RecipeSectionNavigation` (`methodHref={null}`) to jump to the section. Ingredient
+groups stack on phones and use columns on wider screens. Design Lab shows the
+full-access layout and the guest purchase and sign-in actions separately.
 
 The existing shopping selection drawer now groups canonically optional ingredients
 under a localized “Optional” section and leaves them unselected by default. IDs,
@@ -1132,9 +1160,10 @@ LessonPlayer defaults to continuous playback for paid access. The existing aria-
 
 ## Meta cookie consent · 2026-11-06
 
-`CookieConsentPanel` extends the existing outline Button: two equal grid columns,
-identical variants and at least 44px targets. Its semantic surface/body/spacing/focus
-values come from `tokens.css`; it introduces no palette or font. The panel is a
+`CookieConsentPanel` uses the existing terracotta primary Button for both actions,
+with Accept first, two equal grid columns and at least 44px targets. Giving
+Decline the same visual prominence follows the AEPD cookie guidance. Its semantic
+surface, typography, spacing and focus values come from `tokens.css`. The panel is a
 fixed, labelled, nonmodal region, with no backdrop, close control or Escape action.
 At phone widths the copy sits above the actions. If the lower panel would cover a
 visible Cook entry or lesson player/control, it docks at the top; the page remains
@@ -1159,3 +1188,13 @@ Sasha requested neutral banner wording: advertising measurement and personalised
 ads based on visited pages, without the original Bake Again retargeting phrasing.
 Updated uk/en/es together; consent version 2 requests a fresh choice. Privacy copy
 remains as specified.
+
+### Action-led cookie copy · 2026-11-08
+
+The uk/en/es banner now explains that clicking the existing Accept button permits
+storing Meta cookies on the device, following Sasha's supplied wording pattern.
+It retains the actual advertising purposes and visited-page basis. It does not
+claim that advertising cookies improve navigation or enable cookieless analytics.
+The shared Design Lab fixtures read the updated `cookieCopy` directly. Privacy
+details and consent version 2 remain unchanged because the purposes and data
+processing have not changed.
