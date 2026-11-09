@@ -11,6 +11,7 @@ import {
   sanitizeAnalyticsPayload,
   syncAnalyticsPath,
   trackEvent,
+  umamiDisabledForBrowser,
 } from '@/lib/analytics/umami';
 
 /** No visible UI; the tracker owns SPA pageviews, avoiding duplicate React effects. */
@@ -21,15 +22,12 @@ export function SiteAnalytics() {
   }, [pathname]);
   useEffect(() => {
     if (
-      !analyticsAllowed(
-        window.location.hostname,
-        window.location.pathname,
-        navigator.doNotTrack,
-      )
+      !analyticsAllowed(window.location.hostname, window.location.pathname) ||
+      umamiDisabledForBrowser()
     )
       return;
     window.bakeAgainBeforeSend = (type, payload) =>
-      navigator.doNotTrack === '1'
+      umamiDisabledForBrowser()
         ? false
         : sanitizeAnalyticsPayload(type, payload);
     if (!document.getElementById('bake-again-analytics')) {

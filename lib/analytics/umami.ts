@@ -10,6 +10,17 @@ export const analyticsConfig = {
   hostname: 'bakeagain.com',
   scriptUrl: 'https://cloud.umami.is/script.js',
 };
+export const umamiOptOutCookie = '__Host-ba-umami-opt-out';
+
+export function umamiDisabledForBrowser() {
+  if (navigator.doNotTrack === '1') return true;
+  try {
+    const cookies = globalThis.document?.cookie ?? '';
+    return cookies.split(';').some((cookie) => cookie.trim() === `${umamiOptOutCookie}=1`);
+  } catch {
+    return true;
+  }
+}
 
 export const analyticsEvents = [
   'recipe_save',
@@ -289,11 +300,8 @@ export function sanitizeAnalyticsPayload(
 function canTrack() {
   return (
     typeof window !== 'undefined' &&
-    analyticsAllowed(
-      window.location.hostname,
-      window.location.pathname,
-      navigator.doNotTrack,
-    )
+    analyticsAllowed(window.location.hostname, window.location.pathname) &&
+    !umamiDisabledForBrowser()
   );
 }
 

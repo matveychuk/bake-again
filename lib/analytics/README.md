@@ -12,6 +12,13 @@ choices; it does not include people who leave without choosing.
 Repeated mounts in the same lesson state and campaign do not count as a second
 view; leaving the lesson resets this guard for the next visit.
 
+The service link `/api/analytics/umami/off` sets a host-only browser preference
+for one year before redirecting to `/uk`. On this browser profile, the preference
+skips the Umami script and blocks custom events. It also stops sends from already
+open tabs via the tracker's before-send hook. `/api/analytics/umami/on` clears the
+preference. Repeat in each browser profile that should be excluded. The preference
+is independent of Meta consent and does not change historical analytics.
+
 ## Configuration
 
 Public Cloudflare Worker vars: `META_PIXEL_ID=477724239421268` (Sasha, 2026-11-06),
