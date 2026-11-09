@@ -3,6 +3,15 @@
 Umami remains cookieless and independent of advertising consent. `umami.ts` retains
 its existing configuration and allowlist. Meta never uses the Umami pending queue.
 
+Umami records `cookie_consent_accept` and `cookie_consent_decline` on explicit
+banner choices, including through Cookie Settings. On the Napoleon lesson these
+events and `lesson_page_view` include `src` when it matches a reviewed campaign
+label. The payload drops arbitrary `src` values, `fbclid` and all URL queries and
+fragments. Accept divided by accept plus decline measures the share of recorded
+choices; it does not include people who leave without choosing.
+Repeated mounts in the same lesson state and campaign do not count as a second
+view; leaving the lesson resets this guard for the next visit.
+
 ## Configuration
 
 Public Cloudflare Worker vars: `META_PIXEL_ID=477724239421268` (Sasha, 2026-11-06),

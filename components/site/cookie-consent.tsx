@@ -20,6 +20,7 @@ import {
   routeSnapshot,
   serverRouteSnapshot,
 } from '@/lib/analytics/meta';
+import { trackEvent } from '@/lib/analytics/umami';
 import styles from './cookie-consent.module.css';
 
 /** Shared nonmodal panel; the Design Lab variant never stores consent or loads Meta. */
@@ -175,6 +176,7 @@ export function CookieConsent({ pixelId }: { pixelId: string }) {
   }, [visible, pathname]);
   if (!visible) return null;
   const choose = (ads: 'granted' | 'denied') => {
+    trackEvent(ads === 'granted' ? 'cookie_consent_accept' : 'cookie_consent_decline');
     setAdsConsent(ads);
     setReopen(false);
     returnFocus.current?.focus();

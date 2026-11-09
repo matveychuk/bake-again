@@ -5,6 +5,7 @@ import {
   analyticsConfig,
   getSocialClickData,
   sanitizeAnalyticsPayload,
+  syncAnalyticsPath,
   trackEvent,
   flushAnalyticsEvents,
 } from './umami.ts';
@@ -109,6 +110,66 @@ void test('search, hash, referring URL, page title, identity and unapproved data
     sanitizeAnalyticsPayload('event', { url: 'https://elsewhere.com/uk' }),
     false,
   );
+});
+
+void test('lesson views and consent choices keep only reviewed campaign attribution, including queued events', () => {
+  const original = Object.getOwnPropertyDescriptor(globalThis, 'window');
+  const path = '/uk/urok/napoleon';
+  const sources = ['fb-ad-napoleon-13krokiv', 'fb-ad-napoleon-13krokiv-ua'];
+  const location = new URL(`https://${analyticsConfig.hostname}${path}`);
+  const sent: unknown[] = [];
+  const browser: Partial<Window> = { location: location as unknown as Location };
+  Object.defineProperty(globalThis, 'window', { configurable: true, value: browser });
+  try {
+    for (const src of sources) {
+      location.search = `?src=${src}&fbclid=test123&email=private@example.com`;
+      trackEvent('lesson_page_view', { state: 'description' });
+      trackEvent('lesson_page_view', { state: 'description' });
+      trackEvent('cookie_consent_accept');
+      trackEvent('cookie_consent_decline', { recipe_id: 'not-consent-data' });
+    }
+    location.search = '?src=private-alphanumeric-id';
+    trackEvent('cookie_consent_decline');
+    location.pathname = '/uk/saved';
+    browser.umami = {
+      track: (update) => {
+        const result = sanitizeAnalyticsPayload('event', update({}));
+        assert.ok(result);
+        sent.push([result.name, result.url, result.data]);
+      },
+    };
+    flushAnalyticsEvents();
+    assert.deepEqual(sent, [
+      ...sources.flatMap((src) => [
+        ['lesson_page_view', path, { state: 'description', src }],
+        ['cookie_consent_accept', path, { src }],
+        ['cookie_consent_decline', path, { src }],
+      ]),
+      ['cookie_consent_decline', path, {}],
+    ]);
+    const forged = sanitizeAnalyticsPayload('event', {
+      url: path,
+      name: 'cookie_consent_accept',
+      data: { src: 'private-id', locale: 'uk', fbclid: 'test123' },
+    });
+    assert.ok(forged);
+    assert.deepEqual(forged.data, {});
+    location.pathname = path;
+    location.search = `?src=${sources[1]}`;
+    trackEvent('lesson_page_view', { state: 'description' });
+    assert.equal(sent.length, 7);
+    syncAnalyticsPath('/uk/saved');
+    trackEvent('lesson_page_view', { state: 'description' });
+    trackEvent('lesson_page_view', { state: 'login' });
+    assert.deepEqual(sent.slice(7), [
+      ['lesson_page_view', path, { state: 'description', src: sources[1] }],
+      ['lesson_page_view', path, { state: 'login', src: sources[1] }],
+    ]);
+  } finally {
+    syncAnalyticsPath('/uk/saved');
+    if (original) Object.defineProperty(globalThis, 'window', original);
+    else Reflect.deleteProperty(globalThis, 'window');
+  }
 });
 
 void test('events are queued until ready, keep the original page, and tracker failures never break actions', async () => {

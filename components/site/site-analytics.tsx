@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import {
   analyticsAllowed,
   analyticsConfig,
@@ -8,11 +9,16 @@ import {
   getSocialClickData,
   getRecipeDownloadData,
   sanitizeAnalyticsPayload,
+  syncAnalyticsPath,
   trackEvent,
 } from '@/lib/analytics/umami';
 
 /** No visible UI; the tracker owns SPA pageviews, avoiding duplicate React effects. */
 export function SiteAnalytics() {
+  const pathname = usePathname();
+  useEffect(() => {
+    if (pathname) syncAnalyticsPath(pathname);
+  }, [pathname]);
   useEffect(() => {
     if (
       !analyticsAllowed(

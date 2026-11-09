@@ -39,8 +39,29 @@ export const analyticsEvents = [
   'lead_magnet_submit',
   'newsletter_submit',
   'product_banner_click',
+  'cookie_consent_accept',
+  'cookie_consent_decline',
 ] as const;
 export type AnalyticsEvent = (typeof analyticsEvents)[number];
+const consentEvents = ['cookie_consent_accept', 'cookie_consent_decline'];
+const napoleonPath = '/uk/urok/napoleon';
+// Only published campaign labels are allowed; src is otherwise arbitrary URL input.
+const lessonSources = new Set([
+  'fb-ad-napoleon-13krokiv',
+  'fb-ad-napoleon-13krokiv-ua',
+  'ig-bio',
+  'ig-bot-urok',
+  'ig-bot-free',
+  'ig-bot-urok-info',
+  'fb-bot-urok',
+  'fb-bot-free',
+  'fb-bot-urok-info',
+  'email-launch',
+]);
+const hasLessonSource = (path: string, name: unknown) =>
+  path === napoleonPath &&
+  (name === 'lesson_page_view' ||
+    (typeof name === 'string' && consentEvents.includes(name)));
 type SocialClickData = {
   platform: 'instagram' | 'facebook';
   placement: 'header' | 'follow' | 'footer';
@@ -48,6 +69,7 @@ type SocialClickData = {
 };
 type EventData = {
   state?: 'description' | 'login' | 'lesson';
+  src?: string;
   stepId?: string;
   orientation?: 'wide' | 'vertical';
   recipeId?: string;
@@ -66,6 +88,11 @@ type EventData = {
 type Payload = Record<string, unknown>;
 type PendingEvent = { name: AnalyticsEvent; data: EventData; url: string };
 const pending: PendingEvent[] = [];
+let lastLessonView: string | undefined;
+
+export function syncAnalyticsPath(pathname: string) {
+  if (pathname !== napoleonPath) lastLessonView = undefined;
+}
 
 declare global {
   interface Window {
@@ -79,7 +106,7 @@ declare global {
 export function isAnalyticsPath(path: string) {
   if (/^\/uk\/mlyntsi-recept\/?$/.test(path)) return true;
   if (isMagnetPath(path)) return true;
-  if (path === '/uk/urok/napoleon') return true;
+  if (path === napoleonPath) return true;
   return /^\/(?:en|es|uk)(?:\/(?:about|privacy|saved|shopping-list)|\/recipes\/[a-z0-9-]+(?:\/cook)?|\/techniques\/[a-z0-9-]+)?\/?$/.test(
     path,
   );
@@ -189,12 +216,18 @@ export function sanitizeAnalyticsPayload(
       data.orientation = input.orientation;
     }
   }
+  if (typeof payload.name === 'string' && consentEvents.includes(payload.name)) {
+    for (const key of Object.keys(data)) delete data[key as keyof EventData];
+  }
   if (typeof payload.name === 'string' && payload.name.startsWith('lesson_') && !['lesson_step_link_click', 'lesson_free_step_play', 'lesson_free_step_complete', 'lesson_open_from_free_step'].includes(payload.name)) {
-    if (url.pathname !== '/uk/urok/napoleon') return false;
+    if (url.pathname !== napoleonPath) return false;
     for (const key of Object.keys(data)) delete data[key as keyof EventData];
     if (payload.name === 'lesson_page_view' && ['description','login','lesson'].includes(input?.state ?? '')) data.state = input!.state;
     if (['lesson_step_play','lesson_step_complete'].includes(payload.name) && /^s(0[1-9]|1[0-3])-[a-z-]+$/.test(input?.stepId ?? '')) data.stepId = input!.stepId;
     if (payload.name === 'lesson_step_play' && ['wide','vertical'].includes(input?.orientation ?? '')) data.orientation = input!.orientation;
+  }
+  if (hasLessonSource(url.pathname, payload.name) && input?.src && lessonSources.has(input.src)) {
+    data.src = input.src;
   }
   if (payload.name === 'social_profile_open') {
     const social = getSocialClickData(
@@ -275,7 +308,23 @@ function send(event: PendingEvent) {
 
 export function trackEvent(name: AnalyticsEvent, data: EventData = {}) {
   if (!canTrack()) return;
-  const event = { name, data, url: window.location.pathname };
+  const { pathname, search } = window.location;
+  // Capture attribution when the action occurs, even if Umami loads after navigation.
+  const source = hasLessonSource(pathname, name)
+    ? new URLSearchParams(search).get('src')
+    : null;
+  const src = source && lessonSources.has(source) ? source : undefined;
+  if (name === 'lesson_page_view' && pathname === napoleonPath) {
+    // The lesson can run its mount effect again within the same document.
+    const key = `${data.state ?? ''}:${src ?? ''}`;
+    if (lastLessonView === key) return;
+    lastLessonView = key;
+  }
+  const event = {
+    name,
+    data: src ? { ...data, src } : data,
+    url: pathname,
+  };
   if (window.umami) send(event);
   else if (pending.length < 20) pending.push(event);
 }
