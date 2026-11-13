@@ -2,7 +2,8 @@
   position: fixed;
   z-index: 45;
   inset-inline: var(--space-3);
-  bottom: var(--space-3);
+  /* Bottom, clear of the iPhone home indicator; never blocks scrolling. */
+  bottom: calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
   margin-inline: auto;
   max-width: var(--layout-shopping-content);
   display: flex;
@@ -54,10 +55,6 @@
   outline: 3px solid var(--color-focus-ring);
   outline-offset: var(--space-1);
 }
-.panel[data-dock='top'] {
-  top: var(--space-3);
-  bottom: auto;
-}
 .preview {
   position: static;
   margin: 0;
@@ -68,6 +65,10 @@
     align-items: stretch;
     gap: var(--space-2);
     padding: var(--space-3);
+    line-height: 1.4;
+  }
+  .actions {
+    flex-shrink: 1;
   }
 }
 @media print {

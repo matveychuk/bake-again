@@ -1199,3 +1199,13 @@ claim that advertising cookies improve navigation or enable cookieless analytics
 The shared Design Lab fixtures read the updated `cookieCopy` directly. Privacy
 details and consent version 2 remain unchanged because the purposes and data
 processing have not changed.
+
+## Lesson description variants · 2026-11-13
+
+`LessonPreview` renders the purchase-facing lesson page. `default` leads with the
+free step 8 player; `krok8` (for visitors who just watched step 8 in an ad or
+story) leads with the cut-Napoleon photo, the buy button with guarantee, the author
+line and the locked step overview, and repeats step 8 below. Every full
+`LessonBuy` shows “Не підійде — напиши протягом 14 днів, і я поверну гроші.”
+`LessonStickyBuy` is a phone-only bar on `color.lesson.*`; it never shows with the
+cookie panel or to buyers. The cookie panel is always docked at the bottom.

@@ -68,10 +68,16 @@ const lessonSources = new Set([
   'fb-bot-free',
   'fb-bot-urok-info',
   'email-launch',
+  'fb-ad-napoleon-krok8',
+  'ig-story-krok8',
+  'fb-post-krok8',
 ]);
+const lessonVariants = ['krok8', 'default'];
+const lessonBuyPlaces = ['hero', 'end', 'bottom', 'sticky'];
 const hasLessonSource = (path: string, name: unknown) =>
   path === napoleonPath &&
   (name === 'lesson_page_view' ||
+    name === 'lesson_buy_click' ||
     (typeof name === 'string' && consentEvents.includes(name)));
 type SocialClickData = {
   platform: 'instagram' | 'facebook';
@@ -81,6 +87,8 @@ type SocialClickData = {
 type EventData = {
   state?: 'description' | 'login' | 'lesson';
   src?: string;
+  variant?: 'krok8' | 'default';
+  place?: 'hero' | 'end' | 'bottom' | 'sticky';
   stepId?: string;
   orientation?: 'wide' | 'vertical';
   recipeId?: string;
@@ -234,6 +242,8 @@ export function sanitizeAnalyticsPayload(
     if (url.pathname !== napoleonPath) return false;
     for (const key of Object.keys(data)) delete data[key as keyof EventData];
     if (payload.name === 'lesson_page_view' && ['description','login','lesson'].includes(input?.state ?? '')) data.state = input!.state;
+    if (['lesson_page_view', 'lesson_buy_click'].includes(payload.name) && lessonVariants.includes(input?.variant ?? '')) data.variant = input!.variant;
+    if (payload.name === 'lesson_buy_click' && lessonBuyPlaces.includes(input?.place ?? '')) data.place = input!.place;
     if (['lesson_step_play','lesson_step_complete'].includes(payload.name) && /^s(0[1-9]|1[0-3])-[a-z-]+$/.test(input?.stepId ?? '')) data.stepId = input!.stepId;
     if (payload.name === 'lesson_step_play' && ['wide','vertical'].includes(input?.orientation ?? '')) data.orientation = input!.orientation;
   }
@@ -324,7 +334,7 @@ export function trackEvent(name: AnalyticsEvent, data: EventData = {}) {
   const src = source && lessonSources.has(source) ? source : undefined;
   if (name === 'lesson_page_view' && pathname === napoleonPath) {
     // The lesson can run its mount effect again within the same document.
-    const key = `${data.state ?? ''}:${src ?? ''}`;
+    const key = `${data.state ?? ''}:${data.variant ?? ''}:${src ?? ''}`;
     if (lastLessonView === key) return;
     lastLessonView = key;
   }

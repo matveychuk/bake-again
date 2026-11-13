@@ -100,13 +100,22 @@ import { RecipeDownloads } from '@/components/recipe/recipe-downloads';
 import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
 import { ProductBannerInvitation } from '@/components/site/product-banner-invitation';
 import { resolveProductBanner } from '@/content/commerce/product-banner';
-import { LessonPlayer } from '@/components/lessons/lesson-player';
+import {
+  LessonPlayer,
+  LessonStepOverview,
+} from '@/components/lessons/lesson-player';
+import {
+  LessonBuyPreview,
+  LessonCutPhoto,
+  LessonStickyBuy,
+} from '@/components/lessons/lesson-preview';
+import lessonStyles from '@/components/lessons/lesson.module.css';
 import {
   LessonIngredients,
   LessonIngredientsNavigation,
   LessonPreviewDetails,
   LessonPurchase,
-  LessonPurchaseBar,
+  LessonAuthor,
   LessonSignIn,
 } from '@/components/lessons/lesson-details';
 import { lessonStepSummaries } from '@/content/commerce/lessons/napoleon';
@@ -1691,11 +1700,33 @@ export default function DesignSystemPage() {
                 access={false}
                 preview
                 previewFinished
-                purchaseAction={<Button disabled>Купити урок — €9</Button>}
-                purchaseBar={<LessonPurchaseBar preview price="€9" action={<Button disabled>Купити</Button>} />}
-                afterVideo={<LessonPreviewDetails />}
+                purchaseAction={<LessonBuyPreview price="€9" />}
+                inlinePurchase={<LessonBuyPreview price="€9" />}
+                afterVideo={
+                  <>
+                    <LessonAuthor />
+                    <LessonPreviewDetails author={false} />
+                  </>
+                }
               />
-              <LessonPurchase action={<Button disabled>Купити урок — €9</Button>} />
+              <LessonCutPhoto />
+              <LessonPurchase action={<LessonBuyPreview price="€9" />} />
+              <h2>Відеоурок · перехід із кроку 8 (krok8)</h2>
+              <p>
+                Для src із «krok8»: результат, кнопка з гарантією й список кроків
+                до плеєра; крок 8 нижче з заголовком «Крок 8 — ще раз».
+              </p>
+              <p>Крок 8 — уже позаду. Решта 12 — у відеоуроці за €9</p>
+              <div className={lessonStyles.hero}>
+                <LessonCutPhoto />
+                <div className={lessonStyles.heroAside}>
+                  <LessonBuyPreview price="€9" />
+                  <LessonAuthor />
+                  <LessonStepOverview steps={lessonStepSummaries()} />
+                </div>
+              </div>
+              <h3>Липка кнопка (телефон, після першої кнопки)</h3>
+              <LessonStickyBuy preview href="#" price="€9" />
               <LessonSignIn preview />
             </div>
             <h2>Optional recipe video lesson</h2>

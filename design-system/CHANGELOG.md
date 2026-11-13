@@ -1,5 +1,23 @@
 # Design system changelog
 
+## 2026-11-13 — Lesson page: krok8 first screen, guarantee, bottom cookie panel
+
+- Cookie panel: always fixed at the bottom (12 px + safe area), no top docking;
+  shorter uk copy, Decline left and Accept right with equal primary styling,
+  ≤ 140 px tall at 375 px. Consent version and stored choice unchanged.
+- Lesson description, `krok8` variant (src contains `krok8`, kept in
+  sessionStorage `lessonVariant`): title, “Крок 8 — уже позаду…”, cut-Napoleon
+  photo (4:5; 1:1 on phones while the cookie panel is open), buy button,
+  author line, read-only `LessonStepOverview`, then the player under
+  “Крок 8 — ще раз”. Not applied when the lesson is open.
+- Default variant keeps its order; the same photo sits before the purchase section.
+- Every full buy button carries the 14-day refund line in secondary text; new
+  first FAQ item about refunds. Facts plaque reads “18 хв”.
+- `LessonStickyBuy` replaces `LessonPurchaseBar`: phone-only (< 768 px), lesson
+  background tokens, appears after the first buy button leaves the screen, hides at
+  the bottom offer, footer and while the cookie panel is open; keeps campaign query.
+- Design Lab `#video-lessons` shows both variants, the guarantee and the sticky bar.
+
 ## 2026-11-08 — Free lesson preview
 
 - Lead with the free video and show the catalogue price on the purchase actions.

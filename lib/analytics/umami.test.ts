@@ -172,6 +172,26 @@ void test('lesson views and consent choices keep only reviewed campaign attribut
   }
 });
 
+void test('krok8 lesson views and buy clicks keep variant, place and reviewed src only', () => {
+  const path = '/uk/urok/napoleon';
+  const event = (name: string, data: Record<string, unknown>) =>
+    sanitizeAnalyticsPayload('event', { url: path, name, data });
+  const view = event('lesson_page_view', { state: 'description', variant: 'krok8', src: 'ig-story-krok8' });
+  assert.ok(view);
+  assert.deepEqual(view.data, { state: 'description', variant: 'krok8', src: 'ig-story-krok8' });
+  const click = event('lesson_buy_click', {
+    variant: 'default',
+    place: 'sticky',
+    src: 'fb-ad-napoleon-krok8',
+    email: 'private@example.com',
+  });
+  assert.ok(click);
+  assert.deepEqual(click.data, { variant: 'default', place: 'sticky', src: 'fb-ad-napoleon-krok8' });
+  const forged = event('lesson_buy_click', { variant: 'x', place: 'header', src: 'private-id' });
+  assert.ok(forged);
+  assert.deepEqual(forged.data, {});
+});
+
 void test('events are queued until ready, keep the original page, and tracker failures never break actions', async () => {
   const original = Object.getOwnPropertyDescriptor(globalThis, 'window');
   const location = {

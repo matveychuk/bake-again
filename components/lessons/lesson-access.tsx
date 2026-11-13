@@ -6,14 +6,21 @@ import { Button } from '@/components/ui/button';
 import { loadTurnstile } from '@/lib/security/turnstile-client';
 import { trackEvent } from '@/lib/analytics/umami';
 import { trackMetaBuy } from '@/lib/analytics/meta';
+import {
+  type LessonBuyPlace,
+  type LessonVariant,
+  useLessonVariant,
+} from './lesson-variant';
 import styles from './lesson.module.css';
 export function LessonEvents({
   state,
+  variant = 'default',
 }: {
   state: 'description' | 'login' | 'lesson';
+  variant?: LessonVariant;
 }) {
   useEffect(() => {
-    trackEvent('lesson_page_view', { state });
+    trackEvent('lesson_page_view', { state, variant });
     try {
       if (sessionStorage.getItem('ba:lesson-login-success')) {
         sessionStorage.removeItem('ba:lesson-login-success');
@@ -22,7 +29,7 @@ export function LessonEvents({
     } catch {
       /* Optional analytics. */
     }
-  }, [state]);
+  }, [state, variant]);
   return null;
 }
 export function LessonSession({ serverEmail }: { serverEmail: string | null }) {
@@ -80,27 +87,39 @@ export function LessonSession({ serverEmail }: { serverEmail: string | null }) {
     </>
   );
 }
+export const lessonGuarantee =
+  'Не підійде — напиши протягом 14 днів, і я поверну гроші.';
 export function LessonBuy({
   href,
   price,
+  place,
   compact = false,
 }: {
   href: string;
   price: string;
+  place: LessonBuyPlace;
   compact?: boolean;
 }) {
-  return (
+  const variant = useLessonVariant();
+  const button = (
     <Button
       href={href}
       rel="noreferrer"
       aria-label={compact ? `Купити урок — ${price}` : undefined}
       onClick={() => {
-        trackEvent('lesson_buy_click');
+        trackEvent('lesson_buy_click', { variant, place });
         trackMetaBuy();
       }}
     >
       {compact ? 'Купити' : `Купити урок — ${price}`}
     </Button>
+  );
+  if (compact) return button;
+  return (
+    <div className={styles.buy} data-lesson-buy={place}>
+      {button}
+      <p className={styles.guarantee}>{lessonGuarantee}</p>
+    </div>
   );
 }
 export function LessonLogin({ siteKey }: { siteKey: string | null }) {

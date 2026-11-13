@@ -164,6 +164,8 @@ export const validStreamUid = (uid: string) => /^[a-f0-9]{32}$/.test(uid);
 const duration = Math.round(
   napoleonLesson.steps.reduce((total, step) => total + step.videos.uk!.wide.durationSec, 0),
 );
+/** Whole minutes, rounded down; a clock-like 18:07 reads as a time of day. */
+export const napoleonLessonMinutes = Math.floor(duration / 60);
 export const napoleonLessonDuration = `${Math.floor(duration / 60)}:${String(duration % 60).padStart(2, '0')}`;
 
 /** Public projection deliberately excludes every private video identifier. */

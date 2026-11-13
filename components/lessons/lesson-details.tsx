@@ -4,7 +4,7 @@ import { RecipeSectionNavigation } from '@/components/recipe/recipe-reading-acti
 import { Button } from '@/components/ui/button';
 import {
   napoleonLesson,
-  napoleonLessonDuration,
+  napoleonLessonMinutes,
 } from '@/content/commerce/lessons/napoleon';
 import type { Recipe } from '@/content/recipes/recipe.types';
 import { projectRecipeContent } from '@/content/recipes/registry';
@@ -13,27 +13,33 @@ import styles from './lesson.module.css';
 
 const ingredientsId = 'lesson-ingredients';
 
-export function LessonPreviewDetails() {
-  const stepCount = napoleonLesson.steps.length;
+export function LessonAuthor() {
   const portrait = napoleonLesson.steps.find((step) => step.free)?.videos.uk
     ?.vertical.posterPath;
   return (
+    <div className={styles.author}>
+      {portrait && (
+        <span className={styles.authorPortrait}>
+          {/* oxlint-disable-next-line next/no-img-element -- Prepared WebP framed on the author. */}
+          <img
+            src={portrait}
+            alt="Саша, авторка Bake Again"
+            width={720}
+            height={1280}
+            loading="lazy"
+          />
+        </span>
+      )}
+      <p>Я Саша, 10 років печу без глютену для сина й для себе.</p>
+    </div>
+  );
+}
+
+export function LessonPreviewDetails({ author = true }: { author?: boolean }) {
+  const stepCount = napoleonLesson.steps.length;
+  return (
     <div>
-      <div className={styles.author}>
-        {portrait && (
-          <span className={styles.authorPortrait}>
-            {/* oxlint-disable-next-line next/no-img-element -- Prepared WebP framed on the author. */}
-            <img
-              src={portrait}
-              alt="Саша, авторка Bake Again"
-              width={720}
-              height={1280}
-              loading="lazy"
-            />
-          </span>
-        )}
-        <p>Я Саша, 10 років печу без глютену для сина й для себе.</p>
-      </div>
+      {author && <LessonAuthor />}
       <p className={styles.lead}>
         {stepCount} коротких кроків — від тіста до першого шматка. Покажу, що
         впливає на результат і чого не передасть текст рецепта.
@@ -41,7 +47,7 @@ export function LessonPreviewDetails() {
       <LessonHighlights />
       <ul className={styles.facts}>
         <li>
-          Українською · {stepCount} кроків · {napoleonLessonDuration}
+          Українською · {stepCount} кроків · {napoleonLessonMinutes} хв
         </li>
         <li>Телефон, планшет, ноутбук</li>
         <li>Рецепт на Schär Mix B</li>
@@ -112,27 +118,6 @@ export function LessonSignIn({
       </p>
       {children}
     </section>
-  );
-}
-
-export function LessonPurchaseBar({
-  price,
-  action,
-  preview = false,
-}: {
-  price: string;
-  action: ReactNode;
-  preview?: boolean;
-}) {
-  return (
-    <aside
-      aria-label="Купівля уроку"
-      className={preview ? styles.purchaseBarPreview : styles.purchaseBar}
-      data-lesson-sticky={preview ? undefined : ''}
-    >
-      <span>Урок — {price}</span>
-      {action}
-    </aside>
   );
 }
 

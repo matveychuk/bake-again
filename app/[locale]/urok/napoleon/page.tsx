@@ -12,13 +12,15 @@ import {
   LessonSession,
 } from '@/components/lessons/lesson-access';
 import {
+  LessonAuthor,
   LessonIngredients,
   LessonIngredientsNavigation,
   LessonPreviewDetails,
   LessonPurchase,
-  LessonPurchaseBar,
   LessonSignIn,
 } from '@/components/lessons/lesson-details';
+import { LessonPreview } from '@/components/lessons/lesson-preview';
+import { isKrok8Source } from '@/lib/lessons/variant';
 import {
   napoleonLesson,
   lessonStepSummaries,
@@ -62,7 +64,19 @@ export default async function LessonRoute({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   if ((await params).locale !== 'uk') notFound();
-  const login = (await searchParams).login === '1';
+  const query = await searchParams;
+  const login = query.login === '1';
+  const src = typeof query.src === 'string' ? query.src : null;
+  // Keep campaign attribution on the way to checkout; nothing else from the URL.
+  const checkoutQuery = new URLSearchParams();
+  for (const key of ['src', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content']) {
+    const value = query[key];
+    if (typeof value === 'string' && /^[a-zA-Z0-9_.-]{1,100}$/.test(value))
+      checkoutQuery.set(key, value);
+  }
+  const checkoutHref = checkoutQuery.size
+    ? `${napoleonCheckoutPath}?${checkoutQuery}`
+    : napoleonCheckoutPath;
   const bindings = await lessonBindings();
   let email: string | null = null;
   let access = false;
@@ -86,79 +100,86 @@ export default async function LessonRoute({
     !access && offer && canBuyVideoLesson(offer)
       ? formatVideoLessonPrice(offer, 'uk')
       : null;
-  const buyAction = price && (
-    <LessonBuy key="purchase" href={napoleonCheckoutPath} price={price} />
-  );
   const steps = lessonStepSummaries();
-  const freeStep = steps.find((step) => step.free);
   const recipe = offer ? getRecipe(offer.recipeId) : null;
   const lessonRecipe =
     recipe?.versionId === offer?.recipeVersionId ? recipe : null;
   const timing = lessonRecipe?.timing;
   const state = access ? 'lesson' : login ? 'login' : 'description';
+  const unavailableNotice = (
+    <output className={styles.notice}>
+      Не вдалося перевірити доступ. Онови сторінку або напиши на{' '}
+      <a href="mailto:hello@bakeagain.com">hello@bakeagain.com</a>.
+    </output>
+  );
   return (
     <main>
       <SiteHeader locale="uk" pathname="/uk/urok/napoleon" />
       <article className={styles.page} lang="uk" data-meta-lesson-state={state}>
         <LessonArrival access={access} />
-        <LessonEvents state={state} />
-        <header className={access ? undefined : styles.previewHeader}>
-          {!purchaseSession && (
-            <div className={styles.session}>
-              <LessonSession serverEmail={email} />
-            </div>
-          )}
-          <h1 className={styles.title} id="lesson-title" tabIndex={-1}>
-            Наполеон без глютену — відеоурок
-          </h1>
-          {access && lessonRecipe && <LessonIngredientsNavigation />}
-          {!access && freeStep && (
-            <p className={styles.previewIntro}>
-              Подивись крок {freeStep.n} безкоштовно
-              {price && ` · решта ${steps.length - 1} — ${price}`}
-            </p>
-          )}
-        </header>
-        {unavailable && (
-          <output className={styles.notice}>
-            Не вдалося перевірити доступ. Онови сторінку або напиши на{' '}
-            <a href="mailto:hello@bakeagain.com">hello@bakeagain.com</a>.
-          </output>
-        )}
-        {email && !access && !unavailable && (
-          <p className={styles.notice}>
-            За адресою {email} покупку не знайдено. Використовуєш іншу адресу
-            для покупок? Вийди й увійди з неї. Або напиши на{' '}
-            <a href="mailto:hello@bakeagain.com">hello@bakeagain.com</a> —
-            допоможу.
-          </p>
-        )}
-        <LessonPlayer
-          steps={steps}
-          access={access}
-          purchaseAction={buyAction}
-          purchaseBar={
-            price && (
-              <LessonPurchaseBar
-                key="purchase-bar"
-                price={price}
+        {access ? (
+          <>
+            <LessonEvents state="lesson" />
+            <header>
+              {!purchaseSession && (
+                <div className={styles.session}>
+                  <LessonSession serverEmail={email} />
+                </div>
+              )}
+              <h1 className={styles.title} id="lesson-title" tabIndex={-1}>
+                Наполеон без глютену — відеоурок
+              </h1>
+              {lessonRecipe && <LessonIngredientsNavigation />}
+            </header>
+            {unavailable && unavailableNotice}
+            <LessonPlayer steps={steps} access />
+            {lessonRecipe && <LessonIngredients recipe={lessonRecipe} />}
+          </>
+        ) : (
+          <LessonPreview
+            state={state === 'login' ? 'login' : 'description'}
+            serverVariant={isKrok8Source(src) ? 'krok8' : 'default'}
+            source={isKrok8Source(src) ? 'krok8' : src ? 'other' : 'none'}
+            steps={steps}
+            price={price}
+            checkoutHref={checkoutHref}
+            session={!purchaseSession && <LessonSession serverEmail={email} />}
+            notices={
+              <>
+                {unavailable && unavailableNotice}
+                {email && !unavailable && (
+                  <p className={styles.notice}>
+                    За адресою {email} покупку не знайдено. Використовуєш іншу
+                    адресу для покупок? Вийди й увійди з неї. Або напиши на{' '}
+                    <a href="mailto:hello@bakeagain.com">hello@bakeagain.com</a>{' '}
+                    — допоможу.
+                  </p>
+                )}
+              </>
+            }
+            author={<LessonAuthor />}
+            overview={<LessonPreviewDetails author={false} />}
+            purchase={
+              <LessonPurchase
                 action={
-                  <LessonBuy
-                    href={napoleonCheckoutPath}
-                    price={price}
-                    compact
-                  />
+                  price && (
+                    <LessonBuy href={checkoutHref} price={price} place="bottom" />
+                  )
                 }
               />
-            )
-          }
-          afterVideo={!access && <LessonPreviewDetails key="overview" />}
-        />
-        {!access && <LessonPurchase action={buyAction} />}
-        {access && lessonRecipe && <LessonIngredients recipe={lessonRecipe} />}
-        {!access && (
+            }
+            faq={
           <section className={styles.faq} aria-labelledby="lesson-faq">
             <h2 id="lesson-faq">Запитання про урок</h2>
+            <details>
+              <summary>А якщо урок не підійде?</summary>
+              <p>
+                Напиши на{' '}
+                <a href="mailto:hello@bakeagain.com">hello@bakeagain.com</a>{' '}
+                протягом 14 днів після покупки — поверну гроші. Доступ до уроку
+                після повернення закриється.
+              </p>
+            </details>
             <details>
               <summary>А якщо в мене інша суміш?</summary>
               <p>
@@ -216,8 +237,8 @@ export default async function LessonRoute({
               </p>
             </details>
           </section>
-        )}
-        {!access && (
+            }
+            signIn={
           <LessonSignIn>
             {login && (
               <LessonLogin
@@ -230,6 +251,8 @@ export default async function LessonRoute({
               />
             )}
           </LessonSignIn>
+            }
+          />
         )}
       </article>
       <SiteFooter locale="uk" />

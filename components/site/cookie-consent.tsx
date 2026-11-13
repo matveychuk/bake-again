@@ -49,12 +49,9 @@ export function CookieConsentPanel({
         <a href={`/${locale}/privacy#meta-cookies`}>{copy.details}</a>
       </p>
       <div className={styles.actions}>
-        <Button onClick={onAccept}>
-          {copy.accept}
-        </Button>
-        <Button onClick={onDecline}>
-          {copy.decline}
-        </Button>
+        {/* Equal weight; decline first so refusing is as easy as accepting. */}
+        <Button onClick={onDecline}>{copy.decline}</Button>
+        <Button onClick={onAccept}>{copy.accept}</Button>
       </div>
     </section>
   );
@@ -140,40 +137,6 @@ export function CookieConsent({ pixelId }: { pixelId: string }) {
       delete document.documentElement.dataset.cookieBannerOpen;
     };
   }, [visible, reopen]);
-  useEffect(() => {
-    if (!visible) return;
-    // Keep the fixed panel clear of visible cooking entry and lesson video/step controls.
-    const avoidOverlap = () => {
-      const panel = wrapper.current?.firstElementChild as
-        | HTMLElement
-        | undefined;
-      if (!panel) return;
-      const height = panel.getBoundingClientRect().height;
-      const protectedElements = document.querySelectorAll(
-        'a[href$="/cook"], [data-meta-lesson-state="lesson"] video, [data-lesson-controls]',
-      );
-      const collision = [...protectedElements].some((element) => {
-        const box = element.getBoundingClientRect();
-        return (
-          box.top < innerHeight &&
-          box.bottom > innerHeight - height &&
-          box.width > 0
-        );
-      });
-      panel.dataset.dock = collision ? 'top' : 'bottom';
-    };
-    avoidOverlap();
-    window.addEventListener('scroll', avoidOverlap, { passive: true });
-    window.addEventListener('resize', avoidOverlap);
-    const observer = new ResizeObserver(avoidOverlap);
-    if (wrapper.current?.firstElementChild)
-      observer.observe(wrapper.current.firstElementChild);
-    return () => {
-      window.removeEventListener('scroll', avoidOverlap);
-      window.removeEventListener('resize', avoidOverlap);
-      observer.disconnect();
-    };
-  }, [visible, pathname]);
   if (!visible) return null;
   const choose = (ads: 'granted' | 'denied') => {
     trackEvent(ads === 'granted' ? 'cookie_consent_accept' : 'cookie_consent_decline');

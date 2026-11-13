@@ -12,6 +12,12 @@ choices; it does not include people who leave without choosing.
 Repeated mounts in the same lesson state and campaign do not count as a second
 view; leaving the lesson resets this guard for the next visit.
 
+`lesson_page_view` also carries `variant` (`krok8` | `default`): the page order a
+visitor saw. `lesson_buy_click` carries `variant`, `place` (`hero` first button,
+`end` free-step end screen, `bottom` purchase section, `sticky` mobile bar) and the
+reviewed `src`. The `krok8` campaign labels are `fb-ad-napoleon-krok8`,
+`ig-story-krok8` and `fb-post-krok8`. Nothing new goes to Meta.
+
 The service link `/api/analytics/umami/off` sets a host-only browser preference
 for one year before redirecting to `/uk`. On this browser profile, the preference
 skips the Umami script and blocks custom events. It also stops sends from already

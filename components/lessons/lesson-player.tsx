@@ -60,7 +60,9 @@ export function LessonPlayer({
   previewWatchedStepId,
   previewFinished = false,
   purchaseAction,
-  purchaseBar,
+  inlinePurchase,
+  hideSteps = false,
+  replayHeading,
   afterVideo,
 }: {
   steps: StepSummary[];
@@ -68,8 +70,14 @@ export function LessonPlayer({
   preview?: boolean;
   previewWatchedStepId?: string;
   previewFinished?: boolean;
+  /** Offer on the end screen after the free step. */
   purchaseAction?: ReactNode;
-  purchaseBar?: ReactNode;
+  /** Offer under the free-step video. */
+  inlinePurchase?: ReactNode;
+  /** The step overview is rendered elsewhere on the page. */
+  hideSteps?: boolean;
+  /** Visible heading above the free-step video. */
+  replayHeading?: string;
   afterVideo?: ReactNode;
 }) {
   const free = steps.find((s) => s.free)!;
@@ -312,8 +320,15 @@ export function LessonPlayer({
       }
   }
   return (
-    <div className={styles.workspace} data-free-preview={!access || undefined}>
+    <div
+      className={styles.workspace}
+      data-free-preview={!access || undefined}
+      data-single={hideSteps || undefined}
+    >
       <div className={styles.view}>
+        {replayHeading && (
+          <h2 className={styles.replayTitle}>{replayHeading}</h2>
+        )}
         {resume && (
           <div className={styles.notice}>
             <p>
@@ -532,8 +547,8 @@ export function LessonPlayer({
             </Button>
           </div>
         )}
-        {showFreeOffer && (
-          <div className={styles.previewPurchase}>{purchaseAction}</div>
+        {showFreeOffer && inlinePurchase && (
+          <div className={styles.previewPurchase}>{inlinePurchase}</div>
         )}
         {!access && afterVideo}
         {access && (
@@ -575,6 +590,7 @@ export function LessonPlayer({
           <p>Для перегляду увімкни JavaScript.</p>
         </noscript>
       </div>
+      {!hideSteps && (
       <section aria-labelledby={stepsId}>
         <h2 className={styles.stepsTitle} id={stepsId}>
           Що в уроці
@@ -634,9 +650,58 @@ export function LessonPlayer({
           })}
         </ol>
       </section>
-      {showFreeOffer &&
-        (started || (preview && previewFinished)) &&
-        purchaseBar}
+      )}
     </div>
+  );
+}
+
+/** Read-only step overview for the description page; the free step links to the player. */
+export function LessonStepOverview({ steps }: { steps: StepSummary[] }) {
+  // One overview per page; a fixed id avoids useId drift around server slots.
+  const id = 'lesson-steps-overview';
+  return (
+    <section aria-labelledby={id}>
+      <h2 className={styles.stepsTitle} id={id}>
+        Що в уроці
+      </h2>
+      <ol className={styles.steps}>
+        {steps.map((s) => {
+          const row = (
+            <>
+              <StepMarker number={s.n} current={false} completed={false} />
+              <span className={styles.stepTitle}>
+                {s.title}
+                {s.free && <small> · безкоштовно</small>}
+              </span>
+              <span className={styles.meta}>
+                {stamp(Math.round(s.durationSec))}
+              </span>
+            </>
+          );
+          return (
+            <li className={styles.step} key={s.stepId}>
+              {s.free ? (
+                <a
+                  className={styles.stepLink}
+                  href={`#${s.stepId}`}
+                  onClick={() => {
+                    // A repeated click does not change the hash; replay the jump.
+                    if (location.hash === `#${s.stepId}`)
+                      window.dispatchEvent(new HashChangeEvent('hashchange'));
+                  }}
+                >
+                  {row}
+                </a>
+              ) : (
+                <div className={styles.locked}>
+                  {row}
+                  <LockKeyhole size={16} aria-label="Потрібен доступ" />
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </section>
   );
 }
