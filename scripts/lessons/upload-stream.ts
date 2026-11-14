@@ -135,7 +135,7 @@ if (values.prune) {
           metadata: {
             name: `napoleon-uk-${stepId}-${orientation}`,
             requireSignedURLs: step.free ? '' : 'true',
-            allowedOrigins: origins.join(','),
+            allowedOrigins: step.free ? '' : origins.join(','),
           },
           onAfterResponse: (_request, response) => {
             const id = response.getHeader('stream-media-id');
@@ -155,7 +155,7 @@ if (values.prune) {
       console.log({ phase: 'uploaded', stepId, orientation, uid });
       await api(`/${uid}`, 'POST', {
         requireSignedURLs: !step.free,
-        allowedOrigins: origins,
+        allowedOrigins: step.free ? [] : origins,
       });
       let v = await api(`/${uid}`);
       for (let i = 0; !v.readyToStream && i < 240; i++) {

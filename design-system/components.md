@@ -1209,3 +1209,18 @@ line and the locked step overview, and repeats step 8 below. Every full
 `LessonBuy` shows “Не підійде — напиши протягом 14 днів, і я поверну гроші.”
 `LessonStickyBuy` is a phone-only bar on `color.lesson.*`; it never shows with the
 cookie panel or to buyers. The cookie panel is always docked at the bottom.
+
+## Lesson browser recovery · 2026-11-14
+
+`LessonPlayer` reuses its token-based notice for the Facebook browser hint
+(`FBAN`, `FB_IAB`, `FBAV`, `FBIOS`). The text explains the app menu and external
+Chrome/Safari option; it never promises that a normal link can force an app exit.
+Design Lab `#video-lessons` shows this via `previewBrowserHelp`.
+Only the public step has a manifest-derived Stream iframe fallback, independent
+of the playback API. Fatal HLS/native/import/API errors or a 15-second playback
+wait switch to it once. Its labelled iframe retains native Cloudflare controls
+and fullscreen; a notice asks the reader to tap play and offers primary-player
+retry. The inline purchase offer remains visible. Private steps keep their signed
+access checks and one source refresh. No paid video IDs enter the public summary.
+The fallback does not claim a successful play or completion: iframe playback
+is cross-origin and is not counted by the site's native video event handlers.

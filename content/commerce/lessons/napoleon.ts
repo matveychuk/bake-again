@@ -181,5 +181,13 @@ export function lessonStepSummaries() {
       wide: s.videos.uk?.wide.posterPath,
       vertical: s.videos.uk?.vertical.posterPath,
     } : undefined,
+    // Public step only: recovery must also work if the playback API is unavailable.
+    fallback: s.free && s.videos.uk &&
+      validStreamUid(s.videos.uk.wide.uid) && validStreamUid(s.videos.uk.vertical.uid)
+      ? {
+          wide: `https://iframe.videodelivery.net/${s.videos.uk.wide.uid}`,
+          vertical: `https://iframe.videodelivery.net/${s.videos.uk.vertical.uid}`,
+        }
+      : undefined,
   }));
 }

@@ -1,4 +1,5 @@
 import { isLeadMagnetId, leadMagnetPath } from '../../content/lead-magnets.ts';
+import { lessonVideoErrorCodes, type LessonVideoErrorCode } from '../lessons/video-diagnostics.ts';
 
 const isMagnetPath = (path: string) => {
   const id = path.replace(/\/$/, '').split('/').at(-1);
@@ -42,6 +43,7 @@ export const analyticsEvents = [
   'video_lesson_open',
   'lesson_page_view', 'lesson_buy_click', 'lesson_login_request', 'lesson_login_success',
   'lesson_step_play', 'lesson_step_complete', 'lesson_orientation_switch',
+  'lesson_video_error',
   'lesson_step_link_click',
   'lesson_free_step_play',
   'lesson_free_step_complete',
@@ -78,6 +80,7 @@ const hasLessonSource = (path: string, name: unknown) =>
   path === napoleonPath &&
   (name === 'lesson_page_view' ||
     name === 'lesson_buy_click' ||
+    name === 'lesson_video_error' ||
     (typeof name === 'string' && consentEvents.includes(name)));
 type SocialClickData = {
   platform: 'instagram' | 'facebook';
@@ -85,6 +88,10 @@ type SocialClickData = {
   locale: 'uk';
 };
 type EventData = {
+  errorCode?: LessonVideoErrorCode;
+  httpStatus?: number;
+  isFacebook?: boolean;
+  fallback?: 'stream' | 'none';
   state?: 'description' | 'login' | 'lesson';
   src?: string;
   variant?: 'krok8' | 'default';
@@ -249,6 +256,20 @@ export function sanitizeAnalyticsPayload(
   }
   if (hasLessonSource(url.pathname, payload.name) && input?.src && lessonSources.has(input.src)) {
     data.src = input.src;
+  }
+  if (payload.name === 'lesson_video_error') {
+    if (!lessonVideoErrorCodes.includes(input?.errorCode as LessonVideoErrorCode) ||
+      !/^s(0[1-9]|1[0-3])-[a-z-]+$/.test(input?.stepId ?? '') ||
+      !['wide', 'vertical'].includes(input?.orientation ?? '') ||
+      typeof input?.isFacebook !== 'boolean' ||
+      !['stream', 'none'].includes(input?.fallback ?? '')) return false;
+    data.stepId = input.stepId;
+    data.orientation = input.orientation;
+    data.errorCode = input.errorCode;
+    data.isFacebook = input.isFacebook;
+    data.fallback = input.fallback;
+    if (Number.isInteger(input.httpStatus) && input.httpStatus! >= 100 && input.httpStatus! <= 599)
+      data.httpStatus = input.httpStatus;
   }
   if (payload.name === 'social_profile_open') {
     const social = getSocialClickData(

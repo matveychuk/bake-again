@@ -110,3 +110,21 @@ pattern and explicitly describes storage on the device. The actual purposes
 visible in uk/en/es. Navigation and cookieless Umami analytics do not depend on
 this choice, so the banner does not attribute them to Meta cookies. Consent
 version remains 2 because this changes the wording, not the consent scope.
+
+## Lesson video errors · 2026-11-14
+
+`lesson_video_error` is confined to `/uk/urok/napoleon`. Dimensions: `stepId`,
+`orientation`, allowlisted `errorCode`, optional HTTP status (100–599), `isFacebook`
+(boolean derived locally from FBAN/FB_IAB/FBAV/FBIOS), `fallback` (`stream` or `none`),
+and reviewed campaign `src`. Raw user agent, exception message, media URL, signed
+URL/token and fbclid are never sent. Existing DNT, browser opt-out, queue and
+production-only policies apply. Nothing is sent to Meta.
+
+Codes distinguish playback API HTTP/network/timeout, hls.js import/support/network/
+media/other failures, native MediaError codes, rejected play and 15-second waiting.
+A free-step failure is reported once per attempt before switching to Stream;
+explicit retry starts a new attempt. A paid step can report its first failure and
+refresh once. Counts represent failures, not unique affected viewers or purchases.
+`fallback=stream` means recovery was offered, not confirmed playback. Cross-origin
+iframe playback/completion/errors are not observable through the native video
+handlers and are not fabricated as Umami play/complete events.

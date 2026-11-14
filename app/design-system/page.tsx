@@ -1700,6 +1700,7 @@ export default function DesignSystemPage() {
                 access={false}
                 preview
                 previewFinished
+                previewBrowserHelp
                 purchaseAction={<LessonBuyPreview price="€9" />}
                 inlinePurchase={<LessonBuyPreview price="€9" />}
                 afterVideo={

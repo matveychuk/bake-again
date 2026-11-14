@@ -16,6 +16,13 @@ import { Button } from '@/components/ui/button';
 import { StepMarker } from '@/components/ui/step-marker';
 import { LessonHighlights } from './lesson-highlights';
 import { trackEvent } from '@/lib/analytics/umami';
+import {
+  isFacebookBrowser,
+  mediaErrorCode,
+  PlaybackError,
+  playbackFailure,
+  type LessonVideoFailure,
+} from '@/lib/lessons/video-diagnostics';
 import styles from './lesson.module.css';
 export type StepSummary = {
   stepId: string;
@@ -25,6 +32,7 @@ export type StepSummary = {
   free: boolean;
   status: 'draft' | 'final';
   posters?: { wide?: string; vertical?: string };
+  fallback?: { wide: string; vertical: string };
 };
 type Source = { hls: string; dash: string; thumbnail: string };
 type Playback = {
@@ -59,6 +67,7 @@ export function LessonPlayer({
   preview = false,
   previewWatchedStepId,
   previewFinished = false,
+  previewBrowserHelp = false,
   purchaseAction,
   inlinePurchase,
   hideSteps = false,
@@ -70,6 +79,7 @@ export function LessonPlayer({
   preview?: boolean;
   previewWatchedStepId?: string;
   previewFinished?: boolean;
+  previewBrowserHelp?: boolean;
   /** Offer on the end screen after the free step. */
   purchaseAction?: ReactNode;
   /** Offer under the free-step video. */
@@ -85,6 +95,15 @@ export function LessonPlayer({
   const [orientation, setOrientation] = useState<'wide' | 'vertical'>('wide');
   const [playback, setPlayback] = useState<Playback | null>(null);
   const [error, setError] = useState('');
+  const [facebook, setFacebook] = useState(false);
+  const [fallbackStep, setFallbackStep] = useState<string | null>(null);
+  const recoveryStarted = useRef(false);
+  const startupTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+  const sourceFailure = useRef<(failure: LessonVideoFailure) => void>(
+    () => undefined,
+  );
   const [continuous, setContinuous] = useState(access);
   const [resume, setResume] = useState<Progress | null>(null);
   const [watched, setWatched] = useState<string[]>([]);
@@ -101,19 +120,73 @@ export function LessonPlayer({
   const step = steps[index];
   const poster =
     step.posters?.[orientation] ?? playback?.[orientation].thumbnail;
+  const fallbackUrl =
+    fallbackStep === step.stepId && step.free
+      ? step.fallback?.[orientation]
+      : undefined;
   const introPoster =
-    !access && !preview && !started && !error ? step.posters?.wide : undefined;
+    !fallbackUrl && !access && !preview && !started && !error
+      ? step.posters?.wide
+      : undefined;
   const previewStepsId = useId();
   const stepsId = preview ? previewStepsId : 'lesson-steps';
   const showFreeOffer = !access && step.free && Boolean(purchaseAction);
   const showEndScreen =
     showFreeOffer && (finished || (preview && previewFinished));
+  const clearStartupTimer = useCallback(() => {
+    clearTimeout(startupTimer.current);
+    startupTimer.current = undefined;
+  }, []);
+  const reportFailure = useCallback(
+    (failure: LessonVideoFailure) => {
+      if (preview) return;
+      trackEvent('lesson_video_error', {
+        ...failure,
+        stepId: step.stepId,
+        orientation,
+        isFacebook: isFacebookBrowser(navigator.userAgent),
+        fallback: step.free && step.fallback ? 'stream' : 'none',
+      });
+    },
+    [orientation, preview, step],
+  );
+  const activateFallback = useCallback(
+    (failure: LessonVideoFailure) => {
+      if (recoveryStarted.current) return;
+      recoveryStarted.current = true;
+      clearStartupTimer();
+      reportFailure(failure);
+      if (step.free && step.fallback) {
+        video.current?.pause();
+        setFinished(false);
+        setError('');
+        setFallbackStep(step.stepId);
+      } else {
+        setError('Не вдалося відтворити відео. Спробуй ще раз.');
+      }
+    },
+    [clearStartupTimer, reportFailure, step],
+  );
+  function waitForPlayback() {
+    clearStartupTimer();
+    startupTimer.current = setTimeout(
+      () => sourceFailure.current({ errorCode: 'startup_timeout' }),
+      15000,
+    );
+  }
+  useEffect(() => {
+    setFacebook(isFacebookBrowser(navigator.userAgent));
+    return clearStartupTimer;
+  }, [clearStartupTimer]);
   const open = useCallback(
     (i: number, autoplay = false, time = 0) => {
       if (i < 0 || i >= steps.length || (!access && !steps[i].free)) return;
       if (!autoplay) video.current?.pause();
       pendingSeek.current = { time, play: autoplay };
       retryCount.current = 0;
+      recoveryStarted.current = false;
+      clearStartupTimer();
+      setFallbackStep(null);
       setIndex(i);
       setError('');
       setFinished(false);
@@ -124,7 +197,7 @@ export function LessonPlayer({
         if (autoplay) void video.current.play().catch(() => undefined);
       }
     },
-    [access, preview, steps],
+    [access, clearStartupTimer, preview, steps],
   );
   useEffect(() => {
     const media = matchMedia(portraitQuery);
@@ -189,10 +262,11 @@ export function LessonPlayer({
       { cache: 'no-store', signal: AbortSignal.timeout(12000) },
     );
     if (!response.ok)
-      throw new Error(
+      throw new PlaybackError(
         response.status === 401 || response.status === 403
           ? 'Увійди за email покупки, щоб відкрити урок.'
           : 'Відео ще готується. Спробуй пізніше.',
+        { errorCode: 'playback_http', httpStatus: response.status },
       );
     const data = (await response.json()) as Playback;
     cache.current.set(id, data);
@@ -208,80 +282,140 @@ export function LessonPlayer({
         if (!cancelled) setPlayback(data);
       })
       .catch((e) => {
-        if (!cancelled) setError(e.message);
+        if (!cancelled) {
+          activateFallback(playbackFailure(e));
+        }
       });
     if (access && steps[index + 1])
       void fetchPlayback(steps[index + 1].stepId).catch(() => undefined);
     return () => {
       cancelled = true;
     };
-  }, [access, fetchPlayback, index, preview, step.stepId, steps]);
+  }, [
+    access,
+    fetchPlayback,
+    index,
+    preview,
+    step.stepId,
+    steps,
+    activateFallback,
+  ]);
   useEffect(() => {
     const element = video.current;
-    if (!element || !playback) return;
+    if (preview || fallbackUrl) return;
     let hls: Hls | undefined;
     let cancelled = false;
-    const url = playback[orientation].hls;
-    const restore = () => {
-      const { time, play } = pendingSeek.current;
-      element.currentTime = Math.min(
-        time,
-        Math.max(0, element.duration - 0.05),
-      );
-      if (play) void element.play().catch(() => undefined);
-    };
-    element.addEventListener('loadedmetadata', restore, { once: true });
-    async function attach() {
-      if (element!.canPlayType('application/vnd.apple.mpegurl')) {
-        element!.src = url;
-        element!.load();
-      } else {
-        const { default: HlsPlayer } = await import('hls.js');
-        if (cancelled) return;
-        if (!HlsPlayer.isSupported()) {
-          setError(
-            'Цей браузер не підтримує відео. Спробуй Safari або Chrome.',
-          );
-          return;
-        }
-        hls = new HlsPlayer();
-        hls.loadSource(url);
-        hls.attachMedia(element!);
-        hls.on(HlsPlayer.Events.ERROR, (_, data) => {
-          if (data.fatal) void refreshSource();
-        });
-      }
-    }
-    void attach().catch(() =>
-      setError('Не вдалося відкрити відео. Спробуй ще раз.'),
-    );
-    return () => {
-      cancelled = true;
-      element.removeEventListener('loadedmetadata', restore);
-      hls?.destroy();
-      element.removeAttribute('src');
-      element.load();
-    };
-    // The callback reads the active source through this effect's closure.
-    async function refreshSource() {
-      if (retryCount.current++ >= 1) {
-        setError('Не вдалося відтворити відео. Спробуй ще раз.');
+    let handlingFailure = false;
+    const fail = async (failure: LessonVideoFailure) => {
+      if (cancelled || handlingFailure) return;
+      handlingFailure = true;
+      clearStartupTimer();
+      if (step.free || retryCount.current++ >= 1) {
+        activateFallback(failure);
         return;
       }
+      reportFailure(failure);
       pendingSeek.current = {
-        time: element!.currentTime,
-        play: !element!.paused,
+        time: element?.currentTime ?? 0,
+        play: !!element && !element.paused,
       };
       try {
         const data = await fetchPlayback(step.stepId, true);
         if (!cancelled) setPlayback(data);
-      } catch {
-        if (!cancelled) setError('Увійди ще раз або спробуй пізніше.');
+      } catch (reason) {
+        if (!cancelled) activateFallback(playbackFailure(reason));
+      }
+    };
+    sourceFailure.current = (failure) => {
+      void fail(failure);
+    };
+    const restore = () => {
+      if (!element) return;
+      const { time, play } = pendingSeek.current;
+      if (Number.isFinite(element.duration))
+        element.currentTime = Math.min(
+          time,
+          Math.max(0, element.duration - 0.05),
+        );
+      if (play) {
+        clearStartupTimer();
+        startupTimer.current = setTimeout(() => {
+          void fail({ errorCode: 'startup_timeout' });
+        }, 15000);
+      }
+      if (play)
+        void element.play().catch((reason: unknown) => {
+          if (
+            cancelled ||
+            (reason instanceof Error && reason.name === 'AbortError')
+          )
+            return;
+          void fail({
+            errorCode:
+              reason instanceof Error && reason.name === 'NotAllowedError'
+                ? 'play_not_allowed'
+                : 'play_failed',
+          });
+        });
+    };
+    element?.addEventListener('loadedmetadata', restore, { once: true });
+    async function attach() {
+      if (!element || !playback) return;
+      const url = playback[orientation].hls;
+      if (element.canPlayType('application/vnd.apple.mpegurl')) {
+        element.src = url;
+        element.load();
+      } else {
+        const { default: HlsPlayer } = await import('hls.js');
+        if (cancelled) return;
+        if (!HlsPlayer.isSupported()) {
+          void fail({ errorCode: 'hls_unsupported' });
+          return;
+        }
+        hls = new HlsPlayer();
+        hls.on(HlsPlayer.Events.ERROR, (_, data) => {
+          if (data.fatal)
+            void fail({
+              errorCode:
+                data.type === HlsPlayer.ErrorTypes.NETWORK_ERROR
+                  ? 'hls_network'
+                  : data.type === HlsPlayer.ErrorTypes.MEDIA_ERROR
+                    ? 'hls_media'
+                    : 'hls_other',
+              httpStatus: data.response?.code,
+            });
+        });
+        hls.loadSource(url);
+        hls.attachMedia(element);
       }
     }
-  }, [fetchPlayback, orientation, playback, step.stepId]);
+    void attach().catch(() => {
+      if (!cancelled) void fail({ errorCode: 'hls_load' });
+    });
+    return () => {
+      cancelled = true;
+      sourceFailure.current = () => undefined;
+      element?.removeEventListener('loadedmetadata', restore);
+      hls?.destroy();
+      element?.removeAttribute('src');
+      element?.load();
+    };
+  }, [
+    clearStartupTimer,
+    fallbackUrl,
+    fetchPlayback,
+    orientation,
+    playback,
+    preview,
+    reportFailure,
+    step,
+    activateFallback,
+  ]);
   async function retry() {
     retryCount.current = 0;
+    recoveryStarted.current = false;
+    setFallbackStep(null);
+    clearStartupTimer();
     setError('');
     pendingSeek.current = {
       time: video.current?.currentTime ?? 0,
@@ -290,7 +424,7 @@ export function LessonPlayer({
     try {
       setPlayback(await fetchPlayback(step.stepId, true));
     } catch (e) {
-      setError((e as Error).message);
+      activateFallback(playbackFailure(e));
     }
   }
   function saveProgress() {
@@ -356,7 +490,15 @@ export function LessonPlayer({
         )}
         <div className={styles.frame} ref={frame}>
           <div className={styles.videoStage} data-lesson-controls>
-            {preview || (!playback && error) ? (
+            {fallbackUrl ? (
+              <iframe
+                className={`${styles.video} ${styles.streamFallback}`}
+                src={fallbackUrl}
+                title={`Крок ${step.n}. ${step.title} — резервний відеоплеєр`}
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            ) : preview || (!playback && error) ? (
               <img
                 className={styles.placeholder}
                 src={poster ?? fallbackPoster}
@@ -377,6 +519,7 @@ export function LessonPlayer({
                 aria-hidden={introPoster ? true : undefined}
                 poster={poster ?? fallbackPoster}
                 onPlay={() => {
+                  waitForPlayback();
                   if (showFreeOffer) setFinished(false);
                   trackEvent('lesson_step_play', {
                     stepId: step.stepId,
@@ -384,6 +527,7 @@ export function LessonPlayer({
                   });
                 }}
                 onPlaying={() => {
+                  clearStartupTimer();
                   if (access || !step.free) return;
                   setStarted(true);
                   if (document.activeElement === posterButton.current) {
@@ -393,22 +537,16 @@ export function LessonPlayer({
                   }
                 }}
                 onTimeUpdate={saveProgress}
-                onPause={saveProgress}
+                onWaiting={waitForPlayback}
+                onPause={() => {
+                  clearStartupTimer();
+                  saveProgress();
+                }}
                 onError={() => {
-                  if (playback && retryCount.current++ < 1) {
-                    pendingSeek.current = {
-                      time: video.current?.currentTime ?? 0,
-                      play: !video.current?.paused,
-                    };
-                    void fetchPlayback(step.stepId, true)
-                      .then(setPlayback)
-                      .catch(() =>
-                        setError(
-                          'Не вдалося відтворити відео. Спробуй ще раз.',
-                        ),
-                      );
-                  } else if (playback)
-                    setError('Не вдалося відтворити відео. Спробуй ще раз.');
+                  if (video.current?.error && playback)
+                    sourceFailure.current({
+                      errorCode: mediaErrorCode(video.current.error.code),
+                    });
                 }}
                 onEnded={() => {
                   saveProgress();
@@ -475,6 +613,7 @@ export function LessonPlayer({
                   const element = video.current;
                   if (!element) return;
                   pendingSeek.current = { time: 0, play: true };
+                  waitForPlayback();
                   void element.play().catch((reason: unknown) => {
                     if (
                       !element.currentSrc ||
@@ -483,7 +622,13 @@ export function LessonPlayer({
                     )
                       return;
                     pendingSeek.current.play = false;
-                    setError('Не вдалося відтворити відео. Спробуй ще раз.');
+                    sourceFailure.current({
+                      errorCode:
+                        reason instanceof Error &&
+                        reason.name === 'NotAllowedError'
+                          ? 'play_not_allowed'
+                          : 'play_failed',
+                    });
                   });
                 }}
               >
@@ -539,6 +684,25 @@ export function LessonPlayer({
             <p>Чорновий монтаж · без голосу</p>
           )}
         </div>
+        {(facebook || previewBrowserHelp) && (
+          <div className={styles.notice}>
+            <p>
+              Відкрито у Facebook. Якщо відео не запускається, натисни меню ⋮
+              або ⋯ → «Відкрити в браузері» та вибери Chrome або Safari.
+            </p>
+          </div>
+        )}
+        {fallbackUrl && (
+          <div className={styles.notice} aria-live="polite">
+            <p>
+              Увімкнули резервний плеєр. Натисни ▶ на відео. Якщо воно не
+              запускається, відкрий цю сторінку у Chrome або Safari.
+            </p>
+            <Button variant="outline" onClick={() => void retry()}>
+              Спробувати основний плеєр
+            </Button>
+          </div>
+        )}
         {error && (
           <div aria-live="polite" className={styles.notice}>
             {error}{' '}
@@ -591,65 +755,65 @@ export function LessonPlayer({
         </noscript>
       </div>
       {!hideSteps && (
-      <section aria-labelledby={stepsId}>
-        <h2 className={styles.stepsTitle} id={stepsId}>
-          Що в уроці
-        </h2>
-        <ol className={styles.steps} data-lesson-controls>
-          {steps.map((s, i) => {
-            const current = i === index;
-            const isWatched = preview
-              ? previewWatchedStepId === s.stepId
-              : watched.includes(s.stepId);
-            const row = (
-              <>
-                <StepMarker
-                  number={s.n}
-                  current={current}
-                  completed={isWatched}
-                  completedLabel="Переглянуто"
-                />
-                <span className={styles.stepTitle}>
-                  {s.title}
-                  {s.free && !access && <small> · безкоштовно</small>}
-                </span>
-                <span className={styles.meta}>
-                  {stamp(Math.round(s.durationSec))}
-                </span>
-              </>
-            );
-            return (
-              <li
-                className={styles.step}
-                id={preview ? undefined : s.stepId}
-                key={s.stepId}
-              >
-                {access || s.free ? (
-                  <button
-                    type="button"
-                    aria-current={current ? 'step' : undefined}
-                    onClick={() => {
-                      open(i);
-                      if (!access)
-                        video.current?.scrollIntoView({
-                          block: 'center',
-                          behavior: 'smooth',
-                        });
-                    }}
-                  >
-                    {row}
-                  </button>
-                ) : (
-                  <div className={styles.locked}>
-                    {row}
-                    <LockKeyhole size={16} aria-label="Потрібен доступ" />
-                  </div>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </section>
+        <section aria-labelledby={stepsId}>
+          <h2 className={styles.stepsTitle} id={stepsId}>
+            Що в уроці
+          </h2>
+          <ol className={styles.steps} data-lesson-controls>
+            {steps.map((s, i) => {
+              const current = i === index;
+              const isWatched = preview
+                ? previewWatchedStepId === s.stepId
+                : watched.includes(s.stepId);
+              const row = (
+                <>
+                  <StepMarker
+                    number={s.n}
+                    current={current}
+                    completed={isWatched}
+                    completedLabel="Переглянуто"
+                  />
+                  <span className={styles.stepTitle}>
+                    {s.title}
+                    {s.free && !access && <small> · безкоштовно</small>}
+                  </span>
+                  <span className={styles.meta}>
+                    {stamp(Math.round(s.durationSec))}
+                  </span>
+                </>
+              );
+              return (
+                <li
+                  className={styles.step}
+                  id={preview ? undefined : s.stepId}
+                  key={s.stepId}
+                >
+                  {access || s.free ? (
+                    <button
+                      type="button"
+                      aria-current={current ? 'step' : undefined}
+                      onClick={() => {
+                        open(i);
+                        if (!access)
+                          video.current?.scrollIntoView({
+                            block: 'center',
+                            behavior: 'smooth',
+                          });
+                      }}
+                    >
+                      {row}
+                    </button>
+                  ) : (
+                    <div className={styles.locked}>
+                      {row}
+                      <LockKeyhole size={16} aria-label="Потрібен доступ" />
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </section>
       )}
     </div>
   );

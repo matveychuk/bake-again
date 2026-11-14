@@ -1651,3 +1651,11 @@ remains as specified.
 - The lesson player selects a prepared poster for the active orientation, with the
   Stream thumbnail as fallback. The lesson summary and step list use durations from
   the media manifest.
+
+## 2026-11-14 — Facebook lesson recovery
+
+- Reuse the lesson notice for Facebook's external-browser instructions; add an
+  inert Design Lab example with the exact production copy.
+- Free step 8 can recover through a labelled Cloudflare iframe after a failed
+  primary player/API or playback timeout. Existing tokens, food posters, purchase
+  actions and private lesson access remain in use.

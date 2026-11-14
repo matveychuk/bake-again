@@ -112,6 +112,10 @@
   object-fit: contain;
   background: var(--color-action-emphasis);
 }
+.streamFallback {
+  border: 0;
+  height: auto;
+}
 .frame {
   background: var(--color-action-emphasis);
   color: var(--color-text-on-emphasis);
