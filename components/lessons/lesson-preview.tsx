@@ -196,6 +196,7 @@ export function LessonPreview({
           <LessonPlayer
             steps={steps}
             access={false}
+            autoplayPreview={resolved && state === 'description'}
             purchaseAction={buy('end')}
             hideSteps
             replayHeading={freeStep && `Крок ${freeStep.n} — ще раз`}
@@ -207,6 +208,7 @@ export function LessonPreview({
           <LessonPlayer
             steps={steps}
             access={false}
+            autoplayPreview={resolved && state === 'description'}
             purchaseAction={buy('end')}
             inlinePurchase={buy('hero')}
             afterVideo={

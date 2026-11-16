@@ -122,11 +122,24 @@
   padding: var(--space-3);
 }
 .videoStage {
+  position: relative;
   display: grid;
 }
 .videoStage > * {
   grid-area: 1 / 1;
   min-width: 0;
+}
+.soundButton {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: var(--space-3);
+  inset-inline-end: var(--space-3);
+  max-inline-size: calc(100% - var(--space-6));
+  min-block-size: var(--space-12);
+  white-space: normal;
+}
+.videoStage .soundButton:focus-visible {
+  outline-color: var(--color-text-on-emphasis);
 }
 .playPreview {
   z-index: 1;

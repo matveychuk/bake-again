@@ -1,4 +1,5 @@
 import { isLeadMagnetId, leadMagnetPath } from '../../content/lead-magnets.ts';
+import { videoMilestones, videoPlayers, videoStartModes, type VideoMilestone, type VideoPlayer, type VideoStartMode } from '../lessons/video-progress.ts';
 import { lessonVideoErrorCodes, type LessonVideoErrorCode } from '../lessons/video-diagnostics.ts';
 
 const isMagnetPath = (path: string) => {
@@ -43,7 +44,7 @@ export const analyticsEvents = [
   'video_lesson_open',
   'lesson_page_view', 'lesson_buy_click', 'lesson_login_request', 'lesson_login_success',
   'lesson_step_play', 'lesson_step_complete', 'lesson_orientation_switch',
-  'lesson_video_error',
+  'lesson_video_error', 'lesson_video_progress', 'lesson_video_unmute',
   'lesson_step_link_click',
   'lesson_free_step_play',
   'lesson_free_step_complete',
@@ -81,6 +82,9 @@ const hasLessonSource = (path: string, name: unknown) =>
   (name === 'lesson_page_view' ||
     name === 'lesson_buy_click' ||
     name === 'lesson_video_error' ||
+    name === 'lesson_step_play' ||
+    name === 'lesson_video_progress' ||
+    name === 'lesson_video_unmute' ||
     (typeof name === 'string' && consentEvents.includes(name)));
 type SocialClickData = {
   platform: 'instagram' | 'facebook';
@@ -88,6 +92,10 @@ type SocialClickData = {
   locale: 'uk';
 };
 type EventData = {
+  player?: VideoPlayer;
+  startMode?: VideoStartMode;
+  milestone?: VideoMilestone;
+  watchedSeconds?: number;
   errorCode?: LessonVideoErrorCode;
   httpStatus?: number;
   isFacebook?: boolean;
@@ -256,6 +264,26 @@ export function sanitizeAnalyticsPayload(
   }
   if (hasLessonSource(url.pathname, payload.name) && input?.src && lessonSources.has(input.src)) {
     data.src = input.src;
+  }
+  if (payload.name === 'lesson_step_play' || payload.name === 'lesson_video_progress' || payload.name === 'lesson_video_unmute') {
+    if (videoPlayers.includes(input?.player as VideoPlayer)) data.player = input!.player;
+    if (videoStartModes.includes(input?.startMode as VideoStartMode)) data.startMode = input!.startMode;
+    if (lessonVariants.includes(input?.variant ?? '')) data.variant = input!.variant;
+    if (payload.name !== 'lesson_step_play') {
+      if (!data.player || !data.startMode || !data.variant ||
+        !/^s(0[1-9]|1[0-3])-[a-z-]+$/.test(input?.stepId ?? '') ||
+        !['wide', 'vertical'].includes(input?.orientation ?? '')) return false;
+      data.stepId = input!.stepId;
+      data.orientation = input!.orientation;
+      if (payload.name === 'lesson_video_unmute' && data.stepId !== 's08-baked-layers') return false;
+    }
+    if (payload.name === 'lesson_video_progress') {
+      if (!videoMilestones.includes(input?.milestone as VideoMilestone) ||
+        typeof input?.watchedSeconds !== 'number' || !Number.isInteger(input.watchedSeconds) ||
+        input.watchedSeconds < 0 || input.watchedSeconds > 3600) return false;
+      data.milestone = input.milestone;
+      data.watchedSeconds = input.watchedSeconds;
+    }
   }
   if (payload.name === 'lesson_video_error') {
     if (!lessonVideoErrorCodes.includes(input?.errorCode as LessonVideoErrorCode) ||

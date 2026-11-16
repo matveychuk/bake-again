@@ -1659,3 +1659,10 @@ remains as specified.
 - Free step 8 can recover through a labelled Cloudflare iframe after a failed
   primary player/API or playback timeout. Existing tokens, food posters, purchase
   actions and private lesson access remain in use.
+
+## 2026-11-16 — Free lesson autoplay and watch progress
+
+- Start the guest preview muted when its player becomes visible. Keep the
+  labelled manual Play and add a visible “Увімкнути звук” overlay.
+- Count confirmed playback, unmute and watched portions on the standard and Stream
+  players; seeking forward alone no longer marks a step watched.

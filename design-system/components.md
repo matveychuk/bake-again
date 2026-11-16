@@ -1222,5 +1222,18 @@ wait switch to it once. Its labelled iframe retains native Cloudflare controls
 and fullscreen; a notice asks the reader to tap play and offers primary-player
 retry. The inline purchase offer remains visible. Private steps keep their signed
 access checks and one source refresh. No paid video IDs enter the public summary.
-The fallback does not claim a successful play or completion: iframe playback
-is cross-origin and is not counted by the site's native video event handlers.
+The Stream iframe reports playback and progress through the Cloudflare Player SDK.
+The iframe keeps its native controls if the SDK cannot load.
+
+## Free lesson autoplay · 2026-11-16
+
+The guest description attempts to play step 8 once at least half of the player
+is visible in the active tab. Playback starts muted and inline; the player has
+standard pause and audio controls. A shared secondary Button with a speaker icon
+and “Увімкнути звук” overlays muted playback on both players. It wraps at narrow
+widths and returns keyboard focus to the player when activated. Design Lab
+`#video-lessons` shows the inert overlay. Login, paid entry, reduced motion, and the
+inert Design Lab example do not auto-start. If a browser blocks autoplay, the
+poster remains a labelled Play button. In the `krok8` variant, scrolling to the
+player triggers the attempt. Stream recovery can also attempt muted autoplay
+when the original player failed before starting.

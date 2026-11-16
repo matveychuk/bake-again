@@ -125,6 +125,38 @@ media/other failures, native MediaError codes, rejected play and 15-second waiti
 A free-step failure is reported once per attempt before switching to Stream;
 explicit retry starts a new attempt. A paid step can report its first failure and
 refresh once. Counts represent failures, not unique affected viewers or purchases.
-`fallback=stream` means recovery was offered, not confirmed playback. Cross-origin
-iframe playback/completion/errors are not observable through the native video
-handlers and are not fabricated as Umami play/complete events.
+`fallback=stream` means recovery was offered, not confirmed playback. Reserve
+player errors are not emitted by the native video handlers; playback measurement
+uses the Stream SDK as described below.
+
+## Lesson viewing funnel · 2026-11-16
+
+`lesson_step_play` fires once per step per mounted lesson player on confirmed
+playback (`playing`), with `stepId`, `orientation`, `variant`, reviewed campaign
+`src`, `player` (`native` or `stream`) and `startMode` (`autoplay`, `manual`, or
+`continuous`). A rejected autoplay is not a play. Subsequent progress events
+keep the original start mode and report the player/orientation that crossed
+that checkpoint.
+
+`lesson_video_progress` emits checkpoints 10 / 25 / 50 / 75 / 90 / 100 in the
+`milestone` field and whole `watchedSeconds` measured at the checkpoint. It
+counts the union of played media ranges, not position, repeat time, or viewer
+attention. Each checkpoint fires once per step per mounted player; 100% needs
+an ended event and virtually complete playback. The existing
+`lesson_step_complete` remains a 90% event (now by actual coverage).
+
+For step 8 in Umami, compare `lesson_step_play` to `lesson_page_view` (description)
+for starts, and `lesson_video_progress` at 25/50/75/100 to starts for retention.
+Filter by `stepId=s08-baked-layers`, and break down by `startMode`, `src` or
+`variant`. Use session counts when comparing unique visits; repeat navigations
+can create additional starts. Cloudflare SDK is loaded only when the reserve
+player is needed. When it is unavailable, reserve playback still works, but
+its events cannot be observed from the page. Existing analytics opt-out applies.
+
+`lesson_video_unmute` fires once per step 8 per mounted lesson player when already
+playing media moves from silent to audible (overlay or native controls). It uses
+the same campaign, player, and start-mode dimensions. No unmute is inferred for
+a manual play that starts with sound. For campaign analysis compare sessions
+with unmute and milestone 50/100 to campaign description sessions, and split
+starts by startMode. Do not compare all post-autoplay starts with pre-change
+manual starts.

@@ -1693,6 +1693,9 @@ export default function DesignSystemPage() {
               />
               <p>Після завершення відео наступний крок запускається автоматично. «Дивитися підряд» увімкнено за замовчуванням.</p>
               <LessonIngredients recipe={glutenFreeNapoleonRecipe} />
+              <h2>Крок 8 · автозапуск без звуку</h2>
+              <p>Коли відео видно, воно запускається із кнопкою «Увімкнути звук» поверх кадру. Тут показано стан без відтворення.</p>
+              <LessonPlayer steps={lessonStepSummaries()} access={false} preview previewSoundControl hideSteps />
               <h2>Відеоурок · після безкоштовного кроку</h2>
               <p>Подивись крок 8 безкоштовно · решта 12 — €9</p>
               <LessonPlayer

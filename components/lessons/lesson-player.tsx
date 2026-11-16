@@ -15,6 +15,15 @@ import { LockKeyhole, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { StepMarker } from '@/components/ui/step-marker';
 import { LessonHighlights } from './lesson-highlights';
+import { LessonSoundButton } from './lesson-sound-button';
+import { LessonStreamFallback } from './lesson-stream-fallback';
+import { useLessonVariant } from './lesson-variant';
+import {
+  updateVideoCoverage,
+  type VideoCoverage,
+  type VideoPlayer,
+  type VideoStartMode,
+} from '@/lib/lessons/video-progress';
 import { trackEvent } from '@/lib/analytics/umami';
 import {
   isFacebookBrowser,
@@ -65,6 +74,8 @@ export function LessonPlayer({
   steps,
   access,
   preview = false,
+  autoplayPreview = false,
+  previewSoundControl = false,
   previewWatchedStepId,
   previewFinished = false,
   previewBrowserHelp = false,
@@ -77,6 +88,8 @@ export function LessonPlayer({
   steps: StepSummary[];
   access: boolean;
   preview?: boolean;
+  autoplayPreview?: boolean;
+  previewSoundControl?: boolean;
   previewWatchedStepId?: string;
   previewFinished?: boolean;
   previewBrowserHelp?: boolean;
@@ -92,6 +105,19 @@ export function LessonPlayer({
 }) {
   const free = steps.find((s) => s.free)!;
   const [index, setIndex] = useState(access ? 0 : steps.indexOf(free));
+  const variant = useLessonVariant();
+  const [autoplayVisible, setAutoplayVisible] = useState(false);
+  const autoplayTried = useRef(false);
+  const manualPlay = useRef(false);
+  const [nativeMuted, setNativeMuted] = useState(false);
+  const previousMute = useRef<boolean | undefined>(undefined);
+  const startMode = useRef<VideoStartMode>('manual');
+  const playMetrics = useRef(
+    new Map<
+      string,
+      { startMode: VideoStartMode; coverage: VideoCoverage; unmuted: boolean }
+    >(),
+  );
   const [orientation, setOrientation] = useState<'wide' | 'vertical'>('wide');
   const [playback, setPlayback] = useState<Playback | null>(null);
   const [error, setError] = useState('');
@@ -124,6 +150,8 @@ export function LessonPlayer({
     fallbackStep === step.stepId && step.free
       ? step.fallback?.[orientation]
       : undefined;
+  const mayAutoplay =
+    autoplayVisible && autoplayPreview && step.free && !access && !preview;
   const introPoster =
     !fallbackUrl && !access && !preview && !started && !error
       ? step.posters?.wide
@@ -182,6 +210,9 @@ export function LessonPlayer({
     (i: number, autoplay = false, time = 0) => {
       if (i < 0 || i >= steps.length || (!access && !steps[i].free)) return;
       if (!autoplay) video.current?.pause();
+      if (autoplay) startMode.current = 'continuous';
+      else if (activeId.current !== steps[i].stepId)
+        startMode.current = 'manual';
       pendingSeek.current = { time, play: autoplay };
       retryCount.current = 0;
       recoveryStarted.current = false;
@@ -411,6 +442,131 @@ export function LessonPlayer({
     step,
     activateFallback,
   ]);
+  useEffect(() => {
+    if (
+      !autoplayPreview ||
+      access ||
+      preview ||
+      !frame.current ||
+      !('IntersectionObserver' in window)
+    )
+      return;
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = false;
+    const update = () =>
+      setAutoplayVisible(visible && !document.hidden && !reducedMotion.matches);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.intersectionRatio >= 0.5;
+        update();
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(frame.current);
+    document.addEventListener('visibilitychange', update);
+    reducedMotion.addEventListener('change', update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', update);
+      reducedMotion.removeEventListener('change', update);
+    };
+  }, [access, autoplayPreview, preview]);
+  useEffect(() => {
+    const element = video.current;
+    if (!mayAutoplay || !playback || fallbackUrl || !element || error) return;
+    let cancelled = false;
+    const start = () => {
+      if (autoplayTried.current || manualPlay.current || !element.paused)
+        return;
+      autoplayTried.current = true;
+      startMode.current = 'autoplay';
+      element.muted = true;
+      void element.play().catch((reason: unknown) => {
+        if (cancelled || manualPlay.current) return;
+        if (reason instanceof Error && reason.name === 'AbortError') {
+          autoplayTried.current = false;
+          return;
+        }
+        clearStartupTimer();
+        if (reason instanceof Error && reason.name === 'NotAllowedError') {
+          // Browser autoplay policy is expected. The poster remains a Play button.
+          startMode.current = 'manual';
+          element.muted = false;
+          return;
+        }
+        sourceFailure.current({ errorCode: 'play_failed' });
+      });
+    };
+    if (element.readyState >= HTMLMediaElement.HAVE_METADATA) start();
+    else element.addEventListener('loadedmetadata', start, { once: true });
+    return () => {
+      cancelled = true;
+      element.removeEventListener('loadedmetadata', start);
+    };
+  }, [
+    clearStartupTimer,
+    error,
+    fallbackUrl,
+    mayAutoplay,
+    orientation,
+    playback,
+  ]);
+  function recordPlaying(player: VideoPlayer, mode: VideoStartMode) {
+    if (preview || playMetrics.current.has(step.stepId)) return;
+    playMetrics.current.set(step.stepId, {
+      startMode: mode,
+      coverage: { ranges: [], milestone: 0 },
+      unmuted: false,
+    });
+    trackEvent('lesson_step_play', {
+      stepId: step.stepId,
+      orientation,
+      player,
+      startMode: mode,
+      variant,
+    });
+  }
+  function recordUnmute(player: VideoPlayer) {
+    const metrics = playMetrics.current.get(step.stepId);
+    if (!metrics || metrics.unmuted || !step.free) return;
+    metrics.unmuted = true;
+    trackEvent('lesson_video_unmute', {
+      stepId: step.stepId,
+      orientation,
+      player,
+      startMode: metrics.startMode,
+      variant,
+    });
+  }
+  function recordProgress(
+    played: TimeRanges,
+    duration: number,
+    player: VideoPlayer,
+    ended: boolean,
+  ) {
+    const metrics = playMetrics.current.get(step.stepId);
+    if (!metrics) return;
+    for (const progress of updateVideoCoverage(
+      metrics.coverage,
+      played,
+      duration,
+      ended,
+    )) {
+      trackEvent('lesson_video_progress', {
+        stepId: step.stepId,
+        orientation,
+        player,
+        startMode: metrics.startMode,
+        variant,
+        ...progress,
+      });
+      if (progress.milestone === 90 && !completed.current.has(step.stepId)) {
+        completed.current.add(step.stepId);
+        setWatched([...completed.current]);
+        trackEvent('lesson_step_complete', { stepId: step.stepId });
+      }
+    }
+  }
   async function retry() {
     retryCount.current = 0;
     recoveryStarted.current = false;
@@ -427,18 +583,10 @@ export function LessonPlayer({
       activateFallback(playbackFailure(e));
     }
   }
-  function saveProgress() {
+  function saveProgress(ended = false) {
     const v = video.current;
     if (!v || !playback || activeId.current !== step.stepId) return;
-    if (
-      v.duration > 0 &&
-      v.currentTime / v.duration >= 0.9 &&
-      !completed.current.has(step.stepId)
-    ) {
-      completed.current.add(step.stepId);
-      setWatched([...completed.current]);
-      trackEvent('lesson_step_complete', { stepId: step.stepId });
-    }
+    recordProgress(v.played, v.duration, 'native', ended);
     if (access && !preview)
       try {
         localStorage.setItem(
@@ -491,12 +639,22 @@ export function LessonPlayer({
         <div className={styles.frame} ref={frame}>
           <div className={styles.videoStage} data-lesson-controls>
             {fallbackUrl ? (
-              <iframe
-                className={`${styles.video} ${styles.streamFallback}`}
-                src={fallbackUrl}
+              <LessonStreamFallback
+                key={fallbackUrl}
+                url={fallbackUrl}
                 title={`Крок ${step.n}. ${step.title} — резервний відеоплеєр`}
-                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
+                autoplay={
+                  mayAutoplay &&
+                  !manualPlay.current &&
+                  !playMetrics.current.has(step.stepId)
+                }
+                onPlaying={(automatic) =>
+                  recordPlaying('stream', automatic ? 'autoplay' : 'manual')
+                }
+                onUnmute={() => recordUnmute('stream')}
+                onProgress={(played, duration, ended) =>
+                  recordProgress(played, duration, 'stream', ended)
+                }
               />
             ) : preview || (!playback && error) ? (
               <img
@@ -521,14 +679,17 @@ export function LessonPlayer({
                 onPlay={() => {
                   waitForPlayback();
                   if (showFreeOffer) setFinished(false);
-                  trackEvent('lesson_step_play', {
-                    stepId: step.stepId,
-                    orientation,
-                  });
                 }}
-                onPlaying={() => {
+                onPlaying={(event) => {
+                  if (!playback || activeId.current !== step.stepId) return;
+                  recordPlaying('native', startMode.current);
                   clearStartupTimer();
                   if (access || !step.free) return;
+                  const muted =
+                    event.currentTarget.muted ||
+                    event.currentTarget.volume === 0;
+                  previousMute.current = muted;
+                  setNativeMuted(muted);
                   setStarted(true);
                   if (document.activeElement === posterButton.current) {
                     requestAnimationFrame(() =>
@@ -536,7 +697,16 @@ export function LessonPlayer({
                     );
                   }
                 }}
-                onTimeUpdate={saveProgress}
+                onVolumeChange={(event) => {
+                  if (access || !step.free || !started || fallbackUrl) return;
+                  const muted =
+                    event.currentTarget.muted ||
+                    event.currentTarget.volume === 0;
+                  if (previousMute.current && !muted) recordUnmute('native');
+                  previousMute.current = muted;
+                  setNativeMuted(muted);
+                }}
+                onTimeUpdate={() => saveProgress()}
                 onWaiting={waitForPlayback}
                 onPause={() => {
                   clearStartupTimer();
@@ -549,7 +719,7 @@ export function LessonPlayer({
                     });
                 }}
                 onEnded={() => {
-                  saveProgress();
+                  saveProgress(true);
                   if (showFreeOffer) {
                     setFinished(true);
                     const element = video.current as
@@ -612,6 +782,9 @@ export function LessonPlayer({
                 onClick={() => {
                   const element = video.current;
                   if (!element) return;
+                  manualPlay.current = true;
+                  startMode.current = 'manual';
+                  element.muted = false;
                   pendingSeek.current = { time: 0, play: true };
                   waitForPlayback();
                   void element.play().catch((reason: unknown) => {
@@ -649,6 +822,24 @@ export function LessonPlayer({
                   <Play size={24} fill="currentColor" aria-hidden="true" />
                 </span>
               </button>
+            )}
+            {(previewSoundControl ||
+              (!fallbackUrl &&
+                !access &&
+                started &&
+                nativeMuted &&
+                !showEndScreen &&
+                !error)) && (
+              <LessonSoundButton
+                preview={previewSoundControl}
+                onClick={() => {
+                  const element = video.current;
+                  if (!element) return;
+                  element.muted = false;
+                  if (element.volume === 0) element.volume = 1;
+                  element.focus({ preventScroll: true });
+                }}
+              />
             )}
             {showEndScreen && (
               <div className={styles.endScreen}>
@@ -695,8 +886,9 @@ export function LessonPlayer({
         {fallbackUrl && (
           <div className={styles.notice} aria-live="polite">
             <p>
-              Увімкнули резервний плеєр. Натисни ▶ на відео. Якщо воно не
-              запускається, відкрий цю сторінку у Chrome або Safari.
+              Увімкнули резервний плеєр. Якщо відео стоїть на паузі, натисни ▶.
+              Якщо воно не запускається, відкрий цю сторінку у Chrome або
+              Safari.
             </p>
             <Button variant="outline" onClick={() => void retry()}>
               Спробувати основний плеєр
