@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 
 import { trackEvent } from '@/lib/analytics/umami';
 import {
+  type ReactNode,
   useCallback,
   useEffect,
   useId,
@@ -80,6 +81,7 @@ export function InventoryRecipeAdjuster({
   shoppingRecipe,
   configuration = baseConfiguration,
   syncConfigurationToUrl = true,
+  utilityActions,
 }: {
   recipe: StructuredRecipeContent | undefined;
   archiveSections: InventoryArchiveSection[];
@@ -90,6 +92,7 @@ export function InventoryRecipeAdjuster({
   shoppingRecipe?: ShoppingRecipeProjection | null;
   configuration?: RecipeContentConfiguration;
   syncConfigurationToUrl?: boolean;
+  utilityActions?: ReactNode;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -362,35 +365,37 @@ export function InventoryRecipeAdjuster({
     >
       <div className={styles.ingredientHeading}>
         <RecipeIngredientHeading
+          compactAction
           action={
-            shoppingRecipe ? (
-              <AddRecipeIngredientsControl
-                configurationKey={recipeContentConfigurationKey(
-                  draftConfiguration,
-                )}
-                context={`${shoppingRecipe?.title ?? personalRecipe?.title[locale] ?? ''} · ${formattedScaleFactor}×`}
-                disabled={calculationUnavailable}
-                disabledReason={
-                  pendingAmount
-                    ? scaling.updatingAmount
-                    : unresolvedIngredients
-                      ? messages.cook.unsupportedConfiguration
-                      : scaling.positiveAmount
-                }
-                locale={locale}
-                recipe={shoppingRecipe!}
-                scaleFactor={scaleFactor ?? 1}
-              />
-            ) : (
-              <Button
-                disabled
-                title={messages.personal.testedBaseOnly}
-                type="button"
-              >
-                <ShoppingBag aria-hidden="true" size={17} />{' '}
-                {messages.personal.addAll}
-              </Button>
-            )
+            <button
+              type="button"
+              className={styles.mobileAdjustToggle}
+              aria-controls={controlsId}
+              aria-expanded={mobileControlsOpen}
+              onClick={() => setMobileControlsOpen((open) => !open)}
+            >
+              <span className={styles.mobileAdjustText}>
+                <strong>{readerCopy.adjustQuantity}</strong>
+                {invalidAmount ? (
+                  <small>{scaling.positiveAmount}</small>
+                ) : adjusted ? (
+                  <small className={styles.mobileAdjustStatus}>
+                    <span>{formattedScaleFactor}× ·</span>
+                    {recipe?.evidence?.status === 'suggested' ? (
+                      <Lightbulb aria-hidden="true" size={14} />
+                    ) : (
+                      <Calculator aria-hidden="true" size={14} />
+                    )}
+                    <span>
+                      {recipe?.evidence?.status === 'suggested'
+                        ? messages.status.suggested.label
+                        : messages.status.calculated.label}
+                    </span>
+                  </small>
+                ) : null}
+              </span>
+              <ChevronDown aria-hidden="true" size={20} />
+            </button>
           }
           eyebrow={
             concise || !showWorkingRecord
@@ -400,35 +405,6 @@ export function InventoryRecipeAdjuster({
           title={messages.recipe.ingredients}
         />
       </div>
-      <button
-        type="button"
-        className={styles.mobileAdjustToggle}
-        aria-controls={controlsId}
-        aria-expanded={mobileControlsOpen}
-        onClick={() => setMobileControlsOpen((open) => !open)}
-      >
-        <span className={styles.mobileAdjustText}>
-          <strong>{concise ? readerCopy.quantity : scaling.title}</strong>
-          {invalidAmount ? (
-            <small>{scaling.positiveAmount}</small>
-          ) : adjusted ? (
-            <small className={styles.mobileAdjustStatus}>
-              <span>{formattedScaleFactor}× ·</span>
-              {recipe?.evidence?.status === 'suggested' ? (
-                <Lightbulb aria-hidden="true" size={14} />
-              ) : (
-                <Calculator aria-hidden="true" size={14} />
-              )}
-              <span>
-                {recipe?.evidence?.status === 'suggested'
-                  ? messages.status.suggested.label
-                  : messages.status.calculated.label}
-              </span>
-            </small>
-          ) : null}
-        </span>
-        <ChevronDown aria-hidden="true" size={20} />
-      </button>
       <aside
         className={`${styles.controls} ${mobileControlsOpen ? styles.controlsOpen : ''}`}
         id={controlsId}
@@ -678,6 +654,38 @@ export function InventoryRecipeAdjuster({
             <p>{getUiMessages(locale).recipe.methodPendingDescription}</p>
           </div>
         )}
+        <div className={styles.ingredientUtilities}>
+          {shoppingRecipe ? (
+            <AddRecipeIngredientsControl
+              configurationKey={recipeContentConfigurationKey(
+                draftConfiguration,
+              )}
+              context={`${shoppingRecipe?.title ?? personalRecipe?.title[locale] ?? ''} · ${formattedScaleFactor}×`}
+              disabled={calculationUnavailable}
+              disabledReason={
+                pendingAmount
+                  ? scaling.updatingAmount
+                  : unresolvedIngredients
+                    ? messages.cook.unsupportedConfiguration
+                    : scaling.positiveAmount
+              }
+              locale={locale}
+              recipe={shoppingRecipe!}
+              scaleFactor={scaleFactor ?? 1}
+            />
+          ) : (
+            <Button
+              variant="ghost"
+              disabled
+              title={messages.personal.testedBaseOnly}
+              type="button"
+            >
+              <ShoppingBag aria-hidden="true" size={17} />{' '}
+              {messages.personal.addAll}
+            </Button>
+          )}
+          {utilityActions}
+        </div>
       </div>
     </section>
   );

@@ -895,33 +895,28 @@ void test('keeps localized crepe step media and practical guidance together', ()
   const recipe = getRecipeContent('crepes', 'uk');
   const firstStep = recipe?.steps[0];
   const restStep = recipe?.steps.find((step) => step.id === 'add-milk');
-  const cookStep = recipe?.steps.find((step) => step.id === 'cook');
+  const cookStep = recipe?.steps.find((step) => step.id === 'flip-crepe');
 
   assert.equal(firstStep?.title, 'Збийте густу основу');
   assert.equal(recipe?.evidence?.status, 'tested');
   assert.match(firstStep?.tip ?? '', /легше розбити грудочки/i);
   assert.equal(firstStep?.media?.length, 1);
-  assert.equal(firstStep?.media?.[0].id, 'batter-smooth-base');
+  assert.equal(firstStep?.media?.[0].id, 'pdf-v6-base');
   assert.match(restStep?.body ?? '', /15–20 хвилин/);
-  assert.equal(cookStep?.media?.length, 3);
-  assert.equal(cookStep?.media?.[0].title, 'Перед перевертанням');
-  assert.equal(cookStep?.media?.[1].title, 'Відділення краю');
-  assert.equal(cookStep?.media?.[2].title, 'Після перевертання');
-  assert.deepEqual(
-    recipe?.steps.map((step) => step.id),
-    ['start-batter', 'add-milk', 'finish-batter', 'cook'],
-  );
+  assert.equal(cookStep?.media?.length, 1);
+  assert.equal(cookStep?.media?.[0].id, 'pdf-v6-flip');
+  assert.deepEqual(recipe?.steps.map((step) => step.id), ['start-batter', 'add-milk', 'check-consistency', 'add-oil', 'pour-batter', 'check-edge', 'flip-crepe']);
   const oil = recipe?.ingredientSections[0]?.ingredients.find(
     (item) => item.id === 'oil',
   );
   assert.deepEqual(oil?.quantity.base, {
     kind: 'exact',
-    value: 25,
-    unit: 'g',
+    value: 5,
+    unit: 'tbsp',
   });
   assert.equal(oil?.quantity.equivalent, undefined);
-  assert.equal(recipe?.yield?.label, '10 млинців');
-  assert.equal(recipe?.geometry?.label, 'Кругла пательня, 28 см');
+  assert.equal(recipe?.yield?.label, 'Близько 15 млинців');
+  assert.equal(recipe?.geometry?.label, 'Кругла пательня, 24 см');
   assert.equal(recipe?.timing?.activeMinutes, 40);
   assert.equal(recipe?.timing?.totalElapsedMinutes, 60);
   assert.equal(recipe?.beforeStart, undefined);

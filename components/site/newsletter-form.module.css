@@ -60,6 +60,30 @@
   outline: 2px solid var(--color-focus-ring);
   outline-offset: var(--space-1);
 }
+/* Inline campaign confirmation shares the copy/form edge, without an inset card. */
+.done[data-campaign='panettone'] {
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  row-gap: var(--space-2);
+}
+.done[data-campaign='panettone'] > div {
+  display: contents;
+}
+.done[data-campaign='panettone'] .doneIcon {
+  margin-top: calc(
+    (var(--font-size-drawer-title) * var(--line-height-body) - var(--space-6)) /
+      2
+  );
+}
+.done[data-campaign='panettone'] .doneTitle {
+  margin: 0;
+}
+.done[data-campaign='panettone'] p {
+  grid-column: 1 / -1;
+  margin: 0;
+}
 .verify {
   display: grid;
   gap: var(--space-2);

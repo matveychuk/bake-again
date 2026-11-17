@@ -22,6 +22,19 @@ Before changing product UI, read `design-system/README.md` and the relevant file
   AA contrast for normal text.
 - Do not make medical or universal health claims about gluten-free eating.
 
+## Evaluate ideas before implementing
+
+- When Sasha proposes a change to Bake Again content, social media, search,
+  promotion, or the website, evaluate it as an experienced content creator and
+  marketing practitioner. Start with the reader's goal, the expected benefit,
+  the main trade-off, and the evidence available.
+- Say plainly when an idea should be kept, adjusted, or dropped. If another
+  approach would serve the goal better, recommend it and explain why. Label
+  assumptions and distinguish proposals from confirmed results.
+- Scale the critique to the decision: one or two sentences for small, reversible
+  changes, and a practical way to measure uncertain or costly ideas. Continue
+  authorized work when the next step is clear.
+
 ## Media publishing
 
 - Follow [the media storage map](docs/media-storage.uk.md): recipe sources and PDF
@@ -81,6 +94,12 @@ they are not separate statuses.
 2. Update the matching Design Lab example and documentation.
 3. Verify responsive behaviour and accessibility.
 4. Record meaningful system changes in `design-system/CHANGELOG.md`.
+
+## Blog articles
+
+- Use `skills/bake-again-articles/SKILL.md` for requests to write or revise a
+  Bake Again blog article, including informal requests that do not name the skill.
+  Keep Sasha’s ongoing article-writing preferences in that skill.
 
 ## Instagram continuity
 

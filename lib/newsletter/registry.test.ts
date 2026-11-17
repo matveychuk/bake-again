@@ -160,9 +160,10 @@ void test('one product record plus reviewed provider mapping reaches all registr
   // deployed registry, no mocks of derived ID lists, no provider requests.
   const root = await mkdtemp(join(tmpdir(), 'bake-again-registry-'));
   try {
-    for (const dir of ['content', 'lib/newsletter', 'lib/analytics', 'lib/lessons'])
+    for (const dir of ['content/articles', 'lib/newsletter', 'lib/analytics', 'lib/lessons'])
       await mkdir(join(root, dir), { recursive: true });
     const files = [
+      'content/articles/psyllium.ts',
       'content/lead-magnets.ts',
       'content/lead-magnets.validation.ts',
       ...[

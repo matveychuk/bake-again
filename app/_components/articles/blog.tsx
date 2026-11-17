@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { aboutFamilyImages, aboutPageContent } from '@/content/about';
 import { psylliumArticle } from '@/content/articles/psyllium';
+import { xanthanArticle } from '@/content/articles/xanthan-gum';
 import { localeAboutPath } from '@/lib/i18n/routes';
 import styles from './blog.module.css';
 
@@ -22,6 +23,12 @@ const cards = [
     description: psylliumArticle.description,
     images: [{ src: psylliumArticle.cardImage, alt: psylliumArticle.cardAlt }],
     imageCredit: 'Згенерована ілюстрація',
+  },
+  {
+    path: xanthanArticle.path,
+    title: xanthanArticle.title,
+    description: xanthanArticle.description,
+    images: [{ src: xanthanArticle.cover, alt: xanthanArticle.coverAlt }],
   },
 ];
 

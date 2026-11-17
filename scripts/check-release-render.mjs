@@ -51,7 +51,7 @@ for (const [locale, [plum, napoleon, prune, apple]] of Object.entries(paths)) {
         slug: napoleon,
         expected: [
           `${6 * scale} ${{ uk: 'шт.', en: 'pcs', es: 'uds.' }[locale]}`,
-          String(14 * scale),
+          String(16 * scale),
           `${formatted(2000 * scale)} ${locale === 'uk' ? 'мл' : 'ml'}`,
         ],
       },
@@ -144,13 +144,16 @@ for (const [locale, [plum, napoleon, prune, apple]] of Object.entries(paths)) {
           `data-status="${amount === 500 ? 'tested' : 'calculated'}"`,
         ),
       );
-      // The first dough step uses half of the batch flour; the rest is added later.
-      assert(visible.includes(`${amount / 2} ${locale === 'uk' ? 'г' : 'g'}`));
+      // v6 starts with the wet base: 250 g sour cream and 3 eggs per 500 g flour.
+      // The flour is used in the next step; check only the visible first article.
+      const firstStep = visible.slice(visible.indexOf('<article'));
+      assert(firstStep.includes(`${amount / 2} ${locale === 'uk' ? 'г' : 'g'}`));
+      assert(firstStep.includes(`${3 * amount / 500} ${{uk: 'шт.', en: 'pcs', es: 'uds.'}[locale]}`));
     }
     checks++;
   }
 }
-// Initial planned lesson must stay inert on the recipe and absent from cooking/print.
+// The published lesson uses the native checkout and stays absent from cooking/print.
 for (const [locale, [, napoleon]] of Object.entries(paths)) {
   for (const [suffix, query, expected] of [
     ['', '', true],
@@ -164,15 +167,16 @@ for (const [locale, [, napoleon]] of Object.entries(paths)) {
     assert.equal(response.status, 200);
     const html = await response.text();
     const visible = html.slice(0, html.indexOf('</main>'));
-    assert.equal(visible.includes('data-video-lesson="planned"'), expected);
+    assert.equal(visible.includes('data-video-lesson="available"'), expected);
+    assert(!visible.includes('data-video-lesson="planned"'));
     assert(
       !/href="https:\/\/payhip\.com/.test(visible),
-      'A planned lesson must never expose checkout',
+      'Recipe offers must use the native checkout, not a raw provider URL',
     );
     if (expected)
       assert(
-        section(visible, 'video-lesson').includes('disabled'),
-        'Preparation action must be disabled',
+        section(visible, 'video-lesson').includes('href="/uk/urok/napoleon/kupyty"'),
+        'The available lesson must link to its native checkout',
       );
     checks++;
   }

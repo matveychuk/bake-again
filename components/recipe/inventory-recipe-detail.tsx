@@ -75,6 +75,8 @@ import { RecentRecipes } from '@/components/personal-state/recent-recipes';
 import { getRecipeCatalog } from '@/content/recipes/catalog';
 import { NewsletterSignup } from '@/components/site/newsletter-signup';
 import { RecipeReviews } from '@/components/community/recipe-reviews';
+import { RecipeStoryVideo } from './recipe-story-video';
+import { recipeStoryVideos } from '@/content/recipes/story-videos';
 import { ProductBanner } from '@/components/site/product-banner';
 import { getRecipeVideoLesson } from '@/content/commerce/video-lessons';
 import { RecipeVideoLesson } from './recipe-video-lesson';
@@ -209,6 +211,9 @@ export function InventoryRecipeDetail({
       ? recipeStructuredData(recipe.id, locale, configuredStructured)
       : null;
   const document = getRecipeDocument(recipe.id);
+  const heroMedia = document?.recipe.media.find(
+    (item) => item.id === document.recipe.heroMediaId,
+  );
   const videoLesson =
     !isDraft && document?.recipe.versionId
       ? getRecipeVideoLesson(recipe.id, document.recipe.versionId)
@@ -258,7 +263,10 @@ export function InventoryRecipeDetail({
       surface="recipe-detail"
       liveEnabled={Boolean(helpConfiguration)}
     >
-      <main className={styles.page} data-meta-recipe-id={!isDraft ? recipe.id : undefined}>
+      <main
+        className={styles.page}
+        data-meta-recipe-id={!isDraft ? recipe.id : undefined}
+      >
         {structuredData && (
           <script
             type="application/ld+json"
@@ -268,19 +276,14 @@ export function InventoryRecipeDetail({
           />
         )}
         <SiteHeader locale={locale} pathname={pathname} />
-        {!isDraft && <ProductBanner recipeId={recipe.id} locale={locale} />}
+        {!isDraft && (
+          <ProductBanner
+            recipeId={recipe.id}
+            locale={locale}
+            className={styles.bannerAboveRecipe}
+          />
+        )}
         <section className={styles.hero} id="recipe-content" tabIndex={-1}>
-          {recipe.image && (
-            <div className={styles.heroImage}>
-              <Image
-                src={recipe.image}
-                alt={copy?.alt[locale] ?? recipe.imageAlt}
-                fill
-                priority
-                sizes="(min-width: 900px) 48vw, 100vw"
-              />
-            </div>
-          )}
           <div className={styles.heroCopy}>
             <div className={styles.heroTopline}>
               <div className={styles.heroBack}>
@@ -316,22 +319,31 @@ export function InventoryRecipeDetail({
             <p className={styles.summary}>
               {copy?.summary[locale] ?? recipe.summary}
             </p>
+            <RecipeSectionNavigation locale={locale} />
+          </div>
+          {recipe.image && (
+            <div className={styles.heroImage} data-fit={heroMedia?.fit}>
+              <Image
+                src={recipe.image}
+                alt={copy?.alt[locale] ?? recipe.imageAlt}
+                style={
+                  heroMedia?.fit === 'contain'
+                    ? { objectFit: 'contain' }
+                    : undefined
+                }
+                fill
+                priority
+                sizes="(max-width: 700px) 100vw, 48vw"
+              />
+            </div>
+          )}
+          <div className={styles.heroDetails}>
             <RecipeOverview
               content={configuredStructured}
               locale={locale}
               showFlour={!isStandaloneComponent}
               showWorkingRecord={isDraft}
             />
-            <RecipeSectionNavigation locale={locale} />
-            {publicLink && (
-              <RecipeUtilityActions
-                key={publicLink.url}
-                locale={locale}
-                title={detailTitle}
-                url={publicLink.url}
-                printHref={publicLink.printHref}
-              />
-            )}
           </div>
         </section>
 
@@ -395,6 +407,14 @@ export function InventoryRecipeDetail({
           </section>
         ) : null}
 
+        {!isDraft && (
+          <ProductBanner
+            recipeId={recipe.id}
+            locale={locale}
+            className={styles.bannerBeforeIngredients}
+          />
+        )}
+
         <section
           className={styles.ingredientsArea}
           id="ingredients"
@@ -429,6 +449,17 @@ export function InventoryRecipeDetail({
                 : undefined
             }
             showWorkingRecord={isDraft}
+            utilityActions={
+              publicLink && (
+                <RecipeUtilityActions
+                  key={publicLink.url}
+                  locale={locale}
+                  title={detailTitle}
+                  url={publicLink.url}
+                  printHref={publicLink.printHref}
+                />
+              )
+            }
           />
         </section>
 
@@ -504,7 +535,17 @@ export function InventoryRecipeDetail({
                     title={step.title}
                   >
                     <p>{step.body}</p>
-                    {(() => { const link = recipeLessonLink(recipe.id, document?.recipe.versionId ?? "", locale, step); return link ? <RecipeLessonLink link={link} locale={locale} /> : null; })()}
+                    {(() => {
+                      const link = recipeLessonLink(
+                        recipe.id,
+                        document?.recipe.versionId ?? '',
+                        locale,
+                        step,
+                      );
+                      return link ? (
+                        <RecipeLessonLink link={link} locale={locale} />
+                      ) : null;
+                    })()}
                   </RecipeStepContent>
                   {step.media && (
                     <StepMediaSequence
@@ -513,7 +554,15 @@ export function InventoryRecipeDetail({
                       className={styles.stepMedia}
                     />
                   )}
-                  {step.id === "bake-layer" && <RecipeFreeLessonStep recipeId={recipe.id} locale={locale} preview={process.env.NAPOLEON_FREE_STEP_PREVIEW === "true"} />}
+                  {step.id === 'bake-layer' && (
+                    <RecipeFreeLessonStep
+                      recipeId={recipe.id}
+                      locale={locale}
+                      preview={
+                        process.env.NAPOLEON_FREE_STEP_PREVIEW === 'true'
+                      }
+                    />
+                  )}
                   {invitation?.afterStepId === step.id && (
                     <EditorialInvitation
                       lang="uk"
@@ -551,6 +600,12 @@ export function InventoryRecipeDetail({
               <p>{copy?.publicationNote?.[locale] ?? structured?.gapNote}</p>
             </aside>
           )}
+        {recipeStoryVideos[recipe.id] && (
+          <RecipeStoryVideo
+            story={recipeStoryVideos[recipe.id]}
+            locale={locale}
+          />
+        )}
         {videoLesson && (
           <RecipeVideoLesson lesson={videoLesson} locale={locale} />
         )}

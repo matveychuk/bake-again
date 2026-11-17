@@ -91,14 +91,16 @@ void test('scales crepe ingredients and yield, while retaining fixed salt', () =
       unit: 'pinch',
     },
   );
-  assert.equal(configured.overview.yieldLabel, '20 crepes');
+  assert.deepEqual(ingredients.find(({ id }) => id === 'oil')?.quantity.base, { kind: 'exact', value: 10, unit: 'tbsp' });
+  assert.deepEqual(ingredients.find(({ id }) => id === 'water')?.quantity.base, { kind: 'range', min: 0, max: 100, unit: 'ml' });
+  assert.equal(configured.overview.yieldLabel, 'About 30 crepes');
   assert.equal(configured.evidence?.status, 'calculated');
   assert.equal(configured.overview.timing.activeMinutes, 40);
   assert.deepEqual(
     recipeAssistantConfiguration('crepes', configured, configuration),
     {
       kind: 'adjusted',
-      geometryId: 'round-pan-28-cm',
+      geometryId: 'round-pan-24-cm',
       quantityAdjustment: { mode: 'batchScale', factor: 2 },
     },
   );

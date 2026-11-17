@@ -90,3 +90,7 @@
     flex-basis: 82%;
   }
 }
+
+.image[data-fit='contain'] {
+  aspect-ratio: 1;
+}

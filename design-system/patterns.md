@@ -1,5 +1,15 @@
 # Product patterns
 
+## Optional recipe story (2026-11-18)
+
+Keep the complete cooking method usable before offering a short family video.
+The story player follows the method and does not replace ingredient amounts,
+step photographs or checkpoints. Use the shared optional `RecipeStoryVideo`
+registry across recipes, without an empty block on recipes that have no film.
+The crepe page uses the author-confirmed PDF v6 for its seven illustrated steps
+and quantities in all three existing website languages. Translation does not
+change the recipe's evidence; mathematical adjustments still show Calculated.
+
 ## Shared link preview
 
 - The homepage and other non-recipe public pages share the 1200 × 630 image at
@@ -82,9 +92,9 @@ the closing copy. Design Lab uses the production `AboutRecipeStatuses` component
 
 The Ukrainian blog uses a grid based on the catalogue card surface. Its cards have
 one link around the title with a full-card hit area. The first card shows both
-existing family photos side by side and opens the About story. The next card leads
-with a landscape food image. The cards stack on phones and preserve their order.
-The Design Lab shows both cards and the ingredient comparison.
+existing family photos side by side and opens the About story. Ingredient articles
+follow with landscape food images. The cards stack on phones and preserve their order.
+The Design Lab shows the same cards and the ingredient comparison.
 
 The comparison places the food illustration above two aligned columns.
 Keep their left-to-right order on phones. Give each form a visible name,
@@ -119,8 +129,9 @@ be combined; the two quantity methods may not.
 
 On a phone, place the recipe return link and Save control in one compact row inside
 the hero, directly above the title. Omit the category label there; it should not
-delay the recipe name and practical facts. Keep the category visible in the wider
-hero layout and preserve native return-link behaviour.
+delay the recipe name. Show the title and short introduction, then the main
+photo, then the overview with evidence and practical facts. Keep the category
+visible in the wider hero layout and preserve native return-link behaviour.
 
 The written method has a short section name and a step count. Keep the separate
 guided Cook Mode action explicit; its label should describe starting that mode rather
@@ -131,14 +142,17 @@ time/temperature and optional Questions action. Place the title on its own full-
 line below, followed by practical guidance, the instruction, checkpoint and photos.
 Do not reserve an empty time or question row for steps without those elements.
 
-On mobile recipe detail, lead with the Ingredients heading and shopping action. Put a
-collapsed quantity adjustment directly above the ingredient rows, so readers can see
-the recipe before opening its controls. Keep a changed scale and its status visible in
-the closed control; open invalid configurations to expose the error.
+On mobile recipe detail, place Ingredients and the quiet “Adjust quantity” disclosure
+in one row where space allows. Wrap the entire control for long translations or
+larger text; preserve 44px targets. Keep adjustment closed by default, show changed
+scale and status even while closed, and open invalid configurations to expose errors.
+The read-only ingredient rows follow immediately. Put shopping, share and print
+utilities below the list; shopping opens a selection drawer and uses a ghost action,
+not the primary purchase-button treatment. On wider screens retain the scaling sidebar.
 
-The mobile Ingredients heading owns a full-width row. Shopping actions wrap below it,
-including the existing-list and additional-batch state; never squeeze the heading
-between controls. Preserve 44px or larger targets.
+Recipe jump links sit after the short introduction, before the photo. The compact
+lesson invitation follows the overview on phones for every recipe; desktop placement
+remains above the hero. Recipe title, food and practical facts take priority.
 
 Long Tested explanations may use a native disclosure with the exact-version Tested
 summary. Keep the complete source explanation accessible. Calculated and Suggested
@@ -322,7 +336,7 @@ visible preview notice. Live verification/loading states keep the shared Button
 behaviour. Updated by owner request
 on 2026-11-17; the prior dark composition is superseded.
 
-The Ukrainian psyllium page places the campaign before the article H1,
+The Ukrainian psyllium and xanthan gum pages place the campaign before the article H1,
 introduction and cover. Napoleon appears only below the article body. Campaign
 copy and the inclusive 2026-12-10 deadline live in `content/articles/psyllium.ts`;
 Europe/Kyiv determines the last day. The server evaluates the date per request.

@@ -153,6 +153,7 @@ export function NewsletterForm({
   magnetId,
   scenario = 'recipes',
   preview = false,
+  previewSuccess = false,
   previewEmail,
   recipeSiteKey,
   placement = 'landing',
@@ -169,6 +170,8 @@ export function NewsletterForm({
   recipeSiteKey?: string;
   placement?: import('@/lib/newsletter/single-opt-in').SubscriptionPlacement;
   preview?: boolean;
+  /** Inert Design Lab success state; ignored outside preview mode. */
+  previewSuccess?: boolean;
   /** Design Lab only: render the signed-in variant without an account. */
   previewEmail?: string;
   onSent?: () => void;
@@ -194,7 +197,9 @@ export function NewsletterForm({
   const doneHeading = useRef<HTMLHeadingElement>(null);
   const busy = useRef(false);
   const [useOther, setUseOther] = useState(false);
-  const [sentTo, setSentTo] = useState<string | null>(null);
+  const [sentTo, setSentTo] = useState<string | null>(
+    preview && previewSuccess ? 'reader@example.com' : null,
+  );
   const [token, setToken] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [verificationFailed, setVerificationFailed] = useState(false);
@@ -275,8 +280,8 @@ export function NewsletterForm({
   }, [useOther]);
 
   useEffect(() => {
-    if (succeeded) doneHeading.current?.focus();
-  }, [succeeded]);
+    if (succeeded && !preview) doneHeading.current?.focus();
+  }, [succeeded, preview]);
 
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -305,6 +310,7 @@ export function NewsletterForm({
                 email,
                 ...(campaign
                   ? {
+                      articlePath: window.location.pathname.replace(/\/$/, ''),
                       source:
                         new URLSearchParams(window.location.search).get(
                           'src',
@@ -361,7 +367,7 @@ export function NewsletterForm({
   const DoneHeading = campaign ? 'h3' : placement === 'recipe' ? 'h4' : 'h2';
   if (succeeded)
     return (
-      <div className={styles.done} lang={locale}>
+      <div className={styles.done} lang={locale} data-campaign={campaign}>
         <MailCheck size={24} aria-hidden="true" className={styles.doneIcon} />
         <div>
           <DoneHeading

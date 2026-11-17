@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useId, useRef, useState } from 'react';
 import type { ProductBanner } from '@/content/commerce/product-banner';
 import { Button } from '@/components/ui/button';
@@ -10,16 +11,17 @@ import { EditorialInvitation } from './editorial-invitation';
 function BannerLoop({ video }: { video: ProductBanner['video'] }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [load, setLoad] = useState(false);
+  const visible = useRef(false);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (motion.matches) return;
     const observer = new IntersectionObserver(([entry]) => {
-      if (!entry?.isIntersecting) return element.pause();
+      visible.current = !!entry?.isIntersecting;
+      if (!visible.current) return element.pause();
       setLoad(true);
-      void element.play().catch(() => undefined);
+      if (!motion.matches) void element.play().catch(() => undefined);
     });
     observer.observe(element);
     const stop = () => {
@@ -39,6 +41,15 @@ function BannerLoop({ video }: { video: ProductBanner['video'] }) {
       width={360}
       height={450}
       muted
+      controls
+      onCanPlay={() => {
+        if (
+          visible.current &&
+          !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
+          void ref.current?.play().catch(() => undefined);
+        }
+      }}
       loop
       playsInline
       preload="none"
@@ -49,33 +60,44 @@ function BannerLoop({ video }: { video: ProductBanner['video'] }) {
   );
 }
 
-/** Recipe-page banner with direct checkout and two ways to preview the lesson. */
+/** Product banner with one purchase action and a free-preview link. */
 export function ProductBannerInvitation({
   banner,
   recipeId,
   preview = false,
+  compact = false,
+  className,
   titleId: providedTitleId,
 }: {
   banner: ProductBanner;
   recipeId: string;
   preview?: boolean;
+  compact?: boolean;
+  className?: string;
   titleId?: string;
 }) {
   const generatedTitleId = useId();
   const titleId = providedTitleId ?? generatedTitleId;
-  const { buy, details, preview: freeStep } = banner.actions;
+  const { buy, preview: freeStep } = banner.actions;
 
   return (
-    <div data-theme="dark" data-product-banner={banner.id}>
+    <div className={className} data-product-banner={banner.id}>
       <EditorialInvitation
-        variant="product-banner"
+        variant={compact ? 'product-banner-compact' : 'product-banner'}
+        data-preview={preview || undefined}
         lang={banner.locale}
         titleId={titleId}
         eyebrow={banner.eyebrow}
         title={banner.title}
         description={banner.description}
         note={banner.facts}
-        image={<BannerLoop video={banner.video} />}
+        image={
+          compact ? (
+            <Image src={banner.video.poster} alt="" width={360} height={450} sizes="96px" />
+          ) : (
+            <BannerLoop video={banner.video} />
+          )
+        }
         action={
           <>
             {preview ? (
@@ -94,10 +116,7 @@ export function ProductBannerInvitation({
                 {buy.label}
               </Button>
             )}
-            <Button href={details.href} variant="outline">
-              {details.label}
-            </Button>
-            <Button href={freeStep.href} variant="outline">
+            <Button href={freeStep.href} variant="link">
               {freeStep.label}
             </Button>
           </>

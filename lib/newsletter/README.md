@@ -523,7 +523,8 @@ The owner-created list «Панетоне — рецепт 10.12» was verified 
 never collect only into lists #3/#4 while claiming panettone registration.
 
 One upsert adds #3, #4 and the campaign list, with SOURCE from URL `src` (default
-`direct`), SIGNUP_PAGE=`blog-psyllium`, SIGNUP_POSITION=`top-panettone`.
+`direct`), SIGNUP_PAGE=`blog-psyllium` or `blog-xanthan-gum` according to the
+article containing the form, and SIGNUP_POSITION=`top-panettone`.
 Origin/body limits, Turnstile (action `panettone_signup`), the existing D1 atomic
 quotas/short-lived ledger and suppression policy apply. Repeated successful
 addresses show the same thanks; provider failures remain errors and retryable.
@@ -543,3 +544,20 @@ public reply variants. The private message uses one «Хочу рецепт» UR
 with `src=ig-bot-panettone` or `src=fb-bot-panettone` and `#panettone`.
 The live article returned 404 at verification. After deployment, test the form,
 Brevo lists and attributes, inbox delivery, and the comment flow in both channels.
+
+Later on 2026-11-17, the deployed form accepted a new test address from the
+Instagram-tagged URL. Brevo showed lists #3, #4 and #13, and exact matches for
+`SOURCE=ig-bot-panettone`, `SIGNUP_PAGE=blog-psyllium` and
+`SIGNUP_POSITION=top-panettone`. Gmail showed one «Ти в списку на панетоне»
+message under Promotions and no welcome message for the test address. The
+Instagram comment trigger was enabled. A live comment, public reply, and DM
+click still require verification from another Instagram profile.
+
+The first live Instagram comment appeared in SendPulse Chats, but the trigger
+showed zero sends and no outgoing DM appeared. The Instagram trigger was updated
+to include the full words `панетоне`, `панеттоне`, and `panettone` alongside the
+original entries and was verified active after saving. On 2026-11-17, Sasha
+confirmed that the Instagram comment-to-Direct retest from her personal profile
+worked. The Facebook trigger was then updated with the same three full words
+and enabled. The active status and keywords persisted after reload. A live
+Facebook comment and Messenger delivery still require verification.

@@ -105,7 +105,7 @@ void test('crepes step questions preserve prepared help, calculated quantities a
     scope: { kind: 'step' as const, stepIds: ['start-batter'] as [string] },
     configuration: {
       kind: 'adjusted' as const,
-      geometryId: 'round-pan-28-cm',
+      geometryId: 'round-pan-24-cm',
       quantityAdjustment: { mode: 'batchScale' as const, factor: 2 as const },
     },
   };

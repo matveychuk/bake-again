@@ -454,7 +454,7 @@ export const stepHelpCatalog: Record<
     'add-milk': skip(
       'Поступове додавання молока й тривалість відпочинку вказані.',
     ),
-    'finish-batter': help(
+    'check-consistency': help(
       q(
         'body',
         'Якою має бути текучість готового млинцевого тіста?',
@@ -462,16 +462,27 @@ export const stepHelpCatalog: Record<
         '¿Qué fluidez debe tener la masa de crepes terminada?',
       ),
     ),
-    cook: help(
-      text(
+    'add-oil': skip(
+      'Олію вмішують до зникнення жирного шару; ознака вже в кроці.',
+    ),
+    'pour-batter': help(
+      q(
+        'tip',
+        'Чому перший млинець виходить нерівним?',
+        'Why does the first crepe look uneven?',
+        '¿Por qué queda irregular el primer crepe?',
+      ),
+    ),
+    'check-edge': help(
+      q(
         'body',
         'Коли млинець можна перевертати?',
         'When is the crepe ready to flip?',
         '¿Cuándo puedo dar la vuelta al crepe?',
-        'Поверхня має стати матовою з дрібними отворами, а краї — легко відділятися від пательні. Тоді піддіть краї лопаткою й переверніть.',
-        'Wait until the surface turns matte with small holes and the edges lift easily from the pan. Loosen the edges with a spatula, then flip.',
-        'Espera a que la superficie esté mate, con pequeños agujeros, y los bordes se despeguen fácilmente. Levanta los bordes con una espátula y dale la vuelta.',
       ),
+    ),
+    'flip-crepe': skip(
+      'Тривалість другого боку й легку золотистість вказано безпосередньо в кроці.',
     ),
   },
   'fruit-sponge-roll': {

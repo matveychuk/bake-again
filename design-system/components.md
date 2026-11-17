@@ -2,7 +2,7 @@
 
 ## Recipe utilities (2026-10-09)
 
-- `RecipeUtilityActions` uses existing ghost Buttons after the recipe jump links.
+- `RecipeUtilityActions` uses existing ghost Buttons below the ingredient list, beside the secondary shopping utility.
   An inline labelled URL field, Copy button, live result and Close button returning
   focus to Share are always available. Supported devices also get Send using for
   native sharing. Both preserve the current resolved quantities and cream. Browser
@@ -279,6 +279,8 @@ an authorized delivery check. Do not claim browser preview proves email delivery
 
 ## Recipe overview
 
+- On phones, place the main recipe photo between the short introduction and the
+  overview. On wider screens, keep the photo beside the title and overview.
 - Every recipe uses the same decision order: evidence, time, yield, difficulty and flour.
 - `RecipeOverview` composes the existing `EvidenceBadge` and `RecipeFacts` for both
   product pages and the Design Lab. A soft background contains only the evidence icon
@@ -347,7 +349,7 @@ an authorized delivery check. Do not claim browser preview proves email delivery
 - Use `BakeCheckbox` for shopping selection, bought state and Design Lab checkbox examples. Its checked state is a
   warm-brown fill with a warm-white checkmark.
 - Recipe ingredient lists are read-only. They contain no checkboxes; selection happens
-  only after the explicit `To shopping list…` action in the Ingredients heading.
+  only after the explicit `Add ingredients to shopping list` ghost action below the list.
 - When an unquantified ingredient already has a specific note such as “to taste”, show
   that note without adding the generic “as needed” amount beside it.
 - The shopping action opens the shared modal drawer on the right at desktop widths and
@@ -355,7 +357,7 @@ an authorized delivery check. Do not claim browser preview proves email delivery
   an explicitly configured household staple such as water. Let people select all, clear
   the selection, resolve ingredient alternatives and confirm with a button that includes
   the selected count. Closing writes nothing and preserves the unfinished draft.
-- After a successful write, replace the primary action with a persistent `In shopping
+- After a successful write, show a persistent `In shopping
 list · n` link and show an announced confirmation with View list and Undo. If some
   recipe lines remain, keep the add action available beside that status. If all lines are
   present, offer the explicit `Add another batch…` action; never double quantities silently.
@@ -363,9 +365,10 @@ list · n` link and show an announced confirmation with View list and Undo. If s
   presents a localized error rather than implying the ingredients were saved.
 - Recipe detail variants share the same Ingredients heading and read-only row primitives;
   recipe maturity may change the status copy or disable shopping, but not the layout.
-- At mobile widths, place the Ingredients heading and shopping action together before
-  the ingredient list. Show the quantity adjustment as a compact disclosure between
-  them and the list; keep it closed by default and summarize the current scale and
+- At mobile widths, place a quiet `Adjust quantity` disclosure beside the Ingredients
+  heading using `RecipeIngredientHeading.compactAction`; wrap the entire control if
+  needed. Shopping, share and print follow the ingredient list. Keep adjustment closed
+  by default and summarize the current scale and
   evidence status when changed. Invalid configurations open the controls so the error
   remains visible. Desktop keeps the controls beside the ingredients.
 - Source-backed recipe pages show the shared adjustment controls in English, Spanish and
@@ -497,9 +500,10 @@ variation.
   catalogue image automatically. The optional `left-quarter` image-position variant
   exposes a small portion of the mandarin bowl at the left edge of Napoleon cards
   while keeping the cake near the center at desktop card proportions.
-- The crepe and lazy-dumpling listing cards may use separate edited author photos
-  through the same `cardImage` option. Their warm beige linen and visible hemstitch
-  are coordinated with the crinkle-cookie card. Detail-page images remain independent.
+- The crepe recipe hero and listing card use the same author photo of the stack
+  on light linen. The recipe hero uses the full 4:3 frame to keep the whole stack
+  in view at narrow and wide widths. Its search crops come from that source. The lazy-dumpling card
+  uses a separate linen photo through `cardImage` and retains its own recipe hero.
 - `components/recipe/step-media-sequence.tsx` is the only product renderer for ordered
   step photography. Recipe detail uses the `recipe` variant and Cook Mode uses the `cook`
   variant; route-specific copies are not allowed. Multi-image sequences expose a labelled,
@@ -635,6 +639,8 @@ and responsive gutters. The Menu aligns with those gutters on its own bounded
 surface. Account, Saved and Shopping omit header/social
 promotion; their footer retains it. Other Ukrainian pages show Instagram and Facebook
 before the avatar in the same header row. There is no separate mobile social strip.
+The Ukrainian navigation includes «Відеоурок» linking to `/uk/urok/napoleon`,
+in both the desktop row and mobile Menu. Its active page is underlined.
 Drafts remains local-development-only. Privacy stays in the footer.
 
 `SocialLinks` renders only for Ukrainian (`uk`); English and Spanish render no social
@@ -913,6 +919,27 @@ Payhip customer-library variant extends the same generated adaptation with `acco
 
 ## Optional recipe video lesson (2026-10-16)
 
+### Free recipe story video (2026-11-18)
+
+`RecipeStoryVideo` composes `EditorialInvitation variant="recipe-video"` and the
+shared ghost Button. Place this optional family/editorial film after the cooking
+steps. Native controls, inline playback, an explicit language/duration and a local
+poster provide a quiet player without an embedded social feed or autoplay.
+`preload="none"` avoids downloading the film before playback. A narrow portrait
+player sits beside the copy on wide screens and below it on phones; the entire
+frame remains visible. Design Lab `#recipe-story-video` reuses the real component.
+
+The per-recipe registry supports localized media with an explicitly labelled
+fallback. Instagram remains an optional external link; label a language mismatch
+instead of implying that another-language edit is the same linked Reel. Verified
+caption tracks can be supplied per recording; the current crepe narration still
+needs an exact transcript and is not claimed to have accessible closed captions.
+
+`StepMediaSequence` uses a square frame for `fit="contain"` recipe images, retaining
+the complete PDF illustration instead of cropping it. Optional ranges starting
+at zero are displayed as “до / up to / hasta” their maximum; scaling preserves
+the upper limit and the Calculated status.
+
 `EditorialInvitation` is the shared quiet strip for newsletter and optional recipe
 video offers: SectionTitle, body, note and shared Button. It inherits the existing
 newsletter spacing/type tokens, wraps at 390/900/1440 and is excluded from printing.
@@ -957,35 +984,35 @@ text.onAccent and hover reuses the approved terracotta (5.45:1). Strong remains
 suitable for links/focus. Both CSS and portable token maps match; the Design Lab's
 existing action examples and the new light/dark lead magnet examples are references.
 
-### Product banner (updated 2026-11-07)
+### Product banner (updated 2026-11-17)
 
-`EditorialInvitation variant="product-banner"` promotes the one current product at
-the top of UK/EN/ES recipe pages, between the site header and the recipe hero.
-Approved variant B: dark on every screen through a `data-theme="dark"` wrapper, so
-it uses the existing dark semantic tokens (panel surface, primary/secondary text,
-emphasis action) and no new colours. The optional `eyebrow` prop adds the short
-format and video language above the title.
+`EditorialInvitation variant="product-banner-compact"` promotes the current product
+above UK/EN/ES recipes. The Ukrainian psyllium article uses the full
+`variant="product-banner"` below the article.
 
-- Food first: a 4:5 muted loop cropped to the plate (360×450 MP4, ≤250 KB; WebP
-  poster, `aria-label`) loads only when visible; `prefers-reduced-motion` keeps the
-  poster.
-- Title: display type at weight 450 (26–32px clamp, 23px on phones).
-- The description uses `text.primary` (12.52:1). The label and facts use
-  `text.secondary` and show the language, step count, duration and VAT-inclusive price.
-- Spacing after the banner: 24px desktop, 16px phone; nothing added above it.
-- ≤620px: label on its own line, loop opposite the title, then copy, a full-width
-  purchase action and two outline links. Wider layouts keep the loop beside the
-  copy and wrap the actions beneath the copy.
-- Purchase uses the shared same-tab checkout route. The outline links open the
-  lesson overview and the free step in the lesson player.
-- Copy, dates and media live in `content/commerce/product-banner.ts`.
-  The promoted recipe has its own description. The sale offer controls visibility.
-- Copy is per locale (ES names the cake «tarta milhojas» in the banner only).
-  Not shown on drafts, print view or Cook Mode. Analytics:
+- Reuse the light surface, primary text, border and terracotta Button tokens.
+- Recipe pages use a small square crop of the food poster. The actions wrap below
+  the text on narrow screens. On all recipe pages at ≤700 px, place the
+  banner after the photo and overview, before ingredients. Match keyboard order
+  to the visible placement and render only one accessible banner per viewport.
+- The article uses a large 4:5 food loop beside the copy on wider screens and a
+  4:3 crop at ≤620px. Use the existing lightweight 360×450 MP4 and WebP poster. Load when visible,
+  pause offscreen, and keep the poster for reduced motion. Native controls allow
+  pausing and manual playback; the player has a descriptive accessible name.
+- The article placement uses the full reading width without a second outer gutter.
+- One primary action includes the catalog price: «Купити відеоурок — €9».
+  Preserve the native same-tab checkout route and purchase analytics.
+- One shared Button link variant opens the free step. Remove the duplicate
+  overview action. Links wrap and retain visible focus and 44px targets.
+- Show duration in human-readable minutes, with step count and VAT wording.
+  Copy, visibility dates and media remain in `content/commerce/product-banner.ts`;
+  price comes from the sale offer. Preserve the existing EN/ES translations.
+- Not shown on drafts, print view or Cook Mode. Purchase analytics remains
   `product_banner_click` with recipe id and locale only.
 
-`/design-system#product-banner` shows both descriptions in all three languages
-with checkout disabled.
+`/design-system#product-banner` shows the compact recipe examples in all three
+languages and the Ukrainian article example.
+Checkout is disabled but retains the primary colour in these inert examples.
 
 ### Recipe PDF delivery (2026-10-19)
 
@@ -1239,3 +1266,11 @@ inert Design Lab example do not auto-start. If a browser blocks autoplay, the
 poster remains a labelled Play button. In the `krok8` variant, scrolling to the
 player triggers the attempt. Stream recovery can also attempt muted autoplay
 when the original player failed before starting.
+
+### Panettone inline confirmation (2026-11-17)
+
+The campaign success state reuses NewsletterForm without a nested border or padding.
+The envelope shares the campaign copy's left edge and is vertically centered on the
+first heading line; the explanatory paragraph spans both grid columns below it.
+Other newsletter confirmation cards retain their existing layout. Design Lab
+`#panettone-success` uses `previewSuccess` with `preview`, never a provider request.

@@ -4,6 +4,7 @@ import type { AppLocale } from '../../lib/i18n/config.ts';
 export const recipeReaderCopy = {
   uk: {
     quantity: 'Кількість',
+    adjustQuantity: 'Змінити кількість',
     compareCreams: 'Порівняти креми',
     hideCreamDetails: 'Згорнути подробиці',
     base: 'Базовий рецепт',
@@ -21,6 +22,7 @@ export const recipeReaderCopy = {
   },
   en: {
     quantity: 'Quantity',
+    adjustQuantity: 'Adjust quantity',
     compareCreams: 'Compare creams',
     hideCreamDetails: 'Hide details',
     base: 'Base recipe',
@@ -38,6 +40,7 @@ export const recipeReaderCopy = {
   },
   es: {
     quantity: 'Cantidad',
+    adjustQuantity: 'Cambiar cantidad',
     compareCreams: 'Comparar cremas',
     hideCreamDetails: 'Ocultar detalles',
     base: 'Receta base',

@@ -1,5 +1,91 @@
 # Design system changelog
 
+## 2026-11-18 — Verify the combined recipe and article release
+
+- Use the shared Image component for compact product posters; preserve the
+  existing dimensions and responsive banner composition in Design Lab.
+- Align assistant and production-render fixtures with the approved recipes:
+  24 cm crepe pan, Napoleon v6's 16 portions, two hours active preparation,
+  wet-base first step, and the already available native lesson checkout.
+- Combined validation passed: typecheck, lint, 545 foundation/service/SEO/lesson
+  tests (including the corrected assistant case), 27 community tests, local D1
+  migrations, canonical recipe validation and production build. Production
+  rendering passed 78 recipe regressions, 24 utility checks, and SEO coverage of
+  66 recipe pages and 81 sitemap URLs. No live subscription was submitted.
+
+## 2026-11-18 — PDF-aligned crepes and native story player
+
+- Synchronize crepe quantities, approximately 15-crepe yield, 24 cm pan and seven
+  illustrated steps with the author-confirmed PDF v6 in UK/EN/ES.
+- Extend EditorialInvitation with a reusable recipe-video variant after the
+  method: native controls, local poster, no autoplay or initial video download,
+  actual language/duration and a quiet Instagram link. Design Lab uses the same component.
+- Supply Ukrainian and Spanish web copies; label the Ukrainian fallback on the
+  English page and the Ukrainian Instagram destination on translated pages.
+- Preserve square step illustrations with contain; format optional quantities
+  as an upper limit and keep their scaling tied to the canonical recipe.
+- Exact narration caption tracks remain pending author transcript; text story
+  summaries are present and the video is not claimed to be captioned.
+- Verified UK/EN/ES at 390/900/1440px, all seven lazy-loaded photos, native playback,
+  2× quantities and the seven-step cooking view. TypeScript, 162 foundation tests,
+  canonical validation and six localized print render checks passed. Media bundle:
+  246 referenced assets, 46.37 MiB, below the 64 MiB budget.
+
+## 2026-11-17 — Prioritize ingredients across all recipes
+
+- Place recipe jump links below the introduction and move share/print below ingredients.
+- Put a quiet “Adjust quantity” disclosure beside the mobile Ingredients heading;
+  retain visible calculated/suggested status, invalid-input feedback and desktop sidebar.
+- Move shopping below the ingredient list, name the ingredients explicitly and use
+  a ghost action, preserving the review drawer and explicit save confirmation.
+- Extend the mobile lesson-banner placement after the overview to all recipe pages.
+- Design Lab reuses the shared adjuster and links to the complete recipe composition.
+- Verified UK/EN/ES at 390/900/1440px, 2× quantities and shopping review;
+  TypeScript, 26 catalogue/configuration/commerce tests and 24 print render checks passed.
+
+## 2026-11-17 — Move the crepe promotion before ingredients on phones
+
+- On the Ukrainian crepe recipe, show the compact lesson banner after the photo
+  and recipe overview on phones. Keep it above the recipe on wider screens.
+
+## 2026-11-17 — Show the recipe photo earlier on phones
+
+- Place the hero photo after the title and short introduction, above the recipe
+  overview. Keep the side-by-side composition on wider screens.
+
+## 2026-11-17 — Compact recipe promotion and full crepe photo
+
+- Use a compact poster and purchase links above recipes and keep the larger
+  video invitation below the psyllium article. Show both in Design Lab.
+- Fit the full crepe photo in the recipe hero to keep the stack and plate visible.
+
+## 2026-11-17 — Crepe photo on light linen
+
+- Use the approved light-linen photo for the crepe recipe hero, catalogue card
+  and search crops. Checked the recipe layout at 390, 900 and 1440 px.
+
+## 2026-11-17 — Align panettone subscription confirmation
+
+- Remove the nested success-card inset in the panettone campaign. Align its
+  envelope and explanation with the surrounding copy and center the icon on
+  the first title line. Add an inert full-card success example to Design Lab.
+- Verified matching left edges at 390/900/1440px without overflow; TypeScript
+  and oxlint passed. The preview sends no subscription request.
+
+## 2026-11-17 — Light Napoleon product invitation
+
+- Replace the compact dark banner with large food video and a light token surface.
+  Phones stack a full-width 4:3 crop above the copy; wider views use two columns.
+- Use one terracotta purchase action with the catalog price and a text-style
+  free-preview link. Remove the duplicate details action; display duration in minutes.
+- Add native video playback controls and respect visibility and reduced motion.
+- Add «Відеоурок» to Ukrainian desktop/mobile navigation. Update Design Lab
+  and remove the nested outer gutter in the article placement.
+- Verified the article at 390/900/1440px and all six localized Design Lab
+  variants without card overflow. Confirmed mobile playback, the lesson menu
+  destination/current state and the free-preview destination. TypeScript,
+  oxlint and all 18 commerce/lesson tests passed.
+
 ## 2026-11-17 — Psyllium editorial reading flow
 
 - Give the article a full-width, shorter heading and separate metadata/back row;

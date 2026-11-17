@@ -5,18 +5,22 @@ import { NewsletterForm } from './newsletter-form';
 
 export function PanettoneInvitation({
   preview = false,
+  previewSuccess = false,
+  id = 'panettone',
   siteKey,
 }: {
   preview?: boolean;
+  previewSuccess?: boolean;
+  id?: string;
   siteKey?: string;
 }) {
   return (
-    <div id="panettone">
+    <div id={id}>
       <EditorialInvitation
         variant="campaign"
         data-preview={preview || undefined}
         lang="uk"
-        titleId="panettone-title"
+        titleId={`${id}-title`}
         title={copy.title}
         subtitle={copy.subtitle}
         description={copy.description}
@@ -35,6 +39,7 @@ export function PanettoneInvitation({
             locale="uk"
             campaign="panettone"
             preview={preview}
+            previewSuccess={previewSuccess}
             recipeSiteKey={siteKey}
           />
         }

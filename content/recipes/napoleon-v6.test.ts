@@ -11,14 +11,13 @@ import {
   napoleonLesson,
   napoleonLessonSteps,
 } from '../commerce/lessons/napoleon.ts';
-import { videoLessons, type VideoLesson } from '../commerce/video-lessons.ts';
-const available: VideoLesson = {
-  ...videoLessons[0],
-  deliveryUrl: '/uk/urok/napoleon',
-  status: 'available',
-  payhipUrl: 'https://payhip.com/b/lesson123',
-  priceMinor: 1900,
-  currency: 'EUR',
+import type { VideoLesson } from '../commerce/video-lessons.ts';
+const plannedLesson: VideoLesson = {
+  id: 'napoleon-video',
+  recipeId: recipe.id,
+  recipeVersionId: recipe.versionId,
+  language: 'uk',
+  status: 'planned',
 };
 for (const locale of ['uk', 'en', 'es'] as const) {
   void test(`v6 quantities, method, schema and lesson gates (${locale})`, () => {
@@ -47,15 +46,13 @@ for (const locale of ['uk', 'en', 'es'] as const) {
     );
     assert.equal(
       content.steps.filter((s) =>
-        recipeLessonLink(recipe.id, recipe.versionId, locale, s),
+        recipeLessonLink(recipe.id, recipe.versionId, locale, s, [plannedLesson]),
       ).length,
       0,
     );
     const links = content.steps.flatMap((s) => {
-      const l = recipeLessonLink(recipe.id, recipe.versionId, locale, s, [
-        available,
-      ]);
-      return l ? [l] : [];
+      const link = recipeLessonLink(recipe.id, recipe.versionId, locale, s);
+      return link ? [link] : [];
     });
     assert.equal(links.length, locale === 'uk' ? 5 : 0);
     for (const link of links)

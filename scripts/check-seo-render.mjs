@@ -66,8 +66,8 @@ const sitemap = await sitemapResponse.text();
 const entries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(
   (match) => match[1],
 );
-assert.equal(entries.length, 80);
-const isUkBlogPath = (path) => path === '/uk/blog' || path === '/uk/blog/psyllium';
+assert.equal(entries.length, 81);
+const isUkBlogPath = (path) => path === '/uk/blog' || path.startsWith('/uk/blog/');
 assert.equal(
   entries.filter((e) => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(e)).length,
   78,
@@ -123,7 +123,7 @@ for (const [locale, slug] of Object.entries(slugs)) {
     `https://bakeagain.com/en/recipes/${slugs.en}`,
   );
   const recipe = schemas(html).find((schema) => schema['@type'] === 'Recipe');
-  assert.equal(recipe.prepTime, 'PT1H');
+  assert.equal(recipe.prepTime, 'PT2H');
   const expected = {
     uk: 'борошно для підпилу — за потреби',
     en: 'flour for dusting, as needed',

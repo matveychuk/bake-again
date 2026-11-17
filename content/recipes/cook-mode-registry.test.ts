@@ -96,16 +96,16 @@ void test('crepes Cook Mode preserves Ukrainian step copy and media from the rec
   assert.ok(content);
 
   const steps = createRecipeCookSteps(content, 'uk');
-  assert.equal(steps.length, 4);
+  assert.equal(steps.length, 7);
   assert.equal(steps[0].title, 'Збийте густу основу');
   assert.equal(content.evidence?.status, 'tested');
   assert.equal(steps[0].media?.length, 1);
-  assert.equal(steps[0].media?.[0].id, 'batter-smooth-base');
+  assert.equal(steps[0].media?.[0].id, 'pdf-v6-base');
   assert.deepEqual(steps[1].stepIds, ['add-milk']);
   assert.match(steps[1].instructions[0], /15–20/);
   assert.deepEqual(steps[1].timerOptionsSeconds, [900, 1200]);
-  assert.equal(steps[3].media?.length, 3);
-  assert.equal(steps[3].media?.[0].title, 'Перед перевертанням');
+  assert.ok(steps.every((step) => step.media?.length === 1));
+  assert.equal(steps[5].media?.[0].id, 'pdf-v6-edge');
 });
 
 void test('crepes Cook Mode resolves Spanish content through the same adapter', () => {
@@ -114,8 +114,8 @@ void test('crepes Cook Mode resolves Spanish content through the same adapter', 
 
   const steps = createRecipeCookSteps(content, 'es');
   assert.equal(steps[0].title, 'Bate una base espesa');
-  assert.equal(steps[0].media?.[0].id, 'batter-smooth-base');
-  assert.equal(steps[3].media?.[2].title, 'Después de darle la vuelta');
+  assert.equal(steps[0].media?.[0].id, 'pdf-v6-base');
+  assert.equal(steps[6].title, 'Dale la vuelta');
 });
 
 void test('crepes Cook Mode uses the same 2x quantities and calculated configuration', () => {
@@ -132,7 +132,7 @@ void test('crepes Cook Mode uses the same 2x quantities and calculated configura
     recipeAssistantConfiguration('crepes', configured, configuration),
     {
       kind: 'adjusted',
-      geometryId: 'round-pan-28-cm',
+      geometryId: 'round-pan-24-cm',
       quantityAdjustment: { mode: 'batchScale', factor: 2 },
     },
   );

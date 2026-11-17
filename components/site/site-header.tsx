@@ -1,3 +1,4 @@
+/* oxlint-disable next/no-html-link-for-pages -- Header uses native links for vinext navigation. */
 import { AccountSyncNotice } from '@/components/account/account-sync-notice';
 import { AccountLink } from '@/components/account/account-link';
 import { canViewDrafts } from '@/lib/runtime/local-development.server';
@@ -38,27 +39,29 @@ export async function SiteHeader({
     pathname === localeSavedPath(locale) ||
     pathname === localeShoppingListPath(locale);
   const skipTarget =
-    pathname === blogPath ? 'blog-title'
-    : articlePage ? 'article-title'
-    : pathname === '/uk/urok/napoleon'
-      ? 'lesson-title'
-      : pathname === `/${locale}/account`
-      ? 'account-title'
-      : pathname === localeSavedPath(locale)
-        ? 'saved-title'
-        : pathname === localeShoppingListPath(locale)
-          ? 'shopping-title'
-          : pathname === localeAboutPath(locale)
-            ? 'about-title'
-            : pathname === localeDraftsPath(locale)
-              ? 'drafts-title'
-              : pathname === `/${locale}/privacy`
-                ? 'privacy-title'
-                : pathname?.includes('/techniques/')
-                  ? 'technique-title'
-                  : pathname?.includes('/recipes/')
-                    ? 'recipe-content'
-                    : 'hero-title';
+    pathname === blogPath
+      ? 'blog-title'
+      : articlePage
+        ? 'article-title'
+        : pathname === '/uk/urok/napoleon'
+          ? 'lesson-title'
+          : pathname === `/${locale}/account`
+            ? 'account-title'
+            : pathname === localeSavedPath(locale)
+              ? 'saved-title'
+              : pathname === localeShoppingListPath(locale)
+                ? 'shopping-title'
+                : pathname === localeAboutPath(locale)
+                  ? 'about-title'
+                  : pathname === localeDraftsPath(locale)
+                    ? 'drafts-title'
+                    : pathname === `/${locale}/privacy`
+                      ? 'privacy-title'
+                      : pathname?.includes('/techniques/')
+                        ? 'technique-title'
+                        : pathname?.includes('/recipes/')
+                          ? 'recipe-content'
+                          : 'hero-title';
 
   const navigationLinks = (
     <>
@@ -75,9 +78,25 @@ export async function SiteHeader({
         {messages.navigation.recipes}
       </a>
       {locale === 'uk' && (
-        <a href={blogPath}
-          aria-current={pathname === blogPath ? 'page' : blogArticle ? 'location' : undefined}>
+        <a
+          href={blogPath}
+          aria-current={
+            pathname === blogPath
+              ? 'page'
+              : blogArticle
+                ? 'location'
+                : undefined
+          }
+        >
           Блог
+        </a>
+      )}
+      {locale === 'uk' && (
+        <a
+          href="/uk/urok/napoleon"
+          aria-current={pathname === '/uk/urok/napoleon' ? 'page' : undefined}
+        >
+          Відеоурок
         </a>
       )}
       {showDrafts && (
@@ -96,12 +115,16 @@ export async function SiteHeader({
       >
         {messages.navigation.saved}
       </a>
-      {locale !== 'uk' && <a
-        href={localeAboutPath(locale)}
-        aria-current={pathname === localeAboutPath(locale) ? 'page' : undefined}
-      >
-        {messages.navigation.about}
-      </a>}
+      {locale !== 'uk' && (
+        <a
+          href={localeAboutPath(locale)}
+          aria-current={
+            pathname === localeAboutPath(locale) ? 'page' : undefined
+          }
+        >
+          {messages.navigation.about}
+        </a>
+      )}
     </>
   );
 
@@ -130,12 +153,17 @@ export async function SiteHeader({
             <a
               className="nav-bag"
               href={localeShoppingListPath(locale)}
-              aria-current={pathname === localeShoppingListPath(locale) ? 'page' : undefined}
+              aria-current={
+                pathname === localeShoppingListPath(locale) ? 'page' : undefined
+              }
             >
               <ShoppingBag aria-hidden="true" size={17} strokeWidth={1.7} />
               <span>{messages.navigation.shoppingList}</span>
             </a>
-            <div className="mobile-language" hidden={pathname === '/uk/urok/napoleon'}>
+            <div
+              className="mobile-language"
+              hidden={pathname === '/uk/urok/napoleon'}
+            >
               <LanguageSwitcher
                 locale={locale}
                 pathname={pathname ?? resolvedHomeHref}
@@ -153,7 +181,10 @@ export async function SiteHeader({
         </nav>
 
         <div className="site-header-tools">
-          <div className="header-language" hidden={pathname === '/uk/urok/napoleon'}>
+          <div
+            className="header-language"
+            hidden={pathname === '/uk/urok/napoleon'}
+          >
             <LanguageSwitcher
               locale={locale}
               pathname={pathname ?? resolvedHomeHref}

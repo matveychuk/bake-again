@@ -1,4 +1,4 @@
-import { napoleonLesson, napoleonLessonDuration } from './lessons/napoleon.ts';
+import { napoleonLesson, napoleonLessonMinutes } from './lessons/napoleon.ts';
 import {
   videoLessons,
   canBuyVideoLesson,
@@ -14,8 +14,8 @@ type BannerCopy = {
   recipeDescription: string;
   stepsLabel: string;
   vatLabel: string;
+  minutesLabel: string;
   buy: string;
-  details: string;
   preview: string;
   videoLabel: string;
 };
@@ -29,7 +29,6 @@ export type ProductBanner = Pick<
   facts: string;
   actions: {
     buy: { label: string; href: string };
-    details: { label: string; href: string };
     preview: { label: string; href: string };
   };
   video: { mp4: string; poster: string; label: string };
@@ -52,14 +51,14 @@ export const productBanner = {
       eyebrow: 'Відеоурок українською',
       title: 'Наполеон без глютену',
       description:
-        'Від тіста до першого шматка. Покажу, як розкачати тонкі коржі й зварити заварний крем.',
+        'Покажу, яким має бути тісто на дотик, як розкачати тонкі коржі, щоб не рвалися, і зварити крем без грудочок.',
       recipeDescription:
         'Покажу, яким має бути тісто на дотик і як розкачати тонкий корж, щоб він не порвався.',
       stepsLabel: 'кроків',
-      vatLabel: 'з ПДВ',
-      buy: 'Купити урок',
-      details: 'Детальніше',
-      preview: 'Безплатний фрагмент',
+      vatLabel: 'Ціна з ПДВ',
+      minutesLabel: 'хв відео',
+      buy: 'Купити відеоурок',
+      preview: 'Подивитися фрагмент безкоштовно',
       videoLabel:
         'Виделка відламує шматочок безглютенового Наполеона, видно шари',
     },
@@ -71,9 +70,9 @@ export const productBanner = {
       recipeDescription:
         'See how the dough should feel and how to roll each thin layer without tearing it.',
       stepsLabel: 'steps',
-      vatLabel: 'incl. VAT',
+      vatLabel: 'Price incl. VAT',
+      minutesLabel: 'min video',
       buy: 'Buy the lesson',
-      details: 'Lesson details',
       preview: 'Watch a free step',
       videoLabel:
         'A fork breaks off a piece of gluten-free Napoleon cake, showing the layers',
@@ -87,8 +86,8 @@ export const productBanner = {
         'Mira qué textura debe tener la masa y cómo estirar cada capa fina sin que se rompa.',
       stepsLabel: 'pasos',
       vatLabel: 'IVA incluido',
+      minutesLabel: 'min de vídeo',
       buy: 'Comprar la clase',
-      details: 'Más detalles',
       preview: 'Ver un paso gratis',
       videoLabel:
         'Un tenedor corta un trozo de tarta milhojas sin gluten y se ven las capas',
@@ -115,10 +114,9 @@ export function resolveProductBanner(
     title: copy.title,
     description:
       recipeId === offer.recipeId ? copy.recipeDescription : copy.description,
-    facts: `${napoleonLesson.steps.length} ${copy.stepsLabel} · ${napoleonLessonDuration} · ${price} ${copy.vatLabel}`,
+    facts: `${napoleonLesson.steps.length} ${copy.stepsLabel} · ${napoleonLessonMinutes} ${copy.minutesLabel} · ${copy.vatLabel}`,
     actions: {
-      buy: { label: copy.buy, href: napoleonCheckoutPath },
-      details: { label: copy.details, href: offer.deliveryUrl },
+      buy: { label: `${copy.buy} — ${price}`, href: napoleonCheckoutPath },
       preview: {
         label: copy.preview,
         href: `${offer.deliveryUrl}#${napoleonLesson.freePreview.stepId}`,

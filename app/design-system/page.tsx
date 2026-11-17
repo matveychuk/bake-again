@@ -60,6 +60,8 @@ import shoppingControlStyles from '@/components/recipe/add-recipe-ingredients-co
 import { TechniqueHelp } from '@/components/techniques/technique-help';
 import { getRecipeCatalog } from '@/content/recipes/catalog';
 import { getLocalizedRecipePath } from '@/lib/i18n/routes';
+import { RecipeStoryVideo } from '@/components/recipe/recipe-story-video';
+import { recipeStoryVideos } from '@/content/recipes/story-videos';
 import { RecipeOverview } from '@/components/recipe/recipe-overview';
 import { RecipeBackLink } from '@/components/recipe/recipe-back-link';
 import { SaveRecipeControl } from '@/components/recipe/save-recipe-control';
@@ -292,10 +294,12 @@ export default function DesignSystemPage() {
           <section className={styles.section} id="cookie-consent">
             <h2>Cookie consent</h2>
             <p>
-              Nonmodal panel with equal terracotta Accept and Decline buttons. These
-              previews never load Meta or store a choice.
+              Nonmodal panel with equal terracotta Accept and Decline buttons.
+              These previews never load Meta or store a choice.
             </p>
-            {(['uk', 'en', 'es'] as const).map((locale) => <CookieConsentPanel key={locale} locale={locale} preview />)}
+            {(['uk', 'en', 'es'] as const).map((locale) => (
+              <CookieConsentPanel key={locale} locale={locale} preview />
+            ))}
           </section>
           <section className={styles.section} id="colour">
             <NumberedSectionTitle
@@ -438,6 +442,11 @@ export default function DesignSystemPage() {
             <div lang="uk">
               <BlogCards preview />
               <PanettoneInvitation preview />
+              <PanettoneInvitation
+                preview
+                previewSuccess
+                id="panettone-success"
+              />
               <PsylliumStory preview />
             </div>
           </section>
@@ -536,18 +545,17 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Site navigation</strong>
                 <span>
-                  Ukrainian-only social profiles: labelled 44px icon links before
-                  the avatar in the header and quiet
-                  footer links. Home and recipe endings share an email-only
-                  invitation followed by the footer, without adjacent social
-                  links. Mobile navigation and social icons share one sticky row.
-                  The opaque page-colour header band and its lower
-                  divider span the screen, including over lighter recipe
-                  sections. English and Spanish omit social links; the email
-                  invitation is localized. Shopping list keeps an accessible
-                  icon on desktop and its full name in the mobile menu. The
-                  short-page preview keeps its footer at the bottom of the page
-                  without overlaying content.
+                  Ukrainian-only social profiles: labelled 44px icon links
+                  before the avatar in the header and quiet footer links. Home
+                  and recipe endings share an email-only invitation followed by
+                  the footer, without adjacent social links. Mobile navigation
+                  and social icons share one sticky row. The opaque page-colour
+                  header band and its lower divider span the screen, including
+                  over lighter recipe sections. English and Spanish omit social
+                  links; the email invitation is localized. Shopping list keeps
+                  an accessible icon on desktop and its full name in the mobile
+                  menu. The short-page preview keeps its footer at the bottom of
+                  the page without overlaying content.
                 </span>
               </div>
               {(['uk', 'es', 'en'] as const).map((locale) => (
@@ -716,7 +724,12 @@ export default function DesignSystemPage() {
                 <strong>Recipe overview</strong>
                 <span>
                   One comparable scheme for every recipe; equipment stays in
-                  setup and method
+                  setup and method. On phones, the main photo comes before the
+                  overview in the{' '}
+                  <a href="/design-system/napoleon-five-steps">
+                    complete recipe example
+                  </a>
+                  .
                 </span>
               </div>
               <div className={styles.recipeOverviewExample}>
@@ -993,12 +1006,27 @@ export default function DesignSystemPage() {
               </div>
             </div>
 
+            <div className={styles.componentBlock} id="recipe-story-video">
+              <div className={styles.componentLabel}>
+                <strong>Recipe story video</strong>
+                <span>
+                  Optional native player after the method · explicit language ·
+                  manual playback · original Instagram link
+                </span>
+              </div>
+              <RecipeStoryVideo
+                story={recipeStoryVideos.crepes}
+                locale="uk"
+                id="recipe-story-preview"
+              />
+            </div>
+
             <div className={styles.componentBlock} id="recipe-utilities">
               <div className={styles.componentLabel}>
                 <strong>Share, print and return to a recipe</strong>
                 <span>
-                  Resolved configuration links · full-width browser-local
-                  history · provider-hosted email signup
+                  Secondary utilities below ingredients · resolved configuration
+                  links · browser-local history · provider-hosted email signup
                 </span>
               </div>
               <div className={styles.recipeOverviewExample}>
@@ -1036,25 +1064,38 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Product banner</strong>
                 <span>
-                  UK/EN/ES recipe pages, above the hero. Dark on every screen:
-                  food loop, lesson facts and three actions. Checkout is
-                  disabled in this example.
+                  Compact recipe banner in UK/EN/ES with a small food poster,
+                  one purchase action and one free-preview link. Checkout is
+                  disabled in these examples. The{' '}
+                  <a href="/uk/recipes/bezghliutenovi-mlyntsi">
+                    Ukrainian crepe recipe
+                  </a>{' '}
+                  shows the shared mobile placement before ingredients, inline
+                  quantity disclosure and secondary utilities below the list.
                 </span>
               </div>
               <div>
                 {(['uk', 'en', 'es'] as const).flatMap((bannerLocale) =>
                   ['design-system', 'gluten-free-napoleon'].map((recipeId) => {
                     const banner = resolveProductBanner(recipeId, bannerLocale);
-                    return banner && (
-                      <ProductBannerInvitation
-                        key={`${bannerLocale}-${recipeId}`}
-                        banner={banner}
-                        recipeId="design-system"
-                        preview
-                      />
+                    return (
+                      banner && (
+                        <ProductBannerInvitation
+                          key={`${bannerLocale}-${recipeId}`}
+                          banner={banner}
+                          recipeId="design-system"
+                          preview
+                          compact
+                        />
+                      )
                     );
                   }),
                 )}
+                <ProductBannerInvitation
+                  banner={resolveProductBanner('design-system', 'uk')!}
+                  recipeId="design-system"
+                  preview
+                />
               </div>
             </div>
 
@@ -1427,20 +1468,6 @@ export default function DesignSystemPage() {
                 <RecipeIngredientHeading
                   title="Інгредієнти"
                   id="mobile-ingredients-example"
-                  action={
-                    <div className={shoppingControlStyles.control}>
-                      <div className={shoppingControlStyles.actions}>
-                        <Button variant="outline">
-                          <Check aria-hidden="true" size={16} />У списку покупок
-                          · 8
-                        </Button>
-                        <Button>
-                          <ShoppingBag aria-hidden="true" size={16} />
-                          Додати ще одну порцію…
-                        </Button>
-                      </div>
-                    </div>
-                  }
                 />
                 <RecipeIngredientChecklist
                   sections={getRecipeContent('crepes', 'en')!
@@ -1452,6 +1479,17 @@ export default function DesignSystemPage() {
                     }))
                     .filter((section) => section.ingredients.length > 0)}
                 />
+                <div className={shoppingControlStyles.control}>
+                  <div className={shoppingControlStyles.actions}>
+                    <Button variant="outline">
+                      <Check aria-hidden="true" size={16} />У списку покупок · 8
+                    </Button>
+                    <Button variant="ghost">
+                      <ShoppingBag aria-hidden="true" size={16} />
+                      Додати ще одну порцію…
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1697,7 +1735,9 @@ export default function DesignSystemPage() {
           </section>
 
           <section className={styles.section} id="video-lessons">
-            <output>Відкриваємо твій урок. Це може зайняти кілька секунд</output>
+            <output>
+              Відкриваємо твій урок. Це може зайняти кілька секунд
+            </output>
             <output>Урок відкрито — можна дивитися</output>
             <div lang="uk">
               <h2>Відеоурок · приклад повного доступу</h2>
@@ -1708,11 +1748,23 @@ export default function DesignSystemPage() {
                 preview
                 previewWatchedStepId="s01-sour-cream-base"
               />
-              <p>Після завершення відео наступний крок запускається автоматично. «Дивитися підряд» увімкнено за замовчуванням.</p>
+              <p>
+                Після завершення відео наступний крок запускається автоматично.
+                «Дивитися підряд» увімкнено за замовчуванням.
+              </p>
               <LessonIngredients recipe={glutenFreeNapoleonRecipe} />
               <h2>Крок 8 · автозапуск без звуку</h2>
-              <p>Коли відео видно, воно запускається із кнопкою «Увімкнути звук» поверх кадру. Тут показано стан без відтворення.</p>
-              <LessonPlayer steps={lessonStepSummaries()} access={false} preview previewSoundControl hideSteps />
+              <p>
+                Коли відео видно, воно запускається із кнопкою «Увімкнути звук»
+                поверх кадру. Тут показано стан без відтворення.
+              </p>
+              <LessonPlayer
+                steps={lessonStepSummaries()}
+                access={false}
+                preview
+                previewSoundControl
+                hideSteps
+              />
               <h2>Відеоурок · після безкоштовного кроку</h2>
               <p>Подивись крок 8 безкоштовно · решта 12 — €9</p>
               <LessonPlayer
@@ -1734,8 +1786,8 @@ export default function DesignSystemPage() {
               <LessonPurchase action={<LessonBuyPreview price="€9" />} />
               <h2>Відеоурок · перехід із кроку 8 (krok8)</h2>
               <p>
-                Для src із «krok8»: результат, кнопка з гарантією й список кроків
-                до плеєра; крок 8 нижче з заголовком «Крок 8 — ще раз».
+                Для src із «krok8»: результат, кнопка з гарантією й список
+                кроків до плеєра; крок 8 нижче з заголовком «Крок 8 — ще раз».
               </p>
               <p>Крок 8 — уже позаду. Решта 12 — у відеоуроці за €9</p>
               <div className={lessonStyles.hero}>
@@ -1751,7 +1803,11 @@ export default function DesignSystemPage() {
               <LessonSignIn preview />
             </div>
             <h2>Optional recipe video lesson</h2>
-            <RecipeFreeLessonStep recipeId="gluten-free-napoleon" locale="uk" preview />
+            <RecipeFreeLessonStep
+              recipeId="gluten-free-napoleon"
+              locale="uk"
+              preview
+            />
             <p className={styles.guidance}>
               Shared editorial invitation: planned and available states. Sample
               price, no active checkout. The video describes the base recipe

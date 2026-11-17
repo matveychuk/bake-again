@@ -56,3 +56,10 @@ void test('formats recipe counts with locale-specific labels', () => {
   assert.equal(formatRecipeCount('es', 1), '1 receta');
   assert.equal(formatRecipeCount('uk', 5), '5 рецептів');
 });
+
+void test('formats optional zero-based ranges as an upper limit in every locale', () => {
+  const quantity = { kind: 'range', min: 0, max: 50, unit: 'ml' } as const;
+  assert.equal(formatQuantity('uk', quantity), 'до 50 мл');
+  assert.equal(formatQuantity('en', quantity), 'up to 50 ml');
+  assert.equal(formatQuantity('es', quantity), 'hasta 50 ml');
+});

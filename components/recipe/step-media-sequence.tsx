@@ -39,7 +39,7 @@ export function StepMediaSequence({
       >
         {items.map((item, index) => (
           <figure key={item.id}>
-            <div className={styles.image}>
+            <div className={styles.image} data-fit={item.fit}>
               {item.type === 'video' ? (
                 <video
                   controls

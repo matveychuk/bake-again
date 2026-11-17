@@ -13,7 +13,9 @@ type Props = Omit<ComponentPropsWithRef<'section'>, 'title' | 'children'> & {
     | 'lead-magnet'
     | 'recipe-step'
     | 'product-banner'
-    | 'campaign';
+    | 'product-banner-compact'
+    | 'campaign'
+    | 'recipe-video';
   subtitle?: string;
   /** Short product label above the title, e.g. format and launch month. */
   eyebrow?: string;
@@ -43,8 +45,11 @@ export function EditorialInvitation({
         styles.section,
         variant === 'lead-magnet' && styles.leadMagnet,
         variant === 'recipe-step' && styles.recipeStep,
-        variant === 'product-banner' && styles.productBanner,
+        (variant === 'product-banner' || variant === 'product-banner-compact') &&
+          styles.productBanner,
+        variant === 'product-banner-compact' && styles.productBannerCompact,
         variant === 'campaign' && styles.campaign,
+        variant === 'recipe-video' && styles.recipeVideo,
         className,
       ]
         .filter(Boolean)

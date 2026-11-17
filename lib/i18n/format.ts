@@ -111,6 +111,10 @@ export function formatQuantity(
 ): string {
   if (!quantity) return asNeeded[locale];
   if (quantity.kind === 'range') {
+    if (quantity.min === 0) {
+      const upTo = { uk: 'до', en: 'up to', es: 'hasta' }[locale];
+      return `${upTo} ${formatNumber(locale, quantity.max)} ${formatUnit(locale, quantity.unit, quantity.max)}`;
+    }
     return `${formatNumber(locale, quantity.min)}–${formatNumber(locale, quantity.max)} ${formatUnit(locale, quantity.unit, quantity.max)}`;
   }
   return `${formatNumber(locale, quantity.value)} ${formatUnit(locale, quantity.unit, quantity.value)}`;

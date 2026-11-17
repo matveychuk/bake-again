@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { xanthanArticle } from '@/content/articles/xanthan-gum';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import {
   blogPath,
@@ -201,9 +202,13 @@ export function PsylliumStory({ preview = false }: { preview?: boolean }) {
           добре підібраному рецепті допомагають тісту зібратися докупи. До
           булочки ще треба дійти — але тепер зрозуміло, хто за що відповідає.
         </p>
+        <p>
+          А що допомагає скибці кексу дістатися до тарілки цілою?
+          Про це — у статті <a href={xanthanArticle.path}>«{xanthanArticle.title}»</a>.
+        </p>
       </section>
       <details className={styles.sources}>
-        <summary>Для допитливих: джерела</summary>
+        <summary>Джерела для допитливих</summary>
         <ul>
           <li>
             <a href="https://www.mdpi.com/2304-8158/10/5/954">
@@ -222,20 +227,22 @@ export function PsylliumStory({ preview = false }: { preview?: boolean }) {
   );
 }
 
-export async function PsylliumArticle() {
+export async function ArticlePanettoneInvitation() {
+  if (!panettoneIsActive('uk')) return null;
   const bindings = await deliveryBindings();
+  return (
+    <PanettoneInvitation
+      preview={process.env.NODE_ENV === 'development' && !panettoneConfigured(bindings)}
+      siteKey={bindings.TURNSTILE_SITE_KEY as string | undefined}
+    />
+  );
+}
+
+export function PsylliumArticle() {
   const banner = activeProductBanner('blog-psyllium', 'uk');
   return (
     <div className={styles.article}>
-      {panettoneIsActive('uk') && (
-        <PanettoneInvitation
-          preview={
-            process.env.NODE_ENV === 'development' &&
-            !panettoneConfigured(bindings)
-          }
-          siteKey={bindings.TURNSTILE_SITE_KEY as string | undefined}
-        />
-      )}
+      <ArticlePanettoneInvitation />
       <PsylliumStory />
       {banner && (
         <ProductBannerInvitation

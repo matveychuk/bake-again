@@ -109,6 +109,23 @@
   margin: 0;
 }
 
+.xanthanLabel {
+  position: relative;
+}
+
+/* Coordinates follow the two printed words on this specific packaging excerpt. */
+.xanthanLabel::after {
+  content: '';
+  position: absolute;
+  left: 55.2%;
+  top: 69.4%;
+  width: 32.5%;
+  height: 12.4%;
+  border: 2px solid var(--color-action-primary-strong);
+  border-radius: 12% / 48%;
+  pointer-events: none;
+}
+
 .comparisonLabels {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -213,4 +230,10 @@
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-2);
   }
+}
+
+/* The invitation already sits inside the article reading gutter. */
+.article > [data-product-banner] > section {
+  width: 100%;
+  margin: 0;
 }

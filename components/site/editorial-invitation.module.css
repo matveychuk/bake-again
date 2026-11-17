@@ -181,25 +181,24 @@
   width: 100%;
 }
 
-/* Current product banner above the recipe. Dark tokens come from a
-   data-theme="dark" wrapper; the food loop stays the first thing seen. */
+/* Product invitation: large food media, one primary purchase action. */
 .productBanner {
   margin-top: var(--space-4);
   margin-bottom: var(--space-6);
   padding: var(--space-6);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-control);
-  background: var(--color-background-panel);
+  background: var(--color-background-surface);
 }
-/* The food loop spans the copy and the purchase actions. */
 .productBanner .main {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  row-gap: var(--space-3);
+  grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+  gap: var(--space-4) var(--space-6);
 }
 .productBanner .image {
   grid-row: span 2;
-  width: 10rem;
+  align-self: center;
+  min-width: 0;
 }
 .productBanner .copy {
   align-self: end;
@@ -210,8 +209,13 @@
   height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
+  object-position: center 60%;
   border-radius: var(--radius-control);
   background: var(--color-background-panel-subtle);
+}
+.productBanner video:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
 }
 .copy .eyebrow {
   margin: 0 0 var(--space-2);
@@ -221,86 +225,98 @@
   text-transform: uppercase;
   color: var(--color-text-secondary);
 }
-/* One line on a 1440 px desktop; never below 26 px. */
 .productBanner .copy :is(h1, h2) {
-  font-size: clamp(1.625rem, 2.2vw, var(--font-size-section-title-mobile));
-  font-weight: 450;
+  font-size: var(--font-size-section-title-mobile);
+  font-weight: 500;
   line-height: calc(var(--line-height-tight) * 1.15);
   margin-bottom: var(--space-3);
-  overflow-wrap: break-word;
+  text-wrap: balance;
 }
 .productBanner .copy > p:not(.eyebrow) {
-  max-width: var(--layout-cook-reading);
   color: var(--color-text-primary);
 }
 .productBanner .action {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  justify-items: stretch;
   align-self: start;
 }
-/* Light emphasis action on the dark banner, as approved in variant B. */
-.productBanner .action [data-slot='button']:first-child:not(:disabled) {
-  padding-inline: var(--space-6);
-  background: var(--color-action-emphasis);
-  color: var(--color-text-on-emphasis);
+/* Inert Design Lab examples retain the purchase colour. */
+.productBanner[data-preview='true'] button:disabled {
+  background: var(--color-action-primary);
+  color: var(--color-text-on-accent);
+  border-color: transparent;
 }
-.productBanner .action [data-slot='button']:first-child:not(:disabled):hover {
-  background: var(--color-action-emphasis-strong);
-}
-@media (min-width: 621px) and (max-width: 900px) {
-  .productBanner .image {
-    width: 7.5rem;
+@media (max-width: 620px) {
+  .productBanner {
+    margin-bottom: var(--space-4);
+    padding: var(--space-4);
   }
-  .productBanner .copy :is(h1, h2) {
-    font-size: var(--font-size-drawer-title);
+  .productBanner .main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .productBanner .image {
+    grid-row: auto;
+  }
+  .productBanner .image :is(video, img) {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Keep the recipe title within reach below the compact promotion. */
+.productBannerCompact {
+  padding: var(--space-3) var(--space-4);
+}
+.productBannerCompact .main {
+  grid-template-columns: var(--space-24) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+}
+.productBannerCompact .image {
+  grid-row: auto;
+}
+.productBannerCompact .image img {
+  aspect-ratio: 1;
+}
+.productBannerCompact .copy,
+.productBannerCompact .action {
+  align-self: center;
+}
+.productBannerCompact .copy h2 {
+  font-size: var(--font-size-drawer-title);
+  margin-bottom: var(--space-1);
+  text-wrap: wrap;
+}
+.productBannerCompact .copy > p:not(.eyebrow),
+.productBannerCompact .note {
+  font-size: var(--font-size-body-small);
+}
+.productBannerCompact .copy .eyebrow,
+.productBannerCompact .note {
+  margin-block: var(--space-1);
+}
+.productBannerCompact .action {
+  gap: 0;
+}
+@media (max-width: 900px) {
+  .productBannerCompact .main {
+    grid-template-columns: var(--space-16) minmax(0, 1fr);
+  }
+  .productBannerCompact .action {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-3);
+  }
+  .productBannerCompact .action > * {
+    width: auto;
   }
 }
 @media (max-width: 620px) {
-  /* Phone: label above the loop and title, then copy and purchase actions. */
-  .productBanner {
-    margin-bottom: var(--space-4);
-    padding: var(--space-3) var(--space-4);
-  }
-  .productBanner .main {
-    display: grid;
-    grid-template-columns: 4.5rem minmax(0, 1fr);
-    align-items: center;
-    gap: var(--space-2) var(--space-3);
-  }
-  .productBanner .image {
-    width: auto;
-    grid-column: 1;
-    grid-row: 2;
-  }
-  .productBanner .copy {
-    display: contents;
-  }
-  .productBanner .copy .eyebrow {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    margin: 0;
-  }
-  .productBanner .copy :is(h1, h2) {
-    grid-column: 2;
-    grid-row: 2;
-    margin: 0;
-    /* Approved phone size for the banner hook. */
-    font-size: 1.4375rem;
-  }
-  .productBanner .copy > p:not(.eyebrow),
-  .productBanner .copy > .note {
-    grid-column: 1 / -1;
-    font-size: var(--font-size-body-small);
-    margin: 0;
-  }
-  .productBanner .action {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: stretch;
+  .productBannerCompact .action {
     grid-column: 1 / -1;
   }
-  .productBanner .action [data-slot='button']:first-child {
-    grid-column: 1 / -1;
+  .productBannerCompact .copy > p:not(.eyebrow) {
+    display: none;
   }
 }
 
@@ -372,5 +388,45 @@
   }
   .campaign .copy h2 {
     font-size: var(--font-size-drawer-title);
+  }
+}
+
+/* Optional recipe story: keep a vertical film compact beside editorial copy. */
+.recipeVideo .main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--space-4) var(--space-8);
+}
+.recipeVideo .image {
+  grid-row: span 2;
+  width: 100%;
+  max-width: var(--layout-step-media);
+}
+.recipeVideo video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100svh - var(--space-16) * 2);
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  background: var(--color-background-panel);
+}
+.recipeVideo .copy {
+  align-self: end;
+}
+.recipeVideo .action {
+  align-self: start;
+  justify-self: start;
+}
+@media (max-width: 700px) {
+  .recipeVideo .main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .recipeVideo .copy {
+    grid-row: 1;
+  }
+  .recipeVideo .image {
+    grid-row: 2;
+    justify-self: center;
   }
 }

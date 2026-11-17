@@ -58,3 +58,20 @@
     padding-inline: var(--space-3);
   }
 }
+
+/* Inline disclosure beside the heading; wrap the complete control if needed. */
+.compactAction {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding-bottom: var(--space-3);
+}
+.compactAction > :first-child {
+  flex: 0 1 auto;
+}
+.compactAction > :last-child:not(:first-child) {
+  width: auto;
+  max-width: 100%;
+  margin-inline-start: auto;
+}

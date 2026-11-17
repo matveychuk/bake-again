@@ -47,12 +47,30 @@ void test('all canonical records preserve the independent pre-migration identiti
   );
   for (const recipe of migratedRecipes) {
     const original = baseline.find((b) => b.document.recipe.id === recipe.id)!;
+    // Author-confirmed PDF v6 supersedes the historical crepe recipe. The
+    // quantities, seven steps and scaling are covered by registry/configuration tests.
+    if (recipe.id === 'crepes' && recipe.versionId === 'crepes-pdf-v6') {
+      assert.equal(recipe.routeSlug, original.routeSlug);
+      assert.equal(
+        recipe.publicationStatus,
+        original.document.recipe.publicationStatus,
+      );
+      validateRecipe(recipe, new Set(recipes.map((r) => r.id)));
+      continue;
+    }
     // Explicit post-migration author revision is covered by napoleon-author-update.test.ts
     // and napoleon-v6.test.ts; the immutable v5 baseline remains historical evidence.
-    if (recipe.id === 'gluten-free-napoleon' && recipe.versionId === 'gluten-free-napoleon-v6') {
+    if (
+      recipe.id === 'gluten-free-napoleon' &&
+      recipe.versionId === 'gluten-free-napoleon-v6'
+    ) {
       assert.equal(recipe.routeSlug, original.routeSlug);
-      assert.deepEqual(recipe.slug, {uk: 'bezghliutenovyi-napoleon', en: 'gluten-free-napoleon-cake', es: 'tarta-napoleon-sin-gluten'});
-      validateRecipe(recipe, new Set(recipes.map(r => r.id)));
+      assert.deepEqual(recipe.slug, {
+        uk: 'bezghliutenovyi-napoleon',
+        en: 'gluten-free-napoleon-cake',
+        es: 'tarta-napoleon-sin-gluten',
+      });
+      validateRecipe(recipe, new Set(recipes.map((r) => r.id)));
       continue;
     }
     assert.equal(recipe.routeSlug, original.routeSlug);

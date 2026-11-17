@@ -376,7 +376,7 @@ export interface RecipeMedia {
   id: string;
   type: 'image' | 'video';
   path: string;
-  /** Preserve the whole frame when process details must not be cropped. */
+  /** Preserve the whole frame when food or process details must not be cropped. */
   fit?: 'cover' | 'contain';
   posterPath?: string;
   usage: Array<'hero' | 'card' | 'step' | 'gallery' | 'social'>;

@@ -285,6 +285,7 @@ export function AddRecipeIngredientsControl({
         ) : null}
         {!disabled ? (
           <Button
+            variant="ghost"
             className={`${styles.trigger} ${className ?? ''}`}
             onClick={(event) =>
               openDrawer(
@@ -301,6 +302,7 @@ export function AddRecipeIngredientsControl({
           </Button>
         ) : (
           <Button
+            variant="ghost"
             className={`${styles.trigger} ${className ?? ''}`}
             disabled
             title={disabledReason ?? messages.testedBaseOnly}

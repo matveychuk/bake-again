@@ -1,11 +1,14 @@
 import {
   panettoneCampaign,
   panettoneIsActive,
+  panettoneSignupPage,
 } from '../../content/articles/psyllium.ts';
 import { brevoApi } from './brevo-api.ts';
 import { deliveryStore, type DeliveryRequest } from './delivery-store.ts';
 import { DeliveryError, digest } from './delivery-service.ts';
 import { isSuppressed } from './single-opt-in.ts';
+
+type SignupPage = NonNullable<ReturnType<typeof panettoneSignupPage>>;
 
 export function panettoneListId(bindings: Record<string, unknown>) {
   const id = Number(
@@ -31,6 +34,11 @@ export function panettoneConfigured(bindings: Record<string, unknown>) {
 export function parsePanettoneRequest(body: unknown) {
   if (!body || typeof body !== 'object') throw new DeliveryError(400);
   const input = body as Record<string, unknown>;
+  // Before the second placement, only the psyllium form called this endpoint.
+  const signupPage = panettoneSignupPage(
+    input.articlePath === undefined ? '/uk/blog/psyllium' : input.articlePath,
+  );
+  if (!signupPage) throw new DeliveryError(400);
   const email =
     typeof input.email === 'string' ? input.email.trim().toLowerCase() : '';
   if (
@@ -54,15 +62,16 @@ export function parsePanettoneRequest(body: unknown) {
     email,
     token: input.token,
     source: (input.source as string | undefined) || 'direct',
-  };
+    signupPage,
+  } as const;
 }
 
-export function panettoneSubscription(listId: number, source: string) {
+export function panettoneSubscription(listId: number, source: string, signupPage: SignupPage) {
   return {
     listIds: [3, 4, listId],
     attributes: {
       SOURCE: source,
-      SIGNUP_PAGE: 'blog-psyllium',
+      SIGNUP_PAGE: signupPage,
       SIGNUP_POSITION: 'top-panettone',
     },
   };
@@ -75,7 +84,7 @@ export function createPanettoneService(
   listId: number,
   now = () => new Date(),
 ) {
-  return async (email: string, source: string, networkKey: string) => {
+  return async (email: string, source: string, networkKey: string, signupPage: SignupPage = 'blog-psyllium') => {
     if (!panettoneIsActive('uk', now())) throw new DeliveryError(410);
     const time = Math.floor(now().getTime() / 1000);
     const row: DeliveryRequest = {
@@ -111,7 +120,7 @@ export function createPanettoneService(
         !isSuppressed(contact) &&
         !contact?.listUnsubscribed?.includes(listId)
       )
-        await api.subscribe(email, panettoneSubscription(listId, source));
+        await api.subscribe(email, panettoneSubscription(listId, source, signupPage));
       await store.status(id, 'sent', time);
     } catch {
       await store.status(id, 'failed', time);

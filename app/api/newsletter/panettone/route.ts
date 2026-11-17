@@ -37,7 +37,7 @@ export async function POST(request: Request) {
       brevoApi(bindings.BREVO_API_KEY as string),
       panettoneListId(bindings)!,
     );
-    await subscribe(input.email, input.source, network);
+    await subscribe(input.email, input.source, network, input.signupPage);
     return recipeResponse({ ok: true });
   } catch (error) {
     return recipeResponse(

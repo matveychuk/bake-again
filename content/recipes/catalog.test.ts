@@ -43,14 +43,14 @@ void test('keeps Napoleon listing photography separate from its hero', () => {
   assert(napoleon.cardAlt?.includes('Цілий Наполеон'));
 });
 
-void test('uses the author food photos on linen in crepe and dumpling cards', () => {
+void test('uses the linen photo for crepes and keeps the dumpling hero separate', () => {
   const catalog = getRecipeCatalog('uk');
   const crepes = catalog.find((recipe) => recipe.id === 'crepes');
   const dumplings = catalog.find((recipe) => recipe.id === 'lazy-dumplings');
   assert(crepes);
   assert(dumplings);
   assert(crepes.cardImage?.includes('crepes-stack-lace-linen-v1.webp'));
-  assert(crepes.image.includes('crepes-stack-2026-10-20-v1.webp'));
+  assert.equal(crepes.image, crepes.cardImage);
   assert(
     dumplings.cardImage?.includes('lazy-dumplings-real-plate-linen-v1.webp'),
   );

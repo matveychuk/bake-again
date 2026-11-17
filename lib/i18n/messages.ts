@@ -521,7 +521,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         'Add products from a recipe when you are ready to plan a bake.',
       storedInBrowser:
         'Your shopping list is saved to your account.',
-      addIngredients: 'To shopping list…',
+      addIngredients: 'Add ingredients to shopping list',
       addAll: 'To shopping list…',
       reviewIngredients: 'What do you need to buy?',
       reviewIngredientsDescription:
@@ -833,7 +833,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         'Añade productos desde una receta cuando quieras planificar lo que vas a hornear.',
       storedInBrowser:
         'La lista de compra se guarda en tu cuenta.',
-      addIngredients: 'A la lista de compra…',
+      addIngredients: 'Añadir ingredientes a la lista de compra',
       addAll: 'A la lista de compra…',
       reviewIngredients: '¿Qué necesitas comprar?',
       reviewIngredientsDescription:
@@ -1156,7 +1156,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         'Додайте продукти з рецепта, коли будете планувати випічку.',
       storedInBrowser:
         'Список покупок зберігається у вашому акаунті.',
-      addIngredients: 'До списку покупок…',
+      addIngredients: 'Додати інгредієнти до списку покупок',
       addAll: 'До списку покупок…',
       reviewIngredients: 'Що потрібно купити?',
       reviewIngredientsDescription:

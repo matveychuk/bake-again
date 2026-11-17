@@ -1,5 +1,11 @@
 export const blogPath = '/uk/blog';
 
+export function panettoneSignupPage(path: unknown) {
+  if (path === '/uk/blog/psyllium') return 'blog-psyllium';
+  if (path === '/uk/blog/xanthan-gum') return 'blog-xanthan-gum';
+  return null;
+}
+
 /** Temporary campaign. Replace this config for the next offer after launch. */
 export const panettoneCampaign = {
   id: 'panettone',

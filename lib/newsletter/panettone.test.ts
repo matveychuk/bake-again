@@ -38,6 +38,7 @@ void test('input validation keeps source and rejects unsafe submissions', () => 
     email: 'reader+panettone@gmail.com',
     token: 'challenge',
     source: 'direct',
+    signupPage: 'blog-psyllium',
   });
   assert.equal(
     parsePanettoneRequest({ ...body, source: 'ig-bot-panettone' }).source,
@@ -47,6 +48,7 @@ void test('input validation keeps source and rejects unsafe submissions', () => 
     { email: 'bad' },
     { consent: false },
     { website: 'bot' },
+    { articlePath: '/unrelated' },
     { token: '' },
     { source: 'x'.repeat(201) },
     { source: 'bad\nsource' },
@@ -200,7 +202,20 @@ void test('Turnstile validates the campaign action, not a token from another for
   );
 });
 
-void test('analytics admits only this article and omits form and query data', () => {
+void test('xanthan article subscriptions use their own page and the same campaign lists', async () => {
+  const input = parsePanettoneRequest({
+    articlePath: '/uk/blog/xanthan-gum', email: 'reader@example.com', consent: true, token: 'test',
+  });
+  const f = fixture();
+  await f.subscribe(input.email, input.source, 'network', input.signupPage);
+  assert.deepEqual(f.requests[0]?.attributes, {
+    SOURCE: 'direct', SIGNUP_PAGE: 'blog-xanthan-gum', SIGNUP_POSITION: 'top-panettone',
+  });
+  assert.deepEqual(f.requests[0]?.listIds, [3, 4, 99]);
+  f.db.close();
+});
+
+void test('analytics admits the two campaign articles and omits form and query data', () => {
   const event = sanitizeAnalyticsPayload('event', {
     name: 'panettone_signup',
     url: '/uk/blog/psyllium?src=ig-bot-panettone#panettone',
@@ -209,6 +224,13 @@ void test('analytics admits only this article and omits form and query data', ()
   assert.ok(event);
   assert.deepEqual(event.data, {});
   assert.equal(event.url, '/uk/blog/psyllium');
+  const xanthan = sanitizeAnalyticsPayload('event', {
+    name: 'panettone_signup', url: '/uk/blog/xanthan-gum?src=example#panettone',
+    data: { source: 'private' },
+  });
+  assert.ok(xanthan);
+  assert.equal(xanthan.url, '/uk/blog/xanthan-gum');
+  assert.deepEqual(xanthan.data, {});
   assert.equal(
     sanitizeAnalyticsPayload('event', { name: 'panettone_signup', url: '/es' }),
     false,

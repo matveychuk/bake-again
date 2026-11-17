@@ -1,4 +1,5 @@
 import { isLeadMagnetId, leadMagnetPath } from '../../content/lead-magnets.ts';
+import { panettoneSignupPage } from '../../content/articles/psyllium.ts';
 import { videoMilestones, videoPlayers, videoStartModes, type VideoMilestone, type VideoPlayer, type VideoStartMode } from '../lessons/video-progress.ts';
 import { lessonVideoErrorCodes, type LessonVideoErrorCode } from '../lessons/video-diagnostics.ts';
 
@@ -139,7 +140,7 @@ declare global {
 }
 
 export function isAnalyticsPath(path: string) {
-  if (path === '/uk/blog/psyllium') return true;
+  if (panettoneSignupPage(path)) return true;
   if (/^\/uk\/mlyntsi-recept\/?$/.test(path)) return true;
   if (isMagnetPath(path)) return true;
   if (path === napoleonPath) return true;
@@ -333,7 +334,7 @@ export function sanitizeAnalyticsPayload(
     data.magnet = input!.magnet;
   }
   if (payload.name === 'panettone_signup') {
-    if (url.pathname !== '/uk/blog/psyllium') return false;
+    if (!panettoneSignupPage(url.pathname)) return false;
     for (const key of Object.keys(data)) delete data[key as keyof EventData];
   }
   if (payload.name === 'newsletter_submit') {
