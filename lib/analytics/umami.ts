@@ -52,6 +52,7 @@ export const analyticsEvents = [
   'recipe_pdf_download',
   'lead_magnet_submit',
   'newsletter_submit',
+  'panettone_signup',
   'product_banner_click',
   'cookie_consent_accept',
   'cookie_consent_decline',
@@ -138,6 +139,7 @@ declare global {
 }
 
 export function isAnalyticsPath(path: string) {
+  if (path === '/uk/blog/psyllium') return true;
   if (/^\/uk\/mlyntsi-recept\/?$/.test(path)) return true;
   if (isMagnetPath(path)) return true;
   if (path === napoleonPath) return true;
@@ -329,6 +331,10 @@ export function sanitizeAnalyticsPayload(
     // This conversion has exactly one public attribute; never include form fields.
     for (const key of Object.keys(data)) delete data[key as keyof EventData];
     data.magnet = input!.magnet;
+  }
+  if (payload.name === 'panettone_signup') {
+    if (url.pathname !== '/uk/blog/psyllium') return false;
+    for (const key of Object.keys(data)) delete data[key as keyof EventData];
   }
   if (payload.name === 'newsletter_submit') {
     // Only the newsletter language; never form fields or the account address.

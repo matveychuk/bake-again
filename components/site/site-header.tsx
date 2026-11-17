@@ -14,6 +14,7 @@ import {
 import { LanguageSwitcher } from './language-switcher';
 import { Wordmark } from './wordmark';
 import { SocialLinks } from './social-links';
+import { blogPath } from '@/content/articles/psyllium';
 
 type SiteHeaderProps = {
   homeHref?: string;
@@ -29,13 +30,17 @@ export async function SiteHeader({
   const messages = getUiMessages(locale);
   const showDrafts = await canViewDrafts();
   const resolvedHomeHref = homeHref ?? localeHomePath(locale);
+  const articlePage = pathname?.startsWith(`${blogPath}/`);
+  const blogArticle = articlePage || pathname === localeAboutPath('uk');
   const personalPage =
     pathname === '/uk/urok/napoleon' ||
     pathname === `/${locale}/account` ||
     pathname === localeSavedPath(locale) ||
     pathname === localeShoppingListPath(locale);
   const skipTarget =
-    pathname === '/uk/urok/napoleon'
+    pathname === blogPath ? 'blog-title'
+    : articlePage ? 'article-title'
+    : pathname === '/uk/urok/napoleon'
       ? 'lesson-title'
       : pathname === `/${locale}/account`
       ? 'account-title'
@@ -69,6 +74,12 @@ export async function SiteHeader({
       >
         {messages.navigation.recipes}
       </a>
+      {locale === 'uk' && (
+        <a href={blogPath}
+          aria-current={pathname === blogPath ? 'page' : blogArticle ? 'location' : undefined}>
+          Блог
+        </a>
+      )}
       {showDrafts && (
         <a
           href={localeDraftsPath(locale)}
@@ -85,12 +96,12 @@ export async function SiteHeader({
       >
         {messages.navigation.saved}
       </a>
-      <a
+      {locale !== 'uk' && <a
         href={localeAboutPath(locale)}
         aria-current={pathname === localeAboutPath(locale) ? 'page' : undefined}
       >
         {messages.navigation.about}
-      </a>
+      </a>}
     </>
   );
 
@@ -116,6 +127,14 @@ export async function SiteHeader({
           </summary>
           <nav aria-label={messages.a11y.primaryNavigation}>
             {navigationLinks}
+            <a
+              className="nav-bag"
+              href={localeShoppingListPath(locale)}
+              aria-current={pathname === localeShoppingListPath(locale) ? 'page' : undefined}
+            >
+              <ShoppingBag aria-hidden="true" size={17} strokeWidth={1.7} />
+              <span>{messages.navigation.shoppingList}</span>
+            </a>
             <div className="mobile-language" hidden={pathname === '/uk/urok/napoleon'}>
               <LanguageSwitcher
                 locale={locale}
@@ -134,7 +153,6 @@ export async function SiteHeader({
         </nav>
 
         <div className="site-header-tools">
-          {!personalPage && <SocialLinks locale={locale} variant="header" />}
           <div className="header-language" hidden={pathname === '/uk/urok/napoleon'}>
             <LanguageSwitcher
               locale={locale}
@@ -152,15 +170,11 @@ export async function SiteHeader({
           >
             <ShoppingBag aria-hidden="true" size={17} strokeWidth={1.7} />
           </a>
+          {!personalPage && <SocialLinks locale={locale} variant="header" />}
           <AccountLink locale={locale} pathname={pathname} />
         </div>
       </header>
       <AccountSyncNotice locale={locale} />
-      {locale === 'uk' && !personalPage && (
-        <div className="site-mobile-social">
-          <SocialLinks locale={locale} variant="header" />
-        </div>
-      )}
     </>
   );
 }

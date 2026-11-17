@@ -1,4 +1,5 @@
 'use client';
+import { panettoneCampaign } from '@/content/articles/psyllium';
 import { trackMetaLead } from '@/lib/analytics/meta';
 
 /* oxlint-disable next/no-html-link-for-pages -- Native links follow the existing vinext compatibility contract. */
@@ -147,6 +148,7 @@ const messages: Record<AppLocale, Copy> = {
  */
 export function NewsletterForm({
   signup,
+  campaign,
   locale = 'uk',
   magnetId,
   scenario = 'recipes',
@@ -159,6 +161,7 @@ export function NewsletterForm({
   defaultEmail,
 }: {
   signup?: NewsletterSignup;
+  campaign?: 'panettone';
   locale?: AppLocale;
   magnetId?: MagnetId;
   /** Ignored with a magnet, which always promises its PDF. */
@@ -178,10 +181,12 @@ export function NewsletterForm({
   const kind: NewsletterScenario = magnetId ? 'pdf' : scenario;
   const copy = messages[locale];
   const invitation = getRecipeInvitation('crepes', locale);
+  const campaignCopy = campaign === 'panettone' ? panettoneCampaign : null;
   const submitLabel =
-    invitation && magnetId === invitation.magnetId
+    campaignCopy?.submit ??
+    (invitation && magnetId === invitation.magnetId
       ? invitation.submit
-      : copy.submit[kind];
+      : copy.submit[kind]);
   const account = useAccount();
   const accountEmail =
     previewEmail ?? (account.identity ? account.email : null);
@@ -194,12 +199,16 @@ export function NewsletterForm({
   const [attempt, setAttempt] = useState(0);
   const [verificationFailed, setVerificationFailed] = useState(false);
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
-  const endpoint = magnetId
+  const endpoint = campaign
     ? recipeSiteKey
-      ? '/api/newsletter/recipe'
+      ? '/api/newsletter/panettone'
       : null
-    : signup && brevoSignupEndpoint(signup.url);
-  const knownEmail = useOther ? null : accountEmail;
+    : magnetId
+      ? recipeSiteKey
+        ? '/api/newsletter/recipe'
+        : null
+      : signup && brevoSignupEndpoint(signup.url);
+  const knownEmail = useOther || campaign ? null : accountEmail;
   const succeeded = sentTo !== null;
 
   useEffect(() => {
@@ -222,8 +231,10 @@ export function NewsletterForm({
         api = await loadTurnstile();
         if (disposed || !challenge.current) return;
         widget = api.render(challenge.current, {
-          sitekey: magnetId ? recipeSiteKey : brevoSiteKeys[locale],
-          ...(magnetId ? { action: 'recipe_request' } : {}),
+          sitekey: magnetId || campaign ? recipeSiteKey : brevoSiteKeys[locale],
+          ...(magnetId || campaign
+            ? { action: campaign ? 'panettone_signup' : 'recipe_request' }
+            : {}),
           language: locale,
           size: 'flexible',
           theme: 'auto',
@@ -247,7 +258,16 @@ export function NewsletterForm({
       disposed = true;
       if (widget !== undefined) api?.remove(widget);
     };
-  }, [endpoint, preview, attempt, succeeded, locale, magnetId, recipeSiteKey]);
+  }, [
+    endpoint,
+    preview,
+    attempt,
+    succeeded,
+    locale,
+    magnetId,
+    campaign,
+    recipeSiteKey,
+  ]);
 
   const emailField = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -278,12 +298,19 @@ export function NewsletterForm({
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
-        ...(magnetId
+        ...(magnetId || campaign
           ? {
               headers: { 'content-type': 'application/json' },
               body: JSON.stringify({
                 email,
-                magnet: magnetId,
+                ...(campaign
+                  ? {
+                      source:
+                        new URLSearchParams(window.location.search).get(
+                          'src',
+                        ) || 'direct',
+                    }
+                  : { magnet: magnetId }),
                 placement,
                 token,
                 consent: true,
@@ -298,7 +325,7 @@ export function NewsletterForm({
       const result = await response.json();
       if (
         !response.ok ||
-        !(magnetId
+        !(magnetId || campaign
           ? !!result &&
             typeof result === 'object' &&
             'ok' in result &&
@@ -310,10 +337,18 @@ export function NewsletterForm({
       setSentTo(email);
       onSent?.();
       trackEvent(
-        magnetId ? 'lead_magnet_submit' : 'newsletter_submit',
-        magnetId ? { magnet: magnetId } : { locale },
+        campaign
+          ? 'panettone_signup'
+          : magnetId
+            ? 'lead_magnet_submit'
+            : 'newsletter_submit',
+        campaign ? {} : magnetId ? { magnet: magnetId } : { locale },
       );
-      trackMetaLead({ magnetId, scenario, placement });
+      trackMetaLead({
+        magnetId,
+        scenario,
+        placement: campaign ? 'top-panettone' : placement,
+      });
     } catch {
       setStatus('error');
       setAttempt((value) => value + 1);
@@ -323,7 +358,7 @@ export function NewsletterForm({
     }
   }
 
-  const DoneHeading = placement === 'recipe' ? 'h4' : 'h2';
+  const DoneHeading = campaign ? 'h3' : placement === 'recipe' ? 'h4' : 'h2';
   if (succeeded)
     return (
       <div className={styles.done} lang={locale}>
@@ -334,10 +369,16 @@ export function NewsletterForm({
             tabIndex={-1}
             className={styles.doneTitle}
           >
-            {copy.doneTitle}
+            {campaignCopy ? 'Дякую за підписку!' : copy.doneTitle}
           </DoneHeading>
-          <p>{kind === 'pdf' ? copy.donePdf(sentTo) : copy.doneBody}</p>
-          <p className={styles.small}>{copy.doneHint}</p>
+          {campaignCopy ? (
+            <p>{campaignCopy.thanks.replace('Дякую за підписку! ', '')}</p>
+          ) : (
+            <>
+              <p>{kind === 'pdf' ? copy.donePdf(sentTo) : copy.doneBody}</p>
+              <p className={styles.small}>{copy.doneHint}</p>
+            </>
+          )}
           {onClose && (
             <Button variant="outline" type="button" onClick={onClose}>
               {copy.close}
@@ -352,13 +393,21 @@ export function NewsletterForm({
     <form
       className={styles.form}
       method="post"
-      action={magnetId ? '/api/newsletter/recipe' : signup?.url}
+      action={
+        campaign
+          ? '/api/newsletter/panettone'
+          : magnetId
+            ? '/api/newsletter/recipe'
+            : signup?.url
+      }
       onSubmit={submit}
       lang={locale}
       aria-label={
-        invitation && magnetId === invitation.magnetId
-          ? invitation.title
-          : copy.label[kind]
+        campaignCopy
+          ? campaignCopy.eyebrow
+          : invitation && magnetId === invitation.magnetId
+            ? invitation.title
+            : copy.label[kind]
       }
       aria-busy={status === 'sending'}
     >
@@ -379,12 +428,12 @@ export function NewsletterForm({
         </div>
       ) : (
         <label className={fieldStyles.field}>
-          <span className="sr-only">{copy.email}</span>
+          <span className="sr-only">{campaignCopy?.email ?? copy.email}</span>
           <input
             name="EMAIL"
             type="email"
             autoComplete="email"
-            placeholder={copy.placeholder}
+            placeholder={campaignCopy?.email ?? copy.placeholder}
             defaultValue={defaultEmail}
             required
             maxLength={254}
@@ -431,7 +480,8 @@ export function NewsletterForm({
         {status === 'error' && <p>{copy.error}</p>}
       </output>
       <p id={footnoteId} className={`${styles.small} ${styles.footnote}`}>
-        {copy.footnote} <a href={`/${locale}/privacy`}>{copy.privacy}</a>
+        {campaignCopy?.consent ?? copy.footnote}{' '}
+        <a href={`/${locale}/privacy`}>{copy.privacy}</a>
       </p>
       {!preview && (
         <noscript>

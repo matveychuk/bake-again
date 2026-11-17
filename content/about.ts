@@ -160,3 +160,7 @@ export const aboutPageContent: Record<AppLocale, AboutPageContent> = {
     "foodCaption": "Pastel de ciruelas de nuestra colección"
   }
 };
+export const aboutFamilyImages = [
+  { src: '/images/about/family-ivan-4.webp', width: 1800, height: 1350 },
+  { src: '/images/about/family-ivan-14.webp', width: 1280, height: 853 },
+] as const;

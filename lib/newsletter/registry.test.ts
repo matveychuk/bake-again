@@ -160,7 +160,7 @@ void test('one product record plus reviewed provider mapping reaches all registr
   // deployed registry, no mocks of derived ID lists, no provider requests.
   const root = await mkdtemp(join(tmpdir(), 'bake-again-registry-'));
   try {
-    for (const dir of ['content', 'lib/newsletter', 'lib/analytics'])
+    for (const dir of ['content', 'lib/newsletter', 'lib/analytics', 'lib/lessons'])
       await mkdir(join(root, dir), { recursive: true });
     const files = [
       'content/lead-magnets.ts',
@@ -176,6 +176,8 @@ void test('one product record plus reviewed provider mapping reaches all registr
         'brevo-forms.json',
       ].map((name) => `lib/newsletter/${name}`),
       'lib/analytics/umami.ts',
+      'lib/lessons/video-progress.ts',
+      'lib/lessons/video-diagnostics.ts',
     ];
     for (const file of files)
       await cp(new URL(`../../${file}`, import.meta.url), join(root, file));

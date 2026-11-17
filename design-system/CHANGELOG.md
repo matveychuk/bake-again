@@ -1,5 +1,65 @@
 # Design system changelog
 
+## 2026-11-17 — Psyllium editorial reading flow
+
+- Give the article a full-width, shorter heading and separate metadata/back row;
+  pair it with a short introduction, quieter section headings and consistent spacing.
+- Reuse the complete PsylliumStory in the page and Design Lab. Keep the campaign
+  above and outside the article landmark; retain the terracotta preview CTA.
+- Move explanation before shopping details. Add compact image labels and a native
+  disclosure for package names/links; keep sources in a separate optional disclosure.
+- Use the existing source-quality dry-husks/gel illustration instead of the spoon
+  macro. Preserve originals and the prior text/layout snapshot in the review output.
+- Verified 390/900/1440px without horizontal overflow, loaded article images and
+  keyboard disclosure operation with visible focus. TypeScript, oxlint and
+  whitespace checks passed. Media preparation: 234 referenced files, 39.46 MiB.
+
+## 2026-11-17 — Panettone first, article below
+
+- Move the campaign above the psyllium title and body; remove the redundant
+  “Читати про псиліум” link. Mirror the order in Design Lab.
+- Show the shared terracotta primary CTA in inert campaign previews while
+  retaining the disabled button and preview notice. Live form gating is unchanged.
+
+## 2026-11-17 — Light panettone invitation
+
+- Replace the campaign's dark lesson palette with the existing light surface,
+  primary text, subtle border and shared terracotta submit button.
+- Enlarge the food image to a full-width 3:2 crop on phones and a larger 4:5
+  desktop column. Use a sentence-case offer title, delivery date and one sentence.
+- Add “Читати про псиліум” below the card with a focusable article destination;
+  update the shared Design Lab fixture. Consent, deadline and submission logic stay intact.
+- Verified 390/900/1440px without horizontal overflow and the article jump/focus.
+  At 390px the photo is 316 × 211px and email starts around y=636px, about 90px
+  above the prior card. TypeScript and oxlint passed; no subscription was submitted.
+
+## 2026-11-17 — Compact mobile navigation and article heading
+
+- Show Instagram and Facebook as accessible 44px ghost icon links before the
+  avatar. Remove the separate mobile social strip.
+- Move Shopping into the hamburger menu at the compact navigation breakpoint;
+  keep its full localized name and active-page indication.
+- Put the blog back arrow alongside the article title; use the existing mobile
+  section-title token and a smaller top inset. Update the shared Design Lab examples.
+- Verified the article at 390/900/1440px and the UK/ES/EN navigation examples
+  without horizontal overflow; mobile targets are 44px and keyboard focus is
+  visible. TypeScript and oxlint passed. Campaign styling/copy is unchanged.
+
+## 2026-11-16 — Temporary panettone article subscription
+
+- Extend EditorialInvitation with a dark campaign variant and NewsletterForm with
+  the panettone copy, open email field and consent below the button.
+- Reuse lesson colours, existing type/space tokens and a source-backed 4:5 WebP.
+- Place the Ukrainian-only offer below the psyllium H1 through December 10; keep
+  the Napoleon invitation below the article. Add the inert Design Lab example.
+
+## 2026-11-15 — Blog and ingredient comparison
+
+- Reuse the catalogue card surface for two linked blog cards. The first pairs the
+  family photos, and the second features a close-up of baked crumb.
+- Show both ingredient forms side by side with packaging names and links.
+  Design Lab uses the same card and comparison as the Ukrainian pages.
+
 ## 2026-11-13 — Lesson page: krok8 first screen, guarantee, bottom cookie panel
 
 - Cookie panel: always fixed at the bottom (12 px + safe area), no top docking;

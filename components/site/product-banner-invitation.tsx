@@ -54,12 +54,15 @@ export function ProductBannerInvitation({
   banner,
   recipeId,
   preview = false,
+  titleId: providedTitleId,
 }: {
   banner: ProductBanner;
   recipeId: string;
   preview?: boolean;
+  titleId?: string;
 }) {
-  const titleId = useId();
+  const generatedTitleId = useId();
+  const titleId = providedTitleId ?? generatedTitleId;
   const { buy, details, preview: freeStep } = banner.actions;
 
   return (

@@ -29,6 +29,16 @@
   gap: var(--space-6);
 }
 
+.header .links {
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+.header .link svg {
+  width: var(--layout-gutter-mobile);
+  height: var(--layout-gutter-mobile);
+}
+
 .follow {
   width: min(
     100% - 2 * var(--layout-gutter-desktop),

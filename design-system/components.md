@@ -625,23 +625,25 @@ current links have a written underline, and the trigger uses visible keyboard fo
 The neutral avatar does not imply an uploaded photo or expose initials from an email.
 
 At 1120px and below, move primary links into the Menu disclosure before they wrap.
-The visual and keyboard order is Menu, wordmark, language, shopping, account. At 620px
-and below language moves inside Menu. Account and shopping remain immediately
+The visual and keyboard order is Menu, wordmark, language, social icons, account.
+Shopping moves into Menu with its icon and full localized name. At 620px
+and below language also moves inside Menu. Account remains immediately
 available. Menu has a labelled 44px trigger and wrapping links on a bounded scrolling
 surface. The header stays sticky. Its opaque page-background band and lower
 divider span the full viewport, while navigation retains the page maximum width
 and responsive gutters. The Menu aligns with those gutters on its own bounded
 surface. Account, Saved and Shopping omit header/social
-promotion; their footer retains it. Other Ukrainian pages keep their mobile social
-row below the header. Drafts remains local-development-only. Privacy stays in the footer.
+promotion; their footer retains it. Other Ukrainian pages show Instagram and Facebook
+before the avatar in the same header row. There is no separate mobile social strip.
+Drafts remains local-development-only. Privacy stays in the footer.
 
 `SocialLinks` renders only for Ukrainian (`uk`); English and Spanish render no social
 links, invitation or empty mobile row. The current social content is Ukrainian, and
 the owner explicitly chose to omit social promotion from the other site languages.
 The component extends the shared Button with three composition variants:
 
-- `header`: outline buttons with icons and full platform names, aligned with the
-  navigation. Omit the extra “Стежте за нами” line at every width. Header entry
+- `header`: ghost icon buttons with accessible platform names and 44px targets,
+  aligned before the avatar at every width. Header entry
   points are distinct from the single social row at the end of each page.
 - `follow`: a compact editorial “Печімо разом” section describing new gluten-free
   recipes, short videos and practical tips. Equal primary links say “Підписатися в

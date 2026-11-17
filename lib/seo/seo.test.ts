@@ -87,12 +87,21 @@ void test('localized public pages expose a sharing image while recipes keep thei
 
 void test('sitemap contains only published canonical pages and reciprocal language links', () => {
   const entries = sitemapEntries();
-  assert.equal(entries.length, 78);
+  assert.equal(entries.length, 80);
+  const articleUrls = [
+    'https://bakeagain.com/uk/blog',
+    'https://bakeagain.com/uk/blog/psyllium',
+  ];
+  for (const url of articleUrls) {
+    assert.deepEqual(entries.find((entry) => entry.url === url)?.alternatives, [
+      { locale: 'uk', url },
+    ]);
+  }
   assert.equal(new Set(entries.map((entry) => entry.url)).size, entries.length);
   for (const entry of entries) {
     assert.ok(!/\/cook|\/saved|\/drafts|shopping-list|[?]/.test(entry.url));
     assert.ok(entry.alternatives.some((alt) => alt.url === entry.url));
-    assert.equal(entry.alternatives.length, 4);
+    if (!articleUrls.includes(entry.url)) assert.equal(entry.alternatives.length, 4);
   }
   for (const { recipe } of recipeDocuments.filter(
     (d) => d.recipe.publicationStatus !== 'published',

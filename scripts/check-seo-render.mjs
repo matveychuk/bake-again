@@ -66,16 +66,19 @@ const sitemap = await sitemapResponse.text();
 const entries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(
   (match) => match[1],
 );
-assert.equal(entries.length, 78);
+assert.equal(entries.length, 80);
+const isUkBlogPath = (path) => path === '/uk/blog' || path === '/uk/blog/psyllium';
 assert.equal(
   entries.filter((e) => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(e)).length,
   78,
 );
 for (const entry of entries) {
-  assert.match(
-    entry,
-    /hreflang="x-default" href="https:\/\/bakeagain\.com\/en(?:\/|")/,
-  );
+  if (entry.includes('<loc>https://bakeagain.com/uk/blog')) {
+    assert.match(entry, /hreflang="uk"/);
+    assert.doesNotMatch(entry, /hreflang="(?:en|es|x-default)"/);
+  } else {
+    assert.match(entry, /hreflang="x-default" href="https:\/\/bakeagain\.com\/en(?:\/|")/);
+  }
   assert.ok(
     !/\/(saved|shopping-list|account|api|drafts|cook)(\/|<)/.test(entry),
   );
@@ -92,7 +95,7 @@ for (const entry of entries) {
   assert.equal(response.status, 200, path);
   const html = await response.text();
   const head = html.slice(0, html.indexOf('</head>'));
-  assert.ok(head.toLowerCase().includes('hreflang="x-default"'), path);
+  assert.ok(head.toLowerCase().includes(isUkBlogPath(path) ? 'hreflang="uk"' : 'hreflang="x-default"'), path);
   checkVerification(head);
   if (path.includes('/recipes/')) {
     const recipe = schemas(html).find((schema) => schema['@type'] === 'Recipe');

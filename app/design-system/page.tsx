@@ -1,4 +1,7 @@
 import { CookieConsentPanel } from '@/components/site/cookie-consent';
+import { PanettoneInvitation } from '@/components/site/panettone-invitation';
+import { PsylliumStory } from '@/app/_components/articles/articles';
+import { BlogCards } from '@/app/_components/articles/blog';
 import { RecipeFreeLessonStep } from '@/components/recipe/recipe-free-lesson-step';
 import { RecipeReviewsExample } from '@/components/community/recipe-reviews-example';
 import { GuestReviewExample } from '@/components/community/guest-review-example';
@@ -428,6 +431,19 @@ export default function DesignSystemPage() {
 
           <section
             className={styles.section}
+            id="articles"
+            aria-label="Blog cards and ingredient comparison"
+          >
+            <h2>Blog cards and ingredient comparison</h2>
+            <div lang="uk">
+              <BlogCards preview />
+              <PanettoneInvitation preview />
+              <PsylliumStory preview />
+            </div>
+          </section>
+
+          <section
+            className={styles.section}
             id="personal-account"
             aria-label="Personal accounts — identity, settings and sign-in"
           >
@@ -520,11 +536,12 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Site navigation</strong>
                 <span>
-                  Ukrainian-only social profiles: outline header links and quiet
+                  Ukrainian-only social profiles: labelled 44px icon links before
+                  the avatar in the header and quiet
                   footer links. Home and recipe endings share an email-only
                   invitation followed by the footer, without adjacent social
-                  links. On mobile, the social row scrolls away while navigation
-                  stays sticky. The opaque page-colour header band and its lower
+                  links. Mobile navigation and social icons share one sticky row.
+                  The opaque page-colour header band and its lower
                   divider span the screen, including over lighter recipe
                   sections. English and Spanish omit social links; the email
                   invitation is localized. Shopping list keeps an accessible

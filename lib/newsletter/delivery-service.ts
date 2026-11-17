@@ -35,6 +35,7 @@ export function createDeliveryService(
     row: DeliveryRequest,
     placement: SubscriptionPlacement,
   ) {
+    if (!isMagnetId(row.magnet)) throw new DeliveryError(400);
     if (row.status === 'sent') return;
     if (!(await store.claim(row.id, now()))) throw new DeliveryError(409);
     try {
@@ -82,7 +83,7 @@ export function createDeliveryService(
     async confirm(token: string): Promise<MagnetId> {
       if (!/^[a-f0-9]{64}$/.test(token)) throw new DeliveryError(400);
       const row = await store.find(await digest(token));
-      if (!row || row.expires_at <= now()) throw new DeliveryError(410);
+      if (!row || row.expires_at <= now() || !isMagnetId(row.magnet)) throw new DeliveryError(410);
       // Old return links remain recoverable, but no second SMTP sender is revived.
       await register(row, 'landing');
       return row.magnet;

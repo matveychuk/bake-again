@@ -88,6 +88,7 @@ export async function verifyRecipeChallenge(
   token: string,
   bindings: Record<string, unknown>,
   fetcher: typeof fetch = fetch,
+  action = 'recipe_request',
 ) {
   if (
     typeof bindings.TURNSTILE_SECRET_KEY !== 'string' ||
@@ -119,8 +120,8 @@ export async function verifyRecipeChallenge(
   };
   const validContext = localTest
     ? localHosts.includes(result.hostname ?? '') &&
-      ['test', 'recipe_request'].includes(result.action ?? '')
-    : result.hostname === 'bakeagain.com' && result.action === 'recipe_request';
+      ['test', action].includes(result.action ?? '')
+    : result.hostname === 'bakeagain.com' && result.action === action;
   if (result.success !== true || !validContext) throw new DeliveryError(403);
   // Purpose-separated network identifier, never persist the raw ingress address.
   return digest(

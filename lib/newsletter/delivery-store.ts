@@ -7,7 +7,7 @@ export interface DeliveryStatement {
 }
 export interface DeliveryDatabase { prepare(sql: string): DeliveryStatement }
 export type DeliveryRequest = {
-  id: string; token_hash: string; dedupe_key: string; email: string; magnet: MagnetId;
+  id: string; token_hash: string; dedupe_key: string; email: string; magnet: MagnetId | 'panettone';
   network_key: string; created_at: number; expires_at: number;
   status: 'pending' | 'awaiting_confirmation' | 'delivering' | 'sent' | 'failed';
 };

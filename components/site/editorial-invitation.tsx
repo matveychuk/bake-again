@@ -8,7 +8,13 @@ type Props = Omit<ComponentPropsWithRef<'section'>, 'title' | 'children'> & {
   description: string;
   note?: ReactNode;
   action: ReactNode;
-  variant?: 'default' | 'lead-magnet' | 'recipe-step' | 'product-banner';
+  variant?:
+    | 'default'
+    | 'lead-magnet'
+    | 'recipe-step'
+    | 'product-banner'
+    | 'campaign';
+  subtitle?: string;
   /** Short product label above the title, e.g. format and launch month. */
   eyebrow?: string;
   headingLevel?: 1 | 2 | 3;
@@ -26,6 +32,7 @@ export function EditorialInvitation({
   headingLevel = 2,
   image,
   eyebrow,
+  subtitle,
   className,
   ...props
 }: Props) {
@@ -37,6 +44,7 @@ export function EditorialInvitation({
         variant === 'lead-magnet' && styles.leadMagnet,
         variant === 'recipe-step' && styles.recipeStep,
         variant === 'product-banner' && styles.productBanner,
+        variant === 'campaign' && styles.campaign,
         className,
       ]
         .filter(Boolean)
@@ -54,6 +62,7 @@ export function EditorialInvitation({
           >
             {title}
           </SectionTitle>
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
           <p>{description}</p>
           {note && variant !== 'lead-magnet' && (
             <div className={styles.note}>{note}</div>

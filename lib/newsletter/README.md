@@ -511,3 +511,35 @@ event measures an accepted request, never a confirmed subscription or delivery.
 Owner authorized API-key creation and encrypted Cloudflare storage in this chat.
 The key is named `Bake Again - Recipe delivery`, expires 2027-10-21 (and after
 90 inactive days under Brevo's policy). No key value belongs in this file.
+
+## Temporary panettone campaign — 2026-11-16 (local preparation)
+
+`/uk/blog/psyllium#panettone` uses the existing NewsletterForm and the new
+`POST /api/newsletter/panettone`. Copy/deadline are in
+`content/articles/psyllium.ts`; the campaign ends after 2026-12-10 Europe/Kyiv.
+The owner-created list «Панетоне — рецепт 10.12» was verified in Brevo on
+2026-11-17 as #13 and is configured in `panettoneCampaign.listId`. An optional
+`BREVO_PANETTONE_LIST_ID` Worker binding can override it. Invalid IDs fail closed;
+never collect only into lists #3/#4 while claiming panettone registration.
+
+One upsert adds #3, #4 and the campaign list, with SOURCE from URL `src` (default
+`direct`), SIGNUP_PAGE=`blog-psyllium`, SIGNUP_POSITION=`top-panettone`.
+Origin/body limits, Turnstile (action `panettone_signup`), the existing D1 atomic
+quotas/short-lived ledger and suppression policy apply. Repeated successful
+addresses show the same thanks; provider failures remain errors and retryable.
+No welcome email or automation configuration is changed by this implementation.
+
+The existing Umami bridge sends `panettone_signup` after success with no form/query
+data. Meta Lead uses `top-panettone` through the existing consent gate; nothing
+is queued before consent. Development without credentials/list ID is an explicitly
+labelled inert preview. Live Brevo membership and inbox delivery require separate
+verification with the owner's test alias; mocked tests do not establish either.
+
+On 2026-11-17, verified the [Instagram](https://login.sendpulse.com/messengers/bots/instagram/6aca498c548b0b499408d0d2/triggers/6afc73e233715c50f70b804e/)
+and [Facebook](https://login.sendpulse.com/messengers/bots/messenger/baed2c7f-8704-4eea-9c1c-a839c7628060/triggers/6afc74a3ff387a31860220de/)
+SendPulse comment triggers were saved and off. Each matches `панетон`, `панеттон`
+or `panetton` on any post, ignores repeats for five minutes, and has three
+public reply variants. The private message uses one «Хочу рецепт» URL button
+with `src=ig-bot-panettone` or `src=fb-bot-panettone` and `#panettone`.
+The live article returned 404 at verification. After deployment, test the form,
+Brevo lists and attributes, inbox delivery, and the comment flow in both channels.

@@ -78,6 +78,19 @@ for incoming links. A subtle 1px divider separates it from the story: 32px on ea
 side at compact widths, 48px on desktop. Do not stack extra trailing padding inside
 the closing copy. Design Lab uses the production `AboutRecipeStatuses` component.
 
+## Blog
+
+The Ukrainian blog uses a grid based on the catalogue card surface. Its cards have
+one link around the title with a full-card hit area. The first card shows both
+existing family photos side by side and opens the About story. The next card leads
+with a landscape food image. The cards stack on phones and preserve their order.
+The Design Lab shows both cards and the ingredient comparison.
+
+The comparison places the food illustration above two aligned columns.
+Keep their left-to-right order on phones. Give each form a visible name,
+its packaging labels, and a distinct accessible product link. Put the
+generated illustration credit in the figure caption.
+
 ## Publication and local drafts
 
 - Each recipe source owns `publicationStatus`: `published` or `unpublished` (`archived`
@@ -273,3 +286,43 @@ instruction numbering or structured recipe data. Crepes offers the existing
 junior-cook card after step two in Ukrainian. Reuse EditorialInvitation's
 `recipe-step` variant and NewsletterForm; keep the next cooking step visible in
 normal flow, with no modal or gate. Do not add it to print or Cook mode.
+
+## Temporary article campaign · 2026-11-16
+
+Mobile article navigation (revised 2026-11-17): `ArticleHeader` places its 44px
+back-to-blog link in a small metadata row above the full-width title. The category
+stays in that row and wraps if needed. The title uses the existing 32px token on
+phones (title-small on larger screens), balanced wrapping and no forced breaks.
+A short 18px introduction follows in the same header. `PsylliumStory` separates
+the article from the campaign with a quiet rule and contains the complete
+reading flow; the offer sits outside the article landmark. Design Lab `#articles`
+reuses the same story. Section headings use the 24px drawer-title token, paragraphs
+remain 16px with relaxed leading, and related paragraphs stay 16px apart.
+
+Ingredient illustrations follow the idea they explain: dry husks and hydrated
+gel first, whole-versus-ground later. Keep generated-image disclosure visible.
+The two comparison labels remain under the image; English/Spanish package names
+and shop examples sit in an optional native disclosure with a 44px summary target.
+Do not turn a general explanation into a substitution recipe or a tested claim.
+
+`EditorialInvitation` has a `campaign` variant using the existing light surface,
+primary text and subtle border tokens, Literata/Manrope and the shared terracotta
+submit button. The food photo takes three sevenths of the desktop grid in 4:5;
+on phones it fills the content width in a 3:2 crumb crop above the copy.
+`PanettoneInvitation` reuses `NewsletterForm` with the form open
+immediately, an editable email, exact campaign consent/success text and the
+existing keyboard focus and Turnstile behaviour. Sentence-case title, delivery
+date and one short sentence replace the repeated eyebrow and experiment story,
+bringing the form upward despite the larger photograph. The card comes first,
+followed by the article heading and body, without a “Читати про псиліум” link.
+Design Lab `#articles` includes the same inert card followed by the heading and
+comparison example; it cannot subscribe a contact. Inert campaign previews show
+the primary terracotta CTA while preserving native disabled semantics and the
+visible preview notice. Live verification/loading states keep the shared Button
+behaviour. Updated by owner request
+on 2026-11-17; the prior dark composition is superseded.
+
+The Ukrainian psyllium page places the campaign before the article H1,
+introduction and cover. Napoleon appears only below the article body. Campaign
+copy and the inclusive 2026-12-10 deadline live in `content/articles/psyllium.ts`;
+Europe/Kyiv determines the last day. The server evaluates the date per request.

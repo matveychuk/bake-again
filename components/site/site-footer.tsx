@@ -8,6 +8,7 @@ import { canViewDrafts } from '@/lib/runtime/local-development.server';
 import styles from './site-footer.module.css';
 import { SocialLinks } from './social-links';
 import { CookieSettings } from './cookie-consent';
+import { blogPath } from '@/content/articles/psyllium';
 
 export async function SiteFooter({
   locale = defaultLocale,
@@ -30,7 +31,9 @@ export async function SiteFooter({
               : 'Site information'
         }
       >
-        <a href={`/${locale}/about`}>{messages.navigation.about}</a>
+        {locale === 'uk'
+          ? <a href={blogPath}>Блог</a>
+          : <a href={`/${locale}/about`}>{messages.navigation.about}</a>}
         <a href={`/${locale}/privacy`}>{privacyContent[locale].title}</a>
         <CookieSettings locale={locale} />
         {local && <a href="/design-system">Design Lab</a>}

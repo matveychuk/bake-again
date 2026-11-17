@@ -65,10 +65,10 @@ export function SocialLinks({
               variant === 'follow'
                 ? 'default'
                 : variant === 'header'
-                  ? 'outline'
+                  ? 'ghost'
                   : 'link'
             }
-            size="sm"
+            size={variant === 'header' ? 'icon' : 'sm'}
             className={styles.link}
             aria-label={
               variant === 'follow' ? followLabel : `Bake Again · ${name}`
@@ -78,7 +78,7 @@ export function SocialLinks({
             data-social-placement={variant}
           >
             <Icon aria-hidden="true" />
-            <span>{variant === 'follow' ? followLabel : name}</span>
+            {variant !== 'header' && <span>{variant === 'follow' ? followLabel : name}</span>}
           </Button>
         </li>
       ))}
@@ -106,7 +106,7 @@ export function SocialLinks({
   }
 
   return (
-    <div className={`${styles.social} ${variant === 'footer' ? styles.footer : ''}`} data-social-links>
+    <div className={`${styles.social} ${variant === 'footer' ? styles.footer : styles.header}`} data-social-links>
       {links}
     </div>
   );

@@ -303,3 +303,74 @@
     grid-column: 1 / -1;
   }
 }
+
+/* Temporary article campaign: the shared invitation with an always-open form. */
+.campaign {
+  width: 100%;
+  margin: 0;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+}
+.campaign .main {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+  align-items: start;
+  gap: var(--space-4) var(--space-6);
+}
+.campaign .image {
+  grid-row: span 2;
+}
+.campaign .image img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.campaign .copy h2 {
+  font-size: var(--font-size-drawer-title);
+  line-height: calc(var(--line-height-tight) * 1.15);
+  overflow-wrap: anywhere;
+}
+.campaign .copy .subtitle {
+  font-size: var(--font-size-body);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  color: var(--color-text-primary);
+}
+.campaign .copy > p:not(.eyebrow) {
+  color: var(--color-text-primary);
+}
+.campaign .action {
+  width: 100%;
+  justify-items: stretch;
+}
+.campaign a {
+  color: var(--color-text-primary);
+}
+/* Inert previews show the approved primary colour without enabling submission. */
+.campaign[data-preview='true'] button[type='submit']:disabled {
+  background: var(--color-action-primary);
+  color: var(--color-text-on-accent);
+  border-color: transparent;
+}
+@media (max-width: 620px) {
+  .campaign {
+    padding: var(--space-4);
+  }
+  .campaign .main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+  .campaign .image {
+    grid-row: auto;
+    width: 100%;
+  }
+  .campaign .image img {
+    aspect-ratio: 3 / 2;
+    object-position: center;
+  }
+  .campaign .copy h2 {
+    font-size: var(--font-size-drawer-title);
+  }
+}

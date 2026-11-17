@@ -1,10 +1,11 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { EvidenceBadge, type EvidenceStatus } from '@/components/recipe/evidence-badge';
 import { Eyebrow } from '@/components/foundations/eyebrow';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
 import { SocialLinks } from '@/components/site/social-links';
-import { aboutPageContent } from '@/content/about';
+import { aboutFamilyImages, aboutPageContent } from '@/content/about';
+import { blogPath } from '@/content/articles/psyllium';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getLocalizedRecipePath, localeAboutPath, localeHomePath } from '@/lib/i18n/routes';
 import styles from './about-page.module.css';
@@ -18,12 +19,12 @@ export function AboutFamilyPhotos({ locale }: { locale: AppLocale }) {
       <div className={styles.photoPair}>
         <figure className={styles.familyPhoto}>
           {/* oxlint-disable-next-line next/no-img-element -- Prepared WebP with original proportions. */}
-          <img src="/images/about/family-ivan-4.webp" alt={content.photoThenAlt} width={1800} height={1350} fetchPriority="high" />
+          <img {...aboutFamilyImages[0]} alt={content.photoThenAlt} fetchPriority="high" />
           <figcaption>{content.photoThenCaption}</figcaption>
         </figure>
         <figure className={styles.familyPhoto}>
           {/* oxlint-disable-next-line next/no-img-element -- Prepared WebP with original proportions. */}
-          <img src="/images/about/family-ivan-14.webp" alt={content.photoNowAlt} width={1280} height={853} />
+          <img {...aboutFamilyImages[1]} alt={content.photoNowAlt} />
           <figcaption>{content.photoNowCaption}</figcaption>
         </figure>
       </div>
@@ -40,6 +41,9 @@ export function AboutPage({ locale }: { locale: AppLocale }) {
     <main>
       <SiteHeader locale={locale} pathname={pathname} />
       <article className={styles.page}>
+        {locale === 'uk' && <a className={styles.blogBack} href={blogPath}>
+          <ArrowLeft aria-hidden="true" size={18} /> До блогу
+        </a>}
         <header className={styles.hero}>
           <div className={styles.heroCopy}>
             <Eyebrow>{content.eyebrow}</Eyebrow>

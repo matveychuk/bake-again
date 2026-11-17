@@ -155,7 +155,7 @@ export function metaLeadEvent({
   if (magnetId && !isLeadMagnetId(magnetId)) return null;
   if (
     !magnetId &&
-    !['landing', 'recipe', 'footer', 'after-review', 'product-banner'].includes(
+    !['landing', 'recipe', 'footer', 'after-review', 'product-banner', 'top-panettone'].includes(
       placement ?? '',
     )
   )

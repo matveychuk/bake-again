@@ -9,6 +9,7 @@ import {
 } from '../i18n/publication.ts';
 import { getLocalizedRecipePath } from '../i18n/routes.ts';
 import { absoluteUrl } from './site.ts';
+import { blogPath, psylliumArticle } from '../../content/articles/psyllium.ts';
 
 const xmlEscape = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
@@ -25,6 +26,11 @@ function withDefaultLanguage(alternatives: { locale: string; url: string }[]) {
 export function sitemapEntries() {
   const locales = supportedLocales.filter(isUiLocalePublishable);
   return [
+    ...[blogPath, psylliumArticle.path].map((path) => ({
+      url: absoluteUrl(path),
+      lastmod: null,
+      alternatives: [{ locale: 'uk', url: absoluteUrl(path) }],
+    })),
     ...[...publicPageMetadata, ...publishedTechniques].flatMap(
       ({ path, dateModified }) => {
         const alternatives = locales.map((locale) => ({

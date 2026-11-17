@@ -122,6 +122,8 @@ function getLocaleSwitchPathname(
   if (unlocalizedPath === '/' || unlocalizedPath === '')
     return localeHomePath(targetLocale);
   if (unlocalizedPath === '/recipes') return localeHomePath(targetLocale);
+  if (targetLocale !== 'uk' && /^\/(blog|articles)(\/|$)/.test(unlocalizedPath))
+    return localeHomePath(targetLocale);
 
   return `${localeHomePath(targetLocale)}${unlocalizedPath}`;
 }
