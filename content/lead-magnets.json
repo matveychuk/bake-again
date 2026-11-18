@@ -151,5 +151,63 @@
       "confirmation": "Hemos recibido tu solicitud.",
       "delivered": "Busca el correo con la receta y la ficha para peques."
     }
+  },
+  "crepes-en": {
+    "locale": "en",
+    "recipePath": "/en/recipes/gluten-free-crepes",
+    "page": {
+      "title": "Crepe recipe and junior cook card",
+      "subtitle": "Keep the photo recipe on your phone, or print the one-page card so your junior cook can follow along at the kitchen counter.",
+      "features": [
+        "1 A4 sheet · for printing",
+        "6 pages · for your phone"
+      ],
+      "image": "/images/recipes/crepes-stack-2026-10-20-v1.webp",
+      "imageAlt": "A stack of thin golden crepes on a plate",
+      "note": "Subscribe to get both PDFs in one email, followed by new gluten-free recipes from Bake Again."
+    },
+    "recipeInvitation": {
+      "recipeId": "crepes",
+      "afterStepId": "add-milk",
+      "title": "Crepe recipe and junior cook card",
+      "description": "Keep the photo recipe on your phone, or print the one-page card so your junior cook can follow along at the kitchen counter.",
+      "submit": "Email me both PDFs",
+      "note": "Subscribe to get both PDFs in one email, followed by new gluten-free recipes from Bake Again.",
+      "previews": [
+        {
+          "src": "/images/recipes/crepes/pdf-preview/junior-card-en.webp",
+          "alt": "Junior cook card with six illustrated steps for making crepes",
+          "title": "Junior cook card",
+          "description": "1 A4 sheet · for printing",
+          "href": "/images/recipes/crepes/pdf-preview/junior-card-en.webp",
+          "linkLabel": "Enlarge preview"
+        },
+        {
+          "src": "/images/recipes/crepes/pdf-preview/recipe-steps-en.webp",
+          "alt": "Recipe page showing how to blend the batter, add the milk and check the consistency",
+          "title": "Full recipe",
+          "description": "6 pages · for your phone",
+          "href": "/images/recipes/crepes/pdf-preview/recipe-steps-en.webp",
+          "linkLabel": "Enlarge preview"
+        }
+      ]
+    },
+    "email": {
+      "subject": "Your gluten-free crepe recipe and junior cook card",
+      "title": "Thin gluten-free crepes",
+      "intro": "Here are the photo recipe for your phone and the six-step junior cook card to print on A4.",
+      "links": [
+        {
+          "title": "Download the crepe recipe",
+          "href": "/downloads/Bake-Again-Thin-Gluten-Free-Crepes.pdf"
+        },
+        {
+          "title": "Download the junior cook card",
+          "href": "/downloads/Bake-Again-Crepes-Junior-Cook-Card.pdf"
+        }
+      ],
+      "confirmation": "We’ve received your request.",
+      "delivered": "Check your inbox for the crepe recipe and junior cook card."
+    }
   }
 }

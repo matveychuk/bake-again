@@ -112,6 +112,13 @@ void test('the Spanish recipe registers its own bonus and locale independently o
     listIds: [3, 5, 14],
     attributes: { SOURCE: 'website', SIGNUP_PAGE: '/es/recipes/crepes-sin-gluten', SIGNUP_POSITION: 'after-add-milk' },
   });
+  await f.service.request(email, 'crepes-en', 'network', 'recipe');
+  assert.deepEqual(f.registrations[2].subscription, {
+    listIds: [3, 6, 15],
+    attributes: { SOURCE: 'website', SIGNUP_PAGE: '/en/recipes/gluten-free-crepes', SIGNUP_POSITION: 'after-add-milk' },
+  });
+  assert.throws(() => recipeSubscription('crepes-en', 'landing'));
+  assert.equal(isSuppressed({ listUnsubscribed: [15] }), true);
   assert.throws(() => recipeSubscription('crepes-es', 'landing'));
   assert.equal(isSuppressed({ listUnsubscribed: [14] }), true);
 });

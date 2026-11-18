@@ -129,7 +129,7 @@ const messages: Record<AppLocale, Copy> = {
     sending: 'Sending…',
     doneTitle: 'Thanks!',
     doneBody: 'Your first email is on its way.',
-    donePdf: (email) => `The PDF is on its way to ${email}.`,
+    donePdf: (email) => `The recipe and junior cook card are on their way to ${email}.`,
     doneHint: 'Not there in a few minutes? Check Spam or Promotions.',
     close: 'Close',
     error: 'Couldn’t send. Please try again.',

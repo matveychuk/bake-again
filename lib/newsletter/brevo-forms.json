@@ -711,7 +711,8 @@
       "bonusListIds": {
         "mlyntsi": 9,
         "shokolad": 11,
-        "crepes-es": 14
+        "crepes-es": 14,
+        "crepes-en": 15
       },
       "attributes": {
         "SOURCE": "Text",
@@ -726,7 +727,8 @@
           9,
           11,
           13,
-          14
+          14,
+          15
         ],
         "localePriority": [
           "uk",
@@ -746,6 +748,14 @@
         "reentryAfterExit": false
       },
       "bonuses": {
+        "crepes-en": {
+          "automationId": 9,
+          "messageId": 31,
+          "stepId": 3,
+          "listId": 15,
+          "waitMinutes": 2,
+          "savedHtml": "lib/newsletter/provider-templates/crepes-en.html"
+        },
         "mlyntsi": {
           "automationId": 4,
           "messageId": 22,

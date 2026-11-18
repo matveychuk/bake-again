@@ -1202,7 +1202,7 @@ export default function DesignSystemPage() {
                   Junior-cook card after step two; inert preview, no email.
                 </span>
               </div>
-              {(['light', 'dark'] as const).flatMap((theme) => (['uk', 'es'] as const).map((locale) => (
+              {(['light', 'dark'] as const).flatMap((theme) => (['uk', 'es', 'en'] as const).map((locale) => (
                 <div key={theme + locale} data-theme={theme} lang={locale}>
                   <RecipePdfInvitation
                     id={`recipe-step-card-${theme}-${locale}`}

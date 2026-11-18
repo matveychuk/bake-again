@@ -39,7 +39,7 @@ export async function NewsletterSignup({
         recipeSiteKey={bindings.TURNSTILE_SITE_KEY as string}
       />
     ) : (
-      <output>{locale === 'es' ? 'La suscripción no está disponible ahora. Inténtalo más tarde.' : 'Підписка зараз недоступна. Спробуй, будь ласка, пізніше.'}</output>
+      <output>{locale === 'es' ? 'La suscripción no está disponible ahora. Inténtalo más tarde.' : locale === 'en' ? 'Subscriptions are temporarily unavailable. Please try again later.' : 'Підписка зараз недоступна. Спробуй, будь ласка, пізніше.'}</output>
     );
   return signup ? (
     <NewsletterInvitation
