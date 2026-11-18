@@ -644,6 +644,7 @@ export function AssistantTrigger({
   scope,
   configuration,
   label,
+  mobileLabel,
   ariaLabel,
   stepTitle,
   className,
@@ -653,6 +654,7 @@ export function AssistantTrigger({
   scope: AssistantScope;
   configuration: AssistantConfiguration;
   label: string;
+  mobileLabel?: string;
   ariaLabel?: string;
   stepTitle?: string;
   className?: string;
@@ -666,7 +668,7 @@ export function AssistantTrigger({
       variant="link"
       className={className}
       type="button"
-      aria-label={ariaLabel}
+      aria-label={ariaLabel ?? (mobileLabel ? label : undefined)}
       onClick={(event) =>
         context.openAssistant(
           { scope, configuration, stepTitle, preparedAnswers },
@@ -675,7 +677,14 @@ export function AssistantTrigger({
       }
     >
       <MessageCircleQuestion size={compact ? 14 : 17} aria-hidden="true" />
-      {label}
+      {mobileLabel ? (
+        <>
+          <span className={styles.triggerFullLabel}>{label}</span>
+          <span className={styles.triggerMobileLabel}>{mobileLabel}</span>
+        </>
+      ) : (
+        label
+      )}
     </Button>
   );
 }

@@ -41,17 +41,20 @@ export function RecipeCookEntry({
   needsCream = false,
   hasMethod = true,
   secondaryAction,
+  heading,
 }: {
   locale: AppLocale;
   href: string;
   needsCream?: boolean;
   hasMethod?: boolean;
   secondaryAction?: ReactNode;
+  heading?: ReactNode;
 }) {
   const copy = recipeReaderCopy[locale];
   const messages = getUiMessages(locale).recipe;
   return (
-    <div className={styles.cookEntry}>
+    <div className={`${styles.cookEntry} ${heading ? styles.withHeading : ''}`}>
+      {heading && <div className={styles.methodTitle}>{heading}</div>}
       <div className={styles.cookActions}>
         <Button variant="default" href={href}>
           {!needsCream && (
@@ -65,7 +68,9 @@ export function RecipeCookEntry({
                 : messages.openCookMode}
           </span>
         </Button>
-        {secondaryAction}
+        {secondaryAction && (
+          <div className={styles.secondaryAction}>{secondaryAction}</div>
+        )}
       </div>
       <p>
         {hasMethod

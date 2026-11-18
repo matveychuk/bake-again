@@ -234,18 +234,6 @@
 .method h2 {
   margin-top: 0;
 }
-.methodHeading {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(
-      0,
-      var(--layout-assistant-drawer)
-    );
-  align-items: start;
-  gap: var(--space-8);
-}
-.methodHeading > :last-child {
-  justify-self: end;
-}
 .steps {
   margin: var(--space-8) 0 0;
   padding: 0;
@@ -344,13 +332,6 @@
   }
   .method {
     padding: var(--space-8) var(--layout-gutter-mobile) var(--space-12);
-  }
-  .methodHeading {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-6);
-  }
-  .methodHeading > :last-child {
-    justify-self: start;
   }
   .stepMedia {
     margin-inline-start: var(--space-12);

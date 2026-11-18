@@ -56,3 +56,65 @@
   line-height: var(--line-height-body);
   overflow-wrap: anywhere;
 }
+
+.withHeading {
+  max-width: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(
+      0,
+      var(--layout-assistant-drawer)
+    );
+  gap: 0 var(--space-8);
+  align-items: start;
+}
+.methodTitle {
+  min-width: 0;
+  grid-row: span 2;
+}
+.withHeading > p {
+  grid-column: 2;
+}
+@media (max-width: 900px) {
+  .withHeading {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-6);
+  }
+  .methodTitle {
+    grid-row: auto;
+  }
+  .withHeading > p {
+    grid-column: 1;
+    margin-top: 0;
+  }
+}
+@media (max-width: 620px) {
+  .withHeading {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-4) var(--space-2);
+  }
+  .withHeading .cookActions {
+    display: contents;
+  }
+  .methodTitle {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+  .methodTitle h2,
+  .methodTitle h3 {
+    margin-bottom: 0;
+  }
+  .withHeading .secondaryAction {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+  .withHeading .cookActions > a {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: start;
+  }
+  .withHeading > p {
+    grid-column: 1 / -1;
+  }
+}

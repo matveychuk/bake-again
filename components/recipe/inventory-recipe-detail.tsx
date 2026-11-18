@@ -466,40 +466,41 @@ export function InventoryRecipeDetail({
           tabIndex={-1}
           aria-labelledby="method-title"
         >
-          <div className={styles.methodHeading}>
-            <SectionTitle
-              eyebrow={
-                concise || !structured
-                  ? undefined
-                  : messages.method(methodSteps.length)
-              }
-              eyebrowClassName={styles.eyebrow}
-              id="method-title"
-            >
-              {readerCopy.method}
-            </SectionTitle>
-            <RecipeCookEntry
-              locale={locale}
-              href={
-                structured?.creamOptions && !selectedCreamRecipeId
-                  ? '#cream-options'
-                  : cookModePath
-              }
-              needsCream={Boolean(
-                structured?.creamOptions && !selectedCreamRecipeId,
-              )}
-              hasMethod={methodSteps.length > 0}
-              secondaryAction={
-                helpConfiguration ? (
-                  <AssistantTrigger
-                    configuration={helpConfiguration}
-                    scope={{ kind: 'recipe' }}
-                    label={assistantMessages[locale].trigger.recipe}
-                  />
-                ) : undefined
-              }
-            />
-          </div>
+          <RecipeCookEntry
+            heading={
+              <SectionTitle
+                eyebrow={
+                  concise || !structured
+                    ? undefined
+                    : messages.method(methodSteps.length)
+                }
+                eyebrowClassName={styles.eyebrow}
+                id="method-title"
+              >
+                {readerCopy.method}
+              </SectionTitle>
+            }
+            locale={locale}
+            href={
+              structured?.creamOptions && !selectedCreamRecipeId
+                ? '#cream-options'
+                : cookModePath
+            }
+            needsCream={Boolean(
+              structured?.creamOptions && !selectedCreamRecipeId,
+            )}
+            hasMethod={methodSteps.length > 0}
+            secondaryAction={
+              helpConfiguration ? (
+                <AssistantTrigger
+                  configuration={helpConfiguration}
+                  scope={{ kind: 'recipe' }}
+                  label={assistantMessages[locale].trigger.recipe}
+                  mobileLabel={stepHelpMessages[locale].compactTrigger}
+                />
+              ) : undefined
+            }
+          />
           {methodSteps.length > 0 ? (
             <ol className={styles.steps}>
               {methodSteps.map((step, index) => (

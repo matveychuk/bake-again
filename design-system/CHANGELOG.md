@@ -1,5 +1,12 @@
 # Design system changelog
 
+## 2026-11-18 — Compact the mobile method heading
+
+- Place the recipe-wide question alongside the method heading on phones and
+  show the existing short localized question label, retaining the full accessible
+  name. Reuse `RecipeCookEntry`'s heading slot in recipes and the three-language
+  Design Lab examples. Cook mode behavior and the primary entry are unchanged.
+
 ## 2026-11-18 — Remove the doubled recipe divider
 
 - Remove the inline PDF invitation's bottom rule and bottom margin; retain the

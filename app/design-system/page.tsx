@@ -983,10 +983,12 @@ export default function DesignSystemPage() {
                           getRecipeContent('plum-cake', locale)!.steps.length,
                         )}
                       </p>
-                      <h3 id={`reading-method-${locale}`} tabIndex={-1}>
-                        {recipeReaderCopy[locale].method}
-                      </h3>
                       <RecipeCookEntry
+                        heading={
+                          <h3 id={`reading-method-${locale}`} tabIndex={-1}>
+                            {recipeReaderCopy[locale].method}
+                          </h3>
+                        }
                         locale={locale}
                         href={getLocalizedRecipePath(
                           'plum-cake',
@@ -997,6 +999,9 @@ export default function DesignSystemPage() {
                           <AssistantTrigger
                             configuration={{ kind: 'base' }}
                             label={assistantMessages[locale].trigger.recipe}
+                            mobileLabel={
+                              stepHelpMessages[locale].compactTrigger
+                            }
                             scope={{ kind: 'recipe' }}
                           />
                         }

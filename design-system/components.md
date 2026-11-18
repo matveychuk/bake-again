@@ -433,8 +433,11 @@ variation.
 - `RecipeCookEntry` places one primary “Cook step by step” action beside the written
   method, with a short explanation of the separate, one-step-at-a-time view. A quieter
   secondary “Ask about this recipe” action sits beside the Cook entry and opens the
-  recipe-wide assistant scope. On narrow screens the actions wrap beneath the method
-  heading. Label the written section “Method” (localized) with the step count above it;
+  recipe-wide assistant scope. The optional `heading` slot makes this composition
+  reusable in recipes and Design Lab. On phone widths (up to 620px), the recipe
+  question sits beside the heading with a short localized label; its accessible
+  name retains the full recipe-wide meaning. Cook entry and description follow
+  underneath. Label the written section “Method” (localized) with the step count above it;
   reserve “Cook step by step” for the action that opens the guided mode. Do not repeat
   the launch in the hero.
 - Preserve the exact configuration and selected cream in the Cook URL. When cream

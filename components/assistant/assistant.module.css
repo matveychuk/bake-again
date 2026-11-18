@@ -313,6 +313,17 @@
   }
 }
 
+.triggerMobileLabel {
+  display: none;
+}
+@media (max-width: 620px) {
+  .triggerFullLabel {
+    display: none;
+  }
+  .triggerMobileLabel {
+    display: inline;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .drawer {
     transition-duration: 0ms;
