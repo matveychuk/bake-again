@@ -16,12 +16,12 @@ export const crepesRecipe = {
     uk: 'crepes',
   },
   title: {
-    en: 'Gluten-free crepes',
+    en: 'Thin gluten-free crepes',
     es: 'Crepes finos sin gluten',
     uk: 'Безглютенові млинці',
   },
   summary: {
-    en: 'Thin crepes made with milk.',
+    en: 'These thin crepes are soft enough to roll around ham and cheese or fold into quarters with a spoonful of jam. Watch the edges as they cook. When they turn golden and lift easily, the crepe is ready to flip.',
     es: 'Estos crepes de leche quedan finos y flexibles, tanto para rellenarlos de jamón y queso como para servirlos con mermelada. Dales la vuelta cuando la superficie pierda el brillo y los bordes se despeguen.',
     uk: 'Тонкі млинці на молоці. Перевертай млинець, коли поверхня стане матовою, а краї легко відходитимуть від пательні.',
   },
@@ -37,7 +37,7 @@ export const crepesRecipe = {
     totalElapsedMinutes: 60,
     planningNote: {
       text: {
-        en: 'Includes {duration} of batter rest.',
+        en: 'Includes {duration} for the batter to rest.',
         es: 'Incluye {duration} de reposo de la masa.',
         uk: 'Включає {duration} відпочинку тіста.',
       },
@@ -89,7 +89,7 @@ export const crepesRecipe = {
       id: 'round-pan-24-cm',
       label: {
         uk: 'Кругла пательня, 24 см',
-        en: '24 cm round pan',
+        en: '24 cm frying pan',
         es: 'Sartén redonda de 24 cm',
       },
       kind: 'other',
@@ -207,7 +207,7 @@ export const crepesRecipe = {
             {
               ingredientId: 'flour',
               name: {
-                en: 'Schär Mix B Bread flour',
+                en: 'Schär Mix B Bread flour blend',
                 es: 'Mezcla de harina Schär Mix B Bread',
                 uk: 'Борошно Schär Mix B Bread',
               },
@@ -338,7 +338,7 @@ export const crepesRecipe = {
           },
           qualifier: {
             uk: 'За потреби — регулює густоту.',
-            en: 'As needed to adjust the consistency.',
+            en: 'Only if the batter is too thick after resting.',
             es: 'Solo si la masa queda espesa después del reposo.',
           },
         },
@@ -384,7 +384,7 @@ export const crepesRecipe = {
             },
           },
           qualifier: {
-            en: 'For greasing.',
+            en: 'A little for the first crepe.',
             es: 'Basta con un poco para el primer crepe.',
             uk: 'Для змащування.',
           },
@@ -396,12 +396,12 @@ export const crepesRecipe = {
     {
       id: 'start-batter',
       title: {
-        en: 'Blend a thick base',
+        en: 'Blend the batter until smooth',
         es: 'Bate la masa sin grumos',
         uk: 'Збийте густу основу',
       },
       instruction: {
-        en: 'Combine the eggs, flour, sugar and salt. Pour in a little milk — just enough for the blender or mixer to work. Blend to a smooth, thick base with no lumps.',
+        en: 'Put the eggs, flour blend, sugar and salt in a bowl. Add just enough milk to get the mixture moving, then use a hand blender or mixer to beat it into a thick, smooth batter.',
         es: 'Pon los huevos, la harina, el azúcar y la sal en un bol. Echa un chorrito de leche, lo justo para poder batir. Tritura con la batidora hasta que la masa esté espesa y sin grumos.',
         uk: 'З’єднайте яйця, борошно, цукор і сіль. Влийте трохи молока — лише стільки, щоб блендер або міксер міг працювати. Збийте до гладкої густої маси без грудочок.',
       },
@@ -411,7 +411,7 @@ export const crepesRecipe = {
           id: 'start-batter-tip',
           kind: 'practicalTip',
           text: {
-            en: 'Lumps break up more easily in a thick base.',
+            en: 'It’s easier to work out the lumps while the batter is still thick.',
             es: 'Es más fácil deshacer los grumos mientras la masa está espesa.',
             uk: 'У густій основі легше розбити грудочки.',
           },
@@ -435,7 +435,7 @@ export const crepesRecipe = {
             ingredientId: 'milk',
             quantity: 'omit',
             note: {
-              en: 'A little milk for the thick base.',
+              en: 'Just a splash to start.',
               es: 'Solo un chorrito para empezar.',
               uk: 'Трохи молока для густої основи.',
             },
@@ -448,12 +448,12 @@ export const crepesRecipe = {
     {
       id: 'add-milk',
       title: {
-        en: 'Add the milk and rest',
+        en: 'Add the remaining milk and let the batter rest',
         es: 'Incorpora el resto de la leche',
         uk: 'Додайте молоко й залиште тісто',
       },
       instruction: {
-        en: 'Gradually mix in the remaining milk. Leave to rest for 15–20 minutes.',
+        en: 'Stir in the rest of the milk a little at a time. Once the batter is smooth and pourable, let it rest for 15–20 minutes.',
         es: 'Añade poco a poco el resto de la leche mientras remueves. Cuando la masa esté líquida y homogénea, déjala reposar entre 15 y 20 minutos.',
         uk: 'Поступово вмішайте решту молока. Залиште на 15–20 хвилин.',
       },
@@ -465,7 +465,7 @@ export const crepesRecipe = {
             ingredientId: 'milk',
             quantity: 'omit',
             note: {
-              en: 'Remaining milk.',
+              en: 'The rest of the milk.',
               es: 'El resto de la leche.',
               uk: 'Решта молока.',
             },
@@ -479,12 +479,12 @@ export const crepesRecipe = {
       id: 'check-consistency',
       title: {
         uk: 'Перевірте густоту',
-        en: 'Check the consistency',
+        en: 'Check how the batter pours',
         es: 'Ajusta la consistencia',
       },
       instruction: {
         uk: 'Перемішайте тісто після відпочинку. Воно має стікати з ложки рівною цівкою, як рідкі вершки. Загусло — додавайте воду по одній столовій ложці й перемішуйте.',
-        en: 'Stir the batter after resting. It should flow off a spoon in a steady stream, like single cream. If it has thickened, add water one tablespoon at a time and stir.',
+        en: 'Stir the rested batter and lift the spoon. The batter should run off in a thin, steady stream, like pouring cream. If it’s too thick, stir in water a tablespoon at a time, checking after each spoonful.',
         es: 'Remueve la masa y levanta la cuchara. Debe caer en un hilo continuo, como la nata líquida. Si está demasiado espesa, añade agua de cucharada en cucharada y mezcla cada vez.',
       },
       ingredientLineIds: ['water'],
@@ -502,7 +502,7 @@ export const crepesRecipe = {
           kind: 'practicalTip',
           text: {
             uk: 'Густіше тісто без води дає трохи товщі й міцніші млинці — їх легше перевертати. З усією водою млинці тонші й ніжніші: не поспішайте перевертати.',
-            en: 'Thicker batter without water makes slightly thicker, sturdier crepes that are easier to flip. With all the water, crepes are thinner and more delicate: take your time before flipping.',
+            en: 'For crepes that are easier to flip, leave the batter a little thicker. Adding more water gives you thinner, more delicate crepes.',
             es: 'Si es la primera vez que los haces, deja la masa un poco más espesa. Te resultará más fácil darles la vuelta. Cuanta más agua añadas, más finos y delicados quedarán.',
           },
         },
@@ -512,12 +512,12 @@ export const crepesRecipe = {
       id: 'add-oil',
       title: {
         uk: 'Додайте олію',
-        en: 'Add the oil',
+        en: 'Stir in the oil',
         es: 'Añade el aceite',
       },
       instruction: {
         uk: 'Додайте олію й ретельно перемішайте, щоб на поверхні не лишилося жирного шару.',
-        en: 'Add the oil and mix thoroughly so no oily layer remains on the surface.',
+        en: 'Stir the oil into the batter until the sheen of oil on the surface disappears.',
         es: 'Incorpora el aceite a la masa y remueve hasta que desaparezca la película de aceite de la superficie.',
       },
       ingredientLineIds: ['oil'],
@@ -535,12 +535,12 @@ export const crepesRecipe = {
       id: 'pour-batter',
       title: {
         uk: 'Розподіліть тісто',
-        en: 'Spread the batter',
+        en: 'Tilt the pan to spread the batter',
         es: 'Extiende la masa en la sartén',
       },
       instruction: {
         uk: 'Перед першим млинцем змастіть розігріту пательню олією. Налийте тісто й розподіліть тонким шаром, нахиляючи пательню.',
-        en: 'Grease the hot pan before the first crepe. Pour in the batter and tilt the pan to spread it in a thin layer.',
+        en: 'Heat the frying pan and lightly oil it before the first crepe. Ladle a little batter into the centre and immediately tilt the pan in a circle to coat the base in a thin layer.',
         es: 'Calienta bien la sartén y engrásala ligeramente antes de hacer el primer crepe. Vierte un poco de masa con un cucharón e inclina enseguida la sartén para cubrir el fondo con una capa fina.',
       },
       ingredientLineIds: ['pan-oil'],
@@ -558,7 +558,7 @@ export const crepesRecipe = {
           kind: 'practicalTip',
           text: {
             uk: 'Перший млинець може вийти негарним, бо на пательні ще забагато олії. Це нормально: далі підуть рівні.',
-            en: 'The first crepe may look uneven because there is still too much oil in the pan. That is normal: the next ones will be more even.',
+            en: 'A little extra oil can give the first crepe an uneven edge. The next few usually come out more evenly.',
             es: 'Si sobra aceite en la sartén, el primer crepe puede salir irregular. Los siguientes suelen quedar más uniformes.',
           },
         },
@@ -568,12 +568,12 @@ export const crepesRecipe = {
       id: 'check-edge',
       title: {
         uk: 'Перевірте край',
-        en: 'Check the edge',
+        en: 'Watch for the edges to lift',
         es: 'Espera a que se despeguen los bordes',
       },
       instruction: {
         uk: 'Поверхня стала матовою з дрібними отворами, краї злегка підсмажилися й легко відділяються — час перевертати.',
-        en: 'When the surface is matte with small holes and the lightly browned edges lift easily, it is time to flip.',
+        en: 'Wait until the surface loses its shine and tiny holes appear. When the edges are lightly browned and lift easily from the pan, the crepe is ready to turn.',
         es: 'Fíjate en la superficie del crepe. Cuando pierda el brillo, aparezcan agujeritos y los bordes estén dorados y se despeguen con facilidad, ya puedes darle la vuelta.',
       },
       ingredientLineIds: [],
@@ -587,12 +587,12 @@ export const crepesRecipe = {
       id: 'flip-crepe',
       title: {
         uk: 'Переверніть',
-        en: 'Flip the crepe',
+        en: 'Flip and cook the other side',
         es: 'Dale la vuelta',
       },
       instruction: {
         uk: 'Підсуньте лопатку під край і переверніть. Смажте другий бік приблизно 10 секунд, до легкої золотистості. Так само приготуйте решту тіста.',
-        en: 'Slide a spatula under the edge and flip. Cook the second side for about 10 seconds, until lightly golden. Repeat with the remaining batter.',
+        en: 'Slip a spatula under the edge and turn the crepe over. Cook for about 10 seconds, just until the underside is lightly golden. Repeat with the rest of the batter.',
         es: 'Desliza la espátula por debajo del borde y dale la vuelta al crepe. Deja que se dore ligeramente por la otra cara, unos 10 segundos. Repite con el resto de la masa.',
       },
       ingredientLineIds: [],
@@ -622,7 +622,7 @@ export const crepesRecipe = {
       usage: ['hero', 'card'],
       alt: {
         uk: 'Стопка золотавих млинців на тарілці та світлій лляній серветці',
-        en: 'Stack of golden crepes on a plate and a light linen napkin',
+        en: 'Thin golden crepes stacked on a plate on a linen napkin',
         es: 'Crepes finos y dorados apilados en un plato sobre una servilleta de lino',
       },
     },
@@ -634,7 +634,7 @@ export const crepesRecipe = {
       usage: ['step'],
       alt: {
         uk: 'Блендер збиває густу основу для млинців',
-        en: 'Blending the thick crepe batter base',
+        en: 'A hand blender in a bowl of thick crepe batter',
         es: 'Batidora de mano en un bol con la masa espesa de los crepes',
       },
     },
@@ -646,7 +646,7 @@ export const crepesRecipe = {
       usage: ['step'],
       alt: {
         uk: 'Додавання води ложкою для регулювання густоти тіста',
-        en: 'Adding water by the spoonful to adjust batter consistency',
+        en: 'Water being poured into a tablespoon over the bowl of batter',
         es: 'Un vaso de agua y una cuchara sopera sobre el bol de masa',
       },
     },
@@ -658,7 +658,7 @@ export const crepesRecipe = {
       usage: ['step'],
       alt: {
         uk: 'Молоко поступово вливають у густу основу',
-        en: 'Milk poured gradually into the thick batter base',
+        en: 'Milk being poured from a jug as the batter is stirred',
         es: 'Una mano vierte leche de una jarra mientras la otra remueve la masa',
       },
     },
@@ -670,7 +670,7 @@ export const crepesRecipe = {
       usage: ['step'],
       alt: {
         uk: 'Тісто розподіляють тонким шаром на пательні',
-        en: 'Spreading a thin layer of batter in the pan',
+        en: 'A ladle pouring batter into the centre of a frying pan',
         es: 'Un cucharón vierte masa en el centro de la sartén',
       },
     },
@@ -682,7 +682,7 @@ export const crepesRecipe = {
       usage: ['step'],
       alt: {
         uk: 'Олію додають до тіста для млинців',
-        en: 'Adding oil to the crepe batter',
+        en: 'Oil being measured into a spoon over the batter',
         es: 'Una cuchara con aceite sobre el bol de masa',
       },
     },
@@ -694,12 +694,12 @@ export const crepesRecipe = {
       usage: ['step'],
       alt: {
         uk: 'Золотиста сторона перевернутого млинця',
-        en: 'Golden side of the flipped crepe',
+        en: 'A crepe in the pan with its golden side facing up',
         es: 'Crepe con la cara dorada hacia arriba en la sartén',
       },
       caption: {
         uk: 'Так виглядає перший бік. Другий має лише злегка підрум’янитися.',
-        en: 'This is the first side. The other side only needs to turn lightly golden.',
+        en: 'The first side is golden all over. The second needs only a little colour.',
         es: 'Así queda la primera cara. La segunda solo tiene que dorarse un poco.',
       },
     },
@@ -711,12 +711,12 @@ export const crepesRecipe = {
       usage: ['step'],
       alt: {
         uk: 'Матовий верх млинця й край, що відділяється від пательні',
-        en: 'Matte crepe surface and an edge lifting from the pan',
+        en: 'Tiny holes across the crepe and a spatula tucked under its edge',
         es: 'Crepe con agujeritos en la superficie y una espátula junto al borde',
       },
       caption: {
         uk: 'Якщо край ще прилипає, коли піднімаєте його лопаткою, зачекайте ще трохи.',
-        en: 'If the edge sticks when you lift it with the spatula, give it a little longer.',
+        en: 'If the spatula catches at the edge, let the crepe cook a little longer.',
         es: 'Si el borde aún se pega al levantarlo con la espátula, espera un poco más.',
       },
     },
@@ -734,7 +734,7 @@ export const crepesRecipe = {
   contentGaps: [],
   presentation: 'concise',
   evidenceExplanation: {
-    en: 'This exact version has been cooked successfully.',
+    en: 'We tested this recipe with Schär Mix B Bread in a 24 cm frying pan.',
     es: 'Esta versión se ha preparado con éxito.',
     uk: 'Цю версію успішно готували.',
   },
@@ -756,7 +756,7 @@ export const crepesRecipe = {
   },
   discovery: {
     cardTitle: {
-      en: 'Thin breakfast crepes',
+      en: 'Thin gluten-free crepes',
       es: 'Crepes finos sin gluten',
       uk: 'Млинці',
     },
@@ -805,9 +805,9 @@ export const crepesRecipe = {
         'Пропорції приблизно на 15 млинців із суміші Schär Mix B Bread, пательня 24 см. Сім фотокроків: густота тіста, смаження й момент перевертання.',
     },
     en: {
-      title: 'Gluten-free crepes',
+      title: 'Thin gluten-free crepes with Schär Mix B',
       description:
-        'Thin gluten-free crepes made with milk. Ingredient quantities and step-by-step instructions for mixing the batter and cooking in a frying pan.',
+        'Make about 15 thin gluten-free crepes in a 24 cm frying pan. Step-by-step photos show how the batter should pour and when each crepe is ready to flip.',
     },
     es: {
       title: 'Crepes sin gluten con Schär Mix B paso a paso',

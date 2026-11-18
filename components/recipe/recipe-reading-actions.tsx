@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 /* oxlint-disable next/no-html-link-for-pages -- vinext preview currently fails when next/link is hydrated */
-import { Button } from '@/components/ui/button';
+import { RecipeCookLink } from './recipe-quantity-navigation';
 import { ArrowDown, Play } from 'lucide-react';
 import { recipeReaderCopy } from '@/content/recipes/reader-copy';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -59,14 +59,14 @@ export function RecipeCookEntry({
     if (needsCream) return null;
     return (
       <div className={styles.stepEntry}>
-        <Button
+        <RecipeCookLink
           variant="link"
           href={cookStepHref(href, step.id)}
-          aria-label={`${copy.cookFromStep}: ${step.title}`}
+          label={`${copy.cookFromStep}: ${step.title}`}
         >
           <Play size={16} aria-hidden="true" />
           <span>{copy.cookFromStep}</span>
-        </Button>
+        </RecipeCookLink>
       </div>
     );
   }
@@ -74,7 +74,7 @@ export function RecipeCookEntry({
     <div className={`${styles.cookEntry} ${heading ? styles.withHeading : ''}`}>
       {heading && <div className={styles.methodTitle}>{heading}</div>}
       <div className={styles.cookActions}>
-        <Button variant="default" href={href}>
+        <RecipeCookLink variant="default" href={href}>
           {!needsCream && (
             <Play size={16} fill="currentColor" aria-hidden="true" />
           )}
@@ -85,7 +85,7 @@ export function RecipeCookEntry({
                 ? copy.cookStepByStep
                 : messages.openCookMode}
           </span>
-        </Button>
+        </RecipeCookLink>
         {secondaryAction && (
           <div className={styles.secondaryAction}>{secondaryAction}</div>
         )}

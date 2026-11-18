@@ -23,6 +23,12 @@ export function getRecipeDetailTitleParts(
   title: string,
   locale: keyof LocalizedText,
 ): RecipeDetailTitleParts {
+  if (locale === 'en' && /\bgluten-free\b/i.test(title)) {
+    return {
+      glutenFreeLabel: 'Gluten-free',
+      recipeName: title.replace(/\bgluten-free\b\s*/i, '').trim(),
+    };
+  }
   if (locale === 'es') {
     const suffix = ' sin gluten';
     const recipeName = title.toLocaleLowerCase('es').endsWith(suffix)

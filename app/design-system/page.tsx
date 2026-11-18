@@ -1054,6 +1054,11 @@ export default function DesignSystemPage() {
                 locale="es"
                 id="recipe-story-preview-es"
               />
+              <RecipeStoryVideo
+                story={recipeStoryVideos.crepes}
+                locale="en"
+                id="recipe-story-preview-en"
+              />
             </div>
 
             <div className={styles.componentBlock} id="recipe-utilities">

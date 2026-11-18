@@ -31,7 +31,9 @@ import {
   recipeScalingBounds,
   updateRecipeContentConfigurationParams,
   type RecipeContentConfiguration,
+  type RecipeQuantitySelection,
 } from '@/content/recipes/recipe-content-configuration';
+import { useSelectRecipeQuantity } from './recipe-quantity-navigation';
 import { EvidenceBadge } from './evidence-badge';
 import {
   AddRecipeIngredientsControl,
@@ -94,6 +96,7 @@ export function InventoryRecipeAdjuster({
   syncConfigurationToUrl?: boolean;
   utilityActions?: ReactNode;
 }) {
+  const selectQuantity = useSelectRecipeQuantity();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -256,9 +259,13 @@ export function InventoryRecipeAdjuster({
     return () => window.cancelAnimationFrame(frame);
   }, [configuration, pathname]);
 
-  function replaceConfiguration(params: URLSearchParams) {
+  function replaceConfiguration(selection: RecipeQuantitySelection) {
     if (!syncConfigurationToUrl) return;
-    const query = params.toString();
+    selectQuantity?.(selection);
+    const query = updateRecipeContentConfigurationParams(
+      searchParams,
+      selection,
+    ).toString();
     if (query === searchParams.toString()) return;
     const hash = window.location.hash;
     router.replace(`${query ? `${pathname}?${query}` : pathname}${hash}`, {
@@ -333,12 +340,7 @@ export function InventoryRecipeAdjuster({
       });
     setMode('scale');
     setScale(factor);
-    replaceConfiguration(
-      updateRecipeContentConfigurationParams(searchParams, {
-        mode: 'scale',
-        scaleFactor: factor,
-      }),
-    );
+    replaceConfiguration({ mode: 'scale', scaleFactor: factor });
   }
 
   function selectAvailableIngredient() {
@@ -348,14 +350,12 @@ export function InventoryRecipeAdjuster({
     setMode('ingredient');
     setAvailable(nextAvailable);
     setAppliedAvailable(nextAvailable);
-    replaceConfiguration(
-      updateRecipeContentConfigurationParams(searchParams, {
-        mode: 'ingredient',
-        ingredientId: anchor.ingredient.id,
-        availableAmount: nextAvailable,
-        unit: anchor.amount.unit,
-      }),
-    );
+    replaceConfiguration({
+      mode: 'ingredient',
+      ingredientId: anchor.ingredient.id,
+      availableAmount: nextAvailable,
+      unit: anchor.amount.unit,
+    });
   }
 
   return (
@@ -532,6 +532,13 @@ export function InventoryRecipeAdjuster({
                       availableChanged.current = true;
                       const nextAvailable = event.target.value;
                       setAvailable(nextAvailable);
+                      if (syncConfigurationToUrl)
+                        selectQuantity?.({
+                          mode: 'ingredient',
+                          ingredientId: anchor.ingredient.id,
+                          availableAmount: nextAvailable,
+                          unit: anchor.amount.unit,
+                        });
                     }}
                   />
                   <span>

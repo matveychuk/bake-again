@@ -5,6 +5,7 @@ export interface RecipeStoryVideo {
   poster: string;
   language: 'uk' | 'en' | 'es';
   durationSeconds: number;
+  languageLabels?: Partial<LocalizedText>;
   instagramUrl: string;
   title: LocalizedText;
   description: LocalizedText;
@@ -30,11 +31,19 @@ export const recipeStoryVideos: Record<string, RecipeStoryVideo> = {
     poster: '/media/recipes/crepes/crepes-family-poster-v1.webp',
     language: 'uk',
     durationSeconds: 35,
+    languageLabels: { en: 'Ukrainian audio and on-screen text' },
     instagramUrl: 'https://www.instagram.com/reel/De7U95vI0Ky/',
     localizedMedia: {
+      en: {
+        src: '/media/recipes/crepes/crepes-family-en-lite-v1.mp4',
+        poster: '/media/recipes/crepes/crepes-family-en-lite-poster-v1.webp',
+        language: 'en',
+        durationSeconds: 33,
+        languageLabel: 'On-screen text and song in English',
+      },
       es: {
-        src: '/media/recipes/crepes/crepes-family-es-web-v2.mp4',
-        poster: '/media/recipes/crepes/crepes-family-es-poster-v1.webp',
+        src: '/media/recipes/crepes/crepes-family-es-lite-v1.mp4',
+        poster: '/media/recipes/crepes/crepes-family-es-lite-poster-v1.webp',
         language: 'es',
         durationSeconds: 33,
         languageLabel: 'Texto en español · Canción en inglés',
@@ -42,12 +51,12 @@ export const recipeStoryVideos: Record<string, RecipeStoryVideo> = {
     },
     title: {
       uk: 'Млинці без маминих підказок',
-      en: 'Crepes without Mum’s help',
+      en: 'My son makes crepes on his own',
       es: 'Mi hijo prepara los crepes él solo',
     },
     description: {
       uk: 'Коротка історія з нашої кухні: син змішує тісто, смажить млинці й куштує результат. А кіт чекає поруч.',
-      en: 'A short story from our kitchen: my son mixes the batter, cooks the crepes and tastes the result. The cat waits nearby.',
+      en: 'My son follows the recipe on his tablet, from mixing the batter to flipping the crepes. I’m behind the camera, and the cat is waiting for a taste.',
       es: 'Con la receta abierta en la tablet, mi hijo prepara la masa, calienta la sartén y se hace los crepes. Mientras tanto, el gato va a buscar su ración.',
     },
   },

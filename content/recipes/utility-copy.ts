@@ -26,7 +26,7 @@ export const recipeUtilityCopy = {
   },
   en: {
     share: 'Share',
-    print: 'Print / PDF',
+    print: 'Print or save as PDF',
     printNow: 'Print or save as PDF',
     shareDevice: 'Send using…',
     printHint: 'Choose “Save as PDF” in the print dialog to keep a copy.',

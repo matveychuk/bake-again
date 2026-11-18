@@ -202,7 +202,7 @@ void test('splits localized detail titles into a gluten-free label and dish name
     getRecipeDetailTitleParts(recipeDetailTitles.crepes.en, 'en'),
     {
       glutenFreeLabel: 'Gluten-free',
-      recipeName: 'crepes',
+      recipeName: 'Thin crepes',
     },
   );
   assert.deepEqual(

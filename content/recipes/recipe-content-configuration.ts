@@ -140,16 +140,18 @@ export function parseRecipeContentConfiguration(
   return { kind: 'base', mode: 'scale', scaleFactor: 1 };
 }
 
+export type RecipeQuantitySelection =
+  | { mode: 'scale'; scaleFactor: BatchScaleFactor }
+  | {
+      mode: 'ingredient';
+      ingredientId: string;
+      availableAmount: string;
+      unit: Unit;
+    };
+
 export function updateRecipeContentConfigurationParams(
   current: URLSearchParams | string,
-  configuration:
-    | { mode: 'scale'; scaleFactor: BatchScaleFactor }
-    | {
-        mode: 'ingredient';
-        ingredientId: string;
-        availableAmount: string;
-        unit: Unit;
-      },
+  configuration: RecipeQuantitySelection,
 ) {
   const params = new URLSearchParams(
     typeof current === 'string' ? current : current.toString(),

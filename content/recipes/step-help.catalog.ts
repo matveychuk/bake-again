@@ -458,7 +458,7 @@ export const stepHelpCatalog: Record<
       q(
         'body',
         'Якою має бути текучість готового млинцевого тіста?',
-        'How fluid should the finished crepe batter be?',
+        'How can I tell if the batter is thin enough?',
         '¿Qué fluidez debe tener la masa de crepes terminada?',
       ),
     ),

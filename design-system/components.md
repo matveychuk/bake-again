@@ -22,6 +22,10 @@
   shell; inline-size containment must not collapse its intrinsic width. History
   remains browser-local and independent of signed-in Saved recipes. Design
   Lab fixtures use `preview` and do not read/write history.
+- `NewsletterSignup` and `NewsletterInvitation` accept an optional
+  `invitationCopy` prop with the title, description and action label for a
+  particular placement. The strip and its dialog share this copy.
+  The psyllium story in Design Lab (`#articles`) demonstrates the article placement.
 - `NewsletterInvitation` is a compact editorial strip: 24px display heading, short
   benefit copy and one shared primary Button linking directly to the hosted form.
   Home and recipe pages use the same email-only composition before SiteFooter.
@@ -945,7 +949,7 @@ player sits beside the copy on wide screens and below it on phones; the entire
 frame remains visible. Design Lab `#recipe-story-video` reuses the real component.
 
 The per-recipe registry supports localized media with an explicitly labelled
-fallback. A localized edit can specify the on-screen and audio languages separately. The Spanish crepe edit uses Spanish on-screen text and a song in English. Instagram remains an optional external link; label a language mismatch
+fallback. The crepe page selects a matching film and poster for each language. The English and Spanish edits use the same English-language song and identify the language of the on-screen text. Instagram remains an optional external link; label a language mismatch
 instead of implying that another-language edit is the same linked Reel. Verified
 caption tracks can be supplied per recording; the current crepe narration still
 needs an exact transcript and is not claimed to have accessible closed captions.

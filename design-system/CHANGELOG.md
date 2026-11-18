@@ -1,5 +1,19 @@
 # Design system changelog
 
+## 2026-11-19 — Crepe story videos
+
+- Use the author’s English and Spanish edits and matching posters in the shared recipe player. Its language label distinguishes on-screen text from the song.
+
+## 2026-11-19 — Newsletter invitations in articles
+
+- The shared newsletter strip accepts contextual copy and fits the article reading width.
+  The psyllium example in Design Lab opens the preview form with the same invitation.
+
+## 2026-11-18 — English crepe recipe
+
+- The shared recipe title keeps the gluten-free label together when an English dish name starts with a texture description. The story player can label the original recording in the reader’s language.
+- Cook Mode links now use the portion selected in the ingredient panel immediately, including links to individual steps.
+
 ## 2026-11-18 — Spanish crepe PDFs
 
 - Localize the shared in-recipe PDF invitation, its two previews, subscription form and success message for Spain.

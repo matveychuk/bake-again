@@ -22,6 +22,7 @@ import {
   RecipeCookEntry,
   RecipeSectionNavigation,
 } from '@/components/recipe/recipe-reading-actions';
+import { RecipeQuantityNavigation } from './recipe-quantity-navigation';
 import { RecipeDetailTitle } from '@/components/recipe/recipe-detail-title';
 import { RecipeBakeMemory } from '@/components/recipe/recipe-bake-memory';
 import { RecipeBackLink } from '@/components/recipe/recipe-back-link';
@@ -413,185 +414,192 @@ export function InventoryRecipeDetail({
           />
         )}
 
-        <section
-          className={styles.ingredientsArea}
-          id="ingredients"
-          tabIndex={-1}
-          aria-labelledby="ingredients-title"
-        >
-          <InventoryRecipeAdjuster
-            archiveSections={recipe.archiveSections}
-            configuration={configuration}
-            key={`${recipe.id}:${selectedCreamRecipeId ?? 'no-cream'}`}
-            locale={locale}
-            personalRecipe={personalRecipe}
-            scalingAnchorIngredientId={recipe.scalingAnchorIngredientId}
-            shoppingRecipe={
-              structured
-                ? {
-                    id: recipe.id,
-                    versionId: sourceVersionId,
-                    title: detailTitle,
-                    ingredientSections: structured.ingredientSections,
-                  }
-                : null
-            }
-            recipe={
-              structured
-                ? {
-                    ...structured,
-                    gapNote: showEditorialNotes
-                      ? (copy?.publicationNote?.[locale] ?? structured.gapNote)
-                      : undefined,
-                  }
-                : undefined
-            }
-            showWorkingRecord={isDraft}
-            utilityActions={
-              publicLink && (
-                <RecipeUtilityActions
-                  key={publicLink.url}
-                  locale={locale}
-                  title={detailTitle}
-                  url={publicLink.url}
-                  printHref={publicLink.printHref}
-                />
-              )
-            }
-          />
-        </section>
-
-        <section
-          className={styles.method}
-          id="recipe-method"
-          tabIndex={-1}
-          aria-labelledby="method-title"
-        >
-          <RecipeCookEntry
-            heading={
-              <SectionTitle
-                eyebrow={
-                  concise || !structured
-                    ? undefined
-                    : messages.method(methodSteps.length)
-                }
-                eyebrowClassName={styles.eyebrow}
-                id="method-title"
-              >
-                {readerCopy.method}
-              </SectionTitle>
-            }
-            locale={locale}
-            href={
-              structured?.creamOptions && !selectedCreamRecipeId
-                ? '#cream-options'
-                : cookModePath
-            }
-            needsCream={Boolean(
-              structured?.creamOptions && !selectedCreamRecipeId,
-            )}
-            hasMethod={methodSteps.length > 0}
-            secondaryAction={
-              helpConfiguration ? (
-                <AssistantTrigger
-                  configuration={helpConfiguration}
-                  scope={{ kind: 'recipe' }}
-                  label={assistantMessages[locale].trigger.recipe}
-                  mobileLabel={stepHelpMessages[locale].compactTrigger}
-                />
-              ) : undefined
-            }
-          />
-          {methodSteps.length > 0 ? (
-            <ol className={styles.steps}>
-              {methodSteps.map((step, index) => (
-                <li key={step.id}>
-                  <RecipeStepContent
-                    stepNumber={String(index + 1).padStart(2, '0')}
-                    meta={step.meta}
-                    actionPlacement="metadata"
-                    action={
-                      resolveStepHelp(step).length > 0 ? (
-                        <AssistantTrigger
-                          configuration={helpConfiguration ?? { kind: 'base' }}
-                          scope={{ kind: 'step', stepIds: [step.id] }}
-                          stepTitle={step.title}
-                          compact
-                          label={stepHelpMessages[locale].compactTrigger}
-                          ariaLabel={`${stepHelpMessages[locale].trigger}: ${step.title}`}
-                          preparedAnswers={resolveStepHelp(step)}
-                        />
-                      ) : undefined
+        <RecipeQuantityNavigation>
+          <section
+            className={styles.ingredientsArea}
+            id="ingredients"
+            tabIndex={-1}
+            aria-labelledby="ingredients-title"
+          >
+            <InventoryRecipeAdjuster
+              archiveSections={recipe.archiveSections}
+              configuration={configuration}
+              key={`${recipe.id}:${selectedCreamRecipeId ?? 'no-cream'}`}
+              locale={locale}
+              personalRecipe={personalRecipe}
+              scalingAnchorIngredientId={recipe.scalingAnchorIngredientId}
+              shoppingRecipe={
+                structured
+                  ? {
+                      id: recipe.id,
+                      versionId: sourceVersionId,
+                      title: detailTitle,
+                      ingredientSections: structured.ingredientSections,
                     }
-                    technique={step.technique}
+                  : null
+              }
+              recipe={
+                structured
+                  ? {
+                      ...structured,
+                      gapNote: showEditorialNotes
+                        ? (copy?.publicationNote?.[locale] ??
+                          structured.gapNote)
+                        : undefined,
+                    }
+                  : undefined
+              }
+              showWorkingRecord={isDraft}
+              utilityActions={
+                publicLink && (
+                  <RecipeUtilityActions
+                    key={publicLink.url}
                     locale={locale}
-                    checkpoint={step.checkpoint}
-                    checkpointLabel={messages.checkpoint}
-                    className={styles.stepContent}
-                    headingLevel="h3"
-                    tip={step.tip}
-                    tipLabel={messages.tip}
-                    title={step.title}
-                  >
-                    <p>{step.body}</p>
-                    {(() => {
-                      const link = recipeLessonLink(
-                        recipe.id,
-                        document?.recipe.versionId ?? '',
-                        locale,
-                        step,
-                      );
-                      return link ? (
-                        <RecipeLessonLink link={link} locale={locale} />
-                      ) : null;
-                    })()}
-                  </RecipeStepContent>
-                  {step.media && (
-                    <StepMediaSequence
-                      items={step.media}
-                      ariaLabel={messages.stepVisualSequence}
-                      className={styles.stepMedia}
-                    />
-                  )}
-                  {step.id === 'bake-layer' && (
-                    <RecipeFreeLessonStep
-                      recipeId={recipe.id}
-                      locale={locale}
-                      preview={
-                        process.env.NAPOLEON_FREE_STEP_PREVIEW === 'true'
-                      }
-                    />
-                  )}
-                  <RecipeCookEntry
-                    locale={locale}
-                    href={cookModePath}
-                    step={{ id: step.id, title: step.title }}
-                    needsCream={Boolean(
-                      structured?.creamOptions && !selectedCreamRecipeId,
-                    )}
+                    title={detailTitle}
+                    url={publicLink.url}
+                    printHref={publicLink.printHref}
                   />
-                  {invitation?.afterStepId === step.id && (
-                    <RecipePdfInvitation
-                      invitation={invitation}
+                )
+              }
+            />
+          </section>
+
+          <section
+            className={styles.method}
+            id="recipe-method"
+            tabIndex={-1}
+            aria-labelledby="method-title"
+          >
+            <RecipeCookEntry
+              heading={
+                <SectionTitle
+                  eyebrow={
+                    concise || !structured
+                      ? undefined
+                      : messages.method(methodSteps.length)
+                  }
+                  eyebrowClassName={styles.eyebrow}
+                  id="method-title"
+                >
+                  {readerCopy.method}
+                </SectionTitle>
+              }
+              locale={locale}
+              href={
+                structured?.creamOptions && !selectedCreamRecipeId
+                  ? '#cream-options'
+                  : cookModePath
+              }
+              needsCream={Boolean(
+                structured?.creamOptions && !selectedCreamRecipeId,
+              )}
+              hasMethod={methodSteps.length > 0}
+              secondaryAction={
+                helpConfiguration ? (
+                  <AssistantTrigger
+                    configuration={helpConfiguration}
+                    scope={{ kind: 'recipe' }}
+                    label={assistantMessages[locale].trigger.recipe}
+                    mobileLabel={stepHelpMessages[locale].compactTrigger}
+                  />
+                ) : undefined
+              }
+            />
+            {methodSteps.length > 0 ? (
+              <ol className={styles.steps}>
+                {methodSteps.map((step, index) => (
+                  <li key={step.id}>
+                    <RecipeStepContent
+                      stepNumber={String(index + 1).padStart(2, '0')}
+                      meta={step.meta}
+                      actionPlacement="metadata"
                       action={
-                        <NewsletterSignup
-                          locale={invitation.locale}
-                          magnetId={invitation.magnetId}
-                          placement="recipe"
-                        />
+                        resolveStepHelp(step).length > 0 ? (
+                          <AssistantTrigger
+                            configuration={
+                              helpConfiguration ?? { kind: 'base' }
+                            }
+                            scope={{ kind: 'step', stepIds: [step.id] }}
+                            stepTitle={step.title}
+                            compact
+                            label={stepHelpMessages[locale].compactTrigger}
+                            ariaLabel={`${stepHelpMessages[locale].trigger}: ${step.title}`}
+                            preparedAnswers={resolveStepHelp(step)}
+                          />
+                        ) : undefined
                       }
+                      technique={step.technique}
+                      locale={locale}
+                      checkpoint={step.checkpoint}
+                      checkpointLabel={messages.checkpoint}
+                      className={styles.stepContent}
+                      headingLevel="h3"
+                      tip={step.tip}
+                      tipLabel={messages.tip}
+                      title={step.title}
+                    >
+                      <p>{step.body}</p>
+                      {(() => {
+                        const link = recipeLessonLink(
+                          recipe.id,
+                          document?.recipe.versionId ?? '',
+                          locale,
+                          step,
+                        );
+                        return link ? (
+                          <RecipeLessonLink link={link} locale={locale} />
+                        ) : null;
+                      })()}
+                    </RecipeStepContent>
+                    {step.media && (
+                      <StepMediaSequence
+                        items={step.media}
+                        ariaLabel={messages.stepVisualSequence}
+                        className={styles.stepMedia}
+                      />
+                    )}
+                    {step.id === 'bake-layer' && (
+                      <RecipeFreeLessonStep
+                        recipeId={recipe.id}
+                        locale={locale}
+                        preview={
+                          process.env.NAPOLEON_FREE_STEP_PREVIEW === 'true'
+                        }
+                      />
+                    )}
+                    <RecipeCookEntry
+                      locale={locale}
+                      href={cookModePath}
+                      step={{ id: step.id, title: step.title }}
+                      needsCream={Boolean(
+                        structured?.creamOptions && !selectedCreamRecipeId,
+                      )}
                     />
-                  )}
-                </li>
-              ))}
-            </ol>
-          ) : (
-            <div className={styles.pending}>
-              <h3>{messages.methodPending}</h3>
-              <p>{structured?.gapNote ?? messages.methodPendingDescription}</p>
-            </div>
-          )}
-        </section>
+                    {invitation?.afterStepId === step.id && (
+                      <RecipePdfInvitation
+                        invitation={invitation}
+                        action={
+                          <NewsletterSignup
+                            locale={invitation.locale}
+                            magnetId={invitation.magnetId}
+                            placement="recipe"
+                          />
+                        }
+                      />
+                    )}
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <div className={styles.pending}>
+                <h3>{messages.methodPending}</h3>
+                <p>
+                  {structured?.gapNote ?? messages.methodPendingDescription}
+                </p>
+              </div>
+            )}
+          </section>
+        </RecipeQuantityNavigation>
         {showEditorialNotes &&
           !concise &&
           (copy?.publicationNote?.[locale] || structured?.gapNote) && (
