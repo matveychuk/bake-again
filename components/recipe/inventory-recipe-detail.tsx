@@ -1,11 +1,8 @@
 import { recipeLessonLink } from '@/content/commerce/recipe-lesson-links';
 import { RecipeLessonLink } from './recipe-lesson-link';
 import { RecipeFreeLessonStep } from './recipe-free-lesson-step';
-import {
-  getRecipeInvitation,
-  pdfInvitationEyebrow,
-} from '@/content/lead-magnets';
-import { EditorialInvitation } from '@/components/site/editorial-invitation';
+import { getRecipeInvitation } from '@/content/lead-magnets';
+import { RecipePdfInvitation } from './recipe-pdf-invitation';
 import { AssistantProvider, AssistantTrigger } from '@/components/assistant';
 import { stepHelpMessages } from '@/components/assistant/step-help.messages';
 import { assistantMessages } from '@/components/assistant/assistant.messages';
@@ -564,15 +561,8 @@ export function InventoryRecipeDetail({
                     />
                   )}
                   {invitation?.afterStepId === step.id && (
-                    <EditorialInvitation
-                      lang="uk"
-                      data-recipe-subscription={invitation.magnetId}
-                      variant="recipe-step"
-                      headingLevel={3}
-                      eyebrow={pdfInvitationEyebrow.uk}
-                      titleId="recipe-junior-card-title"
-                      title={invitation.title}
-                      description={invitation.description}
+                    <RecipePdfInvitation
+                      invitation={invitation}
                       action={
                         <NewsletterSignup
                           locale="uk"

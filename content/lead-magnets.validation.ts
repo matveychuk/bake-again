@@ -5,6 +5,15 @@ export type LeadMagnetDefinition = {
     title: string;
     description: string;
     submit: string;
+    note?: string;
+    previews?: {
+      src: string;
+      alt: string;
+      title: string;
+      description: string;
+      href: string;
+      linkLabel: string;
+    }[];
   };
   page: {
     title: string;
@@ -62,6 +71,33 @@ export function validateLeadMagnetRegistry(
       ])
         if (!text((recipeInvitation as Record<string, unknown>)[field]))
           fail(id, `recipeInvitation.${field}`);
+      const invitation = recipeInvitation as Record<string, unknown>;
+      if (invitation.note !== undefined && !text(invitation.note))
+        fail(id, 'recipeInvitation.note');
+      if (invitation.previews !== undefined) {
+        if (!Array.isArray(invitation.previews) || !invitation.previews.length)
+          fail(id, 'recipeInvitation.previews');
+        for (const preview of invitation.previews as Record<
+          string,
+          unknown
+        >[]) {
+          if (
+            !object(preview) ||
+            !['src', 'alt', 'title', 'description', 'href', 'linkLabel'].every(
+              (field) => text(preview[field]),
+            )
+          )
+            fail(id, 'recipeInvitation.preview');
+          if (!/^\/images\/[a-zA-Z0-9/_-]+\.webp$/.test(String(preview.src)))
+            fail(id, 'recipeInvitation.preview.src');
+          if (
+            !/^\/(?:images\/[a-zA-Z0-9/_-]+\.webp|downloads\/[a-zA-Z0-9_-]+\.pdf)$/.test(
+              String(preview.href),
+            )
+          )
+            fail(id, 'recipeInvitation.preview.href');
+        }
+      }
     }
     if (!object(page) || !object(email) || !object(bot)) fail(id, 'sections');
     const p = page as Record<string, unknown>,

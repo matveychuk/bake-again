@@ -180,6 +180,33 @@
 .recipeStep .action {
   width: 100%;
 }
+.recipeStep[data-pdf-previews='true'] .main {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-4) var(--space-8);
+  align-items: start;
+}
+.recipeStep[data-pdf-previews='true'] .image {
+  grid-row: span 2;
+}
+.recipeStep[data-pdf-previews='true'] .action form {
+  max-width: none;
+}
+.recipeStep .note {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body);
+}
+@media (max-width: 700px) {
+  .recipeStep[data-pdf-previews='true'] .main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .recipeStep[data-pdf-previews='true'] .copy {
+    grid-row: 1;
+  }
+  .recipeStep[data-pdf-previews='true'] .image {
+    grid-row: 2;
+  }
+}
 
 /* Product invitation: large food media, one primary purchase action. */
 .productBanner {

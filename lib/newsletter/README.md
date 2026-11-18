@@ -38,6 +38,15 @@ copy is owned by `content/lead-magnets.json`; fixed provider attributes are gene
 by `single-opt-in.ts`. Print and Cook mode omit the invitation. Design Lab has
 light/dark inert examples at `#recipe-step-subscription`.
 
+2026-11-18: the recipe invitation now previews the actual A4 card and a page of
+the six-page recipe. The card remains the sole email gift; the full recipe PDF
+has a separate open link. Copy describes six photographed steps, print use and
+delivery within a few minutes. No provider automation or email template changed.
+Preview thumbnails are rendered from the existing delivery PDFs, verified
+byte-for-byte against the supplied masters; source PDFs are unchanged (recipe:
+720,315 bytes; card: 253,284 bytes). Local forms remain visibly inert, with a
+terracotta preview CTA. No inbox or physical-phone delivery test is implied.
+
 Development without a Brevo key renders the same form in explicitly labelled inert
 preview mode. It cannot send mail. A real local test needs an owned test address,
 a locally supplied existing API key, D1 migrations, `NEWSLETTER_LOCAL_TEST=true`

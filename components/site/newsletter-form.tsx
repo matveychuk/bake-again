@@ -77,7 +77,7 @@ const messages: Record<AppLocale, Copy> = {
     verifyRetry: 'Спробувати ще раз',
     openProvider: 'Відкрити форму Brevo',
     noscript: 'Для цієї форми потрібен JavaScript.',
-    preview: 'Перегляд форми — без надсилання й перевірки Turnstile.',
+    preview: 'Локальне прев’ю: листи не надсилаються.',
   },
   es: {
     label: {
@@ -107,7 +107,7 @@ const messages: Record<AppLocale, Copy> = {
     verifyRetry: 'Reintentar',
     openProvider: 'Abrir el formulario de Brevo',
     noscript: 'Este formulario necesita JavaScript.',
-    preview: 'Vista previa: sin envío ni verificación Turnstile.',
+    preview: 'Vista previa local: no se envían correos.',
   },
   en: {
     label: {
@@ -137,7 +137,7 @@ const messages: Record<AppLocale, Copy> = {
     verifyRetry: 'Try again',
     openProvider: 'Open the Brevo form',
     noscript: 'This form needs JavaScript.',
-    preview: 'Form preview: no submission or Turnstile check.',
+    preview: 'Local preview: no emails are sent.',
   },
 };
 
@@ -398,6 +398,8 @@ export function NewsletterForm({
   return (
     <form
       className={styles.form}
+      data-preview={preview || undefined}
+      data-placement={placement}
       method="post"
       action={
         campaign

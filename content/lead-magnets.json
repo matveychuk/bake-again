@@ -66,8 +66,27 @@
       "recipeId": "crepes",
       "afterStepId": "add-milk",
       "title": "Картка юного кухаря",
-      "description": "Надішлю PDF одразу, а далі — нові перевірені рецепти.",
-      "submit": "Надіслати PDF"
+      "description": "Шість коротких кроків із фото й кількостями на одному аркуші A4. Роздрукуй і поклади поруч: дитина зможе сама звірятися з рецептом, а ти — допомагати, коли потрібно.",
+      "submit": "Надіслати PDF",
+      "note": "Надішлю картку на пошту за кілька хвилин, а далі — нові перевірені рецепти.",
+      "previews": [
+        {
+          "src": "/images/recipes/crepes/pdf-preview/junior-card-a4.webp",
+          "alt": "Прев’ю картки юного кухаря: шість кроків млинців із фото на одному аркуші",
+          "title": "Картка для друку",
+          "description": "1 аркуш A4 · на email",
+          "href": "/images/recipes/crepes/pdf-preview/junior-card-a4.webp",
+          "linkLabel": "Збільшити прев’ю"
+        },
+        {
+          "src": "/images/recipes/crepes/pdf-preview/recipe-steps.webp",
+          "alt": "Сторінка PDF-рецепта млинців із фото та поясненнями замішування тіста",
+          "title": "Повний рецепт",
+          "description": "6 сторінок · для телефона",
+          "href": "/downloads/Bake-Again-Bezghliutenovi-mlyntsi.pdf",
+          "linkLabel": "Відкрити рецепт PDF"
+        }
+      ]
     }
   }
 }

@@ -1,5 +1,14 @@
 # Design system changelog
 
+## 2026-11-18 — Explain the junior-cook PDF gift
+
+- Extend the existing recipe-step invitation with two real PDF previews, a clear
+  explanation of the six-step printable A4 card and actual delivery timing.
+- Keep the card as the email gift and give the full recipe a separate open PDF
+  link; preserve the current provider flow and source PDFs.
+- Reuse the same registry-driven composition in the recipe and Design Lab;
+  retain the terracotta CTA in inert previews without enabling submission.
+
 ## 2026-11-18 — Verify the combined recipe and article release
 
 - Use the shared Image component for compact product posters; preserve the

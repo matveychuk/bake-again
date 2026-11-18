@@ -8,6 +8,12 @@
   margin: 0;
   overflow-wrap: anywhere;
 }
+/* Inert recipe previews show the real primary CTA without permitting delivery. */
+.form[data-preview='true'][data-placement='recipe'] button[type='submit']:disabled {
+  background: var(--color-action-primary);
+  color: var(--color-text-on-accent);
+  border-color: transparent;
+}
 .small {
   font-size: var(--font-size-body-small);
   color: var(--color-text-secondary);

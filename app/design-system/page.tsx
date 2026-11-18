@@ -1,5 +1,6 @@
 import { CookieConsentPanel } from '@/components/site/cookie-consent';
 import { PanettoneInvitation } from '@/components/site/panettone-invitation';
+import { RecipePdfInvitation } from '@/components/recipe/recipe-pdf-invitation';
 import { PsylliumStory } from '@/app/_components/articles/articles';
 import { BlogCards } from '@/app/_components/articles/blog';
 import { RecipeFreeLessonStep } from '@/components/recipe/recipe-free-lesson-step';
@@ -1164,15 +1165,9 @@ export default function DesignSystemPage() {
               </div>
               {(['light', 'dark'] as const).map((theme) => (
                 <div key={theme} data-theme={theme} lang="uk">
-                  <EditorialInvitation
-                    variant="recipe-step"
-                    headingLevel={3}
-                    eyebrow={pdfInvitationEyebrow.uk}
-                    titleId={`recipe-step-card-${theme}`}
-                    title={getRecipeInvitation('crepes', 'uk')!.title}
-                    description={
-                      getRecipeInvitation('crepes', 'uk')!.description
-                    }
+                  <RecipePdfInvitation
+                    id={`recipe-step-card-${theme}`}
+                    invitation={getRecipeInvitation('crepes', 'uk')!}
                     action={
                       <NewsletterForm
                         preview

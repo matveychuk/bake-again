@@ -148,6 +148,12 @@ void test('registry rejects unsafe destinations, missing outcome copy and duplic
     (p: typeof leadMagnetRegistry) => {
       p.mlyntsi.bot.keyword = p.shokolad.bot.keyword.toUpperCase();
     },
+    (p: typeof leadMagnetRegistry) => {
+      p.mlyntsi.recipeInvitation.previews[0].href = 'https://outside.example/file.pdf';
+    },
+    (p: typeof leadMagnetRegistry) => {
+      p.mlyntsi.recipeInvitation.previews[0].src = '/images/../private.webp';
+    },
   ]) {
     const registry = structuredClone(leadMagnetRegistry);
     mutate(registry);
