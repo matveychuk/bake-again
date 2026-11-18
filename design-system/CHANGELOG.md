@@ -1,5 +1,10 @@
 # Design system changelog
 
+## 2026-11-18 — Remove the doubled recipe divider
+
+- Remove the inline PDF invitation's bottom rule and bottom margin; retain the
+  next step's separator. The shared recipe-step variant updates Design Lab too.
+
 ## 2026-11-18 — Deliver both crepe PDFs in one email
 
 - Follow the owner's selection of the two-file gift: full recipe plus junior-cook

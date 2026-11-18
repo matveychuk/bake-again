@@ -168,9 +168,8 @@
 /* Inline recipe invitation: same editorial type, a full-width quiet form. */
 .recipeStep {
   width: 100%;
-  margin-block: var(--space-8);
+  margin-block: var(--space-8) 0;
   padding-block: var(--space-6);
-  border-bottom: 1px solid var(--color-border-subtle);
 }
 .recipeStep .main {
   display: grid;

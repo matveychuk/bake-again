@@ -1089,6 +1089,8 @@ The form has a terracotta primary CTA, labelled email, explicit consent/privacy,
 unique descriptions for multiple forms, and keyboard focus on the success heading.
 Print and Cook mode exclude it. `/design-system#recipe-step-subscription` shows
 light/dark inert examples; development without credentials labels its inert form.
+The invitation has no bottom rule or bottom margin; the next recipe step owns
+the single separating rule, avoiding doubled lines and an empty strip.
 An inert recipe preview retains the primary button colour but stays disabled;
 real pending/verification-disabled states retain normal disabled styling.
 Recipe requests use single opt-in and provider automation. Historical DOI/SMTP
