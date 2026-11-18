@@ -575,7 +575,7 @@ export function InventoryRecipeDetail({
                       invitation={invitation}
                       action={
                         <NewsletterSignup
-                          locale="uk"
+                          locale={invitation.locale}
                           magnetId={invitation.magnetId}
                           placement="recipe"
                         />

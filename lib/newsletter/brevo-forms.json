@@ -710,7 +710,8 @@
       "napoleonWaitlistId": 10,
       "bonusListIds": {
         "mlyntsi": 9,
-        "shokolad": 11
+        "shokolad": 11,
+        "crepes-es": 14
       },
       "attributes": {
         "SOURCE": "Text",
@@ -723,7 +724,9 @@
         "waitMinutes": 10,
         "skipIfMemberOfAnyList": [
           9,
-          11
+          11,
+          13,
+          14
         ],
         "localePriority": [
           "uk",
@@ -767,6 +770,20 @@
           "waitMinutes": 2,
           "reentryAfterExit": false,
           "status": "active"
+        },
+        "crepes-es": {
+          "automationId": 8,
+          "messageId": 30,
+          "stepId": 3,
+          "listId": 14,
+          "waitMinutes": 2,
+          "reentryAfterExit": false,
+          "status": "active",
+          "savedHtml": "lib/newsletter/provider-templates/crepes-es.html",
+          "materialPaths": [
+            "/downloads/Bake-Again-Crepes-sin-gluten.pdf",
+            "/downloads/Bake-Again-Crepes-ficha-infantil.pdf"
+          ]
         }
       },
       "pausedLegacyAutomationIds": [

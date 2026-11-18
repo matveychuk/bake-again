@@ -780,7 +780,7 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       calculated: {
         label: 'Calculada',
         explanation:
-          'Las cantidades se han ajustado. Esta versión no se ha probado horneándola.',
+          'Las cantidades se han recalculado. Esta versión está pendiente de probar en la cocina.',
       },
       suggested: {
         label: 'Sugerida',

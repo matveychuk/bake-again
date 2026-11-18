@@ -15,7 +15,7 @@ const copy = {
     fallback: 'Відкрити відео',
   },
   en: {
-    watch: 'This Reel on Instagram',
+    watch: 'This Reel on Instagram (in Ukrainian)',
     languages: {
       uk: 'Video in Ukrainian',
       en: 'Video in English',
@@ -25,7 +25,7 @@ const copy = {
     fallback: 'Open video',
   },
   es: {
-    watch: 'Este Reel en Instagram',
+    watch: 'Ver la versión en ucraniano en Instagram',
     languages: {
       uk: 'Vídeo en ucraniano',
       en: 'Vídeo en inglés',
@@ -46,7 +46,8 @@ export function RecipeStoryVideo({
   id?: string;
 }) {
   const text = copy[locale];
-  const media = story.localizedMedia?.[locale] ?? story;
+  const localized = story.localizedMedia?.[locale];
+  const media = localized ?? story;
   return (
     <EditorialInvitation
       id={id}
@@ -54,7 +55,7 @@ export function RecipeStoryVideo({
       title={story.title[locale]}
       description={story.description[locale]}
       variant="recipe-video"
-      eyebrow={`${text.languages[media.language]} · ${media.durationSeconds} ${text.seconds}`}
+      eyebrow={`${localized?.languageLabel ?? text.languages[media.language]} · ${media.durationSeconds} ${text.seconds}`}
       image={
         // oxlint-disable-next-line jsx-a11y/media-has-caption -- Author narration transcript is pending; do not fabricate captions. Render a verified track when supplied. The adjacent story summary is available as text.
         <video
@@ -86,11 +87,6 @@ export function RecipeStoryVideo({
           rel="noopener noreferrer"
         >
           {text.watch}
-          {locale === 'es'
-            ? ' (en ucraniano)'
-            : locale === 'en'
-              ? ' (in Ukrainian)'
-              : ''}
         </Button>
       }
     />

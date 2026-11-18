@@ -113,7 +113,7 @@ void test('crepes Cook Mode resolves Spanish content through the same adapter', 
   assert.ok(content);
 
   const steps = createRecipeCookSteps(content, 'es');
-  assert.equal(steps[0].title, 'Bate una base espesa');
+  assert.equal(steps[0].title, 'Bate la masa sin grumos');
   assert.equal(steps[0].media?.[0].id, 'pdf-v6-base');
   assert.equal(steps[6].title, 'Dale la vuelta');
 });

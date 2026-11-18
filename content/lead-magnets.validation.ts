@@ -1,4 +1,6 @@
 export type LeadMagnetDefinition = {
+  locale?: string;
+  recipePath?: string;
   recipeInvitation?: {
     recipeId: string;
     afterStepId: string;
@@ -31,7 +33,7 @@ export type LeadMagnetDefinition = {
     confirmation: string;
     delivered: string;
   };
-  bot: { keyword: string; message: string; button: string };
+  bot?: { keyword: string; message: string; button: string };
 };
 
 /** Fixed public configuration only. A visitor can never supply delivery URLs. */
@@ -99,7 +101,7 @@ export function validateLeadMagnetRegistry(
         }
       }
     }
-    if (!object(page) || !object(email) || !object(bot)) fail(id, 'sections');
+    if (!object(page) || !object(email) || (!object(bot) && !recipeInvitation)) fail(id, 'sections');
     const p = page as Record<string, unknown>,
       e = email as Record<string, unknown>,
       b = bot as Record<string, unknown>;
@@ -130,6 +132,11 @@ export function validateLeadMagnetRegistry(
       )
         fail(id, 'link');
     }
+    const { locale = 'uk', recipePath } = value as LeadMagnetDefinition;
+    if (!['uk', 'es', 'en'].includes(locale)) fail(id, 'locale');
+    if (recipeInvitation && (typeof recipePath !== 'string' || !new RegExp('^/' + locale + '/recipes/[a-z0-9-]+$').test(recipePath))) fail(id, 'recipePath');
+    if (bot === undefined) continue;
+    if (!object(bot)) fail(id, 'bot');
     for (const field of ['keyword', 'message', 'button'])
       if (!text(b[field])) fail(id, `bot.${field}`);
     const keyword = String(b.keyword).trim().toLocaleLowerCase('uk');

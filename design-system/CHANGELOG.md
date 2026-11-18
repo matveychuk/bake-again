@@ -1,5 +1,13 @@
 # Design system changelog
 
+## 2026-11-18 — Spanish crepe PDFs
+
+- Localize the shared in-recipe PDF invitation, its two previews, subscription form and success message for Spain.
+
+## 2026-11-18 — Recipe video language
+
+- The Spanish crepe film and its Design Lab example identify the language of the on-screen text and the song separately. The Instagram action identifies the Ukrainian edit.
+
 ## 2026-11-18 — Open Cook Mode from any recipe step
 
 - Fill the phone content width with the main Cook button. Extend `RecipeCookEntry`

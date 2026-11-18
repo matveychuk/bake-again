@@ -99,7 +99,7 @@ const messages: Record<AppLocale, Copy> = {
     sending: 'Enviando…',
     doneTitle: '¡Gracias!',
     doneBody: 'El primer correo ya va de camino.',
-    donePdf: (email) => `El PDF va de camino a ${email}.`,
+    donePdf: (email) => `La receta y la ficha para peques van de camino a ${email}.`,
     doneHint: '¿No llega en unos minutos? Mira en «Spam» o «Promociones».',
     close: 'Cerrar',
     error: 'No se ha podido enviar. Inténtalo de nuevo.',

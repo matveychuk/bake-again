@@ -91,6 +91,65 @@
           "linkLabel": "Збільшити прев’ю"
         }
       ]
+    },
+    "recipePath": "/uk/recipes/bezghliutenovi-mlyntsi"
+  },
+  "crepes-es": {
+    "locale": "es",
+    "recipePath": "/es/recipes/crepes-sin-gluten",
+    "page": {
+      "title": "La receta y una ficha para cocinar con peques",
+      "subtitle": "Guarda la receta con fotos en el móvil. Si cocináis en familia, imprime la ficha de seis pasos para que los peques puedan seguirla mientras tú te encargas de la sartén.",
+      "features": [
+        "1 hoja A4 · para imprimir",
+        "6 páginas · para el móvil"
+      ],
+      "image": "/images/recipes/crepes-stack-2026-10-20-v1.webp",
+      "imageAlt": "Una pila de crepes finos en un plato",
+      "note": "Al suscribirte, recibirás los dos PDF en un mismo correo y, después, nuevas recetas sin gluten de Bake Again."
+    },
+    "recipeInvitation": {
+      "recipeId": "crepes",
+      "afterStepId": "add-milk",
+      "title": "La receta y una ficha para cocinar con peques",
+      "description": "Guarda la receta con fotos en el móvil. Si cocináis en familia, imprime la ficha de seis pasos para que los peques puedan seguirla mientras tú te encargas de la sartén.",
+      "submit": "Enviarme los dos PDF",
+      "note": "Al suscribirte, recibirás los dos PDF en un mismo correo y, después, nuevas recetas sin gluten de Bake Again.",
+      "previews": [
+        {
+          "src": "/images/recipes/crepes/pdf-preview/ficha-infantil-es.webp",
+          "alt": "Los seis pasos de la ficha infantil, con fotos de la masa y de la sartén",
+          "title": "Ficha para peques",
+          "description": "1 hoja A4 · para imprimir",
+          "href": "/images/recipes/crepes/pdf-preview/ficha-infantil-es.webp",
+          "linkLabel": "Ampliar vista previa"
+        },
+        {
+          "src": "/images/recipes/crepes/pdf-preview/pasos-receta-es.webp",
+          "alt": "Página de la receta con fotos de la masa antes y después de añadir la leche",
+          "title": "Receta completa",
+          "description": "6 páginas · para el móvil",
+          "href": "/images/recipes/crepes/pdf-preview/pasos-receta-es.webp",
+          "linkLabel": "Ampliar vista previa"
+        }
+      ]
+    },
+    "email": {
+      "subject": "Tus crepes sin gluten y la ficha para peques",
+      "title": "Crepes finos sin gluten",
+      "intro": "Aquí tienes la receta para el móvil y la ficha de seis pasos para imprimir en A4.",
+      "links": [
+        {
+          "title": "Descargar la receta completa",
+          "href": "/downloads/Bake-Again-Crepes-sin-gluten.pdf"
+        },
+        {
+          "title": "Descargar la ficha para peques",
+          "href": "/downloads/Bake-Again-Crepes-ficha-infantil.pdf"
+        }
+      ],
+      "confirmation": "Hemos recibido tu solicitud.",
+      "delivered": "Busca el correo con la receta y la ficha para peques."
     }
   }
 }

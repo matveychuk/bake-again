@@ -17,6 +17,7 @@ export interface RecipeStoryVideo {
         poster: string;
         language: 'uk' | 'en' | 'es';
         durationSeconds: number;
+        languageLabel?: string;
       }
     >
   >;
@@ -36,17 +37,18 @@ export const recipeStoryVideos: Record<string, RecipeStoryVideo> = {
         poster: '/media/recipes/crepes/crepes-family-es-poster-v1.webp',
         language: 'es',
         durationSeconds: 33,
+        languageLabel: 'Texto en español · Canción en inglés',
       },
     },
     title: {
       uk: 'Млинці без маминих підказок',
       en: 'Crepes without Mum’s help',
-      es: 'Crepes sin las indicaciones de mamá',
+      es: 'Mi hijo prepara los crepes él solo',
     },
     description: {
       uk: 'Коротка історія з нашої кухні: син змішує тісто, смажить млинці й куштує результат. А кіт чекає поруч.',
       en: 'A short story from our kitchen: my son mixes the batter, cooks the crepes and tastes the result. The cat waits nearby.',
-      es: 'Una pequeña historia de nuestra cocina: mi hijo mezcla la masa, cocina los crepes y prueba el resultado. El gato espera cerca.',
+      es: 'Con la receta abierta en la tablet, mi hijo prepara la masa, calienta la sartén y se hace los crepes. Mientras tanto, el gato va a buscar su ración.',
     },
   },
 };

@@ -5,16 +5,25 @@ validateLeadMagnetRegistry(source);
 export const leadMagnetRegistry = source;
 export type LeadMagnetId = keyof typeof source;
 export const leadMagnetIds = Object.keys(source) as LeadMagnetId[];
-/** Label above every PDF-bonus title; ES/EN wait for PDFs in those languages. */
+export const productLocale = (id: LeadMagnetId): 'uk' | 'es' | 'en' => {
+  const product = source[id];
+  if ('locale' in product && (product.locale === 'es' || product.locale === 'en')) return product.locale;
+  return 'uk';
+};
+export const landingMagnetIds = leadMagnetIds.filter((id) => 'bot' in source[id]);
+/** Label above each localized free PDF invitation. */
 export const pdfInvitationEyebrow = {
   uk: 'Безкоштовно · PDF',
   es: 'Gratis · PDF',
   en: 'Free · PDF',
 } as const;
-export const leadMagnetPath = (id: LeadMagnetId) => `/uk/recept/${id}`;
+export const leadMagnetPath = (id: LeadMagnetId) => {
+  const product = source[id];
+  return 'bot' in product ? `/uk/recept/${id}` : product.recipePath;
+};
 export const isLeadMagnetId = (value: unknown): value is LeadMagnetId =>
   typeof value === 'string' && Object.hasOwn(leadMagnetRegistry, value);
-export const leadMagnets = leadMagnetIds.map((magnetId) => ({
+export const leadMagnets = landingMagnetIds.map((magnetId) => ({
   magnetId,
   ...leadMagnetRegistry[magnetId].page,
 }));
@@ -26,19 +35,20 @@ export function getLeadMagnet(locale: string, id: string) {
 }
 
 export function getLeadMagnetBot(id: LeadMagnetId, channel: 'ig' | 'fb') {
+  const product = source[id];
+  if (!('bot' in product)) throw new Error('No bot landing page for this edition');
   return {
-    ...leadMagnetRegistry[id].bot,
+    ...product.bot,
     url: `https://bakeagain.com${leadMagnetPath(id)}?src=${channel}-bot`,
   };
 }
 
 export function getRecipeInvitation(recipeId: string, locale: string) {
-  if (locale !== 'uk') return null;
   for (const magnetId of leadMagnetIds) {
     const product: import('./lead-magnets.validation.ts').LeadMagnetDefinition =
       leadMagnetRegistry[magnetId];
-    if (product.recipeInvitation?.recipeId === recipeId)
-      return { magnetId, ...product.recipeInvitation };
+    if (productLocale(magnetId) === locale && product.recipeInvitation?.recipeId === recipeId)
+      return { magnetId, locale: productLocale(magnetId), ...product.recipeInvitation };
   }
   return null;
 }

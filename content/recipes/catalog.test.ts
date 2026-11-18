@@ -209,7 +209,7 @@ void test('splits localized detail titles into a gluten-free label and dish name
     getRecipeDetailTitleParts(recipeDetailTitles.crepes.es, 'es'),
     {
       glutenFreeLabel: 'Sin gluten',
-      recipeName: 'Crepes',
+      recipeName: 'Crepes finos',
     },
   );
 });

@@ -98,7 +98,7 @@ import { NewsletterForm } from '@/components/site/newsletter-form';
 import {
   getLeadMagnet,
   getRecipeInvitation,
-  leadMagnetIds,
+  landingMagnetIds,
   pdfInvitationEyebrow,
 } from '@/content/lead-magnets';
 import { EditorialInvitation } from '@/components/site/editorial-invitation';
@@ -1049,6 +1049,11 @@ export default function DesignSystemPage() {
                 locale="uk"
                 id="recipe-story-preview"
               />
+              <RecipeStoryVideo
+                story={recipeStoryVideos.crepes}
+                locale="es"
+                id="recipe-story-preview-es"
+              />
             </div>
 
             <div className={styles.componentBlock} id="recipe-utilities">
@@ -1141,7 +1146,7 @@ export default function DesignSystemPage() {
                 </span>
               </div>
               <div>
-                {leadMagnetIds.flatMap((magnet) =>
+                {landingMagnetIds.flatMap((magnet) =>
                   (['light', 'dark'] as const).map((theme) => (
                     <div
                       key={`${magnet}-${theme}`}
@@ -1192,21 +1197,22 @@ export default function DesignSystemPage() {
                   Junior-cook card after step two; inert preview, no email.
                 </span>
               </div>
-              {(['light', 'dark'] as const).map((theme) => (
-                <div key={theme} data-theme={theme} lang="uk">
+              {(['light', 'dark'] as const).flatMap((theme) => (['uk', 'es'] as const).map((locale) => (
+                <div key={theme + locale} data-theme={theme} lang={locale}>
                   <RecipePdfInvitation
-                    id={`recipe-step-card-${theme}`}
-                    invitation={getRecipeInvitation('crepes', 'uk')!}
+                    id={`recipe-step-card-${theme}-${locale}`}
+                    invitation={getRecipeInvitation('crepes', locale)!}
                     action={
                       <NewsletterForm
                         preview
-                        magnetId="mlyntsi"
+                        locale={locale}
+                        magnetId={getRecipeInvitation('crepes', locale)!.magnetId}
                         placement="recipe"
                       />
                     }
                   />
                 </div>
-              ))}
+              )))}
             </div>
 
             <div className={styles.componentBlock} id="recipe-downloads">

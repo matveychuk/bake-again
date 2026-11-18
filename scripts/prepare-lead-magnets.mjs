@@ -1,5 +1,5 @@
 import { stat, mkdir, writeFile } from 'node:fs/promises';
-import { leadMagnetIds, leadMagnetRegistry, leadMagnetPath, getLeadMagnetBot } from '../content/lead-magnets.ts';
+import { landingMagnetIds, leadMagnetIds, leadMagnetRegistry, leadMagnetPath, getLeadMagnetBot } from '../content/lead-magnets.ts';
 
 const root = new URL('../', import.meta.url);
 // Check every asset before writing a handoff. Never send or call provider APIs.
@@ -14,6 +14,7 @@ const output = new URL('outputs/lead-magnets/', root);
 await mkdir(output, { recursive: true });
 for (const id of leadMagnetIds) {
   const product = leadMagnetRegistry[id];
+  if (!landingMagnetIds.includes(id)) continue;
   const handoff = {
     id,
     title: product.page.title,

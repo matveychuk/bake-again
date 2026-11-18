@@ -29,9 +29,9 @@ export async function NewsletterSignup({
     process.env.NODE_ENV === 'development' && !deliveryConfigured(bindings);
   if (magnetId)
     return signup &&
-      locale === 'uk' &&
       (deliveryConfigured(bindings) || localPreview) ? (
       <NewsletterForm
+        locale={locale}
         preview={localPreview}
         placement={placement}
         signup={signup}
@@ -39,7 +39,7 @@ export async function NewsletterSignup({
         recipeSiteKey={bindings.TURNSTILE_SITE_KEY as string}
       />
     ) : (
-      <output>Підписка зараз недоступна. Спробуй, будь ласка, пізніше.</output>
+      <output>{locale === 'es' ? 'La suscripción no está disponible ahora. Inténtalo más tarde.' : 'Підписка зараз недоступна. Спробуй, будь ласка, пізніше.'}</output>
     );
   return signup ? (
     <NewsletterInvitation

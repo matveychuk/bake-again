@@ -1,4 +1,4 @@
-import { isLeadMagnetId, leadMagnetPath } from '../../content/lead-magnets.ts';
+import { isLeadMagnetId, leadMagnetPath, leadMagnetRegistry } from '../../content/lead-magnets.ts';
 import { panettoneSignupPage } from '../../content/articles/psyllium.ts';
 import { videoMilestones, videoPlayers, videoStartModes, type VideoMilestone, type VideoPlayer, type VideoStartMode } from '../lessons/video-progress.ts';
 import { lessonVideoErrorCodes, type LessonVideoErrorCode } from '../lessons/video-diagnostics.ts';
@@ -323,15 +323,13 @@ export function sanitizeAnalyticsPayload(
     data.product_id = input.product_id;
   }
   if (payload.name === 'lead_magnet_submit') {
-    if (
-      !isMagnetPath(url.pathname) ||
-      !isLeadMagnetId(input?.magnet) ||
-      url.pathname.replace(/\/$/,'').split('/').at(-1) !== input?.magnet
-    )
-      return false;
+    if (!isLeadMagnetId(input?.magnet)) return false;
+    const magnet = leadMagnetRegistry[input.magnet];
+    const path = url.pathname.replace(/\/$/, '');
+    if (path !== leadMagnetPath(input.magnet) && !('recipePath' in magnet && path === magnet.recipePath)) return false;
     // This conversion has exactly one public attribute; never include form fields.
     for (const key of Object.keys(data)) delete data[key as keyof EventData];
-    data.magnet = input!.magnet;
+    data.magnet = input.magnet;
   }
   if (payload.name === 'panettone_signup') {
     if (!panettoneSignupPage(url.pathname)) return false;

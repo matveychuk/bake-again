@@ -19,3 +19,5 @@ the existing two-minute wait and Active workflow. No email was sent as a test.
 The saved HTML was inspected at 390, 900 and 1440 CSS px without horizontal
 overflow; both buttons wrap on a phone-width screen. This is a browser layout
 check, not proof of rendering or delivery in an actual inbox.
+
+The Spanish crepe edition uses `crepes-es.html` in active Brevo automation #8, step #3, message #30. Entry is limited to new additions to list #14. The two-minute delay precedes one email with both downloads. The general welcome automation excludes list #14.

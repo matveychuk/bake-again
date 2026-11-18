@@ -945,7 +945,7 @@ player sits beside the copy on wide screens and below it on phones; the entire
 frame remains visible. Design Lab `#recipe-story-video` reuses the real component.
 
 The per-recipe registry supports localized media with an explicitly labelled
-fallback. Instagram remains an optional external link; label a language mismatch
+fallback. A localized edit can specify the on-screen and audio languages separately. The Spanish crepe edit uses Spanish on-screen text and a song in English. Instagram remains an optional external link; label a language mismatch
 instead of implying that another-language edit is the same linked Reel. Verified
 caption tracks can be supplied per recording; the current crepe narration still
 needs an exact transcript and is not claimed to have accessible closed captions.
@@ -1099,7 +1099,7 @@ optional subscription after crepes step two, not an instruction or extra recipe
 step. It explains six photographed steps on one printable A4 sheet. It promises
 both the card and full six-page recipe in one email (owner decision 2026-11-18).
 Both thumbnail links enlarge previews; the single primary action is
-«Надіслати обидва PDF».
+«Надіслати обидва PDF» or «Enviarme los dos PDF». The Spanish edition uses Spanish page previews, email and recipe-specific list membership.
 The form has a terracotta primary CTA, labelled email, explicit consent/privacy,
 unique descriptions for multiple forms, and keyboard focus on the success heading.
 Print and Cook mode exclude it. `/design-system#recipe-step-subscription` shows

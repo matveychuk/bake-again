@@ -49,7 +49,7 @@ export const recipeUtilityCopy = {
   },
   es: {
     share: 'Compartir',
-    print: 'Imprimir / PDF',
+    print: 'Imprimir o guardar en PDF',
     printNow: 'Imprimir o guardar en PDF',
     shareDevice: 'Enviar mediante…',
     printHint: 'Puedes elegir «Guardar como PDF» en el diálogo de impresión.',

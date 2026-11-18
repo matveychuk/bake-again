@@ -1,6 +1,6 @@
 import records from './brevo-forms.json' with { type: 'json' };
 import {
-  getRecipeInvitation,
+  productLocale, leadMagnetRegistry,
   leadMagnetPath,
 } from '../../content/lead-magnets.ts';
 import type { MagnetId } from './magnets.ts';
@@ -15,16 +15,19 @@ export function recipeSubscription(
   const bonusListId = (config.bonusListIds as Record<string, number>)[magnet];
   if (!Number.isSafeInteger(bonusListId))
     throw new Error('Bonus list is not configured');
-  const invitation = getRecipeInvitation('crepes', 'uk');
-  if (placement === 'recipe' && invitation?.magnetId !== magnet)
+  const locale = productLocale(magnet);
+  const product = leadMagnetRegistry[magnet];
+  if (placement === 'landing' && !('bot' in product)) throw new Error('No landing page');
+  const invitation = 'recipeInvitation' in product ? product.recipeInvitation : undefined;
+  if (placement === 'recipe' && !invitation)
     throw new Error('Recipe placement is not configured');
   return {
-    listIds: [config.masterListId, config.localeListIds.uk, bonusListId],
+    listIds: [config.masterListId, config.localeListIds[locale], bonusListId],
     attributes: {
       SOURCE: 'website',
       SIGNUP_PAGE:
-        placement === 'recipe'
-          ? '/uk/recipes/bezghliutenovi-mlyntsi'
+        placement === 'recipe' && 'recipePath' in product
+          ? product.recipePath
           : leadMagnetPath(magnet),
       SIGNUP_POSITION:
         placement === 'recipe'

@@ -12,7 +12,7 @@ Local review only; no new social publication or website deployment recorded.
   H.264 540 × 960, AAC audio, explicit SDR Rec.709 composition;
   `crepes-family-es-web-v2.mp4`: 3,100,797 bytes. Version 1 is an unpublished
   compression review copy and is not referenced by product code.
-  Poster is the cooking frame at 18 seconds from this source.
+  Poster is the cooking frame at 18 seconds from this source. Frame review confirmed Spanish on-screen text. Local recognition of the web MP4 audio identified an English-language song throughout, with no Spanish narration.
 - Original files remain untouched. Source-quality posters are JPEG here;
   product URLs use the WebP outputs from `media:prepare`.
 - Ukrainian Instagram permalink comes from the archived IG-036 publication

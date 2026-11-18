@@ -20,12 +20,12 @@ export function RecipePdfInvitation({
   return (
     <EditorialInvitation
       id={id}
-      lang="uk"
+      lang={invitation.locale}
       data-recipe-subscription={invitation.magnetId}
       data-pdf-previews={Boolean(invitation.previews?.length)}
       variant="recipe-step"
       headingLevel={3}
-      eyebrow={pdfInvitationEyebrow.uk}
+      eyebrow={pdfInvitationEyebrow[invitation.locale]}
       titleId={`${id}-title`}
       title={invitation.title}
       description={invitation.description}
@@ -52,7 +52,7 @@ export function RecipePdfInvitation({
                   </span>
                   <span className={styles.linkLabel}>
                     {preview.linkLabel}
-                    <span className="sr-only"> (нова вкладка)</span>
+                    <span className="sr-only"> {{ uk: '(нова вкладка)', es: '(se abre en otra pestaña)', en: '(opens in a new tab)' }[invitation.locale]}</span>
                   </span>
                 </a>
                 <figcaption>

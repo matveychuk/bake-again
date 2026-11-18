@@ -1,5 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { leadMagnetRegistry, leadMagnetIds } from '../content/lead-magnets.ts';
+import { leadMagnetRegistry, landingMagnetIds as leadMagnetIds } from '../content/lead-magnets.ts';
 const root = new URL('../', import.meta.url);
 const css = await readFile(new URL('design-system/tokens.css', root), 'utf8');
 const forms = JSON.parse(await readFile(new URL('lib/newsletter/brevo-forms.json', root), 'utf8'));

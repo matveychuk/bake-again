@@ -104,6 +104,17 @@ void test('new signup registers all lists in one operation without DOI or a seco
     'sent',
   );
 });
+void test('the Spanish recipe registers its own bonus and locale independently of the Ukrainian edition', async () => {
+  const f = fixture();
+  await f.service.request(email, 'mlyntsi', 'network', 'recipe');
+  await f.service.request(email, 'crepes-es', 'network', 'recipe');
+  assert.deepEqual(f.registrations[1].subscription, {
+    listIds: [3, 5, 14],
+    attributes: { SOURCE: 'website', SIGNUP_PAGE: '/es/recipes/crepes-sin-gluten', SIGNUP_POSITION: 'after-add-milk' },
+  });
+  assert.throws(() => recipeSubscription('crepes-es', 'landing'));
+  assert.equal(isSuppressed({ listUnsubscribed: [14] }), true);
+});
 void test('existing subscriber can enter another bonus without replacing previous membership', async () => {
   const f = fixture();
   f.setContact({ listIds: [3, 4, 9], emailBlacklisted: false });

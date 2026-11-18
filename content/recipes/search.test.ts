@@ -83,7 +83,7 @@ void test('accepts case, accents, prefixes, word forms and one small typo', () =
 void test('returns localized cards with unchanged evidence and prioritizes exact dish titles', () => {
   assert.equal(
     searchRecipes('es', 'млинки')[0]?.title,
-    'Crepes finos para el desayuno',
+    'Crepes finos sin gluten',
   );
   assert.equal(
     searchRecipes('en', 'млинки')[0]?.title,
