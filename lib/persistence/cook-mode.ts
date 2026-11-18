@@ -23,6 +23,44 @@ export type CookModeSessionV1 = {
   note: string;
 };
 
+/** A direct entry selects a screen without completing or clearing any saved steps. */
+export function resolveCookModeEntry(
+  steps: readonly { stepIds: readonly string[] }[],
+  requestedStepId: string | null,
+  saved: Pick<CookModeSessionV1, 'currentStepId' | 'completedAt'> | null,
+) {
+  const requestedIndex = steps.findIndex((step) =>
+    step.stepIds.some((id) => id === requestedStepId),
+  );
+  const savedIndex = steps.findIndex((step) =>
+    step.stepIds.some((id) => id === saved?.currentStepId),
+  );
+  return {
+    stepIndex: requestedIndex >= 0 ? requestedIndex : Math.max(0, savedIndex),
+    showCompletion: Boolean(saved?.completedAt) && requestedIndex < 0,
+  };
+}
+
+/** Internal Cook URLs already carry the selected quantities, geometry and cream. */
+export function cookStepHref(href: string, stepId: string) {
+  const [path, search = ''] = href.split('?');
+  const params = new URLSearchParams(search);
+  params.set('step', stepId);
+  return `${path}?${params}`;
+}
+
+/** Step selection belongs to Cook navigation, never to a recipe configuration. */
+export function cookEntrySearch(search: string) {
+  const params = new URLSearchParams(search);
+  const requestedStepId = params.get('step');
+  params.delete('step');
+  const configuration = params.toString();
+  return {
+    requestedStepId,
+    configurationSearch: configuration ? `?${configuration}` : '',
+  };
+}
+
 export function cookModeStorageKey(
   recipeId: string,
   recipeVersionId: string,

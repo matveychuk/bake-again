@@ -44,6 +44,8 @@ import {
 import {
   persistCookModeSession,
   readCookModeSession,
+  resolveCookModeEntry,
+  cookEntrySearch,
   type CookTimerState,
 } from '@/lib/persistence/cook-mode';
 
@@ -81,16 +83,18 @@ export function CookModePage({
     getLocationSearch,
     () => (configurationSearch ? `?${configurationSearch}` : ''),
   );
-  const resolvedDetailHref = `${baseDetailHref}${locationSearch}`;
+  const { requestedStepId, configurationSearch: recipeSearch } =
+    cookEntrySearch(locationSearch);
+  const resolvedDetailHref = `${baseDetailHref}${recipeSearch}`;
   const state = useMemo(
     () =>
-      definition?.getState(locationSearch) ?? {
+      definition?.getState(recipeSearch) ?? {
         isAdjusted: false,
         steps: [],
         allIngredients: [],
         unavailableReason: messages.unavailableRecord,
       },
-    [definition, locationSearch, messages.unavailableRecord],
+    [definition, recipeSearch, messages.unavailableRecord],
   );
   const configuration = useMemo(
     () => state.assistantConfiguration ?? { kind: 'base' as const },
@@ -105,10 +109,13 @@ export function CookModePage({
     [cookSteps],
   );
   const account = useAccount();
-  const [stepIndex, setStepIndex] = useState(0);
+  const [stepIndex, setStepIndex] = useState(
+    () => resolveCookModeEntry(cookSteps, requestedStepId, null).stepIndex,
+  );
   const [completedStepIds, setCompletedStepIds] = useState<string[]>([]);
   const [timer, setTimer] = useState<CookTimerState | null>(null);
   const [completedAt, setCompletedAt] = useState<string | null>(null);
+  const [showCompletion, setShowCompletion] = useState(false);
   const [note, setNote] = useState('');
   const lastBakeSignature = useRef('');
   const [noteSaveStatus, setNoteSaveStatus] = useState<
@@ -143,9 +150,8 @@ export function CookModePage({
   const timerRunning = Boolean(currentTimer?.endAt && remaining > 0);
 
   useEffect(() => {
-    if (!definition || cookSteps.length === 0) return;
+    if (!account.ready || !definition || cookSteps.length === 0) return;
     setRestoredConfigurationKey(null);
-    setStepIndex(0);
     setCompletedStepIds([]);
     setTimer(null);
     setCompletedAt(null);
@@ -157,6 +163,9 @@ export function CookModePage({
       undefined,
       configurationKey,
     );
+    const entry = resolveCookModeEntry(cookSteps, requestedStepId, saved);
+    setStepIndex(entry.stepIndex);
+    setShowCompletion(entry.showCompletion);
     const baked = readBakeRecord(
       definition.recipeId,
       recipeVersionId,
@@ -167,10 +176,6 @@ export function CookModePage({
       ? JSON.stringify([configurationKey, saved.completedAt, saved.note])
       : '';
     if (saved) {
-      const savedIndex = cookSteps.findIndex((candidate) =>
-        candidate.stepIds.includes(saved.currentStepId),
-      );
-      if (savedIndex >= 0) setStepIndex(savedIndex);
       setCompletedStepIds(
         saved.completedStepIds.filter((stepId) => allStepIds.includes(stepId)),
       );
@@ -188,12 +193,14 @@ export function CookModePage({
     setRestoredConfigurationKey(configurationKey);
     setSessionReady(true);
   }, [
+    account.ready,
     allStepIds,
     configuration,
     configurationKey,
     cookSteps,
     definition,
     recipeVersionId,
+    requestedStepId,
   ]);
 
   useEffect(() => {
@@ -215,6 +222,7 @@ export function CookModePage({
   useEffect(() => {
     if (
       !definition ||
+      !account.ready ||
       !sessionReady ||
       restoredConfigurationKey !== configurationKey ||
       !step
@@ -258,6 +266,7 @@ export function CookModePage({
     setNoteSaveStatus(sessionSaved && memorySaved ? 'saved' : 'error');
   }, [
     account.engine,
+    account.ready,
     completedAt,
     completedStepIds,
     configuration,
@@ -300,6 +309,7 @@ export function CookModePage({
   function goToStep(next: number) {
     const bounded = Math.max(0, Math.min(cookSteps.length - 1, next));
     setStepIndex(bounded);
+    setShowCompletion(false);
     setStepsOpen(false);
     const reduceMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
@@ -326,6 +336,7 @@ export function CookModePage({
         });
       setNoteSaveStatus('saving');
       setCompletedAt(new Date().toISOString());
+      setShowCompletion(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -381,6 +392,7 @@ export function CookModePage({
     setCompletedStepIds([]);
     setTimer(null);
     setCompletedAt(null);
+    setShowCompletion(false);
     setNote('');
     setNoteSaveStatus('saved');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -439,7 +451,7 @@ export function CookModePage({
           locale={locale}
         />
         <div className={styles.workColumn}>
-          {completedAt ? (
+          {completedAt && showCompletion ? (
             <CookCompletion
               completedCount={completedScreenCount}
               totalSteps={cookSteps.length}

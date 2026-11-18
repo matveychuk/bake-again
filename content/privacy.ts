@@ -19,7 +19,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Ваш акаунт і пристрій',
-        body: 'Збережені рецепти, покупки, приватні нотатки, записи випікання та колекції доступні після входу й зберігаються в Supabase. Гостьові персональні збереження та перенесення з браузера не використовуються. Під час входу браузер зберігає сесію й тимчасовий кеш акаунта для надійного надсилання змін. Чернетка нотатки без входу залишається лише у відкритій сторінці. Прогрес приготування та таймери не синхронізуються. Вибір мови зберігається на пристрої. Нотатка не публікується як відгук і не змінює статус рецепта.',
+        body: 'Збережені рецепти, покупки, приватні нотатки, записи випікання та колекції доступні після входу й зберігаються в Supabase. Гостьові персональні збереження та перенесення з браузера не використовуються. Під час входу браузер зберігає сесію й тимчасовий кеш акаунта для надійного надсилання змін. Чернетка нотатки без входу залишається лише у відкритій сторінці. Прогрес приготування та таймери не синхронізуються; без входу вони тимчасово зберігаються в поточній вкладці, зокрема під час переходів між рецептом і кроками. Вибір мови зберігається на пристрої. Нотатка не публікується як відгук і не змінює статус рецепта.',
       },
       {
         title: 'Керуйте збереженнями',
@@ -58,7 +58,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Your account and device',
-        body: 'Saved recipes, shopping, private notes, bake records and collections require sign-in and are stored in Supabase. Guest personal storage and browser imports are not used. The browser stores the sign-in session and a temporary account cache for reliable delivery of changes. A note drafted before signing in stays only on the open page. Cooking progress and timers do not sync. Language preferences stay on your device. Your note is not published as a review and does not change the recipe’s testing status.',
+        body: 'Saved recipes, shopping, private notes, bake records and collections require sign-in and are stored in Supabase. Guest personal storage and browser imports are not used. The browser stores the sign-in session and a temporary account cache for reliable delivery of changes. A note drafted before signing in stays only on the open page. Cooking progress and timers do not sync; without signing in, they are kept temporarily in the current tab, including when moving between a recipe and its steps. Language preferences stay on your device. Your note is not published as a review and does not change the recipe’s testing status.',
       },
       {
         title: 'Manage your saved items',
@@ -97,7 +97,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Tu cuenta y dispositivo',
-        body: 'Las recetas guardadas, compras, notas privadas, registros de horneado y colecciones requieren iniciar sesión y se guardan en Supabase. No se usan guardados personales de invitado ni importaciones del navegador. El navegador conserva la sesión y una caché temporal de la cuenta para enviar los cambios de forma fiable. Una nota redactada sin iniciar sesión permanece solo en la página abierta. El progreso y los temporizadores no se sincronizan. El idioma se recuerda en el dispositivo. Tu nota no se publica como reseña ni cambia el estado de prueba de la receta.',
+        body: 'Las recetas guardadas, compras, notas privadas, registros de horneado y colecciones requieren iniciar sesión y se guardan en Supabase. No se usan guardados personales de invitado ni importaciones del navegador. El navegador conserva la sesión y una caché temporal de la cuenta para enviar los cambios de forma fiable. Una nota redactada sin iniciar sesión permanece solo en la página abierta. El progreso y los temporizadores no se sincronizan; sin iniciar sesión se guardan temporalmente en la pestaña actual, también al pasar entre la receta y sus pasos. El idioma se recuerda en el dispositivo. Tu nota no se publica como reseña ni cambia el estado de prueba de la receta.',
       },
       {
         title: 'Gestiona tus datos guardados',

@@ -50,3 +50,45 @@ void test('language and recent-history preferences remain independent of persona
   guest.setItem('bake-again:preferences:v1', 'uk');
   assert.equal(data.get('bake-again:preferences:v1'), 'uk');
 });
+
+void test('guest navigation keeps cooking progress in this tab, without private notes or bake history', () => {
+  const values = new Map<string, string>();
+  const tab = {
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      values.set(key, value);
+    },
+  };
+  const firstPage = createGuestStorage(undefined, () => tab);
+  const key = 'bake-again:cook-mode:v1:crepes:v1:adjusted';
+  firstPage.setItem(
+    key,
+    JSON.stringify({
+      currentStepId: 'rest',
+      completedStepIds: ['mix'],
+      timer: { stepId: 'rest', endAt: '2026-11-18T10:15:00Z' },
+      note: 'private',
+      completedAt: '2026-11-18T10:00:00Z',
+    }),
+  );
+  const nextPage = createGuestStorage(undefined, () => tab);
+  assert.deepEqual(JSON.parse(nextPage.getItem(key)!), {
+    currentStepId: 'rest',
+    completedStepIds: ['mix'],
+    timer: { stepId: 'rest', endAt: '2026-11-18T10:15:00Z' },
+    note: '',
+    completedAt: null,
+  });
+  assert.equal(createGuestStorage().getItem(key), null);
+  assert.equal(nextPage.getItem('bake-again:recipe-memory:v1'), null);
+  assert.equal(values.size, 1);
+});
+
+void test('blocked tab storage falls back to the current page memory', () => {
+  const guest = createGuestStorage(undefined, () => {
+    throw new Error('BLOCKED');
+  });
+  const key = 'bake-again:cook-mode:v1:crepes:v1';
+  guest.setItem(key, JSON.stringify({ currentStepId: 'mix', note: '' }));
+  assert.equal(JSON.parse(guest.getItem(key)!).currentStepId, 'mix');
+});

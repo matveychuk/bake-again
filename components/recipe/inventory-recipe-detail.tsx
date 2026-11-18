@@ -173,6 +173,7 @@ export function InventoryRecipeDetail({
   const recipePath = pathname ?? `/recipes/${recipe.slug}`;
   const cookModeParams = new URLSearchParams(configurationSearch);
   cookModeParams.delete('from');
+  cookModeParams.delete('step');
   if (selectedCreamRecipeId) cookModeParams.set('cream', selectedCreamRecipeId);
   const cookModeSearch = cookModeParams.toString();
   const cookModePath = `${recipePath}/cook${cookModeSearch ? `?${cookModeSearch}` : ''}`;
@@ -561,6 +562,14 @@ export function InventoryRecipeDetail({
                       }
                     />
                   )}
+                  <RecipeCookEntry
+                    locale={locale}
+                    href={cookModePath}
+                    step={{ id: step.id, title: step.title }}
+                    needsCream={Boolean(
+                      structured?.creamOptions && !selectedCreamRecipeId,
+                    )}
+                  />
                   {invitation?.afterStepId === step.id && (
                     <RecipePdfInvitation
                       invitation={invitation}

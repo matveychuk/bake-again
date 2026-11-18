@@ -437,11 +437,21 @@ variation.
   reusable in recipes and Design Lab. On phone widths (up to 620px), the recipe
   question sits beside the heading with a short localized label; its accessible
   name retains the full recipe-wide meaning. Cook entry and description follow
-  underneath. Label the written section “Method” (localized) with the step count above it;
+  underneath, with the primary button filling the phone content width. Label the
+  written section “Method” (localized) with the step count above it;
   reserve “Cook step by step” for the action that opens the guided mode. Do not repeat
   the launch in the hero.
 - Preserve the exact configuration and selected cream in the Cook URL. When cream
   selection is required, keep the existing “Choose cream first” entry instead.
+- `RecipeCookEntry`'s `step` variant is a quiet link after each step's instructions
+  and media, before any promotional invitation. Its accessible name includes the
+  step title. Use the same gutter as step media and no extra panel or divider.
+  It opens the Cook screen containing that canonical step ID (including grouped
+  screens), preserving quantities, selected cream, completed steps, timer and note.
+  Opening a later step never marks earlier steps complete. Missing or invalid IDs
+  fall back to normal saved-session restoration. A finished recipe can be revisited
+  without erasing its completion record. The return link removes the step selector.
+  Omit per-step entries until a required cream is selected.
 - `/design-system#recipe-reading-actions` demonstrates the production back control,
   section navigation and cooking entry in Ukrainian, English and Spanish.
 - A recipe with source-supported steps opens the shared step-by-step Cook Mode.
@@ -879,7 +889,9 @@ No guest login prompt flashes during initialization. AccountExample in the Desig
 reuses AccountHeading, AccountIdentity, AccountDestinations, AccountSettings and AccountFields in all
 three locales; mutation callbacks are inert. Collections belong to Saved recipes. Normal UI has no guest import,
 manual sync retry or pending marker. Actual errors/conflicts remain visible.
-Guest Cook Mode uses temporary memory only; Save note opens sign-in. Auth session
+Guest Cook Mode keeps progress and timers in tab-scoped session storage so native
+recipe navigation and reload retain them; private notes and bake records remain
+excluded. Blocked storage falls back to page memory. Save note opens sign-in. Auth session
 and account cache remain internal reliability mechanisms. Account changes/sign-out
 reset private UI; sign-out stops if pending saves cannot complete.
 The UK/ES/EN gate was checked at 390/900/1440 CSS pixels, with no overflow and

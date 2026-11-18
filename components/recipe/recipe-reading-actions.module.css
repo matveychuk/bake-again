@@ -37,6 +37,11 @@
   max-width: var(--layout-assistant-drawer);
 }
 
+.stepEntry {
+  margin-block-start: var(--space-3);
+  margin-inline-start: var(--space-16);
+}
+
 .cookActions {
   display: flex;
   align-items: center;
@@ -75,6 +80,9 @@
   grid-column: 2;
 }
 @media (max-width: 900px) {
+  .stepEntry {
+    margin-inline-start: var(--space-12);
+  }
   .withHeading {
     grid-template-columns: minmax(0, 1fr);
     row-gap: var(--space-6);
@@ -88,6 +96,9 @@
   }
 }
 @media (max-width: 620px) {
+  .cookActions > a {
+    width: 100%;
+  }
   .withHeading {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: var(--space-4) var(--space-2);
@@ -112,9 +123,15 @@
   .withHeading .cookActions > a {
     grid-column: 1 / -1;
     grid-row: 2;
-    justify-self: start;
+    justify-self: stretch;
   }
   .withHeading > p {
     grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .stepEntry {
+    margin-inline-start: 0;
   }
 }

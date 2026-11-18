@@ -1006,6 +1006,30 @@ export default function DesignSystemPage() {
                           />
                         }
                       />
+                      <RecipeStepContent
+                        title={
+                          getRecipeContent('plum-cake', locale)!.steps[0].title
+                        }
+                        stepNumber="01"
+                        tipLabel={getUiMessages(locale).recipe.tip}
+                        checkpointLabel={
+                          getUiMessages(locale).recipe.checkpoint
+                        }
+                        locale={locale}
+                      >
+                        <p>
+                          {getRecipeContent('plum-cake', locale)!.steps[0].body}
+                        </p>
+                      </RecipeStepContent>
+                      <RecipeCookEntry
+                        locale={locale}
+                        href={getLocalizedRecipePath(
+                          'plum-cake',
+                          locale,
+                          '/cook',
+                        )!}
+                        step={getRecipeContent('plum-cake', locale)!.steps[0]}
+                      />
                     </div>
                   </AssistantProvider>
                 ))}

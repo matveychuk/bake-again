@@ -14,6 +14,7 @@ export const recipeReaderCopy = {
     toIngredients: 'До інгредієнтів',
     toSteps: 'До кроків',
     cookStepByStep: 'Готувати покроково',
+    cookFromStep: 'Готувати з цього кроку',
     cookModeDescription:
       'У режимі приготування — один крок на екрані, інгредієнти й таймери під рукою.',
     recipeParts: 'Складові рецепта',
@@ -32,6 +33,7 @@ export const recipeReaderCopy = {
     toIngredients: 'Jump to ingredients',
     toSteps: 'Jump to steps',
     cookStepByStep: 'Cook step by step',
+    cookFromStep: 'Cook from this step',
     cookModeDescription:
       'Cook Mode shows one step at a time, with ingredients and timers close at hand.',
     recipeParts: 'Recipe components',
@@ -50,6 +52,7 @@ export const recipeReaderCopy = {
     toIngredients: 'Ir a los ingredientes',
     toSteps: 'Ir a los pasos',
     cookStepByStep: 'Cocinar paso a paso',
+    cookFromStep: 'Cocinar desde este paso',
     cookModeDescription:
       'El modo de cocina muestra un paso a la vez, con ingredientes y temporizadores a mano.',
     recipeParts: 'Componentes de la receta',

@@ -5,6 +5,7 @@ import { ArrowDown, Play } from 'lucide-react';
 import { recipeReaderCopy } from '@/content/recipes/reader-copy';
 import type { AppLocale } from '@/lib/i18n/config';
 import { getUiMessages } from '@/lib/i18n/messages';
+import { cookStepHref } from '@/lib/persistence/cook-mode';
 import styles from './recipe-reading-actions.module.css';
 
 /** The recipe's existing anchor navigation, shared with the Design Lab. */
@@ -42,6 +43,7 @@ export function RecipeCookEntry({
   hasMethod = true,
   secondaryAction,
   heading,
+  step,
 }: {
   locale: AppLocale;
   href: string;
@@ -49,9 +51,25 @@ export function RecipeCookEntry({
   hasMethod?: boolean;
   secondaryAction?: ReactNode;
   heading?: ReactNode;
+  step?: { id: string; title: string };
 }) {
   const copy = recipeReaderCopy[locale];
   const messages = getUiMessages(locale).recipe;
+  if (step) {
+    if (needsCream) return null;
+    return (
+      <div className={styles.stepEntry}>
+        <Button
+          variant="link"
+          href={cookStepHref(href, step.id)}
+          aria-label={`${copy.cookFromStep}: ${step.title}`}
+        >
+          <Play size={16} aria-hidden="true" />
+          <span>{copy.cookFromStep}</span>
+        </Button>
+      </div>
+    );
+  }
   return (
     <div className={`${styles.cookEntry} ${heading ? styles.withHeading : ''}`}>
       {heading && <div className={styles.methodTitle}>{heading}</div>}

@@ -1,8 +1,9 @@
 import { createGuestStorage } from './guest-storage.ts';
 export type StorageLike = Pick<Storage, 'getItem' | 'setItem'>;
 
-const guestStorage = createGuestStorage(() =>
-  typeof window === 'undefined' ? null : window.localStorage,
+const guestStorage = createGuestStorage(
+  () => (typeof window === 'undefined' ? null : window.localStorage),
+  () => (typeof window === 'undefined' ? null : window.sessionStorage),
 );
 let accountOverride: StorageLike | null = null;
 export function setAccountStorage(storage: StorageLike | null) {

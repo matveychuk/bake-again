@@ -1,5 +1,16 @@
 # Design system changelog
 
+## 2026-11-18 — Open Cook Mode from any recipe step
+
+- Fill the phone content width with the main Cook button. Extend `RecipeCookEntry`
+  with a quiet localized step link, shared by every recipe and Design Lab.
+- Open the selected canonical step (including grouped screens) while retaining the
+  chosen quantities, cream, completion progress, timer and notes. Revisiting a
+  finished recipe does not erase its completed session. Ordinary entry still resumes.
+- Keep guest progress and timers in temporary tab storage across native navigation;
+  continue to exclude private notes and bake history. Wait for account storage to be
+  ready before restoring or writing a cooking session.
+
 ## 2026-11-18 — Compact the mobile method heading
 
 - Place the recipe-wide question alongside the method heading on phones and

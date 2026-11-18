@@ -40,7 +40,12 @@ async function readProductSource() {
     )
   )
     .flat()
-    .filter((filename) => codeExtensions.has(path.extname(filename)) || mediaManifests.has(filename));
+    .filter(
+      (filename) =>
+        (codeExtensions.has(path.extname(filename)) &&
+          !/\.(?:test|spec)\.tsx?$/.test(filename)) ||
+        mediaManifests.has(filename),
+    );
   return (
     await Promise.all(files.map((filename) => fs.readFile(filename, 'utf8')))
   ).join('\n');
