@@ -1082,7 +1082,9 @@ label the file format and access route, and provide keyboard-focusable preview
 links with a new-tab announcement. The junior-cook card is an
 optional subscription after crepes step two, not an instruction or extra recipe
 step. It explains six photographed steps on one printable A4 sheet. It promises
-the card by email only; the full six-page recipe is a separate open PDF link.
+both the card and full six-page recipe in one email (owner decision 2026-11-18).
+Both thumbnail links enlarge previews; the single primary action is
+«Надіслати обидва PDF».
 The form has a terracotta primary CTA, labelled email, explicit consent/privacy,
 unique descriptions for multiple forms, and keyboard focus on the success heading.
 Print and Cook mode exclude it. `/design-system#recipe-step-subscription` shows

@@ -204,14 +204,16 @@ void test('provider payload never resets blocklist, merges identities or invokes
     !('EMAIL' in (calls[0].body.attributes as Record<string, unknown>)),
   );
 });
-void test('card and chocolate have only their own fixed material', () => {
+void test('crepes delivers both promised PDFs and chocolate stays separate', () => {
   const card = recipeEmail('mlyntsi'),
     cake = recipeEmail('shokolad');
   assert.ok(card.htmlContent.includes('kartka-yunoho-kukharia'));
   assert.ok(
-    !card.htmlContent.includes('Bake-Again-Bezghliutenovi-mlyntsi.pdf'),
+    card.htmlContent.includes('Bake-Again-Bezghliutenovi-mlyntsi.pdf'),
   );
   assert.ok(cake.htmlContent.includes('shokoladnyi'));
+  assert.ok(!cake.htmlContent.includes('kartka-yunoho-kukharia'));
+  assert.ok(!card.htmlContent.includes('shokoladnyi'));
 });
 void test('validation rejects arbitrary positions, missing consent, honeypots and unsafe origins', async () => {
   assert.deepEqual(

@@ -1,5 +1,27 @@
 # Newsletter connection
 
+## Crepes gift: both PDFs in one email — 2026-11-18
+
+The owner selected the two-file gift after reviewing the card-only proposal.
+`mlyntsi` now promises the full six-page crepe recipe and printable A4 junior-cook
+card in one email. The registry drives the recipe invitation, lead-magnet page,
+success copy and generated email preview. Both thumbnail links enlarge previews;
+the primary CTA is «Надіслати обидва PDF».
+
+Brevo automation #4 / step #3 / message #22 was updated through its HTML editor
+and the step's subject/preheader fields. Reload confirmed the new subject,
+preheader and both material links; automation remains Active with the existing
+2-minute wait and list #9 trigger. No re-entry, sender or delivery logic changed.
+The obsolete “Napoleon lesson coming soon” sentence was removed. The saved
+provider layout is retained in `provider-templates/mlyntsi.html`; it preserves
+native `{{ unsubscribe }}` and the existing email design. Generated registry
+previews are preparation artifacts and do not publish to Brevo automatically.
+
+Both public PDF URLs returned HTTP 200/application-pdf and matched the existing
+delivery files by SHA-256: recipe 720,315 bytes; card 253,284 bytes. No test email
+was sent, and inbox arrival or physical-phone opening is not claimed. Previous
+card-only records below describe the superseded state.
+
 ## Brevo single opt-in activated — 2026-11-01
 
 At the owner's explicit request, new workflows #3 (UK/ES/EN welcome), #4 (junior

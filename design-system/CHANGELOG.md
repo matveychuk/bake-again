@@ -1,5 +1,12 @@
 # Design system changelog
 
+## 2026-11-18 — Deliver both crepe PDFs in one email
+
+- Follow the owner's selection of the two-file gift: full recipe plus junior-cook
+  card. Use «Надіслати обидва PDF» and thumbnail links that enlarge previews.
+- Synchronize the recipe invitation, signup landing page, success copy and email
+  material list from the registry; preserve the established invitation layout.
+
 ## 2026-11-18 — Explain the junior-cook PDF gift
 
 - Extend the existing recipe-step invitation with two real PDF previews, a clear

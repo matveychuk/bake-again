@@ -10,8 +10,8 @@ These are faithful page renders, not generated illustrations or edited PDFs.
 Both public delivery PDFs match the author-supplied files in
 `/Users/sasha/Bake Again Media/pdf/` by SHA-256. Masters are unchanged.
 Website previews use generated WebP files from `media:prepare`. The card preview
-opens as an image; only the full recipe link opens a PDF directly. Email delivery
-continues to promise the junior-cook card only.
+opens as an image. After the owner's subsequent choice on 2026-11-18, both
+thumbnail links enlarge images and the email promises both PDFs together.
 
 Verification: the recipe invitation was inspected at 390, 900 and 1440 CSS px;
 both previews loaded, with no horizontal overflow. Page images use `contain`
