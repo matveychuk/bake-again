@@ -312,7 +312,8 @@ export function InventoryRecipeDetail({
               locale={locale}
               title={detailTitle}
               plain={
-                isStandaloneComponent || !personalRecipe?.flourConfiguration
+                isStandaloneComponent || !personalRecipe?.flourConfiguration ||
+                (recipe.id === 'lazy-dumplings' && locale === 'es')
               }
             />
             <p className={styles.summary}>

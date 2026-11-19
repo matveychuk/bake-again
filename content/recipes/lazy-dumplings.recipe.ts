@@ -16,13 +16,13 @@ export const lazyDumplingsRecipe = {
     uk: 'lazy-dumplings',
   },
   title: {
-    en: 'Gluten-free lazy curd cheese dumplings',
-    es: 'Váreniki de tvorog sin gluten',
+    en: 'Gluten-free cottage cheese dumplings',
+    es: 'Ñoquis dulces de queso fresco sin gluten',
     uk: 'Безглютенові ліниві вареники',
   },
   summary: {
-    en: 'Tender curd cheese dumplings.',
-    es: 'Tiernos váreniki sin relleno, hechos con tvorog.',
+    en: 'These soft, slightly sweet dumplings are called lazy varenyky. The cottage cheese goes straight into the dough. Serve them warm with butter or freeze a batch before boiling.',
+    es: 'Estos váreniki perezosos se hacen con tvorog, un queso fresco seco y granuloso que se mezcla directamente con la masa. Sírvelos con mantequilla o congélalos en crudo.',
     uk: 'Ніжні вареники з кисломолочного сиру.',
   },
   categoryIds: [],
@@ -589,7 +589,7 @@ export const lazyDumplingsRecipe = {
   },
   searchMetadata: {
     datePublished: null,
-    dateModified: '2026-10-18',
+    dateModified: '2026-11-19',
     dateModifiedVersionId: 'lazy-dumplings-source-v3',
     cookTimeMinutes: null,
     recipeCuisine: {
@@ -599,14 +599,14 @@ export const lazyDumplingsRecipe = {
     },
     keywords: {
       uk: ['Безглютенові ліниві вареники'],
-      en: ['Gluten-free lazy curd cheese dumplings'],
-      es: ['Váreniki de tvorog sin gluten'],
+      en: ['cottage cheese dumplings', 'lazy varenyky', 'gluten-free dumplings', 'dry curd cottage cheese'],
+      es: ['ñoquis dulces de queso fresco', 'ñoquis sin gluten', 'váreniki perezosos', 'tvorog'],
     },
   },
   discovery: {
     cardTitle: {
-      en: 'Lazy curd cheese dumplings',
-      es: 'Váreniki de tvorog sin relleno',
+      en: 'Cottage cheese dumplings',
+      es: 'Ñoquis dulces de queso fresco',
       uk: 'Ліниві вареники',
     },
     category: {
@@ -661,14 +661,14 @@ export const lazyDumplingsRecipe = {
         'Безглютенові ліниві вареники з кисломолочного сиру. Пропорції інгредієнтів, формування та варіння крок за кроком.',
     },
     en: {
-      title: 'Gluten-free lazy curd cheese dumplings',
+      title: 'Gluten-free cottage cheese dumplings',
       description:
-        'Gluten-free lazy dumplings made with tvorog curd cheese. Ingredient quantities and step-by-step instructions for shaping and boiling.',
+        'Make gluten-free cottage cheese dumplings with dry curd cheese. Learn how to shape and boil these soft lazy varenyky, serve them with butter or freeze them for later.',
     },
     es: {
-      title: 'Váreniki de tvorog sin gluten',
+      title: 'Ñoquis dulces de queso fresco sin gluten',
       description:
-        'Váreniki sin relleno y sin gluten, hechos con tvorog, un queso fresco de leche fermentada. Cantidades, formado y cocción paso a paso.',
+        'Prepara ñoquis dulces de queso fresco sin gluten. Aprende a hacer la masa con tvorog, formar los váreniki perezosos, cocerlos y congelarlos en crudo.',
     },
   },
   routeSlug: 'lazy-dumplings',

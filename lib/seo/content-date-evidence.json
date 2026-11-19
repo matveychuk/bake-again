@@ -71,9 +71,9 @@
   },
   "lazy-dumplings": {
     "file": "content/recipes/lazy-dumplings.recipe.ts",
-    "date": "2026-10-18",
+    "date": "2026-11-19",
     "versionId": "lazy-dumplings-source-v3",
-    "evidence": "Release reconciliation on 2026-10-18: publish the existing author-corrected v3 method; the historical v2 date is not inherited."
+    "evidence": "Approved English and Spanish dish names, catalogue copy and search descriptions for the published recipe."
   },
   "prune-cake": {
     "file": "content/recipes/prune-cake.recipe.ts",

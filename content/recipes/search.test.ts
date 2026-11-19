@@ -104,3 +104,8 @@ void test('bounds URL input and rejects repeated query parameters', () => {
   assert.equal(cleanRecipeQuery(undefined), '');
   assert.equal(cleanRecipeQuery('x'.repeat(500)).length, 200);
 });
+
+void test('finds the lazy varenyky recipe by localized dish names and familiar spellings', () => {
+  for (const [locale, query] of [['uk', 'леніві вареники'], ['uk', 'нудлс'], ['en', 'lazy varenyky'], ['en', 'cheese dumpling'], ['en', 'dry curd cheese noodles'], ['es', 'ñoquis de queso fresco']] as const)
+    assert(searchRecipes(locale, query).some(recipe => recipe.id === 'lazy-dumplings'));
+});
