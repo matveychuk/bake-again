@@ -195,20 +195,20 @@
     ]
   },
   "lazy-dumplings": {
-    "source": "/images/recipes/lazy-dumplings-real-plate-linen-v1.webp",
+    "source": "/images/recipes/lazy-dumplings-white-balance-v2.webp",
     "images": [
       {
-        "url": "/images/seo/lazy-dumplings-1x1.webp",
+        "url": "/images/seo/lazy-dumplings-v2-1x1.webp",
         "width": 1080,
         "height": 1080
       },
       {
-        "url": "/images/seo/lazy-dumplings-4x3.webp",
+        "url": "/images/seo/lazy-dumplings-v2-4x3.webp",
         "width": 1200,
         "height": 900
       },
       {
-        "url": "/images/seo/lazy-dumplings-16x9.webp",
+        "url": "/images/seo/lazy-dumplings-v2-16x9.webp",
         "width": 1200,
         "height": 675
       }

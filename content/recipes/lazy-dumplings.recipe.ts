@@ -568,12 +568,12 @@ export const lazyDumplingsRecipe = {
     {
       id: 'lazy-dumplings-hero',
       type: 'image',
-      path: '/images/recipes/lazy-dumplings-real-plate-linen-v1.webp',
+      path: '/images/recipes/lazy-dumplings-white-balance-v2.webp',
       usage: ['hero', 'card'],
       alt: {
-        uk: 'Ліниві вареники на світлій тарілці',
-        en: 'Round cheese dumplings on a pale plate',
-        es: 'Váreniki de queso en un plato claro',
+        uk: 'Ліниві вареники в мисці, позаду сметана та ягідне варення',
+        en: 'Cottage cheese dumplings in a bowl with sour cream and berry jam behind it',
+        es: 'Ñoquis de queso en un cuenco, con crema agria y mermelada de frutos rojos al fondo',
       },
     },
     {
@@ -664,7 +664,7 @@ export const lazyDumplingsRecipe = {
     },
     {
       id: 'dumplings-approved-pdf-v5',
-      file: 'public/downloads/Bake-Again-Linyvi-varenyky.pdf',
+      file: 'media/recipes/lazy-dumplings/working/pdf-v5/README.uk.md',
       locator:
         'Approved Ukrainian PDF v5, pp. 1–9: dry grainy curd, about 75 dumplings / 3 servings, seven steps including freezing.',
     },
@@ -673,7 +673,7 @@ export const lazyDumplingsRecipe = {
   presentation: 'concise',
   searchMetadata: {
     datePublished: null,
-    dateModified: '2026-11-19',
+    dateModified: '2026-11-20',
     dateModifiedVersionId: 'lazy-dumplings-pdf-v5',
     cookTimeMinutes: null,
     recipeCuisine: {

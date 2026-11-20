@@ -217,10 +217,10 @@
       "title": "Ліниві вареники в PDF",
       "subtitle": "Збережи сім кроків із фото на телефоні. У рецепті є пропорції на три порції та підказки, як заморозити вареники сирими.",
       "features": [
-        "10 сторінок · для телефона"
+        "11 сторінок · для телефона"
       ],
-      "image": "/images/recipes/lazy-dumplings-real-plate-linen-v1.webp",
-      "imageAlt": "Ліниві вареники на тарілці",
+      "image": "/images/recipes/lazy-dumplings-white-balance-v2.webp",
+      "imageAlt": "Ліниві вареники в мисці, позаду сметана та ягідне варення",
       "note": "Підпишися, щоб отримати PDF і нові рецепти Bake Again українською."
     },
     "recipeInvitation": {
@@ -232,11 +232,11 @@
       "note": "Підпишися, щоб отримати PDF і нові рецепти Bake Again українською.",
       "previews": [
         {
-          "src": "/images/recipes/lazy-dumplings/pdf-v5/preview-uk.webp",
-          "href": "/images/recipes/lazy-dumplings/pdf-v5/preview-uk.webp",
+          "src": "/images/recipes/lazy-dumplings/pdf-v6/preview-uk.webp",
+          "href": "/images/recipes/lazy-dumplings/pdf-v6/preview-uk.webp",
           "title": "Формування вареників",
           "alt": "Сторінка рецепта з фото формування вареників",
-          "description": "10 сторінок · для телефона",
+          "description": "11 сторінок · для телефона",
           "linkLabel": "Збільшити сторінку"
         }
       ]
@@ -262,10 +262,10 @@
       "title": "Lazy varenyky recipe PDF",
       "subtitle": "Keep all seven photo steps on your phone, with quantities for three servings and instructions for freezing the uncooked dumplings.",
       "features": [
-        "10 pages · for your phone"
+        "11 pages · for your phone"
       ],
-      "image": "/images/recipes/lazy-dumplings-real-plate-linen-v1.webp",
-      "imageAlt": "Cheese dumplings on a plate",
+      "image": "/images/recipes/lazy-dumplings-white-balance-v2.webp",
+      "imageAlt": "Cottage cheese dumplings in a bowl with sour cream and berry jam behind it",
       "note": "Subscribe for the PDF and new gluten-free recipes from Bake Again in English."
     },
     "recipeInvitation": {
@@ -277,11 +277,11 @@
       "note": "Subscribe for the PDF and new gluten-free recipes from Bake Again in English.",
       "previews": [
         {
-          "src": "/images/recipes/lazy-dumplings/pdf-v5/preview-en.webp",
-          "href": "/images/recipes/lazy-dumplings/pdf-v5/preview-en.webp",
+          "src": "/images/recipes/lazy-dumplings/pdf-v6/preview-en.webp",
+          "href": "/images/recipes/lazy-dumplings/pdf-v6/preview-en.webp",
           "title": "Shaping the dumplings",
           "alt": "Recipe page showing how to shape the dumplings",
-          "description": "10 pages · for your phone",
+          "description": "11 pages · for your phone",
           "linkLabel": "Enlarge page"
         }
       ]
@@ -307,10 +307,10 @@
       "title": "La receta de váreniki en PDF",
       "subtitle": "Guarda los siete pasos con fotos en el móvil. Incluye cantidades para tres raciones y cómo congelar los váreniki en crudo.",
       "features": [
-        "10 páginas · para el móvil"
+        "11 páginas · para el móvil"
       ],
-      "image": "/images/recipes/lazy-dumplings-real-plate-linen-v1.webp",
-      "imageAlt": "Váreniki de queso en un plato",
+      "image": "/images/recipes/lazy-dumplings-white-balance-v2.webp",
+      "imageAlt": "Ñoquis de queso en un cuenco, con crema agria y mermelada de frutos rojos al fondo",
       "note": "Suscríbete para recibir el PDF y nuevas recetas sin gluten de Bake Again en español."
     },
     "recipeInvitation": {
@@ -322,11 +322,11 @@
       "note": "Suscríbete para recibir el PDF y nuevas recetas sin gluten de Bake Again en español.",
       "previews": [
         {
-          "src": "/images/recipes/lazy-dumplings/pdf-v5/preview-es.webp",
-          "href": "/images/recipes/lazy-dumplings/pdf-v5/preview-es.webp",
+          "src": "/images/recipes/lazy-dumplings/pdf-v6/preview-es.webp",
+          "href": "/images/recipes/lazy-dumplings/pdf-v6/preview-es.webp",
           "title": "Cómo darles forma",
           "alt": "Página de la receta que muestra cómo formar los váreniki",
-          "description": "10 páginas · para el móvil",
+          "description": "11 páginas · para el móvil",
           "linkLabel": "Ampliar página"
         }
       ]

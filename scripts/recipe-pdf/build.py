@@ -99,6 +99,11 @@ def validate(data, base):
         for name in ['name', 'quantity']:
             required_text(item.get(name), f'ingredients[{i}].{name}')
     images = [data['cover'].get('hero', {})]
+    if data.get('ingredientGuide'):
+        guide = data['ingredientGuide']
+        for key in ['title', 'text']:
+            required_text(guide.get(key), 'ingredientGuide.' + key)
+        images.append(guide['photo'])
     if data['cover'].get('flour'):
         required_text(data['cover']['flour'].get('name'), 'cover.flour.name')
         images.append(data['cover']['flour'])
@@ -150,12 +155,14 @@ class RecipePDF:
         if len(set(names)) != 3:
             raise ValueError('Regular / Semibold / LabelBold повинні мати різні внутрішні імена.')
         self.ingredient_pages = self.plan_ingredients()
-        self.n = 1 + len(self.ingredient_pages) + len(data['steps']) + (1 if data.get('closing') else 0)
+        self.n = 1 + len(self.ingredient_pages) + int(bool(data.get('ingredientGuide'))) + len(data['steps']) + (1 if data.get('closing') else 0)
         self.master = work / (output.stem + '-source.pdf')
         if output == self.master:
             raise ValueError('Майстер і доставка мають бути окремими файлами.')
         self.c = canvas.Canvas(str(self.master), pagesize=(self.w, self.h), pageCompression=1)
         self.c.setTitle(data['title'] + ' | Bake Again')
+        if data['cover'].get('description'):
+            self.c.setSubject(data['cover']['description'])
         self.c.setAuthor('Bake Again')
         self.c.setCreator('Bake Again recipe PDF template 1.0')
         self.c._doc.Catalog.Lang = PDFString({'uk': 'uk-UA', 'en': 'en', 'es': 'es'}[data['locale']])
@@ -276,26 +283,48 @@ class RecipePDF:
         end = self.p(markup(data['facts']), end+20, 16, 24, 'BodyBold')
         photo_top = end+24
         link_top = self.h-72
-        flour = data.get('flour')
+        flour = None if self.data.get('ingredientGuide') else data.get('flour')
         pack_top = link_top-112
         photo_bottom = pack_top-24 if flour else link_top-24
+        description = data.get('description')
+        if description:
+            photo_bottom -= self.measure(markup(description), self.cw) + 16
         photo_height = min(self.media['stepMaxHeightPt'] if flour else 342, photo_bottom-photo_top)
         if photo_height < self.media['stepMinHeightPt']:
             raise ValueError('Назва/факти обкладинки занадто довгі. Скоротіть повтори, не основний шрифт.')
-        self.photo(data['hero'], photo_top, photo_height)
-        if flour:
-            image = Image.open(self.base / flour['image']).convert('RGBA')
-            ratio = min(54/image.width, 104/image.height)
-            iw, ih = image.width*ratio, image.height*ratio
-            self.c.drawImage(ImageReader(image), self.m, self.h-pack_top-ih, iw, ih, mask='auto')
-            self.boxes.append({'page':1, 'kind':'image', 'source':flour['image'], 'alt':flour['alt'],
-                               'x':self.m, 'y':pack_top, 'w':iw, 'h':ih})
-            self.p(self.labels['flour'], pack_top+16, 14, 20, color='color-text-secondary', x=self.m+82, width=self.cw-82)
-            end = self.p(markup(flour['name']), pack_top+44, 16, 24, 'BodyBold', x=self.m+82, width=self.cw-82)
-            if end > link_top-8:
-                raise ValueError('Назва суміші в блоці упаковки не вміщується; скоротіть повтори.')
+        end = self.photo(data['hero'], photo_top, photo_height)
+        if description:
+            self.p(markup(description), end+16)
+        if flour and self.flour_card(flour, pack_top) > link_top-8:
+            raise ValueError('Назва суміші в блоці упаковки не вміщується.')
         end = self.p(self.labels['link'], link_top, 14, 20, 'BodyBold', 'color-action-primary-strong')
         self.c.linkURL(self.data['recipeUrl'], (self.m, self.h-end, self.w-self.m, self.h-link_top), relative=0, thickness=0)
+        self.c.showPage()
+
+    def flour_card(self, flour, pack_top):
+        image = Image.open(self.base / flour['image']).convert('RGBA')
+        ratio = min(54/image.width, 104/image.height)
+        iw, ih = image.width*ratio, image.height*ratio
+        self.c.drawImage(ImageReader(image), self.m, self.h-pack_top-ih, iw, ih, mask='auto')
+        self.boxes.append({'page':self.c.getPageNumber(), 'kind':'image', 'source':flour['image'], 'alt':flour['alt'],
+                           'x':self.m, 'y':pack_top, 'w':iw, 'h':ih})
+        self.p(self.labels['flour'], pack_top+16, 14, 20, color='color-text-secondary', x=self.m+82, width=self.cw-82)
+        end = self.p(markup(flour['name']), pack_top+44, 16, 24, 'BodyBold', x=self.m+82, width=self.cw-82)
+        return end
+
+    def ingredient_guide(self, guide):
+        self.base_page(self.labels['ingredients'])
+        end = self.p(markup(guide['title']), 88, 32, 40, 'Display')
+        end = self.p(markup(guide['text']), end+16)
+        top = end + 20
+        flour = self.data['cover'].get('flour')
+        bottom = self.bottom - 120 if flour else self.bottom
+        height = min(self.media['stepMaxHeightPt'], bottom-top)
+        if height < self.media['stepMinHeightPt']:
+            raise ValueError('Ingredient guide needs more room for its photo.')
+        end = self.photo(guide['photo'], top, height)
+        if flour:
+            self.flour_card(flour, end+16)
         self.c.showPage()
 
     def plan_ingredients(self):
@@ -402,6 +431,8 @@ class RecipePDF:
     def save(self):
         self.cover()
         self.ingredients()
+        if guide := self.data.get('ingredientGuide'):
+            self.ingredient_guide(guide)
         self.steps()
         self.closing()
         self.c.save()

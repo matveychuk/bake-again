@@ -71,9 +71,9 @@
   },
   "lazy-dumplings": {
     "file": "content/recipes/lazy-dumplings.recipe.ts",
-    "date": "2026-11-19",
+    "date": "2026-11-20",
     "versionId": "lazy-dumplings-pdf-v5",
-    "evidence": "Recipe, localized titles and seven photo steps reconciled with the approved Ukrainian PDF v5."
+    "evidence": "New author-selected hero photograph and matching localized recipe PDFs."
   },
   "prune-cake": {
     "file": "content/recipes/prune-cake.recipe.ts",

@@ -52,7 +52,7 @@ void test('uses the linen photo for crepes and uses the real dumpling photograph
   assert(crepes.cardImage?.includes('crepes-stack-lace-linen-v1.webp'));
   assert.equal(crepes.image, crepes.cardImage);
   assert(
-    dumplings.cardImage?.includes('lazy-dumplings-real-plate-linen-v1.webp'),
+    dumplings.cardImage?.includes('lazy-dumplings-white-balance-v2.webp'),
   );
   assert(dumplings.image === dumplings.cardImage);
 });
