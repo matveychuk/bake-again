@@ -141,7 +141,7 @@ export function projectRecipeContent(
       ? 'incompleteSource'
       : 'readyToReview',
     evidence: status
-      ? { status, explanation: recipe.evidenceExplanation[locale] }
+      ? { status, explanation: recipe.evidenceExplanation?.[locale] ?? '' }
       : undefined,
     difficulty: recipe.difficulty ?? undefined,
     overview: {

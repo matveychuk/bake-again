@@ -1,5 +1,9 @@
 # Design system changelog
 
+## 2026-11-19 · Localized lazy varenyky recipe PDF
+
+The existing recipe-step invitation supports a single localized photo recipe. Design Lab shows all three editions. The mobile PDF template includes English and Spanish labels and Latin italic and bold glyphs.
+
 ## 2026-11-19 — Crepe story videos
 
 - Use the author’s English and Spanish edits and matching posters in the shared recipe player. Its language label distinguishes on-screen text from the song.

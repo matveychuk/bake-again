@@ -85,15 +85,23 @@ function rememberInvitation(handoff = false) {
   }
 }
 
+export type NewsletterInvitationCopy = {
+  title: string;
+  description: string;
+  action: string;
+};
+
 /** No signup destination means an inert, manually opened Design Lab preview. */
 export function NewsletterInvitation({
   locale,
   signup,
+  invitationCopy,
   autoPrompt = false,
   afterReview,
 }: {
   locale: AppLocale;
   signup?: NewsletterSignup;
+  invitationCopy?: NewsletterInvitationCopy;
   autoPrompt?: boolean;
   /** Local Design Lab variant; reuses the newsletter form without sending. */
   afterReview?: {
@@ -105,6 +113,9 @@ export function NewsletterInvitation({
   };
 }) {
   const copy = messages[locale];
+  const title = invitationCopy?.title ?? copy.title;
+  const description = invitationCopy?.description ?? copy.body;
+  const action = invitationCopy?.action ?? copy.action;
   const titleId = useId();
   const sectionRef = useRef<HTMLElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -221,8 +232,8 @@ export function NewsletterInvitation({
           ref={sectionRef}
           lang={locale}
           titleId={titleId}
-          title={copy.title}
-          description={copy.body}
+          title={title}
+          description={description}
           note={!signup ? copy.preview : undefined}
           data-newsletter-invitation
           action={
@@ -236,13 +247,13 @@ export function NewsletterInvitation({
                     setOpen(true);
                   }}
                 >
-                  {copy.action}
+                  {action}
                   <ArrowRight size={16} aria-hidden="true" />
                 </Button>
               ) : (
                 <>
                   <Button disabled>
-                    {copy.action}
+                    {action}
                     <ArrowRight size={16} aria-hidden="true" />
                   </Button>
                   <Button
@@ -309,10 +320,10 @@ export function NewsletterInvitation({
           </div>
           <div className={styles.dialogBody}>
             <DialogTitle className={styles.title}>
-              {afterReview ? copy.reviewTitle : copy.title}
+              {afterReview ? copy.reviewTitle : title}
             </DialogTitle>
             <DialogDescription className={styles.description}>
-              {afterReview ? copy.reviewBody : copy.body}
+              {afterReview ? copy.reviewBody : description}
             </DialogDescription>
             {!signup && !afterReview && (
               <p className={styles.note}>{copy.preview}</p>

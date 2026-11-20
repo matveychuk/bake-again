@@ -122,6 +122,22 @@ void test('the Spanish recipe registers its own bonus and locale independently o
   assert.throws(() => recipeSubscription('crepes-es', 'landing'));
   assert.equal(isSuppressed({ listUnsubscribed: [14] }), true);
 });
+void test('each lazy varenyky form registers its localized list and delivers its own PDF', async () => {
+  const f = fixture();
+  for (const [edition, list, languageList, filename] of [
+    ['varenyky-uk', 16, 4, 'Linyvi-varenyky'],
+    ['varenyky-en', 17, 6, 'Gluten-Free-Lazy-Varenyky'],
+    ['varenyky-es', 18, 5, 'Vareniki-perezosos-sin-gluten'],
+  ] as const) {
+    await f.service.request(email, edition, 'network', 'recipe');
+    const subscription = f.registrations.at(-1)!.subscription;
+    assert.deepEqual(subscription.listIds, [3, languageList, list]);
+    assert.equal(subscription.attributes.SIGNUP_POSITION, 'after-shape-dumplings');
+    const template = readFileSync(new URL('./provider-templates/' + edition + '.html', import.meta.url), 'utf8');
+    assert.deepEqual([...template.matchAll(/href="https:\/\/bakeagain\.com\/downloads\/([^"]+)"/g)].map(match => match[1]), ['Bake-Again-' + filename + '.pdf']);
+    assert(isSuppressed({ listUnsubscribed: [list] }));
+  }
+});
 void test('existing subscriber can enter another bonus without replacing previous membership', async () => {
   const f = fixture();
   f.setContact({ listIds: [3, 4, 9], emailBlacklisted: false });

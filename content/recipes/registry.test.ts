@@ -943,9 +943,9 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
     value: 500,
     unit: 'g',
   });
-  assert.equal(cottageCheese?.name, 'Кисломолочний сир');
+  assert.equal(cottageCheese?.name, 'Сухий зернистий кисломолочний сир');
   assert.equal(cottageCheese?.quantity.equivalent, undefined);
-  assert.equal(cottageCheese?.note, undefined);
+  assert.match(cottageCheese?.note ?? '', /сироватки/);
   assert.deepEqual(sugar?.quantity.base, {
     kind: 'exact',
     value: 60,
@@ -976,37 +976,23 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
     value: 5,
     unit: 'tbsp',
   });
-  assert.equal(recipe?.versionId, 'lazy-dumplings-source-v3');
-  assert.match(shaping?.tip ?? '', /окремо один від одного/);
+  assert.equal(recipe?.versionId, 'lazy-dumplings-pdf-v5');
+  assert.match(shaping?.checkpoint ?? '', /не злипаються/);
   assert(!ingredients.some((ingredient) => ingredient.id === 'water'));
   assert.equal(recipe?.presentation, 'concise');
   assert.equal(recipe?.evidence?.status, 'tested');
   assert.equal(recipe?.overview.difficulty, 'medium');
   assert.equal(recipe?.overview.timing.activeMinutes, 45);
-  assert.equal(recipe?.overview.timing.totalElapsedMinutes, null);
-  assert.equal(recipe?.overview.yieldLabel, '100 лінивих вареників');
+  assert.equal(recipe?.overview.timing.totalElapsedMinutes, 60);
+  assert.equal(recipe?.overview.yieldLabel, '≈75 вареників');
+  assert.equal(recipe?.evidence?.explanation, '');
   assert.match(recipe?.overview.timing.planningNote ?? '', /15–20/);
-  assert(
-    recipe?.steps.every(
-      (step) =>
-        !step.checkpoint &&
-        step.media?.every((image) => !image.title && !image.caption) !== false,
-    ),
-  );
-  assert.deepEqual(
-    recipe?.steps.map((step) => step.id),
-    [
-      'mix-wet',
-      'add-dry',
-      'rest',
-      'shape-log',
-      'shape-dumplings',
-      'cook-dumplings',
-    ],
-  );
-  assert.equal(cooking?.title, 'Зваріть вареники');
-  assert.equal(cooking?.cookInstructions?.length, 2);
-  assert.equal(cooking?.cookIngredients, undefined);
+  assert(recipe?.steps.every(step => step.media?.length === 1));
+  assert.deepEqual(recipe?.steps.map(step => step.id), [
+    'mix-dough', 'rest-and-roll', 'shape-dumplings', 'cook-dumplings',
+    'serve', 'freeze-raw', 'cook-frozen',
+  ]);
+  assert.match(cooking?.checkpoint ?? '', /спливли/);
   assert.equal(inventory?.scalingAnchorIngredientId, 'cottage-cheese');
 });
 

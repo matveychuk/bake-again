@@ -43,7 +43,7 @@ void test('keeps Napoleon listing photography separate from its hero', () => {
   assert(napoleon.cardAlt?.includes('Цілий Наполеон'));
 });
 
-void test('uses the linen photo for crepes and keeps the dumpling hero separate', () => {
+void test('uses the linen photo for crepes and uses the real dumpling photograph for the hero and card', () => {
   const catalog = getRecipeCatalog('uk');
   const crepes = catalog.find((recipe) => recipe.id === 'crepes');
   const dumplings = catalog.find((recipe) => recipe.id === 'lazy-dumplings');
@@ -54,7 +54,7 @@ void test('uses the linen photo for crepes and keeps the dumpling hero separate'
   assert(
     dumplings.cardImage?.includes('lazy-dumplings-real-plate-linen-v1.webp'),
   );
-  assert(dumplings.image.includes('lazy-dumplings-card-v1.webp'));
+  assert(dumplings.image === dumplings.cardImage);
 });
 
 void test('assigns every recipe to a localized reader-facing collection', () => {
@@ -173,7 +173,7 @@ void test('keeps catalogue names concise and makes gluten-free explicit on recip
   assert.equal(recipeDetailTitles.crepes.uk, 'Безглютенові млинці');
   assert.equal(
     recipeDetailTitles['lazy-dumplings'].uk,
-    'Безглютенові ліниві вареники',
+    'Безглютенові ліниві вареники з сиром',
   );
 
   for (const recipe of recipeInventory) {

@@ -151,29 +151,17 @@ void test('crepes Cook Mode uses the same 2x quantities and calculated configura
   );
 });
 
-void test('lazy dumplings Cook Mode uses one cooking step and step ingredients', () => {
-  const content = getRecipeContent('lazy-dumplings', 'uk');
-  assert.ok(content);
-
-  const steps = createRecipeCookSteps(content, 'uk');
-  assert.equal(steps.length, 6);
-  assert.equal(content.evidence?.status, 'tested');
-  assert.deepEqual(steps[2].timerOptionsSeconds, [900, 1200]);
-  assert.deepEqual(
-    steps[0].ingredients.map((ingredient) => ingredient.id),
-    ['cottage-cheese', 'eggs', 'sugar'],
-  );
-  assert.deepEqual(
-    steps[1].ingredients.map((ingredient) => ingredient.id),
-    ['flour', 'tapioca'],
-  );
-  assert.equal(steps[5].title, 'Зваріть вареники');
-  assert.deepEqual(steps[5].stepIds, ['cook-dumplings']);
-  assert.deepEqual(
-    steps[5].ingredients.map((ingredient) => ingredient.id),
-    [],
-  );
-  assert.equal(steps[5].timerOptionsSeconds, undefined);
+void test('lazy dumplings Cook Mode follows the seven PDF steps and preserves the rest timer', () => {
+  for (const locale of ['uk', 'en', 'es'] as const) {
+    const content = getRecipeContent('lazy-dumplings', locale)!;
+    const steps = createRecipeCookSteps(content, locale);
+    assert.equal(steps.length, 7);
+    assert.deepEqual(steps.map(step => step.title), content.steps.map(step => step.title));
+    assert.equal(content.evidence?.status, 'tested');
+    assert.deepEqual(steps[1].timerOptionsSeconds, [900, 1200]);
+    assert.deepEqual(steps[0].ingredients.map(item => item.id), ['cottage-cheese', 'eggs', 'flour', 'tapioca', 'sugar']);
+    assert.deepEqual(steps[6].stepIds, ['cook-frozen']);
+  }
 });
 
 void test('tested cottage-cheese waffles keep five concise steps, ingredients and timers', () => {

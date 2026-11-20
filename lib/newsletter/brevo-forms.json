@@ -712,7 +712,10 @@
         "mlyntsi": 9,
         "shokolad": 11,
         "crepes-es": 14,
-        "crepes-en": 15
+        "crepes-en": 15,
+        "varenyky-uk": 16,
+        "varenyky-en": 17,
+        "varenyky-es": 18
       },
       "attributes": {
         "SOURCE": "Text",
@@ -728,7 +731,10 @@
           11,
           13,
           14,
-          15
+          15,
+          16,
+          17,
+          18
         ],
         "localePriority": [
           "uk",
@@ -748,6 +754,33 @@
         "reentryAfterExit": false
       },
       "bonuses": {
+        "varenyky-es": {
+          "automationId": 11,
+          "messageId": 33,
+          "stepId": 3,
+          "listId": 18,
+          "waitMinutes": 2,
+          "status": "inactive",
+          "savedHtml": "lib/newsletter/provider-templates/varenyky-es.html"
+        },
+        "varenyky-en": {
+          "automationId": 10,
+          "messageId": 32,
+          "stepId": 3,
+          "listId": 17,
+          "waitMinutes": 2,
+          "status": "inactive",
+          "savedHtml": "lib/newsletter/provider-templates/varenyky-en.html"
+        },
+        "varenyky-uk": {
+          "automationId": 12,
+          "messageId": 34,
+          "stepId": 3,
+          "listId": 16,
+          "waitMinutes": 2,
+          "status": "inactive",
+          "savedHtml": "lib/newsletter/provider-templates/varenyky-uk.html"
+        },
         "crepes-en": {
           "automationId": 9,
           "messageId": 31,

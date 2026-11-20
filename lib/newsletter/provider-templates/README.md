@@ -23,3 +23,5 @@ check, not proof of rendering or delivery in an actual inbox.
 The Spanish crepe edition uses `crepes-es.html` in active Brevo automation #8, step #3, message #30. Entry is limited to new additions to list #14. The two-minute delay precedes one email with both downloads. The general welcome automation excludes list #14.
 
 The English crepe edition uses `crepes-en.html` in active Brevo automation #9, step #3, message #31. New entries to list #15 receive the two English downloads after a two-minute delay. Welcome automation #3 excludes list #15.
+
+On 2026-11-19 the Ukrainian, English and Spanish lazy varenyky PDF messages were saved in Brevo automations #12, #10 and #11, for lists #16, #17 and #18 respectively. The welcome exit condition includes all three lists. These drafts await the public download URLs before activation.

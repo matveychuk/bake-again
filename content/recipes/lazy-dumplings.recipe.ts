@@ -3,7 +3,7 @@ import type { Recipe } from './recipe.types.ts';
 export const lazyDumplingsRecipe = {
   schemaVersion: 3,
   id: 'lazy-dumplings',
-  versionId: 'lazy-dumplings-source-v3',
+  versionId: 'lazy-dumplings-pdf-v5',
   publicationStatus: 'published',
   translationState: {
     uk: 'reviewed',
@@ -16,30 +16,30 @@ export const lazyDumplingsRecipe = {
     uk: 'lazy-dumplings',
   },
   title: {
+    uk: 'Безглютенові ліниві вареники з сиром',
     en: 'Gluten-free cottage cheese dumplings',
     es: 'Ñoquis dulces de queso fresco sin gluten',
-    uk: 'Безглютенові ліниві вареники',
   },
   summary: {
+    uk: 'У цих лінивих варениках кисломолочний сир замішують просто в тісто. Подавай їх теплими з вершковим маслом. Частину можна заморозити сирими.',
     en: 'These soft, slightly sweet dumplings are called lazy varenyky. The cottage cheese goes straight into the dough. Serve them warm with butter or freeze a batch before boiling.',
     es: 'Estos váreniki perezosos se hacen con tvorog, un queso fresco seco y granuloso que se mezcla directamente con la masa. Sírvelos con mantequilla o congélalos en crudo.',
-    uk: 'Ніжні вареники з кисломолочного сиру.',
   },
   categoryIds: [],
   situationIds: [],
   difficulty: 'medium',
   baseProvenance: {
     state: 'tested',
-    sourceIds: ['lazy-dumplings-recorded-source'],
+    sourceIds: ['dumplings-approved-pdf-v5'],
   },
   timing: {
     activeMinutes: 45,
-    totalElapsedMinutes: null,
+    totalElapsedMinutes: 60,
     planningNote: {
       text: {
-        en: 'Allow an additional {duration} for the dough to rest.',
-        es: 'Añade {duration} de reposo de la masa.',
-        uk: 'Додатково {duration} на відпочинок тіста.',
+        en: 'Includes {duration} for the dough to rest.',
+        es: 'Incluye {duration} de reposo de la masa.',
+        uk: 'З них {duration} — на відпочинок тіста.',
       },
       phaseId: 'dough-rest',
     },
@@ -57,28 +57,29 @@ export const lazyDumplingsRecipe = {
           max: 20,
           unit: 'minute',
         },
-        relatedStepId: 'rest',
+        relatedStepId: 'rest-and-roll',
       },
     ],
   },
   yield: {
     default: {
-      id: 'hundred-dumplings',
+      id: 'base-dumplings',
       label: {
-        en: '100 lazy dumplings',
-        es: '100 váreniki de tvorog',
-        uk: '100 лінивих вареників',
+        uk: '≈75 вареників',
+        en: '≈75 dumplings',
+        es: '≈75 ñoquis',
       },
       count: {
         kind: 'exact',
-        value: 100,
+        value: 75,
       },
       unit: 'dumpling',
       provenance: {
         state: 'tested',
-        sourceIds: ['lazy-dumplings-recorded-source'],
+        sourceIds: ['dumplings-approved-pdf-v5'],
       },
       availability: 'default',
+      approximate: true,
     },
     alternatives: [],
   },
@@ -90,7 +91,7 @@ export const lazyDumplingsRecipe = {
   configuration: {
     base: {
       geometryId: 'lazy-dumplings-base',
-      yieldId: 'hundred-dumplings',
+      yieldId: 'base-dumplings',
       batchScale: 1,
     },
     geometryAdjustment: null,
@@ -162,13 +163,18 @@ export const lazyDumplingsRecipe = {
       lines: [
         {
           id: 'cottage-cheese',
+          qualifier: {
+            en: 'Look for dry curd cottage cheese, also sold as farmer’s cheese or tvorog. Choose firm, crumbly curds with very little whey.',
+            es: 'Busca «tvorog» o «requesón tipo tvorog» en tiendas de Europa del Este. Si ves «queso cottage» o «queso fresco granulado», fíjate en la textura: esta receta lleva un queso seco, con gránulos y muy poco suero.',
+            uk: 'Обирай сир із виразними крупинками й мінімумом сироватки.',
+          },
           options: [
             {
               ingredientId: 'cottage-cheese',
               name: {
-                en: 'Tvorog (curd cheese)',
-                es: 'Tvorog (queso fresco de leche fermentada)',
-                uk: 'Кисломолочний сир',
+                uk: 'Сухий зернистий кисломолочний сир',
+                en: 'Dry curd cottage cheese',
+                es: 'Queso fresco de textura granulosa (tvorog)',
               },
             },
           ],
@@ -209,34 +215,6 @@ export const lazyDumplingsRecipe = {
           },
         },
         {
-          id: 'sugar',
-          options: [
-            {
-              ingredientId: 'sugar',
-              name: {
-                en: 'Sugar',
-                es: 'Azúcar',
-                uk: 'Цукор',
-              },
-            },
-          ],
-          quantity: {
-            base: {
-              kind: 'exact',
-              value: 60,
-              unit: 'g',
-            },
-            equivalent: {
-              kind: 'exact',
-              value: 3,
-              unit: 'tbsp',
-            },
-            shopping: {
-              mode: 'base',
-            },
-          },
-        },
-        {
           id: 'flour',
           options: [
             {
@@ -262,11 +240,6 @@ export const lazyDumplingsRecipe = {
             shopping: {
               mode: 'base',
             },
-          },
-          qualifier: {
-            en: 'Plus a little for shaping.',
-            es: 'Y un poco más para dar forma.',
-            uk: 'Плюс трохи для формування.',
           },
         },
         {
@@ -297,24 +270,126 @@ export const lazyDumplingsRecipe = {
             },
           },
         },
+        {
+          id: 'sugar',
+          options: [
+            {
+              ingredientId: 'sugar',
+              name: {
+                en: 'Sugar',
+                es: 'Azúcar',
+                uk: 'Цукор',
+              },
+            },
+          ],
+          quantity: {
+            base: {
+              kind: 'exact',
+              value: 60,
+              unit: 'g',
+            },
+            equivalent: {
+              kind: 'exact',
+              value: 3,
+              unit: 'tbsp',
+            },
+            shopping: {
+              mode: 'base',
+            },
+          },
+        },
+        {
+          id: 'dusting-flour',
+          options: [
+            {
+              ingredientId: 'dusting-flour',
+              name: {
+                uk: 'Борошно для формування',
+                en: 'Flour for shaping',
+                es: 'Harina para formar los váreniki',
+              },
+            },
+          ],
+          quantity: {
+            base: null,
+            shopping: {
+              mode: 'nameOnly',
+            },
+          },
+          qualifier: {
+            uk: 'Трохи',
+            en: 'A little',
+            es: 'Un poco',
+          },
+        },
+        {
+          id: 'butter',
+          options: [
+            {
+              ingredientId: 'butter',
+              name: {
+                uk: 'Вершкове масло для подачі',
+                en: 'Butter to serve',
+                es: 'Mantequilla para servir',
+              },
+            },
+          ],
+          quantity: {
+            base: null,
+            shopping: {
+              mode: 'nameOnly',
+            },
+          },
+          qualifier: {
+            uk: 'За смаком',
+            en: 'To taste',
+            es: 'Al gusto',
+          },
+        },
       ],
     },
   ],
   steps: [
     {
-      id: 'mix-wet',
+      id: 'mix-dough',
       title: {
-        en: 'Mix the base',
-        es: 'Mezcla la base',
-        uk: 'Змішайте основу',
+        uk: 'Заміси тісто',
+        en: 'Mix the dough',
+        es: 'Mezcla la masa',
       },
       instruction: {
-        en: 'Mix the tvorog, eggs and sugar with a fork or in a food processor fitted with a dough attachment.',
-        es: 'Mezcla el tvorog, los huevos y el azúcar con un tenedor o en un robot de cocina con accesorio para amasar.',
-        uk: 'Перемішайте кисломолочний сир, яйця й цукор виделкою або в комбайні насадкою-тістомісом.',
+        uk: 'Виклади сир у миску, додай яйця, борошно, тапіоку й цукор. Перемішай міксером із насадкою-тістомісом або добре розмішай виделкою.',
+        en: 'Put the cheese in a bowl and add the eggs, flour mix, tapioca starch and sugar. Mix with a dough hook or stir thoroughly with a fork.',
+        es: 'Pon el queso en un bol y añade los huevos, la mezcla de harina, el almidón de tapioca y el azúcar. Mezcla con el gancho de amasar o remueve bien con un tenedor.',
       },
-      ingredientLineIds: ['cottage-cheese', 'eggs', 'sugar'],
-      guidance: [],
+      ingredientLineIds: [
+        'cottage-cheese',
+        'eggs',
+        'flour',
+        'tapioca',
+        'sugar',
+      ],
+      mediaIds: ['mix'],
+      guidance: [
+        {
+          id: 'mix-dough-practicalTip',
+          kind: 'practicalTip',
+          text: {
+            uk: 'Рецепт розрахований на сухий зернистий сир. Якщо сир вологий, додай трохи більше борошна.',
+            en: 'Use dry, grainy curd cheese. If your cheese is moist, add a little more flour mix.',
+            es: 'Usa un queso seco y granuloso. Si está húmedo, añade un poco más de la mezcla de harina.',
+          },
+        },
+        {
+          id: 'mix-dough-checkpoint',
+          kind: 'checkpoint',
+          text: {
+            uk: 'М’яка липка маса з видимими крупинками сиру.',
+            en: 'The dough is soft and sticky, with visible curds.',
+            es: 'La masa queda blanda y pegajosa, con granos de queso visibles.',
+          },
+        },
+      ],
       cook: {
         ingredients: [
           {
@@ -324,160 +399,157 @@ export const lazyDumplingsRecipe = {
             ingredientId: 'eggs',
           },
           {
-            ingredientId: 'sugar',
-          },
-        ],
-      },
-      mediaIds: ['mix-cottage-cheese'],
-      equipmentIds: ['fork'],
-    },
-    {
-      id: 'add-dry',
-      title: {
-        en: 'Add the flour and starch',
-        es: 'Añade la harina y el almidón',
-        uk: 'Додайте борошно й крохмаль',
-      },
-      instruction: {
-        en: 'Combine the flour and tapioca starch and mix into the base. The dough should stay sticky — do not add extra flour to firm it up.',
-        es: 'Combina la harina con el almidón de tapioca e incorpóralos a la base. La masa debe quedar pegajosa; no añadas más harina para endurecerla.',
-        uk: 'З’єднайте борошно з тапіоковим крохмалем і вмішайте в основу. Тісто має залишитися липким — не ущільнюйте його додатковим борошном.',
-      },
-      ingredientLineIds: ['flour', 'tapioca'],
-      guidance: [],
-      cook: {
-        ingredients: [
-          {
             ingredientId: 'flour',
           },
           {
             ingredientId: 'tapioca',
           },
-        ],
-      },
-      mediaIds: ['add-flour-tapioca'],
-    },
-    {
-      id: 'rest',
-      title: {
-        en: 'Rest the dough',
-        es: 'Deja reposar la masa',
-        uk: 'Дайте тісту відпочити',
-      },
-      instruction: {
-        en: 'Cover the bowl loosely and leave for 15–20 minutes.',
-        es: 'Cubre el bol sin apretar y deja reposar durante 15–20 minutos.',
-        uk: 'Нещільно накрийте миску й залиште на 15–20 хвилин.',
-      },
-      ingredientLineIds: [],
-      guidance: [],
-      equipmentIds: ['bowl'],
-      durationPhaseId: 'dough-rest',
-    },
-    {
-      id: 'shape-log',
-      title: {
-        en: 'Shape a log',
-        es: 'Forma un cilindro',
-        uk: 'Сформуйте ковбаску',
-      },
-      instruction: {
-        en: 'Dust the surface and dough with flour. Gently roll into a log without kneading the dusting flour into the dough.',
-        es: 'Enharina la superficie y la masa. Forma un cilindro con cuidado, sin amasar la harina de espolvorear dentro de la masa.',
-        uk: 'Присипте поверхню й тісто борошном. Обережно розкачайте в ковбаску, не вмішуючи борошно всередину.',
-      },
-      ingredientLineIds: ['flour'],
-      guidance: [],
-      cook: {
-        ingredients: [
           {
-            ingredientId: 'flour',
-            quantity: 'omit',
-            note: {
-              en: 'For dusting.',
-              es: 'Para espolvorear.',
-              uk: 'Для присипання.',
-            },
+            ingredientId: 'sugar',
           },
         ],
       },
-      mediaIds: ['shape-dough-log'],
+    },
+    {
+      id: 'rest-and-roll',
+      title: {
+        uk: 'Дай відпочити й розкачай',
+        en: 'Rest and roll',
+        es: 'Deja reposar y forma un rollo',
+      },
+      instruction: {
+        uk: 'Накрий миску й залиш тісто на 15–20 хв. Потім ложкою виклади порцію на присипану борошном поверхню, присип зверху й легкими рухами долонь розкачай джгутик, не вимішуючи.',
+        en: 'Cover the bowl and rest the dough for 15–20 minutes. Spoon a portion onto a floured surface. Dust the top and roll gently under your palms to form a rope, without kneading.',
+        es: 'Tapa el bol y deja reposar la masa 15–20 minutos. Pon una porción con una cuchara sobre la superficie enharinada. Espolvorea un poco de harina por encima y forma un cordón con las palmas, sin amasar.',
+      },
+      ingredientLineIds: ['dusting-flour'],
+      mediaIds: ['roll'],
+      durationPhaseId: 'dough-rest',
+      cook: {
+        ingredients: [
+          {
+            ingredientId: 'dusting-flour',
+          },
+        ],
+      },
     },
     {
       id: 'shape-dumplings',
       title: {
-        en: 'Roll the dumplings',
-        es: 'Forma las bolitas',
-        uk: 'Скачайте вареники',
+        uk: 'Наріж і сформуй кульки',
+        en: 'Cut and shape the dumplings',
+        es: 'Corta y forma bolitas',
       },
       instruction: {
-        en: 'Cut into small pieces. Coat the cut sides in flour and gently roll each piece between your palms into a ball.',
-        es: 'Corta en trozos pequeños. Cubre los cortes con harina y haz rodar suavemente cada trozo entre las palmas para formar una bolita.',
-        uk: 'Наріжте тісто на невеликі шматочки. Обваляйте зрізи в борошні й легко скачайте кожен шматочок між долонями в кульку.',
+        uk: 'Наріж джгутик на шматочки однакового розміру. Обваляй зрізи в борошні й легко скатай кульки. Розклади їх з невеликими проміжками.',
+        en: 'Cut the rope into even pieces. Dip the cut sides in flour and gently roll each piece into a ball. Leave a little space between them.',
+        es: 'Corta el cordón en trozos iguales. Pasa las caras cortadas por harina y forma bolitas con suavidad. Deja un poco de espacio entre ellas.',
       },
-      ingredientLineIds: ['flour'],
+      ingredientLineIds: ['dusting-flour'],
+      mediaIds: ['shape'],
       guidance: [
         {
-          id: 'shape-dumplings-tip',
-          kind: 'practicalTip',
+          id: 'shape-dumplings-checkpoint',
+          kind: 'checkpoint',
           text: {
-            en: 'To freeze, arrange uncooked dumplings separately on a tray. Once frozen, transfer to a zip bag and return to the freezer.',
-            es: 'Para congelarlos, coloca los váreniki crudos separados en una bandeja. Una vez congelados, pásalos a una bolsa con cierre y devuélvelos al congelador.',
-            uk: 'Для заморожування розкладіть сирі вареники окремо один від одного на таці. Коли замерзнуть, перекладіть у zip-пакет і поверніть до морозилки.',
+            uk: 'Кульки тримають форму й не злипаються між собою.',
+            en: 'The balls hold their shape and stay separate.',
+            es: 'Las bolitas mantienen la forma y no se pegan entre sí.',
           },
         },
       ],
       cook: {
         ingredients: [
           {
-            ingredientId: 'flour',
-            quantity: 'omit',
-            note: {
-              en: 'For dusting.',
-              es: 'Para espolvorear.',
-              uk: 'Для присипання.',
-            },
+            ingredientId: 'dusting-flour',
           },
         ],
       },
-      mediaIds: ['shape-round-dumplings'],
     },
     {
       id: 'cook-dumplings',
       title: {
-        en: 'Boil the dumplings',
-        es: 'Cuece los váreniki',
-        uk: 'Зваріть вареники',
+        uk: 'Звари до спливання',
+        en: 'Boil until they float',
+        es: 'Cuece hasta que floten',
       },
       instruction: {
-        en: 'Add the dumplings to boiling water in small batches. Gently run a skimmer over the bottom so they do not stick. Cook until the dumplings float to the surface, then lift out with a skimmer. Cook frozen dumplings the same way: add directly to boiling water without thawing.',
-        es: 'Añade los váreniki al agua hirviendo en tandas pequeñas. Pasa suavemente una espumadera por el fondo para que no se peguen. Cuece hasta que los váreniki suban a la superficie y retíralos con una espumadera. Cocina los congelados del mismo modo: directamente en agua hirviendo, sin descongelar.',
-        uk: 'Опускайте вареники в киплячу воду невеликими порціями. Обережно проведіть шумівкою по дну, щоб вони не прилипли. Варіть до спливання на поверхню, потім дістаньте шумівкою. Так само готуйте заморожені вареники: опускайте в окріп без розморожування.',
+        uk: 'Обережно опусти вареники в окріп і відділи від дна легким рухом ложки. Вари, доки спливуть, і дістань шумівкою.',
+        en: 'Lower the dumplings into boiling water. Gently loosen them from the bottom with a spoon. Cook until they float, then lift them out with a slotted spoon.',
+        es: 'Echa los váreniki con cuidado en agua hirviendo. Despégalos del fondo suavemente con una cuchara. Cuando suban a la superficie, sácalos con una espumadera.',
       },
       ingredientLineIds: [],
-      guidance: [],
-      cook: {
-        instructions: [
-          {
-            id: 'cook-dumplings-cook-1',
-            text: {
-              en: 'Add the dumplings to boiling water in small batches. Gently run a skimmer over the bottom so they do not stick.',
-              es: 'Añade los váreniki al agua hirviendo en tandas pequeñas. Pasa suavemente una espumadera por el fondo para que no se peguen.',
-              uk: 'Опускайте вареники в киплячу воду невеликими порціями. Обережно проведіть шумівкою по дну, щоб вони не прилипли.',
-            },
+      mediaIds: ['boil'],
+      guidance: [
+        {
+          id: 'cook-dumplings-checkpoint',
+          kind: 'checkpoint',
+          text: {
+            uk: 'Вареники спливли та зберігають форму.',
+            en: 'The dumplings float and hold their shape.',
+            es: 'Los váreniki flotan y conservan la forma.',
           },
+        },
+      ],
+    },
+    {
+      id: 'serve',
+      title: {
+        uk: 'Подай з маслом',
+        en: 'Serve with butter',
+        es: 'Sirve con mantequilla',
+      },
+      instruction: {
+        uk: 'Дай воді стекти й переклади вареники на тарілку з невеликою кількістю вершкового масла.',
+        en: 'Let the water drain off and transfer the dumplings to a plate with a little butter.',
+        es: 'Deja que escurran y pásalos a un plato con un poco de mantequilla.',
+      },
+      ingredientLineIds: ['butter'],
+      mediaIds: ['serve'],
+      cook: {
+        ingredients: [
           {
-            id: 'cook-dumplings-cook-2',
-            text: {
-              en: 'Cook until the dumplings float to the surface, then lift out with a skimmer. Cook frozen dumplings the same way: add directly to boiling water without thawing.',
-              es: 'Cuece hasta que los váreniki suban a la superficie y retíralos con una espumadera. Cocina los congelados del mismo modo: directamente en agua hirviendo, sin descongelar.',
-              uk: 'Варіть до спливання на поверхню, потім дістаньте шумівкою. Так само готуйте заморожені вареники: опускайте в окріп без розморожування.',
-            },
+            ingredientId: 'butter',
           },
         ],
       },
-      mediaIds: ['boil-round-dumplings'],
-      equipmentIds: ['skimmer'],
+    },
+    {
+      id: 'freeze-raw',
+      title: {
+        uk: 'Заготуй про запас',
+        en: 'Freeze a batch for later',
+        es: 'Congela una tanda',
+      },
+      instruction: {
+        uk: 'Розклади сирі вареники на таці окремо один від одного й постав у морозилку. Коли замерзнуть, переклади в zip-пакет.',
+        en: 'Space the uncooked dumplings apart on a tray and freeze. Once frozen, transfer them to a resealable freezer bag.',
+        es: 'Coloca los váreniki crudos en una bandeja, separados entre sí, y congélalos. Cuando estén congelados, pásalos a una bolsa de congelación con cierre.',
+      },
+      ingredientLineIds: [],
+      mediaIds: ['freeze'],
+    },
+    {
+      id: 'cook-frozen',
+      title: {
+        uk: 'З морозилки — в окріп',
+        en: 'Cook straight from frozen',
+        es: 'Del congelador a la olla',
+      },
+      instruction: {
+        uk: 'Опусти потрібну порцію в киплячу воду без розморожування. Обережно перемішай, вари до спливання й дістань шумівкою.',
+        en: 'Drop as many frozen dumplings as you need straight into boiling water. Stir gently, cook until they float and lift out with a slotted spoon.',
+        es: 'Echa la ración que necesites en agua hirviendo, sin descongelar. Remueve con suavidad y, cuando floten, sácalos con una espumadera.',
+      },
+      ingredientLineIds: ['butter'],
+      mediaIds: ['from-frozen'],
+      cook: {
+        ingredients: [
+          {
+            ingredientId: 'butter',
+          },
+        ],
+      },
     },
   ],
   storage: {
@@ -496,78 +568,89 @@ export const lazyDumplingsRecipe = {
     {
       id: 'lazy-dumplings-hero',
       type: 'image',
-      path: '/images/recipes/lazy-dumplings-card-v1.webp',
-      usage: ['hero'],
-      alt: {
-        en: 'Ukrainian lazy curd cheese dumplings with sour cream and butter',
-        es: 'Váreniki ucranianos de tvorog con nata agria y mantequilla',
-        uk: 'Ліниві вареники з кисломолочного сиру зі сметаною та маслом',
-      },
-    },
-    {
-      id: 'mix-cottage-cheese',
-      type: 'image',
-      path: '/media/recipes/lazy-dumplings/selected/step-01-mix-cottage-cheese-v1.webp',
-      usage: ['step'],
-      alt: {
-        en: 'Tvorog curd cheese, eggs and sugar in a food processor bowl',
-        es: 'Tvorog, huevos y azúcar en el bol de un robot de cocina',
-        uk: 'Кисломолочний сир, яйця й цукор у мисці комбайна',
-      },
-    },
-    {
-      id: 'add-flour-tapioca',
-      type: 'image',
-      path: '/media/recipes/lazy-dumplings/selected/step-02-add-flour-tapioca-v1.webp',
-      usage: ['step'],
-      alt: {
-        en: 'Flour and tapioca starch in sticky cottage-cheese dough',
-        es: 'Harina y almidón de tapioca en una masa pegajosa de tvorog',
-        uk: 'Борошно й тапіоковий крохмаль у липкому тісті',
-      },
-    },
-    {
-      id: 'shape-dough-log',
-      type: 'image',
-      path: '/media/recipes/lazy-dumplings/selected/step-04-shape-log-v1.webp',
-      usage: ['step'],
-      alt: {
-        en: 'Hands shaping a dough log on a floured surface',
-        es: 'Manos formando un cilindro de masa sobre una superficie enharinada',
-        uk: 'Руки формують ковбаску з тіста на присипаній борошном поверхні',
-      },
-    },
-    {
-      id: 'shape-round-dumplings',
-      type: 'image',
-      path: '/media/recipes/lazy-dumplings/selected/step-05-shape-dumplings-v1.webp',
-      usage: ['step'],
-      alt: {
-        en: 'Round dumplings and cut dough on a floured surface',
-        es: 'Bolitas y masa cortada sobre una superficie enharinada',
-        uk: 'Кульки вареників і нарізане тісто на присипаній борошном поверхні',
-      },
-    },
-    {
-      id: 'boil-round-dumplings',
-      type: 'image',
-      path: '/media/recipes/lazy-dumplings/selected/step-06-boil-dumplings-v1.webp',
-      usage: ['step'],
-      alt: {
-        en: 'Dumplings floating in water with one on a skimmer',
-        es: 'Ñoquis flotando en agua, con uno sobre una espumadera',
-        uk: 'Вареники сплили у воді, один вареник на шумівці',
-      },
-    },
-    {
-      id: 'lazy-dumplings-card',
-      type: 'image',
       path: '/images/recipes/lazy-dumplings-real-plate-linen-v1.webp',
-      usage: ['card'],
+      usage: ['hero', 'card'],
       alt: {
-        uk: 'Справжні ліниві вареники на бежевій тарілці та лляній серветці',
-        en: 'Real lazy cottage-cheese dumplings on a beige plate and linen napkin',
-        es: 'Ñoquis de queso reales en un plato beige sobre una servilleta de lino',
+        uk: 'Ліниві вареники на світлій тарілці',
+        en: 'Round cheese dumplings on a pale plate',
+        es: 'Váreniki de queso en un plato claro',
+      },
+    },
+    {
+      id: 'mix',
+      type: 'image',
+      usage: ['step'],
+      path: '/images/recipes/lazy-dumplings/pdf-v5/mix.webp',
+      alt: {
+        uk: 'Сирна маса з помітними крупинками в чаші міксера',
+        en: 'Dough with visible curds in the mixer bowl',
+        es: 'Masa con granos de queso en el bol de la amasadora',
+      },
+    },
+    {
+      id: 'roll',
+      type: 'image',
+      usage: ['step'],
+      path: '/images/recipes/lazy-dumplings/pdf-v5/roll.webp',
+      alt: {
+        uk: 'Джгутик тіста на присипаному борошном килимку',
+        en: 'A rope of dough on a floured mat',
+        es: 'Un cordón de masa sobre un tapete enharinado',
+      },
+    },
+    {
+      id: 'shape',
+      type: 'image',
+      usage: ['step'],
+      path: '/images/recipes/lazy-dumplings/pdf-v5/shape.webp',
+      alt: {
+        uk: 'Нарізані шматочки тіста й руки на борошняному килимку',
+        en: 'Hands shaping pieces of dough on a floured mat',
+        es: 'Manos formando bolitas sobre el tapete enharinado',
+      },
+    },
+    {
+      id: 'boil',
+      type: 'image',
+      usage: ['step'],
+      path: '/images/recipes/lazy-dumplings/pdf-v5/boil.webp',
+      alt: {
+        uk: 'Вареники спливають у каструлі',
+        en: 'Dumplings floating in the pot',
+        es: 'Váreniki flotando en la olla',
+      },
+    },
+    {
+      id: 'serve',
+      type: 'image',
+      usage: ['step'],
+      path: '/images/recipes/lazy-dumplings/pdf-v5/serve.webp',
+      alt: {
+        uk: 'Готові вареники на тарілці',
+        en: 'Cooked cheese dumplings on a plate',
+        es: 'Váreniki cocidos en un plato',
+      },
+    },
+    {
+      id: 'freeze',
+      type: 'image',
+      usage: ['step'],
+      path: '/images/recipes/lazy-dumplings/pdf-v5/freeze.webp',
+      alt: {
+        uk: 'Сирі вареники розкладено окремо на тацях',
+        en: 'Uncooked dumplings spaced apart on trays',
+        es: 'Váreniki crudos separados en bandejas',
+      },
+    },
+    {
+      id: 'from-frozen',
+      type: 'image',
+      usage: ['step'],
+      path: '/images/recipes/lazy-dumplings/pdf-v5/from-frozen.webp',
+      alt: {
+        uk: 'Вареники на шумівці над каструлею',
+        en: 'Dumplings lifted from the pot with a slotted spoon',
+        es: 'Váreniki en una espumadera sobre la olla',
       },
     },
   ],
@@ -579,18 +662,19 @@ export const lazyDumplingsRecipe = {
       locator:
         'Author correction 2026-10-12 · 500 g curd, 2 eggs, 100 g flour, 10 g tapioca (1 tbsp), 60 g sugar; method confirmed 2026-10-14: Schär Mix B Bread, rest 15–20 minutes, cook fresh/frozen until floating, freeze raw on trays then bag',
     },
+    {
+      id: 'dumplings-approved-pdf-v5',
+      file: 'public/downloads/Bake-Again-Linyvi-varenyky.pdf',
+      locator:
+        'Approved Ukrainian PDF v5, pp. 1–9: dry grainy curd, about 75 dumplings / 3 servings, seven steps including freezing.',
+    },
   ],
   contentGaps: [],
   presentation: 'concise',
-  evidenceExplanation: {
-    en: 'Author-corrected quantities for the successfully cooked batch filmed on 11 October 2026.',
-    es: 'Cantidades corregidas por la autora para la tanda preparada con éxito y grabada el 11 de octubre de 2026.',
-    uk: 'Авторські пропорції уточнено за успішно приготовленою партією зі зйомки 11.10.2026.',
-  },
   searchMetadata: {
     datePublished: null,
     dateModified: '2026-11-19',
-    dateModifiedVersionId: 'lazy-dumplings-source-v3',
+    dateModifiedVersionId: 'lazy-dumplings-pdf-v5',
     cookTimeMinutes: null,
     recipeCuisine: {
       uk: 'Українська кухня',
@@ -598,9 +682,24 @@ export const lazyDumplingsRecipe = {
       es: 'Ucraniana',
     },
     keywords: {
-      uk: ['Безглютенові ліниві вареники'],
-      en: ['cottage cheese dumplings', 'lazy varenyky', 'gluten-free dumplings', 'dry curd cottage cheese'],
-      es: ['ñoquis dulces de queso fresco', 'ñoquis sin gluten', 'váreniki perezosos', 'tvorog'],
+      uk: [
+        'ліниві вареники з сиром',
+        'вареники без глютену',
+        'вареники з кисломолочного сиру',
+      ],
+      en: [
+        'lazy varenyky',
+        'cheese dumplings',
+        'dry curd cottage cheese dumplings',
+        'gluten-free dumplings',
+        'dry-curd cottage cheese',
+      ],
+      es: [
+        'váreniki perezosos',
+        'ñoquis de queso sin gluten',
+        'ñoquis de queso fresco',
+        'tvorog',
+      ],
     },
   },
   discovery: {
@@ -621,7 +720,7 @@ export const lazyDumplingsRecipe = {
     },
     collectionIds: ['breakfast', 'everyday', 'cottage-cheese'],
     catalogue: true,
-    imageKind: 'generated-preview',
+    imageKind: 'edited-author-photo',
     sourceTitle: 'Ліниві вареники',
     launchPriority: 'Medium',
     heroCandidate: 'No',
@@ -644,31 +743,30 @@ export const lazyDumplingsRecipe = {
           '500 г кисломолочного сиру\n2 яйця\n100 г Schär Mix B Bread (≈ 5 ст. л. за таблицею; назву суміші для знятої партії ще уточнюємо)\n10 г тапіоки (1 ст. л. — авторська мірка тільки цього рецепта)\n60 г цукру (≈ 3 ст. л. за таблицею)\n\nПопередні нотатки збережені як архів, не як актуальна рецептура.',
       },
     ],
-    needsBeforePublishing:
-      'Record yield, difficulty and total timing; approve or replace the generated photo.',
+    needsBeforePublishing: '',
   },
-  cardMediaId: 'lazy-dumplings-card',
+  cardMediaId: 'lazy-dumplings-hero',
   translationReview: {
-    date: '2026-11-01',
+    date: '2026-11-19',
     reviewer: 'implementation',
     scope:
-      'ID-aligned transfer and semantic comparison of existing UK/EN/ES recipe text; not separate author approval',
+      'Aligned all seven steps, ingredient measures and yield with the Ukrainian PDF v5.',
   },
   seo: {
     uk: {
-      title: 'Безглютенові ліниві вареники',
+      title: 'Ліниві вареники з сиром без глютену',
       description:
-        'Безглютенові ліниві вареники з кисломолочного сиру. Пропорції інгредієнтів, формування та варіння крок за кроком.',
+        'Покроковий рецепт лінивих вареників з кисломолочного сиру без глютену. Як замісити тісто, зварити вареники до спливання й заморозити про запас.',
     },
     en: {
       title: 'Gluten-free cottage cheese dumplings',
       description:
-        'Make gluten-free cottage cheese dumplings with dry curd cheese. Learn how to shape and boil these soft lazy varenyky, serve them with butter or freeze them for later.',
+        'Make gluten-free cottage cheese dumplings with firm, dry curds. Follow the step-by-step photos for lazy varenyky in one hour, with tips for freezing.',
     },
     es: {
       title: 'Ñoquis dulces de queso fresco sin gluten',
       description:
-        'Prepara ñoquis dulces de queso fresco sin gluten. Aprende a hacer la masa con tvorog, formar los váreniki perezosos, cocerlos y congelarlos en crudo.',
+        'Prepara ñoquis dulces de queso fresco sin gluten en una hora. Sigue las fotos para hacer la masa con tvorog, dar forma a los váreniki y congelarlos en crudo.',
     },
   },
   routeSlug: 'lazy-dumplings',

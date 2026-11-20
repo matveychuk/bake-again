@@ -111,7 +111,13 @@ for (const entry of entries) {
     assert.ok(!('datePublished' in recipe));
     for (const forbidden of ['aggregateRating', 'review', 'nutrition'])
       assert.ok(!(forbidden in recipe));
-    assert.equal(recipe.image.length, 2);
+    const expectedCrops = ['4x3', '16x9'];
+    if (recipe.image.some((url) => new URL(url).pathname.startsWith('/images/seo/lazy-dumplings-'))) {
+      expectedCrops.push('1x1');
+    }
+    assert.equal(recipe.image.length, expectedCrops.length, path);
+    for (const crop of expectedCrops)
+      assert.ok(recipe.image.some((url) => url.endsWith(`-${crop}.webp`)), `${path} ${crop}`);
     recipePages++;
   }
 }

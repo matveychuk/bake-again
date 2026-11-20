@@ -11,7 +11,7 @@ import styles from './recipe-pdf-invitation.module.css';
 export function RecipePdfInvitation({
   invitation,
   action,
-  id = 'recipe-junior-card',
+  id = invitation.recipeId === 'crepes' ? 'recipe-junior-card' : 'recipe-pdf',
 }: {
   invitation: NonNullable<ReturnType<typeof getRecipeInvitation>>;
   action: ReactNode;

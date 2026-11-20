@@ -1,6 +1,6 @@
 import { newsletterSignupConfig } from '@/lib/newsletter/config';
 import type { AppLocale } from '@/lib/i18n/config';
-import { NewsletterInvitation } from './newsletter-invitation';
+import { NewsletterInvitation, type NewsletterInvitationCopy } from './newsletter-invitation';
 import { NewsletterForm } from './newsletter-form';
 import type { MagnetId } from '@/lib/newsletter/magnets';
 import { deliveryConfigured } from '@/lib/newsletter/delivery-runtime';
@@ -8,11 +8,13 @@ import { deliveryConfigured } from '@/lib/newsletter/delivery-runtime';
 export async function NewsletterSignup({
   locale,
   autoPrompt = false,
+  invitationCopy,
   magnetId,
   placement = 'landing',
 }: {
   locale: AppLocale;
   autoPrompt?: boolean;
+  invitationCopy?: NewsletterInvitationCopy;
   magnetId?: MagnetId;
   placement?: import('@/lib/newsletter/single-opt-in').SubscriptionPlacement;
 }) {
@@ -46,6 +48,7 @@ export async function NewsletterSignup({
       locale={locale}
       signup={signup}
       autoPrompt={autoPrompt}
+      invitationCopy={invitationCopy}
     />
   ) : null;
 }

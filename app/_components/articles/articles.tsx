@@ -7,6 +7,8 @@ import {
   panettoneIsActive,
 } from '@/content/articles/psyllium';
 import { PanettoneInvitation } from '@/components/site/panettone-invitation';
+import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
+import { NewsletterSignup } from '@/components/site/newsletter-signup';
 import { ProductBannerInvitation } from '@/components/site/product-banner-invitation';
 import { activeProductBanner } from '@/content/commerce/product-banner';
 import { deliveryBindings } from '@/lib/newsletter/delivery-runtime';
@@ -69,7 +71,7 @@ export function PsylliumComparison({
           <strong>Мелене лушпиння</strong>
         </div>
         <figcaption className={styles.caption}>
-          Дві форми одного інгредієнта. Згенерована ілюстрація.
+          Дві форми одного інгредієнта.
         </figcaption>
       </figure>
       <details className={styles.packaging}>
@@ -92,6 +94,7 @@ export function PsylliumComparison({
 }
 
 export function PsylliumStory({ preview = false }: { preview?: boolean }) {
+  const Invitation = preview ? NewsletterInvitation : NewsletterSignup;
   return (
     <article className={styles.story}>
       <ArticleHeader
@@ -100,6 +103,35 @@ export function PsylliumStory({ preview = false }: { preview?: boolean }) {
         id={preview ? 'psyllium-story-example' : 'article-title'}
         introId={preview ? undefined : 'psyllium-content'}
       />
+      <section>
+        <h2>Як псиліум потрапив у мою здобу</h2>
+        <p>
+          Ми з чоловіком час від часу приймаємо псиліум як джерело клітковини.
+          Так я його й знала багато років. Його вживають, зокрема, при закрепах,
+          а також для зниження рівня холестерину.
+        </p>
+        <p>
+          Я бачила псиліум у складі деяких готових безглютенових сумішей.
+          Готова суміш часто універсальна, а мені хотілося підібрати пропорції
+          саме для здоби. Тож я сама змішала кілька видів безглютенового
+          борошна й додала порошок із тієї самої баночки.
+        </p>
+        <figure className={styles.figure}>
+          <Image
+            src={psylliumArticle.blendImage}
+            alt={psylliumArticle.blendAlt}
+            width={1536}
+            height={1024}
+            sizes="(max-width: 760px) 92vw, 720px"
+          />
+        </figure>
+        <p>
+          До того моя безглютенова здоба здебільшого виходила щільною й трохи
+          крихкою, наче з пісочного тіста. А тут із першої ж спроби м’якуш
+          вийшов м’який, пружний, пористий — такий, як у звичайної пшеничної
+          здоби. Оце й було моїм відкриттям.
+        </p>
+      </section>
       <section>
         <h2>Непоказний, доки сухий</h2>
         <p>
@@ -124,7 +156,6 @@ export function PsylliumStory({ preview = false }: { preview?: boolean }) {
           />
           <figcaption className={styles.caption}>
             Ліворуч — сухе лушпиння. Праворуч — гель після додавання води.
-            Згенерована ілюстрація.
           </figcaption>
         </figure>
       </section>
@@ -150,6 +181,8 @@ export function PsylliumStory({ preview = false }: { preview?: boolean }) {
           У кожного своя робота — пакетик дріжджів поки не відпускаємо.
         </p>
       </section>
+
+      <Invitation locale="uk" invitationCopy={psylliumArticle.invitation} />
 
       <section>
         <h2>Дві пачки, одна назва</h2>
@@ -207,22 +240,6 @@ export function PsylliumStory({ preview = false }: { preview?: boolean }) {
           Про це — у статті <a href={xanthanArticle.path}>«{xanthanArticle.title}»</a>.
         </p>
       </section>
-      <details className={styles.sources}>
-        <summary>Джерела для допитливих</summary>
-        <ul>
-          <li>
-            <a href="https://www.mdpi.com/2304-8158/10/5/954">
-              Дослідження псиліуму й структури безглютенового хліба · Foods,
-              2021
-            </a>
-          </li>
-          <li>
-            <a href="https://www.kingarthurbaking.com/learn/guides/gluten-free">
-              Про структуру й рецепти безглютенової випічки · King Arthur Baking
-            </a>
-          </li>
-        </ul>
-      </details>
     </article>
   );
 }

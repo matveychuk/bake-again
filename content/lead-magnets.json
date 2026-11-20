@@ -209,5 +209,140 @@
       "confirmation": "We’ve received your request.",
       "delivered": "Check your inbox for the crepe recipe and junior cook card."
     }
+  },
+  "varenyky-uk": {
+    "locale": "uk",
+    "recipePath": "/uk/recipes/bezghliutenovi-linyvi-varenyky",
+    "page": {
+      "title": "Ліниві вареники в PDF",
+      "subtitle": "Збережи сім кроків із фото на телефоні. У рецепті є пропорції на три порції та підказки, як заморозити вареники сирими.",
+      "features": [
+        "10 сторінок · для телефона"
+      ],
+      "image": "/images/recipes/lazy-dumplings-real-plate-linen-v1.webp",
+      "imageAlt": "Ліниві вареники на тарілці",
+      "note": "Підпишися, щоб отримати PDF і нові рецепти Bake Again українською."
+    },
+    "recipeInvitation": {
+      "recipeId": "lazy-dumplings",
+      "afterStepId": "shape-dumplings",
+      "title": "Ліниві вареники в PDF",
+      "description": "Збережи сім кроків із фото на телефоні. У рецепті є пропорції на три порції та підказки, як заморозити вареники сирими.",
+      "submit": "Надіслати рецепт у PDF",
+      "note": "Підпишися, щоб отримати PDF і нові рецепти Bake Again українською.",
+      "previews": [
+        {
+          "src": "/images/recipes/lazy-dumplings/pdf-v5/preview-uk.webp",
+          "href": "/images/recipes/lazy-dumplings/pdf-v5/preview-uk.webp",
+          "title": "Формування вареників",
+          "alt": "Сторінка рецепта з фото формування вареників",
+          "description": "10 сторінок · для телефона",
+          "linkLabel": "Збільшити сторінку"
+        }
+      ]
+    },
+    "email": {
+      "title": "Ліниві вареники в PDF",
+      "subject": "Твій PDF-рецепт лінивих вареників",
+      "intro": "Збережи сім кроків із фото на телефоні. У рецепті є пропорції на три порції та підказки, як заморозити вареники сирими.",
+      "links": [
+        {
+          "title": "Завантажити рецепт вареників",
+          "href": "/downloads/Bake-Again-Linyvi-varenyky.pdf"
+        }
+      ],
+      "confirmation": "Запит на рецепт прийнято.",
+      "delivered": "Шукай лист із рецептом лінивих вареників у пошті."
+    }
+  },
+  "varenyky-en": {
+    "locale": "en",
+    "recipePath": "/en/recipes/gluten-free-lazy-dumplings",
+    "page": {
+      "title": "Lazy varenyky recipe PDF",
+      "subtitle": "Keep all seven photo steps on your phone, with quantities for three servings and instructions for freezing the uncooked dumplings.",
+      "features": [
+        "10 pages · for your phone"
+      ],
+      "image": "/images/recipes/lazy-dumplings-real-plate-linen-v1.webp",
+      "imageAlt": "Cheese dumplings on a plate",
+      "note": "Subscribe for the PDF and new gluten-free recipes from Bake Again in English."
+    },
+    "recipeInvitation": {
+      "recipeId": "lazy-dumplings",
+      "afterStepId": "shape-dumplings",
+      "title": "Lazy varenyky recipe PDF",
+      "description": "Keep all seven photo steps on your phone, with quantities for three servings and instructions for freezing the uncooked dumplings.",
+      "submit": "Email me the recipe PDF",
+      "note": "Subscribe for the PDF and new gluten-free recipes from Bake Again in English.",
+      "previews": [
+        {
+          "src": "/images/recipes/lazy-dumplings/pdf-v5/preview-en.webp",
+          "href": "/images/recipes/lazy-dumplings/pdf-v5/preview-en.webp",
+          "title": "Shaping the dumplings",
+          "alt": "Recipe page showing how to shape the dumplings",
+          "description": "10 pages · for your phone",
+          "linkLabel": "Enlarge page"
+        }
+      ]
+    },
+    "email": {
+      "title": "Lazy varenyky recipe PDF",
+      "subject": "Your gluten-free lazy varenyky recipe",
+      "intro": "Keep all seven photo steps on your phone, with quantities for three servings and instructions for freezing the uncooked dumplings.",
+      "links": [
+        {
+          "title": "Download the dumpling recipe",
+          "href": "/downloads/Bake-Again-Gluten-Free-Lazy-Varenyky.pdf"
+        }
+      ],
+      "confirmation": "Your recipe request has been received.",
+      "delivered": "Check your inbox for your lazy varenyky recipe."
+    }
+  },
+  "varenyky-es": {
+    "locale": "es",
+    "recipePath": "/es/recipes/vareniki-perezosos-sin-gluten",
+    "page": {
+      "title": "La receta de váreniki en PDF",
+      "subtitle": "Guarda los siete pasos con fotos en el móvil. Incluye cantidades para tres raciones y cómo congelar los váreniki en crudo.",
+      "features": [
+        "10 páginas · para el móvil"
+      ],
+      "image": "/images/recipes/lazy-dumplings-real-plate-linen-v1.webp",
+      "imageAlt": "Váreniki de queso en un plato",
+      "note": "Suscríbete para recibir el PDF y nuevas recetas sin gluten de Bake Again en español."
+    },
+    "recipeInvitation": {
+      "recipeId": "lazy-dumplings",
+      "afterStepId": "shape-dumplings",
+      "title": "La receta de váreniki en PDF",
+      "description": "Guarda los siete pasos con fotos en el móvil. Incluye cantidades para tres raciones y cómo congelar los váreniki en crudo.",
+      "submit": "Enviarme la receta en PDF",
+      "note": "Suscríbete para recibir el PDF y nuevas recetas sin gluten de Bake Again en español.",
+      "previews": [
+        {
+          "src": "/images/recipes/lazy-dumplings/pdf-v5/preview-es.webp",
+          "href": "/images/recipes/lazy-dumplings/pdf-v5/preview-es.webp",
+          "title": "Cómo darles forma",
+          "alt": "Página de la receta que muestra cómo formar los váreniki",
+          "description": "10 páginas · para el móvil",
+          "linkLabel": "Ampliar página"
+        }
+      ]
+    },
+    "email": {
+      "title": "La receta de váreniki en PDF",
+      "subject": "Tu receta de váreniki perezosos sin gluten",
+      "intro": "Guarda los siete pasos con fotos en el móvil. Incluye cantidades para tres raciones y cómo congelar los váreniki en crudo.",
+      "links": [
+        {
+          "title": "Descargar la receta de váreniki",
+          "href": "/downloads/Bake-Again-Vareniki-perezosos-sin-gluten.pdf"
+        }
+      ],
+      "confirmation": "Hemos recibido tu solicitud.",
+      "delivered": "Busca el correo con tu receta de váreniki."
+    }
   }
 }

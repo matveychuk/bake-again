@@ -440,7 +440,7 @@ export interface Recipe {
   situationIds: string[];
   difficulty: RecipeDifficulty | null;
   baseProvenance: Provenance;
-  evidenceExplanation: LocalizedText;
+  evidenceExplanation?: LocalizedText;
   translationReview: {
     date: string;
     reviewer: 'implementation';

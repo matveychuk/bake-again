@@ -1,4 +1,4 @@
-"""Build a Ukrainian Bake Again recipe PDF from recipe-specific JSON, not crepe constants."""
+"""Build a localized Bake Again recipe PDF from recipe-specific JSON, not crepe constants."""
 from pathlib import Path
 from io import BytesIO
 from html import escape
@@ -22,6 +22,52 @@ ROOT = Path(__file__).resolve().parents[2]
 TEMPLATE = ROOT / 'templates/recipe-pdf'
 
 
+LABELS = {
+    'uk': {
+        'badge': 'Без глютену',
+        'tip': 'ПОРАДА',
+        'checkpoint': 'ОРІЄНТИР',
+        'flour': 'Борошно',
+        'link': 'Рецепти на Bake Again',
+        'ingredients': 'Інгредієнти',
+        'first': 'Що потрібно',
+        'continued': 'Інгредієнти далі',
+        'quantity': 'Кількість',
+        'ingredient': 'Інгредієнт',
+        'method': 'Приготування',
+        'step': 'Крок',
+    },
+    'en': {
+        'badge': 'Gluten-free',
+        'tip': 'TIP',
+        'checkpoint': 'LOOK FOR',
+        'flour': 'Flour mix',
+        'link': 'Recipe on Bake Again',
+        'ingredients': 'Ingredients',
+        'first': 'What you need',
+        'continued': 'More ingredients',
+        'quantity': 'Amount',
+        'ingredient': 'Ingredient',
+        'method': 'Method',
+        'step': 'Step',
+    },
+    'es': {
+        'badge': 'Sin gluten',
+        'tip': 'CONSEJO',
+        'checkpoint': 'FÍJATE',
+        'flour': 'Mezcla de harina',
+        'link': 'Receta en Bake Again',
+        'ingredients': 'Ingredientes',
+        'first': 'Qué necesitas',
+        'continued': 'Más ingredientes',
+        'quantity': 'Cantidad',
+        'ingredient': 'Ingrediente',
+        'method': 'Preparación',
+        'step': 'Paso',
+    },
+}
+
+
 def markup(value):
     return escape(str(value)).replace('&lt;br/&gt;', '<br/>').replace('\n', '<br/>')
 
@@ -34,8 +80,8 @@ def required_text(value, field):
 def validate(data, base):
     for name in ['title', 'canonicalSource', 'recipeUrl', 'measurementMode']:
         required_text(data.get(name), name)
-    if data.get('locale') != 'uk':
-        raise ValueError('Поточний генератор має українські лейбли; локалізуйте їх перед іншою мовою.')
+    if data.get('locale') not in LABELS:
+        raise ValueError('Unsupported PDF language.')
     if not data['recipeUrl'].startswith('https://'):
         raise ValueError('recipeUrl має бути точним HTTPS-посиланням рецепта.')
     if data['measurementMode'] not in ['author-spoons', 'grams', 'mixed']:
@@ -82,6 +128,7 @@ def validate(data, base):
 class RecipePDF:
     def __init__(self, data, base, work, output):
         self.data, self.base, self.work, self.output = data, base, work, output
+        self.labels = LABELS[data['locale']]
         self.layout = json.loads((TEMPLATE / 'layout.json').read_text())
         self.types = self.layout['type']
         self.media = self.layout['media']
@@ -93,9 +140,12 @@ class RecipePDF:
         self.cw = self.w - 2 * self.m
         self.bottom = self.h - self.layout['page']['contentBottomInsetPt']
         self.boxes = []
+        fonts = dict(self.layout['fonts'])
+        if data['locale'] in ('en', 'es'):
+            fonts.update(displayItalic='Literata-Latin-Italic.ttf', guidanceLabel='Manrope-Latin-Bold.ttf')
         for name, key in [('Body', 'body'), ('BodyBold', 'bodyStrong'), ('LabelBold', 'guidanceLabel'),
                           ('Display', 'display'), ('DisplayItalic', 'displayItalic'), ('Brand', 'brand')]:
-            pdfmetrics.registerFont(TTFont(name, str(TEMPLATE / 'fonts' / self.layout['fonts'][key])))
+            pdfmetrics.registerFont(TTFont(name, str(TEMPLATE / 'fonts' / fonts[key])))
         names = [pdfmetrics.getFont(x).face.name for x in ['Body', 'BodyBold', 'LabelBold']]
         if len(set(names)) != 3:
             raise ValueError('Regular / Semibold / LabelBold повинні мати різні внутрішні імена.')
@@ -108,7 +158,7 @@ class RecipePDF:
         self.c.setTitle(data['title'] + ' | Bake Again')
         self.c.setAuthor('Bake Again')
         self.c.setCreator('Bake Again recipe PDF template 1.0')
-        self.c._doc.Catalog.Lang = PDFString('uk-UA')
+        self.c._doc.Catalog.Lang = PDFString({'uk': 'uk-UA', 'en': 'en', 'es': 'es'}[data['locale']])
 
     def color(self, name):
         match = re.search('--' + name + r':\s*(#[0-9a-f]+)', self.tokens)
@@ -148,7 +198,7 @@ class RecipePDF:
         self.p('Bake Again.', self.m, 23, 28, 'Brand', width=190)
         if self.data['cover'].get('glutenFree', True):
             self.rect(self.w-self.m-107, self.m, 107, 28, 'color-action-primary', 4)
-            self.p('Без глютену', self.m+6, 12, 16, 'BodyBold', 'color-text-on-accent', x=self.w-self.m-95, width=83)
+            self.p(self.labels['badge'], self.m+6, 12, 16, 'BodyBold', 'color-text-on-accent', x=self.w-self.m-95, width=83)
         self.line(self.h-48)
         self.p(markup(section), self.h-40, 10, 14, color='color-text-secondary', width=self.cw-48)
         self.c.setFillColor(self.color('color-text-secondary'))
@@ -190,7 +240,7 @@ class RecipePDF:
         return top + height
 
     def guidance_markup(self, text, kind):
-        label = 'ПОРАДА' if kind == 'tip' else 'ОРІЄНТИР'
+        label = self.labels['tip'] if kind == 'tip' else self.labels['checkpoint']
         color = self.color('color-action-primary-strong' if kind == 'tip' else 'color-text-primary').hexval()
         return f'<font name="LabelBold" size="{self.types["guidanceLabelPt"]}" color="{color}">{label}</font>&nbsp;&nbsp;{markup(text)}'
 
@@ -240,11 +290,11 @@ class RecipePDF:
             self.c.drawImage(ImageReader(image), self.m, self.h-pack_top-ih, iw, ih, mask='auto')
             self.boxes.append({'page':1, 'kind':'image', 'source':flour['image'], 'alt':flour['alt'],
                                'x':self.m, 'y':pack_top, 'w':iw, 'h':ih})
-            self.p('Борошно', pack_top+16, 14, 20, color='color-text-secondary', x=self.m+82, width=self.cw-82)
+            self.p(self.labels['flour'], pack_top+16, 14, 20, color='color-text-secondary', x=self.m+82, width=self.cw-82)
             end = self.p(markup(flour['name']), pack_top+44, 16, 24, 'BodyBold', x=self.m+82, width=self.cw-82)
             if end > link_top-8:
                 raise ValueError('Назва суміші в блоці упаковки не вміщується; скоротіть повтори.')
-        end = self.p('Рецепти на Bake Again', link_top, 14, 20, 'BodyBold', 'color-action-primary-strong')
+        end = self.p(self.labels['link'], link_top, 14, 20, 'BodyBold', 'color-action-primary-strong')
         self.c.linkURL(self.data['recipeUrl'], (self.m, self.h-end, self.w-self.m, self.h-link_top), relative=0, thickness=0)
         self.c.showPage()
 
@@ -280,11 +330,11 @@ class RecipePDF:
 
     def ingredients(self):
         for i, entries in enumerate(self.ingredient_pages):
-            self.base_page('Інгредієнти')
-            self.p('Що потрібно' if i == 0 else 'Інгредієнти далі', 88, 32, 40, 'Display')
+            self.base_page(self.labels['ingredients'])
+            self.p(self.labels['first'] if i == 0 else self.labels['continued'], 88, 32, 40, 'Display')
             self.rect(self.m, 152, self.cw, 32, 'color-background-panel-subtle')
-            self.p('Кількість', 160, 12, 16, 'BodyBold', x=self.m+12, width=112)
-            self.p('Інгредієнт', 160, 12, 16, 'BodyBold', x=self.m+148, width=self.cw-160)
+            self.p(self.labels['quantity'], 160, 12, 16, 'BodyBold', x=self.m+12, width=112)
+            self.p(self.labels['ingredient'], 160, 12, 16, 'BodyBold', x=self.m+148, width=self.cw-160)
             top = 184
             for kind, item, height in entries:
                 if kind == 'section':
@@ -304,8 +354,8 @@ class RecipePDF:
 
     def steps(self):
         for i, step in enumerate(self.data['steps'], 1):
-            self.base_page('Приготування')
-            self.p(f'Крок {i} / {len(self.data["steps"])}', 80, 12, 20, 'BodyBold', 'color-action-primary-strong', width=96)
+            self.base_page(self.labels['method'])
+            self.p(f'{self.labels["step"]} {i} / {len(self.data["steps"])}', 80, 12, 20, 'BodyBold', 'color-action-primary-strong', width=96)
             if step.get('time'):
                 self.p(markup(step['time']), 80, 16, 20, 'BodyBold', 'color-action-primary-strong', x=self.m+112, width=self.cw-112)
             end = self.p(markup(step['title']), 108, self.types['stepTitlePt'], self.types['stepTitleLeadingPt'], 'Display')

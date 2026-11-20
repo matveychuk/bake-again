@@ -582,35 +582,13 @@ export const stepHelpCatalog: Record<
     ),
   },
   'lazy-dumplings': {
-    'mix-wet': skip('Просте змішування доступним інструментом.'),
-    'add-dry': help(
-      q(
-        'body',
-        'Чи додавати ще борошно, якщо тісто для вареників липке?',
-        'Should I add more flour if the dumpling dough is sticky?',
-        '¿Añado más harina si la masa de los ñoquis de requesón está pegajosa?',
-      ),
-    ),
-    rest: skip('Час і спосіб відпочинку зазначені.'),
-    'shape-log': help(
-      q(
-        'body',
-        'Як використовувати борошно під час формування вареників?',
-        'How should I use flour when shaping the dumplings?',
-        '¿Cómo uso la harina al formar los ñoquis de requesón?',
-      ),
-    ),
-    'shape-dumplings': skip(
-      'Нарізання й обкачування прямо описані; заморожування поза головною дією.',
-    ),
-    'cook-dumplings': help(
-      q(
-        'body',
-        'Коли діставати свіжі й заморожені вареники з води?',
-        'When should I lift fresh and frozen dumplings out of the water?',
-        '¿Cuándo retiro del agua los váreniki frescos y congelados?',
-      ),
-    ),
+    'mix-dough': help(q('tip', 'Що робити, якщо сир вологий?', 'What if my curd cheese is moist?', '¿Qué hago si el queso está húmedo?')),
+    'rest-and-roll': help(q('body', 'Як розкачати липке тісто?', 'How do I roll the sticky dough?', '¿Cómo formo un cordón si la masa está pegajosa?')),
+    'shape-dumplings': skip('Розмір і формування описані в кроці.'),
+    'cook-dumplings': help(q('checkpoint', 'Як зрозуміти, що вареники готові?', 'How can I tell when the dumplings are ready?', '¿Cómo sé cuándo están listos los váreniki?')),
+    serve: skip('Подача з маслом прямо описана.'),
+    'freeze-raw': help(q('body', 'Як заморозити вареники окремо?', 'How do I keep the dumplings separate when freezing?', '¿Cómo congelo los váreniki sin que se peguen?')),
+    'cook-frozen': help(q('body', 'Як варити заморожені вареники?', 'How do I cook frozen dumplings?', '¿Cómo cuezo los váreniki congelados?')),
   },
   'prune-cake': {
     'prepare-pan': skip('Підготовка форми і духовки однозначна.'),

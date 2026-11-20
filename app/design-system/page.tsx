@@ -1199,25 +1199,23 @@ export default function DesignSystemPage() {
               <div className={styles.componentLabel}>
                 <strong>Subscription after a recipe step</strong>
                 <span>
-                  Junior-cook card after step two; inert preview, no email.
+                  Localized invitations for crepes and lazy varenyky at their configured recipe steps.
                 </span>
               </div>
-              {(['light', 'dark'] as const).flatMap((theme) => (['uk', 'es', 'en'] as const).map((locale) => (
-                <div key={theme + locale} data-theme={theme} lang={locale}>
-                  <RecipePdfInvitation
-                    id={`recipe-step-card-${theme}-${locale}`}
-                    invitation={getRecipeInvitation('crepes', locale)!}
-                    action={
-                      <NewsletterForm
-                        preview
-                        locale={locale}
-                        magnetId={getRecipeInvitation('crepes', locale)!.magnetId}
-                        placement="recipe"
+              {(['uk', 'es', 'en'] as const).flatMap((locale) =>
+                ['crepes', 'lazy-dumplings'].flatMap((recipeId) => {
+                  const invitation = getRecipeInvitation(recipeId, locale)!;
+                  return (['light', 'dark'] as const).map((theme) => (
+                    <div key={recipeId + theme + locale} data-theme={theme} lang={locale}>
+                      <RecipePdfInvitation
+                        id={`recipe-step-${recipeId === 'crepes' ? 'card' : recipeId}-${theme}-${locale}`}
+                        invitation={invitation}
+                        action={<NewsletterForm preview locale={locale} magnetId={invitation.magnetId} placement="recipe" />}
                       />
-                    }
-                  />
-                </div>
-              )))}
+                    </div>
+                  ));
+                }),
+              )}
             </div>
 
             <div className={styles.componentBlock} id="recipe-downloads">

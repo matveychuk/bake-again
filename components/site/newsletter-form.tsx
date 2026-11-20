@@ -17,7 +17,7 @@ import {
 } from '@/lib/newsletter/inline-signup';
 import { loadTurnstile, type Turnstile } from '@/lib/security/turnstile-client';
 import { trackEvent } from '@/lib/analytics/umami';
-import { getRecipeInvitation } from '@/content/lead-magnets';
+import { leadMagnetRegistry } from '@/content/lead-magnets';
 import type { MagnetId } from '@/lib/newsletter/magnets';
 import fieldStyles from '@/components/account/account.module.css';
 import styles from './newsletter-form.module.css';
@@ -183,13 +183,12 @@ export function NewsletterForm({
   const formId = useId();
   const kind: NewsletterScenario = magnetId ? 'pdf' : scenario;
   const copy = messages[locale];
-  const invitation = getRecipeInvitation('crepes', locale);
+  const product = magnetId ? leadMagnetRegistry[magnetId] : null;
+  const invitation = product && 'recipeInvitation' in product ? product.recipeInvitation : null;
   const campaignCopy = campaign === 'panettone' ? panettoneCampaign : null;
   const submitLabel =
     campaignCopy?.submit ??
-    (invitation && magnetId === invitation.magnetId
-      ? invitation.submit
-      : copy.submit[kind]);
+    invitation?.submit ?? copy.submit[kind];
   const account = useAccount();
   const accountEmail =
     previewEmail ?? (account.identity ? account.email : null);
@@ -381,7 +380,7 @@ export function NewsletterForm({
             <p>{campaignCopy.thanks.replace('Дякую за підписку! ', '')}</p>
           ) : (
             <>
-              <p>{kind === 'pdf' ? copy.donePdf(sentTo) : copy.doneBody}</p>
+              <p>{product ? product.email.delivered : kind === 'pdf' ? copy.donePdf(sentTo) : copy.doneBody}</p>
               <p className={styles.small}>{copy.doneHint}</p>
             </>
           )}
@@ -413,7 +412,7 @@ export function NewsletterForm({
       aria-label={
         campaignCopy
           ? campaignCopy.eyebrow
-          : invitation && magnetId === invitation.magnetId
+          : invitation
             ? invitation.title
             : copy.label[kind]
       }

@@ -233,6 +233,7 @@
 }
 
 /* The invitation already sits inside the article reading gutter. */
+.story > [data-newsletter-invitation],
 .article > [data-product-banner] > section {
   width: 100%;
   margin: 0;

@@ -297,7 +297,7 @@ three evidence states, an unpublished record and a cream without flour or a baki
 
 A registry-owned invitation may follow a stable canonical step without changing
 instruction numbering or structured recipe data. Crepes offers the existing
-junior-cook card after step two in Ukrainian. Reuse EditorialInvitation's
+junior-cook card and recipe after step two. Lazy varenyky offers its ten-page photo recipe after shaping (step three). Each invitation, preview and delivery link uses the reader’s language. Reuse EditorialInvitation's
 `recipe-step` variant and NewsletterForm; keep the next cooking step visible in
 normal flow, with no modal or gate. Do not add it to print or Cook mode.
 

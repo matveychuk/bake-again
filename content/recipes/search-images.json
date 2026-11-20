@@ -195,8 +195,13 @@
     ]
   },
   "lazy-dumplings": {
-    "source": "/images/recipes/lazy-dumplings-card-v1.webp",
+    "source": "/images/recipes/lazy-dumplings-real-plate-linen-v1.webp",
     "images": [
+      {
+        "url": "/images/seo/lazy-dumplings-1x1.webp",
+        "width": 1080,
+        "height": 1080
+      },
       {
         "url": "/images/seo/lazy-dumplings-4x3.webp",
         "width": 1200,
