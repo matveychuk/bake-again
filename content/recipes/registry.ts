@@ -6,6 +6,7 @@ import { appleFrittersRecipe } from './apple-fritters.recipe.ts';
 import { appleMeringuePieRecipe } from './apple-meringue-pie.recipe.ts';
 import { bananaBreadRecipe } from './banana-bread.recipe.ts';
 import { bananaFrittersRecipe } from './banana-fritters.recipe.ts';
+import { buttermilkPancakesRecipe } from './buttermilk-pancakes.recipe.ts';
 import { carrotCakeRecipe } from './carrot-cake.recipe.ts';
 import { cinnamonRollsRecipe } from './cinnamon-rolls.recipe.ts';
 import { cottageCheeseWafflesRecipe } from './cottage-cheese-waffles.recipe.ts';
@@ -67,6 +68,7 @@ export const recipes: readonly Recipe[] = [
   egglessVanillaCustardRecipe,
   vanillaButtercreamRecipe,
   appleCottageCheeseCookiesRecipe,
+  buttermilkPancakesRecipe,
 ];
 
 export function getRecipe(recipeId: string): Recipe | null {

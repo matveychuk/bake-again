@@ -1,23 +1,33 @@
 import Image from 'next/image';
-import { panettoneCampaign as copy } from '@/content/articles/psyllium';
+import { pancakeCampaign } from '@/content/articles/pancake-invitation';
+import { panettoneCampaign } from '@/content/articles/psyllium';
 import { EditorialInvitation } from './editorial-invitation';
 import { NewsletterForm } from './newsletter-form';
 
-export function PanettoneInvitation({
-  preview = false,
-  previewSuccess = false,
-  id = 'panettone',
-  siteKey,
-}: {
+type WaitlistInvitationProps = {
   preview?: boolean;
   previewSuccess?: boolean;
   id?: string;
   siteKey?: string;
-}) {
+};
+
+export function PanettoneInvitation(props: WaitlistInvitationProps) {
+  return <RecipeWaitlistInvitation {...props} campaign="panettone" />;
+}
+
+export function RecipeWaitlistInvitation({
+  campaign,
+  preview = false,
+  previewSuccess = false,
+  id = campaign,
+  siteKey,
+}: WaitlistInvitationProps & { campaign: 'panettone' | 'pancakes' }) {
+  const copy = campaign === 'pancakes' ? pancakeCampaign : panettoneCampaign;
   return (
     <div id={id}>
       <EditorialInvitation
         variant="campaign"
+        data-image-format={campaign === 'pancakes' ? 'landscape' : undefined}
         data-preview={preview || undefined}
         lang="uk"
         titleId={`${id}-title`}
@@ -28,8 +38,8 @@ export function PanettoneInvitation({
           <Image
             src={copy.image}
             alt={copy.imageAlt}
-            width={1080}
-            height={1350}
+            width={campaign === 'pancakes' ? 1536 : 1080}
+            height={campaign === 'pancakes' ? 1024 : 1350}
             priority
             sizes="(max-width: 620px) calc(100vw - 72px), 288px"
           />
@@ -37,7 +47,7 @@ export function PanettoneInvitation({
         action={
           <NewsletterForm
             locale="uk"
-            campaign="panettone"
+            campaign={campaign}
             preview={preview}
             previewSuccess={previewSuccess}
             recipeSiteKey={siteKey}

@@ -1,4 +1,5 @@
 'use client';
+import { pancakeCampaign } from '@/content/articles/pancake-invitation';
 import { panettoneCampaign } from '@/content/articles/psyllium';
 import { trackMetaLead } from '@/lib/analytics/meta';
 
@@ -162,7 +163,7 @@ export function NewsletterForm({
   defaultEmail,
 }: {
   signup?: NewsletterSignup;
-  campaign?: 'panettone';
+  campaign?: 'panettone' | 'pancakes';
   locale?: AppLocale;
   magnetId?: MagnetId;
   /** Ignored with a magnet, which always promises its PDF. */
@@ -185,7 +186,9 @@ export function NewsletterForm({
   const copy = messages[locale];
   const product = magnetId ? leadMagnetRegistry[magnetId] : null;
   const invitation = product && 'recipeInvitation' in product ? product.recipeInvitation : null;
-  const campaignCopy = campaign === 'panettone' ? panettoneCampaign : null;
+  const campaignCopy = campaign === 'panettone' ? panettoneCampaign : campaign === 'pancakes' ? pancakeCampaign : null;
+  const campaignEndpoint = campaign ? `/api/newsletter/${campaign}` : null;
+  const campaignEvent = campaign === 'pancakes' ? 'pancakes_signup' : 'panettone_signup';
   const submitLabel =
     campaignCopy?.submit ??
     invitation?.submit ?? copy.submit[kind];
@@ -205,7 +208,7 @@ export function NewsletterForm({
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
   const endpoint = campaign
     ? recipeSiteKey
-      ? '/api/newsletter/panettone'
+      ? campaignEndpoint
       : null
     : magnetId
       ? recipeSiteKey
@@ -237,7 +240,7 @@ export function NewsletterForm({
         widget = api.render(challenge.current, {
           sitekey: magnetId || campaign ? recipeSiteKey : brevoSiteKeys[locale],
           ...(magnetId || campaign
-            ? { action: campaign ? 'panettone_signup' : 'recipe_request' }
+            ? { action: campaign ? campaignEvent : 'recipe_request' }
             : {}),
           language: locale,
           size: 'flexible',
@@ -270,6 +273,7 @@ export function NewsletterForm({
     locale,
     magnetId,
     campaign,
+    campaignEvent,
     recipeSiteKey,
   ]);
 
@@ -343,7 +347,7 @@ export function NewsletterForm({
       onSent?.();
       trackEvent(
         campaign
-          ? 'panettone_signup'
+          ? campaignEvent
           : magnetId
             ? 'lead_magnet_submit'
             : 'newsletter_submit',
@@ -352,7 +356,7 @@ export function NewsletterForm({
       trackMetaLead({
         magnetId,
         scenario,
-        placement: campaign ? 'top-panettone' : placement,
+        placement: campaign ? `top-${campaign}` : placement,
       });
     } catch {
       setStatus('error');
@@ -402,7 +406,7 @@ export function NewsletterForm({
       method="post"
       action={
         campaign
-          ? '/api/newsletter/panettone'
+          ? campaignEndpoint ?? undefined
           : magnetId
             ? '/api/newsletter/recipe'
             : signup?.url

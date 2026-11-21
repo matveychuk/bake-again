@@ -1,5 +1,5 @@
 import { CookieConsentPanel } from '@/components/site/cookie-consent';
-import { PanettoneInvitation } from '@/components/site/panettone-invitation';
+import { PanettoneInvitation, RecipeWaitlistInvitation } from '@/components/site/panettone-invitation';
 import { RecipePdfInvitation } from '@/components/recipe/recipe-pdf-invitation';
 import { PsylliumStory } from '@/app/_components/articles/articles';
 import { BlogCards } from '@/app/_components/articles/blog';
@@ -447,6 +447,13 @@ export default function DesignSystemPage() {
                 preview
                 previewSuccess
                 id="panettone-success"
+              />
+              <RecipeWaitlistInvitation campaign="pancakes" preview />
+              <RecipeWaitlistInvitation
+                campaign="pancakes"
+                preview
+                previewSuccess
+                id="pancakes-success"
               />
               <PsylliumStory preview />
             </div>

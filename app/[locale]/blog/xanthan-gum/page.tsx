@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { ArticleHeader, ArticlePanettoneInvitation } from '@/app/_components/articles/articles';
+import { ArticleHeader, ArticlePancakesInvitation } from '@/app/_components/articles/articles';
 import styles from '@/app/_components/articles/articles.module.css';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
@@ -34,7 +34,7 @@ export default async function XanthanRoute({ params }: ArticleProps) {
     <main>
       <SiteHeader locale="uk" pathname={article.path} />
       <div className={styles.article}>
-        <ArticlePanettoneInvitation />
+        <ArticlePancakesInvitation />
         <article className={styles.story}>
           <ArticleHeader title={article.title} introduction={article.introduction} />
           <figure className={styles.figure}>

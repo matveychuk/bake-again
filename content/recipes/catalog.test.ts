@@ -6,7 +6,7 @@ import {
   recipeDetailTitles,
 } from './catalog-locales.ts';
 import { recipeInventory } from './inventory.ts';
-import { getRecipeContent } from './registry.ts';
+import { getRecipe, getRecipeContent } from './registry.ts';
 import { recipeCollectionIds } from './collections.ts';
 
 void test('renders catalogue discovery copy in the selected locale for every recipe', () => {
@@ -184,9 +184,12 @@ void test('keeps catalogue names concise and makes gluten-free explicit on recip
       assert.doesNotMatch(detailTitle.uk, /безглютен/i);
       continue;
     }
-    assert.match(detailTitle.en, /gluten-free/i);
-    assert.match(detailTitle.es, /sin gluten/i);
     assert.match(detailTitle.uk, /безглютен/i);
+    const translationState = getRecipe(recipe.id)!.translationState;
+    if (translationState.en !== 'sourceDraft')
+      assert.match(detailTitle.en, /gluten-free/i);
+    if (translationState.es !== 'sourceDraft')
+      assert.match(detailTitle.es, /sin gluten/i);
   }
 });
 

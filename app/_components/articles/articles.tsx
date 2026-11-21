@@ -6,13 +6,13 @@ import {
   psylliumArticle,
   panettoneIsActive,
 } from '@/content/articles/psyllium';
-import { PanettoneInvitation } from '@/components/site/panettone-invitation';
+import { PanettoneInvitation, RecipeWaitlistInvitation } from '@/components/site/panettone-invitation';
 import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
 import { NewsletterSignup } from '@/components/site/newsletter-signup';
 import { ProductBannerInvitation } from '@/components/site/product-banner-invitation';
 import { activeProductBanner } from '@/content/commerce/product-banner';
 import { deliveryBindings } from '@/lib/newsletter/delivery-runtime';
-import { panettoneConfigured } from '@/lib/newsletter/panettone';
+import { pancakesConfigured, panettoneConfigured } from '@/lib/newsletter/panettone';
 import styles from './articles.module.css';
 
 export function ArticleHeader({
@@ -250,6 +250,20 @@ export async function ArticlePanettoneInvitation() {
   return (
     <PanettoneInvitation
       preview={process.env.NODE_ENV === 'development' && !panettoneConfigured(bindings)}
+      siteKey={bindings.TURNSTILE_SITE_KEY as string | undefined}
+    />
+  );
+}
+
+export async function ArticlePancakesInvitation() {
+  const bindings = await deliveryBindings();
+  const configured = pancakesConfigured(bindings);
+  const preview = process.env.NODE_ENV === 'development' && !configured;
+  if (!configured && !preview) return null;
+  return (
+    <RecipeWaitlistInvitation
+      campaign="pancakes"
+      preview={preview}
       siteKey={bindings.TURNSTILE_SITE_KEY as string | undefined}
     />
   );

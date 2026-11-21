@@ -369,6 +369,12 @@
   aspect-ratio: 4 / 5;
   object-fit: cover;
 }
+.campaign[data-image-format='landscape'] .image {
+  align-self: center;
+}
+.campaign[data-image-format='landscape'] .image img {
+  aspect-ratio: auto;
+}
 .campaign .copy h2 {
   font-size: var(--font-size-drawer-title);
   line-height: calc(var(--line-height-tight) * 1.15);

@@ -170,6 +170,7 @@ void test('one product record plus reviewed provider mapping reaches all registr
       await mkdir(join(root, dir), { recursive: true });
     const files = [
       'content/articles/psyllium.ts',
+      'content/articles/pancake-invitation.ts',
       'content/lead-magnets.ts',
       'content/lead-magnets.validation.ts',
       ...[

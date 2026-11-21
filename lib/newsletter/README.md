@@ -592,3 +592,22 @@ confirmed that the Instagram comment-to-Direct retest from her personal profile
 worked. The Facebook trigger was then updated with the same three full words
 and enabled. The active status and keywords persisted after reload. A live
 Facebook comment and Messenger delivery still require verification.
+
+## Очікування рецепта панкейків — 2026-11-21
+
+`/uk/blog/xanthan-gum#pancakes` збирає підписки через форму кампанії та
+`POST /api/newsletter/pancakes`. Реєстрація додає українського підписника до
+загального й мовного списків і до окремого **«Bake Again — Панкейки — рецепт на пошту»**
+(Brevo #19, перевірено в інтерфейсі 21.11). Worker читає `BREVO_PANCAKES_LIST_ID`.
+Цей запит реєструє підписку. Лист із рецептом готується окремо для списку #19,
+коли опубліковано й перевірено сторінку
+`/uk/recipes/bezghliutenovi-pankeiky-na-molotsi`.
+
+Для звернень із Instagram використовуються `ig-profile-pancakes` і
+`ig-story-pancakes`. У Brevo зберігається `SIGNUP_PAGE=blog-xanthan-gum` і
+`SIGNUP_POSITION=top-pancakes`. Подія Umami `pancakes_signup` дозволена лише
+для цієї статті й не містить полів форми. Панетоне продовжує використовувати
+власний список на сторінці про псиліум.
+
+Форму й підключення перевірено локально та на тестовому адаптері. Фактичний
+запис підписника через чинний сайт і доставка листа перевіряються після релізу.

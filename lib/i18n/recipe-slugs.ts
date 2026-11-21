@@ -7,6 +7,11 @@ export const recipeSlugs: Record<string, Record<AppLocale, string>> = {
     en: 'apple-cottage-cheese-cookies',
     es: 'apple-cottage-cheese-cookies',
   },
+  'buttermilk-pancakes': {
+    uk: 'bezghliutenovi-pankeiky-na-molotsi',
+    en: 'buttermilk-pancakes',
+    es: 'buttermilk-pancakes',
+  },
   'celebration-sponge-cake': {
     uk: 'bezghliutenovyi-sviatkovyi-tort',
     en: 'gluten-free-celebration-cake',

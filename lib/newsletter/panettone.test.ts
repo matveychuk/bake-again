@@ -6,6 +6,9 @@ import { panettoneIsActive } from '../../content/articles/psyllium.ts';
 import { deliveryStore, type DeliveryDatabase } from './delivery-store.ts';
 import {
   createPanettoneService,
+  createPancakesService,
+  pancakesListId,
+  parsePancakesRequest,
   panettoneListId,
   parsePanettoneRequest,
 } from './panettone.ts';
@@ -109,6 +112,7 @@ function fixture() {
     setFail(value: boolean) {
       fail = value;
     },
+    subscribePancakes: createPancakesService(deliveryStore(adapter), api, 19),
     subscribe: createPanettoneService(
       deliveryStore(adapter),
       api,
@@ -243,4 +247,36 @@ void test('analytics admits the two campaign articles and omits form and query d
     ),
     true,
   );
+});
+
+void test('pancake waitlist records only its own signup and uses the verified list', async () => {
+  assert.equal(pancakesListId({ BREVO_PANCAKES_LIST_ID: '19' }), 19);
+  for (const id of ['', '3', '4', '13', '18'])
+    assert.equal(pancakesListId({ BREVO_PANCAKES_LIST_ID: id }), null);
+  const input = {
+    email: 'reader@example.com',
+    token: 'challenge',
+    consent: true,
+    articlePath: '/uk/blog/xanthan-gum',
+    source: 'ig-story-pancakes',
+  };
+  assert.throws(() => parsePancakesRequest({ ...input, articlePath: '/uk/blog/psyllium' }));
+  assert.equal(parsePancakesRequest({ ...input, source: 'reader@example.com' }).source, 'direct');
+
+  const f = fixture();
+  const signup = parsePancakesRequest(input);
+  await f.subscribePancakes(signup.email, signup.source, 'network');
+  await f.subscribePancakes(signup.email, signup.source, 'network');
+  assert.deepEqual(f.requests, [{
+    email: 'reader@example.com',
+    listIds: [3, 4, 19],
+    attributes: {
+      SOURCE: 'ig-story-pancakes',
+      SIGNUP_PAGE: 'blog-xanthan-gum',
+      SIGNUP_POSITION: 'top-pancakes',
+    },
+    updateEnabled: true,
+  }]);
+  assert.equal(f.db.prepare('select magnet from lead_magnet_requests').get()?.magnet, 'pancakes');
+  f.db.close();
 });

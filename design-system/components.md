@@ -1305,3 +1305,14 @@ The envelope shares the campaign copy's left edge and is vertically centered on 
 first heading line; the explanatory paragraph spans both grid columns below it.
 Other newsletter confirmation cards retain their existing layout. Design Lab
 `#panettone-success` uses `previewSuccess` with `preview`, never a provider request.
+
+### Article recipe waitlist
+
+Use the existing editorial campaign invitation with a food photograph, labelled
+email field, a recipe-specific action, explicit newsletter consent and an inline
+confirmation. The pancakes invitation in the xanthan article promises the link
+after publication. Design Lab shows the form and the confirmation. The psyllium
+article uses the Panettone invitation with its own date and signup list.
+
+The pancake invitation uses the same landscape photograph as the draft recipe.
+The campaign's landscape option displays the complete image at its intrinsic aspect ratio.

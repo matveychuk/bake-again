@@ -1,5 +1,10 @@
 # Design system changelog
 
+## 2026-11-21 · Recipe waitlist in the xanthan article
+
+- Reuse the editorial campaign invitation for a recipe link sent after publication.
+  Its landscape format displays the full pancake photograph. Design Lab shows the Pancakes form and its confirmation alongside Panettone.
+
 ## 2026-11-19 · Localized lazy varenyky recipe PDF
 
 The existing recipe-step invitation supports a single localized photo recipe. Design Lab shows all three editions. The mobile PDF template includes English and Spanish labels and Latin italic and bold glyphs.

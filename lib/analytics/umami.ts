@@ -1,4 +1,5 @@
 import { isLeadMagnetId, leadMagnetPath, leadMagnetRegistry } from '../../content/lead-magnets.ts';
+import { pancakeCampaign } from '../../content/articles/pancake-invitation.ts';
 import { panettoneSignupPage } from '../../content/articles/psyllium.ts';
 import { videoMilestones, videoPlayers, videoStartModes, type VideoMilestone, type VideoPlayer, type VideoStartMode } from '../lessons/video-progress.ts';
 import { lessonVideoErrorCodes, type LessonVideoErrorCode } from '../lessons/video-diagnostics.ts';
@@ -54,6 +55,7 @@ export const analyticsEvents = [
   'lead_magnet_submit',
   'newsletter_submit',
   'panettone_signup',
+  'pancakes_signup',
   'product_banner_click',
   'cookie_consent_accept',
   'cookie_consent_decline',
@@ -333,6 +335,10 @@ export function sanitizeAnalyticsPayload(
   }
   if (payload.name === 'panettone_signup') {
     if (!panettoneSignupPage(url.pathname)) return false;
+    for (const key of Object.keys(data)) delete data[key as keyof EventData];
+  }
+  if (payload.name === 'pancakes_signup') {
+    if (url.pathname !== pancakeCampaign.articlePath) return false;
     for (const key of Object.keys(data)) delete data[key as keyof EventData];
   }
   if (payload.name === 'newsletter_submit') {
