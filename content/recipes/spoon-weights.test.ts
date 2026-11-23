@@ -76,6 +76,14 @@ void test('keeps managed dry ingredients gram-first across every recipe', () => 
         'g',
         `${recipe.overview.flour}: ${ingredient.name} must use grams as base`,
       );
+      // A single spoon equivalent must apply to every option on the line.
+      if (
+        ingredient.choose === 1 &&
+        ingredient.options?.some((option) => !usesSpoonWeightTable(option.name))
+      ) {
+        assert.equal(ingredient.quantity.equivalent, undefined);
+        continue;
+      }
       assert(
         ingredient.quantity.equivalent?.unit === 'tsp' ||
           ingredient.quantity.equivalent?.unit === 'tbsp',

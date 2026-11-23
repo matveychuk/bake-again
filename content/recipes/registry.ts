@@ -11,7 +11,7 @@ import { carrotCakeRecipe } from './carrot-cake.recipe.ts';
 import { cinnamonRollsRecipe } from './cinnamon-rolls.recipe.ts';
 import { cottageCheeseWafflesRecipe } from './cottage-cheese-waffles.recipe.ts';
 import { crepesRecipe } from './crepes.recipe.ts';
-import { crinkleCookiesRecipe, crinkleCookiesUkrainianRecipe } from './crinkle-cookies.recipe.ts';
+import { crinkleCookiesRecipe } from './crinkle-cookies.recipe.ts';
 import {
   egglessVanillaCustardRecipe,
   mascarponeWhippedCreamRecipe,
@@ -71,9 +71,7 @@ export const recipes: readonly Recipe[] = [
   buttermilkPancakesRecipe,
 ];
 
-export function getRecipe(recipeId: string, locale?: AppLocale): Recipe | null {
-  if (locale === 'uk' && recipeId === crinkleCookiesUkrainianRecipe.id)
-    return crinkleCookiesUkrainianRecipe;
+export function getRecipe(recipeId: string, _locale?: AppLocale): Recipe | null {
   return recipes.find((recipe) => recipe.id === recipeId) ?? null;
 }
 
@@ -184,7 +182,13 @@ export function projectRecipeContent(
       title: section.title[locale],
       ingredients: section.lines.map((line) => ({
         id: line.id,
-        name: line.options[0].name[locale],
+        name:
+          line.choose === 1 &&
+          line.id === recipe.flourConfiguration?.commercialMixLineId
+            ? new Intl.ListFormat(locale, { type: 'disjunction' }).format(
+                line.options.map((option) => option.name[locale]),
+              )
+            : line.options[0].name[locale],
         options: line.options.map((option) => ({
           ingredientId: option.ingredientId,
           name: option.name[locale],

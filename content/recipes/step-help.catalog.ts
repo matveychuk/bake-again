@@ -228,9 +228,9 @@ export const stepHelpCatalog: Record<
     'beat-wet': help(
       q(
         'body',
-        'До якого стану збивати масляно-яєчну основу печива?',
-        'How far should I beat the butter and egg base for the cookies?',
-        '¿Hasta qué punto bato la base de mantequilla y huevo de las galletas?',
+        'Як зрозуміти, що яйця з цукром і маслом уже достатньо збиті?',
+        'How do I know when the eggs, sugar and butter are beaten enough?',
+        '¿Cómo sé cuándo dejar de batir los huevos con el azúcar y la mantequilla?',
       ),
     ),
     'mix-dry': skip('Назви всіх складників сухої суміші наведені в кроці.'),
@@ -255,8 +255,8 @@ export const stepHelpCatalog: Record<
       q(
         'tip',
         'Чому кульки печива треба формувати швидко?',
-        'Why should I shape the cookie balls quickly?',
-        '¿Por qué debo formar las bolitas de galleta rápidamente?',
+        'Why do I need to roll the dough balls quickly?',
+        '¿Por qué hay que formar las bolitas deprisa?',
       ),
     ),
     'bake-cookies': help(

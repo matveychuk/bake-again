@@ -14,6 +14,8 @@ const dishAliases: Record<string, string[]> = {
     'шоколадне печиво з тріщинками',
     'шоколадне печиво без глютену',
     'шоколадні тріщинки',
+    'marbled crinkle cookies',
+    'galletas marmoladas',
   ],
   eclairs: [
     'еклер',

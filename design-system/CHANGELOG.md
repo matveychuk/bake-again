@@ -1,5 +1,9 @@
 # Design system changelog
 
+## 2026-11-24 · Tested flour choices
+
+The crinkle cookie recipe and its Design Lab overview show two separately tested flour blends. The ingredient row gives a single weight and the shopping drawer accepts one blend.
+
 ## 2026-11-21 · Recipe waitlist in the xanthan article
 
 - Reuse the editorial campaign invitation for a recipe link sent after publication.

@@ -37,18 +37,18 @@ void test('concise detailed cookies preserve chilling/baking timers and omit rem
     const content = getRecipeContent('crinkle-cookies', locale)!;
     const steps = createRecipeCookSteps(content, locale);
     const step = (id: string) => steps.find(({ stepIds }) => stepIds.includes(id))!;
-    assert.equal(steps.length, locale === 'uk' ? 9 : 7);
+    assert.equal(steps.length, 9);
     assert.deepEqual(
       step('beat-wet').ingredients.map((item) => item.id),
       ['eggs', 'sugar', 'butter'],
     );
     assert.deepEqual(
-      step(locale === 'uk' ? 'mix-dry' : 'combine-dough').ingredients.map((item) => item.id),
+      step('mix-dry').ingredients.map((item) => item.id),
       ['cocoa', 'flour', 'baking-powder'],
     );
     assert.deepEqual(
       step('chill-dough').timerOptionsSeconds,
-      locale === 'uk' ? [7200, 86400] : [10800, 14400, 86400],
+      [7200, 86400],
     );
     assert.ok(step('chill-dough').timerOptionLabels?.[86400]);
     assert.deepEqual(step('bake-cookies').timerOptionsSeconds, [480, 600]);

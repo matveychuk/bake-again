@@ -112,7 +112,7 @@ for (const entry of entries) {
     for (const forbidden of ['aggregateRating', 'review', 'nutrition'])
       assert.ok(!(forbidden in recipe));
     const expectedCrops = ['4x3', '16x9'];
-    if (recipe.image.some((url) => new URL(url).pathname.startsWith('/images/seo/lazy-dumplings-'))) {
+    if (recipe.image.some((url) => /^\/images\/seo\/(?:lazy-dumplings|crinkle-cookies)-/.test(new URL(url).pathname))) {
       expectedCrops.push('1x1');
     }
     assert.equal(recipe.image.length, expectedCrops.length, path);

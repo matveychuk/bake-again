@@ -528,6 +528,12 @@ variation.
 
 ## Recipe ingredient rows
 
+- For flour blends tested separately at the same weight, use one flour line with
+  `choose: 1`. Show the product names with a localized “or” and one amount in the
+  recipe, Cook Mode and print. The shopping drawer asks which product to add.
+  Record each tested alternative and its evidence in the recipe. Use grams when
+  a spoon conversion has only been measured for one product.
+
 - A canonical step may specify `ingredientFractions` for an ingredient split between
   stages. Cook Mode applies that fraction to the current batch amount and its spoon
   equivalent; the recipe list and shopping list retain the complete batch amount.

@@ -736,8 +736,7 @@ export default function DesignSystemPage() {
                   overview in the{' '}
                   <a href="/design-system/napoleon-five-steps">
                     complete recipe example
-                  </a>
-                  .
+                  </a>. The crinkle cookie overview lists the two flour blends tested in separate batches.
                 </span>
               </div>
               <div className={styles.recipeOverviewExample}>

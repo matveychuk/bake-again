@@ -47,9 +47,10 @@ void test('all canonical records preserve the independent pre-migration identiti
   );
   for (const recipe of migratedRecipes) {
     const original = baseline.find((b) => b.document.recipe.id === recipe.id)!;
-    // The approved crepe and varenyky PDFs supersede their historical baselines.
+    // These author revisions supersede their historical baselines.
     // Registry and Cook Mode tests cover the current quantities and methods.
-    if ((recipe.id === 'crepes' && recipe.versionId === 'crepes-pdf-v6') ||
+    if ((recipe.id === 'crinkle-cookies' && recipe.versionId === 'crinkle-cookies-v3') ||
+        (recipe.id === 'crepes' && recipe.versionId === 'crepes-pdf-v6') ||
         (recipe.id === 'lazy-dumplings' && recipe.versionId === 'lazy-dumplings-pdf-v5')) {
       assert.equal(recipe.routeSlug, original.routeSlug);
       assert.equal(

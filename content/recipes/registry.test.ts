@@ -75,8 +75,8 @@ void test('normalizes every recipe into the shared overview model', () => {
 void test('shows localized planning guidance without inventing a total time', () => {
   for (const locale of ['en', 'es', 'uk'] as const) {
     const cookies = getRecipeContent('crinkle-cookies', locale);
-    assert.match(cookies?.overview.timing.planningNote ?? '', locale === 'uk' ? /2 год/ : /3–4/);
-    assert.equal(cookies?.overview.timing.totalElapsedMinutes, locale === 'uk' ? 150 : null);
+    assert.match(cookies?.overview.timing.planningNote ?? '', { uk: /Щонайменше 2 год/, en: /At least 2 h/, es: /Como mínimo 2 h/ }[locale]);
+    assert.equal(cookies?.overview.timing.totalElapsedMinutes, 150);
     assert.match(
       getRecipeContent('crepes', locale)?.overview.timing.planningNote ?? '',
       /15–20/,
@@ -823,6 +823,21 @@ void test('keeps crinkle-cookie quantities, guidance and step media together', (
       /цедр|апельсин|orange|zest|ralladura|naranja/i,
     );
     assert.equal(localized.ingredientSections[0].ingredients.length, 7);
+    const flour = localized.ingredientSections[0].ingredients.find(({ id }) => id === 'flour');
+    assert.equal(flour?.choose, 1);
+    assert.deepEqual(flour?.quantity.base, { kind: 'exact', value: 120, unit: 'g' });
+    assert.equal(flour?.quantity.equivalent, undefined);
+    assert.equal(flour?.name, localized.overview.flour);
+    assert.deepEqual(flour?.options?.map(({ name }) => name), [
+      'Schär Mix B Bread', 'King Arthur Gluten-Free Measure for Measure Flour',
+    ]);
+    const photos = localized.steps.flatMap((step) => step.media ?? []);
+    assert.equal(photos.length, 13);
+    if (locale !== 'uk') {
+      for (const text of [...localized.steps.map((step) => step.body), ...photos.map((photo) => photo.alt)]) {
+        assert.doesNotMatch(text, /[А-Яа-яІіЇїЄє]/u);
+      }
+    }
   }
 });
 
