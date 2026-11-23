@@ -224,6 +224,7 @@ export const stepHelpCatalog: Record<
     ),
   },
   'crinkle-cookies': {
+    'prepare-ingredients': skip('Порядок підготовки є в кроці, а кількості наведені у списку інгредієнтів.'),
     'beat-wet': help(
       q(
         'body',
@@ -232,6 +233,7 @@ export const stepHelpCatalog: Record<
         '¿Hasta qué punto bato la base de mantequilla y huevo de las galletas?',
       ),
     ),
+    'mix-dry': skip('Назви всіх складників сухої суміші наведені в кроці.'),
     'combine-dough': help(
       q(
         'body',

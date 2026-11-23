@@ -1,4 +1,9 @@
-import type { Recipe } from './recipe.types.ts';
+import type {
+  LocalizedText,
+  Recipe,
+  RecipeMedia,
+  RecipeStep,
+} from './recipe.types.ts';
 
 export const crinkleCookiesRecipe = {
   schemaVersion: 3,
@@ -19,10 +24,10 @@ export const crinkleCookiesRecipe = {
   title: {
     en: 'Gluten-free marbled crinkle cookies',
     es: 'Galletas marmoladas craqueladas sin gluten',
-    uk: 'Безглютенове мармурове печиво «Тріщинки»',
+    uk: 'Безглютенове шоколадне печиво «Тріщинки»',
   },
   summary: {
-    uk: 'Шоколадне печиво з ніжною серединою й цукровими тріщинками.',
+    uk: 'Мармурове печиво з какао, м’якою серединкою та тріщинками на цукровій скоринці. Тісто на суміші Schär Mix B Bread.',
     en: 'Chocolate cookies with a tender centre and a cracked sugar coating.',
     es: 'Galletas de chocolate con un centro tierno y una cobertura de azúcar craquelada.',
   },
@@ -752,7 +757,11 @@ export const crinkleCookiesRecipe = {
       es: null,
     },
     keywords: {
-      uk: ['Безглютенове мармурове печиво «Тріщинки»'],
+      uk: [
+        'шоколадне печиво без глютену',
+        'мармурове печиво',
+        'печиво з тріщинками',
+      ],
       en: ['Gluten-free marbled crinkle cookies'],
       es: ['Galletas marmoladas craqueladas sin gluten'],
     },
@@ -766,7 +775,7 @@ export const crinkleCookiesRecipe = {
     cardTitle: {
       en: 'Marbled Cookies',
       es: 'Galletas marmoladas',
-      uk: 'Мармурове печиво',
+      uk: 'Шоколадне печиво «Тріщинки»',
     },
     category: {
       en: 'Cookies',
@@ -813,9 +822,9 @@ export const crinkleCookiesRecipe = {
   },
   seo: {
     uk: {
-      title: 'Безглютенове мармурове печиво «Тріщинки»',
+      title: 'Шоколадне печиво «Тріщинки» без глютену',
       description:
-        'Безглютенове шоколадне печиво «Тріщинки» з ніжною серединою та цукровою скоринкою. Інгредієнти й покрокове приготування.',
+        'Покроковий рецепт з фото на 20 мармурових печив із какао та Schär Mix B Bread. Як охолодити тісто, обкачати кульки в пудрі й спекти до появи тріщинок.',
     },
     en: {
       title: 'Gluten-free marbled crinkle cookies',
@@ -830,3 +839,204 @@ export const crinkleCookiesRecipe = {
   },
   routeSlug: 'crinkle-cookies',
 } satisfies Recipe;
+
+// The November revision is available only in Ukrainian while translation awaits review.
+function ukrainianSource(uk: string): LocalizedText {
+  return { uk, en: uk, es: uk };
+}
+
+function stepPhoto(filename: `${string}.webp`, alt: string): RecipeMedia {
+  return {
+    id: filename.slice(0, -5),
+    type: 'image',
+    path: `/media/recipes/crinkle-cookies/selected/${filename}`,
+    usage: ['step'],
+    fit: 'cover',
+    alt: ukrainianSource(alt),
+  };
+}
+
+const authorHero: RecipeMedia = {
+  id: 'crinkle-author-hero-v1',
+  type: 'image',
+  path: '/images/recipes/chocolate-crinkle-cookies-author-v1.webp',
+  usage: ['hero', 'card'],
+  alt: ukrainianSource(
+    'Шоколадні тріщинки в цукровій пудрі на тарілці, одне печиво розламане',
+  ),
+};
+
+const ukrainianStepPhotos = [
+  stepPhoto(
+    'ingredients-v2.webp',
+    'Вершкове масло, розпушувач, какао, цукор, борошняна суміш і два яйця в окремому посуді',
+  ),
+  stepPhoto(
+    'wet-ingredients-v2.webp',
+    'Яйця, цукор і м’яке вершкове масло в мисці перед збиванням',
+  ),
+  stepPhoto(
+    'beat-wet-v2.webp',
+    'Міксер збиває яйця, цукор і вершкове масло у світлу масу',
+  ),
+  stepPhoto(
+    'mix-dry-v2.webp',
+    'Какао, борошняну суміш і розпушувач перемішують ложкою в білій мисці',
+  ),
+  stepPhoto(
+    'add-dry-v2.webp',
+    'Суха суміш із какао поверх збитої масляної основи',
+  ),
+  stepPhoto(
+    'mix-dough-v2.webp',
+    'Міксер поступово поєднує суху суміш зі збитою основою',
+  ),
+  stepPhoto(
+    'dough-before-chill-v2.webp',
+    'Готове липке шоколадне тісто в мисці',
+  ),
+  stepPhoto(
+    'cover-dough-v2.webp',
+    'Миска з шоколадним тістом, накрита харчовою плівкою',
+  ),
+  stepPhoto(
+    'cold-dough-pecans-v2.webp',
+    'Холодне шоколадне тісто з ложкою, пекан і цукрова пудра поруч із деком',
+  ),
+  stepPhoto(
+    'coat-in-sugar-v2.webp',
+    'Рука обкачує шоколадну кульку в цукровій пудрі',
+  ),
+  stepPhoto(
+    'tray-spacing-v2.webp',
+    'Обкачані в пудрі кульки тіста викладені з проміжками на деку з пергаментом',
+  ),
+  stepPhoto(
+    'cookies-in-oven-v2.webp',
+    'Кульки шоколадного тіста в цукровій пудрі на деку в духовці',
+  ),
+  stepPhoto(
+    'cracks-in-oven-v2.webp',
+    'Під час випікання на поверхні шоколадного печива з’являються тріщинки',
+  ),
+];
+
+const prepareIngredients: RecipeStep = {
+  id: 'prepare-ingredients',
+  title: ukrainianSource('Підготуйте інгредієнти'),
+  instruction: ukrainianSource(
+    'Заздалегідь дістаньте вершкове масло, щоб воно розм’якло. Відміряйте інгредієнти для тіста й окремо підготуйте цукрову пудру для обкачування.',
+  ),
+  ingredientLineIds: [
+    'butter',
+    'eggs',
+    'sugar',
+    'cocoa',
+    'flour',
+    'baking-powder',
+    'powdered-sugar',
+  ],
+  mediaIds: ['ingredients-v2'],
+};
+
+const mixDry: RecipeStep = {
+  id: 'mix-dry',
+  title: ukrainianSource('Змішайте сухі інгредієнти'),
+  instruction: ukrainianSource(
+    'В окремій мисці перемішайте какао, борошняну суміш Schär Mix B Bread і розпушувач.',
+  ),
+  ingredientLineIds: ['cocoa', 'flour', 'baking-powder'],
+  mediaIds: ['mix-dry-v2'],
+};
+
+const ukrainianStepUpdates: Record<
+  string,
+  { instruction?: string; mediaIds?: string[] }
+> = {
+  'beat-wet': { mediaIds: ['wet-ingredients-v2', 'beat-wet-v2'] },
+  'combine-dough': {
+    instruction:
+      'Всипте суху суміш до збитої основи. Вимішуйте міксером або тістомісом із гаком на низькій швидкості, доки не залишиться сухих ділянок. Готове шоколадне тісто буде липким.',
+    mediaIds: ['add-dry-v2', 'mix-dough-v2'],
+  },
+  'chill-dough': {
+    instruction:
+      'Накрийте миску з тістом харчовою плівкою й поставте в холодильник щонайменше на 2 години. Можна залишити тісто в холодильнику до 24 годин.',
+    mediaIds: ['dough-before-chill-v2', 'cover-dough-v2'],
+  },
+  'preheat-oven': {
+    instruction:
+      'Поки тісто в холодильнику, розігрійте духовку до 180 °C у режимі верхнього й нижнього нагріву. Застеліть деко пергаментом і насипте цукрову пудру в миску.',
+  },
+  'shape-and-coat': {
+    instruction:
+      'Набирайте холодне тісто ложкою й швидко скочуйте між долонями кульки розміром із волоський горіх. За бажанням покладіть усередину шматочок волоського горіха або пекана. Одразу щедро обкачайте кульки в цукровій пудрі й викладіть на деко, залишаючи між ними багато місця.',
+    mediaIds: ['cold-dough-pecans-v2', 'coat-in-sugar-v2', 'tray-spacing-v2'],
+  },
+  'bake-cookies': {
+    instruction:
+      'Випікайте за 180 °C 8–10 хвилин, до появи тріщинок. Коли печиво підніметься, а тісто в тріщинках ще виглядатиме вологим, вийміть деко. Печиво ущільниться під час охолодження.',
+    mediaIds: ['cookies-in-oven-v2', 'cracks-in-oven-v2'],
+  },
+  'cool-cookies': {
+    instruction:
+      'Дайте печиву повністю охолонути. Зберігайте в герметичній ємності.',
+  },
+};
+
+const novemberSource = {
+  id: 'author-update-2026-11-23',
+  file: 'Current Codex conversation and photographs from 2026-11-22',
+  locator:
+    'Author’s Ukrainian method, timing and photo selections on 2026-11-23',
+};
+
+export const crinkleCookiesUkrainianRecipe: Recipe = {
+  ...crinkleCookiesRecipe,
+  versionId: 'crinkle-cookies-v3',
+  translationState: { uk: 'reviewed', en: 'sourceDraft', es: 'sourceDraft' },
+  baseProvenance: {
+    ...crinkleCookiesRecipe.baseProvenance,
+    sourceIds: [
+      ...crinkleCookiesRecipe.baseProvenance.sourceIds,
+      novemberSource.id,
+    ],
+    note: 'The author’s photos document the baked recipe. The two-hour minimum is the author’s updated timing guidance.',
+  },
+  sources: [...crinkleCookiesRecipe.sources, novemberSource],
+  searchMetadata: {
+    ...crinkleCookiesRecipe.searchMetadata,
+    dateModified: null,
+  },
+  timing: {
+    ...crinkleCookiesRecipe.timing,
+    totalElapsedMinutes: 150,
+    provenance: { state: 'authorGuidance', sourceIds: [novemberSource.id] },
+    planningNote: {
+      phaseId: 'chill',
+      text: ukrainianSource('{duration} на охолодження тіста.'),
+    },
+    phases: crinkleCookiesRecipe.timing.phases.map((phase) =>
+      phase.id === 'chill'
+        ? { ...phase, duration: { kind: 'minimum', min: 2, unit: 'hour' } }
+        : phase,
+    ),
+  },
+  heroMediaId: authorHero.id,
+  discovery: { ...crinkleCookiesRecipe.discovery, imageKind: 'author-photo' },
+  media: [authorHero, ...ukrainianStepPhotos],
+  steps: [
+    prepareIngredients,
+    ...crinkleCookiesRecipe.steps.flatMap((step) => {
+      const { instruction, mediaIds } = ukrainianStepUpdates[step.id] ?? {};
+      const updatedStep: RecipeStep = {
+        ...step,
+        instruction: instruction
+          ? { ...step.instruction, uk: instruction }
+          : step.instruction,
+        mediaIds,
+      };
+      return step.id === 'beat-wet' ? [updatedStep, mixDry] : [updatedStep];
+    }),
+  ],
+};

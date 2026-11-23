@@ -5,7 +5,7 @@ export const creamPageRecipes = recipes
     (recipe) =>
       !recipe.discovery.catalogue && recipe.discovery.category.en === 'Cream',
   )
-  .map(recipeInventoryView);
+  .map((recipe) => recipeInventoryView(recipe));
 export function getCreamPageRecipe(slug: string) {
   return creamPageRecipes.find((recipe) => recipe.slug === slug) ?? null;
 }

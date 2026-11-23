@@ -89,6 +89,26 @@
       }
     ]
   },
+  "crinkle-cookies-uk": {
+    "source": "/images/recipes/chocolate-crinkle-cookies-author-v1.webp",
+    "images": [
+      {
+        "url": "/images/seo/crinkle-cookies-uk-1x1.webp",
+        "width": 1200,
+        "height": 1200
+      },
+      {
+        "url": "/images/seo/crinkle-cookies-uk-4x3.webp",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/images/seo/crinkle-cookies-uk-16x9.webp",
+        "width": 1200,
+        "height": 675
+      }
+    ]
+  },
   "plum-cake": {
     "source": "/images/recipes/plum-cake-author-hero-v1.webp",
     "images": [

@@ -1,8 +1,8 @@
 import { getLocalizedRecipePath } from '../../lib/i18n/routes.ts';
-import { recipeInventory } from './inventory.ts';
+import { recipeInventory, recipeInventoryView } from './inventory.ts';
 import { catalogLocaleCopy } from './catalog-locales.ts';
 import { catalogOrder } from './catalog-order.ts';
-import { getRecipeContent } from './registry.ts';
+import { getRecipe, projectRecipeContent } from './registry.ts';
 import { getRecipePublicationStatus } from './publication.ts';
 import type { AppLocale } from '../../lib/i18n/config.ts';
 import { formatElapsedMinutes } from '../../lib/i18n/format.ts';
@@ -60,7 +60,9 @@ export function getRecipeCatalog(
     )
       return [];
     const copy = catalogLocaleCopy[recipe.id];
-    const overview = getRecipeContent(recipe.id, locale)?.overview;
+    const localized = getRecipe(recipe.id, locale)!;
+    const inventory = recipeInventoryView(localized, locale);
+    const overview = projectRecipeContent(localized, locale).overview;
     const messages = getUiMessages(locale).recipe;
     const difficulty = overview?.difficulty;
     return [
@@ -73,12 +75,12 @@ export function getRecipeCatalog(
           ? `${messages.difficulty}: ${difficulty === 'easy' ? messages.difficultyEasy : difficulty === 'medium' ? messages.difficultyMedium : messages.difficultyAdvanced}`
           : null,
         flour: overview?.flour.replace(' Bread', '') ?? '',
-        image: recipe.image,
-        cardImage: recipe.cardImage,
-        imageKind: recipe.imageKind,
-        alt: copy?.alt[locale] ?? recipe.imageAlt,
-        cardAlt: recipe.cardImageAlt?.[locale],
-        cardImagePosition: recipe.cardImagePosition,
+        image: inventory.image,
+        cardImage: inventory.cardImage,
+        imageKind: inventory.imageKind,
+        alt: inventory.imageAlt,
+        cardAlt: inventory.cardImageAlt?.[locale],
+        cardImagePosition: inventory.cardImagePosition,
         href: getLocalizedRecipePath(recipe.id, locale)!,
         publicationStatus,
         collections: recipe.collectionIds.map((id) => ({

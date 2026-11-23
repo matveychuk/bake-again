@@ -27,7 +27,7 @@ export function RecipePage({
   const recipe = getInventoryRecipe(slug) ?? getComponentPageRecipe(slug);
   return recipe ? (
     <InventoryRecipeDetail
-      personalRecipe={getPersonalStateRecipe(recipe.id)}
+      personalRecipe={getPersonalStateRecipe(recipe.id, locale)}
       recipe={recipe}
       locale={locale}
       pathname={pathname}

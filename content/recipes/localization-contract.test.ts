@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { recipeDocuments, getRecipeContent } from './registry.ts';
+import { recipeDocuments, projectRecipeContent } from './registry.ts';
 import { validateRecipe } from './validate.ts';
 import { bananaFrittersRecipe } from './banana-fritters.recipe.ts';
 
 void test('all recipe locales preserve canonical quantities, provenance and step identities', () => {
   for (const { recipe } of recipeDocuments) {
-    const uk = getRecipeContent(recipe.id, 'uk')!;
+    const uk = projectRecipeContent(recipe, 'uk');
     for (const locale of ['en', 'es'] as const) {
-      const content = getRecipeContent(recipe.id, locale)!;
+      const content = projectRecipeContent(recipe, locale);
       const facts = (value: typeof content) => ({
         status: value.evidence?.status,
         ingredients: value.ingredientSections.flatMap((section) =>

@@ -11,7 +11,7 @@ import { carrotCakeRecipe } from './carrot-cake.recipe.ts';
 import { cinnamonRollsRecipe } from './cinnamon-rolls.recipe.ts';
 import { cottageCheeseWafflesRecipe } from './cottage-cheese-waffles.recipe.ts';
 import { crepesRecipe } from './crepes.recipe.ts';
-import { crinkleCookiesRecipe } from './crinkle-cookies.recipe.ts';
+import { crinkleCookiesRecipe, crinkleCookiesUkrainianRecipe } from './crinkle-cookies.recipe.ts';
 import {
   egglessVanillaCustardRecipe,
   mascarponeWhippedCreamRecipe,
@@ -71,7 +71,9 @@ export const recipes: readonly Recipe[] = [
   buttermilkPancakesRecipe,
 ];
 
-export function getRecipe(recipeId: string): Recipe | null {
+export function getRecipe(recipeId: string, locale?: AppLocale): Recipe | null {
+  if (locale === 'uk' && recipeId === crinkleCookiesUkrainianRecipe.id)
+    return crinkleCookiesUkrainianRecipe;
   return recipes.find((recipe) => recipe.id === recipeId) ?? null;
 }
 
@@ -84,8 +86,8 @@ export const personalStateRecipes = recipes;
 export const getPersonalStateRecipe = getRecipe;
 export const isPersonalStateRecipeId = (id: string) => getRecipe(id) !== null;
 export const isSaveableRecipeId = isPersonalStateRecipeId;
-export function getRecipeDocument(id: string): RecipeDocument | null {
-  const recipe = getRecipe(id);
+export function getRecipeDocument(id: string, locale?: AppLocale): RecipeDocument | null {
+  const recipe = getRecipe(id, locale);
   return recipe ? { recipe } : null;
 }
 
@@ -274,6 +276,6 @@ export function getRecipeContent(
   id: string,
   locale: AppLocale = 'en',
 ): StructuredRecipeContent | null {
-  const recipe = getRecipe(id);
+  const recipe = getRecipe(id, locale);
   return recipe ? projectRecipeContent(recipe, locale) : null;
 }

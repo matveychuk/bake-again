@@ -3,6 +3,7 @@ import test from 'node:test';
 import {
   recipeDocuments,
   getRecipeContent,
+  getRecipeDocument,
 } from '../../content/recipes/registry.ts';
 import { recipeSeo } from '../../content/recipes/seo.ts';
 import {
@@ -233,7 +234,10 @@ void test('dates, durations, cuisine and keywords are conditional source facts s
       const data = recipeStructuredData(recipe.id, locale, content)!;
       const facts = recipeSearchMetadata[recipe.id];
       assert.equal(data.datePublished, facts.datePublished ?? undefined);
-      assert.equal(data.dateModified, recipeLastModified(recipe) ?? undefined);
+      assert.equal(
+        data.dateModified,
+        recipeLastModified(getRecipeDocument(recipe.id, locale)!.recipe) ?? undefined,
+      );
       assert.equal(
         data.prepTime,
         content.timing?.activeMinutes == null

@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { easterBreadRecipe } from './easter-bread.recipe.ts';
 import test from 'node:test';
 import { recipeInventory } from './inventory.ts';
-import { getRecipeContent } from './registry.ts';
+import { getRecipe, getRecipeContent } from './registry.ts';
+import { validateRecipe } from './validate.ts';
 
 void test('reviewed banana bread retains its formula and five concise steps in every locale', () => {
   for (const locale of ['uk', 'en', 'es'] as const) {
@@ -74,8 +75,8 @@ void test('normalizes every recipe into the shared overview model', () => {
 void test('shows localized planning guidance without inventing a total time', () => {
   for (const locale of ['en', 'es', 'uk'] as const) {
     const cookies = getRecipeContent('crinkle-cookies', locale);
-    assert.match(cookies?.overview.timing.planningNote ?? '', /3–4/);
-    assert.equal(cookies?.overview.timing.totalElapsedMinutes, null);
+    assert.match(cookies?.overview.timing.planningNote ?? '', locale === 'uk' ? /2 год/ : /3–4/);
+    assert.equal(cookies?.overview.timing.totalElapsedMinutes, locale === 'uk' ? 150 : null);
     assert.match(
       getRecipeContent('crepes', locale)?.overview.timing.planningNote ?? '',
       /15–20/,
@@ -84,7 +85,7 @@ void test('shows localized planning guidance without inventing a total time', ()
   assert.match(
     getRecipeContent('crinkle-cookies', 'uk')?.overview.timing.planningNote ??
       '',
-    /на кожне деко/,
+    /охолодження тіста/,
   );
   assert.equal(
     getRecipeContent('gluten-free-napoleon', 'uk')?.overview.yieldLabel,
@@ -777,6 +778,7 @@ void test('keeps the published prune cake structured', () => {
 });
 
 void test('keeps crinkle-cookie quantities, guidance and step media together', () => {
+  validateRecipe(getRecipe('crinkle-cookies', 'uk')!);
   const recipe = getRecipeContent('crinkle-cookies', 'uk');
   const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
   const powderedSugar = ingredients.find(
@@ -793,13 +795,20 @@ void test('keeps crinkle-cookie quantities, guidance and step media together', (
   assert.equal(shaping?.title, 'Сформуйте й обкачайте кульки');
   assert.match(shaping?.body ?? '', /набирайте холодне тісто ложкою/i);
   assert.match(shaping?.tip ?? '', /не катайте його довго/i);
-  assert.equal(shaping?.media?.length, 2);
-  assert.match(baking?.body ?? '', /вологими/i);
-  assert.equal(baking?.media?.[0]?.id, 'crinkle-moist-cracks-v1');
+  assert.deepEqual(shaping?.media?.map(({ id }) => id), ['cold-dough-pecans-v2', 'coat-in-sugar-v2', 'tray-spacing-v2']);
+  assert.match(baking?.body ?? '', /180 °C 8–10 хвилин.*вологим/i);
+  assert.deepEqual(baking?.media?.map(({ id }) => id), ['cookies-in-oven-v2', 'cracks-in-oven-v2']);
   assert.equal(recipe?.presentation, 'concise');
   assert.equal(recipe?.evidence?.status, 'tested');
   assert.equal(recipe?.overview.timing.activeMinutes, 30);
-  assert.equal(recipe?.steps.length, 7);
+  assert.deepEqual(recipe?.steps.map(({ id }) => id), [
+    'prepare-ingredients', 'beat-wet', 'mix-dry', 'combine-dough', 'chill-dough',
+    'preheat-oven', 'shape-and-coat', 'bake-cookies', 'cool-cookies',
+  ]);
+  assert.equal(recipe?.overview.yieldLabel, '20 печив');
+  assert.deepEqual(recipe?.timing?.phases.find(({ id }) => id === 'chill')?.duration, {
+    kind: 'minimum', min: 2, unit: 'hour',
+  });
   assert.equal(recipe?.beforeStart, undefined);
   assert(recipe?.steps.every((step) => !step.checkpoint && !step.meta));
   assert(

@@ -48,7 +48,7 @@ function createInventoryCookMode(
   locale: AppLocale,
 ): CookModeDefinition {
   const structured = getRecipeContent(recipe.id, locale);
-  const document = getRecipeDocument(recipe.id);
+  const document = getRecipeDocument(recipe.id, locale);
   const baseVersionId = document?.recipe.versionId ?? `${recipe.id}-source-v1`;
   const baseForCookMode = structured
     ? composeRecipeWithCream(structured, null, null)

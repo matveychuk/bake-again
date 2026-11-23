@@ -8,6 +8,13 @@ export const recipeSearchMaxLength = 200;
 
 /** Editorial discovery vocabulary, never recipe facts or substitutions. */
 const dishAliases: Record<string, string[]> = {
+  'crinkle-cookies': [
+    'мармурове печиво',
+    'печиво з тріщинами',
+    'шоколадне печиво з тріщинками',
+    'шоколадне печиво без глютену',
+    'шоколадні тріщинки',
+  ],
   eclairs: [
     'еклер',
     'еклери',

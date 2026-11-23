@@ -44,10 +44,11 @@ export type InventoryRecipe = {
 
 import { recipes } from './registry.ts';
 import type { Recipe } from './recipe.types.ts';
+import type { AppLocale } from '../../lib/i18n/config.ts';
 import { formatElapsedMinutes } from '../../lib/i18n/format.ts';
 
 /** Compatibility view only: all editable recipe facts live in Recipe. */
-export function recipeInventoryView(recipe: Recipe): InventoryRecipe {
+export function recipeInventoryView(recipe: Recipe, locale?: AppLocale): InventoryRecipe {
   const d = recipe.discovery;
   const hero = recipe.media.find((item) => item.id === recipe.heroMediaId)!;
   const card = recipe.media.find((item) => item.id === recipe.cardMediaId);
@@ -73,7 +74,9 @@ export function recipeInventoryView(recipe: Recipe): InventoryRecipe {
       recipe.configuration.quantityAdjustment.useWhatIHave?.scalingAnchors[0]
         ?.ingredientLineId,
     image: hero?.path ?? '',
-    imageAlt: hero?.alt.en ?? recipe.summary.en,
+    imageAlt: locale
+      ? (hero?.heroAlt ?? hero?.alt)?.[locale] ?? recipe.summary[locale]
+      : hero?.alt.en ?? recipe.summary.en,
     imageKind: d.imageKind,
     cardImage: card?.path,
     cardImageAlt: card?.alt,
@@ -112,7 +115,7 @@ const inventoryOrder = [
 const inventoryRanks = new Map(inventoryOrder.map((id, index) => [id, index]));
 export const recipeInventory: InventoryRecipe[] = recipes
   .filter((recipe) => recipe.discovery.catalogue)
-  .map(recipeInventoryView)
+  .map((recipe) => recipeInventoryView(recipe))
   .sort(
     (a, b) =>
       (inventoryRanks.get(a.id) ?? inventoryRanks.size) -

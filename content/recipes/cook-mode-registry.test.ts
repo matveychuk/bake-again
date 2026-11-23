@@ -36,20 +36,22 @@ void test('concise detailed cookies preserve chilling/baking timers and omit rem
   for (const locale of ['uk', 'en', 'es'] as const) {
     const content = getRecipeContent('crinkle-cookies', locale)!;
     const steps = createRecipeCookSteps(content, locale);
-    assert.equal(steps.length, 7);
+    const step = (id: string) => steps.find(({ stepIds }) => stepIds.includes(id))!;
+    assert.equal(steps.length, locale === 'uk' ? 9 : 7);
     assert.deepEqual(
-      steps[0].ingredients.map((item) => item.id),
+      step('beat-wet').ingredients.map((item) => item.id),
       ['eggs', 'sugar', 'butter'],
     );
     assert.deepEqual(
-      steps[1].ingredients.map((item) => item.id),
+      step(locale === 'uk' ? 'mix-dry' : 'combine-dough').ingredients.map((item) => item.id),
       ['cocoa', 'flour', 'baking-powder'],
     );
-    // The recorded optional 24-hour hold now has its own labelled timer option.
-    // Existing 3/4-hour choices remain first, so a persisted timer is not reset.
-    assert.deepEqual(steps[2].timerOptionsSeconds, [10800, 14400, 86400]);
-    assert.ok(steps[2].timerOptionLabels?.[86400]);
-    assert.deepEqual(steps[5].timerOptionsSeconds, [480, 600]);
+    assert.deepEqual(
+      step('chill-dough').timerOptionsSeconds,
+      locale === 'uk' ? [7200, 86400] : [10800, 14400, 86400],
+    );
+    assert.ok(step('chill-dough').timerOptionLabels?.[86400]);
+    assert.deepEqual(step('bake-cookies').timerOptionsSeconds, [480, 600]);
     assert(
       steps
         .flatMap((step) => step.ingredients)

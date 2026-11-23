@@ -21,7 +21,7 @@ function requestFor(
   id: string,
   locale: 'en' | 'es' | 'uk' = 'uk',
 ): AssistantRequestV1 {
-  const document = getAssistantRecipeDocument(id)!;
+  const document = getAssistantRecipeDocument(id, undefined, locale)!;
   assert.ok(document);
   return {
     schemaVersion: 1,

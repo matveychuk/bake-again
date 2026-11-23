@@ -178,7 +178,8 @@ export function InventoryRecipeDetail({
   if (selectedCreamRecipeId) cookModeParams.set('cream', selectedCreamRecipeId);
   const cookModeSearch = cookModeParams.toString();
   const cookModePath = `${recipePath}/cook${cookModeSearch ? `?${cookModeSearch}` : ''}`;
-  const sourceVersionId = `${getRecipeDocument(recipe.id)?.recipe.versionId ?? `${recipe.id}-source-v1`}${selectedCreamRecipeId ? `-cream-${selectedCreamRecipeId}` : ''}`;
+  const document = getRecipeDocument(recipe.id, locale);
+  const sourceVersionId = `${document?.recipe.versionId ?? `${recipe.id}-source-v1`}${selectedCreamRecipeId ? `-cream-${selectedCreamRecipeId}` : ''}`;
   const backHref = `${isDraft ? localeDraftsPath(locale) : localeHomePath(locale)}#recipes`;
   const backLabel = isDraft
     ? getUiMessages(locale).navigation.drafts
@@ -209,7 +210,6 @@ export function InventoryRecipeDetail({
     !selectedCreamRecipeId
       ? recipeStructuredData(recipe.id, locale, configuredStructured)
       : null;
-  const document = getRecipeDocument(recipe.id);
   const heroMedia = document?.recipe.media.find(
     (item) => item.id === document.recipe.heroMediaId,
   );
@@ -321,11 +321,11 @@ export function InventoryRecipeDetail({
             </p>
             <RecipeSectionNavigation locale={locale} />
           </div>
-          {recipe.image && (
+          {(heroMedia?.path ?? recipe.image) && (
             <div className={styles.heroImage} data-fit={heroMedia?.fit}>
               <Image
-                src={recipe.image}
-                alt={copy?.alt[locale] ?? recipe.imageAlt}
+                src={heroMedia?.path ?? recipe.image}
+                alt={(heroMedia?.heroAlt ?? heroMedia?.alt)?.[locale] ?? copy?.alt[locale] ?? recipe.imageAlt}
                 style={
                   heroMedia?.fit === 'contain'
                     ? { objectFit: 'contain' }

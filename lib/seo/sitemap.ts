@@ -1,5 +1,5 @@
 import { recipeLastModified } from '../../content/recipes/search-metadata.ts';
-import { recipeDocuments } from '../../content/recipes/registry.ts';
+import { getRecipe, recipeDocuments } from '../../content/recipes/registry.ts';
 import { publicPageMetadata } from '../../content/page-metadata.ts';
 import { publishedTechniques } from '../../content/techniques/registry.ts';
 import { supportedLocales } from '../i18n/config.ts';
@@ -52,9 +52,9 @@ export function sitemapEntries() {
           locale,
           url: absoluteUrl(getLocalizedRecipePath(recipe.id, locale)!),
         }));
-      return alternatives.map(({ url }) => ({
+      return alternatives.map(({ url, locale }) => ({
         url,
-        lastmod: recipeLastModified(recipe),
+        lastmod: recipeLastModified(getRecipe(recipe.id, locale) ?? recipe),
         alternatives: withDefaultLanguage(alternatives),
       }));
     }),

@@ -95,7 +95,8 @@ void test('all canonical records preserve the independent pre-migration identiti
     validateRecipe(recipe, new Set(recipes.map((r) => r.id)));
     for (const locale of recipeLocales) {
       const old = original.content[locale],
-        current = getRecipeContent(recipe.id, locale)!;
+        // Compare the migrated record to its own baseline, before locale revisions.
+        current = projectRecipeContent(recipe, locale);
       const context = `${recipe.id}/${locale}`;
       assert.equal(current.presentation, old.presentation, context);
       assert.equal(current.completeness, old.completeness, context);

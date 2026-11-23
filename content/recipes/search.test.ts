@@ -45,6 +45,16 @@ void test('uses profiteroles as the primary name and keeps eclairs as search ali
   }
 });
 
+void test('finds the Ukrainian crinkle cookies by familiar search terms', () => {
+  for (const query of [
+    'мармурове печиво',
+    'печиво з тріщинами',
+    'шоколадне печиво без глютену',
+  ]) {
+    assert.equal(ids(query)[0], 'crinkle-cookies', query);
+  }
+});
+
 void test('combines meaningful words across titles and canonical ingredients', () => {
   for (const query of ['гофре', 'сирні вафлі', 'творожні гофре']) {
     assert.deepEqual(ids(query), ['cottage-cheese-waffles'], query);

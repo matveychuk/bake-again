@@ -2,7 +2,7 @@ import { getFreeLessonPreview, freeLessonCopy } from '../../content/commerce/fre
 import { getRecipeDocument } from '../../content/recipes/registry.ts';
 import {
   getInventoryRecipe,
-  recipeInventory,
+  recipeInventoryView,
 } from '../../content/recipes/inventory.ts';
 import { getComponentPageRecipe } from '../../content/recipes/recipe-component-records.ts';
 import {
@@ -40,10 +40,10 @@ export function recipeIdForSlug(
 }
 
 export function recipePresentation(id: string, locale: AppLocale) {
-  const document = getRecipeDocument(id);
-  const inventory =
-    recipeInventory.find((recipe) => recipe.id === id) ??
-    getComponentPageRecipe(id);
+  const document = getRecipeDocument(id, locale);
+  const inventory = document?.recipe.discovery.catalogue
+    ? recipeInventoryView(document.recipe, locale)
+    : getComponentPageRecipe(id);
   if (!document || !inventory) return null;
   const copy = catalogLocaleCopy[id];
   const title =
@@ -58,12 +58,13 @@ export function recipePresentation(id: string, locale: AppLocale) {
     seoTitle: recipeSeo[id]?.[locale]?.title?.trim() || title,
     seoDescription: recipeSeo[id]?.[locale]?.description?.trim() || description,
     image: inventory.image,
-    alt: copy?.alt[locale] ?? inventory.imageAlt,
+    alt: document.recipe.discovery.catalogue ? inventory.imageAlt : copy?.alt[locale] ?? inventory.imageAlt,
     category: copy?.category[locale] ?? inventory.category,
     indexable: isRecipeLocalePublishable(document.recipe, locale),
-    locales: supportedLocales.filter((language) =>
-      isRecipeLocalePublishable(document.recipe, language),
-    ),
+    locales: supportedLocales.filter((language) => {
+      const localized = getRecipeDocument(id, language);
+      return localized && isRecipeLocalePublishable(localized.recipe, language);
+    }),
   };
 }
 
@@ -82,7 +83,7 @@ export function recipeStructuredData(
     return null;
   const freeVideo = getFreeLessonPreview(id, locale);
   const facts = recipeSearchMetadata[id];
-  const dateModified = recipeLastModified(getRecipeDocument(id)!.recipe);
+  const dateModified = recipeLastModified(getRecipeDocument(id, locale)!.recipe);
   const totalMinutes = content.timing?.totalElapsedMinutes;
   const activeMinutes = content.timing?.activeMinutes;
   return {
@@ -95,7 +96,7 @@ export function recipeStructuredData(
     description: page.seoDescription,
     inLanguage: locale,
     image: (
-      recipeSearchImages[id]?.images.map((image) => image.url) ?? [page.image]
+      (recipeSearchImages[`${id}-${locale}`] ?? recipeSearchImages[id])?.images.map((image) => image.url) ?? [page.image]
     ).map(absoluteUrl),
     author: {
       '@type': 'Person',

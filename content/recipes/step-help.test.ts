@@ -21,16 +21,14 @@ void test('every recipe, step and language has an explicit reviewed help decisio
   );
   const actual: Record<string, string> = {};
   for (const { recipe } of recipeDocuments) {
+    const coveredSteps = new Set<string>();
     for (const locale of locales) {
       const content = getRecipeContent(recipe.id, locale)!;
-      assert.deepEqual(
-        Object.keys(stepHelpCatalog[recipe.id]).sort(),
-        content.steps.map((s) => s.id).sort(),
-      );
       for (const step of content.steps) {
+        coveredSteps.add(step.id);
         const decision = stepHelpCatalog[recipe.id][step.id];
         const label = `${recipe.id}/${step.id}/${locale}`;
-        assert(decision.reason.trim(), label);
+        assert(decision?.reason.trim(), label);
         assert(decision.questions.length <= 3, label);
         const answers = resolveStepHelp(step);
         assert.equal(answers.length, decision.questions.length, label);
@@ -55,7 +53,7 @@ void test('every recipe, step and language has an explicit reviewed help decisio
         actual[label] = createHash('sha256')
           .update(
             JSON.stringify({
-              version: recipe.versionId ?? `${recipe.id}-source-v1`,
+              version: content.versionId ?? `${recipe.id}-source-v1`,
               title: step.title,
               body: step.body,
               tip: step.tip,
@@ -66,6 +64,7 @@ void test('every recipe, step and language has an explicit reviewed help decisio
           .digest('hex');
       }
     }
+    assert.deepEqual(Object.keys(stepHelpCatalog[recipe.id]).sort(), [...coveredSteps].sort());
   }
   assert.deepEqual(
     actual,

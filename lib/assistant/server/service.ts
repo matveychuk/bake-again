@@ -73,6 +73,7 @@ interface AssistantServiceDependencies {
   resolveRecipe?: (
     recipeId: string,
     recipeVersionId?: string,
+    locale?: AppLocale,
   ) => RecipeDocument | null;
   isRecipeEnabled?: (recipeId: string) => boolean;
   isRecipeLocaleAllowed?: (
@@ -247,6 +248,7 @@ export function createAssistantService({
         const document = resolveRecipe(
           request.recipeId,
           request.recipeVersionId,
+          request.locale,
         );
         if (!document || !isRecipeEnabled(request.recipeId)) {
           throw new AssistantServiceError('RECIPE_UNAVAILABLE', 404);
