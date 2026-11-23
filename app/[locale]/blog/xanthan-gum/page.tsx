@@ -5,6 +5,7 @@ import { ArticleHeader, ArticlePancakesInvitation } from '@/app/_components/arti
 import styles from '@/app/_components/articles/articles.module.css';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
+import { pancakeCampaign } from '@/content/articles/pancake-invitation';
 import { psylliumArticle } from '@/content/articles/psyllium';
 import { xanthanArticle as article } from '@/content/articles/xanthan-gum';
 import { getLocalizedRecipePath } from '@/lib/i18n/routes';
@@ -22,8 +23,8 @@ export async function generateMetadata({ params }: ArticleProps): Promise<Metada
     path: article.path,
     title: `${article.title} — Bake Again`,
     description: article.description,
-    image: article.cover,
-    imageAlt: article.coverAlt,
+    image: pancakeCampaign.image,
+    imageAlt: pancakeCampaign.imageAlt,
   });
   return { ...metadata, openGraph: { ...metadata.openGraph, type: 'article' } };
 }
