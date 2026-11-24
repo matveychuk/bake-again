@@ -59,13 +59,10 @@ export function RecentRecipes({
   return (
     <section className={styles.section} aria-labelledby={id}>
       <div className={styles.header}>
-        <div>
-          <h2 id={id} ref={heading} tabIndex={-1}>
-            {copy.recent}
-          </h2>
-          <p>{copy.local}</p>
-        </div>
-        {visible.length > 0 && (
+        <h2 className={styles.title} id={id} ref={heading} tabIndex={-1}>
+          {copy.recent}
+        </h2>
+        {!currentRecipeId && visible.length > 0 && (
           <Button
             variant="ghost"
             onClick={() => {

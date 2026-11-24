@@ -4,7 +4,7 @@
   min-width: 0;
   max-width: var(--layout-max-page);
   margin: 0 auto;
-  padding: var(--space-12) var(--layout-gutter-desktop);
+  padding: var(--space-6) var(--layout-gutter-desktop);
   border-top: 1px solid var(--color-border-subtle);
 }
 .header {
@@ -14,18 +14,17 @@
   flex-wrap: wrap;
   gap: var(--space-4);
 }
-.header h2 {
+.title {
   font-family: var(--font-family-display);
-  font-size: var(--font-size-section-title-mobile);
+  font-size: var(--font-size-drawer-title);
   line-height: 1.2;
   margin: 0;
   overflow-wrap: anywhere;
 }
-.header h2:focus-visible {
+.title:focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: var(--space-1);
 }
-.header p,
 .status {
   font-size: var(--font-size-body-small);
   color: var(--color-text-secondary);
@@ -41,7 +40,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-6);
-  margin-top: var(--space-6);
+  margin-top: var(--space-4);
 }
 @container (min-width: 40rem) {
   .cards {
@@ -57,4 +56,30 @@
   .section {
     padding-inline: var(--layout-gutter-mobile);
   }
+}
+
+.title:lang(uk) {
+  font-family: var(--font-family-display-cyrillic);
+}
+.discoveryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+@container (min-width: 42rem) {
+  .discoveryGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}
+
+.embeddedSection {
+  container-type: inline-size;
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border-subtle);
+}
+.catalogAction {
+  margin-top: var(--space-6);
 }

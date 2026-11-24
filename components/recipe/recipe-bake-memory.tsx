@@ -1,5 +1,6 @@
 'use client';
 
+import { cookLaunchFragment } from '@/lib/persistence/cook-mode';
 import { Button } from '@/components/ui/button';
 
 import { NotebookPen } from 'lucide-react';
@@ -61,7 +62,7 @@ export function RecipeBakeMemory({
         )}
         <small>{messages.personal.bakedStoredInBrowser}</small>
       </div>
-      <Button variant="outline" href={cookModeHref}>
+      <Button variant="outline" href={cookModeHref + cookLaunchFragment}>
         {messages.cook.cookAgain}
       </Button>
     </aside>

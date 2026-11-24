@@ -23,9 +23,10 @@ export async function prepareGuestSubmission(
     fingerprintSecret: string;
     browserId: string;
     moderation: 'published' | 'pending';
+    hasPhotos?: boolean;
   },
 ) {
-  const input = parseGuestContribution(raw);
+  const input = parseGuestContribution(raw, context.hasPhotos);
   if (
     input.recipeId !== scope.recipeId ||
     !scope.version ||
@@ -56,7 +57,9 @@ export async function prepareGuestSubmission(
     );
   // Normalize case for repeat detection only; never remove +suffix or dots, link
   // accounts, verify an address or authorize editing using this private key.
-  const emailKey = await hmac('community-email-v1', input.email.toLowerCase());
+  const emailKey = input.email
+    ? await hmac('community-email-v1', input.email.toLowerCase())
+    : null;
   const browserKey = await hmac('community-browser-v1', context.browserId);
   const ownerHash = await sha(
     `community-owner-v1\0${input.operationId}\0${input.authorToken}`,
@@ -70,14 +73,14 @@ export async function prepareGuestSubmission(
     operation_id: input.operationId,
     owner_hash: ownerHash,
     fingerprint,
-    email: input.email,
+    email: input.email || null,
     email_key: emailKey,
     browser_key: browserKey,
     recipe_id: scope.recipeId,
     recipe_version: scope.version,
     configuration: scope.configuration,
-    display_name: input.name,
-    body: input.text,
+    display_name: input.name || null,
+    body: input.text || null,
     kind: null,
     experience: null,
     rating: input.rating,

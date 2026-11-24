@@ -70,7 +70,10 @@ function bounded(
   return result;
 }
 /** Parse an already size-bounded JSON body. Email format is not ownership proof. */
-export function parseGuestContribution(value: unknown): GuestContribution {
+export function parseGuestContribution(
+  value: unknown,
+  hasPhotos = false,
+): GuestContribution {
   if (!value || typeof value !== 'object' || Array.isArray(value))
     throw new CommunityInputError('form');
   const input = value as Record<string, unknown>;
@@ -89,11 +92,18 @@ export function parseGuestContribution(value: unknown): GuestContribution {
     throw new CommunityInputError('authorToken');
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(recipeId))
     throw new CommunityInputError('recipeId');
-  const name = bounded(input.name, 'name', 2, 60);
-  const email = bounded(input.email, 'email', 3, 254);
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(email))
+  const ratingOnly =
+    !hasPhotos &&
+    input.name == null &&
+    input.email == null &&
+    input.text == null;
+  const name = ratingOnly ? '' : bounded(input.name, 'name', 2, 60);
+  const email = ratingOnly ? '' : bounded(input.email, 'email', 3, 254);
+  if (!ratingOnly && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(email))
     throw new CommunityInputError('email');
-  const text = bounded(input.text, 'text', 1, 2000);
+  const text = ratingOnly
+    ? ''
+    : bounded(input.text, 'text', hasPhotos ? 0 : 1, 2000);
   const rating = input.rating ?? null;
   if (
     rating !== null &&
@@ -103,6 +113,7 @@ export function parseGuestContribution(value: unknown): GuestContribution {
       rating > 5)
   )
     throw new CommunityInputError('rating');
+  if (ratingOnly && rating === null) throw new CommunityInputError('rating');
   return {
     operationId,
     authorToken,

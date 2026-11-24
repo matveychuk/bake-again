@@ -59,13 +59,14 @@ export async function preparePhoto(file: File): Promise<PreparedPhoto> {
 }
 
 export interface ReviewSubmission {
+  contributionId?: string;
   review: {
     operationId: string;
     authorToken: string;
     recipeId: string;
-    name: string;
-    email: string;
-    text: string;
+    name?: string;
+    email?: string;
+    text?: string;
     rating: number | null;
   };
   /** Stable ids/tokens per photo, so a retry reuses the same permits. */
@@ -96,21 +97,24 @@ export async function sendGuestReview(submission: ReviewSubmission) {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
+      contributionId: submission.contributionId,
       review: submission.review,
       photos,
       token: submission.token,
     }),
+    keepalive: submission.photos.length === 0,
     credentials: 'omit',
     referrerPolicy: 'no-referrer',
     signal: AbortSignal.timeout(30_000),
   });
   const result = (await response.json().catch(() => null)) as {
     ok?: boolean;
+    id?: string;
     status?: 'published' | 'pending';
     photos?: string[];
     error?: string;
   } | null;
-  if (!response.ok || !result?.ok || !result.status)
+  if (!response.ok || !result?.ok || !result.id || !result.status)
     throw new ReviewRequestError(
       result?.error ?? 'UNAVAILABLE',
       response.status,
@@ -142,6 +146,7 @@ export async function sendGuestReview(submission: ReviewSubmission) {
     }),
   );
   return {
+    id: result.id,
     status: result.status,
     photosAccepted: uploads.every(Boolean),
   };

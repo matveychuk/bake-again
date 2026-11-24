@@ -8,6 +8,7 @@ import styles from './guest-review-example.module.css';
 export function GuestReviewExample() {
   const [locale, setLocale] = useState<AppLocale>('uk');
   const [scenario, setScenario] = useState('published');
+  const [compact, setCompact] = useState(false);
   const [version, setVersion] = useState(0);
   return (
     <div className={styles.example}>
@@ -43,17 +44,28 @@ export function GuestReviewExample() {
               <option value="error">Помилка надсилання</option>
             </select>
           </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={compact}
+              onChange={(event) => setCompact(event.target.checked)}
+            />
+            Компактна форма після приготування
+          </label>
         </fieldset>
       </details>
       <GuestReviewForm
-        key={`${locale}-${scenario}-${version}`}
+        key={`${locale}-${scenario}-${version}-${compact}`}
+        layout={compact ? 'cook-completion' : 'stacked'}
+        headingLevel={compact ? 'h2' : 'h3'}
         locale={locale}
         recipeId="crepes"
         demo
-        submitReview={async () => {
+        submitReview={async (draft) => {
           await new Promise((resolve) => setTimeout(resolve, 600));
           if (scenario === 'error') throw new Error('DESIGN_LAB_SIMULATION');
           return {
+            id: draft.contributionId ?? draft.contribution.operationId,
             status: scenario === 'published' ? 'published' : 'pending',
             photosAccepted: true,
           };

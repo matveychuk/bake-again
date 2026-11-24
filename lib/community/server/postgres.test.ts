@@ -290,3 +290,85 @@ void test('public review list exposes only published fields and stored photos', 
     await db.exec('RESET ROLE');
   }
 });
+
+void test('a vote is counted without contact, then enriched by its owner on the same row', async (t) => {
+  const db = new PGlite();
+  t.after(() => db.close());
+  await db.exec(
+    'CREATE ROLE anon; CREATE ROLE authenticated; CREATE ROLE service_role;',
+  );
+  for (const sql of [
+    migration,
+    ...later,
+    migrationSql('20261124010000_community_rating_only'),
+  ])
+    await db.exec(sql);
+  const { name, email, text, ...vote } = guest;
+  const initial = await prepareGuestSubmission(vote, scope, context);
+  assert.equal(initial.email, null);
+  const save = async (command: unknown) =>
+    (
+      await db.query<{ result: { id: string; replayed: boolean } }>(
+        'SELECT public.community_save_review($1::jsonb) AS result',
+        [JSON.stringify(command)],
+      )
+    ).rows[0].result;
+  const feedback = async () =>
+    (
+      await db.query<{
+        result: {
+          ratingCount: number;
+          ratingTotal: number;
+          reviews: unknown[];
+        };
+      }>('SELECT public.community_recipe_feedback($1) AS result', ['crepes'])
+    ).rows[0].result;
+  const first = await save(initial);
+  assert.deepEqual(await feedback(), {
+    ratingCount: 1,
+    ratingTotal: 4,
+    reviews: [],
+  });
+  assert.equal((await save(initial)).id, first.id);
+  const revised = await prepareGuestSubmission(
+    { ...vote, rating: 5 },
+    scope,
+    context,
+  );
+  assert.equal(
+    (await save({ ...revised, contribution_id: first.id })).id,
+    first.id,
+  );
+  await assert.rejects(
+    save({ ...revised, owner_hash: 'c'.repeat(64) }),
+    /OPERATION_REUSED/,
+  );
+  await assert.rejects(
+    save({ ...revised, contribution_id: crypto.randomUUID() }),
+    /OPERATION_REUSED/,
+  );
+  const full = await prepareGuestSubmission(
+    { ...vote, name, email, text, rating: 5 },
+    scope,
+    context,
+  );
+  assert.equal(
+    (await save({ ...full, contribution_id: first.id })).id,
+    first.id,
+  );
+  assert.equal((await save(full)).replayed, true);
+  await assert.rejects(save(initial), /OPERATION_REUSED/);
+  const result = await feedback();
+  assert.equal(result.ratingCount, 1);
+  assert.equal(result.ratingTotal, 5);
+  assert.equal(result.reviews.length, 1);
+  assert.ok(!JSON.stringify(result).includes(email));
+  assert.equal(
+    (
+      await db.query<{ email: string }>(
+        'SELECT email FROM bake_again_community.guest_contacts',
+      )
+    ).rows[0].email,
+    email,
+  );
+});

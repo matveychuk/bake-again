@@ -1,6 +1,7 @@
 'use client';
 /* oxlint-disable next/no-img-element -- local blob previews must appear immediately without an image optimizer */
 import {
+  useCallback,
   useEffect,
   useId,
   useRef,
@@ -8,6 +9,7 @@ import {
   type ChangeEvent,
   type SubmitEvent,
 } from 'react';
+import { useReviewRating } from './use-review-rating';
 import { Check, ImagePlus, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { AppLocale } from '@/lib/i18n/config';
@@ -16,6 +18,7 @@ import { NewsletterInvitation } from '@/components/site/newsletter-invitation';
 import { validPhotoMime } from '@/lib/community/photo-constraints';
 import {
   preparePhoto,
+  sendGuestReview,
   randomSecret,
   type PreparedPhoto,
 } from '@/lib/community/client';
@@ -25,11 +28,12 @@ import { reviewFormMessages } from './review-form.messages';
 import styles from './guest-review-form.module.css';
 
 export interface GuestReviewDraft {
+  contributionId?: string;
   contribution: {
     recipeId: string;
-    name: string;
-    email: string;
-    text: string;
+    name?: string;
+    email?: string;
+    text?: string;
     rating: number | null;
     operationId: string;
     authorToken: string;
@@ -39,6 +43,7 @@ export interface GuestReviewDraft {
   token: string;
 }
 export interface GuestReviewResult {
+  id: string;
   status: 'published' | 'pending';
   photosAccepted: boolean;
 }
@@ -51,6 +56,15 @@ interface PreviewPhoto {
   error?: string;
 }
 
+function publishReview(draft: GuestReviewDraft) {
+  return sendGuestReview({
+    contributionId: draft.contributionId,
+    review: draft.contribution,
+    photos: draft.photos,
+    token: draft.token,
+  });
+}
+
 /** The adapter performs the network work; Design Lab injects a simulation.
  * With challengeSiteKey the form renders Turnstile and passes its token on.
  */
@@ -58,12 +72,13 @@ export function GuestReviewForm({
   locale = 'uk',
   recipeId,
   recipeTitle,
-  submitReview,
   challengeSiteKey,
+  submitReview = challengeSiteKey ? publishReview : undefined,
   signup,
   onPublished,
   demo = false,
   layout = 'stacked',
+  headingLevel: Heading = 'h3',
 }: {
   locale?: AppLocale;
   recipeId: string;
@@ -75,8 +90,11 @@ export function GuestReviewForm({
   onPublished?: () => void;
   demo?: boolean;
   /** `wide`: full section width, compact three-row grid on large containers. */
-  layout?: 'stacked' | 'wide';
+  layout?: 'stacked' | 'wide' | 'cook-completion';
+  headingLevel?: 'h2' | 'h3';
 }) {
+  const compact = layout === 'cook-completion';
+  const [expanded, setExpanded] = useState(!compact);
   const copy = reviewFormMessages[locale];
   const id = useId();
   const fileRef = useRef<HTMLInputElement>(null);
@@ -91,7 +109,6 @@ export function GuestReviewForm({
     authorToken: string;
   } | null>(null);
   const [invitationOpen, setInvitationOpen] = useState(false);
-  const [rating, setRating] = useState<number | null>(null);
   const [photos, setPhotos] = useState<PreviewPhoto[]>([]);
   const [photoError, setPhotoError] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -104,6 +121,21 @@ export function GuestReviewForm({
   const [challengeFailed, setChallengeFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [publishedEmail, setPublishedEmail] = useState('');
+  const renewChallenge = useCallback(() => {
+    setToken(null);
+    setAttempt((value) => value + 1);
+  }, []);
+  const vote = useReviewRating(
+    recipeId,
+    submitReview,
+    challengeSiteKey,
+    token,
+    renewChallenge,
+    onPublished,
+    demo,
+  );
+  const rating = vote.rating;
+  const votePending = vote.status === 'queued' || vote.status === 'saving';
   useEffect(() => {
     const active = urls.current;
     return () => {
@@ -229,7 +261,7 @@ export function GuestReviewForm({
   }
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (inFlight.current || !submitReview) return;
+    if (!expanded || votePending || inFlight.current || !submitReview) return;
     const form = event.currentTarget;
     const values = new FormData(form);
     const read = (key: string) => {
@@ -241,7 +273,7 @@ export function GuestReviewForm({
     const text = read('text');
     // Same order as the fields, so focus lands on the first invalid one.
     const invalid: Record<string, string> = {};
-    if (!text || Array.from(text).length > 2000)
+    if ((!text && photos.length === 0) || Array.from(text).length > 2000)
       invalid.text = copy.requiredText;
     if (Array.from(name).length < 2 || Array.from(name).length > 60)
       invalid.name = copy.requiredName;
@@ -278,9 +310,12 @@ export function GuestReviewForm({
       const result = await submitReview({
         contribution: {
           ...payload,
-          operationId: operation.current.operationId,
-          authorToken: operation.current.authorToken,
+          operationId:
+            vote.receipt.current?.operationId ?? operation.current.operationId,
+          authorToken:
+            vote.receipt.current?.authorToken ?? operation.current.authorToken,
         },
+        contributionId: vote.receipt.current?.id,
         photos: photos.map(({ id: photoId, uploadToken, prepared }) => ({
           id: photoId,
           uploadToken,
@@ -293,7 +328,8 @@ export function GuestReviewForm({
       setState(result.status);
       setPhotosAccepted(photos.length === 0 || result.photosAccepted);
       form.reset();
-      setRating(null);
+      vote.reset();
+      if (compact) setExpanded(false);
       for (const photo of photos) if (photo.url) URL.revokeObjectURL(photo.url);
       urls.current.clear();
       setPhotos([]);
@@ -332,7 +368,7 @@ export function GuestReviewForm({
   return (
     <>
       <form
-        className={`${styles.form}${layout === 'wide' ? ` ${styles.wide}` : ''}`}
+        className={`${styles.form} ${layout !== 'stacked' ? styles.wide : ''} ${compact ? styles.compact : ''}`}
         lang={locale}
         onSubmit={submit}
         noValidate
@@ -341,8 +377,11 @@ export function GuestReviewForm({
       >
         <header className={styles.heading}>
           <div className={styles.titleRow}>
-            <h3 id={`${id}-title`}>{copy.title}</h3>
-            <fieldset className={styles.ratingField} disabled={busy}>
+            <Heading id={`${id}-title`}>{copy.title}</Heading>
+            <fieldset
+              className={styles.ratingField}
+              disabled={busy || vote.status === 'saving'}
+            >
               <legend className={styles.visuallyHidden}>
                 {copy.rating} ({copy.optional})
               </legend>
@@ -355,31 +394,79 @@ export function GuestReviewForm({
                         name="rating"
                         value={value}
                         checked={rating === value}
-                        onChange={() => setRating(value)}
+                        onChange={() => {
+                          vote.choose(value);
+                          setExpanded(true);
+                        }}
+                        onClick={compact ? () => setExpanded(true) : undefined}
+                        aria-controls={compact ? `${id}-fields` : undefined}
                         aria-label={`${value} ${copy.ofFive}`}
                       />
-                      <span>{value}</span>
-                      <Star aria-hidden="true" size={16} />
+                      {!compact && <span>{value}</span>}
+                      <Star
+                        aria-hidden="true"
+                        size={compact ? 23 : 16}
+                        className={
+                          compact && rating !== null && value <= rating
+                            ? styles.filledStar
+                            : undefined
+                        }
+                      />
                     </label>
                   ))}
                 </div>
-                {rating !== null && (
-                  <Button
-                    type="button"
-                    variant="link"
-                    onClick={() => setRating(null)}
-                  >
-                    {copy.clear}
-                  </Button>
-                )}
               </div>
             </fieldset>
           </div>
           {recipeTitle && <p className={styles.recipe}>{recipeTitle}</p>}
-          <p>{copy.intro}</p>
+          {compact ? (
+            <p className={styles.prompt}>
+              <button
+                type="button"
+                aria-controls={`${id}-fields`}
+                aria-expanded={expanded}
+                disabled={busy}
+                onClick={() => {
+                  setExpanded(!expanded);
+                }}
+              >
+                {!expanded && <>{copy.question} </>}
+                <span>{expanded ? copy.collapse : copy.invite}</span>
+              </button>
+            </p>
+          ) : (
+            <p>{copy.intro}</p>
+          )}
         </header>
+        {vote.status !== 'idle' && (
+          <output className={styles.voteStatus}>
+            {vote.status === 'saved'
+              ? copy.ratingSaved
+              : vote.status === 'error'
+                ? copy.ratingFailed
+                : copy.ratingSaving}
+            {(vote.status === 'error' || (votePending && challengeFailed)) && (
+              <Button
+                variant="link"
+                type="button"
+                onClick={() => {
+                  setChallengeFailed(false);
+                  renewChallenge();
+                  if (rating) vote.choose(rating);
+                }}
+              >
+                {copy.tryAgain}
+              </Button>
+            )}
+          </output>
+        )}
         {demo && <p className={styles.demo}>{copy.demo}</p>}
-        <fieldset className={styles.controls} disabled={busy}>
+        <fieldset
+          id={`${id}-fields`}
+          className={styles.controls}
+          hidden={!expanded}
+          disabled={busy || !expanded}
+        >
           <fieldset
             className={`${styles.choice} ${styles.photoField}`}
             aria-describedby={`${id}-photo-hint`}
@@ -459,7 +546,7 @@ export function GuestReviewForm({
               onChange={() => clearFieldError('text')}
               rows={5}
               maxLength={2000}
-              required
+              required={photos.length === 0}
               aria-invalid={!!errors.text}
               aria-describedby={errors.text ? `${id}-text-error` : undefined}
             />
@@ -520,6 +607,7 @@ export function GuestReviewForm({
                 className={styles.submit}
                 disabled={
                   !submitReview ||
+                  votePending ||
                   busy ||
                   preparing ||
                   (!!challengeSiteKey && !token)
@@ -551,7 +639,9 @@ export function GuestReviewForm({
           {done && <Check aria-hidden="true" size={20} />}
           {notice}
         </p>
-        {!submitReview && <p className={styles.hint}>{copy.unavailable}</p>}
+        {expanded && !submitReview && (
+          <p className={styles.hint}>{copy.unavailable}</p>
+        )}
       </form>
       <NewsletterInvitation
         locale={locale}

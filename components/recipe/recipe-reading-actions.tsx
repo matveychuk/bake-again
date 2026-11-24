@@ -74,7 +74,11 @@ export function RecipeCookEntry({
     <div className={`${styles.cookEntry} ${heading ? styles.withHeading : ''}`}>
       {heading && <div className={styles.methodTitle}>{heading}</div>}
       <div className={styles.cookActions}>
-        <RecipeCookLink variant="default" href={href}>
+        <RecipeCookLink
+          variant="default"
+          href={href}
+          launch={!needsCream && hasMethod}
+        >
           {!needsCream && (
             <Play size={16} fill="currentColor" aria-hidden="true" />
           )}

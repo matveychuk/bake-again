@@ -65,20 +65,7 @@ export interface PhotoAdmissionRepository {
   complete(id: string, admissionHash: string): Promise<void>;
   fail(id: string, admissionHash: string): Promise<void>;
 }
-/** Only a trusted issuer may supply authorContext, AFTER owner proof,
- * same-origin/anti-spam checks and network/browser quotas. No public
- * issuer endpoint is mounted yet. Email cannot supply these author privileges.
- * The client generates and retains uploadToken before the request, so retry of
- * issuance never requires storing a raw token or silently extending the expiry.
- */
-export async function preparePhotoAdmission(
-  raw: unknown,
-  authorContext: {
-    contributionId: string;
-    ownerHash: string;
-    checksPassed: true;
-  },
-): Promise<PhotoAdmissionCommand> {
+export function parsePhotoRequest(raw: unknown) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw))
     throw new PhotoAdmissionError('INVALID_REQUEST', 400);
   const input = raw as Record<string, unknown>;
@@ -96,6 +83,30 @@ export async function preparePhotoAdmission(
     !validPhotoSecret(input.sha256)
   )
     throw new PhotoAdmissionError('INVALID_REQUEST', 400);
+  return {
+    id: input.id,
+    uploadToken: input.uploadToken,
+    mime: input.mime,
+    bytes: input.bytes,
+    sha256: input.sha256,
+  };
+}
+
+/** Only a trusted issuer may supply authorContext, AFTER owner proof,
+ * same-origin/anti-spam checks and network/browser quotas. No public
+ * issuer endpoint is mounted yet. Email cannot supply these author privileges.
+ * The client generates and retains uploadToken before the request, so retry of
+ * issuance never requires storing a raw token or silently extending the expiry.
+ */
+export async function preparePhotoAdmission(
+  raw: unknown,
+  authorContext: {
+    contributionId: string;
+    ownerHash: string;
+    checksPassed: true;
+  },
+): Promise<PhotoAdmissionCommand> {
+  const input = parsePhotoRequest(raw);
   if (
     !validPhotoId(authorContext.contributionId) ||
     !validPhotoSecret(authorContext.ownerHash) ||

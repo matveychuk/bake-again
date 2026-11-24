@@ -34,7 +34,7 @@ export function RecipeCard({
   headingLevel,
 }: {
   recipe: RecipeCardData;
-  variant?: 'full' | 'compact';
+  variant?: 'full' | 'compact' | 'discovery';
   headingLevel?: 'h2' | 'h3';
 }) {
   const locale = recipe.locale ?? 'en';
@@ -47,7 +47,7 @@ export function RecipeCard({
   return (
     <article
       lang={locale}
-      className={`recipe-card${recipe.featured ? ' recipe-card--wide' : ''} ${variant === 'compact' ? styles.compact : styles.full}`}
+      className={`recipe-card${recipe.featured ? ' recipe-card--wide' : ''} ${styles[variant]}`}
     >
       <a
         className="recipe-card-link"
@@ -68,7 +68,9 @@ export function RecipeCard({
             sizes={
               variant === 'compact'
                 ? '120px'
-                : '(min-width: 901px) 33vw, (min-width: 621px) 50vw, 100vw'
+                : variant === 'discovery'
+                  ? '(min-width: 720px) 25vw, 50vw'
+                  : '(min-width: 901px) 33vw, (min-width: 621px) 50vw, 100vw'
             }
           />
         </div>
@@ -79,7 +81,7 @@ export function RecipeCard({
             {recipe.title}
           </a>
         </Heading>
-        {isSaveableRecipeId(recipe.id) && (
+        {variant !== 'discovery' && isSaveableRecipeId(recipe.id) && (
           <SaveRecipeControl
             locale={locale}
             recipeId={recipe.id}
@@ -87,7 +89,7 @@ export function RecipeCard({
           />
         )}
       </div>
-      {(recipe.detail || recipe.difficulty) && (
+      {variant !== 'discovery' && (recipe.detail || recipe.difficulty) && (
         <ul className="recipe-card-facts">
           {recipe.detail && (
             <li>
@@ -103,7 +105,7 @@ export function RecipeCard({
           )}
         </ul>
       )}
-      {variant !== 'compact' && recipe.flour && (
+      {variant === 'full' && recipe.flour && (
         <p className="recipe-card-flour">
           {messages.recipe.flour}: <span>{recipe.flour}</span>
         </p>
@@ -114,7 +116,7 @@ export function RecipeCard({
           {messages.catalog.workingRecord}
         </p>
       )}
-      {variant !== 'compact' && (
+      {variant === 'full' && (
         <div className={styles.footer}>
           {draft && (
             <p className="recipe-card-draft">

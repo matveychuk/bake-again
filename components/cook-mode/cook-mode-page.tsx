@@ -16,6 +16,7 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  type ReactNode,
 } from 'react';
 import { ArrowLeft, Clock3, NotebookPen, X } from 'lucide-react';
 import { AssistantProvider } from '@/components/assistant';
@@ -46,6 +47,7 @@ import {
   readCookModeSession,
   resolveCookModeEntry,
   cookEntrySearch,
+  cookLaunchFragment,
   type CookTimerState,
 } from '@/lib/persistence/cook-mode';
 
@@ -65,12 +67,14 @@ export function CookModePage({
   detailHref,
   locale = 'en',
   configurationSearch = '',
+  completionReview,
 }: {
   recipeSlug: string;
   homeHref?: string;
   detailHref?: string;
   locale?: AppLocale;
   configurationSearch?: string;
+  completionReview: ReactNode;
 }) {
   const messages = getUiMessages(locale).cook;
   const definition = useMemo(
@@ -118,6 +122,7 @@ export function CookModePage({
   const [showCompletion, setShowCompletion] = useState(false);
   const [note, setNote] = useState('');
   const lastBakeSignature = useRef('');
+  const restartingFromRecipe = useRef(false);
   const [noteSaveStatus, setNoteSaveStatus] = useState<
     'saving' | 'saved' | 'error'
   >('saved');
@@ -157,12 +162,17 @@ export function CookModePage({
     setCompletedAt(null);
     setNote('');
     setNoteSaveStatus('saved');
-    const saved = readCookModeSession(
+    const previousSession = readCookModeSession(
       definition.recipeId,
       recipeVersionId,
       undefined,
       configurationKey,
     );
+    const startNextBake =
+      window.location.hash === cookLaunchFragment &&
+      previousSession?.completedAt;
+    restartingFromRecipe.current = Boolean(startNextBake);
+    const saved = startNextBake ? null : previousSession;
     const entry = resolveCookModeEntry(cookSteps, requestedStepId, saved);
     setStepIndex(entry.stepIndex);
     setShowCompletion(entry.showCompletion);
@@ -244,6 +254,15 @@ export function CookModePage({
       undefined,
       configurationKey,
     );
+    if (window.location.hash === cookLaunchFragment) {
+      if (restartingFromRecipe.current)
+        trackEvent('cook_restart', { recipe_id: definition.recipeId, locale });
+      window.history.replaceState(
+        window.history.state,
+        '',
+        window.location.pathname + window.location.search,
+      );
+    }
     if (!completedAt || !account.engine) return;
     const signature = JSON.stringify([configurationKey, completedAt, note]);
     if (lastBakeSignature.current === signature) {
@@ -267,6 +286,7 @@ export function CookModePage({
   }, [
     account.engine,
     account.ready,
+    locale,
     completedAt,
     completedStepIds,
     configuration,
@@ -337,7 +357,12 @@ export function CookModePage({
       setNoteSaveStatus('saving');
       setCompletedAt(new Date().toISOString());
       setShowCompletion(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.requestAnimationFrame(() => {
+        document
+          .getElementById('cook-complete-title')
+          ?.focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      });
       return;
     }
     goToStep(stepIndex + 1);
@@ -380,22 +405,6 @@ export function CookModePage({
       remainingSeconds: selectedTimerSeconds,
       endAt: null,
     });
-  }
-
-  function restart() {
-    if (!definition) return;
-    trackEvent('cook_restart', { recipe_id: definition.recipeId, locale });
-    setPreviousBake(
-      readBakeRecord(definition.recipeId, recipeVersionId, configuration),
-    );
-    setStepIndex(0);
-    setCompletedStepIds([]);
-    setTimer(null);
-    setCompletedAt(null);
-    setShowCompletion(false);
-    setNote('');
-    setNoteSaveStatus('saved');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function changeNote(nextNote: string) {
@@ -453,9 +462,10 @@ export function CookModePage({
         <div className={styles.workColumn}>
           {completedAt && showCompletion ? (
             <CookCompletion
+              review={completionReview}
+              recipeId={definition.recipeId}
               completedCount={completedScreenCount}
               totalSteps={cookSteps.length}
-              detailHref={resolvedDetailHref}
               note={note}
               noteSaveStatus={
                 account.error ||
@@ -469,7 +479,6 @@ export function CookModePage({
               isGuest={!account.engine}
               onSaveNote={() => requestPersonalAction(locale, () => {})}
               onNoteChange={changeNote}
-              onRestart={restart}
               locale={locale}
             />
           ) : (

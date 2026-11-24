@@ -1,6 +1,12 @@
 export const reviewFormMessages = {
   uk: {
     title: 'Залиш відгук',
+    question: 'Як тобі рецепт?',
+    ratingSaved: 'Оцінку збережено.',
+    ratingSaving: 'Зберігаємо оцінку…',
+    ratingFailed: 'Не вдалося зберегти оцінку.',
+    invite: 'Поділися враженнями або постав запитання',
+    collapse: 'Згорнути форму',
     intro: 'Як тобі рецепт? Поділися враженнями або постав запитання.',
     text: 'Що вдалося або про що хочеш запитати?',
     name: 'Ім’я',
@@ -23,7 +29,7 @@ export const reviewFormMessages = {
     submit: 'Опублікувати відгук',
     requiredName: 'Вкажи ім’я: від 2 до 60 символів.',
     requiredEmail: 'Вкажи коректний email.',
-    requiredText: 'Напиши відгук або запитання: до 2000 символів.',
+    requiredText: 'Додай фото або напиши до 2000 символів.',
     photoLimit: 'Можна додати до 3 фото. Решту не додано.',
     photoSize: 'Це фото завелике. Вибери інший файл.',
     photoFormat: 'Вибери фото JPG, PNG або WebP.',
@@ -44,6 +50,12 @@ export const reviewFormMessages = {
   },
   es: {
     title: 'Deja tu reseña',
+    question: '¿Qué te pareció la receta?',
+    ratingSaved: 'Valoración guardada.',
+    ratingSaving: 'Guardando tu valoración…',
+    ratingFailed: 'No se pudo guardar tu valoración.',
+    invite: 'Comparte tu experiencia o haz una pregunta',
+    collapse: 'Ocultar formulario',
     intro:
       '¿Qué te pareció la receta? Comparte tu experiencia o haz una pregunta.',
     text: '¿Qué te salió bien o qué quieres preguntar?',
@@ -67,7 +79,7 @@ export const reviewFormMessages = {
     submit: 'Publicar reseña',
     requiredName: 'Escribe un nombre de entre 2 y 60 caracteres.',
     requiredEmail: 'Escribe un correo electrónico válido.',
-    requiredText: 'Escribe una reseña o pregunta de hasta 2000 caracteres.',
+    requiredText: 'Añade una foto o escribe hasta 2000 caracteres.',
     photoLimit: 'Puedes añadir hasta 3 fotos. Las demás no se han añadido.',
     photoSize: 'Esta foto es demasiado grande. Elige otro archivo.',
     photoFormat: 'Elige una foto JPG, PNG o WebP.',
@@ -88,6 +100,12 @@ export const reviewFormMessages = {
   },
   en: {
     title: 'Leave a review',
+    question: 'How did you like the recipe?',
+    ratingSaved: 'Rating saved.',
+    ratingSaving: 'Saving your rating…',
+    ratingFailed: 'Your rating could not be saved.',
+    invite: 'Share your thoughts or ask a question',
+    collapse: 'Hide form',
     intro:
       'How did you like the recipe? Share your thoughts or ask a question.',
     text: 'What worked, or what would you like to ask?',
@@ -111,7 +129,7 @@ export const reviewFormMessages = {
     submit: 'Publish review',
     requiredName: 'Enter a name of 2 to 60 characters.',
     requiredEmail: 'Enter a valid email address.',
-    requiredText: 'Write a review or question, up to 2000 characters.',
+    requiredText: 'Add a photo or write up to 2000 characters.',
     photoLimit:
       'You can add up to 3 photos. The remaining files were not added.',
     photoSize: 'This photo is too large. Choose another file.',

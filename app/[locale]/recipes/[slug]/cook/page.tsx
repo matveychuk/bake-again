@@ -1,3 +1,4 @@
+import { cookCompletionReview } from '@/components/community/recipe-reviews';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { CookModePage } from '@/components/cook-mode/cook-mode-page';
@@ -62,6 +63,7 @@ export default async function LocalizedRecipeCookModeRoute({
 
   return (
     <CookModePage
+      completionReview={await cookCompletionReview(definition.recipeId, locale)}
       recipeSlug={legacySlug}
       detailHref={detailHref}
       homeHref={localeHomePath(locale)}

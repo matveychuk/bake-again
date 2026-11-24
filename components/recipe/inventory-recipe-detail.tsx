@@ -69,8 +69,7 @@ import styles from './inventory-recipe-detail.module.css';
 import { recipePublicLink } from '@/content/recipes/recipe-public-link';
 import { RecipeUtilityActions } from './recipe-utility-actions';
 import { RecipePrintView } from './recipe-print-view';
-import { RecentRecipes } from '@/components/personal-state/recent-recipes';
-import { getRecipeCatalog } from '@/content/recipes/catalog';
+import { RecipeDiscovery } from './recipe-discovery';
 import { NewsletterSignup } from '@/components/site/newsletter-signup';
 import { RecipeReviews } from '@/components/community/recipe-reviews';
 import { RecipeStoryVideo } from './recipe-story-video';
@@ -622,9 +621,8 @@ export function InventoryRecipeDetail({
           <RecipeReviews recipeId={recipe.id} locale={locale} />
         )}
         {!isDraft && (
-          <RecentRecipes
+          <RecipeDiscovery
             locale={locale}
-            recipes={getRecipeCatalog(locale)}
             currentRecipeId={recipe.id}
           />
         )}

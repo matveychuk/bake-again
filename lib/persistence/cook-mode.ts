@@ -4,6 +4,9 @@ import {
   type StorageLike,
 } from './storage.ts';
 
+/** A launch from recipe detail resumes unfinished progress or starts the next bake. */
+export const cookLaunchFragment = '#start-cooking';
+
 export type CookTimerState = {
   stepId: string;
   durationSeconds: number;

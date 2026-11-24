@@ -1,5 +1,13 @@
 # Design system changelog
 
+## 2026-11-24 · Cook Mode completion
+
+Finishing a published recipe shows five stars and a text invitation above four discovery cards. Choosing a star saves an anonymous rating and opens the fields. A photo or comment adds to the same review. The text invitation also opens the fields without a rating. The header arrow returns to the recipe, where the main Cook entry can start the next bake.
+
+## 2026-11-24 · Recipe discovery
+
+Recipe pages show two compact lists of linked food photographs and titles before browsing history. The history heading uses the smaller display size, with the clear action on the homepage. Design Lab includes the production layout in Ukrainian, English and Spanish.
+
 ## 2026-11-24 · Tested flour choices
 
 The crinkle cookie recipe and its Design Lab overview show two separately tested flour blends. The ingredient row gives a single weight and the shopping drawer accepts one blend.

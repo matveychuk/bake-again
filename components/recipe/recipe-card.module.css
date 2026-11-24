@@ -111,3 +111,30 @@
     grid-template-columns: minmax(0, 1fr) auto;
   }
 }
+
+.discovery:global(.recipe-card) {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.discovery :global(.recipe-image) {
+  height: auto;
+  aspect-ratio: 3 / 2;
+}
+
+.discovery :global(.recipe-card-header) {
+  display: block;
+  margin-top: var(--space-2);
+}
+
+.discovery:global(.recipe-card) h3 {
+  font-size: var(--font-size-body-large);
+  line-height: 1.25;
+}
+
+.discovery:hover h3,
+.discovery:focus-within h3 {
+  text-decoration: underline;
+  text-underline-offset: var(--space-1);
+}

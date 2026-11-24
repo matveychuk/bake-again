@@ -14,14 +14,17 @@
   notes, shopping state, AI controls, social links or tracking parameters in output.
   `RecipeOverview.expandEvidence` prints the full evidence explanation without a
   closed disclosure. Selected quantities always retain their own evidence status.
-- `RecentRecipes` reuses compact RecipeCards. `RecipeCard.headingLevel` supports h3
-  beneath the block's h2 without changing the compact visual treatment. Clear history
-  affects only viewing history, preserves focus and announces its result. Empty
-  history occupies no space, except immediately after a clear confirmation. The
-  section fills its available width up to the page token, including in the flex page
-  shell; inline-size containment must not collapse its intrinsic width. History
-  remains browser-local and independent of signed-in Saved recipes. Design
-  Lab fixtures use `preview` and do not read/write history.
+- Published recipe pages end with two server-rendered recipe lists. Show up to four
+  related catalogue recipes, then up to four more in varied collections. Use the
+  localized collection name when all related cards share it. Component pages link
+  back to recipes that use the component. Empty lists take up no space.
+- The `discovery` RecipeCard variant pairs a landscape food image with a linked
+  h3 title. Four columns become two on narrow screens. Keep the whole title visible.
+  Design Lab renders production lists at `#recipe-utilities` in each site language.
+- `RecentRecipes` follows the lists and uses compact RecipeCards below a small h2.
+  Its browser-local history is independent of signed-in Saved recipes. The homepage
+  holds the Clear history action, focus management and confirmation. Empty history
+  occupies no space except for confirmation. Design Lab uses isolated preview data.
 - `NewsletterSignup` and `NewsletterInvitation` accept an optional
   `invitationCopy` prop with the title, description and action label for a
   particular placement. The strip and its dialog share this copy.
@@ -341,7 +344,13 @@ an authorized delivery check. Do not claim browser preview proves email delivery
   `Save` / Want to bake. Store the date, exact recipe version, exact base or adjusted
   configuration and one note locally; never present this personal state as Tested.
 - The completion note is optional and saves automatically as it changes. Show an explicit
-  saving, saved or failed message before the Return to recipe and Cook again actions.
+  saving, saved or failed message for signed-in cooks. On completion, group the optional
+  field and guest save action in a disclosure. The header arrow returns to the recipe.
+  Its main Cook entry resumes unfinished progress or starts a fresh bake after completion.
+  The review prompt shows five stars and a text invitation ahead of four discovery cards.
+  Either opens the fields. The invitation also works without a rating. Publish review is the
+  primary action. All recipes is a text link when the form is present and the primary
+  action when it is absent. The Cook tools example links to the final crepe step in each locale.
 - Recipe detail shows the latest Baked date and note. Starting again clears the new note
   field but shows the previous note before the first step, so advice remains useful while
   cooking. Long notes wrap without clipping.
@@ -1128,9 +1137,11 @@ only when the community runtime is configured. The section lists published
 reviews (name, date, stars with screen-reader text, text, thumbnails) and holds
 `GuestReviewForm`; `preview` fixtures power the Design Lab example.
 
-`GuestReviewForm` contains optional rating, optional photos (browser re-encoded),
-required text, public name and private email. With `challengeSiteKey` it renders
-Turnstile (`community_review`); the injected adapter performs the network work.
+`GuestReviewForm` saves a selected star rating without contact details. Adding text
+or a photo to that review requires a public name and private email. Photos are
+re-encoded in the browser. With `challengeSiteKey` it renders
+Turnstile (`community_review`) and uses the shared review submission adapter. Cook Mode
+uses the same form with an h2 after completion. The private bake note stays separate.
 
 `NewsletterInvitation.afterReview` is a controlled variant opened after a
 published review: no inline invitation, publication title and subscription

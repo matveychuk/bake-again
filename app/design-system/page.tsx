@@ -93,7 +93,7 @@ import { getCreamOptionCopy } from '@/content/recipes/cream-option-copy';
 import styles from './design-system.module.css';
 import { RecipeUtilityActions } from '@/components/recipe/recipe-utility-actions';
 import { recipePublicLink } from '@/content/recipes/recipe-public-link';
-import { RecentRecipes } from '@/components/personal-state/recent-recipes';
+import { RecipeDiscovery } from '@/components/recipe/recipe-discovery';
 import { NewsletterForm } from '@/components/site/newsletter-form';
 import {
   getLeadMagnet,
@@ -491,6 +491,9 @@ export default function DesignSystemPage() {
               середня оцінка й форма. Читачі та тексти вигадані.
             </p>
             <RecipeReviewsExample />
+            <a href={`${getLocalizedRecipePath('crepes', 'uk', '/cook')}?step=flip-crepe`}>
+              Форма після завершення млинців
+            </a>
           </section>
           <section className={styles.section} id="components">
             <NumberedSectionTitle
@@ -1094,9 +1097,9 @@ export default function DesignSystemPage() {
                         url={links.url}
                         printHref={links.printHref}
                       />
-                      <RecentRecipes
+                      <RecipeDiscovery
                         locale={locale}
-                        recipes={getRecipeCatalog(locale)}
+                        currentRecipeId="plum-cake"
                         preview
                       />
                       <NewsletterInvitation locale={locale} />
@@ -1544,6 +1547,9 @@ export default function DesignSystemPage() {
               <CookToolsExample />
               {(['uk', 'en', 'es'] as const).map((locale) => (
                 <div key={locale} lang={locale}>
+                  <a href={`${getLocalizedRecipePath('crepes', locale)}/cook?step=flip-crepe`}>
+                    {getUiMessages(locale).cook.finishCooking}
+                  </a>
                   <CookTimerExample
                     locale={locale}
                     step={createRecipeCookSteps(

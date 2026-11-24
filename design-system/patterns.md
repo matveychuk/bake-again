@@ -211,8 +211,8 @@ they remain inside the work column, 32px after the content.
 Cook Mode progress represents completed screens, not the current position. Persist the
 current canonical step ID, completed canonical IDs, a timer end time and the completion
 note per recipe version and exact configuration. Note changes save automatically with a
-visible saved or failed state. `Return to recipe` and `Cook again` never discard a saved
-note. Starting again opens a clean session and surfaces the previous note before step one.
+visible saved or failed state. The header arrow returns to the recipe. Launching Cook Mode
+from the recipe after completion opens a fresh session with the previous saved note before step one.
 A running timer continues across step navigation and reloads.
 Offer a 44px, visibly labelled `Keep screen awake` control near the current step where
 the browser supports Screen Wake Lock. Show when it is active or when the request

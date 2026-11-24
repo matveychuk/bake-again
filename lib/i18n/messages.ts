@@ -107,7 +107,6 @@ type UiMessages = {
     screenAwakeError: string;
     stepChanged: (current: number, total: number, title: string) => string;
     completedSteps: (completed: number, total: number) => string;
-    cookingComplete: string;
     completeTitle: string;
     privateNote: string;
     privateNoteDescription: string;
@@ -115,7 +114,6 @@ type UiMessages = {
     noteSaving: string;
     noteSaved: string;
     noteSaveFailed: string;
-    completionNextSteps: string;
     previousNote: string;
     previousNoteDescription: string;
     returnToRecipe: string;
@@ -373,7 +371,6 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         `Step ${current} of ${total}: ${title}`,
       completedSteps: (completed, total) =>
         `${completed} of ${total} steps completed`,
-      cookingComplete: 'Cooking complete',
       completeTitle: 'Cooking complete.',
       privateNote: 'Private note',
       privateNoteDescription:
@@ -383,8 +380,6 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       noteSaved: 'Saved to your account.',
       noteSaveFailed:
         'Could not save this note. Check your connection.',
-      completionNextSteps:
-        'You can return to the recipe or start another bake.',
       previousNote: 'From your last bake',
       previousNoteDescription: 'Keep this in mind as you cook.',
       returnToRecipe: 'Return to recipe',
@@ -682,7 +677,6 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         `Paso ${current} de ${total}: ${title}`,
       completedSteps: (completed, total) =>
         `${completed} de ${total} pasos completados`,
-      cookingComplete: 'Preparación terminada',
       completeTitle: 'La receta está lista.',
       privateNote: 'Nota privada',
       privateNoteDescription:
@@ -692,8 +686,6 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       noteSaved: 'Guardada en tu cuenta.',
       noteSaveFailed:
         'No se pudo guardar la nota. Revisa la conexión.',
-      completionNextSteps:
-        'Puedes volver a la receta o empezar de nuevo.',
       previousNote: 'De la última vez',
       previousNoteDescription: 'Tenlo en cuenta mientras preparas la receta.',
       returnToRecipe: 'Volver a la receta',
@@ -1006,7 +998,6 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
         `Крок ${current} з ${total}: ${title}`,
       completedSteps: (completed, total) =>
         `Виконано ${completed} з ${total} кроків`,
-      cookingComplete: 'Приготування завершено',
       completeTitle: 'Приготування завершено.',
       privateNote: 'Приватна нотатка',
       privateNoteDescription:
@@ -1016,8 +1007,6 @@ export const uiMessages: Record<AppLocale, UiMessages> = {
       noteSaved: 'Збережено в акаунті.',
       noteSaveFailed:
         'Не вдалося зберегти нотатку. Перевірте з’єднання.',
-      completionNextSteps:
-        'Можна повернутися до рецепта або почати знову.',
       previousNote: 'З минулого приготування',
       previousNoteDescription: 'Зверніть на це увагу під час приготування.',
       returnToRecipe: 'Повернутися до рецепта',

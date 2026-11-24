@@ -14,7 +14,6 @@ export const recipeUtilityCopy = {
     close: 'Закрити',
     back: 'Повернутися до рецепта',
     recent: 'Нещодавно переглянуті',
-    local: 'Лише в цьому браузері.',
     clear: 'Очистити історію',
     cleared: 'Історію переглядів очищено.',
     clearFailed: 'Браузер не дозволив очистити історію. Спробуйте ще раз.',
@@ -37,7 +36,6 @@ export const recipeUtilityCopy = {
     close: 'Close',
     back: 'Back to the recipe',
     recent: 'Recently viewed',
-    local: 'Only in this browser.',
     clear: 'Clear history',
     cleared: 'Viewing history cleared.',
     clearFailed: 'Your browser could not clear the history. Please try again.',
@@ -60,7 +58,6 @@ export const recipeUtilityCopy = {
     close: 'Cerrar',
     back: 'Volver a la receta',
     recent: 'Vistas recientemente',
-    local: 'Solo en este navegador.',
     clear: 'Borrar historial',
     cleared: 'Historial de visitas borrado.',
     clearFailed:

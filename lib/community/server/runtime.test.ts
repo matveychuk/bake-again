@@ -48,7 +48,7 @@ function fakeSupabase(overrides: Record<string, unknown> = {}) {
           action: 'community_review',
         },
       );
-    if (url.endsWith('/community_submit_probe'))
+    if (url.endsWith('/community_save_review'))
       return reply(
         overrides.submit ?? {
           id: contributionId,
@@ -59,8 +59,12 @@ function fakeSupabase(overrides: Record<string, unknown> = {}) {
       );
     if (url.endsWith('/community_photo_admission'))
       return reply({ id: body.input.id, state: 'issued', expiresAt: 1 });
-    if (url.endsWith('/community_recipe_reviews'))
-      return reply(overrides.list ?? []);
+    if (url.endsWith('/community_recipe_feedback'))
+      return reply({
+        reviews: overrides.list ?? [],
+        ratingCount: 1,
+        ratingTotal: 4,
+      });
     if (url.endsWith('/community_public_photo'))
       return reply(overrides.photo ?? null);
     if (url.includes('/storage/v1/object/'))
@@ -114,7 +118,7 @@ void test('submit verifies origin and challenge, publishes and admits photos', a
     photos: [photoId],
   });
   const command = calls.find((call) =>
-    call.url.endsWith('/community_submit_probe'),
+    call.url.endsWith('/community_save_review'),
   )!.body as { command: Record<string, unknown> };
   assert.equal(command.command.state, 'published');
   assert.equal(command.command.recipe_version, 'test-v1');

@@ -12,7 +12,7 @@
 .form:lang(uk) {
   --font-family-display: var(--font-family-display-cyrillic);
 }
-.form :is(p, h3) {
+.form :is(p, h2, h3) {
   margin: 0;
   overflow-wrap: anywhere;
 }
@@ -20,7 +20,7 @@
   display: grid;
   gap: var(--space-2);
 }
-.form .heading h3 {
+.form .heading :is(h2, h3) {
   font-family: var(--font-family-display);
   font-size: var(--font-size-section-title-mobile);
   line-height: var(--line-height-body);
@@ -287,4 +287,51 @@
   .form {
     display: none;
   }
+}
+
+.controls[hidden] {
+  display: none;
+}
+.compact .heading {
+  gap: 0;
+}
+.compact .heading h2 {
+  font-size: var(--font-size-body-large);
+  line-height: 1.2;
+}
+.compact .titleRow {
+  gap: 0 var(--space-2);
+}
+.compact .stars {
+  gap: 0;
+}
+.compact .star {
+  min-width: 44px;
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-action-primary-strong);
+}
+.compact .filledStar {
+  fill: currentColor;
+}
+.prompt {
+  font-size: var(--font-size-body-small);
+  color: var(--color-text-secondary);
+}
+.prompt button {
+  min-height: 44px;
+  text-align: start;
+  cursor: pointer;
+}
+.prompt button span {
+  color: var(--color-action-primary-strong);
+  text-decoration: underline;
+  text-underline-offset: var(--space-1);
+  cursor: pointer;
+}
+
+.voteStatus {
+  font-size: var(--font-size-body-small);
+  color: var(--color-text-secondary);
 }

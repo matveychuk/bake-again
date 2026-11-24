@@ -9,6 +9,7 @@ import {
   PhotoAdmissionError,
   photoSha256,
   preparePhotoAdmission,
+  parsePhotoRequest,
   validPhotoId,
   type PhotoMime,
 } from './photo-admission.ts';
@@ -256,6 +257,7 @@ export function createCommunityHandlers(deps: {
       const {
         review,
         photos: requested = [],
+        contributionId,
         token,
       } = body as Record<string, unknown>;
       if (!Array.isArray(requested) || requested.length > 3)
@@ -267,13 +269,25 @@ export function createCommunityHandlers(deps: {
       const scope =
         typeof recipeId === 'string' ? resolveScope(recipeId) : null;
       if (!scope) throw new CommunityHttpError('INVALID_REQUEST', 400);
+      if (contributionId !== undefined && !validPhotoId(contributionId))
+        throw new CommunityHttpError('INVALID_REQUEST', 400);
       const browserId = await verifyChallenge(request, token);
       const command = await prepareGuestSubmission(review, scope, {
         fingerprintSecret: config.fingerprintSecret,
         browserId,
         moderation: 'published',
+        hasPhotos: requested.length > 0,
       });
-      const saved = (await rpc('community_submit_probe', { command })) as {
+      if (command.display_name && !command.body) {
+        try {
+          requested.forEach(parsePhotoRequest);
+        } catch {
+          throw new CommunityInputError('photos');
+        }
+      }
+      const saved = (await rpc('community_save_review', {
+        command: { ...command, contribution_id: contributionId },
+      })) as {
         id?: unknown;
         status?: unknown;
       } | null;
@@ -318,7 +332,14 @@ export function createCommunityHandlers(deps: {
     if (!resolveScope(recipeId))
       return communityJson({ ok: false, error: 'NOT_FOUND' }, 404);
     try {
-      const rows = await rpc('community_recipe_reviews', { recipe: recipeId });
+      const feedback = (await rpc('community_recipe_feedback', {
+        recipe: recipeId,
+      })) as {
+        reviews?: unknown;
+        ratingCount: number;
+        ratingTotal: number;
+      } | null;
+      const rows = feedback?.reviews;
       if (!Array.isArray(rows))
         throw new CommunityHttpError('UNAVAILABLE', 503);
       const reviews: PublicContribution[] = rows.map((row) => ({
@@ -334,7 +355,16 @@ export function createCommunityHandlers(deps: {
           ? row.photos.filter(validPhotoId)
           : [],
       }));
-      return communityJson({ ok: true, reviews }, 200, 'public, max-age=30');
+      return communityJson(
+        {
+          ok: true,
+          reviews,
+          ratingCount: feedback!.ratingCount,
+          ratingTotal: feedback!.ratingTotal,
+        },
+        200,
+        'public, max-age=30',
+      );
     } catch {
       console.warn('community_list_failed');
       return communityJson({ ok: false, error: 'UNAVAILABLE' }, 503);

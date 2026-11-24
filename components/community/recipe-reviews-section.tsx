@@ -5,7 +5,6 @@ import { Star } from 'lucide-react';
 import type { AppLocale } from '@/lib/i18n/config';
 import type { NewsletterSignup } from '@/lib/newsletter/config';
 import type { PublicContribution } from '@/lib/community/contracts';
-import { sendGuestReview } from '@/lib/community/client';
 import { GuestReviewForm } from './guest-review-form';
 import styles from './recipe-reviews.module.css';
 
@@ -52,10 +51,16 @@ async function fetchReviews(recipeId: string, fresh = false) {
   const body = (await response.json()) as {
     ok?: boolean;
     reviews?: PublicContribution[];
+    ratingCount: number;
+    ratingTotal: number;
   };
   if (!response.ok || !body.ok || !Array.isArray(body.reviews))
     throw new Error('UNAVAILABLE');
-  return body.reviews;
+  return {
+    reviews: body.reviews,
+    count: body.ratingCount,
+    total: body.ratingTotal,
+  };
 }
 
 function Stars({ value }: { value: number }) {
@@ -85,19 +90,26 @@ export function RecipeReviewsSection({
 }) {
   const copy = messages[locale];
   const titleId = useId();
-  const [reviews, setReviews] = useState<PublicContribution[] | null>(
-    preview ?? null,
+  const [feedback, setFeedback] = useState(() =>
+    preview
+      ? {
+          reviews: preview,
+          count: preview.filter((row) => row.rating !== null).length,
+          total: preview.reduce((sum, row) => sum + (row.rating ?? 0), 0),
+        }
+      : null,
   );
+  const reviews = feedback?.reviews;
   const [failed, setFailed] = useState(false);
   const show = useCallback(
     (
-      request: Promise<PublicContribution[]>,
+      request: ReturnType<typeof fetchReviews>,
       active: () => boolean = () => true,
     ) =>
       request.then(
         (list) => {
           if (!active()) return;
-          setReviews(list);
+          setFeedback(list);
           setFailed(false);
         },
         () => {
@@ -114,10 +126,9 @@ export function RecipeReviewsSection({
       active = false;
     };
   }, [recipeId, show, preview]);
-  const rated = (reviews ?? []).filter((review) => review.rating !== null);
-  const average = rated.length
+  const average = feedback?.count
     ? new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(
-        rated.reduce((sum, review) => sum + review.rating!, 0) / rated.length,
+        feedback.total / feedback.count,
       )
     : null;
   const date = new Intl.DateTimeFormat(locale, { dateStyle: 'long' });
@@ -138,7 +149,7 @@ export function RecipeReviewsSection({
         {average && (
           <p className={styles.average}>
             <Star size={18} aria-hidden="true" className={styles.filled} />
-            {copy.average(average, rated.length)}
+            {copy.average(average, feedback!.count)}
           </p>
         )}
       </header>
@@ -207,16 +218,16 @@ export function RecipeReviewsSection({
             demo={!!preview}
             submitReview={
               preview
-                ? async () => {
+                ? async (draft) => {
                     await new Promise((resolve) => setTimeout(resolve, 600));
-                    return { status: 'published', photosAccepted: true };
+                    return {
+                      id:
+                        draft.contributionId ?? draft.contribution.operationId,
+                      status: 'published',
+                      photosAccepted: true,
+                    };
                   }
-                : (draft) =>
-                    sendGuestReview({
-                      review: draft.contribution,
-                      photos: draft.photos,
-                      token: draft.token,
-                    })
+                : undefined
             }
             onPublished={() => {
               if (!preview) void show(fetchReviews(recipeId, true));

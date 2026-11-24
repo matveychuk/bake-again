@@ -27,7 +27,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Нещодавно переглянуті рецепти',
-        body: 'У цьому браузері зберігаються ідентифікатори останніх 12 переглянутих опублікованих рецептів. На головній і на сторінках рецептів показуються до трьох із них. Кнопка «Очистити історію» видаляє лише історію переглядів: збережені рецепти, список покупок і приватні нотатки залишаються. Ця історія не надсилається на сервер.',
+        body: 'У цьому браузері зберігаються ідентифікатори останніх 12 переглянутих опублікованих рецептів. На головній і на сторінках рецептів показуються до трьох із них. Кнопка «Очистити історію» на головній видаляє лише історію переглядів: збережені рецепти, список покупок і приватні нотатки залишаються. Ця історія не надсилається на сервер.',
       },
       {
         title: 'Якщо підписуєтеся на листи',
@@ -66,7 +66,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Recently viewed recipes',
-        body: 'This browser stores the IDs of your last 12 viewed published recipes. Up to three appear on the home and recipe pages. Clear history removes only viewing history: saved recipes, shopping lists and private notes remain. This history is not sent to the server.',
+        body: 'This browser stores the IDs of your last 12 viewed published recipes. Up to three appear on the home and recipe pages. Clear history on the home page removes only viewing history: saved recipes, shopping lists and private notes remain. This history is not sent to the server.',
       },
       {
         title: 'If you subscribe to emails',
@@ -105,7 +105,7 @@ export const privacyContent: Record<
       },
       {
         title: 'Recetas vistas recientemente',
-        body: 'Este navegador guarda los identificadores de las últimas 12 recetas publicadas que has visitado. Se muestran hasta tres en el inicio y en las páginas de recetas. Borrar historial elimina solo el historial de visitas: conserva tus recetas guardadas, la lista de la compra y las notas privadas. Este historial no se envía al servidor.',
+        body: 'Este navegador guarda los identificadores de las últimas 12 recetas publicadas que has visitado. Se muestran hasta tres en el inicio y en las páginas de recetas. Borrar historial en la página de inicio elimina solo el historial de visitas: conserva tus recetas guardadas, la lista de la compra y las notas privadas. Este historial no se envía al servidor.',
       },
       {
         title: 'Si te suscribes a los correos',

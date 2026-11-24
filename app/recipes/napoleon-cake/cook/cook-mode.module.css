@@ -11,7 +11,7 @@
 }
 
 .unavailable svg,
-.completion > svg {
+.completionHeading > svg {
   color: var(--color-action-primary);
 }
 
@@ -57,8 +57,7 @@
   line-height: var(--line-height-relaxed);
 }
 
-.unavailable a,
-.completionActions a {
+.unavailable a {
   min-height: 44px;
   margin-top: var(--space-6);
   padding: var(--space-2) var(--space-4);
@@ -545,26 +544,50 @@
   border-top: 1px solid var(--color-border-subtle);
 }
 
-.completion {
+.completionHeading {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+.completionHeading svg {
+  flex-shrink: 0;
+}
+.noteDisclosure {
+  margin-top: var(--space-4);
   max-width: var(--layout-cook-reading);
+}
+.noteDisclosure summary {
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  padding-block: var(--space-3);
+  font-size: var(--font-size-body-small);
+  font-weight: 700;
+  cursor: pointer;
+}
+.noteDisclosure summary:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: var(--space-1);
+}
+.noteDisclosure button {
+  margin-top: var(--space-2);
 }
 
 .completion > p:not(.meta) {
   color: var(--color-text-secondary);
 }
 
-.completion label {
-  margin-top: var(--space-8);
+.noteDisclosure label {
   display: grid;
   gap: var(--space-1);
 }
 
-.completion label span {
+.noteDisclosure label span {
   color: var(--color-text-secondary);
   font-size: var(--font-size-body-small);
 }
 
-.completion textarea {
+.noteDisclosure textarea {
   width: 100%;
   min-height: 130px;
   margin-top: var(--space-3);
@@ -591,21 +614,12 @@
   color: var(--color-action-primary-strong);
 }
 
-.completionNextSteps {
-  margin: var(--space-6) 0 0;
-  font-size: var(--font-size-body-small);
-  line-height: var(--line-height-body);
-}
-
-.completionActions {
-  display: flex;
-  gap: var(--space-3);
-  align-items: center;
-}
-
-.completionActions button {
+.completionReview {
   margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border-subtle);
 }
+
 
 .stepsDrawer,
 .ingredientsDrawer {
@@ -834,17 +848,6 @@
   }
 }
 
-@media (max-width: 560px) {
-  .completionActions {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .completionActions > * {
-    width: 100%;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .progressTrack span {
     transition: none;
@@ -855,8 +858,7 @@
 .ingredientsAction,
 .timer select,
 .timer button,
-.completionActions button,
-.completion textarea,
+.noteDisclosure textarea,
 .drawerClose {
   border-radius: var(--radius-control);
 }
