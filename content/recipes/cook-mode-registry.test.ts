@@ -65,31 +65,14 @@ void test('carrot cake preserves aligned localized steps, ingredients and the ba
     const content = getRecipeContent('carrot-cake', locale)!;
     const steps = createRecipeCookSteps(content, locale);
     assert.equal(content.evidence?.status, 'tested');
+    assert.equal(content.versionId, 'carrot-cake-v2');
     assert.equal(steps.length, 6);
-    assert.deepEqual(steps[0].stepIds, ['prepare-add-ins']);
-    assert.deepEqual(
-      steps
-        .find((step) => step.stepIds.includes('blend-carrots'))
-        ?.ingredients.map((ingredient) => ingredient.id),
-      ['carrots', 'oil'],
-    );
-    assert.deepEqual(
-      steps
-        .find((step) => step.stepIds.includes('whip-eggs'))
-        ?.ingredients.map((ingredient) => ingredient.id),
-      ['eggs', 'sugar'],
-    );
-    const baking = steps.at(-1)!;
-    assert.deepEqual(baking.timerOptionsSeconds, [2100, 2400]);
-    assert.equal(baking.media?.length, 2);
-    {
-      assert.match(steps[0].tip ?? '', /200°C/);
-      assert.deepEqual(
-        baking.ingredients.map((ingredient) => ingredient.id),
-        ['pan-butter', 'pan-cinnamon'],
-      );
-      assert.equal(steps.filter((step) => step.checkpoint).length, 3);
-    }
+    assert.deepEqual(steps[0].timerOptionsSeconds, [300]);
+    assert.deepEqual(steps[1].ingredients.map(item => item.id), ['butter', 'carrots', 'oil', 'eggs', 'sugar']);
+    assert.deepEqual(steps[2].stepIds, ['mix-dry']);
+    assert.deepEqual(steps[4].timerOptionsSeconds, [3600]);
+    assert.deepEqual(steps[5].timerOptionsSeconds, [1800, 2400]);
+    assert.deepEqual(steps.map(step => step.media?.length ?? 0), [2, 3, 0, 3, 2, 0]);
   }
 });
 

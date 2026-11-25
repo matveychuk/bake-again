@@ -83,7 +83,7 @@ export function getRecipeCatalog(
         cardImagePosition: inventory.cardImagePosition,
         href: getLocalizedRecipePath(recipe.id, locale)!,
         publicationStatus,
-        collections: recipe.collectionIds.map((id) => ({
+        collections: inventory.collectionIds.map((id) => ({
           id,
           label: getLocalizedRecipeCollection(id, locale),
         })),

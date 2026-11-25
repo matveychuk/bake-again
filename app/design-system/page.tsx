@@ -1699,6 +1699,20 @@ export default function DesignSystemPage() {
                   </AssistantProvider>
                 );
               })}
+              {getRecipeContent('carrot-cake', 'uk')!.steps.map((step, index) => step.timeBesideNumber && (
+                <div key={step.id} lang="uk">
+                  <RecipeStepContent
+                    stepNumber={String(index + 1).padStart(2, '0')}
+                    meta={step.meta}
+                    timeBesideNumber
+                    title={step.title}
+                    tipLabel={getUiMessages('uk').recipe.tip}
+                    checkpointLabel={getUiMessages('uk').recipe.checkpoint}
+                  >
+                    <p>{step.body}</p>
+                  </RecipeStepContent>
+                </div>
+              ))}
             </div>
 
             <div className={styles.componentBlock}>

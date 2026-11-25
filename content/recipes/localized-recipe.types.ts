@@ -91,6 +91,7 @@ export type StructuredRecipeStep = {
     numberOnly?: boolean;
   }>;
   meta?: string;
+  timeBesideNumber?: boolean;
   checkpoint?: string;
   tip?: string;
   /** Optional Cook Mode composition; canonical recipe steps remain separate. */

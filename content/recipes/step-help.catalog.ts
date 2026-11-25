@@ -374,40 +374,17 @@ export const stepHelpCatalog: Record<
     ),
   },
   'carrot-cake': {
+    'mix-dry': skip('Усі сухі інгредієнти перелічені в інструкції.'),
+    'carrot-base': skip('Авторка описала консистенцію пюре й послідовність додавання яєць.'),
+    'mix-and-fill': skip('Послідовність замішування і наповнення форми описана в кроці.'),
+    'proof-in-tin': skip('Ознака готовності до випікання є в тексті й на двох фото.'),
     'prepare-add-ins': skip('Замочування і нарізання вже описані.'),
-    'blend-carrots': help(
-      q(
-        'checkpoint',
-        'Наскільки дрібно подрібнювати моркву з олією?',
-        'How smooth should the carrot and oil mixture be?',
-        '¿Cómo de fina debe quedar la mezcla de zanahoria y aceite?',
-      ),
-    ),
-    'whip-eggs': help(
-      q(
-        'checkpoint',
-        'Як зрозуміти, що яйця для морквяного кексу достатньо збиті?',
-        'How do I know the eggs for carrot cake are whipped enough?',
-        '¿Cómo sé si los huevos del bizcocho de zanahoria están suficientemente batidos?',
-      ),
-    ),
-    'mix-batter': help(
-      q(
-        'tip',
-        'Коли припинити перемішувати морквяне тісто?',
-        'When should I stop mixing the carrot cake batter?',
-        '¿Cuándo dejo de mezclar la masa de zanahoria?',
-      ),
-    ),
-    'fold-add-ins': skip(
-      'Додавання горіхів і родзинок зрозуміле; зберігання сирого тіста не підсилюємо новою рекомендацією.',
-    ),
     bake: help(
       q(
         'checkpoint',
-        'Як перевірити середину морквяного кексу?',
-        'How do I check the centre of the carrot cake?',
-        '¿Cómo compruebo el centro del bizcocho de zanahoria?',
+        'Як перевірити, чи пропікся кекс усередині?',
+        'How can I tell if the loaf is baked through?',
+        '¿Cómo sé si el bizcocho está hecho por dentro?',
       ),
     ),
   },

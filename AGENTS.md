@@ -113,11 +113,11 @@ they are not separate statuses.
   Preserve published copy and version updates to existing drafts. This does not
   authorize changing published/scheduled posts or removing website translations.
 
-- For new Reels and Stories, apply the approved food-first defaults in
-  [Instagram templates](docs/instagram/templates.uk.md) and reuse
-  [the Reel package](templates/instagram-reels/README.uk.md): compact header,
-  soft feathered header-to-image transition on every shot, large fixed badge,
-  horizontal opening stamp, and a separate full-screen Story export.
+- Open new Reels with the food already in motion. Use Bake Again website typography.
+  Sasha retired the animated centre-to-side gluten-free stamp on 2026-11-21.
+  A static gluten-free label can sit alongside the title. Reuse
+  [the Reel package](templates/instagram-reels/README.uk.md) for sizing, safe text
+  placement and a separate full-screen Story export.
 
 - Prepare a separate static Reel cover following
   [the cover and profile-grid rules](docs/instagram/templates.uk.md#окрема-обкладинка-reel-і-сітка).

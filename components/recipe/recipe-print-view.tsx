@@ -107,6 +107,7 @@ export function RecipePrintView({
                   title={step.title}
                   stepNumber={String(index + 1)}
                   meta={step.meta}
+                  timeBesideNumber={step.timeBesideNumber}
                   tip={step.tip}
                   tipLabel={messages.tip}
                   checkpoint={step.checkpoint}

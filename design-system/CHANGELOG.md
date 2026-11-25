@@ -1,5 +1,9 @@
 # Design system changelog
 
+## 2026-11-25 · Timed recipe steps
+
+The Ukrainian carrot cake shows proofing and baking durations beside their step numbers at every width. The step questions example in Design Lab includes this layout.
+
 ## 2026-11-24 · Cook Mode completion
 
 Finishing a published recipe shows five stars and a text invitation above four discovery cards. Choosing a star saves an anonymous rating and opens the fields. A photo or comment adds to the same review. The text invitation also opens the fields without a rating. The header arrow returns to the recipe, where the main Cook entry can start the next bake.
@@ -11,6 +15,10 @@ Recipe pages show two compact lists of linked food photographs and titles before
 ## 2026-11-24 · Tested flour choices
 
 The crinkle cookie recipe and its Design Lab overview show two separately tested flour blends. The ingredient row gives a single weight and the shopping drawer accepts one blend.
+
+## 2026-11-21 · Reel opening
+
+Sasha retired the moving gluten-free stamp. New Reels open on the food in motion and may use a static text label. The pancake v2 package demonstrates the opening and separate profile cover.
 
 ## 2026-11-21 · Recipe waitlist in the xanthan article
 

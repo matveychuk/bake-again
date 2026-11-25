@@ -50,6 +50,7 @@ void test('all canonical records preserve the independent pre-migration identiti
     // These author revisions supersede their historical baselines.
     // Registry and Cook Mode tests cover the current quantities and methods.
     if ((recipe.id === 'crinkle-cookies' && recipe.versionId === 'crinkle-cookies-v3') ||
+        (recipe.id === 'carrot-cake' && recipe.versionId === 'carrot-cake-v2') ||
         (recipe.id === 'crepes' && recipe.versionId === 'crepes-pdf-v6') ||
         (recipe.id === 'lazy-dumplings' && recipe.versionId === 'lazy-dumplings-pdf-v5')) {
       assert.equal(recipe.routeSlug, original.routeSlug);

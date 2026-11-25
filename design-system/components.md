@@ -490,7 +490,7 @@ variation.
 
 - Keep the step number on the same baseline as the step title. Optional timing or other
   compact metadata sits in its own row above both; explanatory copy and callouts remain
-  below the title.
+  below the title. With `timeBesideNumber`, the number shares the timing row above the title at every width.
 - Recipe photos align with the instruction text: use the step-number gutter of
   `space-16` above 900px and `space-12` at 561–900px. At 560px and below, both text
   and photos start at the step's left edge. The live Napoleon Design Lab reference

@@ -36,7 +36,7 @@ void test('scales carrot cake from its recorded 200 g carrot base in every local
         ),
         {
           kind: 'exact',
-          value: 8.5 * factor,
+          value: 9 * factor,
           unit: 'tbsp',
         },
       );

@@ -232,7 +232,7 @@ void test('dates, durations, cuisine and keywords are conditional source facts s
     for (const locale of supportedLocales) {
       const content = getRecipeContent(recipe.id, locale)!;
       const data = recipeStructuredData(recipe.id, locale, content)!;
-      const facts = recipeSearchMetadata[recipe.id];
+      const facts = getRecipeDocument(recipe.id, locale)!.recipe.searchMetadata!;
       assert.equal(data.datePublished, facts.datePublished ?? undefined);
       assert.equal(
         data.dateModified,

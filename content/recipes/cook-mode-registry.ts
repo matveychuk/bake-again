@@ -57,7 +57,7 @@ function createInventoryCookMode(
   return {
     recipeId: recipe.id,
     recipeVersionId: baseVersionId,
-    recipeTitle: recipeDetailTitles[recipe.id]?.[locale] ?? recipe.title,
+    recipeTitle: document?.recipe.title[locale] ?? recipe.title,
     assistant: { recipeId: recipe.id, recipeVersionId: baseVersionId },
     detailHref: `/recipes/${recipe.slug}`,
     totalSteps:

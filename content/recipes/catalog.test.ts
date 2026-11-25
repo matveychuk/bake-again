@@ -92,7 +92,6 @@ void test('keeps the reviewed cottage-cheese and batter-on-hand collections prec
   ]);
   assert.deepEqual(recipeIdsFor('batter-on-hand'), [
     'cottage-cheese-waffles',
-    'carrot-cake',
     'crinkle-cookies',
   ]);
 });

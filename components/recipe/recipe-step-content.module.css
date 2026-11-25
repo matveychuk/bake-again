@@ -61,6 +61,14 @@
 }
 
 @media (min-width: 561px) {
+  .numbered.timeBesideNumber > .number {
+    grid-row: 1;
+  }
+
+  .numbered.timeBesideNumber .meta {
+    align-self: baseline;
+  }
+
   .numbered > .metadata {
     display: contents;
   }

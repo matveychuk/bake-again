@@ -303,6 +303,7 @@ export interface RecipeStep {
   }>;
   /** Original editorial metadata, retained independently of structured timers. */
   displayMeta?: LocalizedText;
+  timeBesideNumber?: boolean;
   cook?: {
     group?: string;
     requiresCream?: boolean;

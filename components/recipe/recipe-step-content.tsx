@@ -21,6 +21,7 @@ type RecipeStepContentProps = {
   actionPlacement?: 'header' | 'after-content' | 'metadata';
   stepNumber?: string;
   meta?: string;
+  timeBesideNumber?: boolean;
   headingLevel?: HeadingLevel;
   headingId?: string;
   headingTabIndex?: number;
@@ -45,6 +46,7 @@ export function RecipeStepContent({
   actionPlacement = 'header',
   stepNumber,
   meta,
+  timeBesideNumber,
   headingLevel = 'h3',
   headingId,
   headingTabIndex,
@@ -62,6 +64,7 @@ export function RecipeStepContent({
         stepNumber && styles.numbered,
         stepNumber && hasMetadata && styles.withMetadata,
         stepNumber && meta && styles.withTime,
+        stepNumber && meta && timeBesideNumber && styles.timeBesideNumber,
         stepNumber &&
           action &&
           actionPlacement === 'metadata' &&

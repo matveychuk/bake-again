@@ -1020,62 +1020,38 @@ void test('keeps the lazy-dumpling base, equivalents and author guidance togethe
   assert.equal(inventory?.scalingAnchorIngredientId, 'cottage-cheese');
 });
 
-void test('keeps the tested one-cake carrot recipe concise without losing practical cues', () => {
-  const recipe = getRecipeContent('carrot-cake', 'uk');
-  const ingredients = recipe?.ingredientSections[0]?.ingredients ?? [];
-  const amount = (id: string) =>
-    ingredients.find((ingredient) => ingredient.id === id)?.quantity.base;
-  const whippedEggs = recipe?.steps.find((step) => step.id === 'whip-eggs');
-  const baking = recipe?.steps.find((step) => step.id === 'bake');
-  const addIns = recipe?.steps.find((step) => step.id === 'fold-add-ins');
-
-  assert.deepEqual(amount('carrots'), {
-    kind: 'exact',
-    value: 200,
-    unit: 'g',
+void test('Ukrainian carrot cake uses the November bake with the reviewed method and photo sequence', () => {
+  const recipe = getRecipeContent('carrot-cake', 'uk')!;
+  assert.equal(recipe.versionId, 'carrot-cake-v2');
+  assert.equal(recipe.evidence?.status, 'tested');
+  assert.equal(recipe.overview.yieldLabel, '1 кекс');
+  assert.equal(recipe.overview.timing.activeMinutes, 30);
+  assert.equal(recipe.overview.timing.totalElapsedMinutes, 120);
+  assert.match(recipe.steps[0].body, /^Дно й боки форми застели пергаментом/);
+  const amounts = Object.fromEntries(recipe.ingredientSections[0].ingredients.map(
+    ({ id, quantity }) => [id, quantity.base?.kind === 'exact' ? quantity.base.value : null],
+  ));
+  assert.deepEqual(amounts, {
+    carrots: 200, oil: 55, butter: 45, eggs: 3, sugar: 100,
+    flour: 180, 'tapioca-starch': 20, yeast: 5, 'baking-powder': 4, salt: 1.5, nuts: 100, raisins: 80,
   });
-  assert.deepEqual(amount('eggs'), {
-    kind: 'exact',
-    value: 3,
-    unit: 'piece',
-  });
-  assert.deepEqual(amount('flour'), {
-    kind: 'exact',
-    value: 170,
-    unit: 'g',
-  });
-  assert.deepEqual(amount('raisins'), {
-    kind: 'exact',
-    value: 80,
-    unit: 'g',
-  });
-  assert.match(whippedEggs?.body ?? '', /яйця з цукром/);
-  assert.match(whippedEggs?.checkpoint ?? '', /три-чотири рази/);
-  assert.match(baking?.checkpoint ?? '', /зубочистку/);
-  assert.match(baking?.body ?? '', /розігріту до 200°C/);
-  assert.match(baking?.body ?? '', /пергаментом/);
-  assert.match(addIns?.tip ?? '', /трьох днів/);
-  assert.equal(recipe?.evidence?.status, 'tested');
-  assert.equal(recipe?.presentation, 'concise');
-  assert.equal(recipe?.overview.timing.activeMinutes, 30);
-  assert.equal(recipe?.overview.difficulty, 'medium');
-  assert.equal(recipe?.overview.yieldLabel, '1 кекс');
-  assert.equal(recipe?.beforeStart, undefined);
-  assert.match(recipe?.steps[0].body ?? '', /5 хвилин/);
-  assert.match(recipe?.overview.timing.planningNote ?? '', /200°C/);
-  assert.equal(recipe?.steps.length, 6);
-  assert.equal(recipe?.steps[0].id, 'prepare-add-ins');
-  assert.match(recipe?.steps[0].tip ?? '', /200°C/);
-  assert.match(
-    recipe?.steps.find((step) => step.id === 'mix-batter')?.tip ?? '',
-    /пишність/,
-  );
-  assert(recipe?.steps.every((step) => !step.meta));
-  assert(
-    recipe?.steps
-      .flatMap((step) => step.media ?? [])
-      .every((image) => !image.caption),
-  );
+  assert.deepEqual(recipe.ingredientSections[0].ingredients.find(i => i.id === 'oil')?.quantity.equivalent,
+    { kind: 'exact', value: 60, unit: 'ml' });
+  assert.deepEqual(recipe.steps.map(step => step.media?.map(image => image.id) ?? []), [
+    ['lined-tin', 'add-ins'],
+    ['grated-carrots', 'blend-carrots', 'carrot-base'],
+    [],
+    ['dry-into-carrot-base', 'fold-add-ins', 'filled-tin'],
+    ['before-proof', 'after-proof'],
+    [],
+  ]);
+  assert(recipe.steps.flatMap(step => step.media ?? []).every(image => image.alt));
+  assert.match(recipe.steps[3].body, /ложкою/i);
+  assert.match(recipe.steps[4].body, /вдвічі/);
+  assert.match(recipe.steps[5].body, /175 °C/);
+  assert.match(recipe.steps[5].checkpoint ?? '', /слідів сирого тіста/);
+  assert.deepEqual(recipe.steps.filter(step => step.timeBesideNumber).map(step => step.meta),
+    ['Близько 1 год', '30–40 хв']);
 });
 void test('reviewed paska is concise, timed and yields three medium paskas', () => {
   for (const locale of ['en', 'uk'] as const) {

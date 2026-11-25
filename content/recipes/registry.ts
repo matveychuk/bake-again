@@ -222,6 +222,7 @@ export function projectRecipeContent(
         text: mention.text[locale],
       })),
       meta: step.displayMeta?.[locale],
+      ...(step.timeBesideNumber && { timeBesideNumber: true }),
       checkpoint: step.guidance?.find((g) => g.kind === 'checkpoint')?.text[
         locale
       ],

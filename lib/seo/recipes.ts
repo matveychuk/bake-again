@@ -5,11 +5,7 @@ import {
   recipeInventoryView,
 } from '../../content/recipes/inventory.ts';
 import { getComponentPageRecipe } from '../../content/recipes/recipe-component-records.ts';
-import {
-  catalogLocaleCopy,
-  recipeDetailTitles,
-} from '../../content/recipes/catalog-locales.ts';
-import { recipeSeo } from '../../content/recipes/seo.ts';
+import { catalogLocaleCopy } from '../../content/recipes/catalog-locales.ts';
 import {
   getLocalizedRecipePath,
   getRecipeIdFromLocalizedSlug,
@@ -22,10 +18,7 @@ import type {
   StructuredIngredient,
   StructuredRecipeContent,
 } from '../../content/recipes/localized-recipe.types.ts';
-import {
-  recipeSearchMetadata,
-  recipeLastModified,
-} from '../../content/recipes/search-metadata.ts';
+import { recipeLastModified } from '../../content/recipes/search-metadata.ts';
 import { recipeSearchImages } from '../../content/recipes/search-images.ts';
 
 export function recipeIdForSlug(
@@ -46,17 +39,16 @@ export function recipePresentation(id: string, locale: AppLocale) {
     : getComponentPageRecipe(id);
   if (!document || !inventory) return null;
   const copy = catalogLocaleCopy[id];
-  const title =
-    recipeDetailTitles[id]?.[locale] ?? copy?.title[locale] ?? inventory.title;
-  const description = copy?.summary[locale] ?? inventory.summary;
+  const title = document.recipe.title[locale];
+  const description = document.recipe.summary[locale];
   const path = getLocalizedRecipePath(id, locale)!;
   return {
     id,
     title,
     description,
     path,
-    seoTitle: recipeSeo[id]?.[locale]?.title?.trim() || title,
-    seoDescription: recipeSeo[id]?.[locale]?.description?.trim() || description,
+    seoTitle: document.recipe.seo?.[locale]?.title?.trim() || title,
+    seoDescription: document.recipe.seo?.[locale]?.description?.trim() || description,
     image: inventory.image,
     alt: document.recipe.discovery.catalogue ? inventory.imageAlt : copy?.alt[locale] ?? inventory.imageAlt,
     category: copy?.category[locale] ?? inventory.category,
@@ -82,8 +74,9 @@ export function recipeStructuredData(
   )
     return null;
   const freeVideo = getFreeLessonPreview(id, locale);
-  const facts = recipeSearchMetadata[id];
-  const dateModified = recipeLastModified(getRecipeDocument(id, locale)!.recipe);
+  const recipe = getRecipeDocument(id, locale)!.recipe;
+  const facts = recipe.searchMetadata;
+  const dateModified = recipeLastModified(recipe);
   const totalMinutes = content.timing?.totalElapsedMinutes;
   const activeMinutes = content.timing?.activeMinutes;
   return {

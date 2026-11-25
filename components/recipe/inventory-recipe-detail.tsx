@@ -167,6 +167,7 @@ export function InventoryRecipeDetail({
   const messages = getUiMessages(locale).recipe;
   const copy = catalogLocaleCopy[recipe.id];
   const detailTitle =
+    personalRecipe?.title[locale] ??
     recipeDetailTitles[recipe.id]?.[locale] ??
     copy?.title[locale] ??
     recipe.title;
@@ -316,7 +317,7 @@ export function InventoryRecipeDetail({
               }
             />
             <p className={styles.summary}>
-              {copy?.summary[locale] ?? recipe.summary}
+              {document?.recipe.summary[locale] ?? copy?.summary[locale] ?? recipe.summary}
             </p>
             <RecipeSectionNavigation locale={locale} />
           </div>
@@ -512,6 +513,7 @@ export function InventoryRecipeDetail({
                     <RecipeStepContent
                       stepNumber={String(index + 1).padStart(2, '0')}
                       meta={step.meta}
+                      timeBesideNumber={step.timeBesideNumber}
                       actionPlacement="metadata"
                       action={
                         resolveStepHelp(step).length > 0 ? (

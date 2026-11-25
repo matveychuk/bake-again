@@ -1,5 +1,10 @@
 {
   "approved": "2026-10-12",
+  "opening": {
+    "updated": "2026-11-21",
+    "firstFrame": "food in motion",
+    "animateBadge": false
+  },
   "canvas": {
     "width": 1080,
     "height": 1920,

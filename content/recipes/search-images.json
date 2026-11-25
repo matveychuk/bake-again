@@ -125,17 +125,22 @@
     ]
   },
   "carrot-cake": {
-    "source": "/images/recipes/carrot-cake-card-v1.webp",
+    "source": "/images/recipes/carrot-cake-slice-soft-close-v3.webp",
     "images": [
       {
-        "url": "/images/seo/carrot-cake-4x3.webp",
+        "url": "/images/seo/carrot-cake-uk-v3-4x3.webp",
         "width": 1200,
         "height": 900
       },
       {
-        "url": "/images/seo/carrot-cake-16x9.webp",
+        "url": "/images/seo/carrot-cake-uk-v3-16x9.webp",
         "width": 1200,
         "height": 675
+      },
+      {
+        "url": "/images/seo/carrot-cake-v3-1x1.webp",
+        "width": 1080,
+        "height": 1080
       }
     ]
   },
